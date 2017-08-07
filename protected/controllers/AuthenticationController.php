@@ -193,7 +193,6 @@ class AuthenticationController extends BaseController
 
             if (empty($value['id_module'])) {
                 array_push($menu, array(
-                    'teste'   => 'teste',
                     'text'    => preg_replace("/ Module/", "", $value['text']),
                     'iconCls' => $value['icon_cls'],
                     'rows'    => $this->getSubMenu($modules, $value['id']),

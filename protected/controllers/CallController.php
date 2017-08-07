@@ -140,16 +140,21 @@ class CallController extends Controller
     {
         ini_set('memory_limit', '-1');
 
-        $filter       = isset($_GET['filter']) ? $_GET['filter'] : null;
-        $filter       = $this->createCondition(json_decode($filter));
-        $this->filter = $filter = $this->extraFilter($filter);
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+        $filter = $this->createCondition(json_decode($filter));
+
+        $this->filter = $this->extraFilter($filter);
 
         $ids = json_decode($_GET['ids']);
 
-        $uniID = count($ids) == 1 ? true : false;
-
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $ids);
+        $criteria->addCondition($this->filter);
+        if (count($this->paramsFilter)) {
+            foreach ($this->paramsFilter as $key => $value) {
+                $criteria->params[$key] = $value;
+            }
+        }
         $modelCdr = Call::model()->findAll($criteria);
 
         $folder = $this->magnusFilesDirectory . 'monitor';

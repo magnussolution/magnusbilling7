@@ -29,7 +29,7 @@ class MassiveCallCommand extends ConsoleCommand
         $name_day = $tab_day[$num_day];
 
         $filter = 'status = :key AND type = :key  AND ' . $name_day . ' = :key AND startingdate <= :key1 AND expirationdate > :key1
-						AND  daily_start_time <= :key2 AND daily_stop_time > :key2';
+                        AND  daily_start_time <= :key2 AND daily_stop_time > :key2';
 
         $params = array(
             ':key'  => 1,
@@ -51,8 +51,6 @@ class MassiveCallCommand extends ConsoleCommand
                 echo "SEARCH NUMBER IN CAMPAIGN " . $campaign->name . "\n";
             }
 
-            $nbpage = $campaign->frequency;
-
             //get all campaign phonebook
             $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', array(':key' => $campaign->id));
             $ids_phone_books        = array();
@@ -65,6 +63,7 @@ class MassiveCallCommand extends ConsoleCommand
             $criteria->addCondition('status = :key AND creationdate < :key1');
             $criteria->params[':key']  = 1;
             $criteria->params[':key1'] = date('Y-m-d H:i:s');
+            $criteria->limit           = $campaign->frequency;
             $modelPhoneNumber          = PhoneNumber::model()->findAll($criteria);
 
             if ($this->debug >= 1) {

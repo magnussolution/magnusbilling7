@@ -33,7 +33,7 @@ class Start0800CallBackCommand extends ConsoleCommand
 
             $voltarChamar = time() - 1800;
             $voltarChamar = date('Y-m-d H:i:s', $voltarChamar);
-            CallBack::model()->updateAll(array('status=1'), 'status = 2 AND last_attempt_time < :key', array(':key' => $voltarChamar));
+            CallBack::model()->updateAll(array('status' => '1'), 'status = 2 AND last_attempt_time < :key', array(':key' => $voltarChamar));
 
             //esperar 60 segundos antes de tentar ligar para o cliente.
             $timeToNewCallback = date('Y-m-d H:i:s', time() - 60);

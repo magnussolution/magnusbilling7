@@ -256,6 +256,10 @@ class BaseController extends CController
             echo "<br><br>";
             exit;
         }
+        if (strlen($this->filter) > 1 && $this->start > 0) {
+            $this->start = 0;
+            $this->limit = 25;
+        }
 
         return new CDbCriteria(array(
             'select'    => $this->select,
@@ -1541,18 +1545,19 @@ class BaseController extends CController
 
     public function extraFilterCustom($filter)
     {
-        /*if(Yii::app()->session['user_type']  > 1 && $this->filterByUser)
-        {
-        $filter .= ' AND '. $this->defaultFilterByUser . ' =  :dfby';
-        $this->paramsFilter[':dfby'] = Yii::app()->session['id_user'];
-
-        }*/
-        if (Yii::app()->session['isAgent']) {
+        if (Yii::app()->session['isAdmin']) {
+            $filter = $this->extraFilterCustomAdmin($filter);
+        } elseif (Yii::app()->session['isAgent']) {
             $filter = $this->extraFilterCustomAgent($filter);
         } else if (Yii::app()->session['isClient']) {
             $filter = $this->extraFilterCustomClient($filter);
         }
 
+        return $filter;
+    }
+
+    public function extraFilterCustomAdmin($filter)
+    {
         return $filter;
     }
 
