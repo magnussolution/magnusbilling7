@@ -1,0 +1,142 @@
+<?php
+/**
+ * Acoes do modulo "Campaign".
+ *
+ * =======================================
+ * ###################################
+ * MagnusBilling
+ *
+ * @package MagnusBilling
+ * @author Adilson Leffa Magnus.
+ * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * ###################################
+ *
+ * This software is released under the terms of the GNU Lesser General Public License v2.1
+ * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+ *
+ * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * =======================================
+ * Magnusbilling.com <info@magnusbilling.com>
+ * 28/10/2012
+ * index.php/mBillingSoftphone/read?l=felipe|137DCEC44002170DB2D2DCD9C70DBEBF
+ */
+
+class MBillingSoftphoneController extends BaseController
+{
+    public $attributeOrder = 'id';
+    public $filterByUser   = false;
+    private $host          = 'localhost';
+    private $user          = 'magnus';
+    private $l;
+    private $password = 'magnussolution';
+
+    public function actionRead($asJson = true, $condition = null)
+    {
+
+        if (isset($_GET['l'])) {
+            $data = explode('|', $_GET['l']);
+            $user = $data[0];
+            $pass = $data[1];
+
+            $modelSip = $this->remoteLogin($user, $pass);
+
+            if (!count($modelSip)) {
+                echo 'false';
+                exit;
+            }
+            $result                 = [];
+            $result[0]['username']  = 'username';
+            $result[0]['firstname'] = $modelSip->idUser->firstname;
+            $result[0]['lastname']  = $modelSip->idUser->lastname;
+            $result[0]['credit']    = number_format($modelSip->idUser->credit, 2);
+            $result[0]['currency']  = $this->config['global']['base_currency'];
+
+            if (count($result) == 0) {
+                echo 'false';
+                exit;
+            }
+            //$result[0]['version'] = 'MPhone-1.0.5';
+
+            $result = json_encode(array(
+                $this->nameRoot  => $result,
+                $this->nameCount => 1,
+                $this->nameSum   => '',
+            ));
+
+            $result = json_decode($result, true);
+
+            echo '<pre>';
+            print_r($result);
+        }
+    }
+    public function actionTotalPerCall()
+    {
+        if (isset($_GET['l'])) {
+            $user = $_GET['l'];
+
+            $modelSip = Sip::model()->find("name = :user", array(':user' => $user));
+
+            if (isset($modelSip->callshopnumber) && strlen($modelSip->callshopnumber) > 5) {
+                $sessiontime = $modelSip->callshoptime;
+                $ndiscado    = $modelSip->callshopnumber;
+
+                $MAGNUS   = new Magnus();
+                $ndiscado = $MAGNUS->number_translation($modelSip->idUser->prefix_local, $ndiscado);
+
+                $resultCallShop = RateCallshop::model()->findCallShopRate($ndiscado, $modelSip->id_user);
+
+                $buyrate   = $resultCallShop[0]['buyrate'] > 0 ? $resultCallShop[0]['buyrate'] : $cost;
+                $initblock = $resultCallShop[0]['minimo'];
+                $increment = $resultCallShop[0]['block'];
+
+                $sellratecost_callshop = $MAGNUS->calculation_price($buyrate, $sessiontime, $initblock, $increment);
+
+                echo number_format($sellratecost_callshop, 2);
+            }
+        } else {
+            echo '0,00';
+        }
+    }
+
+    public function actionCallshopTotal()
+    {
+
+        if (isset($_GET['l'])) {
+            $data = explode('|', $_GET['l']);
+            $user = $data[0];
+            $pass = $data[1];
+
+            $modelSip = $this->remoteLogin($user, $pass);
+
+            if (!count($modelSip)) {
+                echo 'false';
+                exit;
+            }
+
+            $result                 = [];
+            $result[0]['username']  = 'username';
+            $result[0]['firstname'] = $modelSip->idUser->firstname;
+            $result[0]['lastname']  = $modelSip->idUser->lastname;
+            $result[0]['currency']  = $this->config['global']['base_currency'];
+
+            $modelCallShop = CallShopCdr::model()->find(array(
+                'select'    => 'SUM(price) price',
+                'condition' => 'status = 0 AND cabina = :user',
+                'params'    => array(":user" => $user),
+            ));
+
+            $result[0]['credit'] = count($modelCallShop) ? number_format($modelCallShop->price, 2) : '0.00';
+
+            $result = json_encode(array(
+                $this->nameRoot  => $result,
+                $this->nameCount => 1,
+                $this->nameSum   => '',
+            ));
+            $result = json_decode($result, true);
+            echo '<pre>';
+            print_r($result);
+
+        }
+    }
+
+}
