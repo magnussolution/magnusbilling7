@@ -70,7 +70,7 @@ class UserCreditManager
 
         //add the refill
         if ($paymount_type != 2) {
-            Process::insertRefill($id_user, $credit, $description, $code, $actualCredit, $signal);
+            UserCreditManager::insertRefill($id_user, $credit, $description, $code, $actualCredit, $signal);
         }
 
         ServicesProcess::checkIfServiceToPayAfterRefill($id_user);
