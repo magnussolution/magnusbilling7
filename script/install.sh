@@ -375,6 +375,7 @@ sleep 2
 if [ ${DIST} = "DEBIAN" ]; then
     rm -rf /var/www/html/index.html
 fi;
+cd /var/www/html
 git clone https://github.com/magnussolution/magnusbilling6.git mbilling
 cd /var/www/html/mbilling/
 rm -rf /var/www/html/mbilling/tmp && mkdir /var/www/html/mbilling/tmp

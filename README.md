@@ -22,7 +22,12 @@ Linux Centos 7 or Debian 8
 
 ### Installing
 ```
-wget -O - https://raw.githubusercontent.com/magnussolution/magnusbilling6/master/script/install.sh | sh
+cd /usr/src/
+yum -y install wget
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling6/master/script/install.sh
+chmod +x install.sh
+./install.sh
+
 ```
 
 
