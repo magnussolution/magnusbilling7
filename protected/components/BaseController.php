@@ -256,7 +256,7 @@ class BaseController extends CController
             echo "<br><br>";
             exit;
         }
-        if (strlen($this->filter) > 1 && $this->start > 0) {
+        if (strlen($this->filter) > 1 && $this->defaultFilter == 1 && $this->start > 0) {
             $this->start = 0;
             $this->limit = 25;
         }
