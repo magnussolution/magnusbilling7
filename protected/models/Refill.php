@@ -21,69 +21,78 @@
 
 class Refill extends Model
 {
-	protected $_module = 'refill';
-	var $sumCredit;
-	var $sumCreditMonth;
-	var $CreditMonth;
-	/**
-	 * Retorna a classe estatica da model.
-	 * @return Admin classe estatica da model.
-	 */
-	public static function model($className = __CLASS__)
-	{
-		return parent::model($className);
-	}
+    protected $_module = 'refill';
+    public $sumCredit;
+    public $sumCreditMonth;
+    public $CreditMonth;
+    /**
+     * Retorna a classe estatica da model.
+     * @return Admin classe estatica da model.
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return nome da tabela.
-	 */
-	public function tableName()
-	{
-		return 'pkg_refill';
-	}
+    /**
+     * @return nome da tabela.
+     */
+    public function tableName()
+    {
+        return 'pkg_refill';
+    }
 
-	/**
-	 * @return nome da(s) chave(s) primaria(s).
-	 */
-	public function primaryKey()
-	{
-		return 'id';
-	}
+    /**
+     * @return nome da(s) chave(s) primaria(s).
+     */
+    public function primaryKey()
+    {
+        return 'id';
+    }
 
-	/**
-	 * @return array validacao dos campos da model.
-	 */
-	public function rules()
-	{
-		return array(
-			array('id_user', 'required'),
-			array('payment', 'numerical', 'integerOnly'=>true),
-			array('credit', 'numerical', 'integerOnly'=>false),
-			array('description, invoice_number', 'length', 'max'=>500)
-		);
-	}
-	/*
-	 * @return array regras de relacionamento.
-	 */
-	public function relations()
-	{
-		return array(
-			'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-		);
-	}
+    /**
+     * @return array validacao dos campos da model.
+     */
+    public function rules()
+    {
+        return array(
+            array('id_user', 'required'),
+            array('payment', 'numerical', 'integerOnly' => true),
+            array('credit', 'numerical', 'integerOnly' => false),
+            array('description, invoice_number', 'length', 'max' => 500),
+        );
+    }
+    /*
+     * @return array regras de relacionamento.
+     */
+    public function relations()
+    {
+        return array(
+            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
+        );
+    }
+    public function beforeSave()
+    {
+        if ($this->getIsNewRecord()) {
+            $modelUser         = User::model()->findByPk($this->id_user);
+            $creditOld         = $modelUser->credit;
+            $this->description = $this->description . ', ' . Yii::t('yii', 'Old credit') . ' ' . round($creditOld, 2);
+        }
 
+        return parent::beforeSave();
+    }
 
-	public function getRefillChart($filter)
-	{
-		if (isset($filter) && $filter[0]->value == 'day') {
-            	$sql = "SELECT id, DATE_FORMAT( DATE,  '%Y-%m-%d' ) AS CreditMonth , SUM( credit ) AS sumCreditMonth
+    public function getRefillChart($filter)
+    {
+        if (isset($filter) && $filter[0]->value == 'day') {
+            $sql = "SELECT id, DATE_FORMAT( DATE,  '%Y-%m-%d' ) AS CreditMonth , SUM( credit ) AS sumCreditMonth
             		FROM pkg_refill WHERE 1 GROUP BY DATE_FORMAT( DATE,  '%Y%m%d' ) ORDER BY id DESC LIMIT 30";
-       
-       	}else{
-            	$sql = "SELECT id, DATE_FORMAT( DATE,  '%Y-%m' ) AS CreditMonth , SUM(credit) AS sumCreditMonth
+
+        } else {
+            $sql = "SELECT id, DATE_FORMAT( DATE,  '%Y-%m' ) AS CreditMonth , SUM(credit) AS sumCreditMonth
             		FROM pkg_refill WHERE 1 GROUP BY EXTRACT(YEAR_MONTH FROM date)  ORDER BY id DESC LIMIT 20 ";
-         
-        	}
-        	return Yii::app()->db->createCommand($sql)->queryAll();
-	}
+
+        }
+        return Yii::app()->db->createCommand($sql)->queryAll();
+    }
 }
