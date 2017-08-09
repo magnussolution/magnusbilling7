@@ -4,7 +4,7 @@
  * Url for moip ruturn http://ip/billing/index.php/pagSeguro .
  * https://pagseguro.uol.com.br/preferences/automaticReturn.jhtml
  */
-class PagSeguroController extends BaseController
+class PagSeguroController extends Controller
 {
     public function actionIndex()
     {

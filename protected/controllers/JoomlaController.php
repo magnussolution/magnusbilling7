@@ -6,7 +6,7 @@
  * 15/04/2013
  */
 
-class JoomlaController extends BaseController
+class JoomlaController extends Controller
 {
     private $menu = array();
 
@@ -170,7 +170,7 @@ class JoomlaController extends BaseController
         $callingcard_pin = Util::generatePassword(6, false, false, true, false) . "\n";
 
         $sql = "INSERT INTO pkg_user (username, password, email, firstname, id_group, id_plan, active, callingcard_pin,id_user, credit)
-					VALUES (:user, :password , :email , :firstname ,  :id_group , :id_plan , :active , :callingcard_pin, 1, :credit)";
+                    VALUES (:user, :password , :email , :firstname ,  :id_group , :id_plan , :active , :callingcard_pin, 1, :credit)";
         $command = Yii::app()->db->createCommand($sql);
         $command->bindValue(":user", $_REQUEST['user'], PDO::PARAM_STR);
         $command->bindValue(":password", $_REQUEST['password'], PDO::PARAM_STR);
@@ -190,8 +190,8 @@ class JoomlaController extends BaseController
         $insecure = 'no';
 
         $sql = "INSERT INTO pkg_sip (id_user, name, accountcode, allow, host, insecure, defaultuser, secret,
-						directmedia, regexten, callerid, cid_number, context) VALUES (:id_user, :user ,
-						:user ,  :allow , :host , :insecure , :user , :password, 'no' , :user, :user, :user,'billing')";
+                        directmedia, regexten, callerid, cid_number, context) VALUES (:id_user, :user ,
+                        :user ,  :allow , :host , :insecure , :user , :password, 'no' , :user, :user, :user,'billing')";
 
         $command = Yii::app()->db->createCommand($sql);
         $command->bindValue(":id_user", $idUser, PDO::PARAM_INT);
@@ -232,8 +232,8 @@ class JoomlaController extends BaseController
         }
 
         $sql = "SELECT m.id, action, show_menu, text, module, icon_cls, m.id_module, gm.createShortCut, gm.createQuickStart FROM
-							pkg_group_module gm INNER JOIN pkg_module m ON gm.id_module = m.id WHERE
-							id_group = :id_group";
+                            pkg_group_module gm INNER JOIN pkg_module m ON gm.id_module = m.id WHERE
+                            id_group = :id_group";
         $command = Yii::app()->db->createCommand($sql);
         $command->bindValue(":id_group", $result[0]['id_group'], PDO::PARAM_STR);
         $result = $command->queryAll();

@@ -7,7 +7,7 @@ require_once "lib/gerencianet/vendor/autoload.php";
 use Gerencianet\Exception\GerencianetException;
 use Gerencianet\Gerencianet;
 
-class GerencianetController extends BaseController
+class GerencianetController extends Controller
 {
     public function actionIndex()
     {

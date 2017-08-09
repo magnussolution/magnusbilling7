@@ -6,7 +6,7 @@
  * 05/06/2013
  */
 
-class SiteController extends BaseController
+class SiteController extends Controller
 {
 
     public function actionIndex()

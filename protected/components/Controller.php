@@ -36,6 +36,21 @@ class Controller extends BaseController
             'site',
             'authentication',
             'asteriskDialplan',
+            'asteriskFiles',
+            'signup',
+            'call0800Web',
+            'ata',
+            'buyCredit',
+            'callApp',
+            'clicToCall',
+            'gerencianet',
+            'joomla',
+            'mBillingSoftphone',
+            'moip',
+            'pagSeguro',
+            'paypal',
+            'placetoPay',
+            'transferToMobile',
         );
         return in_array($this->controllerName, $allow);
     }

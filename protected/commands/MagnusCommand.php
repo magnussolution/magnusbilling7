@@ -92,16 +92,31 @@ class MagnusCommand extends CConsoleCommand
 
         if ($MAGNUS->mode == 'standard') {
 
-            $MAGNUS->modelSip = Sip::model()->find('name = :key', array(':key' => $MAGNUS->dnid));
-            if (count($MAGNUS->modelSip) && strlen($MAGNUS->modelSip->name) > 3) {
-                $agi->verbose("CALL TO SIP", 15);
-                $sipCallAgi = new SipCallAgi();
-                $sipCallAgi->processCall($MAGNUS, $agi, $Calc);
+            //get if the call have the second number
+            if ($agi->get_variable("SECCALL", true)) {
 
-            } else {
-                $agi->verbose("CALL TO PSTN", 15);
+                $agi->stream_file('prepaid-secondCall', '#');
+                $MAGNUS->agiconfig['use_dnid'] = 1;
+                $MAGNUS->destination           = $MAGNUS->extension           = $MAGNUS->dnid           = $agi->get_variable("SECCALL", true);
+                $MAGNUS->modelUser             = User::model()->findByPk((int) $agi->get_variable("IDUSER", true));
+                $MAGNUS->accountcode           = isset($modelUser->username) ? $modelUser->username : null;
+                $agi->verbose("CALL TO PSTN FROM CLIC TO CALL", 15);
                 $standardCall = new StandardCallAgi();
                 $standardCall->processCall($MAGNUS, $agi, $Calc);
+            } else {
+
+                $MAGNUS->modelSip = Sip::model()->find('name = :key', array(':key' => $MAGNUS->dnid));
+
+                if (count($MAGNUS->modelSip) && strlen($MAGNUS->modelSip->name) > 3) {
+                    $agi->verbose("CALL TO SIP", 15);
+                    $sipCallAgi = new SipCallAgi();
+                    $sipCallAgi->processCall($MAGNUS, $agi, $Calc);
+
+                } else {
+                    $agi->verbose("CALL TO PSTN", 15);
+                    $standardCall = new StandardCallAgi();
+                    $standardCall->processCall($MAGNUS, $agi, $Calc);
+                }
             }
 
         }

@@ -3,7 +3,7 @@
 /**
  * Url for paypal ruturn http://ip/billing/index.php/placetoPay .
  */
-class PlacetoPayController extends BaseController
+class PlacetoPayController extends Controller
 {
 
     public function actionIndex()
@@ -170,48 +170,48 @@ class PlacetoPayController extends BaseController
         ?>
 
 
-		<?php header('Content-type: text/html; charset=ISO-8859-1');?>
-		<!DOCTYPE html
-	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <?php header('Content-type: text/html; charset=ISO-8859-1');?>
+    <!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-CO">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
-	<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
+  <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
 <title>PlacetoPay - Comprobante de pago</title>
-	<style type="text/css">
-	body {margin: 0px; font-family: Verdana, Arial, sans-serif; font-size: 10pt;}
-	#placetopay-header { width: 550px; margin-left: auto; margin-right: auto; text-align: left; }
-	#placetopay-content {
-	width: 550px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-khtml-border-radius: 10px;
-	-webkit-box-shadow: 1px 1px 5px 0px #ccc;
-	box-shadow: 1px 1px 5px 0px #ccc;
-	padding: 30px;
-	text-align: center;
+  <style type="text/css">
+  body {margin: 0px; font-family: Verdana, Arial, sans-serif; font-size: 10pt;}
+  #placetopay-header { width: 550px; margin-left: auto; margin-right: auto; text-align: left; }
+  #placetopay-content {
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 5px 0px #ccc;
+  box-shadow: 1px 1px 5px 0px #ccc;
+  padding: 30px;
+  text-align: center;
 }
-	#placetopay-footer { width: 550px; margin-left: auto; margin-right: auto; text-align: right; }
-	h3 { padding: 5px; font-size: 16pt; }
-	table.placetopay {width: 450px;margin-left: auto; margin-right: auto;}
-	th.placetopay  {font-weight: bold; background-color: #000; color: #ffffff; padding: 5px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; font-size: 11pt;}
-	td.placetopayheader {font-size: 14pt; color: #000; font-weight: bold;}
-	td.placetopaytitulo {font-size: 8pt; font-weight: bold; vertical-align: top}
-	td.placetopayvalor {font-size: 10pt; text-align: justify;}
-	th.placetopay1 {
-	font-weight: bold;
-	background-color: #00F;
-	color: #ffffff;
-	padding: 5px;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	font-size: 11pt;
+  #placetopay-footer { width: 550px; margin-left: auto; margin-right: auto; text-align: right; }
+  h3 { padding: 5px; font-size: 16pt; }
+  table.placetopay {width: 450px;margin-left: auto; margin-right: auto;}
+  th.placetopay  {font-weight: bold; background-color: #000; color: #ffffff; padding: 5px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; font-size: 11pt;}
+  td.placetopayheader {font-size: 14pt; color: #000; font-weight: bold;}
+  td.placetopaytitulo {font-size: 8pt; font-weight: bold; vertical-align: top}
+  td.placetopayvalor {font-size: 10pt; text-align: justify;}
+  th.placetopay1 {
+  font-weight: bold;
+  background-color: #00F;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  font-size: 11pt;
 }
     </style>
 </head>
@@ -354,7 +354,7 @@ class PlacetoPayController extends BaseController
 </body>
 </html>
 
-		<?php
+    <?php
 
     }
 }

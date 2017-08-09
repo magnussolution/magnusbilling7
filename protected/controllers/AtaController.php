@@ -20,7 +20,7 @@
 /**
  * Url for paypal ruturn http://ip/mbilling/index.php/ata .
  */
-class AtaController extends BaseController
+class AtaController extends Controller
 {
 
     public function actionIndex()

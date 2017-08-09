@@ -3,7 +3,7 @@
 /**
  * Url for customer register http://ip/billing/index.php/user/add .
  */
-class BuyCreditController extends BaseController
+class BuyCreditController extends Controller
 {
 
     public function actionMethod()

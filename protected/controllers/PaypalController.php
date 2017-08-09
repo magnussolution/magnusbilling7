@@ -3,7 +3,7 @@
 /**
  * Url for paypal ruturn http://ip/billing/index.php/paypal .
  */
-class PaypalController extends BaseController
+class PaypalController extends Controller
 {
 
     public function actionIndex()

@@ -36,7 +36,7 @@ class Calc
     public $idCallCallBack      = 0;
     public $agent_bill          = 0;
 
-    public function Calc()
+    public function __construct()
     {
         $this->dialstatus_rev_list = Magnus::getDialStatus_Revert_List();
     }

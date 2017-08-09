@@ -20,7 +20,7 @@
  * 04/07/2012
  */
 
-class MethodpayController extends BaseController
+class MethodpayController extends Controller
 {
     public $attributeOrder = 'id';
     public $extraValues    = array('idUser' => 'username');

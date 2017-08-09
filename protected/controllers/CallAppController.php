@@ -25,7 +25,7 @@
 //http://localhost/mbilling/index.php/callApp/getReturn?number=5511999464731&user=24315&name=magnus&city=torres
 
 //http://localhost/mbilling/index.php/callApp/getReturn?id=269196
-class CallAppController extends BaseController
+class CallAppController extends Controller
 {
 
     public $user;

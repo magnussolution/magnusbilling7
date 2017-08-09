@@ -3,7 +3,7 @@
 /**
  * Url for customer register http://ip/billing/index.php/clicToCall?id=username .
  */
-class ClicToCallController extends BaseController
+class ClicToCallController extends Controller
 {
 
     public function init()

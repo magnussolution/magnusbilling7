@@ -3,7 +3,7 @@
 /**
  * Url for customer register http://ip/billing/index.php/user/add .
  */
-class SignupController extends BaseController
+class SignupController extends Controller
 {
 
     public function actions()
@@ -99,7 +99,7 @@ class SignupController extends BaseController
                 $modelSip->save();
 
                 $select = 'accountcode, name, defaultuser, secret, regexten, amaflags, callerid, language, cid_number,
-								disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, calllimit';
+                                disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, calllimit';
                 $modelSip = Sip::model()->findAll(array(
                     'select'    => $select,
                     'condition' => "host != 'dynamic' OR  calllimit > 0",
@@ -135,7 +135,14 @@ class SignupController extends BaseController
         }
 
         //render to ADD form
-        $this->render('add', array('signup' => $signup, 'plan' => $modelPlan, 'autoPassword' => $pass));
+        $this->render('add', array(
+            'signup'       => $signup,
+            'plan'         => $modelPlan,
+            'autoPassword' => $pass,
+            'autoUser'     => $this->config['global']['auto_generate_user_signup'],
+            'language'     => $this->config['global']['base_language'],
+            'termsLink'    => $this->config['global']['accept_terms_link'],
+        ));
     }
 
     public function createUserinSuperLogica()

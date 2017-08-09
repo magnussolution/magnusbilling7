@@ -17,16 +17,6 @@ class StandardCallAgi
             $agi->stream_file($MAGNUS->agiconfig['intro_prompt'], '#');
         }
 
-        //get if the call have the second number
-        if ($agi->get_variable("SECCALL", true)) {
-
-            $agi->stream_file('prepaid-secondCall', '#');
-            $MAGNUS->agiconfig['use_dnid'] = 1;
-            $MAGNUS->destination           = $MAGNUS->extension           = $MAGNUS->dnid           = $agi->get_variable("SECCALL", true);
-            $modelUser                     = User::model()->findByPk((int) $agi->get_variable("IDUSER", true));
-            $MAGNUS->accountcode           = isset($modelUser->username) ? $modelUser->username : null;
-        }
-
         // CALL AUTHENTICATE AND WE HAVE ENOUGH CREDIT TO GO AHEAD
         if (AuthenticateAgi::authenticateUser($agi, $MAGNUS) == 1) {
 

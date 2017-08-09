@@ -6,7 +6,7 @@
  * Meus dados -> Preferencia -> uNotificação das transações.
  * https://www.moip.com.br/PagamentoMoIP.do
  */
-class MoipController extends BaseController
+class MoipController extends Controller
 {
 
     public function actionIndex()

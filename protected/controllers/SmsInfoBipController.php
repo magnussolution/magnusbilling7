@@ -3,7 +3,7 @@
 /**
  * Url for http://localhost/mbilling/index.php/smsInfoBip/send?user=6964554610&pass=6964554610&number=57325064403&text=test_sms .
  */
-class SmsInfoBipController extends BaseController
+class SmsInfoBipController extends Controller
 {
 
     public function init()
@@ -49,7 +49,7 @@ class SmsInfoBipController extends BaseController
         $authorization = base64_encode("$user:$pass");
 
         $result = exec("
-		curl -X POST \
+        curl -X POST \
  -H 'Content-Type: application/json' \
  -H 'Accept: application/json' \
  -H 'Authorization: Basic $authorization' \

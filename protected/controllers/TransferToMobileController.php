@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 /**
  * Url for customer register http://ip/billing/index.php/user/add .
  */
-class TransferToMobileController extends BaseController
+class TransferToMobileController extends Controller
 {
     private $url = "https://fm.transfer-to.com/cgi-bin/shop/topup?";
 
@@ -19,12 +19,12 @@ class TransferToMobileController extends BaseController
             $password = $_POST['pass'];
 
             $condition = "(username COLLATE utf8_bin LIKE :user OR username LIKE :user
-				OR email COLLATE utf8_bin LIKE :user)";
+                OR email COLLATE utf8_bin LIKE :user)";
 
             $sql = "SELECT pkg_user.id, username, id_group, id_plan, pkg_user.firstname,
-							pkg_user.lastname , id_user_type, id_user, loginkey, active, password
-							FROM pkg_user JOIN pkg_group_user ON id_group = pkg_group_user.id
-							WHERE $condition";
+                            pkg_user.lastname , id_user_type, id_user, loginkey, active, password
+                            FROM pkg_user JOIN pkg_group_user ON id_group = pkg_group_user.id
+                            WHERE $condition";
             $command = Yii::app()->db->createCommand($sql);
             $command->bindValue(":user", $user, PDO::PARAM_STR);
             $result = $command->queryAll();
@@ -72,8 +72,8 @@ class TransferToMobileController extends BaseController
             Yii::app()->session['user_type']     = $user['id_user_type'];
 
             $sql = "SELECT m.id, action, show_menu, text, module, icon_cls, m.id_module
-							FROM pkg_group_module gm INNER JOIN pkg_module m ON gm.id_module = m.id
-							WHERE id_group = :id_group";
+                            FROM pkg_group_module gm INNER JOIN pkg_module m ON gm.id_module = m.id
+                            WHERE id_group = :id_group";
             $command = Yii::app()->db->createCommand($sql);
             $command->bindValue(":id_group", $user['id_group'], PDO::PARAM_STR);
             $result                         = $command->queryAll();
@@ -102,24 +102,24 @@ class TransferToMobileController extends BaseController
     {
         echo '<div id="container"><div id="form"> <div id="box-4">';
         echo '<form action="" id="form1" method="POST">
-			<fieldset class="well">
-				<div class="control-group">
+            <fieldset class="well">
+                <div class="control-group">
 
-					<div class="control-label">
-						<label >Number<span class="star">&nbsp;*</span></label>
-					</div>
-					<div class="controls">
-						<input type="text" name="number" size="25" required="" aria-required="true" value = "">
-					</div>
+                    <div class="control-label">
+                        <label >Number<span class="star">&nbsp;*</span></label>
+                    </div>
+                    <div class="controls">
+                        <input type="text" name="number" size="25" required="" aria-required="true" value = "">
+                    </div>
 
-					<br>
-					<div class="controls" id="fistButtondiv">
-						<button id="fistButton" type="submit" onclick="button1();" class="btn btn-primary">Next</button>
-					</div>
-					<div class="controls" id="fistButtondivWait"></div>
+                    <br>
+                    <div class="controls" id="fistButtondiv">
+                        <button id="fistButton" type="submit" onclick="button1();" class="btn btn-primary">Next</button>
+                    </div>
+                    <div class="controls" id="fistButtondivWait"></div>
 
-			</fieldset>
-		</form>';
+            </fieldset>
+        </form>';
         echo '</div></div></div>';
 
     }
@@ -147,42 +147,42 @@ class TransferToMobileController extends BaseController
 
         echo '<div id="container"><div id="form"> <div id="box-4">';
         echo '<form action="" id="form2" method="POST">
-			<fieldset class="well">
-				<div class="control-group">
+            <fieldset class="well">
+                <div class="control-group">
 
-					<br>
-					<div class="control-label">
-						<label >Number<span class="star">&nbsp;*</span> : ' . $number . '</label>
-					</div>
-					<div class="control-label">
-						<label >Operator<span class="star">&nbsp;*</span> : ' . $operator . '</label>
-					</div>
-					<div class="control-label">
-						<label >Country<span class="star">&nbsp;*</span> : ' . $country . '</label>
-					</div>
-
-
-					<div class="controls">
-					<label >Amount<span class="star">&nbsp;*</span> :</label>
-						<select id=amountfiel name="amount" ' . $show_price . '>
-						<option value=""></option>
-							' . $amount . '
-						</select>
-					</div>
+                    <br>
+                    <div class="control-label">
+                        <label >Number<span class="star">&nbsp;*</span> : ' . $number . '</label>
+                    </div>
+                    <div class="control-label">
+                        <label >Operator<span class="star">&nbsp;*</span> : ' . $operator . '</label>
+                    </div>
+                    <div class="control-label">
+                        <label >Country<span class="star">&nbsp;*</span> : ' . $country . '</label>
+                    </div>
 
 
-					<div id="rsp_age" style="font-size: 11px; color: red;"></div>
-					<input type="hidden" name="number" value="' . $number . '">
-					<input type="hidden" name="rows" value="' . urlencode(json_encode($values['rows'])) . '">
-					<br>
-					<div class="controls" id="secondButtondiv">
-						<button type="submit" id="secondButton" onclick="button2();" class="btn btn-primary">Next</button>
-					</div>
-					<div class="controls" id="secondButtondivWait"></div>
-					<div id="sellingPrice"></div>
+                    <div class="controls">
+                    <label >Amount<span class="star">&nbsp;*</span> :</label>
+                        <select id=amountfiel name="amount" ' . $show_price . '>
+                        <option value=""></option>
+                            ' . $amount . '
+                        </select>
+                    </div>
 
-			</fieldset>
-		</form>';
+
+                    <div id="rsp_age" style="font-size: 11px; color: red;"></div>
+                    <input type="hidden" name="number" value="' . $number . '">
+                    <input type="hidden" name="rows" value="' . urlencode(json_encode($values['rows'])) . '">
+                    <br>
+                    <div class="controls" id="secondButtondiv">
+                        <button type="submit" id="secondButton" onclick="button2();" class="btn btn-primary">Next</button>
+                    </div>
+                    <div class="controls" id="secondButtondivWait"></div>
+                    <div id="sellingPrice"></div>
+
+            </fieldset>
+        </form>';
         echo '</div></div></div>';
     }
 
@@ -481,20 +481,20 @@ class TransferToMobileController extends BaseController
 
 <script type="text/javascript">
 
-	function button1(buttonId) {
-		document.getElementById("fistButtondiv").style.display = 'none';
-	  	document.getElementById("fistButtondivWait").innerHTML = "<font color = green>Wait! </font>";
-	}
-	function button2(buttonId) {
-	  document.getElementById("secondButtondiv").style.display = 'none';
-	  	document.getElementById("secondButtondivWait").innerHTML = "<font color = green>Wait! </font>";
-	}
-	function showPrice(argument) {
-		text = document.getElementById('amountfiel').options[document.getElementById('amountfiel').selectedIndex].text;
-		var valueAmout = text.split(' ');
-		fee = Number('1.'+argument);
+    function button1(buttonId) {
+        document.getElementById("fistButtondiv").style.display = 'none';
+        document.getElementById("fistButtondivWait").innerHTML = "<font color = green>Wait! </font>";
+    }
+    function button2(buttonId) {
+      document.getElementById("secondButtondiv").style.display = 'none';
+        document.getElementById("secondButtondivWait").innerHTML = "<font color = green>Wait! </font>";
+    }
+    function showPrice(argument) {
+        text = document.getElementById('amountfiel').options[document.getElementById('amountfiel').selectedIndex].text;
+        var valueAmout = text.split(' ');
+        fee = Number('1.'+argument);
 
-		newText = '<b>Selling Price</b>'+' <font color=blue size=7><b>'+valueAmout[3]+ ' '+valueAmout[4] * fee+'</b></font>'
-		document.getElementById('sellingPrice').innerHTML = newText;
-	}
+        newText = '<b>Selling Price</b>'+' <font color=blue size=7><b>'+valueAmout[3]+ ' '+valueAmout[4] * fee+'</b></font>'
+        document.getElementById('sellingPrice').innerHTML = newText;
+    }
 </script>

@@ -21,14 +21,11 @@
  * index.php/mBillingSoftphone/read?l=felipe|137DCEC44002170DB2D2DCD9C70DBEBF
  */
 
-class MBillingSoftphoneController extends BaseController
+class MBillingSoftphoneController extends Controller
 {
     public $attributeOrder = 'id';
     public $filterByUser   = false;
-    private $host          = 'localhost';
-    private $user          = 'magnus';
     private $l;
-    private $password = 'magnussolution';
 
     public function actionRead($asJson = true, $condition = null)
     {

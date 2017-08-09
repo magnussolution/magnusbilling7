@@ -72,9 +72,9 @@ class Magnus
     public $voicemail;
     public $magnusFilesDirectory = '/usr/local/src/magnus/';
 
-    public function Magnus()
+    public function __construct()
     {
-        $this->dialstatus_rev_list = $this->getDialStatus_Revert_List();
+        $this->dialstatus_rev_list = Magnus::getDialStatus_Revert_List();
     }
 
     public function init()
@@ -165,7 +165,7 @@ class Magnus
         exit;
     }
 
-    public function getDialStatus_Revert_List()
+    public static function getDialStatus_Revert_List()
     {
         $dialstatus_rev_list                = array();
         $dialstatus_rev_list["ANSWER"]      = 1;

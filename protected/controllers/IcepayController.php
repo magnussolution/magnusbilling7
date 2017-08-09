@@ -3,7 +3,7 @@
 /**
  * Url for moip ruturn http://ip/billing/index.php/icepay .
  */
-class IcepayController extends BaseController
+class IcepayController extends Controller
 {
 
     public function actionIndex()
@@ -27,7 +27,7 @@ class IcepayController extends BaseController
                 RefillIcepay::model()->deleteByPk((int) (int) $data->orderID);
 
                 echo '<h1>Oops, some error occured</h1>
-    				<p>Error description : OnSuccess FALSE ' . $data->statusCode . ' </p>';
+                    <p>Error description : OnSuccess FALSE ' . $data->statusCode . ' </p>';
                 exit();
             }
 

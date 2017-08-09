@@ -31,7 +31,7 @@ header('Location: http://186.225.143.142/mbilling/index.php/authentication/login
 </form>
  */
 
-class AuthenticationController extends BaseController
+class AuthenticationController extends Controller
 {
     private $menu = array();
 
