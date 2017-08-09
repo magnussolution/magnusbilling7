@@ -226,7 +226,7 @@ class ServicesProcess
 
     }
 
-    public function payService($modelServicesUse)
+    public static function payService($modelServicesUse)
     {
         $modelServicesUse->month_payed++;
         $modelServicesUse->reminded = 0;
@@ -246,7 +246,7 @@ class ServicesProcess
         }
     }
 
-    public function releaseService($modelServicesUse)
+    public static function releaseService($modelServicesUse)
     {
         $modelServicesUse->status      = 0;
         $modelServicesUse->reminded    = 0;
@@ -255,7 +255,7 @@ class ServicesProcess
 
         ServicesProcess::updateUser('release', $modelServicesUse, false);
     }
-    public function checkIfServiceToPayAfterRefill($id_user)
+    public static function checkIfServiceToPayAfterRefill($id_user)
     {
         $criteria = new CDbCriteria();
         $criteria->addCondition('status = 2');
