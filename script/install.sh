@@ -542,6 +542,7 @@ mysql -uroot -p${password} -e "GRANT FILE ON * . * TO  'mbillingUser'@'localhost
 
 mysql mbilling -u root -p${password}  < /var/www/html/mbilling/doc/script.sql
 rm -rf /var/www/html/mbilling/doc
+rm -rf /var/www/html/mbilling/script
 
 echo "[general]
 dbhost = 127.0.0.1
