@@ -22,17 +22,7 @@ Linux Centos 7 or Debian 8
 
 ### Installing
 ```
-cd /usr/src
-
-rm -rf install.sh
-
-yum -y install wget 
-
-wget http://downloads.sourceforge.net/project/magnusbilling/install_beta.sh
-
-chmod +x install_beta.sh
-
-./install_beta.sh
+wget -O - https://raw.githubusercontent.com/magnussolution/magnusbilling6/master/script/install.sh | sh
 ```
 
 
