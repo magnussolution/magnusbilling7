@@ -118,6 +118,7 @@ cd /usr/src
 wget http://www.digip.org/jansson/releases/jansson-2.7.tar.gz
 tar -zxvf jansson-2.7.tar.gz
 cd jansson-2*
+./configure
 make clean
 make && make install
 ldconfig
@@ -300,16 +301,10 @@ if [[ ${MEMORYTOTAL} -ge 1000 ]]; then
     echo $MEMORYCALCULATOR
 
     echo "
-[client]
-port    = 3306
-socket    = /var/run/mysqld/mysqld.sock
-
 [mysqld]
 bind-address     = 127.0.0.1
 port    = 3306
 user    = mysql
-pid-file  = /var/run/mysqld/mysqld.pid
-socket    = /var/run/mysqld/mysqld.sock
 symbolic-links=0
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 
@@ -344,6 +339,8 @@ log-error=/var/log/mariadb/mariadb.log
 pid-file=/var/run/mariadb/mariadb.pid" >> /etc/my.cnf
     fi;
 fi;
+
+#/var/lib/mysql/
 
 echo
 echo "----------- Create mysql password: Your mysql root password is $password ----------"
