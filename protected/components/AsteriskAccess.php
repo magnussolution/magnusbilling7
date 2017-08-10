@@ -158,6 +158,15 @@ class AsteriskAccess
                     //registrar tronco
                     if ($key == 'register_string' && preg_match("/^.{3}.*:.{3}.*@.{5}.*\/.{3}.*/", $data['register_string'])) {
                         $registerLine .= 'register=>' . $data['register_string'] . "\n";
+                    } elseif ($key == 'encryption' && $option == 'no') {
+                        continue;
+                    } elseif ($key == 'transport' && $option == 'no') {
+                        continue;
+                    } elseif ($key == 'port' && $option == '5060') {
+                        continue;
+                    } elseif ($key == 'user') {
+                        $line .= $key . '=' . $option . "\n";
+                        $line .= 'username=' . $option . "\n";
                     } else {
                         $line .= $key . '=' . $option . "\n";
                     }

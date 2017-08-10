@@ -124,7 +124,7 @@ class TrunkController extends Controller
 
     public function generateSipFile()
     {
-        $select = 'trunkcode, providerip, user, secret, disallow, allow, directmedia, context, maxuse, dtmfmode, insecure, nat, qualify, type, host, register_string,port,transport,encryption';
+        $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, register_string,port,transport,encryption';
         $model  = Trunk::model()->findAll(
             array(
                 'select'    => $select,
@@ -136,7 +136,7 @@ class TrunkController extends Controller
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
         }
 
-        $select = 'trunkcode, providerip, user, secret, disallow, allow, directmedia, context, maxuse, dtmfmode, insecure, nat, qualify, type, host, register_string';
+        $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, register_string';
 
         $model = Trunk::model()->findAll(
             array(
