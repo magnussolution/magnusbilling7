@@ -476,6 +476,7 @@ class AsteriskAccess
                             $line .= 'call-limit=' . $data['calllimit'] . "\n";
                         }
 
+                        if ($data['context'] == 'encryption') {
                         if (fwrite($fd, $line) === false) {
                             echo gettext("Impossible to write to the file") . " ($buddyfile)";
                             break;
