@@ -477,6 +477,18 @@ class AsteriskAccess
                         }
 
                         if ($data['context'] == 'encryption') {
+                            $line .= "encryption=yes\n";
+                            $line .= "avpf=yes\n";
+                            $line .= "force_avp=yes\n";
+                            $line .= "icesupport=yes\n";
+                            $line .= "dtlsenable=yes\n";
+                            $line .= "dtlsverify=fingerprint\n";
+                            $line .= "dtlscertfile=/etc/asterisk/certificate/asterisk.pem\n";
+                            $line .= "dtlscafile=/etc/asterisk/certificate/ca.crt\n";
+                            $line .= "dtlssetup=actpass\n";
+                            $line .= "rtcp_mux=yes\n";
+                        }
+
                         if (fwrite($fd, $line) === false) {
                             echo gettext("Impossible to write to the file") . " ($buddyfile)";
                             break;
