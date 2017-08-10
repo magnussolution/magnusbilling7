@@ -240,6 +240,8 @@ class UserController extends Controller
                 $modelSip->secret      = $model->password;
                 $modelSip->save();
             }
+
+            AsteriskAccess::instance()->generateSipPeers();
         }
 
         if (isset($model->id_group_agent) and $model->id_group_agent > 1) {
