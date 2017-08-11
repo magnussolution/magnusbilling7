@@ -317,10 +317,11 @@ query_cache_size = `expr 128 \* ${MEMORYCALCULATOR}`M
 query_cache_limit=`expr 2 \* ${MEMORYCALCULATOR}`M
 tmp_table_size = `expr 64 \* ${MEMORYCALCULATOR}`M
 
+innodb_file_per_table=1
 innodb_buffer_pool_size = `expr 256 \* ${MEMORYCALCULATOR}`M
-innodb_additional_mem_pool_size = `expr 32 \* ${MEMORYCALCULATOR}`M
-innodb_log_file_size = `expr 8 \* ${MEMORYCALCULATOR}`M
-innodb_log_buffer_size = `expr 4 \* ${MEMORYCALCULATOR}`M
+innodb_additional_mem_pool_size = `expr 8 \* ${MEMORYCALCULATOR}`M
+innodb_log_file_size = `expr 64 \* ${MEMORYCALCULATOR}`M
+innodb_log_buffer_size = `expr 8 \* ${MEMORYCALCULATOR}`M
 
 max_connections = `expr 300 \* ${MEMORYCALCULATOR}`
 
