@@ -114,14 +114,14 @@ class SmtpsController extends Controller
             ));
             exit;
         }
-
         $modelSmtp = $this->abstractModel->findByPk((int) $_POST['id']);
 
         Yii::import('application.extensions.phpmailer.JPhpMailer');
         $language = Yii::app()->language == 'pt_BR' ? 'br' : Yii::app()->language;
         $mail     = new JPhpMailer;
         $mail->IsSMTP();
-        $mail->SMTPAuth   = true;
+        $mail->SMTPAuth = true;
+
         $mail->Host       = $modelSmtp->host;
         $mail->SMTPSecure = $modelSmtp->encryption;
         $mail->Username   = $modelSmtp->username;
@@ -132,7 +132,7 @@ class SmtpsController extends Controller
         $mail->Subject = 'MagnusBilling email test';
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
         $mail->MsgHTML('<br>Hi, this is a email from MagnusBilling.');
-        $mail->AddAddress($modelUser->username);
+        $mail->AddAddress($modelUser->email);
         $mail->CharSet = 'utf-8';
 
         ob_start();
