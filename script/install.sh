@@ -312,7 +312,7 @@ user    = mysql
 symbolic-links=0
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 
-key_buffer_size=key_buffer_size=`expr 128 \* ${MEMORYCALCULATOR}`M
+key_buffer_size=`expr 128 \* ${MEMORYCALCULATOR}`M
 query_cache_size = `expr 128 \* ${MEMORYCALCULATOR}`M
 query_cache_limit=`expr 2 \* ${MEMORYCALCULATOR}`M
 tmp_table_size = `expr 64 \* ${MEMORYCALCULATOR}`M
