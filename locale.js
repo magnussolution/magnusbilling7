@@ -17,6 +17,7 @@
         return _constants[string] || string;
     }
 }());
+
 (function() {
     var _constants = {};
     window.Help = {
