@@ -85,7 +85,9 @@ class RefillController extends Controller
 
     public function afterSave($model, $values)
     {
-        UserCreditManager::releaseUserCredit($model->id_user, $model->credit, $model->description, 2);
+        if ($this->isNewRecord) {
+            UserCreditManager::releaseUserCredit($model->id_user, $model->credit, $model->description, 2);
+        }
         return;
     }
 
