@@ -25,9 +25,8 @@ fi
 
 cd /var/www/html/mbilling
 ## pull remote git repository
-git fetch --all
-git reset --hard origin/master
 git fetch origin master
+git reset --hard origin/master
 git clean -f -d
 git pull
 
