@@ -24,11 +24,9 @@ if [[ -e /var/www/html/mbilling/protected/commands/update2.sh ]]; then
 fi
 
 cd /var/www/html/mbilling
-## pull remote git repository
-git fetch origin master
-git reset --hard origin/master
-git clean -f -d
-git pull
+rm -rf master.tar.gz
+wget https://github.com/magnussolution/magnusbilling6/archive/master.tar.gz
+tar xzf master.tar.gz --strip-components=1
 
 ##update database
 php /var/www/html/mbilling/cron.php UpdateMysql
