@@ -89,6 +89,13 @@ echo "$password" > /root/passwordMysql.log
 if  [ ${DIST} = "CENTOS" ]; then
     sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > borra && mv -f borra /etc/selinux/config
 fi
+if [ ${DIST} = "CENTOS" ]; then
+echo '[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1' > /etc/yum.repos.d/MariaDB.repo 
+fi
 
 if [ ${DIST} = "DEBIAN" ]; then
     
@@ -279,73 +286,6 @@ elif [ ${DIST} = "DEBIAN" ]; then
     mkdir -p /var/www/html
     sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' ${HTTP_CONFIG}
 fi; 
-
-
-MEMORYTOTAL=$(awk '/^Mem/ {print $2}' <(free -m))
-
-# configure my.cnf if have memory more than 1000MB
-if [[ ${MEMORYTOTAL} -ge 1000 ]]; then
-
-    if [[ ${MEMORYTOTAL} -ge 16000 ]]; then
-      MEMORYCALCULATOR=16
-    elif [[ ${MEMORYTOTAL} -ge 12000 ]]; then
-      MEMORYCALCULATOR=12
-    elif [[ ${MEMORYTOTAL} -ge 10000 ]]; then
-      MEMORYCALCULATOR=10
-    elif [[ ${MEMORYTOTAL} -ge 8000 ]]; then
-      MEMORYCALCULATOR=8
-    elif [[ ${MEMORYTOTAL} -ge 6000 ]]; then
-      MEMORYCALCULATOR=6
-    elif [[ ${MEMORYTOTAL} -ge 4000 ]]; then
-      MEMORYCALCULATOR=4
-    elif [[ ${MEMORYTOTAL} -ge 2000 ]]; then
-      MEMORYCALCULATOR=2
-    fi
-
-    echo $MEMORYCALCULATOR
-
-    echo "
-[mysqld]
-bind-address     = 127.0.0.1
-port    = 3306
-user    = mysql
-symbolic-links=0
-sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
-
-key_buffer_size=`expr 128 \* ${MEMORYCALCULATOR}`M
-query_cache_size = `expr 128 \* ${MEMORYCALCULATOR}`M
-query_cache_limit=`expr 2 \* ${MEMORYCALCULATOR}`M
-tmp_table_size = `expr 64 \* ${MEMORYCALCULATOR}`M
-
-innodb_file_per_table=1
-innodb_buffer_pool_size = `expr 256 \* ${MEMORYCALCULATOR}`M
-innodb_additional_mem_pool_size = `expr 8 \* ${MEMORYCALCULATOR}`M
-innodb_log_file_size = `expr 64 \* ${MEMORYCALCULATOR}`M
-innodb_log_buffer_size = `expr 8 \* ${MEMORYCALCULATOR}`M
-
-max_connections = `expr 300 \* ${MEMORYCALCULATOR}`
-
-sort_buffer_size = 2M
-read_buffer_size = `expr 256 \* ${MEMORYCALCULATOR}`K
-read_rnd_buffer_size=`expr 512 \* ${MEMORYCALCULATOR}`K
-join_buffer_size = `expr 256 \* ${MEMORYCALCULATOR}`K
-thread_stack = `expr 392 \* ${MEMORYCALCULATOR}`K" > /etc/my.cnf
-
-
-    if [ ${DIST} = "DEBIAN" ]; then
-    echo "
-[mysqld_safe]
-socket    = /var/run/mysqld/mysqld.sock
-nice    = 0" >> /etc/my.cnf
-    elif [ ${DIST} = "CENTOS" ]; then
-    echo "
-[mysqld_safe]
-log-error=/var/log/mariadb/mariadb.log
-pid-file=/var/run/mariadb/mariadb.pid" >> /etc/my.cnf
-    fi;
-fi;
-
-#/var/lib/mysql/
 
 echo
 echo "----------- Create mysql password: Your mysql root password is $password ----------"
