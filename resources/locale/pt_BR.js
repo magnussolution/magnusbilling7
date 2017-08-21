@@ -643,7 +643,7 @@ Locale.load({
     'plans': 'Planos',
     'tariffplan': 'Plano',
     'tariffs': 'Tarifas',
-    'tariffsview': 'Tarifas',
+    'tariffsview': 'Tarifas', 
     'tariffsviewagent': 'Tarifas',
     'taxa': 'Taxa',
     'templatemail': 'E-mails',
