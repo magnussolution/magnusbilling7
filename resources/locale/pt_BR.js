@@ -45,7 +45,7 @@ Locale.load({
     'not': 'não',
     'You can use': 'Você pode usar',
     'Amounts': 'Valores',
-    'Discount': 'Desconto',
+    'Discount': 'Descontar',
     'Fee': 'Tarifa',
     'Csv Format': 'Formato CSV',
     'Delimiter': 'Separador',
