@@ -1,7 +1,7 @@
 Locale.load({
     'Insert the space available to record in GB. Use -1 to unlimit': 'Insira o espaco em GB disponivel para gravaçōes. Use -1 para ilimitado',
     'It is used to change the dialing number.': 'Isto é usado para alterar o número de discagem',
-    'Bulk': 'Volume',
+    'Bulk': 'Gerar',
     'Num attempt': 'Número de Tentativas',
     'Last attempt': 'Última tentativa',
     'Created': 'Criado',
