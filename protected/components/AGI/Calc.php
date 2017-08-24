@@ -646,11 +646,11 @@ class Calc
                     $removeprefix        = $modelTrunk->removeprefix;
                     $next_failover_trunk = $modelTrunk->failover_trunk;
                     $timeout             = $this->tariffObj[0]['timeout'];
-                    $status              = $modelTrunk->status;
-                    $inuse               = $modelTrunk->inuse;
-                    $maxuse              = $modelTrunk->maxuse;
-                    $allow_error         = $modelTrunk->allow_error;
-                    $addparameter        = $modelTrunk->addparameter;
+                    $status              = $this->tariffObj[$k]['status']              = $modelTrunk->status;
+                    $inuse               = $this->tariffObj[$k]['inuse']               = $modelTrunk->inuse;
+                    $maxuse              = $this->tariffObj[$k]['maxuse']              = $modelTrunk->maxuse;
+                    $allow_error         = $this->tariffObj[$k]['allow_error']         = $modelTrunk->allow_error;
+                    $addparameter        = $this->tariffObj[$k]['rt_addparameter_trunk']        = $modelTrunk->addparameter;
 
                     $this->tariffObj[$k]['credit_control'] = $modelTrunk->idProvider->credit_control;
                     $this->tariffObj[$k]['credit']         = $modelTrunk->idProvider->credit;
