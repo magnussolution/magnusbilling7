@@ -297,7 +297,7 @@ class AuthenticateAgi
         return $authentication;
     }
 
-    public static function checkPlanIntraInter(&$MAGNUS, $model)
+    public static function checkPlanIntraInter(&$MAGNUS, $agi)
     {
         if ($MAGNUS->config['global']['intra-inter'] == '1') {
             $agi->verbose(substr($MAGNUS->modelSip->callerid, 0, 4) . "  " . substr($MAGNUS->dnid, 0, 4), 30);
