@@ -406,7 +406,7 @@ class AuthenticateAgi
         : $MAGNUS->credit;
 
         $MAGNUS->modelSip    = Sip::model()->find('name = :key', array('key' => $MAGNUS->sip_account));
-        $MAGNUS->voicemail   = count($MAGNUS->modelSip) ? true : false;
+        $MAGNUS->voicemail   = count($MAGNUS->modelSip) ? $MAGNUS->modelSip->voicemail : false;
         $MAGNUS->record_call = (count($MAGNUS->modelSip) && $MAGNUS->modelSip->record_call) || $MAGNUS->agiconfig['record_call'] ? true : false;
 
     }
