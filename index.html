@@ -69,11 +69,6 @@
                 var theme = window.theme;
                 window.isTablet = !tags.desktop; 
 
-                if(!tags.desktop) {
-                    document.getElementById("viewport").setAttribute("content",
-                         "width=1100; initial-scale=1; maximum-scale=1.0; user-scalable=1;");
-                  theme = 'blue-crisp-touch';
-                } 
                 if (location.search.match(/\bmodern\b/)) {
                     theme = 'modern';
                 }else if (location.search.match(/\bcupertino\b/)) {
