@@ -206,7 +206,7 @@ class UserController extends Controller
         }
 
         if (isset($values['id_group_agent'])) {
-            $values['id_group_agent'] = $values['id_group_agent'] === 0 || !is_numeric($values['id_group_agent'])
+            $values['id_group_agent'] = $values['id_group_agent'] == 0 || !is_numeric($values['id_group_agent'])
             ? null :
             $values['id_group_agent'];
         }
@@ -244,9 +244,12 @@ class UserController extends Controller
             AsteriskAccess::instance()->generateSipPeers();
         }
 
-        if (isset($model->id_group_agent) and $model->id_group_agent > 1) {
-            $modelUser           = User::model()->find("id_user = :id_user", array(':id_user' => $model->id));
-            $modelUser->id_group = $model->id_group_agent;
+        if (!$this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
+            $modelUser = User::model()->find("id_user = :key", array(':key' => $model->id));
+            if (count($modelUser)) {
+                $modelUser->id_group = $model->id_group_agent;
+                $modelUser->save();
+            }
         }
 
         $modelOfferUse = OfferUse::model()->findAll(
