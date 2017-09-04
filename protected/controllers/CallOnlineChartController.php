@@ -42,14 +42,14 @@ class CallOnlineChartController extends Controller
         if (isset($filter) && $filter[0]->value == 'hour') {
 
             $modelCallOnlineChart = CallOnlineChart::model()->findAll(array(
-                'select' => 'id,  date , SUM(total) AS total, SUM(answer) AS answer',
-                'group'  => "DATE_FORMAT( DATE, '%Y-%m-%d %H' )",
+                'select' => 'id,  DATE_FORMAT( date, \'%H\' ) date , SUM(total) AS total, SUM(answer) AS answer',
+                'group'  => "DATE_FORMAT( date, '%Y-%m-%d %H' )",
                 'order'  => 'id DESC',
                 'limit'  => 24,
             ));
         } else {
             $modelCallOnlineChart = CallOnlineChart::model()->findAll(array(
-                'select' => 'id, date, total, answer',
+                'select' => 'id, DATE_FORMAT( date, \'%H:%i\' ) date, total, answer',
                 'order'  => 'id DESC',
                 'limit'  => 20,
             ));
