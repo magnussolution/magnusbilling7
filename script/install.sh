@@ -307,6 +307,74 @@ if [ ${DIST} = "CENTOS" ]; then
   mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
 fi
 
+
+if [ ${DIST} = "CENTOS" ]; then
+echo "
+[mysqld]
+join_buffer_size = 128M
+sort_buffer_size = 2M
+read_rnd_buffer_size = 2M
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+secure-file-priv = ""
+symbolic-links=0
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+" > /etc/my.cnf
+elif [ ${DIST} = "DEBIAN" ]; then
+echo "
+[client]
+port    = 3306
+socket    = /var/run/mysqld/mysqld.sock
+
+[mysqld_safe]
+socket    = /var/run/mysqld/mysqld.sock
+nice    = 0
+
+[mysqld]
+join_buffer_size = 128M
+sort_buffer_size = 2M
+read_rnd_buffer_size = 2M
+user    = mysql
+pid-file  = /var/run/mysqld/mysqld.pid
+socket    = /var/run/mysqld/mysqld.sock
+port    = 3306
+basedir   = /usr
+datadir   = /var/lib/mysql
+tmpdir    = /tmp
+language  = /usr/share/mysql/english
+skip-external-locking
+secure-file-priv = ""
+symbolic-links=0
+sql-mode=NO_ENGINE_SUSTITUTION,STRICT_TRANS_TABLES
+bind-address    = 127.0.0.1
+key_buffer      = 16M
+max_allowed_packet  = 16M
+thread_stack    = 192K
+thread_cache_size   = 8
+myisam-recover      = BACKUP
+query_cache_limit = 1M
+query_cache_size    = 16M
+expire_logs_days  = 10
+max_binlog_size     = 100M
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet  = 16M
+
+[mysql]
+
+[isamchk]
+key_buffer    = 16M
+!includedir /etc/mysql/conf.d/
+" > /etc/my.cnf
+fi;
+
+
 startup_services
 
 clear
