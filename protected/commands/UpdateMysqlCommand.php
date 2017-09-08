@@ -390,7 +390,7 @@ class UpdateMysqlCommand extends ConsoleCommand
 
             $sql = "
 		        ALTER TABLE  `pkg_method_pay` ADD  `showFields` TEXT NULL DEFAULT NULL;
-		        INSERT INTO pkg_method_pay VALUES (NULL, '1', 'MercadoPago', 'MercadoPago', 'Brasil', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '8:10:15:20:2:30:50:100:200', '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');
+		        INSERT INTO pkg_method_pay VALUES (NULL, '1', 'MercadoPago', 'MercadoPago', 'Brasil', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');
 		        UPDATE pkg_method_pay SET showFields = 'payment_method,show_name,id_user,country,active,min,max,boleto_convenio,boleto_inicio_nosso_numeroa,boleto_banco,boleto_agencia,boleto_conta_corrente,boleto_carteira,boleto_taxa,boleto_instrucoes,boleto_nome_emp,boleto_end_emp,boleto_cidade_emp,boleto_estado_emp,boleto_cpf_emp' WHERE payment_method = 'BoletoBancario';
 		        UPDATE pkg_method_pay SET showFields = 'payment_method,show_name,id_user,country,active,min,max,username,url' WHERE payment_method = 'CuentaDigital';
 		        UPDATE pkg_method_pay SET showFields = 'payment_method,show_name,id_user,country,active,min,max,min,max,username,url' WHERE payment_method = 'DineroMail';
