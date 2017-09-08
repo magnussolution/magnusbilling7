@@ -775,7 +775,7 @@ class BaseController extends CController
         $this->nameFileReport = $this->modelName . '_' . time();
         $pathCsv              = $this->magnusFilesDirectory . $this->nameFileReport . '.csv';
 
-        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '" . $this->magnusFilesDirectory . $this->nameFileReport . ".csv'
+        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '/tmp/" . $this->nameFileReport . ".csv'
         FIELDS TERMINATED BY '\;' LINES TERMINATED BY '\n'
         FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
 
