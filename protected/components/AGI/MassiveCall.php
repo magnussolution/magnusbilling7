@@ -75,6 +75,7 @@ class MassiveCall
                     $token   = MassiveCall::make_token($resultPhoneNumber[0]['name']);
                     $tts_url = preg_replace("/tk=/", "tkold=", $tts_url);
                     $tts_url .= "&tk=$token";
+                if (preg_match("/ttsgo/", $tts_url)) {
                 }
                 $agi->verbose($tts_url, 8);
                 exec("wget -q -U Mozilla -O \"/tmp/$file.mp3\" \"$tts_url\"");
