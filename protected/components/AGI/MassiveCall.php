@@ -63,26 +63,45 @@ class MassiveCall
 
             //verifica se tem nome no numero
             if (isset($modelPhoneNumber->name) && strlen($modelPhoneNumber->name) > 3) {
-                $agi->verbose("TTS", 25);
-                $name = utf8_encode($modelPhoneNumber->name);
-                $file = $idPhonenumber . date("His");
-                $name = urlencode($name);
+                $agi->verbose("TTS", 10);
+                $executeTTS = true;
+                $name       = utf8_encode($modelPhoneNumber->name);
+                $file       = $idPhonenumber . date("His");
+                $name       = urlencode($name);
 
                 //http://api.voicerss.org/?key=0ed8d233c8534591a7abf4b620606bc2&src=Adilson&hl=pt-br
                 $tts_url = preg_replace('/\$name/', $name, $MAGNUS->config['global']['tts_url']);
 
-                if (preg_match("/google/", $tts_url)) {
-                    $token   = MassiveCall::make_token($resultPhoneNumber[0]['name']);
-                    $tts_url = preg_replace("/tk=/", "tkold=", $tts_url);
-                    $tts_url .= "&tk=$token";
                 if (preg_match("/ttsgo/", $tts_url)) {
+
+                    $ch = curl_init();
+                    //Caso tenha dificuldade com a requisição via HTTPS, descomente a linha abaixo
+                    //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                    curl_setopt($ch, CURLOPT_URL, $tts_url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $retorno = curl_exec($ch);
+
+                    $objJson = json_decode($retorno);
+
+                    $agi->verbose(print_r($objJson->url, true));
+                    $fp = fopen('/tmp/' . $file . '.wav', 'w');
+                    fwrite($fp, file_get_contents($objJson->url));
+                    fclose($fp);
+                    exec('sox /tmp/' . $file . '.wav -c 1 -r 8000 /tmp/' . $file . '.sln && rm -rf /tmp/' . $file . '.wav');
+
+                } else {
+
+                    if (preg_match("/google/", $tts_url)) {
+                        $token   = MassiveCall::make_token($resultPhoneNumber[0]['name']);
+                        $tts_url = preg_replace("/tk=/", "tkold=", $tts_url);
+                        $tts_url .= "&tk=$token";
+                    }
+                    $agi->verbose($tts_url, 8);
+                    exec("wget -q -U Mozilla -O \"/tmp/$file.mp3\" \"$tts_url\"");
+                    exec("mpg123 -w /tmp/$file.wav /tmp/$file.mp3 && rm -rf /tmp/$file.mp3");
+                    exec("sox -v 2.0 /tmp/$file.wav /tmp/$file2.wav && rm -rf /tmp/$file.wav");
+                    exec("sox /tmp/$file2.wav -c 1 -r 8000 /tmp/$file.wav && rm -rf /tmp/$file2.wav ");
                 }
-                $agi->verbose($tts_url, 8);
-                exec("wget -q -U Mozilla -O \"/tmp/$file.mp3\" \"$tts_url\"");
-                $executeTTS = true;
-                exec("mpg123 -w /tmp/$file.wav /tmp/$file.mp3 && rm -rf /tmp/$file.mp3");
-                exec("sox -v 2.0 /tmp/$file.wav /tmp/$file2.wav && rm -rf /tmp/$file.wav");
-                exec("sox /tmp/$file2.wav -c 1 -r 8000 /tmp/$file.wav && rm -rf /tmp/$file2.wav ");
             }
         }
 
