@@ -316,7 +316,7 @@ sort_buffer_size = 2M
 read_rnd_buffer_size = 2M
 datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
-secure-file-priv = ""
+secure-file-priv = ''
 symbolic-links=0
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 
