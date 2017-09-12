@@ -23,9 +23,9 @@ $yii    = dirname(__FILE__) . '/yii/framework/yii.php';
 $config = dirname(__FILE__) . '/protected/config/cron.php';
 
 // Remover no ambiente de producao
-defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_DEBUG') or define('YII_DEBUG', false);
 
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
+defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 0);
 
 require_once $yii;
 Yii::createConsoleApplication($config)->run();
