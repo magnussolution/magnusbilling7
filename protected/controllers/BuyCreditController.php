@@ -152,8 +152,7 @@ class BuyCreditController extends Controller
         if ($_POST) {
 
             $total = explode(" ", $_POST['ServicesUse']['total']);
-            $total = $total[1];
-            $total = preg_replace("/,/", '', $total[1]);
+            $total = floatval($total[1]);
             if (isset($_POST['ServicesUse']['use_credit']) && $_POST['ServicesUse']['use_credit'] == 1) {
 
                 if ($modelServicesUse[0]->idUser->credit >= $total) {
