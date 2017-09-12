@@ -99,7 +99,7 @@ class MagnusCommand extends CConsoleCommand
                 $MAGNUS->agiconfig['use_dnid'] = 1;
                 $MAGNUS->destination           = $MAGNUS->extension           = $MAGNUS->dnid           = $agi->get_variable("SECCALL", true);
                 $MAGNUS->modelUser             = User::model()->findByPk((int) $agi->get_variable("IDUSER", true));
-                $MAGNUS->accountcode           = isset($modelUser->username) ? $modelUser->username : null;
+                $MAGNUS->accountcode           = isset($MAGNUS->modelUser->username) ? $MAGNUS->modelUser->username : null;
                 $agi->verbose("CALL TO PSTN FROM CLIC TO CALL", 15);
                 $standardCall = new StandardCallAgi();
                 $standardCall->processCall($MAGNUS, $agi, $Calc);
