@@ -420,12 +420,12 @@ class UserController extends Controller
             $modelUser->save();
 
             if ($values['credit'] > 0) {
-                $modelRefill          = new Refill();
-                $command->id_user     = $modelUser->id;
-                $command->payment     = 1;
-                $command->credit      = $values['credit'];
-                $command->description = Yii::t('yii', 'Automatic credit');
-                $command->save();
+                $modelRefill              = new Refill();
+                $modelRefill->id_user     = $modelUser->id;
+                $modelRefill->payment     = 1;
+                $modelRefill->credit      = $values['credit'];
+                $modelRefill->description = Yii::t('yii', 'Automatic credit');
+                $modelRefill->save();
             }
 
         }
