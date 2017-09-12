@@ -901,7 +901,7 @@ CREATE TABLE `pkg_iax` (
   `amaflags` char(7) COLLATE utf8_bin DEFAULT NULL,
   `callgroup` char(10) COLLATE utf8_bin DEFAULT NULL,
   `callerid` varchar(80) COLLATE utf8_bin NOT NULL,
-  `canreinvite` varchar(20) COLLATE utf8_bin NOT NULL,
+  `canreinvite` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `context` varchar(80) COLLATE utf8_bin NOT NULL,
   `DEFAULTip` char(15) COLLATE utf8_bin DEFAULT NULL,
   `dtmfmode` char(7) COLLATE utf8_bin NOT NULL DEFAULT 'RFC2833',
