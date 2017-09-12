@@ -11,5 +11,6 @@ Help.load({
     'trunk.removeprefix': 'Remove a prefix to send to your trunk',
     'trunk.allow': 'G723 and G729 are not installed',
     'trunk.providertech': 'You need install appropriate drive to use card like dgv extra Dongle',
-    'user.disk_space': 'Insert the space available to record in GB. Use -1 to unlimit'
+    'user.disk_space': 'Insert the space available to record in GB. Use -1 to unlimit',
+    'services.disk_space': 'Insert the space available to record in GB.'
 });

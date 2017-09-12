@@ -153,6 +153,7 @@ class BuyCreditController extends Controller
 
             $total = explode(" ", $_POST['ServicesUse']['total']);
             $total = floatval($total[1]);
+
             if (isset($_POST['ServicesUse']['use_credit']) && $_POST['ServicesUse']['use_credit'] == 1) {
 
                 if ($modelServicesUse[0]->idUser->credit >= $total) {
