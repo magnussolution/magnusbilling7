@@ -417,6 +417,7 @@ class UserController extends Controller
             $modelUser->id_plan         = $values['id_plan'];
             $modelUser->active          = $values['active'];
             $modelUser->id_user         = $id_user;
+            $modelUser->credit          = $values['credit'] > 0 ? $values['credit'] : 0;
             $modelUser->save();
 
             if ($values['credit'] > 0) {
