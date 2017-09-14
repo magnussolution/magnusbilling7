@@ -378,18 +378,21 @@ class UpdateMysqlCommand extends ConsoleCommand
 
         if ($version == '6.0.0') {
 
-            $sql = "ALTER TABLE  `pkg_method_pay` ADD  `min` INT( 11 ) NOT NULL DEFAULT  '10', ADD  `max` INT( 11 ) NOT NULL DEFAULT  '500';
-			ALTER TABLE  `pkg_trunk` ADD  `transport` VARCHAR( 3 ) NOT NULL DEFAULT  'no', ADD  `encryption` VARCHAR( 3 ) NOT NULL DEFAULT  'no', ADD  `port` VARCHAR( 5 ) NOT NULL DEFAULT  '5060';
-			";
+            $sql = "ALTER TABLE  `pkg_method_pay` ADD  `min` INT( 11 ) NOT NULL DEFAULT  '10', ADD  `max` INT( 11 ) NOT NULL DEFAULT  '500';";
             $this->executeDB($sql);
+            $sql = "ALTER TABLE  `pkg_trunk` ADD  `transport` VARCHAR( 3 ) NOT NULL DEFAULT  'no', ADD  `encryption` VARCHAR( 3 ) NOT NULL DEFAULT  'no', ADD  `port` VARCHAR( 5 ) NOT NULL DEFAULT  '5060';";
+            $this->executeDB($sql);
+
             $version = '6.0.1';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
         if ($version == '6.0.1') {
 
+            $sql = " ALTER TABLE  `pkg_method_pay` ADD  `showFields` TEXT NULL DEFAULT NULL;";
+            $this->executeDB($sql);
+
             $sql = "
-		        ALTER TABLE  `pkg_method_pay` ADD  `showFields` TEXT NULL DEFAULT NULL;
 		        INSERT INTO pkg_method_pay VALUES (NULL, '1', 'MercadoPago', 'MercadoPago', 'Brasil', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');
 		        UPDATE pkg_method_pay SET showFields = 'payment_method,show_name,id_user,country,active,min,max,boleto_convenio,boleto_inicio_nosso_numeroa,boleto_banco,boleto_agencia,boleto_conta_corrente,boleto_carteira,boleto_taxa,boleto_instrucoes,boleto_nome_emp,boleto_end_emp,boleto_cidade_emp,boleto_estado_emp,boleto_cpf_emp' WHERE payment_method = 'BoletoBancario';
 		        UPDATE pkg_method_pay SET showFields = 'payment_method,show_name,id_user,country,active,min,max,username,url' WHERE payment_method = 'CuentaDigital';
@@ -419,20 +422,35 @@ class UpdateMysqlCommand extends ConsoleCommand
 
         if ($version == '6.0.2') {
 
-            $sql = "INSERT INTO pkg_method_pay VALUES (NULL, '1', 'paghiper', 'paghiper', 'Brasil', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');";
-            $this->executeDB($sql);
+            $sql    = "SELECT * FROM pkg_method_pay WHERE payment_method = 'paghiper'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            if (!count($result)) {
+                $sql = "INSERT INTO pkg_method_pay VALUES (NULL, '1', 'paghiper', 'paghiper', 'Brasil', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');";
+                $this->executeDB($sql);
+            }
             $version = '6.0.3';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
-    }
 
-    public function executeDB($sql)
-    {
-        try {
+        if ($version == '6.0.3') {
+
+            $sql = "
+        	ALTER TABLE  `pkg_iax` CHANGE `canreinvite` `canreinvite` VARCHAR(20) CHARACTER SET CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'no';
+        	ALTER TABLE  `pkg_iax` CHANGE `mask` `mask` VARCHAR(95) CHARACTER SET CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT NULL;
+        	ALTER TABLE  `pkg_iax` CHANGE  `musiconhold`  `musiconhold` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL ;"
+            $this->executeDB($sql);
+            $version = '6.0.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
+        }
 
+        public function executeDB($sql)
+        {
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+
+            }
         }
     }
-}
