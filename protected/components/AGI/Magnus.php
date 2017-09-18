@@ -625,7 +625,7 @@ class Magnus
         }
         /* Run dial command */
         if (strlen($this->agiconfig['amd']) > 0) {
-            $dialstr .= $this->agiconfig['amd'];
+            $dialparams .= $this->agiconfig['amd'];
         }
 
         if ($MAGNUS->$demo == true) {
