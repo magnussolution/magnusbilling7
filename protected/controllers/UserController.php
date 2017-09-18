@@ -90,6 +90,26 @@ class UserController extends Controller
         }
     }
 
+    public function checkAgentEdit($values)
+    {
+        //not allow agent edit his account.
+        if (Yii::app()->session['isAgent'] && !$this->isNewRecord && Yii::app()->session['id_user'] == $values['id']) {
+            echo json_encode(array(
+                'success' => false,
+                'rows'    => array(),
+                'errors'  => Yii::t('yii', 'You cannot EDIT your account.'),
+            ));
+            exit();
+
+        }
+    }
+
+    public function beforeDestroy($values)
+    {
+        $this->checkAgentEdit($values);
+        return $values;
+    }
+
     public function beforeSave($values)
     {
 
@@ -125,6 +145,8 @@ class UserController extends Controller
             //get the group id_group_agent
             $modelUser          = User::model()->findByPk((int) Yii::app()->session['id_user']);
             $values['id_group'] = $modelUser->id_group_agent;
+
+            $this->checkAgentEdit($values);
         }
 
         if ($this->isNewRecord) {
