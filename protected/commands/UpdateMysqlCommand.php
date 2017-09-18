@@ -438,19 +438,21 @@ class UpdateMysqlCommand extends ConsoleCommand
             $sql = "
         	ALTER TABLE  `pkg_iax` CHANGE `canreinvite` `canreinvite` VARCHAR(20) CHARACTER SET CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'no';
         	ALTER TABLE  `pkg_iax` CHANGE `mask` `mask` VARCHAR(95) CHARACTER SET CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT NULL;
-        	ALTER TABLE  `pkg_iax` CHANGE  `musiconhold`  `musiconhold` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL ;"
+        	ALTER TABLE  `pkg_iax` CHANGE  `musiconhold`  `musiconhold` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL ;";
             $this->executeDB($sql);
             $version = '6.0.4';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+    }
 
-        public function executeDB($sql)
-        {
-            try {
-                Yii::app()->db->createCommand($sql)->execute();
-            } catch (Exception $e) {
+    public function executeDB($sql)
+    {
+        try {
+            Yii::app()->db->createCommand($sql)->execute();
+        } catch (Exception $e) {
 
-            }
         }
     }
+
+}
