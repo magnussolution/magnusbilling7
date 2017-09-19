@@ -671,15 +671,14 @@ systemctl daemon-reload
 
 install_fail2ban()
 {
-
+  yum install -y iptables-services
+  rm -rf /etc/fail2ban
   cd /tmp
-    git clone https://github.com/fail2ban/fail2ban.git
-    cd /tmp/fail2ban
-    python setup.py install
+  git clone https://github.com/fail2ban/fail2ban.git
+  cd /tmp/fail2ban
+  python setup.py install
 
   if [ ${DIST} = "CENTOS" ]; then
-          
-    yum install -y epel-release
     systemctl mask firewalld.service
     systemctl enable iptables.service
     systemctl enable ip6tables.service
