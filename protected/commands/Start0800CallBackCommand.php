@@ -53,7 +53,7 @@ class Start0800CallBackCommand extends ConsoleCommand
                     echo "User not have QUEUE";
                     continue;
                 }
-                $server = AsteriskAccess::queueShow($modelQueue->name);
+                $server = AsteriskAccess::instance()->queueShow($modelQueue->name);
 
                 $agent = '';
                 foreach (explode("\n", $server["data"]) as $key => $value) {

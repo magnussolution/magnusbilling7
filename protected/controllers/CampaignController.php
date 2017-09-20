@@ -220,7 +220,7 @@ class CampaignController extends Controller
             $additionalParams = [['key' => 'id_phonebook', 'value' => $id_phonebook], ['key' => 'creationdate', 'value' => $creationdate]];
             $errors           = array();
             if ($array) {
-                $recorder = new CSVACtiveRecorder($array, 'PhoneNumber', $additionalParams);
+                $recorder = new CSVActiveRecorder($array, 'PhoneNumber', $additionalParams);
                 if ($recorder->save());
                 $errors = $recorder->getErrors();
 

@@ -297,7 +297,7 @@ class AuthenticateAgi
         return $authentication;
     }
 
-    public static function checkPlanIntraInter(&$MAGNUS, $model)
+    public static function checkPlanIntraInter(&$MAGNUS, $agi)
     {
         if ($MAGNUS->config['global']['intra-inter'] == '1') {
             $agi->verbose(substr($MAGNUS->modelSip->callerid, 0, 4) . "  " . substr($MAGNUS->dnid, 0, 4), 30);
@@ -406,7 +406,7 @@ class AuthenticateAgi
         : $MAGNUS->credit;
 
         $MAGNUS->modelSip    = Sip::model()->find('name = :key', array('key' => $MAGNUS->sip_account));
-        $MAGNUS->voicemail   = count($MAGNUS->modelSip) ? true : false;
+        $MAGNUS->voicemail   = count($MAGNUS->modelSip) ? $MAGNUS->modelSip->voicemail : false;
         $MAGNUS->record_call = (count($MAGNUS->modelSip) && $MAGNUS->modelSip->record_call) || $MAGNUS->agiconfig['record_call'] ? true : false;
 
     }

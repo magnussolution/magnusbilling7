@@ -901,7 +901,7 @@ CREATE TABLE `pkg_iax` (
   `amaflags` char(7) COLLATE utf8_bin DEFAULT NULL,
   `callgroup` char(10) COLLATE utf8_bin DEFAULT NULL,
   `callerid` varchar(80) COLLATE utf8_bin NOT NULL,
-  `canreinvite` varchar(20) COLLATE utf8_bin NOT NULL,
+  `canreinvite` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `context` varchar(80) COLLATE utf8_bin NOT NULL,
   `DEFAULTip` char(15) COLLATE utf8_bin DEFAULT NULL,
   `dtmfmode` char(7) COLLATE utf8_bin NOT NULL DEFAULT 'RFC2833',
@@ -1109,6 +1109,9 @@ CREATE TABLE `pkg_method_pay` (
   `SLSecret` varchar(50) DEFAULT NULL,
   `SLIdProduto` int(11) DEFAULT NULL,
   `SLvalidationtoken` varchar(100) DEFAULT NULL,
+  `min` int(11) NOT NULL DEFAULT '10',
+  `max` int(11) NOT NULL DEFAULT '10',
+  `showFields` text CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`id`),
   KEY `fk_pkg_user_pkg_method_pay` (`id_user`),
   CONSTRAINT `fk_pkg_user_pkg_method_pay` FOREIGN KEY (`id_user`) REFERENCES `pkg_user` (`id`)
@@ -1121,7 +1124,18 @@ CREATE TABLE `pkg_method_pay` (
 
 LOCK TABLES `pkg_method_pay` WRITE;
 /*!40000 ALTER TABLE `pkg_method_pay` DISABLE KEYS */;
-INSERT INTO `pkg_method_pay` VALUES (5,1,'Pagseguro','Pagseguro','Brasil',0,0,'asd','','info@magnussolution.com','E2E11539547C4C1D988DFAC3790C5004',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,1,'BoletoBancario','BoletoBancario','Brasil',0,0,'','','','',0,'','hsbc','','','','18','1.20','Até vencimento pagável em qualquer banco e agência','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,1,'Moip','Moip','Brasil',0,0,'','https://www.moip.com.br/PagamentoMoIP.do','magnus','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,1,'Paypal','Paypal','Global',1,0,'','https://www.paypal.com/cgi-bin/webscr','financiero@magnusbilling.com','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,1,'CuentaDigital','PagoFacil o Rapipago','Argentina',1,0,'','http://www.cuentadigital.com/api.php','6200','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,1,'DineroMail','Tarjeta de crédito, DineroMail','Brasil',1,0,'','https://argentina.dineromail.com/Shop/Shop_Ingreso.asp','0416248','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `pkg_method_pay` VALUES 
+(1,1,'Pagseguro','Pagseguro','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN '),
+(2,1,'BoletoBancario','BoletoBancario','Brasil',0,0,'','','','',0,'','','','','','18','1.20','Até vencimento pagável em qualquer banco e agência','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,boleto_convenio,boleto_inicio_nosso_numeroa,boleto_banco,boleto_agencia,boleto_conta_corrente,boleto_carteira,boleto_taxa,boleto_instrucoes,boleto_nome_emp,boleto_end_emp,boleto_cidade_emp,boleto_estado_emp,boleto_cpf_emp'),
+(3,1,'Moip','Moip','Brasil',0,0,'','https://www.moip.com.br/PagamentoMoIP.do','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,id_user,show_name,country,active,min,max,username,url'),
+(4,1,'Paypal','Paypal','Global',1,0,'','https://www.paypal.com/cgi-bin/webscr','info@magnusbilling.com','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,500,'payment_method,show_name,id_user,country,active,min,max,username,url,fee'),
+(5,1,'CuentaDigital','PagoFacil o Rapipago','Argentina',0,0,'','http://www.cuentadigital.com/api.php','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,url'),
+(6,1,'DineroMail','Tarjeta de crédito, DineroMail','Brasil',0,0,'','https://argentina.dineromail.com/Shop/Shop_Ingreso.asp','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,min,max,username,url'),
+(7,1,'PlacetoPay','PlacetoPay','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,P2P_CustomerSiteID,P2P_KeyID,P2P_Passphrase,P2P_RecipientKeyID,P2P_tax_amount'),
+(8,1,'GerenciaNet','GerenciaNet','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,client_id,client_secret'),
+(9,1,'Pagseguro','Pagseguro','Brasil',0,0,'','','','',0,'','Banco do Brasil','','','','','','','','','','','','','','','','','','','','','',0,'',10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),
+(10,1,'MercadoPago','MercadoPago','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,20,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),
+(11,1,'paghiper','Boleto Bancario  paghiper','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');
 /*!40000 ALTER TABLE `pkg_method_pay` ENABLE KEYS */;
 UNLOCK TABLES;
 

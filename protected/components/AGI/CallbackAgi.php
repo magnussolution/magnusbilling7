@@ -238,29 +238,33 @@ class CallbackAgi
     {
         $MAGNUS->prefix_local = $modelDestination->idUser->prefix_local;
         $MAGNUS->CallerID     = preg_replace("/\+/", '', $MAGNUS->CallerID);
-        $callerID             = $MAGNUS->number_translation($agi, $MAGNUS->CallerID);
+        $MAGNUS->number_translation($agi, $MAGNUS->CallerID);
+        $callerID = $MAGNUS->destination;
+
         //adiciona o 55 se o callerid tiver somente com DDD numero
-        if (strtoupper($MAGNUS->config['global']['base_country']) == 'BRL'
-            || strtoupper($MAGNUS->config['global']['base_country']) == 'ARG'
+        if ((strtoupper($MAGNUS->config['global']['base_country']) == 'BRL' || strtoupper($MAGNUS->config['global']['base_country']) == 'ARG')
             && (strlen($callerID) == 10 || strlen($callerID) == 11)) {
             $callerID = "55" . $callerID;
         }
+        $work = $MAGNUS->checkIVRSchedule($modelDestination->idDid);
 
         $modelCallBack          = new CallBack();
         $modelCallBack->id_did  = $modelDestination->id_did;
         $modelCallBack->exten   = $callerID;
         $modelCallBack->id_user = $modelDestination->id_user;
-        $modelCallBack->status  = 1;
+        $modelCallBack->status  = $work != 'open' ? 4 : 1;
         $modelCallBack->save();
-        //audio enable
-        if ($modelDestination->cbr_ua == 1) {
 
-            $work = $MAGNUS->checkIVRSchedule($modelDestination);
+        $agi->verbose($callerID, 25);
+
+        //audio enable
+        if ($modelDestination->idDid->cbr_ua == 1) {
+
             //esta dentro do hario de atencao
             $audioURA = $work == 'open' ? 'idDidAudioProWork_' : 'idDidAudioProNoWork_';
-            $audio    = $MAGNUS->magnusFilesDirectory . $audioURA . $modelDestination->id_did;
+            $audio    = $MAGNUS->magnusFilesDirectory . '/sounds/' . $audioURA . $modelDestination->id_did;
             //early_media enable
-            if ($modelDestination->cbr_em == 1) {
+            if ($modelDestination->idDid->cbr_em == 1) {
                 $agi->verbose('earl ok');
                 $agi->execute('Ringing');
                 $agi->execute("Progress");
@@ -272,6 +276,7 @@ class CallbackAgi
                 $agi->stream_file($audio, '#');
             }
         }
+
         $agi->execute('Congestion', '5');
         $MAGNUS->hangup($agi);
         exit;

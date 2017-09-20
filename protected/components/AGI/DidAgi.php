@@ -74,7 +74,7 @@ class DidAgi
                     $MAGNUS->mode = 'standard';
                     $agi->answer();
                     sleep(2);
-                    $MAGNUS->callingcardConnection   = $this->modelDestination[0][0]['connection_sell'];
+                    $MAGNUS->callingcardConnection   = $this->modelDestination[0]['connection_sell'];
                     $MAGNUS->agiconfig['answer']     = 1;
                     $MAGNUS->agiconfig['cid_enable'] = 1;
                     $MAGNUS->agiconfig['use_dnid']   = 0;
@@ -388,14 +388,14 @@ class DidAgi
         //brazil fixed - ^[1-9][0-9][1-5].
         $agi->verbose(print_r($this->modelDestination[0]->getAttributes(), true));
         if (strlen($this->modelDestination[0]->idDid->expression_1) > 0 && ereg($this->modelDestination[0]->idDid->expression_1, $MAGNUS->CallerID) || $this->modelDestination[0]->idDid->expression_1 == '*') {
-            $agi->verbose("encontrou a expression1 no callerid" . $MAGNUS->CallerID, 10);
+            $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDestination[0]->idDid->selling_rate_1;
 
         } elseif (strlen($this->modelDestination[0]->idDid->expression_2) > 0 && ereg($this->modelDestination[0]->idDid->expression_2, $MAGNUS->CallerID) || $this->modelDestination[0]->idDid->expression_2 == '*') {
-            $agi->verbose("encontrou a expression2 no callerid" . $MAGNUS->CallerID, 10);
+            $agi->verbose("CallerID Match regular expression 2 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDestination[0]->idDid->selling_rate_2;
         } elseif (strlen($this->modelDestination[0]->idDid->expression_3) > 0 && ereg($this->modelDestination[0]->idDid->expression_3, $MAGNUS->CallerID) || $this->modelDestination[0]->idDid->expression_3 == '*') {
-            $agi->verbose("encontrou a expression3 no callerid" . $MAGNUS->CallerID, 10);
+            $agi->verbose("CallerID Match regular expression 3 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDestination[0]->idDid->selling_rate_3;
         } else {
             $selling_rate = 0;

@@ -775,7 +775,7 @@ class BaseController extends CController
         $this->nameFileReport = $this->modelName . '_' . time();
         $pathCsv              = $this->magnusFilesDirectory . $this->nameFileReport . '.csv';
 
-        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '" . $this->magnusFilesDirectory . $this->nameFileReport . ".csv'
+        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '/tmp/" . $this->nameFileReport . ".csv'
         FIELDS TERMINATED BY '\;' LINES TERMINATED BY '\n'
         FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
 
@@ -1641,7 +1641,7 @@ class BaseController extends CController
         $additionalParams = $this->importCsvSetAdditionalParams();
         $errors           = array();
         if ($array) {
-            $recorder = new CSVACtiveRecorder($array, $this->instanceModel, $additionalParams);
+            $recorder = new CSVActiveRecorder($array, $this->instanceModel, $additionalParams);
             if ($recorder->save());
             $errors = $recorder->getErrors();
 

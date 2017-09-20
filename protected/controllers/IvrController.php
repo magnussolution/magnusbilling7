@@ -114,7 +114,9 @@ class IvrController extends Controller
                         $attributes[$i]['type_out_' . end($itemKey)] = $itemOption[0];
                     }
 
-                    if (isset($itemOption[1])) {
+                    if (isset($itemOption[1]) && preg_match("/number|group|custom|hangup/", $itemOption[0])) {
+                        $attributes[$i]['extension_out_' . end($itemKey)] = $itemOption[1];
+                    } else if (isset($itemOption[1])) {
                         $attributes[$i]['id_' . $itemOption[0] . '_out_' . end($itemKey)] = end($itemOption);
                         if (is_numeric($itemOption[1])) {
                             $model = ucfirst($itemOption[0]);
@@ -124,8 +126,6 @@ class IvrController extends Controller
                         } else {
                             $attributes[$i]['id_' . $itemOption[0] . '_out_' . end($itemKey) . '_name'] = '';
                         }
-                    } else if (isset($itemOption[1]) && preg_match("/number|group|custom|hangup/", $itemOption[0])) {
-                        $attributes[$i]['extension_out_' . end($itemKey)] = $itemOption[1];
                     }
 
                 } else if (preg_match("/^option_/", $key)) {
@@ -136,7 +136,9 @@ class IvrController extends Controller
                         $attributes[$i]['type_' . end($itemKey)] = $itemOption[0];
                     }
 
-                    if (isset($itemOption[1])) {
+                    if (isset($itemOption[1]) && preg_match("/number|group|custom|hangup/", $itemOption[0])) {
+                        $attributes[$i]['extension_' . end($itemKey)] = $itemOption[1];
+                    } else if (isset($itemOption[1])) {
                         $attributes[$i]['id_' . $itemOption[0] . '_' . end($itemKey)] = end($itemOption);
                         if (is_numeric($itemOption[1])) {
                             $model = ucfirst($itemOption[0]);
@@ -146,8 +148,6 @@ class IvrController extends Controller
                         } else {
                             $attributes[$i]['id_' . $itemOption[0] . '_' . end($itemKey) . '_name'] = '';
                         }
-                    } else if (isset($itemOption[1]) && preg_match("/number|group|custom|hangup/", $itemOption[0])) {
-                        $attributes[$i]['extension_' . end($itemKey)] = $itemOption[1];
                     }
                 }
             }

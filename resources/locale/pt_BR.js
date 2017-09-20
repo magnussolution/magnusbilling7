@@ -1,6 +1,7 @@
 Locale.load({
-    'Insert the space available to record in GB. Use -1 to unlimit': 'Insira o espaco em GB disponivel para gravaçōes. Use -1 para ilimitado',
-    'It is used to change the dialing number.': 'Isto é usado para alterar o número de discagem',
+    'Insert the space available to record in GB. Use -1 to unlimit': 'Espaco em GB para espaço disponível para gravaçōes. Use -1 para ilimitado',
+    'Insert the space available to record in GB.': 'Espaco em GB para gravaçōes.',
+    'It is used to change the dialing number.': 'Esta opção é para permitir a discagem de forma local e 0DDDnumero',
     'Bulk': 'Gerar',
     'Num attempt': 'Número de Tentativas',
     'Last attempt': 'Última tentativa',
@@ -643,7 +644,7 @@ Locale.load({
     'plans': 'Planos',
     'tariffplan': 'Plano',
     'tariffs': 'Tarifas',
-    'tariffsview': 'Tarifas', 
+    'tariffsview': 'Tarifas',
     'tariffsviewagent': 'Tarifas',
     'taxa': 'Taxa',
     'templatemail': 'E-mails',

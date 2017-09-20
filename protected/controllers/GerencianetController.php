@@ -97,7 +97,13 @@ class GerencianetController extends Controller
                         $command->bindValue(':id', $resultRefill[0]['id_user'], PDO::PARAM_INT);
                         $command->bindValue(':credit', $resultRefill[0]['credit'], PDO::PARAM_STR);
                         $command->execute();
-                        UserCreditManager::releaseUserCredit($resultRefill[0]['id_user'], $resultRefill[0]['credit'], $description, $token);
+
+                        $mail = new Mail(Mail::$TYPE_REFILL, $resultRefill[0]['id_user']);
+                        $mail->replaceInEmail(Mail::$ITEM_ID_KEY, $resultRefill[0]['id']);
+                        $mail->replaceInEmail(Mail::$ITEM_AMOUNT_KEY, $resultRefill[0]['credit']);
+                        $mail->replaceInEmail(Mail::$DESCRIPTION, $description);
+                        $mail->send();
+
                         break;
                     case 'unpaid':
                         echo "o boleto nao foi pago";

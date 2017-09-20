@@ -26,8 +26,8 @@ function httpPost($url, $params)
 }
 
 $params = array(
-    "email_loja"          => "$modelMethodPay->username ",
-    "urlRetorno"          => 'http://' . $_SERVER['HTTP_HOST'] . '/mbilling/index.php/paghiper',
+    "email_loja"          => $modelMethodPay->username,
+    "urlRetorno"          => 'http://' . $_SERVER['HTTP_HOST'] . '/mbilling/index.php/pagHiper',
     "tipoBoleto"          => "boletoA4",
     "vencimentoBoleto"    => "7",
     "id_plataforma"       => $reference,
@@ -35,11 +35,9 @@ $params = array(
     "produto_valor_1"     => floatval($_GET['amount']),
     "produto_descricao_1" => "Credito VoIP",
     "produto_qtde_1"      => "1",
-
     "email"               => $modelUser->email,
     "nome"                => $modelUser->firstname . ' ' . $modelUser->lastname,
     "cpf"                 => $modelUser->doc,
-
     "telefone"            => $modelUser->phone,
     "endereco"            => $modelUser->doc,
     "cidade"              => $modelUser->doc,

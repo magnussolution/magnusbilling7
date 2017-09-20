@@ -307,6 +307,74 @@ if [ ${DIST} = "CENTOS" ]; then
   mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
 fi
 
+
+if [ ${DIST} = "CENTOS" ]; then
+echo "
+[mysqld]
+join_buffer_size = 128M
+sort_buffer_size = 2M
+read_rnd_buffer_size = 2M
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+secure-file-priv = ''
+symbolic-links=0
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+" > /etc/my.cnf
+elif [ ${DIST} = "DEBIAN" ]; then
+echo "
+[client]
+port    = 3306
+socket    = /var/run/mysqld/mysqld.sock
+
+[mysqld_safe]
+socket    = /var/run/mysqld/mysqld.sock
+nice    = 0
+
+[mysqld]
+join_buffer_size = 128M
+sort_buffer_size = 2M
+read_rnd_buffer_size = 2M
+user    = mysql
+pid-file  = /var/run/mysqld/mysqld.pid
+socket    = /var/run/mysqld/mysqld.sock
+port    = 3306
+basedir   = /usr
+datadir   = /var/lib/mysql
+tmpdir    = /tmp
+language  = /usr/share/mysql/english
+skip-external-locking
+secure-file-priv = ""
+symbolic-links=0
+sql-mode=NO_ENGINE_SUSTITUTION,STRICT_TRANS_TABLES
+bind-address    = 127.0.0.1
+key_buffer      = 16M
+max_allowed_packet  = 16M
+thread_stack    = 192K
+thread_cache_size   = 8
+myisam-recover      = BACKUP
+query_cache_limit = 1M
+query_cache_size    = 16M
+expire_logs_days  = 10
+max_binlog_size     = 100M
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet  = 16M
+
+[mysql]
+
+[isamchk]
+key_buffer    = 16M
+!includedir /etc/mysql/conf.d/
+" > /etc/my.cnf
+fi;
+
+
 startup_services
 
 clear
@@ -603,30 +671,21 @@ systemctl daemon-reload
 
 install_fail2ban()
 {
+  yum install -y iptables-services
+  rm -rf /etc/fail2ban
+  cd /tmp
+  git clone https://github.com/fail2ban/fail2ban.git
+  cd /tmp/fail2ban
+  python setup.py install
 
-  if [ ${DIST} = "DEBIAN" ]; then
-      apt-get -y install fail2ban
-  elif [ ${DIST} = "CENTOS" ]; then
-          
-    yum install -y epel-release
-    yum install -y fail2ban 
-    yum install -y fail2ban fail2ban-systemd iptables-services
-
+  if [ ${DIST} = "CENTOS" ]; then
     systemctl mask firewalld.service
     systemctl enable iptables.service
     systemctl enable ip6tables.service
     systemctl stop firewalld.service
     systemctl start iptables.service
     systemctl start ip6tables.service
-
     systemctl enable iptables
-
-
-
-    echo
-    echo "Iptables configuration!"
-    echo
-
     systemctl stop firewalld
     chkconfig --levels 123456 firewalld off
   fi       
@@ -689,31 +748,6 @@ asterisk ALL=(ALL) NOPASSWD: /usr/bin/fail2ban-client
 ' >> /etc/sudoers
 
 
-echo "
-[INCLUDES]
-[Definition]
-
-failregex = NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - Wrong password
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - No matching peer found
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - No matching peer found
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - Username/auth name mismatch
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - Device does not match ACL
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - Peer is not supposed to register
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - ACL error (permit/deny)
-            NOTICE.* .*: Registration from '.*' failed for '<HOST>:.*' - Device does not match ACL
-            NOTICE.* .*: Registration from '\".*\".*' failed for '<HOST>:.*' - No matching peer found
-            NOTICE.* .*: Registration from '\".*\".*' failed for '<HOST>:.*' - Wrong password
-            NOTICE.* <HOST> failed to authenticate as '.*'$
-            NOTICE.* .*: No registration for peer '.*' \(from <HOST>\)
-            NOTICE.* .*: Host <HOST> failed MD5 authentication for '.*' (.*)
-            NOTICE.* .*: Failed to authenticate user .*@<HOST>.*
-            NOTICE.* .*: <HOST> failed to authenticate as '.*'
-            NOTICE.* .*: <HOST> tried  to authenticate with nonexistent user '.*'
-            VERBOSE.*SIP/<HOST>-.*Received incoming SIP connection from unknown peer
-
-ignoreregex =
-" > /etc/fail2ban/filter.d/asterisk.conf
-
 
 echo '
 [INCLUDES]
@@ -753,27 +787,7 @@ ignoreregex =
 
 
 
-echo $'
-[INCLUDES]
-before = common.conf
-[Definition]
-_daemon = sshd
-failregex = ^%(__prefix_line)s(?:error: PAM: )?Authentication failure for .* from <HOST>\s*$
-            ^%(__prefix_line)s(?:error: PAM: )?User not known to the underlying authentication module for .* from <HOST>\s*$
-            ^%(__prefix_line)sFailed (?:password|publickey) for .* from <HOST>(?: port \d*)?(?: ssh\d*)?$
-            ^%(__prefix_line)sFailed (?:password|publickey) for .* from <HOST>(?: port \d*)?(?: ssh\d*)?.*$
-            ^%(__prefix_line)sFailed (?:password|publickey) for .* from <HOST>(?: port \d*)?(?: ssh2\d*)?.*$
-            ^%(__prefix_line)sFailed (?:password|publickey) for .* from <HOST>(?: port \d*)?(?: ssh2\d*)?$
-            ^%(__prefix_line)sROOT LOGIN REFUSED.* FROM <HOST>\s*$
-            ^%(__prefix_line)s[iI](?:llegal|nvalid) user .* from <HOST>\s*$
-            ^%(__prefix_line)sUser \S+ from <HOST> not allowed because not listed in AllowUsers$
-            ^%(__prefix_line)sauthentication failure; logname=\S* uid=\S* euid=\S* tty=\S* ruser=\S* rhost=<HOST>(?:\s+user=.*)?\s*$
-            ^%(__prefix_line)srefused connect from \S+ \(<HOST>\)\s*$
-            ^%(__prefix_line)sAddress <HOST> .* POSSIBLE BREAK-IN ATTEMPT!*\s*$
-            ^%(__prefix_line)sUser \S+ from <HOST> not allowed because none of user\'s groups are listed in AllowGroups$
 
-ignoreregex =
-' > /etc/fail2ban/filter.d/sshd.conf
 
 
 
@@ -835,18 +849,22 @@ logpath   = /var/www/html/mbilling/resources/ip.blacklist
 maxretry  = 0
 findtime  = 15552000
 bantime   = -1
-" > /etc/fail2ban/jail.conf
+" > /etc/fail2ban/jail.local
 
 
 
 if [ ${DIST} = "DEBIAN" ]; then
-echo "[mbilling_ddos]
+echo "
+[sshd]
+enablem=true
+
+[mbilling_ddos]
 enabled  = true
 filter   = mbilling_ddos
 action   = iptables-allports[name=mbilling_ddos, port=all, protocol=all]
 logpath  = /var/log/apache2/error.log
 maxretry = 20
-bantime = 3600" >> /etc/fail2ban/jail.conf
+bantime = 3600" >> /etc/fail2ban/jail.local
 elif [ ${DIST} = "CENTOS" ]; then
 echo "
 [ssh-iptables]
@@ -864,7 +882,7 @@ action   = iptables-allports[name=mbilling_ddos, port=all, protocol=all]
 logpath  = /var/log/httpd/error_log
 maxretry = 20
 bantime = 3600
- " >> /etc/fail2ban/jail.conf
+ " >> /etc/fail2ban/jail.local
 fi
 
 
@@ -886,12 +904,11 @@ dateformat=%F %T       ; ISO 8601 date format
 
 ;debug => debug
 ;security => security
-console => warning,error
+console => error
 ;console => notice,warning,error,debug
 messages => notice,warning,error
 ;full => notice,warning,error,debug,verbose,dtmf,fax
 
-fail2ban => notice
 " > /etc/asterisk/logger.conf
 
 asterisk -rx "module reload logger"

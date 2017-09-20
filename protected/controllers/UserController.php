@@ -90,6 +90,26 @@ class UserController extends Controller
         }
     }
 
+    public function checkAgentEdit($values)
+    {
+        //not allow agent edit his account.
+        if (Yii::app()->session['isAgent'] && !$this->isNewRecord && Yii::app()->session['id_user'] == $values['id']) {
+            echo json_encode(array(
+                'success' => false,
+                'rows'    => array(),
+                'errors'  => Yii::t('yii', 'You cannot EDIT your account.'),
+            ));
+            exit();
+
+        }
+    }
+
+    public function beforeDestroy($values)
+    {
+        $this->checkAgentEdit($values);
+        return $values;
+    }
+
     public function beforeSave($values)
     {
 
@@ -125,6 +145,8 @@ class UserController extends Controller
             //get the group id_group_agent
             $modelUser          = User::model()->findByPk((int) Yii::app()->session['id_user']);
             $values['id_group'] = $modelUser->id_group_agent;
+
+            $this->checkAgentEdit($values);
         }
 
         if ($this->isNewRecord) {
@@ -206,7 +228,7 @@ class UserController extends Controller
         }
 
         if (isset($values['id_group_agent'])) {
-            $values['id_group_agent'] = $values['id_group_agent'] === 0 || !is_numeric($values['id_group_agent'])
+            $values['id_group_agent'] = $values['id_group_agent'] == 0 || !is_numeric($values['id_group_agent'])
             ? null :
             $values['id_group_agent'];
         }
@@ -244,9 +266,12 @@ class UserController extends Controller
             AsteriskAccess::instance()->generateSipPeers();
         }
 
-        if (isset($model->id_group_agent) and $model->id_group_agent > 1) {
-            $modelUser           = User::model()->find("id_user = :id_user", array(':id_user' => $model->id));
-            $modelUser->id_group = $model->id_group_agent;
+        if (!$this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
+            $modelUser = User::model()->find("id_user = :key", array(':key' => $model->id));
+            if (count($modelUser)) {
+                $modelUser->id_group = $model->id_group_agent;
+                $modelUser->save();
+            }
         }
 
         $modelOfferUse = OfferUse::model()->findAll(
@@ -414,15 +439,16 @@ class UserController extends Controller
             $modelUser->id_plan         = $values['id_plan'];
             $modelUser->active          = $values['active'];
             $modelUser->id_user         = $id_user;
+            $modelUser->credit          = $values['credit'] > 0 ? $values['credit'] : 0;
             $modelUser->save();
 
             if ($values['credit'] > 0) {
-                $modelRefill          = new Refill();
-                $command->id_user     = $modelUser->id;
-                $command->payment     = 1;
-                $command->credit      = $values['credit'];
-                $command->description = Yii::t('yii', 'Automatic credit');
-                $command->save();
+                $modelRefill              = new Refill();
+                $modelRefill->id_user     = $modelUser->id;
+                $modelRefill->payment     = 1;
+                $modelRefill->credit      = $values['credit'];
+                $modelRefill->description = Yii::t('yii', 'Automatic credit');
+                $modelRefill->save();
             }
 
         }
