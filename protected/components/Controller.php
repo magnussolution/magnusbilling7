@@ -51,6 +51,8 @@ class Controller extends BaseController
             'paypal',
             'placetoPay',
             'transferToMobile',
+            'pagHiper',
+            'mercadoPago',
         );
         return in_array($this->controllerName, $allow);
     }

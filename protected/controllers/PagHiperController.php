@@ -24,8 +24,8 @@ class PagHiperController extends Controller
 {
     public function actionIndex()
     {
-
-        $filter = "payment_method = 'Pagseguro'";
+        Yii::log(print_r($_POST, true), 'error');
+        $filter = "payment_method = 'paghiper'";
         $params = array();
 
         if (isset($_GET['agent'])) {
@@ -42,6 +42,7 @@ class PagHiperController extends Controller
         ));
 
         if (!count($modelMethodpay)) {
+            Yii::log(print_r('Not found paghiper method', true), 'error');
             exit;
         }
 
@@ -59,12 +60,13 @@ class PagHiperController extends Controller
             //PREPARA O POST A SER ENVIADO AO PAGHIPER PARA CONFIRMAR O RETORNO
             //INICIO - NAO ALTERAR//
             //Não realizar alterações no script abaixo//
-            $post = "idTransacao=$idTransacao" .
+            $post = "idTransacao=$transacaoID" .
                 "&status=$status" .
                 "&codRetorno=$codRetorno" .
                 "&valorOriginal=$valorOriginal" .
                 "&valorLoja=$valorLoja" .
                 "&token=$token";
+
             $enderecoPost = "https://www.paghiper.com/checkout/confirm/";
 
             ob_start();
