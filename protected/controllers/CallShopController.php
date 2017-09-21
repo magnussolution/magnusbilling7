@@ -74,10 +74,11 @@ class CallShopController extends Controller
         $modelSip->callshoptime   = 0;
         $modelSip->save();
 
-        $modelCallShop         = CallShopCdr::model()->find("name = :name ", array(':name' => $filter[0]['value']));
-        $modelCallShop->status = 1;
-        $modelCallShop->save();
-
+        $modelCallShopCdr = CallShopCdr::model()->find("cabina = :name ", array(':name' => $filter[0]['value']));
+        if (count($modelCallShopCdr)) {
+            $modelCallShopCdr->status = 1;
+            $modelCallShopCdr->save();
+        }
         echo json_encode(array(
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,

@@ -24,7 +24,7 @@ class CallShopCdrController extends Controller
 {
     public $attributeOrder = 't.date DESC';
     public $select         = 't.id, t.sessionid, t.id_user, t.id_prefix, t.status, buycost, price, calledstation,
-					t.date, sessiontime, cabina, ((t.price - t.buycost) / t.buycost) * 100) t.markup';
+                    t.date, sessiontime, cabina, (((t.price - t.buycost) / t.buycost) * 100) markup';
     public $extraValues = array('idUser' => 'username', 'idPrefix' => 'destination');
     public $config;
     public $fieldsFkReport = array(
@@ -116,9 +116,8 @@ class CallShopCdrController extends Controller
 
         for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
 
-            if ($attributes[$i]['queue_paused'] == 1 && $attributes[$i]['categorizing'] == 0) {
-                $attributes[$i]['priceSum'] = round($modelCallShop->price, 2);
-            }
+            $attributes[$i]['priceSum'] = round($modelCallShop->price, 2);
+
         }
 
         return $attributes;

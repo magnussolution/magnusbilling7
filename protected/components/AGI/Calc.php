@@ -451,7 +451,6 @@ class Calc
         $cost += $MAGNUS->callingcardConnection;
 
         $agi->verbose($terminatecauseid . ' ' . $cost . '+' . $MAGNUS->round_precision(abs($MAGNUS->callingcardConnection)) . ' = ' . $cost, 25);
-
         $costCdr = $cost;
         if ($sessiontime > 0) {
 
@@ -484,7 +483,8 @@ class Calc
             $modelProvider->credit -= $buycost;
             $modelProvider->save();
 
-            $this->callShop($MAGNUS, $calledstation, $sessiontime, $id_prefix);
+            $this->callShop($agi, $MAGNUS, $sessiontime, $id_prefix);
+
         }
 
         if ($terminatecauseid == 1) {
@@ -600,7 +600,7 @@ class Calc
             } else {
                 return false;
             }
-/*se nao tem tronco retornar erro*/
+            //se nao tem tronco retornar erro*/
 
             $prefix         = $this->tariffObj[$k]['rc_trunkprefix'];
             $tech           = $this->tariffObj[$k]['rc_providertech'];
@@ -796,28 +796,30 @@ class Calc
 
     }
 
-    public function callShop(&$MAGNUS, $sessiontime, $id_prefix)
+    public function callShop($agi, $MAGNUS, $sessiontime, $id_prefix)
     {
+
         if ($MAGNUS->callshop == 1) {
 
             $modelReteCallshop = RateCallshop::model()->findCallShopRate($MAGNUS->destination, $MAGNUS->id_user);
 
             if (!count($modelReteCallshop)) {
+                $agi->verbose('Not found CallShop rate => ' . $MAGNUS->destination . ' ' . $MAGNUS->id_user);
                 return;
             }
-
-            $buyrate   = $modelReteCallshop[0]->buyrate > 0 ? $modelReteCallshop[0]->buyrate : $cost;
-            $initblock = $modelReteCallshop[0]->minimo;
-            $increment = $modelReteCallshop[0]->block;
+            $agi->verbose(print_r($modelReteCallshop[0], true));
+            $buyrate   = $modelReteCallshop[0]['buyrate'] > 0 ? $modelReteCallshop[0]['buyrate'] : $cost;
+            $initblock = $modelReteCallshop[0]['minimo'];
+            $increment = $modelReteCallshop[0]['block'];
 
             $sellratecost_callshop = $MAGNUS->calculation_price($buyrate, $sessiontime, $initblock, $increment);
 
-            if ($sessiontime < $modelReteCallshop[0]->minimal_time_charge) {
+            if ($sessiontime < $modelReteCallshop[0]['minimal_time_charge']) {
                 $agi->verbose("Minimal time to charge. Cost 0.0000", 15);
                 $sellratecost_callshop = 0;
             }
 
-            $modelCallShop = CallShopCdr::model()->deleteAll('sessionid = : key', array(':key' => $MAGNUS->channel));
+            $modelCallShop = CallShopCdr::model()->deleteAll('sessionid = :key', array(':key' => $MAGNUS->channel));
 
             $modelCallShop                = new CallShopCdr();
             $modelCallShop->sessionid     = $MAGNUS->channel;
@@ -830,6 +832,10 @@ class Calc
             $modelCallShop->cabina        = $MAGNUS->sip_account;
             $modelCallShop->sessiontime   = $sessiontime;
             $modelCallShop->save();
+            $modelError = $modelCallShop->getErrors();
+            if (count($modelError)) {
+                $agi->verbose(print_r($modelError, true), 25);
+            }
         }
         return;
     }
