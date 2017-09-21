@@ -28,16 +28,15 @@ class PagHiperController extends Controller
         $filter = "payment_method = 'paghiper'";
         $params = array();
 
-        if (isset($_GET['agent'])) {
-            $filter .= " AND u.username = :username";
-            $params = array(':username' => addslashes(strip_tags(trim($_GET['agent']))));
+        if (isset($_GET['id_agent'])) {
+            $filter .= " AND id_user = :key1";
+            $params = array(':key1' => int($_GET['id_agent']));
         } else {
-            $filter .= " AND u.id = 1";
+            $filter .= " AND id = 1";
         }
 
         $modelMethodpay = Methodpay::model()->find(array(
             'condition' => $filter,
-            'join'      => 'INNER JOIN pkg_user u ON t.id_user = u.id',
             'params'    => $params,
         ));
 

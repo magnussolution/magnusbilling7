@@ -25,9 +25,11 @@ function httpPost($url, $params)
 
 }
 
+$agent = $modelUser->id_user > 0 ? '?id_agent=' . $modelUser->id_user : '';
+
 $params = array(
     "email_loja"          => $modelMethodPay->username,
-    "urlRetorno"          => 'http://' . $_SERVER['HTTP_HOST'] . '/mbilling/index.php/pagHiper',
+    "urlRetorno"          => 'http://' . $_SERVER['HTTP_HOST'] . '/mbilling/index.php/pagHiper' . $agent,
     "tipoBoleto"          => "boletoA4",
     "vencimentoBoleto"    => "7",
     "id_plataforma"       => $reference,
