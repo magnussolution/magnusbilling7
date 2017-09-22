@@ -118,7 +118,8 @@ class CampaignController extends Controller
 
                 if ($type == 'ivr' || $type == 'queue' || $type == 'sip') {
                     $attributes[$i]['id_' . $type . '_0'] = $itemOption[1];
-                    $model                                = $type::model()->findByPk((int) $itemOption[1]);
+                    $modelType                            = ucfirst($type);
+                    $model                                = $modelType::model()->findByPk((int) $itemOption[1]);
                     if (count($model)) {
                         $attributes[$i]['id_' . $type . '_0' . '_name'] = $model->name;
                     }
