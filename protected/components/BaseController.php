@@ -72,9 +72,10 @@ class BaseController extends CController
     public $defaultSortDir = null;
     public $fixedWhere     = null;
     public $paramsFilter;
-    public $nofilterPerAdminGroup = array();
-    public $relationFilter        = array();
-    public $fieldsInvisibleClient = array();
+    public $nofilterPerAdminGroup    = array();
+    public $controllerAllowUpdateAll = array();
+    public $relationFilter           = array();
+    public $fieldsInvisibleClient    = array();
     public $config;
     public function init()
     {
@@ -545,9 +546,13 @@ class BaseController extends CController
     public function saveUpdateAll($ids, $values, $module, $namePk, $subRecords)
     {
 
-        if (Yii::app()->session['isClient']) {
+        if (Yii::app()->session['isClient'] && !in_array($this->controllerName, $this->controllerAllowUpdateAll)) {
             $info = 'No admin user trying UPDATEALL';
             MagnusLog::insertLOG(6, $info);
+            echo json_encode(array(
+                $this->nameSuccess => false,
+                $this->nameMsg     => $info,
+            ));
             exit;
         }
         $values = $this->beforeUpdateAll($values, $ids);

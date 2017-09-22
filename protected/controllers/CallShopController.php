@@ -87,91 +87,53 @@ class CallShopController extends Controller
 
     public function asteriskCommand()
     {
-        $asmanager       = new AGI_AsteriskManager;
-        $conectaServidor = $conectaServidor = $asmanager->connect($this->host, $this->user, $this->password);
-        $server          = $asmanager->Command("core show channels concise");
-        $arr             = explode("\n", $server["data"]);
-
         $sql    = "DELETE FROM pkg_callshop WHERE status = 3 ";
         $result = Yii::app()->db->createCommand($sql)->execute();
 
         $sql = "UPDATE pkg_sip SET status = 2 WHERE status = 3 ";
         Yii::app()->db->createCommand($sql)->execute();
 
-        $sql = "UPDATE pkg_sip SET callshopnumber= NULL, callshoptime = 0";
-        //Yii::app()->db->createCommand($sql)->execute();
+        $calls = AsteriskAccess::getCoreShowChannels();
 
-        if ($arr[0] != "") {
+        if (count($calls)) {
             $sql = array();
-            foreach ($arr as $temp) {
-                $linha = explode("!", $temp);
-                if (!isset($linha[1])) {
+            foreach ($calls as $key => $call) {
+
+                if (!isset($call[1])) {
                     continue;
                 }
 
-                $canal = $linha[0];
+                $canal = $call[0];
 
-                $username = isset($linha[8]) ? $linha[8] : 0;
+                $username = isset($call[8]) ? $call[8] : 0;
 
                 if (!$canal) {
                     continue;
                 }
+                $ndiscado = $call[2];
 
-                $result = $asmanager->Command("core show channel $canal");
+                $status = $call[4];
 
-                $arr2 = explode("\n", $result["data"]);
+                $ramal = explode('-', $canal);
+                $ramal = explode('/', $ramal[0]);
+                $ramal = isset($ramal[1]) ? $ramal[1] : null;
 
-                foreach ($arr2 as $temp2) {
-                    //pegando numero discado
-                    if (strstr($temp2, 'DNID Digits')) {
-                        $arr3     = explode("DNID Digits:", $temp2);
-                        $ndiscado = trim(rtrim($arr3[1]));
+                $seconds = $call[11];
 
-                        if (substr($ndiscado, 0, 2) == 00) {
-                            $ndiscado = substr($ndiscado, 2);
-                        }
-                    }
-
-                    //pega status
-                    if (strstr($temp2, 'State:')) {
-                        $arr3   = explode("State:", $temp2);
-                        $status = trim(rtrim($arr3[1]));
-                    } else {
-                        $status = '';
-                    }
-
-                    if (strstr($temp2, ' channel')) {
-                        $arr3 = explode("channel=", $temp2);
-                        if (isset($arr3[1])) {
-                            $ramal = trim(rtrim($arr3[1]));
-                            $ramal = explode('-', $ramal);
-                            $ramal = explode('/', $ramal[0]);
-                            $ramal = isset($ramal[1]) ? $ramal[1] : null;
-                        } else {
-                            $ramal = null;
-                        }
-
-                    }
-
-                    if (strstr($temp2, 'billsec')) {
-                        $arr3    = explode("billsec=", $temp2);
-                        $seconds = trim(rtrim($arr3[1]));
-                    }
-
-                }
                 $ramal = isset($ramal) ? $ramal : null;
 
-                $resultUser = User::model()->findAll(array(
+                $resultUser = User::model()->find(array(
                     'select'    => 'id, callshop',
                     'condition' => "username = '" . $username . "'",
                 ));
 
-                $id_user = isset($resultUser[0]['id']) ? $resultUser[0]['id'] : false;
+                $id_user = isset($resultUser->id) ? $resultUser->id : false;
 
                 $status = explode(" ", (string) $status);
 
-                if (preg_match("/billing/", $linha[1]) && isset($ndiscado) && $ndiscado != '(N/A)' && $status[0] != 'Down' && is_numeric($ndiscado) && !is_null($ramal)) {
-                    if (isset($resultUser[0]['callshop']) && $resultUser[0]['callshop'] == 1) {
+                if (preg_match("/billing/", $call[1]) && isset($ndiscado) && $ndiscado != '(N/A)' && $status != 'Down' && is_numeric($ndiscado) && !is_null($ramal)) {
+
+                    if (isset($resultUser->callshop) && $resultUser->callshop == 1) {
 
                         $sql = "UPDATE pkg_sip SET status = 3, callshopnumber = :ndiscado, callshoptime = :seconds
                                             WHERE name = :name ";

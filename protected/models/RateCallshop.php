@@ -21,67 +21,67 @@
 
 class RateCallshop extends Model
 {
-	protected $_module = 'ratecallshop';
-	/**
-	 * Retorna a classe estatica da model.
-	 * @return Rate classe estatica da model.
-	 */
-	public static function model($className = __CLASS__)
-	{
-		return parent::model($className);
-	}
+    protected $_module = 'ratecallshop';
+    /**
+     * Retorna a classe estatica da model.
+     * @return Rate classe estatica da model.
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return nome da tabela.
-	 */
-	public function tableName()
-	{
-		return 'pkg_rate_callshop';
-	}
+    /**
+     * @return nome da tabela.
+     */
+    public function tableName()
+    {
+        return 'pkg_rate_callshop';
+    }
 
-	/**
-	 * @return nome da(s) chave(s) primaria(s).
-	 */
-	public function primaryKey()
-	{
-		return 'id';
-	}
+    /**
+     * @return nome da(s) chave(s) primaria(s).
+     */
+    public function primaryKey()
+    {
+        return 'id';
+    }
 
-	/**
-	 * @return array validacao dos campos da model.
-	 */
-	public function rules()
-	{
-		return array(          
+    /**
+     * @return array validacao dos campos da model.
+     */
+    public function rules()
+    {
+        return array(
             //array('dialprefix', 'required'),
-            array('id_user, minimo, block, minimal_time_charge', 'numerical', 'integerOnly'=>true),
-            array('dialprefix, destination', 'length', 'max'=>30),
-            array('buyrate', 'length', 'max'=>15),
-		);
-	}
+            array('id_user, minimo, block, minimal_time_charge', 'numerical', 'integerOnly' => true),
+            array('dialprefix, destination', 'length', 'max' => 30),
+            array('buyrate', 'length', 'max' => 15),
+        );
+    }
 
-	public function createCallShopRates($model)
-	{		
-		$table = $model->id_user > 1 ? 'pkg_rate_agent' : 'pkg_rate';
+    public function createCallShopRates($model)
+    {
+        $table = $model->id_user > 1 ? 'pkg_rate_agent' : 'pkg_rate';
 
-		$sql = "SELECT ".$model->id_user.",prefix, destination, rateinitial, initblock, billingblock 
-									FROM ".$table." JOIN pkg_prefix 
-									ON ".$table.".id_prefix = pkg_prefix.id
+        $sql = "SELECT " . $model->id . ",prefix, destination, rateinitial, initblock, billingblock
+									FROM " . $table . " JOIN pkg_prefix
+									ON " . $table . ".id_prefix = pkg_prefix.id
 									WHERE id_plan = :id_plan";
-		
-		$sql = "INSERT INTO pkg_rate_callshop (id_user , dialprefix,  destination, buyrate, minimo , block) $sql";
-		$command = Yii::app()->db->createCommand($sql);
-		$command->bindValue(":id_plan", $model->id_plan, PDO::PARAM_STR);
-		$command->execute();
-	}
 
-	public function findCallShopRate($number,$id_user)
-	{
-		$sql = "SELECT * FROM pkg_rate_callshop WHERE dialprefix = SUBSTRING(:ndiscado,1,length(dialprefix)) 
+        $sql     = "INSERT INTO pkg_rate_callshop (id_user , dialprefix,  destination, buyrate, minimo , block) $sql";
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(":id_plan", $model->id_plan, PDO::PARAM_STR);
+        $command->execute();
+    }
+
+    public function findCallShopRate($number, $id_user)
+    {
+        $sql = "SELECT * FROM pkg_rate_callshop WHERE dialprefix = SUBSTRING(:ndiscado,1,length(dialprefix))
                   				AND id_user= :id_user   ORDER BY LENGTH(dialprefix) DESC LIMIT 1";
-        	$command = Yii::app()->db->createCommand($sql);
-		$command->bindValue(":id_user", $id_user, PDO::PARAM_INT);
-		$command->bindValue(":ndiscado", $number, PDO::PARAM_STR);
-		return $command->queryAll();
-	}
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(":id_user", $id_user, PDO::PARAM_INT);
+        $command->bindValue(":ndiscado", $number, PDO::PARAM_STR);
+        return $command->queryAll();
+    }
 }
