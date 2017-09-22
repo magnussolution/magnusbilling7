@@ -248,7 +248,15 @@ class CallbackAgi
         }
         $work = $MAGNUS->checkIVRSchedule($modelDestination->idDid);
 
-        $modelCallBack          = new CallBack();
+        $modelCallBack = CallBack::model()->find('exten = :key AND status IN (1,4) AND id_did = :key1',
+            array(
+                ':key'  => $callerID,
+                ':key1' => $modelDestination->id_did,
+            ));
+        if (!count($modelCallBack)) {
+            $modelCallBack = new CallBack();
+        }
+
         $modelCallBack->id_did  = $modelDestination->id_did;
         $modelCallBack->exten   = $callerID;
         $modelCallBack->id_user = $modelDestination->id_user;
