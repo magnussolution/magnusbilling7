@@ -72,7 +72,7 @@ class Sip extends Model
             array('language', 'length', 'max' => 2),
             array('mailbox', 'length', 'max' => 50),
             array('accountcode, group', 'length', 'max' => 30),
-            array('rtptimeout, rtpholdtimeout', 'length', 'max' => 3),
+            array('rtptimeout, rtpholdtimeout,videosupport', 'length', 'max' => 3),
             array('deny, permit', 'length', 'max' => 95),
             array('type', 'length', 'max' => 6),
             array('disallow, allow, setvar, useragent', 'length', 'max' => 100),
