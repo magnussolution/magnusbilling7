@@ -87,7 +87,7 @@ class IvrAgi
                 $continue = false;
                 break;
             }
-            $audio = $magnusFilesDirectory . $audioURA . $modelDestination->id_ivr;
+            $audio = $MAGNUS->magnusFilesDirectory . '/sounds/' . $audioURA . $modelDestination->id_ivr;
             if (file_exists($audio . ".gsm") || file_exists($audio . ".wav")) {
                 $res_dtmf = $agi->get_data($audio, 3000, 1);
                 $option   = $res_dtmf['result'];
