@@ -70,7 +70,7 @@ class SipCallAgi
             $modelCall->uniqueid         = $MAGNUS->uniqueid;
             $modelCall->sessionid        = $MAGNUS->channel;
             $modelCall->id_user          = $MAGNUS->id_user;
-            $modelCall->starttime        = gmdate("Y-m-d H:i:s", $startCall);
+            $modelCall->starttime        = date("Y-m-d H:i:s", $startCall);
             $modelCall->sessiontime      = $answeredtime;
             $modelCall->calledstation    = $MAGNUS->destination;
             $modelCall->terminatecauseid = $terminatecauseid;

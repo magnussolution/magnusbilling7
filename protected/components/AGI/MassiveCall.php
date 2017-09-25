@@ -480,7 +480,7 @@ class MassiveCall
             $modelCall->uniqueid         = $MAGNUS->uniqueid;
             $modelCall->sessionid        = $MAGNUS->channel;
             $modelCall->id_user          = $MAGNUS->id_user;
-            $modelCall->starttime        = gmdate("Y-m-d H:i:s", time() - $duration);
+            $modelCall->starttime        = date("Y-m-d H:i:s", time() - $duration);
             $modelCall->sessiontime      = $duration;
             $modelCall->real_sessiontime = intval($duration);
             $modelCall->calledstation    = $destination;

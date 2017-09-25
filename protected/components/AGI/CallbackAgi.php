@@ -189,7 +189,7 @@ class CallbackAgi
                 $modelCall->uniqueid         = $MAGNUS->uniqueid;
                 $modelCall->sessionid        = $MAGNUS->channel;
                 $modelCall->id_user          = $MAGNUS->id_user;
-                $modelCall->starttime        = gmdate("Y-m-d H:i:s", time() - $sessiontime1fsLeg);
+                $modelCall->starttime        = date("Y-m-d H:i:s", time() - $sessiontime1fsLeg);
                 $modelCall->sessiontime      = $sessiontime1fsLeg;
                 $modelCall->real_sessiontime = intval($sessiontime1fsLeg);
                 $modelCall->calledstation    = $called;

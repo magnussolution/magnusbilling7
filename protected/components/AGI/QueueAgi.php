@@ -75,7 +75,7 @@ class QueueAgi
             $modelCall->uniqueid         = $MAGNUS->uniqueid;
             $modelCall->sessionid        = $MAGNUS->channel;
             $modelCall->id_user          = $modelQueue->id_user;
-            $modelCall->starttime        = gmdate("Y-m-d H:i:s", time() - $answeredtime);
+            $modelCall->starttime        = date("Y-m-d H:i:s", time() - $answeredtime);
             $modelCall->sessiontime      = $answeredtime;
             $modelCall->real_sessiontime = intval($answeredtime);
             $modelCall->calledstation    = $MAGNUS->destination;

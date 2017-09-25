@@ -500,7 +500,7 @@ class Calc
             $modelCall->uniqueid         = $MAGNUS->uniqueid;
             $modelCall->sessionid        = $MAGNUS->channel;
             $modelCall->id_user          = $MAGNUS->id_user;
-            $modelCall->starttime        = gmdate("Y-m-d H:i:s", time() - $this->real_answeredtime);
+            $modelCall->starttime        = date("Y-m-d H:i:s", time() - $this->real_answeredtime);
             $modelCall->sessiontime      = $sessiontime;
             $modelCall->real_sessiontime = intval($this->real_answeredtime);
             $modelCall->calledstation    = $MAGNUS->destination;
