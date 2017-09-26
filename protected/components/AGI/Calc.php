@@ -758,7 +758,7 @@ class Calc
                 $MAGNUS->startRecordCall($agi);
                 try {
                     $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param']
-                        , $this->tariffObj[$k]['rc_directmedia']);
+                        , $this->tariffObj[$k]['rc_directmedia'], $timeout);
                 } catch (Exception $e) {
                     //
                 }
