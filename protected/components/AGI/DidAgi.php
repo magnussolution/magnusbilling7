@@ -382,11 +382,11 @@ class DidAgi
 
     public function didCallCost(&$agi, &$MAGNUS)
     {
-        $connection_sell = $this->modelDestination[0]->idDid->connection_sell;
+        $agi->verbose('didCallCost', 10);
 
         //brazil mobile - ^[4,5,6][1-9][7-9].{7}$|^[1,2,3,7,8,9][1-9]9.{8}$
         //brazil fixed - ^[1-9][0-9][1-5].
-        $agi->verbose(print_r($this->modelDestination[0]->getAttributes(), true));
+        $agi->verbose(print_r($this->modelDestination[0]->getAttributes(), true), 25);
         if (strlen($this->modelDestination[0]->idDid->expression_1) > 0 && ereg($this->modelDestination[0]->idDid->expression_1, $MAGNUS->CallerID) || $this->modelDestination[0]->idDid->expression_1 == '*') {
             $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDestination[0]->idDid->selling_rate_1;
@@ -401,31 +401,36 @@ class DidAgi
             $selling_rate = 0;
         }
 
-        if ($connection_sell == 0 && $selling_rate == 0) {
+        if ($this->modelDestination[0]->idDid->connection_sell == 0 && $selling_rate == 0) {
             $this->sell_price = 0;
         } else {
-            $this->sell_price = $MAGNUS->roudRatePrice($answeredtime, $selling_rate, $this->modelDestination[0]->idDid->initblock, $this->modelDestination[0]->idDid->increment);
+            $this->sell_price = $selling_rate;
         }
 
-        $this->sell_price = $this->sell_price + $connection_sell;
+        if ($this->sell_price > 0 && $this->modelDestination[0]->idDid->idUser->credit <= 0) {
+            $agi->verbose(" USER NO CREDIT FOR CALL " . $username, 10);
+            $MAGNUS->hangup($agi);
+        }
+
+    }
+
+    public function billDidCall(&$agi, &$MAGNUS, $answeredtime)
+    {
+        $agi->verbose('billDidCall, sell_price=' . $this->sell_price, 1);
+
+        $this->sell_price = $MAGNUS->roudRatePrice($answeredtime, $this->sell_price, $this->modelDestination[0]->idDid->initblock, $this->modelDestination[0]->idDid->increment);
+
+        $this->sell_price = $this->sell_price + $this->modelDestination[0]->idDid->connection_sell;
 
         if ($answeredtime < $this->modelDestination[0]->idDid->minimal_time_charge) {
             $this->sell_price = 0;
         }
 
-        if ($this->sell_price > 0) {
-            if (UserCreditManager::checkGlobalCredit($MAGNUS->id_user) === false) {
-                $agi->verbose(" USER NO CREDIT FOR CALL " . $username, 10);
-                $MAGNUS->hangup($agi);
-            }
-        }
-
-        $agi->verbose(' answeredtime = ' . $answeredtime . ' sell_price = ' . $this->sell_price . ' connection_sell = ' . $connection_sell, 10);
+        $agi->verbose(' answeredtime = ' . $answeredtime . ' sell_price = ' . $this->sell_price . ' connection_sell = ' . $this->modelDestination[0]->idDid->connection_sell, 1);
     }
 
     public function call_did_billing(&$agi, &$MAGNUS, &$Calc, $answeredtime, $dialstatus)
     {
-        $agi->verbose('Method call_did_billing', 25);
         if (strlen($MAGNUS->dialstatus_rev_list[$dialstatus]) > 0) {
             $terminatecauseid = $MAGNUS->dialstatus_rev_list[$dialstatus];
         } else {
@@ -459,6 +464,8 @@ class DidAgi
         if (!count($modelPrefix)) {
             $agi->verbose('Not found prefix to DID ' . $this->did);
         }
+
+        $this->billDidCall($agi, $MAGNUS, $answeredtime);
 
         $modelCall                   = new Call();
         $modelCall->uniqueid         = $MAGNUS->uniqueid;
