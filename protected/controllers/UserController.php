@@ -254,12 +254,16 @@ class UserController extends Controller
             if ($this->isNewRecord || isset($modelSip->id_user)) {
                 $modelSip->id_user     = $model->id;
                 $modelSip->accountcode = $model->username;
-                $modelSip->name        = $model->username;
-                $modelSip->allow       = 'g729,gsm,alaw,ulaw';
-                $modelSip->host        = 'dynamic';
-                $modelSip->insecure    = 'no';
-                $modelSip->defaultuser = $model->username;
-                $modelSip->secret      = $model->password;
+                if ($this->isNewRecord) {
+                    $modelSip->name         = $model->username;
+                    $modelSip->allow        = 'g729,gsm,alaw,ulaw';
+                    $modelSip->host         = 'dynamic';
+                    $modelSip->insecure     = 'no';
+                    $modelSip->defaultuser  = $model->username;
+                    $modelSip->secret       = $model->password;
+                    $modelSip->videosupport = 'no';
+                }
+
                 $modelSip->save();
             }
 
