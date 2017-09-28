@@ -770,17 +770,17 @@ class BaseController extends CController
         $fieldGroup = json_decode($_GET['group']);
         $sort       = json_decode($_GET['sort']);
 
-        $arraySort    = ($sort && $fieldGroup) ? explode(' ', implode(' ', $sort)) : null;
-        $dirGroup     = $arraySort ? $arraySort[array_search($fieldGroup, $arraySort) + 1] : null;
-        $firstSort    = $fieldGroup ? $fieldGroup . ' ' . $dirGroup . ',' : null;
-        $sort         = $sort ? $firstSort . implode(',', $sort) : null;
-        $sort         = $this->replaceOrder();
-        $this->filter = $filter = $this->extraFilter($filter);
+        $arraySort                  = ($sort && $fieldGroup) ? explode(' ', implode(' ', $sort)) : null;
+        $dirGroup                   = $arraySort ? $arraySort[array_search($fieldGroup, $arraySort) + 1] : null;
+        $firstSort                  = $fieldGroup ? $fieldGroup . ' ' . $dirGroup . ',' : null;
+        $sort                       = $sort ? $firstSort . implode(',', $sort) : null;
+        $sort                       = $this->replaceOrder();
+        $this->filter               = $filter               = $this->extraFilter($filter);
+        $this->magnusFilesDirectory = '/var/www/tmpmagnus/';
+        $this->nameFileReport       = $this->modelName . '_' . time();
+        $pathCsv                    = $this->magnusFilesDirectory . $this->nameFileReport . '.csv';
 
-        $this->nameFileReport = $this->modelName . '_' . time();
-        $pathCsv              = $this->magnusFilesDirectory . $this->nameFileReport . '.csv';
-
-        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '/tmp/" . $this->nameFileReport . ".csv'
+        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '" . $this->magnusFilesDirectory . $this->nameFileReport . ".csv'
         FIELDS TERMINATED BY '\;' LINES TERMINATED BY '\n'
         FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
 
