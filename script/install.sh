@@ -911,6 +911,7 @@ messages => notice,warning,error
 
 " > /etc/asterisk/logger.conf
 
+mkdir /var/run/fail2ban/
 asterisk -rx "module reload logger"
 systemctl enable fail2ban 
 systemctl restart fail2ban 
