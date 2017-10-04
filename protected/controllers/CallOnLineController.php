@@ -94,17 +94,15 @@ class CallOnLineController extends Controller
 
     public function actionDestroy()
     {
-        $values = $this->getAttributesRequest();
-        $result = $this->abstractModel->findByPk($values['id']);
-        if (count($result) > 0) {
-            AsteriskAccess::hangupRequest($result->canal);
+        if (strlen($_POST['channel']) < 30 && preg_match('/SIP\//', $_POST['channel'])) {
+
+            AsteriskAccess::instance()->hangupRequest($_POST['channel']);
             $success = true;
             $msn     = Yii::t('yii', 'Operation was successful.') . Yii::app()->language;
         } else {
             $success = false;
-            $msn     = Yii::t('yii', 'Disallowed action');
+            $msn     = 'error';
         }
-
         echo json_encode(array(
             'success' => $success,
             'msg'     => $msn,
