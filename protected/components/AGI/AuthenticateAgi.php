@@ -315,7 +315,7 @@ class AuthenticateAgi
         }
     }
 
-    public static function checkIfIsAgent(&$MAGNUS, $model)
+    public static function checkIfIsAgent(&$MAGNUS, $agi)
     {
         /*check if user is a agent user*/
         if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
