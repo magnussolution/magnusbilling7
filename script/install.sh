@@ -487,6 +487,7 @@ enabled = yes
 
 port = 5038
 bindaddr = 0.0.0.0
+displayconnects = no
 
 [magnus]
 secret = magnussolution
