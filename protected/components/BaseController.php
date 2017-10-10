@@ -271,6 +271,7 @@ class BaseController extends CController
             'order'     => $this->order,
             'limit'     => $this->limit,
             'offset'    => $this->start,
+            'group'     => $this->group,
         ));
 
     }

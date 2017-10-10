@@ -16,7 +16,6 @@ class SipCallAgi
 
         $dialparams        = $MAGNUS->agiconfig['dialcommand_param_sipiax_friend'];
         $MAGNUS->modelUser = User::model()->findByPk((int) $MAGNUS->modelSip->id_user);
-
         AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $MAGNUS->modelUser);
 
         $MAGNUS->startRecordCall($agi);
