@@ -460,8 +460,9 @@ class Calc
             /*CALULATION CUSTO AND SELL RESELLER */
 
             if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
-                $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . '' . $calldestinationPortabilidade, $this->real_answeredtime, 1);
-                $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)));
+                $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . ' - ' .
+                    $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
+                $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
             } else {
                 $MAGNUS->modelUser->credit -= $MAGNUS->round_precision(abs($costCdr));
                 $MAGNUS->modelUser->lastuse = date('Y-m-d H:i:s');
@@ -543,22 +544,22 @@ class Calc
         }
 
     }
-    public function updateSystemAgent($agi, $MAGNUS, $calledstation, $cost)
+    public function updateSystemAgent($agi, $MAGNUS, $calledstation, $cost, $sessiontime)
     {
 
         $modelRateAgent = Rate::model()->searchAgentRate($calledstation, $MAGNUS->id_plan_agent);
 
         if (!count($modelRateAgent)) {
+            $agi->verbose('NOT FOUND AGENT TARRIF, USE AGENT COST PRICE');
             $cost_customer = $cost;
         } else {
-            $cost_customer = $MAGNUS->roudRatePrice(
-                $this->sessiontime,
-                $modelRateAgent[0]->rateinitial,
-                $modelRateAgent[0]->initblock, $modelRateAgent[0]->billingblock
-            );
+            $agi->verbose('Found agent sell price ' . print_r($modelRateAgent[0], true) . '-  ' . $sessiontime, 25);
+            $cost_customer = $MAGNUS->roudRatePrice($sessiontime, $modelRateAgent[0]['rateinitial'],
+                $modelRateAgent[0]['initblock'], $modelRateAgent[0]['billingblock']);
+            $agi->verbose('$cost_customer=' . $cost_customer);
         }
 
-        if ($this->sessiontime < $modelRateAgent[0]->minimal_time_charge) {
+        if ($sessiontime < $modelRateAgent[0]['minimal_time_charge']) {
             $agi->verbose("Tempo meno que o tempo minimo para", 15);
             $cost_customer = 0;
         }
@@ -573,7 +574,7 @@ class Calc
 
         $modelUser = User::model()->findByPk((int) $MAGNUS->id_user);
         $modelUser->credit -= $MAGNUS->round_precision(abs($cost_customer));
-        $modelUser->lastuse = date('U-m-d H:i:s');
+        $modelUser->lastuse = date('Y-m-d H:i:s');
         $modelUser->save();
 
         $agi->verbose("Update credit customer Agent $MAGNUS->username, " . $MAGNUS->round_precision(abs($cost_customer)), 6);
