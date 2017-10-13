@@ -131,16 +131,16 @@ make && make install
 ldconfig
 
 echo
-echo '----------- Install Asterisk 14 ----------'
+echo '----------- Install Asterisk 13 ----------'
 echo
 sleep 1
 cd /usr/src
 rm -rf asterisk*
 clear
-wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-14-current.tar.gz
+wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13-current.tar.gz
 cd /usr/src
-tar xzvf asterisk-14-current.tar.gz
-rm -rf asterisk-14-current.tar.gz
+tar xzvf asterisk-13-current.tar.gz
+rm -rf asterisk-13-current.tar.gz
 cd asterisk-*
 useradd -c 'Asterisk PBX' -d /var/lib/asterisk asterisk
 mkdir /var/run/asterisk
