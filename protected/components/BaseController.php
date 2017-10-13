@@ -87,7 +87,35 @@ class BaseController extends CController
         $this->controllerName = Yii::app()->controller->id;
 
         if (isset($_POST['ws'])) {
-            $this->actionLogin();
+            $filterUser = 'username = :key AND (UPPER(password) = :key1 OR UPPER(SHA1(password)) = :key1)';
+
+            $modelUser = User::model()->find(
+                array(
+                    'condition' => $filterUser,
+                    'params'    => array(
+                        ':key'  => $_POST['user'],
+                        ':key1' => strtoupper($_POST['pass']),
+                    ),
+                ));
+
+            if (count($modelUser)) {
+                $idUserType                          = $modelUser->idGroup->idUserType->id;
+                Yii::app()->session['isAdmin']       = $idUserType == 1 ? true : false;
+                Yii::app()->session['isAgent']       = $idUserType == 2 ? true : false;
+                Yii::app()->session['isClient']      = $idUserType == 3 ? true : false;
+                Yii::app()->session['isClientAgent'] = isset($modelUser->id_user) && $modelUser->id_user > 1 ? true : false;
+                Yii::app()->session['id_plan']       = $modelUser->id_plan;
+                Yii::app()->session['credit']        = isset($modelUser->credit) ? $modelUser->idUser->credit : 0;
+                Yii::app()->session['username']      = $modelUser->username;
+                Yii::app()->session['logged']        = true;
+                Yii::app()->session['id_user']       = $modelUser->id;
+                Yii::app()->session['id_agent']      = is_null($modelUser->id_user) ? 1 : $modelUser->id_user;
+                Yii::app()->session['name_user']     = $modelUser->firstname . ' ' . $modelUser->lastname;
+                Yii::app()->session['id_group']      = $modelUser->id_group;
+                Yii::app()->session['user_type']     = $idUserType;
+                Yii::app()->session['language']      = $modelUser->language;
+                Yii::app()->session['currency']      = $this->config['global']['base_currency'];
+            }
         }
 
         if (!Yii::app()->session['id_user']) {
