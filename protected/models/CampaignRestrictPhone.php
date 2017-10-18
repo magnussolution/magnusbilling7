@@ -60,16 +60,16 @@ class CampaignRestrictPhone extends Model
 
     public function deleteDuplicatedrows()
     {
-        $sql = "ALTER TABLE $this->tableName() DROP INDEX number";
+        $sql = "ALTER TABLE pkg_campaign_restrict_phone DROP INDEX number";
         Yii::app()->db->createCommand($sql)->execute();
 
-        $sql = "ALTER IGNORE TABLE $this->tableName() ADD UNIQUE (`number`)";
+        $sql = "ALTER IGNORE TABLE pkg_campaign_restrict_phone ADD UNIQUE (`number`)";
         Yii::app()->db->createCommand($sql)->execute();
 
-        $sql = "ALTER TABLE $this->tableName() DROP INDEX number";
+        $sql = "ALTER TABLE pkg_campaign_restrict_phone DROP INDEX number";
         Yii::app()->db->createCommand($sql)->execute();
 
-        $sql = "ALTER TABLE  $this->tableName() ADD INDEX (  `number` )";
+        $sql = "ALTER TABLE  pkg_campaign_restrict_phone ADD INDEX (  `number` )";
         Yii::app()->db->createCommand($sql)->execute();
     }
 }
