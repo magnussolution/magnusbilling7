@@ -78,7 +78,7 @@ class SignupController extends Controller
             : Yii::app()->session['language'];
 
             $signup->attributes   = $_POST['Signup'];
-            $signup->company_name = $_POST['Signup']['company_name'];
+            $signup->company_name = isset($_POST['Signup']['company_name']) ? $_POST['Signup']['company_name'] : '';
             $success              = $signup->save();
 
             //add the new user to SuperLogica
