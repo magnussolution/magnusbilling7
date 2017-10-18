@@ -125,17 +125,15 @@ class PhoneNumberController extends Controller
         }
         $filter = $filter ? $this->createCondition(json_decode($filter)) : '';
 
-        if (!preg_match('/honebook/', $filter)) {
+        if (!isset($this->relationFilter['idPhonebook'])) {
             echo json_encode(array(
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Por favor filtre uma agenda para reprocesar',
             ));
             exit;
-        } else {
-            $filter = preg_replace("/idPhonebookname/", 'g.name', $filter);
         }
 
-        $this->abstractModel->reprocess($filter);
+        $this->abstractModel->reprocess($this->relationFilter,$this->paramsFilter);
 
         echo json_encode(array(
             $this->nameSuccess => true,

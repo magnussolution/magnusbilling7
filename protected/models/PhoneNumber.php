@@ -78,9 +78,11 @@ class PhoneNumber extends Model
 		return parent::beforeSave();
 	}
 
-	public function reprocess($filter)
+	public function reprocess($relationFilter,$paramsFilter)
 	{
-		$sql = "UPDATE pkg_phonenumber a  JOIN pkg_phonebook g ON a.id_phonebook = g.id SET a.status = 1, a.try = 0 WHERE a.status = 2 AND $filter";
-		Yii::app()->db->createCommand($sql)->execute();
+		$sql = "UPDATE pkg_phonenumber t  JOIN pkg_phonebook idPhonebook ON t.id_phonebook = idPhonebook.id SET t.status = 1, t.try = 0 WHERE t.status = 2 AND ".$relationFilter['idPhonebook']['condition'];
+		$command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(":p0",  $paramsFilter['p0'], PDO::PARAM_STR);
+        $command->execute();
 	}
 }
