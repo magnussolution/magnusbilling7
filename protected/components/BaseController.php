@@ -858,7 +858,6 @@ class BaseController extends CController
             $this->filter = $filter = $this->extraFilter($filter);
 
             $criteria = new CDbCriteria(array(
-                'join'      => $this->join,
                 'condition' => $this->filter,
                 'with'      => $this->relationFilter,
                 'params'    => $this->paramsFilter,
