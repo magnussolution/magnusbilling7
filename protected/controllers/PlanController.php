@@ -22,9 +22,9 @@
 
 class PlanController extends Controller
 {
-    public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username');
-
+    public $attributeOrder     = 't.id';
+    public $extraValues        = array('idUser' => 'username');
+    public $defaultFilter      = 't.id_user = 1';
     public $nameModelRelated   = 'ServicesPlan';
     public $nameFkRelated      = 'id_plan';
     public $nameOtherFkRelated = 'id_services';
@@ -94,7 +94,7 @@ class PlanController extends Controller
             $filterPrefix = '11111';
         }
         $filter = "id_plan = $model->id AND t.status = 1 AND
-					id_prefix IN (SELECT id FROM pkg_prefix WHERE prefix LIKE '" . $filterPrefix . "%')";
+                    id_prefix IN (SELECT id FROM pkg_prefix WHERE prefix LIKE '" . $filterPrefix . "%')";
         $modelRate = Rate::model()->findAll($filter);
 
         if (count($modelRate) == 0) {
@@ -150,7 +150,7 @@ class PlanController extends Controller
                 if (preg_match("/$filter_name/", $destination)) {
 
                     $rates[] = "((SELECT id FROM pkg_prefix WHERE prefix = '$prefix' LIMIT 1), $idPlan, $price, $buyprice, " . $modelTrunk->id . ",
-								$initblock, $billingblock, $buyrateinitblock, $buyrateincrement, 1)";
+                                $initblock, $billingblock, $buyrateinitblock, $buyrateincrement, 1)";
                 }
             }
             Rate::model()->insertPortabilidadeRates($rates);
