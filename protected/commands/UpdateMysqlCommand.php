@@ -444,6 +444,32 @@ class UpdateMysqlCommand extends ConsoleCommand
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        if ($version == '6.0.4') {
+
+            $sql = "INSERT INTO pkg_method_pay VALUES (NULL, '1', 'molpay', 'MoPay', 'Global', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN');";
+            $this->executeDB($sql);
+
+            $version = '6.0.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '6.0.5') {
+            $sql = "INSERT INTO `pkg_configuration`  VALUES
+				(NULL, 'CallingCard answer call', 'callingcard_answer', '1', 'Answer call in CallingCard', 'agi-conf1', '1'),
+				(NULL, 'CallingCard enable CID authentication', 'callingcard_cid_enable', '1', 'CID authentication in CallingCard', 'agi-conf1', '1'),
+				(NULL, 'CallingCard number try', 'callingcard_number_try', '3', 'Number try call in CallingCard', 'agi-conf1', '1'),
+				(NULL, 'CallingCard say sall rate', 'callingcard_say_rateinitial', '0', 'CallingCard say sall rate', 'agi-conf1', '1'),
+				(NULL, 'CallingCard say timecall', 'callingcard_say_timetocall', '0', 'CallingCard say timecall', 'agi-conf1', '1');
+			";
+            $this->executeDB($sql);
+
+            $version = '6.0.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

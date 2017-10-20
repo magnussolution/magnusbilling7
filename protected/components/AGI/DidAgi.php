@@ -73,13 +73,17 @@ class DidAgi
                     //callingcard
                     $MAGNUS->mode = 'standard';
                     $agi->answer();
-                    sleep(2);
-                    $MAGNUS->callingcardConnection   = $this->modelDestination[0]->idDid->connection_sell;
-                    $MAGNUS->agiconfig['answer']     = 1;
-                    $MAGNUS->agiconfig['cid_enable'] = 1;
-                    $MAGNUS->agiconfig['use_dnid']   = 0;
-                    $MAGNUS->agiconfig['number_try'] = 3;
-                    $MAGNUS->CallerID                = is_numeric($MAGNUS->CallerID) ? $MAGNUS->CallerID : $agi->request['agi_calleridname'];
+                    sleep(1);
+                    $MAGNUS->callingcardConnection = $this->modelDestination[0]->idDid->connection_sell;
+
+                    $MAGNUS->agiconfig['use_dnid']        = 0;
+                    $MAGNUS->agiconfig['answer']          = $MAGNUS->agiconfig['callingcard_answer'];
+                    $MAGNUS->agiconfig['cid_enable']      = $MAGNUS->agiconfig['callingcard_cid_enable'];
+                    $MAGNUS->agiconfig['number_try']      = $MAGNUS->agiconfig['callingcard_number_try'];
+                    $MAGNUS->agiconfig['say_rateinitial'] = $MAGNUS->agiconfig['callingcard_say_rateinitial'];
+                    $MAGNUS->agiconfig['say_timetocall']  = $MAGNUS->agiconfig['callingcard_say_timetocall'];
+
+                    $MAGNUS->CallerID = is_numeric($MAGNUS->CallerID) ? $MAGNUS->CallerID : $agi->request['agi_calleridname'];
                     $agi->verbose('CallerID ' . $MAGNUS->CallerID);
                     break;
                 case 4:
