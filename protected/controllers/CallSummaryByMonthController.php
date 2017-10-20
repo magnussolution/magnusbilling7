@@ -186,8 +186,11 @@ class CallSummaryByMonthController extends Controller
         return $attributes;
     }
 
-    public function filterReplace($filter)
+    public function extraFilter($filter)
     {
+        if ($this->defaultFilter != 1) {
+            $filter = $filter . ' AND ' . $this->defaultFilter;
+        }
 
         if (preg_match('/c.username/', $filter)) {
             if (!preg_match("/JOIN pkg_user/", $this->join)) {
@@ -204,6 +207,6 @@ class CallSummaryByMonthController extends Controller
 
         }
 
-        return $filter;
+        return $this->extraFilterCustom($filter);
     }
 }
