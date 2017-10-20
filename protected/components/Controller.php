@@ -58,6 +58,7 @@ class Controller extends BaseController
             'transferToMobile',
             'pagHiper',
             'mercadoPago',
+            'molPay',
         );
         return in_array($this->controllerName, $allow);
     }
