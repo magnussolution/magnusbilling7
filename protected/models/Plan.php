@@ -87,33 +87,33 @@ class Plan extends Model
             $prefixclause = substr($prefixclause, 0, -3) . ")";
 
             $prefixclause .= " OR (prefix LIKE '&_%' ESCAPE '&' AND '" . $destination . "'
-			    REGEXP REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(CONCAT('^', prefix, '$'),
-			    'X', '[0-9]'), 'Z', '[1-9]'), 'N', '[2-9]'), '.', '.+'), '_', '')))";
+                REGEXP REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(CONCAT('^', prefix, '$'),
+                'X', '[0-9]'), 'Z', '[1-9]'), 'N', '[2-9]'), '.', '.+'), '_', '')))";
 
         } else {
             $max_len_prefix = 6;
-            $prefixclause .= "  (prefix LIKE '&_%' ESCAPE '&' AND '" . $destination . "'
+            $prefixclause   = "  (prefix LIKE '&_%' ESCAPE '&' AND '" . $destination . "'
                         REGEXP REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(CONCAT('^', prefix, '$'),
                         'X', '[0-9]'), 'Z', '[1-9]'), 'N', '[2-9]'), '.', '.+'), '_', ''))";
         }
 
         $sql = "SELECT lcrtype, pkg_plan.id AS id_plan, pkg_prefix.prefix AS dialprefix,
-				pkg_plan.name, pkg_rate.id_prefix, pkg_rate.id AS id_rate, buyrate,  buyrateinitblock buyrateinitblock,
-				buyrateincrement, rateinitial, initblock, billingblock, connectcharge, disconnectcharge disconnectcharge,
-				pkg_rate.id_trunk AS id_trunk, pkg_trunk.trunkprefix AS rc_trunkprefix, pkg_trunk.directmedia AS rc_directmedia,
-				pkg_trunk.providertech AS rc_providertech ,pkg_trunk.providerip AS rc_providerip,
-				pkg_trunk.removeprefix AS rc_removeprefix, pkg_trunk.failover_trunk AS rt_failover_trunk,
-				pkg_trunk.addparameter AS rt_addparameter_trunk, pkg_trunk.status, pkg_trunk.inuse, pkg_trunk.maxuse,
-				pkg_trunk.allow_error,pkg_trunk.if_max_use, pkg_rate.additional_grace AS additional_grace, minimal_time_charge,
-				minimal_time_buy, pkg_trunk.link_sms, pkg_trunk.user user, pkg_trunk.secret, package_offer ,
-				pkg_trunk.id_provider, pkg_provider.credit_control, pkg_provider.credit
-				FROM pkg_plan
-				LEFT JOIN pkg_rate ON pkg_plan.id = pkg_rate.id_plan
-				LEFT JOIN pkg_trunk AS pkg_trunk ON pkg_trunk.id = pkg_rate.id_trunk
-				LEFT JOIN pkg_prefix ON pkg_rate.id_prefix = pkg_prefix.id
-				LEFT JOIN pkg_provider ON pkg_trunk.id_provider = pkg_provider.id
-				WHERE pkg_plan.id=$id_plan AND pkg_rate.status = 1 AND $prefixclause
-				ORDER BY LENGTH( prefix ) DESC ";
+                pkg_plan.name, pkg_rate.id_prefix, pkg_rate.id AS id_rate, buyrate,  buyrateinitblock buyrateinitblock,
+                buyrateincrement, rateinitial, initblock, billingblock, connectcharge, disconnectcharge disconnectcharge,
+                pkg_rate.id_trunk AS id_trunk, pkg_trunk.trunkprefix AS rc_trunkprefix, pkg_trunk.directmedia AS rc_directmedia,
+                pkg_trunk.providertech AS rc_providertech ,pkg_trunk.providerip AS rc_providerip,
+                pkg_trunk.removeprefix AS rc_removeprefix, pkg_trunk.failover_trunk AS rt_failover_trunk,
+                pkg_trunk.addparameter AS rt_addparameter_trunk, pkg_trunk.status, pkg_trunk.inuse, pkg_trunk.maxuse,
+                pkg_trunk.allow_error,pkg_trunk.if_max_use, pkg_rate.additional_grace AS additional_grace, minimal_time_charge,
+                minimal_time_buy, pkg_trunk.link_sms, pkg_trunk.user user, pkg_trunk.secret, package_offer ,
+                pkg_trunk.id_provider, pkg_provider.credit_control, pkg_provider.credit
+                FROM pkg_plan
+                LEFT JOIN pkg_rate ON pkg_plan.id = pkg_rate.id_plan
+                LEFT JOIN pkg_trunk AS pkg_trunk ON pkg_trunk.id = pkg_rate.id_trunk
+                LEFT JOIN pkg_prefix ON pkg_rate.id_prefix = pkg_prefix.id
+                LEFT JOIN pkg_provider ON pkg_trunk.id_provider = pkg_provider.id
+                WHERE pkg_plan.id=$id_plan AND pkg_rate.status = 1 AND $prefixclause
+                ORDER BY LENGTH( prefix ) DESC ";
         return array($sql, Yii::app()->db->createCommand($sql)->queryAll());
     }
 }

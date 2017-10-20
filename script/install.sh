@@ -99,8 +99,8 @@ fi
 
 if [ ${DIST} = "DEBIAN" ]; then
     
-    apt-get -o Acquire::Check-Valid-Until=false update
-    apt-get install -y curl php5-fpm php5 php5-mcrypt git xmlstarlet libmyodbc unixodbc-bin apache2 php5-dev php5-common php5-cli php5-gd libjansson-dev php-pear php5-cli php-apc php5-curl libapache2-mod-php5 uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
+    apt-get -o Acquire::Check-Valid-Until=false update 
+    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo php5-fpm php5 php5-mcrypt git xmlstarlet libmyodbc unixodbc-bin apache2 php5-dev php5-common php5-cli php5-gd libjansson-dev php-pear php5-cli php-apc php5-curl libapache2-mod-php5 uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
     echo mysql-server mysql-server/root_password password ${password} | debconf-set-selections
     echo mysql-server mysql-server/root_password_again password ${password} | debconf-set-selections            
     apt-get install -y mysql-server php5-mysql mysql-client
@@ -923,7 +923,6 @@ php /var/www/html/mbilling/cron.php updatemysql
 chown -R asterisk:asterisk /var/lib/php/session/
 chown -R asterisk:asterisk /var/spool/asterisk/outgoing/
 chown -R asterisk:asterisk /etc/asterisk
-chown -R asterisk:asterisk /var/www/html/mbilling
 chmod -R 777 /tmp
 chmod -R 555 /var/www/html/mbilling/
 chmod -R 750 /var/www/html/mbilling/resources/reports 
@@ -947,6 +946,7 @@ chmod -R 655 /var/www/html/mbilling/tmp
 chmod -R 750 /var/www/html/mbilling/resources/sounds
 chmod -R 770 /var/www/html/mbilling/resources/images
 chmod -R 755 /var/www/html/mbilling/assets/
+chown -R asterisk:asterisk /var/www/html/mbilling
 echo
 echo
 echo ===============================================================
