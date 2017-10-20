@@ -118,8 +118,9 @@ class SmsSend
 
             $linkSms = preg_replace("/\%number\%/", $destination, $linkSms);
             $linkSms = preg_replace("/\%text\%/", $text, $linkSms);
-            $linkSms = preg_replace("/\%id\%/", $id_phonenumber, $linkSms);
-
+            if (isset($id_phonenumber)) {
+                $linkSms = preg_replace("/\%id\%/", $id_phonenumber, $linkSms);
+            }
             if (strlen($linkSms) < 10) {
                 return array(
                     'success' => false,
@@ -192,13 +193,17 @@ class SmsSend
             $modelCall->sessionbill      = $rateInitial;
             $modelCall->id_plan          = $modelUser->id_plan;
             $modelCall->id_trunk         = $callTrunk[0]['id_trunk'];
-            $modelCall->src              = $username;
+            $modelCall->src              = $modelUser->username;
             $modelCall->buycost          = $buyRate;
             $modelCall->terminatecauseid = $terminateCauseid;
             $modelCall->id_trunk         = $id_prefix;
             $modelCall->sipiax           = 6;
             $modelCall->agent_bill       = $rateInitialClientAgent;
             $modelCall->save();
+            $modelError = $modelCall->getErrors();
+            if (count($modelError)) {
+                $msg = $modelError;
+            }
 
             return array(
                 'success' => $success,

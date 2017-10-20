@@ -75,6 +75,8 @@ class SmsController extends Controller
 
         $modelUser = User::model()->findByPk((int) $values['id_user']);
 
-        SmsSend::send($modelUser, $values['telephone'], $values['sms']);
+        $res = SmsSend::send($modelUser, $values['telephone'], $values['sms']);
+
+        echo json_encode($res);
     }
 }
