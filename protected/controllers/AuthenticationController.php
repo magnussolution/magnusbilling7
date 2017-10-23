@@ -404,7 +404,7 @@ class AuthenticationController extends Controller
         $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
 
         //Yii::log(print_r($sql,true),'info');
-        $secret      = $modelUsergoogle_authenticator_key;
+        $secret      = $modelUser->google_authenticator_key;
         $oneCodePost = $_POST['oneCode'];
 
         $checkResult = $ga->verifyCode($secret, $oneCodePost, 2);
