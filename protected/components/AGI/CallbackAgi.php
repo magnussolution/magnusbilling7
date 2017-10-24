@@ -181,7 +181,11 @@ class CallbackAgi
                 $buycost30 = $buycos / 2;
 
                 //desconto 1 minuto assim que o cliente atende a chamada
-                $MAGNUS->modelUser->credit -= $MAGNUS->round_precision(abs($sell30));
+                User::model()->updateByPk($MAGNUS->modelUser->id,
+                    array(
+                        'credit' => new CDbExpression('credit - ' . $MAGNUS->round_precision(abs($sell30))),
+                    )
+                );
 
                 $sessiontime1fsLeg = 30;
 
@@ -226,11 +230,12 @@ class CallbackAgi
                 if (count($modelError)) {
                     $agi->verbose(print_r($modelError, true), 25);
                 }
-
-                $MAGNUS->modelUser->credit -= $MAGNUS->round_precision(abs($selltNew));
-
+                User::model()->updateByPk($MAGNUS->modelUser->id,
+                    array(
+                        'credit' => new CDbExpression('credit - ' . $MAGNUS->round_precision(abs($selltNew))),
+                    )
+                );
             }
-            $MAGNUS->modelUser->save();
         }
     }
 

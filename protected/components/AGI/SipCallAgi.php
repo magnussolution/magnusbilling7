@@ -57,9 +57,12 @@ class SipCallAgi
 
                 $cost = ($MAGNUS->config['global']['charge_sip_call'] / 60) * $answeredtime;
 
-                $MAGNUS->modelUser->credit -= $cost;
-                $MAGNUS->modelUser->lastuse -= date('Y-m-d H:i:s');
-                $MAGNUS->modelUser->save();
+                User::model()->updateByPk($MAGNUS->modelUser->id,
+                    array(
+                        'lastuse' => date('Y-m-d H:i:s'),
+                        'credit'  => new CDbExpression('credit - ' . $MAGNUS->round_precision(abs($cost))),
+                    )
+                );
                 $agi->verbose("Update credit username after transfer $MAGNUS->username, " . $cost, 15);
             } else {
                 $cost = 0;

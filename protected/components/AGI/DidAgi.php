@@ -494,8 +494,11 @@ class DidAgi
             $agi->verbose(print_r($modelError, true), 25);
         }
 
-        $MAGNUS->modelUser->credit -= $MAGNUS->round_precision(abs($this->sell_price));
-        $MAGNUS->modelUser->save();
+        User::model()->updateByPk($MAGNUS->modelUser->id,
+            array(
+                'credit' => new CDbExpression('credit - ' . $MAGNUS->round_precision(abs($this->sell_price))),
+            )
+        );
 
         $this->modelDestination[0]->secondusedreal += $answeredtime;
         $this->modelDestination->save();

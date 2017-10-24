@@ -464,13 +464,12 @@ class Calc
                     $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
                 $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
             } else {
-                $MAGNUS->modelUser->credit -= $MAGNUS->round_precision(abs($costCdr));
-                $MAGNUS->modelUser->lastuse = date('Y-m-d H:i:s');
-                $MAGNUS->modelUser->save();
-                $modelError = $MAGNUS->modelUser->getErrors();
-                if (count($modelError)) {
-                    $agi->verbose(print_r($modelError, true), 25);
-                }
+                User::model()->updateByPk($MAGNUS->modelUser->id,
+                    array(
+                        'lastuse' => date('Y-m-d H:i:s'),
+                        'credit'  => new CDbExpression('credit - ' . $MAGNUS->round_precision(abs($costCdr))),
+                    )
+                );
 
                 $agi->verbose("Update credit username $MAGNUS->username, " . $MAGNUS->round_precision(abs($cost)), 6);
             }
