@@ -824,7 +824,7 @@ class BaseController extends CController
         $command->execute();
 
         header('Content-type: application/csv');
-        header('Content-Disposition: inline; filename="' . $this->nameFileReport . '_' . $this->nameFileReport . '"');
+        header('Content-Disposition: inline; filename="' . $this->nameFileReport . '.csv"');
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
         ob_clean();
