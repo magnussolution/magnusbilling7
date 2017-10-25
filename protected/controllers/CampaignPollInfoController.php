@@ -173,10 +173,9 @@ class CampaignPollInfoController extends Controller
 
     public function extraFilterCustomClient($filter)
     {
-        //se for cliente filtrar pelo pkg_user.id
-        $filter .= ' AND t.id_user = :clfby';
+        $this->join .= 'JOIN pkg_campaign_poll cp ON cp.id = id_campaign_poll';
+        $filter .= ' AND cp.id_user = :clfby';
         $this->paramsFilter[':clfby'] = Yii::app()->session['id_user'];
-
         return $filter;
     }
 
