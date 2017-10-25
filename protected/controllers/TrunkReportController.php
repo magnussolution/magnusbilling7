@@ -50,11 +50,15 @@ class TrunkReportController extends Controller
         }
         $filter = $filter ? $this->createCondition(json_decode($filter)) : '';
 
-        $modelTrunk                 = Trunk::model()->find($filter);
-        $modelTrunk->call_answered  = 0;
-        $modelTrunk->call_total     = 0;
-        $modelTrunk->secondusedreal = 0;
-        $modelTrunk->save();
+        $filter = preg_replace("/t\./", '', $filter);
+
+        Trunk::model()->updateAll(array(
+            'call_answered'  => 0,
+            'call_total'     => 0,
+            'secondusedreal' => 0,
+
+        ), $filter, $this->paramsFilter);
+
         echo json_encode(array(
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
