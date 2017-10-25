@@ -23,7 +23,7 @@
 class ServicesUseController extends Controller
 {
     public $attributeOrder = 'status DESC, DAY( reservationdate ) DESC';
-    public $extraValues    = array('idServices' => 'name,price', 'idUser' => 'username');
+    public $extraValues    = array('idServices' => 'name,price,type', 'idUser' => 'username');
 
     public $fieldsInvisibleClient = array(
         'id_user',
