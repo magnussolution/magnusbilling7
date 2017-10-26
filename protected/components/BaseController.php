@@ -490,6 +490,10 @@ class BaseController extends CController
 
         unset($values[$this->nameOtherFkRelated]);
 
+        if (Yii::app()->session['isClient'] && $this->abstractModel->tableName() != 'pkg_user') {
+            $values['id_user'] = Yii::app()->session['id_user'];
+        }
+
         //updateAll
         if (isset($values[$namePk]) && is_array($values[$namePk])) {
             $ids = array();
