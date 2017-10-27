@@ -34,12 +34,17 @@ class SmsCommand extends ConsoleCommand
         $num_day  = date('N');
         $name_day = $tab_day[$num_day];
 
-        $filter = 'status = :key AND type = :key  AND ' . $name_day . ' = :key AND startingdate <= :key1 AND expirationdate > :key1
-                        AND  daily_start_time <= :key1 AND daily_stop_time > :key1';
+        echo $name_day;
+
+        $filter = 'status = :key1 AND type = :key0  AND ' . $name_day . ' = :key1 AND startingdate <= :key2 AND expirationdate > :key2
+                        AND  daily_start_time <= :key3 AND daily_stop_time > :key3';
 
         $params = array(
-            ':key'  => 0,
-            ':key1' => date('Y-m-d H:i:s'),
+            ':key0' => 0,
+            ':key1' => 1,
+            ':key2' => date('Y-m-d H:i:s'),
+            ':key3' => date('H:i:s'),
+
         );
 
         if (isset($args[1])) {
@@ -90,18 +95,15 @@ class SmsCommand extends ConsoleCommand
                 continue;
             }
 
-            include_once Yii::app()->baseUrl . '/protected/controllers/SmsSendController.php';
-
-            $send = new SmsSendController(false);
             foreach ($modelPhoneNumber as $sms) {
                 if (date("s") > 55) {
                     exit;
                 }
+                $sms->idPhonebook->idUser->id_plan = $campaign->id_plan > 0 ? $campaign->id_plan : $phone->idPhonebook->idUser->id_plan;
 
-                $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $phone->idPhonebook->idUser->id_plan;
-                $id_user  = $phone->idPhonebook->idUser->id;
-                $username = $phone->idPhonebook->idUser->username;
-                $id_agent = $phone->idPhonebook->idUser->id_user;
+                $id_user  = $sms->idPhonebook->idUser->id;
+                $username = $sms->idPhonebook->idUser->username;
+                $id_agent = $sms->idPhonebook->idUser->id_user;
 
                 if (UserCreditManager::checkGlobalCredit($id_user) === false) {
                     if ($this->debug >= 1) {
@@ -111,17 +113,26 @@ class SmsCommand extends ConsoleCommand
                     continue;
                 }
 
-                $text = preg_replace("/\%name\%/", $sms['name'], $sms['description']);
+                //print_r($sms->getAttributes());
+                //print_r($campaign->getAttributes());
+
+                $text = preg_replace("/\%name\%/", $sms->name, $campaign->description);
 
                 if ($sms->number == '' || !is_numeric($sms->number)) {
                     PhoneNumber::model()->deleteByPk((int) $sms->id);
                     continue;
                 }
-                echo $phone->idPhonebook->idUser->username . " -" . $phone->idPhonebook->idUser->password . " -" . $sms->number . " -" . $text . "\n";
-                $smsResult = SmsSend::send($$phone->idPhonebook->idUser, $sms->number, $text);
+                echo $sms->idPhonebook->idUser->username . " - " . $sms->idPhonebook->idUser->password . " - " . $sms->number . " -" . $text . "\n";
+
+                $res = SmsSend::send($sms->idPhonebook->idUser, $sms->number, $text);
+
                 $sms->try++;
-                $sms->status = $smsResult['success'];
+                $sms->status = isset($res['success']) ? 3 : 2;
                 $sms->save();
+                $modelError = $sms->getErrors();
+                if (count($modelError)) {
+                    print_r($modelError);
+                }
             }
         }
     }
