@@ -281,7 +281,6 @@ class CampaignController extends Controller
             exit;
         }
 
-        Yii::log($id_campaign, 'info');
         $tab_day  = array(1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         $num_day  = date('N');
         $name_day = $tab_day[$num_day];
@@ -290,14 +289,11 @@ class CampaignController extends Controller
 
         $campaignResult = Campaign::model()->checkCampaignActive($id_campaign, $nbpage, $name_day);
 
-        if (count($campaignResult) == 0) {
+        $modelCampaign = $this->abstractModel->findByPk((int) $id_campaign);
 
-            $sql     = "SELECT * FROM pkg_campaign  WHERE id = :id_campaign";
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id_campaign", $id_campaign, PDO::PARAM_INT);
-            $resultCampaign = $command->queryAll();
+        if (!count($campaignResult)) {
 
-            if ($resultCampaign[0]['status'] == 0) {
+            if ($modelCampaign->status == 0) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Please active this campaign',
@@ -305,13 +301,7 @@ class CampaignController extends Controller
                 exit;
             }
 
-            $sql = "SELECT pkg_user.credit, pkg_user.id_plan FROM pkg_campaign  JOIN pkg_user
-                            ON pkg_campaign.id_user = pkg_user.id WHERE pkg_campaign.id = :id_campaign";
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id_campaign", $id_campaign, PDO::PARAM_INT);
-            $resultUser = $command->queryAll();
-
-            if ($resultUser[0]['credit'] < 1) {
+            if ($modelCampaign->idUser->credit < 1) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The user not have enough credit',
@@ -319,7 +309,7 @@ class CampaignController extends Controller
                 exit;
             }
 
-            if ($resultCampaign[0]['startingdate'] > date('Y-m-d H:i:s')) {
+            if ($modelCampaign->startingdate > date('Y-m-d H:i:s')) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The startdate is in the future',
@@ -327,7 +317,7 @@ class CampaignController extends Controller
                 exit;
             }
 
-            if ($resultCampaign[0]['expirationdate'] < date('Y-m-d H:i:s')) {
+            if ($modelCampaign->expirationdate < date('Y-m-d H:i:s')) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The expirationdate is in the past',
@@ -335,20 +325,7 @@ class CampaignController extends Controller
                 exit;
             }
 
-            $sql     = "SELECT id_phonebook FROM pkg_campaign_phonebook WHERE id_campaign = :id_campaign";
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id_campaign", $id_campaign, PDO::PARAM_INT);
-            $resultPhonebook = $command->queryAll();
-
-            if (count($resultPhonebook) == 0) {
-                echo json_encode(array(
-                    $this->nameSuccess => false,
-                    $this->nameMsg     => 'Please select one o more phonebook',
-                ));
-                exit;
-            }
-
-            if ($resultCampaign[0]['daily_start_time'] > date('H:i:s')) {
+            if ($modelCampaign->daily_start_time > date('H:i:s')) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The start time is out of the hour of work',
@@ -356,7 +333,7 @@ class CampaignController extends Controller
                 exit;
             }
 
-            if ($resultCampaign[0]['daily_stop_time'] < date('H:i:s')) {
+            if ($modelCampaign->daily_stop_time < date('H:i:s')) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The stop time is out of the hour of work',
@@ -364,7 +341,7 @@ class CampaignController extends Controller
                 exit;
             }
 
-            if ($resultCampaign[0][$name_day] == 0) {
+            if ($modelCampaign->{$name_day} == 0) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Campaign is not active to start in ' . $name_day,
@@ -372,40 +349,61 @@ class CampaignController extends Controller
                 exit;
             }
 
-            $sql     = "SELECT * FROM pkg_phonenumber  WHERE id_phonebook = :id_phonebook";
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id_phonebook", $resultPhonebook[0]['id_phonebook'], PDO::PARAM_INT);
-            $resultPhonenumber = $command->queryAll();
+            //get campaingphonebookes
+            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key',
+                array(':key' => $id_campaign));
 
-            if (count($resultPhonenumber) == 0) {
+            if (!count($modelCampaignPhonebook)) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
-                    $this->nameMsg     => 'The phonebook not have numbers',
-                ));
-                exit;
-            } else {
-                $sql     = "SELECT * FROM pkg_phonenumber  WHERE id_phonebook = :id_phonebook AND status = 1";
-                $command = Yii::app()->db->createCommand($sql);
-                $command->bindValue(":id_phonebook", $resultPhonebook[0]['id_phonebook'], PDO::PARAM_INT);
-                $resultPhonenumber = $command->queryAll();
-
-                echo json_encode(array(
-                    $this->nameSuccess => false,
-                    $this->nameMsg     => 'The phonebook have numbers, but NOT have active numbers',
+                    $this->nameMsg     => 'Please select one o more phonebook',
                 ));
                 exit;
             }
 
-            $sql     = "SELECT * FROM pkg_phonebook  WHERE id = :id_phonebook AND status = 0";
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id_phonebook", $resultPhonebook[0]['id_phonebook'], PDO::PARAM_INT);
-            $resultPhonebook = $command->queryAll();
+            $ids_phone_books = array();
+            foreach ($modelCampaignPhonebook as $key => $phonebook) {
+                $ids_phone_books[] = $phonebook->id_phonebook;
+            }
 
-            Yii::log($sql, 'info');
-            if (count($resultPhonebook) == 0) {
+            //find active numbers in phonebooks
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('id', $ids_phone_books);
+            $modelPhoneBook = PhoneBook::model()->findAll($criteria);
+
+            if (!count($modelPhoneBook)) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
-                    $this->nameMsg     => 'The phonebook is inactive',
+                    $this->nameMsg     => 'Campaign Not have phonebook',
+                ));
+                exit;
+            }
+            //find only active phonebook
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('id', $ids_phone_books);
+            $criteria->addCondition('status = :key');
+            $criteria->params[':key'] = 1;
+            $modelPhoneBook           = PhoneBook::model()->findAll($criteria);
+
+            if (!count($modelPhoneBook)) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    $this->nameMsg     => 'Campaign Not have phonebook',
+                ));
+                exit;
+            }
+
+            //find active numbers in phonebooks
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('id_phonebook', $ids_phone_books);
+            $criteria->addCondition('status = :key');
+            $criteria->params[':key'] = 1;
+            $modelPhoneNumber         = PhoneNumber::model()->findAll($criteria);
+
+            if (!count($modelPhoneNumber)) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    $this->nameMsg     => 'The phonebook not have numbers or not have active numbers',
                 ));
                 exit;
             }
@@ -420,31 +418,25 @@ class CampaignController extends Controller
 
         }
 
-        if ($campaignResult[0]['type'] == 0) {
+        if ($modelCampaign->type == 0) {
 
-            $sql     = "SELECT * FROM pkg_user WHERE id = :id ";
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id", $campaignResult[0]['id'], PDO::PARAM_INT);
-            $resultUser = $command->queryAll();
+            $criteria = new CDbCriteria(array(
+                'condition' => 'id_plan = :key',
+                'params'    => array(':key' => $modelCampaign->idUser->id_plan),
+                'with'      => array(
+                    'idPrefix' => array(
+                        'condition' => "idPrefix.prefix LIKE '999%'",
+                    ),
+                ),
+            ));
 
-            if ($resultUser[0]['id_user'] > 1) {
-                $sql     = "SELECT * FROM pkg_user WHERE id = :id";
-                $command = Yii::app()->db->createCommand($sql);
-                $command->bindValue(":id", $resultUser[0]['id_user'], PDO::PARAM_INT);
-                $campaingAgent = $command->queryAll();
-
-                $sql = "SELECT id FROM pkg_rate_agent  WHERE id_plan = :id_plan AND id_prefix IN
-                                (SELECT id FROM pkg_prefix WHERE prefix LIKE '999%' ORDER BY prefix DESC)";
+            if ($modelCampaign->idUser->id_user > 1) {
+                $modelRate = RateAgent::model()->find($criteria);
             } else {
-                $sql = "SELECT id FROM pkg_rate  WHERE id_plan = :id_plan AND pkg_rate.status = 1 AND id_prefix =
-                                (SELECT id FROM pkg_prefix  WHERE prefix LIKE '999%' LIMIT 1)";
-
+                $modelRate = Rate::model()->find($criteria);
             }
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id_plan", $resultUser[0]['id_plan'], PDO::PARAM_INT);
-            $resultPrefix = $command->queryAll();
 
-            if (count($resultPrefix) == 0) {
+            if (!count($modelRate)) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Not existe the prefix 999 to send SMS',
