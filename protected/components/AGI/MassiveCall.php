@@ -437,7 +437,7 @@ class MassiveCall
             $agi->stream_file('prepaid-final', ' #');
         }
 
-        $modelRate = Rate::model()->find((int) $idRate);
+        $modelRate = Rate::model()->findByPk((int) $idRate);
 
         if (!count($modelRate)) {
             return;
