@@ -567,27 +567,15 @@ class Magnus
 
     }
 
-    public function check_expirationdate_customer()
+    public function check_expirationdate_customer($agi)
     {
         $prompt = '';
-        if ($this->enableexpire > 0) {
-            if ($this->enableexpire == 1 && $this->expirationdate != '00000000000000' && strlen($this->expirationdate) > 5) {
-                /* expire date */
-                if (intval($this->expirationdate - time()) < 0) /* CARD EXPIRED :( */ {
-                    $prompt = "prepaid-card-expired";
-                }
+        if ($this->modelUser->enableexpire == 1 && $this->expirationdate != '00000000000000' && strlen($this->modelUser->expirationdate) > 5) {
 
-            } elseif ($this->enableexpire == 3 && $this->creationdate != '00000000000000' && strlen($this->creationdate) > 5 && ($this->expiredays > 0)) {
-                /* expire days since creation */
-                $date_will_expire = $this->creationdate + (60 * 60 * 24 * $this->expiredays);
-                if (intval($date_will_expire - time()) < 0) /* CARD EXPIRED :( */ {
-                    $prompt = "prepaid-card-expired";
-                }
-
-            }
-            /*Update card status to Expired */
-            if ($prompt == "prepaid-card-expired") {
-                $this->active            = 0;
+            /* expire date */
+            if (intval(strtotime($this->modelUser->expirationdate) - time()) < 0) {
+                $agi->verbose('User expired => ' . $this->modelUser->expirationdate);
+                $prompt                  = "prepaid-card-expired";
                 $this->modelUser->active = 0;
                 $this->modelUser->save();
             }

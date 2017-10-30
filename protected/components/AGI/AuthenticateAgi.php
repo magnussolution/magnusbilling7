@@ -45,7 +45,7 @@ class AuthenticateAgi
         if ($authentication == false || $MAGNUS->active != 1) {
             $prompt = "prepaid-auth-fail";
         } else {
-            $prompt = $MAGNUS->check_expirationdate_customer();
+            $prompt = $MAGNUS->check_expirationdate_customer($agi);
         }
 
         if (strlen($prompt) > 0) {
