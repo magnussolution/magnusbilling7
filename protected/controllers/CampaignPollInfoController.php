@@ -189,28 +189,4 @@ class CampaignPollInfoController extends Controller
 
         return $filter;
     }
-
-    public function setAttributesModels($attributes, $models)
-    {
-        $select        = 'resposta AS number, COUNT( resposta ) AS resposta';
-        $this->nameSum = 'sum';
-        $result        = $this->abstractModel->find(array(
-            'select'    => $select,
-            'join'      => $this->join,
-            'condition' => $this->filter,
-            'params'    => $this->paramsFilter,
-            'order'     => 'resposta DESC',
-            'group'     => 'resposta',
-
-        ));
-
-        for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
-
-            $attributes[$i]['sumresposta'] = $result->resposta;
-            $attributes[$i]['resposta2']   = $result->number;
-
-        }
-        return $attributes;
-    }
-
 }
