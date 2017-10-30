@@ -248,7 +248,7 @@ class MassiveCallCommand extends ConsoleCommand
             }
 
             $criteria = new CDbCriteria();
-            $criteria->addInCondition('id_phonebook', $ids);
+            $criteria->addInCondition('id', $ids);
             PhoneNumber::model()->updateAll(
                 array(
                     'status' => '2',

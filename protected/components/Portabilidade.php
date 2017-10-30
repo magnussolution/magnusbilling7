@@ -19,7 +19,7 @@
  */
 class Portabilidade
 {
-    public function getDestination($destination, $id_plan = null)
+    public static function getDestination($destination, $id_plan = null)
     {
         if (strlen($destination) >= 10 && substr($destination, 0, 2) == 55) {
             $config    = LoadConfig::getConfig();

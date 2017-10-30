@@ -21,7 +21,7 @@
 class UserCreditManager
 {
 
-    public function checkGlobalCredit($id_user)
+    public static function checkGlobalCredit($id_user)
     {
         $modelUser = User::model()->findByPk((int) $id_user);
 
