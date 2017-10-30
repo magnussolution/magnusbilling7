@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Url for moip ruturn http://ip/billing/index.php/pagSeguro .
+ * Url for moip ruturn http://ip/billing/index.php/mercadoPago .
  * https://pagseguro.uol.com.br/preferences/automaticReturn.jhtml
  */
 class MercadoPagoController extends CController
