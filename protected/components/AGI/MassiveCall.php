@@ -36,7 +36,7 @@ class MassiveCall
         $phonenumberCity  = $agi->get_variable("PHONENUMBER_CITY", true);
         $idCampaign       = $agi->get_variable("CAMPAIGN_ID", true);
         $idRate           = $agi->get_variable("RATE_ID", true);
-        $MAGNUS->id_user  = $agi->get_variable("IDCARD", true);
+        $MAGNUS->id_user  = $agi->get_variable("IDUSER", true);
         $MAGNUS->username = $agi->get_variable("USERNAME", true);
         $MAGNUS->id_agent = $agi->get_variable("AGENT_ID", true);
         $destination      = $MAGNUS->dnid;

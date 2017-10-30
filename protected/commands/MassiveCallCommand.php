@@ -93,10 +93,10 @@ class MassiveCallCommand extends ConsoleCommand
             foreach ($modelPhoneNumber as $phone) {
                 $i++;
 
-                $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $phone->idPhonebook->idUser->id_plan;
-                $id_user  = $phone->idPhonebook->idUser->id;
-                $username = $phone->idPhonebook->idUser->username;
-                $id_agent = $phone->idPhonebook->idUser->id_user;
+                $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $campaign->idUser->id_plan;
+                $id_user  = $campaign->idUser->id;
+                $username = $campaign->idUser->username;
+                $id_agent = $campaign->idUser->id_user;
 
                 if ($id_agent > 1) {
                     $id_plan_agent = $id_plan;
@@ -220,7 +220,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $call .= "Priority: 1\n";
                 $call .= "Set:CALLED=" . $extension . "\n";
                 $call .= "Set:USERNAME=" . $username . "\n";
-                $call .= "Set:IDCARD=" . $id_user . "\n";
+                $call .= "Set:IDUSER=" . $id_user . "\n";
                 $call .= "Set:PHONENUMBER_ID=" . $phone->id . "\n";
                 $call .= "Set:PHONENUMBER_CITY=" . $phone->city . "\n";
                 $call .= "Set:CAMPAIGN_ID=" . $campaign->id . "\n";
