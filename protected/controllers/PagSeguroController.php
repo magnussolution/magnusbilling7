@@ -9,6 +9,29 @@ class PagSeguroController extends Controller
     public function actionIndex()
     {
 
+        /*$_POST = array(
+        'ProdValor_1'     => '50.00',
+        'TransacaoID'     => 'WVJ3YK6545HDVC',
+        'tax'             => '0.00',
+        'StatusTransacao' => 'Aprovado',
+        'payment_status'  => 'Completed',
+        'charset'         => 'windows-1252',
+        'first_name'      => 'Anibal',
+        'mc_fee'          => '4.00',
+        'notify_version'  => '3.7',
+        'custom'          => '',
+        'payer_status'    => 'verified',
+        'txn_id'          => '4Y190387AG109562T',
+        'receiver_email'  => 'magnusadilsom@gmail.com',
+        'payment_fee'     => '4.00',
+        'receiver_id'     => 'HVUEC4FXXDVDB',
+        'Referencia'      => '1458545545-user-110',
+        );*/
+
+        if (!isset($_POST) || count($_POST) < 5) {
+            exit;
+        }
+
         $filter = "payment_method = 'Pagseguro'";
         $params = array();
 
@@ -29,28 +52,34 @@ class PagSeguroController extends Controller
             exit;
         }
 
-        $idUser = $modelMethodpay->idUser->id_user;
-        $TOKEN  = $modelMethodpay->pagseguro_TOKEN;
+        $identification = Util::getDataFromMethodPay($_POST['Referencia']);
+        if (!is_array($identification)) {
+            exit;
+        }
+
+        $username = $identification['username'];
+        $id_user  = $identification['id_user'];
+
+        $TOKEN = $modelMethodpay->pagseguro_TOKEN;
         define('TOKEN', $TOKEN);
 
         if (count($_POST) > 0) {
             // POST recebido, indica que é a requisição do NPI.
-            $npi    = new PagSeguroNpi();
-            $result = $npi->notificationPost();
-
+            $npi         = new PagSeguroNpi();
+            $result      = $npi->notificationPost();
             $transacaoID = isset($_POST['TransacaoID']) ? $_POST['TransacaoID'] : '';
 
             if ($result == "VERIFICADO") {
                 $StatusTransacao = $_POST['StatusTransacao'];
                 $monto           = str_replace(",", ".", $_POST['ProdValor_1']);
-                $usuario         = explode("-", $_POST['Referencia']);
-                $usuario         = addslashes(strip_tags(trim($usuario[1])));
                 $description     = "Pagamento confirmado, PAGSEGURO:" . $transacaoID;
 
                 if ($StatusTransacao == 'Aprovado') {
-                    $modelUser = User::model()->find("username = :usuario", array(':usuario' => $usuario));
+
+                    $modelUser = User::model()->findByPk((int) $id_user);
 
                     if (count($modelUser)) {
+                        Yii::log($modelUser->id . ' ' . $monto . ' ' . $description . ' ' . $transacaoID, 'error');
                         UserCreditManager::releaseUserCredit($modelUser->id, $monto, $description, 1, $transacaoID);
                     }
                 }

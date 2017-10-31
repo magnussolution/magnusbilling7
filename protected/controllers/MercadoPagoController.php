@@ -48,14 +48,21 @@ class MercadoPagoController extends CController
         if ($merchant_order_info["status"] == 200) {
 
             if (isset($merchant_order_info["response"]['payments'][0]['status']) && $merchant_order_info["response"]['payments'][0]['status'] == 'approved') {
-                $amount   = $merchant_order_info["response"]['items'][0]['unit_price'];
-                $username = explode("-", $merchant_order_info["response"]['items'][0]['title']);
-                $username = addslashes(strip_tags(trim($username[1])));
+                $amount = $merchant_order_info["response"]['items'][0]['unit_price'];
+
+                $identification = Util::getDataFromMethodPay($merchant_order_info["response"]['items'][0]['title']);
+                if (!is_array($identification)) {
+                    exit;
+                }
+                $username = $identification['username'];
+                $id_user  = $identification['id_user'];
 
                 $code        = $merchant_order_info["response"]['payments'][0]['id'];
                 $description = "Pagamento confirmado, MERCADOPAGO:" . $code;
-                $modelUser   = User::model()->find('username = :key', array(':key', $username));
-                if (count($resultUser) > 0) {
+                $modelUser   = User::model()->findByPk((int) $id_user);
+
+                if (count($resultUser)) {
+                    Yii::log($modelUser->id . ' ' . $amount . ' ' . $description . ' ' . $txn_id, 'error');
                     UserCreditManager::releaseUserCredit($modelUser->id, $amount, $description, 1, $code);
                 }
 

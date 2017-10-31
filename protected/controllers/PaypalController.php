@@ -36,7 +36,7 @@ class PaypalController extends Controller
         'txn_type' => 'web_accept',
         'item_name' => 'user, 44767',
         'mc_currency' => 'USD',
-        'item_number' => '3202',
+        'item_number' => '1458545545-user-110',
         'residence_country' => 'AR',
         'handling_amount' => '0.00',
         'transaction_subject' => 'user, 44767',
@@ -116,10 +116,7 @@ class PaypalController extends Controller
                         if (count($modelUser)) {
                             //checa se o usaurio ja fez pagamentos
                             if ($this->config['global']['paypal_new_user'] == 0) {
-                                $modelRefillCount = Refill::model()->count(array(
-                                    'condition' => 'id_user = :id_user',
-                                    'params'    => array(':id_user', $modelUser->id),
-                                ));
+                                $modelRefillCount = Refill::model()->count('id_user = :key', array(':key' => $modelUser->id));
 
                                 if ($modelRefillCount == 0) {
                                     $mail_subject = "RECURRING SERVICES : PAYPAL";
@@ -133,12 +130,12 @@ class PaypalController extends Controller
                                     fclose($fp);
                                     exit;
                                 } else {
-                                    Yii::log($resultUser[0]['id'] . ' ' . $amount . ' ' . $description . ' ' . $txn_id, 'info');
+                                    Yii::log($modelUser->id . ' ' . $amount . ' ' . $description . ' ' . $txn_id, 'error');
                                     UserCreditManager::releaseUserCredit($modelUser->id, $amount, $description, 1, $txn_id);
                                 }
 
                             } else {
-                                Yii::log($resultUser[0]['id'] . ' ' . $amount . ' ' . $description . ' ' . $txn_id, 'info');
+                                Yii::log($modelUser->id . ' ' . $amount . ' ' . $description . ' ' . $txn_id, 'error');
                                 UserCreditManager::releaseUserCredit($modelUser->id, $amount, $description, 1, $txn_id);
                             }
                         } else {
