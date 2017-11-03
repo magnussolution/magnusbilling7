@@ -22,9 +22,9 @@
 
 class PlanController extends Controller
 {
-    public $attributeOrder     = 't.id';
-    public $extraValues        = array('idUser' => 'username');
-    public $defaultFilter      = 't.id_user = 1';
+    public $attributeOrder = 't.id';
+    public $extraValues    = array('idUser' => 'username');
+
     public $nameModelRelated   = 'ServicesPlan';
     public $nameFkRelated      = 'id_plan';
     public $nameOtherFkRelated = 'id_services';
@@ -36,6 +36,10 @@ class PlanController extends Controller
         $this->titleReport   = Yii::t('yii', 'Plan');
 
         $this->abstractModelRelated = ServicesPlan::model();
+
+        if (Yii::app()->session['isAdmin']) {
+            $this->defaultFilter = 't.id_user = 1';
+        }
         parent::init();
     }
 

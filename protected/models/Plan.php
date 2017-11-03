@@ -58,6 +58,7 @@ class Plan extends Model
             array('id_user, play_audio,techprefix, lcrtype, signup, portabilidadeMobile, portabilidadeFixed', 'numerical', 'integerOnly' => true),
             array('name, ini_credit', 'length', 'max' => 50),
             array('techprefix', 'length', 'max' => 5),
+            array('name', 'unique', 'caseSensitive' => 'false'),
         );
     }
 
