@@ -799,43 +799,26 @@ class BaseController extends CController
 
         $columns = $this->removeColumns($columns);
 
-        $filter     = isset($_GET['filter']) ? $this->createCondition(json_decode($_GET['filter'])) : null;
-        $fieldGroup = json_decode($_GET['group']);
-        $sort       = json_decode($_GET['sort']);
+        $this->setLimit($_GET);
 
-        $arraySort                  = ($sort && $fieldGroup) ? explode(' ', implode(' ', $sort)) : null;
-        $dirGroup                   = $arraySort ? $arraySort[array_search($fieldGroup, $arraySort) + 1] : null;
-        $firstSort                  = $fieldGroup ? $fieldGroup . ' ' . $dirGroup . ',' : null;
-        $sort                       = $sort ? $firstSort . implode(',', $sort) : null;
-        $sort                       = $this->replaceOrder();
-        $this->filter               = $filter               = $this->extraFilter($filter);
-        $this->magnusFilesDirectory = '/var/www/tmpmagnus/';
-        $this->nameFileReport       = $this->modelName . '_' . time();
-        $pathCsv                    = $this->magnusFilesDirectory . $this->nameFileReport . '.csv';
+        $this->setStart($_GET);
 
-        $sql = "SELECT " . $this->getColumnsFromReport($columns) . " INTO OUTFILE '" . $this->magnusFilesDirectory . $this->nameFileReport . ".csv'
-        FIELDS TERMINATED BY '\;' LINES TERMINATED BY '\n'
-        FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
+        $this->setSort();
 
-        $command = Yii::app()->db->createCommand($sql);
-        if (count($this->paramsFilter)) {
-            foreach ($this->paramsFilter as $key => $param) {
-                $command->bindValue($key, $param, PDO::PARAM_STR);
-            }
+        $this->order = 't.id ASC';
 
-        }
+        $this->filter = isset($_GET['filter']) ? $this->createCondition(json_decode($_GET['filter'])) : null;
 
-        $command->execute();
+        $this->applyFilterToLimitedAdmin();
+        $this->showAdminLog();
 
-        header('Content-type: application/csv');
-        header('Content-Disposition: inline; filename="' . $this->nameFileReport . '.csv"');
-        header('Content-Transfer-Encoding: binary');
-        header('Accept-Ranges: bytes');
-        ob_clean();
-        flush();
-        if (readfile($pathCsv)) {
-            unlink($pathCsv);
-        }
+        CsvExport::export(
+            $this->abstractModel->findAll($this->readModel()),
+            $columns,
+            true, // boolPrintRows
+            $this->modelName . '_' . time() . '.csv'
+        );
+
     }
 
     /**
