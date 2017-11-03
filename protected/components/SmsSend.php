@@ -185,7 +185,7 @@ class SmsSend
             $modelCall                   = new Call();
             $modelCall->sessionid        = $sessionid;
             $modelCall->uniqueid         = $uniqueid;
-            $modelCall->id_user          = $modelUser->id_user;
+            $modelCall->id_user          = $modelUser->id;
             $modelCall->starttime        = $date_msn;
             $modelCall->stoptime         = $date_msn;
             $modelCall->sessiontime      = $sessionTime;
