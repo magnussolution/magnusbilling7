@@ -270,12 +270,13 @@ class AtaController extends Controller
             $xml .= '<Speed_Dial_9_2_ ua="na">' . $modelSipuras->Speed_Dial_9_2_ . '</Speed_Dial_9_2_>';
 
             //ANTIRESET
-            if ($modelSipuras->antireset == 'yes') {
+            if ($modelSipuras->antireset == '1') {
                 $xml .= '<Protect_IVR_FactoryReset ua="na">Yes</Protect_IVR_FactoryReset>';
+            } else {
+                $xml .= '<Protect_IVR_FactoryReset ua="na">No</Protect_IVR_FactoryReset>';
             }
-            if ($modelSipuras->senha_admin == '') {
-                $xml .= '<Admin_Passwd ua="na">' . $modelSipuras->senha_admin . '</Admin_Passwd>';
-            }
+
+            $xml .= '<Admin_Passwd ua="na">' . $modelSipuras->senha_admin . '</Admin_Passwd>';
 
             $xml .= '</flat-profile>';
 
