@@ -69,9 +69,10 @@ class DiddestinationController extends Controller
 
     public function beforeSave($values)
     {
-        $values['voip_call'] = isset($values['voip_call']) ? $values['voip_call'] : 1;
 
         if ($this->isNewRecord) {
+            $values['voip_call'] = isset($values['voip_call']) ? $values['voip_call'] : 1;
+
             $did       = Did::model()->findByPk($values['id_did']);
             $modelUser = User::model()->findByPk($values['id_user']);
 
