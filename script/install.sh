@@ -912,10 +912,12 @@ messages => notice,warning,error
 
 " > /etc/asterisk/logger.conf
 
+cp -Rf /tmp/fail2ban/build/fail2ban.service /usr/lib/systemd/system/fail2ban.service
+
 mkdir /var/run/fail2ban/
 asterisk -rx "module reload logger"
-systemctl enable fail2ban 
-systemctl restart fail2ban 
+systemctl enable fail2ban.service 
+systemctl restart fail2ban.service 
 iptables -L -v
 
 php /var/www/html/mbilling/cron.php updatemysql

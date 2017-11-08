@@ -262,7 +262,7 @@ class UserController extends Controller
                     $modelSip->defaultuser  = $model->username;
                     $modelSip->secret       = $model->password;
                     $modelSip->videosupport = 'no';
-                    $modelSip->videosupport = 'billing';
+                    $modelSip->context      = 'billing';
                 }
 
                 $modelSip->save();
