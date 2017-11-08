@@ -66,9 +66,7 @@ class BackupController extends Controller
         }
 
         $file = $_GET['file'];
-
-        $magnusFilesDirectory = '/usr/local/src/';
-        $path                 = $magnusFilesDirectory . $file;
+        $path = $this->diretory . $file;
 
         header('Content-type: application/csv');
         header('Content-Disposition: inline; filename="' . $file . '"');
@@ -125,7 +123,16 @@ class BackupController extends Controller
         if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
             exit;
         }
-        LinuxAccess::exec("php /var/www/html/mbilling/cron.php Backup");
+        $dbString = explode('dbname=', Yii::app()->db->connectionString);
+        $dataBase = end($dbString);
+
+        $username = Yii::app()->db->username;
+        $password = Yii::app()->db->password;
+        $data     = date("d-m-Y");
+        $comando  = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed > /tmp/base.sql";
+        LinuxAccess::exec($comando);
+        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_Magnus.$data.tgz /tmp/base.sql /etc/asterisk");
+        LinuxAccess::exec("rm -f /tmp/base.sql");
 
         echo json_encode(array(
             $this->nameSuccess => $this->success,
@@ -146,7 +153,7 @@ class BackupController extends Controller
         ini_set("max_execution_time", "-1");
         if (isset($_FILES['file']['tmp_name'])) {
 
-            $uploadfile = "/usr/local/src/" . $_FILES['file']['name'];
+            $uploadfile = $this->diretory . $_FILES['file']['name'];
             Yii::log($uploadfile, 'info');
             move_uploaded_file($_FILES["file"]["tmp_name"], $uploadfile);
         }
