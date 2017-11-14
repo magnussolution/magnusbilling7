@@ -350,7 +350,7 @@ class Magnus
 
         $credit_cur = $credit / $mycur;
 
-        list($units, $cents) = split('[.]', sprintf('%01.2f', $credit_cur));
+        list($units, $cents) = pre_split('/\[\.\]/', sprintf('%01.2f', $credit_cur));
 
         $agi->verbose("[BEFORE: $credit_cur SPRINTF : " . sprintf('%01.2f', $credit_cur) . "]", 10);
 
@@ -435,7 +435,7 @@ class Magnus
         $mycur      = 1;
         $credit_cur = $rate / $mycur;
 
-        list($units, $cents) = split('[.]', sprintf('%01.3f', $credit_cur));
+        list($units, $cents) = pre_split('/\[\.\]/', sprintf('%01.3f', $credit_cur));
 
         if (substr($cents, 2) > 0) {
             $point = substr($cents, 2);
@@ -630,11 +630,11 @@ class Magnus
 
         //$this->prefix_local = "0/54,*/5511/8,15/549342/9";
 
-        $regexs = split(",", $this->prefix_local);
+        $regexs = preg_split("/,/", $this->prefix_local);
 
         foreach ($regexs as $key => $regex) {
 
-            $regra   = split('/', $regex);
+            $regra   = preg_split('/\//', $regex);
             $grab    = $regra[0];
             $replace = isset($regra[1]) ? $regra[1] : '';
             $digit   = isset($regra[2]) ? $regra[2] : '';
