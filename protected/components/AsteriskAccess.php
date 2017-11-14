@@ -348,7 +348,7 @@ class AsteriskAccess
         }
         return $channels;
     }
-    public function getCoreShowChannel($channel)
+    public static function getCoreShowChannel($channel)
     {
 
         $modelServers = Servers::model()->getAllAsteriskServers();

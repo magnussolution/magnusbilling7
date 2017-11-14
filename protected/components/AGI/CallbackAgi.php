@@ -152,7 +152,7 @@ class CallbackAgi
 
     }
 
-    public function chargeFistCall($agi, $MAGNUS, $Calc, $sessiontime = 0)
+    public static function chargeFistCall($agi, $MAGNUS, $Calc, $sessiontime = 0)
     {
 
         if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
