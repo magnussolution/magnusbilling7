@@ -333,7 +333,7 @@ class BaseController extends CController
      */
     public function actionRead($asJson = true, $condition = null)
     {
-        //$this->checkActionAccess(array(), $this->instanceModel->getModule(),'canRead');
+        $this->checkActionAccess(array(), $this->instanceModel->getModule(), 'canRead');
 
         $this->beforeRead($_GET);
 
@@ -482,7 +482,7 @@ class BaseController extends CController
             $values = $this->beforeSave($values);
         }
 
-        $this->checkActionAccess($values, $module, $this->isNewRecord == true ? 'canUpdate' : 'canCreate');
+        $this->checkActionAccess($values, $module, $this->isNewRecord == true ? 'canCreate' : 'canUpdate');
 
         $this->hidenInvisibleField($values);
 
