@@ -149,11 +149,11 @@ class SipController extends Controller
             } elseif ($type == 'save') {
                 if ($this->isNewRecord) {
                     $sql = "INSERT INTO $dbname.$table (username,domain,ha1,accountcode) VALUES
-							('$values->defaultuser,'$hostname','" . md5($values->defaultuser . ':' . $hostname . ':' . $values->secret) . "','$values->accountcode')";
+                            ('$values->defaultuser,'$hostname','" . md5($values->defaultuser . ':' . $hostname . ':' . $values->secret) . "','$values->accountcode')";
                     $con->createCommand($sql)->execute();
                 } else {
                     $sql = "UPDATE $dbname.$table SET ha1 = '" . md5($values->defaultuser . ':' . $hostname . ':' . $values->secret) . "',
-							username = '$values->defaultuser' WHERE username = '$values->defaultuser'";
+                            username = '$values->defaultuser' WHERE username = '$values->defaultuser'";
                     $con->createCommand($sql)->execute();
                 }
             }
@@ -167,7 +167,7 @@ class SipController extends Controller
             $attributes[$i]['lineStatus'] = 'unregistered';
             foreach ($this->sipShowPeers as $value) {
 
-                if ($value['Name/username'] == $attributes[$i]['name'] . '/' . $attributes[$i]['name']) {
+                if (strtok($value['Name/username'], '/') == $attributes[$i]['name']) {
                     $attributes[$i]['lineStatus'] = $value['Status'];
                 }
             }
