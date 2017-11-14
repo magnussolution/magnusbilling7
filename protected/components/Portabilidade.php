@@ -50,26 +50,24 @@ class Portabilidade
                 } else {
                     if ($is_mobile && strlen($ddd) == 10 && substr($ddd, 2, 1) == 7) {
                         //verifico se é radio
-                        $sql     = "SELECT company FROM pkg_portabilidade_prefix  WHERE number = :number LIMIT 1";
-                        $command = $conn->prepare($sql);
-                        $command->bindValue(":number", substr($ddd, 0, 6), PDO::PARAM_STR);
-                        $command->execute();
-                        $row = $command->fetchAll(PDO::FETCH_ASSOC);
+                        $sql     = "SELECT company FROM pkg_portabilidade_prefix  WHERE number = :key LIMIT 1";
+                        $command = Yii::app()->db->createCommand($sql);
+                        $command->bindValue(":key", substr($ddd, 0, 6), PDO::PARAM_STR);
+                        $result = $command->queryAll();
 
                         $radiosRn1 = array('55377,55390,55391');
 
                         //se nao for radio, adiciono o 9º digito
-                        if (!count($row) || !in_array($row[0]['company'], $radiosRn1)) {
+                        if (!count($result) || !in_array($row[0]['company'], $radiosRn1)) {
                             $ddd = substr($ddd, 0, 2) . 9 . substr($ddd, 2);
                         }
 
                     }
 
                     $sql     = "SELECT company FROM pkg_portabilidade  WHERE number = :key ORDER BY id DESC LIMIT 1";
-                    $command = $conn->prepare($sql);
+                    $command = Yii::app()->db->createCommand($sql);
                     $command->bindValue(":key", $ddd, PDO::PARAM_STR);
-                    $command->execute();
-                    $result = $command->fetchAll(PDO::FETCH_ASSOC);
+                    $result = $command->queryAll();
 
                     if (count($result) && isset($result[0]['company'])) {
                         $destination = preg_replace("/^55/", '1111', $result[0]['company']) . $destination;
