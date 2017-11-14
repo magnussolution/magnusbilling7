@@ -63,8 +63,8 @@ class User extends Model
         return array(
             array('username, password', 'required'),
             array('id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
-				 	typepaid, creditlimit, credit_notification,sipaccountlimit, restriction, callingcard_pin, callshop, plan_day,
-					record_call, active_paypal, boleto, boleto_day, calllimit, disk_space,id_group_agent', 'numerical', 'integerOnly' => true),
+                    typepaid, creditlimit, credit_notification,sipaccountlimit, restriction, callingcard_pin, callshop, plan_day,
+                    record_call, active_paypal, boleto, boleto_day, calllimit, disk_space,id_group_agent', 'numerical', 'integerOnly' => true),
             array('language,mix_monitor_format', 'length', 'max' => 5),
             array('username, zipcode, phone, mobile, vat', 'length', 'max' => 20),
             array('city, state, country, loginkey', 'length', 'max' => 40),
@@ -86,7 +86,7 @@ class User extends Model
             $this->addError($attribute, Yii::t('yii', 'No space allow in username'));
         }
 
-        if (!preg_match('/^[1-9]|^[A-Z]|^[a-z]/', $this->username)) {
+        if (!preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->username)) {
             $this->addError($attribute, Yii::t('yii', 'Username need start with numbers or letters'));
         }
 
