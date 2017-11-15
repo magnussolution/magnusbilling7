@@ -283,9 +283,13 @@ class BaseController extends CController
             echo '$this->relationFilter = ';
             print_r($this->relationFilter);
             echo "<br><br>";
+            print_r($this->limit);
+            echo "<br><br>";
+            print_r($this->start);
+            echo "<br><br>";
             exit;
         }
-        if (strlen($this->filter) > 1 && $this->defaultFilter == 1 && $this->start > 0) {
+        if (strlen($this->filter) > 1 && $this->defaultFilter == 1 && $this->start > 0 && !Yii::app()->session['isClient']) {
             $this->start = 0;
             $this->limit = 25;
         }
