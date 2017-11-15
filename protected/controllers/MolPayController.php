@@ -71,24 +71,28 @@ class MolPayController extends Controller
 
                 Yii::log(print_r($status . 'OK 00', true), 'error');
 
-                $usuario = explode("-", $orderid);
-                $usuario = addslashes(strip_tags(trim($usuario[1])));
-                $status  = $_POST['status'];
-                $amount  = str_replace(",", ".", $amount);
-                $amount  = $amount * 0.9434;
+                $identification = Util::getDataFromMethodPay($orderid);
+                if (!is_array($identification)) {
+                    exit;
+                }
+
+                $username = $identification['username'];
+                $id_user  = $identification['id_user'];
+                $status   = $_POST['status'];
+                $amount   = str_replace(",", ".", $amount);
+                $amount   = $amount * 0.9434;
 
                 $description = "Received via MOLPAY:" . $tranID;
                 Yii::log(print_r($description, true), 'error');
 
-                Yii::log('usuario=' . $usuario . ', Valor = ' . $amount, 'error');
-                $modelUser = User::model()->find(
-                    "username = :usuario",
-                    array(
-                        ':usuario' => $usuario)
-                );
+                Yii::log('username=' . $username . ', amount = ' . $amount, 'error');
+                $modelUser = User::model()->findByPk((int) $id_user);
 
                 if (count($modelUser)) {
                     UserCreditManager::releaseUserCredit($modelUser->id, $amount, $description, 1, $tranID);
+                    echo "<p align='center'> <font color=red font face='verdana' size='5pt'>Your payment was completed.</font> </p>";
+                    echo "<p align='center'> <font color=red font face='verdana' size='5pt'>You may close this window and get back to your account.</font> </p>";
+                    echo "<p align='center'> <font color=red font face='verdana' size='5pt'>Thank You</font> </p>";
                 }
 
             } else {
