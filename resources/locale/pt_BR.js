@@ -1,4 +1,5 @@
 Locale.load({
+    'This option is exclusive to users': 'Esta opção é exclusiva para usuários',
     'Insert the space available to record in GB. Use -1 to unlimit': 'Espaco em GB para espaço disponivel para gravaçōes. Use -1 para ilimitado',
     'Insert the space available to record in GB.': 'Espaco em GB para gravaçōes.',
     'It is used to change the dialing number.': 'Esta opção é para permitir a discagem de forma local e 0DDDnumero',
