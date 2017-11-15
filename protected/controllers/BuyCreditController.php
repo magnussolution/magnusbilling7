@@ -30,7 +30,7 @@ class BuyCreditController extends Controller
         if ($modelMethodPay->max > 0 && $_GET['amount'] > $modelMethodPay->max) {
             exit(Yii::t('yii', 'The maximum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('yii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max);
         } elseif ($modelMethodPay->min > 0 && $_GET['amount'] < $modelMethodPay->min) {
-            exit(Yii::t('yii', 'The minimal amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('yii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
+            exit(Yii::t('yii', 'The minimum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('yii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
         }
 
         $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
