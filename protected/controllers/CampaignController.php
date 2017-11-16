@@ -180,7 +180,9 @@ class CampaignController extends Controller
 
         $creationdate = $_POST['startingdate'] . ' ' . $_POST['startingtime'];
 
-        $name        = Yii::app()->session['username'] . '_' . $creationdate;
+        $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
+
+        $name        = $modelUser->username . '_' . $creationdate;
         $description = isset($_POST['sms_text']) ? $_POST['sms_text'] : false;
 
         $type = $_POST['type'] == 'CALL' ? 1 : 0;
@@ -189,7 +191,8 @@ class CampaignController extends Controller
         $modelCampaign->name             = $name;
         $modelCampaign->startingdate     = $creationdate;
         $modelCampaign->expirationdate   = '2030-01-01 00:00:00';
-        $modelCampaign->id_user          = Yii::app()->session['id_user'];
+        $modelCampaign->id_user          = $modelUser->id;
+        $modelCampaign->id_plan          = $modelUser->id_plan;
         $modelCampaign->type             = $type;
         $modelCampaign->description      = $description;
         $modelCampaign->frequency        = 10;
@@ -198,7 +201,7 @@ class CampaignController extends Controller
         $id_campaign = $modelCampaign->getPrimaryKey();
 
         $modelPhoneBook          = new PhoneBook();
-        $modelPhoneBook->id_user = Yii::app()->session['id_user'];
+        $modelPhoneBook->id_user = $modelUser->id;
         $modelPhoneBook->name    = $name;
         $modelPhoneBook->status  = 1;
         $modelPhoneBook->save();
