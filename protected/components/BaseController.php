@@ -157,13 +157,7 @@ class BaseController extends CController
         );
         $startSession = strlen(session_id()) < 1 ? session_start() : null;
 
-        if (!isset(Yii::app()->session['language'])) {
-
-            Yii::app()->session['language'] = $this->config['global']['base_language'];
-            Yii::app()->language            = Yii::app()->sourceLanguage            = isset(Yii::app()->session['language'])
-            ? Yii::app()->session['language']
-            : Yii::app()->language;
-        }
+        Yii::app()->language = Yii::app()->sourceLanguage = $this->config['global']['base_language'];
 
         parent::init();
     }

@@ -21,13 +21,11 @@ $configFile = '/etc/asterisk/res_config_mysql.conf';
 $array      = parse_ini_file($configFile);
 
 return array(
-    'basePath'       => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name'           => 'MagnusBilling',
-    'preload'        => array('log'),
-    'language'       => 'pt_BR',
-    'sourceLanguage' => 'pt_BR',
+    'basePath'   => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+    'name'       => 'MagnusBilling',
+    'preload'    => array('log'),
     # autoload das models e componentes
-    'import'         => array(
+    'import'     => array(
         'application.models.*',
         'application.components.*',
         'application.components.AGI.*',
@@ -37,7 +35,7 @@ return array(
         'ext.fpdf.FPDF',
     ),
     # application components
-    'components'     => array(
+    'components' => array(
         # criacao de urls amigaveis
         'urlManager'   => array(
             'urlFormat' => 'path',
