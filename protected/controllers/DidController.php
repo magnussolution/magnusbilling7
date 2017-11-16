@@ -201,22 +201,29 @@ class DidController extends Controller
 
     public function actionLiberar()
     {
-        if (isset($_POST['id'])) {
+        if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 
             $id = json_decode($_POST['id']);
 
-            $modelDid           = Did::model()->findByPk((int) $id);
-            $modelDid->reserved = 0;
-            $modelDid->id_user  = null;
-            $modelDid->save();
+            Did::model()->updateByPk(
+                $id,
+                array(
+                    'reserved' => 0,
+                    'id_user'  => null,
+                ));
 
-            $modelDidDestination = DidDestination::model()->deleteAll("id_did = :id_did", array(':id_did' => $id));
+            DidDestination::model()->deleteAll("id_did = :key", array(':key' => $id));
 
-            $modelDidUse = DidUse::model()->find("id_did = :id_did AND releasedate = '0000-00-00 00:00:00' AND status = 1",
-                array(':id_did' => $id));
-            $modelDidUse->releasedate = date('Y-m-d H:i:s');
-            $modelDidUse->status      = 0;
-            $modelDidUse->save();
+            DidUse::model()->updateAll(
+                array(
+                    'releasedate' => date('Y-m-d H:i:s'),
+                    'status'      => 0,
+                ),
+                'id_did = :key AND releasedate = :key1 AND status = 1',
+                array(
+                    ':key'  => $id,
+                    ':key1' => '0000-00-00 00:00:00',
+                ));
 
             echo json_encode(array(
                 $this->nameSuccess => true,

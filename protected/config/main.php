@@ -30,6 +30,7 @@ return array(
     'import'         => array(
         'application.models.*',
         'application.components.*',
+        'application.components.AGI.*',
         'ext.yii-mail.YiiMailMessage',
         'ext.phpAGI.AGI',
         'ext.phpAGI.AGI_AsteriskManager',
