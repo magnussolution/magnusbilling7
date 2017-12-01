@@ -156,7 +156,7 @@ class AsteriskAccess
                     }
 
                     //registrar tronco
-                    if ($key == 'register_string' && preg_match("/^.{3}.*:.{3}.*@.{5}.*\/.{3}.*/", $data['register_string'])) {
+                    if ($key == 'register_string' && preg_match("/^.{3}.*:.{3}.*@.{5}.*/", $data['register_string'])) {
                         $registerLine .= 'register=>' . $data['register_string'] . "\n";
                     } elseif ($key == 'encryption' && $option == 'no') {
                         continue;
