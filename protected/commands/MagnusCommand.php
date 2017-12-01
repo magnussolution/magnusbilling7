@@ -66,6 +66,12 @@ class MagnusCommand extends CConsoleCommand
             $MAGNUS->agiconfig['number_try'] = 3;
         }
 
+        if ($agi->get_variable("MEMBERNAME", true) || $agi->get_variable("QUEUEPOSITION", true)) {
+            $agi->answer();
+            $Calc->init();
+            QueueAgi::recIvrQueue($agi, $MAGNUS, $Calc, $result_did);
+        }
+
         if ($agi->get_variable("PHONENUMBER_ID", true) > 0 && $agi->get_variable("CAMPAIGN_ID", true) > 0) {
             $MAGNUS->mode = 'massive-call';
             MassiveCall::send($agi, $MAGNUS, $Calc);
@@ -79,12 +85,6 @@ class MagnusCommand extends CConsoleCommand
             $agi->stream_file('prepaid-final', '#');
             $MAGNUS->hangup($agi);
             exit;
-        }
-
-        if ($agi->get_variable("MEMBERNAME", true) || $agi->get_variable("QUEUEPOSITION", true)) {
-            $agi->answer();
-            $Calc->init();
-            QueueAgi::recIvrQueue($agi, $MAGNUS, $Calc, $result_did);
         }
 
         $didAgi = new DidAgi();

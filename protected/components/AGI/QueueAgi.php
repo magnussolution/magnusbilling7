@@ -20,7 +20,7 @@
 
 class QueueAgi
 {
-    public function callQueue(&$agi, &$MAGNUS, &$Calc, $modelDestination, &$DidAgi = null, $type = 'queue')
+    public function callQueue(&$agi, &$MAGNUS, &$Calc, $modelDestination, $DidAgi = null, $type = 'queue')
     {
         $agi->verbose("Queue module", 5);
 

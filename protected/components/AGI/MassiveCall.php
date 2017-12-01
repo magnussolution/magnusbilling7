@@ -182,17 +182,17 @@ class MassiveCall
                 }
             } elseif ($forwardOptionType == 'queue') {
 
-                $modelDestination           = new modelDestination();
-                $modelDestination->id_queue = $forwardOption[1];
-                $modelDestination->did      = $destination;
+                $modelDiddestination             = new Diddestination();
+                $modelDiddestination->id_queue   = $forwardOption[1];
+                $modelDiddestination->idDid->did = $destination;
                 $agi->set_variable("CALLERID(num)", $destination);
                 $agi->set_callerid($destination);
-                QueueAgi::callQueue($agi, $MAGNUS, $Calc, $modelDestination, 'torpedo');
+                QueueAgi::callQueue($agi, $MAGNUS, $Calc, $modelDestination, null, 'torpedo');
             } elseif ($forwardOptionType == 'ivr') {
-                $modelDestination         = new modelDestination();
-                $modelDestination->id_ivr = $forwardOption[1];
-                $modelDestination->did    = $destination;
-                Ivr::callIvr($agi, $MAGNUS, $Calc, $modelDestination, 'torpedo');
+                $modelDiddestination             = new Diddestination();
+                $modelDiddestination->id_ivr     = $forwardOption[1];
+                $modelDiddestination->idDid->did = $destination;
+                Ivr::callIvr($agi, $MAGNUS, $Calc, $modelDestination, null, 'torpedo');
             } elseif ($forwardOptionType == 'group') {
 
                 $agi->verbose("Call group $group ", 25);
