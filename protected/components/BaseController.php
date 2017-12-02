@@ -1187,7 +1187,6 @@ class BaseController extends CController
             } else {
                 $comparison = null;
             }
-
             switch ($type) {
                 case 'string':
                     $field = isset($f->caseSensitive) && $f->caseSensitive && !is_array($field) ? "BINARY $field" : $field;
@@ -1195,11 +1194,14 @@ class BaseController extends CController
                     switch ($comparison) {
                         case 'st':
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter = array(
-                                    strtok($field, '.') => array(
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
                                         'condition' => "$field LIKE :$paramName",
-                                    ),
-                                );
+                                    );
+                                }
+
                             } else {
                                 $condition .= " AND $field LIKE :$paramName";
                             }
@@ -1208,16 +1210,20 @@ class BaseController extends CController
 
                             break;
                         case 'ed':
-                            $this->paramsFilter[$paramName] = "%$value";
+
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter = array(
-                                    strtok($field, '.') => array(
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
                                         'condition' => "$field LIKE :$paramName",
-                                    ),
-                                );
+                                    );
+                                }
                             } else {
                                 $condition .= " AND $field LIKE :$paramName";
                             }
+
+                            $this->paramsFilter[$paramName] = "%$value";
 
                             break;
                         case 'ct':
@@ -1233,40 +1239,50 @@ class BaseController extends CController
                                 $conditionsOr = implode(' OR ', $conditionsOr);
                                 $condition .= " AND ($conditionsOr)";
                             } else {
-                                $this->paramsFilter[$paramName] = "%$value%";
+
                                 if (preg_match("/^id[A-Z].*\./", $field)) {
-                                    $this->relationFilter = array(
-                                        strtok($field, '.') => array(
+
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
                                             'condition' => "$field LIKE :$paramName",
-                                        ),
-                                    );
+                                        );
+                                    }
                                 } else {
                                     $condition .= " AND $field LIKE :$paramName";
                                 }
 
+                                $this->paramsFilter[$paramName] = "%$value%";
+
                             }
                             break;
                         case 'eq':
-                            $this->paramsFilter[$paramName] = $value;
+
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter = array(
-                                    strtok($field, '.') => array(
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
                                         'condition' => "$field = :$paramName",
-                                    ),
-                                );
+                                    );
+                                }
                             } else {
                                 $condition .= " AND $field = :$paramName";
                             }
 
+                            $this->paramsFilter[$paramName] = $value;
                             break;
                         case 'df':
                             $this->paramsFilter[$paramName] = $value;
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter = array(
-                                    strtok($field, '.') => array(
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field != :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
                                         'condition' => "$field != :$paramName",
-                                    ),
-                                );
+                                    );
+                                }
                             } else {
                                 $condition .= " AND $field != :$paramName";
                             }
@@ -1284,9 +1300,13 @@ class BaseController extends CController
                     switch ($comparison) {
                         case 'eq':
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter[strtok($field, '.')] = array(
-                                    'condition' => "$field = :$paramName",
-                                );
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field = :$paramName",
+                                    );
+                                }
                             } else {
                                 $condition .= " AND $field = :$paramName";
                             }
@@ -1294,9 +1314,13 @@ class BaseController extends CController
                             break;
                         case 'lt':
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter[strtok($field, '.')] = array(
-                                    'condition' => "$field < :$paramName",
-                                );
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field < :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field < :$paramName",
+                                    );
+                                }
                             } else {
                                 $condition .= " AND $field < :$paramName";
                             }
@@ -1304,9 +1328,13 @@ class BaseController extends CController
                             break;
                         case 'gt':
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                $this->relationFilter[strtok($field, '.')] = array(
-                                    'condition' => "$field > :$paramName",
-                                );
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field > :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field > :$paramName",
+                                    );
+                                }
                             } else {
                                 $condition .= " AND $field > :$paramName";
                             }
@@ -1592,11 +1620,13 @@ class BaseController extends CController
     public function extraFilterCustomAgent($filter)
     {
         //se é agente filtrar pelo user.id_user
-        $this->relationFilter = array(
-            'idUser' => array(
+        if (array_key_exists('idUser', $this->relationFilter)) {
+            $this->relationFilter['idUser']['condition'] .= " AND idUser.id_user LIKE :agfby";
+        } else {
+            $this->relationFilter['idUser'] = array(
                 'condition' => "idUser.id_user LIKE :agfby",
-            ),
-        );
+            );
+        }
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
 
         return $filter;
