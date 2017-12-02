@@ -834,8 +834,7 @@ class BaseController extends CController
         $namePk       = $this->abstractModel->primaryKey();
         $arrayPkAlias = explode('.', $this->abstractModel->primaryKey());
         $ids          = array();
-
-        $values = $this->beforeDestroy($values);
+        $values       = $this->beforeDestroy($values);
         if ((isset($_POST['filter']) && strlen($_POST['filter']) > 0)) {
             $filter = isset($_POST['filter']) ? $_POST['filter'] : null;
             $filter = $filter ? $this->createCondition(json_decode($filter)) : $this->defaultFilter;
@@ -846,6 +845,7 @@ class BaseController extends CController
                 'condition' => $this->filter,
                 'with'      => $this->relationFilter,
                 'params'    => $this->paramsFilter,
+                'with'      => $this->relationFilter,
             ));
 
             # retorna o resultado da execucao
