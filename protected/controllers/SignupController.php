@@ -73,9 +73,9 @@ class SignupController extends Controller
             unset($_POST['Signup']['ini_credit']);
 
             $signup->typepaid = 0;
-            $signup->language = Yii::app()->session['language'] == 'pt_BR'
+            $signup->language = $this->config['global']['base_language'] == 'pt_BR'
             ? 'br'
-            : Yii::app()->session['language'];
+            : $this->config['global']['base_language'];
 
             $signup->attributes   = $_POST['Signup'];
             $signup->company_name = isset($_POST['Signup']['company_name']) ? $_POST['Signup']['company_name'] : '';

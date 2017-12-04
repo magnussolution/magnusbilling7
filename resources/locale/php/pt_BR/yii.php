@@ -1,6 +1,7 @@
 <?php
 return array(
     /*new '' => '', */
+    'Terms'                                                                                                                                                                            => 'Termos',
     'No space allow in name'                                                                                                                                                           => 'Não usar espaçoes no nome',
     'You cannot EDIT your account.'                                                                                                                                                    => 'Você não pode editar sua propria conta de revenda',
     'company_name'                                                                                                                                                                     => 'Empresa',
