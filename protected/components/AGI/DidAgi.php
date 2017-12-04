@@ -411,7 +411,11 @@ class DidAgi
             $this->sell_price = $selling_rate;
         }
 
-        if ($this->sell_price > 0 && $this->modelDestination[0]->idDid->idUser->credit <= 0) {
+        $credit = $this->modelDestination[0]->idDid->idUser->typepaid == 1
+        ? $this->modelDestination[0]->idDid->idUser->credit + $this->modelDestination[0]->idDid->idUser->creditlimit
+        : $this->modelDestination[0]->idDid->idUser->credit;
+
+        if ($this->sell_price > 0 && $credit <= 0) {
             $agi->verbose(" USER NO CREDIT FOR CALL " . $username, 10);
             $MAGNUS->hangup($agi);
         }
