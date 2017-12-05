@@ -100,23 +100,21 @@ class TrunkController extends Controller
     }
     public function setAttributesModels($attributes, $models)
     {
-        if ($_SERVER['HTTP_HOST'] != 'localhost') {
-            $trunkRegister = AsteriskAccess::instance()->sipShowRegistry();
-            $trunkRegister = explode("\n", $trunkRegister['data']);
+        $trunkRegister = AsteriskAccess::instance()->sipShowRegistry();
+        $trunkRegister = explode("\n", $trunkRegister['data']);
 
-            for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
-                $modelTrunk                                = Trunk::model()->findByPk((int) $attributes[$i]['failover_trunk']);
-                $attributes[$i]['failover_trunktrunkcode'] = count($modelTrunk)
-                ? $modelTrunk->trunkcode
-                : Yii::t('yii', 'undefined');
-                foreach ($trunkRegister as $key => $trunk) {
-                    if (preg_match("/" . $attributes[$i]['host'] . ".*" . $attributes[$i]['username'] . ".*Registered/", $trunk) && $attributes[$i]['providertech'] == 'sip') {
-                        $attributes[$i]['registered'] = 1;
-                        break;
-                    }
+        for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
+            $modelTrunk                                = Trunk::model()->findByPk((int) $attributes[$i]['failover_trunk']);
+            $attributes[$i]['failover_trunktrunkcode'] = count($modelTrunk)
+            ? $modelTrunk->trunkcode
+            : Yii::t('yii', 'undefined');
+            foreach ($trunkRegister as $key => $trunk) {
+                if (preg_match("/" . $attributes[$i]['host'] . ".*" . $attributes[$i]['username'] . ".*Registered/", $trunk) && $attributes[$i]['providertech'] == 'sip') {
+                    $attributes[$i]['registered'] = 1;
+                    break;
                 }
-
             }
+
         }
 
         return $attributes;
@@ -126,9 +124,6 @@ class TrunkController extends Controller
 
     public function generateSipFile()
     {
-        if ($_SERVER['HTTP_HOST'] != 'localhost') {
-            return;
-        }
 
         $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption';
         $model  = Trunk::model()->findAll(
