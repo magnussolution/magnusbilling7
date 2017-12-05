@@ -68,7 +68,12 @@ class AsteriskAccess
 
     public function hangupRequest($channel)
     {
-        return $this->asmanager->Command("hangup request " . $channel);
+        $modelServers = Servers::model()->getAllAsteriskServers();
+        $channels     = array();
+        foreach ($modelServers as $key => $server) {
+            AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->hangupChannel($channel);
+            $this->asmanager->Command("hangup request " . $channel);
+        }
     }
 
     public function sipReload()
