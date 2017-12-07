@@ -98,8 +98,8 @@ class Queue extends Model
     public function updateQueueStatus($operator, $id_queue, $oldtime, $uniqueid)
     {
         $sql = "UPDATE pkg_queue_status SET status = 'answered', id_agent =
-				(SELECT id FROM pkg_queue_agent_status WHERE agentName = :key AND id_queue = :key1),
-					oldtime = :key2  WHERE callId = :key3 ";
+                (SELECT id FROM pkg_queue_agent_status WHERE agentName = :key AND id_queue = :key1),
+                    oldtime = :key2  WHERE callId = :key3 ";
         $command = Yii::app()->db->createCommand($sql);
         $command->bindValue(":key", $operator, PDO::PARAM_STR);
         $command->bindValue(":key1", $id_queue, PDO::PARAM_INT);
@@ -109,25 +109,25 @@ class Queue extends Model
     }
     public function getQueueStatus($id)
     {
-        $sql     = "SELECT * FROM pkg_queue_status WHERE id_agent = :id_agent";
+        $sql     = "SELECT * FROM pkg_queue_status WHERE id_agent = :key";
         $command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(":id_agent", $id, PDO::PARAM_STR);
+        $command->bindValue(":key", $id, PDO::PARAM_STR);
         return $command->queryAll();
     }
 
     public function getQueueAgentStatus($id)
     {
-        $sql     = "SELECT agentName FROM pkg_queue_agent_status WHERE id = :id";
+        $sql     = "SELECT agentName FROM pkg_queue_agent_status WHERE id = :key";
         $command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(":id_agent", $id, PDO::PARAM_STR);
+        $command->bindValue(":key", $id, PDO::PARAM_STR);
         return $command->queryAll();
     }
 
     public function insertQueueStatus($id_queue, $uniqueid, $queueName, $callerId, $channel)
     {
         $sql = "INSERT INTO pkg_queue_status (id_queue, callId, queue_name, callerId, time, channel, status)
-						VALUES (" . $id_queue . ", '" . $uniqueid . "', '$queueName', '" . $callerId . "',
-						'" . date('Y-m-d H:i:s') . "', '" . $channel . "', 'ringing')";
+                        VALUES (" . $id_queue . ", '" . $uniqueid . "', '$queueName', '" . $callerId . "',
+                        '" . date('Y-m-d H:i:s') . "', '" . $channel . "', 'ringing')";
         Yii::app()->db->createCommand($sql)->execute();
     }
 }
