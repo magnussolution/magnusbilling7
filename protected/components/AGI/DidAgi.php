@@ -20,10 +20,10 @@
 
 class DidAgi
 {
-    private $voip_call;
-    private $did;
-    private $sell_price;
-    private $modelDestination;
+    public $voip_call;
+    public $did;
+    public $sell_price;
+    public $modelDestination;
 
     public function checkIfIsDidCall(&$agi, &$MAGNUS, &$Calc)
     {
