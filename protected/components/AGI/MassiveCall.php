@@ -517,9 +517,6 @@ class MassiveCall
                 $modelUser->save();
             }
 
-            $modelPhoneNumber->status = 3;
-            $modelPhoneNumber->save();
-
             $modelTrunk = Trunk::model()->findByPk((int) $id_trunk);
             $modelTrunk->secondusedreal += $duration;
             $modelTrunk->save();
@@ -527,9 +524,11 @@ class MassiveCall
             $modelProvider = Provider::model()->findByPk((int) $modelTrunk->id_provider);
             $modelProvider->credit -= $buyratecost;
             $modelProvider->save();
-
-            $MAGNUS->hangup($agi);
         }
+
+        $modelPhoneNumber->status = 3;
+        $modelPhoneNumber->save();
+        $MAGNUS->hangup($agi);
     }
 
     private function make_token($line)
