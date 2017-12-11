@@ -57,6 +57,12 @@ class MagnusCommand extends CConsoleCommand
             $MAGNUS->hangup($agi);
         }
 
+        if ($agi->get_variable("IDCALLBACK", true)) {
+            $modelSip = Sip::model()->find('id_user = :key',
+                array(':key' => $agi->get_variable("IDUSER", true)));
+            $agi->set_callerid($modelSip->callerid);
+        }
+
         if ($agi->get_variable("CIDCALLBACK", true)) {
 
             CallbackAgi::chargeFistCall($agi, $MAGNUS, $Calc, 0);

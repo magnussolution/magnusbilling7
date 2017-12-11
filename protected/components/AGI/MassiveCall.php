@@ -187,12 +187,12 @@ class MassiveCall
                 $modelDiddestination->idDid->did = $destination;
                 $agi->set_variable("CALLERID(num)", $destination);
                 $agi->set_callerid($destination);
-                QueueAgi::callQueue($agi, $MAGNUS, $Calc, $modelDestination, null, 'torpedo');
+                QueueAgi::callQueue($agi, $MAGNUS, $Calc, $modelDiddestination, null, 'torpedo');
             } elseif ($forwardOptionType == 'ivr') {
                 $modelDiddestination             = new Diddestination();
                 $modelDiddestination->id_ivr     = $forwardOption[1];
                 $modelDiddestination->idDid->did = $destination;
-                Ivr::callIvr($agi, $MAGNUS, $Calc, $modelDestination, null, 'torpedo');
+                Ivr::callIvr($agi, $MAGNUS, $Calc, $modelDiddestination, null, 'torpedo');
             } elseif ($forwardOptionType == 'group') {
 
                 $agi->verbose("Call group $group ", 25);
