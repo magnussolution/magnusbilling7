@@ -61,7 +61,7 @@ class DidAgi
         if (!isset($modelSip) || !count($modelSip)) {
 
             $this->voip_call = $this->modelDestination[0]->voip_call;
-            $this->checkBlockCallerID($agi, $MAGNUS->CallerID);
+            $this->checkBlockCallerID($agi, $MAGNUS);
 
             $agi->verbose('voip_call ' . $this->voip_call, 5);
             switch ($this->voip_call) {
@@ -306,9 +306,9 @@ class DidAgi
             return 1;
         }
     }
-    public function checkBlockCallerID(&$agi, $callerID)
+    public function checkBlockCallerID(&$agi, &$MAGNUS)
     {
-        $agi->verbose("try blocked");
+        $agi->verbose("try blocked", 5);
         $block_expression_1 = $this->modelDestination[0]->idDid->block_expression_1;
         $block_expression_2 = $this->modelDestination[0]->idDid->block_expression_2;
         $block_expression_3 = $this->modelDestination[0]->idDid->block_expression_3;
@@ -317,12 +317,16 @@ class DidAgi
         $send_to_callback_2 = $this->modelDestination[0]->idDid->send_to_callback_2;
         $send_to_callback_3 = $this->modelDestination[0]->idDid->send_to_callback_3;
 
+        $expression_1 = $this->modelDestination[0]->idDid->expression_1;
+        $expression_2 = $this->modelDestination[0]->idDid->expression_2;
+        $expression_3 = $this->modelDestination[0]->idDid->expression_3;
+
         if ($block_expression_1 == 1 || $send_to_callback_1) {
-            $agi->verbose("try blocked number match with expression 1, " . $callerID . ' ' . $expression_2, 1);
+            $agi->verbose("try blocked number match with expression 1, " . $MAGNUS->CallerID . ' ' . $expression_2, 1);
             if (strlen($expression_1) > 1 && ereg($expression_1, $MAGNUS->CallerID)) {
 
                 if ($block_expression_1 == 1) {
-                    $agi->verbose("Call blocked becouse this number becouse match with expression 1, " . $callerID . ' FROM did ' . $this->did, 1);
+                    $agi->verbose("Call blocked becouse this number match with expression 1, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 1);
                     $MAGNUS->hangup($agi);
                 } elseif ($send_to_callback_1 == 1) {
                     $agi->verbose('Send to Callback expression 1', 10);
@@ -332,10 +336,10 @@ class DidAgi
         }
 
         if ($block_expression_2 == 1 || $send_to_callback_2) {
-            $agi->verbose("try blocked number match with expression 2, " . $callerID . ' ' . $expression_2, 1);
-            if (strlen($expression_2) > 1 && ereg($expression_2, $callerID)) {
+            $agi->verbose("try blocked number match with expression 2, " . $MAGNUS->CallerID . ' ' . $expression_2, 1);
+            if (strlen($expression_2) > 1 && ereg($expression_2, $MAGNUS->CallerID)) {
                 if ($block_expression_2 == 1) {
-                    $agi->verbose("Call blocked becouse this number becouse match with expression 2, " . $callerID . ' FROM did ' . $this->did, 1);
+                    $agi->verbose("Call blocked becouse this number match with expression 2, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 1);
                     $MAGNUS->hangup($agi);
                 } elseif ($send_to_callback_2 == 1) {
                     $agi->verbose('Send to Callback expression 2', 10);
@@ -345,14 +349,14 @@ class DidAgi
         }
 
         if ($block_expression_3 == 1 || $send_to_callback_3) {
-            $agi->verbose("try blocked number match with expression 3, " . $callerID . ' ' . $expression_3, 1);
-            if (strlen($expression_3) > 0 && (ereg($expression_3, $callerID) || $expression_3 == '*') &&
-                strlen($expression_1) > 1 && !ereg($expression_1, $callerID) &&
-                strlen($expression_2) > 1 && !ereg($expression_2, $callerID)
+            $agi->verbose("try blocked number match with expression 3, " . $MAGNUS->CallerID . ' ' . $expression_3, 1);
+            if (strlen($expression_3) > 0 && (ereg($expression_3, $MAGNUS->CallerID) || $expression_3 == '*') &&
+                strlen($expression_1) > 1 && !ereg($expression_1, $MAGNUS->CallerID) &&
+                strlen($expression_2) > 1 && !ereg($expression_2, $MAGNUS->CallerID)
             ) {
 
                 if ($block_expression_1 == 3) {
-                    $agi->verbose("Call blocked becouse this number becouse match with expression 3, " . $callerID . ' FROM did ' . $this->did, 1);
+                    $agi->verbose("Call blocked becouse this number match with expression 3, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 1);
                     $MAGNUS->hangup($agi);
                 } elseif ($send_to_callback_3 == 1) {
                     $agi->verbose('Send to Callback expression 3', 10);
