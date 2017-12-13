@@ -29,22 +29,25 @@ class DidAgi
     {
 
         //check if did call
-        $mydnid = substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, -10) : $MAGNUS->dnid;
-        $agi->verbose('checkIfIsDidCall ' . $mydnid, 25);
-        $this->modelDestination = Diddestination::model()->findAll(
-            array(
-                'condition' => "t.activated = 1",
-                'order'     => 'priority ASC',
-                'with'      => array('idDid' => array(
-                    'condition' => "idDid.did LIKE :key AND idDid.activated = 1",
-                ),
-                ),
-                'params'    => array(':key' => $mydnid),
-            )
-        );
-        if (count($this->modelDestination)) {
-            $agi->verbose("Is a DID call");
-            $this->checkDidDestinationType($agi, $MAGNUS, $Calc);
+        $mydnid = substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
+        $agi->verbose('Check If Is Did ' . $mydnid, 10);
+        $modelDid = Did::model()->find('did = :key', array(':key' => $mydnid));
+        if (count($modelDid)) {
+            $agi->verbose("Is a DID call", 5);
+            $this->modelDestination = Diddestination::model()->findAll(
+                array(
+                    'condition' => "t.activated = 1 AND id_did = :key",
+                    'order'     => 'priority ASC',
+                    'params'    => array(':key' => $modelDid->id),
+                )
+            );
+            if (count($this->modelDestination)) {
+                $agi->verbose("Did have destination", 15);
+                $this->checkDidDestinationType($agi, $MAGNUS, $Calc);
+            } else {
+                $agi->verbose("Is a DID call But not have destination Hangup Call");
+                $MAGNUS->hangup($agi);
+            }
         }
     }
     public function checkDidDestinationType(&$agi, &$MAGNUS, &$Calc)
