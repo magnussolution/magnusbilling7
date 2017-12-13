@@ -589,7 +589,6 @@ class Magnus
         if (($this->mode == 'did') || ($this->mode == 'callback')) {
             return;
         }
-        $agi->verbose($number);
         $this->modelUser->redial = $number;
         $this->modelUser->save();
     }

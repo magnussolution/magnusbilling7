@@ -495,7 +495,7 @@ class Calc
                 $modelCallBack->status            = 3;
                 $modelCallBack->save();
             }
-            $agi->verbose('Insert call on CDR');
+            $agi->verbose('Insert call on CDR', 10);
             $modelCall                   = new Call();
             $modelCall->uniqueid         = $MAGNUS->uniqueid;
             $modelCall->sessionid        = $MAGNUS->channel;
@@ -521,7 +521,7 @@ class Calc
             }
 
         } else {
-            $agi->verbose('Insert failed call');
+            $agi->verbose('Insert failed call', 10);
             $modelCallFailed                   = new CallFailed();
             $modelCallFailed->uniqueid         = $MAGNUS->uniqueid;
             $modelCallFailed->sessionid        = $MAGNUS->channel;
