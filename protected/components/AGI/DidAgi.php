@@ -56,6 +56,22 @@ class DidAgi
 
         $this->did = $this->modelDestination[0]->idDid->did;
         $agi->verbose('DID ' . $this->did, 5);
+
+        //if DID option charge of was = 0 only allow call from existent callerid
+        if ($this->modelDestination[0]->idDid->charge_of == 0) {
+            $modelCallerId = Callerid::model()->find('cid = :key AND activated = 1', array(':key' => $MAGNUS->CallerID));
+            if (count($modelCallerId)) {
+                $agi->verbose('found callerid, new user = ' . $modelCallerId->idUser->username);
+                $Calc->did_charge_of_id_user     = $modelCallerId->idUser->id;
+                $Calc->did_charge_of_answer_time = time();
+                $Calc->didAgi                    = $this->modelDestination[0]->idDid;
+
+            } else {
+                $agi->verbose('NOT found callerid, = ' . $MAGNUS->CallerID . ' to did ' . $this->did . ' and was selected charge_of to callerID');
+                $MAGNUS->hangup($agi);
+            }
+        }
+
         //check if is a call betewen 2 sipcounts.
         if (strlen($MAGNUS->accountcode) > 0) {
             $modelSip = Sip::model()->find('name = :did', array(':did' => $this->did));
