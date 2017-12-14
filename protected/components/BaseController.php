@@ -510,37 +510,41 @@ class BaseController extends CController
 
         $id    = $values[$namePk];
         $model = $id ? $this->loadModel($id, $this->abstractModel) : $this->instanceModel;
+        if ($model == $this->msgRecordNotFound) {
+            $this->success = false;
+            $this->nameMsg = $this->msgRecordNotFound;
+        } else {
+            $model->attributes = $values;
 
-        $model->attributes = $values;
+            try {
+                $this->success = $model->save();
+                $errors        = $model->getErrors();
 
-        try {
-            $this->success = $model->save();
-            $errors        = $model->getErrors();
-
-            if (!count($errors)) {
-                $id = $id ? $id : $model->$namePk;
-                if ($subRecords !== false) {
-                    $this->saveRelated($id, $subRecords);
+                if (!count($errors)) {
+                    $id = $id ? $id : $model->$namePk;
+                    if ($subRecords !== false) {
+                        $this->saveRelated($id, $subRecords);
+                    }
+                    $this->saveGetNewRecord($namePk, $id);
                 }
-                $this->saveGetNewRecord($namePk, $id);
+
+            } catch (Exception $e) {
+                $this->success = false;
+                $errors        = $this->getErrorMySql($e);
             }
 
-        } catch (Exception $e) {
-            $this->success = false;
-            $errors        = $this->getErrorMySql($e);
-        }
+            if ($this->success) {
+                //insert in log table
+                MagnusLog::insertLOG($id && $id > 0 ? 2 : 4, 'Module: ' . $module . '  ' . json_encode($values));
+            } else {
+                $this->nameMsg = $this->nameMsgErrors;
+            }
 
-        if ($this->success) {
-            //insert in log table
-            MagnusLog::insertLOG($id && $id > 0 ? 2 : 4, 'Module: ' . $module . '  ' . json_encode($values));
-        } else {
-            $this->nameMsg = $this->nameMsgErrors;
-        }
+            $this->msg = $this->success ? $this->msgSuccess : $errors;
 
-        $this->msg = $this->success ? $this->msgSuccess : $errors;
-
-        if (!$this->isUpdateAll) {
-            $this->afterSave($model, $values);
+            if (!$this->isUpdateAll) {
+                $this->afterSave($model, $values);
+            }
         }
 
         # retorna o resultado da execucao
