@@ -125,13 +125,8 @@ class MagnusCommand extends CConsoleCommand
                     $standardCall->processCall($MAGNUS, $agi, $Calc);
                 }
             }
-
         }
-
         SipTransferAgi::billing($MAGNUS, $agi, $Calc);
-
-        Yii::log("End AGI script ", 'error');
         $MAGNUS->hangup($agi);
-
     }
 }
