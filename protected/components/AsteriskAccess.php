@@ -71,7 +71,7 @@ class AsteriskAccess
         $modelServers = Servers::model()->getAllAsteriskServers();
         $channels     = array();
         foreach ($modelServers as $key => $server) {
-            AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->hangupChannel($channel);
+            AsteriskAccess::instance($server['host'], $server['username'], $server['password']);
             $this->asmanager->Command("hangup request " . $channel);
         }
     }
