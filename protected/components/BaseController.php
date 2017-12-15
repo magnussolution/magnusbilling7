@@ -283,10 +283,6 @@ class BaseController extends CController
             echo "<br><br>";
             exit;
         }
-        if (strlen($this->filter) > 1 && $this->defaultFilter == 1 && $this->start > 0 && !Yii::app()->session['isClient']) {
-            $this->start = 0;
-            $this->limit = 25;
-        }
 
         return new CDbCriteria(array(
             'select'    => $this->select,
