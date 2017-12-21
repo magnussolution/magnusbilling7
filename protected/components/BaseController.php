@@ -722,8 +722,6 @@ class BaseController extends CController
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
 
-        ini_set("memory_limit", "1024M");
-
         $orientation = $_GET['orientation'];
 
         $columns = json_decode($_GET['columns'], true);
@@ -736,7 +734,11 @@ class BaseController extends CController
 
         //Yii::log(print_r($columns,true), 'info');
 
-        $this->setfilter($_GET);
+        if (!$condition) {
+            $this->setfilter($_GET);
+        } else {
+            $this->filter = $condition;
+        }
 
         $fieldGroup = json_decode($_GET['group']);
         $sort       = json_decode($_GET['sort']);
@@ -776,7 +778,7 @@ class BaseController extends CController
 
     public function actionCsv()
     {
-        ini_set("memory_limit", "1024M");
+
         if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
@@ -805,7 +807,11 @@ class BaseController extends CController
 
         $this->order = 't.id ASC';
 
-        $this->filter = isset($_GET['filter']) ? $this->createCondition(json_decode($_GET['filter'])) : null;
+        if (!$condition) {
+            $this->setfilter($_GET);
+        } else {
+            $this->filter = $condition;
+        }
 
         $this->applyFilterToLimitedAdmin();
         $this->showAdminLog();
@@ -828,7 +834,7 @@ class BaseController extends CController
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to delete in module:" . $this->instanceModel->getModule());
         }
-        ini_set("memory_limit", "1024M");
+
         # recebe os parametros da exclusao
         $values       = $this->getAttributesRequest();
         $namePk       = $this->abstractModel->primaryKey();
