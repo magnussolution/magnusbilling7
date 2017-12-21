@@ -732,13 +732,7 @@ class BaseController extends CController
 
         $columns = $this->subscribeColunms($columns);
 
-        //Yii::log(print_r($columns,true), 'info');
-
-        if (!$condition) {
-            $this->setfilter($_GET);
-        } else {
-            $this->filter = $condition;
-        }
+        $this->setfilter($_GET);
 
         $fieldGroup = json_decode($_GET['group']);
         $sort       = json_decode($_GET['sort']);
@@ -807,11 +801,7 @@ class BaseController extends CController
 
         $this->order = 't.id ASC';
 
-        if (!$condition) {
-            $this->setfilter($_GET);
-        } else {
-            $this->filter = $condition;
-        }
+        $this->setfilter($_GET);
 
         $this->applyFilterToLimitedAdmin();
         $this->showAdminLog();
