@@ -184,8 +184,6 @@ class RateController extends Controller
         if (!Yii::app()->session['id_user'] || Yii::app()->session['isClient'] == true) {
             exit();
         }
-
-        ini_set("memory_limit", "1500M");
         ini_set("upload_max_filesize", "3M");
         ini_set("max_execution_time", "120");
         $values = $this->getAttributesRequest();
