@@ -97,7 +97,7 @@ class PrefixController extends Controller
                     }
 
                 } else {
-                    $sqlPrefix[] = "($prefix, '$destination')";
+                    $sqlPrefix[] = "('$prefix', '$destination')";
                 }
             }
         }

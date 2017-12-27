@@ -229,7 +229,7 @@ class RateController extends Controller
                 $destination = ($row[1] == '') ? 'ROC' : trim($row[1]);
                 $destination = utf8_encode($destination);
                 $destination = preg_replace("/'/", "''", $destination);
-                $sqlPrefix[] = "($prefix, '$destination')";
+                $sqlPrefix[] = "('$prefix', '$destination')";
 
             }
         }
