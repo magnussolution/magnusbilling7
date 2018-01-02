@@ -705,7 +705,8 @@ class BaseController extends CController
             'condition' => $this->filter,
             'with'      => $this->relationFilter,
             'params'    => $this->paramsFilter,
-            'order'     => $this->order,
+            'order'     => $this->order,            
+            'limit'     => $this->limit == 1 ? $this->limit : -1,
         ));
     }
 

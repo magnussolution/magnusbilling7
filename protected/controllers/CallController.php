@@ -252,7 +252,7 @@ class CallController extends Controller
                     'condition' => $this->filter,
                     'params'    => $this->paramsFilter,
                 ));
-
+                $this->limit          = 1;
                 $this->titleReport    = "Estatistica da campanha $nameCampaign";
                 $this->subTitleReport = "Total de chamadas $count";
 
