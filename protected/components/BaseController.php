@@ -705,7 +705,7 @@ class BaseController extends CController
             'condition' => $this->filter,
             'with'      => $this->relationFilter,
             'params'    => $this->paramsFilter,
-            'order'     => $this->order,            
+            'order'     => $this->order,
             'limit'     => $this->limit == 1 ? $this->limit : -1,
         ));
     }
@@ -837,25 +837,53 @@ class BaseController extends CController
             $filter = $filter ? $this->createCondition(json_decode($filter)) : $this->defaultFilter;
 
             $this->filter = $filter = $this->extraFilter($filter);
+            //if have related filter
+            if (count($this->relationFilter)) {
 
-            $criteria = new CDbCriteria(array(
-                'condition' => $this->filter,
-                'with'      => $this->relationFilter,
-                'params'    => $this->paramsFilter,
-                'with'      => $this->relationFilter,
-            ));
+                foreach ($this->relationFilter as $key => $relationFilter) {
+                    //convert $this->relationFilter to DELETE SQL;
+                    $table     = strtolower(preg_replace("/id/", 'pkg_', $key));
+                    $joinField = strtolower(preg_replace("/id/", 'id_', $key));
+                    $this->join .= ' JOIN ' . $table . ' ' . $key . ' ON t.' . $joinField . ' = ' . $key . '.id';
+                    $this->filter .= ' AND ' . $relationFilter['condition'];
+                }
 
-            # retorna o resultado da execucao
-            try {
-                $this->success = $this->abstractModel->deleteAll($criteria);
-                $errors        = true;
+                $sql     = 'DELETE t FROM ' . $this->abstractModel->tableName() . ' t ' . $this->join . ' WHERE ' . $this->filter;
+                $command = Yii::app()->db->createCommand($sql);
+                foreach ($this->paramsFilter as $key => $value) {
+                    $command->bindValue(':' . $key, $value, PDO::PARAM_STR);
+                }
 
-                $info = 'Module ' . $this->instanceModel->getModule() . '  ' . json_encode($values);
-                MagnusLog::insertLOG(3, $info);
+                try {
+                    $this->success = $command->execute();
+                    $errors        = true;
 
-            } catch (Exception $e) {
-                $this->success = false;
-                $errors        = $this->getErrorMySql($e);
+                    $info = 'Module ' . $this->instanceModel->getModule() . '  ' . json_encode($values);
+                    MagnusLog::insertLOG(3, $info);
+
+                } catch (Exception $e) {
+                    $this->success = false;
+                    $errors        = $this->getErrorMySql($e);
+                }
+
+            } else {
+                $criteria = new CDbCriteria(array(
+                    'condition' => $this->filter,
+                    'params'    => $this->paramsFilter,
+                ));
+
+                # retorna o resultado da execucao
+                try {
+                    $this->success = $this->abstractModel->deleteAll($criteria);
+                    $errors        = true;
+
+                    $info = 'Module ' . $this->instanceModel->getModule() . '  ' . json_encode($values);
+                    MagnusLog::insertLOG(3, $info);
+
+                } catch (Exception $e) {
+                    $this->success = false;
+                    $errors        = $this->getErrorMySql($e);
+                }
             }
 
             $this->msg = $this->success ? $this->msgSuccess : $errors;
