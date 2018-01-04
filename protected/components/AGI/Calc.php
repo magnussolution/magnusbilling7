@@ -475,14 +475,18 @@ class Calc
                 $agi->verbose("Update credit username $MAGNUS->username, " . $MAGNUS->round_precision(abs($cost)), 6);
             }
 
-            $modelTrunk = Trunk::model()->findByPk((int) $this->usedtrunk);
-            $modelTrunk->secondusedreal += $sessiontime;
-            $modelTrunk->call_answered++;
-            $modelTrunk->save();
+            Trunk::model()->updateByPk($this->usedtrunk,
+                array(
+                    'call_answered'  => new CDbExpression('call_answered + 1'),
+                    'secondusedreal' => new CDbExpression('secondusedreal + ' . $sessiontime),
+                )
+            );
 
-            $modelProvider = Provider::model()->findByPk((int) $this->tariffObj[$K]['id_provider']);
-            $modelProvider->credit -= $buycost;
-            $modelProvider->save();
+            Provider::model()->updateByPk($this->tariffObj[$K]['id_provider'],
+                array(
+                    'credit' => new CDbExpression('credit - ' . $buycost),
+                )
+            );
 
             $this->callShop($agi, $MAGNUS, $sessiontime, $id_prefix);
 
