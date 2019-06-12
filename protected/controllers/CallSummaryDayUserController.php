@@ -164,6 +164,5 @@ class CallSummaryDayUserController extends Controller
                 array_push($fieldsCsv, $value);
             }
             fputcsv($f, $fieldsCsv, ';');
-
-    }
+        }
 }
