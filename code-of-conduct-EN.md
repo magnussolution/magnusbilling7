@@ -1,39 +1,76 @@
-## Introduction
+# Contributor Covenant Code of Conduct
 
-We are dedicated to providing a harassment­ free experience for everyone, and we do not tolerate harassment of participants in any form. We ask you to be considerate of others and behave professionally and respectfully to all other participants. This code and related procedures also apply to unacceptable behavior occurring outside the scope of community activities, in all community venues— online and in-person— as well as in all one-on-one communications, and anywhere such behavior has the potential to adversely affect the safety and well-being of community members. 
+## Our Pledge
 
+In the interest of fostering an open and welcoming environment, we as
+contributors and maintainers pledge to making participation in our project and
+our community a harassment-free experience for everyone, regardless of age, body
+size, disability, ethnicity, sex characteristics, gender identity and expression,
+level of experience, education, socio-economic status, nationality, personal
+appearance, race, religion, or sexual identity and orientation.
 
-Our goal is to maintain a safe, helpful and friendly MagnusBilling community for everyone, regardless of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other protected categories under applicable law.
+## Our Standards
 
-## Expected Behavior
+Examples of behavior that contributes to creating a positive environment
+include:
 
-- Be professional.
-- Be responsible.
-- Be welcoming.
-- Be kind.
-- Be respectful of other viewpoints and ideas.
-- Be supportive and look out for each other.
+* Using welcoming and inclusive language
+* Being respectful of differing viewpoints and experiences
+* Gracefully accepting constructive criticism
+* Focusing on what is best for the community
+* Showing empathy towards other community members
 
-## Unacceptable Behavior
+Examples of unacceptable behavior by participants include:
 
-Harassment may include but not limited to the following:
+* The use of sexualized language or imagery and unwelcome sexual attention or
+ advances
+* Trolling, insulting/derogatory comments, and personal or political attacks
+* Public or private harassment
+* Publishing others' private information, such as a physical or electronic
+ address, without explicit permission
+* Other conduct which could reasonably be considered inappropriate in a
+ professional setting
 
-- Offensive, inappropriate, or unwanted comments related to gender, gender identity or expression, sexual orientation, disability, physical appearance, body size, race, ethnicity, national origin, religion, or age, or other protected categories under applicable law.
-- Visual harassment eg. sexual imagery or use of sexual language at MagnusBilling community events
-- Disrespect towards differences of opinion
-- Deliberate intimidation, stalking, harassing photography or recording
-- Sustained disruption of talks or other events
-- Inappropriate or unwanted physical contact
-- Intimidation or bullying (online or in-person)
-- Unwelcome sexual attention
+## Our Responsibilities
 
-## Reporting and Enforcement
+Project maintainers are responsible for clarifying the standards of acceptable
+behavior and are expected to take appropriate and fair corrective action in
+response to any instances of unacceptable behavior.
 
-- If you are the subject of, or witness to any violations of this Code of Conduct, please contact us by submitting an [incident report] to email info@magnussolution.com
+Project maintainers have the right and responsibility to remove, edit, or
+reject comments, commits, code, wiki edits, issues, and other contributions
+that are not aligned to this Code of Conduct, or to ban temporarily or
+permanently any contributor for other behaviors that they deem inappropriate,
+threatening, offensive, or harmful.
 
+## Scope
 
-Portions derived from the [Slack Developer Community Code of Conduct](https://api.slack.com/docs/community-code-of-conduct), [The Ada Initiative](https://adainitiative.org/2014/02/18/howto-design-a-code-of-conduct-for-your-community/), [geekfeminism.org](https://geekfeminism.org/about/code-of-conduct/) and [Drupal Events Code of Conduct](https://events.drupal.org/dublin2016/code-conduct)
+This Code of Conduct applies both within project spaces and in public spaces
+when an individual is representing the project or its community. Examples of
+representing a project or community include using an official project e-mail
+address, posting via an official social media account, or acting as an appointed
+representative at an online or offline event. Representation of a project may be
+further defined and clarified by project maintainers.
 
-This work is licensed under a Creative Commons Attribution 3.0 Unported License For attribution requirements:
+## Enforcement
 
-"@MagnusBilling Code of Conduct" © 2019 MagnusBilling, Inc, used under a Creative Commons Attribution Unported license: [http://creativecommons.org/licenses/by/3.0/](http://creativecommons.org/licenses/by/3.0/)
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported by contacting the project team at info@magnussolution.com. All
+complaints will be reviewed and investigated and will result in a response that
+is deemed necessary and appropriate to the circumstances. The project team is
+obligated to maintain confidentiality with regard to the reporter of an incident.
+Further details of specific enforcement policies may be posted separately.
+
+Project maintainers who do not follow or enforce the Code of Conduct in good
+faith may face temporary or permanent repercussions as determined by other
+members of the project's leadership.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
+available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+
+[homepage]: https://www.contributor-covenant.org
+
+For answers to common questions about this code of conduct, see
+https://www.contributor-covenant.org/faq
