@@ -182,7 +182,7 @@ class Mail
                 $this->message    = $modelTemplate->messagehtml;
                 $this->title      = isset($modelTemplate->subject) ? $modelTemplate->subject : null;
                 $this->from_email = isset($modelTemplate->fromemail) ? $modelTemplate->fromemail : null;
-                $this->from_name  = isset($modelTemplate->from_name) ? $modelTemplate->from_name : null;
+                $this->from_name  = isset($modelTemplate->fromname) ? $modelTemplate->fromname : null;
                 $this->language   = isset($modelTemplate->language) ? $modelTemplate->language : null;
             } else {
                 Yii::log("Template Type '$type' cannot be found into the database!", 'info');
