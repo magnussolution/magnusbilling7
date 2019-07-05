@@ -634,23 +634,35 @@ class Magnus
             $number_prefix = substr($destination, 0, strlen($grab));
 
             if (strtoupper($this->config['global']['base_country']) == 'BRL' || strtoupper($this->config['global']['base_country']) == 'ARG') {
-                if ($grab == '*' && strlen($destination) == $digit) {
-                    $destination = $replace . $destination;
-                } else if (strlen($destination) == $digit && $number_prefix == $grab) {
-                    $destination = $replace . substr($destination, strlen($grab));
-                } elseif ($number_prefix == $grab) {
-                    $destination = $replace . substr($destination, strlen($grab));
-                }
+				if (strlen($destination) == $digit) {
+					if ($grab == '*') {
+						$destination = $replace . $destination;
+					} else if ($number_prefix == $grab) {
+						$destination = $replace . substr($destination, strlen($grab));
+					}
+				} elseif ($digit == '') {
+					if ($grab == '*') {
+						$destination = $replace . $destination;
+				    } elseif ($number_prefix == $grab) {
+						$destination = $replace . substr($destination, strlen($grab));
+					}
+				}
 
             } else {
 
                 if (strlen($destination) == $digit) {
-                    if ($grab == '*' && strlen($destination) == $digit) {
-                        $destination = $replace . $destination;
-                    } else if ($number_prefix == $grab) {
-                        $destination = $replace . substr($destination, strlen($grab));
-                    }
-                }
+					if ($grab == '*') {
+						$destination = $replace . $destination;
+					} else if ($number_prefix == $grab) {
+						$destination = $replace . substr($destination, strlen($grab));
+					}
+				} elseif ($digit == '') {
+					if ($grab == '*') {
+						$destination = $replace . $destination;
+				    } elseif ($number_prefix == $grab) {
+						$destination = $replace . substr($destination, strlen($grab));
+					}
+				}
             }
         }
 
