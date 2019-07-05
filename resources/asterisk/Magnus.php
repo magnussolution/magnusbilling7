@@ -638,7 +638,7 @@ class Magnus
                     $destination = $replace . $destination;
                 } else if (strlen($destination) == $digit && $number_prefix == $grab) {
                     $destination = $replace . substr($destination, strlen($grab));
-                } elseif ($number_prefix == $grab) {
+                } elseif ($number_prefix == $grab && $digit == '') {
                     $destination = $replace . substr($destination, strlen($grab));
                 }
 
