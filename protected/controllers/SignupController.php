@@ -47,6 +47,12 @@ class SignupController extends Controller
                 Yii::app()->session['newGoogleAuthenticator']   = false;
                 Yii::app()->session['checkGoogleAuthenticator'] = false;
                 Yii::app()->session['googleAuthenticatorKey']   = false;
+				
+				$mail = new Mail(Mail::$TYPE_SIGNUPCONFIRM, $id);
+				try {
+					$mail->send();
+				} catch (Exception $e) {
+				}
 
             }
 
