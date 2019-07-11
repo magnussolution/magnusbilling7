@@ -11,6 +11,11 @@ class SipCallAgi
             $MAGNUS->destination = $MAGNUS->dnid;
         }
 
+        if (file_exists(dirname(__FILE__) . '/push/Push.php')) {
+            include dirname(__FILE__) . '/push/Push.php';
+            Push::send($agi, $MAGNUS->destination, $MAGNUS->CallerID);
+        }
+
         $MAGNUS->destination = $MAGNUS->dnid;
         $dialparams          = $MAGNUS->agiconfig['dialcommand_param_sipiax_friend'];
         //add the sipaccount dial timeout in dialcommand_param.
@@ -30,6 +35,12 @@ class SipCallAgi
 
         $startCall = time();
         $MAGNUS->run_dial($agi, $dialstr, $dialparams);
+
+        $blindTransfer = $agi->get_variable("BLINDTRANSFER");
+        $blindTransfer = $blindTransfer['data'];
+        if (strlen($blindTransfer) > 1) {
+            exit;
+        }
 
         $answeredtime = $agi->get_variable("ANSWEREDTIME");
         $answeredtime = $answeredtime['data'];
@@ -120,7 +131,7 @@ class SipCallAgi
         } else if ($optionType == 'group') // CUSTOM
         {
             $agi->verbose("Call to group " . $optionValue, 1);
-            $sql      = "SELECT * FROM pkg_sip WHERE `group` = '$optionValue'";
+            $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
             $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
             if (!isset($modelSip[0]->id)) {

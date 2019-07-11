@@ -1425,6 +1425,36 @@ class UpdateMysqlCommand extends ConsoleCommand
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '6.5.8') {
+
+            $sql = "INSERT INTO pkg_method_pay VALUES (NULL, '1', 'Stripe', 'Stripe', 'Global', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,client_id,client_secret');";
+            $this->executeDB($sql);
+
+            $version = '6.5.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '6.5.9') {
+
+            $sql = "INSERT INTO pkg_method_pay VALUES (NULL, '1', 'Elavon', 'Elavon', 'Global', '0', '0', NULL, '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', '500', 'payment_method,show_name,id_user,country,active,min,max,username,client_id,client_secret');";
+            $this->executeDB($sql);
+
+            $version = '6.6.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '6.6.0') {
+
+            $sql = " ALTER TABLE `pkg_sip` CHANGE `group` `sip_group` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;";
+            $this->executeDB($sql);
+
+            $version = '6.6.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

@@ -50,6 +50,11 @@ class TransferToMobileController extends Controller
         if (isset($_POST['TransferToMobile']['number']) && $_POST['TransferToMobile']['number'] == '5551982464731') {
             $this->test = true;
         }
+
+        if (isset($_POST['TransferToMobile']['number']) && substr($_POST['TransferToMobile']['number'], 0, 2) == '00') {
+            $_POST['TransferToMobile']['number'] = substr($_POST['TransferToMobile']['number'], 2);
+        }
+
         $this->instanceModel = new User;
         $this->abstractModel = User::model();
         parent::init();
@@ -687,7 +692,8 @@ error_txt=Transaction successful';
                 //print_r($result);
                 if (preg_match("/Transaction successful/", $result)) {
                     $resultArray = explode("\n", $result);
-                    $operatorid  = trim(end(explode('=', $resultArray[3])));
+                    $tmp         = explode('=', $resultArray[3]);
+                    $operatorid  = trim(end($tmp));
                 } else {
                     //echo "Not foun product from TrasnferRo, try ding";
                     //request provider code to ding and chech if exist products to Ding
@@ -779,27 +785,36 @@ error_txt=Transaction successful';
 
             $modelRefill = Refill::model()->findByPk((int) $id_refill, 'id_user = :key', array(':key' => Yii::app()->session['id_user']));
 
-            echo $config['global']['fm_transfer_print_header'] . "<br>";
+            echo $config['global']['fm_transfer_print_header'] . "<br><br>";
 
             echo $modelRefill->idUser->company_name . "<br>";
-
+            echo $modelRefill->idUser->address . ', ' . $modelRefill->idUser->city . "<br>";
             echo "Trx ID: " . $modelRefill->id . "<br>";
 
             echo $modelRefill->date . "<br>";
 
             $number = explode(" ", $modelRefill->description);
 
-            echo "Mobile No.: " . $number[5] . "<br>";
+            echo "Cellulare.: " . $number[5] . "<br>";
 
-            if (!preg_match('/international/', $modelRefill->description)) {
-                echo 'Product: BDT ' . $number[3] . "<br>";
-                $amount = end($number);
-            } else {
-                echo 'Product: ' . $number[2] . ' ' . $number[3] . "<br>";
-                $amount = substr($number[9], 0, -1);
+            if (preg_match('/Meter/', $modelRefill->description)) {
+                $tmp = explode('Meter', $modelRefill->description);
+                echo 'Meter: ' . $tmp[1] . "<br>";
             }
 
-            echo "Amount Paid: <input type=text' style='text-align: right;' size='10' value='$amount'> <br><br>";
+            $tmp    = explode('EUR ', $modelRefill->description);
+            $tmp    = explode('. T', $tmp[1]);
+            $amount = $tmp[0];
+
+            $tmp      = explode('via ', $modelRefill->description);
+            $operator = strtok($tmp[1], '-');
+            $tmp      = explode('Send Credit ', $modelRefill->description);
+            $tmp      = explode(' -', $tmp[1]);
+            $product  = $tmp[0];
+
+            echo 'Prodotto:  ' . $product . ' ' . $operator . "<br>";
+
+            echo "Importo: EUR <input type=text' style='text-align: right;' size='6' value='$amount'> <br><br>";
 
             echo $config['global']['fm_transfer_print_footer'] . "<br><br>";
 

@@ -114,7 +114,7 @@ class Magnus
 
         $this->lastapp = isset($agi->request['agi_lastapp']) ? $agi->request['agi_lastapp'] : null;
 
-        if (preg_match('/Local/', $this->channel) && strlen($this->accountcode) < 4) {
+        if (preg_match('/^Local\//', $this->channel) && strlen($this->accountcode) < 4) {
             $sql               = "SELECT * FROM pkg_sip WHERE name = '$this->dnid' LIMIT 1";
             $modelSip          = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $this->accountcode = $modelSip->accountcode;
@@ -209,7 +209,7 @@ class Magnus
             $agi->verbose("USE_DNID DESTINATION -> " . $this->destination, 10);
         } else {
             $agi->verbose('Request the destination number' . $prompt_enter_dest, 25);
-            $res_dtmf = $agi->get_data($prompt_enter_dest, 6000, 20);
+            $res_dtmf = $agi->get_data($prompt_enter_dest, 10000, 20);
             $agi->verbose("RES DTMF -> " . $res_dtmf["result"], 10);
             $this->destination = $res_dtmf["result"];
             $this->dnid        = $res_dtmf["result"];
@@ -272,9 +272,11 @@ class Magnus
 
         if ($resfindrate == 0) {
             $agi->verbose("The number $this->destination, no exist in the plan $this->id_plan", 3);
-
             $this->executePlayAudio("prepaid-dest-unreachable", $agi);
-
+            if ($this->agiconfig['number_try'] > 1 && ($this->agiconfig['number_try'] > $try_num + 1)) {
+                $try_num++;
+                $this->checkNumber($agi, $CalcAgi, $try_num);
+            }
             return false;
         } else {
             $agi->verbose("NUMBER TARIFF FOUND -> " . $CalcAgi->number_trunk, 10);
@@ -348,9 +350,7 @@ class Magnus
 
         $credit_cur = $credit / $mycur;
 
-        list($units, $cents) = pre_split('/\[\.\]/', sprintf('%01.2f', $credit_cur));
-
-        $agi->verbose("[BEFORE: $credit_cur SPRINTF : " . sprintf('%01.2f', $credit_cur) . "]", 10);
+        list($units, $cents) = explode('.', $credit_cur);
 
         if ($credit > 1) {
             $unit_audio = "credit";
@@ -433,7 +433,7 @@ class Magnus
         $mycur      = 1;
         $credit_cur = $rate / $mycur;
 
-        list($units, $cents) = pre_split('/\[\.\]/', sprintf('%01.3f', $credit_cur));
+        list($units, $cents) = explode('.', $credit_cur);
 
         if (substr($cents, 2) > 0) {
             $point = substr($cents, 2);
@@ -831,4 +831,56 @@ class Magnus
         }
         return "closed";
     }
+
+    public static function getNewUsername($MAGNUS, $agi)
+    {
+        $existsUsername = true;
+
+        $generate_username = $MAGNUS->config['global']['username_generate'];
+        $agi->verbose('getNewUsername ' . $generate_username);
+        if ($generate_username == 1) {
+            $length = $MAGNUS->config['global']['generate_length'] == 0 ? 5 : $MAGNUS->config['global']['generate_length'];
+            $prefix = $MAGNUS->config['global']['generate_prefix'] == '0' ? '' : $MAGNUS->config['global']['generate_prefix'];
+            while ($existsUsername) {
+                $randUserName = $prefix . AuthenticateAgi::generatePassword($length, false, false, true, false) . "\n";
+
+                $sql            = "SELECT count(*) FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
+                $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                $existsUsername = ($countUsername->count > 0);
+            }
+        } else {
+
+            while ($existsUsername) {
+                $randUserName   = mt_rand(10000, 99999);
+                $sql            = "SELECT count(*) as count FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
+                $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                $existsUsername = ($countUsername->count > 0);
+            }
+
+        }
+        return trim($randUserName);
+    }
+
+    public static function generatePassword($tamanho, $maiuscula, $minuscula, $numeros, $codigos)
+    {
+        $maius = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
+        $minus = "abcdefghijklmnopqrstuwxyz";
+        $numer = "123456789";
+        $codig = '!@#%';
+
+        $base = '';
+        $base .= ($maiuscula) ? $maius : '';
+        $base .= ($minuscula) ? $minus : '';
+        $base .= ($numeros) ? $numer : '';
+        $base .= ($codigos) ? $codig : '';
+
+        srand((float) microtime() * 10000000);
+        $password = '';
+        for ($i = 0; $i < $tamanho; $i++) {
+            $password .= substr($base, rand(0, strlen($base) - 1), 1);
+        }
+
+        return $password;
+    }
+
 };

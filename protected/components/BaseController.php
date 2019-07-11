@@ -332,27 +332,35 @@ class BaseController extends CController
 
     public function readCountRecord()
     {
-        if (strlen($this->group) < 2) {
-            $count = $this->abstractModel->count(array(
-                'join'      => $this->join,
-                'condition' => $this->filter,
-                'with'      => $this->relationFilter,
-                'params'    => $this->paramsFilter,
-            ));
-        } else {
-            $recordCont = $this->abstractModel->findAll(array(
-                'select'    => $this->select,
-                'join'      => $this->join,
-                'condition' => $this->filter,
-                'with'      => $this->relationFilter,
-                'params'    => $this->paramsFilter,
-                'order'     => $this->order,
-                'group'     => $this->group,
-            ));
-            $count = count($recordCont);
-        }
 
-        return $count;
+        if ((!isset($_GET['filter']) || strlen($_GET['filter']) < 3) && preg_match('/^Call$|^CallFailed$|^CallArchive$/', $this->modelName) && Yii::app()->session['isAdmin'] == true) {
+            $sql    = "SHOW TABLE STATUS LIKE  '" . $this->abstractModel->tableName() . "'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            return $result[0]['Rows'];
+        } else {
+
+            if (strlen($this->group) < 2) {
+                $count = $this->abstractModel->count(array(
+                    'join'      => $this->join,
+                    'condition' => $this->filter,
+                    'with'      => $this->relationFilter,
+                    'params'    => $this->paramsFilter,
+                ));
+            } else {
+                $recordCont = $this->abstractModel->findAll(array(
+                    'select'    => $this->select,
+                    'join'      => $this->join,
+                    'condition' => $this->filter,
+                    'with'      => $this->relationFilter,
+                    'params'    => $this->paramsFilter,
+                    'order'     => $this->order,
+                    'group'     => $this->group,
+                ));
+                $count = count($recordCont);
+            }
+
+            return $count;
+        }
     }
     /**
      * Lista os registros da model
