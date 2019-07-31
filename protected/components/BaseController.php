@@ -857,7 +857,7 @@ class BaseController extends CController
         $sql = "SELECT " . substr($header, 0, -1) . " UNION ALL SELECT " . $this->getColumnsFromReport($columns) . " FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
 
         $command = Yii::app()->db->createCommand($sql);
-        if (count($this->paramsFilter)) {
+        if ((is_array($this->paramsFilter) || is_object($this->paramsFilter)) && count($this->paramsFilter)) {
             foreach ($this->paramsFilter as $key => $value) {
                 $command->bindValue($key, $value, PDO::PARAM_STR);
             }
@@ -1347,11 +1347,11 @@ class BaseController extends CController
                                             'condition' => "$field LIKE :$paramName",
                                         );
                                     }
+                                    $this->paramsFilter[$paramName] = "%" . $value . "%";
                                 } else {
-                                    $condition .= " AND $field LIKE :$paramName";
+                                    $condition .= " AND LOWER($field) LIKE :$paramName";
+                                    $this->paramsFilter[$paramName] = "%" . strtolower($value) . "%";
                                 }
-
-                                $this->paramsFilter[$paramName] = "%$value%";
 
                             }
                             break;

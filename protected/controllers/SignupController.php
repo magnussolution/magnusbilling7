@@ -59,6 +59,11 @@ class SignupController extends Controller
             } catch (Exception $e) {
             }
 
+            if ($this->config['global']['signup_admin_email'] == 1) {
+                $mail->setTitle('NEW USER SIGNUP FROM MAGNUSBILLING SIGNUP FORM. USERNAME ');
+                $mail->send($this->config['global']['admin_email']);
+            }
+
             $signup = Signup::model()->findByPk((int) $id);
             $this->render('view', array('signup' => $signup));
         }
@@ -75,7 +80,7 @@ class SignupController extends Controller
             $password = trim($_POST['Signup']['password']);
 
             $signup->id_group = $result[0]['id'];
-            $signup->active   = $_POST['Signup']['id_user'] > 1 ? 1 : 2;
+            $signup->active   = 2;
 
             if ($this->config['global']['base_language'] == 'pt_BR') {
                 $phone = $_POST['Signup']['phone'];
@@ -88,7 +93,6 @@ class SignupController extends Controller
                 } else {
                     $ddd = 11;
                 }
-
                 $signup->prefix_local = '0/55,*/55' . $ddd . '/8,*/55' . $ddd . '/9';
             } else {
                 $signup->prefix_local = '';
