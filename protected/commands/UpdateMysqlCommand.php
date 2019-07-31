@@ -101,7 +101,7 @@ class UpdateMysqlCommand extends ConsoleCommand
 			ALTER TABLE `pkg_campaign`  ADD CONSTRAINT `fk_pkg_plan_pkg_campaign` FOREIGN KEY (`id_plan`) REFERENCES `pkg_plan` (`id`);
 			INSERT INTO pkg_configuration VALUES
 				(NULL, 'Link to signup terms', 'accept_terms_link', '', 'Set a link to signup terms', 'global', '1'),
-				(NULL, 'Auto gernerate user in Signup form', 'auto_generate_user_signup', '1', 'Auto gernerate user in Signup form', 'global', '1'),
+				(NULL, 'Auto gernerate user in Signup form', 'auto_generate_user_signup', '1', 'Auto generate user in Signup form', 'global', '1'),
 				(NULL, 'Notificação de  Pagamento de serviços', 'service_daytopay', '5', 'Total Dias anterior ao vencimento que o MagnusBilling avisara o cliente para pagar os serviços', 'global', '1');
 				";
             $this->executeDB($sql);
@@ -1451,6 +1451,94 @@ class UpdateMysqlCommand extends ConsoleCommand
             $this->executeDB($sql);
 
             $version = '6.6.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        //2019-07-18
+        if ($version == '6.6.1') {
+
+            $sql = "
+			INSERT INTO pkg_configuration VALUES
+				(NULL, 'Send email to admin when user signup from form', 'signup_admin_email', '1', 'Send email to administrator email when creation new account from signup page\n 0 - Disable \n1 - Enable', 'global', '1')";
+            $this->executeDB($sql);
+
+            $sql = "CREATE TABLE `pkg_cryptocurrency` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`id_user` int(11) NOT NULL,
+				`status` TINYINT(1) NOT NULL DEFAULT '0',
+				`currency` varchar(50) NOT NULL,
+				`amountCrypto` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+				`amount` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+				`date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (`id`),
+				KEY `fk_pkg_user_pkg_cryptocurrency` (`id_user`),
+				CONSTRAINT `fk_pkg_user_pkg_cryptocurrency` FOREIGN KEY (`id_user`) REFERENCES `pkg_user` (`id`) ON DELETE CASCADE
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO `pkg_method_pay` (`id`, `id_user`, `payment_method`, `show_name`, `country`, `active`, `active_agent`, `obs`, `url`, `username`, `pagseguro_TOKEN`, `fee`, `boleto_convenio`, `boleto_banco`, `boleto_agencia`, `boleto_conta_corrente`, `boleto_inicio_nosso_numeroa`, `boleto_carteira`, `boleto_taxa`, `boleto_instrucoes`, `boleto_nome_emp`, `boleto_end_emp`, `boleto_cidade_emp`, `boleto_estado_emp`, `boleto_cpf_emp`, `P2P_CustomerSiteID`, `P2P_KeyID`, `P2P_Passphrase`, `P2P_RecipientKeyID`, `P2P_tax_amount`, `client_id`, `client_secret`, `SLAppToken`, `SLAccessToken`, `SLSecret`, `SLIdProduto`, `SLvalidationtoken`, `min`, `max`, `showFields`) VALUES
+				(NULL, 1, 'cryptocurrency', 'BITCOIN', 'Global', 1, 0, NULL, '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', NULL, NULL, NULL, NULL, NULL, 10, 500, 'payment_method,show_name,id_user,country,active,min,max,username,client_id,client_secret');
+			";
+            $this->executeDB($sql);
+
+            $version = '6.6.2';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        //2019-07-24
+        if ($version == '6.6.2') {
+
+            $sql = "
+            	TRUNCATE pkg_call_chart;
+            	ALTER TABLE `pkg_call_chart` ADD UNIQUE(`date`);";
+            $this->executeDB($sql);
+
+            $version = '6.6.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        if ($version == '6.6.3') {
+
+            $sql = "ALTER TABLE pkg_servers ADD `name` VARCHAR(100) NOT NULL AFTER `id`;
+            	UPDATE pkg_servers SET name = host;";
+            $this->executeDB($sql);
+
+            $version = '6.6.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '6.6.4') {
+
+            $sql = "
+				CREATE TABLE IF NOT EXISTS `pkg_cdr_summary_ids` (
+					`id` int(11) NOT NULL AUTO_INCREMENT,
+					`day` date NOT NULL,
+					cdr_id int(11) NOT NULL,
+					cdr_falide_id int(11) NOT NULL,
+					PRIMARY KEY (`id`),
+					UNIQUE KEY `day` (`day`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;";
+            $this->executeDB($sql);
+            $version = '6.6.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '6.6.5') {
+
+            $sql = "UPDATE pkg_configuration SET `config_value` = '1' WHERE config_key = 'username_generate'";
+            $this->executeDB($sql);
+
+            $sql    = "SELECT config_value FROM pkg_configuration WHERE config_key = 'generate_length'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+            if ($result[0]['config_value'] == '0') {
+                $sql = "UPDATE pkg_configuration SET `config_value` = '5' WHERE config_key = 'generate_length'";
+                $this->executeDB($sql);
+            }
+
+            $version = '6.6.7';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

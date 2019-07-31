@@ -86,13 +86,10 @@ class CallShopCdrController extends Controller
     public function setAttributesModels($attributes, $models)
     {
         $modelCallShop = $this->getSumPrice();
-
-        for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
-
+        $pkCount       = is_array($attributes) || is_object($attributes) ? $attributes : [];
+        for ($i = 0; $i < count($pkCount); $i++) {
             $attributes[$i]['priceSum'] = round($modelCallShop->price, 2);
-
         }
-
         return $attributes;
     }
 }

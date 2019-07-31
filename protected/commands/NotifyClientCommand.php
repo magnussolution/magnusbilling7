@@ -48,7 +48,7 @@ class NotifyClientCommand extends ConsoleCommand
 
             $modelSmtp = Smtps::model()->find('id_user = :key', array(':key' => $user->id_user));
 
-            if (!count($modelSmtp)) {
+            if (!isset($modelSmtp->id)) {
                 continue;
             }
 
