@@ -22,6 +22,7 @@ class MassiveCall
 {
     public function send($agi, &$MAGNUS, &$CalcAgi)
     {
+
         require_once 'Tts.php';
         $uploaddir = $MAGNUS->magnusFilesDirectory . 'sounds/';
 
@@ -60,118 +61,140 @@ class MassiveCall
 
         $forward_number = $modelCampaign->forward_number;
 
-        /*VERIFICA SE CAMPAÃ‘A TEM ENCUESTA*/
-        $sql               = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
-        $modelCampaignPoll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        if ($agi->get_variable("MBILLINGRESULT", true) && preg_match('/AGI\|FORWARD/', $agi->get_variable("MBILLINGRESULT", true))) {
+            //massive call execute from app_mbilling and have redirect
+            $res = explode('|', $agi->get_variable("MBILLINGRESULT", true));
+            $agi->verbose(print_r($res, true));
+            $now                = $res[2];
+            $res_dtmf['result'] = $modelCampaign->digit_authorize;
+        } elseif ($agi->get_variable("MBILLINGRESULT", true) && preg_match('/AGI\|POLL/', $agi->get_variable("MBILLINGRESULT", true))) {
+            //massive call execute from app_mbilling and have poll
+            $res = explode('|', $agi->get_variable("MBILLINGRESULT", true));
+            $agi->verbose(print_r($res, true));
+            $now                = $res[2];
+            $res_dtmf['result'] = $res[3];
 
-        if (isset($modelCampaign->audio_2) && strlen($modelPhoneNumber->name) > 3 && (strlen($modelCampaign->audio_2) > 5) || strlen($modelCampaign->tts_audio2) > 2) {
-            $agi->verbose('get phonenumber name from TTS', 10);
-            $tts  = true;
-            $file = $idPhonenumber . date("His");
-
-            $audio_name = Tts::create($MAGNUS, $modelPhoneNumber->name);
-
-        }
-
-        /*AUDIO FOR CAMPAIN*/
-        if (strlen($modelCampaign->tts_audio) > 2) {
-
-            $file = 'campaign_' . MD5($modelCampaign->tts_audio);
-            if (file_exists('/tmp/' . $file . '.wav')) {
-                $agi->verbose('Audio already exist');
-                $audio = '/tmp/' . $file;
-            } else {
-                $agi->verbose('Get audio from TTS');
-                $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio);
-            }
+            /*VERIFICA SE CAMPAÃ‘A TEM ENCUESTA*/
+            $sql               = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
+            $modelCampaignPoll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+            $forward_number    = "";
 
         } else {
-            $audio = $uploaddir . "idCampaign_" . $modelCampaign->id;
-        }
 
-        //If exist audio2 execute audio1
-        if (isset($tts)) {
-            $agi->stream_file($audio, '#');
+            /*VERIFICA SE CAMPAÃ‘A TEM ENCUESTA*/
+            $sql               = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
+            $modelCampaignPoll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
-        } else {
-            // CHECK IF NEED AUTORIZATION FOR EXECUTE POLL OR IS EXISTE FORWARD NUMBER
-            if (strlen($forward_number) > 2 || (isset($modelCampaignPoll[0]->id) && $modelCampaignPoll[0]->request_authorize == 1)) {
-                $res_dtmf = $agi->get_data($audio, 5000, 1);
-            } else {
-                $agi->stream_file($audio, ' #');
-            }
-        }
+            if (isset($modelCampaign->audio_2) && strlen($modelPhoneNumber->name) > 3 && (strlen($modelCampaign->audio_2) > 5) || strlen($modelCampaign->tts_audio2) > 2) {
+                $agi->verbose('get phonenumber name from TTS', 10);
+                $tts  = true;
+                $file = $idPhonenumber . date("His");
 
-        //execute
-        if (isset($tts)) {
-            $agi->stream_file($audio_name, ' #');
-            if (!preg_match('/campaign/', $audio_name)) {
-                $agi->verbose('delete audio name ' . $audio_name, 10);
-                exec("rm -rf $audio_name*");
-            }
-        }
+                $audio_name = Tts::create($MAGNUS, $modelPhoneNumber->name);
 
-        if (strlen($modelCampaign->audio_2) > 5 || strlen($modelCampaign->tts_audio2) > 2) {
-
-            /*Execute audio 2*/
-
-            if (strlen($modelCampaign->tts_audio2) > 2) {
-
-                $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio2);
-
-            } else {
-                $audio = $uploaddir . "idCampaign_" . $idCampaign . "_2";
             }
 
-            // CHECK IF NEED AUTORIZATION FOR EXECUTE POLL OR IS EXISTE FORWARD NUMBER
-            if (strlen($forward_number) > 2 || (isset($modelCampaignPoll[0]) && $modelCampaignPoll[0]->request_authorize == 1)) {
-                $res_dtmf = $agi->get_data($audio, 5000, 1);
-            } else {
-                $agi->stream_file($audio, ' #');
-            }
+            /*AUDIO FOR CAMPAIN*/
+            if (strlen($modelCampaign->tts_audio) > 2) {
 
-        }
-
-        if (strlen($modelCampaign->asr_options)) {
-            //execute audio to ASR
-            for ($i = 0; $i < 4; $i++) {
-                $agi->execute('AGI speech-recog.agi,"pt-BR",2,,NOBEEP');
-                $textASR = $agi->get_variable("utterance", true);
-                $agi->verbose('O texto que você acabou de dizer: ' . $textASR);
-                if (strlen($textASR) < 1) {
-                    $text  = "Desculpe não consegui te compreender. Vamos tentar novamente?";
-                    $audio = Tts::create($MAGNUS, $text);
-
-                    $agi->stream_file($audio, ' #');
-
-                } elseif (preg_match('/' . $modelCampaign->asr_options . '/', $textASR)) {
-
-                    $text  = "Você disse. " . $textASR . ". Por favor aguarde.";
-                    $audio = Tts::create($MAGNUS, $text);
-
-                    $agi->stream_file($audio, ' #');
-
-                    $res_dtmf['result'] = 1;
-                    break;
+                $file = 'campaign_' . MD5($modelCampaign->tts_audio);
+                if (file_exists('/tmp/' . $file . '.wav')) {
+                    $agi->verbose('Audio already exist');
+                    $audio = '/tmp/' . $file;
                 } else {
+                    $agi->verbose('Get audio from TTS');
+                    $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio);
+                }
 
-                    $text  = "Você realmente não quer escutar o recado? Vamos tentar novamente?";
-                    $audio = Tts::create($MAGNUS, $text);
+            } else {
+                $audio = $uploaddir . "idCampaign_" . $modelCampaign->id;
+            }
 
+            //If exist audio2 execute audio1
+            if (isset($tts)) {
+                $agi->stream_file($audio, '#');
+
+            } else {
+                // CHECK IF NEED AUTORIZATION FOR EXECUTE POLL OR IS EXISTE FORWARD NUMBER
+                if (strlen($forward_number) > 2 || (isset($modelCampaignPoll[0]->id) && $modelCampaignPoll[0]->request_authorize == 1)) {
+                    $res_dtmf = $agi->get_data($audio, 5000, 1);
+                } else {
                     $agi->stream_file($audio, ' #');
                 }
             }
+
+            //execute
+            if (isset($tts)) {
+                $agi->stream_file($audio_name, ' #');
+                if (!preg_match('/campaign/', $audio_name)) {
+                    $agi->verbose('delete audio name ' . $audio_name, 10);
+                    exec("rm -rf $audio_name*");
+                }
+            }
+
+            if (strlen($modelCampaign->audio_2) > 5 || strlen($modelCampaign->tts_audio2) > 2) {
+
+                /*Execute audio 2*/
+
+                if (strlen($modelCampaign->tts_audio2) > 2) {
+
+                    $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio2);
+
+                } else {
+                    $audio = $uploaddir . "idCampaign_" . $idCampaign . "_2";
+                }
+
+                // CHECK IF NEED AUTORIZATION FOR EXECUTE POLL OR IS EXISTE FORWARD NUMBER
+                if (strlen($forward_number) > 2 || (isset($modelCampaignPoll[0]) && $modelCampaignPoll[0]->request_authorize == 1)) {
+                    $res_dtmf = $agi->get_data($audio, 5000, 1);
+                } else {
+                    $agi->stream_file($audio, ' #');
+                }
+
+            }
+
+            if (strlen($modelCampaign->asr_options)) {
+                //execute audio to ASR
+                for ($i = 0; $i < 4; $i++) {
+                    $agi->execute('AGI speech-recog.agi,"pt-BR",2,,NOBEEP');
+                    $textASR = $agi->get_variable("utterance", true);
+                    $agi->verbose('O texto que você acabou de dizer: ' . $textASR);
+                    if (strlen($textASR) < 1) {
+                        $text  = "Desculpe não consegui te compreender. Vamos tentar novamente?";
+                        $audio = Tts::create($MAGNUS, $text);
+
+                        $agi->stream_file($audio, ' #');
+
+                    } elseif (preg_match('/' . $modelCampaign->asr_options . '/', $textASR)) {
+
+                        $text  = "Você disse. " . $textASR . ". Por favor aguarde.";
+                        $audio = Tts::create($MAGNUS, $text);
+
+                        $agi->stream_file($audio, ' #');
+
+                        $res_dtmf['result'] = 1;
+                        break;
+                    } else {
+
+                        $text  = "Você realmente não quer escutar o recado? Vamos tentar novamente?";
+                        $audio = Tts::create($MAGNUS, $text);
+
+                        $agi->stream_file($audio, ' #');
+                    }
+                }
+            }
+
+            $agi->verbose('RESULT DTMF ' . $res_dtmf['result'], 25);
+
+            if (strlen($modelCampaign->audio) < 5 && strlen($forward_number) > 2) {
+                $res_dtmf['result'] = 1;
+                $agi->verbose('CAMPAIN SEM AUDIO, ENVIA DIRETO PARA ' . $forward_number);
+            }
+
+            //CHECK IF IS FORWARD EXTERNAL CALLL
+            $agi->verbose("forward_number $forward_number , res_dtmf: " . $res_dtmf['result'] . ", digit_authorize: " . $modelCampaignPoll[0]->digit_authorize, 10);
+
         }
-
-        $agi->verbose('RESULT DTMF ' . $res_dtmf['result'], 25);
-
-        if (strlen($modelCampaign->audio) < 5 && strlen($forward_number) > 2) {
-            $res_dtmf['result'] = 1;
-            $agi->verbose('CAMPAIN SEM AUDIO, ENVIA DIRETO PARA ' . $forward_number);
-        }
-
-        //CHECK IF IS FORWARD EXTERNAL CALLL
-        $agi->verbose("forward_number $forward_number , res_dtmf: " . $res_dtmf['result'] . ", digit_authorize: " . $modelCampaignPoll[0]->digit_authorize, 10);
 
         if (strlen($forward_number) > 2 && ($res_dtmf['result'] == $modelCampaign->digit_authorize || $modelCampaign->digit_authorize == '-1')) {
 
