@@ -40,6 +40,7 @@ class MassiveCallCommand extends ConsoleCommand
         $modelCampaign = Campaign::model()->findAll(array(
             'condition' => $filter,
             'params'    => $params,
+            'order'     => 'RAND()',
         ));
 
         if ($this->debug >= 1) {
@@ -51,9 +52,37 @@ class MassiveCallCommand extends ConsoleCommand
                 echo "SEARCH NUMBER IN CAMPAIGN " . $campaign->name . "\n";
             }
 
+            $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $campaign->idUser->id_plan;
+            $id_user  = $campaign->idUser->id;
+            $username = $campaign->idUser->username;
+            $id_agent = $campaign->idUser->id_user;
+
+            if ($id_agent > 1) {
+                $id_plan_agent = $id_plan;
+                $modelAgent    = User::model()->findByPk((int) $id_agent);
+                $id_plan       = $modelAgent->id_plan;
+            } else {
+                $id_plan_agent = 0;
+            }
+
+            if (UserCreditManager::checkGlobalCredit($id_user) === false) {
+                if ($this->debug >= 1) {
+                    echo " USER NO CREDIT FOR CALL " . $username . "\n\n\n";
+                }
+
+                continue;
+            }
+
             //get all campaign phonebook
-            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', array(':key' => $campaign->id));
-            $ids_phone_books        = array();
+            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll(
+                array(
+                    'condition' => 'id_campaign = :key',
+                    'params'    => array(':key' => $campaign->id),
+                    'order'     => 'RAND()',
+                )
+            );
+
+            $ids_phone_books = array();
             foreach ($modelCampaignPhonebook as $key => $phonebook) {
                 $ids_phone_books[] = $phonebook->id_phonebook;
             }
@@ -90,21 +119,23 @@ class MassiveCallCommand extends ConsoleCommand
             $i         = 0;
             $ids       = array();
             $sleepNext = 1;
+
+            foreach ($modelPhoneNumber as $phone) {
+                $ids[] = $phone->id;
+            }
+
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('id', $ids);
+            PhoneNumber::model()->updateAll(
+                array(
+                    'status' => '2',
+                    'try'    => new CDbExpression('try + 1'),
+                ),
+                $criteria
+            );
+
             foreach ($modelPhoneNumber as $phone) {
                 $i++;
-
-                $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $campaign->idUser->id_plan;
-                $id_user  = $campaign->idUser->id;
-                $username = $campaign->idUser->username;
-                $id_agent = $campaign->idUser->id_user;
-
-                if ($id_agent > 1) {
-                    $id_plan_agent = $id_plan;
-                    $modelAgent    = User::model()->findByPk((int) $id_agent);
-                    $id_plan       = $modelAgent->id_plan;
-                } else {
-                    $id_plan_agent = 0;
-                }
 
                 $name_number = $phone->name;
                 $destination = $phone->number;
@@ -129,14 +160,6 @@ class MassiveCallCommand extends ConsoleCommand
                     $phone->save();
                     if ($this->debug >= 1) {
                         echo "DISABLE NUMBER  " . $destination . " AFTER TWO TRYING\n\n\n";
-                    }
-
-                    continue;
-                }
-
-                if (UserCreditManager::checkGlobalCredit($id_user) === false) {
-                    if ($this->debug >= 1) {
-                        echo " USER NO CREDIT FOR CALL " . $username . "\n\n\n";
                     }
 
                     continue;
@@ -246,16 +269,6 @@ class MassiveCallCommand extends ConsoleCommand
                 $ids[] = $phone->id;
 
             }
-
-            $criteria = new CDbCriteria();
-            $criteria->addInCondition('id', $ids);
-            PhoneNumber::model()->updateAll(
-                array(
-                    'status' => '2',
-                    'try'    => new CDbExpression('try + 1'),
-                ),
-                $criteria
-            );
 
             echo "Campain " . $campaign->name . " sent " . $i . " calls \n\n";
         }
