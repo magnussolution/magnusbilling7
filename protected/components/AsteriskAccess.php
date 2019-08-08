@@ -419,7 +419,7 @@ class AsteriskAccess
                 if ($call[4] == 'Down') {
                     continue;
                 }
-                if ($call[6] == '<none>' && $call[7] != 'AGI') {
+                if ($call[6] == '<none>' && $call[7] != 'AGI' && substr($call[1], 0, 2) != 'MC') {
                     continue;
                 }
                 $call['server'] = $server['host'];
