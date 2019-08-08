@@ -10,7 +10,7 @@
  * @copyright   Todos os direitos reservados.
  * ###################################
  * =======================================
- * MagnusSolution.com <info@magnussolution.com> 
+ * MagnusSolution.com <info@magnussolution.com>
  * 22/11/2012
  */
 Locale.load({
@@ -23,18 +23,18 @@ Locale.load({
     'Not working': 'Not working',
     'Maximum trying': 'Maximum trying',
     'Interval beteween trying': 'Interval beteween trying',
-    'Call Archive': 'Call Archive',
-    'Tariff Find Limit': 'Tariff Find Limit',
-    'Call Failed': 'Call Failed',
-    'Summary per Day': 'Summary per dia',
-    'Summary per Month': 'Summary per Month',
-    'Summary per Trunk': 'Summary per Trunk',
-    'Summary per User': 'Summary per User',
-    'Summary Day User': 'Summary per Day/User',
-    'Summary Day Trunk': 'Summary Day/Trunk',
-    'Summary Day Agent': 'Summary Day/Agent',
-    'Summary Month User': 'Summary Month/User',
-    'Summary Month Trunk': 'Summary Month/Trunk',
+    'Call Archive': 'Call archive',
+    'Tariff Find Limit': 'Tariff find limit',
+    'Call Failed': 'Failed calls',
+    'Summary per Day': 'Summary per day',
+    'Summary per Month': 'Summary per month',
+    'Summary per Trunk': 'Summary per trunk',
+    'Summary per User': 'Summary per user',
+    'Summary Day User': 'Summary per day/user',
+    'Summary Day Trunk': 'Summary day/trunk',
+    'Summary Day Agent': 'Summary day/agent',
+    'Summary Month User': 'Summary month/user',
+    'Summary Month Trunk': 'Summary month/trunk',
     'Timeout in seconds to wait the sip answer the call': 'Timeout in seconds to wait the sip answer the call',
     'Only Spy': 'Only Spy',
     'Whisper, can talk to the spied': 'Whisper, can talk to the spied',
