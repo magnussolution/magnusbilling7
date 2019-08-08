@@ -25,4 +25,22 @@ class Model extends CActiveRecord
     {
         return $this->_module;
     }
+
+    public function uniquePeerName($attribute, $params)
+    {
+
+        if (isset($this->name)) {
+            $modelTrunk = Trunk::model()->find('trunkcode = :key', array(':key' => $this->name));
+            if (isset($modelTrunk->id)) {
+                $this->addError($attribute, Yii::t('yii', 'This username is in use by a trunk'));
+            }
+        } else if (isset($this->trunkcode)) {
+
+            $modelSip = Sip::model()->find('name = :key', array(':key' => $this->trunkcode));
+            if (isset($modelSip->id)) {
+                $this->addError($attribute, Yii::t('yii', 'This trunk name is in use by a Sip Account'));
+            }
+        }
+
+    }
 }

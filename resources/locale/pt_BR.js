@@ -1,4 +1,6 @@
 Locale.load({
+    'This trunk name is in use by a Sip Account': 'Este nome esta em uso por uma Conta VOIP',
+    'This username is in use by a trunk': 'Este usuário esta em uso por um Tronco',
     'week': 'semana',
     'Return Credit': 'Retornar Credito',
     'Reprocess': 'Reprocessar',

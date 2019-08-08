@@ -69,6 +69,7 @@ class Trunk extends Model
             array('port', 'length', 'max' => 5),
             array('register_string', 'length', 'max' => 300),
             array('trunkcode', 'checkTrunkCode'),
+            array('trunkcode', 'uniquePeerName'),
         );
     }
 
