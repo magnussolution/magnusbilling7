@@ -37,12 +37,16 @@ class SiteController extends Controller
         Yii::app()->session['wallpaper'] = $wallpaper;
         echo 'window.colorMenu = ' . json_encode($this->config['global']['color_menu']) . ';';
         echo 'window.moduleExtra = ' . json_encode($this->config['global']['module_extra']) . ';';
-        $reCaptchaKey = isset($this->config['global']['reCaptchaKey'])
+        $reCaptchaKey = isset($this->config['global']['reCaptchaKey']) &&
+        strlen($this->config['global']['reCaptchaSecret']) > 10 &&
+        strlen($this->config['global']['reCaptchaKey']) > 10
         ? $this->config['global']['reCaptchaKey']
         : "";
         echo 'window.reCaptchaKey = ' . json_encode($reCaptchaKey) . ';';
         $upload_max_size = ini_get('upload_max_filesize');
         echo 'window.uploadFaxFilesize = "' . $upload_max_size . '";';
         echo 'window.uploadFaxFilesizebites = "' . intval($upload_max_size) . '";';
+        echo 'window.show_signup_button = ' . $this->config['global']['show_signup_button'] . ';';
+
     }
 }

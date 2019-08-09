@@ -1545,7 +1545,7 @@ class UpdateMysqlCommand extends ConsoleCommand
 
         if ($version == '6.6.7') {
 
-        	$sql    = "SELECT id FROM pkg_group_user WHERE name = 'Agent' AND id_user_type = '2'";
+            $sql    = "SELECT id FROM pkg_group_user WHERE name = 'Agent' AND id_user_type = '2'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
             if ($result[0]['id'] == '2') {
                 $sql = "UPDATE pkg_group_module SET `show_menu` = '0' WHERE id_group = '2' AND id_module = '2'";
@@ -1553,6 +1553,23 @@ class UpdateMysqlCommand extends ConsoleCommand
             }
 
             $version = '6.6.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        //2019-08-08
+        if ($version == '6.6.8') {
+
+            $sql = "
+			INSERT INTO pkg_configuration VALUES
+				(NULL, 'Show Signup button on login page', 'show_signup_button', '0', 'Show Signup button on login page\n 0 - Disable \n1 - Enable', 'global', '1')";
+            $this->executeDB($sql);
+
+            $sql = "
+			INSERT INTO pkg_configuration VALUES
+				(NULL, 'reCaptchaKey secretkey', 'reCaptchaSecret', '', 'Generate your secredt key in https://www.google.com/recaptcha/admin#list', 'global', '1')";
+            $this->executeDB($sql);
+
+            $version = '6.6.9';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
