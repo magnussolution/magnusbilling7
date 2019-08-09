@@ -87,6 +87,8 @@ class AuthenticationController extends Controller
             return;
         }
 
+        $this->checkCaptcha();
+
         if ($modelUser->active != 1) {
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
@@ -621,6 +623,44 @@ class AuthenticationController extends Controller
             MagnusLog::insertLOG(1, $info);
 
             exit;
+        }
+    }
+
+    public function checkCaptcha()
+    {
+        if (strlen($this->config['global']['reCaptchaSecret']) > 10 && strlen($this->config['global']['reCaptchaKey']) > 10) {
+            $post_data = http_build_query(
+                array(
+                    'secret'   => $this->config['global']['reCaptchaSecret'],
+                    'response' => $_POST['key'],
+                )
+            );
+
+            $opts = array('http' => array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'content' => $post_data,
+            ),
+            );
+
+            $context  = stream_context_create($opts);
+            $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+            try {
+                $response = json_decode($response);
+            } catch (Exception $e) {
+                echo json_encode(array(
+                    'success' => false,
+                    'msg'     => 'Invalid captcha json' . print_r($response, true),
+                ));
+                exi;
+            }
+            if ($response->success != true || $response->hostname != $_SERVER['HTTP_HOST']) {
+                echo json_encode(array(
+                    'success' => false,
+                    'msg'     => 'Invalid captcha',
+                ));
+                exit;
+            }
         }
     }
 }

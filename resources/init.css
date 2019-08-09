@@ -1,5 +1,8 @@
 /* Mask Loading App */
 
+.grecaptcha-badge {
+    top: 7px !important;
+}
 #loading-mask {
     position: absolute;
     left: 0;
