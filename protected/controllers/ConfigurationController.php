@@ -94,4 +94,17 @@ class ConfigurationController extends Controller
             $this->nameMsg     => 'Success',
         ));
     }
+
+    public function setAttributesModels($attributes, $models)
+    {
+        for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
+            if ($attributes[$i]['config_key'] == 'reCaptchaKey') {
+                $attributes[$i]['config_value'] = '***************************************';
+            }if ($attributes[$i]['config_key'] == 'reCaptchaSecret') {
+                $attributes[$i]['config_value'] = '***************************************';
+            }
+
+        }
+        return $attributes;
+    }
 }
