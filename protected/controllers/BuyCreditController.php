@@ -15,7 +15,7 @@ class BuyCreditController extends Controller
             $pass           = $data[1];
             $_GET['amount'] = $data[2];
 
-            $modelSip = $this->remoteLogin($user, $pass);
+            $modelSip = AccessManager::checkAccess($user, $pass);
 
             if (!is_object($modelSip) || !count($modelSip)) {
                 echo 'User or password is invalid';

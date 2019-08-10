@@ -1574,6 +1574,33 @@ class UpdateMysqlCommand extends ConsoleCommand
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2019-08-09
+        if ($version == '6.6.9') {
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''API'')', 'api', 'offercdr', 12, 98)";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            $sql = "
+			    CREATE TABLE IF NOT EXISTS `pkg_api` (
+			    `id` int(11) NOT NULL AUTO_INCREMENT,
+			    `id_user` int(11) NOT NULL,
+			    `status` tinyint(11) NOT NULL DEFAULT '1',
+			    `api_key` varchar(150) NOT NULL,
+			    `api_secret` varchar(150) NOT NULL,
+			    `api_restriction_ips` varchar(150) DEFAULT NULL,
+			    `action` varchar(7) NOT NULL,
+			    PRIMARY KEY (`id`)
+			    ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+            $this->executeDB($sql);
+            $version = '6.7.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

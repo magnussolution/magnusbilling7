@@ -86,7 +86,9 @@ class BaseController extends CController
 
         $this->controllerName = Yii::app()->controller->id;
 
-        if (isset($_POST['ws'])) {
+        if (isset($_SERVER['HTTP_SIGN']) && isset($_SERVER['HTTP_KEY'])) {
+            ApiAccess::checkAuthentication();
+        } else if (isset($_POST['ws'])) {
             $filterUser = 'username = :key AND (UPPER(password) = :key1 OR UPPER(SHA1(password)) = :key1)';
 
             $modelUser = User::model()->find(

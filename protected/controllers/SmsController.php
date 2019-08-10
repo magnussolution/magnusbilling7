@@ -53,7 +53,7 @@ class SmsController extends Controller
             exit('invalid user');
         }
 
-        $modelSip = $this->remoteLogin($_GET['username'], $_GET['password']);
+        $modelSip = AccessManager::checkAccess($_GET['username'], $_GET['password']);
 
         if (!count($modelSip)) {
             exit('invalid user');
@@ -105,7 +105,7 @@ class SmsController extends Controller
             exit('invalid user');
         }
 
-        $modelSip = $this->remoteLogin($_POST['username'], $_POST['api']);
+        $modelSip = AccessManager::checkAccess($_GET['username'], $_GET['api']);
 
         if (!count($modelSip)) {
             exit('invalid user');

@@ -102,7 +102,7 @@ class Call0800WebController extends Controller
                 $user = $data[0];
                 $pass = $data[1];
 
-                $modelSip = $this->remoteLogin($user, $pass);
+                $modelSip = AccessManager::checkAccess($user, $pass);
 
                 if (!is_array($modelSip) || !count($modelSip)) {
                     echo 'User or password is invalid';
