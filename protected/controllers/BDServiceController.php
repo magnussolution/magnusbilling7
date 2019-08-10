@@ -38,7 +38,7 @@ class BDServiceController extends Controller
         if (!Yii::app()->session['id_user']) {
             $user     = $_POST['user'];
             $password = $_POST['pass'];
-            $modelSip = $this->remoteLogin($user, $password);
+            $modelSip = AccessManager::checkAccess($user, $pass);
 
         }
         if (!isset(Yii::app()->session['id_user'])) {
@@ -221,28 +221,28 @@ class BDServiceController extends Controller
 
         echo '<div id="container"><div id="form"> <div id="box-4">';
         echo '<form action="" id="form1" method="POST">
-			<fieldset class="well">
-				<div class="control-group">
+            <fieldset class="well">
+                <div class="control-group">
 
-					<div class="control-label">
-						<label >Select Service to new transfer<span class="star">&nbsp;*</span></label>
-					</div>
-					<div class="controls">
-						<select name="service">
-						  <option value="flexiload">Flexiload</option>
-						  <option value="bkash">Bkash</option>
-						  <option value="DBBL">DBBL</option>
-						</select>
-					</div>
-					</div>
+                    <div class="control-label">
+                        <label >Select Service to new transfer<span class="star">&nbsp;*</span></label>
+                    </div>
+                    <div class="controls">
+                        <select name="service">
+                          <option value="flexiload">Flexiload</option>
+                          <option value="bkash">Bkash</option>
+                          <option value="DBBL">DBBL</option>
+                        </select>
+                    </div>
+                    </div>
 
-					<br>
-					<div class="controls">
-						<button type="submit" class="btn btn-primary">Next</button>
-					</div>
+                    <br>
+                    <div class="controls">
+                        <button type="submit" class="btn btn-primary">Next</button>
+                    </div>
 
-			</fieldset>
-		</form>';
+            </fieldset>
+        </form>';
         echo '</div></div></div>';
 
         /*echo '<br><br><br><br><div id="container"><div id="form"> <div id="box-4">';
@@ -282,37 +282,37 @@ class BDServiceController extends Controller
         $selected2 = isset($_POST['type']) && $_POST['type'] == 2 ? 'selected' : '';
         echo '<div id="container"><div id="form"> <div id="box-4">';
         echo '<form action="" id="form2" method="POST">
-			<fieldset class="well">
-				<div class="control-group">
-					<div class="control-label">
-						<label >Selected Service: ' . ucfirst($_POST['service']) . '</label>
-					</div>
-					<br>
-					<div class="control-label">
-						<label >Number<span class="star">&nbsp;*</span></label>
-					</div>
-					<div class="controls">
-						<input type="text" name="number" size="25" required="" aria-required="true" value = "' . $_POST['number'] . '">
-					</div>
+            <fieldset class="well">
+                <div class="control-group">
+                    <div class="control-label">
+                        <label >Selected Service: ' . ucfirst($_POST['service']) . '</label>
+                    </div>
+                    <br>
+                    <div class="control-label">
+                        <label >Number<span class="star">&nbsp;*</span></label>
+                    </div>
+                    <div class="controls">
+                        <input type="text" name="number" size="25" required="" aria-required="true" value = "' . $_POST['number'] . '">
+                    </div>
 
-					<div class="control-label">
-						<label >Amount<span class="star">&nbsp;(Min: ' . $min . ' BDT, Max: ' . $max . ' BDT) </span></label>
-					</div>
-					<div class="controls">
-						<input id="valid_age" onkeyup="callAjax(this.value, ' . trim($this->config['global']['BDService_cambio']) . ')" type="number" name="amount" value = "' . $_POST['amount'] . '">
-					</div>
-					<div id="rsp_age" style="font-size: 11px; color: red;"></div>
-					<input type="hidden" name="service" value="' . $_POST['service'] . '">
-					<input type="hidden" name="type" value="1">
-					<input type="hidden" name="min" value="' . $min . '">
-					<input type="hidden" name="max" value="' . $max . '">
-					<br>
-					<div class="controls">
-						<button type="submit" id="sendButton" class="btn btn-primary">Send Credit</button>
-					</div>
+                    <div class="control-label">
+                        <label >Amount<span class="star">&nbsp;(Min: ' . $min . ' BDT, Max: ' . $max . ' BDT) </span></label>
+                    </div>
+                    <div class="controls">
+                        <input id="valid_age" onkeyup="callAjax(this.value, ' . trim($this->config['global']['BDService_cambio']) . ')" type="number" name="amount" value = "' . $_POST['amount'] . '">
+                    </div>
+                    <div id="rsp_age" style="font-size: 11px; color: red;"></div>
+                    <input type="hidden" name="service" value="' . $_POST['service'] . '">
+                    <input type="hidden" name="type" value="1">
+                    <input type="hidden" name="min" value="' . $min . '">
+                    <input type="hidden" name="max" value="' . $max . '">
+                    <br>
+                    <div class="controls">
+                        <button type="submit" id="sendButton" class="btn btn-primary">Send Credit</button>
+                    </div>
 
-			</fieldset>
-		</form>';
+            </fieldset>
+        </form>';
         echo '</div></div></div>';
     }
 
@@ -466,11 +466,11 @@ class BDServiceController extends Controller
         Yii::app()->db->createCommand($sql)->execute();
 
         $sql = "CREATE TABLE IF NOT EXISTS `pkg_BDService` (
-			  `id` int(11) NOT NULL AUTO_INCREMENT,
-			  `id_user` int(11) NOT NULL,
-			  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-			  PRIMARY KEY (`id`)
-			) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;";
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `id_user` int(11) NOT NULL,
+              `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+              PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;";
         Yii::app()->db->createCommand($sql)->execute();
 
         $sql = "INSERT IGNORE INTO pkg_BDService (id) VALUES (15254);";
@@ -596,8 +596,8 @@ class BDServiceController extends Controller
 
   function callAjax(value, cambio)
   {
-  	euro = value * cambio;
-  	document.getElementById("rsp_age").innerHTML=euro.toFixed(2) +" EUR";
+    euro = value * cambio;
+    document.getElementById("rsp_age").innerHTML=euro.toFixed(2) +" EUR";
 
   }
 

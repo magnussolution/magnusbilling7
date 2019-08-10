@@ -1,6 +1,6 @@
 <?php
 /**
- * Acoes do modulo "Campaign".
+ * Controller module "MBillingSoftphone".
  *
  * =======================================
  * ###################################
@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2018 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2019 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -17,7 +17,7 @@
  * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
  * =======================================
  * Magnusbilling.com <info@magnusbilling.com>
- * 28/10/2012
+ * 28/10/2019
  * index.php/mBillingSoftphone/read?l=felipe|137DCEC44002170DB2D2DCD9C70DBEBF
  */
 
@@ -35,7 +35,7 @@ class MBillingSoftphoneController extends Controller
             $user = $data[0];
             $pass = $data[1];
 
-            $modelSip = $this->remoteLogin($user, $pass);
+            $modelSip = AccessManager::checkAccess($user, $pass);
 
             if (!count($modelSip)) {
                 echo 'false';
@@ -102,7 +102,7 @@ class MBillingSoftphoneController extends Controller
             $user = $data[0];
             $pass = $data[1];
 
-            $modelSip = $this->remoteLogin($user, $pass);
+            $modelSip = AccessManager::checkAccess($user, $pass);
 
             if (!count($modelSip)) {
                 echo 'false';
