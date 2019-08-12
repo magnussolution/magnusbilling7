@@ -657,7 +657,7 @@ class AuthenticationController extends Controller
             if ($response->success != true || $response->hostname != $_SERVER['HTTP_HOST']) {
                 echo json_encode(array(
                     'success' => false,
-                    'msg'     => 'Invalid captcha',
+                    'msg'     => 'Invalid captcha. Refresh the page to generate new code',
                 ));
                 exit;
             }
