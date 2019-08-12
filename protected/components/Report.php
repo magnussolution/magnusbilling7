@@ -94,7 +94,9 @@ class Report extends FPDF
     public function Header()
     {
         if ($this->PageNo() === 1) {
-            $date = utf8_decode($this->strDate) . date($this->formatDate);
+
+            $date =strlen($this->strDat) > 5 ? utf8_decode($this->strDate) . date($this->formatDate) : '';
+
             $user = isset($_SESSION[$this->idxUserSession]) ? utf8_decode($this->strUser) . $_SESSION[$this->idxUserSession] : isset($this->user) ? $this->user : null;
 
             if (strlen($this->logo) > 10) {
@@ -338,7 +340,7 @@ class Report extends FPDF
             return;
         }
 
-        if ($fieldName == 'sessiontime') {
+        if ($fieldName == 'sessiontime' || $fieldName == 'real_sessiontime') {
             $this->Cell($widthFill, 5, $this->formtSeconds($value), 0, 0, 'L', true);
             $this->SetTextColor(0, 0, 0);
             return;
