@@ -19,9 +19,11 @@
  */
 class ApiAccess
 {
-    public static function checkAuthentication()
+    public function checkAuthentication($baseController)
     {
-        $config   = LoadConfig::getConfig();
+
+        $config = $baseController->config;
+
         $modelApi = Api::model()->find('api_key = :key AND status = 1', array(
             ':key' => $_SERVER['HTTP_KEY'],
         ));
@@ -69,10 +71,10 @@ class ApiAccess
             $modelUser = $modelApi->idUser;
             if (isset($modelUser->id)) {
 
-                ApiAccess::checkPermissions($modelApi);
+                $this->checkPermissions($modelApi);
 
                 if (isset($_POST['createUser'])) {
-                    ApiAccess::createUser();
+                    $this->createUser($baseController);
                     exit;
                 }
                 if ($_POST['action'] == 'save') {
@@ -106,7 +108,7 @@ class ApiAccess
                 Yii::app()->session['currency']      = $config['global']['base_currency'];
 
                 $modelGroupModule             = GroupModule::model()->getGroupModule(Yii::app()->session['id_group'], Yii::app()->session['isClient'], Yii::app()->session['id_user']);
-                Yii::app()->session['action'] = ApiAccess::getActions($modelGroupModule);
+                Yii::app()->session['action'] = $baseController->getActions($modelGroupModule);
 
                 if (isset($_POST['getMenu']) && isset($_POST['username'])) {
 
@@ -116,8 +118,8 @@ class ApiAccess
 
                         $modelGroupModule = GroupModule::model()->getGroupModule($modelUser->id_group, $idUserType == 3 ? true : false, $modelUser->id);
                         echo json_encode([
-                            'menu'    => ApiAccess::getMenu($modelGroupModule),
-                            'actions' => ApiAccess::getActions($modelGroupModule),
+                            'menu'    => $baseController->getMenu($modelGroupModule),
+                            'actions' => $baseController->getActions($modelGroupModule),
                         ]);
                     } else {
                         echo 'not found user';
@@ -157,7 +159,7 @@ class ApiAccess
 
     }
 
-    public static function checkPermissions($modelApi)
+    private function checkPermissions($modelApi)
     {
 
         if ($_POST['action'] == 'save' && $_POST['id'] == 0) {
@@ -176,132 +178,57 @@ class ApiAccess
 
     }
 
-    private static function getMenu($modules)
+    private function createUser($baseController)
     {
-        $menu = array();
 
-        foreach ($modules as $value) {
-            if ($value['module'] != 'buycredit') {
-                if (!$value['show_menu']) {
-                    continue;
-                }
-            }
+        $values = $_POST;
 
-            if (empty($value['id_module'])) {
-                array_push($menu, array(
-                    'text'    => preg_replace("/ Module/", "", $value['text']),
-                    'iconCls' => $value['icon_cls'],
-                    'rows'    => ApiAccess::getSubMenu($modules, $value['id']),
-                ));
-            }
+        $modelUser = User::model()->find('email = :key', array(':key' => $values['email']));
+
+        if (count($modelUser)) {
+            exit('This email already in use');
+
+        }
+        $modelUser = User::model()->find('username = :key', array(':key' => $values['username']));
+
+        if (count($modelUser)) {
+            exit('This username already in use');
         }
 
-        return $menu;
-    }
+        $values['username']        = isset($values['username']) ? $values['username'] : Util::getNewUsername();
+        $values['password']        = isset($values['password']) ? $values['password'] : trim(Util::generatePassword(10, true, true, true, false));
+        $values['callingcard_pin'] = isset($values['callingcard_pin']) ? $values['callingcard_pin'] : Util::getNewLock_pin();
+        $values['id_user']         = isset($values['id_user']) ? $values['id_user'] : 1;
 
-    private function getSubMenu($modules, $idOwner)
-    {
-        $subModulesOwner = Util::arrayFindByProperty($modules, 'id_module', $idOwner);
-        $subMenu         = array();
-
-        foreach ($subModulesOwner as $value) {
-
-            if ($value['module'] != 'buycredit') {
-                if (!$value['show_menu']) {
-                    continue;
-                }
-            }
-
-            if (!empty($value['module'])) {
-                array_push($subMenu, array(
-                    'text'             => $value['text'],
-                    'iconCls'          => $value['icon_cls'],
-                    'module'           => $value['module'],
-                    'action'           => $value['action'],
-                    'leaf'             => true,
-                    'createShortCut'   => $value['createShortCut'],
-                    'createQuickStart' => $value['createQuickStart'],
-                ));
+        if (isset($values['id_plan'])) {
+            $values['id_plan'] = $values['id_plan'];
+        } else {
+            $modelPlan = Plan::model()->find('signup = 1');
+            if (count($modelPlan)) {
+                $values['id_plan'] = $modelPlan->id;
             } else {
-                array_push($subMenu, array(
-                    'text'    => $value['text'],
-                    'iconCls' => $value['icon_cls'],
-                    'rows'    => ApiAccess::getSubMenu($modules, $value['id']),
-                ));
+                exit('No plan active');
             }
         }
 
-        return $subMenu;
-    }
-
-    private static function getActions($modules)
-    {
-        $actions = array();
-
-        foreach ($modules as $key => $value) {
-            if (!empty($value['action'])) {
-                $actions[$value['module']] = $value['action'];
-            }
+        if (!isset($values['credit'])) {
+            $values['credit'] = isset($modelPlan->ini_credit) ? $modelPlan->ini_credit : 0;
         }
 
-        return $actions;
-    }
-
-    private static function createUser()
-    {
-
-        $modelUser = User::model()->find('email = :key', array(':key' => $_POST['email']));
-
-        if (count($modelUser)) {
-            exit('COM_USERS_PROFILE_EMAIL1_MESSAGE');
-
-        }
-        $modelUser = User::model()->find('username = :key', array(':key' => $_POST['user']));
-
-        if (count($modelUser)) {
-            exit('COM_USERS_PROFILE_USERNAME_MESSAGE');
-        }
-
-        $modelPlan = Plan::model()->find('signup = 1');
-
-        if (count($modelPlan)) {
-            $id_plan = $modelPlan->id;
+        if (isset($values['id_group'])) {
+            $values['id_group'] = $values['id_group'];
         } else {
-            exit('No plan active');
-        }
-
-        $credit = $modelPlan->ini_credit;
-
-        if (isset($_POST['id_group'])) {
-            $id_group = $_POST['id_group'];
-
-        } else {
-
             $modelGroupUser = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
             if (count($modelGroupUser)) {
-                $id_group = $modelGroupUser[0]['id'];
+                $values['id_group'] = $modelGroupUser[0]['id'];
             } else {
                 exit('No plan group for user');
             }
         }
 
-        $callingcard_pin = Util::getNewLock_pin();
-
-        $modelUser                  = new User();
-        $modelUser->username        = $_POST['user'];
-        $modelUser->password        = $_POST['password'];
-        $modelUser->email           = $_POST['email'];
-        $modelUser->firstname       = $_POST['firstname'];
-        $modelUser->id_group        = $id_group;
-        $modelUser->id_plan         = $id_plan;
-        $modelUser->active          = $_POST['active'];
-        $modelUser->callingcard_pin = $callingcard_pin;
-        $modelUser->id_user         = 1;
-        $modelUser->credit          = $credit;
-        if (isset($_POST['phone']) && strlen($_POST['phone']) > 5) {
-            $modelUser->phone = $_POST['phone'];
-        }
-        $success = $modelUser->save();
+        $modelUser             = new User();
+        $modelUser->attributes = $values;
+        $success               = $modelUser->save();
 
         if ($success) {
 
@@ -320,7 +247,40 @@ class ApiAccess
             }
             $modelSip->save();
 
+            AsteriskAccess::instance()->generateSipPeers();
+
+            $attributes = false;
+            foreach ($modelUser as $key => $item) {
+
+                if (!strlen($item)) {
+                    continue;
+                }
+                $attributes[$key] = $item;
+
+                if (isset(Yii::app()->session['isClient']) && Yii::app()->session['isClient']) {
+                    foreach ($baseController->fieldsInvisibleClient as $field) {
+                        unset($attributes[$key][$field]);
+                    }
+                }
+
+                if (isset(Yii::app()->session['isAgent']) && Yii::app()->session['isAgent']) {
+                    foreach ($baseController->fieldsInvisibleAgent as $field) {
+                        unset($attributes[$key][$field]);
+                    }
+                }
+            }
+
+            echo json_encode([
+                'success' => true,
+                'data'    => print_r($attributes),
+            ]);
+
+        } else {
+            echo json_encode([
+                'success' => false,
+                'errors'  => $modelUser->getErrors(),
+            ]);
         }
-        echo json_encode(['success' => true]);
+
     }
 }

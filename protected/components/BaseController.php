@@ -87,7 +87,8 @@ class BaseController extends CController
         $this->controllerName = Yii::app()->controller->id;
 
         if (isset($_SERVER['HTTP_SIGN']) && isset($_SERVER['HTTP_KEY'])) {
-            ApiAccess::checkAuthentication();
+            $api = new ApiAccess();
+            $api->checkAuthentication($this);
         }
 
         if (!Yii::app()->session['id_user']) {
@@ -146,7 +147,65 @@ class BaseController extends CController
         parent::init();
     }
 
-    private function getActions($modules)
+    public function getMenu($modules)
+    {
+        $menu = array();
+
+        foreach ($modules as $value) {
+            if ($value['module'] != 'buycredit') {
+                if (!$value['show_menu']) {
+                    continue;
+                }
+            }
+
+            if (empty($value['id_module'])) {
+                array_push($menu, array(
+                    'text'    => preg_replace("/ Module/", "", $value['text']),
+                    'iconCls' => $value['icon_cls'],
+                    'rows'    => $this->getSubMenu($modules, $value['id']),
+                ));
+            }
+        }
+
+        return $menu;
+    }
+
+    public function getSubMenu($modules, $idOwner)
+    {
+        $subModulesOwner = Util::arrayFindByProperty($modules, 'id_module', $idOwner);
+        $subMenu         = array();
+
+        foreach ($subModulesOwner as $value) {
+
+            if ($value['module'] != 'buycredit') {
+                if (!$value['show_menu']) {
+                    continue;
+                }
+            }
+
+            if (!empty($value['module'])) {
+                array_push($subMenu, array(
+                    'text'             => $value['text'],
+                    'iconCls'          => $value['icon_cls'],
+                    'module'           => $value['module'],
+                    'action'           => $value['action'],
+                    'leaf'             => true,
+                    'createShortCut'   => $value['createShortCut'],
+                    'createQuickStart' => $value['createQuickStart'],
+                ));
+            } else {
+                array_push($subMenu, array(
+                    'text'    => $value['text'],
+                    'iconCls' => $value['icon_cls'],
+                    'rows'    => $this->getSubMenu($modules, $value['id']),
+                ));
+            }
+        }
+
+        return $subMenu;
+    }
+
+    public function getActions($modules)
     {
         $actions = array();
 
