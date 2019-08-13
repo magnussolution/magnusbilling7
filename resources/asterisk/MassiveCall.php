@@ -186,18 +186,12 @@ class MassiveCall
 
             $agi->verbose('RESULT DTMF ' . $res_dtmf['result'], 25);
 
-            if (strlen($modelCampaign->audio) < 5 && strlen($forward_number) > 2) {
-                $res_dtmf['result'] = 1;
-                $agi->verbose('CAMPAIN SEM AUDIO, ENVIA DIRETO PARA ' . $forward_number);
-            }
-
             //CHECK IF IS FORWARD EXTERNAL CALLL
             $agi->verbose("forward_number $forward_number , res_dtmf: " . $res_dtmf['result'] . ", digit_authorize: " . $modelCampaignPoll[0]->digit_authorize, 10);
 
         }
-
-        if (strlen($forward_number) > 2 && ($res_dtmf['result'] == $modelCampaign->digit_authorize || $modelCampaign->digit_authorize == '-1')) {
-
+        //if have a forward                         if res_dtmf is equal the digit_authorize                OR press any digit and digit_authorize equal -2 (any digit)    OR  digit_authorize equal -3 (every)
+        if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || (strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
             $agi->verbose("have Forward number $forward_number");
             $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF 1' WHERE id = $idPhonenumber LIMIT 1";
             $agi->exec($sql);
