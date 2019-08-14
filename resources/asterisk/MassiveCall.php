@@ -571,7 +571,9 @@ class MassiveCall
 
             if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
 
-                $MAGNUS->id_plan_agent = $agi->get_variable("AGENT_ID_PLAN", true);
+                $sql                   = "SELECT * FROM pkg_user WHERE id_user = " . $MAGNUS->id_agent . " LIMIT 1";
+                $modelAgent            = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                $MAGNUS->id_plan_agent = $modelAgent->id_plan;
                 $agi->verbose($MAGNUS->id_plan_agent);
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' $id_call' . $id_call . '$destination' . $destination, 10);
 

@@ -391,7 +391,7 @@ Help.load({
     'campaign.audio': 'Somente usado se o tipo de campanha for de voz. O audio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz',
     'campaign.audio_2': 'Se você usar TTS, o nome do número será executado entre o audio 1 e 2',
     'campaign.restrict_phone': 'Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.',
-    'campaign.digit_authorize': 'Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, entao coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Deixe em -1 para desativar esta função.',
+    'campaign.digit_authorize': 'Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, entao coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Digito", para enviar para o destino se o cliente marcar qualquer digito, ou "Sempre" para sempre enviar, independente se digitar algo ou não.',
     'campaign.id_phonebook': 'Selecione as agendas que esta campanha vai usar.',
     'campaign.daily_start_time': '',
     'campaign.daily_stop_time': '',

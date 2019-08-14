@@ -239,6 +239,47 @@ class AsteriskAccess
                 }
             }
 
+            if ($head_field == 'trunkcode') {
+                $sql          = "SELECT * FROM pkg_servers WHERE type != 'mbilling' AND status = 1 AND host != 'localhost'";
+                $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
+
+                foreach ($modelServers as $key => $data) {
+
+                    $line = "\n\n[" . preg_replace('/ /', '', strtolower($data['name'])) . "]\n";
+
+                    if ($data['type'] == 'asterisk') {
+                        $line .= 'host=' . $data['host'] . "\n";
+                        $line .= 'context=slave' . "\n";
+                    } else if ($data['type'] == 'sipproxy') {
+                        $line .= 'host=' . $data['host'] . "\n";
+                        $line .= 'fromdomain=' . $data['host'] . "\n";
+                        $line .= 'accountcode=sipproxy' . "\n";
+                        $line .= 'context=proxy' . "\n";
+                    }
+                    $line .= 'disallow=all' . "\n";
+                    $line .= 'allow=g729,alaw,ulaw' . "\n";
+                    $line .= 'directmedia=no' . "\n";
+                    $line .= 'dtmfmode=RFC2833' . "\n";
+                    $line .= 'insecure=invite' . "\n";
+                    $line .= 'nat=no' . "\n";
+                    $line .= 'qualify=no' . "\n";
+                    $line .= 'type=friend' . "\n";
+                    $line .= 'sendrpid=no' . "\n";
+                    $line .= 'nat=force_rport,comedia' . "\n";
+
+                    if (fwrite($fr, $registerLine) === false) {
+                        echo gettext("Impossible to write to the file") . " ($registerLine)";
+                        break;
+                    }
+
+                    if (fwrite($fd, $line) === false) {
+                        echo "Impossible to write to the file ($buddyfile)";
+                        break;
+                    }
+                }
+
+            }
+
             fclose($fd);
 
             if (preg_match("/sip/", $file)) {
