@@ -1601,6 +1601,19 @@ class UpdateMysqlCommand extends ConsoleCommand
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2019-08-09
+        if ($version == '6.7.0') {
+            $sql = "
+            ALTER TABLE `pkg_did` ADD `callerid` VARCHAR(50) NOT NULL DEFAULT '' AFTER `did`;
+            ALTER TABLE `pkg_trunk` ADD `sip_config` TEXT NULL DEFAULT NULL ;
+            ";
+            $this->executeDB($sql);
+
+            $version = '6.7.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

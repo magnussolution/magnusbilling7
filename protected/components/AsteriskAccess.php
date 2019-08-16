@@ -223,6 +223,8 @@ class AsteriskAccess
                         if ($option > 0) {
                             $line .= 'call-limit=' . $option . "\n";
                         }
+                    } elseif ($key == 'sip_config') {
+                        $line .= $option;
                     } else {
                         $line .= $key . '=' . $option . "\n";
                     }
@@ -245,12 +247,13 @@ class AsteriskAccess
 
                 foreach ($modelServers as $key => $data) {
 
-                    $line = "\n\n[" . preg_replace('/ /', '', strtolower($data['name'])) . "]\n";
-
                     if ($data['type'] == 'asterisk') {
+                        $line = "\n\n[" . preg_replace('/ /', '', strtolower($data['name'])) . "]\n";
                         $line .= 'host=' . $data['host'] . "\n";
                         $line .= 'context=slave' . "\n";
                     } else if ($data['type'] == 'sipproxy') {
+
+                        $line = "\n\n[sipproxy-" . preg_replace('/ /', '', strtolower($data['name'])) . "]\n";
                         $line .= 'host=' . $data['host'] . "\n";
                         $line .= 'fromdomain=' . $data['host'] . "\n";
                         $line .= 'accountcode=sipproxy' . "\n";

@@ -68,6 +68,7 @@ class Trunk extends Model
             array('transport,encryption', 'length', 'max' => 3),
             array('port', 'length', 'max' => 5),
             array('register_string', 'length', 'max' => 300),
+            array('sip_config', 'length', 'max' => 500),
             array('trunkcode', 'checkTrunkCode'),
             array('trunkcode', 'uniquePeerName'),
         );
