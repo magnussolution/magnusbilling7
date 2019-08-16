@@ -133,7 +133,7 @@ class TrunkController extends Controller
         if ($_SERVER['HTTP_HOST'] == 'localhost') {
             return;
         }
-        $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse';
+        $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse,sip_config';
         $model  = Trunk::model()->findAll(
             array(
                 'select'    => $select,
@@ -145,9 +145,8 @@ class TrunkController extends Controller
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
         }
 
-        $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, register_string';
-
-        $model = Trunk::model()->findAll(
+        $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, register_string,sip_config';
+        $model  = Trunk::model()->findAll(
             array(
                 'select'    => $select,
                 'condition' => 'providertech = :key',

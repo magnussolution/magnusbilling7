@@ -110,12 +110,10 @@ Help.load({
     'trunk.qualify': '',
     'trunk.type': '',
     'trunk.disallow': '',
-    'trunk.addparameter': '',
     'trunk.link_sms': 'URL para enviar SMS. Subistituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuario=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% ',
     'trunk.sms_res': 'Deixe em branco para não aguardar resposta do provedor. Ou coloque o texto que deve conter na resposta do provedor para ser considerado ENVIADO.',
     'trunk.port': 'Porta do tronco. Se você precisar usar outra porta diferente da 5060, lembre-se de liberar a porta no IPTABLES.',
-    'trunk.encryption': 'Para SRTP encrypted media Precisa instalar certificado no Asterisk',
-    'trunk.transport': 'Ativar TLS transport. Precisa instalar certificado no Asterisk',
+    'trunk.sip_config': 'Formato válido no Asterisk sip.conf, uma opção por linha.',
     //TEMPLATE MAIL
     'templatemail.fromname': '',
     'templatemail.fromemail': '',
@@ -326,6 +324,7 @@ Help.load({
     'diddestination.id_sip': '',
     //DID
     'did.did': 'O número extamente como chega no Asterisk.',
+    'did.callerid': 'Coloque aqui o identificador de chamadas, deixe em branco para usar o que vem do provedor do DID',
     'did.connection_charge': 'Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.',
     'did.fixrate': 'Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.',
     'did.activated': '',

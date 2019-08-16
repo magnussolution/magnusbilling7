@@ -117,8 +117,7 @@ Help.load({
     'trunk.link_sms': 'Post here your SMS link to send SMS. Replace: number variable per %number% and text per %text%. EXAMPLE. Your sms URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% ',
     'trunk.sms_res': 'Leave it empty to not wait URL result. If you want wait the any success message, write here the expected result.',
     'trunk.port': 'If you want use diferent of 5060, you will need open new port in IPTABLES.',
-    'trunk.encryption': 'Whether to offer SRTP encrypted media (ONLY TO SRTP)',
-    'trunk.transport': 'Enable TLS transport. Need install certificate on Asterisk',
+    'trunk.sip_config': 'Asterisk sip.conf format, one option per line. option = value',
     //TEMPLATE MAIL
     'templatemail.fromname': '',
     'templatemail.fromemail': '',

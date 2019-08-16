@@ -329,6 +329,7 @@ Help.load({
     'diddestination.id_sip': '',
     //DID
     'did.did': 'The exact number coming from the context. We recommend you to always use the E164 format.',
+    'did.callerid': 'Use this field to set a fixed callerid, or leave blank to use the received callerid from the DID provider.',
     'did.connection_charge': 'Activation cost. E.g.: If \'Activation Cost\' is 5 and \'Monthly price\' is 10, then 15 credit is taken from the user\'s credit when you active the DID.',
     'did.fixrate': 'Monthly cost. This amount will be taken from the user\'s credit each month. The DID will be paid if the user has enough credit, otherwise the DID is released.',
     'did.activated': '',
