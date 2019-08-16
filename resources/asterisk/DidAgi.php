@@ -251,9 +251,17 @@ class DidAgi
 
                 $MAGNUS->record_call = $MAGNUS->modelUser->record_call;
 
+                $agi->verbose("DID call friend: IS LOCAL !!!", 1);
+
+                if (strlen($this->modelDid->callerid)) {
+                    $MAGNUS->CallerID = $this->modelDid->callerid;
+                    $agi->verbose('Set fixed DID callerID ' . $MAGNUS->CallerID);
+                    $agi->set_callerid($MAGNUS->CallerID);
+                }
+
                 /* IF SIP CALL*/
                 if ($inst_listdestination['voip_call'] == 1) {
-                    $agi->verbose("DID call friend: IS LOCAL !!!", 1);
+
                     $sql              = "SELECT * FROM pkg_sip WHERE id = " . $inst_listdestination['id_sip'] . " LIMIT 1";
                     $MAGNUS->modelSip = $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
