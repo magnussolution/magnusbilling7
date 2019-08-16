@@ -21,7 +21,7 @@ class MassiveCallCommand extends ConsoleCommand
 {
     public function run($args)
     {
-
+        $config         = LoadConfig::getConfig();
         $UNIX_TIMESTAMP = "UNIX_TIMESTAMP(";
 
         $tab_day  = array(1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
@@ -250,6 +250,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $call .= "Set:RATE_ID=" . $searchTariff[0]['id_rate'] . "\n";
                 $call .= "Set:AGENT_ID=" . $id_agent . "\n";
                 $call .= "Set:AGENT_ID_PLAN=" . $id_plan_agent . "\n";
+                $call .= "Set:SIPDOMAIN=" . $config['global']['ip_servers'] . "\n";
 
                 if ($this->debug > 1) {
                     echo $call . "\n\n";
