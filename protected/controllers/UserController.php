@@ -268,6 +268,10 @@ class UserController extends Controller
                 $modelSip->save();
             }
 
+            if (!$this->isNewRecord && isset($model->id)) {
+                Sip::model()->updateAll(array('accountcode' => $model->username), 'id_user = :key', array(':key' => $model->id));
+            }
+
             AsteriskAccess::instance()->generateSipPeers();
         }
 
