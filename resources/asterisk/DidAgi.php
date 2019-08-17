@@ -254,9 +254,7 @@ class DidAgi
                 $agi->verbose("DID call friend: IS LOCAL !!!", 1);
 
                 if (strlen($this->modelDid->callerid)) {
-                    $MAGNUS->CallerID = $this->modelDid->callerid;
-                    $agi->verbose('Set fixed DID callerID ' . $MAGNUS->CallerID);
-                    $agi->set_callerid($MAGNUS->CallerID);
+                    $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
                 }
 
                 /* IF SIP CALL*/
@@ -386,13 +384,17 @@ class DidAgi
                             if (file_exists(dirname(__FILE__) . '/push/Push.php')) {
                                 include dirname(__FILE__) . '/push/Push.php';
 
-                                $agi->verbose("there are PUSH on DID custom dial");
                                 $tmp = explode('PUSH/', $dialstr);
                                 foreach ($tmp as $key => $value) {
-                                    if (preg_match('/SIP|LOCAL|AGI/', strtoupper($value))) {
+
+                                    $agi->verbose($value);
+                                    if (preg_match('/^SIP|LOCAL|AGI/', strtoupper($value))) {
                                         continue;
                                     }
-                                    Push::send($agi, strtok($value, ','), $MAGNUS->CallerID, 0);
+
+                                    $dialString = preg_split('/\,|\&/', $value);
+                                    $agi->verbose("there are PUSH on DID custom dial " . $dialString[0]);
+                                    Push::send($agi, $dialString[0], $MAGNUS->CallerID, 0);
                                 }
                                 sleep(5);
                             }

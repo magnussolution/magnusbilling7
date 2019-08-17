@@ -324,7 +324,7 @@ Help.load({
     'diddestination.id_sip': '',
     //DID
     'did.did': 'O número extamente como chega no Asterisk.',
-    'did.callerid': 'Coloque aqui o identificador de chamadas, deixe em branco para usar o que vem do provedor do DID',
+    'did.callerid': 'Coloque aqui CallerID Name, deixe em branco para usar o que vem do provedor do DID.',
     'did.connection_charge': 'Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.',
     'did.fixrate': 'Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.',
     'did.activated': '',
