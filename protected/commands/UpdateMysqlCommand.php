@@ -28,6 +28,9 @@ class UpdateMysqlCommand extends ConsoleCommand
 
         echo $version;
 
+        $sql = "DELETE FROM  pkg_configuration WHERE id = 258";
+        $this->executeDB($sql);
+
         if ($version == '5.3.4') {
 
             $sql = "ALTER TABLE  `pkg_did` ADD  `send_to_callback_1` TINYINT( 1 ) NOT NULL DEFAULT  '0',
@@ -1547,7 +1550,7 @@ class UpdateMysqlCommand extends ConsoleCommand
 
             $sql    = "SELECT id FROM pkg_group_user WHERE name = 'Agent' AND id_user_type = '2'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if ($result[0]['id'] == '2') {
+            if (isset($result[0]['id']) && $result[0]['id'] == '2') {
                 $sql = "UPDATE pkg_group_module SET `show_menu` = '0' WHERE id_group = '2' AND id_module = '2'";
                 $this->executeDB($sql);
             }
