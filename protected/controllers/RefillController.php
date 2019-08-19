@@ -58,8 +58,8 @@ class RefillController extends Controller
 
     public function beforeSave($values)
     {
+        $modelRefill = Refill::model()->findByPk($values['id']);
         if (!$this->isNewRecord) {
-            $modelRefill = Refill::model()->findByPk($values['id']);
 
             if (isset($values['payment']) && (preg_match('/^PENDING\:/', $modelRefill->description) && $values['payment'] == 1 && $modelRefill->payment == 0)) {
                 $this->releaseSendCreditBDService($values, $modelRefill);
@@ -67,7 +67,7 @@ class RefillController extends Controller
         }
         if (isset(Yii::app()->session['isAgent']) && Yii::app()->session['isAgent'] == true) {
 
-            if (Yii::app()->session['id_user'] == $values['id_user']) {
+            if (Yii::app()->session['id_user'] == $modelRefill->id_user) {
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
@@ -83,22 +83,24 @@ class RefillController extends Controller
             )
             );
 
-            $totalRefill = $modelUser->credit + $values['credit'];
+            if (isset($values['credit'])) {
+                $totalRefill = $modelUser->credit + $values['credit'];
 
-            $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
+                $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
 
-            $userAgent = $modelUser->typepaid == 1 ? $modelUser->credit = $modelUser->credit + $modelUser->creditlimit : $modelUser->credit;
+                $userAgent = $modelUser->typepaid == 1 ? $modelUser->credit = $modelUser->credit + $modelUser->creditlimit : $modelUser->credit;
 
-            $maximunCredit = $this->config["global"]['agent_limit_refill'] * $userAgent;
-            //Yii::log("$totalRefill > $maximunCredit", 'info');
-            if ($totalRefill > $maximunCredit) {
-                $limite = $maximunCredit - $totalRefill;
-                echo json_encode(array(
-                    'success' => false,
-                    'rows'    => array(),
-                    'errors'  => Yii::t('yii', 'Limit refill exceeded, your limit is') . ' ' . $maximunCredit . '. ' . Yii::t('yii', 'You have') . ' ' . $limite . ' ' . Yii::t('yii', 'to refill'),
-                ));
-                exit;
+                $maximunCredit = $this->config["global"]['agent_limit_refill'] * $userAgent;
+                //Yii::log("$totalRefill > $maximunCredit", 'info');
+                if ($totalRefill > $maximunCredit) {
+                    $limite = $maximunCredit - $totalRefill;
+                    echo json_encode(array(
+                        'success' => false,
+                        'rows'    => array(),
+                        'errors'  => Yii::t('yii', 'Limit refill exceeded, your limit is') . ' ' . $maximunCredit . '. ' . Yii::t('yii', 'You have') . ' ' . $limite . ' ' . Yii::t('yii', 'to refill'),
+                    ));
+                    exit;
+                }
             }
         }
 
