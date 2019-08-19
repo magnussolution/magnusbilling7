@@ -734,6 +734,10 @@ class CalcAgi
             $dialstr = "$tech/$ipaddress/$prefix$destination";
         }
 
+        if (strlen($addparameter) > 0) {
+            $dialstr = "$tech/$ipaddress/$prefix$destination" . $addparameter;
+        }
+
         if ($this->tariffObj[$k]['credit_control'] == 1 && $this->tariffObj[$k]['credit'] <= 0) {
             $agi->verbose("Provider not have credit", 3);
             $this->tariffObj[$k]['status'] = 0;
