@@ -149,7 +149,8 @@ class CallOnLineController extends Controller
                 ));
             }
 
-            $array = '';
+            $array   = '';
+            $totalUP = 0;
             foreach ($modelServers as $key => $server) {
                 if ($server['type'] == 'mbilling') {
                     $server['host'] = 'localhost';
@@ -158,10 +159,15 @@ class CallOnLineController extends Controller
                 $modelCallOnLine = CallOnLine::model()->count('server = :key', array('key' => $server['host']));
 
                 $modelCallOnLineUp = CallOnLine::model()->count('server = :key AND status = :key1', array('key' => $server['host'], ':key1' => 'Up'));
+                $totalUP += $modelCallOnLineUp;
                 $array .= '<font color="black">' . strtoupper($server['name']) . '</font> <font color="blue">Total:' . $modelCallOnLine . '</font> <font color="green">Up:' . $modelCallOnLineUp . '</font>&ensp;&ensp;|&ensp;&ensp;';
             }
 
             $attributes[0]['serverSum'] = $array;
+
+            if ($totalUP > 0) {
+                $attributes[0]['serverSum'] .= "<font color=green> TOTAL UP: " . $totalUP . "</font>";
+            }
         }
 
         return $attributes;
