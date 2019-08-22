@@ -47,8 +47,29 @@ class QueueAgi
         $agi->exec($sql);
 
         $ring_or_moh = $modelQueue->ring_or_moh == 'ring' ? 'r' : '';
-        $agi->verbose("Queue", $queueName . ',' . $ring_or_moh . 'tc,,,,/var/www/html/mbilling/resources/asterisk/mbilling.php');
-        $agi->execute("Queue", $queueName . ',' . $ring_or_moh . 'tc,,,,/var/www/html/mbilling/resources/asterisk/mbilling.php');
+
+        $max_wait_time = $modelQueue->max_wait_time > 0 ? $modelQueue->max_wait_time : '';
+        $agi->verbose("Queue", $queueName . ',' . $ring_or_moh . 'tc,,,' . $max_wait_time . ',/var/www/html/mbilling/resources/asterisk/mbilling.php');
+        $agi->execute("Queue", $queueName . ',' . $ring_or_moh . 'tc,,,' . $max_wait_time . ',/var/www/html/mbilling/resources/asterisk/mbilling.php');
+
+        $linha = exec(" egrep $MAGNUS->uniqueid /var/log/asterisk/queue_log | tail -1");
+        $linha = explode('|', $linha);
+        $agi->verbose(print_r($linha, true), 25);
+        if ($linha[4] == 'EXITWITHTIMEOUT') {
+            if (strlen($modelQueue->max_wait_time_action)) {
+                $sql              = "SELECT * FROM pkg_sip WHERE name = '" . $modelQueue->max_wait_time_action . "' LIMIT 1";
+                $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+                $MAGNUS->dnid = $MAGNUS->destination = $MAGNUS->sip_account = $MAGNUS->modelSip->name;
+                $callToSip    = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, 'fromqueue');
+
+                if ($callToSip['dialstatus'] == 'ANSWER') {
+                    $linha[4] = 'COMPLETEAGENT';
+                }
+
+                $MAGNUS->destination = $DidAgi->modelDid->did;
+            }
+        }
 
         $MAGNUS->stopRecordCall($agi);
 
@@ -60,11 +81,6 @@ class QueueAgi
         $CalcAgi->sessiontime = $stopTime - $startTime;
 
         $siptransfer = $agi->get_variable("SIPTRANSFER");
-
-        $linha = exec(" egrep $MAGNUS->uniqueid /var/log/asterisk/queue_log | tail -1");
-        $linha = explode('|', $linha);
-
-        $agi->verbose(print_r($linha, true), 25);
 
         if ($linha[4] == 'ABANDON') {
             $MAGNUS->sip_account = $linha[4];
