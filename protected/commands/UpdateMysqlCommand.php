@@ -1616,6 +1616,16 @@ class UpdateMysqlCommand extends ConsoleCommand
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2019-08-22
+        if ($version == '6.7.1') {
+            $sql = "ALTER TABLE `pkg_queue` ADD `max_wait_time` INT(11) NULL DEFAULT NULL ;
+		        ALTER TABLE `pkg_queue` ADD `max_wait_time_action` VARCHAR(50) NULL DEFAULT NULL ;";
+            $this->executeDB($sql);
+
+            $version = '6.7.2';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
     }
 

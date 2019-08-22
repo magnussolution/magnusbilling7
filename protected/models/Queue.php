@@ -54,12 +54,15 @@ class Queue extends Model
     {
         return array(
             array('name, id_user', 'required'),
-            array('id_user, timeout, retry, wrapuptime, weight, periodic-announce-frequency', 'numerical', 'integerOnly' => true),
+            array('id_user, timeout, retry, wrapuptime, weight, periodic-announce-frequency, max_wait_time', 'numerical', 'integerOnly' => true),
             array('language, joinempty, leavewhenempty, musiconhold,announce-holdtime,leavewhenempty,strategy, ringinuse, announce-position, announce-holdtime, announce-frequency', 'length', 'max' => 128),
             array('periodic-announce ', 'length', 'max' => 200),
             array('ring_or_moh ', 'length', 'max' => 4),
-            array('name ', 'length', 'max' => 25),
+            array('name', 'length', 'max' => 25),
+            array('max_wait_time_action', 'length', 'max' => 50),
             array('name', 'checkname'),
+            array('max_wait_time_action', 'check_max_wait_time_action'),
+
         );
     }
 
@@ -71,6 +74,17 @@ class Queue extends Model
         return array(
             'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
         );
+    }
+
+    public function check_max_wait_time_action($attribute, $params)
+    {
+        if (strlen($this->max_wait_time_action) > 2) {
+
+            $modelSip = Sip::model()->find('name = :key', array(':key' => $this->max_wait_time_action));
+            if (!isset($modelSip->id)) {
+                $this->addError($attribute, Yii::t('yii', 'You need add a existent Sip Account'));
+            }
+        }
     }
 
     public function checkname($attribute, $params)
