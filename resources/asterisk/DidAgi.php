@@ -105,6 +105,10 @@ class DidAgi
 
         if (!isset($modelSip->id)) {
 
+            if (strlen($this->modelDid->callerid)) {
+                $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
+            }
+
             $MAGNUS->record_call = $MAGNUS->modelUser->record_call;
             $MAGNUS->accountcode = $MAGNUS->username = $MAGNUS->modelUser->username;
 
@@ -252,10 +256,6 @@ class DidAgi
                 $MAGNUS->record_call = $MAGNUS->modelUser->record_call;
 
                 $agi->verbose("DID call friend: IS LOCAL !!!", 1);
-
-                if (strlen($this->modelDid->callerid)) {
-                    $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
-                }
 
                 /* IF SIP CALL*/
                 if ($inst_listdestination['voip_call'] == 1) {
