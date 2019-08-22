@@ -133,8 +133,10 @@ class CallChartCommand extends ConsoleCommand
                             $type    = 'DID';
                             $trunk   = 'DID Call ' . $modelDid[0]->idDid->did;
                             $id_user = isset($modelDid[0]->id_user) ? $modelDid[0]->id_user : null;
+
+                            $didChannel = AsteriskAccess::getCoreShowChannel($channel);
+                            $cdr        = time() - intval($didChannel['UniqueID']);
                             if ($des_chan != '<none>') {
-                                $didChannel = AsteriskAccess::getCoreShowChannel($channel);
                                 if (isset($didChannel['DIALEDPEERNUMBER'])) {
                                     $sip_account = $didChannel['DIALEDPEERNUMBER'];
                                 }
@@ -260,6 +262,10 @@ class CallChartCommand extends ConsoleCommand
                     if (isset($resultDid[0]->id)) {
                         $id_user = $resultDid[0]->id_user;
                         $trunk   = $ndiscado . ' Queue ' . $resultDid[0]->idQueue->name;
+                        if ($status == 'Up') {
+                            $callQueue = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
+                            $cdr       = time() - intval($callQueue['UniqueID']);
+                        }
                     } else {
                         $id_user = 'NULL';
                     }

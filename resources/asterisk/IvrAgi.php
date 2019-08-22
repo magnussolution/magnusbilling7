@@ -141,7 +141,7 @@ class IvrAgi
                     $agi->verbose($dialstr, 25);
                     $MAGNUS->sip_account = $modelSip->name;
                     $MAGNUS->startRecordCall($agi);
-                    $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+                    $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
                     $MAGNUS->run_dial($agi, $dialstr);
 
                     $dialstatus      = $agi->get_variable("DIALSTATUS");
@@ -203,7 +203,7 @@ class IvrAgi
                     $agi->verbose($dialstr, 25);
                     $MAGNUS->sip_account = $modelSip->name;
                     $MAGNUS->startRecordCall($agi);
-                    $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+                    $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
                     $MAGNUS->run_dial($agi, $dialstr, $dialparams);
 
                     $dialstatus      = $agi->get_variable("DIALSTATUS");
@@ -248,7 +248,7 @@ class IvrAgi
                     $dialstr = substr($group, 0, -1) . $dialparams;
 
                     $MAGNUS->startRecordCall($agi);
-                    $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+                    $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
                     $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
                     $dialstatus = $agi->get_variable("DIALSTATUS");
                     $dialstatus = $dialstatus['data'];
@@ -257,7 +257,7 @@ class IvrAgi
                 {
                     $insertCDR = true;
                     $MAGNUS->startRecordCall($agi);
-                    $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+                    $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
                     $myres      = $MAGNUS->run_dial($agi, $optionValue);
                     $dialstatus = $agi->get_variable("DIALSTATUS");
                     $dialstatus = $dialstatus['data'];
