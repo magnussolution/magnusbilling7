@@ -86,10 +86,8 @@ class CallOnLineController extends Controller
 
     public function actionDestroy()
     {
-        $model = $this->abstractModel->find('uniqueid = :key', array('key' => $_POST['id']));
-
+        $model = $this->abstractModel->find('canal = :key', array('key' => $_POST['id']));
         if (strlen($model->canal) < 30 && preg_match('/SIP\//', $model->canal)) {
-
             AsteriskAccess::instance()->hangupRequest($model->canal);
             $success = true;
             $msn     = Yii::t('yii', 'Operation was successful.') . Yii::app()->language;
