@@ -364,7 +364,7 @@ class BaseController extends CController
         } else {
             if (strlen($this->group) < 2) {
                 $recordCont = $this->abstractModel->find(array(
-                    'select'    => "COUNT('id') AS id",
+                    'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
                     'join'      => $this->join,
                     'condition' => $this->filter,
                     'with'      => $this->relationFilter,
@@ -372,7 +372,7 @@ class BaseController extends CController
                 ));
             } else {
                 $recordCont = $this->abstractModel->find(array(
-                    'select'    => "COUNT('id') AS id",
+                    'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
                     'join'      => $this->join,
                     'condition' => $this->filter,
                     'with'      => $this->relationFilter,
@@ -380,7 +380,8 @@ class BaseController extends CController
                     'group'     => $this->group,
                 ));
             }
-            return $recordCont['id'];
+
+            return $recordCont[$this->abstractModel->primaryKey()];
         }
     }
     /**

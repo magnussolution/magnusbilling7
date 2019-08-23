@@ -86,7 +86,7 @@ class CallOnLineController extends Controller
 
     public function actionDestroy()
     {
-        $model = $this->abstractModel->find('canal = :key', array('key' => $_POST['id']));
+        $model = $this->abstractModel->find('canal = :key', array('key' => $_POST['channel']));
         if (strlen($model->canal) < 30 && preg_match('/SIP\//', $model->canal)) {
             AsteriskAccess::instance()->hangupRequest($model->canal);
             $success = true;
