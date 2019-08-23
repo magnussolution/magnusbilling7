@@ -67,7 +67,9 @@ class RefillController extends Controller
         }
         if (isset(Yii::app()->session['isAgent']) && Yii::app()->session['isAgent'] == true) {
 
-            if (Yii::app()->session['id_user'] == $modelRefill->id_user) {
+            $id_user = isset($values['id_user']) ? $values['id_user'] : $modelRefill->id_user;
+
+            if (Yii::app()->session['id_user'] == $id_user) {
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
