@@ -62,7 +62,7 @@ return array(
     'config_desc_cpstotal'                         => 'Maximum CPS accepted.',
     'config_title_decimal_precision'               => 'Decimal precision',
     'config_desc_decimal_precision'                => 'Decimal precision.',
-    'config_title_delay_notifications'             => 'Days to notification',
+    'config_title_delay_notifications'             => 'Low balance notification frequency',
     'config_desc_delay_notifications'              => 'Number of days to generate low balance warning to customers.',
     'config_title_dialcommand_param'               => 'AGI - Command Dial',
     'config_desc_dialcommand_param'                => 'More information  : http://voip-info.org/wiki-Asterisk+cmd+dial',

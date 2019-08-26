@@ -207,7 +207,7 @@ Help.load({
     'queue.ring_or_moh': '',
     'queue.musiconhold': '',
     'queue.max_wait_time': 'Maximum wait time on the queue',
-    'queue.max_wait_time_action': 'SipAccouin to send the caller if maximum wait time is superated.',
+    'queue.max_wait_time_action': 'SipAccount, IVR or QUEUE to send the caller if maximum wait time is superated. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.',
     //PROVIDER
     'provider.provider_name': 'Provider name',
     'provider.credit': 'How much credit do you have in your provider account? This field is optional.',

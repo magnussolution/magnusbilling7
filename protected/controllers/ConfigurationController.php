@@ -98,9 +98,9 @@ class ConfigurationController extends Controller
     public function setAttributesModels($attributes, $models)
     {
         for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
-            if ($attributes[$i]['config_key'] == 'reCaptchaKey') {
+            if ($attributes[$i]['config_key'] == 'reCaptchaKey' && strlen($attributes[$i]['config_value'])) {
                 $attributes[$i]['config_value'] = '***************************************';
-            }if ($attributes[$i]['config_key'] == 'reCaptchaSecret') {
+            }if ($attributes[$i]['config_key'] == 'reCaptchaSecret' && strlen($attributes[$i]['reCaptchaSecret'])) {
                 $attributes[$i]['config_value'] = '***************************************';
             }
 
