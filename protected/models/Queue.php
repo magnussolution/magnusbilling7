@@ -79,11 +79,27 @@ class Queue extends Model
     public function check_max_wait_time_action($attribute, $params)
     {
         if (strlen($this->max_wait_time_action) > 2) {
+            if (preg_match('/\//', $this->max_wait_time_action)) {
+                $data        = explode('/', $this->max_wait_time_action);
+                $type        = strtoupper($data[0]);
+                $destination = $data[1];
 
-            $modelSip = Sip::model()->find('name = :key', array(':key' => $this->max_wait_time_action));
-            if (!isset($modelSip->id)) {
-                $this->addError($attribute, Yii::t('yii', 'You need add a existent Sip Account'));
+                switch ($type) {
+                    case 'SIP':
+                        $model = Sip::model()->find('UPPER(name) = :key', array(':key' => strtoupper($destination)));
+                        break;
+                    case 'QUEUE':
+                        $model = Queue::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
+                        break;
+                    case 'IVR':
+                        $model = Ivr::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
+                        break;
+                }
             }
+            if (!isset($model->id)) {
+                $this->addError($attribute, Yii::t('yii', 'You need add a existent Sip Account, IVR or Queue.'));
+            }
+            $this->max_wait_time_action = $type . '/' . $destination;
         }
     }
 

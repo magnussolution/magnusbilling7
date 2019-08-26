@@ -57,14 +57,38 @@ class QueueAgi
         $agi->verbose(print_r($linha, true), 25);
         if ($linha[4] == 'EXITWITHTIMEOUT') {
             if (strlen($modelQueue->max_wait_time_action)) {
-                $sql              = "SELECT * FROM pkg_sip WHERE name = '" . $modelQueue->max_wait_time_action . "' LIMIT 1";
-                $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-                $MAGNUS->dnid = $MAGNUS->destination = $MAGNUS->sip_account = $MAGNUS->modelSip->name;
-                $callToSip    = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, 'fromqueue');
+                $data        = explode('/', strtoupper($modelQueue->max_wait_time_action));
+                $actionType  = $data[0];
+                $destination = $data[1];
+                switch ($actionType) {
+                    case 'SIP':
+                        $sql              = "SELECT * FROM pkg_sip WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                        $MAGNUS->dnid     = $MAGNUS->destination     = $MAGNUS->sip_account     = $MAGNUS->modelSip->name;
+                        $callToSip        = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, 'fromqueue');
+                        if ($callToSip['dialstatus'] == 'ANSWER') {
+                            $linha[4] = 'COMPLETEAGENT';
+                        }
+                        break;
+                    case 'QUEUE':
+                        $sql                                     = "SELECT * FROM pkg_queue WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $modelQueue                              = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                        $DidAgi->modelDestination[0]['id_queue'] = $modelQueue->id;
+                        $MAGNUS->stopRecordCall($agi);
 
-                if ($callToSip['dialstatus'] == 'ANSWER') {
-                    $linha[4] = 'COMPLETEAGENT';
+                        $sql = "DELETE FROM pkg_queue_status WHERE callId = " . $MAGNUS->uniqueid;
+                        $agi->exec($sql);
+
+                        QueueAgi::callQueue($agi, $MAGNUS, $CalcAgi, $DidAgi);
+                        $noCDR = true;
+                        break;
+                    case 'IVR':
+                        $sql                                   = "SELECT * FROM pkg_ivr WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $modelIrv                              = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                        $DidAgi->modelDestination[0]['id_ivr'] = $modelIrv->id;
+                        IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'queue');
+                        break;
                 }
 
                 $MAGNUS->destination = $DidAgi->modelDid->did;
@@ -88,13 +112,9 @@ class QueueAgi
             $MAGNUS->sip_account = substr($linha[3], 4);
         }
 
-        if ($linha[4] == 'ABANDON' || $linha[4] == 'EXITEMPTY' || $linha[4] == 'EXITWITHTIMEOUT') {
-            $CalcAgi->terminatecauseid = 7;
-        } else {
-            $CalcAgi->terminatecauseid = 1;
-        }
+        $CalcAgi->terminatecauseid = 1;
 
-        if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
+        if ($agi->get_variable("ISFROMCALLBACKPRO", true) || isset($noCDR)) {
             return;
         }
 

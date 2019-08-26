@@ -202,7 +202,7 @@ Help.load({
     'queue.ring_or_moh': '',
     'queue.musiconhold': '',
     'queue.max_wait_time': 'Tempo maximo de espera para ser atendido',
-    'queue.max_wait_time_action': 'Conta VoIP para enviar o cliente caso o tempo máximo de espera for superado.',
+    'queue.max_wait_time_action': 'Conta VoIP, IVR ou Fila de espera, para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceitos: SIP/conta_voip, QUEUE/nome_da_queue ou IRV/nome_da_ivr.',
     //PROVIDER
     'provider.provider_name': 'Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter varios troncos',
     'provider.credit': 'Quanto você tem de crédito com o provedor? Este campo é opcional.',
