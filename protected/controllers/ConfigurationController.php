@@ -100,7 +100,7 @@ class ConfigurationController extends Controller
         for ($i = 0; $i < count($attributes) && is_array($attributes); $i++) {
             if ($attributes[$i]['config_key'] == 'reCaptchaKey' && strlen($attributes[$i]['config_value'])) {
                 $attributes[$i]['config_value'] = '***************************************';
-            }if ($attributes[$i]['config_key'] == 'reCaptchaSecret' && strlen($attributes[$i]['reCaptchaSecret'])) {
+            } else if ($attributes[$i]['config_key'] == 'reCaptchaSecret' && strlen($attributes[$i]['config_value'])) {
                 $attributes[$i]['config_value'] = '***************************************';
             }
 
