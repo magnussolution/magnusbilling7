@@ -414,6 +414,7 @@ Help.load({
     'campaign.tts_audio': '',
     'campaign.tts_audio2': '',
     'campaign.asr_options': '',
+    'campaign.auto_reprocess': 'If there are no active numbers in this campaign phone book, reactivates all pending numbers.',
     //CALL SUMMARY CALL SHOP
     'callsummarycallshop.sumsessiontime': '',
     'callsummarycallshop.sumprice': '',

@@ -198,6 +198,10 @@ class SipTraceController extends Controller
 
             $fromIp = strtok($fromTo[2], ':');
 
+            if (!isset($fromTo[4])) {
+                continue;
+            }
+
             $toIp = strtok($fromTo[4], ':');
 
             foreach ($lines as $key => $line) {

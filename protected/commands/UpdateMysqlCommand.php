@@ -1626,6 +1626,17 @@ class UpdateMysqlCommand extends ConsoleCommand
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2019-08-30
+        if ($version == '6.7.2') {
+            $sql = "ALTER TABLE `pkg_campaign` ADD `auto_reprocess` INT(11) NULL DEFAULT 0 ;";
+            $this->executeDB($sql);
+
+            $version = '6.7.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            exec("echo '\n*/2 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess\n' >> /var/spool/cron/root");
+        }
 
     }
 
