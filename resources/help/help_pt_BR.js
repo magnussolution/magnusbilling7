@@ -411,6 +411,7 @@ Help.load({
     'campaign.tts_audio': '',
     'campaign.tts_audio2': '',
     'campaign.asr_options': '',
+    'campaign.auto_reprocess': 'Reativar automaticamente todos os numeros das agendas da campanha quando não tiver mais números ativos',
     //CALL SUMMARY CALL SHOP
     'callsummarycallshop.sumsessiontime': '',
     'callsummarycallshop.sumprice': '',
