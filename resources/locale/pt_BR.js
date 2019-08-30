@@ -1,4 +1,5 @@
 Locale.load({
+    'Auto Reprocess': 'Reprocessar automaticamente',
     'Number to Forward': 'Digito esperado para reenviar',
     'Disable': 'Desativato',
     'Any Digit': 'Qualquer Dígito',
