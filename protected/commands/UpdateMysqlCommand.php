@@ -1638,6 +1638,19 @@ class UpdateMysqlCommand extends ConsoleCommand
             exec("echo '\n*/2 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess\n' >> /var/spool/cron/root");
         }
 
+        //2019-09-04
+        if ($version == '6.7.3') {
+            $sql = "ALTER TABLE  `pkg_cdr_summary_day_agent` ADD  `agent_bill` FLOAT NOT NULL DEFAULT  '0';
+    				ALTER TABLE  `pkg_cdr_summary_day_agent` ADD  `agent_lucro` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $version = '6.7.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            exec("echo '\n*/2 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess\n' >> /var/spool/cron/root");
+        }
+
     }
 
     public function executeDB($sql)

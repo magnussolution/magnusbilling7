@@ -297,13 +297,14 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perDayAgent($filter = 1)
     {
 
-        $sql = "SELECT DATE(starttime) AS day,
+        echo $sql = "SELECT DATE(starttime) AS day,
                 c.id_user as id_user,
                 sum(sessiontime) AS sessiontime,
                 SUM(sessiontime) / COUNT(*) AS aloc_all_calls,
                 count(*) as nbcall,
                 sum(buycost) AS buycost,
-                sum(sessionbill) AS sessionbill
+                sum(sessionbill) AS sessionbill,
+                sum(agent_bill) AS agent_bill
                 FROM pkg_cdr t
                 LEFT JOIN pkg_user c ON t.id_user = c.id
                 WHERE  t.id >= $this->cdr_id AND c.id_user > 1  GROUP BY day, c.id_user ORDER BY day DESC";
@@ -318,13 +319,13 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if ($value['day'] != date('Y-m-d')) {
                 continue;
             }
-            $line .= "('" . $value['day'] . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
+            $line .= "('" . $value['day'] . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_day_agent WHERE day = '$this->date' ";
         Yii::app()->db->createCommand($sql)->execute();
 
-        $sql = "INSERT INTO pkg_cdr_summary_day_agent (day, id_user, sessiontime, aloc_all_calls, nbcall, buycost, sessionbill) VALUES " . substr($line, 0, -1) . ";";
+        $sql = "INSERT INTO pkg_cdr_summary_day_agent (day, id_user, sessiontime, aloc_all_calls, nbcall, buycost, sessionbill, agent_bill) VALUES " . substr($line, 0, -1) . ";";
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
@@ -333,7 +334,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         echo "perDayAgent " . date('H:i:s') . "\n";
 
-        $sql = "UPDATE  pkg_cdr_summary_day_agent SET lucro = sessionbill - buycost";
+        $sql = "UPDATE  pkg_cdr_summary_day_agent SET lucro = sessionbill - buycost, agent_lucro = agent_bill -  sessionbill";
         Yii::app()->db->createCommand($sql)->execute();
     }
 
