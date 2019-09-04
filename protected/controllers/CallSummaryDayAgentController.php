@@ -21,6 +21,11 @@ class CallSummaryDayAgentController extends Controller
     public $join           = 'JOIN pkg_user ON t.id_user = pkg_user.id';
     public $extraValues    = array('idUser' => 'username');
 
+    public $fieldsInvisibleAgent = array(
+        'lucro',
+        'buycost',
+    );
+
     public function init()
     {
         $this->instanceModel = new CallSummaryDayAgent;
@@ -31,7 +36,7 @@ class CallSummaryDayAgentController extends Controller
 
     public function actionRead($asJson = true, $condition = null)
     {
-        if (!Yii::app()->session['isAdmin']) {
+        if (Yii::app()->session['isClient']) {
             echo json_encode(array(
                 $this->nameRoot  => [],
                 $this->nameCount => 0,
@@ -40,6 +45,14 @@ class CallSummaryDayAgentController extends Controller
             exit;
         }
         parent::actionRead();
+    }
+
+    public function extraFilterCustomAgent($filter)
+    {
+        $filter .= ' AND t.id_user = :agfby';
+        $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
+
+        return $filter;
     }
 
     public function recordsExtraSum($records = array())
