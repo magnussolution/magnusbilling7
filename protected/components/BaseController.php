@@ -1046,13 +1046,22 @@ class BaseController extends CController
 
                         if ($this->abstractModel->tableName() == 'pkg_user') {
                             $modelUser = User::model()->findByPk($values['id']);
+                            $id_user   = $modelUser->id;
+                        } else if (preg_match('/pkg_plan/', $this->abstractModel->tableName())) {
+                            $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
+                            $id_user    = $modelCheck->idUser->id;
+
+                        } else if (preg_match('/pkg_rate_agent/', $this->abstractModel->tableName())) {
+                            $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
+                            $id_user    = $modelCheck->idPlan->idUser->id;
+
                         } else {
                             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
-                            $modelUser  = User::model()->findByPk($modelCheck->id_user);
+                            $id_user    = $modelCheck->idUser->id_user;
                         }
 
-                        if ($modelUser->id_user != Yii::app()->session['id_user']) {
-                            exit('try edit invalid id');
+                        if ($id_user != Yii::app()->session['id_user']) {
+                            exit('try edit invalid id 3' . $values[$namePk] . ' ' . $modelCheck->id_user . '' . Yii::app()->session['id_user']);
                         }
                     }
                 }
