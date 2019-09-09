@@ -942,7 +942,11 @@ class BaseController extends CController
         if ((isset($_POST['filter']) && strlen($_POST['filter']) > 0)) {
 
             if (!Yii::app()->session['isAdmin']) {
-                exit('You only can delete one data per time');
+                echo json_encode(array(
+                    $this->nameSuccess   => false,
+                    $this->nameMsgErrors => 'You only can delete one data per time',
+                ));
+                exit();
             }
             $filter = isset($_POST['filter']) ? $_POST['filter'] : null;
             $filter = $filter ? $this->createCondition(json_decode($filter)) : $this->defaultFilter;
@@ -1013,7 +1017,11 @@ class BaseController extends CController
             if (array_key_exists(0, $values)) {
 
                 if (!Yii::app()->session['isAdmin']) {
-                    exit('You only can delete one data per time');
+                    echo json_encode(array(
+                        $this->nameSuccess   => false,
+                        $this->nameMsgErrors => 'You only can delete one data per time',
+                    ));
+                    exit();
                 }
 
                 # percorre o array para excluir o(s) registro(s)
@@ -1031,7 +1039,11 @@ class BaseController extends CController
                         if (isset($modelCheck->id_user)) {
                             $modelUser = User::model()->findByPk($modelCheck->id_user);
                             if (isset($modelUser->id) && $modelUser->id != Yii::app()->session['id_user']) {
-                                exit('try destroy invalid id');
+                                echo json_encode(array(
+                                    $this->nameSuccess   => false,
+                                    $this->nameMsgErrors => 'try destroy invalid id',
+                                ));
+                                exit();
                             }
                         }
 
@@ -1049,7 +1061,7 @@ class BaseController extends CController
             foreach ($ids as $valueid) {
                 if ($valueid == 1) {
                     $this->success = false;
-                    $this->msg     = Yii::t('yii', 'Not allowed delete this user');
+                    $this->errors  = Yii::t('yii', 'Not allowed delete this user');
                 }
             }
         }
