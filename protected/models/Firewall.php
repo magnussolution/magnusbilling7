@@ -38,6 +38,14 @@ class Firewall extends Model
     }
 
     /**
+     * @return nome da(s) chave(s) primaria(s).
+     */
+    public function primaryKey()
+    {
+        return 'id';
+    }
+
+    /**
      *
      *
      * @return array validacao dos campos da model.
