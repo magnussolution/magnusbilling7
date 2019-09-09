@@ -32,27 +32,18 @@ class PhoneBooksReprocessCommand extends ConsoleCommand
             }
 
             $ids_phone_books = '';
-            $processar       = false;
             foreach ($modelCampaignPhonebook as $key => $phonebook) {
-
-                if ($phonebook->id_phonebook == 817) {
-                    $processar = true;
-                    continue;
-                }
                 $ids_phone_books .= $phonebook->id_phonebook . ',';
-            }
-
-            if ($processar == false) {
-                echo "nao reprocessar proque nao tem a agenda 'reprocessar_automatico'\n";
-                continue;
             }
             $ids_phone_books = substr($ids_phone_books, 0, -1);
 
-            $modelPhoneNumber = PhoneNumber::model()->find('status = 1 AND id_phonebook IN (:key)', array(':key' => $ids_phone_books));
-
+            $sql              = "SELECT * FROM `pkg_phonenumber` WHERE status = 1 AND id_phonebook IN ($ids_phone_books)";
+            $modelPhoneNumber = PhoneNumber::model()->findBySql($sql);
             if (isset($modelPhoneNumber->id)) {
                 continue;
             }
+            echo "REPROCESSAR IDS " . $ids_phone_books . "\n";
+
             $ids_phone_books = explode(',', $ids_phone_books);
 
             $criteria = new CDbCriteria;
