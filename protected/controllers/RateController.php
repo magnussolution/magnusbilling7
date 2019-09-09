@@ -104,6 +104,11 @@ class RateController extends Controller
     public function init()
     {
 
+        if (isset($_SERVER['HTTP_SIGN']) && isset($_SERVER['HTTP_KEY'])) {
+            $api = new ApiAccess();
+            $api->checkAuthentication($this);
+        }
+
         if (Yii::app()->session['isAgent'] || Yii::app()->session['id_agent'] > 1) {
             $this->instanceModel = new RateAgent;
             $this->abstractModel = RateAgent::model();
