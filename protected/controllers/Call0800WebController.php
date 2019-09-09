@@ -25,12 +25,6 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 class Call0800WebController extends Controller
 {
 
-    public function verbose($val = null, $val1 = null)
-    {
-        // echo $val . "<br>";
-        return;
-    }
-
     public function actionIndex()
     {
 
@@ -47,15 +41,23 @@ class Call0800WebController extends Controller
             $destination = isset($_REQUEST['number']) ? $_REQUEST['number'] : '';
             $user        = isset($_GET['user']) ? $_GET['user'] : '';
 
-            $modelSip = Sip::model()->find("name = :user", array(':user' => $user));
+            $model = Sip::model()->find("name = :user", array(':user' => $user));
 
-            if (!isset($modelSip->id)) {
-                $error_msg = Yii::t('yii', 'Error : User no Found!');
-                echo $error_msg;
-                exit;
+            if (!isset($model->id)) {
+
+                $model = Iax::model()->find("name = :user", array(':user' => $user));
+                if (!isset($model->id)) {
+                    $error_msg = Yii::t('yii', 'Error : User no Found!');
+                    echo $error_msg;
+                    exit;
+                } else {
+                    $type = 'IAX2';
+                }
+            } else {
+                $type = 'SIP';
             }
 
-            $dialstr = "SIP/" . $modelSip->name;
+            $dialstr = $type . '/' . $model->name;
 
             // gerar os arquivos .call
             $call = "Channel: " . $dialstr . "\n";
@@ -63,7 +65,7 @@ class Call0800WebController extends Controller
             $call .= "Context: billing\n";
             $call .= "Extension: " . $user . "\n";
             $call .= "Priority: 1\n";
-            $call .= "Set:IDUSER=" . $modelSip->id_user . "\n";
+            $call .= "Set:IDUSER=" . $model->id_user . "\n";
             $call .= "Set:SECCALL=" . $destination . "\n";
 
             AsteriskAccess::generateCallFile($call);
