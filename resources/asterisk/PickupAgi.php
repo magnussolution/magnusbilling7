@@ -22,7 +22,7 @@ class PickupAgi
 {
     public function execute(&$agi, &$MAGNUS)
     {
-        $sql = "SELECT * FROM pkg_sip WHERE name = '" . substr($MAGNUS->dnid, 2) . "' OR (alias = '" . substr($MAGNUS->dnid, 2) . "' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
+        $sql = "SELECT * FROM pkg_sip WHERE ( name = '" . substr($MAGNUS->dnid, 2) . "' OR alias = '" . substr($MAGNUS->dnid, 2) . "' )  AND accountcode = '$MAGNUS->accountcode' LIMIT 1";
 
         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
