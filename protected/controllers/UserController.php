@@ -221,6 +221,11 @@ class UserController extends Controller
                 ));
                 exit;
             }
+
+            if (isset($values['enableexpire']) && $values['enableexpire'] == 0) {
+                $values['expirationdate'] = '0000-00-00 00:00:00';
+            }
+
         }
         if (isset($values['id_plan'])) {
             $values['id_plan'] = $values['id_plan'] < 1 ? null : $values['id_plan'];
@@ -234,10 +239,6 @@ class UserController extends Controller
 
         if (isset($values['id_offer'])) {
             $values['id_offer'] = $values['id_offer'] === 0 ? null : $values['id_offer'];
-        }
-
-        if (isset($values['enableexpire']) && $values['enableexpire'] == 0) {
-            $values['expirationdate'] = '0000-00-00 00:00:00';
         }
 
         return $values;
