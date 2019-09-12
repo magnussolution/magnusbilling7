@@ -518,7 +518,7 @@ class CalcAgi
             $this->sipiax           = 3;
             $this->buycost          = 0;
             $this->id_prefix        = $id_prefix;
-            $this->saveCDR();
+            $this->saveCDR($agi, $MAGNUS);
 
         }
 

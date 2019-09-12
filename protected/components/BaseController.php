@@ -362,24 +362,13 @@ class BaseController extends CController
             $result = Yii::app()->db->createCommand($sql)->queryAll();
             return $result[0]['Rows'];
         } else {
-            if (strlen($this->group) < 2) {
-                $recordCont = $this->abstractModel->find(array(
-                    'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
-                    'join'      => $this->join,
-                    'condition' => $this->filter,
-                    'with'      => $this->relationFilter,
-                    'params'    => $this->paramsFilter,
-                ));
-            } else {
-                $recordCont = $this->abstractModel->find(array(
-                    'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
-                    'join'      => $this->join,
-                    'condition' => $this->filter,
-                    'with'      => $this->relationFilter,
-                    'params'    => $this->paramsFilter,
-                    'group'     => $this->group,
-                ));
-            }
+            $recordCont = $this->abstractModel->find(array(
+                'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
+                'join'      => $this->join,
+                'condition' => $this->filter,
+                'with'      => $this->relationFilter,
+                'params'    => $this->paramsFilter,
+            ));
 
             return $recordCont[$this->abstractModel->primaryKey()];
         }
