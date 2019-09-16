@@ -46,6 +46,6 @@ class StandardCallAgi
                 $MAGNUS->agiconfig['use_dnid'] = 0;
             } //END FOR
         }
-        $MAGNUS->hangup();
+        $MAGNUS->hangup($agi);
     }
 }
