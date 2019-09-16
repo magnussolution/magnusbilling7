@@ -86,7 +86,7 @@ class DidAgi
             $modelCallerId = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelCallerId->id)) {
                 $agi->verbose('found callerid, new user = ' . $MAGNUS->modelUser->username . ' ' . $this->sell_price);
-                $CalcAgi->did_charge_of_id_user     = $MAGNUS->modelUser->id;
+                $CalcAgi->did_charge_of_id_user     = $modelCallerId->id_user;
                 $CalcAgi->did_charge_of_answer_time = time();
                 $CalcAgi->didAgi                    = $this->modelDid;
                 $this->modelDid->selling_rate_1     = $this->sell_price;
