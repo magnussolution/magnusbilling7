@@ -22,7 +22,7 @@ if (function_exists('pcntl_signal')) {
     pcntl_signal(SIGHUP, SIG_IGN);
 }
 
-error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
 
 require_once 'AGI.Class.php';
 require_once 'AGI_AsteriskManager.Class.php';
