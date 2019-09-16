@@ -197,7 +197,7 @@ class Magnus
         $res               = 0;
         $prompt_enter_dest = 'prepaid-enter-dest';
         $msg               = "use_dnid:" . $this->agiconfig['use_dnid'] . " && len_dnid:(" . strlen($this->
-                dnid) . " || len_exten:" . strlen($this->extension) . " ) && (try_num:$try_num)";
+            dnid) . " || len_exten:" . strlen($this->extension) . " ) && (try_num:$try_num)";
         $agi->verbose($msg, 15);
 
         if (($this->agiconfig['use_dnid'] == 1) && $try_num == 0) {
