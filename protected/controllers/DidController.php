@@ -83,6 +83,14 @@ class DidController extends Controller
     {
         $success = false;
 
+        if (!Yii::app()->session['isAdmin']) {
+            echo json_encode(array(
+                $this->nameSuccess => false,
+                $this->nameMsg     => 'This option is only available to clients.',
+            ));
+            exit;
+        }
+
         $id_did  = isset($_POST['id']) ? json_decode($_POST['id']) : null;
         $id_user = Yii::app()->session['id_user'];
 
