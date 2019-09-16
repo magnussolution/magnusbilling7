@@ -1936,7 +1936,7 @@ class BaseController extends CController
     {
         if ($this->abstractModel->tableName() == 'pkg_user') {
             $modelUser = User::model()->findByPk($values['id']);
-            $id_user   = $modelUser->id;
+            $id_user   = $modelUser->id_user;
         } else if (preg_match('/pkg_plan/', $this->abstractModel->tableName())) {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idUser->id;
