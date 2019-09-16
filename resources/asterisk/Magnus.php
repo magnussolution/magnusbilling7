@@ -658,10 +658,10 @@ class Magnus
         return round($number, $PRECISION);
     }
 
-    public function executePlayAudio($prompt, $agi, $force_playback = false)
+    public function executePlayAudio($prompt, $agi)
     {
         if (strlen($prompt) > 0) {
-            if ($this->play_audio == 1 || $force_playback) {
+            if ($this->play_audio == 1) {
                 $agi->verbose($prompt, 3);
                 $agi->answer();
                 $agi->stream_file($prompt, '#');
