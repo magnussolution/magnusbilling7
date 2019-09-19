@@ -44,6 +44,9 @@ class AuthenticateAgi
 
         if ($authentication == false || $MAGNUS->active != 1) {
             $prompt = "prepaid-auth-fail";
+            //force the audio to play
+            $MAGNUS->play_audio = true;
+
         } else {
             $prompt = $MAGNUS->check_expirationdate_customer($agi);
         }
