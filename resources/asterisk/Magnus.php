@@ -119,9 +119,8 @@ class Magnus
             $modelSip          = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $this->accountcode = $modelSip->accountcode;
         }
-        $account           = explode("-", $this->channel);
-        $account           = explode("/", $account[0]);
-        $this->sip_account = $account[1];
+        $account           = explode("/", $this->channel);
+        $this->sip_account = substr($account[1], 0, strrpos($account[1], '-'));
         $pos_lt            = strpos($this->CallerID, '<');
         $pos_gt            = strpos($this->CallerID, '>');
         if (($pos_lt !== false) && ($pos_gt !== false)) {

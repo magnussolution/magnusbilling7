@@ -88,15 +88,12 @@ class SipCallAgi
                     $cost = 0;
                 }
             }
-
-            $MAGNUS->id_trunk          = null;
             $CalcAgi->starttime        = date("Y-m-d H:i:s", $startCall);
             $CalcAgi->sessiontime      = $answeredtime;
             $CalcAgi->terminatecauseid = $terminatecauseid;
             $CalcAgi->sessionbill      = $cost;
             $CalcAgi->sipiax           = 1;
             $CalcAgi->buycost          = 0;
-            $CalcAgi->id_prefix        = null;
             $CalcAgi->saveCDR($agi, $MAGNUS);
 
             $MAGNUS->hangup($agi);
@@ -122,8 +119,7 @@ class SipCallAgi
             $sql              = "SELECT name, callerid,id_user,dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            $MAGNUS->CallerID = $modelSip->callerid;
-            $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+            $agi->set_variable("CALLERID(all)", $modelSip->callerid);
 
             $MAGNUS->dnid = $MAGNUS->destination = $MAGNUS->sip_account = $MAGNUS->modelSip->name;
             sipCallAgi::processCall($MAGNUS, $agi, $CalcAgi);
@@ -174,10 +170,7 @@ class SipCallAgi
         {
             $sql              = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
             $modelUserForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-
-            $MAGNUS->CallerID = $modelSipForward->callerid;
-            $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
-
+            $agi->set_variable("CALLERID(all)", $modelSipForward->callerid);
             $MAGNUS->accountcode = $modelUserForward->accountcode;
             $agi->verbose("CALL number $optionValue");
             $didAgi = new DidAgi();

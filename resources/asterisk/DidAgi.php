@@ -48,6 +48,22 @@ class DidAgi
                 $sql               = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
                 $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
+                if ($this->id_prefix == 0) {
+
+                    $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('" . $this->did . "',1,length(prefix))
+                                    ORDER BY LENGTH(prefix) DESC";
+                    $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    if (!isset($modelPrefix->id)) {
+                        $agi->verbose('Not found prefix to DID ' . $this->did);
+                    }
+                    $CalcAgi->id_prefix = $modelPrefix->id;
+
+                    $sql               = "SELECT * FROM pkg_trunk WHERE trunkcode = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                    $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $MAGNUS->id_trunk = isset($modelTrunk->id) ? $modelTrunk->id : NULL;
+                }
+
+
                 if ($this->modelDid->calllimit > 0) {
                     $agi->verbose('Check DID channels');
                     $calls = AsteriskAccess::getCallsPerDid($this->modelDid->did);
@@ -660,17 +676,6 @@ class DidAgi
 
         }
 
-        if ($this->id_prefix == 0) {
-
-            $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('" . $this->did . "',1,length(prefix))
-                            ORDER BY LENGTH(prefix) DESC";
-            $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            if (!isset($modelPrefix->id)) {
-                $agi->verbose('Not found prefix to DID ' . $this->did);
-            }
-            $this->id_prefix = $modelPrefix->id;
-        }
-
         $this->billDidCall($agi, $MAGNUS, $answeredtime);
 
         if ($this->sell_price > 0) {
@@ -685,7 +690,7 @@ class DidAgi
         $MAGNUS->destination       = $this->did;
         $CalcAgi->terminatecauseid = $terminatecauseid;
         $CalcAgi->sessionbill      = $this->sell_price;
-        $MAGNUS->id_trunk          = null;
+        $MAGNUS->id_trunk          = $MAGNUS->id_trunk  > 0 ? $MAGNUS->id_trunk : null;
         $CalcAgi->sipiax           = 3;
         $CalcAgi->buycost          = 0;
         $CalcAgi->id_prefix        = $this->id_prefix;

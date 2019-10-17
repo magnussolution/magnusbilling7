@@ -25,6 +25,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     private $cdr_falide_id;
     private $month_cdr_id;
     private $month_cdr_falide_id;
+    private $day;
 
     public function run($args)
     {
@@ -72,6 +73,8 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         } else {
             $day = date('d');
         }
+
+        $this->day = $day;
 
         $sql    = "SELECT cdr_id, cdr_falide_id FROM pkg_cdr_summary_ids WHERE `day` = '" . date('Y-m-') . $day . "' LIMIT 1";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
@@ -153,13 +156,19 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perDay()
     {
 
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->cdr_id;
+        }
+
         $sql = "SELECT DATE(starttime) AS day,
                 sum(sessiontime) AS sessiontime,
                 SUM(sessiontime) / COUNT(*) AS aloc_all_calls,
                 count(*) as nbcall,
                 sum(buycost) AS buycost,
                 sum(sessionbill) AS sessionbill
-                FROM pkg_cdr t WHERE id >= $this->cdr_id GROUP BY day ORDER BY day DESC";
+                FROM pkg_cdr t WHERE $filter GROUP BY day ORDER BY day DESC";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
         if (!isset($result[0]['day'])) {
@@ -187,9 +196,15 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         echo "perDay " . date('H:i:s') . "\n";
 
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->cdr_falide_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->cdr_falide_id;
+        }
+
         $sql = "SELECT DATE(starttime) AS day,
                 count(*) as nbcall_fail
-                FROM pkg_cdr_failed t WHERE id >= $this->cdr_falide_id  GROUP BY day ORDER BY day DESC ";
+                FROM pkg_cdr_failed t WHERE $filter  GROUP BY day ORDER BY day DESC ";
         $model = Yii::app()->db->createCommand($sql)->queryAll();
 
         foreach ($model as $key => $value) {
@@ -208,6 +223,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perDayUser()
     {
 
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->cdr_id;
+        }
         $sql = "SELECT DATE(starttime) AS day,
                 id_user,
                 sum(sessiontime) AS sessiontime,
@@ -216,7 +236,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 sum(buycost) AS buycost,
                 sum(sessionbill) AS sessionbill,
                 sum(agent_bill) AS agent_bill
-                FROM pkg_cdr t WHERE id >= $this->cdr_id GROUP BY day, id_user ORDER BY day DESC";
+                FROM pkg_cdr t WHERE $filter  GROUP BY day, id_user ORDER BY day DESC";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
         if (!isset($result[0]['day'])) {
@@ -258,6 +278,12 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perDayTrunk()
     {
 
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->cdr_id;
+        }
+
         $sql = "SELECT DATE(starttime) AS day,
                 id_trunk,
                 sum(sessiontime) AS sessiontime,
@@ -265,7 +291,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 count(*) as nbcall,
                 sum(buycost) AS buycost,
                 sum(sessionbill) AS sessionbill
-                FROM pkg_cdr t WHERE id >= $this->cdr_id AND id_trunk IS NOT NULL GROUP BY day, id_trunk ORDER BY day DESC";
+                FROM pkg_cdr t WHERE $filter AND id_trunk IS NOT NULL GROUP BY day, id_trunk ORDER BY day DESC";
 
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
@@ -300,6 +326,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
     public function perDayAgent()
     {
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->cdr_id;
+        }
 
         $sql = "SELECT DATE(starttime) AS day,
                 c.id_user as id_user,
@@ -311,7 +342,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 sum(agent_bill) AS agent_bill
                 FROM pkg_cdr t
                 LEFT JOIN pkg_user c ON t.id_user = c.id
-                WHERE  t.id >= $this->cdr_id AND c.id_user > 1  GROUP BY day, c.id_user ORDER BY day DESC";
+                WHERE  $filter AND c.id_user > 1  GROUP BY day, c.id_user ORDER BY day DESC";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
         if (!isset($result[0]['day'])) {
@@ -343,6 +374,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
     public function perMonth()
     {
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->month_cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->month_cdr_id;
+        }
 
         $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
                 sum(sessiontime) AS sessiontime,
@@ -350,7 +386,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 count(*) as nbcall,
                 sum(buycost) AS buycost,
                 sum(sessionbill) AS sessionbill
-                FROM pkg_cdr t WHERE t.id >= $this->month_cdr_id GROUP BY month ORDER BY month DESC";
+                FROM pkg_cdr t WHERE $filter GROUP BY month ORDER BY month DESC";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
         if (!isset($result[0]['month'])) {
@@ -385,6 +421,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
     public function perMonthUser()
     {
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->month_cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->month_cdr_id;
+        }
 
         $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
                 id_user,
@@ -394,7 +435,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 sum(buycost) AS buycost,
                 sum(sessionbill) AS sessionbill,
                 sum(agent_bill) AS agent_bill
-                FROM pkg_cdr t WHERE  t.id >= $this->month_cdr_id GROUP BY month, id_user ORDER BY month DESC";
+                FROM pkg_cdr t WHERE  $filter GROUP BY month, id_user ORDER BY month DESC";
 
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
@@ -438,6 +479,12 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perMonthTrunk()
     {
 
+        if ($this->day == date('d')) {
+            $filter = 't.id >= ' . $this->month_cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
+        } else {
+            $filter = 't.id >= ' . $this->month_cdr_id;
+        }
+
         $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
                 id_trunk,
                 sum(sessiontime) AS sessiontime,
@@ -445,7 +492,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 count(*) as nbcall,
                 sum(buycost) AS buycost,
                 sum(sessionbill) AS sessionbill
-                FROM pkg_cdr t WHERE t.id >= $this->month_cdr_id AND  id_trunk IS NOT NULL GROUP BY month, id_trunk ORDER BY month DESC";
+                FROM pkg_cdr t WHERE $filter AND  id_trunk IS NOT NULL GROUP BY month, id_trunk ORDER BY month DESC";
 
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
