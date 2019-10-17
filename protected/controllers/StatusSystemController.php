@@ -401,8 +401,8 @@ class sysinfo
                 }
             }
 
-            $results['ram']['t_used']  = is_numeric($results['ram']['total']) && is_numeric($results['ram']['t_free']) ? $results['ram']['total'] - $results['ram']['t_free'] : 0;
-            $results['ram']['percent'] = is_numeric($results['ram']['total']) && is_numeric($results['ram']['t_used']) ? round(($results['ram']['t_used'] * 100) / $results['ram']['total']) : 0;
+            $results['ram']['t_used']  =  intval($results['ram']['total']) - intval($results['ram']['t_free']) ;
+             $results['ram']['percent'] = is_numeric($results['ram']['total']) && is_numeric($results['ram']['t_used']) ? round(($results['ram']['t_used'] * 100) / $results['ram']['total']) : 0;
             $results['swap']['used']   = is_numeric($results['swap']['total']) && is_numeric($results['swap']['free']) ? $results['swap']['total'] - $results['swap']['free'] : 0;
 
             // If no swap, avoid divide by 0

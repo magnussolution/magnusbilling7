@@ -401,7 +401,7 @@ class MassiveCall
                             if (is_numeric($dtmf_result)) {
                                 $agi->verbose("dtmf_result es numerico ", 8);
 
-                                $sql               = "SELECT * FROM pkg_campaign_poll WHERE id = $poll->id LIMIT 1";
+                                $sql               = "SELECT option" . $dtmf_result . " as resposta_option FROM pkg_campaign_poll WHERE id = $poll->id LIMIT 1";
                                 $modelCampaignPoll = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                                 $agi->verbose('$i' . $i . " " . $repeat, 25);
@@ -421,7 +421,7 @@ class MassiveCall
                         }
                     }
 
-                    if ($modelCampaignPoll[0]->{'option' . $dtmf_result} != 'repeat') {
+                    if ($modelCampaignPoll->resposta_option != 'repeat') {
                         break;
                     }
 

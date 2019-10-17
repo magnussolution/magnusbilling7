@@ -95,9 +95,8 @@ class SmsSend
             }
 
             $linkSms      = isset($callTrunk[0]['link_sms']) ? $callTrunk[0]['link_sms'] : null;
-            $trunkPrefix  = isset($callTrunk[0]['trunkprefix']) ? $callTrunk[0]['trunkprefix'] : null;
-            $trunkCode    = isset($callTrunk[0]['trunkcode']) ? $callTrunk[0]['trunkcode'] : null;
-            $removePrefix = isset($callTrunk[0]['removeprefix']) ? $callTrunk[0]['removeprefix'] : null;
+            $trunkPrefix  = isset($callTrunk[0]['rc_trunkprefix']) ? $callTrunk[0]['rc_trunkprefix'] : null;
+            $removePrefix = isset($callTrunk[0]['rc_removeprefix']) ? $callTrunk[0]['rc_removeprefix'] : null;
             $smsRes       = isset($callTrunk[0]['sms_res']) ? $callTrunk[0]['sms_res'] : null;
 
             $buyRate     = isset($callTrunk[0]['buyrate']) ? $callTrunk[0]['buyrate'] : null;
