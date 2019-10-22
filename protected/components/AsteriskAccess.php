@@ -199,6 +199,7 @@ class AsteriskAccess
         if (!$fd) {
             echo "</br><center><b><font color=red>" . gettext("Could not open buddy file") . $file . "</font></b></center>";
         } else {
+
             foreach ($rows as $key => $data) {
                 $line         = "\n\n[" . $data[$head_field] . "]\n";
                 $registerLine = '';
@@ -228,11 +229,28 @@ class AsteriskAccess
                     } else {
                         $line .= $key . '=' . $option . "\n";
                     }
+
+                    //to queues member
+                    if ($key == 'setqueueentryvar') {
+                        $line .= "\n";
+                        $modelMember = QueueMember::model()->findAll([
+                            'condition' => 'queue_name = :key AND paused = 0',
+                            'params'    => array(':key' => $data['name']),
+                            'order'     => 'uniqueid ASC',
+                        ]);
+                        foreach ($modelMember as $member) {
+                            $line .= 'member=' . $member['interface'] . "\n";
+                        }
+
+                    }
+
                 }
 
-                if (fwrite($fr, $registerLine) === false) {
-                    echo gettext("Impossible to write to the file") . " ($registerLine)";
-                    break;
+                if (isset($fr)) {
+                    if (fwrite($fr, $registerLine) === false) {
+                        echo "Impossible to write to the file" . " ($registerLine)";
+                        break;
+                    }
                 }
 
                 if (fwrite($fd, $line) === false) {
