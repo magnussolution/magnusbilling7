@@ -160,4 +160,15 @@ class Queue extends Model
                         '" . date('Y-m-d H:i:s') . "', '" . $channel . "', 'ringing')";
         Yii::app()->db->createCommand($sql)->execute();
     }
+
+    public function beforeSave()
+    {
+        if (!$this->getIsNewRecord()) {
+            $model = Queue::model()->findByPk($this->id);
+
+            QueueMember::model()->updateAll(array('queue_name' => $this->name), 'queue_name = :key', array(':key' => $model->name));
+
+        }
+        return parent::beforeSave();
+    }
 }
