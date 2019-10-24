@@ -244,6 +244,8 @@ class UpdateMysqlCommand extends ConsoleCommand
             $this->executeDB($sql);
 
             exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php statussystem' >> /var/spool/cron/root");
+            exec("touch /etc/asterisk/queues_magnus.conf");
+            exec("echo '#include queues_magnus.conf' >> /etc/asterisk/queues.conf");
 
             $version = '7.0.0';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "'WHERE config_key = 'version'";
