@@ -215,6 +215,9 @@ class MassiveCall
 
                     $MAGNUS->startRecordCall($agi);
 
+                    $agi->set_callerid($destination);
+                    $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
+
                     $myres      = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_sipiax_friend']);
                     $dialstatus = $agi->get_variable("DIALSTATUS");
                     $dialstatus = $dialstatus['data'];
