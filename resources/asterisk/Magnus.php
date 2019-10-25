@@ -74,6 +74,7 @@ class Magnus
     public $magnusFilesDirectory = '/usr/local/src/magnus/';
     public $tariff_limit         = 1;
     public $prefixclause;
+    public $is_callingcard = false;
 
     public function __construct()
     {
@@ -212,8 +213,9 @@ class Magnus
             $agi->verbose('Request the destination number' . $prompt_enter_dest, 25);
             $res_dtmf = $agi->get_data($prompt_enter_dest, 10000, 20);
             $agi->verbose("RES DTMF -> " . $res_dtmf["result"], 10);
-            $this->destination = $res_dtmf["result"];
-            $this->dnid        = $res_dtmf["result"];
+            $this->destination    = $res_dtmf["result"];
+            $this->dnid           = $res_dtmf["result"];
+            $this->is_callingcard = true;
         }
 
         if ($this->dnid == '*150') {
@@ -586,24 +588,26 @@ class Magnus
 
     public function run_dial($agi, $dialstr, $dialparams = "", $trunk_directmedia = 'no', $timeout = 3600, $max_long = 2147483647)
     {
+
         $dialparams = str_replace("%timeout%", min($timeout * 1000, $max_long), $dialparams);
-        $dialparams = str_replace("%timeoutsec%", min($timeout, $max_long), $dialparams);
+
         if ($this->modelSip->directmedia == 'yes' && $trunk_directmedia == 'yes') {
             $agi->verbose("DIRECT MEDIA ACTIVE", 10);
-            $dialparams = preg_replace("/,L/", "", $dialparams);
-            $dialparams = preg_replace("/,rRL/", "", $dialparams);
-            $dialparams = preg_replace("/,RrL/", "", $dialparams);
+            $dialparams = preg_replace("/L\(.*\)/", "", $dialparams);
         }
 
+        $dialparams = preg_replace("/Rr|rR/", "", $dialparams);
+
         if ($this->modelSip->ringfalse == '1') {
-            $dialparams = preg_replace("/(^\,.*\,)/", "$1Rr", $dialparams);
-        } elseif ($this->modelSip->ringfalse == '0') {
-            $dialparams = preg_replace("/Rr/", "", $dialparams);
-            $dialparams = preg_replace("/rR/", "", $dialparams);
+            $dialparams .= 'Rr';
         }
-        /* Run dial command */
+
         if (strlen($this->agiconfig['amd']) > 0) {
             $dialparams .= $this->agiconfig['amd'];
+        }
+
+        if ($this->is_callingcard == true) {
+            $dialparams .= 'U(trunk_answer_handler)';
         }
 
         if ($MAGNUS->$demo == true) {
