@@ -568,6 +568,10 @@ exten => h,1,hangup()
 exten => *111,1,VoiceMailMain(${CHANNEL(peername)}@billing)
   same => n,Hangup()
 
+[trunk_answer_handler]
+exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=${EPOCH})
+  same => n,Return()
+
 ' > /etc/asterisk/extensions_magnus.conf
 
 echo "

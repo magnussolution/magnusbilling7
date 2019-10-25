@@ -733,10 +733,6 @@ class CalcAgi
             $dialstr = "$tech/$ipaddress/$prefix$destination";
         }
 
-        if (strlen($addparameter) > 0) {
-            $dialstr = "$tech/$ipaddress/$prefix$destination" . $addparameter;
-        }
-
         if ($this->tariffObj[$k]['credit_control'] == 1 && $this->tariffObj[$k]['credit'] <= 0) {
             $agi->verbose("Provider not have credit", 3);
             $this->tariffObj[$k]['status'] = 0;
@@ -755,7 +751,7 @@ class CalcAgi
 
             $MAGNUS->startRecordCall($agi);
             try {
-                $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param']
+                $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param'] . $addparameter
                     , $this->tariffObj[$k]['rc_directmedia'], $timeout);
             } catch (Exception $e) {
                 //
@@ -766,8 +762,11 @@ class CalcAgi
                 $dialstatus              = 'ANSWER';
                 $this->dialstatus        = 'ANSWER';
             } else {
-
-                $answeredtime            = $agi->get_variable("ANSWEREDTIME");
+                if ($MAGNUS->is_callingcard == true) {
+                    $answeredtime = time() - $agi->get_variable("TRUNKANSWERTIME");
+                } else {
+                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
+                }
                 $this->real_answeredtime = $this->answeredtime = $answeredtime['data'];
                 $dialstatus              = $agi->get_variable("DIALSTATUS");
                 $this->dialstatus        = $dialstatus['data'];

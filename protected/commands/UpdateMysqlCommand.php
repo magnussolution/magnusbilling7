@@ -247,6 +247,12 @@ class UpdateMysqlCommand extends ConsoleCommand
             exec("touch /etc/asterisk/queues_magnus.conf");
             exec("echo '#include queues_magnus.conf' >> /etc/asterisk/queues.conf");
 
+            exec("echo '
+
+[trunk_answer_handler]
+exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=${EPOCH})
+    same => n,Return()' >> /etc/asterisk/extensions_magnus.conf");
+
             $version = '7.0.0';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "'WHERE config_key = 'version'";
             $this->executeDB($sql);
