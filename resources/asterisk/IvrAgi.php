@@ -37,38 +37,11 @@ class IvrAgi
         $MAGNUS->id_user     = $modelIvr->id_user;
         $MAGNUS->id_plan     = $modelIvr->id_plan;
         $MAGNUS->record_call = $modelIvr->record_call;
-        $monFriStart         = $modelIvr->monFriStart;
-        $monFriStop          = $modelIvr->monFriStop;
-        $satStart            = $modelIvr->satStart;
-        $satStop             = $modelIvr->satStop;
-        $sunStart            = $modelIvr->sunStart;
-        $sunStop             = $modelIvr->sunStop;
-        $nowDay              = date('D');
-        $nowHour             = date('H:i:s');
 
-        if ($nowDay != 'Sun' && $nowDay != 'Sat') {
-            if ($nowHour > $monFriStart && $nowHour < $monFriStop) {
-                $agi->verbose("MonFri");
-                $work = true;
-            }
-        }
-
-        if ($nowDay == 'Sat') {
-            if ($nowHour > $satStart && $nowHour < $satStop) {
-                $agi->verbose("Sat");
-                $work = true;
-            }
-        }
-
-        if ($nowDay == 'Sun') {
-            if ($nowHour > $sunStart && $nowHour < $sunStop) {
-                $agi->verbose("Sun");
-                $work = true;
-            }
-        }
+        $work = $MAGNUS->checkIVRSchedule($modelIvr->monFriStart, $modelIvr->satStart, $modelIvr->sunStart);
 
         //esta dentro do hario de atencao
-        if ($work) {
+        if ($work == 'open') {
             $audioURA   = 'idIvrDidWork_';
             $optionName = 'option_';
         } else {
@@ -93,7 +66,7 @@ class IvrAgi
             $wait_time     = 3000;
 
             if ($modelIvr->direct_extension == 1) {
-                $sql            = "SELECT name FROM pkg_sip WHERE name REGEXP '^[0-9]*$' ORDER BY LENGTH(name) DESC LIMIT 1";
+                $sql            = "SELECT name FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . "name REGEXP '^[0-9]*$' ORDER BY LENGTH(name) DESC LIMIT 1";
                 $modelSipDirect = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (isset($modelSipDirect->name)) {
                     $digit_timeout       = strlen($modelSipDirect->name);
@@ -120,7 +93,7 @@ class IvrAgi
             } else if (isset($is_direct_extention) && $is_direct_extention == 1 && strlen($option) > 1) {
                 $agi->verbose('Dial to expecific SIP ACCOUNT', 5);
 
-                $sql      = "SELECT name, dial_timeout, record_call FROM pkg_sip WHERE name = $option LIMIT 1";
+                $sql      = "SELECT name, dial_timeout, record_call FROM pkg_sip WHERE name = '$option' OR (alias = '$option' AND id_user = " . $MAGNUS->id_user . ")  LIMIT 1";
                 $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 if (isset($modelSip->name)) {

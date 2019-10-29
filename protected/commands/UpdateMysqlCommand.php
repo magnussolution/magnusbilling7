@@ -235,8 +235,6 @@ class UpdateMysqlCommand extends ConsoleCommand
 
                 UPDATE `pkg_module` SET priority = 1 WHERE id_module = 85 AND module = 'services';
                 UPDATE `pkg_module` SET priority = 2 WHERE id_module = 85 AND module = 'servicesuse';
-
-
             ";
             $this->executeDB($sql);
 
@@ -254,6 +252,26 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=${EPOCH})
     same => n,Return()' >> /etc/asterisk/extensions_magnus.conf");
 
             $version = '7.0.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "'WHERE config_key = 'version'";
+            $this->executeDB($sql);
+        }
+
+        if ($version == '7.0.0') {
+
+            $sql = "
+            ALTER TABLE `pkg_ivr` CHANGE `monFriStart` `monFriStart` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '09:00-12:00|14:00-18:00';
+            ALTER TABLE `pkg_ivr` CHANGE `satStart` `satStart` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '09:00-12:00';
+            ALTER TABLE `pkg_ivr` CHANGE `sunStart` `sunStart` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '00:00';
+            UPDATE pkg_ivr SET monFriStart = CONCAT(monFriStart,'-',monFriStop);
+            UPDATE pkg_ivr SET satStart = CONCAT(satStart,'-',satStop);
+            UPDATE pkg_ivr SET sunStart = CONCAT(sunStart,'-',sunStop);
+            ALTER TABLE `pkg_ivr` DROP `monFriStop`;
+            ALTER TABLE `pkg_ivr` DROP `satStop`;
+            ALTER TABLE `pkg_ivr` DROP `sunStop`;
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.0.1';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "'WHERE config_key = 'version'";
             $this->executeDB($sql);
         }

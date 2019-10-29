@@ -786,19 +786,19 @@ class Magnus
         }
         return ($sessiontime / 60) * $sell;
     }
-    public function checkIVRSchedule($model)
+    public function checkIVRSchedule($monFri, $sat, $sun)
     {
         $weekDay = date('D');
 
         switch ($weekDay) {
             case 'Sun':
-                $weekDay = $model->{'TimeOfDay_sun'};
+                $weekDay = $sun;
                 break;
             case 'Sat':
-                $weekDay = $model->{'TimeOfDay_sat'};
+                $weekDay = $sat;
                 break;
             default:
-                $weekDay = $model->{'TimeOfDay_monFri'};
+                $weekDay = $monFri;
                 break;
         }
 
