@@ -54,10 +54,31 @@ class Ivr extends Model
     {
         return array(
             array('id_user, direct_extension', 'numerical', 'integerOnly' => true),
-            array('monFriStart, monFriStop, satStart, satStop, sunStart, sunStop', 'length', 'max' => 5),
+            array('monFriStart,  satStart,  sunStart', 'length', 'max' => 200),
             array('name, option_0, option_1, option_2, option_3, option_4, option_5, option_6, option_7, option_8, option_9, option_10', 'length', 'max' => 50),
             array('option_out_0, option_out_1, option_out_2, option_out_3, option_out_4, option_out_5, option_out_6, option_out_7, option_out_8, option_out_9, option_out_10', 'length', 'max' => 50),
+            array('monFriStart,  satStart,  sunStart', 'checkInterval'),
+
         );
+    }
+
+    public function checkInterval($attribute, $params)
+    {
+        $intervals = explode('|', $this->{$attribute});
+        foreach ($intervals as $key => $interval) {
+            if (!preg_match('/-/', $interval)) {
+                $this->addError($attribute, 'There is a interval with a invalid format, the allowed formatting is: 00:00-00:00. Use | for more than one interval.');
+                return;
+            }
+
+            $hours = explode('-', $interval);
+            foreach ($hours as $key => $hour) {
+                if (!preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $hour)) {
+                    $this->addError($attribute, 'There is a interval with a invalid format, the allowed formatting is: 00:00-00:00. Use | for more than one interval.');
+                }
+            }
+
+        }
     }
 
     /**

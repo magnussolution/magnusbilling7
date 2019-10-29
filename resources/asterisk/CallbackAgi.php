@@ -260,7 +260,7 @@ class CallbackAgi
             && (strlen($callerID) == 10 || strlen($callerID) == 11)) {
             $callerID = "55" . $callerID;
         }
-        $work   = $MAGNUS->checkIVRSchedule($DidAgi->modelDid);
+        $work   = $MAGNUS->checkIVRSchedule($DidAgi->modelDid->TimeOfDay_monFri, $DidAgi->modelDid->TimeOfDay_sat, $DidAgi->modelDid->TimeOfDay_sun);
         $status = $work != 'open' ? 4 : 1;
 
         $sql           = "SELECT * FROM pkg_callback WHERE exten = '$callerID' AND status IN (1,4) AND id_did = " . $DidAgi->modelDestination[0]['id_did'] . " LIMIT 1 ";
