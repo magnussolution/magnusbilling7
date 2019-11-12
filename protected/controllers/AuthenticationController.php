@@ -77,10 +77,10 @@ class AuthenticationController extends Controller
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
                 'success' => false,
-                'msg'     => 'Username or password is wrong',
+                'msg'     => 'Username and password combination is invalid',
             ));
             $nameMsg = $this->nameMsg;
-            $info    = 'Username or password is wrong - User ' . $user . ' from IP - ' . $_SERVER['REMOTE_ADDR'];
+            $info    = 'Username and password combination is invalid - User: ' . $user . ' IP: ' . $_SERVER['REMOTE_ADDR'];
             Yii::log($info, 'error');
             MagnusLog::insertLOG(1, $info);
 
@@ -517,11 +517,11 @@ class AuthenticationController extends Controller
             return;
         }
 
-        if (preg_match('/IP Blocked because tried login 3 times with invalid data. IP - /', $modelLogUsers[0]->description)) {
+        if (preg_match('/IP blocked after 3 failing attempts. IP: /', $modelLogUsers[0]->description)) {
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
                 'success' => false,
-                'msg'     => "IP Blocked because tried login 3 times with invalid data. WAIT 5 MINUTES THEN TRY AGAIN",
+                'msg'     => "IP blocked after 3 failing attempts. Wait 5 minutes and try again.",
                 'ip'      => $_SERVER['REMOTE_ADDR'],
             ));
             exit;
@@ -529,7 +529,7 @@ class AuthenticationController extends Controller
 
         $invalid = 0;
         for ($i = 0; $i < 3; $i++) {
-            if (preg_match('/Username or password is wrong/', $modelLogUsers[$i]->description)) {
+            if (preg_match('/Username and password combination is invalid/', $modelLogUsers[$i]->description)) {
                 $invalid++;
             }
         }
@@ -538,11 +538,11 @@ class AuthenticationController extends Controller
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
                 'success' => false,
-                'msg'     => Yii::t('yii', "IP Blocked because tried login 3 times with invalid data.") . "<br><b>" . Yii::t('yii', "WAIT 5 MINUTES THEN TRY AGAIN.") . "</b>" . "<br> IP - " . $_SERVER['REMOTE_ADDR'],
+                'msg'     => Yii::t('yii', "IP blocked after 3 failing attempts.") . "<br><b>" . Yii::t('yii', "Wait 5 minutes and try again.") . "</b>" . "<br> IP: " . $_SERVER['REMOTE_ADDR'],
             ));
             $nameMsg = $this->nameMsg;
 
-            $info = 'IP Blocked because tried login 3 times with invalid data. IP - ' . $_SERVER['REMOTE_ADDR'];
+            $info = 'IP blocked after 3 failing attempts. IP: ' . $_SERVER['REMOTE_ADDR'];
             Yii::log($info, 'error');
             MagnusLog::insertLOG(1, $info);
 

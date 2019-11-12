@@ -23,8 +23,8 @@ Help.load({
     'user.calllimit_error': '',
     'user.sipaccountlimit': 'How many SipAccount this user can create. You need add permissions on the group to allow user create SipAccout. Or use Services menu to control permissions.',
     'user.callingcard_pin': 'Used to callingcard authentication.',
-    'user.restriction': 'Used to restriction dial. Add the numbers in User menu, Restricted Numbers sub-menu.',
-    'user.record_call': 'When you change this field it will change record call option to all SIP Accounts too. You can set user record call to NO and activate record call individually to each SipAccount. This option need be activated to record incomming DID call.',
+    'user.restriction': 'Used to restriction dial. Add the numbers in User menu, Restricted numbers sub-menu.',
+    'user.record_call': 'When you change this field it will change record call option to all SIP accounts too. You can set user record call to NO and activate record call individually to each SipAccount. This option need be activated to record incomming DID call.',
     //SIP ACCOUNT
     'sip.defaultuser': 'Username to login on the SIP device.',
     'sip.secret': 'Password to login on the SIP device.',
@@ -206,7 +206,7 @@ Help.load({
     'queue.ring_or_moh': '',
     'queue.musiconhold': '',
     'queue.max_wait_time': 'Maximum wait time on the queue',
-    'queue.max_wait_time_action': 'SipAccount, IVR or QUEUE to send the caller if maximum wait time is superated. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.',
+    'queue.max_wait_time_action': 'SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.',
     //PROVIDER
     'provider.provider_name': 'Provider name',
     'provider.credit': 'How much credit do you have in your provider account? This field is not necessary.',
@@ -322,7 +322,7 @@ Help.load({
     //DID DESTINATION
     'diddestination.id_did': 'Select the DID that you want create new destination',
     'diddestination.activated': '',
-    'diddestination.priority': 'You can create 5 destination to your DID. If try call to the priority 1 and receive error, Magnusbilling will try send call to destination priority two and so on. Onlu work with "Call SIP" type ',
+    'diddestination.priority': 'You can create 5 destination to your DID. If try call to the priority 1 and receive error, Magnusbilling will try send call to destination priority two and so on. Onlu work with "SIP call" type ',
     'diddestination.voip_call': '',
     'diddestination.destination': '',
     'diddestination.id_ivr': '',
@@ -406,7 +406,7 @@ Help.load({
     'campaign.sunday': '',
     'campaign.frequency': 'How many number will be executed per minute?',
     'campaign.nb_callmade': 'Ued to control the max completd calls',
-    'campaign.enable_max_call': 'If you enable it, MagnusBilling will check if have the \'Max Complete Call\' amount with duration equal \'Total Audio Time\'. If true the campaign will be inactived',
+    'campaign.enable_max_call': 'If you enable it, MagnusBilling will check if have the \'max completed calls\' amount with duration equal \'Total audio time\'. If true the campaign will be inactived',
     'campaign.secondusedreal': 'How many call do you want send. Need active abose parameter to control it.',
     'campaign.description': 'Text to send SMS. You can use %name% where you want replace per number name',
     'campaign.tts_audio': '',

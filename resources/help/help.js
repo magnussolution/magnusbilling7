@@ -23,7 +23,7 @@ Help.load({
     'user.calllimit_error': '',
     'user.sipaccountlimit': 'How many SipAccount this user can create. You need add permissions on the group to allow user create SipAccout. Or use Services menu to control permissions.',
     'user.callingcard_pin': 'Used to callingcard authentication.',
-    'user.restriction': 'Used to restriction dial. Add the numbers in User menu, Restricted Numbers sub-menu.',
+    'user.restriction': 'Used to restriction dial. Add the numbers in User menu, Restricted numbers sub-menu.',
     //SIP ACCOUNT
     'sip.defaultuser': 'Username to login on the SIP device.',
     'sip.secret': 'Password to login on the SIP device.',
@@ -317,7 +317,7 @@ Help.load({
     //DID DESTINATION
     'diddestination.id_did': 'Select the DID that you want create new destination',
     'diddestination.activated': '',
-    'diddestination.priority': 'You can create 5 destination to your DID. If try call to the priority 1 and receive error, Magnusbilling will try send call to destination priority two and so on. Onlu work with "Call SIP" type ',
+    'diddestination.priority': 'You can create 5 destination to your DID. If try call to the priority 1 and receive error, Magnusbilling will try send call to destination priority two and so on. Onlu work with "SIP call" type ',
     'diddestination.voip_call': '',
     'diddestination.destination': '',
     'diddestination.id_ivr': '',
@@ -401,7 +401,7 @@ Help.load({
     'campaign.sunday': '',
     'campaign.frequency': 'How many number will be executed per minute?',
     'campaign.nb_callmade': 'Ued to control the max completd calls',
-    'campaign.enable_max_call': 'If you enable it, MagnusBilling will check if have the \'Max Complete Call\' amount with duration equal \'Total Audio Time\'. If true the campaign will be inactived',
+    'campaign.enable_max_call': 'If you enable it, MagnusBilling will check if have the \'max completed calls\' amount with duration equal \'Total audio time\'. If true the campaign will be inactived',
     'campaign.secondusedreal': 'How many call do you want send. Need active abose parameter to control it.',
     'campaign.description': 'Text to send SMS. You can use %name% where you want replace per number name',
     'campaign.tts_audio': '',
