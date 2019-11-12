@@ -220,7 +220,7 @@ Help.load({
     'plan.play_audio': 'Executar audios para os cliente deste plano ou mandar somente erro? Por exemplo os auidos que acabou o crédito.',
     'plan.portabilidadeMobile': 'Somente ative se você for usar a consulta de portabilidade. Pode saber mais no site http://portabilidadecelular.com|http://portabilidadecelular.com',
     'plan.portabilidadeFixed': 'Somente ative se você for usar a consulta de portabilidade. Pode saber mais no site http://portabilidadecelular.com|http://portabilidadecelular.com',
-    'plan.techprefix': 'TechPrefix é como uma senha para o cliente poder usar mais de uma plano. Por exemplo, digamos que você tem 3 tipos de planos,GSM, TDM e CLI, e quer deixar seu cliente escolher qual plano ele deseja usar. Então coloque techprefix nos planos e solicite ai seu cliente que para usar cada um dos planos ele deve usar techprefix diferente.',
+    'plan.techprefix': 'Techprefix é como uma senha para o cliente poder usar mais de uma plano. Por exemplo, digamos que você tem 3 tipos de planos,GSM, TDM e CLI, e quer deixar seu cliente escolher qual plano ele deseja usar. Então coloque techprefix nos planos e solicite ai seu cliente que para usar cada um dos planos ele deve usar techprefix diferente.',
     //PHONE NUMBER
     'phonenumber.number': 'Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato DDI+DDD+número',
     'phonenumber.name': 'Nome do dono do número, usado para TTS ou SMS',
@@ -326,7 +326,7 @@ Help.load({
     'diddestination.id_sip': '',
     //DID
     'did.did': 'O número extamente como chega no Asterisk.',
-    'did.callerid': 'Coloque aqui CallerID Name, deixe em branco para usar o que vem do provedor do DID.',
+    'did.callerid': 'Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.',
     'did.connection_charge': 'Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.',
     'did.fixrate': 'Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.',
     'did.activated': '',

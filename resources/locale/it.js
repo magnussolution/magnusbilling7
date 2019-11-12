@@ -68,7 +68,7 @@ Locale.load({
     'agents': 'Rivenditori',
     'alarm': 'Allarme',
     'all': 'Tutti',
-    'aloc_all_calls': 'ALOC All Calls',
+    'aloc_all_calls': 'ALOC all calls',
     'aloc_success_calls': 'ALOC Success Calls',
     'allow_error': 'Send to trunk backup independent error',
     'and': 'e',
