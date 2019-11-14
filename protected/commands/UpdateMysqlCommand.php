@@ -276,6 +276,20 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=${EPOCH})
             $this->executeDB($sql);
         }
 
+        //2019-11-14
+        if ($version == '7.0.1') {
+            $sql = "ALTER TABLE `pkg_campaign` ADD `auto_reprocess` INT(11) NULL DEFAULT 0 ;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE  `pkg_cdr_summary_day_agent` ADD  `agent_bill` FLOAT NOT NULL DEFAULT  '0';
+                    ALTER TABLE  `pkg_cdr_summary_day_agent` ADD  `agent_lucro` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $version = '7.0.2';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
