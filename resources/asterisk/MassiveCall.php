@@ -286,7 +286,7 @@ class MassiveCall
                         //CODIFICA O TESTO DO SMS
                         $text = urlencode($text);
 
-                        $sql = "SELECT pkg_rate.id AS idRate, rateinitial, buyrate, pkg_prefix.id AS id_prefix, pkg_rate.id_trunk,
+                        $sql = "SELECT pkg_rate.id AS idRate, rateinitial, pkg_prefix.id AS id_prefix, pkg_rate.id_trunk,
                             rt_trunk.trunkcode, rt_trunk.trunkprefix, rt_trunk.removeprefix, rt_trunk.providertech, rt_trunk.inuse,
                             rt_trunk.maxuse, rt_trunk.status, rt_trunk.failover_trunk, rt_trunk.link_sms, rt_trunk.sms_res
                             FROM pkg_rate
@@ -526,11 +526,32 @@ class MassiveCall
             return;
         }
 
-        $id_prefix = $modelRate->id_prefix;
+        $max_len_prefix = strlen($MAGNUS->destination);
+        $prefixclause   = '(';
+        while ($max_len_prefix >= 1) {
+            $prefixclause .= "prefix='" . substr($MAGNUS->destination, 0, $max_len_prefix) . "' OR ";
+            $max_len_prefix--;
+        }
+
+        $prefixclause = substr($prefixclause, 0, -3) . ")";
+
+        $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
+        "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $modelRate->id_trunk . ") AND " . $prefixclause .
+            "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+        $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+
         /*buy rate*/
-        $buyrate          = $modelRate->buyrate;
-        $buyrateinitblock = $modelRate->buyrateinitblock;
-        $buyrateincrement = $modelRate->buyrateincrement;
+        if (isset($modelRateProvider[0]->id)) {
+            $buyrate          = $modelRateProvider[0]->buyrate;
+            $buyrateinitblock = $modelRateProvider[0]->buyrateinitblock;
+            $buyrateincrement = $modelRateProvider[0]->buyrateincrement;
+            $minimal_time_buy = $modelRateProvider[0]->minimal_time_buy;
+        } else {
+            $buyrate = 0;
+        }
+
+        $id_prefix = $modelRate->id_prefix;
+
         /*sell rate*/
         $rateinitial  = $modelRate->rateinitial;
         $initblock    = $modelRate->initblock;
