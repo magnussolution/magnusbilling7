@@ -248,7 +248,7 @@ class UpdateMysqlCommand extends ConsoleCommand
             exec("echo '
 
 [trunk_answer_handler]
-exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=${EPOCH})
+exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
     same => n,Return()' >> /etc/asterisk/extensions_magnus.conf");
 
             $version = '7.0.0';

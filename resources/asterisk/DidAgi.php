@@ -45,6 +45,8 @@ class DidAgi
             if (count($this->modelDestination)) {
                 $agi->verbose("Did have destination", 15);
 
+                $this->did = $this->modelDid->did;
+
                 $sql               = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
                 $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
@@ -58,9 +60,11 @@ class DidAgi
                     }
                     $CalcAgi->id_prefix = $modelPrefix->id;
 
-                    $sql               = "SELECT * FROM pkg_trunk WHERE trunkcode = '" . $MAGNUS->sip_account . "' LIMIT 1";
-                    $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                    $MAGNUS->id_trunk = isset($modelTrunk->id) ? $modelTrunk->id : NULL;
+                    $sql              = "SELECT * FROM pkg_trunk WHERE trunkcode = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                    $modelTrunk       = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $MAGNUS->id_trunk = isset($modelTrunk->id) ? $modelTrunk->id : null;
+                } else {
+                    $CalcAgi->id_prefix = $this->id_prefix;
                 }
 
                 if ($this->modelDid->calllimit > 0) {
@@ -689,10 +693,9 @@ class DidAgi
         $MAGNUS->destination       = $this->did;
         $CalcAgi->terminatecauseid = $terminatecauseid;
         $CalcAgi->sessionbill      = $this->sell_price;
-        $MAGNUS->id_trunk          = $MAGNUS->id_trunk  > 0 ? $MAGNUS->id_trunk : null;
+        $MAGNUS->id_trunk          = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
         $CalcAgi->sipiax           = 3;
         $CalcAgi->buycost          = 0;
-        $CalcAgi->id_prefix        = $this->id_prefix;
         $CalcAgi->saveCDR($agi, $MAGNUS);
 
         $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $answeredtime
