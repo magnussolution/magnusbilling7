@@ -30,23 +30,21 @@ class StatusSystemCommand extends ConsoleCommand
         foreach ($sysinfo->network() as $net_name => $net) {
             $net_name = trim($net_name);
 
-            if ((!preg_match('/eth/', $net_name) && !preg_match('/enp/', $net_name) && !preg_match('/venet/', $net_name)) || preg_match('/w.g./', $net_name)) {
-                continue;
+            if (preg_match('/eth|enp|venet|w\.g|eno/', $net_name)) {
+                $rx1 = $net["rx_bytes"];
+                $tx1 = $net["tx_bytes"];
+                break;
             }
-            $rx1 = $net["rx_bytes"];
-            $tx1 = $net["tx_bytes"];
-            break;
         }
         sleep(10);
         foreach ($sysinfo->network() as $net_name => $net) {
             $net_name = trim($net_name);
 
-            if ((!preg_match('/eth/', $net_name) && !preg_match('/enp/', $net_name) && !preg_match('/venet/', $net_name)) || preg_match('/w.g./', $net_name)) {
-                continue;
+            if (preg_match('/eth|enp|venet|w\.g|eno/', $net_name)) {
+                $rx2 = $net["rx_bytes"];
+                $tx2 = $net["tx_bytes"];
+                break;
             }
-            $rx2 = $net["rx_bytes"];
-            $tx2 = $net["tx_bytes"];
-            break;
         }
         $networkin  = (($rx2 - $rx1) / 1000) / 10;
         $networkout = (($tx2 - $tx1) / 1000) / 10;
