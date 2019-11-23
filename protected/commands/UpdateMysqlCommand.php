@@ -290,6 +290,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2019-11-23
+        if ($version == '7.0.2') {
+
+            $sql = "UPDATE pkg_plan SET `lcrtype` = '0' WHERE lcrtype != 2;
+                    UPDATE pkg_plan SET `lcrtype` = '1' WHERE lcrtype = 2;";
+            $this->executeDB($sql);
+
+            $version = '7.0.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

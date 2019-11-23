@@ -63,6 +63,12 @@ class SearchTariff
 
         $result = array_slice($result, 0, $i);
 
+        if (count($result) > 1) {
+            if ($result[0]['lcrtype'] == 1) {
+                $result = $this->load_balancer($agi, $result);
+            }
+        }
+
         $mylistoftrunk = array();
 
         //Select custom rate to user
@@ -134,9 +140,6 @@ class SearchTariff
             }
         }
         $result = array_values($result);
-        foreach ($result as $key => $value) {
-            $agi->verbose($key . ' => ' . print_r($value['id_rate'], true), 15);
-        }
 
         return $result;
     }
