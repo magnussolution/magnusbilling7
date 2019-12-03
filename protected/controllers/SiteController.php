@@ -49,7 +49,9 @@ class SiteController extends Controller
         echo 'window.show_signup_button = ' . $this->config['global']['show_signup_button'] . ';';
         echo 'window.auto_generate_user_signup = ' . $this->config['global']['auto_generate_user_signup'] . ';';
         echo 'window.enable_signup = ' . $this->config['global']['enable_signup'] . ';';
-
+        if (isset($this->config['global']['login_header']) && strlen($this->config['global']['login_header']) > 5) {
+            echo 'window.loginheader = "' . $this->config['global']['login_header'] . '";';
+        }
         if ($this->config['global']['signup_auto_pass'] > 5) {
             $pass = '"' . Util::generatePassword($this->config['global']['signup_auto_pass'], true, true, true, false) . '"';
         } else {
