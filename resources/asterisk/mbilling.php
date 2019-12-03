@@ -78,6 +78,12 @@ if (substr($MAGNUS->dnid, 0, 2) == '*7') {
     PickupAgi::execute($agi, $MAGNUS);
 }
 
+if ($MAGNUS->dnid == '*180' || $MAGNUS->dnid == '*181') {
+    QueueAgi::pauseQueue($agi, $MAGNUS);
+    $MAGNUS->hangup($agi);
+    exit;
+}
+
 //Hangup call that start with 1111, avoid fake call to Brasilian portability
 if (substr($MAGNUS->dnid, 0, 4) == 1111) {
     $agi->execute((congestion), Congestion);

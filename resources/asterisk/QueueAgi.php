@@ -191,4 +191,35 @@ class QueueAgi
         $MAGNUS->startRecordCall($agi);
         exit;
     }
+
+    public function pauseQueue($agi, $MAGNUS)
+    {
+
+        $sql        = "SELECT * FROM pkg_queue_member WHERE interface = 'SIP/" . $MAGNUS->sip_account . "'";
+        $modelQueue = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        if (isset($modelQueue[0])) {
+            $asmanager = new AGI_AsteriskManager();
+            $asmanager->connect('localhost', 'magnus', 'magnussolution');
+            $agi->verbose($MAGNUS->dnid);
+            foreach ($modelQueue as $queue) {
+                if ($MAGNUS->dnid == '*181') {
+                    $sql     = "UPDATE pkg_queue_member SET paused = 0 WHERE interface = 'SIP/" . $MAGNUS->sip_account . "'";
+                    $command = 'queue unpause member ' . $queue->interface;
+                    $agi->verbose($sql);
+                    $asmanager->command($command);
+                    $agi->stream_file('agent-loginok', '#');
+
+                } else {
+                    $sql     = "UPDATE pkg_queue_member SET paused = 1  WHERE interface = 'SIP/" . $MAGNUS->sip_account . "'";
+                    $command = 'queue pause member ' . $queue->interface . ' queue ' . $queue->queue_name;
+                    $agi->verbose($sql);
+                    $asmanager->command($command);
+                    $agi->stream_file('agent-loggedoff', '#');
+                }
+                $agi->exec($sql);
+            }
+        }
+
+        $asmanager->disconnect();
+    }
 }
