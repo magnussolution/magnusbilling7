@@ -55,8 +55,18 @@ class Util
         $generate_username = $config['global']['username_generate'];
 
         if ($generate_username == 1) {
+
             $length = $config['global']['generate_length'] == 0 ? 5 : $config['global']['generate_length'];
-            $prefix = $config['global']['generate_prefix'] == '0' ? '' : $config['global']['generate_prefix'];
+
+            $modeGroupUser = GroupUser::model()->find('id = :key',
+                array(':key' => Yii::app()->session['id_group']));
+
+            if (isset($modeGroupUser->id) && strlen($modeGroupUser->user_prefix) > 0) {
+                $prefix = $modeGroupUser->user_prefix;
+            } else {
+                $prefix = $config['global']['generate_prefix'] == '0' ? '' : $config['global']['generate_prefix'];
+            }
+
             while ($existsUsername) {
                 $randUserName   = $prefix . Util::generatePassword($length, false, false, true, false) . "\n";
                 $countUsername  = User::model()->count('username LIKE :key', array(':key' => $randUserName));

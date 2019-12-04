@@ -38,6 +38,7 @@
 class GroupUser extends Model
 {
     protected $_module = 'groupuser';
+
     /**
      * Return the static class of model.
      *
@@ -79,6 +80,7 @@ class GroupUser extends Model
             array('name', 'required'),
             array('id_user_type', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 100),
+            array('user_prefix', 'length', 'max' => 6),
         );
     }
 
