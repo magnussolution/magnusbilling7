@@ -302,6 +302,24 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2019-12-04
+        if ($version == '7.0.3') {
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Group to Admins'')', 'groupusergroup', 'x-fa fa-desktop', 12,11)";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+
+            }
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '0', '0');";
+            $this->executeDB($sql);
+
+            $version = '7.0.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
