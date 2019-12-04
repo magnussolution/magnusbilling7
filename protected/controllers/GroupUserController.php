@@ -28,6 +28,18 @@ class GroupUserController extends Controller
         parent::init();
     }
 
+    public function extraFilterCustomAdmin($filter)
+    {
+
+        $modelGroupUserGroup = GroupUserGroup::model()->find('id_group_user = :key',
+            array(':key' => Yii::app()->session['id_group']));
+
+        if (isset($modelGroupUserGroup->id)) {
+            $filter .= ' AND t.id IN (SELECT id_group FROM pkg_group_user_group WHERE id_group_user = ' . Yii::app()->session['id_group'] . ') ';
+        }
+        return $filter;
+    }
+
     public function actionGetUserType()
     {
         $filter       = isset($_POST['filter']) ? $_POST['filter'] : null;
@@ -73,7 +85,7 @@ class GroupUserController extends Controller
         $this->msgSuccess = 'invalid group';
         if (isset($_POST['id'])) {
             $modelGroupUser = $this->abstractModel->findByPk((int) $_POST['id']);
-            if (count($modelGroupUser)) {
+            if (isset($modelGroupUser->id)) {
                 $this->instanceModel->name         = $modelGroupUser->name . ' Cloned';
                 $this->instanceModel->id_user_type = $modelGroupUser->id_user_type;
                 $this->instanceModel->save();

@@ -22,6 +22,7 @@
 class GroupUserGroup extends Model
 {
     protected $_module = 'module';
+    public $user_prefix;
     /**
      * Retorna a classe estatica da model.
      * @return SubModule classe estatica da model.
@@ -44,7 +45,7 @@ class GroupUserGroup extends Model
      */
     public function primaryKey()
     {
-        return array('id');
+        return 'id';
     }
 
     /**
@@ -54,7 +55,8 @@ class GroupUserGroup extends Model
     {
         return array(
             array('id_group_user, id_group', 'required'),
-            array('id_group_user, id_group', 'numerical', 'integerOnly' => true),
+            array('id_group_user, id_group, ', 'numerical', 'integerOnly' => true),
+
         );
     }
 }
