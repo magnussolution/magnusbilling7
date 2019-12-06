@@ -221,9 +221,9 @@ class AuthenticationController extends Controller
         if (Yii::app()->session['logged']) {
 
             $this->mountMenu();
-            $modelGroupUserGroup = GroupUserGroup::model()->find('id_group_user = :key',
+            $modelGroupUserGroup = GroupUserGroup::model()->count('id_group_user = :key',
                 array(':key' => Yii::app()->session['id_group']));
-            Yii::app()->session['adminLimitUsers']      = is_object($modelGroupUserGroup) ? count($modelGroupUserGroup) : [];
+            Yii::app()->session['adminLimitUsers']      = $modelGroupUserGroup;
             Yii::app()->session['licence']              = $this->config['global']['licence'];
             Yii::app()->session['email']                = $this->config['global']['admin_email'];
             Yii::app()->session['currency']             = $this->config['global']['base_currency'];

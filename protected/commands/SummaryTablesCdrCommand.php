@@ -26,6 +26,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     private $month_cdr_id;
     private $month_cdr_falide_id;
     private $day;
+    private $filter_per_day;
 
     public function run($args)
     {
@@ -76,7 +77,26 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $this->day = $day;
 
-        $sql    = "SELECT cdr_id, cdr_falide_id FROM pkg_cdr_summary_ids WHERE `day` = '" . date('Y-m-') . $day . "' LIMIT 1";
+        $sql    = "SELECT * FROM pkg_cdr_summary_ids WHERE day >= '" . date('Y-m') . "-01' ORDER BY day DESC";
+        $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+        for ($i = 0; $i < count($result); $i++) {
+
+            if ($i == 0) {
+                $sql = "SELECT * FROM `pkg_cdr` WHERE `id` > " . $result[$i]['cdr_id'] . " AND starttime < '" . $result[$i]['day'] . "' ORDER BY `starttime` ASC";
+            } else {
+                $sql = "SELECT * FROM `pkg_cdr` WHERE `id` > " . $result[$i]['cdr_id'] . " AND id < " . $result[$i - 1]['cdr_id'] . " AND starttime < '" . $result[$i]['day'] . "' ORDER BY `starttime` ASC";
+
+            }
+            $result2 = Yii::app()->db->createCommand($sql)->queryAll();
+
+            if (isset($result2[0])) {
+                echo "\n";
+                echo $result[$i]['day'] . '   ' . $sql . "\n";
+            }
+        }
+
+        $sql    = "SELECT cdr_id, cdr_falide_id, day FROM pkg_cdr_summary_ids WHERE `day` = '" . date('Y-m-') . $day . "' LIMIT 1";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
         if (!isset($result[0]['cdr_id']) || ($result[0]['cdr_id'] == 0 || $result[0]['cdr_falide_id'] == 0)) {
             $sql       = "SELECT id  FROM pkg_cdr WHERE starttime > '" . date('Y-m-') . $day . "' ORDER BY id ASC LIMIT 1";
@@ -90,15 +110,17 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!isset($resultCdrFailed[0]['id'])) {
                 exit;
             }
-            $this->cdr_id        = $resultCdr[0]['id'];
-            $this->cdr_falide_id = $resultCdrFailed[0]['id'];
+            $this->cdr_id         = $resultCdr[0]['id'];
+            $this->cdr_falide_id  = $resultCdrFailed[0]['id'];
+            $this->filter_per_day = date('Y-m-') . $day;
 
             $sql = "INSERT INTO pkg_cdr_summary_ids (day, cdr_id, cdr_falide_id) VALUES ('" . date('Y-m-') . $day . "', '" . $this->cdr_id . "', '" . $this->cdr_falide_id . "' )";
             Yii::app()->db->createCommand($sql)->execute();
 
         } else {
-            $this->cdr_id        = $result[0]['cdr_id'];
-            $this->cdr_falide_id = $result[0]['cdr_falide_id'];
+            $this->cdr_id         = $result[0]['cdr_id'];
+            $this->cdr_falide_id  = $result[0]['cdr_falide_id'];
+            $this->filter_per_day = $result[0]['day'];
         }
 
         $sql    = "SELECT cdr_id, cdr_falide_id FROM pkg_cdr_summary_ids WHERE `day` = '" . date('Y-m-') . "01' LIMIT 1";
@@ -177,7 +199,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['day'] > date('Y-m-d')) {
+            if ($value['day'] > $this->filter_per_day) {
                 continue;
             }
             $line .= "('" . $value['day'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
@@ -245,7 +267,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['day'] > date('Y-m-d')) {
+            if ($value['day'] > $this->filter_per_day) {
                 continue;
             }
             $line .= "('" . $value['day'] . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
@@ -301,7 +323,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['day'] > date('Y-m-d')) {
+            if ($value['day'] > $this->filter_per_day) {
                 continue;
             }
             $line .= "('" . $value['day'] . "','" . $value['id_trunk'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
@@ -351,7 +373,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['day'] > date('Y-m-d')) {
+            if ($value['day'] > $this->filter_per_day) {
                 continue;
             }
             $line .= "('" . $value['day'] . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
@@ -392,7 +414,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['month'] > date('Ym')) {
+            if ($value['month'] > $this->filter_per_day) {
                 continue;
             }
             $line .= "('" . $value['month'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
@@ -439,7 +461,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['month'] > date('Ym')) {
+            if ($value['month'] > $this->filter_per_day) {
                 continue;
             }
 
@@ -492,7 +514,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['month'] > date('Ym')) {
+            if ($value['month'] > $this->filter_per_day) {
                 continue;
             }
             $line .= "('" . $value['month'] . "','" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
@@ -600,7 +622,6 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
             if (!is_numeric($value['id_trunk'])) {
                 continue;
             }
