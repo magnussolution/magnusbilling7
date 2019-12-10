@@ -58,8 +58,10 @@ class Util
 
             $length = $config['global']['generate_length'] == 0 ? 5 : $config['global']['generate_length'];
 
-            $modeGroupUser = GroupUser::model()->find('id = :key',
-                array(':key' => Yii::app()->session['id_group']));
+            if (isset(Yii::app()->session['id_group']) && Yii::app()->session['id_group'] > 0) {
+                $modeGroupUser = GroupUser::model()->find('id = :key',
+                    array(':key' => Yii::app()->session['id_group']));
+            }
 
             if (isset($modeGroupUser->id) && strlen($modeGroupUser->user_prefix) > 0) {
                 $prefix = $modeGroupUser->user_prefix;
