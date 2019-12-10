@@ -1827,6 +1827,8 @@ class BaseController extends CController
                 $columns[$i]['dataIndex'] = 'id_did';
             } else if ($columns[$i]['dataIndex'] == 'idTrunktrunkcode') {
                 $columns[$i]['dataIndex'] = 'id_trunk';
+            } else if ($columns[$i]['dataIndex'] == 'idProviderprovider_name') {
+                $columns[$i]['dataIndex'] = 't.id_provider';
             } else if ($columns[$i]['dataIndex'] == 'id') {
                 $columns[$i]['dataIndex'] = 't.id';
             }

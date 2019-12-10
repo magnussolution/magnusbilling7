@@ -316,7 +316,7 @@ class AsteriskAccess
     public static function generateCallFile($callFile, $time = 0)
     {
         $aleatorio    = str_replace(" ", "", microtime(true));
-        $arquivo_call = "/tmp/$aleatorio.call";
+        $arquivo_call = "/var/www/html/mbilling/tmp/$aleatorio.call";
         $fp           = fopen("$arquivo_call", "a+");
         fwrite($fp, $callFile);
         fclose($fp);
