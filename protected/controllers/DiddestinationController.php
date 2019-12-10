@@ -70,7 +70,10 @@ class DiddestinationController extends Controller
     public function beforeSave($values)
     {
 
+        $this->checkRelation($values);
+
         if ($this->isNewRecord) {
+
             $values['voip_call'] = isset($values['voip_call']) ? $values['voip_call'] : 1;
 
             $did       = Did::model()->findByPk($values['id_did']);
@@ -101,6 +104,73 @@ class DiddestinationController extends Controller
         }
 
         return $values;
+    }
+
+    public function checkRelation($values)
+    {
+        if ($this->isNewRecord) {
+
+            switch ($values['voip_call']) {
+                case '1':
+                    $model = Sip::model()->findByPk((int) $values['id_sip']);
+                    $name  = 'SIP ACCOUNT';
+                    break;
+                case '2':
+                    $model = Ivr::model()->findByPk((int) $values['id_ivr']);
+                    $name  = 'IVR';
+                    break;
+                case '7':
+                    $model = Queue::model()->findByPk((int) $values['id_queue']);
+                    $name  = 'QUEUE';
+                    break;
+            }
+
+            if (isset($name) && $values['id_user'] != $model->id_user) {
+                echo json_encode(array(
+                    'success' => false,
+                    'rows'    => array(),
+                    'errors'  => ['voip_call' => ['The ' . $name . ' must belong to the DID owner']],
+                ));
+                exit;
+            }
+
+        } else {
+
+            $modelDiddestination = Diddestination::model()->findByPk((int) $values['id']);
+
+            $id_user = $modelDiddestination->id_user;
+
+            $voip_call = isset($values['voip_call']) ? $values['voip_call'] : $modelDiddestination->voip_call;
+
+            switch ($voip_call) {
+                case '1':
+                    $id_sip = isset($values['id_sip']) ? $values['id_sip'] : $modelDiddestination->id_sip;
+                    $model  = Sip::model()->findByPk((int) $id_sip);
+                    $name   = 'SIP ACCOUNT';
+                    break;
+                case '2':
+                    $id_ivr = isset($values['id_ivr']) ? $values['id_ivr'] : $modelDiddestination->id_ivr;
+                    $model  = Ivr::model()->findByPk((int) $id_ivr);
+                    $name   = 'IVR';
+                    break;
+                case '7':
+                    $id_queue = isset($values['id_queue']) ? $values['id_queue'] : $modelDiddestination->id_queue;
+                    $model    = Queue::model()->findByPk((int) $id_queue);
+                    $name     = 'QUEUE';
+                    break;
+            }
+
+            if (isset($name) && isset($model->id_user) && $id_user != $model->id_user) {
+                echo json_encode(array(
+                    'success' => false,
+                    'rows'    => array(),
+                    'errors'  => ['voip_call' => ['The ' . $name . ' must belong to the DID owner']],
+                ));
+                exit;
+            }
+
+        }
+
     }
 
     public function afterSave($model, $values)

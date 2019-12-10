@@ -43,9 +43,11 @@ class QueueMemberController extends Controller
 
     public function beforeSave($values)
     {
+        $this->checkRelation($values);
+
         if (isset($values['interface'])) {
             $modelSip = Sip::model()->find("id = :id OR name = :id",
-                array('id' => preg_replace("/SIP\//", '', $values['interface']))
+                array('id' => $values['interface'])
             );
 
             $values['id_user']   = $modelSip->id_user;
@@ -59,6 +61,43 @@ class QueueMemberController extends Controller
         }
 
         return $values;
+    }
+
+    public function checkRelation($values)
+    {
+
+        if ($this->isNewRecord) {
+
+            $modelSip   = Sip::model()->findByPk((int) $values['interface']);
+            $modelQueue = Queue::model()->findByPk((int) $values['queue_name']);
+
+            if ($modelSip->id_user != $modelQueue->id_user) {
+                echo json_encode(array(
+                    'success' => false,
+                    'rows'    => array(),
+                    'errors'  => ['interface' => ['The SIP ACCOUNT must belong to the QUEUE owner']],
+                ));
+                exit;
+            }
+
+        } else {
+            if (isset($values['interface'])) {
+
+                $modelQueueMember = QueueMember::model()->findByPk((int) $values['uniqueid']);
+
+                $modelSip   = Sip::model()->findByPk((int) $values['interface']);
+                $modelQueue = Queue::model()->find('name = :key', [':key' => $modelQueueMember['queue_name']]);
+
+                if ($modelSip->id_user != $modelQueue->id_user) {
+                    echo json_encode(array(
+                        'success' => false,
+                        'rows'    => array(),
+                        'errors'  => ['interface' => ['The SIP ACCOUNT must belong to the QUEUE owner']],
+                    ));
+                    exit;
+                }
+            }
+        }
     }
 
     public function generateQueueFile()

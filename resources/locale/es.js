@@ -1,4 +1,11 @@
 Locale.load({
+    'The SIP ACCOUNT must belong to the DID owner': 'La CUENTA VOIP deve pertenecer al dueño del DID',
+    'The IVR must belong to the DID owner': 'A IVR deve pertenecer al dueño del DID',
+    'The QUEUE must belong to the DID owner': 'La QUEUE deve pertenecer al dueño del DID',
+    'The SIP ACCOUNT must belong to the IVR owner': 'La CUENTA VOIP deve pertenecer al dueño de la IVR',
+    'The IVR must belong to the IVR owner': 'AL IVR deve pertenecer al dueño de la IVR',
+    'The QUEUE must belong to the IVR owner': 'La QUEUE deve pertencer ao dono da la IVR',
+    'The SIP ACCOUNT must belong to the QUEUE owner': 'La CUENTA VOIP deve pertenecer al dueño de la QUEUE',
     'Tariff Find Limit': 'Tarifa limite',
     'Call Failed': 'Llamadas incompletas',
     'Summary per Day': 'CDR por dia',
