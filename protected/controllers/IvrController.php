@@ -44,6 +44,7 @@ class IvrController extends Controller
 
     public function beforeSave($values)
     {
+        $this->checkRelation($values);
 
         for ($i = 0; $i <= 10; $i++) {
 
@@ -75,6 +76,96 @@ class IvrController extends Controller
             }
         }
         return $values;
+    }
+
+    public function showError($model_id_user, $values, $name, $key, $i, $type = '')
+    {
+        if ($values['id_user'] != $model_id_user) {
+
+            $key = $i == 10 ? substr($key, -2) : substr($key, -1);
+            $msg = $model_id_user == 0 ? ['The ' . $name . ' cannot be blank'] : ['The ' . $name . ' must belong to the IVR owner'];
+            echo json_encode(array(
+                'success' => false,
+                'rows'    => array(),
+                'errors'  => ['type_' . $type . $key => $msg],
+            ));
+            exit;
+        }
+    }
+
+    public function checkRelation($values)
+    {
+        //ensure all sip, ivr or queue belong to the IVR ouned
+        for ($i = 0; $i <= 10; $i++) {
+
+            if ($values['type_' . $i] != 'undefined' && strlen($values['type_' . $i]) > 0) {
+                $type = $values['type_' . $i];
+
+                if ($type == 'sip') {
+                    $id_sip = $values['id_sip_' . $i];
+                    if (!is_numeric($id_sip)) {
+                        $this->showError(0, $values, 'SIP ACCOUNT', 'id_sip' . $i, $i);
+                    } else {
+                        $model = Sip::model()->findByPk((int) $id_sip);
+                        $this->showError($model->id_user, $values, 'SIP ACCOUNT', 'id_sip' . $i, $i);
+                    }
+
+                } else if ($type == 'ivr') {
+                    $id_ivr = $values['id_ivr_' . $i];
+                    if (!is_numeric($id_ivr)) {
+                        $this->showError(0, $values, 'IRV', 'id_ivr' . $i, $i);
+                    } else {
+                        $model = Ivr::model()->findByPk((int) $id_ivr);
+                        $this->showError($model->id_user, $values, 'IVR', 'id_ivr' . $i, $i);
+                    }
+
+                } else if ($type == 'queue') {
+                    $id_queue = $values['id_queue_' . $i];
+                    if (!is_numeric($id_queue)) {
+                        $this->showError(0, $values, 'QUEUE', 'id_queue' . $i, $i);
+                    } else {
+                        $model = Queue::model()->findByPk((int) $id_queue);
+                        $this->showError($model->id_user, $values, 'QUEUE', 'id_queue' . $i, $i);
+                    }
+                }
+            }
+        }
+
+        for ($i = 0; $i <= 10; $i++) {
+
+            if ($values['type_out_' . $i] != 'undefined' && strlen($values['type_out_' . $i]) > 0) {
+                $type = $values['type_out_' . $i];
+
+                if ($type == 'sip') {
+                    $id_sip = $values['id_sip_out_' . $i];
+                    if (!is_numeric($id_sip)) {
+                        $this->showError(0, $values, 'SIP ACCOUNT', 'id_sip_out' . $i, $i, 'out_');
+                    } else {
+                        $model = Sip::model()->findByPk((int) $id_sip);
+                        $this->showError($model->id_user, $values, 'SIP ACCOUNT', 'id_sip_out' . $i, $i, 'out_');
+                    }
+
+                } else if ($type == 'ivr') {
+                    $id_ivr = $values['id_ivr_out_' . $i];
+                    if (!is_numeric($id_ivr)) {
+                        $this->showError(0, $values, 'IRV', 'id_ivr_out' . $i, $i, 'out_');
+                    } else {
+                        $model = Ivr::model()->findByPk((int) $id_ivr);
+                        $this->showError($model->id_user, $values, 'IVR', 'id_ivr_out' . $i, $i, 'out_');
+                    }
+
+                } else if ($type == 'queue') {
+                    $id_queue = $values['id_queue_out_' . $i];
+                    if (!is_numeric($id_queue)) {
+                        $this->showError(0, $values, 'QUEUE', 'id_queue_out' . $i, $i, 'out_');
+                    } else {
+                        $model = Queue::model()->findByPk((int) $id_queue);
+                        $this->showError($model->id_user, $values, 'QUEUE', 'id_queue_out' . $i, $i, 'out_');
+                    }
+                }
+            }
+        }
+
     }
 
     public function afterSave($model, $values)

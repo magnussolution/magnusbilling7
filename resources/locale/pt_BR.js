@@ -1,4 +1,11 @@
 Locale.load({
+    'The SIP ACCOUNT must belong to the DID owner': 'A CONTA VOIP deve pertencer ao dono do DID',
+    'The IVR must belong to the DID owner': 'A IVR deve pertencer ao dono do DID',
+    'The QUEUE must belong to the DID owner': 'A QUEUE deve pertencer ao dono do DID',
+    'The SIP ACCOUNT must belong to the IVR owner': 'A CONTA VOIP deve pertencer ao dono da URA',
+    'The IVR must belong to the IVR owner': 'A IVR deve pertencer ao dono da URA',
+    'The QUEUE must belong to the IVR owner': 'A QUEUE deve pertencer ao dono da URA',
+    'The SIP ACCOUNT must belong to the QUEUE owner': 'A CONTA VOIP deve pertencer ao dono da FILA DE ESPERA',
     'DOC': 'CPF/CNPJ',
     'Company Name': 'Nome da empresa',
     'Read Terms': 'Ver termos',
