@@ -58,7 +58,7 @@ class Util
 
             $length = $config['global']['generate_length'] == 0 ? 5 : $config['global']['generate_length'];
 
-            if (isset(Yii::app()->session['id_group']) && Yii::app()->session['id_group'] > 0) {
+            if (isset($_SESSION['id_group']) && Yii::app()->session['id_group'] > 0) {
                 $modeGroupUser = GroupUser::model()->find('id = :key',
                     array(':key' => Yii::app()->session['id_group']));
             }
