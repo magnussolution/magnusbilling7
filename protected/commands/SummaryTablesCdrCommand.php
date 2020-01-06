@@ -414,7 +414,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['month'] > $this->filter_per_day) {
+            if ($value['month'] > substr(preg_replace('/-/', '', $this->filter_per_day), 0, 6)) {
                 continue;
             }
             $line .= "('" . $value['month'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
@@ -461,7 +461,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['month'] > $this->filter_per_day) {
+            if ($value['month'] > substr(preg_replace('/-/', '', $this->filter_per_day), 0, 6)) {
                 continue;
             }
 
@@ -514,7 +514,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            if ($value['month'] > $this->filter_per_day) {
+            if ($value['month'] > substr(preg_replace('/-/', '', $this->filter_per_day), 0, 6)) {
                 continue;
             }
             $line .= "('" . $value['month'] . "','" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
