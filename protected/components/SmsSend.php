@@ -80,6 +80,16 @@ class SmsSend
                 'msg'     => Yii::t('yii', 'Prefix not found') . ' ' . $destination,
             );
         } else {
+
+            $max_len_prefix = strlen($destination);
+            $prefixclause   = '(';
+            while ($max_len_prefix >= 1) {
+                $prefixclause .= "prefix='" . substr($destination, 0, $max_len_prefix) . "' OR ";
+                $max_len_prefix--;
+            }
+
+            $prefixclause = substr($prefixclause, 0, -3) . ")";
+
             //RETIRO O 1111
             if (substr($destination, 0, 7) == '9991111') {
                 $destination = substr($destination, 10);
@@ -99,9 +109,17 @@ class SmsSend
             $removePrefix = isset($callTrunk[0]['rc_removeprefix']) ? $callTrunk[0]['rc_removeprefix'] : null;
             $smsRes       = isset($callTrunk[0]['sms_res']) ? $callTrunk[0]['sms_res'] : null;
 
-            $buyRate     = isset($callTrunk[0]['buyrate']) ? $callTrunk[0]['buyrate'] : null;
             $rateInitial = isset($callTrunk[0]['rateinitial']) ? $callTrunk[0]['rateinitial'] : null;
             $id_prefix   = isset($callTrunk[0]['id_prefix']) ? $callTrunk[0]['id_prefix'] : null;
+
+            $modelTrunk = Trunk::model()->findByPk($callTrunk[0]['id_trunk']);
+
+            $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
+            "id_provider = " . $modelTrunk->id_provider . " AND " . $prefixclause .
+                "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+            $modelRateProvider = Yii::app()->db->createCommand($sql)->queryAll();
+
+            $buyRate = isset($modelRateProvider[0]['buyrate']) ? $modelRateProvider[0]['buyrate'] : null;
 
             //retiro e adiciono os prefixos do tronco
             if (strncmp($destination, $removePrefix, strlen($removePrefix)) == 0) {
