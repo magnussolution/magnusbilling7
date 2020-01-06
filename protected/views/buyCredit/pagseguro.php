@@ -17,34 +17,55 @@
  * Magnusbilling.com <info@magnusbilling.com>
  *
  */
-?>
-<div id="load" ><?php echo Yii::t('yii', 'Please wait while loading...') ?></div>
-<script languaje="JavaScript">
-    window.onload = function () {
-        var form = document.getElementById("buyForm");
-        form.submit();
-    };
-</script>
-<form method="POST" action="https://pagseguro.uol.com.br/v2/checkout/payment.html" target="_parent" id="buyForm">
-    <input type="hidden" name="receiverEmail" value="<?php echo $modelMethodPay->username ?>"  />
-    <input type="hidden" name="shippingType" value="3"  />
-    <input type="hidden" name="currency" value="BRL"  />
-    <input type="hidden" name="shippingAddressPostalCode" value="<?php echo $modelUser->zipcode; ?>"  />
-    <input type="hidden" name="shippingAddressStreet" value="<?php echo $modelUser->address; ?>"  />
-    <input type="hidden" name="shippingAddressNumber" value="4875"  />
-    <input type="hidden" name="shippingAddressDistrict" value="centro"  />
-    <input type="hidden" name="shippingAddressComplement" value=""  />
-    <input type="hidden" name="shippingAddressCity" value="<?php echo $modelUser->city; ?>"  />
-    <input type="hidden" name="shippingAddressState" value="<?php echo $modelUser->state; ?>"  />
-    <input type="hidden" name="shippingAddressCountry" value="<?php echo $modelUser->country; ?>"  />
-    <input type="hidden" name="senderAreaCode" value="11"  />
-    <input type="hidden" name="senderPhone" value="40040435"  />
-    <input type="hidden" name="senderEmail" value="<?php echo $modelUser->email; ?>"  />
-    <input type="hidden" name="senderCPF" value="<?php echo $modelUser->doc; ?>"  />
-    <input type="hidden" name="senderName" value="<?php echo $modelUser->firstname . ' ' . $modelUser->lastname ?>"  />
-    <input type="hidden" name="holderCPF" value="<?php echo $modelUser->doc; ?>"  />
-    <input type="hidden" name="itemId1" value="<?php echo $reference; ?>"  />
-    <input type="hidden" name="itemDescription1" value="Credito voip"  />
-    <input type="hidden" name="itemQuantity1" value="1"  />
-    <input type="hidden" name="itemAmount1" value="<?php echo $_GET['amount']; ?>"  />
-</form>
+
+// URL DE SANDBOX https://sandbox.pagseguro.uol.com.br
+$url                           = 'https://ws.pagseguro.uol.com.br/v2/checkout';
+$data['email']                 = $modelMethodPay->username;
+$data['token']                 = $modelMethodPay->pagseguro_TOKEN;
+$data['currency']              = 'BRL';
+$data['itemId1']               = $reference;
+$data['itemDescription1']      = "Credito voip";
+$data['itemAmount1']           = $_GET['amount'];
+$data['itemQuantity1']         = 1;
+$data['itemWeight1']           = 0;
+$data['reference']             = $reference; //aqui vai o código que será usado para receber os retornos das notificações
+$data['senderAreaCode']        = "11";
+$data['senderPhone']           = "940040435";
+$data['senderEmail']           = $modelUser->email;
+$data['senderCPF']             = $modelUser->doc;
+$data['senderName']            = $modelUser->firstname . ' ' . $modelUser->lastname;
+$data['shippingType']          = "3";
+$data['shippingAddressStreet'] = $modelUser->address;
+$data['shippingAddressNumber'] = 4875;
+
+$data['shippingAddressDistrict']   = "centro";
+$data['shippingAddressPostalCode'] = $modelUser->zipcode;
+$data['shippingAddressCity']       = $modelUser->city;
+$data['shippingAddressState']      = $modelUser->state;
+$data['shippingAddressCountry']    = $modelUser->country;
+
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
+
+$data['redirectURL'] = $protocol . $_SERVER['HTTP_HOST'] . '/mbilling/index.php/pagseguro';
+$data                = http_build_query($data);
+$curl                = curl_init($url);
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+$xml = curl_exec($curl);
+
+if ($xml == 'Unauthorized') {
+    echo "Unauthorized";
+    exit();
+}
+curl_close($curl);
+$xml = simplexml_load_string($xml);
+if (count($xml->error) > 0) {
+    echo "XML ERRO";
+    exit();
+}
+
+// Redireciona o comprador para a página de pagamento
+header('Location: https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $xml->code);
