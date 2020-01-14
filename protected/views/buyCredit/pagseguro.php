@@ -18,28 +18,39 @@
  *
  */
 
+$doc      = preg_replace('/\.|\-|\//', '', $modelUser->doc);
+$cpf_cnpj = new ValidaCPFCNPJ($doc);
+
 // URL DE SANDBOX https://sandbox.pagseguro.uol.com.br
-$url                           = 'https://ws.pagseguro.uol.com.br/v2/checkout';
-$data['email']                 = $modelMethodPay->username;
-$data['token']                 = $modelMethodPay->pagseguro_TOKEN;
-$data['currency']              = 'BRL';
-$data['itemId1']               = $reference;
-$data['itemDescription1']      = "Credito voip";
-$data['itemAmount1']           = $_GET['amount'];
-$data['itemQuantity1']         = 1;
-$data['itemWeight1']           = 0;
-$data['reference']             = $reference; //aqui vai o código que será usado para receber os retornos das notificações
-$data['senderAreaCode']        = "11";
-$data['senderPhone']           = "940040435";
-$data['senderEmail']           = $modelUser->email;
-$data['senderCPF']             = $modelUser->doc;
+$url                      = 'https://ws.pagseguro.uol.com.br/v2/checkout';
+$data['email']            = $modelMethodPay->username;
+$data['token']            = $modelMethodPay->pagseguro_TOKEN;
+$data['currency']         = 'BRL';
+$data['itemId1']          = $reference;
+$data['itemDescription1'] = "Credito voip";
+$data['itemAmount1']      = $_GET['amount'];
+$data['itemQuantity1']    = 1;
+$data['itemWeight1']      = 0;
+$data['reference']        = $reference; //aqui vai o código que será usado para receber os retornos das notificações
+$data['senderAreaCode']   = "11";
+$data['senderPhone']      = "940040435";
+$data['senderEmail']      = $modelUser->email;
+if ($cpf_cnpj->valida() == 1) {
+    $data['documentstype'] = strlen($doc) == 11 ? 'CPF' : 'CNPJ';
+
+    if (strlen($doc) == 11) {
+        $data['senderCPF'] = $doc;
+    } else {
+        $data['senderCNPJ'] = $doc;
+    }
+}
 $data['senderName']            = $modelUser->firstname . ' ' . $modelUser->lastname;
 $data['shippingType']          = "3";
 $data['shippingAddressStreet'] = $modelUser->address;
 $data['shippingAddressNumber'] = 4875;
 
 $data['shippingAddressDistrict']   = "centro";
-$data['shippingAddressPostalCode'] = $modelUser->zipcode;
+$data['shippingAddressPostalCode'] = preg_replace('/ |\-/', '', $modelUser->zipcode);
 $data['shippingAddressCity']       = $modelUser->city;
 $data['shippingAddressState']      = $modelUser->state;
 $data['shippingAddressCountry']    = $modelUser->country;
