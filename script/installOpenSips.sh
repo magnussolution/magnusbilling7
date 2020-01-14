@@ -88,7 +88,7 @@ mysqladmin -u root password $password
 
 cd /usr/src
 yum install -y epel-release
-yum install -y http://yum.opensips.org/2.4/releases/el/7/x86_64/opensips-yum-releases-2.4-3.el7.noarch.rpm
+yum install https://yum.opensips.org/2.4/releases/el/7/x86_64/opensips-yum-releases-2.4-5.el7.noarch.rpm
 yum install -y opensips opensips-db_mysql
 
 touch /var/log/opensips.log
