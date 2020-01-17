@@ -592,14 +592,7 @@ CREATE TABLE `pkg_cdr_failed` (
   `hangupcause` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
-  KEY `id_plan` (`id_plan`),
   KEY `id_trunk` (`id_trunk`),
-  KEY `calledstation` (`calledstation`),
-  KEY `terminatecauseid` (`terminatecauseid`),
-  KEY `id_prefix` (`id_prefix`),
-  KEY `uniqueid` (`uniqueid`),
-  KEY `id_trunk_2` (`id_trunk`),
-  KEY `id_user_2` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
