@@ -70,7 +70,7 @@ class Sip extends Model
             array('DEFAULTip, ipaddr, maxcallbitrate, rtpkeepalive', 'length', 'max' => 15),
             array('nat, host', 'length', 'max' => 31),
             array('language', 'length', 'max' => 2),
-            array('mailbox,forward', 'length', 'max' => 50),
+            array('mailbox,forward,addparameter', 'length', 'max' => 50),
             array('accountcode', 'length', 'max' => 30),
             array('sip_group', 'length', 'max' => 20),
             array('rtptimeout, rtpholdtimeout,videosupport', 'length', 'max' => 3),

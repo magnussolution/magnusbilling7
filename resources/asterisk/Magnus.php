@@ -602,12 +602,12 @@ class Magnus
             $dialparams .= 'Rr';
         }
 
-        if (strlen($this->agiconfig['amd']) > 0) {
-            $dialparams .= $this->agiconfig['amd'];
-        }
-
         if ($this->is_callingcard == true) {
             $dialparams .= 'U(trunk_answer_handler)';
+        }
+
+        if (strlen($MAGNUS->modelSip->addparameter)) {
+            $dialparams .= $MAGNUS->modelSip->addparameter;
         }
 
         if ($MAGNUS->$demo == true) {
