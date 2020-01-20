@@ -515,7 +515,12 @@ CREATE TABLE `pkg_cdr` (
   `agent_bill` decimal(15,6) DEFAULT '0.000000',
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
-  KEY `id_trunk` (`id_trunk`)
+  KEY `id_trunk` (`id_trunk`),
+  KEY `id_prefix` (`id_prefix`),
+  KEY `calledstation` (`calledstation`),
+  KEY `src` (`src`),
+  KEY `callerid` (`callerid`),
+  KEY `starttime` (`starttime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -593,6 +598,8 @@ CREATE TABLE `pkg_cdr_failed` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   KEY `id_trunk` (`id_trunk`),
+  KEY `calledstation` (`calledstation`),
+  KEY `starttime` (`starttime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

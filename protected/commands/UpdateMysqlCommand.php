@@ -338,6 +338,70 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-01-20
+        if ($version == '7.0.5') {
+            $sql = "ALTER TABLE  `pkg_cdr_summary_day_user` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
+                    ALTER TABLE  `pkg_cdr_summary_day_user` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE  `pkg_cdr_summary_day_trunk` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
+                    ALTER TABLE  `pkg_cdr_summary_day_trunk` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE  `pkg_cdr_summary_day_agent` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
+                    ALTER TABLE  `pkg_cdr_summary_day_agent` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE  `pkg_cdr_summary_month` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
+                    ALTER TABLE  `pkg_cdr_summary_month` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE  `pkg_cdr_summary_month_user` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
+                    ALTER TABLE  `pkg_cdr_summary_month_user` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE  `pkg_cdr_summary_month_trunk` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
+                    ALTER TABLE  `pkg_cdr_summary_month_trunk` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `id_user` (`id_user`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `id_trunk` (`id_trunk`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `id_prefix` (`id_prefix`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `starttime` (`starttime`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `calledstation` (`calledstation`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `src` (`src`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `callerid` (`callerid`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `id_trunk` (`id_trunk`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `id_user` (`id_user`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `calledstation` (`calledstation`);";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `starttime` (`starttime`);";
+            $this->executeDB($sql);
+
+            $version = '7.0.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
