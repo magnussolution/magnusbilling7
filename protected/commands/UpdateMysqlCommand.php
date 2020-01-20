@@ -339,7 +339,11 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         }
 
         //2020-01-20
-        if ($version == '7.0.5') {
+        if ($version == '7.0.6') {
+
+            $sql = "ALTER TABLE `pkg_restrict_phone` ADD `direction` INT(11) NOT NULL DEFAULT '1' ;";
+            $this->executeDB($sql);
+
             $sql = "ALTER TABLE  `pkg_cdr_summary_day_user` ADD  `nbcall_fail` INT( 11 ) NOT NULL DEFAULT  '0' AFTER  `nbcall` ;
                     ALTER TABLE  `pkg_cdr_summary_day_user` ADD  `asr` FLOAT NOT NULL DEFAULT  '0';";
             $this->executeDB($sql);
@@ -397,7 +401,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `starttime` (`starttime`);";
             $this->executeDB($sql);
 
-            $version = '7.0.6';
+            $version = '7.0.7';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

@@ -93,6 +93,10 @@ class DidAgi
     public function checkDidDestinationType(&$agi, &$MAGNUS, &$CalcAgi)
     {
 
+        $MAGNUS->id_user = $MAGNUS->modelUser->id;
+
+        $MAGNUS->checkRestrictPhoneNumber($agi, 'did');
+
         $this->didCallCost($agi, $MAGNUS);
 
         $this->did = $this->modelDid->did;

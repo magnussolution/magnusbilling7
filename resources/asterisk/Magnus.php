@@ -675,12 +675,15 @@ class Magnus
         }
     }
 
-    public function checkRestrictPhoneNumber($agi)
+    public function checkRestrictPhoneNumber($agi, $type = 'outbound')
     {
 
-        if ($this->modelSip->block_call_reg != '') {
+        $destination = $type == 'outbound' ? $this->destination : $this->CallerID;
+        $direction   = $type == 'outbound' ? 1 : 2;
 
-            if (preg_match("/" . $this->modelSip->block_call_reg . "/", $this->destination)) {
+        if ($check_block_call_reg == 'outbound' && $this->modelSip->block_call_reg != '') {
+
+            if (preg_match("/" . $this->modelSip->block_call_reg . "/", $destination)) {
                 $agi->verbose("NUMBER NOT AUHTORIZED - NOT ALLOW TO CALL BY REGEX SIP ACCOUNT " . $this->sip_account, 1);
                 if ($this->play_audio == 1) {
                     $agi->answer();
@@ -693,8 +696,8 @@ class Magnus
         }
         if ($this->restriction == 1 || $this->restriction == 2) {
             /*Check if Account have restriction*/
-            $sql = "SELECT id FROM pkg_restrict_phone WHERE id_user = $this->id_user
-                        AND number = SUBSTRING('" . $this->destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+            $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user
+                        AND number = SUBSTRING('" . $destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
             $modelRestrictedPhonenumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $agi->verbose("RESTRICTED NUMBERS ", 15);
