@@ -54,7 +54,7 @@ class RestrictedPhonenumber extends Model
     {
         return array(
             array('id_user', 'required'),
-            array('id_user', 'numerical', 'integerOnly' => true),
+            array('id_user, direction', 'numerical', 'integerOnly' => true),
             array('number', 'numerical'),
         );
     }
