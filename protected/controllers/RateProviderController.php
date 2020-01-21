@@ -147,6 +147,8 @@ class RateProviderController extends Controller
             $modelPrefix = Prefix::model()->find(1);
         }
 
+        Prefix::model()->deleteAll('prefix REGEXP "[a-z]"');
+
         $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
             " IGNORE INTO TABLE pkg_rate_provider" .
             " CHARACTER SET UTF8 " .
