@@ -29,7 +29,6 @@ class CallArchive extends Model
     public $sessionbillMobile;
     public $sessiontimeRest = 0;
     public $sessionbillRest;
-    public $stoptime;
     public $sumbuycost;
     public $sumsessionbill;
     /**

@@ -61,7 +61,7 @@ class CallSummaryPerMonth extends Model
     public function rules()
     {
         return array(
-            array('month,sessiontime, sessionbill, nbcall, buycost, lucro, aloc_all_calls', 'length', 'max' => 50),
+            array('month,sessiontime, sessionbill, nbcall, buycost, lucro, aloc_all_calls, nbcall_fail, asr', 'length', 'max' => 50),
         );
     }
 }

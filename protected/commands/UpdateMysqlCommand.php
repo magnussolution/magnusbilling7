@@ -406,6 +406,22 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-01-23
+        if ($version == '7.0.7') {
+            $sql = "ALTER TABLE `pkg_cdr` ADD `id_server` INT(11) NULL DEFAULT NULL AFTER `id_campaign`;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr_failed` ADD `id_server` INT(11) NULL DEFAULT NULL AFTER `id_prefix`;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_cdr` DROP `stoptime`;";
+            $this->executeDB($sql);
+
+            $version = '7.0.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
