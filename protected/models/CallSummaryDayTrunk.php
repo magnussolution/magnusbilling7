@@ -62,7 +62,7 @@ class CallSummaryDayTrunk extends Model
     public function rules()
     {
         return array(
-            array('sessiontime,day, id_trunk, sessionbill, nbcall, buycost, lucro, aloc_all_calls, sumaloc_all_calls', 'length', 'max' => 50),
+            array('sessiontime,day, id_trunk, sessionbill, nbcall, buycost, lucro, aloc_all_calls, sumaloc_all_calls, nbcall_fail, asr', 'length', 'max' => 50),
         );
     }
 

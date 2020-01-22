@@ -64,7 +64,7 @@ class Call extends Model
     {
         return array(
             array('id_user, id_plan, calledstation', 'required'),
-            array('id_user, id_plan, id_campaign, id_trunk, sessiontime, real_sessiontime, sipiax', 'numerical', 'integerOnly' => true),
+            array('id_user, id_plan, id_campaign, id_server, id_trunk, sessiontime, real_sessiontime, sipiax', 'numerical', 'integerOnly' => true),
             array('uniqueid, starttime, src, calledstation,
                 terminatecauseid, buycost, sessionbill,  agent_bill, callerid', 'length', 'max' => 50),
         );
@@ -78,6 +78,7 @@ class Call extends Model
             'idTrunk'    => array(self::BELONGS_TO, 'Trunk', 'id_trunk'),
             'idUser'     => array(self::BELONGS_TO, 'User', 'id_user'),
             'idCampaign' => array(self::BELONGS_TO, 'Campaign', 'id_campaign'),
+            'idServer'   => array(self::BELONGS_TO, 'Servers', 'id_server'),
         );
     }
 }

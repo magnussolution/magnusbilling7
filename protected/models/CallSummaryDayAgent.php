@@ -62,7 +62,7 @@ class CallSummaryDayAgent extends Model
     public function rules()
     {
         return array(
-            array('sessiontime, id_user, sessionbill, nbcall, buycost, lucro, aloc_all_calls, sumaloc_all_calls', 'length', 'max' => 50),
+            array('sessiontime, id_user, sessionbill, nbcall, buycost, lucro, aloc_all_calls, sumaloc_all_calls, nbcall_fail, asr', 'length', 'max' => 50),
         );
     }/**
      * @return array regras de relacionamento.

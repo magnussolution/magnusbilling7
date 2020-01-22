@@ -80,7 +80,8 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
 
         }
@@ -144,9 +145,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_trunk'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
-
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_day_trunk WHERE day = '" . $this->day . "' ";
@@ -204,9 +205,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
-
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_day_agent WHERE day = '" . $this->day . "' ";
@@ -264,8 +265,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
-
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_day WHERE day = '" . $this->day . "' ";
@@ -323,9 +325,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
-
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_month WHERE month = '" . $month . "' ";
@@ -374,9 +376,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "','" . $value['nbcall_fail'] . "'),";
-
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_month_user WHERE month = '" . $month . "' ";
@@ -430,9 +432,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "','" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
-
         }
 
         $sql = "DELETE FROM pkg_cdr_summary_month_trunk WHERE month = '" . $month . "' ";
@@ -478,10 +480,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
-            if ($value['isAgent'] == '') {
-                $value['isAgent'] = 0;
-            }
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['isAgent']     = $value['isAgent'] == null || $value['isAgent'] == '' ? 0 : $value['isAgent'];
             $line .= "('" . $value['id_user'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['isAgent'] . "','" . $value['agent_bill'] . "', '" . $value['nbcall_fail'] . "'),";
         }
 
@@ -536,7 +537,8 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-
+            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
         }
 

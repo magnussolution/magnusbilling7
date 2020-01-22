@@ -54,7 +54,7 @@ class CallFailed extends Model
     {
         return array(
             array('id_user, calledstation', 'required'),
-            array('id_user, id_plan, id_trunk, sipiax, terminatecauseid,hangupcause', 'numerical', 'integerOnly' => true),
+            array('id_user, id_plan, id_trunk, id_server, sipiax, terminatecauseid,hangupcause', 'numerical', 'integerOnly' => true),
             array('uniqueid, starttime, callerid, src, calledstation', 'length', 'max' => 50),
         );
     }
@@ -66,6 +66,7 @@ class CallFailed extends Model
             'idPlan'   => array(self::BELONGS_TO, 'Plan', 'id_plan'),
             'idTrunk'  => array(self::BELONGS_TO, 'Trunk', 'id_trunk'),
             'idUser'   => array(self::BELONGS_TO, 'User', 'id_user'),
+            'idServer' => array(self::BELONGS_TO, 'Servers', 'id_server'),
         );
     }
 

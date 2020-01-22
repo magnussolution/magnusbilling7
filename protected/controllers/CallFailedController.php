@@ -28,6 +28,7 @@ class CallFailedController extends Controller
         'idPlan'   => 'name',
         'idTrunk'  => 'trunkcode',
         'idPrefix' => 'destination',
+        'idServer' => 'name',
     );
 
     public $fieldsInvisibleClient = array(
@@ -63,6 +64,11 @@ class CallFailedController extends Controller
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
+        ),
+        'id_server' => array(
+            'table'       => 'pkg_servers',
+            'pk'          => 'id',
+            'fieldReport' => 'name',
         ),
     );
 

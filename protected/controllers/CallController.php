@@ -29,6 +29,7 @@ class CallController extends Controller
         'idTrunk'    => 'trunkcode',
         'idPrefix'   => 'destination',
         'idCampaign' => 'name',
+        'idServer'   => 'name',
     );
 
     public $fieldsInvisibleClient = array(
@@ -40,6 +41,7 @@ class CallController extends Controller
         'id_user',
         'id_user',
         'provider_name',
+        'id_server',
     );
 
     public $fieldsInvisibleAgent = array(
@@ -76,6 +78,11 @@ class CallController extends Controller
         ,
         'id_campaign' => array(
             'table'       => 'pkg_campaign',
+            'pk'          => 'id',
+            'fieldReport' => 'name',
+        ),
+        'id_server'   => array(
+            'table'       => 'pkg_servers',
             'pk'          => 'id',
             'fieldReport' => 'name',
         ),
