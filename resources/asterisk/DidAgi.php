@@ -146,6 +146,11 @@ class DidAgi
                     CallbackAgi::advanced0800CallBack($agi, $MAGNUS, $this, $CalcAgi);
                     return;
                 }
+            } else if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
+                $sql              = "SELECT * FROM pkg_callback WHERE id = '" . $agi->get_variable("IDCALLBACK", true) . "' LIMIT 1";
+                $modelCallback    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                $MAGNUS->CallerID = $modelCallback->exten;
+                $agi->set_callerid($MAGNUS->CallerID);
             }
 
             switch ($this->voip_call) {
