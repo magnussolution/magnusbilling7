@@ -84,6 +84,16 @@ class Start0800CallBackCommand extends ConsoleCommand
 
                 $destination = $callback->exten;
 
+                $modelUser = $modelDiddestination->idUser;
+
+                //PEGA O PREÇO DE VENDA DO AGENT
+                if ($modelUser->id_user > 1) {
+                    $modelUserAgent = User::model()->findByPk((int) $modelUser->id_user);
+                    $id_plan        = $modelUserAgent->id_plan;
+                } else {
+                    $id_plan = $modelDiddestination->idUser->id_plan;
+                }
+
                 $searchTariff = new SearchTariff();
                 $resfindrate  = $searchTariff->find($destination, $modelDiddestination->idUser->id_plan, $modelDiddestination->id_user);
 

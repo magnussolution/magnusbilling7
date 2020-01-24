@@ -389,6 +389,22 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "ALTER TABLE `pkg_cdr` ADD INDEX `callerid` (`callerid`);";
             $this->executeDB($sql);
 
+            $version = '7.0.7';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2020-01-23
+        if ($version == '7.0.7') {
+            $sql = "ALTER TABLE `pkg_cdr` CHANGE `id_offer` `id_server` INT(11) NULL DEFAULT NULL;";
+            $this->executeDB($sql);
+
+            $sql = "RENAME TABLE pkg_cdr_failed to pkg_cdr_failed_old;";
+            $this->executeDB($sql);
+
+            $sql = "CREATE TABLE `pkg_cdr_failed` LIKE pkg_cdr_failed_old;";
+            $this->executeDB($sql);
+
             $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `id_trunk` (`id_trunk`);";
             $this->executeDB($sql);
 
@@ -401,23 +417,35 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "ALTER TABLE `pkg_cdr_failed` ADD INDEX `starttime` (`starttime`);";
             $this->executeDB($sql);
 
-            $version = '7.0.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
-        }
-
-        //2020-01-23
-        if ($version == '7.0.7') {
-            $sql = "ALTER TABLE `pkg_cdr` ADD `id_server` INT(11) NULL DEFAULT NULL AFTER `id_campaign`;";
-            $this->executeDB($sql);
-
             $sql = "ALTER TABLE `pkg_cdr_failed` ADD `id_server` INT(11) NULL DEFAULT NULL AFTER `id_prefix`;";
             $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_cdr_failed (SELECT NULL, id_user, id_plan, id_trunk, id_prefix, NULL, sessionid, uniqueid, starttime, calledstation, sipiax, src, callerid, terminatecauseid, hangupcause FROM pkg_cdr_failed_old);";
+            $this->executeDB($sql);
+
+            $version = '7.0.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
 
             $sql = "ALTER TABLE `pkg_cdr` DROP `stoptime`;";
             $this->executeDB($sql);
 
-            $version = '7.0.8';
+        }
+
+        if ($version == '7.0.8') {
+            $sql = "UPDATE pkg_configuration SET config_key = 'delay_notifications' WHERE config_key = 'Low balance notification frequency';";
+            $this->executeDB($sql);
+
+            $version = '7.0.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '7.0.9') {
+            $sql = "ALTER TABLE `pkg_servers` ADD `public_ip` VARCHAR(80) NULL DEFAULT NULL AFTER `host`;";
+            $this->executeDB($sql);
+
+            $version = '7.1.0';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

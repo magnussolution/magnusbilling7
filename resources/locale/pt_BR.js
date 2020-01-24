@@ -1,4 +1,9 @@
 Locale.load({
+    'Call Details': 'Detalhes',
+    'SIPport': 'Porta Sip',
+    'Weight': 'Carga',
+    'Public IP': 'IP público',
+    'Server IP': 'IP do servidor',
     'The SIP ACCOUNT must belong to the DID owner': 'A CONTA VOIP deve pertencer ao dono do DID',
     'The IVR must belong to the DID owner': 'A IVR deve pertencer ao dono do DID',
     'The QUEUE must belong to the DID owner': 'A QUEUE deve pertencer ao dono do DID',

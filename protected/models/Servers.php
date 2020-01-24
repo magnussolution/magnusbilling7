@@ -61,6 +61,7 @@ class Servers extends Model
             array('description', 'length', 'max' => 500),
             array('password, username', 'length', 'max' => 50),
             array('type, port, sip_port', 'length', 'max' => 20),
+            array('public_ip', 'length', 'max' => 80),
             array('password', 'checkpassword'),
         );
     }

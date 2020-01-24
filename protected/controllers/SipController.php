@@ -142,6 +142,9 @@ class SipController extends Controller
         if (isset($values['id_user'])) {
             $modelUser             = User::model()->findByPk((int) $values['id_user']);
             $values['accountcode'] = $modelUser->username;
+        } else {
+            $modelSip              = Sip::model()->findByPk($values['id']);
+            $values['accountcode'] = $modelSip->idUser->username;
         }
 
         if (isset($values['defaultuser'])) {
@@ -234,7 +237,7 @@ class SipController extends Controller
     public function setAttributesModels($attributes, $models)
     {
 
-        $pkCount       = is_array($attributes) || is_object($attributes) ? $attributes : [];
+        $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
             $attributes[$i]['lineStatus'] = 'unregistered';
             foreach ($this->sipShowPeers as $value) {

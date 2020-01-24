@@ -35,14 +35,17 @@ class SipProxyAccountsCommand extends ConsoleCommand
             $password = $server->password;
             $port     = $server->port;
 
-            if (preg_match("/\|/", $server->description)) {
+            if (filter_var($server->public_ip, FILTER_VALIDATE_IP)) {
+                $remoteProxyIP = $server->public_ip;
+
+            } else if (preg_match("/\|/", $server->description)) {
                 $remoteProxyIP = explode("|", $server->description);
                 $remoteProxyIP = end($remoteProxyIP);
                 if (!filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
                     $remoteProxyIP = $hostname;
                 }
             } else {
-                $remoteProxyIP = $hostname;
+                $remoteProxyIP = $server->host;
             }
 
             $sqlproxy = 'TRUNCATE subscriber;';
