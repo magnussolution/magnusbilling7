@@ -126,15 +126,9 @@ class Start0800CallBackCommand extends ConsoleCommand
                     $call .= "Priority: 1\n";
                     $call .= "Set:CALLED=" . $destination . "\n";
                     $call .= "Set:TARRIFID=" . $resfindrate[0]['id_rate'] . "\n";
-
                     $call .= "Set:SELLCOST=" . $resfindrate[0]['rateinitial'] . "\n";
                     $call .= "Set:SELLINITBLOCK=" . $resfindrate[0]['initblock'] . "\n";
                     $call .= "Set:SELLINCREMENT=" . $resfindrate[0]['billingblock'] . "\n";
-
-                    $call .= "Set:BUYCOST=" . $resfindrate[0]['buyrate'] . "\n";
-                    $call .= "Set:BUYRATEINIT=" . $resfindrate[0]['buyrateinitblock'] . "\n";
-                    $call .= "Set:BUYINCREMENT=" . $resfindrate[0]['buyrateincrement'] . "\n";
-
                     $call .= "Set:IDUSER=" . $modelDiddestination->id_user . "\n";
                     $call .= "Set:IDPREFIX=" . $resfindrate[0]['id_prefix'] . "\n";
                     $call .= "Set:IDTRUNK=" . $resfindrate[0]['id_trunk'] . "\n";
