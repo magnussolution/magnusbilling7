@@ -636,6 +636,15 @@ echo "
   endscript
 }
 
+/var/log/asterisk/magnus {
+  missingok
+  rotate 3
+  daily
+  postrotate
+  /usr/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+  endscript
+}
+
 /var/log/asterisk/fail2ban {
   missingok
   rotate 3
@@ -1031,16 +1040,12 @@ ignoreregex =
 
 echo "
 [general]
-dateformat=%F %T       ; ISO 8601 date format
+dateformat=%F %T
+
 [logfiles]
-
-;debug => debug
-;security => security
 console => error
-;console => notice,warning,error,debug
 messages => notice,warning,error
-;full => notice,warning,error,debug,verbose,dtmf,fax
-
+magnus => debug
 " > /etc/asterisk/logger.conf
 
 if [ ${DIST} = "DEBIAN" ]; then
