@@ -202,22 +202,37 @@ class DidAgi
             }
 
             if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
+                $MAGNUS->id_trunk = $agi->get_variable("IDTRUNK", true);
+
+                $max_len_prefix = strlen($MAGNUS->CallerID);
+                $prefixclause   = '(';
+                while ($max_len_prefix >= 1) {
+                    $prefixclause .= "prefix='" . substr($MAGNUS->CallerID, 0, $max_len_prefix) . "' OR ";
+                    $max_len_prefix--;
+                }
+
+                $prefixclause = substr($prefixclause, 0, -3) . ")";
+
+                $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
+                "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $MAGNUS->id_trunk . ") AND " . $prefixclause .
+                    "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+                $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                 $sessiontime         = time() - $this->startCall;
                 $sell                = $agi->get_variable("SELLCOST", true);
                 $sellinitblock       = $agi->get_variable("SELLINITBLOCK", true);
                 $sellincrement       = $agi->get_variable("SELLINCREMENT", true);
-                $buy                 = $agi->get_variable("BUYCOST", true);
-                $buyinitblock        = $agi->get_variable("BUYRATEINIT", true);
-                $buyincrement        = $agi->get_variable("BUYINCREMENT", true);
+                $buy                 = $modelRateProvider[0]->buyrate;
+                $buyinitblock        = $modelRateProvider[0]->buyrateinitblock;
+                $buyincrement        = $modelRateProvider[0]->buyrateincrement;
                 $MAGNUS->id_user     = $agi->get_variable("IDUSER", true);
                 $MAGNUS->id_plan     = $agi->get_variable("IDPLAN", true);
                 $MAGNUS->sip_account = $MAGNUS->destination;
                 $MAGNUS->destination = $MAGNUS->CallerID;
 
-                $sell_price                = $MAGNUS->roudRatePrice($sessiontime, $sell, $sellinitblock, $sellincrement);
-                $buy_price                 = $MAGNUS->roudRatePrice($sessiontime, $buy, $buyinitblock, $buyincrement);
-                $MAGNUS->id_trunk          = $agi->get_variable("IDTRUNK", true);
+                $sell_price = $MAGNUS->roudRatePrice($sessiontime, $sell, $sellinitblock, $sellincrement);
+                $buy_price  = $MAGNUS->roudRatePrice($sessiontime, $buy, $buyinitblock, $buyincrement);
+
                 $CalcAgi->starttime        = date("Y-m-d H:i:s", $this->startCall);
                 $CalcAgi->sessiontime      = $sessiontime;
                 $CalcAgi->terminatecauseid = 1;
