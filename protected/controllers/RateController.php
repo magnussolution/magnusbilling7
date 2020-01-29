@@ -116,9 +116,7 @@ class RateController extends Controller
         foreach ($modelPlan as $key => $plan) {
             $ids_plan .= $plan->id . ',';
         }
-        $filter .= ' AND t.id_plan = :dfby0';
-        $this->paramsFilter[':dfby0'] = substr($ids_plan, 0, -1);
-
+        $filter .= ' AND t.id_plan IN( ' . substr($ids_plan, 0, -1) . ' )';
         return $filter;
     }
 
