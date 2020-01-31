@@ -415,6 +415,7 @@ Help.load({
     'campaign.tts_audio2': '',
     'campaign.asr_options': '',
     'campaign.auto_reprocess': 'If there are no active numbers in this campaign phone book, reactivates all pending numbers.',
+    'campaign.max_frequency': 'It\'s the maximum call limit that the user can set. Ex. set to 50, the user will to able edit the to any number less than or equal 50.',
     //CALL SUMMARY CALL SHOP
     'callsummarycallshop.sumsessiontime': '',
     'callsummarycallshop.sumprice': '',

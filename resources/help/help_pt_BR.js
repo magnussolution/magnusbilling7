@@ -412,6 +412,7 @@ Help.load({
     'campaign.tts_audio2': '',
     'campaign.asr_options': '',
     'campaign.auto_reprocess': 'Reativar automaticamente todos os numeros das agendas da campanha quando não tiver mais números ativos',
+    'campaign.max_frequency': 'Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.',
     //CALL SUMMARY CALL SHOP
     'callsummarycallshop.sumsessiontime': '',
     'callsummarycallshop.sumprice': '',

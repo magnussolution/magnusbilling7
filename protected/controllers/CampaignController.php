@@ -54,6 +54,32 @@ class CampaignController extends Controller
 
         if (Yii::app()->session['isClient']) {
             $values['id_plan'] = Yii::app()->session['id_plan'];
+
+            if ($this->isNewRecord) {
+
+                if ($values['frequency'] > $this->config['global']['campaign_user_limit']) {
+
+                    echo json_encode(array(
+                        'success' => false,
+                        'rows'    => [],
+                        'errors'  => ['frequency' => [Yii::t('yii', 'The call limit need be less than') . ' ', $this->config['global']['campaign_user_limit']]],
+                    ));
+                    exit;
+
+                }
+            } else {
+                $modelCampaign = Campaign::model()->findByPk($values['id']);
+
+                if ($values['frequency'] > $modelCampaign->max_frequency) {
+
+                    echo json_encode(array(
+                        'success' => false,
+                        'rows'    => [],
+                        'errors'  => ['frequency' => [Yii::t('yii', 'The call limit need be less than') . ' ', $modelCampaign->max_frequency]],
+                    ));
+                    exit;
+                }
+            }
         }
 
         if (isset($values['type_0'])) {

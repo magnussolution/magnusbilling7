@@ -450,6 +450,15 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.1.0') {
+            $sql = " ALTER TABLE `pkg_campaign` ADD `max_frequency` INT(11) NOT NULL DEFAULT '0' AFTER `frequency`;";
+            $this->executeDB($sql);
+
+            $version = '7.1.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

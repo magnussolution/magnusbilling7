@@ -1,4 +1,6 @@
 Locale.load({
+    'The call limit need be less than': 'O valor maximo deve ser menor que:',
+    'Maximum call limit': 'Maximo de chamadas',
     'Call Details': 'Detalhes',
     'SIPport': 'Porta Sip',
     'Weight': 'Carga',
