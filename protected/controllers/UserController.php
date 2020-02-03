@@ -252,8 +252,7 @@ class UserController extends Controller
             Sip::model()->findByAttributes(array('id_user' => $model->id));
 
             if ($this->isNewRecord || isset($modelSip->id_user)) {
-                $modelSip->id_user     = $model->id;
-                $modelSip->accountcode = $model->username;
+                $modelSip->id_user = $model->id;
                 if ($this->isNewRecord) {
                     $modelSip->name         = $model->username;
                     $modelSip->allow        = 'g729,gsm,alaw,ulaw';
@@ -266,10 +265,6 @@ class UserController extends Controller
                 }
 
                 $modelSip->save();
-            }
-
-            if (!$this->isNewRecord && isset($model->id)) {
-                Sip::model()->updateAll(array('accountcode' => $model->username), 'id_user = :key', array(':key' => $model->id));
             }
 
             AsteriskAccess::instance()->generateSipPeers();

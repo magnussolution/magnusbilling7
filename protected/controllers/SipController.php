@@ -129,26 +129,17 @@ class SipController extends Controller
                 ));
                 exit;
             }
-            $values['accountcode'] = $modelUser->username;
-            $values['regseconds']  = 1;
-            $values['context']     = 'billing';
-            $values['regexten']    = $values['name'];
+            $values['regseconds'] = 1;
+            $values['context']    = 'billing';
+            $values['regexten']   = $values['name'];
             if (!$values['callerid']) {
                 $values['callerid'] = $values['name'];
             }
 
         }
 
-        if (isset($values['id_user'])) {
-            $modelUser             = User::model()->findByPk((int) $values['id_user']);
-            $values['accountcode'] = $modelUser->username;
-        } else {
-            $modelSip              = Sip::model()->findByPk($values['id']);
-            $values['accountcode'] = $modelSip->idUser->username;
-        }
-
         if (isset($values['defaultuser'])) {
-            $values['name'] = $values['defaultuser'] == '' ? $values['accountcode'] : $values['defaultuser'];
+            $values['name'] = $values['defaultuser'];
         }
 
         if (isset($values['callerid'])) {
@@ -222,8 +213,9 @@ class SipController extends Controller
                 }
             } elseif ($type == 'save') {
                 if ($this->isNewRecord) {
-                    $sql = "INSERT INTO $dbname.$table (username,domain,ha1,accountcode,trace) VALUES
-                            ('$values->defaultuser','$remoteProxyIP','" . md5($values->defaultuser . ':' . $remoteProxyIP . ':' . $values->secret) . "','$values->accountcode',$values->trace)";
+                    $modelUser = User::model()->findByPk((int) $values->id_user);
+                    $sql       = "INSERT INTO $dbname.$table (username,domain,ha1,accountcode,trace) VALUES
+                            ('$values->defaultuser','$remoteProxyIP','" . md5($values->defaultuser . ':' . $remoteProxyIP . ':' . $values->secret) . "','" . $modelUser->username . "',$values->trace)";
                     $con->createCommand($sql)->execute();
                 } else {
                     $sql = "UPDATE $dbname.$table SET ha1 = '" . md5($values->defaultuser . ':' . $remoteProxyIP . ':' . $values->secret) . "',

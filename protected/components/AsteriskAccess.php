@@ -350,7 +350,7 @@ class AsteriskAccess
     {
         $channelsData = AsteriskAccess::instance()->coreShowChannelsConcise();
         $channelsData = explode("\n", $channelsData["data"]);
-        $modelSip     = Sip::model()->findAll('accountcode = :key', array(':key' => $accountcode));
+        $modelSip     = Sip::model()->findAll('id_user = ( SELECT id FROM pkg_user WHERE username = :key)', array(':key' => $accountcode));
         $sipAccounts  = '';
         foreach ($modelSip as $key => $sip) {
             $sipAccounts .= $sip->name . '|';
@@ -667,7 +667,6 @@ class AsteriskAccess
                         if (strlen($sip->defaultuser) > 1) {
                             $line .= 'defaultuser=' . $sip->defaultuser . "\n";
                         }
-
                         if (strlen($sip->fromuser) > 1) {
                             $line .= 'fromuser=' . $sip->fromuser . "\n";
                         }

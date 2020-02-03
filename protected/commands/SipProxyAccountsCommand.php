@@ -63,9 +63,9 @@ class SipProxyAccountsCommand extends ConsoleCommand
             foreach ($modelSip as $key => $sip) {
 
                 if ($sip->host == 'dynamic') {
-                    $sqlproxy .= " ('" . $sip->defaultuser . "', '$remoteProxyIP','" . $sip->secret . "','" . md5($sip->defaultuser . ':' . $remoteProxyIP . ':' . $sip->secret) . "', '" . $sip->accountcode . "', '" . $sip->trace . "','" . $sip->idUser->cpslimit . "'),";
+                    $sqlproxy .= " ('" . $sip->defaultuser . "', '$remoteProxyIP','" . $sip->secret . "','" . md5($sip->defaultuser . ':' . $remoteProxyIP . ':' . $sip->secret) . "', '" . $sip->idUser->username . "', '" . $sip->trace . "','" . $sip->idUser->cpslimit . "'),";
                 } else {
-                    $sqlproxyadd .= "('0', '$sip->host','0', '" . $sip->accountcode . '|' . $sip->name . '|' . $sip->idUser->cpslimit . "'),";
+                    $sqlproxyadd .= "('0', '$sip->host','0', '" . $sip->idUser->username . '|' . $sip->name . '|' . $sip->idUser->cpslimit . "'),";
                 }
             }
 

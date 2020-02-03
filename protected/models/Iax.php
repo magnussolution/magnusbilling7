@@ -63,14 +63,13 @@ class Iax extends Model
             array('id_user', 'required'),
             array('id_user,calllimit ', 'numerical', 'integerOnly' => true),
             array('name, callerid, context, fromuser, fromdomain, md5secret, secret', 'length', 'max' => 80),
-            array('regexten, insecure', 'length', 'max' => 20),
+            array('regexten, insecure, accountcode', 'length', 'max' => 20),
             array('amaflags, dtmfmode, qualify', 'length', 'max' => 7),
             array('callgroup, pickupgroup', 'length', 'max' => 10),
             array('DEFAULTip, ipaddr', 'length', 'max' => 15),
             array('nat, host', 'length', 'max' => 31),
             array('language', 'length', 'max' => 2),
             array('mailbox', 'length', 'max' => 50),
-            array('accountcode', 'length', 'max' => 30),
             array('rtpholdtimeout', 'length', 'max' => 3),
             array('deny, permit', 'length', 'max' => 95),
             array('port', 'length', 'max' => 5),
@@ -87,6 +86,14 @@ class Iax extends Model
             $this->addError($attribute, Yii::t('yii', 'No space allow in username'));
         }
 
+    }
+
+    public function afterSave()
+    {
+        $sql = "UPDATE pkg_iax SET accountcode = ( SELECT username FROM pkg_user WHERE pkg_user.id = pkg_iax.id_user)";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        return parent::afterSave();
     }
 
     /*

@@ -139,7 +139,6 @@ class SignupController extends Controller
                 if ($success) {
                     $modelSip              = new Sip();
                     $modelSip->id_user     = $signup->id;
-                    $modelSip->accountcode = $signup->username;
                     $modelSip->name        = $signup->username;
                     $modelSip->allow       = 'g729,gsm';
                     $modelSip->host        = 'dynamic';
