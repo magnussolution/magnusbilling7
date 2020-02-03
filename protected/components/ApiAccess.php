@@ -234,7 +234,6 @@ class ApiAccess
 
             $modelSip              = new Sip();
             $modelSip->id_user     = $modelUser->id;
-            $modelSip->accountcode = $modelUser->username;
             $modelSip->name        = $modelUser->username;
             $modelSip->allow       = 'g729,gsm,alaw,ulaw';
             $modelSip->host        = 'dynamic';

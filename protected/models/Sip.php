@@ -71,7 +71,6 @@ class Sip extends Model
             array('nat, host', 'length', 'max' => 31),
             array('language', 'length', 'max' => 2),
             array('mailbox,forward,addparameter', 'length', 'max' => 50),
-            array('accountcode', 'length', 'max' => 30),
             array('sip_group', 'length', 'max' => 20),
             array('rtptimeout, rtpholdtimeout,videosupport', 'length', 'max' => 3),
             array('deny, permit', 'length', 'max' => 95),
@@ -126,6 +125,14 @@ class Sip extends Model
             $this->insecure = 'no';
         }
         return parent::beforeSave();
+    }
+
+    public function afterSave()
+    {
+        $sql = "UPDATE pkg_sip SET accountcode = ( SELECT username FROM pkg_user WHERE pkg_user.id = pkg_sip.id_user)";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        return parent::afterSave();
     }
 
     public function checkusername($attribute, $params)

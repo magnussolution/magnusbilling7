@@ -40,10 +40,7 @@ class IaxController extends Controller
 
         if ($this->isNewRecord) {
 
-            $modelUser             = User::model()->findByPk((int) $values['id_user']);
-            $values['accountcode'] = $modelUser->username;
-
-            $values['name'] = $values['username'] == '' ? $values['accountcode'] : $values['username'];
+            $values['name'] = $values['username'];
 
             $values['regseconds'] = 1;
             $values['context']    = 'billing';
@@ -51,12 +48,6 @@ class IaxController extends Controller
             if (!$values['callerid']) {
                 $values['callerid'] = $values['name'];
             }
-
-        }
-
-        if (isset($values['id_user'])) {
-            $modelUser             = User::model()->findByPk((int) $values['id_user']);
-            $values['accountcode'] = $modelUser->username;
         }
 
         if (isset($values['callerid'])) {
