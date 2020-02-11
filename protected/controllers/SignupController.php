@@ -79,12 +79,11 @@ class SignupController extends Controller
         $signup = new Signup();
         if (isset($_POST['extjs'])) {
             $_POST['Signup'] = $_POST;
+            $signup->captcha = false;
         }
         if (isset($_POST['Signup'])) {
 
             $result = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
-
-            $password = trim($_POST['Signup']['password']);
 
             $signup->id_group = $result[0]['id'];
             $signup->active   = 2;
@@ -105,8 +104,13 @@ class SignupController extends Controller
                 $signup->prefix_local = '';
             }
 
-            if (!isset($_POST['Signup']['username'])) {
+            if (!isset($_POST['Signup']['username']) || strlen($_POST['Signup']['username']) == 0) {
                 $signup->username = Util::getNewUsername();
+                unset($_POST['Signup']['username']);
+            }
+            if (!isset($_POST['Signup']['password']) || strlen($_POST['Signup']['password']) == 0) {
+                $signup->password = trim(Util::generatePassword($this->config['global']['signup_auto_pass'], true, true, true, false));
+                unset($_POST['Signup']['password']);
             }
 
             $signup->callingcard_pin = Util::getNewLock_pin();
@@ -144,7 +148,7 @@ class SignupController extends Controller
                     $modelSip->host        = 'dynamic';
                     $modelSip->insecure    = 'no';
                     $modelSip->defaultuser = $signup->username;
-                    $modelSip->secret      = $password;
+                    $modelSip->secret      = $signup->password;
                     $modelSip->callerid    = $signup->phone;
                     $modelSip->cid_number  = $signup->phone;
                     $modelSip->save();
