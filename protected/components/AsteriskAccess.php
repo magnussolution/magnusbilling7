@@ -275,6 +275,11 @@ class AsteriskAccess
                         $line .= 'fromdomain=' . $data['host'] . "\n";
                         $line .= 'accountcode=sipproxy' . "\n";
                         $line .= 'context=proxy' . "\n";
+                    } else if ($data['type'] == 'mbilling') {
+
+                        $line = "\n\n[mbilling]\n";
+                        $line .= 'host=' . $data['host'] . "\n";
+                        $line .= 'context=slave' . "\n";
                     }
                     $line .= 'disallow=all' . "\n";
                     $line .= 'allow=g729,alaw,ulaw' . "\n";
@@ -286,6 +291,7 @@ class AsteriskAccess
                     $line .= 'type=friend' . "\n";
                     $line .= 'sendrpid=no' . "\n";
                     $line .= 'nat=force_rport,comedia' . "\n";
+                    $line .= 'port=' . $data['sip_port'] . "\n";
 
                     if (fwrite($fr, $registerLine) === false) {
                         echo gettext("Impossible to write to the file") . " ($registerLine)";

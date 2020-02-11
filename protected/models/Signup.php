@@ -23,6 +23,7 @@ class Signup extends Model
     public $verifyCode;
     public $password2;
     public $accept_terms;
+    public $captcha = true;
 
     public static function model($className = __CLASS__)
     {
@@ -60,7 +61,7 @@ class Signup extends Model
             array('mobile, phone,', 'length', 'min' => 10),
             array('email', 'checkemail'),
             array('email', 'unique'),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements()),
+            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || $this->captcha == false),
             array('password', 'compare', 'compareAttribute' => 'password2'),
             array('accept_terms', 'required', 'requiredValue' => 1, 'message' => 'You must accept the Terms and Conditons in order to register.'),
         );
