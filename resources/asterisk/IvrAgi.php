@@ -66,7 +66,7 @@ class IvrAgi
             $wait_time     = 3000;
 
             if ($modelIvr->direct_extension == 1) {
-                $sql            = "SELECT name FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . "name REGEXP '^[0-9]*$' ORDER BY LENGTH(name) DESC LIMIT 1";
+                $sql            = "SELECT name FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " AND name REGEXP '^[0-9]*$' ORDER BY LENGTH(name) DESC LIMIT 1";
                 $modelSipDirect = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (isset($modelSipDirect->name)) {
                     $digit_timeout       = strlen($modelSipDirect->name);
