@@ -72,11 +72,10 @@ class QueueDashBoardController extends Controller
         $resultQueue = Queue::model()->findAll();
 
         foreach ($resultQueue as $key => $queue) {
-            //echo $queue->name."\n";
 
             $queueData = AsteriskAccess::instance()->queueShow($queue->name);
-            $arr       = explode("\n", $queueData["data"]);
-            //echo '<pre>';
+
+            $arr = explode("\n", $queueData["data"]);
             foreach ($arr as $key => $line) {
                 $line = trim($line);
 
@@ -106,35 +105,23 @@ class QueueDashBoardController extends Controller
                     $resultSIP   = Sip::model()->findAll(array('condition' => "name = '$username'"));
                     $id_user     = $resultSIP[0]->id_user;
 
-                    /*echo $agentStatus."\n";
-                    echo $totalCalls."\n";
-                    echo $id_user."\n";
-                    echo $username."\n";*/
-
-                    if (isset($_GET['log5'])) {
-                        $valuesInsert = "$id_user, '$$username', '$agentStatus', '$totalCalls', '$last_call', '$queue->id";
-                        echo "INSERT INTO pkg_queue_agent_status
-                                (id_user, agentName, agentStatus, totalCalls, last_call, id_queue)
-                                VALUES ($valuesInsert) <br>";
-                    }
                     $valuesInsert = ":id_user, :username, :agentStatus, :totalCalls, :last_call, :queueId";
-                    $sql          = "INSERT INTO pkg_queue_agent_status
-                                (id_user, agentName, agentStatus, totalCalls, last_call, id_queue)
-                                VALUES ($valuesInsert) ";
-                    $command = Yii::app()->db->createCommand($sql);
+                    $sql          = "INSERT INTO pkg_queue_agent_status (id_user, agentName, agentStatus, totalCalls, last_call, id_queue) VALUES ($valuesInsert) ";
+                    $command      = Yii::app()->db->createCommand($sql);
                     $command->bindValue(":id_user", $id_user, PDO::PARAM_INT);
                     $command->bindValue(":username", $username, PDO::PARAM_STR);
                     $command->bindValue(":agentStatus", $agentStatus, PDO::PARAM_STR);
                     $command->bindValue(":totalCalls", $totalCalls, PDO::PARAM_STR);
                     $command->bindValue(":last_call", $last_call, PDO::PARAM_STR);
                     $command->bindValue(":queueId", $queue->id, PDO::PARAM_STR);
-                    $command->execute();
+
+                    try {
+                        $command->execute();
+                    } catch (Exception $e) {
+
+                    }
 
                 }
-
-                //if (preg_match("/stripslashes($member)/", $line)) {
-                //echo ($line)."\n      ";
-                //}
             }
 
         }
