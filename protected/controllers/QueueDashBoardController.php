@@ -95,10 +95,11 @@ class QueueDashBoardController extends Controller
                     continue;
                 } elseif (preg_match("/^SIP/", $line)) {
 
+                    $line        = preg_replace('/ \(realtime\)/', '', $line);
                     $username    = $this->get_string_between($line, 'SIP/', ' ');
                     $totalCalls  = $this->get_string_between($line, 'has taken ', 'calls');
                     $totalCalls  = is_numeric($totalCalls) ? $totalCalls : 0;
-                    $agentStatus = preg_replace("/\(|\)/", '', $this->get_string_between($line, 'realtime) (', ' has taken'));
+                    $agentStatus = $this->get_string_between($line, ') (', ') has ');
                     $agentStatus = substr($agentStatus, 0, 7) == 'in call' ? 'in call' : $agentStatus;
                     $last_call   = $this->get_string_between($line, '(last was ', ' secs ago)');
                     $last_call   = is_numeric($last_call) ? $last_call : 0;
@@ -107,7 +108,8 @@ class QueueDashBoardController extends Controller
 
                     $valuesInsert = ":id_user, :username, :agentStatus, :totalCalls, :last_call, :queueId";
                     $sql          = "INSERT INTO pkg_queue_agent_status (id_user, agentName, agentStatus, totalCalls, last_call, id_queue) VALUES ($valuesInsert) ";
-                    $command      = Yii::app()->db->createCommand($sql);
+
+                    $command = Yii::app()->db->createCommand($sql);
                     $command->bindValue(":id_user", $id_user, PDO::PARAM_INT);
                     $command->bindValue(":username", $username, PDO::PARAM_STR);
                     $command->bindValue(":agentStatus", $agentStatus, PDO::PARAM_STR);
