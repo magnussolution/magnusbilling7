@@ -310,7 +310,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 SUM(nbcall_fail) AS nbcall_fail,
                 SUM(sessionbill) AS sessionbill
                 FROM pkg_cdr_summary_day
-                WHERE day > '" . substr($this->day, 0, -3) . "-01'";
+                WHERE day >= '" . substr($this->day, 0, -3) . "-01'  AND day <= '" . substr($this->day, 0, -3) . "-31' ";
 
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
@@ -354,7 +354,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perMonthUser()
     {
 
-        $sql = "SELECT
+        echo $sql = "SELECT
                 id_user,
                 SUM(sessiontime) AS sessiontime,
                 SUM(aloc_all_calls) AS aloc_all_calls,
@@ -364,7 +364,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 SUM(sessionbill) AS sessionbill,
                 sum(agent_bill) AS agent_bill
                 FROM pkg_cdr_summary_day_user
-                WHERE day > '" . substr($this->day, 0, -3) . "-01' GROUP BY id_user";
+                WHERE day >= '" . substr($this->day, 0, -3) . "-01' AND day <= '" . substr($this->day, 0, -3) . "-31' GROUP BY id_user";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
         if (!isset($result[0]['sessiontime'])) {
@@ -419,7 +419,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 SUM(buycost) AS buycost,
                 SUM(sessionbill) AS sessionbill
                 FROM pkg_cdr_summary_day_trunk
-                WHERE day > '" . substr($this->day, 0, -3) . "-01' GROUP BY id_trunk";
+                WHERE day >= '" . substr($this->day, 0, -3) . "-01'  AND day <= '" . substr($this->day, 0, -3) . "-31' GROUP BY id_trunk";
 
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
