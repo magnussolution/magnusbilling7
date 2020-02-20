@@ -275,22 +275,24 @@ class AsteriskAccess
                         $line .= 'fromdomain=' . $data['host'] . "\n";
                         $line .= 'accountcode=sipproxy' . "\n";
                         $line .= 'context=proxy' . "\n";
+                        $line .= 'directmedia=yes' . "\n";
+                        $line .= 'nat=no' . "\n";
                     } else if ($data['type'] == 'mbilling') {
 
                         $line = "\n\n[mbilling]\n";
                         $line .= 'host=' . $data['host'] . "\n";
                         $line .= 'context=slave' . "\n";
+                        $line .= 'directmedia=no' . "\n";
+                        $line .= 'nat=force_rport,comedia' . "\n";
                     }
                     $line .= 'disallow=all' . "\n";
                     $line .= 'allow=g729,alaw,ulaw' . "\n";
-                    $line .= 'directmedia=no' . "\n";
                     $line .= 'dtmfmode=RFC2833' . "\n";
                     $line .= 'insecure=invite' . "\n";
                     $line .= 'nat=no' . "\n";
                     $line .= 'qualify=no' . "\n";
                     $line .= 'type=friend' . "\n";
                     $line .= 'sendrpid=no' . "\n";
-                    $line .= 'nat=force_rport,comedia' . "\n";
                     $line .= 'port=' . $data['sip_port'] . "\n";
 
                     if (fwrite($fr, $registerLine) === false) {
