@@ -477,6 +477,22 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.1.3') {
+
+            $sql = "INSERT INTO pkg_configuration VALUES
+            (NULL, 'DIDWW APY KEY', 'didww_api_key', '', 'DIDWW APY KEY', 'global', '1'),
+            (NULL, 'DIDWW APY KEY', 'didww_url', 'https://api.didww.com/v3/', 'DIDWW APY URL', 'global', '1'),
+            (NULL, 'DIDWW APY KEY', 'didww_profit', '0', 'DIDWW profit percentage. Integer value', 'global', '1');
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.1.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php didwww' >> /var/spool/cron/root");
+        }
+
     }
 
     public function executeDB($sql)
