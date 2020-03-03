@@ -25,7 +25,7 @@ Linux Centos 7 or Debian 8 or newer. Recomended Centos 7
 ```
 cd /usr/src/
 yum -y install wget
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling/master/script/install.sh
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/master/script/install.sh
 chmod +x install.sh
 ./install.sh
 
@@ -40,7 +40,7 @@ chmod +x install.sh
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/magnussolution/magnusbilling/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/magnussolution/magnusbilling7/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -50,7 +50,7 @@ We are in MagnusBilling version 7.x.x
 
 * **Adilson Magnus** - *Initial work* - [MagnusSolution](https://magnussolution.com)
 
-See also the list of [contributors](https://github.com/magnussolution/magnusbillin7/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/magnussolution/magnusbilling7/contributors) who participated in this project.
 
 ## License
 
