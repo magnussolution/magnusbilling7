@@ -146,6 +146,7 @@ class CallChartCommand extends ConsoleCommand
                             echo "is a SIP call\n";
                             $type        = 'SIP';
                             $sip_account = $originate;
+                            $modelSip    = Sip::model()->find('name = :key', array(':key' => $sip_account));
                             $trunk       = Yii::t('yii', 'Sip Call');
                             $id_user     = $modelSip->id_user;
                             $is_sip_call = true;
