@@ -49,9 +49,12 @@ class SipTraceController extends Controller
 
         $result = htmlentities($data);
 
+        $modelServers = Servers::model()->findAll('status = 1');
+
         $result = explode("U " . date('Y') . "", $result);
         $packet = [];
         $id     = 1;
+        $mils   = 0;
         foreach ($result as $key => $value) {
 
             $callid = '';
@@ -71,6 +74,10 @@ class SipTraceController extends Controller
             }
 
             $fromTo = explode(' ', $lines[0]);
+
+            if (count($fromTo) < 4) {
+                continue;
+            }
 
             $date = $fromTo[0] . ' ' . $fromTo[1];
 
@@ -99,18 +106,27 @@ class SipTraceController extends Controller
                 break;
             }
 
+            $server_id_from = array_search($fromIp, array_column($modelServers, 'host'));
+            $server_id_to   = array_search($toIp, array_column($modelServers, 'host'));
+
+            $time = explode('.', $date);
+            $date = date('Y') . $time[0];
+            $mils = ($time[1] - $mils) / 1000000;
+
             if ($id == 1) {
                 $firstPacket = $fromIp;
+                $mils        = $time[1];
             }
+
             array_push($packet, array(
                 'id'        => $id,
                 'method'    => $method,
-                'fromip'    => $fromIp,
-                'toip'      => $toIp,
+                'fromip'    => $server_id_from ? $modelServers[$server_id_from]->name . ' (' . $fromIp : $fromIp . ')',
+                'toip'      => $server_id_to ? $modelServers[$server_id_to]->name . ' (' . $toIp : $toIp . ')',
                 'sipto'     => $sipto,
                 'callid'    => $callid,
-                'head'      => date('Y') . $value,
-                'date'      => date('Y') . $date,
+                'head'      => date('Y') . preg_replace('/\#/', '', $value),
+                'date'      => $id == 1 ? $date : $date . ' + ' . number_format($mils, 4) . 's',
                 'direction' => $firstPacket == $fromIp ? 'red' : 'green',
             ));
 
@@ -128,6 +144,9 @@ class SipTraceController extends Controller
 
     public function actionRead($asJson = true, $condition = null)
     {
+
+        $modelServers = Servers::model()->findAll('status = 1');
+
         $start = $_GET['start'];
 
         $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : null;
@@ -195,7 +214,9 @@ class SipTraceController extends Controller
             }
 
             $fromTo = explode(' ', $lines[0]);
-
+            if (!isset($fromTo[2])) {
+                continue;
+            }
             $fromIp = strtok($fromTo[2], ':');
 
             if (!isset($fromTo[4])) {
@@ -341,11 +362,14 @@ class SipTraceController extends Controller
                 break;
             }
 
+            $server_id_from = array_search($fromIp, array_column($modelServers, 'host'));
+            $server_id_to   = array_search($toIp, array_column($modelServers, 'host'));
+
             array_push($packet, array(
                 'id'     => $id,
                 'method' => $method,
-                'fromip' => $fromIp,
-                'toip'   => $toIp,
+                'fromip' => $server_id_from ? $modelServers[$server_id_from]->name : $fromIp,
+                'toip'   => $server_id_to ? $modelServers[$server_id_to]->name : $toIp,
                 'sipto'  => $sipto,
                 'callid' => $callid,
                 'head'   => date('Y') . html_entity_decode($value),
