@@ -80,6 +80,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
+
+            if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
+                continue;
+            }
+
             $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
@@ -145,6 +150,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
+            if (!is_numeric($value['id_trunk']) || $value['id_trunk'] < 1) {
+                continue;
+            }
+
             $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_trunk'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
@@ -205,6 +214,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
+
+            if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
+                continue;
+            }
+
             $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
@@ -376,6 +390,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
+
+            if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
+                continue;
+            }
+
             $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "','" . $value['nbcall_fail'] . "'),";
@@ -432,6 +451,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
+
+            if (!is_numeric($value['id_trunk']) || $value['id_trunk'] < 1) {
+                continue;
+            }
+
             $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "','" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
