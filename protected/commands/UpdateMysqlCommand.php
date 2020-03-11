@@ -493,6 +493,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php didwww' >> /var/spool/cron/root");
         }
 
+        if ($version == '7.1.4') {
+
+            $sql = "ALTER TABLE `pkg_trunk` CHANGE `secret` `secret` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+            ALTER TABLE `pkg_smtp` CHANGE `password` `password` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.1.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
