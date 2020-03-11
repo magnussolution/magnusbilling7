@@ -40,7 +40,7 @@ class StatusSystemCommand extends ConsoleCommand
         foreach ($sysinfo->network() as $net_name => $net) {
             $net_name = trim($net_name);
 
-            if (preg_match('/eth|enp|venet|w\.g|eno/', $net_name)) {
+            if (preg_match('/eth|ens|enp|venet|w\.g|eno/', $net_name)) {
                 $rx2 = $net["rx_bytes"];
                 $tx2 = $net["tx_bytes"];
                 break;
