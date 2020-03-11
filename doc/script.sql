@@ -2895,7 +2895,7 @@ CREATE TABLE `pkg_trunk` (
   `status` int(11) DEFAULT '1',
   `if_max_use` int(11) DEFAULT '0',
   `user` varchar(80) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `secret` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `secret` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `allow` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `link_sms` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `directmedia` char(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'no',
