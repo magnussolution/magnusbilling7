@@ -64,28 +64,68 @@ table.blueTable tfoot .links a{
 }
 
 </style>
+
+<?php
+
+foreach ($packet as $element) {
+    $hash                  = $element['fromip'];
+    $unique_servers[$hash] = $element;
+}
+
+?>
 <div id="border">
 <table class="blueTable" width="100%">
 	<tr>
 		<td width="50%" valign="top">
 			<table class="blueTable" width="100%">
 				<tr>
-					<td width="30%"></td>
-					<td width="20%"><u><b><?php echo $packet[0]['fromip'] ?></b></u></td>
-					<td width="30%"></td>
-					<td width="20%"><u><b><?php echo $packet[0]['toip'] ?></b></u></td>
-				</tr>
+					<td width="20%">Date</td>
+					<?php $i = 0;?>
+						<?php foreach ($unique_servers as $key => $server): ?>
+							<td align="center" width="<?php echo 80 / count($unique_servers) ?>"><u><b><?php echo $server['fromip'] ?></b></u></td>
+							<?php if ($i == 0): ?>
+								<?php $server0 = $server['fromip'];?>
+							<?php elseif ($i == 1): ?>
+								<?php $server1 = $server['fromip'];?>
+							<?php elseif ($i == 2): ?>
+								<?php $server2 = $server['fromip'];?>
+							<?php endif?>
+
+							<?php $i++;?>
+
+						<?php endforeach?>
+					</tr>
 				<?php foreach ($packet as $key => $value): ?>
 				<tr>
-					<td><?php echo $value['date'] ?></td>
+					<td width="20%" ><?php echo $value['date'] ?></td>
 
-					<td colspan="3">
-						<div align="center" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
-							<font color="<?php echo $value['direction'] ?>">
-								<?php echo $value['method'] ?><br><?php echo $value['direction'] == 'red' ? '&rarr;' : '&larr;' ?>
+					<td>
+						<?php if (($value['fromip'] == $server0 && $value['toip'] == $server1) || ($value['toip'] == $server0 && $value['fromip'] == $server1)): ?>
+							<div align="right" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
+								<font color="<?php echo $value['fromip'] == $server0 ? 'red' : 'green' ?>">
+									<?php echo $value['method'] ?>&nbsp; <?php echo $value['fromip'] == $server0 ? '&rarr;' : '&larr;' ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-							</font>
-						</div>
+								</font>
+							</div>
+						<?php else: ?>
+							&nbsp;
+						<?php endif?>
+					</td>
+					<?php if (isset($server2)): ?>
+						<td>&nbsp;</td>
+					<?php endif?>
+
+					<td>
+						<?php if ((isset($server2) && $value['fromip'] == $server2 && $value['toip'] == $server1) || (isset($server2) && $value['toip'] == $server2 && $value['fromip'] == $server1)): ?>
+							<div align="left" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
+								<font color="<?php echo $value['fromip'] == $server1 ? 'red' : 'green' ?>">
+									&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['fromip'] == $server0 ? '&rarr;' : '&larr;' ?> <?php echo $value['method'] ?>
+
+								</font>
+							</div>
+						<?php else: ?>
+							&nbsp;
+						<?php endif?>
 					</td>
 
 				</tr>

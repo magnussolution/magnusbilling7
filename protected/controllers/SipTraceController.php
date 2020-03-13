@@ -55,6 +55,13 @@ class SipTraceController extends Controller
         $packet = [];
         $id     = 1;
         $mils   = 0;
+
+        try {
+            $callids = json_decode($_GET['callid']);
+        } catch (Exception $e) {
+            exit('invalid Josn');
+        }
+
         foreach ($result as $key => $value) {
 
             $callid = '';
@@ -63,6 +70,22 @@ class SipTraceController extends Controller
             if (count($lines) < 10) {
                 continue;
             }
+
+            foreach ($lines as $key => $line) {
+                if (preg_match('/Call-ID:/', $line)) {
+                    $callid = trim(substr($line, 8));
+                } else if (preg_match('/To:/', $line)) {
+                    $sipto = trim(substr($line, 3));
+                }
+            }
+
+            if (!in_array($callid, $callids)) {
+                continue;
+            }
+            if ($id > 50) {
+                break;
+            }
+
             if (preg_match('/Trying/', $lines[1])) {
                 $method = '100 Trying';
             } else if (preg_match('/SIP\/2\.0 /', $lines[1])) {
@@ -84,28 +107,6 @@ class SipTraceController extends Controller
             $fromIp = strtok($fromTo[2], ':');
             $toIp   = strtok($fromTo[4], ':');
 
-            foreach ($lines as $key => $line) {
-                if (preg_match('/Call-ID:/', $line)) {
-                    $callid = trim(substr($line, 8));
-                }if (preg_match('/To:/', $line)) {
-                    $sipto = trim(substr($line, 9, -2));
-                }
-            }
-            foreach ($lines as $key => $line) {
-                if (preg_match('/Call-ID:/', $line)) {
-                    $callid = trim(substr($line, 8));
-                }if (preg_match('/To:/', $line)) {
-                    $sipto = trim(substr($line, 3));
-                }
-            }
-
-            if ($_GET['callid'] != $callid) {
-                continue;
-            }
-            if ($id > 50) {
-                break;
-            }
-
             $server_id_from = array_search($fromIp, array_column($modelServers, 'host'));
             $server_id_to   = array_search($toIp, array_column($modelServers, 'host'));
 
@@ -119,15 +120,14 @@ class SipTraceController extends Controller
             }
 
             array_push($packet, array(
-                'id'        => $id,
-                'method'    => $method,
-                'fromip'    => $server_id_from ? $modelServers[$server_id_from]->name . ' (' . $fromIp : $fromIp . ')',
-                'toip'      => $server_id_to ? $modelServers[$server_id_to]->name . ' (' . $toIp : $toIp . ')',
-                'sipto'     => $sipto,
-                'callid'    => $callid,
-                'head'      => date('Y') . preg_replace('/\#/', '', $value),
-                'date'      => $id == 1 ? $date : $date . ' + ' . number_format($mils, 4) . 's',
-                'direction' => $firstPacket == $fromIp ? 'red' : 'green',
+                'id'     => $id,
+                'method' => $method,
+                'fromip' => $server_id_from ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
+                'toip'   => $server_id_to ? $modelServers[$server_id_to]->name . ' (' . $toIp . ')' : $toIp,
+                'sipto'  => $sipto,
+                'callid' => $callid,
+                'head'   => date('Y') . preg_replace('/\#/', '', $value),
+                'date'   => $id == 1 ? $date : $date . ' + ' . number_format($mils, 4) . 's',
             ));
 
             $id++;
@@ -137,11 +137,6 @@ class SipTraceController extends Controller
         $this->render('index', array('packet' => $packet));
     }
 
-    public function actionDestroy()
-    {
-        exec("rm -rf " . $this->log_name);
-    }
-
     public function actionRead($asJson = true, $condition = null)
     {
 
@@ -149,7 +144,7 @@ class SipTraceController extends Controller
 
         $start = $_GET['start'];
 
-        $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : null;
+        $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : [];
 
         if (count($filter)) {
 
@@ -386,6 +381,12 @@ class SipTraceController extends Controller
         ), JSON_UNESCAPED_SLASHES);
     }
 
+    public function actionDestroy()
+    {
+        SipTrace::model()->deleteAll();
+        exec("rm -rf " . $this->log_name);
+    }
+
     public function actionExport()
     {
         header('Content-type: application/csv; charset=utf-8');
@@ -402,7 +403,7 @@ class SipTraceController extends Controller
     public function actionStart()
     {
 
-        $modelTrace = Trace::model()->find('in_use = 1 OR status = 1');
+        $modelTrace = SipTrace::model()->find();
 
         if (count($modelTrace)) {
             echo json_encode(array(
@@ -411,7 +412,7 @@ class SipTraceController extends Controller
             ));
             exit;
         }
-        $modelTrace          = new Trace();
+        $modelTrace          = new SipTrace();
         $modelTrace->filter  = $_POST['filter'];
         $modelTrace->timeout = $_POST['timeout'];
         $modelTrace->port    = $_POST['port'];
@@ -427,13 +428,12 @@ class SipTraceController extends Controller
 
     public function actionClearAll()
     {
-        SipTrace::model()->deleteAll();
+        try {
+            SipTrace::model()->deleteAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
 
-        Trace::model()->deleteAll();
-        $modelTrace         = new Trace();
-        $modelTrace->filter = 'stop';
-        $modelTrace->status = 0;
-        $modelTrace->save();
     }
 
 }

@@ -36,7 +36,7 @@ class SipTrace extends Model
      */
     public function tableName()
     {
-        return 'pkg_siptrace';
+        return 'pkg_trace';
     }
 
     /**
@@ -53,9 +53,9 @@ class SipTrace extends Model
     public function rules()
     {
         return array(
-            array('traced_data,method,callid,fromip,toip,direction', 'length', 'max' => 100),
-            array('date, head', 'safe'),
-
+            array('status,timeout,in_use', 'numerical', 'integerOnly' => true),
+            array('filter', 'length', 'max' => 50),
+            array('port', 'length', 'max' => 7),
         );
     }
 }
