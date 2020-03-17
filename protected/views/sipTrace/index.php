@@ -119,7 +119,7 @@ foreach ($packet as $element) {
 						<?php if ((isset($server2) && $value['fromip'] == $server2 && $value['toip'] == $server1) || (isset($server2) && $value['toip'] == $server2 && $value['fromip'] == $server1)): ?>
 							<div align="left" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
 								<font color="<?php echo $value['fromip'] == $server1 ? 'red' : 'green' ?>">
-									&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['fromip'] == $server0 ? '&rarr;' : '&larr;' ?> <?php echo $value['method'] ?>
+									&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['fromip'] == $server1 ? '&rarr;' : '&larr;' ?> <?php echo $value['method'] ?>
 
 								</font>
 							</div>
