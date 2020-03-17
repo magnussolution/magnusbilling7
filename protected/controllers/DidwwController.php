@@ -232,16 +232,20 @@ class DidwwController extends Controller
              -H  'Api-Key: " . $this->api_key . "' \
              '" . $this->url . "/countries'");
 
-        $countries = json_decode($result);
+        if (strlen($result)) {
 
-        $result = [];
-        foreach ($countries->data as $key => $country) {
-            $result[] = [
-                'id'   => $country->id,
-                'name' => $country->attributes->name,
-            ];
+            $countries = json_decode($result);
+
+            $result = [];
+            foreach ($countries->data as $key => $country) {
+                $result[] = [
+                    'id'   => $country->id,
+                    'name' => $country->attributes->name,
+                ];
+            }
+        } else {
+            exit('Invalid data');
         }
-
         return $result;
 
     }

@@ -79,7 +79,7 @@ class SipTraceController extends Controller
                 }
             }
 
-            if (!in_array($callid, $callids)) {
+            if (is_array($callid) && !in_array($callid, $callids)) {
                 continue;
             }
             if ($id > 50) {
@@ -122,8 +122,8 @@ class SipTraceController extends Controller
             array_push($packet, array(
                 'id'     => $id,
                 'method' => $method,
-                'fromip' => $server_id_from ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
-                'toip'   => $server_id_to ? $modelServers[$server_id_to]->name . ' (' . $toIp . ')' : $toIp,
+                'fromip' => $server_id_from !== false ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
+                'toip'   => $server_id_to !== false ? $modelServers[$server_id_to]->name . ' (' . $toIp . ')' : $toIp,
                 'sipto'  => $sipto,
                 'callid' => $callid,
                 'head'   => date('Y') . preg_replace('/\#/', '', $value),
@@ -363,8 +363,8 @@ class SipTraceController extends Controller
             array_push($packet, array(
                 'id'     => $id,
                 'method' => $method,
-                'fromip' => $server_id_from ? $modelServers[$server_id_from]->name : $fromIp,
-                'toip'   => $server_id_to ? $modelServers[$server_id_to]->name : $toIp,
+                'fromip' => $server_id_from !== false ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
+                'toip'   => $server_id_to !== false ? $modelServers[$server_id_to]->name . ' (' . $toIp . ')' : $toIp,
                 'sipto'  => $sipto,
                 'callid' => $callid,
                 'head'   => date('Y') . html_entity_decode($value),
