@@ -97,11 +97,12 @@ foreach ($packet as $element) {
 					</tr>
 				<?php foreach ($packet as $key => $value): ?>
 				<tr>
+
 					<td width="20%" ><?php echo $value['date'] ?></td>
 
-					<td>
+					<td colspan="<?php echo isset($server2) ? '1' : '2'; ?>">
 						<?php if (($value['fromip'] == $server0 && $value['toip'] == $server1) || ($value['toip'] == $server0 && $value['fromip'] == $server1)): ?>
-							<div align="right" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
+							<div align="<?php echo isset($server2) ? 'right' : 'center'; ?>" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
 								<font color="<?php echo $value['fromip'] == $server0 ? 'red' : 'green' ?>">
 									<?php echo $value['method'] ?>&nbsp; <?php echo $value['fromip'] == $server0 ? '&rarr;' : '&larr;' ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -112,21 +113,23 @@ foreach ($packet as $element) {
 						<?php endif?>
 					</td>
 					<?php if (isset($server2)): ?>
-						<td>&nbsp;</td>
+						<td >&nbsp;</td>
+
+
+						<td>
+							<?php if ((isset($server2) && $value['fromip'] == $server2 && $value['toip'] == $server1) || (isset($server2) && $value['toip'] == $server2 && $value['fromip'] == $server1)): ?>
+								<div align="left" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
+									<font color="<?php echo $value['fromip'] == $server1 ? 'red' : 'green' ?>">
+										&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['fromip'] == $server1 ? '&rarr;' : '&larr;' ?> <?php echo $value['method'] ?>
+
+									</font>
+								</div>
+							<?php else: ?>
+								&nbsp;
+							<?php endif?>
+						</td>
 					<?php endif?>
 
-					<td>
-						<?php if ((isset($server2) && $value['fromip'] == $server2 && $value['toip'] == $server1) || (isset($server2) && $value['toip'] == $server2 && $value['fromip'] == $server1)): ?>
-							<div align="left" onclick='selectMethod("<?php echo $value['id'] ?>","<?php echo count($packet) ?>")' >
-								<font color="<?php echo $value['fromip'] == $server1 ? 'red' : 'green' ?>">
-									&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['fromip'] == $server1 ? '&rarr;' : '&larr;' ?> <?php echo $value['method'] ?>
-
-								</font>
-							</div>
-						<?php else: ?>
-							&nbsp;
-						<?php endif?>
-					</td>
 
 				</tr>
 				<?php endforeach;?>
