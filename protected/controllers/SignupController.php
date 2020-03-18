@@ -111,6 +111,10 @@ class SignupController extends Controller
             if (!isset($_POST['Signup']['password']) || strlen($_POST['Signup']['password']) == 0) {
                 $signup->password = trim(Util::generatePassword($this->config['global']['signup_auto_pass'], true, true, true, false));
                 unset($_POST['Signup']['password']);
+            } else {
+                if ($_POST['Signup']['password'] != $_POST['Signup']['password2']) {
+                    $signup->addError('id_plan', Yii::t('yii', 'Password '));
+                }
             }
 
             $signup->callingcard_pin = Util::getNewLock_pin();
@@ -162,6 +166,18 @@ class SignupController extends Controller
                             'username' => $signup->username,
                             'msg'      => 'Your account was created. Please ckeck your email',
                         ));
+
+                        $mail = new Mail(Mail::$TYPE_SIGNUP, $signup->id);
+                        try {
+                            $mail->send();
+                        } catch (Exception $e) {
+                        }
+
+                        if ($this->config['global']['signup_admin_email'] == 1) {
+                            $mail->setTitle('NEW USER SIGNUP FROM MAGNUSBILLING SIGNUP FORM. USERNAME ');
+                            $mail->send($this->config['global']['admin_email']);
+                        }
+
                         exit;
                     }
 
@@ -212,7 +228,7 @@ class SignupController extends Controller
     public function createUserinSuperLogica()
     {
         $modelMethodPay = Methodpay::model()->find("payment_method = 'SuperLogica' AND active = 1");
-        if (count($modelMethodPay)) {
+        if (isset($modelMethodPay->id)) {
 
             $response = SLUserSave::saveUserSLCurl($this, $modelMethodPay->SLAppToken
                 , $modelMethodPay->SLAccessToken, false);

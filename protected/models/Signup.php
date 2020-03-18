@@ -62,7 +62,6 @@ class Signup extends Model
             array('email', 'checkemail'),
             array('email', 'unique'),
             array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || $this->captcha == false),
-            array('password', 'compare', 'compareAttribute' => 'password2'),
             array('accept_terms', 'required', 'requiredValue' => 1, 'message' => 'You must accept the Terms and Conditons in order to register.'),
         );
     }

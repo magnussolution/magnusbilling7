@@ -79,7 +79,7 @@ class SipTraceController extends Controller
                 }
             }
 
-            if (is_array($callid) && !in_array($callid, $callids)) {
+            if (!in_array($callid, $callids)) {
                 continue;
             }
             if ($id > 50) {
