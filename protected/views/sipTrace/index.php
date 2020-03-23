@@ -71,7 +71,7 @@ foreach ($packet as $element) {
     $hash                  = $element['fromip'];
     $unique_servers[$hash] = $element;
 }
-
+$server1 = '';
 ?>
 <div id="border">
 <table class="blueTable" width="100%">
