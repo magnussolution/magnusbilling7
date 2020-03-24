@@ -667,6 +667,9 @@ class AsteriskAccess
             if ($fd) {
                 foreach ($modelSip as $key => $sip) {
 
+                    if ($sip->idUser->active != 1) {
+                        continue;
+                    }
                     if ($sip->techprefix > 1) {
                         $line = "\n\n[" . $sip->host . "]\n";
                     } else {
@@ -807,6 +810,11 @@ class AsteriskAccess
 
             if ($fd) {
                 foreach ($modelIax as $key => $iax) {
+
+                    if ($iax->idUser->active != 1) {
+                        continue;
+                    }
+
                     $line = "\n\n[" . $iax->name . "]\n";
                     if (fwrite($fd, $line) === false) {
                         echo "Impossible to write to the file ($buddyfile)";

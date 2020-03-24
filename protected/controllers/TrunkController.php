@@ -108,7 +108,7 @@ class TrunkController extends Controller
         $trunkRegister = AsteriskAccess::instance()->sipShowRegistry();
         $trunkRegister = explode("\n", $trunkRegister['data']);
 
-        $pkCount       = is_array($attributes) || is_object($attributes) ? $attributes : [];
+        $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
             $modelTrunk                                = Trunk::model()->findByPk((int) $attributes[$i]['failover_trunk']);
             $attributes[$i]['failover_trunktrunkcode'] = count($modelTrunk)
@@ -138,7 +138,7 @@ class TrunkController extends Controller
         $model  = Trunk::model()->findAll(
             array(
                 'select'    => $select,
-                'condition' => 'providertech = :key',
+                'condition' => 'providertech = :key AND status = 1',
                 'params'    => array(':key' => 'sip'),
             ));
 
@@ -150,7 +150,7 @@ class TrunkController extends Controller
         $model  = Trunk::model()->findAll(
             array(
                 'select'    => $select,
-                'condition' => 'providertech = :key',
+                'condition' => 'providertech = :key AND status = 1',
                 'params'    => array(':key' => 'iax2'),
             ));
 
