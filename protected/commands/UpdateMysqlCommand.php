@@ -505,6 +505,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.1.5') {
+
+            $sql = "ALTER TABLE `pkg_sip` ADD `amd` INT(11) NOT NULL DEFAULT '0'";
+            $this->executeDB($sql);
+
+            $version = '7.1.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
