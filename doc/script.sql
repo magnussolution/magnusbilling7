@@ -3091,27 +3091,6 @@ INSERT INTO `pkg_user_type` VALUES (1,'t(\'admin\')'),(2,'t(\'agent\')'),(3,'t(\
 /*!40000 ALTER TABLE `pkg_user_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Temporary table structure for view `pkg_voicemail_users`
---
-
-DROP TABLE IF EXISTS `pkg_voicemail_users`;
-/*!50001 DROP VIEW IF EXISTS `pkg_voicemail_users`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-/*!50001 CREATE TABLE `pkg_voicemail_users` (
-  `id` tinyint NOT NULL,
-  `customer_id` tinyint NOT NULL,
-  `context` tinyint NOT NULL,
-  `mailbox` tinyint NOT NULL,
-  `password` tinyint NOT NULL,
-  `fullname` tinyint NOT NULL,
-  `email` tinyint NOT NULL,
-  `pager` tinyint NOT NULL,
-  `stamp` tinyint NOT NULL,
-  `uniqueid` tinyint NOT NULL
-) ENGINE=MyISAM */;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `pkg_voucher`
@@ -3149,25 +3128,6 @@ LOCK TABLES `pkg_voucher` WRITE;
 /*!40000 ALTER TABLE `pkg_voucher` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Final view structure for view `pkg_voicemail_users`
---
-
-/*!50001 DROP TABLE IF EXISTS `pkg_voicemail_users`*/;
-/*!50001 DROP VIEW IF EXISTS `pkg_voicemail_users`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8 */;
-/*!50001 SET character_set_results     = utf8 */;
-/*!50001 SET collation_connection      = utf8_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `pkg_voicemail_users` AS select `pkg_sip`.`id` AS `id`,`pkg_sip`.`id_user` AS `customer_id`,'billing' AS `context`,`pkg_sip`.`name` AS `mailbox`,`pkg_user`.`callingcard_pin` AS `password`,`pkg_user`.`firstname` AS `fullname`,`pkg_user`.`email` AS `email`,`pkg_sip`.`md5secret` AS `pager`,`pkg_user`.`creationdate` AS `stamp`,'' AS `uniqueid` from (`pkg_sip` join `pkg_user` on((`pkg_sip`.`id_user` = `pkg_user`.`id`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
