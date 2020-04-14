@@ -515,6 +515,26 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.1.6') {
+
+            $sql = "ALTER TABLE `pkg_sip` ADD `voicemail_email` VARCHAR(100) NULL DEFAULT NULL AFTER `voicemail`, ADD `voicemail_password` INT(11) NULL DEFAULT NULL AFTER `voicemail_email`;";
+            $this->executeDB($sql);
+
+            $sql = "UPDATE pkg_sip INNER JOIN pkg_user ON pkg_sip.id_user = pkg_user.id SET pkg_sip.voicemail_email = pkg_user.email, pkg_sip.voicemail_password = pkg_user.callingcard_pin;";
+            $this->executeDB($sql);
+
+            $sql = "DROP TABLE IF EXISTS `pkg_voicemail_users`; DROP VIEW IF EXISTS `pkg_voicemail_users`;";
+            $this->executeDB($sql);
+
+            $sql = " CREATE VIEW `pkg_voicemail_users` AS SELECT `pkg_sip`.`id` AS `id`,`pkg_sip`.`id_user` AS `customer_id`,'billing' AS `context`,`pkg_sip`.`name` AS `mailbox`,`pkg_sip`.`voicemail_password` AS `password`,`pkg_user`.`firstname` AS `fullname`,`pkg_sip`.`voicemail_email` AS `email`,`pkg_sip`.`md5secret` AS `pager`,`pkg_user`.`creationdate` AS `stamp`,'' AS `uniqueid` FROM `pkg_sip` JOIN `pkg_user` on `pkg_sip`.`id_user` = `pkg_user`.`id` ;
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.1.7';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

@@ -228,6 +228,10 @@ class SipTraceController extends Controller
                 }
             }
 
+            if (!isset($sipto)) {
+                continue;
+            }
+
             if (isset($filterMethod)) {
                 //filter method
                 if ($filterMethodComparation == 'st') {

@@ -62,7 +62,7 @@ class Sip extends Model
     {
         return array(
             array('id_user', 'required'),
-            array('id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd', 'numerical', 'integerOnly' => true),
+            array('id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd, voicemail_password', 'numerical', 'integerOnly' => true),
             array('name, callerid, context, fromuser, fromdomain, md5secret, secret, fullcontact', 'length', 'max' => 80),
             array('regexten, insecure, regserver, vmexten, callingpres, mohsuggest, allowtransfer', 'length', 'max' => 20),
             array('amaflags, dtmfmode, qualify', 'length', 'max' => 7),
@@ -76,7 +76,7 @@ class Sip extends Model
             array('deny, permit', 'length', 'max' => 95),
             array('type', 'length', 'max' => 6),
             array('url_events', 'length', 'max' => 150),
-            array('disallow, allow, setvar, useragent,block_call_reg', 'length', 'max' => 100),
+            array('disallow, allow, setvar, useragent,block_call_reg, voicemail_email', 'length', 'max' => 100),
             array('lastms', 'length', 'max' => 11),
             array('directmedia,alias', 'length', 'max' => 10),
             array('defaultuser, cid_number, outboundproxy, sippasswd', 'length', 'max' => 40),
