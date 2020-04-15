@@ -33,6 +33,14 @@ class SmsController extends Controller
         parent::init();
     }
 
+    public function actionRead($asJson = true, $condition = null)
+    {
+        if (isset($_POST['referencia'])) {
+            $this->actionSendPost();
+        }
+        parent::actionRead();
+    }
+
     /*
     Url for Send SMSr http://ip/mbilling/index.php/sms/send?username=user&password=MD5(pass)&number=55dddn&text=sms-text.
      */
@@ -69,48 +77,37 @@ class SmsController extends Controller
     {
         /*
         <?php
-        $url  = 'http://your_server_ip/mbilling/index.php/sms/sendPost';
+        $magnusBilling             = new MagnusBilling('eef4d9186132d9f79002ba87975ba915', 'e62659fa9494e98bf43d721b6c17d040');
+        $magnusBilling->public_url = "https://sip2.voziphone.com/voziphone/"; // Your MagnusBilling URL
+
+        //read data from user module
         $data = array(
-        'username'   => 'username', //username
-        'api'        => MD5('your_password'), //MD5 password
-        'number'     => '573112370000', //numbers to send sms, ',' separated
-        'text'       => 'SMS API test', //SMS text
+        'module'     => 'sms',
+        'action'     => 'read',
+        'id'         => 0,
+        'username'   => '28999', //Numero de cliente
+        'number'     => '573117178962,573117196293', //numero o numeros telefonicos a enviar el SMS (separados por una coma ,)
+        'text'       => 'SMS API de prueba voziphone', //Mensaje de texto a enviar
+        'referencia' => 'Referenca Envio voziphone', //(campo opcional) Numero de referencio ó nombre de campaña
         );
 
-        $options = array(
-        'http' => array(
-        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-        'method'  => 'POST',
-        'content' => http_build_query($data),
-        ),
-        );
-        $context = stream_context_create($options);
-        $result  = json_decode(file_get_contents($url, false, $context));
-        if ($result->success == 1) {
-        print 'Sent ' . $result->totalSmsSent . ' SMS successfully';
-        } else {
-        print 'error!!';
-        print_r($result);
-        }
+        $result = $magnusBilling->query($data);
 
          */
+
         SqlInject::sanitize($_POST);
-        if (!isset($_POST['number']) || !isset($_POST['text']) || !isset($_POST['username']) || !isset($_POST['api'])) {
+        if (!isset($_POST['number']) || !isset($_POST['text']) || !isset($_POST['username'])) {
             exit('invalid data');
         } else if (strlen($_POST['text']) > 140) {
             exit('invalid number');
         } else if (strlen($_POST['username']) < 4) {
             exit('invalid user');
-        } else if (strlen($_POST['api']) < 5) {
-            exit('invalid user');
         }
 
-        $modelSip = AccessManager::checkAccess($_GET['username'], $_GET['api']);
-
-        if (!count($modelSip)) {
-            exit('invalid user');
+        $modelSip = Sip::model()->find('name = :key', array(':key' => $_POST['username']));
+        if (!isset($modelSip->id)) {
+            exit('invalid data');
         }
-
         $numbers = explode(',', $_POST['number']);
         $i       = 0;
         foreach ($numbers as $key => $number) {
@@ -125,6 +122,8 @@ class SmsController extends Controller
 
         $result['totalSmsSent'] = $i;
         echo json_encode($result);
+
+        exit;
     }
 
     public function actionSave()

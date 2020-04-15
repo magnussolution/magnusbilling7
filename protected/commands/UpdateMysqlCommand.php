@@ -481,8 +481,8 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql = "INSERT INTO pkg_configuration VALUES
             (NULL, 'DIDWW APY KEY', 'didww_api_key', '', 'DIDWW APY KEY', 'global', '1'),
-            (NULL, 'DIDWW APY KEY', 'didww_url', 'https://api.didww.com/v3/', 'DIDWW APY URL', 'global', '1'),
-            (NULL, 'DIDWW APY KEY', 'didww_profit', '0', 'DIDWW profit percentage. Integer value', 'global', '1');
+            (NULL, 'DIDWW APY URL', 'didww_url', 'https://api.didww.com/v3/', 'DIDWW APY URL', 'global', '1'),
+            (NULL, 'DIDWW PROFIT', 'didww_profit', '0', 'DIDWW profit percentage. Integer value', 'global', '1');
             ";
             $this->executeDB($sql);
 
@@ -531,6 +531,40 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.7';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '7.1.7') {
+
+            $sql = "UPDATE pkg_configuration SET config_title = 'DIDWW APY URL' WHERE config_key = 'didww_url';
+                UPDATE pkg_configuration SET config_title = 'DIDWW PROFIT' WHERE config_key = 'didww_profit';";
+
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''DIDWW'')', 'didww', 'x-fa fa-desktop', 5,10);
+                INSERT INTO pkg_module VALUES (NULL, 't(''Extra2'')', 'extra2', 'x-fa fa-desktop', 12,10);
+                INSERT INTO pkg_module VALUES (NULL, 't(''Extra3'')', 'extra3', 'x-fa fa-desktop', 12,11);
+            ";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'URL to extra module2', 'module_extra2', '', 'Url to extra module, default: index.php/extra2/read', 'global', '1');
+                INSERT INTO pkg_configuration VALUES (NULL, 'URL to extra module3', 'module_extra3', '', 'Url to extra module, default: index.php/extra3/read', 'global', '1');
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.1.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        if ($version == '7.1.8') {
+
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'DIDWW CURRENCY CONVERTER', 'didww_curreny_converter', '0', 'DIDWW CURRENCY CONVERTER. Ex. 1 USD in your local currency is 3.25, so add here 3.25', 'global', '1');
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.1.9';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
