@@ -27,12 +27,15 @@ class DidwwController extends Controller
     private $api_key;
     private $url;
     private $profit;
+    private $currency_converter;
 
     public function init()
     {
-        $this->api_key = $this->config['global']['didww_api_key'];
-        $this->url     = $this->config['global']['didww_url'];
-        $this->profit  = '1.' . $this->config['global']['didww_profit'];
+        parent::init();
+        $this->api_key            = $this->config['global']['didww_api_key'];
+        $this->url                = $this->config['global']['didww_url'];
+        $this->profit             = '1.' . $this->config['global']['didww_profit'];
+        $this->currency_converter = $this->config['global']['didww_curreny_converter'];
     }
 
     public function actionAdd()
@@ -94,8 +97,8 @@ class DidwwController extends Controller
         $did_name   = Yii::app()->session['did_name']   = $dids->included[0]->attributes->area_name;
 
         $sku_id        = Yii::app()->session['sku_id']        = $dids->included[2]->id;
-        $setup_price   = Yii::app()->session['setup_price']   = $dids->included[2]->attributes->setup_price * $this->profit;
-        $monthly_price = Yii::app()->session['monthly_price'] = $dids->included[2]->attributes->monthly_price * $this->profit;
+        $setup_price   = Yii::app()->session['setup_price']   = ($dids->included[2]->attributes->setup_price * $this->profit) * $this->currency_converter;
+        $monthly_price = Yii::app()->session['monthly_price'] = ($dids->included[2]->attributes->monthly_price * $this->profit) * $this->currency_converter;
 
         $modelUser = User::model()->findByPk(Yii::app()->session['id_user']);
 
