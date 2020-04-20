@@ -61,6 +61,12 @@ class SipCallAgi
             }
         }
 
+        $sql               = "SELECT voicemail FROM pkg_sip WHERE name = '$MAGNUS->destination' LIMIT 1 ";
+        $modelSipVoiceMail = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        if (isset($modelSipForward->id)) {
+            $MAGNUS->voicemail = $modelSipVoiceMail->voicemail;
+        }
+
         $answeredtime = $MAGNUS->executeVoiceMail($agi, $dialstatus, $answeredtime);
 
         if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
