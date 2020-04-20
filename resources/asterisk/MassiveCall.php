@@ -275,7 +275,19 @@ class MassiveCall
                     $agi->set_callerid($destination . ' ' . $modelPhoneNumber->name);
                     $MAGNUS->CallerID = $destination . ' ' . $modelPhoneNumber->name;
 
-                    if (preg_match('/AGI/', $forwardOption[1])) {
+                    if (preg_match('/^http/', $forwardOption[1])) {
+
+                        $url = preg_replace("/\%number\%/", $destination, $forwardOption[1]);
+                        $url = preg_replace("/\%name\%/", $modelPhoneNumber->name, $url);
+
+                        if (preg_match('/POST/', $url)) {
+                            $url = explode('?', $url);
+                            exec(" curl -k -X POST  -d '" . $url[1] . "' " . $url[0] . "");
+                        } else {
+                            file_get_contents($url);
+                        }
+
+                    } else if (preg_match('/AGI/', $forwardOption[1])) {
                         $agi = explode("|", $forwardOption[1]);
                         $agi->exec_agi($agi[1] . ",$destination,$idCampaign,$idPhonenumber");
                     } else if (strtoupper($forwardOption[1]) == 'SMS') {
@@ -431,8 +443,29 @@ class MassiveCall
                 }
 
                 if (is_numeric($dtmf_result) && $dtmf_result >= 0) {
+                    if (preg_match('/^http/', $poll->{'option' . $dtmf_result})) {
+
+                        $agi->verbose('chamar API', 25);
+
+                        $url = preg_replace("/\%number\%/", $destination, $poll->{'option' . $dtmf_result});
+                        $url = preg_replace("/\%name\%/", $modelPhoneNumber->name, $url);
+
+                        if (preg_match('/POST/', $url)) {
+                            $url = explode('?', $url);
+                            exec(" curl -k -X POST  -d '" . $url[1] . "' " . $url[0] . "");
+                        } else {
+                            file_get_contents($url);
+                        }
+
+                        $sql = "INSERT INTO pkg_campaign_poll_info (id_campaign_poll,resposta,number,city ) VALUES
+                             (  $poll->id, '$dtmf_result', '$destination', '$phonenumberCity') ";
+                        $agi->exec($sql);
+
+                        break;
+
+                    }
                     //si esta hangup en la opcion, corlgar.
-                    if (preg_match('/hangup/', $poll->{'option' . $dtmf_result})) {
+                    else if (preg_match('/hangup/', $poll->{'option' . $dtmf_result})) {
 
                         $agi->verbose('desligar chamadas', 25);
 
