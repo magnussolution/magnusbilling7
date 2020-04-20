@@ -288,6 +288,8 @@ class AuthenticateAgi
                         }
                     }
                 }
+            } else {
+                $MAGNUS->hangup($agi);
             }
         }
         return $authentication;
