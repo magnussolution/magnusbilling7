@@ -569,6 +569,30 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.1.9') {
+
+            $sql = "ALTER TABLE `pkg_campaign` CHANGE `forward_number` `forward_number` VARCHAR(160) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL;
+                ";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_campaign_poll` CHANGE `option0` `option0` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option1` `option1` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option2` `option2` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option3` `option3` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option4` `option4` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option5` `option5` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option6` `option6` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option7` `option7` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option8` `option8` VARCHAR(150) NOT NULL;
+                    ALTER TABLE `pkg_campaign_poll` CHANGE `option9` `option9` VARCHAR(150) NOT NULL;
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.2.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

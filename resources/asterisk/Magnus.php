@@ -766,7 +766,6 @@ class Magnus
             if (($dialstatus == "CHANUNAVAIL") || ($dialstatus == "CONGESTION")) {
                 $agi->verbose("CHANNEL UNAVAILABLE - GOTO VOICEMAIL ($dest_username)", 6);
                 $agi->answer();
-                $agi->stream_file("vm-intro", '#');
                 $agi->execute(VoiceMail, $this->destination . '@billing,u');
             }
         }
