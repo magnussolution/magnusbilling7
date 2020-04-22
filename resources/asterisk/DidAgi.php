@@ -351,7 +351,7 @@ class DidAgi
 
                     $dialstr = substr($group, 0, -1) . $dialparams;
 
-                    $MAGNUS->startRecordCall($agi, $this->did);
+                    $MAGNUS->startRecordCall($agi, $this->did, true);
 
                     $agi->verbose("DIAL $dialstr", 6);
                     $myres = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
@@ -420,7 +420,7 @@ class DidAgi
                         $agi->verbose("Ccall group $group ", 6);
                         $dialstr = $inst_listdestination['destination'];
 
-                        $MAGNUS->startRecordCall($agi, $this->did);
+                        $MAGNUS->startRecordCall($agi, $this->did, true);
 
                         if (preg_match('/PUSH/', $dialstr)) {
 

@@ -732,10 +732,16 @@ class Magnus
         }
     }
 
-    public function startRecordCall(&$agi, $addicional = '')
+    public function startRecordCall(&$agi, $addicional = '', $isDid = false)
     {
         if ($this->record_call == 1) {
-            $command_mixmonitor = "MixMonitor /var/spool/asterisk/monitor/$this->accountcode/{$this->destination}{$addicional}.{$this->uniqueid}." . $this->mix_monitor_format . ",b";
+
+            if ($isDid == true) {
+                $command_mixmonitor = "MixMonitor /var/spool/asterisk/monitor/$this->accountcode/{$addicional}-{$this->CallerID}.{$this->uniqueid}." . $this->mix_monitor_format . ",b";
+            } else {
+                $command_mixmonitor = "MixMonitor /var/spool/asterisk/monitor/$this->accountcode/{$this->sip_account}-{$this->destination}{$addicional}.{$this->uniqueid}." . $this->mix_monitor_format . ",b";
+
+            }
             $agi->execute($command_mixmonitor);
             $agi->verbose($command_mixmonitor, 6);
         }
