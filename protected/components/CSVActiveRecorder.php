@@ -115,7 +115,14 @@ class CSVActiveRecorder
         if (count(array_intersect($columns, $modelColumns)) == count($columns)) {
             return true;
         } else {
-            $this->addError("The columns are miscofigurated", -1);
+
+            foreach ($modelColumns as $key => $value) {
+                if ($value == 'id' || substr($value, 0, 2) == 'id') {
+                    unset($modelColumns[$key]);
+                }
+            }
+
+            $this->addError("The columns are miscofigurated" . "</br>Available columns to this module!</br>" . implode($modelColumns, "</br>"), -1);
             return false;
         }
     }
