@@ -92,7 +92,14 @@ class TransferToMobileController extends Controller
                 $this->modelTransferToMobile->operator = $_POST['TransferToMobile']['operator'];
             }
             if ($this->modelTransferToMobile->method == 'international') {
-                $this->modelTransferToMobile->amountValues = $_POST['TransferToMobile']['amountValues'];
+
+                if (isset($_POST['TransferToMobile']['amountValuesBDT'])) {
+                    $this->modelTransferToMobile->amountValues = Yii::app()->session['interval_product_id'];
+                    $_POST['TransferToMobile']['amountValues'] = Yii::app()->session['interval_product_id'];
+                } else {
+                    $this->modelTransferToMobile->amountValues = $_POST['TransferToMobile']['amountValues'];
+                }
+
             }
 
             if ($this->modelTransferToMobile->method != 'international') {
@@ -137,6 +144,7 @@ class TransferToMobileController extends Controller
                         $this->render('confirmInternational', array(
                             'modelTransferToMobile' => $this->modelTransferToMobile,
                             'modelSendCreditRates'  => $modelSendCreditRates,
+                            'post'                  => $_POST,
                         ));
                     } else {
                         $this->render('confirmBDService', array(
@@ -445,7 +453,7 @@ error_txt=Transaction successful';
                 ),
             ));
 
-            if (!count($modelSendCreditRates)) {
+            if (!isset($modelSendCreditRates->id)) {
 
                 echo '<div align=center id="container">';
                 echo Yii::app()->session['id_user'] . ' ' . $product . ' ' . Yii::app()->session['operatorId'] . "<br>";
@@ -681,7 +689,7 @@ error_txt=Transaction successful';
                         ':key1' => date('Y-m-d H:i', mktime(date('H'), date('i') - 10, date('s'), date('m'), date('d'), date('Y'))),
                         ':key2' => Yii::app()->session['id_user'],
                     ));
-                if (count($modelRefill)) {
+                if (isset($modelRefill->id)) {
                     echo '<div align=center id="container">';
                     echo "<font color=red>You already send credit to this number. Wait minimal 10 minutes to new recharge</font>";
                     echo '</div>';
@@ -716,7 +724,7 @@ error_txt=Transaction successful';
 
                 }
 
-                if (!count($modelSendCreditProducts)) {
+                if (!isset($modelSendCreditProducts[0])) {
 
                     echo '<div align=center id="container">';
                     echo "<font color=red>ERROR. No exist product to this number. Contact admin</font><br><br>";
@@ -752,10 +760,22 @@ error_txt=Transaction successful';
 
                 foreach ($modelSendCreditProducts as $key => $product) {
 
-                    if ($this->test == true) {
-                        echo $product->id . ' -> ' . $product->currency_dest . ' ' . $product->product . ' = ' . $product->currency_orig . ' ' . trim($modelSendCreditRates[$i]->sell_price) . "<BR>";
+                    if (is_numeric($product->product)) {
+
+                        if ($this->test == true) {
+                            echo $product->id . ' -> ' . $product->currency_dest . ' ' . $product->product . ' = ' . $product->currency_orig . ' ' . trim($modelSendCreditRates[$i]->sell_price) . "<BR>";
+                        }
+                        $values[trim($product->id)]        = '<font size=1px>' . $product->currency_dest . '</font> ' . trim($product->product) . ' = <font size=1px>' . $product->currency_orig . '</font> ' . trim($modelSendCreditRates[$i]->sell_price);
+                        Yii::app()->session['is_interval'] = false;
+                    } else {
+                        Yii::app()->session['is_interval']                 = true;
+                        Yii::app()->session['interval_currency']           = $product->currency_dest;
+                        Yii::app()->session['interval_product_id']         = $product->id;
+                        Yii::app()->session['interval_product_interval']   = $product->product;
+                        Yii::app()->session['interval_product_sell_price'] = trim($modelSendCreditRates[$i]->sell_price);
+
+                        Yii::app()->session['allowedAmount'] = explode('-', $product->product);
                     }
-                    $values[trim($product->id)] = '<font size=1px>' . $product->currency_dest . '</font> ' . trim($product->product) . ' = <font size=1px>' . $product->currency_orig . '</font> ' . trim($modelSendCreditRates[$i]->sell_price);
                     $i++;
 
                 }

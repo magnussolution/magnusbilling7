@@ -59,6 +59,7 @@ class SendCreditProducts extends Model
             array('currency_dest,currency_orig', 'length', 'max' => 3),
             array('SkuCode', 'length', 'max' => 30),
             array('operator_id', 'length', 'max' => 11),
+            array('type,retail_price', 'length', 'max' => 50),
 
         );
     }

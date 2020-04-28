@@ -38,7 +38,7 @@ class SendCreditRatesController extends Controller
         if (Yii::app()->session['isClient']) {
             $modelSendCreditRates = SendCreditRates::model()->find('id_user = :key', array(':key' => Yii::app()->session['id_user']));
             //add the user sell_price if his not have any change
-            if (!count($modelSendCreditRates)) {
+            if (!isset($modelSendCreditRates->id)) {
                 $sql = " INSERT INTO pkg_send_credit_rates (id_user,id_product,sell_price)  SELECT " . (int) Yii::app()->session['id_user'] . ",id,wholesale_price FROM pkg_send_credit_products ";
                 Yii::app()->db->createCommand($sql)->execute();
 
@@ -54,6 +54,21 @@ class SendCreditRatesController extends Controller
         );
 
         $sql = " INSERT INTO pkg_send_credit_rates (id_user,id_product,sell_price)  SELECT " . (int) Yii::app()->session['id_user'] . ",id,wholesale_price FROM pkg_send_credit_products ";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        echo json_encode(array(
+            $this->nameSuccess => true,
+            $this->nameMsg     => 'Sell price reseted',
+        ));
+    }
+
+    public function actionResetRetailPrice()
+    {
+        SendCreditRates::model()->deleteAll('id_user = :key',
+            array(':key' => Yii::app()->session['id_user'])
+        );
+
+        $sql = " INSERT INTO pkg_send_credit_rates (id_user,id_product,sell_price)  SELECT " . (int) Yii::app()->session['id_user'] . ",id,retail_price FROM pkg_send_credit_products ";
         Yii::app()->db->createCommand($sql)->execute();
 
         echo json_encode(array(
