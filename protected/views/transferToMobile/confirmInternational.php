@@ -43,9 +43,22 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<label>Operator:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['operator'] ?></div>
 	<label>Product:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
+
+	<?php if (isset(Yii::app()->session['is_interval'])): ?>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $post['TransferToMobile']['amountValuesBDT'] ?></div>
+	<?php else: ?>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
+	<?php endif?>
+
 	<label>Amount to be collected:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
+
+	<?php if (isset(Yii::app()->session['is_interval'])): ?>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $post['TransferToMobile']['amountValuesEUR'] ?></div>
+	<?php else: ?>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
+	<?php endif?>
+
+
 
 
 <?php if ($_POST['TransferToMobile']['metric'] != ''): ?>

@@ -165,7 +165,7 @@ if [ ${DIST} = "DEBIAN" ]; then
     echo mysql-server mysql-server/root_password_again password ${password} | debconf-set-selections            
     apt-get install -y mysql-server php-mysql mysql-client unzip git
     apt-get install -y unixODBC unixODBC-dev
-    apt-get install -y libmysqlclient15-dev libcurl4-openssl-dev
+    apt-get install -y libmysqlclient15-dev libcurl4-openssl-dev ssmtp
 elif  [ ${DIST} = "CENTOS" ]; then
     yum clean all
     yum -y install kernel-devel.`uname -m` epel-release
@@ -177,7 +177,7 @@ elif  [ ${DIST} = "CENTOS" ]; then
     yum -y install mysql mariadb-server  mariadb-devel mariadb php-mysql mysql-connector-odbc
     yum -y install xmlstarlet libsrtp libsrtp-devel dmidecode gtk2-devel binutils-devel svn libtermcap-devel libtiff-devel audiofile-devel cronie cronie-anacron
     yum -y install perl perl-libwww-perl perl-LWP-Protocol-https perl-JSON cpan flac libcurl-devel nss
-    yum -y install libpcap-devel autoconf automake git ncurses-devel
+    yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp
 fi
 
 

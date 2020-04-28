@@ -12,7 +12,7 @@ class SipCallAgi
         }
 
         if (file_exists(dirname(__FILE__) . '/push/Push.php')) {
-            include dirname(__FILE__) . '/push/Push.php';
+            include_once dirname(__FILE__) . '/push/Push.php';
             Push::send($agi, $MAGNUS->destination, $MAGNUS->CallerID);
         }
 

@@ -108,6 +108,43 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
 	<p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Meter') ?></p>
 </div>
 
+<?php if (Yii::app()->session['is_interval'] == true): ?>
+
+
+
+<br>
+
+<div class="field">
+		<?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (EUR)')); ?>
+		<?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR',
+    array(
+        'class'   => 'input',
+        'id'      => 'amountfielEUR',
+        'onkeyup' => 'showPriceEUR(' . Yii::app()->session['interval_product_sell_price'] . ')',
+        'style'   => 'color:blue; font-size:20',
+    )) ?>
+		<?php echo $form->error($modelTransferToMobile, 'amountValuesEUR') ?>
+
+	</div>
+
+	<div class="field">
+		<?php echo $form->labelEx($modelTransferToMobile, 'amountValuesBDT', array('label' => 'Receive Amount (' . Yii::app()->session['interval_currency'] . ')')); ?>
+		<?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT',
+    array(
+        'class'   => 'input',
+        'id'      => 'amountfielBDT',
+        'onkeyup' => 'showPriceBDT(' . Yii::app()->session['interval_product_sell_price'] . ')',
+        'style'   => 'color:blue; font-size:20',
+    )) ?>
+		<?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
+		<p class="hint"><?php echo $amountDetails ?></p>
+	</div>
+
+
+
+<br>
+<?php endif?>
+
 
 <div class="sp-page companies__content" >
       <div class="company__list" id='productList'>
@@ -147,6 +184,40 @@ $this->endWidget();?>
 
 
 <script type="text/javascript">
+
+
+	function showPriceEUR(sell_price) {
+
+
+		valueAmoutEUR = document.getElementById('amountfielEUR').value;
+
+		if (valueAmoutEUR > 0) {
+
+			value = valueAmoutEUR / sell_price;
+
+  			document.getElementById('secondButton').style.display = 'inline';
+  			document.getElementById('buying_price').style.display = 'inline';
+			document.getElementById('buying_price').value = 'R';
+  			document.getElementById('amountfielBDT').value = value.toFixed(0);
+
+		}
+	}
+
+	function showPriceBDT(sell_price) {
+
+		valueAmoutBDT = document.getElementById('amountfielBDT').value;
+
+		if (valueAmoutBDT > 0) {
+
+			value = valueAmoutBDT * sell_price;
+  			document.getElementById('amountfielEUR').value = value.toFixed(2);
+  			document.getElementById('buying_price').style.display = 'inline';
+			document.getElementById('buying_price').value = 'R';
+
+		}
+	}
+
+
 
 	function getBuyingPrice(argument) {
 		var id =  document.getElementById('productinput'+window.productInputSelected).value;
