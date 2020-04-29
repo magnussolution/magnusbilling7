@@ -25,18 +25,20 @@ class AtaController extends Controller
 
     public function actionIndex()
     {
-        $config       = LoadConfig::getConfig();
-        $mac          = isset($_GET['mac']) ? $_GET['mac'] : null;
-        $date         = date("Y-m-d H:i:s");
-        $mac          = strtoupper(preg_replace("/:/", "", $mac));
-        $mac          = substr($mac, 0);
+
+        $config = LoadConfig::getConfig();
+        $mac    = isset($_GET['mac']) ? $_GET['mac'] : null;
+        $date   = date("Y-m-d H:i:s");
+        $mac    = strtoupper(preg_replace("/:/", "", $mac));
+        $mac    = substr($mac, 0);
+
         $proxy        = $this->config['global']['ip_servers'];
         $Profile_Rule = "http://" . $proxy . "/mbilling/index.php/ata?mac=\$MAC";
         $modelo       = explode(" ", $_SERVER["HTTP_USER_AGENT"]);
 
         $modelSipuras = Sipuras::model()->find('macadr = :mac', array(':mac' => $mac));
 
-        if (count($modelSipuras) == 0) {
+        if (!isset($modelSipuras->id)) {
             echo 'Ata no found';
             $info = 'Username or password is wrong - User ' . $mac . ' from IP - ' . $_SERVER['REMOTE_ADDR'];
             Yii::log($info, 'error');
@@ -56,7 +58,7 @@ class AtaController extends Controller
             //verfica se a senha da linha 1 foi alterada
             $modelSip = Sip::model()->find('name = :name', array(':name' => $modelSipuras->User_ID_1));
 
-            if (count($modelSip) > 0 && $modelSip->secret != $modelSipuras->Password_1) {
+            if (isset($modelSip->id) && $modelSip->secret != $modelSipuras->Password_1) {
                 $modelSipuras->Password_1 = $modelSip->secret;
                 $modelSipuras->altera     = 'si';
                 $modelSipuras->Password_1 = $modelSip->secret;
@@ -65,7 +67,7 @@ class AtaController extends Controller
             //verfica se a senha da linha 2 foi alterada
             $modelSip = Sip::model()->find("name = :name", array(':name' => $modelSipuras->User_ID_2));
 
-            if (count($modelSip) > 0 && $modelSip->secret != $modelSipuras->Password_2) {
+            if (isset($modelSip->id) && $modelSip->secret != $modelSipuras->Password_2) {
                 $modelSipuras->Password_2 = $modelSip->secret;
                 $modelSipuras->altera     = 'si';
                 $modelSipuras->Password_2 = $modelSip->secret;
@@ -158,7 +160,7 @@ class AtaController extends Controller
             # *** LINE 1
             $xml .= '<SAS_Enable_1_ ua="na">' . $modelSipuras->SAS_Enable_1_ . '</SAS_Enable_1_>';
             $xml .= '<SAS_DLG_Refresh_Intvl_1_ ua="na">' . $modelSipuras->SAS_DLG_Refresh_Intvl_1_ . '</SAS_DLG_Refresh_Intvl_1_>';
-            $xml .= '<Proxy_1_ ua="na">' . $proxy . '</Proxy_1_>';
+            $xml .= '<Proxy_1_ ua="na">' . $modelSipuras->Proxy_1 . '</Proxy_1_>';
             //$xml .= '<SIP_Port_1_ ua="na">' . $modelSipuras->SIP_Port_1_ .'</SIP_Port_1_>';
             $xml .= '<NAT_Keep_Alive_Enable_1_ ua="na">' . $modelSipuras->NAT_Keep_Alive_Enable_1_ . '</NAT_Keep_Alive_Enable_1_>';
             $xml .= '<Use_Outbound_Proxy_1_ ua="na">' . $modelSipuras->Use_Outbound_Proxy_1 . '</Use_Outbound_Proxy_1_>';
@@ -215,7 +217,7 @@ class AtaController extends Controller
             # *** LINE 2
             $xml .= '<SAS_Enable_2_ ua="na">' . $modelSipuras->SAS_Enable_2_ . '</SAS_Enable_2_>';
             $xml .= '<SAS_DLG_Refresh_Intvl_2_ ua="na">' . $modelSipuras->SAS_DLG_Refresh_Intvl_2_ . '</SAS_DLG_Refresh_Intvl_2_>';
-            $xml .= '<Proxy_2_ ua="na">' . $proxy . '</Proxy_2_>';
+            $xml .= '<Proxy_2_ ua="na">' . $modelSipuras->Proxy_2 . '</Proxy_2_>';
             //$xml .= '<SIP_Port_2_ ua="na">' . $modelSipuras->SIP_Port_2_ .'</SIP_Port_2_>';
             $xml .= '<NAT_Keep_Alive_Enable_2_ ua="na">' . $modelSipuras->NAT_Keep_Alive_Enable_2_ . '</NAT_Keep_Alive_Enable_2_>';
             $xml .= '<Use_Outbound_Proxy_2_ ua="na">' . $modelSipuras->Use_Outbound_Proxy_2 . '</Use_Outbound_Proxy_2_>';
