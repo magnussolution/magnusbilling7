@@ -62,12 +62,12 @@ class Sipuras extends Model
             array('lastmov', 'length', 'max' => 20),
             array('marca', 'length', 'max' => 2),
             array('obs', 'length', 'max' => 50),
-            array('Proxy_1, Proxy_2', 'length', 'max' => 60),
+            array('Proxy_1, Proxy_2', 'length', 'max' => 100),
             array('last_ip, nserie', 'length', 'max' => 15),
             array('Register_Expires_1, Register_Expires_2', 'length', 'max' => 4),
             array('fultmov', 'length', 'max' => 30),
             array('User_ID_1, User_ID_2, Password_1, Password_2', 'length', 'max' => 25),
-            array('STUN_Server', 'length', 'max' => 80),
+            array('STUN_Server,Dial_Tone', 'length', 'max' => 80),
             array('Dial_Plan_1, Dial_Plan_2', 'length', 'max' => 180),
         );
     }
@@ -84,9 +84,8 @@ class Sipuras extends Model
 
     public function beforeSave()
     {
-        $config        = LoadConfig::getConfig();
-        $this->Proxy_1 = $this->Proxy_2 = $config['global']['ip_servers'];
-        $this->altera  = $this->remote == 1 ? $this->altera : 'si';
+        $config       = LoadConfig::getConfig();
+        $this->altera = $this->remote == 1 ? $this->altera : 'si';
         return parent::beforeSave();
     }
 }
