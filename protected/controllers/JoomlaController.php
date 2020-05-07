@@ -89,13 +89,16 @@ class JoomlaController extends Controller
         $modelUser->username        = $_REQUEST['user'];
         $modelUser->password        = $_REQUEST['password'];
         $modelUser->email           = $_REQUEST['email'];
-        $modelUser->firstname       = $_REQUEST['firstname'];
+        $modelUser->firstname       = substr($_REQUEST['firstname'], 0, strrpos($_REQUEST['firstname'], ' '));
+        $modelUser->lastname        = substr($_REQUEST['firstname'], strrpos($_REQUEST['firstname'], ' '));
         $modelUser->id_group        = $id_group;
         $modelUser->id_plan         = $id_plan;
         $modelUser->active          = $_REQUEST['active'];
         $modelUser->callingcard_pin = $callingcard_pin;
         $modelUser->id_user         = 1;
         $modelUser->credit          = $credit;
+        $modelUser->language        = $this->config['global']['base_language'];
+
         if (isset($_REQUEST['phone']) && strlen($_REQUEST['phone']) > 5) {
             $modelUser->phone = $_REQUEST['phone'];
         }

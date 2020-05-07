@@ -47,11 +47,6 @@ class SmsCommand extends ConsoleCommand
 
         );
 
-        if (isset($args[1])) {
-            $filter .= 'name = :campaignName';
-            $params['campaignName'] = $args[1];
-        }
-
         $modelCampaign = Campaign::model()->findAll(array(
             'condition' => $filter,
             'params'    => $params,
@@ -122,6 +117,29 @@ class SmsCommand extends ConsoleCommand
                     continue;
                 }
                 echo $sms->idPhonebook->idUser->username . " - " . $sms->number . " -" . $text . "\n";
+
+                if (isset($args[0]) && $args[0] == 'whatsapp') {
+                    $user = $args[1];
+                    $pass = $args[2];
+                    $url  = 'http://csv.portabilidadecelular.com/painel/consulta_numero_api_whatsapp.php?seache_number=' . $sms->number . '&user=' . $user . '&pass=' . $pass;
+
+                    $res = file_get_contents($url);
+
+                    if ($res = file_get_contents($url)) {
+                        $res = explode('|', $res);
+
+                        if (isset($res[1]) && $res[1] != 'Sim') {
+                            echo "Number " . $sms->number . " not use WhatsApp\n";
+                            $sms->try++;
+                            $sms->status = 0;
+                            $sms->info   = "Number " . $sms->number . " not use WhatsApp";
+                            $sms->save();
+                            exit;
+                        }
+
+                    }
+
+                }
 
                 $res = SmsSend::send($sms->idPhonebook->idUser, $sms->number, $text, $sms->id);
                 $sms->try++;
