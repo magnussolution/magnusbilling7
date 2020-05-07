@@ -23,7 +23,5 @@
     'provider'        => ['Provider'],
     'status'          => ['Active'],
     'send_value'      => ['Send_Value'],
-    'retail_price'    => ['Retail_Price'],
-    'type'            => ['Type'],
 
 ]?>

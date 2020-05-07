@@ -24,14 +24,14 @@ class SmsSend
         if (!count($modelUser)) {
             return array(
                 'success' => false,
-                'msg'     => Yii::t('yii', 'Error : Autentication Error!'),
+                'errors'  => Yii::t('yii', 'Error : Autentication Error!'),
             );
         }
 
         if (!$destination || !$text) {
             return array(
                 'success' => false,
-                'msg'     => Yii::t('yii', 'Disallowed action'),
+                'errors'  => Yii::t('yii', 'Disallowed action'),
             );
         }
 
@@ -39,7 +39,7 @@ class SmsSend
         if (UserCreditManager::checkGlobalCredit($modelUser->id) === false) {
             return array(
                 'success' => false,
-                'msg'     => Yii::t('yii', 'Error : You don t have enough credit to call you SMS!'),
+                'errors'  => Yii::t('yii', 'Error : You don t have enough credit to call you SMS!'),
             );
         }
 
@@ -58,7 +58,7 @@ class SmsSend
             if (!count($modelRate)) {
                 return array(
                     'success' => false,
-                    'msg'     => Yii::t('yii', 'Prefix not found in Agent') . ' ' . $destination,
+                    'errors'  => Yii::t('yii', 'Prefix not found in Agent') . ' ' . $destination,
                 );
             }
 
@@ -77,7 +77,7 @@ class SmsSend
         if ($callTrunk == 0) {
             return array(
                 'success' => false,
-                'msg'     => Yii::t('yii', 'Prefix not found') . ' ' . $destination,
+                'errors'  => Yii::t('yii', 'Prefix not found') . ' ' . $destination,
             );
         } else {
 
@@ -100,7 +100,7 @@ class SmsSend
             if (!isset($callTrunk[0]['link_sms'])) {
                 return array(
                     'success' => false,
-                    'msg'     => Yii::t('yii', 'No sms link'),
+                    'errors'  => Yii::t('yii', 'No sms link'),
                 );
             }
 
@@ -141,7 +141,7 @@ class SmsSend
             if (strlen($linkSms) < 10) {
                 return array(
                     'success' => false,
-                    'msg'     => Yii::t('yii', 'Your SMS is not send!') . ' ' . Yii::t('yii', 'Not have link in trunk'),
+                    'errors'  => Yii::t('yii', 'Your SMS is not send!') . ' ' . Yii::t('yii', 'Not have link in trunk'),
                 );
 
             }
@@ -149,7 +149,7 @@ class SmsSend
             if (!$res = @file_get_contents($linkSms, false)) {
                 return array(
                     'success' => false,
-                    'msg'     => Yii::t('yii', 'ERROR, contact us'),
+                    'errors'  => Yii::t('yii', 'ERROR, contact us'),
                 );
             }
 
