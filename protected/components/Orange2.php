@@ -181,4 +181,20 @@ class Orange2
 
     }
 
+    public function sendPayment($data = '')
+    {
+        echo '<pre>';
+        print_r($data);
+        exit;
+        $order = array(
+            "type"        => "airtime",
+            "targetTotal" => $modelSendCreditRates->idProduct->product,
+            "beneficiary" => array(
+                'mobile' => '+' . $number,
+                "name"   => "ABC",
+
+            ));
+
+    }
+
 }
