@@ -1,5 +1,10 @@
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+  <script src="https://plentz.github.io/jquery-maskmoney/javascripts/jquery.maskMoney.min.js" type="text/javascript"></script>
+  <script type="text/javascript">$(function() {
+    $('#amountfielEUR').maskMoney();
+    $('#amountfielBDT').maskMoney({precision:0, thousands:''});
+  })</script>
 <?php
 
 $form = $this->beginWidget('CActiveForm', array(
@@ -12,8 +17,6 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
 
 <br/>
-
-
 <?php
 
 $buttonName = 'Next';
@@ -23,37 +26,44 @@ $fieldOption = array('class' => 'input');
 ?>
 
 
+
 <div class="field">
     <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
-        <div class="styled-select">
-            <?php echo $form->dropDownList($modelTransferToMobile, 'method', $methods,
+    <div class="styled-select">
+        <?php
+echo $form->dropDownList($modelTransferToMobile, 'method',
+    $methods,
     array(
         'empty'    => Yii::t('yii', 'Select the method'),
         'disabled' => strlen($modelTransferToMobile->country) > 3,
     )); ?>
-            <?php echo $form->error($modelTransferToMobile, 'method') ?>
-        </div>
+        <?php echo $form->error($modelTransferToMobile, 'method') ?>
+    </div>
 </div>
+<?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $_POST['TransferToMobile']['number'])); ?>
+
 
 <br>
 
 
-
+<br>
+<div class='field' id="divsellingPrice" style="display:none; border:0">
+    <label>Selling Price</label>
+    <div id="sellingPrice" class="input" style="border:0; width:650px" ></div>
+</div>
 
 <div class="controls" id="sendButton">
 <?php echo CHtml::submitButton(Yii::t('yii', $buttonName), array(
-    'class'   => 'button',
-    'onclick' => "return button2(event)",
-    'id'      => 'secondButton'));
+    'class' => 'button',
+    'id'    => 'secondButton'));
 ?>
 <input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
+
 </div>
 <div class="controls" id="buttondivWait"></div>
 
+<?php $this->endWidget();?>
 
-<?php
-
-$this->endWidget();?>
 
 
 

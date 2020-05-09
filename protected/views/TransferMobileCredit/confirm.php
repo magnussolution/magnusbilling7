@@ -33,8 +33,6 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 <br/>
 
 
-<?php //print_r($modelSendCreditProducts->getAttributes())?>
-<?php //print_r($_POST)?>
 <div class='field' id="aditionalInfo" style="display:inline; border:0">
 	<label>Country:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['country'] ?></div>
@@ -43,22 +41,9 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<label>Operator:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['operator'] ?></div>
 	<label>Product:</label>
-
-	<?php if (isset(Yii::app()->session['is_interval'])): ?>
-		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $post['TransferToMobile']['amountValuesBDT'] ?></div>
-	<?php else: ?>
-		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
-	<?php endif?>
-
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
 	<label>Amount to be collected:</label>
-
-	<?php if (isset(Yii::app()->session['is_interval'])): ?>
-		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $post['TransferToMobile']['amountValuesEUR'] ?></div>
-	<?php else: ?>
-		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
-	<?php endif?>
-
-
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
 
 
 <?php if ($_POST['TransferToMobile']['metric'] != ''): ?>
@@ -75,7 +60,6 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 
 </div>
 
-<?php echo $form->hiddenField($modelTransferToMobile, 'method', array('value' => $_POST['TransferToMobile']['method'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $_POST['TransferToMobile']['number'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'country', array('value' => $_POST['TransferToMobile']['country'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'operator', array('value' => $_POST['TransferToMobile']['operator'])); ?>
@@ -142,4 +126,5 @@ $this->endWidget();?>
 	}
 
 </script>
+
 
