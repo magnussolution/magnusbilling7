@@ -57,12 +57,19 @@ class Report extends FPDF
     public $fieldsPercent;
     public $fieldsFk;
     public $renderer;
+    public $columnsDetails = [];
+    public $recordsDetails = [];
 
     public function generate($type = 'link')
     {
         $this->AliasNbPages();
         $this->AddPage($this->orientation);
         $this->SetFont($this->fontFamily, '', $this->fontSize);
+        if (count($this->columnsDetails)) {
+
+            $this->bodyExtra();
+            $this->Ln(5);
+        }
         $this->body();
         $this->fileReport = isset($this->fileReport) ? $this->magnusFilesDirectory . $this->fileReport : $this->magnusFilesDirectory . $this->createNameFile("report.pdf");
         $this->Output("$this->fileReport", 'F');
@@ -160,6 +167,84 @@ class Report extends FPDF
                 $this->Ln(20);
             }
 
+        }
+    }
+
+    public function bodyExtra()
+    {
+        if (!$this->recordsDetails) {
+            return;
+        }
+
+        $this->SetFont($this->fontFamily, 'B', $this->fontSize);
+        $this->SetTextColor(255, 255, 255);
+        $widthContent = $this->orientation === 'P' ? 189 : 276;
+        $countColumns = $this->fieldGroup ? count($this->columnsDetails) - 1 : count($this->columnsDetails);
+        $widthFill    = $widthContent / $countColumns;
+
+        foreach ($this->columnsDetails as $column) {
+            $header = utf8_decode($column['header']);
+            if ($column['dataIndex'] === $this->fieldGroup) {
+                $headerGroup = utf8_decode($column['header']);
+                continue;
+            }
+            $widthHeader = $this->GetStringWidth($header);
+
+            $this->SetFillColor(156, 156, 156);
+            $this->Cell($widthFill, 5, $header, 0, 0, 'C', true);
+            $this->Cell(0.6, 5);
+        }
+
+        $this->Ln();
+        $this->SetFont($this->fontFamily, '', $this->fontSize);
+        $this->SetTextColor(0, 0, 0);
+        $rowNumber = 0;
+        $this->clearRecords();
+
+        foreach ($this->recordsDetails as $row) {
+            $rowColor = ($rowNumber % 2) === 0 ? 250 : 190;
+            $this->SetFillColor($rowColor, $rowColor, $rowColor);
+
+            $columnsTableDetails = $this->convertColumns($this->columnsTableDetails);
+
+            foreach ($row as $fieldName => $col) {
+                if ($fieldName == $this->fieldGroup) {
+                    $idxLastValue = $rowNumber === 0 ? $rowNumber : $rowNumber - 1;
+                    $lastValue    = utf8_decode($this->recordsDetails[$idxLastValue][$fieldName]);
+                    $value        = utf8_decode($col);
+                    if ($lastValue == $value && $rowNumber != 0) {
+                        continue;
+                    }
+
+                    if (is_array($this->fieldsFk) && array_key_exists($fieldName, $this->fieldsFk)) {
+                        $this->writeHeaderGroup(gettype($col), $value, $fieldName, $headerGroup);
+                    } else if (is_array($this->renderer) && array_key_exists($fieldName, $this->renderer)) {
+                        $renderer = $this->renderer[$fieldName][$col];
+                        $value    = utf8_decode($renderer);
+                        $this->writeHeaderGroup(gettype($renderer), $value, $fieldName, $headerGroup);
+                    } else {
+                        $this->writeHeaderGroup($columnsTableDetails[$fieldName]['Type'], $value, $fieldName, $headerGroup);
+                    }
+
+                    $widthFill = $widthContent / $countColumns;
+                    $this->SetFillColor($rowColor, $rowColor, $rowColor);
+                } else if (is_array($this->fieldsFk) && array_key_exists($fieldName, $this->fieldsFk)) {
+                    $value = utf8_decode($col);
+                    $this->writeLine(gettype($col), $widthFill, $value, $fieldName);
+                } else if (is_array($this->renderer) && array_key_exists($fieldName, $this->renderer)) {
+                    $renderer = $this->renderer[$fieldName][$col];
+                    $value    = utf8_decode($renderer);
+                    $this->writeLine(gettype($renderer), $widthFill, $value, $fieldName);
+                } else {
+                    $value = utf8_decode($col);
+                    $this->writeLine($columnsTableDetails[$fieldName]['Type'], $widthFill, $value, $fieldName);
+                }
+
+                $this->Cell(0.6, 5);
+            }
+
+            $rowNumber++;
+            $this->Ln();
         }
     }
 

@@ -593,6 +593,25 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.2.0') {
+
+            $sql = "ALTER TABLE `pkg_user` ADD `neighborhood` VARCHAR(50) NULL DEFAULT NULL AFTER `city`;";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'Fixed CallerId to use on Signup', 'fixed_callerid_signup', '', 'Fixed CallerId to use on Signup, Leave blank to use the user phone', 'global', '1');";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'Apply the local prefix rule on DID and Sip Call', 'apply_local_prefix_did_sip', '0', 'Apply the local prefix rule on DID and Sip Call', 'global', '0'); ";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'Default Codecs', 'default_codeds', 'g729,gsm,opus,alaw,ulaw', 'Default Codecs', 'global', '1'); ";
+            $this->executeDB($sql);
+
+            $version = '7.2.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
