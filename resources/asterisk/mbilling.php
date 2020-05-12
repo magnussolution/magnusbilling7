@@ -151,6 +151,11 @@ if ($agi->get_variable("SPY", true) == 1) {
     exit;
 }
 
+if ($MAGNUS->config['global']['apply_local_prefix_did_sip'] == 1) {
+    $MAGNUS->number_translation($agi, $MAGNUS->dnid);
+    $MAGNUS->dnid = $MAGNUS->destination;
+}
+
 $didAgi = new DidAgi();
 $didAgi->checkIfIsDidCall($agi, $MAGNUS, $CalcAgi);
 
@@ -170,6 +175,7 @@ if ($MAGNUS->mode == 'standard') {
         $standardCall = new StandardCallAgi();
         $standardCall->processCall($MAGNUS, $agi, $CalcAgi);
     } else {
+
         $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
         $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 

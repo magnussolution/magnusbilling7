@@ -23,6 +23,7 @@ class Sip extends Model
 {
     protected $_module = 'sip';
     private $lineStatus;
+    private $sipshowpeer;
     /**
      * Retorna a classe estatica da model.
      *
