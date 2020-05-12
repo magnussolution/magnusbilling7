@@ -21,7 +21,7 @@ class MolPayController extends Controller
         );
          */
         Yii::log(print_r($_REQUEST, true), 'error');
-        $filter = "payment_method = 'MolPay'";
+        $filter = "payment_method = 'molpay'";
         $params = array();
 
         if (isset($_GET['agent'])) {
