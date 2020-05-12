@@ -100,6 +100,12 @@
 	<?php echo $form->error($signup, 'city') ?>
 	<p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'city') ?></p>
 </div>
+<div class="field">
+	<?php echo $form->labelEx($signup, Yii::t('yii', 'neighborhood')) ?>
+	<?php echo $form->textField($signup, 'neighborhood', array('class' => 'input')) ?>
+	<?php echo $form->error($signup, 'neighborhood') ?>
+	<p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'neighborhood') ?></p>
+</div>
 
 <?php if ($language == 'pt_BR'): ?>
 	<div class="field">

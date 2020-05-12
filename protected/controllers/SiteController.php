@@ -61,5 +61,6 @@ class SiteController extends Controller
         }
         echo 'window.signup_auto_pass = ' . $pass . ';';
         echo 'window.backgroundColor = "' . $this->config['global']['backgroundColor'] . '";';
+        echo 'window.default_codes = "' . $this->config['global']['default_codeds'] . '";';
     }
 }

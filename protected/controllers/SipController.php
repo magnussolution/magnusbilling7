@@ -278,4 +278,20 @@ class SipController extends Controller
         }
         return $attributes;
     }
+
+    public function actionGetSipShowPeer()
+    {
+        $modelSip = Sip::model()->find('name = :key', array(':key' => $_POST['name']));
+
+        if ($modelSip->idUser->active != 1) {
+            $sipShowPeer = 'The username is inactive';
+        } else {
+            $sipShowPeer = AsteriskAccess::instance()->sipShowPeer($modelSip->name);
+        }
+
+        echo json_encode(array(
+            'success'     => true,
+            'sipshowpeer' => Yii::app()->session['isAdmin'] ? print_r($sipShowPeer, true) : '',
+        ));
+    }
 }
