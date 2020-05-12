@@ -102,6 +102,23 @@ class JoomlaController extends Controller
         if (isset($_REQUEST['phone']) && strlen($_REQUEST['phone']) > 5) {
             $modelUser->phone = $_REQUEST['phone'];
         }
+
+        if ($this->config['global']['base_language'] == 'pt_BR') {
+            $phone = $_REQUEST['phone'];
+            if (substr($phone, 0, 2) == 55 && strlen($phone) > 11) {
+                $ddd = substr($phone, 2, 2);
+            } elseif (substr($phone, 0, 1) == 0) {
+                $ddd = substr($phone, 1, 2);
+            } elseif (strlen($phone) == 10 || (strlen($phone) == 11 && substr($phone, 2, 1) == 9)) {
+                $ddd = substr($phone, 0, 2);
+            } else {
+                $ddd = 11;
+            }
+            $modelUser->prefix_local = '0/55/11,0/55/12,*/55' . $ddd . '/8,*/55' . $ddd . '/9';
+        } else {
+            $modelUser->prefix_local = '';
+        }
+
         $success = $modelUser->save();
 
         if ($success) {
@@ -109,15 +126,20 @@ class JoomlaController extends Controller
             $modelSip              = new Sip();
             $modelSip->id_user     = $modelUser->id;
             $modelSip->name        = $modelUser->username;
-            $modelSip->allow       = 'g729,gsm,alaw,ulaw';
+            $modelSip->allow       = $this->config['global']['default_codeds'];
             $modelSip->host        = 'dynamic';
             $modelSip->insecure    = 'no';
             $modelSip->defaultuser = $modelUser->username;
             $modelSip->secret      = $modelUser->password;
-            if (strlen($modelUser->phone) > 5) {
+
+            if (strlen($this->config['global']['fixed_callerid_signup']) > 1) {
+                $modelSip->callerid   = $this->config['global']['fixed_callerid_signup'];
+                $modelSip->cid_number = $this->config['global']['fixed_callerid_signup'];
+            } else {
                 $modelSip->callerid   = $modelUser->phone;
                 $modelSip->cid_number = $modelUser->phone;
             }
+
             $modelSip->save();
 
         }

@@ -73,7 +73,7 @@ class User extends Model
             array('language,mix_monitor_format,calllimit_error', 'length', 'max' => 5),
             array('username, zipcode, phone, mobile, vat', 'length', 'max' => 20),
             array('city, state, country, loginkey', 'length', 'max' => 40),
-            array('lastname, firstname, company_name, redial, prefix_local', 'length', 'max' => 50),
+            array('lastname, firstname, company_name, redial, prefix_local,neighborhood', 'length', 'max' => 50),
             array('company_website', 'length', 'max' => 60),
             array('address, email, description, doc', 'length', 'max' => 100),
             array('credit', 'type', 'type' => 'double'),

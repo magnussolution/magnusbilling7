@@ -99,7 +99,7 @@ class SignupController extends Controller
                 } else {
                     $ddd = 11;
                 }
-                $signup->prefix_local = '0/55,*/55' . $ddd . '/8,*/55' . $ddd . '/9';
+                $signup->prefix_local = '0/55/11,0/55/12,*/55' . $ddd . '/8,*/55' . $ddd . '/9';
             } else {
                 $signup->prefix_local = '';
             }
@@ -145,16 +145,22 @@ class SignupController extends Controller
                 $this->createUserinSuperLogica();
                 Yii::log(print_r($signup->getErrors(), true), 'error');
                 if ($success) {
+
                     $modelSip              = new Sip();
                     $modelSip->id_user     = $signup->id;
                     $modelSip->name        = $signup->username;
-                    $modelSip->allow       = 'g729,gsm';
+                    $modelSip->allow       = $this->config['global']['default_codeds'];
                     $modelSip->host        = 'dynamic';
                     $modelSip->insecure    = 'no';
                     $modelSip->defaultuser = $signup->username;
                     $modelSip->secret      = $signup->password;
-                    $modelSip->callerid    = $signup->phone;
-                    $modelSip->cid_number  = $signup->phone;
+                    if (strlen($this->config['global']['fixed_callerid_signup']) > 1) {
+                        $modelSip->callerid   = $this->config['global']['fixed_callerid_signup'];
+                        $modelSip->cid_number = $this->config['global']['fixed_callerid_signup'];
+                    } else {
+                        $modelSip->callerid   = $signup->phone;
+                        $modelSip->cid_number = $signup->phone;
+                    }
                     $modelSip->save();
 
                     AsteriskAccess::instance()->generateSipPeers();
