@@ -123,7 +123,7 @@ class SearchTariff
             }
             $agi->exec($sql);
         } else {
-            $sql = "INSERT INTO pkg_balance (last_use, id_prefix) VALUES (0, '" . $result[0]['dialprefix'] . ")";
+            $sql = "INSERT INTO pkg_balance (last_use, id_prefix) VALUES (0, " . $result[0]['dialprefix'] . ")";
             $agi->exec($sql);
             $ultimo = 0;
         }
