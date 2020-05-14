@@ -22,6 +22,14 @@ $fieldOption = array('class' => 'input');
 ?>
 
 
+<div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->error($modelTransferToMobile, 'method') ?>
+        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
+</div>
+
+
     <?php
 
 $modelSendCreditProduct = SendCreditProducts::model()->findAll(array(

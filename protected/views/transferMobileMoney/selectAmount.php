@@ -28,36 +28,28 @@ if (strlen($modelTransferToMobile->number) > 10):
 endif;
 ?>
 
-<?php if (strlen($modelTransferToMobile->number) > 10): ?>
-    <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'method', $fieldOption) ?>
-    <?php echo $form->error($modelTransferToMobile, 'method') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
-</div>
+<label>Method</label>
+    <div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['method'] ?></div>
 
-<?php else: ?>
+
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
-    <div class="styled-select">
-        <?php
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->error($modelTransferToMobile, 'country') ?>
+        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Country') ?></p>
+</div>
 
-echo $form->dropDownList($modelTransferToMobile, 'method',
-    $methods,
-    array(
-        'empty'    => Yii::t('yii', 'Select the method'),
-        'disabled' => strlen($modelTransferToMobile->number) > 4,
-    ));
-?>
-    <?php echo $form->error($modelTransferToMobile, 'method') ?>
-
-    </div>
+<div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Operator')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->error($modelTransferToMobile, 'method') ?>
+        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Operator') ?></p>
 </div>
 
 
 
-<?php endif?>
+
 <br>
 
 <div class="field">
