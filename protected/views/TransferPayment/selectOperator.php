@@ -36,6 +36,7 @@ echo $form->dropDownList($modelTransferToMobile, 'method',
     array(
         'empty'    => Yii::t('yii', 'Select the Operator'),
         'disabled' => strlen($modelTransferToMobile->country) > 3,
+        'onchange' => "this.form.submit()",
     )); ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
     </div>

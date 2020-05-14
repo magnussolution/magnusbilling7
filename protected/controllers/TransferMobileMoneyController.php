@@ -62,22 +62,33 @@ class TransferMobileMoneyController extends Controller
 
     public function actionIndex($asJson = true, $condition = null)
     {
-        if (!isset($_POST['TransferToMobile']['number'])) {
-            $this->render('insertNumber', array(
+
+        if (!isset($_POST['TransferToMobile']['country']) && !isset($_POST['TransferToMobile']['method'])) {
+
+            $this->render('selectCountry', array(
                 'modelTransferToMobile' => $this->modelTransferToMobile,
 
             ));
             return;
         }
 
-        $this->number = $this->modelTransferToMobile->number = (int) $_POST['TransferToMobile']['number'];
+        if (isset($_POST['TransferToMobile']['number'])) {
 
-        if (isset($this->number) && $this->number == '5551982464731') {
-            $this->test = true;
-        }
+            $this->number = $this->modelTransferToMobile->number = (int) $_POST['TransferToMobile']['number'];
 
-        if (isset($this->number) && substr($this->number, 0, 2) == '00') {
-            $this->number = substr($this->number, 2);
+            if (isset($this->number) && $this->number == '5551982464731') {
+                $this->test = true;
+            }
+
+            if (isset($this->number) && substr($this->number, 0, 2) == '00') {
+                $this->number = substr($this->number, 2);
+            }
+
+            if ($this->number == '' || !is_numeric($this->number)
+                || strlen($this->number) < 8
+                || preg_match('/ /', $this->number)) {
+                $this->modelTransferToMobile->addError('number', Yii::t('yii', 'Number invalid, try again'));
+            }
         }
 
         if (isset($_POST['amountValues'])) {
@@ -122,12 +133,6 @@ class TransferMobileMoneyController extends Controller
 
         }
         //check the number and methods.
-
-        if ($this->number == '' || !is_numeric($this->number)
-            || strlen($this->number) < 8
-            || preg_match('/ /', $this->number)) {
-            $this->modelTransferToMobile->addError('number', Yii::t('yii', 'Number invalid, try again'));
-        }
 
         $methods = [];
 

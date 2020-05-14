@@ -12,7 +12,12 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
 <br>
 
-
+<div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->error($modelTransferToMobile, 'method') ?>
+        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
+</div>
 
 <br>
 
@@ -67,7 +72,7 @@ $this->widget(
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));
 ?>
-<input class="button" style="width: 80px;" onclick="window.location='../../index.php/TransferMobileCredit/read';" value="Cancel">
+<input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
 <input id ='buying_price'  class="button" style="display:none; width: 100px;" onclick="getBuyingPrice()" value="R" readonly>
 </div>
 <div class="controls" id="buttondivWait"></div>

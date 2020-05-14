@@ -59,6 +59,7 @@ class TransferMobileCreditController extends Controller
     {
 
         if (!isset($_POST['TransferToMobile']['number'])) {
+            $this->modelTransferToMobile->method = "Mobile Credit";
             $this->render('insertNumber', array(
                 'modelTransferToMobile' => $this->modelTransferToMobile,
 
@@ -566,10 +567,11 @@ error_txt=Transaction successful';
                 exit;
             }
 
-            $modelSendCreditProducts = SendCreditProducts::model()->findAll('status = 1 AND operator_name = :key AND country_code =:key1',
+            $modelSendCreditProducts = SendCreditProducts::model()->findAll('status = 1 AND operator_name = :key AND country_code =:key1 AND type = :key2',
                 array(
                     ':key'  => $modelSendCreditProducts[0]->operator_name,
                     ':key1' => $modelSendCreditProducts[0]->country_code,
+                    ':key2' => 'Mobile Credit',
                 ));
 
             $ids_products = array();

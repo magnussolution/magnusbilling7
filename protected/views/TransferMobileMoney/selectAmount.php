@@ -67,7 +67,7 @@ echo $form->dropDownList($modelTransferToMobile, 'method',
     <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
 </div>
 
-<?php if (strlen($modelTransferToMobile->number) > 10): ?>
+
     <div class="field">
         <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (EUR)')); ?>
         <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR',
@@ -94,7 +94,7 @@ echo $form->dropDownList($modelTransferToMobile, 'method',
         <p class="hint"><?php echo $amountDetails ?></p>
     </div>
 
-<?php endif?>
+
 <br>
 <div class='field' id="divsellingPrice" style="display:none; border:0">
     <label>Selling Price</label>

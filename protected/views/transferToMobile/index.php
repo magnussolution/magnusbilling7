@@ -30,6 +30,7 @@ $fieldOption = array('class' => 'input');
     array(
         'empty'    => Yii::t('yii', 'Select the method'),
         'disabled' => strlen($modelTransferToMobile->country) > 3,
+        'onchange' => "this.form.submit()",
     )); ?>
             <?php echo $form->error($modelTransferToMobile, 'method') ?>
         </div>
@@ -40,13 +41,7 @@ $fieldOption = array('class' => 'input');
 
 
 
-<div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('yii', $buttonName), array(
-    'class'   => 'button',
-    'onclick' => "return button2(event)",
-    'id'      => 'secondButton'));
-?>
-<input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
+
 </div>
 <div class="controls" id="buttondivWait"></div>
 
