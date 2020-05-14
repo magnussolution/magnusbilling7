@@ -14,6 +14,9 @@ $form = $this->beginWidget('CActiveForm', array(
 <br/>
 
 
+
+
+
 <div class="field">
     <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>

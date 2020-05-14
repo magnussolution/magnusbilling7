@@ -71,6 +71,7 @@ class TransferPaymentController extends Controller
 
         if (isset($_POST['TransferToMobile']['method'])) {
 
+            $this->modelTransferToMobile->method = "Payment";
             $this->render('insertData', array(
                 'modelTransferToMobile' => $this->modelTransferToMobile,
                 'selectedMethod'        => $_POST['TransferToMobile']['method'],

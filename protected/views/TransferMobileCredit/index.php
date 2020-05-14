@@ -48,8 +48,11 @@ $fieldOption['readonly'] = true;
     <?php
 
 $modelSendCreditProducts = SendCreditProducts::model()->findAll(array(
-    'condition' => 'country = :key',
-    'params'    => array(':key' => $modelTransferToMobile->country),
+    'condition' => 'country = :key AND type = :key1',
+    'params'    => array(
+        ':key'  => $modelTransferToMobile->country,
+        ':key1' => 'Mobile Credit',
+    ),
     'group'     => 'operator_name',
 ));
 
