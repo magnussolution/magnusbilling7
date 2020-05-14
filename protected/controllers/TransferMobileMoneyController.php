@@ -63,6 +63,8 @@ class TransferMobileMoneyController extends Controller
     public function actionIndex($asJson = true, $condition = null)
     {
 
+        $this->modelTransferToMobile->method = "Mobile Credit";
+
         if (!isset($_POST['TransferToMobile']['country']) && !isset($_POST['TransferToMobile']['method'])) {
 
             $this->render('selectCountry', array(
@@ -145,7 +147,7 @@ class TransferMobileMoneyController extends Controller
 
         $amountDetails = null;
 
-        if (isset($_POST['TransferToMobile']['method'])) {
+        if (isset($_POST['TransferToMobile']['method']) && $_POST['TransferToMobile']['method'] != 'Mobile Credit') {
 
             if ($_POST['TransferToMobile']['method'] == '') {
                 $this->modelTransferToMobile->addError('method', Yii::t('yii', 'Please select a method'));
@@ -161,18 +163,20 @@ class TransferMobileMoneyController extends Controller
                 $values = explode("-", $this->config['global']['BDService_bkash']);
             }
 
-            Yii::app()->session['allowedAmount'] = $values;
-            $amountDetails                       = 'Amount (Min: ' . $values[0] . ' BDT, Max: ' . $values[1] . ' BDT)';
-            $view                                = 'selectAmount';
-
+            Yii::app()->session['allowedAmount']  = $values;
+            $amountDetails                        = 'Amount (Min: ' . $values[0] . ' BDT, Max: ' . $values[1] . ' BDT)';
+            $view                                 = 'selectAmount';
+            $this->modelTransferToMobile->country = $_POST['TransferToMobile']['country'];
         } else {
-            $view = 'selectMethod';
+            $view                                 = 'selectOperator';
+            $this->modelTransferToMobile->country = $_POST['TransferToMobile']['country'];
         }
 
         $this->render($view, array(
             'modelTransferToMobile' => $this->modelTransferToMobile,
             'methods'               => $methods,
             'amountDetails'         => $amountDetails,
+            'post'                  => $_POST,
         ));
 
     }
