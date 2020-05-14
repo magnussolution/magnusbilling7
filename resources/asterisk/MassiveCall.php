@@ -27,6 +27,7 @@ class MassiveCall
         $uploaddir = $MAGNUS->magnusFilesDirectory . 'sounds/';
 
         $agi->answer();
+        sleep(1);
         $now = time();
 
         if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
@@ -126,10 +127,6 @@ class MassiveCall
             //execute
             if (isset($tts)) {
                 $agi->stream_file($audio_name, ' #');
-                if (!preg_match('/campaign/', $audio_name)) {
-                    $agi->verbose('delete audio name ' . $audio_name, 10);
-                    exec("rm -rf $audio_name*");
-                }
             }
 
             if (strlen($modelCampaign->audio_2) > 5 || strlen($modelCampaign->tts_audio2) > 2) {

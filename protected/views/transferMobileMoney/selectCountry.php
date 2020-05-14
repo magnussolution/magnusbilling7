@@ -36,9 +36,7 @@ $country = CHtml::listData($modelSendCreditProduct, 'country', 'country');
 
 ?>
 
-
-
-<?php if (count($country) > 1): ?>
+<?php if (count($country) > 0): ?>
 <div class="field">
     <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'country')) ?>
     <div class="styled-select">

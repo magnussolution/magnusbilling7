@@ -59,10 +59,15 @@ class Tts
 
                     $tts_url = preg_replace('/\$token/', $token, $tts_url);
                 }
-                system("wget -q -U Mozilla -O \"/tmp/$file.mp3\" \"$tts_url\"");
-                system("mpg123 -w /tmp/$file.wav /tmp/$file.mp3 && rm -rf /tmp/$file.mp3");
-                system("sox -v 2.0 /tmp/$file.wav /tmp/$file2.wav && rm -rf /tmp/$file.wav");
-                system("sox /tmp/$file2.wav -c 1 -r 8000 /tmp/$file.wav && rm -rf /tmp/$file2.wav ");
+                if (preg_match("/voicerss\.org/", $tts_url)) {
+                    //"http://api.voicerss.org/?key=YOUR API&hl=pt-br&src=adilson&f=8khz_16bit_mono
+                    system("wget -q -U Mozilla -O \"/tmp/$file.wav\" \"$tts_url\"");
+                } else {
+                    system("wget -q -U Mozilla -O \"/tmp/$file.mp3\" \"$tts_url\"");
+                    system("mpg123 -w /tmp/$file.wav /tmp/$file.mp3 && rm -rf /tmp/$file.mp3");
+                    system("sox -v 2.0 /tmp/$file.wav /tmp/$file2.wav && rm -rf /tmp/$file.wav");
+                    system("sox /tmp/$file2.wav -c 1 -r 8000 /tmp/$file.wav && rm -rf /tmp/$file2.wav ");
+                }
             }
 
         }
