@@ -1,10 +1,5 @@
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-  <script src="https://plentz.github.io/jquery-maskmoney/javascripts/jquery.maskMoney.min.js" type="text/javascript"></script>
-  <script type="text/javascript">$(function() {
-    $('#amountfielEUR').maskMoney();
-    $('#amountfielBDT').maskMoney({precision:0, thousands:''});
-  })</script>
+
 <?php
 
 $form = $this->beginWidget('CActiveForm', array(
@@ -23,9 +18,6 @@ $buttonName = 'Next';
 
 $fieldOption = array('class' => 'input');
 
-if (strlen($modelTransferToMobile->number) > 10):
-    $fieldOption['readonly'] = true;
-endif;
 ?>
 
 <label>Method</label>
@@ -48,10 +40,6 @@ endif;
 </div>
 
 
-
-
-<br>
-
 <div class="field">
     <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
     <?php echo $form->numberField($modelTransferToMobile, 'number', $fieldOption) ?>
@@ -60,34 +48,55 @@ endif;
 </div>
 
 
-    <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (EUR)')); ?>
-        <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR',
+<?php if (Yii::app()->session['is_interval'] == true): ?>
+    <div id='is_interval'>
+        <br>
+
+        <div class="field">
+            <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (EUR)')); ?>
+            <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR',
     array(
         'class'   => 'input',
         'id'      => 'amountfielEUR',
         'onkeyup' => 'showPriceEUR()',
         'style'   => 'color:blue; font-size:20',
     )) ?>
-        <?php echo $form->error($modelTransferToMobile, 'amountValuesEUR') ?>
+            <?php echo $form->error($modelTransferToMobile, 'amountValuesEUR') ?>
 
-    </div>
+        </div>
 
-    <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesBDT', array('label' => 'Receive Amount (BDT)')); ?>
-        <?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT',
+        <div class="field">
+            <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesBDT', array('label' => 'Receive Amount (BDT)')); ?>
+            <?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT',
     array(
         'class'   => 'input',
         'id'      => 'amountfielBDT',
         'onkeyup' => 'showPriceBDT()',
         'style'   => 'color:blue; font-size:20',
     )) ?>
-        <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
-        <p class="hint"><?php echo $amountDetails ?></p>
-    </div>
+            <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
+            <p class="hint"><?php echo $amountDetails ?></p>
+        </div>
 
-
+     </div>
 <br>
+<?php endif?>
+
+<div class="sp-page companies__content" >
+      <div class="company__list" id='productList'>
+        <?php $id = 0;?>
+        <?php foreach (Yii::app()->session['amounts'] as $key => $value): ?>
+            <label for="2" class="company__row" id="productLabel<?php echo $id ?>">
+                    <input type="radio"  id="productinput<?php echo $id ?>" name="amountValues" value="<?php echo $key ?>">
+                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo count(Yii::app()->session['amounts']) ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
+                </label>
+                <?php $id++;?>
+        <?php endforeach;?>
+
+      </div>
+</div>
+
+
 <div class='field' id="divsellingPrice" style="display:none; border:0">
     <label>Selling Price</label>
     <div id="sellingPrice" class="input" style="border:0; width:650px" ></div>
@@ -111,6 +120,7 @@ endif;
 <script type="text/javascript">
 
     function getBuyingPrice(argument) {
+
         amountValuesEUR = document.getElementById('amountfielEUR').value;
         valueAmoutBDT = document.getElementById('amountfielBDT').value;
         if (document.getElementById('buying_price').value != 'R') {
@@ -154,6 +164,15 @@ endif;
     function showPriceEUR() {
 
 
+        for (var i = 0; i < 50 ; i++) {
+            if ( document.getElementById('productLabel'+i)) {
+                document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
+            }else{
+                break;
+            }
+        }
+
+
         valueAmoutEUR = document.getElementById('amountfielEUR').value;
 
         if (valueAmoutEUR > 0) {
@@ -183,6 +202,15 @@ endif;
 
     function showPriceBDT() {
 
+
+        for (var i = 0; i < 50 ; i++) {
+            if ( document.getElementById('productLabel'+i)) {
+                document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
+            }else{
+                break;
+            }
+        }
+
         valueAmoutBDT = document.getElementById('amountfielBDT').value;
 
 
@@ -204,5 +232,123 @@ endif;
 
 
     }
+
+
+    function handleChange1(argument,total) {
+
+        for (var i = 0; i < total ; i++) {
+            document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
+        }
+        document.getElementById('productLabel'+argument).style.backgroundColor = 'dd8980';
+
+        document.getElementById('productinput'+argument).checked = true;
+        window.productInputSelected = argument
+
+        document.getElementById('buying_price').style.display = 'inline';
+        document.getElementById('buying_price').value = 'R';
+
+         document.getElementById('amountfielEUR').value = '';
+          document.getElementById('amountfielBDT').value = '';
+    }
+
 </script>
 
+
+<style type="text/css">
+    #contactform {
+        margin: 0 auto;
+        width: 720px;
+        padding: 5px;
+        background: #f0f0f0;
+        overflow: auto;
+        /* Border style */
+        border: 1px solid #cccccc;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        border-radius: 7px;
+        /* Border Shadow */
+        -moz-box-shadow: 2px 2px 2px #cccccc;
+        -webkit-box-shadow: 2px 2px 2px #cccccc;
+        box-shadow: 2px 2px 2px #cccccc;
+    }
+    .company__row {
+        display: inline-block;
+        -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);
+        background-color: #fff;
+        position: relative;
+        vertical-align: top
+    }
+
+    .company__row:nth-child(odd) {
+        margin-left: 0
+    }
+
+    .company__row:hover {
+        background: #f7f7f7
+    }
+
+    .company__row input[type=radio] {
+        display: none
+    }
+
+
+    .company__logo-container {
+        text-align: center
+    }
+
+    .company__row--disabled .company__logo {
+        filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+        filter: #999;
+        -webkit-filter: grayscale(100%);
+        -webkit-transition: all .6s ease;
+        transition: all .6s ease;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        opacity: .41
+    }
+
+    .company__row {
+        width: 23%;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 20px 30px;
+        cursor: pointer
+    }
+
+    .company__row:first-child,
+    .company__row:nth-child(2) {
+        border-top: 0!important
+    }
+
+    .company__row:nth-child(odd) {
+        border-right: 1px solid hsla(0, 0%, 80%, .25)
+    }
+
+    .company__row:nth-child(2n),
+    .company__row:nth-child(odd) {
+        border-top: 1px solid hsla(0, 0%, 80%, .25)
+    }
+
+
+    .company__list {
+        -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        overflow: hidden
+    }
+
+    .company__logo {
+        vertical-align: middle
+    }
+
+    .company__logo-container {
+        height: 58px;
+        line-height: 58px
+    }
+
+    .company__row--blank {
+        height: 108px
+    }
+</style>

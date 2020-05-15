@@ -18,7 +18,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php //print_r($_POST)?>
 <div class='field' id="aditionalInfo" style="display:inline; border:0">
 	<label>Country:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" >Bangladesh</div>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['country'] ?></div>
 	<label>Number:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['number'] ?></div>
 
@@ -32,6 +32,7 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 <?php echo $form->hiddenField($modelTransferToMobile, 'method', array('value' => $_POST['TransferToMobile']['method'])); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'country', array('value' => $_POST['TransferToMobile']['country'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $_POST['TransferToMobile']['number'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesBDT', array('value' => $_POST['TransferToMobile']['amountValuesBDT'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesEUR', array('value' => $_POST['TransferToMobile']['amountValuesEUR'])); ?>
