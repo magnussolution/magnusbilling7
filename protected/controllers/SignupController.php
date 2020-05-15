@@ -27,6 +27,9 @@ class SignupController extends Controller
                 $modelUser->active   = 1;
                 $modelUser->loginkey = '';
                 $modelUser->save();
+
+                AsteriskAccess::instance()->generateSipPeers();
+
                 $idUserType                                     = $modelUser->idGroup->idUserType->id;
                 Yii::app()->session['isAdmin']                  = $idUserType == 1 ? true : false;
                 Yii::app()->session['isAgent']                  = $idUserType == 2 ? true : false;

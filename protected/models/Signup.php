@@ -57,7 +57,7 @@ class Signup extends Model
             array('password', 'checksecret'),
             array('doc', 'checkdoc'),
             array('state_number', 'length', 'max' => 40),
-            array('neighborhood', 'length', 'min' => 50),
+            array('neighborhood', 'length', 'max' => 50),
             array('address, company_name', 'length', 'max' => 100),
             array('mobile, phone', 'length', 'min' => 10),
             array('email', 'checkemail'),
