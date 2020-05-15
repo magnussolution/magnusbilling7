@@ -353,21 +353,21 @@ $this->endWidget();?>
 
 <style type="text/css">
     #contactform {
-    margin: 0 auto;
-    width: 720px;
-    padding: 5px;
-    background: #f0f0f0;
-    overflow: auto;
-    /* Border style */
-    border: 1px solid #cccccc;
-    -moz-border-radius: 7px;
-    -webkit-border-radius: 7px;
-    border-radius: 7px;
-    /* Border Shadow */
-    -moz-box-shadow: 2px 2px 2px #cccccc;
-    -webkit-box-shadow: 2px 2px 2px #cccccc;
-    box-shadow: 2px 2px 2px #cccccc;
-}
+        margin: 0 auto;
+        width: 720px;
+        padding: 5px;
+        background: #f0f0f0;
+        overflow: auto;
+        /* Border style */
+        border: 1px solid #cccccc;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        border-radius: 7px;
+        /* Border Shadow */
+        -moz-box-shadow: 2px 2px 2px #cccccc;
+        -webkit-box-shadow: 2px 2px 2px #cccccc;
+        box-shadow: 2px 2px 2px #cccccc;
+    }
     .company__row {
         display: inline-block;
         -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);

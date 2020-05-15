@@ -68,7 +68,7 @@ class SendCreditRatesController extends Controller
             array(':key' => Yii::app()->session['id_user'])
         );
 
-        $sql = " INSERT INTO pkg_send_credit_rates (id_user,id_product,sell_price)  SELECT " . (int) Yii::app()->session['id_user'] . ",id,retail_price FROM pkg_send_credit_products ";
+        $sql = " INSERT INTO pkg_send_credit_rates (id_user,id_product,retail_price)  SELECT " . (int) Yii::app()->session['id_user'] . ",id,retail_price FROM pkg_send_credit_products ";
         Yii::app()->db->createCommand($sql)->execute();
 
         echo json_encode(array(
