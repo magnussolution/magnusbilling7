@@ -141,7 +141,7 @@ class SmsCommand extends ConsoleCommand
 
                 }
 
-                $res = SmsSend::send($sms->idPhonebook->idUser, $sms->number, $text, $sms->id);
+                $res = SmsSend::send($sms->idPhonebook->idUser, $sms->number, $text, $sms->id, $campaign->from);
                 $sms->try++;
                 $sms->status = isset($res['success']) && $res['success'] == true ? 3 : 2;
                 $sms->save();

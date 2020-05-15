@@ -61,6 +61,7 @@ class Campaign extends Model
             array('daily_start_time, daily_stop_time', 'length', 'max' => 8),
             array('description, forward_number', 'length', 'max' => 160),
             array('tts_audio,tts_audio2,asr_audio,asr_options', 'length', 'max' => 200),
+            array('from', 'length', 'max' => 20),
         );
     }
 
