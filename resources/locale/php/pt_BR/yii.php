@@ -274,6 +274,7 @@ return array(
     'Did Destination'                                                                                                                                                                  => 'Destino dos Dids',
     'Did Use'                                                                                                                                                                          => 'Uso dos Dids',
     'Did'                                                                                                                                                                              => 'Números Dids',
+    'Neighborhood'                                                                                                                                                                     => 'Bairro',
     'Disallowed action'                                                                                                                                                                => 'Não foi permitido executar esta ação',
     'Group User'                                                                                                                                                                       => 'Grupos de Usuários',
     'Moludes'                                                                                                                                                                          => 'Módulos',
