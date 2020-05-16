@@ -36,6 +36,10 @@ class SearchTariff
 
         $MAGNUS->prefixclause = substr($MAGNUS->prefixclause, 0, -3) . ")";
 
+        // Searching for the Tariff Limit
+        $tariff_limit = "SELECT tariff_limit FROM pkg_plan WHERE id=$MAGNUS->id_plan";
+        $limitresult = $agi->query($tariff_limit)->fetch(PDO::FETCH_ASSOC);
+        
         $sql = "SELECT lcrtype, pkg_plan.id AS id_plan, pkg_prefix.prefix AS dialprefix, " .
         "pkg_plan.name, pkg_rate.id_prefix, pkg_rate.id AS id_rate, minimal_time_charge, " .
         "rateinitial, initblock, billingblock, connectcharge, disconnectcharge disconnectcharge, " .
@@ -44,7 +48,7 @@ class SearchTariff
         "LEFT JOIN pkg_rate ON pkg_plan.id = pkg_rate.id_plan " .
         "LEFT JOIN pkg_prefix ON pkg_rate.id_prefix = pkg_prefix.id " .
         "WHERE pkg_plan.id=$MAGNUS->id_plan AND pkg_rate.status = 1 AND " . $MAGNUS->prefixclause .
-            "ORDER BY LENGTH( prefix ) DESC LIMIT $MAGNUS->tariff_limit";
+            "ORDER BY LENGTH( prefix ) DESC LIMIT " . $limitresult['tariff_limit'];
         $result = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         // $agi->verbose($result, 25);
 
@@ -116,7 +120,7 @@ class SearchTariff
 
         if (isset($modelBalance->last_use)) {
             $ultimo = $modelBalance->last_use;
-            if ($modelBalance->last_use >= $total - 1) {
+            if ($modelBalance->last_use >= $total) {
                 $sql = "UPDATE pkg_balance SET last_use = 0 WHERE id_prefix = " . $result[0]['dialprefix'];
             } else {
                 $sql = "UPDATE pkg_balance SET last_use = last_use + 1 WHERE id_prefix = " . $result[0]['dialprefix'];
