@@ -42,7 +42,7 @@ class MolPayController extends Controller
         }
 
         $idUser = $modelMethodpay->idUser->id_user;
-        $vkey   = $modelMethodpay->pagseguro_TOKEN;
+        $vkey   = $modelMethodpay->P2P_RecipientKeyID;
 
         if (count($_POST) > 0) {
 
