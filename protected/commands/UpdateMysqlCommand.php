@@ -622,6 +622,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        if ($version == '7.2.2') {
+
+            $sql = "UPDATE `pkg_method_pay` SET `showFields` = 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN,P2P_RecipientKeyID' WHERE payment_method = 'molpay';";
+            $this->executeDB($sql);
+
+            $version = '7.2.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
