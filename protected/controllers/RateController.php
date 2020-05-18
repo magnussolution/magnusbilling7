@@ -236,7 +236,7 @@ class RateController extends Controller
 
         }
 
-        $sql = "UPDATE pkg_rate t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0";
+        $sql = "UPDATE pkg_rate t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0 AND p.prefix > 0";
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
