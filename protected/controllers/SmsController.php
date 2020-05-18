@@ -53,8 +53,6 @@ class SmsController extends Controller
             exit('invalid non-numeric number');
         } else if (strlen($_GET['number']) > 15) {
             exit('invalid number');
-        } else if (strlen($_GET['text']) > 140) {
-            exit('invalid number');
         } else if (strlen($_GET['username']) < 4) {
             exit('invalid user');
         } else if (strlen($_GET['password']) < 5) {
