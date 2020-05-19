@@ -53,6 +53,7 @@ mkdir -p /var/www/tmpmagnus
 chown -R asterisk:asterisk /var/www/tmpmagnus
 chmod -R 777 /var/www/tmpmagnus
 chmod 774 /var/www/html/mbilling/resources/ip.blacklist
+mkdir -r /var/www/html/mbilling/tmp
 chmod -R 700 /var/www/html/mbilling/tmp
 chmod -R 700 /var/www/html/mbilling/assets
 chmod -R 700 /var/www/html/mbilling/resources/sounds

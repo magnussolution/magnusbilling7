@@ -1,3 +1,5 @@
+select operator
+
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
   <script src="https://plentz.github.io/jquery-maskmoney/javascripts/jquery.maskMoney.min.js" type="text/javascript"></script>
@@ -25,7 +27,8 @@ $fieldOption = array('class' => 'input');
 
 ?>
 
-
+<label>Method</label>
+    <div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelTransferToMobile->method ?></div>
 
 <div class="field">
     <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Operator')) ?>
