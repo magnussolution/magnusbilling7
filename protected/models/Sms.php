@@ -58,6 +58,7 @@ class Sms extends Model
             array('telephone', 'numerical'),
             array('sms', 'length', 'max' => 200),
             array('rate', 'length', 'max' => 10),
+            array('from', 'length', 'max' => 16),
 
         );
     }
