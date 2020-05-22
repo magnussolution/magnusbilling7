@@ -734,7 +734,7 @@ class AsteriskAccess
 
                     if (strlen($sip->cid_number) > 1) {
                         $line .= 'cid_number=' . $sip->cid_number . "\n";
-                        $line .= 'callerid=' . $iax->cid_number . "\n";
+                        $line .= 'callerid=' . $sip->cid_number . "\n";
                     }
 
                     if (strlen($sip->language) > 1) {
