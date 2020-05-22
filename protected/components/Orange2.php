@@ -123,7 +123,7 @@ class Orange2
 
     }
 
-    public static function checkMetric($metric = '')
+    public static function checkMetric($metric = '', $country = '')
     {
 
         $config = LoadConfig::getConfig();
@@ -131,6 +131,10 @@ class Orange2
         $username = $config['global']['Orange2_username'];
         $password = $config['global']['Orange2_password'];
         $test     = $config['global']['Orange2_test'];
+
+        if (strlen($country)) {
+            $_POST['TransferToMobile']['country'] = $country;
+        }
 
         switch ($_POST['TransferToMobile']['country']) {
             case 'Gambia':

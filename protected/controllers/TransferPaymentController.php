@@ -67,204 +67,183 @@ class TransferPaymentController extends Controller
 
         $this->modelTransferToMobile->method = "Payment";
 
-        if (isset($_POST['TransferToMobile']['method']) && isset($_POST['TransferToMobile']['number']) && isset($_POST['TransferToMobile']['metric'])) {
+        //select country
+        if (!isset($_POST['TransferToMobile']['country'])) {
 
-            if (!is_numeric($_POST['TransferToMobile']['metric'])) {
-                $this->modelTransferToMobile->addError('metric', Yii::t('yii', 'Metric invalid, try again'));
-            } else {
-                $this->confirmRefill();
-                exit;
-            }
-
-        }
-
-        if (isset($_POST['TransferToMobile']['method'])) {
-
-            $this->modelTransferToMobile->method = $_POST['TransferToMobile']['method'];
-            $_POST['TransferToMobile']['method'] = 'Payment';
-
-            if (!isset($_POST['TransferToMobile']['number'])) {
-                $this->render('insertNumber', array(
-                    'modelTransferToMobile' => $this->modelTransferToMobile,
-
-                ));
-                return;
-            }
-
-            if ($_POST['TransferToMobile']['number'] == '' || !is_numeric($_POST['TransferToMobile']['number'])
-                || strlen($_POST['TransferToMobile']['number']) < 8
-                || preg_match('/ /', $_POST['TransferToMobile']['number'])) {
-                $this->modelTransferToMobile->addError('number', Yii::t('yii', 'Number invalid, try again'));
-                $this->render('insertNumber', array(
-                    'modelTransferToMobile' => $this->modelTransferToMobile,
-
-                ));
-                return;
-            }
-
-            if (!count($this->modelTransferToMobile->getErrors())) {
-                $this->getNumberDetails();
-            }
-
-            $this->modelTransferToMobile->number = $_POST['TransferToMobile']['number'];
-            $this->render('insertDataPre', array(
+            $this->render('selectCountry', array(
                 'modelTransferToMobile' => $this->modelTransferToMobile,
-                'selectedMethod'        => $_POST['TransferToMobile']['method'],
+
             ));
             return;
         }
+        //select type
+        if (!isset($_POST['TransferToMobile']['type'])) {
 
-        $methods = [];
+            $this->modelTransferToMobile->country = $_POST['TransferToMobile']['country'];
+            $types                                = [];
 
-        $methods["Prepaid_Electricity"] = "Prepaid Electricity";
-        $methods["Bill_Electricity"]    = "Bill Electricity";
+            $types["Prepaid_Electricity"] = "Prepaid Electricity";
+            $types["Bill_Electricity"]    = "Bill Electricity";
 
-        $this->render('selectOperator', array(
-            'modelTransferToMobile' => $this->modelTransferToMobile,
-            'methods'               => $methods,
-        ));
+            $this->render('selectType', array(
+                'modelTransferToMobile' => $this->modelTransferToMobile,
+                'types'                 => $types,
+            ));
+
+            return;
+        }
+
+        //select amount
+        if (!isset($_POST['TransferToMobile']['amountValuesBDT'])) {
+
+            $this->modelTransferToMobile->country = $_POST['TransferToMobile']['country'];
+            $this->modelTransferToMobile->type    = $_POST['TransferToMobile']['type'];
+
+            $this->getAmount();
+
+            $this->render('selectAmount', array(
+                'modelTransferToMobile' => $this->modelTransferToMobile,
+            ));
+
+            return;
+        }
+
+        if (isset($_POST['amountValues'])) {
+            $_POST['TransferToMobile']['amountValues'] = $_POST['amountValues'];
+        }
+
+        if (isset($_POST['TransferToMobile']['amountValuesBDT']) && $_POST['TransferToMobile']['amountValuesBDT'] > 0) {
+            $this->modelTransferToMobile->amountValues = Yii::app()->session['interval_product_id'];
+            $_POST['TransferToMobile']['amountValues'] = Yii::app()->session['interval_product_id'];
+        } else {
+
+            $this->modelTransferToMobile->amountValues    = Yii::app()->session['interval_product_id']    = $_POST['TransferToMobile']['amountValues'];
+            $modelSendCreditProducts                      = SendCreditProducts::model()->findByPk((int) $_POST['TransferToMobile']['amountValues']);
+            $_POST['TransferToMobile']['amountValuesBDT'] = $modelSendCreditProducts->product;
+        }
+
+        //select meter
+        if (!isset($_POST['TransferToMobile']['meter'])) {
+
+            $this->modelTransferToMobile->country         = $_POST['TransferToMobile']['country'];
+            $this->modelTransferToMobile->type            = $_POST['TransferToMobile']['type'];
+            $this->modelTransferToMobile->amountValues    = $_POST['TransferToMobile']['amountValues'];
+            $this->modelTransferToMobile->amountValuesBDT = $_POST['TransferToMobile']['amountValuesBDT'];
+
+            $this->render('insertMeter', array(
+                'modelTransferToMobile' => $this->modelTransferToMobile,
+            ));
+
+            return;
+        }
+
+        //select meter
+        if (!isset($_POST['TransferToMobile']['number'])) {
+
+            $this->modelTransferToMobile->country         = $_POST['TransferToMobile']['country'];
+            $this->modelTransferToMobile->type            = $_POST['TransferToMobile']['type'];
+            $this->modelTransferToMobile->amountValues    = $_POST['TransferToMobile']['amountValues'];
+            $this->modelTransferToMobile->amountValuesBDT = $_POST['TransferToMobile']['amountValuesBDT'];
+            $this->modelTransferToMobile->meter           = $_POST['TransferToMobile']['meter'];
+
+            $this->render('insertNumber', array(
+                'modelTransferToMobile' => $this->modelTransferToMobile,
+            ));
+
+            return;
+        }
+
+        $this->modelTransferToMobile->country         = $_POST['TransferToMobile']['country'];
+        $this->modelTransferToMobile->type            = $_POST['TransferToMobile']['type'];
+        $this->modelTransferToMobile->amountValues    = $_POST['TransferToMobile']['amountValues'];
+        $this->modelTransferToMobile->amountValuesBDT = $_POST['TransferToMobile']['amountValuesBDT'];
+        $this->modelTransferToMobile->meter           = $_POST['TransferToMobile']['meter'];
+        $this->modelTransferToMobile->number          = $_POST['TransferToMobile']['number'];
+
+        if (!isset($_POST['TransferToMobile']['confirmed'])) {
+            $this->render('confirm', array(
+                'modelTransferToMobile' => $this->modelTransferToMobile,
+            ));
+            return;
+        }
+        $this->confirmRefill();
 
     }
 
-    public function getNumberDetails()
+    public function getAmount()
     {
+        $modelSendCreditProducts = SendCreditProducts::model()->findAll('country = :key AND status = 1 AND type = "payment"', array(':key' => $this->modelTransferToMobile->country));
 
-        if (isset($_POST['TransferToMobile']['number'])) {
+        if (!isset($modelSendCreditProducts[0])) {
 
-            $number = $_POST['TransferToMobile']['number'];
+            echo '<div align=center id="container">';
+            echo "<font color=red>ERROR. No exist product to this number. Contact admin</font><br><br>";
+            echo '<a href="../../index.php/transferToMobile/read">Start new request </a>' . "<br><br>";
+            echo '</div>';
+            exit;
+        }
 
-            $number = preg_match("/\+/", $number) ? $number : '+' . $number;
+        $ids_products = array();
+        foreach ($modelSendCreditProducts as $key => $products) {
+            $ids_products[] = $products->id;
+        }
 
-            if (isset($this->config['global']['fm_transfer_to_username'])) {
+        //get the user prices to mount the amount combo
+        $criteria = new CDbCriteria();
+        $criteria->addInCondition('id_product', $ids_products);
+        $criteria->addCondition('id_user = :key');
+        $criteria->params[':key'] = Yii::app()->session['id_user'];
 
-                $modelRefill = Refill::model()->find('description LIKE :key AND date BETWEEN :key1 AND  NOW() AND payment = 1 AND id_user = :key2',
-                    array(
-                        ':key'  => "%" . $number . "%",
-                        ':key1' => date('Y-m-d H:i', mktime(date('H'), date('i') - 10, date('s'), date('m'), date('d'), date('Y'))),
-                        ':key2' => Yii::app()->session['id_user'],
-                    ));
-                if (isset($modelRefill->id)) {
-                    echo '<div align=center id="container">';
-                    echo "<font color=red>You already send credit to this number. Wait minimal 10 minutes to new recharge</font>";
-                    echo '</div>';
-                    exit;
+        $modelSendCreditRates = SendCreditRates::model()->findAll($criteria);
+
+        if (!count($modelSendCreditRates)) {
+            exit('Before send credit, you need add your sell price');
+        }
+
+        $values                            = array();
+        $i                                 = 0;
+        Yii::app()->session['is_interval'] = false;
+        $values                            = [];
+        foreach ($modelSendCreditProducts as $key => $product) {
+
+            if (is_numeric($product->product)) {
+
+                if ($this->test == true) {
+                    echo $product->id . ' -> ' . $product->currency_dest . ' ' . $product->product . ' = ' . $product->currency_orig . ' ' . trim($modelSendCreditRates[$i]->sell_price) . "<BR>";
                 }
-
-                $result = $this->sendActionTransferToMobile('msisdn_info');
-                //print_r($result);
-                if (preg_match("/Transaction successful/", $result)) {
-                    $resultArray = explode("\n", $result);
-                    $tmp         = explode('=', $resultArray[3]);
-                    $operatorid  = trim(end($tmp));
-                } else {
-                    //echo "Not foun product from TrasnferRo, try ding";
-                    //request provider code to ding and chech if exist products to Ding
-                    $operatorid = DingConnect::getProviderCode($_POST['TransferToMobile']['number']);
-                }
-                //find products whit trasnferto operatorid
-                $modelSendCreditProducts = SendCreditProducts::model()->findAll('operator_id = :key AND status = 1', array(':key' => $operatorid));
-
-                if (!count($modelSendCreditProducts)) {
-
-                    //not receive Operator ID FROM API. API OFF LINE. GET operator from country_code
-                    $numberFormate           = $_POST['TransferToMobile']['number'];
-                    $numberFormate           = substr($numberFormate, 0, 2) == '00' ? substr($numberFormate, 2) : $numberFormate;
-                    $modelSendCreditProducts = SendCreditProducts::model()->findAll('country_code = SUBSTRING(:key,1,length(country_code)) AND status = 1',
-                        array(
-                            ':key' => $numberFormate,
-                        ));
-                    $forceOperatorSelect = true;
-                    // echo $modelSendCreditProducts[0]->id . ' ' . $modelSendCreditProducts[0]->country_code;
-
-                }
-
-                if (!isset($modelSendCreditProducts[0])) {
-
-                    echo '<div align=center id="container">';
-                    echo "<font color=red>ERROR. No exist product to this number. Contact admin</font><br><br>";
-                    echo '<a href="../../index.php/transferToMobile/read">Start new request </a>' . "<br><br>";
-                    echo '</div>';
-                    exit;
-                }
-
-                $modelSendCreditProducts = SendCreditProducts::model()->findAll('status = 1 AND operator_name = :key AND country_code =:key1',
-                    array(
-                        ':key'  => $modelSendCreditProducts[0]->operator_name,
-                        ':key1' => $modelSendCreditProducts[0]->country_code,
-                    ));
-
-                $ids_products = array();
-                foreach ($modelSendCreditProducts as $key => $products) {
-                    $ids_products[] = $products->id;
-                }
-
-                //get the user prices to mount the amount combo
-                $criteria = new CDbCriteria();
-                $criteria->addInCondition('id_product', $ids_products);
-                $criteria->addCondition('id_user = :key');
-                $criteria->params[':key'] = Yii::app()->session['id_user'];
-
-                $modelSendCreditRates = SendCreditRates::model()->findAll($criteria);
-
-                if (!count($modelSendCreditRates)) {
-                    exit('Before send credit, you need add your sell price');
-                }
-
-                $values = array();
-                $i      = 0;
-
-                foreach ($modelSendCreditProducts as $key => $product) {
-
-                    if (is_numeric($product->product)) {
-
-                        if ($this->test == true) {
-                            echo $product->id . ' -> ' . $product->currency_dest . ' ' . $product->product . ' = ' . $product->currency_orig . ' ' . trim($modelSendCreditRates[$i]->sell_price) . "<BR>";
-                        }
-                        $values[trim($product->id)]        = '<font size=1px>' . $product->currency_dest . '</font> ' . trim($product->product) . ' = <font size=1px>' . $product->currency_orig . '</font> ' . trim($modelSendCreditRates[$i]->sell_price);
-                        Yii::app()->session['is_interval'] = false;
-                    } else {
-                        Yii::app()->session['is_interval']                 = true;
-                        Yii::app()->session['interval_currency']           = $product->currency_dest;
-                        Yii::app()->session['interval_product_id']         = $product->id;
-                        Yii::app()->session['interval_product_interval']   = $product->product;
-                        Yii::app()->session['interval_product_sell_price'] = trim($modelSendCreditRates[$i]->sell_price);
-
-                        Yii::app()->session['allowedAmount'] = explode('-', $product->product);
-                    }
-                    $i++;
-
-                }
-
-                Yii::app()->session['amounts']      = $values;
-                Yii::app()->session['operatorId']   = $operatorid;
-                Yii::app()->session['ids_products'] = $ids_products;
-
-                $this->modelTransferToMobile->country  = $modelSendCreditProducts[0]->country;
-                $this->modelTransferToMobile->operator = $modelSendCreditProducts[0]->operator_name;
-
-                return $this->modelTransferToMobile;
+                $values[trim($product->id)] = '<font size=1px>' . $product->currency_dest . '</font> ' . trim($product->product) . ' = <font size=1px>' . $product->currency_orig . '</font> ' . trim($modelSendCreditRates[$i]->sell_price);
 
             } else {
-                echo 'Service inactive';
+                Yii::app()->session['is_interval']                 = true;
+                Yii::app()->session['interval_currency']           = $product->currency_dest;
+                Yii::app()->session['interval_product_id']         = $product->id;
+                Yii::app()->session['interval_product_interval']   = $product->product;
+                Yii::app()->session['interval_product_sell_price'] = trim($modelSendCreditRates[$i]->sell_price);
+
+                Yii::app()->session['allowedAmount'] = explode('-', $product->product);
             }
+            $i++;
+
         }
+
+        Yii::app()->session['amounts']      = $values;
+        Yii::app()->session['ids_products'] = $ids_products;
+
+        $this->modelTransferToMobile->country  = $modelSendCreditProducts[0]->country;
+        $this->modelTransferToMobile->operator = $modelSendCreditProducts[0]->operator_name;
+
     }
 
     public function confirmRefill()
     {
 
-        $product = $_POST['amountValues']; //is the amout to refill
+        $product = $_POST['TransferToMobile']['amountValues']; //is the amout to refill
 
         $modelSendCreditRates = SendCreditRates::model()->find(array(
-            'condition' => 'id_user = :key',
+            'condition' => 'id_user = :key AND id_product = :key1',
             'params'    => array(
                 ':key'  => Yii::app()->session['id_user'],
-                ':key1' => $_POST['amountValues'],
-            ),
-            'with'      => array(
-                'idProduct' => array(
-                    'condition' => 'idProduct.id =  :key1',
-                ),
+                ':key1' => $product,
             ),
         ));
 
@@ -301,7 +280,7 @@ class TransferPaymentController extends Controller
     {
         $modelSendCreditSummary            = new SendCreditSummary();
         $modelSendCreditSummary->id_user   = Yii::app()->session['id_user'];
-        $modelSendCreditSummary->service   = $_POST['TransferToMobile']['method'];
+        $modelSendCreditSummary->service   = 'Payment';
         $modelSendCreditSummary->number    = $this->number;
         $modelSendCreditSummary->confirmed = 0;
         $modelSendCreditSummary->cost      = $this->user_cost;
@@ -646,6 +625,154 @@ error_txt=Transaction successful';
             echo '</center>';
         } else {
             echo ' Invalid reffil';
+        }
+    }
+
+    public function actionConvertCurrency()
+    {
+        $method = 'Payment';
+
+        $country = $_GET['country'];
+
+        $modelSendCreditProducts = SendCreditProducts::model()->findAll('country = :key AND status = 1 AND type = "payment" AND product LIKE "%-%"', array(':key' => $country));
+
+        if ($_GET['currency'] == 'EUR') {
+
+            /*
+            Request 2: to Send EUR 2.00, will show Selling price EUR 2.00 and BDT amount converted to BDT 125 to
+            send(2.00-0.75/0.01).
+            If click on "R", will show EUR 1.25.
+             */
+
+            $amountEUR = $_GET['amount'];
+
+            $amountBDT = $amountEUR / ($modelSendCreditProducts[0]->wholesale_price);
+
+            foreach ($modelSendCreditProducts as $key => $value) {
+
+                $product = explode('-', $value->product);
+                if ($amountBDT >= $product[0] && $amountBDT <= $product[1]) {
+                    $product = $value;
+                    break;
+                }
+            }
+
+            if (!isset($product->product)) {
+                exit('invalid');
+            }
+
+            $modelSendCreditRates = SendCreditRates::model()->find(array(
+                'condition' => 'id_user = :key',
+                'params'    => array(
+                    ':key'  => Yii::app()->session['id_user'],
+                    ':key1' => $product->product,
+                ),
+                'with'      => array(
+                    'idProduct' => array(
+                        'condition' => 'product =  :key1 AND operator_id = 0',
+                    ),
+                ),
+            ));
+
+            echo $amount = number_format(($amountEUR - $modelSendCreditRates->sell_price) / $modelSendCreditProducts[0]->wholesale_price, 0, '', '');
+        } else {
+
+            /*
+            Request 1: to Send BDT 150, will show Selling price EUR 2.25(150*0.01+0.75). If click on "R", will show EUR 1.5.
+             */
+            $amountBDT = $_GET['amount'];
+
+            foreach ($modelSendCreditProducts as $key => $value) {
+                $product = explode('-', $value->product);
+                if ($amountBDT >= $product[0] && $amountBDT <= $product[1]) {
+                    $product = $value;
+                    break;
+                }
+            }
+
+            if (!isset($product->product)) {
+                exit('invalid');
+            }
+
+            $modelSendCreditRates = SendCreditRates::model()->find(array(
+                'condition' => 'id_user = :key AND id_product = :key1',
+                'params'    => array(
+                    ':key'  => Yii::app()->session['id_user'],
+                    ':key1' => $product->id,
+                ),
+            ));
+
+            echo $amount = number_format(($amountBDT * $product->wholesale_price) + $modelSendCreditRates->sell_price, 2);
+
+        }
+    }
+
+    public function convertCurrency()
+    {
+        echo $method = 'Payment';
+
+        $amountEUR = $_GET['valueAmoutEUR'];
+        $amountBDT = $_GET['valueAmoutBDT'];
+        $country   = $_GET['country'];
+
+        $modelSendCreditProducts = SendCreditProducts::model()->findAll('country = :key AND status = 1 AND type = "payment" AND product LIKE "%-%"', array(':key' => $country));
+
+        echo $country;
+        print_r($modelSendCreditProducts[0]->getAttributes());
+
+        foreach ($modelSendCreditProducts as $key => $value) {
+
+            $product = explode('-', $value->product);
+            if ($amountBDT >= $product[0] && $amountBDT <= $product[1]) {
+                $product = $value;
+                break;
+            }
+        }
+
+        echo $product;
+
+        $modelSendCreditRates = SendCreditRates::model()->find(array(
+            'condition' => 'id_user = :key',
+            'params'    => array(
+                ':key'  => Yii::app()->session['id_user'],
+                ':key1' => $product->product,
+            ),
+            'with'      => array(
+                'idProduct' => array(
+                    'condition' => 'product =  :key1 AND operator_id = 0',
+                ),
+            ),
+        ));
+
+        $amount = $amountEUR - $modelSendCreditRates->sell_price;
+
+        $methosProfit = 'transfer_' . $methodOld . '_profit';
+
+        $user_profit = $this->modelTransferToMobile->{$methosProfit};
+
+        $amountR = $amount - ($amount * ($user_profit / 100));
+
+        //$user_profit = $amount * ($user_profit / 100);
+
+        if (isset($_GET['method'])) {
+            echo 'EUR ' . $amountR;
+        } else {
+            return $amount;
+        }
+
+    }
+
+    public function actionCheckNumber($value = '')
+    {
+
+        $metric_operator_name                       = Orange2::checkMetric($_GET['meter'], $_GET['country']);
+        Yii::app()->session['metric_operator_name'] = $metric_operator_name;
+        if ($metric_operator_name === false) {
+            echo 'The Meter number is invalid. Please try again';
+
+            exit;
+        } else {
+            echo $metric_operator_name;
         }
     }
 
