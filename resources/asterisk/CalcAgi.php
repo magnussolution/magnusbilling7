@@ -594,8 +594,6 @@ class CalcAgi
 
             $this->usedratecard = $k;
 
-            $agi->verbose('$k' . $k);
-
             $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $this->tariffObj[$k]['id_trunk'] . " LIMIT 1";
             $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
