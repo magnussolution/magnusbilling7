@@ -37,35 +37,27 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 
 <div class='field' id="aditionalInfo" style="display:inline; border:0">
 	<label>Country:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['country'] ?></div>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->country ?></div>
 	<label>Number:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
 	<label>Operator:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['operator'] ?></div>
-	<label>Product:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
-	<label>Amount to be collected:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
-
-
-<?php if ($_POST['TransferToMobile']['metric'] != ''): ?>
-
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->type ?></div>
+	<label>Amount:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->amountValuesBDT ?></div>
 	<label>Meter:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['metric'] ?></div>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->meter ?></div>
 	<label>Meter owner name:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $metric_operator_name ?></div>
-	<?php echo $form->hiddenField($modelTransferToMobile, 'metric', array('value' => $_POST['TransferToMobile']['metric'])); ?>
-	<?php echo $form->hiddenField($modelTransferToMobile, 'metric_operator_name', array('value' => $metric_operator_name)); ?>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo Yii::app()->session['metric_operator_name'] ?></div>
 </div>
 
-<?php endif;?>
+
 
 </div>
-
-<?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $_POST['TransferToMobile']['number'])); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'country', array('value' => $_POST['TransferToMobile']['country'])); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'operator', array('value' => $_POST['TransferToMobile']['operator'])); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'amountValues', array('value' => $_POST['TransferToMobile']['amountValues'])); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'country', array('value' => $this->modelTransferToMobile->country)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $this->modelTransferToMobile->number)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'type', array('value' => $this->modelTransferToMobile->type)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesBDT', array('value' => $this->modelTransferToMobile->amountValuesBDT)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'meter', array('value' => $this->modelTransferToMobile->meter)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'confirmed', array('value' => 'ok')); ?>
 
 
@@ -88,10 +80,9 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	Confirm?<br><br>
 	Country: <?php echo $_POST['TransferToMobile']['country'] ?><br>
 	Number: <?php echo $_POST['TransferToMobile']['number'] ?><br>
-	Product:<?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?><br>
-	<?php if ($_POST['TransferToMobile']['metric'] != ''): ?>
-		Meter: <?php echo $_POST['TransferToMobile']['metric'] ?><br>
-	<?php endif;?>
+	Product:<?php echo $this->modelTransferToMobile->amountValuesBDT ?><br>
+	Meter: <?php echo $this->modelTransferToMobile->meter ?><br>
+
 </div>
 
 <?php

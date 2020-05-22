@@ -33,6 +33,9 @@ class TransferToMobile extends Model
     public $provider;
     public $product;
     public $metric;
+    public $meter;
+    public $type;
+    public $metric_operator_name;
     /**
      * Return the static class of model.
      *

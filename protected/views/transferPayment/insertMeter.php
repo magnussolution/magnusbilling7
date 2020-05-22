@@ -1,4 +1,4 @@
-insertnumber<link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
+insert meter<link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 
 <?php
 
@@ -22,7 +22,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="field">
         <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'id' => 'country', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'country') ?>
 </div>
 
@@ -38,18 +38,13 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
 </div>
 
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Meter')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'meter', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'meter') ?>
-</div>
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
-    <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Meter number')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'meter', array('class' => 'input', 'id' => 'meter')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'meter') ?>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'meter') ?></p>
 </div>
 
 
@@ -57,9 +52,11 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo CHtml::submitButton(Yii::t('yii', 'Next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
+    'style'   => 'display: none;',
     'id'      => 'secondButton'));
 ?>
-<input class="button" style="width: 80px;" onclick="window.location='../../index.php/TransferToMobile/read';" value="Cancel">
+<input class="button" style="width: 80px; " onclick="window.location='../../index.php/TransferToMobile/read';" value="Cancel">
+<input id ='check_number'  class="button"  onclick="checknumber()"  value="Check number" readonly>
 </div>
 <div class="controls" id="buttondivWait"></div>
 <?php
@@ -68,6 +65,37 @@ $this->endWidget();?>
 
 
 <script type="text/javascript">
+
+
+
+    function checknumber() {
+         meter = document.getElementById('meter').value;
+         country = document.getElementById('country').value;
+
+        if (meter > 0) {
+             document.getElementById("check_number").style.display = 'none';
+            document.getElementById("buttondivWait").innerHTML = "<font color = green>Wait! </font>";
+            var http = new XMLHttpRequest()
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert("Meter operator name is: "+this.responseText);
+                       document.getElementById("check_number").style.display = 'inline';
+                        document.getElementById("buttondivWait").innerHTML = "";
+
+                        if (this.responseText != 'The Meter number is invalid. Please try again') {
+                            document.getElementById("secondButton").style.display = 'inline';
+                        }
+                }
+            };
+
+            http.open("GET", "../../index.php/transferPayment/checkNumber?meter="+meter+"&country="+country,true)
+            http.send(null);
+        }else{
+            alert("Meter need be numeric")
+        }
+
+    }
     function button2(e) {
 
         document.getElementById("sendButton").style.display = 'none';
