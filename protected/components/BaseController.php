@@ -340,7 +340,7 @@ class BaseController extends CController
             exit;
         }
 
-        return new CDbCriteria(array(
+        $criteria = array(
             'select'    => $this->select,
             'join'      => $this->join,
             'condition' => $this->filter,
@@ -349,9 +349,12 @@ class BaseController extends CController
             'order'     => $this->order,
             'limit'     => $this->limit,
             'offset'    => $this->start,
-            'group'     => $this->group,
-        ));
 
+        );
+
+        if ($this->group != 1) {
+            $criteria['group'] = $this->group;
+        }
     }
 
     public function readCountRecord()
@@ -488,15 +491,8 @@ class BaseController extends CController
         if (!in_array($this->controllerName, $this->nofilterPerAdminGroup)
             && Yii::app()->session['user_type'] == 1 && Yii::app()->session['adminLimitUsers'] == true) {
 
-            if ($this->controllerName != 'user' && !preg_match("/pkg_user/", $this->join)) {
-                $this->join .= ' JOIN pkg_user b ON t.id_user = b.id';
-                $defaultFilterByUser = 'b.' . $this->defaultFilterByUser;
-            } else {
-                $defaultFilterByUser = $this->defaultFilterByUser;
-            }
+            $this->filter .= " AND t.id_user IN ( SELECT id FROM pkg_user WHERE id_group IN ( SELECT gug.id_group FROM pkg_group_user_group gug WHERE gug.id_group_user = :idgA0 ) )";
 
-            $filterByGroup = preg_replace("/id_user/", 'id_group', $defaultFilterByUser);
-            $this->filter .= " AND $filterByGroup IN (SELECT gug.id_group FROM pkg_group_user_group gug WHERE gug.id_group_user = :idgA0 )";
             $this->paramsFilter['idgA0'] = Yii::app()->session['id_group'];
         }
 
