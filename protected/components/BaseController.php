@@ -355,6 +355,8 @@ class BaseController extends CController
         if ($this->group != 1) {
             $criteria['group'] = $this->group;
         }
+
+        return $criteria;
     }
 
     public function readCountRecord()

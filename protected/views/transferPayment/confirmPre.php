@@ -1,4 +1,4 @@
-confirme
+
 
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 

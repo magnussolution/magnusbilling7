@@ -16,26 +16,26 @@ $form = $this->beginWidget('CActiveForm', array(
         <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
-        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
 </div>
 
-<br>
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill No')) ?>
-    <?php echo $form->numberField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'id' => 'country', 'readonly' => true)) ?>
+        <?php echo $form->error($modelTransferToMobile, 'country') ?>
+</div>
+
+<div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Type')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'type', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->error($modelTransferToMobile, 'type') ?>
+</div>
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill Number')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
-</div>
-
-
-
-
-<div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill amount')) ?>
-    <?php echo $form->numberField($modelTransferToMobile, 'credit', array('class' => 'input')) ?>
-    <?php echo $form->error($modelTransferToMobile, 'credit') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Bill amount') ?></p>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Bill Number') ?></p>
 </div>
 
 
@@ -60,13 +60,28 @@ $this->widget(
 );
 
 ?>
+<?php echo $form->error($modelTransferToMobile, 'creationdate') ?>
+</div>
+<br>
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, "Bill amount (" . Yii::app()->session['currency_dest'] . ')') ?>
+    <?php echo $form->textField($modelTransferToMobile, 'bill_amount', array('id' => 'bill_amount', 'class' => 'input', 'onkeyup' => 'showPriceEUR()')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'bill_amount') ?>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Bill amount') ?></p>
 </div>
 
-<?php echo $form->hiddenField($modelTransferToMobile, 'method', array('value' => $selectedMethod)); ?>
+
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, "Paid Amount (" . Yii::app()->session['currency_orig'] . ')') ?>
+    <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR', array('id' => 'amountValuesEUR', 'class' => 'input', 'onkeyup' => 'showPriceBDT()')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'amountValuesEUR') ?>
+</div>
 
 
 
-<div class="controls" id="sendButton">
+
+<div class="controls" id="sendButton" style="display: none">
 <?php echo CHtml::submitButton(Yii::t('yii', 'next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
@@ -81,12 +96,75 @@ $this->widget(
 $this->endWidget();?>
 
 
+
 <script type="text/javascript">
 
+    function showPriceEUR() {
 
+
+
+        bill_amount = document.getElementById('bill_amount').value;
+
+        if (bill_amount > 0) {
+            var http = new XMLHttpRequest()
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+
+                    if (this.responseText =='invalid') {
+                        document.getElementById('sendButton').style.display = 'none';
+                    }else{
+                        document.getElementById('sendButton').style.display = 'inline';
+                    }
+
+
+                    document.getElementById('buying_price').style.display = 'inline';
+                    document.getElementById('buying_price').value = 'R';
+                    document.getElementById('amountValuesEUR').value = this.responseText;
+                }
+            };
+
+            http.open("GET", "../../index.php/transferPayment/convertCurrency?currency=<?php echo Yii::app()->session['currency_dest'] ?>&amount="+bill_amount+"&country=<?php echo $_POST['TransferToMobile']['country']; ?>&type=Bill",true)
+            http.send(null);
+        }
+
+
+    }
+
+    function showPriceBDT() {
+
+
+
+        amountValuesEUR = document.getElementById('amountValuesEUR').value;
+
+
+        if (amountValuesEUR > 0) {
+            var http = new XMLHttpRequest()
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+                     if (this.responseText =='invalid') {
+                        document.getElementById('sendButton').style.display = 'none';
+                    }else{
+                        document.getElementById('sendButton').style.display = 'inline';
+                    }
+
+                    document.getElementById('bill_amount').value = this.responseText;
+                    document.getElementById('buying_price').style.display = 'inline';
+                    document.getElementById('buying_price').value = 'R';
+                    }
+                };
+
+            http.open("GET", "../../index.php/transferPayment/convertCurrency?currency=EUR&amount="+amountValuesEUR+"&country=<?php echo $_POST['TransferToMobile']['country']; ?>&type=Bill",true)
+            http.send(null);
+        }
+
+
+    }
 
     function button2(e) {
-        document.getElementById("sendButton").style.display = 'none';
         document.getElementById("buttondivWait").innerHTML = "<font color = green>Wait! </font>";
     }
 
