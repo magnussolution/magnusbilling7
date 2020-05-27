@@ -46,7 +46,7 @@ $fieldOption = array('class' => 'input');
         <br>
 
         <div class="field">
-            <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (EUR)')); ?>
+            <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (' . Yii::app()->session['currency_orig'] . ')')); ?>
             <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR',
     array(
         'class'   => 'input',
@@ -59,7 +59,7 @@ $fieldOption = array('class' => 'input');
         </div>
 
         <div class="field">
-            <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesBDT', array('label' => 'Receive Amount (BDT)')); ?>
+            <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesBDT', array('label' => 'Receive Amount (' . Yii::app()->session['currency_dest'] . ')')); ?>
             <?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT',
     array(
         'class'   => 'input',

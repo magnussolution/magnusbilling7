@@ -9,44 +9,63 @@
 class Orange2
 {
 
+    public function billElectricity($post, $modelSendCreditRates, $test)
+    {
+
+        $order = array(
+            "type"          => "bill",
+            "beneficiary"   => array(
+                'mobile' => '+221786434468',
+                "name"   => "Ibra",
+
+            ),
+            "billOrderData" => [
+
+                "billType" => [
+                    "id" => 1,
+                ],
+                'data'     => [
+                    'number' => $post['number'],
+                    'date'   => $post['creationdate'],
+                ],
+            ],
+
+            "targetTotal"   => $post['bill_amount'],
+
+        );
+
+        Orange2::sendOrder($order);
+
+    }
+
     public static function sendCredit($number, $modelSendCreditRates, $test)
     {
 
-        if (isset($_POST['TransferToMobile']['metric'])) {
-            $order = array(
-                "type"        => "cashpower",
-                "targetTotal" => $modelSendCreditRates->idProduct->product,
-                "beneficiary" => array(
-                    'mobile' => '+' . $number,
-                    "name"   => "ABC",
+        $order = array(
+            "type"        => "cashpower",
+            "targetTotal" => $modelSendCreditRates->idProduct->product,
+            "beneficiary" => array(
+                'mobile' => '+' . $number,
+                "name"   => "ABC",
 
-                ),
-                "meterId"     => $_POST['TransferToMobile']['metric'],
-            );
-        } else {
-            $order = array(
-                "type"        => "airtime",
-                "targetTotal" => $modelSendCreditRates->idProduct->product,
-                "beneficiary" => array(
-                    'mobile' => '+' . $number,
-                    "name"   => "ABC",
+            ),
+            "meterId"     => $_POST['TransferToMobile']['meter'],
+        );
 
-                ));
-        }
+        Orange2::sendOrder($order);
 
-        //$test = true;
-        /*
-        INSERT IGNORE INTO pkg_configuration  VALUES
-        (NULL, 'Orange2 username', 'Orange2_username', '', 'Orange2 username', 'global', '1'),
-        (NULL, 'Orange2 password', 'Orange2_password', '', 'Orange2 password', 'global', '1'),
-        (NULL, 'Orange2 test', 'Orange2_test', '0', 'Orange2 teste', 'global', '1');
-         */
+    }
+
+    public function sendOrder($order = '')
+    {
 
         $config = LoadConfig::getConfig();
 
         $username = $config['global']['Orange2_username'];
         $password = $config['global']['Orange2_password'];
         $test     = $config['global']['Orange2_test'];
+
+        $test = 1;
 
         if ($test == 1) {
             $url = 'https://qa.baluwo.com/rest/v1/external/transaction';
@@ -82,10 +101,7 @@ class Orange2
         $output = curl_exec($ch);
         $info   = curl_getinfo($ch);
         curl_close($ch);
-
         $output = json_decode($output);
-
-        // print_r($output);
 
         if (!isset($output->id) || !is_numeric($output->id)) {
             return 'error_txt=' . print_r($output, true);
@@ -112,7 +128,8 @@ class Orange2
             'Content-Length: 0',
         ));
         $output = curl_exec($ch);
-        $info   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        $info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         if ($info == 204) {
@@ -131,6 +148,8 @@ class Orange2
         $username = $config['global']['Orange2_username'];
         $password = $config['global']['Orange2_password'];
         $test     = $config['global']['Orange2_test'];
+
+        $test = 1;
 
         if (strlen($country)) {
             $_POST['TransferToMobile']['country'] = $country;
