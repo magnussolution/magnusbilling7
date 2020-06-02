@@ -76,7 +76,7 @@ class CSVActiveRecorder
         if ($this->data["additionalParams"] > 0) {
             $sql .= " " . implode(" ", array_map(
                 function ($v) {
-                    return $v['key'] . " = " . $v['value'] . ',';
+                    return $v['key'] . '= "' . $v['value'] . '",';
                 },
                 $this->additionalParams
             )

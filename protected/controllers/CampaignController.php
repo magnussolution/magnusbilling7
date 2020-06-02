@@ -255,7 +255,8 @@ class CampaignController extends Controller
             $additionalParams = [['key' => 'id_phonebook', 'value' => $id_phonebook], ['key' => 'creationdate', 'value' => $creationdate]];
             $errors           = array();
             if ($array) {
-                $recorder = new CSVActiveRecorder($array, 'PhoneNumber', $additionalParams);
+                $instanceModel = new PhoneNumber;
+                $recorder      = new CSVActiveRecorder($array, $instanceModel, $additionalParams);
                 if ($recorder->save());
                 $errors = $recorder->getErrors();
 
@@ -267,6 +268,8 @@ class CampaignController extends Controller
                 $this->nameSuccess => count($errors) > 0 ? false : true,
                 $this->nameMsg     => count($errors) > 0 ? implode(',', $errors) : $this->msgSuccess,
             ));
+
+            exit;
 
         }
 
