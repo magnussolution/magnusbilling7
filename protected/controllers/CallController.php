@@ -163,6 +163,14 @@ class CallController extends Controller
 
             $day = $day[2] . $day[1] . $day[0];
 
+            if ($modelCall->id_server > 0 && $modelCall->idServer->type == 'asterisk') {
+
+                $host = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
+
+                header('Location: http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username);
+                exit;
+            }
+
             exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ', $output);
 
             if (isset($output[0])) {
