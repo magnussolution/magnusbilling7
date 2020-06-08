@@ -280,8 +280,6 @@ class TransferPaymentController extends Controller
 
         $result = Orange2::billElectricity($_POST['TransferToMobile'], $modelSendCreditRates, $this->test);
 
-        print_r($result);
-
         $this->checkResult($result);
 
         $this->updateDataBase();
@@ -604,7 +602,7 @@ class TransferPaymentController extends Controller
             $description = '';
         }
         //Send Credit BDT 150 to 01630593593 via flexiload at 2.25"
-        $description .= 'Send Credit BDT ' . $_POST['TransferToMobile']['amountValuesBDT'] . ' - ' . $this->modelTransferToMobile->number . ' via ' . $this->modelTransferToMobile->method . ' - EUR ' . $this->sell_price;
+        $description .= 'Send Credit BDT ' . $this->modelTransferToMobile->amountValuesBDT . ' - ' . $this->modelTransferToMobile->number . ' via ' . $this->modelTransferToMobile->method . ' - EUR ' . $this->sell_price;
 
         if ($this->test == true) {
             echo $description;

@@ -2,6 +2,7 @@
 return array(
 
     /*MENU CONFIGURATION*/
+    'config_title_signup_unique_doc'               => 'Signup: Allow multiples users with same DOC',
     'config_title_signup_admin_email'              => 'Sends an email to the admin when a user signsup',
     'config_desc_signup_admin_email'               => 'Sends an email to the admin when a new account is created from the signup page \n 0 - Disable \n1 - Enable',
     'config_title_enable_callingcard'              => 'Enable CallingCard',

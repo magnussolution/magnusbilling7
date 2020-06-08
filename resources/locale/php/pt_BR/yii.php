@@ -1,8 +1,11 @@
 <?php
 return array(
     /*new '' => '', */
+    'This DOC is already used per other user'                                                                                                                                          => 'Este CPF/CNPJ já esta em uso por outro usuário',
 
     /*MENU CONFIGURATION*/
+    'config_title_signup_unique_doc'                                                                                                                                                   => 'Permitir usuários se registrar com CPF/CNPJ já em uso',
+
     'config_title_signup_admin_email'                                                                                                                                                  => 'Avisar admin/email quando alguem se registrar',
     'config_desc_signup_admin_email'                                                                                                                                                   => 'Envia um email para o administrador quando alguem se cadastrar no formulário de registro. \n 0 - Desativa \n 1 - Ativa',
     'config_title_enable_callingcard'                                                                                                                                                  => 'Ativar CallingCard',
@@ -66,11 +69,11 @@ return array(
     'config_title_delay_notifications'                                                                                                                                                 => 'Intervalo de notificação',
     'config_desc_delay_notifications'                                                                                                                                                  => 'Intervalo para notificar os cliente de que estão com pouco credito.',
     'config_title_dialcommand_param'                                                                                                                                                   => 'AGI - Comando Dial',
-    'config_desc_dialcommand_param'                                                                                                                                                    => 'Mais informações em  : http://voip-info.org/wiki-Asterisk+cmd+dial',
+    'config_desc_dialcommand_param'                                                                                                                                                    => 'Mais informações em : http://voip-info.org/wiki-Asterisk+cmd+dial',
     'config_title_dialcommand_param_call_2did'                                                                                                                                         => 'AGI - DID Dial Command Params',
     'config_desc_dialcommand_param_call_2did'                                                                                                                                          => '%timeout% is the value of the paramater : Max time to Call a DID no billed',
     'config_title_dialcommand_param_sipiax_friend'                                                                                                                                     => 'AGI - Internal Call, Dial Command Params',
-    'config_desc_dialcommand_param_sipiax_friend'                                                                                                                                      => 'Parâmetros para o DIAL usado em ligações entre clientes.\nby default (3600000  =  1HOUR MAX CALL).',
+    'config_desc_dialcommand_param_sipiax_friend'                                                                                                                                      => 'Parâmetros para o DIAL usado em ligações entre clientes.\nby default (3600000 = 1HOUR MAX CALL).',
     'config_title_external_record_link'                                                                                                                                                => 'Baixar gravaçoes via API URL',
     'config_desc_external_record_link'                                                                                                                                                 => 'URL para baixar as gravaçoes. Permite baixar somente 1 audio por vez. Deixe em branco para desativar. URL EX: http://IP/record.php?username=%user%&amp;audio=%number%.%uniqueid%.%audio_exten%',
     'config_title_failover_lc_prefix'                                                                                                                                                  => 'AGI - Backup por LCR/LCD Prefix',
@@ -100,7 +103,7 @@ return array(
     'config_desc_paypal-softphone'                                                                                                                                                     => 'Ativar Paypal no Android Softphones, 0 - Disable 1 - Enable',
     'config_title_paypal_new_user'                                                                                                                                                     => 'Paypal para novos cliente',
     'config_desc_paypal_new_user'                                                                                                                                                      => 'Permitir recargas automáticas para cliente novos.\n0 - Desativado (RECOMENDADO )\n1 - Ativado',
-    'config_title_planbilling_daytopay'                                                                                                                                                => 'Notificação de  Pacotes de Ofertas',
+    'config_title_planbilling_daytopay'                                                                                                                                                => 'Notificação de Pacotes de Ofertas',
     'config_desc_planbilling_daytopay'                                                                                                                                                 => 'Total Dias anterior ao vencimento que o MBilling avisara o cliente para pagar o pacote de oferta.',
     'config_title_portabilidadePassword'                                                                                                                                               => 'Portabilidade Senha',
     'config_desc_portabilidadePassword'                                                                                                                                                => 'Senha da portabilidade para consulta via WebService',
@@ -125,7 +128,7 @@ return array(
     'config_title_show_playicon_cdr'                                                                                                                                                   => 'Mostrar icone PLAY no menu Relatório de Ligaçōes',
     'config_desc_show_playicon_cdr'                                                                                                                                                    => 'Mostrar icone PLAY no menu Relatório de Ligaçōes',
     'config_title_signup_auto_pass'                                                                                                                                                    => 'Gerar a senha automaticamente no formulario de registro',
-    'config_desc_signup_auto_pass'                                                                                                                                                     => 'Coloque o numero total de digitos que deseja gerar a senha. EX:  Se quer uma senha de 10 digitos, colocar 10. Minimo 6. Deixe em branco para o usuário poder cadastrar a propria senha',
+    'config_desc_signup_auto_pass'                                                                                                                                                     => 'Coloque o numero total de digitos que deseja gerar a senha. EX: Se quer uma senha de 10 digitos, colocar 10. Minimo 6. Deixe em branco para o usuário poder cadastrar a propria senha',
     'config_title_social_media_network'                                                                                                                                                => 'Link para redes sociais para mostrar no painel de cliente',
     'config_desc_social_media_network'                                                                                                                                                 => 'Link para redes sociais para mostrar no painel de cliente',
     'config_title_switchdialcommand'                                                                                                                                                   => 'AGI - Outbound Call',
@@ -184,7 +187,7 @@ return array(
     'address'                                                                                                                                                                          => 'Endereço',
     'mobile'                                                                                                                                                                           => 'Celular',
     'zipcode'                                                                                                                                                                          => 'CEP',
-    'Email already in use'                                                                                                                                                             => 'Email ja esta em uso.',
+    'Email already in use'                                                                                                                                                             => 'Email já esta em uso.',
     'Active'                                                                                                                                                                           => 'Ativo',
     'Inactive'                                                                                                                                                                         => 'Inativo',
     'Pending'                                                                                                                                                                          => 'Pendente',
@@ -236,7 +239,7 @@ return array(
     'Enter your loginkey which was sent for Email'                                                                                                                                     => 'Coloque a Chave de registro que foi enviado por email',
     'loginkey'                                                                                                                                                                         => 'Chave de registro',
     'This email is invalid'                                                                                                                                                            => 'Este Email é invalido',
-    'This email adress already exist'                                                                                                                                                  => 'Este email ja esta em uso',
+    'This email adress already exist'                                                                                                                                                  => 'Este email já esta em uso',
     'Phone must be a number.'                                                                                                                                                          => 'Somente números',
     'cannot be blank'                                                                                                                                                                  => 'Este campo não pode esta em branco',
     'username'                                                                                                                                                                         => 'Usuário',
