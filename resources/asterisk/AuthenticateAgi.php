@@ -350,7 +350,18 @@ class AuthenticateAgi
 
     public static function checkUserCallLimit(&$MAGNUS, &$agi)
     {
-        if ($MAGNUS->mode == 'standard' && $MAGNUS->user_calllimit >= 0) {
+        if ($MAGNUS->user_calllimit == 0) {
+            $agi->verbose("Send Congestion user call limit", 3);
+
+            if ($MAGNUS->modelUser->calllimit_error == 403) {
+                $agi->execute((busy), busy);
+            } else {
+                $agi->execute((congestion), Congestion);
+            }
+
+            $MAGNUS->hangup($agi);
+
+        } elseif ($MAGNUS->mode == 'standard' && $MAGNUS->user_calllimit >= 0) {
             //check user call limit
             $agi->verbose('check user call limit', 5);
 
