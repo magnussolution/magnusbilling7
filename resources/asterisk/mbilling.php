@@ -151,9 +151,13 @@ if ($agi->get_variable("SPY", true) == 1) {
     exit;
 }
 
-if ($MAGNUS->config['global']['apply_local_prefix_did_sip'] == 1) {
-    $MAGNUS->number_translation($agi, $MAGNUS->dnid);
-    $MAGNUS->dnid = $MAGNUS->destination;
+if (preg_match('/\-/', $MAGNUS->config['global']['apply_local_prefix_did_sip'])) {
+    $rules = explode('-', $MAGNUS->config['global']['apply_local_prefix_did_sip']);
+    if (substr($MAGNUS->dnid, 0, 1) == $rules['0']) {
+        $agi->verbose($MAGNUS->dnid);
+        $MAGNUS->dnid = $MAGNUS->destination = $rules['1'] . substr($MAGNUS->dnid, 1);
+        $agi->verbose($MAGNUS->dnid);
+    }
 }
 
 $didAgi = new DidAgi();
