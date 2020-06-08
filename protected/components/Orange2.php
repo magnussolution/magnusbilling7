@@ -11,30 +11,26 @@ class Orange2
 
     public function billElectricity($post, $modelSendCreditRates, $test)
     {
+        $date = date_create($post['creationdate']);
 
         $order = array(
-            "type"          => "bill",
             "beneficiary"   => array(
                 'mobile' => '+221786434468',
                 "name"   => "Ibra",
 
             ),
+            "type"          => "bill",
             "billOrderData" => [
-
                 "billType" => [
                     "id" => 1,
                 ],
-                'data'     => [
-                    'number' => $post['number'],
-                    'date'   => $post['creationdate'],
-                ],
+                'data'     => "{\"number\":\"" . $post['number'] . "\",\"date\":\"" . date_format($date, "d/m/Y") . "\"}",
             ],
-
             "targetTotal"   => $post['bill_amount'],
 
         );
 
-        Orange2::sendOrder($order);
+        return Orange2::sendOrder($order);
 
     }
 
@@ -52,7 +48,7 @@ class Orange2
             "meterId"     => $_POST['TransferToMobile']['meter'],
         );
 
-        Orange2::sendOrder($order);
+        return Orange2::sendOrder($order);
 
     }
 
@@ -64,8 +60,6 @@ class Orange2
         $username = $config['global']['Orange2_username'];
         $password = $config['global']['Orange2_password'];
         $test     = $config['global']['Orange2_test'];
-
-        $test = 1;
 
         if ($test == 1) {
             $url = 'https://qa.baluwo.com/rest/v1/external/transaction';
@@ -101,9 +95,20 @@ class Orange2
         $output = curl_exec($ch);
         $info   = curl_getinfo($ch);
         curl_close($ch);
-        $output = json_decode($output);
+
+        $output = json_decode($output, JSON_UNESCAPED_SLASHES);
+
+        if (isset($output['id'])) {
+            $output = (object) $output;
+        }
 
         if (!isset($output->id) || !is_numeric($output->id)) {
+            echo '<pre>';
+            echo "<br><br>";
+            print_r($data_string);
+            print_r($output);
+            echo "<br>RESPONSE<br><br>";
+
             return 'error_txt=' . print_r($output, true);
         }
 

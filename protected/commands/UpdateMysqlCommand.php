@@ -644,6 +644,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2020-06-08
+        if ($version == '7.2.4') {
+
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'Signup: Allow multiples users with same DOC', 'signup_unique_doc', '1', 'Signup: Allow multiples users with same DOC', 'global', '1');";
+            $this->executeDB($sql);
+
+            $version = '7.2.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
     }
 

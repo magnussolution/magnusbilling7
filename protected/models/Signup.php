@@ -93,6 +93,13 @@ class Signup extends Model
             }
 
         }
+
+        if ($config['global']['signup_unique_doc'] == 0 && strlen($this->doc)) {
+            $modelUserCheck = User::model()->find('doc = :key', array(':key' => $this->doc));
+            if (isset($modelUserCheck->id)) {
+                $this->addError($attribute, Yii::t('yii', 'This DOC is already used per other user'));
+            }
+        }
     }
     public function checkusername($attribute, $params)
     {
