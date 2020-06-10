@@ -96,7 +96,7 @@ class SmsController extends Controller
         SqlInject::sanitize($_POST);
         if (!isset($_POST['number']) || !isset($_POST['text']) || !isset($_POST['username'])) {
             exit('invalid data');
-        } else if (strlen($_POST['text']) > 140) {
+        } else if (strlen($_POST['text']) > 200) {
             exit('invalid number');
         } else if (strlen($_POST['username']) < 4) {
             exit('invalid user');
