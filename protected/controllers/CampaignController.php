@@ -243,7 +243,7 @@ class CampaignController extends Controller
         $modelCampaignPhonebook->id_phonebook = $id_phonebook;
         $modelCampaignPhonebook->save();
 
-        if ($type == 'CALL') {
+        if ($type == 1) {
             $audio                = $this->uploaddir . "idCampaign_" . $id_campaign;
             $modelCampaign->audio = $audio;
             $modelCampaign->save();
