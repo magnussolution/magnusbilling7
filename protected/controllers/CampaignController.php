@@ -229,6 +229,15 @@ class CampaignController extends Controller
         $modelCampaign->frequency        = 10;
         $modelCampaign->daily_start_time = $_POST['startingtime'];
         $modelCampaign->save();
+
+        if (count($modelCampaign->getErrors())) {
+            echo json_encode(array(
+                $this->nameSuccess => true,
+                $this->nameMsg     => print_r($modelCampaign->getErrors(), true),
+            ));
+            exit;
+        }
+
         $id_campaign = $modelCampaign->getPrimaryKey();
 
         $modelPhoneBook          = new PhoneBook();
@@ -247,6 +256,18 @@ class CampaignController extends Controller
             $audio                = $this->uploaddir . "idCampaign_" . $id_campaign;
             $modelCampaign->audio = $audio;
             $modelCampaign->save();
+        }
+
+        if (isset($_FILES['audio_path']['tmp_name']) && strlen($_FILES['audio_path']['tmp_name']) > 3) {
+
+            //import audio torpedo
+            if (file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav')) {
+                unlink($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav');
+            }
+
+            $typefile   = explode('.', $_FILES["audio_path"]["name"]);
+            $uploadfile = $this->uploaddir . 'idCampaign_' . $id_campaign . '.' . $typefile[1];
+            move_uploaded_file($_FILES["audio_path"]["tmp_name"], $uploadfile);
         }
 
         if (isset($_FILES['csv_path']['tmp_name']) && strlen($_FILES['csv_path']['tmp_name']) > 3) {
@@ -285,19 +306,6 @@ class CampaignController extends Controller
                 $modelPhoneNumber->save();
             }
         }
-
-        if (isset($_FILES['audio_path']['tmp_name']) && strlen($_FILES['audio_path']['tmp_name']) > 3) {
-
-            //import audio torpedo
-            if (file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav')) {
-                unlink($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav');
-            }
-
-            $typefile   = explode('.', $_FILES["audio_path"]["name"]);
-            $uploadfile = $this->uploaddir . 'idCampaign_' . $id_campaign . '.' . $typefile[1];
-            move_uploaded_file($_FILES["audio_path"]["tmp_name"], $uploadfile);
-        }
-
         echo json_encode(array(
             $this->nameSuccess => $this->success,
             $this->nameMsg     => $this->msg,
