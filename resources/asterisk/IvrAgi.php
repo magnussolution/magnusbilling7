@@ -279,11 +279,7 @@ class IvrAgi
             $DidAgi->call_did_billing($agi, $MAGNUS, $CalcAgi, $answeredtime, $dialstatus);
         }
 
-        if ($type == 'ivr') {
-            $MAGNUS->hangup($agi);
-        } else {
-            return;
-        }
+        return;
 
     }
 }

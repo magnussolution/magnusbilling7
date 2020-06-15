@@ -88,7 +88,9 @@ class DidAgi
                 $agi->verbose("Is a DID call But not have destination Hangup Call");
                 $MAGNUS->hangup($agi);
             }
+            exit;
         }
+
     }
     public function checkDidDestinationType(&$agi, &$MAGNUS, &$CalcAgi)
     {
