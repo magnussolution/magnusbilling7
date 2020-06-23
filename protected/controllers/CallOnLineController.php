@@ -71,17 +71,36 @@ class CallOnLineController extends Controller
                 $reinvite = end($reinvite);
             }
         }
-        echo json_encode(array(
-            'success'     => true,
-            'msg'         => 'success',
-            'description' => Yii::app()->session['isAdmin'] ? print_r($channel, true) : '',
-            'codec'       => $channel['WriteFormat'],
-            'billsec'     => $channel['billsec'],
-            'callerid'    => $channel['Caller ID'],
-            'from_ip'     => $from_ip,
-            'reinvite'    => preg_match("/local/", $reinvite) ? 'no' : 'yes',
-            'ndiscado'    => $channel['dnid'],
-        ));
+
+        if (preg_match('/^MC\!/', $channel['accountcode'])) {
+
+            $modelPhonenumber = PhoneNumber::model()->find('number = :key', array(':key' => $channel['Caller ID']));
+
+            echo json_encode(array(
+                'success'     => true,
+                'msg'         => 'success',
+                'description' => Yii::app()->session['isAdmin'] ? print_r($channel, true) : '',
+                'codec'       => $channel['WriteFormat'],
+                'billsec'     => $channel['billsec'],
+                'callerid'    => $modelPhonenumber->name . ' ' . $modelPhonenumber->city,
+                'from_ip'     => $from_ip,
+                'reinvite'    => preg_match("/local/", $reinvite) ? 'no' : 'yes',
+                'ndiscado'    => $channel['Caller ID'],
+            ));
+
+        } else {
+            echo json_encode(array(
+                'success'     => true,
+                'msg'         => 'success',
+                'description' => Yii::app()->session['isAdmin'] ? print_r($channel, true) : '',
+                'codec'       => $channel['WriteFormat'],
+                'billsec'     => $channel['billsec'],
+                'callerid'    => $channel['Caller ID'],
+                'from_ip'     => $from_ip,
+                'reinvite'    => preg_match("/local/", $reinvite) ? 'no' : 'yes',
+                'ndiscado'    => $channel['dnid'],
+            ));
+        }
     }
 
     public function actionDestroy()
