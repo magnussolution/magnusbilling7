@@ -1,4 +1,7 @@
 Locale.load({
+    'Servers': 'Servidores',
+    'Select one or more': 'Selecione um ou mais',
+    'Trunk Groups': 'Grupo de troncos',
     'Neighborhood': 'Bairro',
     'The call limit need be less than': 'O valor maximo deve ser menor que:',
     'Maximum call limit': 'Maximo de chamadas',

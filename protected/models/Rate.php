@@ -55,7 +55,7 @@ class Rate extends Model
 
         return array(
             array('id_plan', 'required'),
-            array('id_plan, id_prefix, id_trunk,initblock, billingblock, package_offer, minimal_time_charge', 'numerical', 'integerOnly' => true),
+            array('id_plan, id_prefix, id_trunk_group,initblock, billingblock, package_offer, minimal_time_charge', 'numerical', 'integerOnly' => true),
             array('rateinitial, additional_grace,status', 'length', 'max' => 15),
         );
 
@@ -67,9 +67,9 @@ class Rate extends Model
     {
 
         return array(
-            'idTrunk'  => array(self::BELONGS_TO, 'Trunk', 'id_trunk'),
-            'idPlan'   => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-            'idPrefix' => array(self::BELONGS_TO, 'Prefix', 'id_prefix'),
+            'idTrunkGroup' => array(self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'),
+            'idPlan'       => array(self::BELONGS_TO, 'Plan', 'id_plan'),
+            'idPrefix'     => array(self::BELONGS_TO, 'Prefix', 'id_prefix'),
         );
 
     }
@@ -77,7 +77,7 @@ class Rate extends Model
     public function insertPortabilidadeRates($rates)
     {
         if (count($rates) > 0) {
-            $sql = 'INSERT INTO pkg_rate (id_prefix, id_plan, rateinitial,  id_trunk, initblock, billingblock,  status) VALUES ' . implode(',', $rates) . ';';
+            $sql = 'INSERT INTO pkg_rate (id_prefix, id_plan, rateinitial,  id_trunk_group, initblock, billingblock,  status) VALUES ' . implode(',', $rates) . ';';
             Yii::app()->db->createCommand($sql)->execute();
         }
     }
@@ -101,7 +101,7 @@ class Rate extends Model
     {
 
         if ($userType == 1) {
-            $sqlRate = 'INSERT INTO pkg_rate (id_prefix, id_plan, rateinitial, id_trunk, initblock, billingblock, status) VALUES ' . implode(',', $sqlRate) . ';';
+            $sqlRate = 'INSERT INTO pkg_rate (id_prefix, id_plan, rateinitial, id_trunk_group, initblock, billingblock, status) VALUES ' . implode(',', $sqlRate) . ';';
         } else {
             $sqlRate = 'INSERT INTO pkg_rate_agent (id_prefix, id_plan, rateinitial,  initblock, billingblock) VALUES ' . implode(',', $sqlRate) . ';';
         }

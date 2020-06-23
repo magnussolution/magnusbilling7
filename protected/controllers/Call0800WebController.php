@@ -163,6 +163,25 @@ class Call0800WebController extends Controller
                     exit;
                 }
 
+                if ($searchTariff[0]['trunk_group_type'] == 1) {
+                    $order = 'id ASC';
+                } else if ($searchTariff[0]['trunk_group_type'] == 2) {
+                    $order = 'RAND()';
+                }
+
+                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->find([
+                    'condition' => 'id_trunk_group = :key',
+                    'params'    => [':key' => $searchTariff[0]['id_trunk_group']],
+                    'order'     => $order,
+                ]);
+
+                $modelTrunk   = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+                $idTrunk      = $modelTrunk->id;
+                $providertech = $modelTrunk->providertech;
+                $ipaddress    = $modelTrunk->trunkcode;
+                $removeprefix = $modelTrunk->removeprefix;
+                $prefix       = $modelTrunk->trunkprefix;
+
                 if (substr("$yournumber", 0, 4) == 1111) {
                     $yournumber = str_replace(substr($yournumber, 0, 7), "", $yournumber);
                 }
@@ -171,11 +190,7 @@ class Call0800WebController extends Controller
                     $destination = str_replace(substr($destination, 0, 7), "", $destination);
                 }
 
-                $yournumber   = $yournumber;
-                $providertech = $callTrunk[0]['rc_providertech'];
-                $ipaddress    = $callTrunk[0]['rc_providerip'];
-                $removeprefix = $callTrunk[0]['rc_removeprefix'];
-                $prefix       = $callTrunk[0]['rc_trunkprefix'];
+                $yournumber = $yournumber;
 
                 if (strncmp($yournumber, $removeprefix, strlen($removeprefix)) == 0) {
                     $yournumber = substr($yournumber, strlen($removeprefix));
@@ -196,7 +211,7 @@ class Call0800WebController extends Controller
                 $call .= "Set:CIDCALLBACK=1\n";
                 $call .= "Set:IDUSER=" . $result[0]['id'] . "\n";
                 $call .= "Set:IDPREFIX=" . $callTrunk[0]['id_prefix'] . "\n";
-                $call .= "Set:IDTRUNK=" . $callTrunk[0]['id_trunk'] . "\n";
+                $call .= "Set:IDTRUNK=" . $idTrunk . "\n";
                 $call .= "Set:IDPLAN=" . $result[0]['id_plan'] . "\n";
 
                 $call .= "Set:SECCALL=" . $destination . "\n";

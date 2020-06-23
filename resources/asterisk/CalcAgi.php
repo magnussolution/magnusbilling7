@@ -60,7 +60,6 @@ class CalcAgi
         $this->answeredtime      = 0;
         $this->real_answeredtime = 0;
         $this->dialstatus        = '';
-        $this->usedratecard      = '';
         $this->usedtrunk         = '';
         $this->lastcost          = '';
         $this->lastbuycost       = '';
@@ -72,33 +71,31 @@ class CalcAgi
             return false;
         }
 
-        for ($k = 0; $k < count($this->tariffObj); $k++) {
-            $res_calcultimeout = $this->calculateTimeout($MAGNUS, $k, $agi);
+        $res_calcultimeout = $this->calculateTimeout($MAGNUS, $agi);
 
-            if (substr($res_calcultimeout, 0, 5) == 'ERROR' || $res_calcultimeout < 1) {
-                return false;
-            } else {
-                return true;
-            }
+        if (substr($res_calcultimeout, 0, 5) == 'ERROR' || $res_calcultimeout < 1) {
+            return false;
+        } else {
+            return true;
         }
 
         return true;
     }
 
-    public function calculateTimeout(&$MAGNUS, $K = 0, $agi)
+    public function calculateTimeout(&$MAGNUS, $agi)
     {
-        $rateinitial                   = $MAGNUS->round_precision(abs($this->tariffObj[$K]['rateinitial']));
-        $initblock                     = $this->tariffObj[$K]['initblock'];
-        $billingblock                  = $this->tariffObj[$K]['billingblock'];
-        $connectcharge                 = $MAGNUS->round_precision(abs($this->tariffObj[$K]['connectcharge']));
-        $id_offer                      = $package_offer                      = $this->tariffObj[$K]['package_offer'];
-        $id_rate                       = $this->tariffObj[$K]['id_rate'];
-        $initial_credit                = $credit                = $MAGNUS->credit;
-        $this->freetimetocall_left[$K] = 0;
-        $this->freecall[$K]            = false;
-        $this->offerToApply[$K]        = null;
+        $rateinitial                  = $MAGNUS->round_precision(abs($this->tariffObj[0]['rateinitial']));
+        $initblock                    = $this->tariffObj[0]['initblock'];
+        $billingblock                 = $this->tariffObj[0]['billingblock'];
+        $connectcharge                = $MAGNUS->round_precision(abs($this->tariffObj[0]['connectcharge']));
+        $id_offer                     = $package_offer                     = $this->tariffObj[0]['package_offer'];
+        $id_rate                      = $this->tariffObj[0]['id_rate'];
+        $initial_credit               = $credit               = $MAGNUS->credit;
+        $this->freetimetocall_left[0] = 0;
+        $this->freecall[0]            = false;
+        $this->offerToApply[0]        = null;
 
-        if ($id_offer == 1 && $MAGNUS->id_offer > 0 && $K == 0) {
+        if ($id_offer == 1 && $MAGNUS->id_offer > 0) {
             $sql = "SELECT * FROM pkg_offer_use WHERE id_offer = $MAGNUS->id_offer
                                 AND id_user = $MAGNUS->id_user LIMIT 1";
             $modelOfferUse = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -116,9 +113,9 @@ class CalcAgi
                 switch ($packagetype) {
                     case 0:
                         $agi->verbose("offer Unlimited calls");
-                        $this->freecall[0]      = true;
-                        $package_selected       = true;
-                        $this->offerToApply[$K] = array("id" => $id_offer, "label" => "Unlimited calls", "type" => $packagetype);
+                        $this->freecall[0]     = true;
+                        $package_selected      = true;
+                        $this->offerToApply[0] = array("id" => $id_offer, "label" => "Unlimited calls", "type" => $packagetype);
                         break;
                     case 1:
 
@@ -127,26 +124,26 @@ class CalcAgi
                             $number_calls_used = $MAGNUS->freeCallUsed($agi, $MAGNUS->id_user, $id_offer, $billingtype, $startday);
 
                             if ($number_calls_used < $freetimetocall) {
-                                $this->freecall[$K]     = true;
-                                $package_selected       = true;
-                                $this->offerToApply[$K] = array("id" => $id_offer, "label" => "Number of Free calls", "type" => $packagetype);
-                                $agi->verbose(print_r($this->offerToApply[$K], true), 6);
+                                $this->freecall[0]     = true;
+                                $package_selected      = true;
+                                $this->offerToApply[0] = array("id" => $id_offer, "label" => "Number of Free calls", "type" => $packagetype);
+                                $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
                         break;
                     case 2:
                         if ($freetimetocall > 0) {
-                            $this->freetimetocall_used     = $MAGNUS->packageUsedSeconds($agi, $MAGNUS->id_user, $id_offer, $billingtype, $startday);
-                            $this->freetimetocall_left[$K] = $freetimetocall - $this->freetimetocall_used;
+                            $this->freetimetocall_used    = $MAGNUS->packageUsedSeconds($agi, $MAGNUS->id_user, $id_offer, $billingtype, $startday);
+                            $this->freetimetocall_left[0] = $freetimetocall - $this->freetimetocall_used;
 
-                            if ($this->freetimetocall_left[$K] < 0) {
-                                $this->freetimetocall_left[$K] = 0;
+                            if ($this->freetimetocall_left[0] < 0) {
+                                $this->freetimetocall_left[0] = 0;
                             }
 
-                            if ($this->freetimetocall_left[$K] > 0) {
-                                $package_selected       = true;
-                                $this->offerToApply[$K] = array("id" => $id_offer, "label" => "Free minutes", "type" => $packagetype);
-                                $agi->verbose(print_r($this->offerToApply[$K], true), 6);
+                            if ($this->freetimetocall_left[0] > 0) {
+                                $package_selected      = true;
+                                $this->offerToApply[0] = array("id" => $id_offer, "label" => "Free minutes", "type" => $packagetype);
+                                $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
                         break;
@@ -155,11 +152,11 @@ class CalcAgi
         }
 
         $credit -= $connectcharge;
-        $this->tariffObj[$K]['timeout']                     = 0;
-        $this->tariffObj[$K]['timeout_without_rules']       = 0;
-        $this->tariffObj[$K]['freetime_include_in_timeout'] = $this->freetimetocall_left[$K];
+        $this->tariffObj[0]['timeout']                     = 0;
+        $this->tariffObj[0]['timeout_without_rules']       = 0;
+        $this->tariffObj[0]['freetime_include_in_timeout'] = $this->freetimetocall_left[0];
         $agi->verbose("Credit $credit", 20);
-        if ($credit < 0 && !$this->freecall[$K] && $this->freetimetocall_left[$K] <= 0) {
+        if ($credit < 0 && !$this->freecall[0] && $this->freetimetocall_left[0] <= 0) {
             return "ERROR CT1";
             /*NO  CREDIT TO CALL */
         }
@@ -167,23 +164,23 @@ class CalcAgi
         $TIMEOUT              = 0;
         $answeredtime_1st_leg = 0;
         if ($rateinitial <= 0) /*Se o preÃ§o for 0, entao retornar o timeout em 3600 s*/ {
-            $this->tariffObj[$K]['timeout']               = 3600;
-            $this->tariffObj[$K]['timeout_without_rules'] = 3600;
-            $TIMEOUT                                      = 3600;
+            $this->tariffObj[0]['timeout']               = 3600;
+            $this->tariffObj[0]['timeout_without_rules'] = 3600;
+            $TIMEOUT                                     = 3600;
             return $TIMEOUT;
         }
 
-        if ($this->freecall[$K]) /*usado para planos gratis*/ {
-            $this->tariffObj[$K]['timeout']                     = 3600;
-            $TIMEOUT                                            = 3600;
-            $this->tariffObj[$K]['timeout_without_rules']       = 3600;
-            $this->tariffObj[$K]['freetime_include_in_timeout'] = 3600;
+        if ($this->freecall[0]) /*usado para planos gratis*/ {
+            $this->tariffObj[0]['timeout']                     = 3600;
+            $TIMEOUT                                           = 3600;
+            $this->tariffObj[0]['timeout_without_rules']       = 3600;
+            $this->tariffObj[0]['freetime_include_in_timeout'] = 3600;
             return $TIMEOUT;
         }
-        if ($credit < 0 && $this->freetimetocall_left[$K] > 0) {
-            $this->tariffObj[$K]['timeout']               = $this->freetimetocall_left[$K];
-            $TIMEOUT                                      = $this->freetimetocall_left[$K];
-            $this->tariffObj[$K]['timeout_without_rules'] = $this->freetimetocall_left[$K];
+        if ($credit < 0 && $this->freetimetocall_left[0] > 0) {
+            $this->tariffObj[0]['timeout']               = $this->freetimetocall_left[0];
+            $TIMEOUT                                     = $this->freetimetocall_left[0];
+            $this->tariffObj[0]['timeout_without_rules'] = $this->freetimetocall_left[0];
             return $TIMEOUT;
         }
 
@@ -204,31 +201,31 @@ class CalcAgi
         $TIMEOUT = $num_sec;
 
         /*Call time to speak without rate rules... idiot rules*/
-        $num_min_WR                                   = $initial_credit / $rateinitial;
-        $num_sec_WR                                   = intval($num_min_WR * 60);
-        $this->tariffObj[$K]['timeout_without_rules'] = $num_sec_WR + $this->freetimetocall_left[$K];
-        $this->tariffObj[$K]['timeout']               = $TIMEOUT + $this->freetimetocall_left[$K];
+        $num_min_WR                                  = $initial_credit / $rateinitial;
+        $num_sec_WR                                  = intval($num_min_WR * 60);
+        $this->tariffObj[0]['timeout_without_rules'] = $num_sec_WR + $this->freetimetocall_left[0];
+        $this->tariffObj[0]['timeout']               = $TIMEOUT + $this->freetimetocall_left[0];
 
-        return $TIMEOUT + $this->freetimetocall_left[$K];
+        return $TIMEOUT + $this->freetimetocall_left[0];
     }
 
-    public function calculateCost(&$MAGNUS, $callduration, $K = 0, $agi)
+    public function calculateCost(&$MAGNUS, $callduration, $agi)
     {
-        $rateinitial           = $MAGNUS->round_precision(abs($this->tariffObj[$K]['rateinitial']));
-        $initblock             = $this->tariffObj[$K]['initblock'];
-        $billingblock          = $this->tariffObj[$K]['billingblock'];
-        $connectcharge         = $MAGNUS->round_precision(abs($this->tariffObj[$K]['connectcharge']));
-        $disconnectcharge      = $MAGNUS->round_precision(abs($this->tariffObj[$K]['disconnectcharge']));
-        $additional_grace_time = $this->tariffObj[$K]['additional_grace'];
+        $rateinitial           = $MAGNUS->round_precision(abs($this->tariffObj[0]['rateinitial']));
+        $initblock             = $this->tariffObj[0]['initblock'];
+        $billingblock          = $this->tariffObj[0]['billingblock'];
+        $connectcharge         = $MAGNUS->round_precision(abs($this->tariffObj[0]['connectcharge']));
+        $disconnectcharge      = $MAGNUS->round_precision(abs($this->tariffObj[0]['disconnectcharge']));
+        $additional_grace_time = $this->tariffObj[0]['additional_grace'];
 
         $this->freetimetocall_used = 0;
 
         $cost = 0;
         $cost += $connectcharge;
 
-        if ($this->freecall[$K]) {
+        if ($this->freecall[0]) {
             $this->lastcost = 0;
-            $agi->verbose("CALCUL COST: K=$K - SELLING COST: $cost", 10);
+            $agi->verbose("CALCUL COST: SELLING COST: $cost", 10);
             return;
         }
         if ($callduration < $initblock) {
@@ -241,7 +238,7 @@ class CalcAgi
                 $callduration += ($billingblock - $mod_sec);
             }
         }
-        if ($this->freetimetocall_left[$K] >= $callduration) {
+        if ($this->freetimetocall_left[0] >= $callduration) {
             $this->freetimetocall_used = $callduration;
             $callduration              = 0;
         }
@@ -250,7 +247,7 @@ class CalcAgi
         $agi->verbose("CALCULCOST: 1. COST: \$cost = ($callduration/60) * $rateinitial ", 10);
 
         $this->lastcost = $MAGNUS->round_precision($cost);
-        $agi->verbose("CALCULCOST: K=$K -  SELLING COST:$this->lastcost", 10);
+        $agi->verbose("CALCULCOST:  -  SELLING COST:$this->lastcost", 10);
     }
 
     public function array_csort()
@@ -278,10 +275,9 @@ class CalcAgi
     public function updateSystem(&$MAGNUS, &$agi, $doibill = 1, $didcall = 0, $callback = 0)
     {
         $agi->verbose('Update System', 6);
-        $this->usedratecard    = $this->usedratecard < 0 ? 0 : $this->usedratecard;
-        $K                     = $this->usedratecard;
+
         $id_offer              = $MAGNUS->id_offer;
-        $additional_grace_time = $this->tariffObj[$K]['additional_grace'];
+        $additional_grace_time = $this->tariffObj[0]['additional_grace'];
         $sessiontime           = $this->answeredtime;
         $dialstatus            = $this->dialstatus;
 
@@ -299,12 +295,12 @@ class CalcAgi
                 }
             }
 
-            if (($id_offer != -1) && ($this->offerToApply[$K] != null)) {
-                $id_offer = $this->offerToApply[$K]["id"];
+            if (($id_offer != -1) && ($this->offerToApply[0] != null)) {
+                $id_offer = $this->offerToApply[0]["id"];
 
                 $this->calculateCost($MAGNUS, $sessiontime, 0, $agi);
 
-                switch ($this->offerToApply[$K]["type"]) {
+                switch ($this->offerToApply[0]["type"]) {
                     /*Unlimited*/
                     case 0:
                         $this->freetimetocall_used = $sessiontime;
@@ -342,27 +338,27 @@ class CalcAgi
                 $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
                 $agi->exec($sql);
             } else {
-                $this->calculateCost($MAGNUS, $sessiontime, $K, $agi);
+                $this->calculateCost($MAGNUS, $sessiontime, $agi);
             }
         } else {
             $sessiontime = 0;
         }
         $agi->verbose('Sessiontime' . $sessiontime, 10);
 
-        if (($id_offer != -1) && ($this->offerToApply[$K] != null) && $sessiontime > 0) {
+        if (($id_offer != -1) && ($this->offerToApply[0] != null) && $sessiontime > 0) {
             $sessiontime = $this->freetimetocall_used;
         }
 
         $id_prefix = $this->tariffObj[0]['id_prefix'];
-        $id_plan   = $this->tariffObj[$K]['id_plan'];
+        $id_plan   = $this->tariffObj[0]['id_plan'];
 
-        if ($doibill == 0 || $sessiontime <= $this->tariffObj[$K]['minimal_time_charge']) {
+        if ($doibill == 0 || $sessiontime <= $this->tariffObj[0]['minimal_time_charge']) {
             $cost = 0;
         } else {
             $cost = $this->lastcost;
         }
 
-        $agi->verbose("CALL: used tariff K=$K - (sessiontime=$sessiontime :: dialstatus=$dialstatus)", 10);
+        $agi->verbose("CALL: (sessiontime=$sessiontime :: dialstatus=$dialstatus)", 10);
 
         if ($didcall) {
             $calltype = 2;
@@ -391,8 +387,8 @@ class CalcAgi
 
         /*recondeo call*/
         if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $sessiontime > 0) {
-            $initblock    = ($this->tariffObj[$K]['initblock'] < 1) ? 1 : $this->tariffObj[$K]['initblock'];
-            $billingblock = ($this->tariffObj[$K]['billingblock'] < 1) ? 1 : $this->tariffObj[$K]['billingblock'];
+            $initblock    = ($this->tariffObj[0]['initblock'] < 1) ? 1 : $this->tariffObj[0]['initblock'];
+            $billingblock = ($this->tariffObj[0]['billingblock'] < 1) ? 1 : $this->tariffObj[0]['billingblock'];
 
             if ($sessiontime > $initblock) {
                 $restominutos   = $sessiontime % $billingblock;
@@ -582,28 +578,31 @@ class CalcAgi
 
     public function sendCall($agi, $destination, &$MAGNUS, $typecall = 0)
     {
-        $max_long = 2147483647;
-
         if (substr("$destination", 0, 4) == 1111) /*Retira o techprefix de numeros portados*/ {
             $destination = str_replace(substr($destination, 0, 7), "", $destination);
         }
         $old_destination = $destination;
 
-        for ($k = 0; $k < count($this->tariffObj); $k++) {
-            $destination = $old_destination;
+        if ($this->tariffObj[0]['trunk_group_type'] == 1) {
+            $order = 'id ASC';
+        } else if ($this->tariffObj[0]['trunk_group_type'] == 2) {
+            $order = 'RAND()';
+        }
 
-            $this->usedratecard = $k;
+        $sql         = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $this->tariffObj[0]['id_trunk_group'] . " ORDER BY " . $order;
+        $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
-            $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $this->tariffObj[$k]['id_trunk'] . " LIMIT 1";
+        foreach ($modelTrunks as $key => $trunk) {
+
+            $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
             $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            $id_trunk          = $modelTrunk->id;
+            $this->usedtrunk   = $modelTrunk->id;
             $prefix            = $modelTrunk->trunkprefix;
             $tech              = $modelTrunk->providertech;
             $trunkcode         = $modelTrunk->trunkcode;
             $removeprefix      = $modelTrunk->removeprefix;
             $timeout           = $this->tariffObj[0]['timeout'];
-            $failover_trunk    = $modelTrunk->failover_trunk;
             $addparameter      = $modelTrunk->addparameter;
             $inuse             = $modelTrunk->inuse;
             $maxuse            = $modelTrunk->maxuse;
@@ -611,116 +610,62 @@ class CalcAgi
             $status            = $modelTrunk->status;
             $this->id_provider = $modelTrunk->id_provider;
 
-            if ($id_trunk > '0') {
-                $this->usedtrunk   = $id_trunk;
-                $usetrunk_failover = 1;
-            } else {
-                return false;
-            }
-
             if ($typecall == 1) {
                 $timeout = 3600;
             }
 
-            $outcid = 0;
-
-            $this->sendCalltoTrunk($MAGNUS, $agi, $k, $destination, $prefix, $tech, $trunkcode, $removeprefix, $timeout
-                , $addparameter, $inuse, $maxuse, $allow_error, $status);
-
-            $loop_failover = 0;
-
-            while ($loop_failover <= $MAGNUS->agiconfig['failover_recursive_limit']
-                && is_numeric($failover_trunk) && $failover_trunk >= 0
-                && ($this->dialstatus == "CHANUNAVAIL" || $this->dialstatus == "CONGESTION")) {
-                $loop_failover++;
-                $this->real_answeredtime = $this->answeredtime = 0;
-                $this->usedtrunk         = $failover_trunk;
-                $agi->verbose("K=$k -> ANSWEREDTIME=" . $this->answeredtime . "-DIALSTATUS=" . $this->dialstatus, 10);
-                $destination = $old_destination;
-
-                $sql        = "SELECT *, pkg_trunk.id id FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $failover_trunk . " LIMIT 1";
-                $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-
-                if (isset($modelTrunk->id)) {
-                    $prefix              = $modelTrunk->trunkprefix;
-                    $tech                = $modelTrunk->providertech;
-                    $trunkcode           = $modelTrunk->trunkcode;
-                    $removeprefix        = $modelTrunk->removeprefix;
-                    $next_failover_trunk = $modelTrunk->failover_trunk;
-                    $this->id_provider   = $modelTrunk->id_provider;
-                    $status              = $modelTrunk->status;
-                    $timeout             = $this->tariffObj[0]['timeout'];
-                    $inuse               = $this->tariffObj[$k]['inuse']               = $modelTrunk->inuse;
-                    $maxuse              = $this->tariffObj[$k]['maxuse']              = $modelTrunk->maxuse;
-                    $allow_error         = $this->tariffObj[$k]['allow_error']         = $modelTrunk->allow_error;
-                    $addparameter        = $this->tariffObj[$k]['rt_addparameter_trunk']        = $modelTrunk->addparameter;
-
-                    $this->tariffObj[$k]['credit_control'] = $modelTrunk->credit_control;
-                    $this->tariffObj[$k]['credit']         = $modelTrunk->credit;
-
-                    if ($status == 0) {
-                        $agi->verbose("Failover trunk cannot be used because it is disabled", 3);
-                        break;
-                    }
-
-                    $this->sendCalltoTrunk($MAGNUS, $agi, $k, $destination, $prefix, $tech, $trunkcode, $removeprefix, $timeout
-                        , $addparameter, $inuse, $maxuse, $allow_error, $status);
-                    $agi->verbose("FAILOVER app_callingcard: Dialing '$dialstr' with timeout of '$timeout'.", 15);
-
-                    $agi->verbose("[FAILOVER K=$k]:[ANSTIME=" . $this->answeredtime . "-DIALSTATUS=" . $this->dialstatus, 15);
-                }
-                // IF THE FAILOVER TRUNK IS SAME AS THE ACTUAL TRUNK WE BREAK
-                if ($next_failover_trunk == $failover_trunk) {
-                    break;
-                } else {
-                    $failover_trunk = $next_failover_trunk;
-                }
-
+            if ($this->tariffObj[0]['credit_control'] == 1 && $this->tariffObj[0]['credit'] <= 0) {
+                $agi->verbose("Provider not have credit", 3);
+                continue;
             }
 
-            if (($this->dialstatus == "CANCEL")) {
-                return true;
+            if ($status == 0) {
+                $agi->verbose("Trunk is inactive", 3);
+                continue;
             }
 
-            // END FOR LOOP FAILOVER
-            //# Ooh, something actually happened!
-            if ($this->dialstatus == "BUSY") {
-                $this->real_answeredtime = $this->answeredtime = 0;
-                if ($MAGNUS->play_audio == 1) {
-                    $agi->stream_file('prepaid-isbusy', '#');
-                } else {
-                    $agi->execute((busy), busy);
-                }
+            $this->sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $trunkcode, $removeprefix, $timeout
+                , $addparameter, $inuse, $maxuse, $allow_error);
 
-            } elseif ($this->dialstatus == "NOANSWER") {
+            if ($this->dialstatus == "CANCEL" || $this->dialstatus == "NOANSWER" || $this->dialstatus == "BUSY") {
                 $this->real_answeredtime = $this->answeredtime = 0;
-                if ($MAGNUS->play_audio == 1) {
-                    $agi->stream_file('prepaid-noanswer', '#');
-                } else {
-                    $agi->execute((congestion), Congestion);
-                }
-
-            } elseif ($this->dialstatus == "CANCEL") {
+            } else if ($this->dialstatus == "CHANUNAVAIL" || $this->dialstatus == "CONGESTION") {
                 $this->real_answeredtime = $this->answeredtime = 0;
-            } elseif (($this->dialstatus == "CHANUNAVAIL") || ($this->dialstatus == "CONGESTION")) {
-                $this->real_answeredtime = $this->answeredtime = 0;
-                // Check if we will failover for LCR/LCD prefix - better false for an exact billing on resell
-                if ($MAGNUS->agiconfig['failover_lc_prefix']) {
-                    $agi->verbose("Call send for backup trunk -> ERROR => $this->dialstatus", 6);
-                    continue;
-                }
-                return false;
+            } else {
+                break;
             }
-            return true;
+
         }
-        // End for
-        $this->usedratecard = $k - $loop_failover;
-        $agi->verbose("USEDRATECARD - FAIL =" . $this->usedratecard . ' ' . $k . ' ' . $loop_failover . "\n\n\n", 10);
-        return false;
+
+        //# Ooh, something actually happened!
+        if ($this->dialstatus == "BUSY") {
+            $this->real_answeredtime = $this->answeredtime = 0;
+            if ($MAGNUS->play_audio == 1) {
+                $agi->stream_file('prepaid-isbusy', '#');
+            } else {
+                $agi->execute((busy), busy);
+            }
+
+        } elseif ($this->dialstatus == "NOANSWER") {
+            $this->real_answeredtime = $this->answeredtime = 0;
+            if ($MAGNUS->play_audio == 1) {
+                $agi->stream_file('prepaid-noanswer', '#');
+            } else {
+                $agi->execute((congestion), Congestion);
+            }
+
+        } elseif ($this->dialstatus == "CANCEL") {
+            $this->real_answeredtime = $this->answeredtime = 0;
+        } elseif (($this->dialstatus == "CHANUNAVAIL") || ($this->dialstatus == "CONGESTION")) {
+            $this->real_answeredtime = $this->answeredtime = 0;
+            return false;
+        }
+        return true;
     }
 
-    public function sendCalltoTrunk($MAGNUS, $agi, $k, $destination, $prefix, $tech, $ipaddress, $removeprefix, $timeout
-        , $addparameter, $inuse, $maxuse, $allow_error, $status) {
+    public function sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $ipaddress, $removeprefix, $timeout
+        , $addparameter, $inuse, $maxuse, $allow_error) {
+
         if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
             $destination = substr($destination, strlen($removeprefix));
         }
@@ -731,59 +676,34 @@ class CalcAgi
             $dialstr = "$tech/$ipaddress/$prefix$destination";
         }
 
-        if ($this->tariffObj[$k]['credit_control'] == 1 && $this->tariffObj[$k]['credit'] <= 0) {
-            $agi->verbose("Provider not have credit", 3);
-            $this->tariffObj[$k]['status'] = 0;
+        $dialedpeername       = $agi->get_variable("SIPTRANSFER");
+        $this->dialedpeername = $dialedpeername['data'];
+
+        if ($this->dialedpeername == 'yes') {
+            $agi->execute("hangup request $this->channel");
+            $MAGNUS->hangup($agi);
+        }
+        $sql = "UPDATE pkg_trunk SET  call_total = call_total + 1 WHERE id=" . $this->usedtrunk . " LIMIT 1";
+        $agi->exec($sql);
+
+        $MAGNUS->startRecordCall($agi);
+        try {
+            $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param'] . $addparameter
+                , $this->tariffObj[0]['rc_directmedia'], $timeout);
+        } catch (Exception $e) {
+            //
         }
 
-        if ($status == 1) {
-            $dialedpeername       = $agi->get_variable("SIPTRANSFER");
-            $this->dialedpeername = $dialedpeername['data'];
-
-            if ($this->dialedpeername == 'yes') {
-                $agi->execute("hangup request $this->channel");
-                $MAGNUS->hangup($agi);
-            }
-            $sql = "UPDATE pkg_trunk SET  call_total = call_total + 1 WHERE id=" . $this->usedtrunk . " LIMIT 1";
-            $agi->exec($sql);
-
-            $MAGNUS->startRecordCall($agi);
-            try {
-                $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param'] . $addparameter
-                    , $this->tariffObj[$k]['rc_directmedia'], $timeout);
-            } catch (Exception $e) {
-                //
-            }
-            if ($MAGNUS->demo == true) {
-                $answeredtime            = date('s');
-                $this->real_answeredtime = $answeredtime;
-                $dialstatus              = 'ANSWER';
-                $this->dialstatus        = 'ANSWER';
-            } else {
-                if ($MAGNUS->is_callingcard == true) {
-                    $answeredtime = time() - $agi->get_variable("TRUNKANSWERTIME");
-                } else {
-                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
-                }
-                $this->real_answeredtime = $this->answeredtime = $answeredtime['data'];
-                $dialstatus              = $agi->get_variable("DIALSTATUS");
-                $this->dialstatus        = $dialstatus['data'];
-            }
-
+        if ($MAGNUS->is_callingcard == true) {
+            $answeredtime = time() - $agi->get_variable("TRUNKANSWERTIME");
+        } else {
+            $answeredtime = $agi->get_variable("ANSWEREDTIME");
         }
-        //if the trunk is inactive
-        else {
-            $agi->verbose('THE TRUNK ' . $ipaddress . ' IS INACTIVE, SEND TO NEXT TRUNK');
-            $this->answeredtime = $answeredtime['data'] = 0;
-            $this->dialstatus   = 'CONGESTION';
-        }
+        $this->real_answeredtime = $this->answeredtime = $answeredtime['data'];
+        $dialstatus              = $agi->get_variable("DIALSTATUS");
+        $this->dialstatus        = $dialstatus['data'];
 
         $MAGNUS->stopRecordCall($agi);
-
-        if ($allow_error == 1 && $this->dialstatus == "BUSY") {
-            $this->dialstatus = "CONGESTION";
-        }
-
     }
 
     public function callShop($agi, $MAGNUS, $sessiontime, $id_prefix, $cost)

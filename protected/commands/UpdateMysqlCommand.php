@@ -655,6 +655,100 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-06-15
+        if ($version == '7.2.5') {
+
+            $sql = "CREATE TABLE IF NOT EXISTS `pkg_trunk_group` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `name` varchar(100) NOT NULL,
+                `type`  INT(11) NOT NULL DEFAULT '1',
+                `description` text,
+                PRIMARY KEY (`id`),
+                UNIQUE KEY `name` (`name`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            $sql = "CREATE TABLE IF NOT EXISTS `pkg_trunk_group_trunk` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `id_trunk_group` int(11) NOT NULL,
+                `id_trunk` int(11) NOT NULL,
+                PRIMARY KEY (`id`),
+                KEY `id_trunk_group` (`id_trunk_group`),
+                KEY `id_trunk` (`id_trunk`),
+
+                CONSTRAINT `fk_pkg_trunk_group_trunk_pkg_trunk_group` FOREIGN KEY (`id_trunk_group`) REFERENCES `pkg_trunk_group` (`id`) ON DELETE CASCADE,
+                CONSTRAINT `fk_pkg_trunk_group_trunk_pkg_trunk` FOREIGN KEY (`id_trunk`) REFERENCES `pkg_trunk` (`id`) ON DELETE CASCADE
+                ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            $sql = "ALTER TABLE pkg_rate DROP foreign key fk_pkg_trunk_pkg_rate;
+            ALTER TABLE `pkg_rate` CHANGE `id_trunk` `id_trunk_group` INT(11) NOT NULL;";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            $sql        = "SELECT id, id_trunk_group FROM pkg_rate GROUP BY id_trunk_group";
+            $resultRate = Yii::app()->db->createCommand($sql)->queryAll();
+
+            foreach ($resultRate as $key => $rate) {
+
+                echo "---------\n\n";
+                $sql        = "SELECT * FROM pkg_trunk WHERE id = " . $rate['id_trunk_group'];
+                $modelTrunk = Yii::app()->db->createCommand($sql)->queryAll();
+
+                $sql = "INSERT INTO pkg_trunk_group (name) VALUES ('Group - " . $modelTrunk[0]['trunkcode'] . "')";
+                try {
+                    Yii::app()->db->createCommand($sql)->execute();
+                    $id_trunk_group = Yii::app()->db->lastInsertID;
+                } catch (Exception $e) {
+                    $sql            = "SELECT id FROM pkg_trunk_group WHERE name = 'Group - " . $modelTrunk[0]['trunkcode'] . "'";
+                    $result         = Yii::app()->db->createCommand($sql)->queryAll();
+                    $id_trunk_group = $result[0]['id'];
+                }
+
+                $sql = "UPDATE pkg_rate SET id_trunk_group = $id_trunk_group WHERE id_trunk_group = " . $rate['id_trunk_group'];
+                echo $sql . "\n";
+                Yii::app()->db->createCommand($sql)->execute();
+
+                for ($i = 0; $i < 5; $i++) {
+
+                    $sql = "INSERT INTO pkg_trunk_group_trunk (id_trunk_group, id_trunk) VALUES ( $id_trunk_group, " . $modelTrunk[0]['id'] . " )";
+                    Yii::app()->db->createCommand($sql)->execute();
+                    echo $sql . "\n";
+
+                    if (!is_numeric($modelTrunk[0]['failover_trunk'])) {
+                        break;
+                    }
+                    $sql        = "SELECT * FROM pkg_trunk WHERE id = " . $modelTrunk[0]['failover_trunk'];
+                    $modelTrunk = Yii::app()->db->createCommand($sql)->queryAll();
+
+                }
+
+            }
+
+            $sql = "
+            ALTER TABLE `pkg_rate` ADD  CONSTRAINT `fk_pkg_trunk_group_pkg_rate` FOREIGN KEY (`id_trunk_group`) REFERENCES `pkg_trunk_group` (`id`)";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Trunk Groups'')', 'trunkgroup', 'x-fa fa-desktop', 10,4)";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            $sql = "
+            UPDATE pkg_module SET priority = 1 WHERE module = 'provider';
+            UPDATE pkg_module SET priority = 2 WHERE module = 'trunk';
+            UPDATE pkg_module SET priority = 3 WHERE module = 'trunkgroup';
+            UPDATE pkg_module SET priority = 4 WHERE module = 'rateprovider';
+            UPDATE pkg_module SET priority = 5 WHERE module = 'servers';
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.3.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
