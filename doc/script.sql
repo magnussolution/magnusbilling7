@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.45-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: mbilling
 -- ------------------------------------------------------
--- Server version 10.1.41-MariaDB
+-- Server version 10.1.45-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -111,18 +111,9 @@ CREATE TABLE `pkg_call_chart` (
   `total` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `date` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `pkg_call_chart`
---
-
-LOCK TABLES `pkg_call_chart` WRITE;
-/*!40000 ALTER TABLE `pkg_call_chart` DISABLE KEYS */;
-INSERT INTO `pkg_call_chart` VALUES (1,0,'2019-10-21 17:14:00',0),(14,0,'2019-10-21 17:15:00',0);
-/*!40000 ALTER TABLE `pkg_call_chart` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `pkg_call_online`
@@ -297,7 +288,8 @@ CREATE TABLE `pkg_campaign` (
   `nb_callmade` int(11) DEFAULT '0',
   `status` int(11) NOT NULL DEFAULT '1',
   `frequency` int(11) NOT NULL DEFAULT '0',
-  `forward_number` char(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `max_frequency` int(11) NOT NULL DEFAULT '0',
+  `forward_number` varchar(160) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `daily_start_time` time NOT NULL DEFAULT '10:00:00',
   `daily_stop_time` time NOT NULL DEFAULT '18:00:00',
   `monday` tinyint(4) NOT NULL DEFAULT '1',
@@ -317,6 +309,8 @@ CREATE TABLE `pkg_campaign` (
   `tts_audio2` varchar(200) DEFAULT NULL,
   `asr_audio` varchar(200) DEFAULT NULL,
   `asr_options` varchar(200) DEFAULT NULL,
+  `auto_reprocess` int(11) DEFAULT '0',
+  `from` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_pkg_user_pkg_campaign` (`id_user`),
   KEY `fk_pkg_plan_pkg_campaign` (`id_plan`),
@@ -403,16 +397,16 @@ CREATE TABLE `pkg_campaign_poll` (
   `description` varchar(100) DEFAULT NULL,
   `arq_audio` varchar(100) DEFAULT NULL,
   `ordem_exibicao` int(11) DEFAULT NULL,
-  `option0` varchar(30) NOT NULL,
-  `option1` varchar(30) NOT NULL,
-  `option2` varchar(30) NOT NULL,
-  `option3` varchar(30) NOT NULL,
-  `option4` varchar(50) NOT NULL,
-  `option5` varchar(50) NOT NULL,
-  `option6` varchar(30) NOT NULL,
-  `option7` varchar(30) NOT NULL,
-  `option8` varchar(30) NOT NULL,
-  `option9` varchar(30) NOT NULL,
+  `option0` varchar(150) NOT NULL,
+  `option1` varchar(150) NOT NULL,
+  `option2` varchar(150) NOT NULL,
+  `option3` varchar(150) NOT NULL,
+  `option4` varchar(150) NOT NULL,
+  `option5` varchar(150) NOT NULL,
+  `option6` varchar(150) NOT NULL,
+  `option7` varchar(150) NOT NULL,
+  `option8` varchar(150) NOT NULL,
+  `option9` varchar(150) NOT NULL,
   `digit_authorize` int(1) NOT NULL DEFAULT '1',
   `request_authorize` int(1) NOT NULL DEFAULT '0',
   `repeat` int(1) NOT NULL DEFAULT '1',
@@ -498,7 +492,7 @@ CREATE TABLE `pkg_cdr` (
   `id_user` int(11) NOT NULL,
   `id_plan` int(11) DEFAULT NULL,
   `id_trunk` int(11) DEFAULT NULL,
-  `id_offer` int(11) DEFAULT '0',
+  `id_server` int(11) DEFAULT NULL,
   `id_prefix` int(11) DEFAULT NULL,
   `id_campaign` int(11) DEFAULT NULL,
   `callerid` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -586,6 +580,7 @@ CREATE TABLE `pkg_cdr_failed` (
   `id_plan` int(11) DEFAULT NULL,
   `id_trunk` int(11) DEFAULT NULL,
   `id_prefix` int(11) DEFAULT NULL,
+  `id_server` int(11) DEFAULT NULL,
   `sessionid` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `uniqueid` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `starttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -610,6 +605,45 @@ CREATE TABLE `pkg_cdr_failed` (
 LOCK TABLES `pkg_cdr_failed` WRITE;
 /*!40000 ALTER TABLE `pkg_cdr_failed` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pkg_cdr_failed` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pkg_cdr_failed_old`
+--
+
+DROP TABLE IF EXISTS `pkg_cdr_failed_old`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pkg_cdr_failed_old` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_plan` int(11) DEFAULT NULL,
+  `id_trunk` int(11) DEFAULT NULL,
+  `id_prefix` int(11) DEFAULT NULL,
+  `sessionid` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `uniqueid` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `starttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `calledstation` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `sipiax` int(11) DEFAULT '0',
+  `src` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `callerid` varchar(40) DEFAULT NULL,
+  `terminatecauseid` int(1) DEFAULT '1',
+  `hangupcause` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  KEY `id_trunk` (`id_trunk`),
+  KEY `calledstation` (`calledstation`),
+  KEY `starttime` (`starttime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pkg_cdr_failed_old`
+--
+
+LOCK TABLES `pkg_cdr_failed_old` WRITE;
+/*!40000 ALTER TABLE `pkg_cdr_failed_old` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pkg_cdr_failed_old` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -658,9 +692,13 @@ CREATE TABLE `pkg_cdr_summary_day_agent` (
   `sessiontime` bigint(25) NOT NULL,
   `aloc_all_calls` int(11) NOT NULL,
   `nbcall` int(11) NOT NULL,
+  `nbcall_fail` int(11) NOT NULL DEFAULT '0',
   `buycost` float NOT NULL DEFAULT '0',
   `sessionbill` float NOT NULL DEFAULT '0',
   `lucro` float DEFAULT '0',
+  `agent_bill` float NOT NULL DEFAULT '0',
+  `agent_lucro` float NOT NULL DEFAULT '0',
+  `asr` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `day` (`day`),
   KEY `id_user` (`id_user`)
@@ -690,9 +728,11 @@ CREATE TABLE `pkg_cdr_summary_day_trunk` (
   `sessiontime` bigint(25) NOT NULL,
   `aloc_all_calls` int(11) NOT NULL,
   `nbcall` int(11) NOT NULL,
+  `nbcall_fail` int(11) NOT NULL DEFAULT '0',
   `buycost` float NOT NULL DEFAULT '0',
   `sessionbill` float NOT NULL DEFAULT '0',
   `lucro` float DEFAULT '0',
+  `asr` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `day` (`day`),
   KEY `id_trunk` (`id_trunk`)
@@ -722,11 +762,13 @@ CREATE TABLE `pkg_cdr_summary_day_user` (
   `sessiontime` bigint(25) NOT NULL,
   `aloc_all_calls` int(11) NOT NULL,
   `nbcall` int(11) NOT NULL,
+  `nbcall_fail` int(11) NOT NULL DEFAULT '0',
   `buycost` float DEFAULT '0',
   `sessionbill` float DEFAULT '0',
   `lucro` float DEFAULT '0',
   `isAgent` tinyint(1) DEFAULT NULL,
   `agent_bill` float NOT NULL DEFAULT '0',
+  `asr` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `day` (`day`),
   KEY `id_user` (`id_user`)
@@ -781,9 +823,11 @@ CREATE TABLE `pkg_cdr_summary_month` (
   `sessiontime` bigint(25) NOT NULL,
   `aloc_all_calls` int(11) NOT NULL,
   `nbcall` int(11) NOT NULL,
+  `nbcall_fail` int(11) NOT NULL DEFAULT '0',
   `buycost` float NOT NULL DEFAULT '0',
   `sessionbill` float NOT NULL DEFAULT '0',
   `lucro` float DEFAULT '0',
+  `asr` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `month` (`month`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -812,9 +856,11 @@ CREATE TABLE `pkg_cdr_summary_month_trunk` (
   `sessiontime` bigint(25) NOT NULL,
   `aloc_all_calls` int(11) NOT NULL,
   `nbcall` int(11) NOT NULL,
+  `nbcall_fail` int(11) NOT NULL DEFAULT '0',
   `buycost` float NOT NULL DEFAULT '0',
   `sessionbill` float NOT NULL DEFAULT '0',
   `lucro` float DEFAULT '0',
+  `asr` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `month` (`month`),
   KEY `id_trunk` (`id_trunk`)
@@ -844,11 +890,13 @@ CREATE TABLE `pkg_cdr_summary_month_user` (
   `sessiontime` bigint(25) NOT NULL,
   `aloc_all_calls` int(11) NOT NULL,
   `nbcall` int(11) NOT NULL,
+  `nbcall_fail` int(11) NOT NULL DEFAULT '0',
   `buycost` float NOT NULL DEFAULT '0',
   `sessionbill` float NOT NULL DEFAULT '0',
   `lucro` float DEFAULT '0',
   `isAgent` tinyint(1) DEFAULT NULL,
   `agent_bill` float NOT NULL DEFAULT '0',
+  `asr` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `month` (`month`),
   KEY `id_user` (`id_user`)
@@ -946,7 +994,7 @@ CREATE TABLE `pkg_configuration` (
   `config_group_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `status` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -955,7 +1003,7 @@ CREATE TABLE `pkg_configuration` (
 
 LOCK TABLES `pkg_configuration` WRITE;
 /*!40000 ALTER TABLE `pkg_configuration` DISABLE KEYS */;
-INSERT INTO `pkg_configuration` VALUES (1,'System Currency','base_currency','USD','System Currency','global',1),(2,'Language','base_language','en','Allow \n en English \nes Espanhol \npt_BR Portugues','global',1),(3,'Version','version','7.0.0','MBilling Version','global',1),(4,'Licence','licence','free','MBilling Licence','global',0),(5,'Server IP','ip_servers','','Ip do servidor MBilling','global',1),(6,'Template','template','black-neptune','Allowed values:\ngreen, gray, blue, yellow, red, orange, purple','global',0),(7,'Country','base_country','USA','ISO CODE values\nUSA United States,\nBRL Brasil,\nARG Argentina,\nNLD Netherlands,\nESP Spanish','global',1),(8,'Desktop layout','layout','0','Active Desktop template, only to FULL version\n1 - Enable (Only to full version)\n0 - Disable','global',0),(9,'Wallpaper','wallpaper','Azul','Default Wallpaper, only FULL version.','global',0),(10,'SMTP Host','smtp_host','mail.magnusbilling.com','SMTP Hostname','global',0),(11,'SMTP UserName','smtp_username','billing@magnusbilling.com','SMTP server Username','global',0),(12,'SMTP Password','smtp_password','magnus','SMTP server Password','global',0),(13,'SMTP Encryption','smtp_encryption','null','SMTP Encryption: tls, ssl or blank','global',0),(14,'SMTP Port','smtp_port','587','SMTP Port','global',0),(15,'Admin Email','admin_email','info2@magnusbilling.com','Email for receive notifications','global',1),(16,'Send email copy to admin','admin_received_email','1','Send copy for admin email','global',1),(19,'Days notification','delay_notifications','3','Number of days to generate low balance warning to customers','global',1),(20,'Rounding calls','bloc_time_call','1','Round the lead time as charging sales.\n1: Yes\n0: No','global',1),(21,'Days to pay offers','planbilling_daytopay','5','Set how many days before maturity you wanna collect the bid offers','global',1),(22,'Agent refill limit','agent_limit_refill','5','Limit to agent refill yours customers','global',1),(23,'Archive cdr','archive_call_prior_x_month','4','Calls to file before 10 months.','global',1),(25,'Decimal precision','decimal_precision','0000','Decimal precision.','global',1),(26,'Active paypal for new customer','paypal_new_user','0','Active paypal for new customer. \n\n0 - Disable (RECOMENDED )\n1 - Enable','global',1),(29,'Portabilidade Usuário','portabilidadeUsername','0','Usuário da portabilidade para consulta via WebService','global',0),(30,'Portabilidade Senha','portabilidadePassword','0','Senha da portabilidade para consulta via WebService','global',0),(31,'AGI 1 - Answer Call','answer_call','0','If enabled the MBilling answers the call that starts.\nDefault: 0','agi-conf1',1),(32,'AGI 1 - User DNID','use_dnid','1','If the client does not need active schedule again the number he wish to call after entering the PIN.\n\n1 - Enable (DEFAULT)\n0 - Disable','agi-conf1',1),(34,'AGI 1 - Intro Prompt','intro_prompt','','To specify a prompt to play at the beginning of the calls','agi-conf1',1),(36,'AGI 1 - Recording calls','record_call','0','Enables recording of all customers.\nCAUTION, THIS OPTION REQUIRES A LOT OF SERVER PERFORMANCE. SO YOU CAN RECORD CUSTOMER SPECIFIC.\n\n0: Disable\n1: Enable','agi-conf1',1),(37,'AGI 1 - International prefixes','international_prefixes','00,09','List the prefixes you want stripped off if the call number','agi-conf1',1),(38,'AGI 1 - Say sell price','say_rateinitial','0','Play the initial cost of the tariff.\n\n0 - No\n1 - Yes','agi-conf1',1),(39,'AGI 1 - Say Duration','say_timetocall','0','Play the amount of time that the user can call.\n\n0 - No\n1 - Yes','agi-conf1',1),(40,'AGI 1 - CallerID Authentication','cid_enable','0','Active CallerID Authentication.\n\n0 - Disable\n1 - Enable','agi-conf1',1),(41,'AGI 1 - FailOver LCR/LCD','failover_lc_prefix','1','If anable and have two hidden tariff in de plan, MBilling gonna get the cheaper','agi-conf1',1),(42,'AGI 1 - Dial Command Params','dialcommand_param',',60,L(%timeout%:61000:30000)','More info: http://voip-info.org/wiki-Asterisk+cmd+dial','agi-conf1',1),(43,'AGI 1 - Internal Call, Dial Command Params','dialcommand_param_sipiax_friend',',60,TtiL(3600000:61000:30000)','Dial paramater for call between users.\n\nby default (3600000  =  1HOUR MAX CALL).','agi-conf1',1),(44,'AGI 1 - DID Dial Command Params','dialcommand_param_call_2did',',45,TtiL(%timeout%:61000:30000)','Dial paramater to DID calls','agi-conf1',1),(45,'AGI 1 - Failover Retry Limit','failover_recursive_limit','5','Define how many time we want to authorize the research of the failover trunk when a call fails','agi-conf1',1),(46,'AGI 1 - Number of attempt','number_try','1','Number of attempts to dial the number\n Minimum value 1','agi-conf1',1),(47,'AGI 1 - Outbound Call','switchdialcommand','0','Define the order to make the outbound call<br>YES -> SIP/number@trunk - NO  SIP/trunk/number<br>Both should work exactly the same but i experimented one case when gateway was supporting number@trunk, So in case of trouble, try it out.','agi-conf1',1),(48,'AGI 1 - Say Balance After Call','say_balance_after_call','0','Play the balance to the user after the call\n\n0 - No\n1 - Yes','agi-conf1',1),(85,'SIP Account for spy call','channel_spy','0','SIP Account for spy call','global',1),(142,'Username Auto Generate ','username_generate','1','Generate username automatically ','global',1),(143,'Username Prefix','generate_prefix','0','Prefix for username ','global',1),(144,'Username length','generate_length','5','Username Length','global',1),(145,'Answer Callback','answer_callback','0','Answer callback and play audio','global',1),(146,'Callback add Prefix','callback_add_prefix','','Add prefix in callerd in callback call','global',1),(147,'Callback remove Prefix','callback_remove_prefix','','Remove prefix in callerd in callback call','global',1),(233,'Menu color','color_menu','White','Menu color, Black or White','global',0),(234,'Menu color','color_menu','White','Menu color, Black or White','global',1),(235,'Charge Sip Call','charge_sip_call','0','Charge sip call between clients','global',1),(236,'URL to extra module','module_extra','index.php/extra/read','Url to extra module, default: index.php/extra/read','global',1),(237,'intra/inter Billing','intra-inter','0','Enable Intra-Inter Billing. If you enable this option, and you have another plan with the same name + Intra on the name Mbilling use the new plan to intra call','global',0),(238,'Enable Paypal on Softphone','paypal-softphone','0','Active Paypal on Android Softphones, valid only Softphone version 2.5. 0 - Disable 1 - Enable','global',1),(239,'Enable CallBack on Softphone','callback-softphone','0','Active Callback on Android Softphones, valid only Softphone version 2.5. 0 - Disable 1 - Enable','global',1),(240,'Invoice tax','invoice_tax','0','Tax to add in Invoice.','global',1),(241,'Log nivel','log','0','min 0 - max 5 ','global',0),(242,'Asterisk','asterisk_version','11','Set your Asterisk Version instaled. Default 1.8','global',0),(243,'Tts URL','tts_url','https://translate.google.com/translate_tts?ie=UTF-8&q=$name&tl=pt-BR&total=1&idx=0&textlen=25&client=t&tk=55786|34299.','Set here the URL to use in Massive Call. Use variable $name in the string field','global',1),(244,'fm.transfer-to.com username','fm_transfer_to_username',NULL,'Username in Transfer To','global',0),(245,'fm.transfer-to.com token','fm_transfer_to_ token',NULL,'Token to Transfer To API','global',0),(248,'Days to find in Summary per agent','summary_per_agent_days','7','Days to find when you open the menu Summary per Agent','global',1),(249,'MixMonitor Format','MixMonitor_format','gsm','see the availables extensions in http://www.voip-info.org/wiki/view/MixMonitor','global',1),(251,'fm.transfer-to.com print Header','fm_transfer_print_header','Change it in configuration menu','Description to print header','global',0),(252,'fm.transfer-to.com print Footer','fm_transfer_print_footer','Change it in configuration menu','Description to print footer','global',0),(253,'fm.transfer-to.com Currency','fm_transfer_currency','€','Set the transfer-to currency','global',0),(254,'Sip trunk short duration call','trunk_short_duration_call','3','SIP TRUNK short duration call','global',1),(255,'Sip trunk short total calls','trunk_short_total_calls','0','Sip trunk short total calls','global',1),(256,'Enable IAX','enable_izx','3','Enable IAX','global',0),(259,'BDService Url','BDService_url','https://req.ovinovo.net','Default https://req.ovinovo.net','global',0),(260,'Generate password automatically on Signup Form','signup_auto_pass','0','Set the number of caracter to password. EX: if you have pass with 10 digits, set it to 10. Minimo value 6','global',1),(261,'Social Media Network to show in customer panel','social_media_network','','Social Media Network to show in customer panel','global',1),(262,'Link to signup terms','accept_terms_link','','Set a link to signup terms','global',1),(263,'Auto gernerate user in Signup form','auto_generate_user_signup','1','Auto gernerate user in Signup form','global',1),(264,'Notificação de  Pagamento de serviços','service_daytopay','5','Total Dias anterior ao vencimento que o MagnusBilling avisara o cliente para pagar os serviços','global',1),(265,'Start User Call Limit','start_user_call_limit','-1','Default call limit for new user','global',0),(266,'CallingCard answer call','callingcard_answer','1','Answer call in CallingCard','agi-conf1',1),(267,'CallingCard enable CID authentication','callingcard_cid_enable','1','CID authentication in CallingCard','agi-conf1',1),(268,'CallingCard number try','callingcard_number_try','3','Number try call in CallingCard','agi-conf1',1),(269,'CallingCard say sall rate','callingcard_say_rateinitial','0','CallingCard say sall rate','agi-conf1',1),(270,'CallingCard say timecall','callingcard_say_timetocall','0','CallingCard say timecall','agi-conf1',1),(271,'reCaptchaKey sitekey','reCaptchaKey','','Generate your sitekey in https://www.google.com/recaptcha/admin#list','global',1),(272,'BDService Username','BDService_username','','BDService username','global',0),(273,'BDService token','BDService_token','','BDService token','global',0),(274,'BDService flexiload values','BDService_flexiload','10-1000','BDService flexiload values','global',0),(275,'BDService bkash values','BDService_bkash','50-2500','BDService bkash values','global',0),(276,'BDService currency translation','BDService_cambio','0.01','BDService currency translation','global',0),(277,'BDService DBBL/Rocket values','BDService_dbbl_rocket','10-1000','DBBL/Rocket flexiload values','global',0),(278,'BDService Credit','BDService_credit_provider','0','BDService Credit','global',0),(279,'Session timeout','session_timeout','3600','Time in seconds to close user session','global',1),(280,'Show Play icon on CDR','show_playicon_cdr','0','Show Play icon on CDR menu. Set to 1 for show the icon','global',1),(281,'Show fields help','show_filed_help','1','Show fields help','global',1),(282,'Authentication IP/tech length','ip_tech_length','6','Authentication IP/tech length 4, 5 or 6 digits','global',1),(283,'External URL to download records','external_record_link','','External URL to download records. Only used to download only one audio. Leave blank to no find audio in external link. URL EX: http://IP/record.php?username=%user%&audio=%number%.%uniqueid%.%audio_exten%','global',1),(284,'Campaign call limit to users','campaign_user_limit','1','Campaign call limit to users','global',1),(285,'Enable CallingCard','enable_callingcard','1','Enable CallingCard','global',1),(286,'Send email to admin when user signup from form','signup_admin_email','1','Send email to administrator email when creation new account from signup page\n 0 - Disable \n1 - Enable','global',1),(287,'Show Signup button on login page','show_signup_button','0','Show Signup button on login page\n 0 - Disable \n1 - Enable','global',1),(288,'reCaptchaKey secretkey','reCaptchaSecret','','Generate your secredt key in https://www.google.com/recaptcha/admin#list','global',1),(289,'Enable Signup Form','enable_signup','0','Enable Signup form','global',1),(290,'Background Color','backgroundColor','#1b1e23','Background Color','global',1);
+INSERT INTO `pkg_configuration` VALUES (1,'System Currency','base_currency','USD','System Currency','global',1),(2,'Language','base_language','en','Allow \n en English \nes Espanhol \npt_BR Portugues','global',1),(3,'Version','version','7.3.0','MBilling Version','global',1),(4,'Licence','licence','free','MBilling Licence','global',0),(5,'Server IP','ip_servers','','Ip do servidor MBilling','global',1),(6,'Template','template','black-neptune','Allowed values:\ngreen, gray, blue, yellow, red, orange, purple','global',0),(7,'Country','base_country','USA','ISO CODE values\nUSA United States,\nBRL Brasil,\nARG Argentina,\nNLD Netherlands,\nESP Spanish','global',1),(8,'Desktop layout','layout','0','Active Desktop template, only to FULL version\n1 - Enable (Only to full version)\n0 - Disable','global',0),(9,'Wallpaper','wallpaper','Azul','Default Wallpaper, only FULL version.','global',0),(10,'SMTP Host','smtp_host','mail.magnusbilling.com','SMTP Hostname','global',0),(11,'SMTP UserName','smtp_username','billing@magnusbilling.com','SMTP server Username','global',0),(12,'SMTP Password','smtp_password','magnus','SMTP server Password','global',0),(13,'SMTP Encryption','smtp_encryption','null','SMTP Encryption: tls, ssl or blank','global',0),(14,'SMTP Port','smtp_port','587','SMTP Port','global',0),(15,'Admin Email','admin_email','info2@magnusbilling.com','Email for receive notifications','global',1),(16,'Send email copy to admin','admin_received_email','1','Send copy for admin email','global',1),(19,'Days notification','delay_notifications','3','Number of days to generate low balance warning to customers','global',1),(20,'Rounding calls','bloc_time_call','1','Round the lead time as charging sales.\n1: Yes\n0: No','global',1),(21,'Days to pay offers','planbilling_daytopay','5','Set how many days before maturity you wanna collect the bid offers','global',1),(22,'Agent refill limit','agent_limit_refill','5','Limit to agent refill yours customers','global',1),(23,'Archive cdr','archive_call_prior_x_month','4','Calls to file before 10 months.','global',1),(25,'Decimal precision','decimal_precision','0000','Decimal precision.','global',1),(26,'Active paypal for new customer','paypal_new_user','0','Active paypal for new customer. \n\n0 - Disable (RECOMENDED )\n1 - Enable','global',1),(29,'Portabilidade Usuário','portabilidadeUsername','0','Usuário da portabilidade para consulta via WebService','global',0),(30,'Portabilidade Senha','portabilidadePassword','0','Senha da portabilidade para consulta via WebService','global',0),(31,'AGI 1 - Answer Call','answer_call','0','If enabled the MBilling answers the call that starts.\nDefault: 0','agi-conf1',1),(32,'AGI 1 - User DNID','use_dnid','1','If the client does not need active schedule again the number he wish to call after entering the PIN.\n\n1 - Enable (DEFAULT)\n0 - Disable','agi-conf1',1),(34,'AGI 1 - Intro Prompt','intro_prompt','','To specify a prompt to play at the beginning of the calls','agi-conf1',1),(36,'AGI 1 - Recording calls','record_call','0','Enables recording of all customers.\nCAUTION, THIS OPTION REQUIRES A LOT OF SERVER PERFORMANCE. SO YOU CAN RECORD CUSTOMER SPECIFIC.\n\n0: Disable\n1: Enable','agi-conf1',1),(37,'AGI 1 - International prefixes','international_prefixes','00,09','List the prefixes you want stripped off if the call number','agi-conf1',1),(38,'AGI 1 - Say sell price','say_rateinitial','0','Play the initial cost of the tariff.\n\n0 - No\n1 - Yes','agi-conf1',1),(39,'AGI 1 - Say Duration','say_timetocall','0','Play the amount of time that the user can call.\n\n0 - No\n1 - Yes','agi-conf1',1),(40,'AGI 1 - CallerID Authentication','cid_enable','0','Active CallerID Authentication.\n\n0 - Disable\n1 - Enable','agi-conf1',1),(41,'AGI 1 - FailOver LCR/LCD','failover_lc_prefix','1','If anable and have two hidden tariff in de plan, MBilling gonna get the cheaper','agi-conf1',1),(42,'AGI 1 - Dial Command Params','dialcommand_param',',60,L(%timeout%:61000:30000)','More info: http://voip-info.org/wiki-Asterisk+cmd+dial','agi-conf1',1),(43,'AGI 1 - Internal Call, Dial Command Params','dialcommand_param_sipiax_friend',',60,TtiL(3600000:61000:30000)','Dial paramater for call between users.\n\nby default (3600000  =  1HOUR MAX CALL).','agi-conf1',1),(44,'AGI 1 - DID Dial Command Params','dialcommand_param_call_2did',',45,TtiL(%timeout%:61000:30000)','Dial paramater to DID calls','agi-conf1',1),(45,'AGI 1 - Failover Retry Limit','failover_recursive_limit','5','Define how many time we want to authorize the research of the failover trunk when a call fails','agi-conf1',1),(46,'AGI 1 - Number of attempt','number_try','1','Number of attempts to dial the number\n Minimum value 1','agi-conf1',1),(47,'AGI 1 - Outbound Call','switchdialcommand','0','Define the order to make the outbound call<br>YES -> SIP/number@trunk - NO  SIP/trunk/number<br>Both should work exactly the same but i experimented one case when gateway was supporting number@trunk, So in case of trouble, try it out.','agi-conf1',1),(48,'AGI 1 - Say Balance After Call','say_balance_after_call','0','Play the balance to the user after the call\n\n0 - No\n1 - Yes','agi-conf1',1),(85,'SIP Account for spy call','channel_spy','0','SIP Account for spy call','global',1),(142,'Username Auto Generate ','username_generate','1','Generate username automatically ','global',1),(143,'Username Prefix','generate_prefix','0','Prefix for username ','global',1),(144,'Username length','generate_length','5','Username Length','global',1),(145,'Answer Callback','answer_callback','0','Answer callback and play audio','global',1),(146,'Callback add Prefix','callback_add_prefix','','Add prefix in callerd in callback call','global',1),(147,'Callback remove Prefix','callback_remove_prefix','','Remove prefix in callerd in callback call','global',1),(233,'Menu color','color_menu','White','Menu color, Black or White','global',0),(234,'Menu color','color_menu','White','Menu color, Black or White','global',1),(235,'Charge Sip Call','charge_sip_call','0','Charge sip call between clients','global',1),(236,'URL to extra module','module_extra','index.php/extra/read','Url to extra module, default: index.php/extra/read','global',1),(237,'intra/inter Billing','intra-inter','0','Enable Intra-Inter Billing. If you enable this option, and you have another plan with the same name + Intra on the name Mbilling use the new plan to intra call','global',0),(238,'Enable Paypal on Softphone','paypal-softphone','0','Active Paypal on Android Softphones, valid only Softphone version 2.5. 0 - Disable 1 - Enable','global',1),(239,'Enable CallBack on Softphone','callback-softphone','0','Active Callback on Android Softphones, valid only Softphone version 2.5. 0 - Disable 1 - Enable','global',1),(240,'Invoice tax','invoice_tax','0','Tax to add in Invoice.','global',1),(241,'Log nivel','log','0','min 0 - max 5 ','global',0),(242,'Asterisk','asterisk_version','11','Set your Asterisk Version instaled. Default 1.8','global',0),(243,'Tts URL','tts_url','https://translate.google.com/translate_tts?ie=UTF-8&q=$name&tl=pt-BR&total=1&idx=0&textlen=25&client=t&tk=55786|34299.','Set here the URL to use in Massive Call. Use variable $name in the string field','global',1),(244,'fm.transfer-to.com username','fm_transfer_to_username',NULL,'Username in Transfer To','global',0),(245,'fm.transfer-to.com token','fm_transfer_to_ token',NULL,'Token to Transfer To API','global',0),(248,'Days to find in Summary per agent','summary_per_agent_days','7','Days to find when you open the menu Summary per Agent','global',1),(249,'MixMonitor Format','MixMonitor_format','gsm','see the availables extensions in http://www.voip-info.org/wiki/view/MixMonitor','global',1),(251,'fm.transfer-to.com print Header','fm_transfer_print_header','Change it in configuration menu','Description to print header','global',0),(252,'fm.transfer-to.com print Footer','fm_transfer_print_footer','Change it in configuration menu','Description to print footer','global',0),(253,'fm.transfer-to.com Currency','fm_transfer_currency','€','Set the transfer-to currency','global',0),(254,'Sip trunk short duration call','trunk_short_duration_call','3','SIP TRUNK short duration call','global',1),(255,'Sip trunk short total calls','trunk_short_total_calls','0','Sip trunk short total calls','global',1),(256,'Enable IAX','enable_izx','3','Enable IAX','global',0),(259,'BDService Url','BDService_url','https://req.ovinovo.net','Default https://req.ovinovo.net','global',0),(260,'Generate password automatically on Signup Form','signup_auto_pass','0','Set the number of caracter to password. EX: if you have pass with 10 digits, set it to 10. Minimo value 6','global',1),(261,'Social Media Network to show in customer panel','social_media_network','','Social Media Network to show in customer panel','global',1),(262,'Link to signup terms','accept_terms_link','','Set a link to signup terms','global',1),(263,'Auto gernerate user in Signup form','auto_generate_user_signup','1','Auto gernerate user in Signup form','global',1),(264,'Notificação de  Pagamento de serviços','service_daytopay','5','Total Dias anterior ao vencimento que o MagnusBilling avisara o cliente para pagar os serviços','global',1),(265,'Start User Call Limit','start_user_call_limit','-1','Default call limit for new user','global',0),(266,'CallingCard answer call','callingcard_answer','1','Answer call in CallingCard','agi-conf1',1),(267,'CallingCard enable CID authentication','callingcard_cid_enable','1','CID authentication in CallingCard','agi-conf1',1),(268,'CallingCard number try','callingcard_number_try','3','Number try call in CallingCard','agi-conf1',1),(269,'CallingCard say sall rate','callingcard_say_rateinitial','0','CallingCard say sall rate','agi-conf1',1),(270,'CallingCard say timecall','callingcard_say_timetocall','0','CallingCard say timecall','agi-conf1',1),(271,'reCaptchaKey sitekey','reCaptchaKey','','Generate your sitekey in https://www.google.com/recaptcha/admin#list','global',1),(272,'BDService Username','BDService_username','','BDService username','global',0),(273,'BDService token','BDService_token','','BDService token','global',0),(274,'BDService flexiload values','BDService_flexiload','10-1000','BDService flexiload values','global',0),(275,'BDService bkash values','BDService_bkash','50-2500','BDService bkash values','global',0),(276,'BDService currency translation','BDService_cambio','0.01','BDService currency translation','global',0),(277,'BDService DBBL/Rocket values','BDService_dbbl_rocket','10-1000','DBBL/Rocket flexiload values','global',0),(278,'BDService Credit','BDService_credit_provider','0','BDService Credit','global',0),(279,'Session timeout','session_timeout','3600','Time in seconds to close user session','global',1),(280,'Show Play icon on CDR','show_playicon_cdr','0','Show Play icon on CDR menu. Set to 1 for show the icon','global',1),(281,'Show fields help','show_filed_help','1','Show fields help','global',1),(282,'Authentication IP/tech length','ip_tech_length','6','Authentication IP/tech length 4, 5 or 6 digits','global',1),(283,'External URL to download records','external_record_link','','External URL to download records. Only used to download only one audio. Leave blank to no find audio in external link. URL EX: http://IP/record.php?username=%user%&audio=%number%.%uniqueid%.%audio_exten%','global',1),(284,'Campaign call limit to users','campaign_user_limit','1','Campaign call limit to users','global',1),(285,'Enable CallingCard','enable_callingcard','1','Enable CallingCard','global',1),(286,'Send email to admin when user signup from form','signup_admin_email','1','Send email to administrator email when creation new account from signup page\n 0 - Disable \n1 - Enable','global',1),(287,'Show Signup button on login page','show_signup_button','0','Show Signup button on login page\n 0 - Disable \n1 - Enable','global',1),(288,'reCaptchaKey secretkey','reCaptchaSecret','','Generate your secredt key in https://www.google.com/recaptcha/admin#list','global',1),(289,'Enable Signup Form','enable_signup','0','Enable Signup form','global',1),(290,'Background Color','backgroundColor','#1b1e23','Background Color','global',1),(291,'DIDWW APY KEY','didww_api_key','','DIDWW APY KEY','global',1),(292,'DIDWW APY URL','didww_url','https://api.didww.com/v3/','DIDWW APY URL','global',1),(293,'DIDWW PROFIT','didww_profit','0','DIDWW profit percentage. Integer value','global',1),(294,'URL to extra module2','module_extra2','','Url to extra module, default: index.php/extra2/read','global',1),(295,'URL to extra module3','module_extra3','','Url to extra module, default: index.php/extra3/read','global',1),(296,'DIDWW CURRENCY CONVERTER','didww_curreny_converter','0','DIDWW CURRENCY CONVERTER. Ex. 1 USD in your local currency is 3.25, so add here 3.25','global',1),(297,'Fixed CallerId to use on Signup','fixed_callerid_signup','','Fixed CallerId to use on Signup, Leave blank to use the user phone','global',1),(298,'Apply the local prefix rule on DID and Sip Call','apply_local_prefix_did_sip','0','Apply the local prefix rule on DID and Sip Call','global',0),(299,'Default Codecs','default_codeds','g729,gsm,opus,alaw,ulaw','Default Codecs','global',1),(300,'Signup: Allow multiples users with same DOC','signup_unique_doc','1','Signup: Allow multiples users with same DOC','global',1);
 /*!40000 ALTER TABLE `pkg_configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1203,7 +1251,7 @@ CREATE TABLE `pkg_group_module` (
 
 LOCK TABLES `pkg_group_module` WRITE;
 /*!40000 ALTER TABLE `pkg_group_module` DISABLE KEYS */;
-INSERT INTO `pkg_group_module` VALUES (1,1,'crud',1,0,0),(1,3,'crud',1,0,0),(1,4,'ru',1,0,0),(1,5,'crud',1,0,0),(1,6,'crud',1,0,0),(1,7,'crud',1,0,0),(1,8,'crud',1,0,0),(1,9,'crud',1,0,0),(1,10,'crud',1,0,0),(1,12,'crud',1,0,0),(1,13,'crud',1,0,0),(1,14,'crud',1,0,0),(1,15,'crud',1,1,1),(1,16,'crud',1,0,0),(1,17,'crud',1,1,1),(1,19,'crud',1,1,1),(1,20,'crud',1,0,0),(1,21,'crud',1,1,1),(1,22,'crud',1,0,0),(1,23,'crud',1,1,1),(1,25,'crud',1,0,0),(1,26,'crud',1,0,0),(1,27,'crud',1,0,0),(1,28,'crud',1,0,0),(1,29,'crud',1,1,1),(1,30,'rud',1,1,1),(1,31,'crud',1,0,0),(1,32,'crud',1,0,0),(1,33,'crud',1,0,0),(1,34,'crud',1,0,0),(1,36,'crud',1,0,0),(1,40,'crud',1,1,1),(1,41,'crud',1,0,0),(1,42,'crud',1,0,0),(1,43,'crud',1,0,0),(1,44,'crud',1,0,0),(1,45,'crud',1,0,0),(1,46,'crud',1,0,0),(1,48,'crud',1,0,0),(1,49,'crud',1,0,0),(1,50,'crud',1,0,0),(1,51,'crud',1,0,0),(1,53,'crud',1,0,0),(1,54,'crud',1,0,0),(1,56,'crud',1,0,0),(1,57,'crud',1,0,0),(1,58,'crud',1,0,0),(1,59,'crud',1,0,0),(1,60,'crud',1,1,0),(1,62,'crud',1,0,0),(1,63,'crud',1,1,1),(1,64,'r',1,1,1),(1,66,'crud',1,1,1),(1,67,'rud',1,1,1),(1,71,'r',1,1,1),(1,72,'crud',1,1,1),(1,77,'crud',1,1,1),(1,78,'r',1,1,1),(1,80,'r',1,1,1),(1,82,'crud',1,0,0),(1,83,'crud',1,1,1),(1,85,'crud',1,1,1),(1,86,'crud',1,1,1),(1,87,'crud',1,1,1),(1,89,'r',1,1,1),(1,90,'r',1,1,1),(1,91,'r',1,1,1),(1,92,'r',1,1,1),(1,93,'r',1,1,1),(1,94,'r',1,1,1),(1,95,'crud',1,1,1),(1,96,'crud',1,1,1),(1,97,'crud',1,1,1),(2,1,'crud',1,0,0),(2,7,'crud',1,0,0),(2,8,'crud',1,0,0),(2,9,'crud',1,0,0),(2,15,'crud',1,1,1),(2,19,'crud',1,1,1),(2,20,'crud',1,0,0),(2,21,'r',1,1,1),(2,23,'crud',1,1,1),(2,25,'r',0,0,0),(2,28,'crud',1,0,0),(2,29,'crud',1,1,1),(2,30,'r',1,1,1),(2,33,'r',0,0,0),(2,51,'r',1,0,0),(2,53,'r',1,0,0),(2,61,'r',1,1,1),(3,1,'ru',1,0,0),(3,5,'r',1,0,0),(3,7,'r',1,0,0),(3,8,'r',1,0,0),(3,9,'r',1,0,0),(3,15,'ru',1,1,1),(3,19,'ru',1,0,0),(3,20,'crud',1,0,0),(3,21,'r',1,1,1),(3,22,'crud',1,0,0),(3,23,'r',1,1,1),(3,25,'r',0,0,0),(3,28,'r',0,0,0),(3,29,'r',1,1,1),(3,30,'r',1,1,1),(3,31,'r',1,0,0),(3,32,'crud',1,0,0),(3,33,'r',0,0,0),(3,34,'r',0,0,0),(3,61,'r',1,1,1),(3,80,'r',1,0,0),(3,90,'r',1,0,0),(3,93,'r',1,0,0);
+INSERT INTO `pkg_group_module` VALUES (1,1,'crud',1,0,0),(1,3,'crud',1,0,0),(1,4,'ru',1,0,0),(1,5,'crud',1,0,0),(1,6,'crud',1,0,0),(1,7,'crud',1,0,0),(1,8,'crud',1,0,0),(1,9,'crud',1,0,0),(1,10,'crud',1,0,0),(1,12,'crud',1,0,0),(1,13,'crud',1,0,0),(1,14,'crud',1,0,0),(1,15,'crud',1,1,1),(1,16,'crud',1,0,0),(1,17,'crud',1,1,1),(1,19,'crud',1,1,1),(1,20,'crud',1,0,0),(1,21,'crud',1,1,1),(1,22,'crud',1,0,0),(1,23,'crud',1,1,1),(1,25,'crud',1,0,0),(1,26,'crud',1,0,0),(1,27,'crud',1,0,0),(1,28,'crud',1,0,0),(1,29,'crud',1,1,1),(1,30,'rud',1,1,1),(1,31,'crud',1,0,0),(1,32,'crud',1,0,0),(1,33,'crud',1,0,0),(1,34,'crud',1,0,0),(1,36,'crud',1,0,0),(1,40,'crud',1,1,1),(1,41,'crud',1,0,0),(1,42,'crud',1,0,0),(1,43,'crud',1,0,0),(1,44,'crud',1,0,0),(1,45,'crud',1,0,0),(1,46,'crud',1,0,0),(1,48,'crud',1,0,0),(1,49,'crud',1,0,0),(1,50,'crud',1,0,0),(1,51,'crud',1,0,0),(1,53,'crud',1,0,0),(1,54,'crud',1,0,0),(1,56,'crud',1,0,0),(1,57,'crud',1,0,0),(1,58,'crud',1,0,0),(1,59,'crud',1,0,0),(1,60,'crud',1,1,0),(1,62,'crud',1,0,0),(1,63,'crud',1,1,1),(1,64,'r',1,1,1),(1,66,'crud',1,1,1),(1,67,'rud',1,1,1),(1,71,'r',1,1,1),(1,72,'crud',1,1,1),(1,77,'crud',1,1,1),(1,78,'r',1,1,1),(1,80,'r',1,1,1),(1,82,'crud',1,0,0),(1,83,'crud',1,1,1),(1,85,'crud',1,1,1),(1,86,'crud',1,1,1),(1,87,'crud',1,1,1),(1,89,'r',1,1,1),(1,90,'r',1,1,1),(1,91,'r',1,1,1),(1,92,'r',1,1,1),(1,93,'r',1,1,1),(1,94,'r',1,1,1),(1,95,'crud',1,1,1),(1,96,'crud',1,1,1),(1,97,'crud',1,1,1),(1,98,'crud',1,0,0),(1,102,'crud',1,1,1),(2,1,'crud',1,0,0),(2,7,'crud',1,0,0),(2,8,'crud',1,0,0),(2,9,'crud',1,0,0),(2,15,'crud',1,1,1),(2,19,'crud',1,1,1),(2,20,'crud',1,0,0),(2,21,'r',1,1,1),(2,23,'crud',1,1,1),(2,25,'r',0,0,0),(2,28,'crud',1,0,0),(2,29,'crud',1,1,1),(2,30,'r',1,1,1),(2,33,'r',0,0,0),(2,51,'r',1,0,0),(2,53,'r',1,0,0),(2,61,'r',1,1,1),(3,1,'ru',1,0,0),(3,5,'r',1,0,0),(3,7,'r',1,0,0),(3,8,'r',1,0,0),(3,9,'r',1,0,0),(3,15,'ru',1,1,1),(3,19,'ru',1,0,0),(3,20,'crud',1,0,0),(3,21,'r',1,1,1),(3,22,'crud',1,0,0),(3,23,'r',1,1,1),(3,25,'r',0,0,0),(3,28,'r',0,0,0),(3,29,'r',1,1,1),(3,30,'r',1,1,1),(3,31,'r',1,0,0),(3,32,'crud',1,0,0),(3,33,'r',0,0,0),(3,34,'r',0,0,0),(3,61,'r',1,1,1),(3,80,'r',1,0,0),(3,90,'r',1,0,0),(3,93,'r',1,0,0);
 /*!40000 ALTER TABLE `pkg_group_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1218,6 +1266,7 @@ CREATE TABLE `pkg_group_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `id_user_type` int(11) NOT NULL,
+  `user_prefix` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pkg_user_type_pkg_group_user` (`id_user_type`),
   CONSTRAINT `pkg_user_type_pkg_group_user` FOREIGN KEY (`id_user_type`) REFERENCES `pkg_user_type` (`id`)
@@ -1230,7 +1279,7 @@ CREATE TABLE `pkg_group_user` (
 
 LOCK TABLES `pkg_group_user` WRITE;
 /*!40000 ALTER TABLE `pkg_group_user` DISABLE KEYS */;
-INSERT INTO `pkg_group_user` VALUES (1,'Administrator',1),(2,'Agent',2),(3,'Client',3);
+INSERT INTO `pkg_group_user` VALUES (1,'Administrator',1,NULL),(2,'Agent',2,NULL),(3,'Client',3,NULL);
 /*!40000 ALTER TABLE `pkg_group_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1342,12 +1391,9 @@ CREATE TABLE `pkg_ivr` (
   `id_user` int(11) NOT NULL,
   `id_did` int(11) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
-  `monFriStart` varchar(5) NOT NULL DEFAULT '09:00',
-  `monFriStop` varchar(5) NOT NULL DEFAULT '18:00',
-  `satStart` varchar(5) NOT NULL DEFAULT '09:00',
-  `satStop` varchar(5) NOT NULL DEFAULT '12:00',
-  `sunStart` varchar(5) NOT NULL DEFAULT '09:00',
-  `sunStop` varchar(5) NOT NULL DEFAULT '12:00',
+  `monFriStart` varchar(200) NOT NULL DEFAULT '09:00-12:00|14:00-18:00',
+  `satStart` varchar(200) NOT NULL DEFAULT '09:00-12:00',
+  `sunStart` varchar(200) NOT NULL DEFAULT '00:00',
   `option_0` varchar(50) DEFAULT NULL,
   `option_1` varchar(50) DEFAULT NULL,
   `option_2` varchar(50) DEFAULT NULL,
@@ -1406,18 +1452,9 @@ CREATE TABLE `pkg_log` (
   `ip` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_pkg_log_actions_pkg_log` (`id_log_actions`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `pkg_log`
---
-
-LOCK TABLES `pkg_log` WRITE;
-/*!40000 ALTER TABLE `pkg_log` DISABLE KEYS */;
-INSERT INTO `pkg_log` VALUES (1,1,1,'Username Login on the panel - User root',NULL,'2019-10-21 17:10:14','177.137.112.37');
-/*!40000 ALTER TABLE `pkg_log` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `pkg_log_actions`
@@ -1479,7 +1516,7 @@ CREATE TABLE `pkg_method_pay` (
   `P2P_CustomerSiteID` varchar(100) NOT NULL DEFAULT '',
   `P2P_KeyID` varchar(50) NOT NULL DEFAULT '',
   `P2P_Passphrase` varchar(50) NOT NULL DEFAULT '',
-  `P2P_RecipientKeyID` varchar(30) NOT NULL DEFAULT '',
+  `P2P_RecipientKeyID` varchar(100) NOT NULL DEFAULT '',
   `P2P_tax_amount` varchar(10) NOT NULL DEFAULT '0',
   `client_id` varchar(500) DEFAULT NULL,
   `client_secret` varchar(500) DEFAULT NULL,
@@ -1503,7 +1540,7 @@ CREATE TABLE `pkg_method_pay` (
 
 LOCK TABLES `pkg_method_pay` WRITE;
 /*!40000 ALTER TABLE `pkg_method_pay` DISABLE KEYS */;
-INSERT INTO `pkg_method_pay` VALUES (1,1,'Pagseguro','Pagseguro','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(3,1,'Moip','Moip','Brasil',0,0,'','https://www.moip.com.br/PagamentoMoIP.do','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,id_user,show_name,country,active,min,max,username,url'),(4,1,'Paypal','Paypal','Global',1,0,'','https://www.paypal.com/cgi-bin/webscr','info@magnusbilling.com','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,500,'payment_method,show_name,id_user,country,active,min,max,username,url,fee'),(5,1,'CuentaDigital','PagoFacil o Rapipago','Argentina',0,0,'','http://www.cuentadigital.com/api.php','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,url'),(6,1,'DineroMail','Tarjeta de crédito, DineroMail','Brasil',0,0,'','https://argentina.dineromail.com/Shop/Shop_Ingreso.asp','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,min,max,username,url'),(7,1,'PlacetoPay','PlacetoPay','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,P2P_CustomerSiteID,P2P_KeyID,P2P_Passphrase,P2P_RecipientKeyID,P2P_tax_amount'),(8,1,'GerenciaNet','GerenciaNet','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,client_id,client_secret'),(9,1,'Pagseguro','Pagseguro','Brasil',0,0,'','','','',0,'','Banco do Brasil','','','','','','','','','','','','','','','','','','','','','',0,'',10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(10,1,'MercadoPago','MercadoPago','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,20,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(11,1,'paghiper','Boleto Bancario  paghiper','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(12,1,'MercadoPago','MercadoPago','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(13,1,'molpay','MoPay','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(14,1,'Sagepay','sagepay','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,P2P_KeyID,client_id'),(15,1,'Stripe','Stripe','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,client_id,client_secret'),(16,1,'Elavon','Elavon','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,client_id,client_secret'),(17,1,'cryptocurrency','BITCOIN','Global',1,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0','','',NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,client_id,client_secret');
+INSERT INTO `pkg_method_pay` VALUES (1,1,'Pagseguro','Pagseguro','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(3,1,'Moip','Moip','Brasil',0,0,'','https://www.moip.com.br/PagamentoMoIP.do','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,id_user,show_name,country,active,min,max,username,url'),(4,1,'Paypal','Paypal','Global',1,0,'','https://www.paypal.com/cgi-bin/webscr','info@magnusbilling.com','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,500,'payment_method,show_name,id_user,country,active,min,max,username,url,fee'),(5,1,'CuentaDigital','PagoFacil o Rapipago','Argentina',0,0,'','http://www.cuentadigital.com/api.php','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,url'),(6,1,'DineroMail','Tarjeta de crédito, DineroMail','Brasil',0,0,'','https://argentina.dineromail.com/Shop/Shop_Ingreso.asp','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,min,max,username,url'),(7,1,'PlacetoPay','PlacetoPay','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,P2P_CustomerSiteID,P2P_KeyID,P2P_Passphrase,P2P_RecipientKeyID,P2P_tax_amount'),(8,1,'GerenciaNet','GerenciaNet','Brasil',0,0,'','','','',0,'','','','','','','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,client_id,client_secret'),(9,1,'Pagseguro','Pagseguro','Brasil',0,0,'','','','',0,'','Banco do Brasil','','','','','','','','','','','','','','','','','','','','','',0,'',10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(10,1,'MercadoPago','MercadoPago','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,20,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(11,1,'paghiper','Boleto Bancario  paghiper','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(12,1,'MercadoPago','MercadoPago','Brasil',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN'),(13,1,'molpay','MoPay','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN,P2P_RecipientKeyID'),(14,1,'Sagepay','sagepay','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,P2P_KeyID,client_id'),(15,1,'Stripe','Stripe','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,client_id,client_secret'),(16,1,'Elavon','Elavon','Global',0,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0',NULL,NULL,NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,client_id,client_secret'),(17,1,'cryptocurrency','BITCOIN','Global',1,0,NULL,'','','',0,'','','','','','','','','','','','','','','','','','0','','',NULL,NULL,NULL,NULL,NULL,10,500,'payment_method,show_name,id_user,country,active,min,max,username,client_id,client_secret');
 /*!40000 ALTER TABLE `pkg_method_pay` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1524,7 +1561,7 @@ CREATE TABLE `pkg_module` (
   PRIMARY KEY (`id`),
   KEY `fk_pkg_module_pkg_module` (`id_module`),
   CONSTRAINT `fk_pkg_module_pkg_module` FOREIGN KEY (`id_module`) REFERENCES `pkg_module` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1533,7 +1570,7 @@ CREATE TABLE `pkg_module` (
 
 LOCK TABLES `pkg_module` WRITE;
 /*!40000 ALTER TABLE `pkg_module` DISABLE KEYS */;
-INSERT INTO `pkg_module` VALUES (1,'t(\'users Module\')',NULL,'x-fa fa-arrow-right',NULL,1),(3,'t(\'groupuser\')','groupuser','x-fa fa-desktop',12,2),(4,'t(\'Menus\')','module','x-fa fa-desktop',12,1),(5,'t(\'did Module\')',NULL,'x-fa fa-arrow-right',NULL,3),(6,'t(\'settings\')','configuration','x-fa fa-desktop',12,3),(7,'t(\'billing Module\')',NULL,'x-fa fa-arrow-right',NULL,2),(8,'t(\'rates Module\')',NULL,'x-fa fa-arrow-right',NULL,4),(9,'t(\'reports Module\')',NULL,'x-fa fa-arrow-right',NULL,5),(10,'t(\'routes Module\')',NULL,'x-fa fa-arrow-right',NULL,6),(12,'t(\'config Module\')',NULL,'x-fa fa-arrow-right',NULL,7),(13,'t(\'callcenter Module\')',NULL,'x-fa fa-arrow-right',NULL,8),(14,'t(\'callshop Module\')',NULL,'x-fa fa-arrow-right',NULL,9),(15,'t(\'users\')','user','x-fa fa-desktop',1,1),(16,'t(\'provider\')','provider','x-fa fa-desktop',10,2),(17,'t(\'trunk\')','trunk','x-fa fa-desktop',10,3),(19,'t(\'sip\')','sip','x-fa fa-desktop',1,2),(20,'t(\'sipuras\')','sipuras','x-fa fa-desktop',1,5),(21,'t(\'callonline\')','callonline','x-fa fa-desktop',1,3),(22,'t(\'callerid\')','callerid','x-fa fa-desktop',1,4),(23,'t(\'refill\')','refill','x-fa fa-desktop',7,1),(25,'t(\'paymentmethods\')','methodpay','x-fa fa-desktop',7,2),(26,'t(\'voucher\')','voucher','x-fa fa-desktop',7,3),(27,'t(\'refillprovider\')','refillprovider','x-fa fa-desktop',7,4),(28,'t(\'plans\')','plan','x-fa fa-desktop',8,1),(29,'t(\'tariffs\')','rate','x-fa fa-desktop',8,2),(30,'t(\'cdr\')','call','x-fa fa-desktop',9,1),(31,'t(\'did\')','did','x-fa fa-desktop',5,1),(32,'t(\'diddestination\')','diddestination','x-fa fa-desktop',5,2),(33,'t(\'prefixs\')','prefix','x-fa fa-desktop',8,3),(34,'t(\'offer\')','offer','x-fa fa-desktop',8,5),(36,'t(\'diduse\')','diduse','x-fa fa-desktop',5,3),(40,'t(\'Summary per Day\')','callsummaryperday','x-fa fa-desktop',9,3),(41,'t(\'campaigns\')','campaign','x-fa fa-desktop',13,1),(42,'t(\'polls\')','campaignpoll','x-fa fa-desktop',13,4),(43,'t(\'phonebooks\')','phonebook','x-fa fa-desktop',13,2),(44,'t(\'numbers\')','phonenumber','x-fa fa-desktop',13,3),(45,'t(\'offercdr\')','offercdr','x-fa fa-desktop',8,6),(46,'t(\'offeruse\')','offeruse','x-fa fa-desktop',8,7),(48,'t(\'restrictedphonenumber\')','restrictedphonenumber','x-fa fa-desktop',1,6),(49,'t(\'sms\')','sms','x-fa fa-desktop',13,7),(50,'t(\'cabinas\')','callshop','x-fa fa-desktop',14,1),(51,'t(\'callshopcdr\')','callshopcdr','x-fa fa-desktop',14,2),(53,'t(\'callshoptariffs\')','ratecallshop','x-fa fa-desktop',14,3),(54,'t(\'templatemail\')','templatemail','x-fa fa-desktop',12,4),(55,'t(\'callback\')','callback','x-fa fa-desktop',1,7),(56,'t(\'ivr\')','ivr','x-fa fa-desktop',5,4),(57,'t(\'campaignpollinfo\')','campaignpollinfo','x-fa fa-desktop',13,5),(58,'t(\'queues\')','queue','x-fa fa-desktop',5,5),(59,'t(\'queuesmember\')','queuemember','x-fa fa-desktop',5,6),(60,'t(\'Summary per Month\')','callsummarypermonth','x-fa fa-desktop',9,7),(61,'t(\'buycredit\')','buycredit','x-fa fa-desktop',1,8),(62,'t(\'Restrict Phone\')','campaignrestrictphone','x-fa fa-desktop',13,6),(63,'t(\'Quick Campaign\')','campaignsend','x-fa fa-desktop',13,8),(64,'t(\'Log Users\')','logusers','x-fa fa-desktop',12,5),(65,'t(\'Call per Minutes\')','campaignlog','x-fa fa-desktop',12,10),(66,'t(\'User Rate\')','userrate','x-fa fa-desktop',8,4),(67,'t(\'Call Failed\')','callfailed','x-fa fa-desktop',9,2),(68,'t(\'Buy DID\')','didbuy','x-fa fa-desktop',5,7),(69,'t(\'Extra\')','extra','x-fa fa-desktop',12,69),(71,'t(\'Dashboard\')','dashboard','x-fa fa-desktop',12,9),(72,'t(\'Smtp\')','smtps','x-fa fa-desktop',12,6),(73,'t(\'CallShop per Day\')','callsummarycallshop','x-fa fa-desktop',14,4),(77,'t(\'Servers\')','servers','x-fa fa-desktop',10,4),(78,'t(\'Queue DashBoard\')','dashboardqueue','x-fa fa-desktop',5,8),(79,'t(\'Send Credit\')','transfertomobile','x-fa fa-desktop',1,11),(80,'t(\'Summary per User\')','callsummaryperuser','x-fa fa-desktop',9,10),(82,'t(\'Firewall\')','firewall','x-fa fa-desktop',12,7),(83,'t(\'Iax\')','iax','x-fa fa-desktop',1,9),(85,'t(\'Services\')',NULL,'x-fa fa-arrow-right',NULL,10),(86,'t(\'Services\')','services','x-fa fa-desktop',85,1),(87,'t(\'Services Use\')','servicesuse','x-fa fa-desktop',85,2),(88,'t(\'Send Credit Summary\')','sendcreditsummary','x-fa fa-desktop',9,13),(89,'t(\'Summary per Trunk\')','callsummarypertrunk','x-fa fa-desktop',9,11),(90,'t(\'Summary Day User\')','callsummarydayuser','x-fa fa-desktop',9,4),(91,'t(\'Summary Day Trunk\')','callsummarydaytrunk','x-fa fa-desktop',9,5),(92,'t(\'Summary Day Agent\')','callsummarydayagent','x-fa fa-desktop',9,6),(93,'t(\'Summary Month User\')','callsummarymonthuser','x-fa fa-desktop',9,8),(94,'t(\'Summary Month Trunk\')','callsummarymonthtrunk','x-fa fa-desktop',9,9),(95,'t(\'Call Archive\')','callarchive','x-fa fa-desktop',9,12),(96,'t(\'API\')','api','x-fa fa-desktop',12,8),(97,'t(\'Provider Rates\')','rateprovider','x-fa fa-desktop',10,1);
+INSERT INTO `pkg_module` VALUES (1,'t(\'users Module\')',NULL,'x-fa fa-arrow-right',NULL,1),(3,'t(\'groupuser\')','groupuser','x-fa fa-desktop',12,2),(4,'t(\'Menus\')','module','x-fa fa-desktop',12,1),(5,'t(\'did Module\')',NULL,'x-fa fa-arrow-right',NULL,3),(6,'t(\'settings\')','configuration','x-fa fa-desktop',12,3),(7,'t(\'billing Module\')',NULL,'x-fa fa-arrow-right',NULL,2),(8,'t(\'rates Module\')',NULL,'x-fa fa-arrow-right',NULL,4),(9,'t(\'reports Module\')',NULL,'x-fa fa-arrow-right',NULL,5),(10,'t(\'routes Module\')',NULL,'x-fa fa-arrow-right',NULL,6),(12,'t(\'config Module\')',NULL,'x-fa fa-arrow-right',NULL,7),(13,'t(\'callcenter Module\')',NULL,'x-fa fa-arrow-right',NULL,8),(14,'t(\'callshop Module\')',NULL,'x-fa fa-arrow-right',NULL,9),(15,'t(\'users\')','user','x-fa fa-desktop',1,1),(16,'t(\'provider\')','provider','x-fa fa-desktop',10,1),(17,'t(\'trunk\')','trunk','x-fa fa-desktop',10,2),(19,'t(\'sip\')','sip','x-fa fa-desktop',1,2),(20,'t(\'sipuras\')','sipuras','x-fa fa-desktop',1,5),(21,'t(\'callonline\')','callonline','x-fa fa-desktop',1,3),(22,'t(\'callerid\')','callerid','x-fa fa-desktop',1,4),(23,'t(\'refill\')','refill','x-fa fa-desktop',7,1),(25,'t(\'paymentmethods\')','methodpay','x-fa fa-desktop',7,2),(26,'t(\'voucher\')','voucher','x-fa fa-desktop',7,3),(27,'t(\'refillprovider\')','refillprovider','x-fa fa-desktop',7,4),(28,'t(\'plans\')','plan','x-fa fa-desktop',8,1),(29,'t(\'tariffs\')','rate','x-fa fa-desktop',8,2),(30,'t(\'cdr\')','call','x-fa fa-desktop',9,1),(31,'t(\'did\')','did','x-fa fa-desktop',5,1),(32,'t(\'diddestination\')','diddestination','x-fa fa-desktop',5,2),(33,'t(\'prefixs\')','prefix','x-fa fa-desktop',8,3),(34,'t(\'offer\')','offer','x-fa fa-desktop',8,5),(36,'t(\'diduse\')','diduse','x-fa fa-desktop',5,3),(40,'t(\'Summary per Day\')','callsummaryperday','x-fa fa-desktop',9,3),(41,'t(\'campaigns\')','campaign','x-fa fa-desktop',13,1),(42,'t(\'polls\')','campaignpoll','x-fa fa-desktop',13,4),(43,'t(\'phonebooks\')','phonebook','x-fa fa-desktop',13,2),(44,'t(\'numbers\')','phonenumber','x-fa fa-desktop',13,3),(45,'t(\'offercdr\')','offercdr','x-fa fa-desktop',8,6),(46,'t(\'offeruse\')','offeruse','x-fa fa-desktop',8,7),(48,'t(\'restrictedphonenumber\')','restrictedphonenumber','x-fa fa-desktop',1,6),(49,'t(\'sms\')','sms','x-fa fa-desktop',13,7),(50,'t(\'cabinas\')','callshop','x-fa fa-desktop',14,1),(51,'t(\'callshopcdr\')','callshopcdr','x-fa fa-desktop',14,2),(53,'t(\'callshoptariffs\')','ratecallshop','x-fa fa-desktop',14,3),(54,'t(\'templatemail\')','templatemail','x-fa fa-desktop',12,4),(55,'t(\'callback\')','callback','x-fa fa-desktop',1,7),(56,'t(\'ivr\')','ivr','x-fa fa-desktop',5,4),(57,'t(\'campaignpollinfo\')','campaignpollinfo','x-fa fa-desktop',13,5),(58,'t(\'queues\')','queue','x-fa fa-desktop',5,5),(59,'t(\'queuesmember\')','queuemember','x-fa fa-desktop',5,6),(60,'t(\'Summary per Month\')','callsummarypermonth','x-fa fa-desktop',9,7),(61,'t(\'buycredit\')','buycredit','x-fa fa-desktop',1,8),(62,'t(\'Restrict Phone\')','campaignrestrictphone','x-fa fa-desktop',13,6),(63,'t(\'Quick Campaign\')','campaignsend','x-fa fa-desktop',13,8),(64,'t(\'Log Users\')','logusers','x-fa fa-desktop',12,5),(65,'t(\'Call per Minutes\')','campaignlog','x-fa fa-desktop',12,10),(66,'t(\'User Rate\')','userrate','x-fa fa-desktop',8,4),(67,'t(\'Call Failed\')','callfailed','x-fa fa-desktop',9,2),(68,'t(\'Buy DID\')','didbuy','x-fa fa-desktop',5,7),(69,'t(\'Extra\')','extra','x-fa fa-desktop',12,69),(71,'t(\'Dashboard\')','dashboard','x-fa fa-desktop',12,9),(72,'t(\'Smtp\')','smtps','x-fa fa-desktop',12,6),(73,'t(\'CallShop per Day\')','callsummarycallshop','x-fa fa-desktop',14,4),(77,'t(\'Servers\')','servers','x-fa fa-desktop',10,5),(78,'t(\'Queue DashBoard\')','dashboardqueue','x-fa fa-desktop',5,8),(79,'t(\'Send Credit\')','transfertomobile','x-fa fa-desktop',1,11),(80,'t(\'Summary per User\')','callsummaryperuser','x-fa fa-desktop',9,10),(82,'t(\'Firewall\')','firewall','x-fa fa-desktop',12,7),(83,'t(\'Iax\')','iax','x-fa fa-desktop',1,9),(85,'t(\'Services\')',NULL,'x-fa fa-arrow-right',NULL,10),(86,'t(\'Services\')','services','x-fa fa-desktop',85,1),(87,'t(\'Services Use\')','servicesuse','x-fa fa-desktop',85,2),(88,'t(\'Send Credit Summary\')','sendcreditsummary','x-fa fa-desktop',9,13),(89,'t(\'Summary per Trunk\')','callsummarypertrunk','x-fa fa-desktop',9,11),(90,'t(\'Summary Day User\')','callsummarydayuser','x-fa fa-desktop',9,4),(91,'t(\'Summary Day Trunk\')','callsummarydaytrunk','x-fa fa-desktop',9,5),(92,'t(\'Summary Day Agent\')','callsummarydayagent','x-fa fa-desktop',9,6),(93,'t(\'Summary Month User\')','callsummarymonthuser','x-fa fa-desktop',9,8),(94,'t(\'Summary Month Trunk\')','callsummarymonthtrunk','x-fa fa-desktop',9,9),(95,'t(\'Call Archive\')','callarchive','x-fa fa-desktop',9,12),(96,'t(\'API\')','api','x-fa fa-desktop',12,8),(97,'t(\'Provider Rates\')','rateprovider','x-fa fa-desktop',10,4),(98,'t(\'Group to Admins\')','groupusergroup','x-fa fa-desktop',12,11),(99,'t(\'DIDWW\')','didww','x-fa fa-desktop',5,10),(100,'t(\'Extra2\')','extra2','x-fa fa-desktop',12,10),(101,'t(\'Extra3\')','extra3','x-fa fa-desktop',12,11),(102,'t(\'Trunk Groups\')','trunkgroup','x-fa fa-desktop',10,3);
 /*!40000 ALTER TABLE `pkg_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1886,6 +1923,7 @@ CREATE TABLE `pkg_queue_agent_status` (
   `totalCalls` int(11) NOT NULL DEFAULT '0',
   `last_call` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`agentName`,`id_queue`),
   KEY `id_user` (`id_user`),
   KEY `id_queue` (`id_queue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1982,7 +2020,7 @@ DROP TABLE IF EXISTS `pkg_rate`;
 CREATE TABLE `pkg_rate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_plan` int(11) NOT NULL,
-  `id_trunk` int(11) NOT NULL,
+  `id_trunk_group` int(11) NOT NULL,
   `id_prefix` int(11) NOT NULL,
   `rateinitial` decimal(15,6) DEFAULT '0.000000',
   `initblock` int(11) NOT NULL DEFAULT '1',
@@ -1998,10 +2036,10 @@ CREATE TABLE `pkg_rate` (
   PRIMARY KEY (`id`),
   KEY `fk_pkg_plan_pkg_rate` (`id_plan`),
   KEY `fk_pkg_prefix_pkg_rate` (`id_prefix`),
-  KEY `fk_pkg_trunk_pkg_rate` (`id_trunk`),
+  KEY `fk_pkg_trunk_pkg_rate` (`id_trunk_group`),
   KEY `dialprefix` (`dialprefix`),
   CONSTRAINT `fk_pkg_plan_pkg_rate` FOREIGN KEY (`id_plan`) REFERENCES `pkg_plan` (`id`),
-  CONSTRAINT `fk_pkg_trunk_pkg_rate` FOREIGN KEY (`id_trunk`) REFERENCES `pkg_trunk` (`id`)
+  CONSTRAINT `fk_pkg_trunk_group_pkg_rate` FOREIGN KEY (`id_trunk_group`) REFERENCES `pkg_trunk_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2209,6 +2247,7 @@ CREATE TABLE `pkg_restrict_phone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `number` bigint(20) NOT NULL,
+  `direction` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `fk_pkg_user_pkg_restricted_phonenumber` (`id_user`),
   KEY `number` (`number`),
@@ -2269,6 +2308,7 @@ CREATE TABLE `pkg_servers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `host` varchar(100) NOT NULL,
+  `public_ip` varchar(80) DEFAULT NULL,
   `username` varchar(50) NOT NULL DEFAULT '',
   `password` varchar(50) NOT NULL,
   `port` char(10) NOT NULL,
@@ -2424,7 +2464,7 @@ CREATE TABLE `pkg_sip` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `name` varchar(80) NOT NULL,
-  `accountcode` varchar(30) NOT NULL,
+  `accountcode` varchar(30) DEFAULT NULL,
   `alias` varchar(10) DEFAULT NULL,
   `regexten` varchar(40) DEFAULT NULL,
   `amaflags` varchar(40) DEFAULT NULL,
@@ -2494,12 +2534,16 @@ CREATE TABLE `pkg_sip` (
   `ringfalse` tinyint(1) NOT NULL DEFAULT '0',
   `record_call` tinyint(1) NOT NULL DEFAULT '0',
   `voicemail` tinyint(1) NOT NULL DEFAULT '0',
+  `voicemail_email` varchar(100) DEFAULT NULL,
+  `voicemail_password` int(11) DEFAULT NULL,
   `forward` varchar(50) NOT NULL DEFAULT '',
   `url_events` varchar(150) DEFAULT NULL,
   `block_call_reg` varchar(100) NOT NULL DEFAULT '',
   `dial_timeout` int(11) NOT NULL DEFAULT '60',
   `techprefix` int(6) DEFAULT NULL,
   `trace` tinyint(1) NOT NULL DEFAULT '0',
+  `addparameter` varchar(50) NOT NULL DEFAULT '',
+  `amd` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `techprefix` (`techprefix`),
   KEY `host` (`host`),
@@ -2731,6 +2775,7 @@ CREATE TABLE `pkg_sms` (
   `sms` mediumtext NOT NULL,
   `result` varchar(50) NOT NULL DEFAULT '',
   `rate` decimal(15,5) NOT NULL DEFAULT '0.00000',
+  `from` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_pkg_user_pkg_sms` (`id_user`),
   KEY `prefix` (`prefix`),
@@ -2760,7 +2805,7 @@ CREATE TABLE `pkg_smtp` (
   `id_user` int(11) NOT NULL,
   `host` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `port` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `encryption` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
@@ -2799,7 +2844,7 @@ CREATE TABLE `pkg_status_system` (
   `uptime` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `date` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2808,7 +2853,7 @@ CREATE TABLE `pkg_status_system` (
 
 LOCK TABLES `pkg_status_system` WRITE;
 /*!40000 ALTER TABLE `pkg_status_system` DISABLE KEYS */;
-INSERT INTO `pkg_status_system` VALUES (1,'2019-10-21 14:15:00',0.06,8,4,1.2,0,0,' Intel(R) Xeon(R) CPU @ 2.30GHz','0 days 03:06:12');
+INSERT INTO `pkg_status_system` VALUES (1,'2019-10-21 14:15:00',0.06,8,4,1.2,0,0,' Intel(R) Xeon(R) CPU @ 2.30GHz','0 days 03:06:12'),(2,'2020-06-23 19:08:00',0.78,60.91,4,3.3,1243.28,18.3337,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:09:23'),(3,'2020-06-23 19:09:00',0.45,8,4,0.61,0.0474,0.036,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:00:46'),(4,'2020-06-23 19:10:00',0.18,2.01,4,0.61,0.0697,0.0498,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:01:45'),(5,'2020-06-23 19:11:00',0.38,7.04,4,0.61,0.19,0.3499,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:02:46'),(6,'2020-06-23 19:12:00',0.14,19.1,4,0.62,0.0056,0,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:03:46'),(7,'2020-06-23 19:13:00',0.05,3.02,4,0.62,0.2483,0.0779,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:04:46'),(8,'2020-06-23 19:14:00',0.02,16.75,4,0.62,0.0056,0,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:05:46'),(9,'2020-06-23 19:15:00',0.01,1.51,4,0.62,0.0058,0.0198,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:06:46'),(10,'2020-06-23 19:16:00',0,6.03,4,0.62,0.0294,0.0066,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:07:45'),(11,'2020-06-23 19:17:00',0,5.53,4,0.63,0.8499,0.7215,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:08:46'),(12,'2020-06-23 19:18:00',0.45,18.09,4,0.92,0.0056,0,' Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz','0 days 00:09:46');
 /*!40000 ALTER TABLE `pkg_status_system` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2895,7 +2940,7 @@ CREATE TABLE `pkg_trunk` (
   `status` int(11) DEFAULT '1',
   `if_max_use` int(11) DEFAULT '0',
   `user` varchar(80) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `secret` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `secret` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `allow` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `link_sms` varchar(250) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `directmedia` char(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'no',
@@ -2936,6 +2981,60 @@ LOCK TABLES `pkg_trunk` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pkg_trunk_group`
+--
+
+DROP TABLE IF EXISTS `pkg_trunk_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pkg_trunk_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `type` int(11) NOT NULL DEFAULT '1',
+  `description` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pkg_trunk_group`
+--
+
+LOCK TABLES `pkg_trunk_group` WRITE;
+/*!40000 ALTER TABLE `pkg_trunk_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pkg_trunk_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pkg_trunk_group_trunk`
+--
+
+DROP TABLE IF EXISTS `pkg_trunk_group_trunk`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pkg_trunk_group_trunk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_trunk_group` int(11) NOT NULL,
+  `id_trunk` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_trunk_group` (`id_trunk_group`),
+  KEY `id_trunk` (`id_trunk`),
+  CONSTRAINT `fk_pkg_trunk_group_trunk_pkg_trunk` FOREIGN KEY (`id_trunk`) REFERENCES `pkg_trunk` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_pkg_trunk_group_trunk_pkg_trunk_group` FOREIGN KEY (`id_trunk_group`) REFERENCES `pkg_trunk_group` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pkg_trunk_group_trunk`
+--
+
+LOCK TABLES `pkg_trunk_group_trunk` WRITE;
+/*!40000 ALTER TABLE `pkg_trunk_group_trunk` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pkg_trunk_group_trunk` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pkg_user`
 --
 
@@ -2962,6 +3061,7 @@ CREATE TABLE `pkg_user` (
   `firstname` varchar(50) NOT NULL DEFAULT '',
   `address` varchar(100) DEFAULT NULL,
   `city` varchar(50) NOT NULL DEFAULT '',
+  `neighborhood` varchar(50) DEFAULT NULL,
   `state` varchar(50) NOT NULL DEFAULT '',
   `country` varchar(50) NOT NULL DEFAULT '',
   `zipcode` varchar(20) DEFAULT '',
@@ -3031,7 +3131,7 @@ CREATE TABLE `pkg_user` (
 
 LOCK TABLES `pkg_user` WRITE;
 /*!40000 ALTER TABLE `pkg_user` DISABLE KEYS */;
-INSERT INTO `pkg_user` VALUES (1,1,1,NULL,NULL,NULL,'root','9f4ca770b638615ac5c3e0d2da16b77c80c2f2c6',0.0000,1,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,0,'','','','','','','','','','','0','','',NULL,'0000-00-00 00:00:00',0,0,'en','','',NULL,10,0,534565,'21','0',1,0,0,0,0,'','0000-00-00 00:00:00',0,'',NULL,NULL,-1,-1,-1,-1,'503','gsm',0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `pkg_user` VALUES (1,1,1,NULL,NULL,NULL,'root','9f4ca770b638615ac5c3e0d2da16b77c80c2f2c6',0.0000,1,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0,0,'','','','',NULL,'','','','','','','0','','',NULL,'0000-00-00 00:00:00',0,0,'en','','',NULL,10,0,534565,'21','0',1,0,0,0,0,'','0000-00-00 00:00:00',0,'',NULL,NULL,-1,-1,-1,-1,'503','gsm',0,0,0,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `pkg_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3091,6 +3191,27 @@ INSERT INTO `pkg_user_type` VALUES (1,'t(\'admin\')'),(2,'t(\'agent\')'),(3,'t(\
 /*!40000 ALTER TABLE `pkg_user_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Temporary table structure for view `pkg_voicemail_users`
+--
+
+DROP TABLE IF EXISTS `pkg_voicemail_users`;
+/*!50001 DROP VIEW IF EXISTS `pkg_voicemail_users`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `pkg_voicemail_users` (
+  `id` tinyint NOT NULL,
+  `customer_id` tinyint NOT NULL,
+  `context` tinyint NOT NULL,
+  `mailbox` tinyint NOT NULL,
+  `password` tinyint NOT NULL,
+  `fullname` tinyint NOT NULL,
+  `email` tinyint NOT NULL,
+  `pager` tinyint NOT NULL,
+  `stamp` tinyint NOT NULL,
+  `uniqueid` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `pkg_voucher`
@@ -3128,6 +3249,25 @@ LOCK TABLES `pkg_voucher` WRITE;
 /*!40000 ALTER TABLE `pkg_voucher` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Final view structure for view `pkg_voicemail_users`
+--
+
+/*!50001 DROP TABLE IF EXISTS `pkg_voicemail_users`*/;
+/*!50001 DROP VIEW IF EXISTS `pkg_voicemail_users`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`mbillingUser`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `pkg_voicemail_users` AS select `pkg_sip`.`id` AS `id`,`pkg_sip`.`id_user` AS `customer_id`,'billing' AS `context`,`pkg_sip`.`name` AS `mailbox`,`pkg_sip`.`voicemail_password` AS `password`,`pkg_user`.`firstname` AS `fullname`,`pkg_sip`.`voicemail_email` AS `email`,`pkg_sip`.`md5secret` AS `pager`,`pkg_user`.`creationdate` AS `stamp`,'' AS `uniqueid` from (`pkg_sip` join `pkg_user` on((`pkg_sip`.`id_user` = `pkg_user`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
@@ -3137,4 +3277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-21 14:15:04
+-- Dump completed on 2020-06-23 19:18:56
