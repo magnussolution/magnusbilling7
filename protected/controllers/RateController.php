@@ -24,28 +24,28 @@ class RateController extends Controller
 {
     public $attributeOrder = 't.id';
     public $extraValues    = array(
-        'idTrunk'  => 'trunkcode',
-        'idPlan'   => 'name',
-        'idPrefix' => 'destination,prefix',
+        'idTrunkGroup' => 'name',
+        'idPlan'       => 'name',
+        'idPrefix'     => 'destination,prefix',
     );
 
     public $fieldsFkReport = array(
-        'id_plan'   => array(
+        'id_plan'        => array(
             'table'       => 'pkg_plan',
             'pk'          => 'id',
             'fieldReport' => 'name',
         ),
-        'id_trunk'  => array(
-            'table'       => 'pkg_trunk',
+        'id_trunk_group' => array(
+            'table'       => 'pkg_trunk_group',
             'pk'          => 'id',
-            'fieldReport' => 'trunkcode',
+            'fieldReport' => 'name',
         ),
-        'id_prefix' => array(
+        'id_prefix'      => array(
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'prefix',
         ),
-        't.id'      => array(
+        't.id'           => array(
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
@@ -54,7 +54,7 @@ class RateController extends Controller
 
     public $fieldsInvisibleClient = array(
         'additional_grace',
-        'id_trunk',
+        'id_trunk_group',
         'idTrunktrunkcode',
         'connectcharge',
         'disconnectcharge',
@@ -64,7 +64,7 @@ class RateController extends Controller
 
     public $fieldsInvisibleAgent = array(
         'additional_grace',
-        'id_trunk',
+        'id_trunk_group',
         'idTrunktrunkcode',
         'connectcharge',
         'disconnectcharge',
@@ -223,7 +223,7 @@ class RateController extends Controller
         " CHARACTER SET UTF8 " .
         " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
         " LINES TERMINATED BY '\\r\\n' (dialprefix,destination,rateinitial,initblock,billingblock,minimal_time_charge,connectcharge,disconnectcharge)" .
-        " SET id_plan = " . $values['id_plan'] . ", id_trunk = " . $values['id_trunk'] . ", id_prefix = " . $modelPrefix->id . "";
+        " SET id_plan = " . $values['id_plan'] . ", id_trunk_group = " . $values['id_trunk_group'] . ", id_prefix = " . $modelPrefix->id . "";
 
         try {
             Yii::app()->db->createCommand($sql)->execute();

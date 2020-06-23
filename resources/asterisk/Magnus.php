@@ -270,8 +270,7 @@ class Magnus
         $searchTariff = new SearchTariff();
         $resfindrate  = $searchTariff->find($this, $agi);
 
-        $CalcAgi->tariffObj    = $resfindrate;
-        $CalcAgi->number_trunk = count($resfindrate);
+        $CalcAgi->tariffObj = $resfindrate;
 
         if ($resfindrate == 0) {
             $agi->verbose("The number $this->destination, no exist in the plan $this->id_plan", 3);
@@ -281,8 +280,6 @@ class Magnus
                 $this->checkNumber($agi, $CalcAgi, $try_num);
             }
             return false;
-        } else {
-            $agi->verbose("NUMBER TARIFF FOUND -> " . $CalcAgi->number_trunk, 10);
         }
 
         /* CHECKING THE TIMEOUT*/

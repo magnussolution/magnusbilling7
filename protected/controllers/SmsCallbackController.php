@@ -56,10 +56,25 @@ class SmsCallbackController extends Controller
             echo $error_msg;
             exit;
         } else {
-            $providertech = $callTrunk[0]['providertech'];
-            $ipaddress    = $callTrunk[0]['trunkcode'];
-            $removeprefix = $callTrunk[0]['removeprefix'];
-            $prefix       = $callTrunk[0]['trunkprefix'];
+
+            if ($searchTariff[0]['trunk_group_type'] == 1) {
+                $order = 'id ASC';
+            } else if ($searchTariff[0]['trunk_group_type'] == 2) {
+                $order = 'RAND()';
+            }
+
+            $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->find([
+                'condition' => 'id_trunk_group = :key',
+                'params'    => [':key' => $searchTariff[0]['id_trunk_group']],
+                'order'     => $order,
+            ]);
+
+            $modelTrunk   = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+            $idTrunk      = $modelTrunk->id;
+            $providertech = $modelTrunk->providertech;
+            $ipaddress    = $modelTrunk->trunkcode;
+            $removeprefix = $modelTrunk->removeprefix;
+            $prefix       = $modelTrunk->trunkprefix;
 
             if (strncmp($callerid, $removeprefix, strlen($removeprefix)) == 0) {
                 $callerid = substr($callerid, strlen($removeprefix));
@@ -80,7 +95,7 @@ class SmsCallbackController extends Controller
             $call .= "Set:CIDCALLBACK=1\n";
             $call .= "Set:IDUSER=" . $modelCallerid->id_user . "\n";
             $call .= "Set:IDPREFIX=" . $callTrunk[0]['id_prefix'] . "\n";
-            $call .= "Set:IDTRUNK=" . $callTrunk[0]['id_trunk'] . "\n";
+            $call .= "Set:IDTRUNK=" . $idTrunk . "\n";
             $call .= "Set:IDPLAN=" . $modelCallerid->idUser->id_plan . "\n";
             $call .= "Set:SECCALL=" . $destination . "\n";
             AsteriskAccess::generateCallFile($call, 5);

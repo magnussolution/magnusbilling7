@@ -90,6 +90,20 @@ class SmsSend
 
             $prefixclause = substr($prefixclause, 0, -3) . ")";
 
+            if ($callTrunk[0]['trunk_group_type'] == 1) {
+                $order = 'id ASC';
+            } else if ($callTrunk[0]['trunk_group_type'] == 2) {
+                $order = 'RAND()';
+            }
+
+            $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->find([
+                'condition' => 'id_trunk_group = :key',
+                'params'    => [':key' => $callTrunk[0]['id_trunk_group']],
+                'order'     => $order,
+            ]);
+
+            $modelTrunk = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+
             //RETIRO O 1111
             if (substr($destination, 0, 7) == '9991111') {
                 $destination = substr($destination, 10);
@@ -97,22 +111,20 @@ class SmsSend
                 $destination = substr($destination, 3);
             }
 
-            if (!isset($callTrunk[0]['link_sms'])) {
+            if (!isset($modelTrunk->link_sms)) {
                 return array(
                     'success' => false,
                     'errors'  => Yii::t('yii', 'No sms link'),
                 );
             }
 
-            $linkSms      = isset($callTrunk[0]['link_sms']) ? $callTrunk[0]['link_sms'] : null;
-            $trunkPrefix  = isset($callTrunk[0]['rc_trunkprefix']) ? $callTrunk[0]['rc_trunkprefix'] : null;
-            $removePrefix = isset($callTrunk[0]['rc_removeprefix']) ? $callTrunk[0]['rc_removeprefix'] : null;
-            $smsRes       = isset($callTrunk[0]['sms_res']) ? $callTrunk[0]['sms_res'] : null;
+            $linkSms      = $callTrunk->link_sms;
+            $trunkPrefix  = $modelTrunk->trunkprefix;
+            $removePrefix = $modelTrunk->removeprefix;
+            $smsRes       = $modelTrunk->sms_res;
 
             $rateInitial = isset($callTrunk[0]['rateinitial']) ? $callTrunk[0]['rateinitial'] : null;
             $id_prefix   = isset($callTrunk[0]['id_prefix']) ? $callTrunk[0]['id_prefix'] : null;
-
-            $modelTrunk = Trunk::model()->findByPk($callTrunk[0]['id_trunk']);
 
             $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
             "id_provider = " . $modelTrunk->id_provider . " AND " . $prefixclause .

@@ -95,7 +95,29 @@ class Start0800CallBackCommand extends ConsoleCommand
                 }
 
                 $searchTariff = new SearchTariff();
-                $resfindrate  = $searchTariff->find($destination, $modelDiddestination->idUser->id_plan, $modelDiddestination->id_user);
+                $searchTariff = $searchTariff->find($destination, $modelUser->id_plan, $modelUser->id);
+
+                if (!count($searchTariff[1])) {
+                    $phone->status = 0;
+                    $phone->save();
+                    if ($this->debug >= 1) {
+                        echo " NO FOUND RATE TO CALL " . $username . "  DESTINATION $destination \n\n";
+                    }
+
+                    continue;
+                }
+
+                if ($searchTariff[0]['trunk_group_type'] == 1) {
+                    $order = 'id ASC';
+                } else if ($searchTariff[0]['trunk_group_type'] == 2) {
+                    $order = 'RAND()';
+                }
+
+                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->find([
+                    'condition' => 'id_trunk_group = :key',
+                    'params'    => [':key' => $searchTariff[0]['id_trunk_group']],
+                    'order'     => $order,
+                ]);
 
                 if (substr("$destination", 0, 4) == 1111) {
                     $destination = str_replace(substr($destination, 0, 7), "", $destination);
@@ -105,11 +127,14 @@ class Start0800CallBackCommand extends ConsoleCommand
                 ? $modelDiddestination->idUser->credit + $modelDiddestination->idUser->creditlimit
                 : $modelDiddestination->idUser->credit;
 
-                if ($resfindrate != 0 && $credit > 0) {
-                    $providertech = $resfindrate[0]['rc_providertech'];
-                    $ipaddress    = $resfindrate[0]['rc_providerip'];
-                    $removeprefix = $resfindrate[0]['rc_removeprefix'];
-                    $prefix       = $resfindrate[0]['rc_trunkprefix'];
+                if ($credit > 0) {
+
+                    $modelTrunk   = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+                    $idTrunk      = $modelTrunk->id;
+                    $providertech = $modelTrunk->providertech;
+                    $ipaddress    = $modelTrunk->trunkcode;
+                    $removeprefix = $modelTrunk->removeprefix;
+                    $prefix       = $modelTrunk->trunkprefix;
 
                     if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
                         $destination = substr($destination, strlen($removeprefix));
@@ -125,13 +150,13 @@ class Start0800CallBackCommand extends ConsoleCommand
                     $call .= "Priority: 1\n";
                     $call .= "Priority: 1\n";
                     $call .= "Set:CALLED=" . $destination . "\n";
-                    $call .= "Set:TARRIFID=" . $resfindrate[0]['id_rate'] . "\n";
-                    $call .= "Set:SELLCOST=" . $resfindrate[0]['rateinitial'] . "\n";
-                    $call .= "Set:SELLINITBLOCK=" . $resfindrate[0]['initblock'] . "\n";
-                    $call .= "Set:SELLINCREMENT=" . $resfindrate[0]['billingblock'] . "\n";
+                    $call .= "Set:TARRIFID=" . $searchTariff[0]['id_rate'] . "\n";
+                    $call .= "Set:SELLCOST=" . $searchTariff[0]['rateinitial'] . "\n";
+                    $call .= "Set:SELLINITBLOCK=" . $searchTariff[0]['initblock'] . "\n";
+                    $call .= "Set:SELLINCREMENT=" . $searchTariff[0]['billingblock'] . "\n";
                     $call .= "Set:IDUSER=" . $modelDiddestination->id_user . "\n";
-                    $call .= "Set:IDPREFIX=" . $resfindrate[0]['id_prefix'] . "\n";
-                    $call .= "Set:IDTRUNK=" . $resfindrate[0]['id_trunk'] . "\n";
+                    $call .= "Set:IDPREFIX=" . $searchTariff[0]['id_prefix'] . "\n";
+                    $call .= "Set:IDTRUNK=" . $idTrunk . "\n";
                     $call .= "Set:IDPLAN=" . $modelDiddestination->idUser->id_plan . "\n";
                     $call .= "Set:IDCALLBACK=" . $callback->id . "\n";
                     $call .= "Set:ISFROMCALLBACKPRO=1\n";

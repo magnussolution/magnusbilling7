@@ -181,36 +181,28 @@ class MassiveCallCommand extends ConsoleCommand
 
                 $searchTariff = $searchTariff[1];
 
-                if ($searchTariff[0]['status'] == 0 || $phone->try > 0 || ($searchTariff[0]['inuse'] >= $searchTariff[0]['maxuse'] && $searchTariff[0]['maxuse'] != -1)) {
-                    $modelTrunk = Trunk::model()->findByPk((int) $searchTariff[0]['rt_failover_trunk']);
+                if ($searchTariff[0]['trunk_group_type'] == 1) {
+                    $order = 'id ASC';
+                } else if ($searchTariff[0]['trunk_group_type'] == 2) {
+                    $order = 'RAND()';
+                }
 
-                    if (count($modelTrunk) > 0) {
-                        $idTrunk        = $modelTrunk->id;
-                        $trunkcode      = $modelTrunk->trunkcode;
-                        $trunkprefix    = $modelTrunk->trunkprefix;
-                        $removeprefix   = $modelTrunk->removeprefix;
-                        $providertech   = $modelTrunk->providertech;
-                        $inuse          = $modelTrunk->inuse;
-                        $maxuse         = $modelTrunk->maxuse;
-                        $status         = $modelTrunk->status;
-                        $failover_trunk = $modelTrunk->failover_trunk;
-                    } else {
-                        //desativa o numero de falhou na 1º tentativa e nao tem backup
-                        $phone->status = 0;
-                        $phone->save();
+                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->find([
+                    'condition' => 'id_trunk_group = :key',
+                    'params'    => [':key' => $searchTariff[0]['id_trunk_group']],
+                    'order'     => $order,
+                ]);
+
+                foreach ($modelTrunks as $key => $trunk) {
+                    $modelTrunk = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+                    if ($modelTrunk->status == 0 || $phone->try > 0) {
                         continue;
                     }
-
-                } else {
-                    $idTrunk        = $searchTariff[0]['id_trunk'];
-                    $trunkcode      = $searchTariff[0]['rc_providerip'];
-                    $trunkprefix    = $searchTariff[0]['rc_trunkprefix'];
-                    $removeprefix   = $searchTariff[0]['rc_removeprefix'];
-                    $providertech   = $searchTariff[0]['rc_providertech'];
-                    $inuse          = $searchTariff[0]['inuse'];
-                    $maxuse         = $searchTariff[0]['maxuse'];
-                    $status         = $searchTariff[0]['status'];
-                    $failover_trunk = $searchTariff[0]['rt_failover_trunk'];
+                    $idTrunk      = $modelTrunk->id;
+                    $trunkcode    = $modelTrunk->trunkcode;
+                    $trunkprefix  = $modelTrunk->trunkprefix;
+                    $removeprefix = $modelTrunk->removeprefix;
+                    $providertech = $modelTrunk->providertech;
                 }
 
                 if (substr($destination, 0, 4) == '1111') {
@@ -248,6 +240,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $call .= "Set:PHONENUMBER_CITY=" . $phone->city . "\n";
                 $call .= "Set:CAMPAIGN_ID=" . $campaign->id . "\n";
                 $call .= "Set:RATE_ID=" . $searchTariff[0]['id_rate'] . "\n";
+                $call .= "Set:TRUNK_ID=" . $idTrunk . "\n";
                 $call .= "Set:AGENT_ID=" . $id_agent . "\n";
                 $call .= "Set:AGENT_ID_PLAN=" . $id_plan_agent . "\n";
                 $call .= "Set:SIPDOMAIN=" . $config['global']['ip_servers'] . "\n";
