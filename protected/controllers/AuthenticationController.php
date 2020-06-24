@@ -438,6 +438,14 @@ class AuthenticationController extends Controller
 
         }
 
+        $colors = ['black', 'blue', 'gray', 'orange', 'purple', 'red', 'yellow'];
+        foreach ($colors as $key => $color) {
+            $types = ['crisp', 'neptune', 'triton'];
+            foreach ($types as $key => $type) {
+                exec("cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/");
+            }
+        }
+
         echo json_encode(array(
             'success' => $success,
             'msg'     => $msg,

@@ -61,6 +61,17 @@ chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
 chmod -R 100 /var/www/html/mbilling/resources/asterisk/
+
+if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
+	for color in black blue gray orange purple red yellow
+	do
+		for type in crisp neptune triton
+		do
+			cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/
+		done	
+	done	
+fi
+
 if [[ -e /var/www/html/mbilling/protected/commands/update3.sh ]]; then
 	/var/www/html/mbilling/protected/commands/update3.sh
 fi
