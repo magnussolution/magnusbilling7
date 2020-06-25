@@ -220,6 +220,7 @@ class Magnus
 
         if ($this->dnid == '*150') {
             $agi->verbose("SAY BALANCE : $this->credit ", 10);
+            $this->credit = number_format($this->credit, 2);
             $this->sayBalance($agi, $this->credit);
 
             $prompt = "prepaid-final";
