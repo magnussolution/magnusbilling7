@@ -559,7 +559,14 @@ class BaseController extends CController
             $this->success = false;
             $this->nameMsg = $this->msgRecordNotFound;
         } else {
-            if (!$this->isNewRecord && Yii::app()->session['isClient'] && $model->id_user != Yii::app()->session['id_user']) {
+            if (!$this->isNewRecord && Yii::app()->session['isClient'] && preg_match('/pkg_phonenumber/', $this->abstractModel->tableName())) {
+                $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
+
+                if ($modelCheck->idPhonebook->idUser->id != Yii::app()->session['id_user']) {
+                    exit('try edit invalid id');
+                }
+
+            } elseif (!$this->isNewRecord && Yii::app()->session['isClient'] && $model->id_user != Yii::app()->session['id_user']) {
                 exit('try edit invalid id');
             } else if (!$this->isNewRecord && Yii::app()->session['isAgent']) {
                 $this->checkAgentPermission($values, $namePk);

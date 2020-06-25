@@ -35,7 +35,7 @@ class SmsController extends Controller
 
     public function actionRead($asJson = true, $condition = null)
     {
-        if (isset($_POST['referencia'])) {
+        if (isset($_POST['referencia']) && Yii::app()->session['username'] == $_POST['username']) {
             $this->actionSendPost();
         }
         parent::actionRead();
@@ -102,14 +102,14 @@ class SmsController extends Controller
             exit('invalid user');
         }
 
-        $modelSip = Sip::model()->find('name = :key', array(':key' => $_POST['username']));
-        if (!isset($modelSip->id)) {
+        $modelUser = User::model()->find('username = :key', array(':key' => $_POST['username']));
+        if (!isset($modelUser->id)) {
             exit('invalid data');
         }
         $numbers = explode(',', $_POST['number']);
         $i       = 0;
         foreach ($numbers as $key => $number) {
-            $result = SmsSend::send($modelSip->idUser, $number, $_POST['text']);
+            $result = SmsSend::send($modelUser, $number, $_POST['text']);
             if ($result['success'] != 'Sent') {
                 $result['errornumber'] = $number;
                 break;
