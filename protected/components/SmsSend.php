@@ -118,7 +118,7 @@ class SmsSend
                 );
             }
 
-            $linkSms      = $callTrunk->link_sms;
+            $linkSms      = $modelTrunk->link_sms;
             $trunkPrefix  = $modelTrunk->trunkprefix;
             $removePrefix = $modelTrunk->removeprefix;
             $smsRes       = $modelTrunk->sms_res;
@@ -231,7 +231,7 @@ class SmsSend
             $modelCall->calledstation    = $destination;
             $modelCall->sessionbill      = $rateInitial;
             $modelCall->id_plan          = $modelUser->id_plan;
-            $modelCall->id_trunk         = $callTrunk[0]['id_trunk'];
+            $modelCall->id_trunk         = $modelTrunk->id;
             $modelCall->src              = $modelUser->username;
             $modelCall->buycost          = $buyRate;
             $modelCall->terminatecauseid = $terminateCauseid;
