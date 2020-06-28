@@ -1,0 +1,106 @@
+/**
+ * Classe que define a lista de "Did"
+ *
+ * =======================================
+ * ###################################
+ * MagnusBilling
+ *
+ * @package MagnusBilling
+ * @author Adilson Leffa Magnus.
+ * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * ###################################
+ *
+ * This software is released under the terms of the GNU Lesser General Public License v3
+ * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+ *
+ * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * =======================================
+ * Magnusbilling.org <info@magnussolution.com>
+ * 24/09/2012
+ */
+Ext.define('MBilling.view.did.List', {
+    extend: 'Ext.ux.grid.Panel',
+    alias: 'widget.didlist',
+    store: 'Did',
+    fieldSearch: 'did',
+    initComponent: function() {
+        var me = this;
+        me.buttonUpdateLot = false;
+        me.extraButtons = [{
+            text: t('crearToReleaseDid'),
+            iconCls: 'icon-delete',
+            handler: 'onRelease',
+            disabled: false
+        }];
+        me.columns = me.columns || [{
+            header: t('Id'),
+            dataIndex: 'id',
+            flex: 1,
+            hidden: true,
+            hideable: App.user.isAdmin
+        }, {
+            header: t('did'),
+            dataIndex: 'did',
+            flex: 4
+        }, {
+            header: t('reserved'),
+            dataIndex: 'reserved',
+            renderer: Helper.Util.formattyyesno,
+            flex: 2,
+            filter: {
+                type: 'list',
+                options: [
+                    [1, t('yes')],
+                    [0, t('no')]
+                ]
+            },
+            hidden: App.user.isClient,
+            hideable: !App.user.isClient
+        }, {
+            header: t('user'),
+            dataIndex: 'idUserusername',
+            filter: {
+                type: 'string',
+                field: 'idUser.username'
+            },
+            flex: 3,
+            menuDisabled: true
+        }, {
+            header: t('status'),
+            dataIndex: 'activated',
+            renderer: Helper.Util.formatBooleanActive,
+            flex: 2,
+            filter: {
+                type: 'list',
+                options: [
+                    [1, t('active')],
+                    [0, t('inactive')]
+                ]
+            },
+            hidden: App.user.isClient,
+            hideable: !App.user.isClient
+        }, {
+            header: t('connection_charge'),
+            dataIndex: 'connection_charge',
+            renderer: Helper.Util.formatMoneyDecimal,
+            flex: 3
+        }, {
+            header: t('monthly_price'),
+            dataIndex: 'fixrate',
+            renderer: Helper.Util.formatMoneyDecimal,
+            flex: 3
+        }, {
+            header: t('secondusedreal'),
+            renderer: Helper.Util.formatsecondsToTime,
+            dataIndex: 'secondusedreal',
+            flex: 3
+        }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 5
+        }]
+        me.callParent(arguments);
+    }
+});

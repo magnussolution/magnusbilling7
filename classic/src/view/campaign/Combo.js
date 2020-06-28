@@ -1,0 +1,58 @@
+/**
+ * Classe que define a combo de "CampaignCombo"
+ *
+ * =======================================
+ * ###################################
+ * MagnusBilling
+ *
+ * @package MagnusBilling
+ * @author Adilson Leffa Magnus.
+ * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * ###################################
+ *
+ * This software is released under the terms of the GNU Lesser General Public License v3
+ * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+ *
+ * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * =======================================
+ * Magnusbilling.org <info@magnussolution.com>
+ * 28/10/2012
+ */
+Ext.define('MBilling.view.campaign.Combo', {
+    extend: 'Ext.form.field.ComboBox',
+    alias: 'widget.campaigncombo',
+    name: 'id_campaign',
+    fieldLabel: t('campaign'),
+    displayField: 'name',
+    forceSelection: true,
+    editable: false,
+    valueField: 'id',
+    initComponent: function() {
+        var me = this;
+        me.store = Ext.create('MBilling.store.Campaign', {
+            proxy: {
+                type: 'uxproxy',
+                module: 'campaign',
+                limitParam: undefined
+            }
+        });
+        me.callParent(arguments);
+    }
+});
+Ext.define('MBilling.view.general.TypeCampaignDestination', {
+    extend: 'Ext.form.field.ComboBox',
+    alias: 'widget.typecampaigndestinationcombo',
+    fieldLabel: t('type'),
+    forceSelection: true,
+    editable: false,
+    value: '',
+    store: [
+        ['', t('')],
+        ['undefined', t('Undefined')],
+        ['sip', t('SIP')],
+        ['ivr', t('IVR')],
+        ['queue', t('Queue')],
+        ['group', t('Group')],
+        ['custom', t('Custom')]
+    ]
+});
