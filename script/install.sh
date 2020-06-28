@@ -183,9 +183,9 @@ fi
 
 mkdir -p /var/www/html/
 rm -rf /var/www/html/mbilling
-cd /var/www/html
-git clone https://github.com/magnussolution/magnusbilling7.git mbilling
-
+cd /var/www/html/mbilling
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/magnus/build/MagnusBilling-current.tar.gz
+tar xzf MagnusBilling-current.tar.gz
 
 echo
 echo '----------- Install PJPROJECT ----------'
@@ -743,7 +743,7 @@ echo "
 * * * * * php /var/www/html/mbilling/cron.php MassiveCall
 * * * * * php /var/www/html/mbilling/cron.php Sms
 0 2 * * * php /var/www/html/mbilling/cron.php Backup
-0 4 * * * /var/www/html/mbilling/protected/commands/verificamemoria
+0 4 * * * /var/www/html/mbilling/protected/commands/clear_memory
 0 4 * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr processCdrLast30Days
 */2 * * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr processCdrToday
 * * * * * php /var/www/html/mbilling/cron.php cryptocurrency
