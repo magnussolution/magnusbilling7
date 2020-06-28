@@ -9,11 +9,13 @@ Mbilling_7.sublime-project
 /protected/runtime/cron*
 /protected/models/overrides
 /protected/controllers/overrides
+/protected/config/overrides.php
 /assets/*
 .sass-cache/
 teste.php
 protected/config/cron_production.php
 protected/config/main_production.php
+classic/src/ApplicationBuild.js
 ck.pem
 doc
 Mbilling_7.sublime-workspace
@@ -78,3 +80,4 @@ blue-triton.json
 blue-triton.jsonp
 classic.json
 classic.jsonp
+
