@@ -21,9 +21,9 @@ doc
 Mbilling_7.sublime-workspace
 Mbilling_7.sublime-project
 resources/reports/*.log
-sass
+/sass
 .github
-modern
+/modern
 yellow-triton.jsonp
 yellow-triton.json
 yellow-neptune.json

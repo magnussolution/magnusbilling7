@@ -5,6 +5,14 @@ email, or any other method with the owners of this repository before making a ch
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
+
+## Sencha EXTJS build
+1. Install Sencha CMD 6.2
+2. Execute the command 'sencha app build development' 
+3. to build execute the command 'sencha app build production'
+4. Copy the directories protected, doc, yii to build/production/MBilling/
+
+
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
