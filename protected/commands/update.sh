@@ -24,9 +24,9 @@ if [[ -e /var/www/html/mbilling/protected/commands/update2.sh ]]; then
 fi
 
 cd /var/www/html/mbilling
-rm -rf master.tar.gz
-wget https://github.com/magnussolution/magnusbilling7/archive/master.tar.gz
-tar xzf master.tar.gz --strip-components=1
+rm -rf MagnusBilling-current.tar.gz
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
+tar xzf MagnusBilling-current.tar.gz
 
 
 
