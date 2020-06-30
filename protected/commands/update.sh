@@ -25,7 +25,7 @@ fi
 
 cd /var/www/html/mbilling
 rm -rf MagnusBilling-current.tar.gz
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/magnus/build/MagnusBilling-current.tar.gz
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
 tar xzf MagnusBilling-current.tar.gz
 
 
