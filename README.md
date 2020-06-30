@@ -25,7 +25,7 @@ Linux Centos 7 or Debian 8 or newer. Recomended Centos 7
 ```
 cd /usr/src/
 yum -y install wget
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/magnus/script/install.sh
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
 chmod +x install.sh
 ./install.sh
 
@@ -40,7 +40,7 @@ chmod +x install.sh
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/magnussolution/magnusbilling7/blob/magnus/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/magnussolution/magnusbilling7/blob/source/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 

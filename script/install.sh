@@ -181,10 +181,9 @@ elif  [ ${DIST} = "CENTOS" ]; then
 fi
 
 
-mkdir -p /var/www/html/
-rm -rf /var/www/html/mbilling
+mkdir -p /var/www/html/mbilling
 cd /var/www/html/mbilling
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/magnus/build/MagnusBilling-current.tar.gz
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
 tar xzf MagnusBilling-current.tar.gz
 
 echo
