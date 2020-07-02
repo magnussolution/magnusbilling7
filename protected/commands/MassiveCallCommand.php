@@ -193,7 +193,7 @@ class MassiveCallCommand extends ConsoleCommand
                     'order'     => $order,
                 ]);
 
-                foreach ($modelTrunks as $key => $trunk) {
+                foreach ($modelTrunkGroupTrunk as $key => $trunk) {
                     $modelTrunk = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
                     if ($modelTrunk->status == 0 || $phone->try > 0) {
                         continue;
