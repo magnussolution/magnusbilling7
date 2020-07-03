@@ -1,4 +1,6 @@
 Locale.load({
+    'Random': 'Aleatório',
+    'Order': 'Em ordem',
     'Servers': 'Servidores',
     'Select one or more': 'Selecione um ou mais',
     'Trunk Groups': 'Grupo de troncos',
