@@ -584,12 +584,13 @@ class CalcAgi
         $old_destination = $destination;
 
         if ($this->tariffObj[0]['trunk_group_type'] == 1) {
-            $order = 'id ASC';
+            $sql = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $this->tariffObj[0]['id_trunk_group'] . " ORDER BY id ASC";
         } else if ($this->tariffObj[0]['trunk_group_type'] == 2) {
-            $order = 'RAND()';
-        }
+            $sql = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $this->tariffObj[0]['id_trunk_group'] . " ORDER BY RAND() ";
 
-        $sql         = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $this->tariffObj[0]['id_trunk_group'] . " ORDER BY " . $order;
+        } else if ($this->tariffObj[0]['trunk_group_type'] == 3) {
+            $sql = "SELECT *, (SELECT buyrate FROM pkg_rate_provider WHERE id_provider = tr.id_provider AND id_prefix = " . $this->tariffObj[0]['id_prefix'] . " LIMIT 1) AS buyrate  FROM pkg_trunk_group_trunk t  JOIN pkg_trunk tr ON t.id_trunk = tr.id WHERE id_trunk_group = " . $this->tariffObj[0]['id_trunk_group'] . " ORDER BY buyrate IS NULL , buyrate ";
+        }
         $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
         foreach ($modelTrunks as $key => $trunk) {

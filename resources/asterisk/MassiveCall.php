@@ -35,6 +35,7 @@ class MassiveCall
             $MAGNUS->hangup($agi);
         }
 
+        $id_trunk            = $agi->get_variable("TRUNK_ID", true);
         $idPhonenumber       = $agi->get_variable("PHONENUMBER_ID", true);
         $phonenumberCity     = $agi->get_variable("PHONENUMBER_CITY", true);
         $idCampaign          = $agi->get_variable("CAMPAIGN_ID", true);
@@ -566,7 +567,7 @@ class MassiveCall
         $prefixclause = substr($prefixclause, 0, -3) . ")";
 
         $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
-        "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $modelRate->id_trunk . ") AND " . $prefixclause .
+            "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $id_trunk . ") AND " . $prefixclause .
             "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
         $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
