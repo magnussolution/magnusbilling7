@@ -36,7 +36,57 @@ class Tts
 
             $tts_url = preg_replace('/\$name/', $name, $MAGNUS->config['global']['tts_url']);
 
-            if (preg_match("/ttsgo/", $tts_url)) {
+            if (preg_match("/vocalware/", $tts_url)) {
+                //https://www.vocalware.com/tts/gen.php?EID=3&LID=2&VID=1&TXT=$name&EXT=mp3&FX_TYPE=&FX_LEVEL=&ACC=YOUR_ACC&API=YPUR_API&SESSION=&HTTP_ERR=&CS=
+                $variables = explode("?", $tts_url);
+
+                $url = $variables[0];
+
+                $variables = explode("&", $variables[1]);
+
+                foreach ($variables as $key => $value) {
+                    $val = explode("=", $value);
+                    switch ($val[0]) {
+                        case 'EID':
+                            $EID = $val[1];
+                            break;
+                        case 'VID':
+                            $VID = $val[1];
+                            break;
+                        case 'ext':
+                            $ext = $val[1];
+                            break;
+                        case 'ACC':
+                            $ACC = $val[1];
+                            break;
+                        case 'API':
+                            $API = $val[1];
+                            break;
+                        case 'SECRET':
+                            $SECRET = $val[1];
+                            break;
+                    }
+                }
+
+                $get = 'EID=' . $EID
+                    . '&LID=' . $LID
+                    . '&VID=' . $VID
+                    . '&TXT=' . $name
+                    . '&EXT=' . $ext
+                    . '&FX_TYPE='
+                    . '&FX_LEVEL='
+                    . '&ACC=' . $ACC
+                    . '&API=' . $API
+                    . '&SESSION='
+                    . '&HTTP_ERR=';
+                $CS = md5($EID . $LID . $VID . $string .
+                    $ext . $fxType . $fxLevel . $ACC . $API . $session . $httpErr . $SECRET);
+
+                $tts_url = $url . '?' . $get . '&CS=' . $CS;
+
+                exec("curl --insecure \"$tts_url\" --output \"/tmp/$file.mp3\" ");
+
+            } else if (preg_match("/ttsgo/", $tts_url)) {
 
                 $ch = curl_init();
                 //Caso tenha dificuldade com a requisição via HTTPS, descomente a linha abaixo
