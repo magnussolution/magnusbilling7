@@ -37,7 +37,8 @@ Ext.define('MBilling.view.trunkGroup.Form', {
             value: 1,
             store: [
                 [1, t('Order')],
-                [2, t('Random')]
+                [2, t('Random')],
+                [3, t('LCR')]
             ]
         }, {
             style: 'margin-top:10px; overflow: visible;',
