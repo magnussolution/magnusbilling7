@@ -65,7 +65,8 @@ Ext.define('MBilling.view.campaign.List', {
                     [1, t('active')],
                     [0, t('inactive')]
                 ]
-            }
+            },
+            hidden: window.isTablet
         }, {
             header: t('type'),
             dataIndex: 'type',
@@ -85,20 +86,24 @@ Ext.define('MBilling.view.campaign.List', {
                     [0, t('sms')],
                     [1, t('voice')]
                 ]
-            }
+            },
+            hidden: window.isTablet
         }, {
             header: t('daily_start_time'),
             dataIndex: 'daily_start_time',
-            flex: 4
+            flex: 4,
+            hidden: window.isTablet
         }, {
             header: t('daily_stop_time'),
             dataIndex: 'daily_stop_time',
-            flex: 4
+            flex: 4,
+            hidden: window.isTablet
         }, {
             header: t('startingdate'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'startingdate',
-            flex: 4
+            flex: 4,
+            hidden: window.isTablet
         }, {
             header: t('Call limit'),
             dataIndex: 'frequency',

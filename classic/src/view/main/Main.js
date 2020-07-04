@@ -28,7 +28,7 @@ Ext.define('MBilling.view.main.Main', {
         me.items = [{
             region: 'north',
             border: false,
-            //hidden : window.isTablet || window.isTablets,
+            hidden: window.isTablet || window.isTablets,
             reference: 'header',
             dockedItems: [{
                 xtype: 'toolbar',
@@ -92,14 +92,13 @@ Ext.define('MBilling.view.main.Main', {
         }, {
             reference: 'tabPanelMenu',
             region: 'west',
-            width: 230,
+            width: window.isTablet ? '100%' : 230,
             minWidth: 150,
-            maxWidth: 400,
-            split: true,
-            collapsible: window.isThemeNeptune ? true : false,
+            split: false,
+            collapsible: !window.isTablets || window.isThemeNeptune ? true : false,
             titleCollapse: false,
             collapsed: false,
-            layout: window.isTablet || window.isTablets ? '' : 'accordion',
+            layout: window.isTablet || window.isTablets ? 'anchor' : 'accordion',
             defaultType: 'treepanel',
             autoScroll: true,
             title: t('Menu'),
@@ -124,7 +123,7 @@ Ext.define('MBilling.view.main.Main', {
                 tabchange: 'changeActivatedTab'
             },
             items: [{
-                hidden: window.isTablets,
+                hidden: window.isTablet,
                 xtype: 'dashboardmodule',
                 glyph: icons.home,
                 title: t('Home'),

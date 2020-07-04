@@ -34,11 +34,13 @@ Ext.define('MBilling.view.user.List', {
         }, {
             header: t('firstname'),
             dataIndex: 'firstname',
-            flex: 3
+            flex: 3,
+            hidden: window.isTablet
         }, {
             header: t('email'),
             dataIndex: 'email',
-            flex: window.isTablet ? 3 : 4
+            flex: 4,
+            hidden: window.isTablet
         }, {
             header: t('credit'),
             dataIndex: 'credit',
@@ -50,6 +52,7 @@ Ext.define('MBilling.view.user.List', {
             header: t('plan'),
             dataIndex: 'id_plan',
             comboFilter: 'plancombo',
+            hidden: window.isTablet,
             flex: 3
         }, {
             xtype: 'templatecolumn',
@@ -89,6 +92,7 @@ Ext.define('MBilling.view.user.List', {
             header: t('creationdate'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
+            hidden: window.isTablet,
             flex: 4
         }, {
             dataIndex: 'id_offer',

@@ -47,7 +47,8 @@ Ext.define('MBilling.view.rate.List', {
                     type: 'string',
                     field: 'idPrefix.destination'
                 },
-                flex: window.isTablet ? 2 : 3
+                flex: window.isTablet ? 2 : 3,
+                hidden: window.isTablet
             }, {
                 header: t('rateinitial'),
                 dataIndex: 'rateinitial',
@@ -61,8 +62,8 @@ Ext.define('MBilling.view.rate.List', {
             }, {
                 header: t('billingblock'),
                 dataIndex: 'billingblock',
-                hidden: window.isTablet,
-                flex: 2
+                flex: 2,
+                hidden: window.isTablet
             }, {
                 xtype: 'templatecolumn',
                 tpl: '{idTrunkGroupname}',
@@ -70,7 +71,7 @@ Ext.define('MBilling.view.rate.List', {
                 dataIndex: 'id_trunk_group',
                 comboFilter: 'trunkgroupcombo',
                 flex: 3,
-                hidden: !App.user.isAdmin,
+                hidden: !App.user.isAdmin || window.isTablet,
                 hideable: App.user.isAdmin
             }, {
                 xtype: 'templatecolumn',

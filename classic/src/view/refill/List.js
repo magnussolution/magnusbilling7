@@ -79,7 +79,8 @@ Ext.define('MBilling.view.refill.List', {
         }, {
             header: t('description'),
             dataIndex: 'description',
-            flex: 5
+            flex: 5,
+            hidden: window.isTablet
         }, {
             header: t('payment'),
             dataIndex: 'payment',
@@ -96,7 +97,8 @@ Ext.define('MBilling.view.refill.List', {
             header: t('date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'date',
-            flex: 4
+            flex: 4,
+            hidden: window.isTablet
         }];
         me.callParent(arguments);
     }

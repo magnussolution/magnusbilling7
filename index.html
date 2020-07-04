@@ -74,15 +74,8 @@
             Ext.beforeLoad = function (tags) {
                 var theme = window.theme;
                 window.isTablet = !tags.desktop; 
-                
-                if (location.search.match(/\bmodern\b/)) {
-                    theme = 'modern';
-                }else if (location.search.match(/\bcupertino\b/)) {
-                    theme = 'modern-cupertino';
-                }
 
                 Ext.microloaderTags = tags; Ext.Boot.platformTags = Ext.platformTags || {};
-                //theme = 'modern';
 
                 Ext.manifest = theme; // this name must match a build profile name   
             };

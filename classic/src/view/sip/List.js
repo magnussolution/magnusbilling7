@@ -36,7 +36,8 @@ Ext.define('MBilling.view.sip.List', {
             dataIndex: 'lineStatus',
             width: 3,
             menuDisabled: true,
-            renderer: Helper.Util.formatStatusImage
+            renderer: Helper.Util.formatStatusImage,
+            hidden: window.isTablet
         }, {
             header: t('accountcode'),
             dataIndex: 'idUserusername',
@@ -52,11 +53,13 @@ Ext.define('MBilling.view.sip.List', {
         }, {
             header: t('host'),
             dataIndex: 'host',
-            flex: 4
+            flex: 4,
+            hidden: window.isTablet
         }, {
             header: t('codec'),
             dataIndex: 'allow',
-            flex: 5
+            flex: 5,
+            hidden: window.isTablet
         }, {
             header: t('Group'),
             dataIndex: 'sip_group',
