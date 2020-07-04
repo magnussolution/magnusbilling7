@@ -101,7 +101,6 @@ Ext.define('MBilling.view.main.MainController', {
                     iconCls: iconCls,
                     xtype: module + 'module',
                     module: module,
-                    titleModule: txt,
                     allowCreate: hasAction ? action.search('c') !== -1 : false,
                     allowUpdate: hasAction ? action.search('u') !== -1 : false,
                     allowDelete: hasAction ? action.search('d') !== -1 : false
@@ -109,6 +108,10 @@ Ext.define('MBilling.view.main.MainController', {
             } else {
                 tabPanelCenter.setActiveTab(tabOpen);
             }
+        }
+        if (window.isTablet) {
+            tabPanelCenter.getTabBar().setVisible(false);
+            me.lookupReference('tabPanelMenu').collapse();
         }
     },
     importLogo: function(menuItem) {

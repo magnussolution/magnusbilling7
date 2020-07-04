@@ -37,7 +37,7 @@ Ext.define('Ext.ux.panel.Module', {
             xtype: me.module + 'form',
             reference: me.module + 'form',
             region: 'east',
-            title: me.titleDetails,
+            header: false,
             flex: me.flexForm,
             maxWidth: 1900,
             width: window.isTablet || window.isTablets ? '100%' : me.widthForm,
@@ -56,7 +56,7 @@ Ext.define('Ext.ux.panel.Module', {
             reference: me.module + 'list',
             region: 'center',
             glyph: icons.file3,
-            title: t('List of ') + me.titleModule,
+            header: false,
             flex: !Ext.Boot.platformTags.desktop ? 0 : Ext.isDefined(me.module) ? 2 : 1,
             border: false,
             allowCreate: me.allowCreate,
@@ -67,7 +67,7 @@ Ext.define('Ext.ux.panel.Module', {
         });
         Ext.applyIf(me.defaults, {
             border: false,
-            split: true
+            split: false
         });
         me.items = [cfgCenter];
         if (Ext.isDefined(me.module)) {

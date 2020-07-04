@@ -35,15 +35,18 @@ Ext.define('MBilling.view.provider.List', {
             dataIndex: 'provider_name'
         }, {
             header: t('description'),
-            dataIndex: 'description'
+            dataIndex: 'description',
+            hidden: window.isTablet
         }, {
             header: t('credit'),
             dataIndex: 'credit',
-            renderer: Helper.Util.formatMoneyDecimal
+            renderer: Helper.Util.formatMoneyDecimal,
+            hidden: window.isTablet
         }, {
             header: t('creationdate'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
-            dataIndex: 'creationdate'
+            dataIndex: 'creationdate',
+            hidden: window.isTablet
         }];
         me.callParent(arguments);
     }

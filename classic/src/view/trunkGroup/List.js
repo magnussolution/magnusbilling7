@@ -38,7 +38,8 @@ Ext.define('MBilling.view.trunkGroup.List', {
         }, {
             header: t('Description'),
             dataIndex: 'description',
-            flex: 5
+            flex: 5,
+            hidden: window.isTablet
         }]
         me.callParent(arguments);
     }

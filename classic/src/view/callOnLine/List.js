@@ -89,7 +89,8 @@ Ext.define('MBilling.view.callOnLine.List', {
                 type: 'string',
                 field: 'idUser.username'
             },
-            flex: 3
+            flex: 3,
+            hidden: window.isTablet
         }, {
             header: t('credit'),
             dataIndex: 'idUsercredit',
@@ -98,7 +99,8 @@ Ext.define('MBilling.view.callOnLine.List', {
                 field: 'idUser.credit'
             },
             renderer: Helper.Util.formatMoneyDecimal,
-            flex: 2
+            flex: 2,
+            hidden: window.isTablet
         }, {
             header: t('number'),
             dataIndex: 'ndiscado',
@@ -114,7 +116,8 @@ Ext.define('MBilling.view.callOnLine.List', {
         }, {
             header: t('Codec'),
             dataIndex: 'codec',
-            flex: 2
+            flex: 2,
+            hidden: window.isTablet
         }, {
             header: t('duration'),
             dataIndex: 'duration',

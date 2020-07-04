@@ -39,12 +39,13 @@ Ext.define('MBilling.view.plan.List', {
             header: t('Tech prefix'),
             dataIndex: 'techprefix',
             flex: 4,
-            hidden: !App.user.isAdmin
+            hidden: !App.user.isAdmin || window.isTablet
         }, {
             header: t('date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
-            flex: 4
+            flex: 4,
+            hidden: window.isTablet
         }, {
             header: t('Port. Celular'),
             dataIndex: 'portabilidadeMobile',
@@ -57,7 +58,7 @@ Ext.define('MBilling.view.plan.List', {
                     [1, t('yes')]
                 ]
             },
-            hidden: App.user.language != 'pt_BR',
+            hidden: App.user.language != 'pt_BR' || window.isTablet,
             hideable: false
         }, {
             header: t('Port. Fixo'),
@@ -71,7 +72,7 @@ Ext.define('MBilling.view.plan.List', {
                     [1, t('yes')]
                 ]
             },
-            hidden: App.user.language != 'pt_BR',
+            hidden: App.user.language != 'pt_BR' || window.isTablet,
             hideable: false
         }];
         me.callParent(arguments);

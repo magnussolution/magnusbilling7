@@ -18,7 +18,9 @@ Ext.define('MBilling.view.dashboard.Module', {
     },
     initComponent: function() {
         var me = this;
-        if (window.customDashboard && !App.user.isAdmin) {
+        if (window.isTablet) {
+            me.items = [{}]
+        } else if (window.customDashboard && !App.user.isAdmin) {
             me.items = [{
                 header: false,
                 bodyPadding: 0,
