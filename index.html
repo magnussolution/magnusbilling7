@@ -72,9 +72,9 @@
             window.colorMenu = window.colorMenu;
 
             Ext.beforeLoad = function (tags) {
-                var theme = window.theme;
-                window.isTablet = !tags.desktop; 
-
+                window.isTablet =!tags.desktop;
+                var theme = window.isTablet ?  window.theme_color+'-triton' : window.theme; 
+                
                 Ext.microloaderTags = tags; Ext.Boot.platformTags = Ext.platformTags || {};
 
                 Ext.manifest = theme; // this name must match a build profile name   

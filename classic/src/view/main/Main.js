@@ -94,7 +94,7 @@ Ext.define('MBilling.view.main.Main', {
             region: 'west',
             width: window.isTablet ? '100%' : 230,
             minWidth: 150,
-            split: false,
+            split: window.isTablet ? false : true,
             collapsible: !window.isTablets || window.isThemeNeptune ? true : false,
             titleCollapse: false,
             collapsed: false,
@@ -102,7 +102,7 @@ Ext.define('MBilling.view.main.Main', {
             defaultType: 'treepanel',
             autoScroll: true,
             title: t('Menu'),
-            header: window.isThemeNeptune ? true : false,
+            header: !window.isTablet ? true : false,
             defaults: {
                 animFloat: true,
                 border: window.isThemeNeptune ? false : true,

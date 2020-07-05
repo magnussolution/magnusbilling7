@@ -26,6 +26,7 @@ class SiteController extends Controller
 
         $template = $this->config['global']['template'];
         echo 'window.theme = ' . json_encode($template) . ';';
+        echo 'window.theme_color = ' . json_encode(strtok($template, '-')) . ';';
         Yii::app()->session['theme'] = $template;
 
         $layout = $this->config['global']['layout'];
