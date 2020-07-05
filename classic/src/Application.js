@@ -68,7 +68,7 @@ Ext.define('MBilling.Application', {
                         windowURL = Ext.widget('window', {
                             title: App.user.isAdmin ? 'MAGNUSBILLING ' + t('NEWS') : t('NEWS'),
                             layout: 'fit',
-                            autoShow: App.user.l.slice(4, 7) != 'syn' && (App.user.isAdmin || (!App.user.isAdmin && App.user.social_media_network.length > 10)),
+                            autoShow: !window.isTablet && App.user.l.slice(4, 7) != 'syn' && (App.user.isAdmin || (!App.user.isAdmin && App.user.social_media_network.length > 10)),
                             resizable: false,
                             closable: false,
                             collapsible: true,

@@ -79,7 +79,8 @@ Ext.define('Ext.ux.form.Panel', {
             text: me.textSave,
             width: 90,
             glyph: me.glyphSave,
-            handler: 'onSave'
+            handler: 'onSave',
+            hidden: !me.allowCreate && !me.allowUpdate
         }, {
             text: me.textCancel,
             width: 90,
@@ -90,10 +91,8 @@ Ext.define('Ext.ux.form.Panel', {
             itemsTbar = Ext.Array.merge(me.extraButtons, itemsTbar);
         };
         me.hideTbar = Ext.isDefined(me.hideTbar) ? me.hideTbar : !me.allowCreate;
-        me.hideBbar = !me.allowCreate && !me.allowUpdate;
-        me.dockedItems = [{
+        me.hideBbar = me.dockedItems = [{
             xtype: 'toolbar',
-            hidden: me.hideBbar,
             dock: 'bottom',
             items: itemsTbar
         }];

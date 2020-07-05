@@ -82,8 +82,16 @@ Ext.define('Ext.ux.grid.Panel', {
         var me = this,
             groupDelete = Ext.id(),
             groupUpdateLot = Ext.id();
-        me.buttonNewWidth = window.isThemeTriton ? 90 : me.buttonNewWidth;
-        me.buttonDeleteWidth = window.isThemeTriton ? 120 : me.buttonDeleteWidth;
+        if (window.isTablet) {
+            me.textNew = '';
+            me.textDelete = '';
+            me.textButtonUpdateLot = '';
+            me.buttonNewWidth = 40;
+            me.buttonDeleteWidth = 60;
+        } else {
+            me.buttonNewWidth = window.isThemeTriton ? 90 : me.buttonNewWidth;
+            me.buttonDeleteWidth = window.isThemeTriton ? 120 : me.buttonDeleteWidth;
+        }
         me.tbar = [];
         if (me.module && !me.listeners) {
             me.listeners = {
@@ -110,9 +118,20 @@ Ext.define('Ext.ux.grid.Panel', {
                 handler: 'onNew'
             });
         }
-        if (me.allowDelete) {
+        if (me.allowDelete && window.isTablet) {
             me.tbar.push({
-                xtype: 'splitbutton',
+                xtype: 'button',
+                itemId: 'btnPrint',
+                text: me.textDelete,
+                width: me.buttonDeleteWidth,
+                glyph: me.glyphDelete,
+                disabled: true,
+                reference: 'delete',
+                handler: 'onDelete'
+            });
+        } else if (me.allowDelete) {
+            me.tbar.push({
+                xtype: window.isTablet || !App.user.isAdmin ? 'button' : 'splitbutton',
                 itemId: 'btnPrint',
                 text: me.textDelete,
                 width: me.buttonDeleteWidth,
@@ -123,12 +142,13 @@ Ext.define('Ext.ux.grid.Panel', {
                 menu: [{
                     text: me.labelAll,
                     checked: false,
-                    hidden: !App.user.isAdmin,
+                    hidden: window.isTablet || !App.user.isAdmin,
                     group: groupDelete,
                     value: 'all'
                 }, {
                     text: me.labelSelected,
                     checked: true,
+                    hidden: window.isTablet || !App.user.isAdmin,
                     group: groupDelete,
                     value: 'selected'
                 }]
@@ -140,7 +160,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 iconCls: me.iconButtonUpdateLot,
                 text: me.textButtonUpdateLot,
                 enableToggle: true,
-                width: App.user.language == 'en' ? 140 : 170,
+                width: window.isTablet ? 85 : App.user.language == 'en' ? 140 : 170,
                 reference: 'updateLot',
                 listeners: {
                     toggle: 'onToggleUpdateLot'
@@ -173,7 +193,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 width: me.widthButtonCsv
             });
         };
-        if (me.buttonImportCsv) {
+        if (me.buttonImportCsv && !window.isTablet) {
             me.tbar.push({
                 iconCls: me.iconButtonImportCsv,
                 text: me.textButtonImportCsv,
@@ -188,7 +208,7 @@ Ext.define('Ext.ux.grid.Panel', {
             me.tbar.push('->', {
                 xtype: 'splitbutton',
                 glyph: me.glyphPrint,
-                text: me.textPrint,
+                text: window.isTablet ? '' : me.textPrint,
                 width: 100,
                 hidden: !me.allowPrint,
                 handler: 'onPrint',
@@ -210,9 +230,9 @@ Ext.define('Ext.ux.grid.Panel', {
         if (me.buttonCleanFilter) {
             me.tbar.push({
                 iconCls: me.iconClsCleanFilter,
-                text: me.textCleanFilter,
+                text: window.isTablet ? '' : me.textCleanFilter,
                 scope: me,
-                width: 110,
+                width: window.isTablet ? 50 : 110,
                 handler: me.cleanFilters
             });
         }
