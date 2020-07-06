@@ -13,9 +13,9 @@ Ext.define('MBilling.view.user.List', {
         me.extraButtons = [{
             text: t('Bulk user'),
             handler: 'onBulk',
-            width: 100,
+            width: 80,
             disabled: false,
-            hidden: App.user.isClient || !me.allowCreate
+            hidden: App.user.isClient || !me.allowCreate || window.isTablet
         }];
         me.columns = me.columns || [{
             header: t('Id'),

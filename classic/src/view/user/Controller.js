@@ -166,5 +166,23 @@ Ext.define('MBilling.view.user.Controller', {
             }
         });
         if (notDelete == false) me.callParent(arguments);
+    },
+    onResendActivation: function() {
+        var me = this,
+            record = me.list.getSelectionModel().getSelection()[0];
+        if (record.get('email').length < 5) {
+            Ext.ux.Alert.alert(me.titleError, t('User not have a email'), 'error');
+            return;
+        }
+        Ext.Ajax.request({
+            params: {
+                id: record.get(me.idProperty)
+            },
+            url: 'index.php/user/resendActivationEmail',
+            scope: me,
+            success: function(response) {
+                Ext.ux.Alert.alert(me.titleError, t('Success'), 'success');
+            }
+        });
     }
 });
