@@ -469,4 +469,15 @@ class UserController extends Controller
             $this->nameMsg     => $this->msgSuccess,
         ));
     }
+
+    public function actionResendActivationEmail()
+    {
+
+        $modelUser = User::model()->findByPk((int) $_POST['id']);
+        $mail      = new Mail(Mail::$TYPE_SIGNUPCONFIRM, $modelUser->id);
+        try {
+            $mail->send();
+        } catch (Exception $e) {
+        }
+    }
 }

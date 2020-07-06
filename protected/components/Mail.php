@@ -174,10 +174,10 @@ class Mail
             $order       = null;
             $order_field = null;
 
-            $this->id_agent = count($modelUser) ? $modelUser->id_user : null;
-            $this->id_user  = count($modelUser) ? $modelUser->id : null;
+            $this->id_agent = isset($modelUser->id) ? $modelUser->id_user : null;
+            $this->id_user  = isset($modelUser->id) ? $modelUser->id : null;
 
-            if (count($modelTemplate)) {
+            if ($modelTemplate->id) {
                 $mail_tmpl        = isset($modelTemplate->id) ? $modelTemplate->id : null;
                 $this->message    = $modelTemplate->messagehtml;
                 $this->title      = isset($modelTemplate->subject) ? $modelTemplate->subject : null;
@@ -322,7 +322,7 @@ class Mail
 
         $modelSmtps = Smtps::model()->find('id_user = :key', array(':key' => $this->id_agent));
 
-        if (!count($modelSmtps)) {
+        if (!isset($modelSmtps->id)) {
             return;
         }
         $smtp_host       = $modelSmtps->host;

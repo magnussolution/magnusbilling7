@@ -16,6 +16,12 @@ Ext.define('MBilling.view.user.Form', {
         Ext.each(App.user.menu, function(item) {
             if (item.text == "t('Services')") haveServiceMenu = true;
         });
+        me.extraButtons = [{
+            text: t('Resend') + ' Email',
+            iconCls: 'x-fa fa-envelope',
+            handler: 'onResendActivation',
+            width: 130
+        }];
         me.items = [{
             xtype: 'tabpanel',
             defaults: {
