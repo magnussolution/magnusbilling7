@@ -83,11 +83,14 @@ Ext.define('Ext.ux.grid.Panel', {
             groupDelete = Ext.id(),
             groupUpdateLot = Ext.id();
         if (window.isTablet) {
+            me.textButtonCsv = '';
             me.textNew = '';
             me.textDelete = '';
             me.textButtonUpdateLot = '';
             me.buttonNewWidth = 40;
             me.buttonDeleteWidth = 60;
+            me.widthButtonCsv = 40;
+
         } else {
             me.buttonNewWidth = window.isThemeTriton ? 90 : me.buttonNewWidth;
             me.buttonDeleteWidth = window.isThemeTriton ? 120 : me.buttonDeleteWidth;
@@ -106,7 +109,8 @@ Ext.define('Ext.ux.grid.Panel', {
                 fieldFilter: me.fieldSearch,
                 filterOnClick: me.filterFieldOnClick,
                 store: me.store,
-                comparison: me.comparisonfilter
+                comparison: me.comparisonfilter,
+                width : window.isTablet ? 80 : 130
             });
         }
         if (me.allowCreate) {
@@ -154,7 +158,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 }]
             });
         }
-        if ((me.allowUpdate && me.buttonUpdateLot && !App.user.isClient) || me.buttonUpdateLotCallShopRate) {
+        if ((me.allowUpdate && me.buttonUpdateLot && !App.user.isClient && !window.isTablet) || me.buttonUpdateLotCallShopRate) {
             me.tbar.push({
                 xtype: 'splitbutton',
                 iconCls: me.iconButtonUpdateLot,
