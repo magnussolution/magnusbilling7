@@ -67,7 +67,7 @@ Ext.define('Ext.ux.panel.Module', {
         });
         Ext.applyIf(me.defaults, {
             border: false,
-            split: false
+            split: window.isTablet ? false : true
         });
         me.items = [cfgCenter];
         if (Ext.isDefined(me.module)) {

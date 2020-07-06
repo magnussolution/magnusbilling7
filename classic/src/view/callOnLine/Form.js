@@ -23,30 +23,42 @@ Ext.define('MBilling.view.callOnLine.Form', {
     alias: 'widget.callonlineform',
     initComponent: function() {
         var me = this;
+
+         me.defaults = {
+            readOnly: true,
+            allowBlank: true
+        };
+
         me.items = [{
+            fieldLabel: t('Username'),
+            name: 'idUserusername'
+        },{
+            fieldLabel: t('Sip Account'),
+            name: 'sip_account'
+        },{
+            fieldLabel: t('credit'),
+            name: 'idUsercredit'
+        },{
             fieldLabel: t('number'),
-            name: 'ndiscado',
-            readOnly: true
+            name: 'ndiscado'
+        },{
+            fieldLabel: t('codec'),
+            name: 'Codec'
         }, {
             fieldLabel: t('CallerID'),
-            name: 'callerid',
-            allowBlank: true,
-            readOnly: true
+            name: 'callerid'
+        }, {
+            fieldLabel: t('trunk'),
+            name: 'tronco'
         }, {
             fieldLabel: t('Reinvite'),
-            name: 'reinvite',
-            allowBlank: true,
-            readOnly: true
+            name: 'reinvite'
         }, {
             fieldLabel: t('From IP'),
-            name: 'from_ip',
-            allowBlank: true,
-            readOnly: true
+            name: 'from_ip'
         }, {
             xtype: 'textarea',
             name: 'description',
-            readOnly: true,
-            allowBlank: true,
             height: 350,
             anchor: '100%',
             hidden: !App.user.isAdmin

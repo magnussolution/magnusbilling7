@@ -83,7 +83,7 @@ Ext.define('Ext.ux.form.Panel', {
             hidden: !me.allowCreate && !me.allowUpdate
         }, {
             text: me.textCancel,
-            width: 90,
+            width: 100,
             glyph: me.glyphCancel,
             handler: 'onCancel'
         }];

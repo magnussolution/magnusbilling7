@@ -41,10 +41,10 @@ Ext.define('MBilling.view.callOnLine.List', {
             me.buttonDeleteWidth = 140,
             me.refreshTime = (localStorage && localStorage.getItem('callonlinerefresh')) || me.refreshTime;
         me.extraButtons = [{
-            text: t('Spy') + ' ' + t('call'),
+            text: window.isTablet ? '' : t('Spy') + ' ' + t('call'),
             iconCls: 'call',
             handler: 'onSpyCall',
-            width: 130,
+            width: window.isTablet ? 50 :130,
             disabled: false
         }, {
             xtype: 'numberfield',
@@ -127,13 +127,13 @@ Ext.define('MBilling.view.callOnLine.List', {
             header: t('trunk'),
             dataIndex: 'tronco',
             flex: 4,
-            hidden: !App.user.isAdmin,
+            hidden: !App.user.isAdmin || window.isTablet,
             hideable: App.user.isAdmin
         }, {
             header: t('Server'),
             dataIndex: 'server',
             flex: 3,
-            hidden: !window.slave || !App.user.isAdmin,
+            hidden: !window.slave || !App.user.isAdmin || window.isTablet,
             hideable: App.user.isAdmin
         }];
         me.sessionLoad = Ext.create('Ext.util.DelayedTask', function() {
