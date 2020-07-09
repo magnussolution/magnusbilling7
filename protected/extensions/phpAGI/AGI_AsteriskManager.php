@@ -397,7 +397,7 @@ class AGI_AsteriskManager
         if ($res['Response'] != 'Success') {
             $this->disconnect();
             restore_error_handler();
-            throw new \Exception("Failed to login");
+            $this->log("Failed to login manager {$this->server}:{$this->port}");
             return false;
         }
         $this->CoreSettings();
