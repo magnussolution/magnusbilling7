@@ -37,7 +37,7 @@ php /var/www/html/mbilling/cron.php UpdateMysql
 rm -rf /var/www/html/mbilling/doc
 rm -rf /var/www/html/mbilling/script
 ## set default permissions 
-chown -R asterisk:asterisk /var/lib/php/session/
+chown -R asterisk:asterisk /var/lib/php/sessions/
 chown -R asterisk:asterisk /var/spool/asterisk/outgoing/
 chown -R asterisk:asterisk /etc/asterisk
 chown -R asterisk:asterisk /var/www/html/mbilling
