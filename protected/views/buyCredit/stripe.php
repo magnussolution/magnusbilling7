@@ -21,6 +21,7 @@
 
 
 <?php
+$error = $success = '';
 
 if ($_POST) {
 
