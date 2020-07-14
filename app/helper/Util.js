@@ -542,8 +542,8 @@ Ext.define('Helper.Util', {
     },
     formatBooleanActive: function(value) {
         var me = Helper.Util,
-            color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'green' : value == 4 ? 'red' : '#FFCC00';
-        value = value == 0 ? t('inactive') : value == 1 ? t('active') : value == 2 ? t('pending') : value == 3 ? t('sent') : value == 4 ? t('blocked') : t('pending');
+            color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'green' : value == 4 ? 'red' : value == 5 ? 'orange' : '#FFCC00';
+        value = value == 0 ? t('inactive') : value == 1 ? t('active') : value == 2 ? t('pending') : value == 3 ? t('sent') : value == 4 ? t('blocked') : value == 5 ? t('AMD') : t('pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatBooleanSms: function(value) {

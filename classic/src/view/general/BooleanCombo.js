@@ -107,7 +107,8 @@ Ext.define('MBilling.view.general.StatusCombo', {
         [0, t('inactive')],
         [2, t('pending')],
         [3, t('sent')],
-        [4, t('blocked')]
+        [4, t('blocked')],
+        [5, t('AMD')]
     ]
 });
 Ext.define('MBilling.view.general.StatusUserCombo', {
