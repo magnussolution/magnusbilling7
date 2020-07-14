@@ -37,7 +37,7 @@ Ext.define('MBilling.view.sms.Form', {
             fieldLabel: t('sms'),
             maxLength: 160
         }, {
-            name: 'from',
+            name: 'sms_from',
             fieldLabel: t('From'),
             allowBlank: true
         }];

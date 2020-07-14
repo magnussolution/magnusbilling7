@@ -73,7 +73,7 @@ Ext.define('MBilling.view.sms.List', {
             flex: 6
         }, {
             header: t('From'),
-            dataIndex: 'from',
+            dataIndex: 'sms_from',
             flex: 2
         }]
         me.callParent(arguments);

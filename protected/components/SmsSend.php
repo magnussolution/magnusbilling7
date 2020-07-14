@@ -19,7 +19,7 @@
  */
 class SmsSend
 {
-    public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $from = '')
+    public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '')
     {
         if (!count($modelUser)) {
             return array(
@@ -147,7 +147,7 @@ class SmsSend
 
             $linkSms = preg_replace("/\%number\%/", $destination, $linkSms);
             $linkSms = preg_replace("/\%text\%/", $text, $linkSms);
-            $linkSms = preg_replace("/\%from\%/", $from, $linkSms);
+            $linkSms = preg_replace("/\%from\%/", $sms_from, $linkSms);
             if ($id_phonenumber > 0) {
                 $linkSms = preg_replace("/\%id\%/", $id_phonenumber, $linkSms);
             }
@@ -185,7 +185,7 @@ class SmsSend
                 $modelSms->sms       = $text;
                 $modelSms->result    = $sussess;
                 $modelSms->rate      = $rateInitial;
-                $modelSms->from      = $from;
+                $modelSms->sms_from  = $sms_from;
                 $modelSms->save();
 
                 //RETIRA CREDITO DO CLIENTE
