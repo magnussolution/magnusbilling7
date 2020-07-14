@@ -65,7 +65,8 @@ Ext.define('MBilling.view.phoneNumber.List', {
                     [0, t('inactive')],
                     [2, t('pending')],
                     [3, t('send')],
-                    [4, t('blocked')]
+                    [4, t('blocked')],
+                    [5, t('AMD')]
                 ]
             }
         }, {
