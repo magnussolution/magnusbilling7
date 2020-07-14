@@ -23,27 +23,25 @@ Ext.define('MBilling.view.callOnLine.Form', {
     alias: 'widget.callonlineform',
     initComponent: function() {
         var me = this;
-
-         me.defaults = {
+        me.defaults = {
             readOnly: true,
             allowBlank: true
         };
-
         me.items = [{
             fieldLabel: t('Username'),
             name: 'idUserusername'
-        },{
+        }, {
             fieldLabel: t('Sip Account'),
             name: 'sip_account'
-        },{
+        }, {
             fieldLabel: t('credit'),
             name: 'idUsercredit'
-        },{
+        }, {
             fieldLabel: t('number'),
             name: 'ndiscado'
-        },{
-            fieldLabel: t('codec'),
-            name: 'Codec'
+        }, {
+            fieldLabel: t('Codec'),
+            name: 'codec'
         }, {
             fieldLabel: t('CallerID'),
             name: 'callerid'
