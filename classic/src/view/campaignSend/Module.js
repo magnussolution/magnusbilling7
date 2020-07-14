@@ -35,7 +35,7 @@ Ext.define('MBilling.view.campaignSend.Module', {
             items: [{
                 xtype: 'campaignsendcombo',
                 name: 'type',
-                fieldLabel: t('campaign') + ' ' + t('type')
+                fieldLabel: t('Campaign') + ' ' + t('type')
             }, { //SMS
                 name: 'sms_text',
                 fieldLabel: 'SMS ' + t('Text'),

@@ -192,7 +192,7 @@ Ext.define('MBilling.view.call.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idCampaignname}',
-            header: t('campaign'),
+            header: t('Campaign'),
             dataIndex: 'id_campaign',
             comboFilter: 'campaigncombo',
             flex: 3,

@@ -207,7 +207,6 @@ class AuthenticationController extends Controller
         Yii::app()->session['systemName']    = false;
         Yii::app()->session['base_country']  = false;
         Yii::app()->session['version']       = false;
-
         Yii::app()->session->clear();
         Yii::app()->session->destroy();
 
@@ -335,6 +334,7 @@ class AuthenticationController extends Controller
             'logo'                     => file_exists('resources/images/logo_custom.png') ? 'resources/images/logo_custom.png' : 'resources/images/logo.png',
             'show_filed_help'          => $this->config['global']['show_filed_help'],
             'campaign_user_limit'      => $this->config['global']['campaign_user_limit'],
+            'showMCDashBoard'          => $this->config['global']['showMCDashBoard'],
         ));
     }
 

@@ -216,7 +216,7 @@ Locale.load({
     'cadastres': 'Signups',
     'call': 'Call',
     'callback': 'CallBack',
-    'callcenter': 'Massive Calls and SMS',
+    'callcenter': 'Voice Broadcasting',
     'callerid': 'CallerID',
     'callforpstn': 'Call for PSTN',
     'calllimit': 'Call limit',

@@ -25,6 +25,8 @@ class CallChartCommand extends ConsoleCommand
     public function run($args)
     {
 
+        $this->debug = 0;
+
         for (;;) {
             try {
                 $calls = AsteriskAccess::getCoreShowCdrChannels();
@@ -97,11 +99,8 @@ class CallChartCommand extends ConsoleCommand
                     AsteriskAccess::instance()->hangupRequest($channel);
                     echo "return after hangup channel\n";
                     continue;
-                } elseif ($status == 'Ringing') {
-                    echo "return because status is Ringing";
-                    continue;
                 }
-
+                $uniqueid    = null;
                 $trunk       = null;
                 $sip_account = $call[1];
                 $ndiscado    = $call[2];
@@ -116,12 +115,18 @@ class CallChartCommand extends ConsoleCommand
                 $originate = $originate[1];
 
                 if ($last_app == 'Dial' || $last_app == 'Mbilling') {
+
+                    if ($status == 'Ringing') {
+                        echo "return because status is Ringing";
+                        continue;
+                    }
+
                     if (preg_match('/^MC\!/', $sip_account)) {
                         echo "torpedo\n";
-                        $campaingName  = preg_replace('/^MC\!/', '', $call[1]);
-                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName));
+                        $campaingName  = preg_split('/\!/', $call[1]);
+                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName[1]));
                         $id_user       = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
-                        $trunk         = "Campaign " . $campaingName;
+                        $trunk         = "Campaign " . $campaingName[1];
                     } else {
                         //check if is a DID call
                         $modelDid = $this->isDid($ndiscado);
@@ -212,15 +217,16 @@ class CallChartCommand extends ConsoleCommand
                             continue;
                         }
                     }
-                } elseif ($last_app == 'AGI') {
+                } elseif ($last_app == 'AGI' || $last_app == 'AppDial2') {
                     if (preg_match('/^MC\!/', $call[1])) {
-                        //torpedo
-                        $campaingName = preg_replace('/^MC\!/', '', $call[1]);
 
-                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName));
+                        //torpedo
+                        $campaingName = preg_split('/\!/', $call[1]);
+
+                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName[1]));
 
                         $id_user = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
-                        $trunk   = "Campaign " . $campaingName;
+                        $trunk   = "Campaign " . $campaingName[1];
                     } else {
                         //check if is a DID number
                         //DID call ivr   -> SIP/addphone-000000|           |9999999999    |           |Up|(g729)|<none>             |AGI  |4|5
@@ -258,17 +264,30 @@ class CallChartCommand extends ConsoleCommand
                         }
                     }
                 } elseif ($last_app == 'Queue') {
-                    //check if is a DID number
-                    $resultDid = $this->isDid($ndiscado);
-                    if (isset($resultDid[0]->id)) {
-                        $id_user = $resultDid[0]->id_user;
-                        $trunk   = $ndiscado . ' Queue ' . $resultDid[0]->idQueue->name;
-                        if ($status == 'Up') {
-                            $callQueue = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                            $cdr       = time() - intval($callQueue['UniqueID']);
-                        }
+
+                    if (preg_match('/^MC\!/', $call[1])) {
+                        //torpedo
+                        $campaingName = preg_split('/\!/', $call[1]);
+
+                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName[1]));
+
+                        $id_user  = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
+                        $trunk    = "Campaign " . $campaingName[1];
+                        $uniqueid = $campaingName[2];
                     } else {
-                        $id_user = 'NULL';
+
+                        //check if is a DID number
+                        $resultDid = $this->isDid($ndiscado);
+                        if (isset($resultDid[0]->id)) {
+                            $id_user = $resultDid[0]->id_user;
+                            $trunk   = $ndiscado . ' Queue ' . $resultDid[0]->idQueue->name;
+                            if ($status == 'Up') {
+                                $callQueue = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
+                                $cdr       = time() - intval($callQueue['UniqueID']);
+                            }
+                        } else {
+                            $id_user = 'NULL';
+                        }
                     }
                 } else {
                     echo "continue because last_app is not valid $last_app\n";
@@ -285,7 +304,7 @@ class CallChartCommand extends ConsoleCommand
                 }
                 $totalCalls++;
 
-                $sql[] = "(NULL,NULL, '$sip_account', $id_user, '$channel', '" . utf8_encode($trunk) . "', '$ndiscado', '" . preg_replace('/\(|\)/', '', $codec) . "', '$status', '$cdr', 'no','no', '" . $call['server'] . "')";
+                $sql[] = "(NULL,'" . $uniqueid . "', '$sip_account', $id_user, '$channel', '" . utf8_encode($trunk) . "', '$ndiscado', '" . preg_replace('/\(|\)/', '', $codec) . "', '$status', '$cdr', 'no','no', '" . $call['server'] . "')";
 
                 if (count($callShopIds)) {
                     if (in_array($modelSip->id_user, $callShopIds)) {
