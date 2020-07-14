@@ -43,7 +43,7 @@ Ext.define('MBilling.model.Sms', {
         name: 'sms',
         type: 'string'
     }, {
-        name: 'from',
+        name: 'sms_from',
         type: 'string'
     }, 'idUserusername'],
     proxy: {
