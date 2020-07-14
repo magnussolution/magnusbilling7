@@ -22,7 +22,7 @@ Ext.define('MBilling.view.campaign.Combo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.campaigncombo',
     name: 'id_campaign',
-    fieldLabel: t('campaign'),
+    fieldLabel: t('Campaign'),
     displayField: 'name',
     forceSelection: true,
     editable: false,

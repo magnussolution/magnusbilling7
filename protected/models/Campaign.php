@@ -23,6 +23,14 @@ class Campaign extends Model
 {
     protected $_module = 'campaign';
     public $id_phonebook;
+    public $callsPlaced;
+    public $callsringing;
+    public $callsInTransfer;
+    public $callsTransfered;
+    public $callsTotalNumbers;
+    public $callsDialedtoday;
+    public $callsRemaningToDial;
+
     /**
      * Retorna a classe estatica da model.
      * @return Prefix classe estatica da model.

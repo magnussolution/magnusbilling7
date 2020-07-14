@@ -45,6 +45,9 @@ Ext.define('MBilling.view.dashboard.Module', {
                             if (item.module == 'buycredit') {
                                 showBuy = true;
                             }
+                            if (item.module == 'campaign') {
+                                showCampaignDashBoad = true;
+                            }
                         }, me);
                     }
                 }, me);
@@ -107,25 +110,36 @@ Ext.define('MBilling.view.dashboard.Module', {
                     userCls: 'big-40 small-100'
                 }]
             } else {
-                me.items = [{
-                    header: true,
-                    title: t('Buy') + ' ' + 'Credit',
-                    xtype: 'buycreditmodule',
-                    // 60% width when viewport is big enough,
-                    // 100% when viewport is small
-                    height: height,
-                    userCls: 'big-50 small-100',
-                    hidden: !showBuy,
-                    cls: 'dashboard-main-chart shadow'
-                }, {
-                    header: true,
-                    title: t('Buy') + ' ' + 'DID',
-                    xtype: 'didbuymodule',
-                    height: height,
-                    userCls: 'big-50 small-100',
-                    hidden: !showDid || !App.user.isClient,
-                    cls: 'dashboard-main-chart shadow'
-                }]
+                if (App.user.showMCDashBoard == true && showCampaignDashBoad) {
+                    me.items = [{
+                        header: true,
+                        title: t('DashBoard') + ' ' + t('callcenter'),
+                        xtype: 'campainlistdashboard',
+                        height: Ext.Element.getViewportHeight() - 130,
+                        userCls: 'big-100 small-100',
+                        cls: 'dashboard-main-chart shadow'
+                    }]
+                } else {
+                    me.items = [{
+                        header: true,
+                        title: t('Buy') + ' ' + 'Credit',
+                        xtype: 'buycreditmodule',
+                        // 60% width when viewport is big enough,
+                        // 100% when viewport is small
+                        height: height,
+                        userCls: 'big-50 small-100',
+                        hidden: !showBuy,
+                        cls: 'dashboard-main-chart shadow'
+                    }, {
+                        header: true,
+                        title: t('Buy') + ' ' + 'DID',
+                        xtype: 'didbuymodule',
+                        height: height,
+                        userCls: 'big-50 small-100',
+                        hidden: !showDid || !App.user.isClient,
+                        cls: 'dashboard-main-chart shadow'
+                    }]
+                }
             }
         }
         me.callParent(arguments);
