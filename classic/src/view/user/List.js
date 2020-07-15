@@ -81,9 +81,9 @@ Ext.define('MBilling.view.user.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [2, t('pending')],
-                    [0, t('inactive')]
+                    [1, t('Active')],
+                    [2, t('Pending')],
+                    [0, t('Inactivated')]
                 ]
             },
             hidden: App.user.isClient || window.isTablet,
