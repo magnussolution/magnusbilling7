@@ -75,6 +75,8 @@ AuthMethod=LOGIN';
                 fclose($fd);
 
                 exec(" sed -i 's/serveremail.*/serveremail=" . $modelSmtp->username . "/' /etc/asterisk/voicemail.conf");
+                exec(" sed -i 's/mailcmd.*/mailcmd=\/usr\/sbin\/ssmtp \-t/' /etc/asterisk/voicemail.conf");
+
                 AsteriskAccess::instance()->reload();
                 echo "\n";
                 echo 'echo -e "From: ' . $modelSmtp->username . '\nTo: info@magnussolution.com\nSubject: this is the subject\n\nThis is the body,\nwith multiple lines." | ssmtp -t';
