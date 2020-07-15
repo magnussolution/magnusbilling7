@@ -298,7 +298,7 @@ class CalcAgi
             if (($id_offer != -1) && ($this->offerToApply[0] != null)) {
                 $id_offer = $this->offerToApply[0]["id"];
 
-                $this->calculateCost($MAGNUS, $sessiontime, 0, $agi);
+                $this->calculateCost($MAGNUS, $sessiontime, $agi);
 
                 switch ($this->offerToApply[0]["type"]) {
                     /*Unlimited*/
