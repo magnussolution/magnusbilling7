@@ -23,6 +23,15 @@ class MassiveCall
     public function send($agi, &$MAGNUS, &$CalcAgi)
     {
 
+        if ($agi->get_variable("AMDSTATUS", true) && preg_match("/MACHINE/", $agi->get_variable("AMDSTATUS", true))) {
+            $amd_status = $agi->get_variable("AMDSTATUS", true);
+            $agi->verbose(date("Y-m-d H:i:s") . " => " . $MAGNUS->dnid . ': amd_status ' . $amd_status . ", hangup call", 5);
+
+            $sql = "UPDATE pkg_phonenumber SET status = 5, info = '" . $agi->get_variable("AMDCAUSE", true) . "' WHERE id = $idPhonenumber LIMIT 1";
+            $agi->exec($sql);
+            $MAGNUS->hangup($agi);
+        }
+
         require_once 'Tts.php';
         $uploaddir = $MAGNUS->magnusFilesDirectory . 'sounds/';
 
@@ -191,7 +200,7 @@ class MassiveCall
         //if have a forward                         if res_dtmf is equal the digit_authorize                OR press any digit and digit_authorize equal -2 (any digit)    OR  digit_authorize equal -3 (every)
         if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || (strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
             $agi->verbose("have Forward number $forward_number");
-            $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF 1' WHERE id = $idPhonenumber LIMIT 1";
+            $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . "' WHERE id = $idPhonenumber LIMIT 1";
             $agi->exec($sql);
 
             $chanStatus = $agi->channel_status($MAGNUS->channel);
