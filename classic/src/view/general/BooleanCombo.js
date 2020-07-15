@@ -103,11 +103,11 @@ Ext.define('MBilling.view.general.StatusCombo', {
     editable: false,
     value: 1,
     store: [
-        [1, t('active')],
-        [0, t('inactive')],
-        [2, t('pending')],
-        [3, t('sent')],
-        [4, t('blocked')],
+        [1, t('Active')],
+        [0, t('Inactivated')],
+        [2, t('Pending')],
+        [3, t('Sent')],
+        [4, t('Blocked')],
         [5, t('AMD')]
     ]
 });
@@ -119,9 +119,9 @@ Ext.define('MBilling.view.general.StatusUserCombo', {
     editable: false,
     value: 1,
     store: [
-        [1, t('active')],
-        [0, t('inactive')],
-        [2, t('pending')]
+        [1, t('Active')],
+        [0, t('Inactivated')],
+        [2, t('Pending')]
     ]
 });
 Ext.define('MBilling.view.general.CallbackCombo', {
@@ -132,9 +132,9 @@ Ext.define('MBilling.view.general.CallbackCombo', {
     editable: false,
     value: 1,
     store: [
-        [1, t('active')],
-        [2, t('pending')],
-        [3, t('sent')],
+        [1, t('Active')],
+        [2, t('Pending')],
+        [3, t('Sent')],
         [4, t('Not working')],
         [5, t('Complete')]
     ]

@@ -62,9 +62,9 @@ Ext.define('MBilling.view.callBack.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [2, t('pending')],
-                    [3, t('sent')],
+                    [1, t('Active')],
+                    [2, t('Pending')],
+                    [3, t('Sent')],
                     [4, t('Not working')],
                     [5, t('Complete')]
                 ]

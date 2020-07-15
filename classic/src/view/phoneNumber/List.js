@@ -61,11 +61,11 @@ Ext.define('MBilling.view.phoneNumber.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [0, t('inactive')],
-                    [2, t('pending')],
-                    [3, t('send')],
-                    [4, t('blocked')],
+                    [1, t('Active')],
+                    [0, t('Inactivated')],
+                    [2, t('Pending')],
+                    [3, t('Sent')],
+                    [4, t('Blocked')],
                     [5, t('AMD')]
                 ]
             }
