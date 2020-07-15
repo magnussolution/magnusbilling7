@@ -630,6 +630,7 @@ class CalcAgi
 
             if ($this->dialstatus == "CANCEL" || $this->dialstatus == "NOANSWER" || $this->dialstatus == "BUSY") {
                 $this->real_answeredtime = $this->answeredtime = 0;
+                break;
             } else if ($this->dialstatus == "CHANUNAVAIL" || $this->dialstatus == "CONGESTION") {
                 $this->real_answeredtime = $this->answeredtime = 0;
             } else {
