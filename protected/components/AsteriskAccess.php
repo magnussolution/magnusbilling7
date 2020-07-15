@@ -61,6 +61,11 @@ class AsteriskAccess
         return $this->asmanager->Command("queue show " . $queue);
     }
 
+    public function reload()
+    {
+        return $this->asmanager->Command("reload");
+    }
+
     public function queueReload()
     {
         return $this->asmanager->Command("queue reload all");
