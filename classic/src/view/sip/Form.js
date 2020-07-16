@@ -298,7 +298,7 @@ Ext.define('MBilling.view.sip.Form', {
                     forceSelection: true,
                     editable: false,
                     name: 'amd',
-                    value: 'gsm',
+                    value: '0',
                     fieldLabel: t('AMD'),
                     allowBlank: true,
                     hidden: !window.dma || !window.dialC
