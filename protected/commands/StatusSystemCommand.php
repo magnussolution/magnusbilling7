@@ -30,7 +30,7 @@ class StatusSystemCommand extends ConsoleCommand
         foreach ($sysinfo->network() as $net_name => $net) {
             $net_name = trim($net_name);
 
-            if (preg_match('/eth|enp|venet|w\.g|eno/', $net_name)) {
+            if (preg_match('/eth|ens|enp|venet|w\.g|eno/', $net_name)) {
                 $rx1 = $net["rx_bytes"];
                 $tx1 = $net["tx_bytes"];
                 break;
@@ -46,8 +46,8 @@ class StatusSystemCommand extends ConsoleCommand
                 break;
             }
         }
-        $networkin  = (($rx2 - $rx1) / 1000) / 10;
-        $networkout = (($tx2 - $tx1) / 1000) / 10;
+        $networkin  = !isset($rx1) ? 0 : (($rx2 - $rx1) / 1000) / 10;
+        $networkout = !isset($tx1) ? 0 : (($tx2 - $tx1) / 1000) / 10;
 
         $memory = $sysinfo->memory();
 
