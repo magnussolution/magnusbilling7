@@ -772,6 +772,23 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-07-20
+        if ($version == '7.3.2') {
+            $sql = " INSERT INTO `pkg_configuration` (`id`, `config_title`, `config_key`, `config_value`, `config_description`, `config_group_title`, `status`) VALUES
+                (NULL, 'Remove 0 on the DID', 'did_ignore_zero_on_did', '1', 'Remove 0 on the DID', 'global', '1'),
+                (NULL, 'Enable IAX internal calls', 'use_sip_to_iax', '0', 'Enable IAX internal calls', 'global', '1');";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_did_destination` ADD `context` TEXT NOT NULL DEFAULT '' AFTER `destination`;";
+            $this->executeDB($sql);
+
+            echo ("touch /etc/asterisk/extensions_magnus_did.conf");
+            exec("echo '#include extensions_magnus_did.conf' >> /etc/asterisk/extensions.conf");
+
+            $version = '7.3.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)

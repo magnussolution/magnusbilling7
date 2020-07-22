@@ -56,7 +56,7 @@ Ext.define('MBilling.view.diddestination.Form', {
                 labelAlign: me.labelAlignFields
             },
             items: [{
-                xtype: 'didtypefullcombo',
+                xtype: 'didtypecombo',
                 name: 'voip_call',
                 fieldLabel: t('type')
             }, {
@@ -84,6 +84,14 @@ Ext.define('MBilling.view.diddestination.Form', {
                 name: 'id_sip',
                 fieldLabel: t('SIP'),
                 allowBlank: true
+            }, {
+                xtype: 'textarea',
+                name: 'context',
+                fieldLabel: t('Context'),
+                allowBlank: true,
+                emptyText: t('Asterisk DialPlan. Example: exten => _X.,1,Dial(SIP/3333@39.5.5.5,30); )'),
+                height: 300,
+                anchor: '100%'
             }]
         }];
         me.callParent(arguments);

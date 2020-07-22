@@ -33,7 +33,8 @@ class DidAgi
         $this->startCall = time();
 
         //check if did call
-        $mydnid = substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
+        $mydnid = $MAGNUS->config['global']['did_ignore_zero_on_did'] == 1 && substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
+
         $agi->verbose('Check If Is Did ' . $mydnid, 10);
         $sql            = "SELECT * FROM pkg_did WHERE did = '$mydnid' AND activated = 1 LIMIT 1";
         $this->modelDid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -462,6 +463,8 @@ class DidAgi
                         }
                     }
 
+                } elseif ($inst_listdestination['voip_call'] == 10) {
+                    $MAGNUS->run_dial($agi, "LOCAL/" . $this->did . "@did-" . $this->did);
                 } else {
                     /* CHECK IF DESTINATION IS SET*/
                     if (strlen($inst_listdestination['destination']) == 0) {

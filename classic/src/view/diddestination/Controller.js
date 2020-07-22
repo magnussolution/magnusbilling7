@@ -24,7 +24,7 @@ Ext.define('MBilling.view.diddestination.Controller', {
     init: function() {
         var me = this;
         me.control({
-            'didtypefullcombo': {
+            'didtypecombo': {
                 select: me.onSelectMethod
             }
         });
@@ -80,8 +80,11 @@ Ext.define('MBilling.view.diddestination.Controller', {
             case 9:
                 method = t('Custom');
                 break;
+            case 10:
+                method = t('Context');
+                break;
         }
-        showFields = me.formPanel.down('didtypefullcombo').store.findRecord('name', method).getData().showFields;
+        showFields = me.formPanel.down('didtypecombo').store.findRecord('name', method).getData().showFields;
         me.showFieldsRelated(showFields);
         me.callParent(arguments);
     },
@@ -90,7 +93,7 @@ Ext.define('MBilling.view.diddestination.Controller', {
             form = me.formPanel.getForm(),
             record = me.list.getSelectionModel().getSelection()[0];
         method = t('sipcall');
-        showFields = me.formPanel.down('didtypefullcombo').store.findRecord('name', method).getData().showFields;
+        showFields = me.formPanel.down('didtypecombo').store.findRecord('name', method).getData().showFields;
         me.showFieldsRelated(showFields);
         me.callParent(arguments);
     }

@@ -1,6 +1,6 @@
 Ext.define('MBilling.view.diddestination.Combo', {
     extend: 'Ext.form.field.ComboBox',
-    alias: 'widget.didtypefullcombo',
+    alias: 'widget.didtypecombo',
     fieldLabel: t('typepaid'),
     displayField: 'name',
     valueField: 'id',
@@ -49,40 +49,10 @@ Ext.define('MBilling.view.diddestination.Combo', {
             id: '9',
             name: t('Custom'),
             showFields: ['voip_call', 'destination', 'id_did', 'id_user', 'activated']
-        }]
-    }
-});
-Ext.define('MBilling.view.diddestination.freeCombo', {
-    extend: 'Ext.form.field.ComboBox',
-    alias: 'widget.didtypefreecombo',
-    fieldLabel: t('typepaid'),
-    displayField: 'name',
-    forceSelection: true,
-    editable: false,
-    valueField: 'id',
-    value: 1,
-    store: {
-        fields: ['id', 'name'],
-        data: [{
-            id: '0',
-            name: t('callforpstn'),
-            showFields: ['voip_call', 'id_did', 'destination', 'id_user', 'activated']
         }, {
-            id: '1',
-            name: t('sipcall'),
-            showFields: ['voip_call', 'id_did', 'id_sip', 'id_user', 'activated', 'priority']
-        }, {
-            id: '2',
-            name: t('ivr'),
-            showFields: ['voip_call', 'id_did', 'id_ivr', 'id_user']
-        }, {
-            id: '3',
-            name: 'CallingCard',
-            showFields: ['voip_call', 'id_did', 'id_user']
-        }, {
-            id: '4',
-            name: t('portalDeVoz'),
-            showFields: ['voip_call', 'id_did', 'id_user']
+            id: '10',
+            name: t('Context'),
+            showFields: ['voip_call', 'context', 'id_did', 'id_user', 'activated']
         }]
     }
 });
