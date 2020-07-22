@@ -58,12 +58,12 @@ class CampaignDashBoardController extends Controller
             }
 
             //Calls Being Placed
-            $criteria = new CDbCriteria();
-            $criteria->addInCondition('id_phonebook', $ids_phone_books);
-            $criteria->addCondition('status > 1');
-            $modelPhoneNumber = PhoneNumber::model()->count($criteria);
-
-            $attributes[$i]['callsPlaced'] = $modelPhoneNumber;
+            $modelCallOnline = CallOnLine::model()->count('id_user = :key AND sip_account LIKE :key1 ',
+                array(
+                    ':key'  => Yii::app()->session['id_user'],
+                    ':key1' => 'MC!' . $attributes[$i]['name'] . '%',
+                ));
+            $attributes[$i]['callsPlaced'] = $modelCallOnline;
 
             // Calls Ringing
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND status LIKE :key1 ',
