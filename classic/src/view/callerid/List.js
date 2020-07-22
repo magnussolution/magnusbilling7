@@ -22,6 +22,8 @@ Ext.define('MBilling.view.callerid.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.calleridlist',
     store: 'Callerid',
+    fieldSearch: 'cid',
+    buttonImportCsv: true,
     initComponent: function() {
         var me = this;
         me.columns = [{
