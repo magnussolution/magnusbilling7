@@ -220,6 +220,10 @@ class MassiveCallCommand extends ConsoleCommand
 
                 $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
 
+                if (file_exists(dirname(__FILE__) . '/MassiveCallBeforeDial.php')) {
+                    include dirname(__FILE__) . '/MassiveCallBeforeDial.php';
+                }
+
                 $dialstr = "$providertech/$trunkcode/$destination";
 
                 // gerar os arquivos .call
