@@ -204,6 +204,23 @@ if ($MAGNUS->mode == 'standard') {
             $sipCallAgi->processCall($MAGNUS, $agi, $CalcAgi);
 
         } else {
+
+            if ($MAGNUS->config['global']['use_sip_to_iax'] == 1) {
+                require_once 'IaxCallAgi.php';
+
+                $sql     = "SELECT * FROM pkg_iax WHERE name = '$MAGNUS->dnid'  LIMIT 1";
+                $modeIax = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                if (isset($modeIax->id) && strlen($modeIax->name) > 3) {
+                    $MAGNUS->destination = $MAGNUS->dnid = $modeIax->name;
+                    $MAGNUS->mode        = 'call-iax';
+                    $MAGNUS->voicemail   = 0;
+                    $agi->verbose("CALL TO IAX", 15);
+                    $iaxCallAgi = new IaxCallAgi();
+                    $iaxCallAgi->processCall($MAGNUS, $agi, $CalcAgi, $modeIax);
+                    exit;
+                }
+            }
+
             $agi->verbose("CALL TO PSTN", 15);
             $standardCall = new StandardCallAgi();
             $standardCall->processCall($MAGNUS, $agi, $CalcAgi);
