@@ -57,6 +57,7 @@ class Diddestination extends Model
             array('id_user', 'required'),
             array('id_user, id_queue, id_sip, id_ivr, id_did, priority, activated, secondusedreal, voip_call', 'numerical', 'integerOnly' => true),
             array('destination', 'length', 'max' => 120),
+            array('context', 'safe'),
         );
     }
 

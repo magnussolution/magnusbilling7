@@ -108,6 +108,11 @@ class AsteriskAccess
         }
     }
 
+    public function dialPlanReload()
+    {
+        return $this->asmanager->Command("dialplan reload");
+    }
+
     public function sipReload()
     {
         return $this->asmanager->Command("sip reload");
@@ -914,6 +919,26 @@ class AsteriskAccess
         }
 
         AsteriskAccess::instance()->iaxReload();
+
+    }
+
+    public function writeDidContext()
+    {
+        $modeDidDestination = Diddestination::model()->findAll('voip_call = 10 AND context != ""');
+        $context_file       = '';
+        foreach ($modeDidDestination as $key => $destination) {
+            $context_file .= "[did-" . $destination->idDid->did . "]\n";
+            $context_file .= $destination->context . "\n\n";
+        }
+
+        $buddyfile = '/etc/asterisk/extensions_magnus_did.conf';
+        $fd        = fopen($buddyfile, "w");
+        if ($fd) {
+            fwrite($fd, $context_file);
+            fclose($fd);
+        }
+
+        AsteriskAccess::instance()->dialPlanReload();
 
     }
 

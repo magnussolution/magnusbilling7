@@ -175,6 +175,7 @@ class DiddestinationController extends Controller
 
     public function afterSave($model, $values)
     {
+        AsteriskAccess::instance()->writeDidContext();
 
         if ($this->isNewRecord) {
             $modelDid = Did::model()->findByPk($model->id_did);
@@ -198,11 +199,11 @@ class DiddestinationController extends Controller
                         //adiciona a recarga e pagamento do custo de ativaçao
                         if ($modelDid->connection_charge > 0) {
                             UserCreditManager::releaseUserCredit($model->id_user, $modelDid->connection_charge,
-                                Yii::t('yii', 'Activation Did') . ' ' . $modelDid->did, 0);
+                                Yii::t('yii', 'ActivationDid') . '' . $modelDid->did, 0);
                         }
 
                         UserCreditManager::releaseUserCredit($model->id_user, $modelDid->fixrate,
-                            Yii::t('yii', 'Monthly payment Did') . ' ' . $modelDid->did, 0);
+                            Yii::t('yii', 'MonthlypaymentDid') . '' . $modelDid->did, 0);
 
                         $mail = new Mail(Mail::$TYPE_DID_CONFIRMATION, $model->id_user);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $modelUser->credit);
@@ -226,7 +227,7 @@ class DiddestinationController extends Controller
                 $use->save();
 
                 if (isset($mail)) {
-                    $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                    $sendAdmin = $this->config['global ']['admin_received_email'] == 1 ? $mail->send($this->config['global ']['admin_email']) : null;
                 }
 
             }
