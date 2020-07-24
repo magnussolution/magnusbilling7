@@ -38,8 +38,8 @@ class SiteController extends Controller
         Yii::app()->session['wallpaper'] = $wallpaper;
         echo 'window.colorMenu = ' . json_encode($this->config['global']['color_menu']) . ';';
         echo 'window.moduleExtra = ' . json_encode($this->config['global']['module_extra']) . ';';
-        echo 'window.moduleExtra2 = ' . json_encode($this->config['global']['module_extra2']) . ';';
-        echo 'window.moduleExtra3 = ' . json_encode($this->config['global']['module_extra3']) . ';';
+        echo 'window.module2Extra = ' . json_encode($this->config['global']['module_extra2']) . ';';
+        echo 'window.module3Extra = ' . json_encode($this->config['global']['module_extra3']) . ';';
         $reCaptchaKey = isset($this->config['global']['reCaptchaKey']) &&
         strlen($this->config['global']['reCaptchaSecret']) > 10 &&
         strlen($this->config['global']['reCaptchaKey']) > 10
