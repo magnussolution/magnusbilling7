@@ -37,6 +37,7 @@ php /var/www/html/mbilling/cron.php UpdateMysql
 rm -rf /var/www/html/mbilling/doc
 rm -rf /var/www/html/mbilling/script
 ## set default permissions 
+touch /etc/asterisk/extensions_magnus_did.conf
 chown -R asterisk:asterisk /var/lib/php/session/
 chown -R asterisk:asterisk /var/spool/asterisk/outgoing/
 chown -R asterisk:asterisk /etc/asterisk
@@ -61,6 +62,7 @@ chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
 chmod -R 100 /var/www/html/mbilling/resources/asterisk/
+
 
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
 	for color in black blue gray orange purple red yellow
