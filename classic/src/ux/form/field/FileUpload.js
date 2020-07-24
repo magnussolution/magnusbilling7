@@ -140,12 +140,9 @@ Ext.define('Ext.ux.form.field.FileUpload', {
         var me = this,
             isPlay = btn.iconCls === 'icon-play';
         if (isPlay) {
-            me.audio.play();
-        } else if (me.audio && !me.audio.paused && me.audio.currentTime) {
-            me.audio.pause();
-            me.audio.currentTime = 0;
+            url = 'index.php/playAudio/?audio=' + me.formPanel.getForm().getRecord().get(me.name);
+            window.open(url, "_blank");
         }
-        btn.setIconCls(isPlay ? 'icon-stop' : 'icon-play');
     },
     initTipInfo: function() {
         var me = this;
