@@ -476,6 +476,7 @@ mkdir /var/www/html/mbilling/assets
 chown -R asterisk:asterisk /var/www/html/mbilling
 mkdir /var/run/magnus
 touch /etc/asterisk/extensions_magnus.conf
+touch /etc/asterisk/extensions_magnus_did.conf
 touch /etc/asterisk/sip_magnus_register.conf
 touch /etc/asterisk/sip_magnus.conf
 touch /etc/asterisk/sip_magnus_user.conf
