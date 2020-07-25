@@ -1062,7 +1062,8 @@ iptables -L -v
 
 php /var/www/html/mbilling/cron.php updatemysql
 
-chown -R asterisk:asterisk /var/lib/php/session/
+
+chown -R asterisk:asterisk /var/lib/php/session*
 chown -R asterisk:asterisk /var/spool/asterisk/outgoing/
 chown -R asterisk:asterisk /etc/asterisk
 chmod -R 777 /tmp

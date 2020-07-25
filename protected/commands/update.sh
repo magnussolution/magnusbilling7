@@ -38,7 +38,7 @@ rm -rf /var/www/html/mbilling/doc
 rm -rf /var/www/html/mbilling/script
 ## set default permissions 
 touch /etc/asterisk/extensions_magnus_did.conf
-chown -R asterisk:asterisk /var/lib/php/session/
+chown -R asterisk:asterisk /var/lib/php/session*
 chown -R asterisk:asterisk /var/spool/asterisk/outgoing/
 chown -R asterisk:asterisk /etc/asterisk
 chown -R asterisk:asterisk /var/www/html/mbilling
