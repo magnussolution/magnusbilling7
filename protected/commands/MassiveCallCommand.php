@@ -29,7 +29,7 @@ class MassiveCallCommand extends ConsoleCommand
         $name_day = $tab_day[$num_day];
 
         $filter = 'status = :key AND type = :key  AND ' . $name_day . ' = :key AND startingdate <= :key1 AND expirationdate > :key1
-                        AND  daily_start_time <= :key2 AND daily_stop_time > :key2';
+                        AND  daily_start_time <= :key2 AND daily_stop_time > :key2 AND frequency > 0';
 
         $params = array(
             ':key'  => 1,
@@ -72,6 +72,10 @@ class MassiveCallCommand extends ConsoleCommand
 
                 continue;
             }
+
+            $modelServers = Servers::model()->count('status = 1 AND weight > 0 AND (type = :key OR type = :key1)', array(':key' => 'mbilling', ':key1' => 'asterisk'));
+
+            $campaign->frequency = ceil($campaign->frequency / $modelServers);
 
             //get all campaign phonebook
             $modelCampaignPhonebook = CampaignPhonebook::model()->findAll(
