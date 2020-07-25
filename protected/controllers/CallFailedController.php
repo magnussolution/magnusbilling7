@@ -227,6 +227,9 @@ $model = CallFailed::model()->findByPk((int) $_GET['id']);
             echo '<th>Reason</th>';
             foreach ($ora_books as $key => $value) {
                 $line = explode('|', $value);
+                if (!isset($line[1])) {
+                    continue;
+                }
                 $data = explode('] ', $line[0]);
                 echo '<tr>';
                 echo '<td>' . substr($data[0], 1) . '</td>';
