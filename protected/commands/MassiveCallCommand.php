@@ -75,7 +75,7 @@ class MassiveCallCommand extends ConsoleCommand
 
             $modelServers = Servers::model()->count('status = 1 AND weight > 0 AND (type = :key OR type = :key1)', array(':key' => 'mbilling', ':key1' => 'asterisk'));
 
-            $campaign->frequency = ceil($campaign->frequency / $modelServers);
+            $campaign->frequency = $modelServers > 0 ? ceil($campaign->frequency / $modelServers) : $campaign->frequency;
 
             //get all campaign phonebook
             $modelCampaignPhonebook = CampaignPhonebook::model()->findAll(
