@@ -800,6 +800,24 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2020-07-11
+        if ($version == '7.3.4') {
+            $sql = "UPDATE `pkg_configuration` SET config_title = 'Show Broadcasting DashBoard on User home panel' WHERE config_key =  'showMCDashBoard'";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''DashBoard'')', 'campaigndashboard', 'x-fa fa-desktop', 13,11)";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            $version = '7.3.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
