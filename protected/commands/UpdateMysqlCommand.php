@@ -775,7 +775,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         //2020-07-20
         if ($version == '7.3.2') {
             $sql = " INSERT INTO `pkg_configuration` (`id`, `config_title`, `config_key`, `config_value`, `config_description`, `config_group_title`, `status`) VALUES
-                (NULL, 'Remove 0 on the DID', 'did_ignore_zero_on_did', '1', 'Remove 0 on the DID', 'global', '1'),
+                (NULL, 'Incoming DID first Digit Removal', 'did_ignore_zero_on_did', '1', '0=Disable \n1=Enable Remove First Digit of Incoming DID', 'global', '1'),
                 (NULL, 'Enable IAX internal calls', 'use_sip_to_iax', '0', 'Enable IAX internal calls', 'global', '1');";
             $this->executeDB($sql);
 
