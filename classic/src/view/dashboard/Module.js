@@ -114,7 +114,7 @@ Ext.define('MBilling.view.dashboard.Module', {
                     me.items = [{
                         header: true,
                         title: t('DashBoard') + ' ' + t('callcenter'),
-                        xtype: 'campainlistdashboard',
+                        xtype: 'campaigndashboardlist',
                         height: Ext.Element.getViewportHeight() - 130,
                         userCls: 'big-100 small-100',
                         cls: 'dashboard-main-chart shadow'
