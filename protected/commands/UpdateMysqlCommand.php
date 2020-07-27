@@ -779,13 +779,24 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                 (NULL, 'Enable IAX internal calls', 'use_sip_to_iax', '0', 'Enable IAX internal calls', 'global', '1');";
             $this->executeDB($sql);
 
-            $sql = "ALTER TABLE `pkg_did_destination` ADD `context` TEXT NOT NULL DEFAULT '' AFTER `destination`;";
+            $sql = "ALTER TABLE `pkg_did_destination` ADD `context` TEXT NULL DEFAULT NULL AFTER `destination`;";
             $this->executeDB($sql);
 
             echo ("touch /etc/asterisk/extensions_magnus_did.conf");
             exec("echo '#include extensions_magnus_did.conf' >> /etc/asterisk/extensions.conf");
 
             $version = '7.3.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2020-07-27
+        if ($version == '7.3.3') {
+
+            $sql = "ALTER TABLE `pkg_did_destination` ADD `context` TEXT NULL DEFAULT NULL AFTER `destination`;";
+            $this->executeDB($sql);
+
+            $version = '7.3.4';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
