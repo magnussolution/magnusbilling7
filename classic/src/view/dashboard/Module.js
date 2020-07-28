@@ -34,7 +34,7 @@ Ext.define('MBilling.view.dashboard.Module', {
             }];
         } else {
             //verifica se a opção comprar credito e did estao ativos
-            showDid = showBuy = false;
+            showDid = showBuy = showCampaignDashBoad = false;
             if (!App.user.isAdmin) {
                 Ext.each(App.user.menu, function(menuItem) {
                     if (!Ext.isEmpty(menuItem.rows)) {
