@@ -22,23 +22,28 @@ Ext.define('MBilling.view.offer.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.offerform',
     fieldsHideUpdateLot: ['name'],
-    items: [{
-        name: 'label',
-        fieldLabel: t('name')
-    }, {
-        xtype: 'offertypecombo',
-        name: 'packagetype',
-        fieldLabel: t('packagetype')
-    }, {
-        name: 'freetimetocall',
-        fieldLabel: t('freetimetocall')
-    }, {
-        xtype: 'billingtypecombo',
-        name: 'billingtype',
-        fieldLabel: t('periode')
-    }, {
-        xtype: 'moneyfield',
-        name: 'price',
-        fieldLabel: t('price')
-    }]
+    initComponent: function() {
+        var me = this;
+        me.items = [{
+            name: 'label',
+            fieldLabel: t('name')
+        }, {
+            xtype: 'offertypecombo',
+            name: 'packagetype',
+            fieldLabel: t('packagetype')
+        }, {
+            name: 'freetimetocall',
+            fieldLabel: t('freetimetocall')
+        }, {
+            xtype: 'billingtypecombo',
+            name: 'billingtype',
+            fieldLabel: t('periode')
+        }, {
+            xtype: 'moneyfield',
+            mask: App.user.currency + ' #9.999.990,00',
+            name: 'price',
+            fieldLabel: t('price')
+        }]
+        me.callParent(arguments);
+    }
 });

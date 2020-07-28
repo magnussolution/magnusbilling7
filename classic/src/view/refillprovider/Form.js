@@ -25,6 +25,7 @@ Ext.define('MBilling.view.refillprovider.Form', {
             xtype: 'providercombo'
         }, {
             xtype: 'moneyfield',
+            mask: App.user.currency + ' #9.999.990,00',
             name: 'credit',
             fieldLabel: t('credit')
         }, {

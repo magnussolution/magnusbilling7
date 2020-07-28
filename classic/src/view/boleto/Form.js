@@ -31,6 +31,7 @@ Ext.define('MBilling.view.boleto.Form', {
             allowBlank: App.user.isClient
         }, {
             xtype: 'moneyfield',
+            mask: App.user.currency + ' #9.999.990,00',
             name: 'payment',
             fieldLabel: t('value'),
             readOnly: App.user.isClient
