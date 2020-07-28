@@ -8,6 +8,8 @@ Ext.define('MBilling.view.module.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.modulelist',
     store: 'Module',
+    fieldSearch: 'text',
+    comparisonfilter: 'ct',
     initComponent: function() {
         var me = this;
         me.buttonCsv = false;

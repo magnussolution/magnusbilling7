@@ -22,7 +22,6 @@ Ext.define('MBilling.view.campaignReport.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.campaignreportlist',
     store: 'CampaignReport',
-    fieldSearch: 'idCampaignname',
     initComponent: function() {
         var me = this;
         me.buttonCsv = false;
@@ -31,51 +30,68 @@ Ext.define('MBilling.view.campaignReport.List', {
         me.allowDelete = false;
         me.buttonCleanFilter = false;
         me.buttonUpdateLot = false;
+        me.extraButtons = [{
+            text: t('Last') + ' ' + t('hour'),
+            reference: 'hour',
+            iconCls: '',
+            handler: 'onSetInterval',
+            disabled: false
+        }, {
+            text: t('Today'),
+            reference: 'day',
+            iconCls: '',
+            handler: 'onSetInterval',
+            disabled: false
+        }, {
+            text: t('Last') + ' 7 ' + t('days'),
+            reference: 'week',
+            iconCls: '',
+            handler: 'onSetInterval',
+            disabled: false
+        }, {
+            text: t('Last') + ' 30 ' + t('days'),
+            reference: 'month',
+            iconCls: '',
+            handler: 'onSetInterval',
+            disabled: false
+        }];
         me.columns = [{
             header: t('Id'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
+            sortable: false,
             hideable: App.user.isAdmin
         }, {
             header: t('Campaign'),
-            dataIndex: 'idCampaignname',
-            filter: {
-                type: 'string',
-                field: 'idCampaign.name'
-            },
+            dataIndex: 'name',
+            menuDisabled: true,
+            sortable: false,
             flex: 3
         }, {
-            header: t('user'),
-            dataIndex: 'idUserusername',
-            filter: {
-                type: 'string',
-                field: 'idUser.username'
-            },
+            header: t('Total Dialed'),
+            dataIndex: 'totalDialed',
+            menuDisabled: true,
+            sortable: false,
             flex: 3
         }, {
-            header: t('status'),
-            dataIndex: 'status',
-            renderer: Helper.Util.formatBooleanActive,
-            comboRelated: 'statuscombo',
-            flex: 2,
-            filter: {
-                type: 'list',
-                options: [
-                    [1, t('Active')],
-                    [0, t('Inactivated')],
-                    [2, t('Pending')],
-                    [3, t('Sent')],
-                    [4, t('Blocked')],
-                    [5, t('AMD')]
-                ]
-            }
+            header: t('Total AMD'),
+            dataIndex: 'totalAmd',
+            menuDisabled: true,
+            sortable: false,
+            flex: 3
         }, {
-            header: t('Date'),
-            renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
-            dataIndex: 'unix_timestamp',
-            flex: 4,
-            hidden: window.isTablet
+            header: t('Total Answered'),
+            dataIndex: 'totalAnswered',
+            menuDisabled: true,
+            sortable: false,
+            flex: 3
+        }, {
+            header: t('Transfered'),
+            menuDisabled: true,
+            dataIndex: 'transfered',
+            sortable: false,
+            flex: 3
         }]
         me.callParent(arguments);
     }
