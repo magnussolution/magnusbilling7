@@ -130,10 +130,10 @@ class BackupController extends Controller
         $dbString = explode('dbname=', Yii::app()->db->connectionString);
         $dataBase = end($dbString);
 
-        $username = Yii::app()->db->username;
-        $password = Yii::app()->db->password;
-        $data     = date("d-m-Y");
-        $comando  = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed > /tmp/base.sql";
+        $username     = Yii::app()->db->username;
+        $password     = Yii::app()->db->password;
+        $data         = date("d-m-Y");
+        echo $comando = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed > /tmp/base.sql";
         LinuxAccess::exec($comando);
         LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_Magnus.$data.tgz /tmp/base.sql /etc/asterisk");
         LinuxAccess::exec("rm -f /tmp/base.sql");
@@ -142,28 +142,6 @@ class BackupController extends Controller
             $this->nameSuccess => $this->success,
             $this->nameRoot    => $this->attributes,
             $this->nameMsg     => $this->msg . ' Backup in process, this task can spend many time to finish.',
-        ));
-
-    }
-
-    public function actionImportFromCsv()
-    {
-        if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
-            exit;
-        }
-
-        ini_set("memory_limit", "-1");
-        ini_set("upload_max_filesize", "100M");
-        ini_set("max_execution_time", "-1");
-        if (isset($_FILES['file']['tmp_name'])) {
-
-            $uploadfile = $this->diretory . $_FILES['file']['name'];
-            Yii::log($uploadfile, 'info');
-            move_uploaded_file($_FILES["file"]["tmp_name"], $uploadfile);
-        }
-        echo json_encode(array(
-            $this->nameSuccess => true,
-            $this->nameMsg     => $this->success,
         ));
 
     }

@@ -24,25 +24,13 @@ Ext.define('MBilling.view.backup.List', {
     store: 'Backup',
     initComponent: function() {
         var me = this;
-        me.buttonImportCsv = true;
-        me.textButtonImportCsv = t('Importar Backup');
-        me.widthButtonCsv = 140;
-        me.extraButtons = [
-            /*{
-                text: t('Recovery Backup'),
-                glyph  : icons.cog,
-                width : 120,
-                handler: 'onRecovery',
-                disabled: false
-            },*/
-            {
-                text: t('Download Backup'),
-                glyph: icons.disk,
-                handler: 'onDownload',
-                width: 140,
-                disabled: false
-            }
-        ];
+        me.extraButtons = [{
+            text: t('Download') + ' Backup',
+            glyph: icons.disk,
+            handler: 'onDownload',
+            width: 140,
+            disabled: false
+        }];
         me.buttonCsv = false;
         me.allowPrint = false;
         me.buttonUpdateLot = false;
@@ -50,12 +38,12 @@ Ext.define('MBilling.view.backup.List', {
         me.allowUpdate = false;
         me.columns = [{
             menuDisabled: true,
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 1
         }, {
             menuDisabled: true,
-            header: t('size'),
+            header: t('Size'),
             dataIndex: 'size',
             flex: 1
         }]
