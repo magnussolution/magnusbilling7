@@ -827,7 +827,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                 `id_user` int(11) NOT NULL,
                 `id_trunk` int(11) NOT NULL,
                 `unix_timestamp` int(11) NOT NULL,
-                `status` tinyint(1) NOT NULL DEFAULT '2'
+                `status` tinyint(1) NOT NULL DEFAULT '2',
                 PRIMARY KEY (`id`),
                 KEY `unix_timestamp` (`unix_timestamp`),
                 KEY `fk_pkg_campaign_report_pkg_campaign` (`id_campaign`),
