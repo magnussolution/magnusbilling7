@@ -23,6 +23,10 @@ class CampaignReport extends Model
 {
     protected $_module = 'campaignreport';
 
+    public $totalDialed   = 0;
+    public $totalAmd      = 0;
+    public $totalAnswered = 0;
+    public $transfered    = 0;
     /**
      * Retorna a classe estatica da model.
      * @return Prefix classe estatica da model.

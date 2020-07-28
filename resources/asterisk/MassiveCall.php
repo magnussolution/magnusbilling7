@@ -26,15 +26,6 @@ class MassiveCall
         require_once 'Tts.php';
         $uploaddir = $MAGNUS->magnusFilesDirectory . 'sounds/';
 
-        $agi->answer();
-        sleep(1);
-        $now = time();
-
-        if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
-            $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed", 25);
-            $MAGNUS->hangup($agi);
-        }
-
         $id_trunk            = $agi->get_variable("TRUNK_ID", true);
         $idPhonenumber       = $agi->get_variable("PHONENUMBER_ID", true);
         $phonenumberCity     = $agi->get_variable("PHONENUMBER_CITY", true);
@@ -44,6 +35,19 @@ class MassiveCall
         $MAGNUS->username    = $MAGNUS->accountcode    = $agi->get_variable("USERNAME", true);
         $MAGNUS->id_agent    = $agi->get_variable("AGENT_ID", true);
         $MAGNUS->destination = $destination = $MAGNUS->dnid;
+
+        $agi->answer();
+
+        $sql = "UPDATE pkg_campaign_report SET status = 3 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+        $agi->exec($sql);
+
+        sleep(1);
+        $now = time();
+
+        if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
+            $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed", 25);
+            $MAGNUS->hangup($agi);
+        }
 
         $sql = "SELECT *, pkg_campaign.id AS id, pkg_campaign.id_user AS id_user, pkg_campaign.description AS description FROM pkg_campaign
                             LEFT JOIN pkg_user ON pkg_campaign.id_user = pkg_user.id
@@ -64,6 +68,9 @@ class MassiveCall
         if ($agi->get_variable("AMDSTATUS", true) && preg_match("/MACHINE/", $agi->get_variable("AMDSTATUS", true))) {
             $amd_status = $agi->get_variable("AMDSTATUS", true);
             $agi->verbose(date("Y-m-d H:i:s") . " => " . $MAGNUS->dnid . ': amd_status ' . $amd_status . ", hangup call", 5);
+
+            $sql = "UPDATE pkg_campaign_report SET status = 5 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+            $agi->exec($sql);
 
             $sql = "UPDATE pkg_phonenumber SET status = 5, info = '" . $agi->get_variable("AMDCAUSE", true) . "' WHERE id = $idPhonenumber LIMIT 1";
             $agi->exec($sql);
@@ -206,6 +213,9 @@ class MassiveCall
             if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || (strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
                 $agi->verbose("have Forward number $forward_number");
                 $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . "' WHERE id = $idPhonenumber LIMIT 1";
+                $agi->exec($sql);
+
+                $sql = "UPDATE pkg_campaign_report SET status = 7 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
                 $agi->exec($sql);
 
                 $chanStatus = $agi->channel_status($MAGNUS->channel);

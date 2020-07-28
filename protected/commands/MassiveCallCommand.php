@@ -51,12 +51,12 @@ class MassiveCallCommand extends ConsoleCommand
             if ($this->debug >= 1) {
                 echo "SEARCH NUMBER IN CAMPAIGN " . $campaign->name . "\n";
             }
-
             $reportValues = '';
-            $id_plan      = $campaign->id_plan > 0 ? $campaign->id_plan : $campaign->idUser->id_plan;
-            $id_user      = $campaign->idUser->id;
-            $username     = $campaign->idUser->username;
-            $id_agent     = $campaign->idUser->id_user;
+
+            $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $campaign->idUser->id_plan;
+            $id_user  = $campaign->idUser->id;
+            $username = $campaign->idUser->username;
+            $id_agent = $campaign->idUser->id_user;
 
             if ($id_agent > 1) {
                 $id_plan_agent = $id_plan;
@@ -129,7 +129,15 @@ class MassiveCallCommand extends ConsoleCommand
                 $ids[] = $phone->id;
             }
 
-            echo 'teste;';
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('id', $ids);
+            PhoneNumber::model()->updateAll(
+                array(
+                    'status' => '2',
+                    'try'    => new CDbExpression('try + 1'),
+                ),
+                $criteria
+            );
 
             foreach ($modelPhoneNumber as $phone) {
                 $i++;
@@ -166,7 +174,7 @@ class MassiveCallCommand extends ConsoleCommand
 
                 $searchTariff = Plan::model()->searchTariff($id_plan, $destination);
 
-                if (!count($searchTariff[1])) {
+                if (!isset($searchTariff[1][0])) {
                     $phone->status = 0;
                     $phone->save();
                     if ($this->debug >= 1) {
@@ -177,8 +185,6 @@ class MassiveCallCommand extends ConsoleCommand
                 }
 
                 $searchTariff = $searchTariff[1];
-
-                print_r($searchTariff);
 
                 if ($searchTariff[0]['trunk_group_type'] == 1) {
                     $order = 'id ASC';
@@ -191,9 +197,6 @@ class MassiveCallCommand extends ConsoleCommand
                     'params'    => [':key' => $searchTariff[0]['id_trunk_group']],
                     'order'     => $order,
                 ]);
-                if (!isset($modelTrunkGroupTrunk->id)) {
-                    continue;
-                }
 
                 foreach ($modelTrunkGroupTrunk as $key => $trunk) {
                     $modelTrunk = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
@@ -254,8 +257,7 @@ class MassiveCallCommand extends ConsoleCommand
                 if ($this->debug > 1) {
                     echo $call . "\n\n";
                 }
-
-                echo $reportValues .= '(' . $campaign->id . ', ' . $phone->id . ', ' . $id_user . ', ' . $idTrunk . ' , ' . time() . '),';
+                $reportValues .= '(' . $campaign->id . ', ' . $phone->id . ', ' . $id_user . ', ' . $idTrunk . ' , ' . time() . '),';
 
                 AsteriskAccess::generateCallFile($call, $sleepNext);
 
@@ -271,9 +273,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $ids[] = $phone->id;
 
             }
-
             CampaignReport::insertReport(substr($reportValues, 0, -1));
-
             echo "Campain " . $campaign->name . " sent " . $i . " calls \n\n";
         }
     }
