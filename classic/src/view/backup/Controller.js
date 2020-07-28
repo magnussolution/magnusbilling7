@@ -77,7 +77,7 @@ Ext.define('MBilling.view.backup.Controller', {
     },
     onNew: function() {
         var me = this;
-        Ext.Msg.confirm(me.titleConfirmation, t('Do you relly want create a new backup now? It can take many time and make your server slow. Mbilling make backup every day automatically.'), function(btn) {
+        Ext.Msg.confirm(me.titleConfirmation, t('Do you relly want create a new backup now? It can take many time and make your server slow. MagnusBilling make backup every day automatically.'), function(btn) {
             if (btn === 'yes') {
                 Ext.Msg.confirm(me.titleConfirmation, t('This backup will override the backup held today! Do you sure?'), function(btn) {
                     if (btn === 'yes') {
@@ -104,62 +104,4 @@ Ext.define('MBilling.view.backup.Controller', {
             }
         }, me);
     }
-    /*,
-
-            onRecovery: function (btn) {
-                var me = this,
-                    records     = me.list.getSelectionModel().getSelection(),
-                record     = me.list.getSelectionModel().getSelection()[0],
-                idRecord = [];
-
-
-
-            if (records.length > 1) {
-                Ext.ux.Alert.alert(me.titleError, t('Please select only 1 backup'), 'notification');
-            }else if(record){
-                Ext.Msg.confirm(me.titleConfirmation, t('ALERT: Do you really recovery this BACKUP?'), function(btn) {
-                        if(btn === 'yes') {
-                            Ext.Msg.confirm(me.titleConfirmation, t('ALERT: It can spend many time? Do you sure?'), function(btn) {
-                                if(btn === 'yes') {
-                                    Ext.Msg.confirm(me.titleConfirmation, t('ALERT: It will delete your current database, after will import the sql file. Do you really wnat do it?'), function(btn) {
-                                        if(btn === 'yes') {
-                                            Ext.Msg.confirm(me.titleConfirmation, t('ALERT: It can spend many time? Do you sure?'), function(btn) {
-                                                if(btn === 'yes') {
-                                                    Ext.Msg.confirm(me.titleConfirmation, t('ALERT: At your own risk!!!! '), function(btn) {
-                                                        if(btn === 'yes') {
-                                                            Ext.ux.Alert.alert(me.titleError, t('It will be necessary to wait. Your server is down until recover all database.'), 'error');
-                                                            Ext.Ajax.request({
-                                                            url: 'index.php/backup/recovery',
-
-                                                            params : {id: Ext.encode(record.get('name'))},
-                                                            scope  : me,
-                                                            success: function(response) {
-                                                                response = Ext.decode(response.responseText);
-
-                                                                if(response[me.nameSuccessRequest]){
-                                                                    var msg = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
-                                                                    Ext.ux.Alert.alert(me.titleSuccess, msg, 'success');
-                                                                }
-                                                                else {
-                                                                    var errors = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
-                                                                    Ext.ux.Alert.alert(me.titleError, errors, 'notification');
-                                                                }
-                                                            }
-                                                        }); 
-                                                        }
-                                                    }, me);
-                                                }
-                                            }, me);
-                                        }
-                                    }, me);
-                                }
-                            }, me);
-                        }
-                    }, me);
-            }else{
-                Ext.ux.Alert.alert(me.titleError, t('Please select 1 backup'), 'notification');
-            }
-                
-
-            }*/
 });
