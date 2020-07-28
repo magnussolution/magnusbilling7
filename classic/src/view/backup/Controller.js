@@ -77,9 +77,9 @@ Ext.define('MBilling.view.backup.Controller', {
     },
     onNew: function() {
         var me = this;
-        Ext.Msg.confirm(me.titleConfirmation, t('Do you relly want create a new backup now? It can take many time and make your server slow. MagnusBilling make backup every day automatically.'), function(btn) {
+        Ext.Msg.confirm(me.titleConfirmation, t('Do you really want to create a new backup now? It may take a long time and make your server slow. MagnusBilling makes backups every day automatically at 03:00.'), function(btn) {
             if (btn === 'yes') {
-                Ext.Msg.confirm(me.titleConfirmation, t('This backup will override the backup held today! Do you sure?'), function(btn) {
+                Ext.Msg.confirm(me.titleConfirmation, t('This will overwrite any backup made today! Are you sure?'), function(btn) {
                     if (btn === 'yes') {
                         Ext.Ajax.request({
                             url: 'index.php/backup/save',
