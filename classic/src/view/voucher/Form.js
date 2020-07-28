@@ -32,6 +32,7 @@ Ext.define('MBilling.view.voucher.Form', {
         }
         me.items = [{
             xtype: 'moneyfield',
+            mask: App.user.currency + ' #9.999.990,00',
             name: 'credit',
             fieldLabel: t('credit'),
             hidden: App.user.isClient,
