@@ -820,6 +820,31 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
         //2020-07-28
         if ($version == '7.3.5') {
+
+            $version = '7.3.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2020-07-28
+        if ($version == '7.3.6') {
+
+            $sql = "UPDATE `pkg_group_module` SET show_menu = 0 WHERE id_group = 1 AND id_module = (SELECT id FROM `pkg_module` WHERE `module` LIKE 'dashboard' LIMIT 1)";
+            $this->executeDB($sql);
+
+            $sql    = "SELECT * FROM pkg_module WHERE module = 'backup'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            if (!isset($result[0])) {
+
+                echo $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Backup'')', 'backup', 'x-fa fa-desktop', 12,15)";
+                $this->executeDB($sql);
+
+                $idServiceModule = Yii::app()->db->lastInsertID;
+
+                $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+                $this->executeDB($sql);
+            }
+
             $sql = " CREATE TABLE IF NOT EXISTS `pkg_campaign_report` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `id_campaign` int(11) NOT NULL,
@@ -840,14 +865,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
             $this->executeDB($sql);
 
-            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Campaign Report'')', 'campaignreport', 'x-fa fa-desktop', 13,12)";
-            $this->executeDB($sql);
-            $idServiceModule = Yii::app()->db->lastInsertID;
+            $sql    = "SELECT * FROM pkg_module WHERE module = 'campaignreport'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            if (!isset($result[0])) {
+                $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Campaign Report'')', 'campaignreport', 'x-fa fa-desktop', 13,12)";
+                $this->executeDB($sql);
+                $idServiceModule = Yii::app()->db->lastInsertID;
 
-            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
-            $this->executeDB($sql);
+                $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+                $this->executeDB($sql);
+            }
 
-            $version = '7.3.6';
+            $version = '7.3.7';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
