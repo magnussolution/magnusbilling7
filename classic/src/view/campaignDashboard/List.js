@@ -26,7 +26,6 @@ Ext.define('MBilling.view.campaignDashboard.List', {
     fieldSearch: 'name',
     initComponent: function() {
         var me = this;
-        me.pagination = false;
         me.buttonCsv = false;
         me.allowPrint = false;
         me.allowCreate = false;

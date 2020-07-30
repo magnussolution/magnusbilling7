@@ -51,6 +51,7 @@ class MassiveCallCommand extends ConsoleCommand
             if ($this->debug >= 1) {
                 echo "SEARCH NUMBER IN CAMPAIGN " . $campaign->name . "\n";
             }
+            $reportValues = '';
 
             $id_plan  = $campaign->id_plan > 0 ? $campaign->id_plan : $campaign->idUser->id_plan;
             $id_user  = $campaign->idUser->id;
@@ -103,7 +104,7 @@ class MassiveCallCommand extends ConsoleCommand
                 echo 'Found ' . count($modelPhoneNumber) . ' Numbers in Campaign ' . "\n";
             }
 
-            if (!count($modelPhoneNumber)) {
+            if (!isset($modelPhoneNumber[0])) {
                 if ($this->debug >= 1) {
                     echo "NO PHONE FOR CALL" . "\n\n\n";
                 }
@@ -147,7 +148,7 @@ class MassiveCallCommand extends ConsoleCommand
                 if ($campaign->restrict_phone == 1) {
                     $modelCampaignRestrictPhone = CampaignRestrictPhone::model()->find('number = :key', array(':key' => $destination));
 
-                    if (count($modelCampaignRestrictPhone)) {
+                    if (isset($modelCampaignRestrictPhone->id)) {
                         $phone->status = 4;
                         $phone->save();
                         if ($this->debug >= 1) {
@@ -173,7 +174,7 @@ class MassiveCallCommand extends ConsoleCommand
 
                 $searchTariff = Plan::model()->searchTariff($id_plan, $destination);
 
-                if (!count($searchTariff[1])) {
+                if (!isset($searchTariff[1][0])) {
                     $phone->status = 0;
                     $phone->save();
                     if ($this->debug >= 1) {
@@ -256,6 +257,7 @@ class MassiveCallCommand extends ConsoleCommand
                 if ($this->debug > 1) {
                     echo $call . "\n\n";
                 }
+                $reportValues .= '(' . $campaign->id . ', ' . $phone->id . ', ' . $id_user . ', ' . $idTrunk . ' , ' . time() . '),';
 
                 AsteriskAccess::generateCallFile($call, $sleepNext);
 
@@ -271,7 +273,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $ids[] = $phone->id;
 
             }
-
+            CampaignReport::insertReport(substr($reportValues, 0, -1));
             echo "Campain " . $campaign->name . " sent " . $i . " calls \n\n";
         }
     }
