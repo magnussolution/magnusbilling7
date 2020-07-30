@@ -22,15 +22,15 @@ source_encoding = 'utf-8-sig'
 master_doc = 'index'
 
 # General information about the project
-project = 'MagnusBilling Doc BR'
-copyright = '2005-2018, MagnusSolution'
+project = 'MagnusBilling Wiki'
+copyright = '2005-2020, MagnusSolution'
 author = 'Adilson Magnus and the MagnusBilling community'
 
 # Version info for the project, acts as replacement for |version| and |release|
 # The short X.Y version
-version = 'latest'
+version = 'source'
 # The full version, including alpha/beta/rc tags
-release = 'latest'
+release = 'source'
 
 language = 'en'
 
@@ -66,7 +66,7 @@ html_theme_options = {
 html_context = {
     "display_github": True, # Integrate GitHub
     "github_user": "magnussolution", # Username
-    "github_repo": "MagnusBilling6DocPT_BR", # Repo name
+    "github_repo": "MagnusBilling Wiki", # Repo name
     "github_version": "master", # Version
     "conf_py_path": "/", # Path in the checkout to the docs root
 }
@@ -74,7 +74,7 @@ html_context = {
 html_logo = 'img/docs_logo.png'
 
 # Output file base name for HTML help builder
-htmlhelp_basename = 'MagnusBillingDocPT_BR'
+htmlhelp_basename = 'MagnusBilling Wiki'
 
 # -- Options for reStructuredText parser ----------------------------------
 
