@@ -6,6 +6,9 @@
 Bem vindo a documentação do MagnusBilling 6 em português.
 =========================================================
 
+.. meta::
+   :description lang=pt_BR: Inície sua experiencia com MagnusBilling por nossa docuemntação em Português..
+
 .. attention:: Nos precisamos de ajuda para desenvolver a documentaçao. Entre em contato.
 
 **MagnusBilling**
@@ -67,7 +70,7 @@ The main documentation for the site is organized into the following sections:
    :caption: Usuarios
    :name: sec-Usuarios
 
-   users/users.rst
+   user/user.rst
 
    campaign/startingdate.rst
 
