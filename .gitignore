@@ -17,7 +17,6 @@ protected/config/cron_production.php
 protected/config/main_production.php
 classic/src/ApplicationBuild.js
 ck.pem
-doc
 Mbilling_7.sublime-workspace
 Mbilling_7.sublime-project
 resources/reports/*.log
