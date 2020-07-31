@@ -25,8 +25,15 @@ yum -y install perl-JSON flac
  */
 class Tts
 {
-    public static function create(&$MAGNUS, $string)
+    public static function create(&$MAGNUS, $agi, $string)
     {
+
+        if (preg_match('/\|/', $string)) {
+            $data       = explode('|', $string);
+            $LID_CUSTOM = $data[0];
+            $VID_CUSTOM = $data[1];
+            $string     = $data[2];
+        }
 
         $name = urlencode($string);
 
@@ -37,7 +44,7 @@ class Tts
             $tts_url = preg_replace('/\$name/', $name, $MAGNUS->config['global']['tts_url']);
 
             if (preg_match("/vocalware/", $tts_url)) {
-                //https://www.vocalware.com/tts/gen.php?EID=3&LID=2&VID=1&TXT=$name&EXT=mp3&FX_TYPE=&FX_LEVEL=&ACC=YOUR_ACC&API=YPUR_API&SESSION=&HTTP_ERR=&CS=
+                //https://www.vocalware.com/tts/gen.php?EID=3&LID=2&VID=1&TXT=$name&EXT=mp3&FX_TYPE=&FX_LEVEL=&ACC=YOUR_ACC&API=YPUR_API&SESSION=&HTTP_ERR=&CS=&SECRET=YOUR_SECRET
                 $variables = explode("?", $tts_url);
 
                 $url = $variables[0];
@@ -47,14 +54,17 @@ class Tts
                 foreach ($variables as $key => $value) {
                     $val = explode("=", $value);
                     switch ($val[0]) {
+                        case 'LID':
+                            $LID = $val[1];
+                            break;
                         case 'EID':
                             $EID = $val[1];
                             break;
                         case 'VID':
                             $VID = $val[1];
                             break;
-                        case 'ext':
-                            $ext = $val[1];
+                        case 'EXT':
+                            $EXT = $val[1];
                             break;
                         case 'ACC':
                             $ACC = $val[1];
@@ -68,22 +78,25 @@ class Tts
                     }
                 }
 
+                $LID = isset($LID_CUSTOM) ? $LID_CUSTOM : $LID; //language
+                $VID = isset($VID_CUSTOM) ? $VID_CUSTOM : $VID; //voice
                 $get = 'EID=' . $EID
                     . '&LID=' . $LID
                     . '&VID=' . $VID
                     . '&TXT=' . $name
-                    . '&EXT=' . $ext
+                    . '&EXT=' . $EXT
                     . '&FX_TYPE='
                     . '&FX_LEVEL='
                     . '&ACC=' . $ACC
                     . '&API=' . $API
                     . '&SESSION='
                     . '&HTTP_ERR=';
+
                 $CS = md5($EID . $LID . $VID . $string .
-                    $ext . $fxType . $fxLevel . $ACC . $API . $session . $httpErr . $SECRET);
+                    $EXT . $fxType . $fxLevel . $ACC . $API . $session . $httpErr . $SECRET);
 
-                $tts_url = $url . '?' . $get . '&CS=' . $CS;
-
+                $tts_url = 'https://www.vocalware.com/tts/gen.php?' . $get . '&CS=' . $CS;
+                $agi->verbose($tts_url, 25);
                 exec("curl --insecure \"$tts_url\" --output \"/tmp/$file.mp3\" ");
 
             } else if (preg_match("/ttsgo/", $tts_url)) {

@@ -113,7 +113,7 @@ class MassiveCall
                     $tts  = true;
                     $file = $idPhonenumber . date("His");
 
-                    $audio_name = Tts::create($MAGNUS, $modelPhoneNumber->name);
+                    $audio_name = Tts::create($MAGNUS, $agi, $modelPhoneNumber->name);
 
                 }
 
@@ -126,7 +126,7 @@ class MassiveCall
                         $audio = '/tmp/' . $file;
                     } else {
                         $agi->verbose('Get audio from TTS');
-                        $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio);
+                        $audio = Tts::create($MAGNUS, $agi, $modelCampaign->tts_audio);
                     }
 
                 } else {
@@ -157,7 +157,7 @@ class MassiveCall
 
                     if (strlen($modelCampaign->tts_audio2) > 2) {
 
-                        $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio2);
+                        $audio = Tts::create($MAGNUS, $agi, $modelCampaign->tts_audio2);
 
                     } else {
                         $audio = $uploaddir . "idCampaign_" . $idCampaign . "_2";
@@ -180,14 +180,14 @@ class MassiveCall
                         $agi->verbose('O texto que você acabou de dizer: ' . $textASR);
                         if (strlen($textASR) < 1) {
                             $text  = "Desculpe não consegui te compreender. Vamos tentar novamente?";
-                            $audio = Tts::create($MAGNUS, $text);
+                            $audio = Tts::create($MAGNUS, $agi, $text);
 
                             $agi->stream_file($audio, ' #');
 
                         } elseif (preg_match('/' . $modelCampaign->asr_options . '/', $textASR)) {
 
                             $text  = "Você disse. " . $textASR . ". Por favor aguarde.";
-                            $audio = Tts::create($MAGNUS, $text);
+                            $audio = Tts::create($MAGNUS, $agi, $text);
 
                             $agi->stream_file($audio, ' #');
 
@@ -196,7 +196,7 @@ class MassiveCall
                         } else {
 
                             $text  = "Você realmente não quer escutar o recado? Vamos tentar novamente?";
-                            $audio = Tts::create($MAGNUS, $text);
+                            $audio = Tts::create($MAGNUS, $agi, $text);
 
                             $agi->stream_file($audio, ' #');
                         }
