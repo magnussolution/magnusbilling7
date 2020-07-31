@@ -3,10 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MagnusBilling 7 in English.
+Bem vindo a documentação do MagnusBilling 7 em português.
 =========================================================
 
-.. attention:: We need help to write the documentation. Contact us.
+.. meta::
+   :description lang=pt_BR: Inície sua experiencia com MagnusBilling por nossa docuemntação em Português..
+
+.. attention:: Nos precisamos de ajuda para desenvolver a documentaçao. Entre em contato.
 
 **MagnusBilling**
 -----------------
@@ -44,28 +47,22 @@ MagnusBilling funções
 .. _Canal youtube: https://www.youtube.com/channel/UCish_6Lxfkh29n4CLVEd90Q
 .. _MagnusBilling: https://www.magnusbilling.com
 
-The main documentation for the site is organized into the following sections:
+
 
 .. toctree::
-   :maxdepth: 1
    :caption: Primeiros passos
-   :name: sec-general
+   :maxdepth: 2
 
    get_started/quick_install.rst
    get_started/interface.rst
    get_started/backup.rst
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Segurança
-   :name: sec-Segurança
-
-   firewall/iptables.rst
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Usuarios
-   :name: sec-Usuarios
+   :maxdepth: 2
+   :caption: Menus
+
+   modules/index.rst
 
 
 .. Indices and tables
@@ -74,3 +71,4 @@ The main documentation for the site is organized into the following sections:
 .. * :ref:`genindex`
 .. * :ref:`modindex`
 .. * :ref:`search`
+

@@ -19,8 +19,11 @@ extensions = [
     'gdscript', 
     'sphinx_tabs.tabs', 
     'sphinx.ext.imgmath', 
-    'sphinx_rtd_theme'
+    'sphinx_rtd_theme',
+    'sphinx.ext.autosectionlabel',
 ]
+autosectionlabel_prefix_document = True
+
 templates_path = ['_templates']
 
 # You can specify multiple suffix as a list of string: ['.rst', '.md']
