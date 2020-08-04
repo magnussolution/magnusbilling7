@@ -18,8 +18,8 @@ class SignupController extends Controller
     public function actionView($id)
     {
         if (isset($_GET['loginkey']) && strlen($_GET['loginkey']) > 5 and strlen($_GET['loginkey']) < 30) {
-            $modelUser = User::model()->find('loginkey = :key AND id = :key1', array(':key' => $_GET['loginkey'], ':key1' => $_GET['id']));
-            if (count($modelUser) < 1) {
+            $modelUser = User::model()->find('active = 2 AND loginkey = :key AND id = :key1', array(':key' => $_GET['loginkey'], ':key1' => $_GET['id']));
+            if (!isset($modelUser->id)) {
                 $this->redirect(array('add'));
             }
 
@@ -52,23 +52,7 @@ class SignupController extends Controller
                 Yii::app()->session['googleAuthenticatorKey']   = false;
 
             }
-
             $this->redirect('/');
-        } else {
-
-            $mail = new Mail(Mail::$TYPE_SIGNUP, $id);
-            try {
-                $mail->send();
-            } catch (Exception $e) {
-            }
-
-            if ($this->config['global']['signup_admin_email'] == 1) {
-                $mail->setTitle('NEW USER SIGNUP FROM MAGNUSBILLING SIGNUP FORM. USERNAME ');
-                $mail->send($this->config['global']['admin_email']);
-            }
-
-            $signup = Signup::model()->findByPk((int) $id);
-            $this->render('view', array('signup' => $signup));
         }
     }
 
