@@ -54,6 +54,22 @@ class CampaignReportController extends Controller
     }
     public function getAttributesModels($models, $itemsExtras = array())
     {
+
+        /*
+
+        2 Pending (CANCEL CONGESTION BUSY CHANUNVALEBLE)
+
+        3 answer REceive the 200 ok code
+
+        4 user press any digit
+
+        5 AMD
+
+        7 mach with your campaign forward configuration
+
+        total dialed = total AMD + total answer + total failed
+
+         */
         $attributes = false;
         foreach ($models as $key => $item) {
             $attributes[$key]    = $item->attributes;
@@ -70,6 +86,19 @@ class CampaignReportController extends Controller
             $attributes[$key]['totalDialed'] = $modelCampaignReport->totalDialed;
 
             $modelCampaignReport = CampaignReport::model()->find([
+                'select'    => 'count(*) totalFailed ',
+                'condition' => 'id_campaign = :key AND status = 2 AND unix_timestamp > :key1',
+                'params'    => [
+                    ':key'  => $item->id,
+                    ':key1' => $this->interval,
+
+                ],
+            ]);
+
+            $ratio                           = @($modelCampaignReport->totalFailed / $attributes[$key]['totalDialed']) * 100;
+            $attributes[$key]['totalFailed'] = $modelCampaignReport->totalFailed . ' (' . number_format($ratio, 2) . '%)';
+
+            $modelCampaignReport = CampaignReport::model()->find([
                 'select'    => 'count(*) totalAmd',
                 'condition' => 'id_campaign = :key AND status = 5 AND unix_timestamp > :key1',
                 'params'    => [
@@ -79,19 +108,32 @@ class CampaignReportController extends Controller
                 ],
             ]);
 
-            $attributes[$key]['totalAmd'] = $modelCampaignReport->totalAmd;
+            $ratio                        = @($modelCampaignReport->totalAmd / $attributes[$key]['totalDialed']) * 100;
+            $attributes[$key]['totalAmd'] = $modelCampaignReport->totalAmd . ' (' . number_format($ratio, 2) . '%)';
 
             $modelCampaignReport = CampaignReport::model()->find([
                 'select'    => 'count(*) totalAnswered ',
-                'condition' => 'id_campaign = :key AND status IN (3,7) AND unix_timestamp > :key1',
+                'condition' => 'id_campaign = :key AND status IN (3,4,5,7) AND unix_timestamp > :key1',
                 'params'    => [
                     ':key'  => $item->id,
                     ':key1' => $this->interval,
 
                 ],
             ]);
+            $ratio                             = @($modelCampaignReport->totalAnswered / $attributes[$key]['totalDialed']) * 100;
+            $attributes[$key]['totalAnswered'] = $modelCampaignReport->totalAnswered . ' (' . number_format($ratio, 2) . '%)';
 
-            $attributes[$key]['totalAnswered'] = $modelCampaignReport->totalAnswered;
+            $modelCampaignReport = CampaignReport::model()->find([
+                'select'    => 'count(*) totalPressDigit',
+                'condition' => 'id_campaign = :key AND status = 4 AND unix_timestamp > :key1',
+                'params'    => [
+                    ':key'  => $item->id,
+                    ':key1' => $this->interval,
+
+                ],
+            ]);
+            $ratio                               = @($modelCampaignReport->totalPressDigit / $attributes[$key]['totalDialed']) * 100;
+            $attributes[$key]['totalPressDigit'] = $modelCampaignReport->totalPressDigit . ' (' . number_format($ratio, 2) . '%)';
 
             $modelCampaignReport = CampaignReport::model()->find([
                 'select'    => 'count(*) transfered',
@@ -102,8 +144,8 @@ class CampaignReportController extends Controller
 
                 ],
             ]);
-
-            $attributes[$key]['transfered'] = $modelCampaignReport->transfered;
+            $ratio                          = @($modelCampaignReport->transfered / $attributes[$key]['totalDialed']) * 100;
+            $attributes[$key]['transfered'] = $modelCampaignReport->transfered . ' (' . number_format($ratio, 2) . '%)';
 
         }
 
