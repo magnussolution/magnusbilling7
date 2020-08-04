@@ -75,6 +75,12 @@ Ext.define('MBilling.view.campaignReport.List', {
             sortable: false,
             flex: 3
         }, {
+            header: t('Total Failed'),
+            menuDisabled: true,
+            dataIndex: 'totalFailed',
+            sortable: false,
+            flex: 3
+        }, {
             header: t('Total AMD'),
             dataIndex: 'totalAmd',
             menuDisabled: true,
@@ -84,6 +90,12 @@ Ext.define('MBilling.view.campaignReport.List', {
             header: t('Total Answered'),
             dataIndex: 'totalAnswered',
             menuDisabled: true,
+            sortable: false,
+            flex: 3
+        }, {
+            header: t('Press any key'),
+            menuDisabled: true,
+            dataIndex: 'totalPressDigit',
             sortable: false,
             flex: 3
         }, {

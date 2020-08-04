@@ -36,6 +36,8 @@ Ext.define('MBilling.view.servicesUse.Form', {
                 allowBlank: App.user.isClient
             }, {
                 xtype: 'serviceslookup',
+                name: 'id_services',
+                fieldLabel: t('Service'),
                 ownerForm: me,
                 readOnly: true
             }, {

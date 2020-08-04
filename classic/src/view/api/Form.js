@@ -25,6 +25,7 @@ Ext.define('MBilling.view.api.Form', {
         var me = this;
         me.items = [{
             xtype: 'userlookup',
+            name: 'id_user',
             ownerForm: me,
             hidden: App.user.isClient,
             allowBlank: App.user.isClient
@@ -44,6 +45,7 @@ Ext.define('MBilling.view.api.Form', {
             columns: 4,
             fieldLabel: t('Permissions'),
             allowBlank: true,
+            name: 'action',
             items: [{
                 boxLabel: t('Read'),
                 name: 'action',

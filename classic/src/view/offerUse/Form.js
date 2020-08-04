@@ -31,6 +31,8 @@ Ext.define('MBilling.view.offerUse.Form', {
             readOnly: true
         }, {
             xtype: 'offercombo',
+            name: 'id_offer',
+            fieldLabel: t('Offer'),
             readOnly: true
         }, {
             name: 'month_payed',

@@ -26,12 +26,13 @@ Ext.define('MBilling.view.boleto.Form', {
         var me = this;
         me.items = [{
             xtype: 'userlookup',
+            name: 'id_user',
             ownerForm: me,
             hidden: App.user.isClient,
             allowBlank: App.user.isClient
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,00',
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             name: 'payment',
             fieldLabel: t('value'),
             readOnly: App.user.isClient

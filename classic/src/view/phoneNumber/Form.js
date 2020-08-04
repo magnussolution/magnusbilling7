@@ -25,7 +25,9 @@ Ext.define('MBilling.view.phoneNumber.Form', {
     initComponent: function() {
         var me = this;
         me.items = [{
-            xtype: 'phonebookcombo'
+            xtype: 'phonebookcombo',
+            name: 'id_phonebook',
+            fieldLabel: t('Phonebook')
         }, {
             name: 'number',
             fieldLabel: t('number')

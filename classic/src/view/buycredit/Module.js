@@ -34,7 +34,7 @@ Ext.define('MBilling.view.buycredit.Module', {
             },
             items: [{
                 xtype: 'moneyfield',
-                mask: App.user.currency + ' #9.999.990,00',
+                mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                 fieldLabel: t('Amounts'),
                 value: 0,
                 name: 'amount'

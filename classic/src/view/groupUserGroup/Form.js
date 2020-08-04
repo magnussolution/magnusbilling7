@@ -41,6 +41,7 @@ Ext.define('MBilling.view.groupUserGroup.Form', {
             items: [{
                 anchor: '100%',
                 fieldLabel: '',
+                name: 'id_group',
                 xtype: 'groupusertag',
                 allowBlank: true
             }]

@@ -32,7 +32,7 @@ Ext.define('MBilling.view.rateCallshop.Form', {
             fieldLabel: t('destination')
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,00',
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             name: 'buyrate',
             fieldLabel: t('rateinitial')
         }, {

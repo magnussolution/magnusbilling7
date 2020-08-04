@@ -30,6 +30,8 @@ Ext.define('MBilling.view.didUse.Form', {
             readOnly: true
         }, {
             xtype: 'didcombo',
+            name: 'id_did',
+            fieldLabel: t('DID'),
             readOnly: true
         }, {
             xtype: 'datefield',
