@@ -58,14 +58,14 @@ Ext.define('MBilling.view.did.Form', {
                     allowBlank: true
                 }, {
                     xtype: 'moneyfield',
-                    mask: App.user.currency + ' #9.999.990,00',
+                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     name: 'connection_charge',
                     fieldLabel: t('connection_charge'),
                     value: '0',
                     hidden: App.user.isClient || App.user.isAgent
                 }, {
                     xtype: 'moneyfield',
-                    mask: App.user.currency + ' #9.999.990,00',
+                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     name: 'fixrate',
                     fieldLabel: t('monthly_price'),
                     value: '0',
@@ -84,7 +84,7 @@ Ext.define('MBilling.view.did.Form', {
                     },
                     items: [{
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,00',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'connection_sell',
                         fieldLabel: t('Connection charge'),
                         value: '0',
@@ -160,7 +160,7 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,00',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'selling_rate_1',
                         fieldLabel: t('Sell price per min'),
                         value: '0',
@@ -196,7 +196,7 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,00',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'selling_rate_2',
                         fieldLabel: t('Sell price per min'),
                         value: '0',
@@ -232,7 +232,7 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,00',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'selling_rate_3',
                         fieldLabel: t('Sell price per min'),
                         value: '0',

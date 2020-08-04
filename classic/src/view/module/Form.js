@@ -17,6 +17,7 @@ Ext.define('MBilling.view.module.Form', {
         maxLength: 100
     }, {
         xtype: 'modulecombo',
+        name: 'id_module',
         fieldLabel: t('Main Menu'),
         readOnly: true,
         allowBlank: true

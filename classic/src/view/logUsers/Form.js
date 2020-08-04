@@ -26,6 +26,8 @@ Ext.define('MBilling.view.logUsers.Form', {
         var me = this;
         me.items = [{
             xtype: 'usercombo',
+            name: 'id_user',
+            fieldLabel: t('Username'),
             allowBlank: true,
             readOnly: true
         }, {

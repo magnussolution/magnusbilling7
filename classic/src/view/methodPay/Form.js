@@ -45,13 +45,13 @@ Ext.define('MBilling.view.methodPay.Form', {
             fieldLabel: t('active')
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,00',
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             name: 'min',
             value: 10,
             fieldLabel: t('Min amount')
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,00',
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             name: 'max',
             value: 500,
             fieldLabel: t('Max amount')
