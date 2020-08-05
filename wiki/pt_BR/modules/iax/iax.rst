@@ -1,16 +1,27 @@
 .. _iax-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _iax-allow:
+.. _iax-username:
 
-allow
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _iax-secret:
+
+Senha
 """""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -18,44 +29,29 @@ allow
 .. _iax-callerid:
 
 Caller Id
-""""""""
-
-
-
-
-
-.. _iax-calllimit:
-
-Limite de chamadas
 """""""""
 
-
-
-
-
-.. _iax-context:
-
-Contexto
-"""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _iax-disallow:
 
-disallow
+Disallow
 """"""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _iax-dtmfmode:
+.. _iax-allow:
 
-dtmfmode
-""""""""
 
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -65,60 +61,77 @@ dtmfmode
 Host
 """"
 
-
-
-
-
-.. _iax-insecure:
-
-insecure
-""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _iax-nat:
 
-nat
-"""
 
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _iax-context:
+
+Contexto
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _iax-qualify:
 
-qualify
-"""""""
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _iax-dtmfmode:
 
-.. _iax-secret:
 
-secret
-""""""
 
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _iax-insecure:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _iax-type:
 
-Tipo
-""""
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _iax-calllimit:
 
-.. _iax-username:
+Limite de chamadas
+""""""""""""""""""
 
-Usuário
-""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

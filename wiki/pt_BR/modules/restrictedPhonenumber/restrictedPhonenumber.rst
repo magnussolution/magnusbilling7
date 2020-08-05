@@ -1,25 +1,27 @@
 .. _restrictedPhonenumber-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _restrictedPhonenumber-directio:
-
-directio
-""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _restrictedPhonenumber-number:
 
 Número
-""""""
+"""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _restrictedPhonenumber-directio:
+
+Direction
+"""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -1,16 +1,27 @@
 .. _firewall-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _firewall-ip:
+
+Ip
+""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _firewall-actio:
 
-actio
-"""""
+Ban permanente
+""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -20,15 +31,7 @@ actio
 Descrição
 """""""""""
 
-
-
-
-
-.. _firewall-ip:
-
-ip
-""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

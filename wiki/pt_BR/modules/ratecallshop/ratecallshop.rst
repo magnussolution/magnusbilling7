@@ -1,25 +1,17 @@
 .. _rateCallshop-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _rateCallshop-block:
+.. _rateCallshop-dialprefix:
 
-block
-"""""
-
-
-
-
-
-.. _rateCallshop-buyrate:
-
-Compra
+Prefixo
 """""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -27,35 +19,49 @@ Compra
 .. _rateCallshop-destination:
 
 Destino
-"""""""""""
+"""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _rateCallshop-buyrate:
 
-.. _rateCallshop-dialprefix:
+Venda
+"""""
 
-Prefixo
-""""""""""
-
-
-
-
-
-.. _rateCallshop-minimal_time_charge:
-
-minimal_time_charge
-"""""""""""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _rateCallshop-minimo:
 
-minimo
-""""""
+Mínimo compra
+""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _rateCallshop-block:
+
+Bloco de compra
+"""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _rateCallshop-minimal_time_charge:
+
+Tempo minimo para tarifar
+"""""""""""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

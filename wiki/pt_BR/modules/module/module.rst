@@ -1,43 +1,47 @@
 .. _module-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _module-text:
+
+Texto
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _module-icon_cls:
 
-icon_cls
-""""""""
+Ícone
+""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _module-id_module:
 
-id_module
+Main Menu
 """""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _module-priority:
 
-Prioridade
+Em ordem
 """"""""
 
-
-
-
-
-.. _module-text:
-
-text
-""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

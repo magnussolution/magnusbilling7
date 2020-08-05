@@ -1,52 +1,47 @@
 .. _rate-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _rate-additional_grace:
-
-Tempo Adicional
-""""""""""""""""
-
-Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
-
-
-
-.. _rate-billingblock:
-
-Bloco de venda
-""""""""""""
-
-Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. 
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _rate-id_plan:
 
-id_plan
-"""""""
+Plan
+""""
 
 O plano que você quer adiconar esta tarifa.
 
 
 
+
 .. _rate-id_prefix:
 
-id_prefix
-"""""""""
+Destination
+"""""""""""
 
 Selecione o profixo que quer criar a tarifa
 
 
 
+
 .. _rate-id_trunk_group:
 
-id_trunk_group
-""""""""""""""
+Grupo de troncos
+""""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _rate-rateinitial:
+
+Venda
+"""""
+
+Preço de venda por minuto para este destino
 
 
 
@@ -54,36 +49,50 @@ id_trunk_group
 .. _rate-initblock:
 
 Mínimo venda
-"""""""""
+"""""""""""""
 
 Tempo minimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
 
 
+
+.. _rate-billingblock:
+
+Bloco de venda
+""""""""""""""
+
+Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. 
+
+
+
+
 .. _rate-minimal_time_charge:
 
-minimal_time_charge
-"""""""""""""""""""
+Tempo minimo para tarifar
+"""""""""""""""""""""""""
 
 Tempo minimo para tarifar. Se colocar 3, so vai tarifar chamadas que o tempo for => que 3 segundos
 
 
 
+
+.. _rate-additional_grace:
+
+Tempo Adicional
+"""""""""""""""
+
+Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
+
+
+
+
 .. _rate-package_offer:
 
-package_offer
-"""""""""""""
+Incluir nos pacotes de promoções
+""""""""""""""""""""""""""""""""""
 
 Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
 
-
-
-.. _rate-rateinitial:
-
-Venda
-"""""""""""
-
-Preço de venda por minuto para este destino
 
 
 
@@ -92,6 +101,7 @@ Preço de venda por minuto para este destino
 Estado
 """"""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

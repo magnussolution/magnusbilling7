@@ -1,25 +1,27 @@
 .. _offerUse-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _offerUse-id_offer:
 
-id_offer
-""""""""
+Offer
+"""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _offerUse-month_payed:
 
-month_payed
+Meses Pagos
 """""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -27,8 +29,9 @@ month_payed
 .. _offerUse-reservationdate:
 
 Data de Ativação
-"""""""""""""""
+""""""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -1,16 +1,17 @@
 .. _callBack-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _callBack-exten:
 
-exten
-"""""
+Número Destino
+"""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -20,6 +21,7 @@ exten
 Estado
 """"""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

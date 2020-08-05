@@ -1,89 +1,38 @@
 .. _trunk-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _trunk-addparameter:
+.. _trunk-trunkcode:
 
-Parametros adicionais
-""""""""""""
+Nome do tronco
+""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _trunk-user:
 
-.. _trunk-allow:
+Usuário
+""""""""
 
-allow
+Somente coloque usuário se seu tronco for autenticado por usuário e senha.
+
+
+
+
+.. _trunk-secret:
+
+Senha
 """""
 
-Selecione os codecs que o tronco aceita.
+Somente coloque senha se seu tronco for autenticado por usuário e senha.
 
-
-
-.. _trunk-allow_error:
-
-Enviar para tronco backup independente do erro
-"""""""""""
-
-Se SIM, a chamadas será enviada para o tronco backup a menos que a chamada seja atendida ou cancelada. Somente use quando seu tronco tiver algum problema de sinalização, por exemplo sinaliza BUSY quando não tiver canal disponivel.
-
-
-
-.. _trunk-context:
-
-Contexto
-"""""""
-
-Somente altere se você souber o que esta fazendo.
-
-
-
-.. _trunk-directmedia:
-
-directmedia
-"""""""""""
-
-
-
-
-
-.. _trunk-disallow:
-
-disallow
-""""""""
-
-
-
-
-
-.. _trunk-dtmfmode:
-
-dtmfmode
-""""""""
-
-Clique para mais informaçōes|htt
-
-
-
-.. _trunk-fromdomain:
-
-fromdomain
-""""""""""
-
-
-
-
-
-.. _trunk-fromuser:
-
-fromuser
-""""""""
-
-Many SIP providers require this. Normally it is the some username
 
 
 
@@ -96,20 +45,233 @@ IP ou Dominio do tronco
 
 
 
-.. _trunk-insecure:
 
-insecure
-""""""""
+.. _trunk-trunkprefix:
 
-Clique para mais informaçōes|htt
+Adicionar prefixo
+"""""""""""""""""
+
+Adiciona um prefixo no inicio do número to enviar para o tronco. Tambem usado para quando você precisa enviar um techprefix. 
+
+
+
+
+.. _trunk-removeprefix:
+
+Remover prefixo
+"""""""""""""""
+
+Remove este prefixo do número.
+
+
+
+
+.. _trunk-allow:
+
+Codec
+"""""
+
+Selecione os codecs que o tronco aceita.
+
+
+
+
+.. _trunk-providertech:
+
+Sinalização
+"""""""""""""
+
+Protocolo do tronco. Alguns protocolos como Dahdi, Dongle, DGV, khomp, precisam ser instalado no Asterisk antes de usar.
+
+
+
+
+.. _trunk-status:
+
+Estado
+""""""
+
+Se o tronco for inativado, Magnusbilling enviara a chamada para o tronco backup
+
+
+
+
+.. _trunk-allow_error:
+
+Enviar para tronco backup independente do erro
+""""""""""""""""""""""""""""""""""""""""""""""
+
+Se SIM, a chamadas será enviada para o tronco backup a menos que a chamada seja atendida ou cancelada. Somente use quando seu tronco tiver algum problema de sinalização, por exemplo sinaliza BUSY quando não tiver canal disponivel.
+
+
+
+
+.. _trunk-register:
+
+Registrar Tronco
+""""""""""""""""
+
+Somente ative se seu tronco for por usuário e senha.
+
+
+
+
+.. _trunk-register_string:
+
+Register String
+"""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-fromuser:
+
+
+
+
+Many SIP providers require this. Normally it is the some username
+
+
+
+
+.. _trunk-fromdomain:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _trunk-language:
 
 Idioma
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-context:
+
+Contexto
 """"""""
 
+Somente altere se você souber o que esta fazendo.
+
+
+
+
+.. _trunk-dtmfmode:
+
+
+
+
+Clique para mais informaçōes|htt
+
+
+
+
+.. _trunk-insecure:
+
+
+
+
+Clique para mais informaçōes|htt
+
+
+
+
+.. _trunk-maxuse:
+
+Maximo de canais
+""""""""""""""""
+
+Número maximo de chamadas simultaneas.
+
+
+
+
+.. _trunk-nat:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-directmedia:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-qualify:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-type:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-disallow:
+
+Disallow
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-sendrpid:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-addparameter:
+
+Parametros adicionais
+"""""""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunk-port:
+
+Port
+""""
+
+Porta do tronco. Se você precisar usar outra porta diferente da 5060, lembre-se de liberar a porta no IPTABLES.
 
 
 
@@ -123,155 +285,23 @@ URL para enviar SMS. Subistituir o número por %number% e o texto por %text%. EX
 
 
 
-.. _trunk-maxuse:
 
-Maximo de canais
-""""""
+.. _trunk-sms_res:
 
-Número maximo de chamadas simultaneas.
+Resposta esperada
+"""""""""""""""""
 
-
-
-.. _trunk-nat:
-
-nat
-"""
-
-
-
-
-
-.. _trunk-port:
-
-port
-""""
-
-Porta do tronco. Se você precisar usar outra porta diferente da 5060, lembre-se de liberar a porta no IPTABLES.
-
-
-
-.. _trunk-providertech:
-
-Sinalização
-""""""""""""
-
-Protocolo do tronco. Alguns protocolos como Dahdi, Dongle, DGV, khomp, precisam ser instalado no Asterisk antes de usar.
-
-
-
-.. _trunk-qualify:
-
-qualify
-"""""""
-
-
-
-
-
-.. _trunk-register:
-
-Registro
-""""""""
-
-Somente ative se seu tronco for por usuário e senha.
-
-
-
-.. _trunk-register_string:
-
-register_string
-"""""""""""""""
-
-
-
-
-
-.. _trunk-removeprefix:
-
-removeprefix
-""""""""""""
-
-Remove este prefixo do número.
-
-
-
-.. _trunk-secret:
-
-secret
-""""""
-
-Somente coloque senha se seu tronco for autenticado por usuário e senha.
-
-
-
-.. _trunk-sendrpid:
-
-sendrpid
-""""""""
-
+Deixe em branco para não aguardar resposta do provedor. Ou coloque o texto que deve conter na resposta do provedor para ser considerado ENVIADO.
 
 
 
 
 .. _trunk-sip_config:
 
-sip_config
-""""""""""
+Configuração do Asterisk
+""""""""""""""""""""""""""
 
 Formato válido no Asterisk sip.conf, uma opção por linha.
 
-
-
-.. _trunk-sms_res:
-
-Resposta esperada
-"""""""
-
-Deixe em branco para não aguardar resposta do provedor. Ou coloque o texto que deve conter na resposta do provedor para ser considerado ENVIADO.
-
-
-
-.. _trunk-status:
-
-Estado
-""""""
-
-Se o tronco for inativado, Magnusbilling enviara a chamada para o tronco backup
-
-
-
-.. _trunk-trunkcode:
-
-Nome do tronco
-"""""""""
-
-
-
-
-
-.. _trunk-trunkprefix:
-
-trunkprefix
-"""""""""""
-
-Adiciona um prefixo no inicio do número to enviar para o tronco. Tambem usado para quando você precisa enviar um techprefix. 
-
-
-
-.. _trunk-type:
-
-Tipo
-""""
-
-
-
-
-
-.. _trunk-user:
-
-Usuário
-""""
-
-Somente coloque usuário se seu tronco for autenticado por usuário e senha.
 
 

@@ -1,52 +1,57 @@
 .. _callSummaryCallShop-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _callSummaryCallShop-sumbuycost:
+.. _callSummaryCallShop-sumsessiontime:
 
-sumbuycost
-""""""""""
+Duração mínima
+"""""""""""""""""
 
-
-
-
-
-.. _callSummaryCallShop-sumlucro:
-
-sumlucro
-""""""""
-
-
-
-
-
-.. _callSummaryCallShop-sumnbcall:
-
-sumnbcall
-"""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _callSummaryCallShop-sumprice:
 
-sumprice
-""""""""
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _callSummaryCallShop-sumlucro:
 
-.. _callSummaryCallShop-sumsessiontime:
+Lucro
+"""""
 
-sumsessiontime
-""""""""""""""
+Nós ainda não escrevemos a descrição deste campo.
 
+
+
+
+.. _callSummaryCallShop-sumbuycost:
+
+Compra
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryCallShop-sumnbcall:
+
+Total de Chamadas
+"""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

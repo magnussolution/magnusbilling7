@@ -1,16 +1,17 @@
 .. _campaignReport-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _campaignReport-idCampaignnam:
 
-idCampaignnam
-"""""""""""""
+Nome
+""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

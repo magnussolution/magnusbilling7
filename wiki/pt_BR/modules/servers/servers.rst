@@ -1,26 +1,8 @@
 .. _servers-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _servers-description:
-
-Descrição
-"""""""""""
-
-
-
-
-
-.. _servers-host:
-
-Host
-""""
-
-Este menu é esclusivo para quem usa Slave e Proxy, clique para mais informaçōes|htt
+**********************
+Descrição dos campos
+**********************
 
 
 
@@ -29,60 +11,27 @@ Este menu é esclusivo para quem usa Slave e Proxy, clique para mais informaçō
 Nome
 """"
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _servers-password:
+.. _servers-host:
 
-Senha
-""""""""
+IP do servidor
+""""""""""""""
 
-
-
-
-
-.. _servers-port:
-
-port
-""""
-
+Este menu é esclusivo para quem usa Slave e Proxy, clique para mais informaçōes|htt
 
 
 
 
 .. _servers-public_ip:
 
-public_ip
-"""""""""
+IP público
+"""""""""""
 
-
-
-
-
-.. _servers-sip_port:
-
-sip_port
-""""""""
-
-
-
-
-
-.. _servers-status:
-
-Estado
-""""""
-
-
-
-
-
-.. _servers-type:
-
-Tipo
-""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -92,15 +41,77 @@ Tipo
 Usuário
 """"""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servers-password:
+
+Senha
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servers-port:
+
+port
+""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servers-sip_port:
+
+Porta Sip
+"""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servers-type:
+
+Tipo
+""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _servers-weight:
 
-weight
+Carga
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servers-status:
+
+Estado
 """"""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servers-description:
+
+Descrição
+"""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

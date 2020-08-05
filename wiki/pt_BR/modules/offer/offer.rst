@@ -1,34 +1,17 @@
 .. _offer-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _offer-billingtype:
-
-billingtype
-"""""""""""
-
-
-
-
-
-.. _offer-freetimetocall:
-
-Gratis
-""""""""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _offer-label:
 
-label
-"""""
+Nome
+""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -36,8 +19,29 @@ label
 .. _offer-packagetype:
 
 Tipo de Pacote
-"""""""""""
+""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _offer-freetimetocall:
+
+Gratis
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _offer-billingtype:
+
+Periodo
+"""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -45,8 +49,9 @@ Tipo de Pacote
 .. _offer-price:
 
 Preço
-"""""
+""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

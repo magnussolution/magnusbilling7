@@ -1,35 +1,18 @@
 .. _services-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _services-calllimit:
+.. _services-type:
 
-Limite de chamadas
-"""""""""
+Tipo
+""""
 
+Tipo de serviço
 
-
-
-
-.. _services-description:
-
-Descrição
-"""""""""""
-
-
-
-
-
-.. _services-disk_space:
-
-Espaço em Disco
-""""""""""
-
-Coloque o total de espaço em disco em GB.
 
 
 
@@ -42,11 +25,43 @@ Nome para o serviço
 
 
 
+
+.. _services-calllimit:
+
+Limite de chamadas
+""""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _services-disk_space:
+
+Espaço em Disco
+""""""""""""""""
+
+Coloque o total de espaço em disco em GB.
+
+
+
+
+.. _services-sipaccountlimit:
+
+Limite contas voip
+""""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _services-price:
 
 Preço
-"""""
+""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -54,26 +69,19 @@ Preço
 .. _services-return_credit:
 
 Devolver crédito
-"""""""""""""
+"""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _services-description:
 
-.. _services-sipaccountlimit:
+Descrição
+"""""""""""
 
-sipaccountlimit
-"""""""""""""""
+Nós ainda não escrevemos a descrição deste campo.
 
-
-
-
-
-.. _services-type:
-
-Tipo
-""""
-
-Tipo de serviço
 
 

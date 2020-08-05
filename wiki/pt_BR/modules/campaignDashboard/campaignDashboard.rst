@@ -1,16 +1,17 @@
 .. _campaignDashboard-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _campaignDashboard-nam:
 
-nam
-"""
+Nome
+""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -1,52 +1,57 @@
 .. _callSummaryDayAgent-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _callSummaryDayAgent-sumbuycost:
+.. _callSummaryDayAgent-sumsessiontime:
 
-sumbuycost
-""""""""""
+Duração mínima
+"""""""""""""""""
 
-
-
-
-
-.. _callSummaryDayAgent-sumlucro:
-
-sumlucro
-""""""""
-
-
-
-
-
-.. _callSummaryDayAgent-sumnbcall:
-
-sumnbcall
-"""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _callSummaryDayAgent-sumsessionbill:
 
-sumsessionbill
-""""""""""""""
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _callSummaryDayAgent-sumbuycost:
 
-.. _callSummaryDayAgent-sumsessiontime:
+Compra
+""""""
 
-sumsessiontime
-""""""""""""""
+Nós ainda não escrevemos a descrição deste campo.
 
+
+
+
+.. _callSummaryDayAgent-sumlucro:
+
+Lucro
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryDayAgent-sumnbcall:
+
+Total de Chamadas
+"""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

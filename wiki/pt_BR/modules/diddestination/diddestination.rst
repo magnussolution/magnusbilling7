@@ -1,70 +1,27 @@
 .. _diddestination-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _diddestination-activated:
-
-activated
-"""""""""
-
-
-
-
-
-.. _diddestination-context:
-
-Contexto
-"""""""
-
-
-
-
-
-.. _diddestination-destination:
-
-Destino
-"""""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _diddestination-id_did:
 
-id_did
-""""""
+Did
+"""
 
 Selecione o DID para criar o novo destino
 
 
 
-.. _diddestination-id_ivr:
 
-id_ivr
+.. _diddestination-activated:
+
+Estado
 """"""
 
-
-
-
-
-.. _diddestination-id_queue:
-
-id_queue
-""""""""
-
-
-
-
-
-.. _diddestination-id_sip:
-
-id_sip
-""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -72,17 +29,69 @@ id_sip
 .. _diddestination-priority:
 
 Prioridade
-""""""""
+""""""""""
 
 Você pode criar ate 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, ate completar. 
 
 
 
+
 .. _diddestination-voip_call:
 
-Chamada Voip
-"""""""""
+Tipo
+""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _diddestination-destination:
+
+Destination
+"""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _diddestination-id_ivr:
+
+IVR
+"""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _diddestination-id_queue:
+
+Queue
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _diddestination-id_sip:
+
+SIP
+"""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _diddestination-context:
+
+Context
+"""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

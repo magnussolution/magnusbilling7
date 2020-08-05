@@ -1,34 +1,37 @@
 .. _groupUserGroup-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _groupUserGroup-id_group:
-
-id_group
-""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _groupUserGroup-name:
 
-Nome
-""""
+Grupo
+"""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _groupUserGroup-user_prefix:
 
-user_prefix
+User Prefix
 """""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _groupUserGroup-id_group:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

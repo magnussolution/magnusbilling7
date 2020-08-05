@@ -1,17 +1,8 @@
 .. _trunkGroup-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _trunkGroup-id_trunk:
-
-Trunco
-""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
@@ -20,6 +11,7 @@ Trunco
 Nome
 """"
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -29,6 +21,17 @@ Nome
 Tipo
 """"
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _trunkGroup-id_trunk:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

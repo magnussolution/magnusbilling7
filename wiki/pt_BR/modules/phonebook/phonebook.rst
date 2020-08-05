@@ -1,17 +1,8 @@
 .. _phoneBook-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _phoneBook-description:
-
-Descrição
-"""""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
@@ -20,6 +11,7 @@ Descrição
 Nome
 """"
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -29,6 +21,17 @@ Nome
 Estado
 """"""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _phoneBook-description:
+
+Descrição
+"""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

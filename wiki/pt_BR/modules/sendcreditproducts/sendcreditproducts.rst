@@ -1,70 +1,37 @@
 .. _sendCreditProducts-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _sendCreditProducts-country:
 
 País
-"""""""
+"""""
 
-
-
-
-
-.. _sendCreditProducts-info:
-
-info
-""""
-
-
-
-
-
-.. _sendCreditProducts-operator_id:
-
-operator_id
-"""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _sendCreditProducts-operator_name:
 
-operator_name
+Operator Name
 """""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _sendCreditProducts-product:
+.. _sendCreditProducts-operator_id:
 
-product
-"""""""
+Operator Id
+"""""""""""
 
-
-
-
-
-.. _sendCreditProducts-provider:
-
-Provedor
-""""""""
-
-
-
-
-
-.. _sendCreditProducts-send_value:
-
-send_value
-""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -74,6 +41,47 @@ send_value
 SkuCode
 """""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _sendCreditProducts-product:
+
+Product
+"""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _sendCreditProducts-send_value:
+
+Send Value
+""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _sendCreditProducts-wholesale_price:
+
+Wholesale Price
+"""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _sendCreditProducts-provider:
+
+Provedor
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -83,15 +91,17 @@ SkuCode
 Estado
 """"""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _sendCreditProducts-wholesale_price:
+.. _sendCreditProducts-info:
 
-wholesale_price
-"""""""""""""""
+info
+""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

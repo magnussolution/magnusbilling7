@@ -1,61 +1,67 @@
 .. _callSummaryPerTrunk-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _callSummaryPerTrunk-sumbuycost:
+.. _callSummaryPerTrunk-sumsessiontime:
 
-sumbuycost
-""""""""""
+Duração mínima
+"""""""""""""""""
 
-
-
-
-
-.. _callSummaryPerTrunk-sumlucro:
-
-sumlucro
-""""""""
-
-
-
-
-
-.. _callSummaryPerTrunk-sumnbcall:
-
-sumnbcall
-"""""""""
-
-
-
-
-
-.. _callSummaryPerTrunk-sumnbcallfail:
-
-sumnbcallfail
-"""""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _callSummaryPerTrunk-sumsessionbill:
 
-sumsessionbill
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryPerTrunk-sumbuycost:
+
+Compra
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryPerTrunk-sumlucro:
+
+Lucro
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryPerTrunk-sumnbcall:
+
+Answered calls
 """"""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _callSummaryPerTrunk-sumsessiontime:
+.. _callSummaryPerTrunk-sumnbcallfail:
 
-sumsessiontime
-""""""""""""""
+Failed calls
+""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

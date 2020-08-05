@@ -1,8 +1,18 @@
 .. _sms-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _sms-telephone:
+
+Número
+"""""""
+
+Número no formato E164
+
 
 
 
@@ -11,24 +21,17 @@ Lista de campos
 Sms
 """
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _sms-sms_from:
 
-sms_from
-""""""""
+From
+""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
-
-
-
-.. _sms-telephone:
-
-telephone
-"""""""""
-
-Número no formato E164
 
 

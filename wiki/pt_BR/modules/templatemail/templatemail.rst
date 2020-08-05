@@ -1,34 +1,27 @@
 .. _templateMail-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _templateMail-fromemail:
-
-Email Remetente
-"""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _templateMail-fromname:
 
 Nome Remetente
-""""""""
+""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _templateMail-fromemail:
 
-.. _templateMail-messagehtml:
+Email Remetente
+"""""""""""""""
 
-messagehtml
-"""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -38,6 +31,17 @@ messagehtml
 Assunto
 """""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _templateMail-messagehtml:
+
+Descrição
+"""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

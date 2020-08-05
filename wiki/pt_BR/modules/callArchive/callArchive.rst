@@ -1,43 +1,17 @@
 .. _callArchive-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _callArchive-agent_bill:
-
-agent_bill
-""""""""""
-
-
-
-
-
-.. _callArchive-buycost:
-
-Compra
-"""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _callArchive-calledstation:
 
 Número
-"""""""""""""
+"""""""
 
-
-
-
-
-.. _callArchive-sessionbill:
-
-Venda
-"""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -45,8 +19,39 @@ Venda
 .. _callArchive-sessiontime:
 
 Duração
-"""""""""""
+"""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callArchive-buycost:
+
+Compra
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callArchive-sessionbill:
+
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callArchive-agent_bill:
+
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

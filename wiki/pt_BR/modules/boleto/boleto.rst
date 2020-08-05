@@ -1,8 +1,48 @@
 .. _boleto-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _boleto-id_user:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _boleto-payment:
+
+Valor
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _boleto-status:
+
+Pago
+""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _boleto-vencimento:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
@@ -11,42 +51,7 @@ Lista de campos
 Descrição
 """""""""""
 
-
-
-
-
-.. _boleto-id_user:
-
-id_user
-"""""""
-
-
-
-
-
-.. _boleto-payment:
-
-Pagamento
-"""""""
-
-
-
-
-
-.. _boleto-status:
-
-Estado
-""""""
-
-
-
-
-
-.. _boleto-vencimento:
-
-vencimento
-""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
