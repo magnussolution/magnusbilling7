@@ -1,34 +1,37 @@
 .. _campaignPollInfo-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _campaignPollInfo-number:
 
 Número
-""""""
+"""""""
 
-
-
-
-
-.. _campaignPollInfo-obs:
-
-Observação
-"""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _campaignPollInfo-resposta:
 
-resposta
-""""""""
+Respostas
+"""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _campaignPollInfo-obs:
+
+Descrição
+"""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

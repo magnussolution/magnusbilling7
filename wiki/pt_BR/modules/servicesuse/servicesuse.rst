@@ -1,34 +1,27 @@
 .. _servicesUse-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _servicesUse-id:
 
-br
-""
 
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _servicesUse-id_services:
 
-id_services
-"""""""""""
+Serviço
+""""""""
 
-
-
-
-
-.. _servicesUse-method:
-
-method
-""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -36,17 +29,29 @@ method
 .. _servicesUse-price:
 
 Preço
-"""""
+""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servicesUse-method:
+
+Metodos de Pagamentos
+"""""""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _servicesUse-reservationdate:
 
-Data de Ativação
+Data de reserva
 """""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

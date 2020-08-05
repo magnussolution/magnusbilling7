@@ -1,16 +1,37 @@
 .. _gAuthenticator-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _gAuthenticator-username:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _gAuthenticator-googleAuthenticator_enable:
+
+Estado
+""""""
+
+Após o usuário ativar o Token, somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.
+
 
 
 
 .. _gAuthenticator-code:
 
-code
+Code
 """"
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -20,24 +41,7 @@ code
 google_authenticator_key
 """"""""""""""""""""""""
 
-
-
-
-
-.. _gAuthenticator-googleAuthenticator_enable:
-
-googleAuthenticator_enable
-""""""""""""""""""""""""""
-
-Após o usuário ativar o Token, somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.
-
-
-
-.. _gAuthenticator-username:
-
-Usuário
-""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

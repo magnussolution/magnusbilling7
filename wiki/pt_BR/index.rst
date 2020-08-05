@@ -56,7 +56,13 @@ MagnusBilling funções
    get_started/quick_install.rst
    get_started/interface.rst
    get_started/backup.rst
+   
+.. toctree::
+   :maxdepth: 1
+   :caption: Segurança
+   :name: sec-Segurança
 
+   firewall/iptables.rst
 
 .. toctree::
    :maxdepth: 2

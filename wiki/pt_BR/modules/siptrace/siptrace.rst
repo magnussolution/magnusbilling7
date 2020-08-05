@@ -1,16 +1,17 @@
 .. _sipTrace-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _sipTrace-head:
 
-head
-""""
 
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

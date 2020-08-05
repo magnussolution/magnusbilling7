@@ -826,5 +826,7 @@ Locale.load({
     'workaudio': 'Áudio Trabalhando',
     'yellow': 'Amarelo',
     'yes': 'Sim',
-    'zipcode': 'CEP'
+    'zipcode': 'CEP',
+    'We not write the description to this field.': 'Nós ainda não escrevemos a descrição deste campo.',
+    'Field list': 'Descrição dos campos',
 });

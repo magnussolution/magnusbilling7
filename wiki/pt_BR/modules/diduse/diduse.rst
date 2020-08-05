@@ -1,16 +1,17 @@
 .. _didUse-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _didUse-id_did:
 
-id_did
-""""""
+DID
+"""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -18,8 +19,9 @@ id_did
 .. _didUse-reservationdate:
 
 Data de Ativação
-"""""""""""""""
+""""""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

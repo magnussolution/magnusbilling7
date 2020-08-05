@@ -1,16 +1,27 @@
 .. _queueMember-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _queueMember-queue_name:
+
+
+
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _queueMember-interface:
 
-interface
-"""""""""
 
+
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -18,17 +29,9 @@ interface
 .. _queueMember-paused:
 
 Pausa
-""""""
+"""""
 
-
-
-
-
-.. _queueMember-queue_name:
-
-queue_name
-""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

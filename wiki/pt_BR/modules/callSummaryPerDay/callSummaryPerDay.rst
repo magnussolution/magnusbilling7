@@ -1,61 +1,67 @@
 .. _callSummaryPerDay-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _callSummaryPerDay-sumbuycost:
+.. _callSummaryPerDay-sumsessiontime:
 
-sumbuycost
-""""""""""
+Duração mínima
+"""""""""""""""""
 
-
-
-
-
-.. _callSummaryPerDay-sumlucro:
-
-sumlucro
-""""""""
-
-
-
-
-
-.. _callSummaryPerDay-sumnbcall:
-
-sumnbcall
-"""""""""
-
-
-
-
-
-.. _callSummaryPerDay-sumnbcallfail:
-
-sumnbcallfail
-"""""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _callSummaryPerDay-sumsessionbill:
 
-sumsessionbill
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryPerDay-sumbuycost:
+
+Compra
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryPerDay-sumlucro:
+
+Lucro
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryPerDay-sumnbcall:
+
+Answered calls
 """"""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _callSummaryPerDay-sumsessiontime:
+.. _callSummaryPerDay-sumnbcallfail:
 
-sumsessiontime
-""""""""""""""
+Failed calls
+""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

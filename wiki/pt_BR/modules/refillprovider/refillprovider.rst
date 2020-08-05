@@ -1,16 +1,27 @@
 .. _refillprovider-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _refillprovider-id_provide:
+
+Provedor
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _refillprovider-credit:
 
 Crédito
-""""""
+""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -20,24 +31,17 @@ Crédito
 Descrição
 """""""""""
 
-
-
-
-
-.. _refillprovider-id_provide:
-
-id_provide
-""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _refillprovider-payment:
 
-Pagamento
-"""""""
+Adicionar pagamento
+"""""""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

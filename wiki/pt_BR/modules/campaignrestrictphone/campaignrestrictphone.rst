@@ -1,16 +1,17 @@
 .. _campaignRestrictPhone-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _campaignRestrictPhone-number:
 
 Número
-""""""
+"""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

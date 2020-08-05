@@ -1,17 +1,8 @@
 .. _smtps-menu-list:
 
-***************
-Lista de campos
-***************
-
-
-
-.. _smtps-encryption:
-
-encryption
-""""""""""
-
-
+**********************
+Descrição dos campos
+**********************
 
 
 
@@ -24,29 +15,43 @@ Você precisa verificar se o datacenter não bloqueia as portas usada pelo SMTP
 
 
 
-.. _smtps-password:
-
-Senha
-""""""""
-
-
-
-
-
-.. _smtps-port:
-
-port
-""""
-
-
-
-
 
 .. _smtps-username:
 
 Usuário
 """"""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _smtps-password:
+
+Senha
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _smtps-port:
+
+Port
+""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _smtps-encryption:
+
+Encryption
+""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

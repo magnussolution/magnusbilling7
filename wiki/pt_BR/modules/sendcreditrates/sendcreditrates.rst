@@ -1,34 +1,37 @@
 .. _sendCreditRates-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _sendCreditRates-idProductcountry:
 
-idProductcountry
-""""""""""""""""
+País
+"""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _sendCreditRates-idProductoperator_name:
 
-idProductoperator_name
-""""""""""""""""""""""
+Operator Name
+"""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _sendCreditRates-sell_price:
 
-sell_price
+Sell Price
 """"""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

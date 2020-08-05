@@ -1,16 +1,17 @@
 .. _groupUser-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _groupUser-id:
 
-br
-""
+Código
+"""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -20,6 +21,7 @@ br
 Nome
 """"
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

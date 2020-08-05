@@ -1,61 +1,67 @@
 .. _voucher-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
 .. _voucher-credit:
 
 Crédito
-""""""
+""""""""
 
 Valor do VOUCHER
 
 
 
+
 .. _voucher-id_plan:
 
-id_plan
-"""""""
+Plan
+""""
 
 Plano que será usado no cliente que usar este crédito.
+
 
 
 
 .. _voucher-language:
 
 Idioma
-""""""""
+""""""
 
 Idioma que será usado
 
 
 
+
 .. _voucher-prefix_local:
 
-prefix_local
-""""""""""""
+DDD
+"""
 
 Regra que será usado no campo DDD do cliente
 
 
 
+
 .. _voucher-quantity:
 
-quantity
+Quantity
 """"""""
 
 Quantos VOUCHER você deseja gerar?
 
 
 
+
 .. _voucher-tag:
 
-tag
-"""
+Descrição
+"""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -65,6 +71,7 @@ tag
 Voucher
 """""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

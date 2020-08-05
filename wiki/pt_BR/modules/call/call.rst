@@ -1,25 +1,37 @@
 .. _call-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _call-agent_bill:
+.. _call-starttime:
 
-agent_bill
+Data
+""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _call-src:
+
+Conta VoIP
 """"""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _call-buycost:
+.. _call-callerid:
 
-Compra
-"""""""
+Callerid
+""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -27,35 +39,19 @@ Compra
 .. _call-calledstation:
 
 Número
-"""""""""""""
+"""""""
 
-
-
-
-
-.. _call-callerid:
-
-Caller Id
-""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _call-idPrefixdestination:
 
-idPrefixdestination
-"""""""""""""""""""
+Destino
+"""""""
 
-
-
-
-
-.. _call-idTrunktrunkcode:
-
-idTrunktrunkcode
-""""""""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -63,17 +59,19 @@ idTrunktrunkcode
 .. _call-idUserusername:
 
 Usuário
-""""""""""""""
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _call-idTrunktrunkcode:
 
-.. _call-sessionbill:
+Troncos
+"""""""
 
-Venda
-"""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,35 +79,49 @@ Venda
 .. _call-sessiontime:
 
 Duração
-"""""""""""
-
-
-
-
-
-.. _call-src:
-
-src
-"""
-
-
-
-
-
-.. _call-starttime:
-
-Hora de início
 """""""""
 
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _call-buycost:
+
+Compra
+""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _call-sessionbill:
+
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _call-agent_bill:
+
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _call-uniqueid:
 
-uniqueid
+Uniqueid
 """"""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

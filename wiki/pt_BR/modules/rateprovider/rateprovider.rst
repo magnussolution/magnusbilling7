@@ -1,25 +1,37 @@
 .. _rateProvider-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
+
+
+
+.. _rateProvider-id_provider:
+
+Provedor
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _rateProvider-id_prefix:
+
+Destination
+"""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _rateProvider-buyrate:
 
 Compra
-"""""""
+""""""
 
-
-
-
-
-.. _rateProvider-buyrateincrement:
-
-Bloco de compra
-""""""""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -27,35 +39,29 @@ Bloco de compra
 .. _rateProvider-buyrateinitblock:
 
 Mínimo compra
-""""""""""""""""
+""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _rateProvider-buyrateincrement:
 
-.. _rateProvider-id_prefix:
+Bloco de compra
+"""""""""""""""
 
-id_prefix
-"""""""""
-
-
-
-
-
-.. _rateProvider-id_provider:
-
-id_provider
-"""""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _rateProvider-minimal_time_buy:
 
-minimal_time_buy
-""""""""""""""""
+Tempo minimo para compra
+""""""""""""""""""""""""
 
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

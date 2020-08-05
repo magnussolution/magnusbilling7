@@ -1,52 +1,57 @@
 .. _callSummaryDayTrunk-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _callSummaryDayTrunk-sumbuycost:
+.. _callSummaryDayTrunk-sumsessiontime:
 
-sumbuycost
-""""""""""
+Duração mínima
+"""""""""""""""""
 
-
-
-
-
-.. _callSummaryDayTrunk-sumlucro:
-
-sumlucro
-""""""""
-
-
-
-
-
-.. _callSummaryDayTrunk-sumnbcall:
-
-sumnbcall
-"""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _callSummaryDayTrunk-sumsessionbill:
 
-sumsessionbill
-""""""""""""""
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _callSummaryDayTrunk-sumbuycost:
 
-.. _callSummaryDayTrunk-sumsessiontime:
+Compra
+""""""
 
-sumsessiontime
-""""""""""""""
+Nós ainda não escrevemos a descrição deste campo.
 
+
+
+
+.. _callSummaryDayTrunk-sumlucro:
+
+Lucro
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryDayTrunk-sumnbcall:
+
+Total de Chamadas
+"""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 

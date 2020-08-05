@@ -1,52 +1,57 @@
 .. _callSummaryMonthTrunk-menu-list:
 
-***************
-Lista de campos
-***************
+**********************
+Descrição dos campos
+**********************
 
 
 
-.. _callSummaryMonthTrunk-sumbuycost:
+.. _callSummaryMonthTrunk-sumsessiontime:
 
-sumbuycost
-""""""""""
+Duração mínima
+"""""""""""""""""
 
-
-
-
-
-.. _callSummaryMonthTrunk-sumlucro:
-
-sumlucro
-""""""""
-
-
-
-
-
-.. _callSummaryMonthTrunk-sumnbcall:
-
-sumnbcall
-"""""""""
-
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _callSummaryMonthTrunk-sumsessionbill:
 
-sumsessionbill
-""""""""""""""
+Venda
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
+.. _callSummaryMonthTrunk-sumbuycost:
 
-.. _callSummaryMonthTrunk-sumsessiontime:
+Compra
+""""""
 
-sumsessiontime
-""""""""""""""
+Nós ainda não escrevemos a descrição deste campo.
 
+
+
+
+.. _callSummaryMonthTrunk-sumlucro:
+
+Lucro
+"""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _callSummaryMonthTrunk-sumnbcall:
+
+Total de Chamadas
+"""""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
 
 
 
