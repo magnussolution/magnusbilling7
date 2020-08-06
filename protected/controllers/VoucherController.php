@@ -39,7 +39,7 @@ class VoucherController extends Controller
     {
         $this->instanceModel = new Voucher;
         $this->abstractModel = Voucher::model();
-        $this->titleReport   = Yii::t('yii', 'Voucher');
+        $this->titleReport   = Yii::t('zii', 'Voucher');
         parent::init();
     }
 

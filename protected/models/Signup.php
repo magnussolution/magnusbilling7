@@ -70,7 +70,7 @@ class Signup extends Model
     public function checkemail($attribute, $params)
     {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $this->addError($attribute, Yii::t('yii', 'Invalid Email'));
+            $this->addError($attribute, Yii::t('zii', 'Invalid Email'));
         }
 
     }
@@ -89,7 +89,7 @@ class Signup extends Model
             if ($formatado) {
                 $this->doc = $formatado;
             } else {
-                $this->addError($attribute, Yii::t('yii', 'CPF ou CNPJ Inválido'));
+                $this->addError($attribute, Yii::t('zii', 'CPF ou CNPJ Inválido'));
             }
 
         }
@@ -97,33 +97,33 @@ class Signup extends Model
         if ($config['global']['signup_unique_doc'] == 0 && strlen($this->doc)) {
             $modelUserCheck = User::model()->find('doc = :key', array(':key' => $this->doc));
             if (isset($modelUserCheck->id)) {
-                $this->addError($attribute, Yii::t('yii', 'This DOC is already used per other user'));
+                $this->addError($attribute, Yii::t('zii', 'This DOC is already used per other user'));
             }
         }
     }
     public function checkusername($attribute, $params)
     {
         if (preg_match('/ /', $this->username)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in username'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in username'));
         }
 
         if (!preg_match('/^[1-9]|^[A-Z]|^[a-z]/', $this->username)) {
-            $this->addError($attribute, Yii::t('yii', 'Username need start with numbers or letters'));
+            $this->addError($attribute, Yii::t('zii', 'Username need start with numbers or letters'));
         }
 
     }
     public function checksecret($attribute, $params)
     {
         if (preg_match('/ /', $this->password)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in password'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in password'));
         }
 
         if ($this->password == '123456' || $this->password == '12345678' || $this->password == '012345') {
-            $this->addError($attribute, Yii::t('yii', 'No use sequence in the pasword'));
+            $this->addError($attribute, Yii::t('zii', 'No use sequence in the pasword'));
         }
 
         if ($this->password == $this->username) {
-            $this->addError($attribute, Yii::t('yii', 'Password cannot be equal username'));
+            $this->addError($attribute, Yii::t('zii', 'Password cannot be equal username'));
         }
 
     }

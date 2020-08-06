@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 28/10/2012
@@ -26,12 +26,12 @@ Ext.define('MBilling.view.trunkGroup.Form', {
         var me = this;
         me.items = [{
             name: 'name',
-            fieldLabel: t('name'),
+            fieldLabel: t('Name'),
             hidden: App.user.isClient
         }, {
             xtype: 'combobox',
             name: 'type',
-            fieldLabel: t('type'),
+            fieldLabel: t('Type'),
             forceSelection: true,
             editable: false,
             value: 1,
@@ -41,18 +41,18 @@ Ext.define('MBilling.view.trunkGroup.Form', {
                 [3, t('LCR')]
             ]
         }, {
-            style: 'margin-top:10px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Select one or more') + ' ' + t('Trunks'),
+            style: 'margin-top:10px; overflow: visible;',
+            title: t('Select one or more trunks'),
             collapsible: false,
             collapsed: false,
             items: [{
-                labelWidth: 10,
+                xtype: 'trunktag',
                 name: 'id_trunk',
                 fieldLabel: t('Trunk'),
+                labelWidth: 10,
                 anchor: '100%',
-                fieldLabel: '',
-                xtype: 'trunktag',
+                fieldLabel: t('Trunk'),
                 allowBlank: true
             }]
         }];

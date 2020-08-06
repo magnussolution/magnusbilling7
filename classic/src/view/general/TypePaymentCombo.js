@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 12/09/2012
@@ -21,19 +21,19 @@
 Ext.define('MBilling.view.general.TypePaymentCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.typepaymentcombo',
-    fieldLabel: t('typepaid'),
+    fieldLabel: t('Type paid'),
     forceSelection: true,
     editable: false,
     value: 0,
     store: [
-        [0, t('prepaid')],
-        [1, t('pospaid')]
+        [0, t('Prepaid')],
+        [1, t('Postpaid')]
     ]
 });
 Ext.define('MBilling.view.general.CampaignSendCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.campaignsendcombo',
-    fieldLabel: t('type'),
+    fieldLabel: t('Type'),
     forceSelection: true,
     editable: false,
     displayField: 'name',
@@ -59,7 +59,7 @@ Ext.define('MBilling.view.general.CampaignSendCombo', {
 Ext.define('MBilling.view.general.PaymentCountryCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.paymentcountrycombo',
-    fieldLabel: t('typepaid'),
+    fieldLabel: t('Type paid'),
     value: 'Brasil',
     forceSelection: true,
     editable: true,
@@ -79,7 +79,7 @@ Ext.define('MBilling.view.general.PaymentCountryCombo', {
 Ext.define('MBilling.view.general.BoletoBanckCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.boletobanckcombo',
-    fieldLabel: t('Banco'),
+    fieldLabel: t('Bank'),
     forceSelection: true,
     editable: false,
     value: 'cef',
@@ -91,7 +91,7 @@ Ext.define('MBilling.view.general.BoletoBanckCombo', {
 Ext.define('MBilling.view.general.PaymentBanckCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.paymentbanckcombo',
-    fieldLabel: t('typepaid'),
+    fieldLabel: t('Type paid'),
     forceSelection: true,
     editable: false,
     value: 'Banco do Brasil',

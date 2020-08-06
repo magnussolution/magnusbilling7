@@ -45,7 +45,7 @@ class CampaignController extends Controller
         $this->instanceModel        = new Campaign;
         $this->abstractModel        = Campaign::model();
         $this->abstractModelRelated = CampaignPhonebook::model();
-        $this->titleReport          = Yii::t('yii', 'Campaign');
+        $this->titleReport          = Yii::t('zii', 'Campaign');
         parent::init();
     }
 
@@ -62,7 +62,7 @@ class CampaignController extends Controller
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => [],
-                        'errors'  => ['frequency' => [Yii::t('yii', 'The call limit need be less than') . ' ', $this->config['global']['campaign_user_limit']]],
+                        'errors'  => ['frequency' => [Yii::t('zii', 'The call limit need be less than') . ' ', $this->config['global']['campaign_user_limit']]],
                     ));
                     exit;
 
@@ -75,7 +75,7 @@ class CampaignController extends Controller
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => [],
-                        'errors'  => ['frequency' => [Yii::t('yii', 'The call limit need be less than') . ' ', $modelCampaign->max_frequency]],
+                        'errors'  => ['frequency' => [Yii::t('zii', 'The call limit need be less than') . ' ', $modelCampaign->max_frequency]],
                     ));
                     exit;
                 }
@@ -151,7 +151,7 @@ class CampaignController extends Controller
                     $attributes[$i]['id_' . $type . '_0'] = $itemOption[1];
                     $modelType                            = ucfirst($type);
                     $model                                = $modelType::model()->findByPk((int) $itemOption[1]);
-                    if (count($model)) {
+                    if (isset($model->name)) {
                         $attributes[$i]['id_' . $type . '_0' . '_name'] = $model->name;
                     }
 

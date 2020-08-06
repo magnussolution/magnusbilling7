@@ -18,7 +18,7 @@
  *
  */
 ?>
-<div id="load" ><?php echo Yii::t('yii', 'Please wait while loading...') ?></div>
+<div id="load" ><?php echo Yii::t('zii', 'Please wait while loading...') ?></div>
 
 <script languaje="JavaScript">
 window.onload = function () {

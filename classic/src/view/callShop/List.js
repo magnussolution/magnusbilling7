@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -27,10 +27,10 @@ Ext.define('MBilling.view.callShop.List', {
         emptyText: '<center class="grid-empty">' + t('No record found') + '</center>',
         getRowClass: function(record) {
             if (App.user.l == 'callshop') {
-                if (record.get('status') == 1) return 'callshoFree';
-                else if (record.get('status') == 0) return 'callshoBlock';
-                else if (record.get('status') == 2) return 'callshoInUse';
-                else if (record.get('status') == 3) return 'callshoInCall';
+                if (record.get('Status') == 1) return 'callshoFree';
+                else if (record.get('Status') == 0) return 'callshoBlock';
+                else if (record.get('Status') == 2) return 'callshoInUse';
+                else if (record.get('Status') == 3) return 'callshoInCall';
             };
         }
     },
@@ -70,34 +70,33 @@ Ext.define('MBilling.view.callShop.List', {
             }
         }];
         me.columns = [{
-            header: t('cabina'),
+            header: t('Booth'),
             dataIndex: 'callerid',
             flex: 4
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             renderer: Helper.Util.formatBooleanFree,
             flex: 3,
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('free')],
-                    [2, t('inuse')],
-                    [0, t('blocked')],
-                    [3, t('calling')]
+                    [1, t('Free')],
+                    [2, t('In use')],
+                    [0, t('Blocked')],
+                    [3, t('Calling')]
                 ]
             }
         }, {
-            header: t('number'),
+            header: t('Number'),
             dataIndex: 'callshopnumber',
             flex: 4
         }, {
-            header: t('Destino'),
+            header: t('Destination'),
             dataIndex: 'callshopdestination',
-            hidden: App.user.l != 'callshop',
             flex: 6
         }, {
-            header: t('sessiontime'),
+            header: t('Duration'),
             dataIndex: 'callshoptime',
             renderer: Helper.Util.formatsecondsToTime,
             flex: 3

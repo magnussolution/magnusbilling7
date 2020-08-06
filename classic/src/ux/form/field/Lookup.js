@@ -4,7 +4,7 @@ Ext.define('Ext.ux.form.field.Lookup', {
         field: 'Ext.form.field.Field'
     },
     layout: 'fit',
-    blankText: t('This field is required.'),
+    blankText: t('This field is required'),
     displayField: undefined,
     valueField: 'id',
     gridConfig: {},

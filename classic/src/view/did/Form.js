@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 24/09/2012
@@ -41,39 +41,39 @@ Ext.define('MBilling.view.did.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     name: 'did',
-                    fieldLabel: t('did'),
+                    fieldLabel: t('DID'),
                     readOnly: App.user.isClient || App.user.isAgent
                 }, {
                     xtype: 'booleancombo',
                     name: 'activated',
-                    fieldLabel: t('status'),
+                    fieldLabel: t('Status'),
                     hidden: App.user.isClient || App.user.isAgent,
                     allowBlank: true
                 }, {
                     name: 'callerid',
-                    fieldLabel: t('callerid_name'),
+                    fieldLabel: t('Callerid name'),
                     allowBlank: true
                 }, {
                     xtype: 'moneyfield',
-                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     name: 'connection_charge',
-                    fieldLabel: t('connection_charge'),
+                    fieldLabel: t('Connection charge'),
+                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     value: '0',
                     hidden: App.user.isClient || App.user.isAgent
                 }, {
                     xtype: 'moneyfield',
-                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     name: 'fixrate',
-                    fieldLabel: t('monthly_price'),
+                    fieldLabel: t('Monthly price'),
+                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     value: '0',
                     hidden: App.user.isClient || App.user.isAgent
                 }, {
-                    style: 'margin-top:5px; overflow: visible;',
                     xtype: 'fieldset',
-                    title: t('Did') + ' ' + t('increment'),
+                    style: 'margin-top:5px; overflow: visible;',
+                    title: t('DID increment'),
                     collapsible: false,
                     collapsed: false,
                     hidden: !App.user.isAdmin,
@@ -84,9 +84,9 @@ Ext.define('MBilling.view.did.Form', {
                     },
                     items: [{
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'connection_sell',
                         fieldLabel: t('Connection charge'),
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         value: '0',
                         hidden: !App.user.isAdmin
                     }, {
@@ -98,20 +98,20 @@ Ext.define('MBilling.view.did.Form', {
                     }, {
                         xtype: 'numberfield',
                         name: 'initblock',
-                        fieldLabel: t('initblock'),
+                        fieldLabel: t('Initial block'),
                         value: '1',
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'numberfield',
                         name: 'increment',
-                        fieldLabel: t('billingblock'),
+                        fieldLabel: t('Billing block'),
                         value: '1',
                         hidden: !App.user.isAdmin
                     }]
                 }, {
                     xtype: 'combobox',
                     name: 'charge_of',
-                    fieldLabel: t('charge_who'),
+                    fieldLabel: t('Charge who'),
                     value: 1,
                     forceSelection: true,
                     editable: false,
@@ -123,7 +123,7 @@ Ext.define('MBilling.view.did.Form', {
                 }, {
                     xtype: 'numberfield',
                     name: 'calllimit',
-                    fieldLabel: t('Channel Limit'),
+                    fieldLabel: t('Channel limit'),
                     value: '-1',
                     minValue: '-1',
                     hidden: !window.didChannelLimit || !App.user.isAdmin
@@ -131,15 +131,15 @@ Ext.define('MBilling.view.did.Form', {
                     xtype: 'textareafield',
                     allowBlank: true,
                     name: 'description',
-                    fieldLabel: t('description'),
+                    fieldLabel: t('Description'),
                     hidden: !App.user.isAdmin
                 }]
             }, {
                 title: t('Billing'),
                 items: [{
-                    style: 'margin-top:5px; overflow: visible;',
                     xtype: 'fieldset',
-                    title: t('Did Billing per minute') + ' ' + t('rate') + ' 1',
+                    style: 'margin-top:5px; overflow: visible;',
+                    title: t('DID billing per minute rate') + ' 1',
                     collapsible: false,
                     collapsed: false,
                     hidden: !App.user.isAdmin,
@@ -177,9 +177,9 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }]
                 }, {
-                    style: 'margin-top:25px; overflow: visible;',
                     xtype: 'fieldset',
-                    title: t('Did Billing per minute') + ' ' + t('rate') + ' 2',
+                    style: 'margin-top:25px; overflow: visible;',
+                    title: t('DID billing per minute rate') + ' 2',
                     collapsible: false,
                     collapsed: false,
                     hidden: !App.user.isAdmin,
@@ -196,9 +196,9 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'selling_rate_2',
                         fieldLabel: t('Sell price per min'),
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         value: '0',
                         hidden: !App.user.isAdmin
                     }, {
@@ -213,9 +213,9 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }]
                 }, {
-                    style: 'margin-top:25px; overflow: visible;',
                     xtype: 'fieldset',
-                    title: t('Did Billing per minute') + ' ' + t('rate') + ' 3',
+                    style: 'margin-top:25px; overflow: visible;',
+                    title: t('DID billing per minute rate') + ' 3',
                     collapsible: false,
                     collapsed: false,
                     hidden: !App.user.isAdmin,
@@ -232,9 +232,9 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
-                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'selling_rate_3',
                         fieldLabel: t('Sell price per min'),
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         value: '0',
                         hidden: !App.user.isAdmin
                     }, {
@@ -250,12 +250,12 @@ Ext.define('MBilling.view.did.Form', {
                     }]
                 }]
             }, {
-                title: t('CallBack Pro'),
+                title: t('CallBack pro'),
                 hidden: !window.cbr,
                 items: [{
                     xtype: 'booleancombo',
                     name: 'cbr',
-                    fieldLabel: t('CallBack Pro'),
+                    fieldLabel: t('CallBack pro'),
                     value: 0,
                     //window.cbr=1; no index.html
                     hidden: !window.cbr,
@@ -263,7 +263,7 @@ Ext.define('MBilling.view.did.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'cbr_ua',
-                    fieldLabel: t('Use Audio'),
+                    fieldLabel: t('Use audio'),
                     value: 0,
                     hidden: true,
                     allowBlank: true
@@ -286,7 +286,7 @@ Ext.define('MBilling.view.did.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'cbr_em',
-                    fieldLabel: t('Early Media'),
+                    fieldLabel: t('Early media'),
                     hidden: true,
                     allowBlank: true
                 }, {
@@ -309,18 +309,18 @@ Ext.define('MBilling.view.did.Form', {
                     hidden: true
                 }, {
                     xtype: 'uploadfield',
-                    fieldLabel: t('workaudio'),
+                    name: 'workaudio',
+                    fieldLabel: t('Work audio'),
                     emptyText: 'Select an gsm File',
                     allowBlank: true,
-                    name: 'workaudio',
                     extAllowed: ['wav', 'gsm'],
                     hidden: true
                 }, {
                     xtype: 'uploadfield',
-                    fieldLabel: t('noworkaudio'),
+                    name: 'noworkaudio',
+                    fieldLabel: t('Out work audio'),
                     emptyText: 'Select an gsm File',
                     allowBlank: true,
-                    name: 'noworkaudio',
                     extAllowed: ['wav', 'gsm'],
                     hidden: true
                 }]

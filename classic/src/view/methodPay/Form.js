@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2012
@@ -27,46 +27,47 @@ Ext.define('MBilling.view.methodPay.Form', {
             xtype: 'methodpaycombo',
             name: 'payment_method',
             valueField: 'payment_method',
-            fieldLabel: t('paymentmethods')
+            fieldLabel: t('Payment methods')
         }, {
             name: 'show_name',
-            fieldLabel: t('showName')
+            fieldLabel: t('Show name')
         }, {
             xtype: 'userlookup',
             ownerForm: me,
-            name: 'id_user'
+            name: 'id_user',
+            fieldLabel: t('Username')
         }, {
             xtype: 'paymentcountrycombo',
             name: 'country',
-            fieldLabel: t('country')
+            fieldLabel: t('Country')
         }, {
             xtype: 'booleancombo',
             name: 'active',
-            fieldLabel: t('active')
+            fieldLabel: t('Active')
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             name: 'min',
-            value: 10,
-            fieldLabel: t('Min amount')
+            fieldLabel: t('Min amount'),
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+            value: 10
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             name: 'max',
-            value: 500,
-            fieldLabel: t('Max amount')
+            fieldLabel: t('Max amount'),
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+            value: 500
         }, {
             name: 'username',
             fieldLabel: t('Username'),
             allowBlank: true
         }, {
             name: 'url',
-            fieldLabel: 'Url',
+            fieldLabel: t('URL'),
             allowBlank: true
         }, {
             xtype: 'noyescombo',
             name: 'fee',
-            fieldLabel: t('Discount') + ' ' + t('Fee'),
+            fieldLabel: t('Discount fee'),
             allowBlank: true
         }, {
             xtype: 'paymentbanckcombo',
@@ -75,56 +76,56 @@ Ext.define('MBilling.view.methodPay.Form', {
             allowBlank: true
         }, {
             name: 'boleto_convenio',
-            fieldLabel: t('numeroconvenio'),
+            fieldLabel: 'Convenio',
             allowBlank: true
         }, {
             name: 'boleto_agencia',
-            fieldLabel: t('agencia'),
+            fieldLabel: t('Bank agency'),
             allowBlank: true
         }, {
             name: 'boleto_conta_corrente',
-            fieldLabel: t('contacorrente'),
+            fieldLabel: t('Bank account'),
             allowBlank: true
         }, {
             name: 'boleto_inicio_nosso_numeroa',
-            fieldLabel: t('Inicio nosso nº'),
+            fieldLabel: 'Inicio nosso numero',
             allowBlank: true
         }, {
             name: 'boleto_carteira',
-            fieldLabel: t('carteira'),
+            fieldLabel: 'Carteira',
             allowBlank: true
         }, {
             name: 'boleto_taxa',
-            fieldLabel: t('taxa'),
+            fieldLabel: t('Tax'),
             allowBlank: true
         }, {
             name: 'boleto_instrucoes',
-            fieldLabel: t('instructions'),
+            fieldLabel: t('Instructions'),
             maxLength: '100',
             allowBlank: true
         }, {
             name: 'boleto_nome_emp',
-            fieldLabel: t('company'),
+            fieldLabel: t('Company'),
             allowBlank: true
         }, {
             name: 'boleto_end_emp',
-            fieldLabel: t('address'),
+            fieldLabel: t('Address'),
             allowBlank: true
         }, {
             name: 'boleto_cidade_emp',
-            fieldLabel: t('city'),
+            fieldLabel: t('City'),
             allowBlank: true
         }, {
             name: 'boleto_estado_emp',
-            fieldLabel: t('state'),
+            fieldLabel: t('State'),
             allowBlank: true
         }, {
             name: 'boleto_cpf_emp',
-            fieldLabel: 'CNPJ CPF',
+            fieldLabel: t('DOC'),
             allowBlank: true
         }, {
             name: 'pagseguro_TOKEN',
-            fieldLabel: 'TOKEN',
+            fieldLabel: t('TOKEN'),
             allowBlank: true
         }, {
             name: 'P2P_CustomerSiteID',
@@ -152,7 +153,7 @@ Ext.define('MBilling.view.methodPay.Form', {
             allowBlank: true
         }, {
             name: 'client_secret',
-            fieldLabel: t('Client Secret'),
+            fieldLabel: t('Client secret'),
             allowBlank: true
         }];
         me.callParent(arguments);

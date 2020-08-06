@@ -34,7 +34,7 @@ class ServicesUseController extends Controller
     {
         $this->instanceModel = new ServicesUse;
         $this->abstractModel = ServicesUse::model();
-        $this->titleReport   = Yii::t('yii', 'Services Use');
+        $this->titleReport   = Yii::t('zii', 'Services Use');
         parent::init();
     }
 

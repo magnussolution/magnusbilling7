@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 28/10/2012
@@ -42,53 +42,55 @@ Ext.define('MBilling.view.campaign.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     xtype: App.user.isClient ? 'textfield' : 'userlookup',
+                    name: 'id_user',
+                    fieldLabel: t('Username'),
                     ownerForm: me,
                     hidden: App.user.isClient
                 }, {
-                    fieldLabel: t('Plan'),
                     xtype: 'plancombo',
                     name: 'id_plan',
+                    fieldLabel: t('Plan'),
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
                     name: 'name',
-                    fieldLabel: t('name')
+                    fieldLabel: t('Name')
                 }, {
                     xtype: 'booleancombo',
                     name: 'status',
-                    fieldLabel: t('status')
+                    fieldLabel: t('Status')
                 }, {
                     xtype: 'datetimefield',
                     name: 'startingdate',
-                    fieldLabel: t('startingdate'),
+                    fieldLabel: t('Starting date'),
                     format: 'Y-m-d H:i:s',
                     value: new Date()
                 }, {
                     xtype: 'datetimefield',
                     name: 'expirationdate',
-                    fieldLabel: t('expirationdate'),
+                    fieldLabel: t('Expiration date'),
                     format: 'Y-m-d H:i:s',
                     value: '2030-01-01 00:00:00'
                 }, {
                     xtype: 'campaigntypefullcombo',
                     name: 'type',
-                    fieldLabel: t('type')
+                    fieldLabel: t('Type')
                 }, {
                     xtype: 'uploadfield',
+                    name: 'audio',
                     fieldLabel: t('Audio'),
                     emptyText: 'Select an wav or gsm File',
                     allowBlank: true,
-                    name: 'audio',
                     extAllowed: ['wav', 'gsm']
                 }, {
                     xtype: 'uploadfield',
-                    fieldLabel: t('Audio') + '2',
+                    name: 'audio_2',
+                    fieldLabel: t('Audio 2'),
                     emptyText: 'Select an wav or gsm File',
                     allowBlank: true,
-                    name: 'audio_2',
                     extAllowed: ['wav', 'gsm']
                 }, {
                     xtype: 'yesnocombo',
@@ -101,26 +103,25 @@ Ext.define('MBilling.view.campaign.Form', {
                     name: 'auto_reprocess',
                     fieldLabel: t('Auto reprocess')
                 }, {
-                    style: 'margin-top:10px; overflow: visible;',
                     xtype: 'fieldset',
+                    style: 'margin-top:10px; overflow: visible;',
                     title: t('Select one or more phonebook'),
                     collapsible: true,
                     collapsed: false,
                     items: [{
+                        xtype: 'phonebooktag',
                         labelWidth: 10,
                         name: 'id_phonebook',
-                        fieldLabel: t('phonebook'),
+                        fieldLabel: t('Phonebook'),
                         anchor: '100%',
-                        fieldLabel: '',
-                        xtype: 'phonebooktag',
                         allowBlank: true
                     }]
                 }]
             }, {
                 title: t('Forward'),
                 items: [{
-                    style: 'margin-top:25px; overflow: visible;',
                     xtype: 'fieldset',
+                    style: 'margin-top:25px; overflow: visible;',
                     title: t('Forward to'),
                     collapsible: true,
                     collapsed: false,
@@ -132,14 +133,14 @@ Ext.define('MBilling.view.campaign.Form', {
                     },
                     items: [{
                         xtype: 'combobox',
+                        name: 'digit_authorize',
+                        fieldLabel: t('Number to forward'),
                         forceSelection: true,
                         editable: false,
                         value: '-1',
-                        name: 'digit_authorize',
-                        fieldLabel: t('Number to forward'),
                         store: [
                             ['-1', t('Disable')],
-                            ['-2', t('Any Digit')],
+                            ['-2', t('Any digit')],
                             ['-3', t('Every')],
                             ['0', '0'],
                             ['1', '1'],
@@ -153,9 +154,9 @@ Ext.define('MBilling.view.campaign.Form', {
                             ['9', '9']
                         ]
                     }, {
-                        fieldLabel: t('Forward type'),
-                        name: 'type_0',
                         xtype: 'typecampaigndestinationcombo',
+                        name: 'type_0',
+                        fieldLabel: t('Forward type'),
                         allowBlank: true
                     }, {
                         xtype: 'textfield',
@@ -184,55 +185,55 @@ Ext.define('MBilling.view.campaign.Form', {
                         xtype: 'siplookup',
                         ownerForm: me,
                         name: 'id_sip_0',
+                        fieldLabel: t('Sip user'),
                         displayField: 'id_sip_0_name',
-                        fieldLabel: t('SIP'),
                         allowBlank: true,
                         hidden: true
                     }, {
                         xtype: 'textfield',
-                        fieldLabel: t('Destination'),
                         name: 'extension_0',
+                        fieldLabel: t('Destination'),
                         hidden: true
                     }]
                 }]
             }, {
-                title: t('schedules'),
+                title: t('Schedules'),
                 items: [{
                     name: 'daily_start_time',
-                    fieldLabel: t('daily_start_time'),
+                    fieldLabel: t('Daily start time'),
                     value: '09:00'
                 }, {
                     name: 'daily_stop_time',
-                    fieldLabel: t('daily_stop_time'),
+                    fieldLabel: t('Daily stop time'),
                     value: '18:00'
                 }, {
                     xtype: 'yesnocombo',
-                    fieldLabel: t('monday'),
-                    name: 'monday'
+                    name: 'monday',
+                    fieldLabel: t('Monday')
                 }, {
                     xtype: 'yesnocombo',
-                    fieldLabel: t('tuesday'),
-                    name: 'tuesday'
+                    name: 'tuesday',
+                    fieldLabel: t('Tuesday')
                 }, {
                     xtype: 'yesnocombo',
-                    fieldLabel: t('wednesday'),
-                    name: 'wednesday'
+                    name: 'wednesday',
+                    fieldLabel: t('Wednesday')
                 }, {
                     xtype: 'yesnocombo',
-                    fieldLabel: t('thursday'),
-                    name: 'thursday'
+                    name: 'thursday',
+                    fieldLabel: t('Thursday')
                 }, {
                     xtype: 'yesnocombo',
-                    fieldLabel: t('friday'),
-                    name: 'friday'
+                    name: 'friday',
+                    fieldLabel: t('Friday')
                 }, {
                     xtype: 'noyescombo',
-                    fieldLabel: t('saturday'),
-                    name: 'saturday'
+                    name: 'saturday',
+                    fieldLabel: t('Saturday')
                 }, {
                     xtype: 'noyescombo',
-                    fieldLabel: t('sunday'),
-                    name: 'sunday'
+                    name: 'sunday',
+                    fieldLabel: t('Sunday')
                 }]
             }, {
                 title: t('Limit'),
@@ -257,20 +258,20 @@ Ext.define('MBilling.view.campaign.Form', {
                     value: App.user.isClient ? App.user.campaign_user_limit : 10
                 }, {
                     name: 'nb_callmade',
-                    fieldLabel: t('Total audio time'),
+                    fieldLabel: t('Audio duration'),
                     hidden: !App.user.isAdmin,
                     allowBlank: true,
                     value: 0
                 }, {
                     xtype: 'booleancombo',
                     name: 'enable_max_call',
-                    fieldLabel: t('toggle_max_completed_calls'),
+                    fieldLabel: t('Toggle max completed calls'),
                     hidden: !App.user.isAdmin,
                     allowBlank: true,
                     value: 0
                 }, {
                     name: 'secondusedreal',
-                    fieldLabel: t('max_completed_calls'),
+                    fieldLabel: t('Max completed calls'),
                     hidden: !App.user.isAdmin,
                     allowBlank: true,
                     value: 0
@@ -284,7 +285,7 @@ Ext.define('MBilling.view.campaign.Form', {
                 }, {
                     xtype: 'textareafield',
                     name: 'description',
-                    fieldLabel: t('descriptionOrSmsText'),
+                    fieldLabel: t('Description or SMS Text'),
                     allowBlank: true,
                     maxLength: 300
                 }]

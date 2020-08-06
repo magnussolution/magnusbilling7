@@ -26,25 +26,25 @@ $fieldOption = array('class' => 'input');
 
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'country') ?>
-        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Country') ?></p>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Country') ?></p>
 </div>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Operator')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Operator')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
-        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Operator') ?></p>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Operator') ?></p>
 </div>
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Number')) ?>
     <?php echo $form->numberField($modelTransferToMobile, 'number', $fieldOption) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Number') ?></p>
 </div>
 
 
@@ -103,7 +103,7 @@ $fieldOption = array('class' => 'input');
 </div>
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('yii', $buttonName), array(
+<?php echo CHtml::submitButton(Yii::t('zii', $buttonName), array(
     'class'   => 'button',
     'onclick' => 'button2(event)',
     'id'      => 'secondButton'));

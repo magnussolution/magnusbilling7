@@ -30,7 +30,7 @@ class TemplateMailController extends Controller
 
         $this->instanceModel = new TemplateMail;
         $this->abstractModel = TemplateMail::model();
-        $this->titleReport   = Yii::t('yii', 'Mails');
+        $this->titleReport   = Yii::t('zii', 'Emails');
 
         parent::init();
 

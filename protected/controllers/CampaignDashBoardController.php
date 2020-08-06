@@ -30,7 +30,7 @@ class CampaignDashBoardController extends Controller
     {
         $this->instanceModel = new Campaign;
         $this->abstractModel = Campaign::model();
-        $this->titleReport   = Yii::t('yii', 'Campaign');
+        $this->titleReport   = Yii::t('zii', 'Campaign');
         parent::init();
     }
 

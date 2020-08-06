@@ -1,7 +1,7 @@
 Ext.define('Overrides.ux.grid.filter.DateTimeFilter', {
     override: 'Ext.ux.grid.filter.DateTimeFilter',
     requires: ['Ext.ux.form.field.DateTime'],
-    tipField: t('Para enviar o filtro, selecione a data'),
+    tipField: t('Please select a date before filter'),
     /**
      * @cfg {String} dateFormat
      * The date format to return when using getValue.

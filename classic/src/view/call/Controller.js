@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -28,7 +28,7 @@ Ext.define('MBilling.view.call.Controller', {
             idRecord = [];
         //no have filter and not select any selected record
         if (!record && filter.length < 5) {
-            Ext.ux.Alert.alert(me.titleError, t('Please select one or more register'), 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select one or more records'), 'notification');
         } else {
             Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
                 idRecord.push(record.get(me.idProperty));
@@ -61,9 +61,9 @@ Ext.define('MBilling.view.call.Controller', {
             scope: me,
             success: function(r) {
                 r = Ext.decode(r.responseText);
-                Ext.ux.Alert.alert(me.titleSuccess, '<b> ' + t('Total') + ' ' + t('buycost') + ': ' + App.user.currency + ' ' + r.sumbuycost + "<br>" + t('Total') + ' ' + t('sessionbill') + ': ' + App.user.currency + ' ' + r.sumsessionbill + "<br>" + t('Total') + ' ' + t('profit') + ': ' + App.user.currency + ' ' + r.totalCall + '</b>', 'information', true, false);
+                Ext.ux.Alert.alert(me.titleSuccess, '<b> ' + t('Total buy price') + ': ' + App.user.currency + ' ' + r.sumbuycost + "<br>" + t('Total sell price') + ': ' + App.user.currency + ' ' + r.sumsessionbill + "<br>" + t('Total profit') + ': ' + App.user.currency + ' ' + r.totalCall + '</b>', 'information', true, false);
                 button.enable();
-                button.setText(t('Show Total'));
+                button.setText(t('Show total'));
             },
             failure: function(r) {
                 button.enable();

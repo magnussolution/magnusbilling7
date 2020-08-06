@@ -27,12 +27,12 @@ Ext.define('MBilling.view.campaignPoll.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     xtype: 'campaigncombo'
                 }, {
                     name: 'name',
-                    fieldLabel: t('name')
+                    fieldLabel: t('Name')
                 }, {
                     xtype: 'numberfield',
                     name: 'repeat',
@@ -43,7 +43,7 @@ Ext.define('MBilling.view.campaignPoll.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'request_authorize',
-                    fieldLabel: t('Request') + ' ' + t('authorization')
+                    fieldLabel: t('Request authorization')
                 }, {
                     xtype: 'numberfield',
                     name: 'digit_authorize',
@@ -55,58 +55,58 @@ Ext.define('MBilling.view.campaignPoll.Form', {
                 }, {
                     xtype: 'textareafield',
                     name: 'description',
-                    fieldLabel: t('description'),
+                    fieldLabel: t('Description'),
                     allowBlank: true
                 }, {
                     xtype: 'uploadfield',
-                    fieldLabel: 'Audio',
+                    name: 'arq_audio',
+                    fieldLabel: t('Audio'),
                     emptyText: 'Select an wav or gsm File',
                     allowBlank: true,
-                    name: 'arq_audio',
                     extAllowed: ['wav', 'gsm']
                 }]
             }, {
-                title: t('options'),
+                title: t('Options'),
                 itemId: 'optionsData',
                 items: [{
                     name: 'option0',
-                    fieldLabel: t('option') + ' 0',
+                    fieldLabel: t('Option') + ' 0',
                     allowBlank: true
                 }, {
                     name: 'option1',
-                    fieldLabel: t('option') + ' 1',
+                    fieldLabel: t('Option') + ' 1',
                     allowBlank: true
                 }, {
                     name: 'option2',
-                    fieldLabel: t('option') + ' 2',
+                    fieldLabel: t('Option') + ' 2',
                     allowBlank: true
                 }, {
                     name: 'option3',
-                    fieldLabel: t('option') + ' 3',
+                    fieldLabel: t('Option') + ' 3',
                     allowBlank: true
                 }, {
                     name: 'option4',
-                    fieldLabel: t('option') + ' 4',
+                    fieldLabel: t('Option') + ' 4',
                     allowBlank: true
                 }, {
                     name: 'option5',
-                    fieldLabel: t('option') + ' 5',
+                    fieldLabel: t('Option') + ' 5',
                     allowBlank: true
                 }, {
                     name: 'option6',
-                    fieldLabel: t('option') + ' 6',
+                    fieldLabel: t('Option') + ' 6',
                     allowBlank: true
                 }, {
                     name: 'option7',
-                    fieldLabel: t('option') + ' 7',
+                    fieldLabel: t('Option') + ' 7',
                     allowBlank: true
                 }, {
                     name: 'option8',
-                    fieldLabel: t('option') + ' 8',
+                    fieldLabel: t('Option') + ' 8',
                     allowBlank: true
                 }, {
                     name: 'option9',
-                    fieldLabel: t('option') + ' 9',
+                    fieldLabel: t('Option') + ' 9',
                     allowBlank: true
                 }]
             }]

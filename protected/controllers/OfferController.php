@@ -28,7 +28,7 @@ class OfferController extends Controller
     {
         $this->instanceModel = new Offer;
         $this->abstractModel = Offer::model();
-        $this->titleReport   = Yii::t('yii', 'Offer');
+        $this->titleReport   = Yii::t('zii', 'Offer');
         parent::init();
     }
 

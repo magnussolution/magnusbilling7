@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -29,43 +29,43 @@ Ext.define('MBilling.view.callFailed.List', {
         me.allowCreate = false;
         me.grupableColumns = false;
         me.extraButtons = [{
-            text: t('Call Details'),
+            text: t('Call details'),
             glyph: icons.info,
             handler: 'onCallDetails',
             disabled: false,
             width: 130
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('date'),
+            header: t('Date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'starttime',
             flex: 3
         }, {
-            header: t('Sip Account'),
+            header: t('Sip user'),
             dataIndex: 'src',
             flex: 3
         }, {
-            header: t('CallerId'),
+            header: t('CallerID'),
             dataIndex: 'callerid',
             flex: 3,
             hidden: true,
             hideable: true
         }, {
-            header: t('number'),
+            header: t('Number'),
             dataIndex: 'calledstation',
             flex: 3
         }, {
-            header: t('destination'),
+            header: t('Destination'),
             dataIndex: 'idPrefixdestination',
             flex: 4
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -77,30 +77,30 @@ Ext.define('MBilling.view.callFailed.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idTrunktrunkcode}',
-            header: t('trunk'),
+            header: t('Trunk'),
             dataIndex: 'id_trunk',
             comboFilter: 'trunkcombo',
-            header: t('trunk'),
+            header: t('Trunk'),
             flex: 4,
             hidden: App.user.isClient || App.user.isAgent,
             hideable: !App.user.isClient && !App.user.isAgent
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'terminatecauseid',
             renderer: Helper.Util.formatDialStatus,
             flex: 2,
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('answer')],
-                    [2, t('busy')],
-                    [3, t('no') + ' ' + t('answer')],
-                    [4, t('cancelcall')],
-                    [5, 'congestion'],
-                    [6, 'chanunavail'],
-                    [7, 'dontcall'],
-                    [8, 'torture'],
-                    [9, 'invalidargs']
+                    [1, t('Answer')],
+                    [2, t('Busy')],
+                    [3, t('No answer')],
+                    [4, t('Cancel')],
+                    [5, t('Congestion')],
+                    [6, t('Chanunavail')],
+                    [7, t('Dontcall')],
+                    [8, t('Torture')],
+                    [9, t('Invalidargs')]
                 ]
             }
         }, {
@@ -110,7 +110,7 @@ Ext.define('MBilling.view.callFailed.List', {
             hidden: !window.dialC,
             flex: 3
         }, {
-            header: t('uniqueid'),
+            header: t('Uniqueid'),
             dataIndex: 'uniqueid',
             flex: 3,
             hidden: true,

@@ -56,7 +56,7 @@ Ext.define('MBilling.view.queue.ListDashboard', {
             dataIndex: 'agentName',
             flex: 3
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             renderer: Helper.Util.formatQueueState,
             flex: 4

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 20/09/2012
@@ -23,15 +23,15 @@ Ext.define('Ext.ux.form.field.FileUpload', {
     alias: 'widget.uploadfield',
     anchor: '0',
     name: 'file',
-    emptyText: t('selectFile'),
-    fieldLabel: t('file'),
+    emptyText: t('Select file'),
+    fieldLabel: t('File'),
     buttonText: undefined,
     maxSize: window.uploadFaxFilesizebites * 1000000,
     extAllowed: ['csv', 'ret'],
-    titleTipInfo: t('modelContent'),
-    titleWarning: t('warning'),
-    msgInvalidFile: t('fileNotAllow'),
-    msgInvalidSize: t('maxSizeFile'),
+    titleTipInfo: t('Model content'),
+    titleWarning: t('Warning'),
+    msgInvalidFile: t('File not allow'),
+    msgInvalidSize: t('Max size file'),
     childEls: ['browseButtonWrap', 'playButtonWrap'],
     buttonPlayMargin: 5,
     buttonConfig: {

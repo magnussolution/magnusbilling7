@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -33,12 +33,12 @@ Ext.define('MBilling.view.queue.Form', {
             allowBlank: App.user.isClient
         }, {
             name: 'name',
-            fieldLabel: t('name')
+            fieldLabel: t('Name')
         }, {
             xtype: 'languagecombo',
             name: 'language',
             value: App.user.language == 'pt_BR' ? 'br' : App.user.language,
-            fieldLabel: t('language')
+            fieldLabel: t('Language')
         }, {
             xtype: 'queuestrategycombo',
             name: 'strategy',
@@ -68,53 +68,53 @@ Ext.define('MBilling.view.queue.Form', {
             fieldLabel: t('Weight'),
             value: 0
         }, {
-            name: 'periodic-announce', //audio para anuncio
+            name: 'periodic-announce',
             fieldLabel: t('Periodic announce'),
             value: 'queue-periodic-announce'
         }, {
             xtype: 'numberfield',
-            name: 'periodic-announce-frequency', //cada cuanto executar el anuncio
+            name: 'periodic-announce-frequency',
             fieldLabel: t('Frequency'),
             value: 30
         }, {
             xtype: 'yesnostringcombo',
-            name: 'announce-position', //anuncioar la posicion en la cola
+            name: 'announce-position',
             fieldLabel: t('Announce position')
         }, {
             xtype: 'yesnostringcombo',
-            name: 'announce-holdtime', //anuncioar tiempo de espera
+            name: 'announce-holdtime',
             fieldLabel: t('Announce holdtime')
         }, {
             xtype: 'numberfield',
-            name: 'announce-frequency', //frequencia del los avisos
+            name: 'announce-frequency',
             fieldLabel: t('Announce frequency'),
             value: 45
         }, {
             xtype: 'combobox',
+            name: 'joinempty',
+            fieldLabel: t('Join empty'),
             forceSelection: true,
             editable: false,
             value: 'yes',
             store: [
                 ['no', t('No')],
                 ['yes', t('Yes')],
-                ['unavailable,invalid,unknown', t('unavailable,invalid,unknown')],
-                ['penalty,paused,invalid,unavailable', t('penalty,paused,invalid,unavailable')]
-            ],
-            name: 'joinempty',
-            fieldLabel: t('Join empty')
+                ['unavailable,invalid,unknown', t('Unavailable, Invalid, Unknown')],
+                ['penalty,paused,invalid,unavailable', t('Penalty, Paused, Invalid, Unavailable')]
+            ]
         }, {
             xtype: 'combobox',
+            name: 'leavewhenempty',
+            fieldLabel: t('Leave when empty'),
             forceSelection: true,
             editable: false,
             value: 'no',
             store: [
                 ['no', t('No')],
                 ['yes', t('Yes')],
-                ['unavailable,invalid,unknown', t('unavailable,invalid,unknown')],
-                ['penalty,paused,invalid,unavailable', t('penalty,paused,invalid,unavailable')]
-            ],
-            fieldLabel: t('Leave when empty'),
-            name: 'leavewhenempty'
+                ['unavailable,invalid,unknown', t('Unavailable, Invalid, Unknown')],
+                ['penalty,paused,invalid,unavailable', t('Penalty, Paused, Invalid, Unavailable')]
+            ]
         }, {
             xtype: 'numberfield',
             name: 'max_wait_time',
@@ -127,21 +127,21 @@ Ext.define('MBilling.view.queue.Form', {
             allowBlank: true
         }, {
             xtype: 'combobox',
+            name: 'ring_or_moh',
+            fieldLabel: t('Ring or playing MOH'),
             forceSelection: true,
             editable: false,
             value: 'moh',
             store: [
                 ['moh', t('MOH')],
                 ['ring', t('Ring')]
-            ],
-            fieldLabel: t('Ring or playing MOH'),
-            name: 'ring_or_moh'
+            ]
         }, {
             xtype: 'uploadfield',
-            fieldLabel: t('Audio') + ' ' + t('musiconhold'),
+            name: 'musiconhold',
+            fieldLabel: t('Audio musiconhold'),
             emptyText: t('Select an wav mono 8khz or gsm File'),
             allowBlank: true,
-            name: 'musiconhold',
             extAllowed: ['wav', 'gsm']
         }];
         me.callParent(arguments);

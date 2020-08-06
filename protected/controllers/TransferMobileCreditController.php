@@ -96,7 +96,7 @@ class TransferMobileCreditController extends Controller
             }
 
             if (!is_numeric($_POST['TransferToMobile']['amountValues'])) {
-                $this->modelTransferToMobile->addError('amountValues', Yii::t('yii', 'Invalid amount'));
+                $this->modelTransferToMobile->addError('amountValues', Yii::t('zii', 'Invalid amount'));
             } elseif (!count($this->modelTransferToMobile->getErrors())) {
 
                 if (!isset($_POST['TransferToMobile']['confirmed'])) {
@@ -131,7 +131,7 @@ class TransferMobileCreditController extends Controller
         if ($this->number == '' || !is_numeric($this->number)
             || strlen($this->number) < 8
             || preg_match('/ /', $this->number)) {
-            $this->modelTransferToMobile->addError('number', Yii::t('yii', 'Number invalid, try again'));
+            $this->modelTransferToMobile->addError('number', Yii::t('zii', 'Number invalid, try again'));
         }
 
         //request number information

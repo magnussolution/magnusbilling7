@@ -37,7 +37,7 @@ class RestrictedPhonenumberController extends Controller
     {
         $this->instanceModel = new RestrictedPhonenumber;
         $this->abstractModel = RestrictedPhonenumber::model();
-        $this->titleReport   = Yii::t('yii', 'Config');
+        $this->titleReport   = Yii::t('zii', 'Config');
         parent::init();
     }
 

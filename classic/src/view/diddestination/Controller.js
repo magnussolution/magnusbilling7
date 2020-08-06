@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -48,22 +48,22 @@ Ext.define('MBilling.view.diddestination.Controller', {
         var me = this,
             form = me.formPanel.getForm(),
             record = me.list.getSelectionModel().getSelection()[0];
-        method = record ? record.get('voip_call') : 'sipcall';
+        method = record ? record.get('voip_call') : t('SIP');
         switch (method) {
             case 0:
-                method = t('callforpstn');
+                method = t('Call to PSTN');
                 break;
             case 1:
-                method = t('sipcall');
+                method = t('SIP');
                 break;
             case 2:
-                method = t('ivr');
+                method = t('IVR');
                 break;
             case 3:
                 method = 'CallingCard';
                 break;
             case 4:
-                method = t('portalDeVoz');
+                method = t('Direct extension');
                 break;
             case 5:
                 method = t('CID Callback');
@@ -75,7 +75,7 @@ Ext.define('MBilling.view.diddestination.Controller', {
                 method = t('Queue');
                 break;
             case 8:
-                method = t('Call Group');
+                method = t('SIP group');
                 break;
             case 9:
                 method = t('Custom');
@@ -92,7 +92,7 @@ Ext.define('MBilling.view.diddestination.Controller', {
         var me = this,
             form = me.formPanel.getForm(),
             record = me.list.getSelectionModel().getSelection()[0];
-        method = t('sipcall');
+        method = t('SIP');
         showFields = me.formPanel.down('didtypecombo').store.findRecord('name', method).getData().showFields;
         me.showFieldsRelated(showFields);
         me.callParent(arguments);

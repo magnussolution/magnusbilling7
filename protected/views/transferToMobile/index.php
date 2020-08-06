@@ -24,11 +24,11 @@ $fieldOption = array('class' => 'input');
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
         <div class="styled-select">
             <?php echo $form->dropDownList($modelTransferToMobile, 'method', $methods,
     array(
-        'empty'    => Yii::t('yii', 'Select the method'),
+        'empty'    => Yii::t('zii', 'Select the method'),
         'disabled' => strlen($modelTransferToMobile->country) > 3,
         'onchange' => "this.form.submit()",
     )); ?>

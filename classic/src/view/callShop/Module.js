@@ -56,12 +56,12 @@ Ext.define('MBilling.view.callShop.Module', {
             items.push({
                 xtype: 'tabpanel',
                 reference: 'tab' + i,
-                title: t('Cabina') + i,
+                title: t('Booth') + i,
                 collapsed: i > 3,
                 items: [{
-                    reference: 'cabina' + i,
-                    title: t('Cabina'),
                     xtype: 'form',
+                    reference: 'cabina' + i,
+                    title: t('Booth'),
                     bodyPadding: 10,
                     defaults: {
                         xtype: 'displayfield',
@@ -78,8 +78,8 @@ Ext.define('MBilling.view.callShop.Module', {
                         layout: 'hbox',
                         items: [{
                             xtype: 'displayfield',
-                            fieldLabel: t('Number'),
                             name: 'callshopnumber',
+                            fieldLabel: t('Number'),
                             labelAlign: 'right',
                             labelWidth: 50,
                             renderer: function(value) {
@@ -87,11 +87,11 @@ Ext.define('MBilling.view.callShop.Module', {
                             },
                             flex: 2
                         }, {
+                            xtype: 'displayfield',
                             labelAlign: 'right',
                             labelWidth: 90,
-                            xtype: 'displayfield',
                             readOnly: true,
-                            fieldLabel: t('total'),
+                            fieldLabel: t('Total'),
                             name: 'total',
                             labelStyle: "font-size:18px!important;font-weight:bold;",
                             renderer: function(value) {
@@ -112,8 +112,8 @@ Ext.define('MBilling.view.callShop.Module', {
                         name: 'callshoptime',
                         renderer: Helper.Util.formatsecondsToTime
                     }, {
-                        border: false,
                         xtype: 'toolbar',
+                        border: false,
                         hidden: me.hideBbar,
                         dock: 'bottom',
                         items: [{
@@ -207,7 +207,7 @@ Ext.define('MBilling.view.callShop.Module', {
             if (tab = me.lookupReference('tab' + i)) {
                 name = row.data.callerid.length < 1 ? row.data.name : row.data.callerid;
                 status = Helper.Util.formatBooleanFree(row.data.status);
-                tab.setTitle(t('Cabina') + ' ' + i + ' - ' + name + ' ' + status);
+                tab.setTitle(t('Booth') + ' ' + i + ' - ' + name + ' ' + status);
                 tab.setVisible(true);
                 me.lookupReference('cabina' + i).getForm().loadRecord(row);
             }

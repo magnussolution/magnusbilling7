@@ -34,7 +34,7 @@ class CampaignPollInfoController extends Controller
     {
         $this->instanceModel = new CampaignPollInfo;
         $this->abstractModel = CampaignPollInfo::model();
-        $this->titleReport   = Yii::t('yii', 'Poll Info');
+        $this->titleReport   = Yii::t('zii', 'Poll Info');
         parent::init();
     }
 

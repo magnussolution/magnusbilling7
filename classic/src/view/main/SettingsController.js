@@ -14,7 +14,7 @@ Ext.define('MBilling.view.main.SettingsController', {
     },
     onSelectLayout: function(tree, record) {
         var me = this,
-            type = record.get('type');
+            type = record.get('Type');
         me.getView().userLayout = type;
         me.lookupReference('imageLayout').setSrc(me.getView().pathScreens + (type === 'standard' ? 'blue-crisp' : 'blue-crisp-desktop') + '.png');
     },
@@ -97,7 +97,7 @@ Ext.define('MBilling.view.main.SettingsController', {
                 },
                 url: 'index.php/configuration/theme',
                 success: function() {
-                    Ext.ux.Alert.alert(view.changeThemeTitle, t('successOperation'), 'success');
+                    Ext.ux.Alert.alert(view.changeThemeTitle, t('Success'), 'success');
                 }
             });
         }

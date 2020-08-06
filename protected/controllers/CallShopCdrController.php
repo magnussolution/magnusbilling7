@@ -41,7 +41,7 @@ class CallShopCdrController extends Controller
 
         $this->instanceModel = new CallShopCdr;
         $this->abstractModel = CallShopCdr::model();
-        $this->titleReport   = Yii::t('yii', 'CallShop');
+        $this->titleReport   = Yii::t('zii', 'CallShop');
         parent::init();
     }
 
@@ -75,7 +75,7 @@ class CallShopCdrController extends Controller
         $modelCallShop = $this->getSumPrice();
 
         $this->titleReport    = $this->config['global']['base_currency'] . ' ' . round($modelCallShop->price, 2);
-        $this->subTitleReport = Yii::t('yii', 'priceSun');
+        $this->subTitleReport = Yii::t('zii', 'Price SUM');
 
         $this->join          = '';
         $this->defaultFilter = 1;

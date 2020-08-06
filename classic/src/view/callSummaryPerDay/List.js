@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -30,7 +30,7 @@ Ext.define('MBilling.view.callSummaryPerDay.List', {
         me.allowUpdate = false;
         me.allowDelete = false;
         me.columns = [{
-            header: t('day'),
+            header: t('Day'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d'),
             dataIndex: 'day',
             filter: {
@@ -39,11 +39,11 @@ Ext.define('MBilling.view.callSummaryPerDay.List', {
             },
             flex: 3
         }, {
-            header: t('min_sessiontime'),
+            header: t('Duration'),
             dataIndex: 'sessiontime',
             flex: 2
         }, {
-            header: t('aloc_all_calls'),
+            header: t('ALOC all calls'),
             dataIndex: 'aloc_all_calls',
             renderer: Helper.Util.formatsecondsToTime,
             flex: 3
@@ -56,19 +56,19 @@ Ext.define('MBilling.view.callSummaryPerDay.List', {
             dataIndex: 'nbcall_fail',
             flex: 3
         }, {
-            header: t('buycost'),
+            header: t('Buy price'),
             dataIndex: 'buycost',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,
             hidden: App.user.isClient,
             hideable: App.user.isAdmin
         }, {
-            header: t('sessionbill'),
+            header: t('Sell price'),
             dataIndex: 'sessionbill',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3
         }, {
-            header: t('markup'),
+            header: t('Markup'),
             dataIndex: 'lucro',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,

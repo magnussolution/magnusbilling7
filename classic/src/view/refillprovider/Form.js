@@ -23,22 +23,22 @@ Ext.define('MBilling.view.refillprovider.Form', {
         var me = this;
         me.items = [{
             xtype: 'providercombo',
-            fieldLabel: t('Provider'),
-            name: 'id_provider'
+            name: 'id_provider',
+            fieldLabel: t('Provider')
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,00',
             name: 'credit',
-            fieldLabel: t('credit')
+            fieldLabel: t('Credit'),
+            mask: App.user.currency + ' #9.999.990,00'
         }, {
             xtype: 'textareafield',
             name: 'description',
-            fieldLabel: t('description'),
+            fieldLabel: t('Description'),
             allowBlank: true
         }, {
             xtype: 'yesnocombo',
             name: 'payment',
-            fieldLabel: t('add_payment'),
+            fieldLabel: t('Add payment'),
             allowBlank: true
         }];
         me.callParent(arguments);

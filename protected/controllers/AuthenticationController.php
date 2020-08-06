@@ -545,7 +545,7 @@ class AuthenticationController extends Controller
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
                 'success' => false,
-                'msg'     => Yii::t('yii', "IP blocked after 3 failing attempts.") . "<br><b>" . Yii::t('yii', "Wait 5 minutes and try again.") . "</b>" . "<br> IP: " . $_SERVER['REMOTE_ADDR'],
+                'msg'     => Yii::t('zii', "IP blocked after 3 failing attempts.") . "<br><b>" . Yii::t('zii', "Wait 5 minutes and try again.") . "</b>" . "<br> IP: " . $_SERVER['REMOTE_ADDR'],
             ));
             $nameMsg = $this->nameMsg;
 

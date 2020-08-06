@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2017
@@ -124,11 +124,11 @@ Ext.define('MBilling.view.servicesUse.Controller', {
         me.formPanel.collapse();
         me.list.setLoading(true);
         if (me.list.getSelectionModel().getSelection().length == 1) {
-            if (selected.get('status') == 0) {
-                Ext.ux.Alert.alert(me.titleWarning, t('This Service alread is canceled'), 'notification');
+            if (selected.get('Status') == 0) {
+                Ext.ux.Alert.alert(me.titleWarning, t('This service already is canceled'), 'notification');
                 me.list.setLoading(false);
                 return;
-            } else if (selected.get('status') == 2) {
+            } else if (selected.get('Status') == 2) {
                 me.ondSendRequest(selected.get('id'));
             } else {
                 Ext.Msg.confirm(me.titleConfirmation, '<font color=red>' + t('ALERT: Do you really want cancel this service to this user?') + '</font>', function(btn) {
@@ -147,7 +147,7 @@ Ext.define('MBilling.view.servicesUse.Controller', {
                 })
             }
         } else {
-            Ext.ux.Alert.alert(me.titleError, t('Please Select only a record'), 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
             me.list.setLoading(false);
         }
     },

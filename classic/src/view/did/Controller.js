@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -111,12 +111,12 @@ Ext.define('MBilling.view.did.Controller', {
     onRelease: function(btn, pressed) {
         var me = this,
             selected = me.list.getSelectionModel().getSelection()[0],
-            msgConfirmation = t('Confirm Release Did') + ' ' + selected.get('did'),
+            msgConfirmation = t('Confirm release DID') + ' ' + selected.get('DID'),
             store = me.list.getStore();
         if (me.list.getSelectionModel().getSelection().length > 1) {
-            Ext.ux.Alert.alert(me.titleError, t('Please Select only one DID to release'), 'error');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only one DID to release'), 'error');
         } else if (selected.get('reserved') === 0) {
-            Ext.ux.Alert.alert(me.titleError, t('didIsNotUse'), 'error');
+            Ext.ux.Alert.alert(me.titleError, t('Did is not in use'), 'error');
             store.load();
         } else {
             Ext.Msg.confirm(me.titleConfirmation, msgConfirmation, function(btn) {
@@ -146,8 +146,8 @@ Ext.define('MBilling.view.did.Controller', {
             getForm = me.lookupReference('buydidPanel'),
             fieldDid = getForm.getForm().findField('did').getValue(),
             valueDid = getForm.getForm().findField('did').rawValue,
-            msgConfirmation = t('confirmationBuyDid');
-        if (fieldDid < 1) Ext.ux.Alert.alert(me.titleError, t('Please, select a Did'), 'warning');
+            msgConfirmation = t('Do you confirm buy this DID?');
+        if (fieldDid < 1) Ext.ux.Alert.alert(me.titleError, t('Please, select a DID'), 'warning');
         else {
             Ext.Msg.confirm(t('Confirmation'), msgConfirmation + ' <br>' + valueDid, function(btn) {
                 if (btn === 'yes') {

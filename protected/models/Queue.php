@@ -97,7 +97,7 @@ class Queue extends Model
                 }
             }
             if (!isset($model->id)) {
-                $this->addError($attribute, Yii::t('yii', 'You need add a existent Sip Account, IVR or Queue.'));
+                $this->addError($attribute, Yii::t('zii', 'You need add a existent Sip Account, IVR or Queue.'));
             }
             $this->max_wait_time_action = $type . '/' . $destination;
         }
@@ -106,11 +106,11 @@ class Queue extends Model
     public function checkname($attribute, $params)
     {
         if (preg_match('/ /', $this->name)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in name'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in name'));
         }
 
         if (!preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->name)) {
-            $this->addError($attribute, Yii::t('yii', 'Name need start with numbers or letters'));
+            $this->addError($attribute, Yii::t('zii', 'Name need start with numbers or letters'));
         }
     }
 

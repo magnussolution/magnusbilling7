@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -60,7 +60,7 @@ Ext.define('MBilling.view.main.Main', {
                     menu: [{
                         handler: 'openChangePassword',
                         iconCls: 'icon-change-password',
-                        text: t('changePassword'),
+                        text: t('Change password'),
                         hidden: !App.user.isAdmin
                     }, {
                         text: t('Import logo'),
@@ -68,12 +68,12 @@ Ext.define('MBilling.view.main.Main', {
                         handler: 'importLogo',
                         hidden: !App.user.isAdmin || window.isTablet || window.isTablets
                     }, {
-                        text: t('import_wallpaper'),
+                        text: t('Import wallpaper'),
                         glyph: icons.cog,
                         handler: 'importWallpaper',
                         hidden: !App.user.isAdmin || window.isTablet || window.isTablets
                     }, {
-                        text: t('theme_settings'),
+                        text: t('Theme settings'),
                         glyph: icons.cog,
                         handler: 'openSettings',
                         hidden: !App.user.isAdmin || window.isTablet || window.isTablets
@@ -116,15 +116,15 @@ Ext.define('MBilling.view.main.Main', {
                 render: 'loadMenuStandard'
             }
         }, {
-            region: 'center',
             xtype: 'tabpanel',
+            region: 'center',
             reference: 'tabPanelCenter',
             listeners: {
                 tabchange: 'changeActivatedTab'
             },
             items: [{
-                hidden: window.isTablet,
                 xtype: 'dashboardmodule',
+                hidden: window.isTablet,
                 glyph: icons.home,
                 title: t('Home'),
                 stateful: false,

@@ -50,7 +50,7 @@ Ext.define('MBilling.view.main.Login', {
                 height: 55,
                 hideLabel: true,
                 allowBlank: false,
-                emptyText: t('Username or Email')
+                emptyText: t('Username or email')
             }, {
                 xtype: 'textfield',
                 cls: 'auth-textbox',

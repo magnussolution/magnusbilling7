@@ -32,7 +32,7 @@ Ext.define('MBilling.view.groupUser.Controller', {
                 }
             });
         } else {
-            Ext.ux.Alert.alert(me.titleError, t('Please Select only a record'), 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
         };
         me.store.load()
     }

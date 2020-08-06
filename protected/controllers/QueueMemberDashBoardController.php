@@ -30,7 +30,7 @@ class QueueMemberDashBoardController extends Controller
     {
         $this->instanceModel = new QueueMemberDashBoard;
         $this->abstractModel = QueueMemberDashBoard::model();
-        $this->titleReport   = Yii::t('yii', 'Queue Member DashBoard');
+        $this->titleReport   = Yii::t('zii', 'Queue Member DashBoard');
 
         parent::init();
     }

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -29,7 +29,7 @@ Ext.define('MBilling.view.offerUse.List', {
         me.allowUpdate = false;
         me.allowDelete = false;
         me.columns = [{
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -39,21 +39,21 @@ Ext.define('MBilling.view.offerUse.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idOfferlabel}',
-            header: t('offer'),
+            header: t('Offer'),
             dataIndex: 'id_offer',
             comboFilter: 'offercombo',
             flex: 3
         }, {
-            header: t('monthpayed'),
+            header: t('Month payed'),
             dataIndex: 'month_payed',
             flex: 3
         }, {
-            header: t('reservationdate'),
+            header: t('Reservation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d'),
             dataIndex: 'reservationdate',
             flex: 3
         }, {
-            header: t('releasedate'),
+            header: t('Release date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d'),
             dataIndex: 'releasedate',
             flex: 3

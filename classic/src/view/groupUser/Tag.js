@@ -8,7 +8,7 @@ Ext.define('MBilling.view.groupUser.Tag', {
     extend: 'Ext.form.field.Tag',
     alias: 'widget.groupusertag',
     name: 'id_group',
-    fieldLabel: t('GroupUser'),
+    fieldLabel: t('Group user'),
     displayField: 'name',
     valueField: 'id',
     initComponent: function() {

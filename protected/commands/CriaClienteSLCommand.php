@@ -83,7 +83,7 @@ class CriaClienteSLCommand extends ConsoleCommand
             echo json_encode(array(
                 'success' => false,
                 'rows'    => array(),
-                'errors'  => Yii::t('yii', $response[0]->msg),
+                'errors'  => Yii::t('zii', $response[0]->msg),
             ));
 
         }

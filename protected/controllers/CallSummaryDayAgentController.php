@@ -30,7 +30,7 @@ class CallSummaryDayAgentController extends Controller
     {
         $this->instanceModel = new CallSummaryDayAgent;
         $this->abstractModel = CallSummaryDayAgent::model();
-        $this->titleReport   = Yii::t('yii', 'Calls Summary per day per agent');
+        $this->titleReport   = Yii::t('zii', 'Summary Day Agent');
         parent::init();
     }
 

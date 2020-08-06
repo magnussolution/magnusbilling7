@@ -174,15 +174,15 @@ Ext.define('Overrides.ux.desktop.App', {
             contextMenuItems: [{
                 handler: 'openChangePassword',
                 iconCls: 'icon-change-password',
-                text: t('changePassword'),
+                text: t('Change password'),
                 hidden: !App.user.isAdmin
             }, {
-                text: t('import_wallpaper'),
+                text: t('Import wallpaper'),
                 glyph: icons.cog,
                 handler: 'importLogo',
                 hidden: !App.user.isAdmin
             }, {
-                text: t('Settings') + ' ' + t('Theme'),
+                text: t('Settings theme'),
                 iconCls: 'icon-wallpaper',
                 handler: 'openSettings',
                 hidden: !App.user.isAdmin
@@ -212,27 +212,20 @@ Ext.define('Overrides.ux.desktop.App', {
                     textAlign: 'left'
                 },
                 items: [{
-                        text: t('import_wallpaper'),
-                        glyph: icons.cog,
-                        handler: 'importLogo',
-                        hidden: !App.user.isAdmin
-                    }
-                    /*,{
-                                        text   : me.textHelp,
-                                        glyph  : icons.support,
-                                        handler: 'openHelp'
-                                    }*/
-                    , {
-                        text: t('Settings') + ' ' + t('Theme'),
-                        iconCls: 'icon-wallpaper',
-                        handler: 'openSettings',
-                        hidden: !App.user.isAdmin
-                    }, '-', {
-                        text: me.textLogout,
-                        glyph: icons.exit,
-                        handler: 'logout'
-                    }
-                ]
+                    text: t('Import wallpaper'),
+                    glyph: icons.cog,
+                    handler: 'importLogo',
+                    hidden: !App.user.isAdmin
+                }, {
+                    text: t('Settings theme'),
+                    iconCls: 'icon-wallpaper',
+                    handler: 'openSettings',
+                    hidden: !App.user.isAdmin
+                }, '-', {
+                    text: me.textLogout,
+                    glyph: icons.exit,
+                    handler: 'logout'
+                }]
             }
         };
     },

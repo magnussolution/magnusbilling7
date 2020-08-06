@@ -32,7 +32,7 @@ class CallBackController extends Controller
     {
         $this->instanceModel = new CallBack;
         $this->abstractModel = CallBack::model();
-        $this->titleReport   = Yii::t('yii', 'CallBack');
+        $this->titleReport   = Yii::t('zii', 'CallBack');
         parent::init();
     }
 

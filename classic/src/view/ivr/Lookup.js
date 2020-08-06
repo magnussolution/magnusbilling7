@@ -8,18 +8,18 @@ Ext.define('MBilling.view.ivr.Lookup', {
     extend: 'Ext.ux.form.field.Lookup',
     alias: 'widget.ivrlookup',
     name: 'id_ivr',
-    fieldLabel: t('Ivr'),
+    fieldLabel: t('IVR'),
     displayField: 'idIvrname',
     displayFieldList: 'name',
     gridConfig: {
         xtype: 'ivrlist',
         fieldSearch: 'name',
         columns: [{
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 5
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUsernumber',
             filter: {
                 type: 'string',

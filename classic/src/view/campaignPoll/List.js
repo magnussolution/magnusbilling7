@@ -11,13 +11,13 @@ Ext.define('MBilling.view.campaignPoll.List', {
     initComponent: function() {
         var me = this;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 4
         }, {
@@ -28,7 +28,7 @@ Ext.define('MBilling.view.campaignPoll.List', {
             comboFilter: 'campaigncombo',
             flex: 4
         }, {
-            header: t('description'),
+            header: t('Description'),
             dataIndex: 'description',
             flex: 4
         }]

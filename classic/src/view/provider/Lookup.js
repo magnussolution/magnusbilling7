@@ -15,10 +15,10 @@ Ext.define('MBilling.view.provider.Lookup', {
         xtype: 'providerlist',
         fieldSearch: 'username',
         columns: [{
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'provider_name'
         }, {
-            header: t('description'),
+            header: t('Description'),
             dataIndex: 'description'
         }]
     }

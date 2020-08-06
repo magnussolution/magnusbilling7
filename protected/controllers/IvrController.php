@@ -38,7 +38,7 @@ class IvrController extends Controller
         $this->uploaddir     = $this->magnusFilesDirectory . 'sounds/';
         $this->instanceModel = new Ivr;
         $this->abstractModel = Ivr::model();
-        $this->titleReport   = Yii::t('yii', 'Ivr');
+        $this->titleReport   = Yii::t('zii', 'IVR');
         parent::init();
     }
 

@@ -58,7 +58,7 @@ Ext.define('MBilling.view.main.SetUserData', {
         }, {
             xtype: 'countryisocombo',
             reference: 'countryiso',
-            fieldLabel: t('country'),
+            fieldLabel: t('Country'),
             labelWidth: 100,
             allowBlank: false,
             value: App.user.base_country.length != 3 ? 'USA' : App.user.base_country,

@@ -79,7 +79,7 @@ class CallArchiveController extends Controller
     {
         $this->instanceModel = new CallArchive;
         $this->abstractModel = CallArchive::model();
-        $this->titleReport   = Yii::t('yii', 'Calls');
+        $this->titleReport   = Yii::t('zii', 'Calls');
 
         parent::init();
 
@@ -181,7 +181,7 @@ class CallArchiveController extends Controller
 
                     header('Location: ' . $url);
                 } else {
-                    echo yii::t('yii', 'Audio no found');
+                    echo yii::t('zii', 'Audio no found');
                 }
             }
             exit;

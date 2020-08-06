@@ -15,7 +15,7 @@ Ext.define('MBilling.view.trunk.Lookup', {
         xtype: 'trunklist',
         fieldSearch: 'trunkcode',
         columns: [{
-            header: t('trunkcode'),
+            header: t('Name'),
             dataIndex: 'trunkcode'
         }]
     }

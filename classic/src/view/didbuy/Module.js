@@ -14,8 +14,8 @@ Ext.define('MBilling.view.didbuy.Module', {
     initComponent: function() {
         var me = this;
         me.items = [{
-            reference: 'buydidPanel',
             xtype: 'form',
+            reference: 'buydidPanel',
             margin: '10 10 10 10',
             autoShow: true,
             closable: false,
@@ -34,8 +34,8 @@ Ext.define('MBilling.view.didbuy.Module', {
             },
             items: [{
                 xtype: 'didbuycombo',
-                fieldLabel: t('Select a Did'),
-                name: 'did'
+                name: 'did',
+                fieldLabel: t('Select a DID')
             }],
             bbar: [{
                 text: t('Next'),

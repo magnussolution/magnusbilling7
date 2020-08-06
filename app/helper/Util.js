@@ -6,18 +6,18 @@
  */
 Ext.define('Helper.Util', {
     singleton: true,
-    yesValue: t('active'),
-    noValue: t('inactive'),
+    yesValue: t('Active'),
+    noValue: t('Inactive'),
     colorYesValue: 'green',
     colorNoValue: 'red',
-    LCRbuy: t('LCRAccordingtothebuyerPrice'),
-    LCRSell: t('LCRAccordingtothesellerPrice'),
-    prepaidValue: t('prepaid'),
-    pospaidValue: t('pospaid'),
-    yesValue: t('yes'),
-    noValue: t('no'),
-    activeValue: t('active'),
-    inactiveValue: t('inactive'),
+    LCRbuy: t('LCR According buyer Price'),
+    LCRSell: t('LCR According seseller Price'),
+    prepaidValue: t('Pre paid'),
+    pospaidValue: t('Pos paid'),
+    yesValue: t('Yes'),
+    noValue: t('No'),
+    activeValue: t('Active'),
+    inactiveValue: t('Inactive'),
     getListFilter: function(combo, name) {
         var store,
             labelField;
@@ -232,7 +232,7 @@ Ext.define('Helper.Util', {
     formatBooleanFree: function(value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'orange' : '#FFCC00';
-        value = value == 0 ? t('blocked') : value == 1 ? t('free') : value == 2 ? t('inuse') : value == 3 ? t('calling') : t('pending');
+        value = value == 0 ? t('Blocked') : value == 1 ? t('Free') : value == 2 ? t('In use') : value == 3 ? t('Calling') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatBoleto: function(value) {
@@ -242,37 +242,37 @@ Ext.define('Helper.Util', {
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatPackageType: function(value) {
-        value = value == 0 ? t('unlimitedcalls') : value == 1 ? t('numberfreecalls') : t('freeseconds');
+        value = value == 0 ? t('Unlimited calls') : value == 1 ? t('Number free calls') : t('Free seconds');
         return value;
     },
     formatBooleancallback: function(value) {
         color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'orange' : value == 4 ? 'black' : value == 5 ? 'green' : '#FFCC00';
-        value = value == 1 ? t('active') : value == 2 ? t('pending') : value == 4 ? t('Not working') : value == 5 ? t('Complete') : t('sent');
+        value = value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 4 ? t('Not working') : value == 5 ? t('Complete') : t('Sent');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatPorcente: function(value) {
         return value + '%';
     },
     formatBillingType: function(value) {
-        value = value == 0 ? t('monthly') : t('weekly');
+        value = value == 0 ? t('Monthly') : t('Weekly');
         return value;
     },
     formatDidType: function(value) {
         switch (value) {
             case 0:
-                value = t('callforpstn');
+                value = t('Call to PSTN');
                 break;
             case 1:
-                value = t('sipcall');
+                value = t('SIP');
                 break;
             case 2:
-                value = t('ivr');
+                value = t('IVR');
                 break;
             case 3:
-                value = 'CallingCard';
+                value = t('CallingCard');
                 break;
             case 4:
-                value = t('portalDeVoz');
+                value = t('Direct extension');
                 break;
             case 5:
                 value = t('CID Callback');
@@ -289,12 +289,15 @@ Ext.define('Helper.Util', {
             case 9:
                 value = t('Custom');
                 break;
+            case 10:
+                value = t('Context');
+                break;
         }
         return value;
     },
     formatLcrtype: function(value) {
         var me = Helper.Util,
-            value = value == 1 ? t('LCRAccordingtothebuyerPrice') : value == 2 ? t('Load Balancer') : value == 0 ? t('LCRAccordingtothesellerPrice') : '';
+            value = value == 1 ? t('LCR According buyer Price') : value == 2 ? t('Load Balancer') : value == 0 ? t('LCR According seseller Price') : '';
         return value;
     },
     formatMoneyDecimalWithoutColor: function(value) {
@@ -339,7 +342,7 @@ Ext.define('Helper.Util', {
     },
     formatUserType: function(value) {
         var me = Helper.Util,
-            value = value == 1 ? t('admin') : value == 2 ? t('agent') : value == 3 ? t('user') : t('NULL');
+            value = value == 1 ? t('Admin') : value == 2 ? t('Agent') : value == 3 ? t('User') : t('NULL');
         return value;
     },
     formatMoney: function(value) {
@@ -362,11 +365,11 @@ Ext.define('Helper.Util', {
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatCampaignType: function(value) {
-        value = value == 1 ? t('voice') : value == 3 ? t('WhatsApp') : t('sms');
+        value = value == 1 ? t('Coice') : t('SMS');
         return value;
     },
     formatDirection: function(value) {
-        value = value == 1 ? t('outbound') : t('inbound');
+        value = value == 1 ? t('Outbound') : t('Inbound');
         return value;
     },
     formatHangupCause: function(value) {
@@ -497,41 +500,41 @@ Ext.define('Helper.Util', {
     formatCallType: function(value) {
         switch (value) {
             case 0:
-                value = t('standard');
+                value = t('Standard');
                 break;
             case 1:
-                value = t('sipcall');
+                value = t('SIP');
                 break;
             case 2:
-                value = t('did');
+                value = t('DID');
                 break;
             case 3:
-                value = t('didvoip');
+                value = t('DID voip');
                 break;
             case 4:
-                value = t('callback');
+                value = t('Callback');
                 break;
             case 5:
-                value = t('callcenter');
+                value = t('Voice Broadcasting');
                 break;
             case 6:
-                value = t('sms');
+                value = t('SMS');
                 break;
             case 7:
-                value = t('transfer');
+                value = t('Transfer');
                 break;
             case 8:
-                value = t('queue');
+                value = t('Queue');
                 break;
             case 9:
-                value = t('ivr');
+                value = t('IVR');
                 break;
         }
         return value;
     },
     formatWhatsapp: function(value) {
         color = value == 0 ? 'blue' : value == 1 ? 'green' : value == 2 ? 'red' : value == 3 ? 'black' : value == 4 ? 'red' : '#FFCC00';
-        value = value == 0 ? t('inactive') : value == 1 ? t('active') : value == 2 ? t('blocked') : value == 3 ? t('Wrong identity') : value == 4 ? t('blocked') : t('pending');
+        value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('Blocked') : value == 3 ? t('Wrong identity') : value == 4 ? t('Blocked') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatBoleto: function(value) {
@@ -543,13 +546,13 @@ Ext.define('Helper.Util', {
     formatBooleanActive: function(value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'green' : value == 4 ? 'red' : value == 5 ? 'orange' : '#FFCC00';
-        value = value == 0 ? t('inactive') : value == 1 ? t('active') : value == 2 ? t('pending') : value == 3 ? t('sent') : value == 4 ? t('blocked') : value == 5 ? t('AMD') : t('pending');
+        value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 3 ? t('Sent') : value == 4 ? t('Blocked') : value == 5 ? t('AMD') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatBooleanSms: function(value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : '#FFCC00',
-            value = value == 0 ? t('error') : value == 1 ? t('sent') : value == 2 ? t('received') : t('pending');
+            value = value == 0 ? t('Error') : value == 1 ? t('Sent') : value == 2 ? t('Received') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatLanguageImage: function(value) {
@@ -580,31 +583,31 @@ Ext.define('Helper.Util', {
     formatDialStatus: function(value) {
         switch (value) {
             case 1:
-                value = t('answer');
+                value = t('Answer');
                 break;
             case 2:
-                value = t('busy');
+                value = t('Busy');
                 break;
             case 3:
-                value = t('no') + ' ' + t('answer');
+                value = t('No answer');
                 break;
             case 4:
-                value = t('cancelcall');
+                value = t('Cancel');
                 break;
             case 5:
-                value = 'congestion';
+                value = t('Congestion');
                 break;
             case 6:
-                value = 'chanunavail';
+                value = t('Chanunavail');
                 break;
             case 7:
-                value = 'dontcall';
+                value = t('Dontcall');
                 break;
             case 8:
-                value = 'torture';
+                value = t('Torture');
                 break;
             case 9:
-                value = 'invalidargs';
+                value = t('Invalidargs');
                 break;
         }
         return value;
@@ -621,7 +624,7 @@ Ext.define('Helper.Util', {
                 value = '<span style="color:red; font-weight: bold;">' + t('On Phone') + '</span>';
                 break;
             case 'Idle':
-                value = t('Idle');
+                value = 'Idle';
                 break;
         }
         return value;

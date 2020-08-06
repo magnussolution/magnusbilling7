@@ -48,7 +48,7 @@ class JoomlaController extends Controller
 
         if (count($modelUser)) {
             if (isset($is_android)) {
-                exit(Yii::t('yii', 'Email already in use'));
+                exit(Yii::t('zii', 'Email already in use'));
             } else {
                 exit('COM_USERS_PROFILE_EMAIL1_MESSAGE');
             }

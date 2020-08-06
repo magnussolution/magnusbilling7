@@ -17,9 +17,9 @@
 
 <?php if (count($countries) > 1): ?>
 <div class="field">
-	<?php echo $form->labelEx($did, Yii::t('yii', 'Country')) ?>
+	<?php echo $form->labelEx($did, Yii::t('zii', 'Country')) ?>
 	<div class="styled-select">
-	<?php echo $form->dropDownList($did, 'country', $countries, array('prompt' => Yii::t('yii', 'Select a country'))); ?>
+	<?php echo $form->dropDownList($did, 'country', $countries, array('prompt' => Yii::t('zii', 'Select a country'))); ?>
 	</div>
 </div>
 
@@ -29,6 +29,6 @@
 
 
 
-<?php echo CHtml::submitButton(Yii::t('yii', 'Next'), array('class' => 'button')); ?>
+<?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array('class' => 'button')); ?>
 
 <?php $this->endWidget();?>

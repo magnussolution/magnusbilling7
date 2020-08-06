@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -29,18 +29,18 @@ Ext.define('MBilling.view.offerCdr.List', {
         me.allowUpdate = false;
         me.allowDelete = false;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('date'),
+            header: t('Date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'date_consumption',
             flex: 3
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -50,12 +50,12 @@ Ext.define('MBilling.view.offerCdr.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idOfferlabel}',
-            header: t('offer'),
+            header: t('Offer'),
             dataIndex: 'id_offer',
             comboFilter: 'offercombo',
             flex: 3
         }, {
-            header: t('duration'),
+            header: t('Duration'),
             dataIndex: 'used_secondes',
             renderer: Helper.Util.formatsecondsToTime,
             flex: 3

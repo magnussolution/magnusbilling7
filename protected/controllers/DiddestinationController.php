@@ -63,7 +63,7 @@ class DiddestinationController extends Controller
     {
         $this->instanceModel = new Diddestination;
         $this->abstractModel = Diddestination::model();
-        $this->titleReport   = Yii::t('yii', 'Did Destination');
+        $this->titleReport   = Yii::t('zii', 'DID Destination');
         parent::init();
     }
 
@@ -83,7 +83,7 @@ class DiddestinationController extends Controller
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => '[]',
-                    'errors'  => Yii::t('yii', 'You only can set DID to CLIENTS'),
+                    'errors'  => Yii::t('zii', 'You only can set DID to CLIENTS'),
                 ));
                 exit;
             }
@@ -96,7 +96,7 @@ class DiddestinationController extends Controller
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => '[]',
-                        'errors'  => Yii::t('yii', 'Customer not have credit for buy Did') . ' - ' . $did->did,
+                        'errors'  => Yii::t('zii', 'Customer not have credit for buy DID') . ' - ' . $did->did,
                     ));
                     exit;
                 }
@@ -199,11 +199,11 @@ class DiddestinationController extends Controller
                         //adiciona a recarga e pagamento do custo de ativaçao
                         if ($modelDid->connection_charge > 0) {
                             UserCreditManager::releaseUserCredit($model->id_user, $modelDid->connection_charge,
-                                Yii::t('yii', 'ActivationDid') . '' . $modelDid->did, 0);
+                                Yii::t('zii', 'Activation DID') . '' . $modelDid->did, 0);
                         }
 
                         UserCreditManager::releaseUserCredit($model->id_user, $modelDid->fixrate,
-                            Yii::t('yii', 'MonthlypaymentDid') . '' . $modelDid->did, 0);
+                            Yii::t('zii', 'Monthly payment DID') . '' . $modelDid->did, 0);
 
                         $mail = new Mail(Mail::$TYPE_DID_CONFIRMATION, $model->id_user);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $modelUser->credit);

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -53,7 +53,7 @@ Ext.define('MBilling.view.callShop.Controller', {
         if (tab = me.lookupReference('tab' + id)) {
             name = row.data.callerid.length < 1 ? row.data.name : row.data.callerid;
             status = Helper.Util.formatBooleanFree(row.data.status);
-            tab.setTitle(t('Cabina') + ' ' + id + ' - ' + name + ' ' + status);
+            tab.setTitle(t('Booth') + ' ' + id + ' - ' + name + ' ' + status);
             tab.setVisible(true);
             getForm.loadRecord(row);
         }
@@ -92,7 +92,7 @@ Ext.define('MBilling.view.callShop.Controller', {
             filterCabina = Ext.encode([{
                 type: 'string',
                 comparison: 'eq',
-                value: selected.get('name'),
+                value: selected.get('Name'),
                 field: 'cabina'
             }, {
                 type: 'list',
@@ -136,7 +136,7 @@ Ext.define('MBilling.view.callShop.Controller', {
             filterCabina = [{
                 type: 'string',
                 comparison: 'eq',
-                value: selected.get('name'),
+                value: selected.get('Name'),
                 field: 'cabina'
             }, {
                 type: 'list',
@@ -149,7 +149,7 @@ Ext.define('MBilling.view.callShop.Controller', {
             btnCobrar = me.formPanel.down('#charge'),
             btnLiberar = me.formPanel.down('#release'),
             btnPrint = me.formPanel.down('#print');
-        tbtextPriceSum.setText('<b> ' + t('pricesum') + ' 0.00');
+        tbtextPriceSum.setText('<b> ' + t('Sum to pay') + ' 0.00');
         me.formPanel.expand();
         btnCobrar.enable();
         btnLiberar.enable();
@@ -157,10 +157,10 @@ Ext.define('MBilling.view.callShop.Controller', {
         storeCallshopcdr.proxy.extraParams.filter = filterCabina;
         storeCallshopcdr.load({
             callback: function(records) {
-                if (records) records[0] && tbtextPriceSum.setText('<b> ' + t('pricesum') + ' ' + t('moedasimblo') + ' ' + records[0].get('priceSum') + '</b> ');
+                if (records) records[0] && tbtextPriceSum.setText('<b> ' + t('Total to pay') + ' ' + App.user.currency + ' ' + records[0].get('priceSum') + '</b> ');
             }
         });
-        console.log(selected.get('callerid') + ', ' + selected.get('name'));
+        console.log(selected.get('CallerID') + ', ' + selected.get('Name'));
         storeCallshopcdr.defaultFilter = initFilter;
         me.showHideFields();
         me.focusFirstField();
@@ -175,7 +175,7 @@ Ext.define('MBilling.view.callShop.Controller', {
             filter = Ext.encode([{
                 type: 'string',
                 comparison: 'eq',
-                value: selected.get('name'),
+                value: selected.get('Name'),
                 field: 'cabina'
             }, {
                 type: 'list',

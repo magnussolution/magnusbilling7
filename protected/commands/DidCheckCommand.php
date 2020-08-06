@@ -76,7 +76,7 @@ class DidCheckCommand extends ConsoleCommand
                             $didUse->month_payed++;
                             $didUse->save();
 
-                            $description = Yii::t('yii', 'Monthly payment Did') . ' ' . $didUse->idDid->did;
+                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
                             UserCreditManager::releaseUserCredit($didUse->id_user, $didUse->idDid->fixrate, $description, 0);
 
                             $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user);
@@ -86,7 +86,7 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->send();
                             $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                         } else {
-                            $description = Yii::t('yii', 'Monthly payment Did') . ' ' . $didUse->idDid->did;
+                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
 
                             $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " AGENT '" . $modelAgent->username . "' HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
@@ -135,7 +135,7 @@ class DidCheckCommand extends ConsoleCommand
                             $didUse->month_payed++;
                             $didUse->save();
 
-                            $description = Yii::t('yii', 'Monthly payment Did') . ' ' . $didUse->idDid->did;
+                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
                             UserCreditManager::releaseUserCredit($didUse->id_user, $didUse->idDid->fixrate, $description, 0);
 
                             $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user);
@@ -145,7 +145,7 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->send();
                             $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                         } else {
-                            $description = Yii::t('yii', 'Monthly payment Did') . ' ' . $didUse->idDid->did;
+                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
 
                             $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " AGENT '" . $modelAgent->username . "' HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 

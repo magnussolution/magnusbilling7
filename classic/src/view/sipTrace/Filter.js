@@ -64,7 +64,7 @@ Ext.define('MBilling.view.sipTrace.Filter', {
         me.bbar = [{
             width: 150,
             iconCls: 'icon-play',
-            text: t('Start'),
+            text: t('Start capture'),
             scope: me,
             handler: me.onStart
         }];

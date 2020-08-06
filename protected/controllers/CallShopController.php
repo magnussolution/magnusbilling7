@@ -26,7 +26,7 @@ class CallShopController extends Controller
     {
         $this->instanceModel = new CallShop;
         $this->abstractModel = CallShop::model();
-        $this->titleReport   = Yii::t('yii', 'CallShop');
+        $this->titleReport   = Yii::t('zii', 'CallShop');
         parent::init();
     }
 

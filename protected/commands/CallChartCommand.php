@@ -152,7 +152,7 @@ class CallChartCommand extends ConsoleCommand
                             $type        = 'SIP';
                             $sip_account = $originate;
                             $modelSip    = Sip::model()->find('name = :key', array(':key' => $sip_account));
-                            $trunk       = Yii::t('yii', 'Sip Call');
+                            $trunk       = Yii::t('zii', 'Sip Call');
                             $id_user     = $modelSip->id_user;
                             $is_sip_call = true;
                         } else {
@@ -161,15 +161,18 @@ class CallChartCommand extends ConsoleCommand
                             $tech   = substr($ndiscado, 0, $config['global']['ip_tech_length']);
 
                             //try get user
-                            $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', array(':key' => $tech));
+                            if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
+                                $modelSip = Sip::model()->find('name = :key',
+                                    array(
+                                        ':key' => $sip_account,
+                                    ));
+                            } else {
+
+                                $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', array(':key' => $tech));
+                            }
                             if (!count($modelSip)) {
 
-                                if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
-                                    $modelSip = Sip::model()->find('name = :key',
-                                        array(
-                                            ':key' => $sip_account,
-                                        ));
-                                } else if (strlen($sip_account) > 3) {
+                                if (strlen($sip_account) > 3) {
                                     //echo "check per sip_account $originate\n";
                                     $modelSip = Sip::model()->find('name = :key',
                                         array(

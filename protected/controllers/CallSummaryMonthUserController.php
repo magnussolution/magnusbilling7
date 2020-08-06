@@ -48,7 +48,7 @@ class CallSummaryMonthUserController extends Controller
         }
         $this->instanceModel = new CallSummaryMonthUser;
         $this->abstractModel = CallSummaryMonthUser::model();
-        $this->titleReport   = Yii::t('yii', 'Calls Summary Per Month Per User');
+        $this->titleReport   = Yii::t('zii', 'Summary Month User');
         parent::init();
     }
 

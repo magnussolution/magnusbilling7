@@ -10,7 +10,7 @@ Ext.define('Ext.ux.window.ImportCsv', {
     modal: true,
     layout: 'fit',
     iconCls: 'icon-import-csv',
-    title: t('importFromCsv'),
+    title: t('Import CSV'),
     width: 400,
     height: window.isThemeTriton ? 220 : 175,
     labelWidthFields: 75,
@@ -25,7 +25,7 @@ Ext.define('Ext.ux.window.ImportCsv', {
         var me = this,
             fieldsImport = Ext.Array.merge(me.fieldsImport, [{
                 xtype: 'uploadfield',
-                fieldLabel: t('fileCsv'),
+                fieldLabel: t('File CSV'),
                 htmlTipInfo: me.htmlTipInfo
             }]);
         me.items = [{
@@ -37,10 +37,10 @@ Ext.define('Ext.ux.window.ImportCsv', {
         me.title = me.title + (me.titleModule ? ' - ' + me.titleModule : '');
         me.bbar = [{
             xtype: 'tbtext',
-            text: t('maxSizeFile') + window.uploadFaxFilesize
+            text: t('Max size file') + ' ' + window.uploadFaxFilesize
         }, '->', {
             iconCls: 'icon-import-csv',
-            text: t('importText'),
+            text: t('Import text'),
             width: 150,
             scope: me,
             handler: me.onImport
@@ -58,9 +58,9 @@ Ext.define('Ext.ux.window.ImportCsv', {
             success: function(form, action) {
                 var obj = Ext.decode(action.response.responseText);
                 if (obj.success) {
-                    Ext.ux.Alert.alert(t('Success'), obj.msg, 'success');
+                    Ext.ux.Alert.alert(t('Success'), t(obj.msg), 'success');
                 } else {
-                    Ext.ux.Alert.alert(t('Error'), obj.errors, 'error');
+                    Ext.ux.Alert.alert(t('Error'), t(obj.errors), 'error');
                 }
                 btn.enable();
                 me.list.setLoading(false);
@@ -70,9 +70,9 @@ Ext.define('Ext.ux.window.ImportCsv', {
             failure: function(form, action) {
                 if (Ext.isObject(action.response)) {
                     var obj = Ext.decode(action.response.responseText);
-                    Ext.ux.Alert.alert(t('Error'), obj.errors, 'error');
+                    Ext.ux.Alert.alert(t('Error'), t(obj.errors), 'error');
                 } else {
-                    Ext.ux.Alert.alert(t('Error'), action.response.responseText, 'error', true, false);
+                    Ext.ux.Alert.alert(t('Error'), t(action.response.responseText), 'error', true, false);
                 }
                 btn.enable();
                 me.list.setLoading(false);
