@@ -36,7 +36,7 @@ class GroupUserGroupController extends Controller
         $this->instanceModel        = new GroupUser;
         $this->abstractModel        = GroupUser::model();
         $this->abstractModelRelated = GroupUserGroup::model();
-        $this->titleReport          = Yii::t('yii', 'GroupUserGroup');
+        $this->titleReport          = Yii::t('zii', 'GroupUserGroup');
         parent::init();
     }
 

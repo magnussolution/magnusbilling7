@@ -37,7 +37,7 @@ class BoletoController extends Controller
     {
         $this->instanceModel = new Boleto;
         $this->abstractModel = Boleto::model();
-        $this->titleReport   = Yii::t('yii', 'Boleto');
+        $this->titleReport   = 'Boleto';
         parent::init();
     }
 

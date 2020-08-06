@@ -33,7 +33,7 @@ class CallOnLineController extends Controller
     {
         $this->instanceModel = new CallOnLine;
         $this->abstractModel = CallOnLine::model();
-        $this->titleReport   = Yii::t('yii', 'CallOnLine');
+        $this->titleReport   = Yii::t('zii', 'Calls Online');
 
         parent::init();
 
@@ -109,7 +109,7 @@ class CallOnLineController extends Controller
         if (strlen($model->canal) < 30 && preg_match('/SIP\//', $model->canal)) {
             AsteriskAccess::instance()->hangupRequest($model->canal);
             $success = true;
-            $msn     = Yii::t('yii', 'Operation was successful.') . Yii::app()->language;
+            $msn     = Yii::t('zii', 'Operation was successful.') . Yii::app()->language;
         } else {
             $success = false;
             $msn     = 'error';

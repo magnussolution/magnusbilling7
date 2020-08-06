@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -29,30 +29,30 @@ Ext.define('MBilling.view.servers.List', {
             emptyText: App.user.language == 'pt_BR' ? me.emptyTextBr : me.emptyTextEn
         };
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 4
         }, {
-            header: t('host'),
+            header: t('Host'),
             dataIndex: 'host',
             flex: 4
         }, {
-            header: t('username'),
+            header: t('Username'),
             dataIndex: 'username',
             flex: 4
         }, {
-            header: t('type'),
+            header: t('Type'),
             dataIndex: 'type',
             comboRelated: 'booleancombo',
             flex: 2
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             renderer: Helper.Util.formatBooleanActive,
             comboRelated: 'booleancombo',
@@ -60,8 +60,8 @@ Ext.define('MBilling.view.servers.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [0, t('inactive')]
+                    [1, t('Active')],
+                    [0, t('Inactive')]
                 ]
             }
         }]

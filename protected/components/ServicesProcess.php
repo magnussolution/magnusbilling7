@@ -201,7 +201,7 @@ class ServicesProcess
         $signal = $method == 'activation' ? '-' : '+';
         $credit = $signal . $modelServicesUse->idServices->price;
 
-        $description = Yii::t('yii', $method) . ' ' . Yii::t('yii', 'Service') . ' ' . $modelServicesUse->idServices->name;
+        $description = Yii::t('zii', $method) . ' ' . Yii::t('zii', 'Service') . ' ' . $modelServicesUse->idServices->name;
 
         if ($method == 'activation') {
             $modelRefill              = new Refill();
@@ -242,7 +242,7 @@ class ServicesProcess
         $modelServicesUse->status   = 1;
         $modelServicesUse->save();
 
-        $description = Yii::t('yii', 'Monthly payment Service') . ' ' . $modelServicesUse->idServices->name;
+        $description = Yii::t('zii', 'Monthly payment Service') . ' ' . $modelServicesUse->idServices->name;
         UserCreditManager::releaseUserCredit($modelServicesUse->id_user, '-' . $modelServicesUse->idServices->price, $description);
 
         $mail = new Mail(Mail::$TYPE_SERVICES_PAID, $modelServicesUse->id_user);

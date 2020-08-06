@@ -32,7 +32,7 @@ class CallOnlineChartController extends Controller
 
         $this->instanceModel = new CallOnlineChart;
         $this->abstractModel = CallOnlineChart::model();
-        $this->titleReport   = Yii::t('yii', 'CallOnlineChart');
+        $this->titleReport   = Yii::t('zii', 'CallOnlineChart');
         parent::init();
     }
 

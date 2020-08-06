@@ -8,7 +8,7 @@ Ext.define('MBilling.view.plan.Tag', {
     extend: 'Ext.form.field.Tag',
     alias: 'widget.plantag',
     name: 'id_plan',
-    fieldLabel: t('plan'),
+    fieldLabel: t('Plan'),
     displayField: 'name',
     valueField: 'id',
     initComponent: function() {

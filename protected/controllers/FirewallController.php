@@ -16,7 +16,7 @@ class FirewallController extends Controller
     {
         $this->instanceModel = new Firewall;
         $this->abstractModel = Firewall::model();
-        $this->titleReport   = Yii::t('yii', 'Firewall');
+        $this->titleReport   = Yii::t('zii', 'Firewall');
         parent::init();
     }
 

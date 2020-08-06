@@ -27,14 +27,14 @@
             <p style="text-align: center; width: 100%"><img src="/mbilling/resources/images/Click-to-Call.png" /></p>
             <form method='POST'>
                 <div class="linha2" id="linha2">
-                <div class="col1">&nbsp;&nbsp;&nbsp;<?php echo Yii::t('yii', 'Your Number') ?></div>
+                <div class="col1">&nbsp;&nbsp;&nbsp;<?php echo Yii::t('zii', 'Your number') ?></div>
                 <div class="col2">
                         <input type="text" id="destino" name="number" class="txt" onfocus="this.className='cxOn'" onblur="this.className='cxOff'" />
                 </div>
-                <div style="color: red; font-size: 10px; width: 100%; text-align: center;"><?php echo Yii::t('yii', 'Example') . ' <b>' . Yii::t('yii', '1+360+NUMBER') . ' </b>' ?> </div>
+                <div style="color: red; font-size: 10px; width: 100%; text-align: center;"><?php echo Yii::t('zii', 'Example') . ' <b>' . Yii::t('zii', '1+360+NUMBER') . ' </b>' ?> </div>
                 </div>
                 <div class="linha4">
-                <input type="submit" value=" <?php echo Yii::t('yii', 'Call Me') ?>" style="width: 100px; height: 30px; cursor: pointer" />
+                <input type="submit" value=" <?php echo Yii::t('zii', 'Call Me') ?>" style="width: 100px; height: 30px; cursor: pointer" />
                 </div>
             </form>
         </div>
@@ -45,8 +45,7 @@
         <p style="text-align: center; width: 100%"><img src="../resources/images/Click-to-Call.png" /></p>
 
         <div class="linha2" id="linha2">
-            <div class="col1">&nbsp;&nbsp;&nbsp;<?php echo Yii::t('yii', 'Wait, your phone ring') ?> </div><br>
-            <div class="colw">&nbsp;&nbsp;&nbsp;<?php echo Yii::t('yii', 'in few seconds') ?> </div>
+            <div class="col1">&nbsp;&nbsp;&nbsp;<?php echo Yii::t('zii', 'Wait, your phone ring in few seconds') ?> </div>
         </div>
         <div class="linha4">&nbsp;</div>
 

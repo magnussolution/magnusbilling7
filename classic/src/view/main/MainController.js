@@ -95,11 +95,11 @@ Ext.define('MBilling.view.main.MainController', {
                 action = record.get('action');
                 hasAction = Ext.isDefined(action);
                 tabPanelCenter.add({
+                    xtype: module + 'module',
                     title: txt,
                     autoDestroy: true,
                     closable: true,
                     iconCls: iconCls,
-                    xtype: module + 'module',
                     module: module,
                     allowCreate: hasAction ? action.search('c') !== -1 : false,
                     allowUpdate: hasAction ? action.search('u') !== -1 : false,
@@ -271,7 +271,7 @@ Ext.define('MBilling.view.main.MainController', {
         if (me.winAbout && me.winAbout.isVisible()) {
             return;
         }
-        me.winAbout = Ext.widget('about', {
+        me.winAbout = Ext.widget('About', {
             title: menuItem.text,
             glyph: menuItem.glyph
         });

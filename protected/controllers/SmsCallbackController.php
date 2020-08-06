@@ -36,7 +36,7 @@ class SmsCallbackController extends Controller
         $modelCallerid = Callerid::model()->find("cid = :callerid AND activated = 1", array(':callerid' => $callerid));
 
         if (!isset($modelCallerid->id)) {
-            $error_msg = Yii::t('yii', 'Error : Autentication Error!');
+            $error_msg = Yii::t('zii', 'Error : Autentication Error!');
             echo $error_msg;
             exit;
         }
@@ -52,7 +52,7 @@ class SmsCallbackController extends Controller
         }
 
         if (count($callTrunk) == 0) {
-            $error_msg = Yii::t('yii', 'Prefix not found');
+            $error_msg = Yii::t('zii', 'Prefix not found');
             echo $error_msg;
             exit;
         } else {

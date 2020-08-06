@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -128,7 +128,7 @@ Ext.define('MBilling.view.sip.Controller', {
             form.findField('extension').setVisible(false);
         }
         this.callParent(arguments);
-        valueAllow = me.formPanel.idRecord ? record.get('allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'];
+        valueAllow = me.formPanel.idRecord ? record.get('Allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'];
         fieldAllow = me.formPanel.down('checkboxgroup');
         fieldAllow.setValue({
             allow: valueAllow

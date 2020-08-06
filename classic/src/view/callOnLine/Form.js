@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -28,35 +28,37 @@ Ext.define('MBilling.view.callOnLine.Form', {
             allowBlank: true
         };
         me.items = [{
-            fieldLabel: t('Username'),
-            name: 'idUserusername'
+            name: 'idUserusername',
+            fieldLabel: t('Username')
         }, {
-            fieldLabel: t('Sip Account'),
-            name: 'sip_account'
+            name: 'sip_account',
+            fieldLabel: t('Sip user')
         }, {
-            fieldLabel: t('credit'),
-            name: 'idUsercredit'
+            name: 'idUsercredit',
+            fieldLabel: t('Credit')
         }, {
-            fieldLabel: t('number'),
-            name: 'ndiscado'
+            name: 'ndiscado',
+            fieldLabel: t('Number')
         }, {
-            fieldLabel: t('Codec'),
-            name: 'codec'
+            name: 'codec',
+            fieldLabel: t('Codec')
         }, {
-            fieldLabel: t('CallerID'),
-            name: 'callerid'
+            name: 'callerid',
+            fieldLabel: t('CallerID')
         }, {
-            fieldLabel: t('trunk'),
-            name: 'tronco'
+            name: 'tronco',
+            fieldLabel: t('Trunk'),
+            hidden: App.user.isClient
         }, {
-            fieldLabel: t('Reinvite'),
-            name: 'reinvite'
+            name: 'reinvite',
+            fieldLabel: t('Reinvite')
         }, {
-            fieldLabel: t('From IP'),
-            name: 'from_ip'
+            name: 'from_ip',
+            fieldLabel: t('From IP')
         }, {
             xtype: 'textarea',
             name: 'description',
+            fieldLabel: t('Description'),
             height: 350,
             anchor: '100%',
             hidden: !App.user.isAdmin

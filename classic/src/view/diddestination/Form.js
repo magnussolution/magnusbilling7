@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 24/09/2012
@@ -27,27 +27,29 @@ Ext.define('MBilling.view.diddestination.Form', {
         var me = this;
         me.items = [{
             xtype: 'didlookup',
-            fieldLabel: t('did'),
             name: 'id_did',
+            fieldLabel: t('DID'),
             ownerForm: me
         }, {
             xtype: 'userlookup',
             ownerForm: me,
+            name: 'id_user',
+            fieldLabel: t('Username'),
             allowBlank: App.user.isClient
         }, {
             xtype: 'booleancombo',
             name: 'activated',
-            fieldLabel: t('status'),
+            fieldLabel: t('Status'),
             allowBlank: false
         }, {
             xtype: 'numbercombo',
             name: 'priority',
-            fieldLabel: t('priority'),
+            fieldLabel: t('Priority'),
             allowBlank: true
         }, {
-            style: 'margin-top:25px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Did Destination'),
+            style: 'margin-top:25px; overflow: visible;',
+            title: t('DID destination'),
             collapsible: true,
             collapsed: false,
             defaults: {
@@ -58,7 +60,7 @@ Ext.define('MBilling.view.diddestination.Form', {
             items: [{
                 xtype: 'didtypecombo',
                 name: 'voip_call',
-                fieldLabel: t('type')
+                fieldLabel: t('Type')
             }, {
                 xtype: 'textfield',
                 name: 'destination',
@@ -82,14 +84,14 @@ Ext.define('MBilling.view.diddestination.Form', {
                 xtype: 'siplookup',
                 ownerForm: me,
                 name: 'id_sip',
-                fieldLabel: t('SIP'),
+                fieldLabel: t('Sip user'),
                 allowBlank: true
             }, {
                 xtype: 'textarea',
                 name: 'context',
                 fieldLabel: t('Context'),
                 allowBlank: true,
-                emptyText: t('Asterisk DialPlan. Example: exten => _X.,1,Dial(SIP/3333@39.5.5.5,30); )'),
+                emptyText: t('Asterisk dial plan. Example: exten => _X.,1,Dial(SIP/3333@39.5.5.5,30); )'),
                 height: 300,
                 anchor: '100%'
             }]

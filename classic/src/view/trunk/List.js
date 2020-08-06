@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2012
@@ -26,46 +26,46 @@ Ext.define('MBilling.view.trunk.List', {
     initComponent: function() {
         var me = this;
         me.columns = me.columns || [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('trunkcode'),
+            header: t('Name'),
             dataIndex: 'trunkcode',
             flex: 3
         }, {
-            header: t('add_prefix'),
+            header: t('Add prefix'),
             dataIndex: 'trunkprefix',
             flex: 2,
             hidden: window.isTablet
         }, {
-            header: t('remove_prefix'),
+            header: t('Remove prefix'),
             dataIndex: 'removeprefix',
             flex: 2,
             hidden: window.isTablet
         }, {
-            header: t('host'),
+            header: t('Host'),
             dataIndex: 'host',
             flex: 2,
             hidden: window.isTablet
         }, {
             xtype: 'templatecolumn',
             tpl: '{idProviderprovider_name}',
-            header: t('provider'),
+            header: t('Provider'),
             dataIndex: 'id_provider',
             comboFilter: 'providercombo',
             flex: 2,
             hidden: window.isTablet
         }, {
-            header: t('secondusedreal'),
+            header: t('Time used'),
             renderer: Helper.Util.formatsecondsToTime,
             dataIndex: 'secondusedreal',
             flex: 3,
             hidden: window.isTablet
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             renderer: Helper.Util.formatBooleanActive,
             comboFilter: 'booleancombo',
@@ -73,12 +73,12 @@ Ext.define('MBilling.view.trunk.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [0, t('inactive')]
+                    [1, t('Active')],
+                    [0, t('Inactive')]
                 ]
             }
         }, {
-            header: t('creationdate'),
+            header: t('Creation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
             flex: 3,

@@ -29,7 +29,7 @@ class ConfigurationController extends Controller
     {
         $this->instanceModel = new Configuration;
         $this->abstractModel = Configuration::model();
-        $this->titleReport   = Yii::t('yii', 'Config');
+        $this->titleReport   = Yii::t('zii', 'Config');
         parent::init();
     }
 

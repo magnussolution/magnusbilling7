@@ -34,7 +34,7 @@ class CallSummaryDayTrunkController extends Controller
 
         $this->instanceModel = new CallSummaryDayTrunk;
         $this->abstractModel = CallSummaryDayTrunk::model();
-        $this->titleReport   = Yii::t('yii', 'Calls Summary per day per trunk');
+        $this->titleReport   = Yii::t('zii', 'Summary Day Trunk');
         parent::init();
     }
 

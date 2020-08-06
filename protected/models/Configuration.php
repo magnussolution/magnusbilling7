@@ -92,12 +92,12 @@ class Configuration extends Model
                 'red-triton', 'red-neptune', 'red-crisp');
 
             if (!in_array($this->config_value, $valuesAllow)) {
-                $this->addError($attribute, Yii::t('yii', 'ERROR: Invalid option'));
+                $this->addError($attribute, Yii::t('zii', 'ERROR: Invalid option'));
             }
         }
 
         if ($error) {
-            $this->addError($attribute, Yii::t('yii', 'ERROR: Invalid option'));
+            $this->addError($attribute, Yii::t('zii', 'ERROR: Invalid option'));
         }
     }
 

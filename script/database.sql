@@ -2794,7 +2794,7 @@ DROP TABLE IF EXISTS `pkg_status_system`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pkg_status_system` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cpuMediaUso` float NOT NULL DEFAULT '0',
   `cpuPercent` float NOT NULL DEFAULT '0',
   `memTotal` int(11) DEFAULT NULL,
@@ -2805,7 +2805,7 @@ CREATE TABLE `pkg_status_system` (
   `uptime` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `date` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -39,7 +39,7 @@ class CampaignPollController extends Controller
         $this->uploaddir     = $this->magnusFilesDirectory . 'sounds/';
         $this->instanceModel = new CampaignPoll;
         $this->abstractModel = CampaignPoll::model();
-        $this->titleReport   = Yii::t('yii', 'Poll');
+        $this->titleReport   = Yii::t('zii', 'Poll');
         parent::init();
     }
 

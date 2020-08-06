@@ -41,7 +41,7 @@ class QueueController extends Controller
     {
         $this->instanceModel = new Queue;
         $this->abstractModel = Queue::model();
-        $this->titleReport   = Yii::t('yii', 'Queue');
+        $this->titleReport   = Yii::t('zii', 'Queue');
         parent::init();
     }
 

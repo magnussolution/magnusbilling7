@@ -44,7 +44,7 @@ class RateProviderController extends Controller
     {
         $this->instanceModel = new RateProvider;
         $this->abstractModel = RateProvider::model();
-        $this->titleReport   = Yii::t('yii', 'RateProvider');
+        $this->titleReport   = Yii::t('zii', 'RateProvider');
         parent::init();
     }
 
@@ -106,7 +106,7 @@ class RateProviderController extends Controller
         } catch (Exception $e) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                'errors'           => Yii::t('yii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
             ));
             exit;
 
@@ -120,7 +120,7 @@ class RateProviderController extends Controller
         if (!isset($_FILES['file']['tmp_name']) || strlen($_FILES['file']['tmp_name']) < 10) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                'errors'           => Yii::t('yii', 'Please select a CSV file'),
+                'errors'           => Yii::t('zii', 'Please select a CSV file'),
             ));
             exit;
         }
@@ -135,7 +135,7 @@ class RateProviderController extends Controller
         if (count($firstLine) < 3) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                'errors'           => Yii::t('yii', 'CSV format invalid, please check your CSV file and than try again.') . "\n\n" . $firstLine[0],
+                'errors'           => Yii::t('zii', 'CSV format invalid, please check your CSV file and than try again.') . "\n\n" . $firstLine[0],
             ));
             exit;
         }
@@ -161,7 +161,7 @@ class RateProviderController extends Controller
         } catch (Exception $e) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                'errors'           => Yii::t('yii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
             ));
             exit;
 
@@ -180,7 +180,7 @@ class RateProviderController extends Controller
         } catch (Exception $e) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                'errors'           => Yii::t('yii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
             ));
             exit;
 
@@ -202,7 +202,7 @@ class RateProviderController extends Controller
                 } catch (Exception $e) {
                     echo json_encode(array(
                         $this->nameSuccess => false,
-                        'errors'           => Yii::t('yii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                        'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
                     ));
                     exit;
 
@@ -215,7 +215,7 @@ class RateProviderController extends Controller
             } catch (Exception $e) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
-                    'errors'           => Yii::t('yii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                    'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
                 ));
                 exit;
 
@@ -231,7 +231,7 @@ class RateProviderController extends Controller
         } catch (Exception $e) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                'errors'           => Yii::t('yii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
             ));
             exit;
 

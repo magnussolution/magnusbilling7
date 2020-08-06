@@ -41,7 +41,7 @@ class ClicToCallController extends Controller
         try {
             $model->save();
             $errors = $model->getErrors();
-            echo '<h4>' . Yii::t('yii', 'Operation was successful.') . '</h4>';
+            echo '<h4>' . Yii::t('zii', 'Operation was successful.') . '</h4>';
         } catch (Exception $e) {
             $errors = $e;
         }

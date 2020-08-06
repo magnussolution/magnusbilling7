@@ -36,7 +36,7 @@ class LogUsersController extends Controller
     {
         $this->instanceModel = new LogUsers;
         $this->abstractModel = LogUsers::model();
-        $this->titleReport   = Yii::t('yii', 'LogUsers');
+        $this->titleReport   = Yii::t('zii', 'Log Users');
         parent::init();
     }
 
@@ -44,7 +44,7 @@ class LogUsersController extends Controller
     {
         echo json_encode(array(
             $this->nameSuccess   => false,
-            $this->nameMsgErrors => Yii::t('yii', 'Not allowed delete in this module'),
+            $this->nameMsgErrors => Yii::t('zii', 'Not allowed delete in this module'),
         ));
         exit;
     }

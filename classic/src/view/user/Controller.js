@@ -96,21 +96,21 @@ Ext.define('MBilling.view.user.Controller', {
     onEdit: function() {
         var me = this,
             record = me.list.getSelectionModel().getSelection()[0];
-        fieldUsername = record.get('username'),
+        fieldUsername = record.get('Username'),
             fieldGroupAgent = record.get('id_group_agent'),
-            fieldPassword = record.get('password'),
+            fieldPassword = record.get('Password'),
             fieldPlan = record.get('id_plan'),
             fieldPrefixLocal = record.get('prefix_local'),
-            fieldTypepaid = record.get('typepaid'),
-            fieldCreditlimit = record.get('creditlimit'),
+            fieldTypepaid = record.get('Type paid'),
+            fieldCreditlimit = record.get('Credit limit'),
             fieldEnableexpire = record.get('enableexpire'),
-            fieldExpirationDate = record.get('expirationdate'),
+            fieldExpirationDate = record.get('Expiration date'),
             fieldCreditNot = record.get('credit_notification'),
             fieldCallshop = record.get('callshop'),
-            fieldRecordCall = record.get('record_call'),
+            fieldRecordCall = record.get('Record call'),
             fieldLock_pin = record.get('lock_pin'),
             fieldRestriction = record.get('restriction'),
-            fieldPasswordGen = record.get('password'),
+            fieldPasswordGen = record.get('Password'),
             fieldCallingcard_pin = record.get('callingcard_pin'),
             fieldGroupAgent = me.formPanel.getForm().findField('id_group_agent'),
             fieldGroup = me.formPanel.getForm().findField('id_group');
@@ -170,7 +170,7 @@ Ext.define('MBilling.view.user.Controller', {
     onResendActivation: function() {
         var me = this,
             record = me.list.getSelectionModel().getSelection()[0];
-        if (record.get('email').length < 5) {
+        if (record.get('Email').length < 5) {
             Ext.ux.Alert.alert(me.titleError, t('User not have a email'), 'error');
             return;
         }

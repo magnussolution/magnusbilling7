@@ -1,6 +1,6 @@
 Ext.define('Overrides.form.field.VTypes', {
     override: 'Ext.form.field.VTypes',
-    comparePasswordText: t('passwordNotMatch'),
+    comparePasswordText: t('Passwords not match'),
     comparePassword: function(value, field) {
         var password = field.up('form').down('field[password=true]').getValue();
         return (value === password);

@@ -100,10 +100,10 @@ class Sip extends Model
             $length = $config['global']['ip_tech_length'];
 
             if (strlen($this->techprefix) != $length) {
-                $this->addError($attribute, Yii::t('yii', 'Techprefix have a invalid length'));
+                $this->addError($attribute, Yii::t('zii', 'Techprefix have a invalid length'));
             }
             if (strlen($this->techprefix) > 6) {
-                $this->addError($attribute, Yii::t('yii', 'Techprefix maximum length is 6'));
+                $this->addError($attribute, Yii::t('zii', 'Techprefix maximum length is 6'));
             }
         }
     }
@@ -112,7 +112,7 @@ class Sip extends Model
     {
         if (strlen($this->techprefix) > 2) {
             if ($this->host == 'dynamic' && preg_match('/invite/', $this->insecure)) {
-                $this->addError($attribute, Yii::t('yii', 'Never use host=dynamic and insecure=invite'));
+                $this->addError($attribute, Yii::t('zii', 'Never use host=dynamic and insecure=invite'));
             }
         }
     }
@@ -139,22 +139,22 @@ class Sip extends Model
     public function checkusername($attribute, $params)
     {
         if (preg_match('/ /', $this->defaultuser)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in defaultuser'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in defaultuser'));
         }
 
     }
     public function checksecret($attribute, $params)
     {
         if (preg_match('/ /', $this->secret)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in password'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in password'));
         }
 
         if ($this->secret == '123456' || $this->secret == '12345678' || $this->secret == '012345') {
-            $this->addError($attribute, Yii::t('yii', 'No use sequence in the pasword'));
+            $this->addError($attribute, Yii::t('zii', 'No use sequence in the pasword'));
         }
 
         if ($this->secret == $this->defaultuser) {
-            $this->addError($attribute, Yii::t('yii', 'Password cannot be equal username'));
+            $this->addError($attribute, Yii::t('zii', 'Password cannot be equal username'));
         }
 
     }

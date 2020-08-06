@@ -30,9 +30,9 @@ form {
 <br/>
 
 <?php if (isset($message)):
-    echo Yii::t('yii', $message);
+    echo Yii::t('zii', $message);
     ?>
-	<?php else: ?>
+			<?php else: ?>
 
 
 
@@ -40,10 +40,10 @@ form {
 
 
 	<div class="field">
-		<?php echo $form->labelEx($model, Yii::t('yii', 'MethodPay')) ?>
+		<?php echo $form->labelEx($model, Yii::t('zii', 'MethodPay')) ?>
 		<div class="styled-select" style="width: 380px">
 		<?php echo $form->dropDownList($model, 'id_method', $modelMethodPay, array(
-    'prompt' => Yii::t('yii', 'Select a Method'),
+    'prompt' => Yii::t('zii', 'Select a method'),
 )
 ); ?>
 		</div>
@@ -54,7 +54,7 @@ form {
 		<?php $totalPrice += $modelServicesUse[$i]->idServices->price?>
 		<div class="field">
 
-			<?php echo $form->labelEx($model, Yii::t('yii', 'Service') . ' ' . $modelServicesUse[$i]->idServices->name) ?>
+			<?php echo $form->labelEx($model, Yii::t('zii', 'Service') . ' ' . $modelServicesUse[$i]->idServices->name) ?>
 			<?php echo $form->textField($model, 'service0', array(
     'class'    => 'input',
     'value'    => $currency . ' ' . number_format($modelServicesUse[$i]->idServices->price, 2),
@@ -72,16 +72,16 @@ form {
 
 	<?php if ($modelServicesUse[0]->idUser->credit > 0): ?>
 	<div class="field">
-		<?php echo $form->labelEx($model, Yii::t('yii', 'Your credit')) ?>
+		<?php echo $form->labelEx($model, Yii::t('zii', 'Your credit')) ?>
 		<?php echo $form->checkBox($model, 'use_credit', array('checked' => false)); ?>
-		<?php echo ' ' . $currency . ' ' . number_format($modelServicesUse[0]->idUser->credit, 2) . ' ' . Yii::t('yii', 'Use that') ?>
+		<?php echo ' ' . $currency . ' ' . number_format($modelServicesUse[0]->idUser->credit, 2) . ' ' . Yii::t('zii', 'Use that') ?>
 
 	</div>
 	<?php endif;?>
 	<br><br><br>
 
 	<div class="field">
-		<?php echo $form->labelEx($model, Yii::t('yii', 'Total Price')) ?>
+		<?php echo $form->labelEx($model, Yii::t('zii', 'Total Price')) ?>
 		<?php echo $form->textField($model, 'total', array(
     'class'    => 'input',
     'value'    => $currency . ' ' . number_format($totalPrice, 2),
@@ -90,6 +90,6 @@ form {
 		<p>&nbsp;</p>
 	</div>
 
-	<?php echo CHtml::submitButton(Yii::t('yii', 'Pay Now'), array('class' => 'button')); ?>
+	<?php echo CHtml::submitButton(Yii::t('zii', 'Pay Now'), array('class' => 'button')); ?>
 <?php endif;?>
 <?php $this->endWidget();?>

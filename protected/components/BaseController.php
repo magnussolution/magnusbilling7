@@ -116,16 +116,16 @@ class BaseController extends CController
 
         $this->getSessionParams();
 
-        $this->subTitleReport         = Yii::t('yii', 'report');
-        $this->msgSuccess             = Yii::t('yii', 'Operation was successful.');
-        $this->msgSuccessLot          = Yii::t('yii', 'Records updated with success.');
-        $this->msgRecordNotFound      = Yii::t('yii', 'Record not found.');
-        $this->msgRecordAlreadyExists = Yii::t('yii', 'Record already exists.');
-        $this->msgError               = Yii::t('yii', 'Disallowed action');
+        $this->subTitleReport         = Yii::t('zii', 'Report');
+        $this->msgSuccess             = Yii::t('zii', 'Operation was successful.');
+        $this->msgSuccessLot          = Yii::t('zii', 'Records updated with success.');
+        $this->msgRecordNotFound      = Yii::t('zii', 'Record not found.');
+        $this->msgRecordAlreadyExists = Yii::t('zii', 'Record already exists.');
+        $this->msgError               = Yii::t('zii', 'Disallowed action');
         $this->mapErrorsMySql         = array(
-            1451 => Yii::t('yii', 'Record to be deleted is related to another. Technical information: '),
-            1452 => Yii::t('yii', 'Record to be listed there. Technical information: '),
-            0    => Yii::t('yii', 'Technical information: '),
+            1451 => Yii::t('zii', 'Record to be deleted is related to another. Technical information: '),
+            1452 => Yii::t('zii', 'Record to be listed there. Technical information: '),
+            0    => Yii::t('zii', 'Technical information: '),
         );
         $startSession = strlen(session_id()) < 1 ? session_start() : null;
 
@@ -1054,7 +1054,7 @@ class BaseController extends CController
             foreach ($ids as $valueid) {
                 if ($valueid == 1) {
                     $this->success = false;
-                    $this->errors  = Yii::t('yii', 'Not allowed delete this user');
+                    $this->errors  = Yii::t('zii', 'Not allowed delete this user');
                 }
             }
         }
@@ -1283,7 +1283,7 @@ class BaseController extends CController
                     $erro = 'Campaign';
                     break;
                 case "phonenumber":
-                    $erro = 'Phone Number';
+                    $erro = 'Phonenumber';
                     break;
                 case "refill_provider":
                     $erro = 'Refill Provider';
@@ -1303,7 +1303,7 @@ class BaseController extends CController
                     break;
             }
 
-            return $this->mapErrorsMySql[$codeErro] . "<br> " . Yii::t('yii', 'Please, first delete all related records in the module ') . Yii::t('yii', $erro) . "<br><br><a target = '_blank' href='http://en.wikipedia.org/wiki/Foreign_key'>http://en.wikipedia.org/wiki/Foreign_key</a>";
+            return $this->mapErrorsMySql[$codeErro] . "<br> " . Yii::t('zii', 'Please, first delete all related records in the module ') . Yii::t('zii', $erro) . "<br><br><a target = '_blank' href='http://en.wikipedia.org/wiki/Foreign_key'>http://en.wikipedia.org/wiki/Foreign_key</a>";
         } else {
             return $this->mapErrorsMySql[$codeErro] . $e->getMessage();
         }

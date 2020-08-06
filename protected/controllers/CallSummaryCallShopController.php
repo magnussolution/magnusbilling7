@@ -69,7 +69,7 @@ class CallSummaryCallShopController extends Controller
     {
         $this->instanceModel = new CallSummaryCallShop;
         $this->abstractModel = CallSummaryCallShop::model();
-        $this->titleReport   = Yii::t('yii', 'Calls Summary Callshop');
+        $this->titleReport   = Yii::t('zii', 'Summary per Day');
 
         parent::init();
     }

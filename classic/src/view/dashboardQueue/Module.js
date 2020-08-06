@@ -12,9 +12,9 @@ Ext.define('MBilling.view.dashboardQueue.Module', {
     initComponent: function() {
         var me = this;
         me.items = [{
+            xtype: 'dashboard',
             width: !window.isDesktop ? width : 'NULL',
             header: false,
-            xtype: 'dashboard',
             listeners: {
                 activate: 'setRunnerInfoSystem'
             },
@@ -24,7 +24,7 @@ Ext.define('MBilling.view.dashboardQueue.Module', {
             items: [{
                 columnWidth: 1 / 2,
                 items: [{
-                    title: t('Queue Monitor'),
+                    title: t('Queue monitor'),
                     items: {
                         xtype: 'queuedashboardlist'
                     },
@@ -33,7 +33,7 @@ Ext.define('MBilling.view.dashboardQueue.Module', {
             }, {
                 columnWidth: 1 / 2,
                 items: [{
-                    title: t('Agent Monitor'),
+                    title: t('Agent monitor'),
                     iconCls: 'icon-chart-column',
                     glyph: undefined,
                     items: {

@@ -28,7 +28,7 @@ class SipTraceController extends Controller
     {
         $this->instanceModel = new SipTrace;
         $this->abstractModel = SipTrace::model();
-        $this->titleReport   = Yii::t('yii', 'SipTrace');
+        $this->titleReport   = Yii::t('zii', 'SipTrace');
         parent::init();
     }
 
@@ -412,7 +412,7 @@ class SipTraceController extends Controller
         if (count($modelTrace)) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                $this->nameMsg     => Yii::t('yii', 'Exist a filter active or in use. Wait or click in Stop Capture button.'),
+                $this->nameMsg     => Yii::t('zii', 'Exist a filter active or in use. Wait or click in Stop Capture button.'),
             ));
             exit;
         }
@@ -426,7 +426,7 @@ class SipTraceController extends Controller
 
         echo json_encode(array(
             $this->nameSuccess => true,
-            $this->nameMsg     => Yii::t('yii', 'Reload this module to see the packets'),
+            $this->nameMsg     => Yii::t('zii', 'Reload this module to see the packets'),
         ));
     }
 

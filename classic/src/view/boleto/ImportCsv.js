@@ -16,13 +16,13 @@
 Ext.define('MBilling.view.boleto.ImportCsv', {
     extend: 'Ext.ux.window.ImportBoleto',
     alias: 'widget.boletoimportcsv',
-    title: t('Importar Retorno'),
+    title: 'Importar Retorno',
     labelWidthFields: 250,
     height: 275,
     fieldsImport: [{
         xtype: 'boletobanckcombo',
         name: 'banco',
-        fieldLabel: t('Banco'),
+        fieldLabel: t('Bank'),
         width: 350
     }]
 });

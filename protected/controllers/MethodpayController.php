@@ -66,7 +66,7 @@ class MethodpayController extends Controller
     {
         $this->instanceModel = new Methodpay;
         $this->abstractModel = Methodpay::model();
-        $this->titleReport   = Yii::t('yii', 'Payment Methods');
+        $this->titleReport   = Yii::t('zii', 'Payment Methods');
         parent::init();
     }
 

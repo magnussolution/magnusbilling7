@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -26,16 +26,16 @@ Ext.define('MBilling.view.sendCreditRates.Form', {
         var me = this;
         me.items = [{
             name: 'idProductcountry',
-            fieldLabel: t('country'),
+            fieldLabel: t('Country'),
             readOnly: true
         }, {
             name: 'idProductoperator_name',
-            fieldLabel: t('Operator Name'),
+            fieldLabel: t('Operator name'),
             readOnly: true
         }, {
-            name: 'sell_price',
-            fieldLabel: t('Sell Price'),
             xtype: 'moneyfield',
+            name: 'sell_price',
+            fieldLabel: t('Sell price'),
             mask: '#9.999.990,00',
             readOnly: App.user.isAdmin
         }];

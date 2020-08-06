@@ -38,10 +38,10 @@ Ext.define('MBilling.view.user.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     name: 'username',
-                    fieldLabel: t('username'),
+                    fieldLabel: t('Username'),
                     maxLength: 20,
                     minLength: 4,
                     readOnly: App.user.isClient
@@ -52,34 +52,33 @@ Ext.define('MBilling.view.user.Form', {
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
-                    name: 'id_group',
-                    fieldLabel: t('IdGroup'),
                     xtype: 'groupusercombo',
+                    name: 'id_group',
+                    fieldLabel: t('Group'),
                     allowBlank: !App.user.isAdmin,
                     hidden: !App.user.isAdmin
                 }, {
-                    name: 'id_group_agent',
-                    fieldLabel: t('GroupUser'),
                     xtype: 'groupuseragentcombo',
+                    name: 'id_group_agent',
                     emptyText: t('SELECT GROUP FOR AGENT USERS'),
-                    fieldLabel: t('Group for Agent Users'),
+                    fieldLabel: t('Group for agent users'),
                     hidden: true,
                     allowBlank: true
                 }, {
-                    fieldLabel: t('Plan'),
-                    name: 'id_plan',
                     xtype: 'planlookup',
                     ownerForm: me,
+                    name: 'id_plan',
+                    fieldLabel: t('Plan'),
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
                     xtype: 'languagecombo',
                     name: 'language',
                     value: App.user.language == 'pt_BR' ? 'br' : App.user.language,
-                    fieldLabel: t('language')
+                    fieldLabel: t('Language')
                 }, {
                     name: 'prefix_local',
-                    fieldLabel: t('prefixlocal'),
+                    fieldLabel: t('Prefix rules'),
                     value: App.user.base_country == 'BRL' ? '0/55/11,0/55/12,*/5511/8,*/5511/9' : App.user.base_country == 'ARG' ? '0/54,*/5411/8,15/54911/10,16/54911/10' : '',
                     allowBlank: true,
                     emptyText: 'match / replace / length',
@@ -93,13 +92,13 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'countrycombo',
                     name: 'country',
-                    fieldLabel: t('country'),
+                    fieldLabel: t('Country'),
                     value: App.user.language == 'pt_BR' ? '55' : '1',
                     allowBlank: true
                 }, {
-                    name: 'id_offer',
-                    fieldLabel: t('offer'),
                     xtype: 'offercombo',
+                    name: 'id_offer',
+                    fieldLabel: t('Offer'),
                     allowBlank: true
                 }, {
                     xtype: 'numberfield',
@@ -112,26 +111,26 @@ Ext.define('MBilling.view.user.Form', {
                     allowBlank: true
                 }]
             }, {
-                title: t('personalData'),
+                title: t('Personal data'),
                 itemId: 'personalData',
                 items: [, {
                     name: 'company_name',
-                    fieldLabel: t('company') + ' ' + t('name'),
+                    fieldLabel: t('Company name'),
                     allowBlank: true
                 }, {
                     name: 'state_number',
-                    fieldLabel: t('state_number'),
+                    fieldLabel: t('State number'),
                     allowBlank: true,
                     hidden: App.user.base_country = !'BRL'
                 }, {
                     name: 'lastname',
-                    fieldLabel: t('lastname'),
+                    fieldLabel: t('Lastname'),
                     allowBlank: true,
                     maxLength: 40,
                     minLength: 4
                 }, {
                     name: 'firstname',
-                    fieldLabel: t('firstname'),
+                    fieldLabel: t('Firstname'),
                     allowBlank: true,
                     maxLength: 40,
                     minLength: 4
@@ -146,21 +145,21 @@ Ext.define('MBilling.view.user.Form', {
                     },
                     items: [{
                         name: 'city',
-                        fieldLabel: t('city'),
+                        fieldLabel: t('City'),
                         allowBlank: true,
                         maxLength: 40,
                         minLength: 4,
                         flex: 2
                     }, {
                         name: 'state',
-                        fieldLabel: t('state'),
+                        fieldLabel: t('State'),
                         allowBlank: true,
                         maxLength: 20,
                         minLength: 2
                     }]
                 }, {
                     name: 'address',
-                    fieldLabel: t('address'),
+                    fieldLabel: t('Address'),
                     allowBlank: true
                 }, {
                     xtype: 'fieldcontainer',
@@ -178,7 +177,7 @@ Ext.define('MBilling.view.user.Form', {
                         flex: 2
                     }, {
                         name: 'zipcode',
-                        fieldLabel: t('zipcode'),
+                        fieldLabel: t('Zip code'),
                         allowBlank: true,
                         flex: 2
                     }]
@@ -193,25 +192,25 @@ Ext.define('MBilling.view.user.Form', {
                     },
                     items: [{
                         name: 'phone',
-                        fieldLabel: t('phone'),
+                        fieldLabel: t('Phone'),
                         allowBlank: true,
                         maxLength: 13,
                         minLength: 8
                     }, {
                         name: 'mobile',
-                        fieldLabel: t('mobile'),
+                        fieldLabel: t('Mobile'),
                         allowBlank: true,
                         maxLength: 20,
                         minLength: 8
                     }]
                 }, {
                     name: 'email',
-                    fieldLabel: t('email'),
+                    fieldLabel: t('Email'),
                     allowBlank: true,
                     vtype: 'email'
                 }, {
                     name: 'doc',
-                    fieldLabel: t('Doc'),
+                    fieldLabel: t('DOC'),
                     allowBlank: true
                 }, {
                     name: 'vat',
@@ -220,7 +219,7 @@ Ext.define('MBilling.view.user.Form', {
                     allowBlank: true
                 }]
             }, {
-                title: t('suplementaryInfo'),
+                title: t('Supplementary info'),
                 itemId: 'suplementaryInfo',
                 defaults: {
                     labelAlign: 'right',
@@ -233,7 +232,7 @@ Ext.define('MBilling.view.user.Form', {
                 items: [{
                     xtype: 'typepaymentcombo',
                     name: 'typepaid',
-                    fieldLabel: t('typepaid'),
+                    fieldLabel: t('Type paid'),
                     allowBlank: true,
                     readOnly: App.user.isClient
                 }, {
@@ -247,7 +246,7 @@ Ext.define('MBilling.view.user.Form', {
                     },
                     items: [{
                         name: 'creditlimit',
-                        fieldLabel: t('creditlimit'),
+                        fieldLabel: t('Credit limit'),
                         value: 0,
                         allowBlank: true,
                         readOnly: App.user.isClient,
@@ -255,8 +254,8 @@ Ext.define('MBilling.view.user.Form', {
                     }, {
                         xtype: 'numberfield',
                         name: 'credit_notification',
+                        fieldLabel: t('Credit notification'),
                         labelWidth: 150,
-                        fieldLabel: t('creditnotification'),
                         value: '-1',
                         minValue: -1,
                         allowBlank: true,
@@ -274,14 +273,14 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'enableexpire',
-                        fieldLabel: t('enableexpire'),
+                        fieldLabel: t('Enableexpire'),
                         allowBlank: true,
                         hidden: !App.user.isAdmin,
                         flex: 2
                     }, {
                         xtype: 'datefield',
                         name: 'expirationdate',
-                        fieldLabel: t('expirationdate'),
+                        fieldLabel: t('Expiration date'),
                         format: 'Y-m-d H:i:s',
                         allowBlank: true,
                         hidden: !App.user.isAdmin,
@@ -300,18 +299,18 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'record_call',
-                        fieldLabel: t('record_call'),
+                        fieldLabel: t('Record call'),
                         allowBlank: true,
                         hidden: !haveServiceMenu || !App.user.isAdmin,
                         readOnly: !App.user.isAdmin,
                         flex: 2
                     }, {
-                        labelWidth: 150,
                         xtype: 'combobox',
+                        labelWidth: 150,
                         store: [
-                            ['gsm', t('gsm')],
-                            ['wav', t('wav')],
-                            ['wav49', t('wav49')]
+                            ['gsm', 'gsm'],
+                            ['wav', 'wav'],
+                            ['wav49', 'wav49']
                         ],
                         name: 'mix_monitor_format',
                         fieldLabel: t('Record call format'),
@@ -334,20 +333,20 @@ Ext.define('MBilling.view.user.Form', {
                         flex: 1
                     },
                     items: [{
-                        labelWidth: 145,
                         xtype: 'numberfield',
                         name: 'calllimit',
-                        fieldLabel: t('calllimit'),
+                        fieldLabel: t('Call limit'),
+                        labelWidth: 145,
                         value: '-1',
                         minValue: -1,
                         flex: 2
                     }, {
-                        labelWidth: 150,
                         xtype: 'combobox',
-                        forceSelection: true,
-                        editable: false,
                         name: 'calllimit_error',
                         fieldLabel: t('Limit error'),
+                        labelWidth: 150,
+                        forceSelection: true,
+                        editable: false,
                         value: '503',
                         store: [
                             ['503', t('Congestion')],
@@ -358,7 +357,7 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'callshop',
-                    fieldLabel: 'Callshop',
+                    fieldLabel: t('Callshop'),
                     allowBlank: true,
                     hidden: App.user.isClient
                 }, {
@@ -370,9 +369,9 @@ Ext.define('MBilling.view.user.Form', {
                     minValue: -1,
                     readOnly: !App.user.isAdmin
                 }, {
-                    name: 'sipaccountlimit',
                     xtype: 'numberfield',
-                    fieldLabel: t('Sip Account Limit'),
+                    name: 'sipaccountlimit',
+                    fieldLabel: t('Sip account limit'),
                     value: '-1',
                     minValue: -1,
                     allowBlank: !App.user.isAdmin,
@@ -381,19 +380,19 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'numberfield',
                     name: 'callingcard_pin',
-                    fieldLabel: t('lockpin'),
+                    fieldLabel: t('CallingCard PIN'),
                     minValue: 100000,
                     maxLength: 6,
                     minLength: 6
                 }, {
                     xtype: 'restrictioncombo',
                     name: 'restriction',
-                    fieldLabel: t('restriction'),
+                    fieldLabel: t('Restriction'),
                     allowBlank: true,
                     hidden: App.user.isClient
                 }]
             }, {
-                title: window.showservices ? t('Services') : t('Send Credit'),
+                title: window.showservices ? t('Services') : t('Send credit'),
                 itemId: 'transferData',
                 hidden: !window.transferToMobile && !window.showservices,
                 items: [{
@@ -409,13 +408,13 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'transfer_international',
-                        fieldLabel: window.showservices ? t('CallerId Inteligente') : t('Enable International')
+                        fieldLabel: window.showservices ? t('Dynamic callerID') : t('Enable International')
                     }, {
-                        hidden: !window.transferToMobile,
                         xtype: 'numberfield',
                         name: 'transfer_international_profit',
-                        labelWidth: 120,
                         fieldLabel: t('Profit'),
+                        hidden: !window.transferToMobile,
+                        labelWidth: 120,
                         minValue: -100
                     }]
                 }, {
@@ -431,13 +430,13 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'transfer_flexiload',
-                        fieldLabel: window.showservices ? t('Procom') : t('Enable Flexiload')
+                        fieldLabel: window.showservices ? t('Procom') : t('Enable flexiload')
                     }, {
-                        hidden: !window.transferToMobile,
                         xtype: 'numberfield',
                         name: 'transfer_flexiload_profit',
-                        labelWidth: 120,
                         fieldLabel: t('Profit'),
+                        hidden: !window.transferToMobile,
+                        labelWidth: 120,
                         minValue: -100
                     }]
                 }, {
@@ -455,11 +454,11 @@ Ext.define('MBilling.view.user.Form', {
                         name: 'transfer_bkash',
                         fieldLabel: window.showservices ? t('Não perturbe') : t('Enable Bkash')
                     }, {
-                        hidden: !window.transferToMobile,
                         xtype: 'numberfield',
                         name: 'transfer_bkash_profit',
-                        labelWidth: 120,
                         fieldLabel: t('Profit'),
+                        hidden: !window.transferToMobile,
+                        labelWidth: 120,
                         minValue: -100
                     }]
                 }, {
@@ -479,22 +478,22 @@ Ext.define('MBilling.view.user.Form', {
                     }, {
                         xtype: 'numberfield',
                         name: 'transfer_dbbl_rocket_profit',
-                        labelWidth: 120,
                         fieldLabel: t('Profit'),
+                        labelWidth: 120,
                         minValue: -100
                     }]
                 }, {
                     xtype: 'numberfield',
                     name: 'transfer_bdservice_rate',
-                    fieldLabel: t('BDService rate'),
+                    fieldLabel: 'BDService rate',
                     minValue: 0,
                     hidden: !App.user.isAdmin || !window.transferToMobile,
                     allowBlank: true
                 }, {
-                    hidden: !window.transferToMobile,
                     xtype: 'numberfield',
                     name: 'transfer_show_selling_price',
-                    fieldLabel: t('show selling price'),
+                    fieldLabel: t('Show selling price'),
+                    hidden: !window.transferToMobile,
                     allowBlank: true
                 }]
             }]

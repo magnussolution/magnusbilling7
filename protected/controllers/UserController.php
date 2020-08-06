@@ -96,7 +96,7 @@ class UserController extends Controller
             echo json_encode(array(
                 'success' => false,
                 'rows'    => array(),
-                'errors'  => Yii::t('yii', 'You cannot EDIT your account.'),
+                'errors'  => Yii::t('zii', 'You cannot EDIT your account.'),
             ));
             exit();
 
@@ -123,7 +123,7 @@ class UserController extends Controller
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => array(),
-                        'errors'  => Yii::t('yii', 'Group no allow for Agent users'),
+                        'errors'  => Yii::t('zii', 'Group no allow for agent users'),
                     ));
                     exit();
                 }
@@ -165,19 +165,19 @@ class UserController extends Controller
             if (count($methodModel) > 0 && $idUserType == 3) {
 
                 if (strlen($values['lastname']) < 5) {
-                    $error = Yii::t('yii', 'lastname');
+                    $error = Yii::t('zii', 'Lastname');
                 } else if (strlen($values['firstname']) < 5) {
-                    $error = Yii::t('yii', 'firstname');
+                    $error = Yii::t('zii', 'Firstname');
                 } else if (strlen($values['doc']) < 11) {
-                    $error = Yii::t('yii', 'CPF');
+                    $error = Yii::t('zii', 'DOC');
                 } else if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $values['email'])) {
-                    $error = Yii::t('yii', 'email');
+                    $error = Yii::t('zii', 'Email');
                 }
                 if (isset($error)) {
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => array(),
-                        'errors'  => Yii::t('yii', $error) . ' ' . Yii::t('yii', 'is required'),
+                        'errors'  => Yii::t('zii', $error) . ' ' . Yii::t('zii', 'Is required'),
                     ));
                     exit();
                 }
@@ -207,7 +207,7 @@ class UserController extends Controller
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
-                    'errors'  => Yii::t('yii', 'You are not allowed to edit this field'),
+                    'errors'  => Yii::t('zii', 'You are not allowed to edit this field'),
                 ));
                 exit;
             }
@@ -217,7 +217,7 @@ class UserController extends Controller
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
-                    'errors'  => Yii::t('yii', 'You cannot change user type group'),
+                    'errors'  => Yii::t('zii', 'You cannot change user type group'),
                 ));
                 exit;
             }
@@ -458,7 +458,7 @@ class UserController extends Controller
                 $modelRefill->id_user     = $modelUser->id;
                 $modelRefill->payment     = 1;
                 $modelRefill->credit      = $values['credit'];
-                $modelRefill->description = Yii::t('yii', 'Automatic credit');
+                $modelRefill->description = Yii::t('zii', 'Automatic credit');
                 $modelRefill->save();
             }
 

@@ -16,22 +16,22 @@ if (Yii::app()->session['isAdmin'] == 1):
 
     $modelUser = User::model()->findAll();
     $users     = CHtml::listData($modelUser, 'id', 'username');?>
-                                                                                                                              <div class="field">
-                                                                                                                                  <?php echo $form->labelEx($model, Yii::t('yii', 'Select a user')) ?>
-                                                                                                                                  <div class="styled-select">
-                                                                                                                                      <?php echo $form->dropDownList($model,
+                                                                                                                                        <div class="field">
+                                                                                                                                            <?php echo $form->labelEx($model, Yii::t('zii', 'Select a user')) ?>
+                                                                                                                                            <div class="styled-select">
+                                                                                                                                                <?php echo $form->dropDownList($model,
         'id',
         $users,
         array('options' => array($_POST['SendCreditSummary']['id'] => array('selected' => true)))
     ); ?>
-                                                                                                                                  </div>
-                                                                                                                              </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
 
-                                                                                                                          <?php endif;?>
+                                                                                                                                    <?php endif;?>
 
 
 <div class="field">
-    <?php echo $form->labelEx($model, Yii::t('yii', 'From Date')) ?>
+    <?php echo $form->labelEx($model, Yii::t('zii', 'From date')) ?>
 
 <?php
 $this->widget(
@@ -50,12 +50,12 @@ $this->widget(
 
 ?>
 <?php echo $form->error($model, 'date') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'date') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'date') ?></p>
 
 </div>
 <br>
 <div class="field">
-    <?php echo $form->labelEx($model, Yii::t('yii', 'To Date')) ?>
+    <?php echo $form->labelEx($model, Yii::t('zii', 'To date')) ?>
 <?php
 $this->widget(
     'ext.jui.EJuiDateTimePicker',
@@ -75,7 +75,7 @@ $this->widget(
 </div>
 <br>
 <div class="field">
-    <?php echo $form->labelEx($model, Yii::t('yii', 'Service')) ?>
+    <?php echo $form->labelEx($model, Yii::t('zii', 'Service')) ?>
 <?php
 echo $form->dropDownList($model, 'service', array(
     'all'           => 'All',
@@ -90,7 +90,7 @@ echo $form->dropDownList($model, 'service', array(
 
 
 <br>
-<?php echo CHtml::submitButton(Yii::t('yii', 'Filter'), array('class' => 'button')); ?>
+<?php echo CHtml::submitButton(Yii::t('zii', 'Filter'), array('class' => 'button')); ?>
 <?php $this->endWidget();?>
 <div class="rounded">
 

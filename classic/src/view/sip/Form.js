@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2012
@@ -46,27 +46,28 @@ Ext.define('MBilling.view.sip.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     xtype: 'userlookup',
                     ownerForm: me,
-                    fieldLabel: t('accountcode'),
+                    name: 'id_user',
+                    fieldLabel: t('Username'),
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
                     name: 'defaultuser',
-                    fieldLabel: t('username'),
+                    fieldLabel: t('SIP user'),
                     minLength: 4,
                     allowBlank: true,
                     readOnly: App.user.isClient
                 }, {
                     name: 'secret',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('SIP password'),
                     allowBlank: true,
                     minLength: 6
                 }, {
                     name: 'callerid',
-                    fieldLabel: t('callerid'),
+                    fieldLabel: t('CallerID'),
                     allowBlank: true
                 }, {
                     name: 'alias',
@@ -75,14 +76,15 @@ Ext.define('MBilling.view.sip.Form', {
                     minLength: 3
                 }, {
                     name: 'disallow',
-                    fieldLabel: 'Disallow',
+                    fieldLabel: t('Disallow'),
                     value: 'all',
                     hidden: !App.user.isAdmin,
                     allowBlank: App.user.isClient
                 }, {
                     xtype: 'checkboxgroup',
+                    name: 'allow',
+                    fieldLabel: t('Codec'),
                     columns: 3,
-                    fieldLabel: t('codec'),
                     items: [{
                         boxLabel: 'g729',
                         name: 'allow',
@@ -158,7 +160,7 @@ Ext.define('MBilling.view.sip.Form', {
                     allowBlank: App.user.isClient
                 }, {
                     name: 'host',
-                    fieldLabel: t('host'),
+                    fieldLabel: t('Host'),
                     value: 'dynamic',
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
@@ -169,45 +171,45 @@ Ext.define('MBilling.view.sip.Form', {
                 }, {
                     xtype: 'yesnostringcombo',
                     name: 'videosupport',
-                    fieldLabel: 'Videosupport',
+                    fieldLabel: t('Videosupport'),
                     value: 'no',
                     allowBlank: !App.user.isAdmin
                 }, {
                     name: 'block_call_reg',
-                    fieldLabel: t('block_call_regex'),
+                    fieldLabel: t('Block call regex'),
                     allowBlank: true,
                     hidden: App.user.isClient
                 }, {
                     xtype: 'noyescombo',
                     name: 'record_call',
-                    fieldLabel: t('record_call'),
+                    fieldLabel: t('Record call'),
                     allowBlank: true,
                     hidden: !App.user.isAdmin
                 }, {
                     xtype: 'numberfield',
                     name: 'techprefix',
-                    fieldLabel: t('Techprefix'),
+                    fieldLabel: t('Tech prefix'),
                     hidden: !App.user.isAdmin,
                     allowBlank: true,
                     maxLength: 6
                 }]
             }, {
-                title: t('Nat'),
+                title: t('NAT'),
                 hidden: !App.user.isAdmin,
                 items: [{
                     name: 'nat',
-                    fieldLabel: 'Nat',
+                    fieldLabel: t('NAT'),
                     value: 'force_rport,comedia',
                     allowBlank: !App.user.isAdmin
                 }, {
                     name: 'directmedia',
-                    fieldLabel: 'Directmedia',
+                    fieldLabel: t('Directmedia'),
                     value: 'no',
                     allowBlank: !App.user.isAdmin
                 }, {
                     xtype: 'yesnostringcombo',
                     name: 'qualify',
-                    fieldLabel: 'Qualify',
+                    fieldLabel: t('Qualify'),
                     value: 'no',
                     allowBlank: !App.user.isAdmin
                 }]
@@ -224,39 +226,39 @@ Ext.define('MBilling.view.sip.Form', {
                 },
                 items: [{
                     name: 'context',
-                    fieldLabel: t('context'),
+                    fieldLabel: t('Context'),
                     value: 'billing',
                     hidden: !App.user.isAdmin,
                     allowBlank: true
                 }, {
                     name: 'dtmfmode',
-                    fieldLabel: 'Dtmfmode',
+                    fieldLabel: t('Dtmfmode'),
                     value: 'RFC2833',
                     allowBlank: !App.user.isAdmin
                 }, {
                     name: 'insecure',
-                    fieldLabel: 'Insecure',
+                    fieldLabel: t('Insecure'),
                     value: 'no',
                     allowBlank: true
                 }, {
                     name: 'deny',
-                    fieldLabel: 'Deny',
+                    fieldLabel: t('Deny'),
                     allowBlank: true,
                     hidden: !App.user.isAdmin
                 }, {
                     name: 'permit',
-                    fieldLabel: 'Permit',
+                    fieldLabel: t('Permit'),
                     allowBlank: true,
                     hidden: !App.user.isAdmin
                 }, {
                     name: 'type',
-                    fieldLabel: 'Type',
+                    fieldLabel: t('Type'),
                     value: 'friend',
                     allowBlank: !App.user.isAdmin
                 }, {
                     xtype: 'noyesstringcombo',
                     name: 'allowtransfer',
-                    fieldLabel: 'Allowtransfer',
+                    fieldLabel: t('Allowtransfer'),
                     value: 'no',
                     allowBlank: !App.user.isAdmin
                 }, {
@@ -266,9 +268,9 @@ Ext.define('MBilling.view.sip.Form', {
                     value: '0',
                     allowBlank: !App.user.isAdmin
                 }, {
-                    name: 'calllimit',
                     xtype: 'numberfield',
-                    fieldLabel: t('calllimit'),
+                    name: 'calllimit',
+                    fieldLabel: t('Call limit'),
                     value: '0',
                     allowBlank: !App.user.isAdmin
                 }, {
@@ -278,28 +280,28 @@ Ext.define('MBilling.view.sip.Form', {
                     hidden: !App.user.isAdmin
                 }, {
                     name: 'url_events',
-                    fieldLabel: t('Url Events notify'),
+                    fieldLabel: t('URL events notify'),
                     hidden: !App.user.isAdmin || !window.events === true,
                     allowBlank: true
                 }, {
                     name: 'addparameter',
-                    fieldLabel: t('addparameter'),
+                    fieldLabel: t('Addparameter'),
                     allowBlank: true,
                     hidden: !App.user.isAdmin,
-                    emptyText: t('parameterdial')
+                    emptyText: t('Parameterdial')
                 }, {
                     xtype: 'combobox',
+                    name: 'amd',
+                    fieldLabel: t('AMD'),
                     store: [
                         ['0', t('Disable')],
-                        ['1', t('Before Answer')],
-                        ['2', t('After Answer')],
+                        ['1', t('Before answer')],
+                        ['2', t('After answer')],
                         ['3', t('Both')]
                     ],
                     forceSelection: true,
                     editable: false,
-                    name: 'amd',
                     value: '0',
-                    fieldLabel: t('AMD'),
                     allowBlank: true,
                     hidden: !window.dma || !window.dialC
                 }]
@@ -326,28 +328,33 @@ Ext.define('MBilling.view.sip.Form', {
                 items: [{
                     fieldLabel: t('Forward'),
                     items: [{
-                        name: 'type_forward',
                         xtype: 'typesipforwardcombo',
+                        name: 'type_forward',
+                        fieldLabel: t('Forward'),
                         flex: 2
                     }, {
                         xtype: 'ivrlookup',
                         name: 'id_ivr',
+                        fieldLabel: t('IVR'),
                         displayField: 'id_ivr_name'
                     }, {
                         xtype: 'queuelookup',
                         name: 'id_queue',
+                        fieldLabel: t('Queue'),
                         displayField: 'id_queue_name'
                     }, {
                         xtype: 'sip2lookup',
                         name: 'id_sip',
+                        fieldLabel: t('Sip user'),
                         displayField: 'id_sip_name'
                     }, {
                         xtype: 'textfield',
-                        name: 'extension'
+                        name: 'extension',
+                        fieldLabel: t('DialPlan')
                     }]
                 }, {
-                    name: 'dial_timeout',
                     xtype: 'numberfield',
+                    name: 'dial_timeout',
                     fieldLabel: t('Dial timeout'),
                     value: '60',
                     labelWidth: 90
@@ -375,7 +382,7 @@ Ext.define('MBilling.view.sip.Form', {
                 items: [{
                     xtype: 'noyescombo',
                     name: 'voicemail',
-                    fieldLabel: t('Enable') + ' ' + t('voicemail'),
+                    fieldLabel: t('Enable voicemail'),
                     value: '0'
                 }, {
                     xtype: 'textfield',
@@ -384,7 +391,7 @@ Ext.define('MBilling.view.sip.Form', {
                 }, {
                     xtype: 'numberfield',
                     name: 'voicemail_password',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('Password'),
                     value: ''
                 }]
             }, {
@@ -411,6 +418,8 @@ Ext.define('MBilling.view.sip.Form', {
                 items: [{
                     xtype: 'textarea',
                     name: 'sipshowpeer',
+                    fieldLabel: t('Peer'),
+                    labelWidth: 50,
                     readOnly: true,
                     allowBlank: true,
                     height: 700,

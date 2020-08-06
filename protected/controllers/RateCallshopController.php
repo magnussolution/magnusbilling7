@@ -28,7 +28,7 @@ class RateCallshopController extends Controller
     {
         $this->instanceModel = new RateCallshop;
         $this->abstractModel = RateCallshop::model();
-        $this->titleReport   = Yii::t('yii', 'Ratecard') . ' ' . Yii::t('yii', 'CallShop');
+        $this->titleReport   = Yii::t('zii', 'Rates') . ' ' . Yii::t('zii', 'CallShop');
         parent::init();
     }
 

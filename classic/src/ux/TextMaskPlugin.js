@@ -1,41 +1,23 @@
 /**
- * autor: Rodrigo Krummenauer do Nascimento
- * site: www.rkn.com.br
- * email: rodrigoknascimento@gmail.com
- * 
- * Versão: 4.2
- * Lincença: GPLv3
- **/
-/**
- * MODO DE USO DO Ext.ux.TextMaskPlugin (ptype: 'textmask')
+ * Classe TextMaskPlugin
  *
- *	var campo = Ext.create('Ext.field.TextField',{
- *		plugins: 'textmask',
- *		mask: '(099) 9999-9999',
- *		money: false
- *	})
+ * =======================================
+ * ###################################
+ * MagnusBilling
  *
- *	Ext.create('Ext.panel.Panel', {
- *		title: 'Exemplo mascara dinheiro',
- *		renderTo: Ext.getBody(),
- *		items: [{
- *			xtype: 'textfield',
- *			plugins: 'textmask',
- *			fieldLabel: 'Valor',
- *			mask: 'R$ #9.999.990,00',
- *			money: true
- *		},{
- *			xtype: 'textfield',
- *			plugins: 'textmask',
- *			fieldLabel: 'Completo',
- *			mask: '% #0.0',
- *			money: true
- *		}]
- *	})
- * 
- * Temos a função setMask(mascara) que serve para mudar a mascara
- * depois que o objeto já estiver criado.
- **/
+ * @package MagnusBilling
+ * @author Adilson Leffa Magnus.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
+ * ###################################
+ *
+ * This software is released under the terms of the GNU Lesser General Public License v3
+ * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+ *
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
+ * =======================================
+ * Magnusbilling.org <info@magnussolution.com>
+ * 19/09/2012
+ */
 Ext.define('Ext.ux.TextMaskPlugin', {
     extend: 'Ext.AbstractPlugin',
     uses: ['Ext.ux.TextMaskCore'],
@@ -225,114 +207,114 @@ Ext.define('Ext.ux.TextMaskPlugin', {
  *
 //Ext.form.DateField.prototype.altFormats = 'd|dm|dmY|d/m|d-m|d/m/Y|d-m-Y|Y-m-d|Y-m-dTg:i:s';
 Ext.define('Ext.ux.form.MaskDateField', {
-	extend: 'Ext.form.DateField',
-	alias: 'widget.maskdatefield',
-	maskRel: {
-		m: '99',
-		d: '99',
-		n: '99',
-		j: '99',
-		Y: '9999'
-	},
-	initComponent: function(){
-		this.mask = '';
-		Ext.each(this.format.split(''), function(item){
-			this.mask += this.maskRel[item] || item
-		},this)
-		
-		Ext.ux.form.MaskDateField.superclass.initComponent.apply(this, arguments);
-		this.textMask = new Ext.ux.TextMask(this.mask);
-		this.textMask.blankChar = '_';
-	},
-	onRender: function(){
-		Ext.ux.form.MaskDateField.superclass.onRender.apply(this, arguments);
-		this.hiddenField = this.inputEl.insertSibling({
-			tag: 'input',
-			type: 'hidden',
-			name: this.name,
-			value: this.textMask.unmask(this.value)
-		}, 'after');
-		this.hiddenName = this.name;
-		this.inputEl.dom.removeAttribute('name');
-		this.enableKeyEvents = true;
-		this.inputEl.on({
-			keypress:this.updateHidden,
-			keydown: function(e){
-				if(this.readOnly){return false};
-				if(e.getKey() == e.BACKSPACE){
-					this.hiddenField.dom.value = this.hiddenField.dom.value.substr(0, this.hiddenField.dom.value.length-1);
-					this.updateHidden(e);
-				}
-			},
-			scope:this
-		});
-		this.setValue(this.value);
-	},
-	getKeyCode : function(onKeyDownEvent, type) {
-		if(this.readOnly){return false};
-		var keycode = {};
-		keycode.unicode = onKeyDownEvent.getKey();
-		keycode.isShiftPressed = onKeyDownEvent.shiftKey;
-		
-		keycode.isDelete = ((onKeyDownEvent.getKey() == Ext.EventObject.DELETE && type=='keydown') || ( type=='keypress' && onKeyDownEvent.charCode===0 && onKeyDownEvent.keyCode == Ext.EventObject.DELETE))? true: false;
-		keycode.isTab = (onKeyDownEvent.getKey() == Ext.EventObject.TAB)? true: false;
-		keycode.isBackspace = (onKeyDownEvent.getKey() == Ext.EventObject.BACKSPACE)? true: false;
-		keycode.isLeftOrRightArrow = (onKeyDownEvent.getKey() == Ext.EventObject.LEFT || onKeyDownEvent.getKey() == Ext.EventObject.RIGHT)? true: false;
-		keycode.pressedKey = String.fromCharCode(keycode.unicode);
-		return(keycode);
-	},
-	updateHidden: function(e){
-		
-		if(this.readOnly){return false};
-		var key = this.getKeyCode(e, 'keydown');
-		if(!(e.getKey() >= e.F1 && e.getKey() <= e.F12) && !e.isNavKeyPress()){
-			if((this.inputEl.dom.selectionStart == 0 && this.inputEl.dom.selectionEnd == this.inputEl.dom.value.length) || (this.hiddenField.dom.value == 'undefined')){
-				this.hiddenField.dom.value = '';
-			}
-			
-			if(!key.isBackspace){
-				this.hiddenField.dom.value = this.textMask.unmask(this.hiddenField.dom.value + key.pressedKey);
-			}
-			
-			this.inputEl.dom.value = this.textMask.mask(this.hiddenField.dom.value);
-			this.inputEl.dom.selectionStart = this.textMask.getLength(this.hiddenField.dom.value);
-			this.inputEl.dom.selectionEnd = this.inputEl.dom.selectionStart;
-			
-			e.preventDefault();
-		}
-	},
-	getRawValue: function(){
-		return this.hiddenField.dom.value;
-	},
-	setValue: function(v){
-		if(v === 'now'){
-			v = new Date;
-		}
-		
-		if(this.inputEl){
-			v = this.formatDate(this.parseDate(v));
-			this.hiddenField.dom.value = v;
-			this.inputEl.dom.value = this.textMask.mask(v);
-		}
-		this.value = v;
-	},
-	//Correção de bug, só dava parse na mascara se fosse um TAB
-	onFocus2: function(){
-		Ext.form.TriggerField.superclass.onFocus.call(this);
-		if(!this.mimicing){
-			this.wrap.addClass(this.wrapFocusClass);
-			this.mimicing = true;
-			this.doc.on('mousedown', this.mimicBlur, this, {delay: 10});
-			if(this.monitorTab){
-				this.on('keydown', this.checkTab, this);
-			}
-		}
-	},
-	checkTab: function(me, e){
-		if(e.getKey() == e.TAB || e.getKey() == e.ENTER){
-			this.triggerBlur();
-		}
-	}
+    extend: 'Ext.form.DateField',
+    alias: 'widget.maskdatefield',
+    maskRel: {
+        m: '99',
+        d: '99',
+        n: '99',
+        j: '99',
+        Y: '9999'
+    },
+    initComponent: function(){
+        this.mask = '';
+        Ext.each(this.format.split(''), function(item){
+            this.mask += this.maskRel[item] || item
+        },this)
+        
+        Ext.ux.form.MaskDateField.superclass.initComponent.apply(this, arguments);
+        this.textMask = new Ext.ux.TextMask(this.mask);
+        this.textMask.blankChar = '_';
+    },
+    onRender: function(){
+        Ext.ux.form.MaskDateField.superclass.onRender.apply(this, arguments);
+        this.hiddenField = this.inputEl.insertSibling({
+            tag: 'input',
+            type: 'hidden',
+            name: this.name,
+            value: this.textMask.unmask(this.value)
+        }, 'after');
+        this.hiddenName = this.name;
+        this.inputEl.dom.removeAttribute('name');
+        this.enableKeyEvents = true;
+        this.inputEl.on({
+            keypress:this.updateHidden,
+            keydown: function(e){
+                if(this.readOnly){return false};
+                if(e.getKey() == e.BACKSPACE){
+                    this.hiddenField.dom.value = this.hiddenField.dom.value.substr(0, this.hiddenField.dom.value.length-1);
+                    this.updateHidden(e);
+                }
+            },
+            scope:this
+        });
+        this.setValue(this.value);
+    },
+    getKeyCode : function(onKeyDownEvent, type) {
+        if(this.readOnly){return false};
+        var keycode = {};
+        keycode.unicode = onKeyDownEvent.getKey();
+        keycode.isShiftPressed = onKeyDownEvent.shiftKey;
+        
+        keycode.isDelete = ((onKeyDownEvent.getKey() == Ext.EventObject.DELETE && type=='keydown') || ( type=='keypress' && onKeyDownEvent.charCode===0 && onKeyDownEvent.keyCode == Ext.EventObject.DELETE))? true: false;
+        keycode.isTab = (onKeyDownEvent.getKey() == Ext.EventObject.TAB)? true: false;
+        keycode.isBackspace = (onKeyDownEvent.getKey() == Ext.EventObject.BACKSPACE)? true: false;
+        keycode.isLeftOrRightArrow = (onKeyDownEvent.getKey() == Ext.EventObject.LEFT || onKeyDownEvent.getKey() == Ext.EventObject.RIGHT)? true: false;
+        keycode.pressedKey = String.fromCharCode(keycode.unicode);
+        return(keycode);
+    },
+    updateHidden: function(e){
+        
+        if(this.readOnly){return false};
+        var key = this.getKeyCode(e, 'keydown');
+        if(!(e.getKey() >= e.F1 && e.getKey() <= e.F12) && !e.isNavKeyPress()){
+            if((this.inputEl.dom.selectionStart == 0 && this.inputEl.dom.selectionEnd == this.inputEl.dom.value.length) || (this.hiddenField.dom.value == 'undefined')){
+                this.hiddenField.dom.value = '';
+            }
+            
+            if(!key.isBackspace){
+                this.hiddenField.dom.value = this.textMask.unmask(this.hiddenField.dom.value + key.pressedKey);
+            }
+            
+            this.inputEl.dom.value = this.textMask.mask(this.hiddenField.dom.value);
+            this.inputEl.dom.selectionStart = this.textMask.getLength(this.hiddenField.dom.value);
+            this.inputEl.dom.selectionEnd = this.inputEl.dom.selectionStart;
+            
+            e.preventDefault();
+        }
+    },
+    getRawValue: function(){
+        return this.hiddenField.dom.value;
+    },
+    setValue: function(v){
+        if(v === 'now'){
+            v = new Date;
+        }
+        
+        if(this.inputEl){
+            v = this.formatDate(this.parseDate(v));
+            this.hiddenField.dom.value = v;
+            this.inputEl.dom.value = this.textMask.mask(v);
+        }
+        this.value = v;
+    },
+    //Correção de bug, só dava parse na mascara se fosse um TAB
+    onFocus2: function(){
+        Ext.form.TriggerField.superclass.onFocus.call(this);
+        if(!this.mimicing){
+            this.wrap.addClass(this.wrapFocusClass);
+            this.mimicing = true;
+            this.doc.on('mousedown', this.mimicBlur, this, {delay: 10});
+            if(this.monitorTab){
+                this.on('keydown', this.checkTab, this);
+            }
+        }
+    },
+    checkTab: function(me, e){
+        if(e.getKey() == e.TAB || e.getKey() == e.ENTER){
+            this.triggerBlur();
+        }
+    }
 })
 //Ext.reg('maskdatefield', Ext.ux.form.MaskDateField);
 

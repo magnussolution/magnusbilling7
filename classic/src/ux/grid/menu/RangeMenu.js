@@ -102,7 +102,7 @@ menuItemCfgs : {
         var me = this,
             fields, fieldCfg, i, len, item, cfg, Cls;
         me.menuItemCfgs = {
-            emptyText: t('Enter Number...'),
+            emptyText: t('Enter number...'),
             allowDecimals: true,
             decimalPrecision: me.numericDecimalPrecision,
             selectOnFocus: false,

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 10/07/2012
@@ -22,7 +22,7 @@ Ext.define('MBilling.view.did.Combo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.didcombo',
     name: 'id_did',
-    fieldLabel: t('did'),
+    fieldLabel: t('DID'),
     displayField: 'did',
     forceSelection: true,
     editable: true,
@@ -45,15 +45,15 @@ Ext.define('MBilling.view.did.BuyCombo', {
     name: 'id_did',
     forceSelection: true,
     editable: false,
-    fieldLabel: t('did'),
+    fieldLabel: t('DID'),
     displayField: 'did',
     valueField: 'id',
-    listConfig: {
-        itemTpl: Ext.create('Ext.XTemplate', '<div>{did}  (' + t('Setup') + ': ' + t('moedasimblo') + ' {connection_charge} --> ' + t('monthly payment') + ': ' + t('moedasimblo') + ' {fixrate})</div>')
-    },
-    displayTpl: Ext.create('Ext.XTemplate', '<tpl for=".">{did}  (' + t('Setup') + ': ' + t('moedasimblo') + ' {connection_charge} --> ' + t('monthly payment') + ': ' + t('moedasimblo') + ' {fixrate})</tpl>'),
     initComponent: function() {
         var me = this;
+        me.listConfig = {
+            itemTpl: Ext.create('Ext.XTemplate', '<div>{did}  (' + t('Setup') + ': ' + App.user.currency + ' {connection_charge} --> ' + t('Monthly payment') + ': ' + App.user.currency + ' {fixrate})</div>')
+        };
+        me.displayTpl = Ext.create('Ext.XTemplate', '<tpl for=".">{did}  (' + t('Setup') + ': ' + App.user.currency + ' {connection_charge} --> ' + t('Monthly payment') + ': ' + App.user.currency + ' {fixrate})</tpl>');
         me.store = Ext.create('MBilling.store.Did', {
             proxy: {
                 type: 'uxproxy',

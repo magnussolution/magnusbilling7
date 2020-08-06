@@ -42,7 +42,7 @@ Ext.define('MBilling.view.main.ChangePassword', {
             maxLength: 100,
             inputType: 'password',
             hideLabel: true,
-            emptyText: t('Current Password'),
+            emptyText: t('Current password'),
             anchor: '0'
         }, {
             xtype: 'textfield',
@@ -50,7 +50,7 @@ Ext.define('MBilling.view.main.ChangePassword', {
             inputType: 'password',
             maxLength: 100,
             hideLabel: true,
-            emptyText: t('New Password'),
+            emptyText: t('New password'),
             anchor: '0'
         }]
     },

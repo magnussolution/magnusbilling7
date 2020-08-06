@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2012
@@ -31,7 +31,7 @@ Ext.define('MBilling.view.refill.List', {
         }];
         if (App.user.isAdmin && me.buttonCleanFilter) {
             me.extraButtons = [{
-                text: t('charts'),
+                text: t('Charts'),
                 iconCls: 'icon-chart-column',
                 handler: 'onChart',
                 reference: 'chart',
@@ -56,13 +56,13 @@ Ext.define('MBilling.view.refill.List', {
             }];
         }
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -72,29 +72,29 @@ Ext.define('MBilling.view.refill.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('credit'),
+            header: t('Credit'),
             dataIndex: 'credit',
             renderer: Helper.Util.formatMoneyDecimal2,
             flex: 2
         }, {
-            header: t('description'),
+            header: t('Description'),
             dataIndex: 'description',
             flex: 5,
             hidden: window.isTablet
         }, {
-            header: t('payment'),
+            header: t('Payment'),
             dataIndex: 'payment',
             renderer: Helper.Util.formattyyesno,
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('no')],
-                    [1, t('yes')]
+                    [0, t('No')],
+                    [1, t('Yes')]
                 ]
             },
             flex: 2
         }, {
-            header: t('date'),
+            header: t('Date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'date',
             flex: 4,

@@ -48,7 +48,7 @@ class CallSummaryPerUserController extends Controller
         }
         $this->instanceModel = new CallSummaryPerUser;
         $this->abstractModel = CallSummaryPerUser::model();
-        $this->titleReport   = Yii::t('yii', 'Calls summary per User');
+        $this->titleReport   = Yii::t('zii', 'Summary Day User');
         parent::init();
 
     }

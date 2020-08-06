@@ -64,14 +64,14 @@ class Api extends Model
     public function checksecret($attribute, $params)
     {
         if (preg_match('/ /', $this->api_key)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in api_key'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in api_key'));
         }
         if (preg_match('/ /', $this->api_secret)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in api_secret'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in api_secret'));
         }
 
         if ($this->api_secret == $this->api_key) {
-            $this->addError($attribute, Yii::t('yii', 'Key cannot be equal secret'));
+            $this->addError($attribute, Yii::t('zii', 'Key cannot be equal secret'));
         }
 
     }

@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 <form class="rounded" id="contactform" action="../../index.php/authentication/login" method="post" target="_blank">
 
-	<h2><?php Yii::t('yii', 'confirmation')?></h2>
+	<h2><?php Yii::t('zii', 'Confirmation')?></h2>
 
 	<?php
 if (isset($_GET['id_user'])) {
@@ -32,18 +32,18 @@ if (isset($_GET['id_user'])) {
 }
 
 if (!isset($_GET['loginkey']) && (isset($smtpResult) && count($smtpResult) > 0)):
-    echo '<font color=red>' . Yii::t('yii', 'Please check your email') . '</font>';
+    echo '<font color=red>' . Yii::t('zii', 'Please check your email') . '</font>';
     echo '</form>';
 else:
 ?>
 			<div align="left" class="field">
-				<label><?php echo Yii::t('yii', 'username') ?></label>
+				<label><?php echo Yii::t('zii', 'Username') ?></label>
 				<input readonly="readonly" class="input" name="user" type="text" value="<?php echo $signup->username ?>" />
 			</div>
 
 			<?php if ($signup->id_user > 1): ?>
 			<div align="left" class="field">
-				<label><?php echo Yii::t('yii', 'password') ?></label>
+				<label><?php echo Yii::t('zii', 'Password') ?></label>
 				<input readonly="readonly" class="input" name="passagent" type="text" value="<?php echo $signup->password ?>" />
 			</div>
 			<?php endif;?>
@@ -52,12 +52,12 @@ else:
 			</div>
 			<div align="left" class="field">
 				<input required class="input" name="loginkey" type="hidden" value="<?php echo $loginkey = isset($_GET['loginkey']) ? $_GET['loginkey'] : null ?>" />
-				<p class="hint"><?php echo Yii::t('yii', 'Enter your loginkey which was sent to your Email') ?></p>
+				<p class="hint"><?php echo Yii::t('zii', 'Enter your loginkey which was sent to your Email') ?></p>
 			</div>
 
 			<input name="remote" value="1" type="hidden" />
 
 
-			<input class="button" type="submit" value = "<?php echo Yii::t('yii', 'Enter your account') ?>" />
+			<input class="button" type="submit" value = "<?php echo Yii::t('zii', 'Enter in your account') ?>" />
 		</form>
 	<?php endif;?>

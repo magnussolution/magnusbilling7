@@ -6,7 +6,7 @@ Ext.define('MBilling.view.main.GoogleAuthenticatorController', {
     msgAuthenticating: t('Authenticating...'),
     msgEnteringInSystem: t('Entering in system...'),
     msgWelcome: t('Welcome'),
-    titleErrorInAuthentication: t('Authentication Error'),
+    titleErrorInAuthentication: t('Authentication error'),
     control: {
         textfield: {
             keyup: 'onKeyUpField'

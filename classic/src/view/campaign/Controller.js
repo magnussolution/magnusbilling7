@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -111,7 +111,7 @@ Ext.define('MBilling.view.campaign.Controller', {
                 var obj = Ext.decode(action.response.responseText);
                 if (obj.success) {
                     Ext.ux.Alert.alert(me.titleSuccess, obj.msg, 'success');
-                    me.formPanel.fireEvent('aftersave', me.formPanel, obj.rows[0]);
+                    me.formPanel.fireEvent('Aftersave', me.formPanel, obj.rows[0]);
                 } else {
                     errors = Helper.Util.convertErrorsJsonToString(obj.msg);
                     if (!Ext.isObject(obj.errors)) {
@@ -144,9 +144,9 @@ Ext.define('MBilling.view.campaign.Controller', {
         var me = this,
             selected = me.list.getSelectionModel().getSelection()[0];
         if (me.list.getSelectionModel().getSelection().length == 0) {
-            Ext.ux.Alert.alert(me.titleError, t('Please Select one campaign'), 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select one campaign'), 'notification');
         } else if (me.list.getSelectionModel().getSelection().length > 1) {
-            Ext.ux.Alert.alert(me.titleError, t('Please Select only one campaign'), 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only one campaign'), 'notification');
         } else {
             Ext.Ajax.request({
                 url: 'index.php/campaign/testCampaign',

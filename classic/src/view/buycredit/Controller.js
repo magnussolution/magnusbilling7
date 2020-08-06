@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/10/2013
@@ -77,10 +77,10 @@ Ext.define('MBilling.view.buycredit.Controller', {
                 getForm.getForm().findField('card_num').focus();
             }
         } else if (!fieldMethod) {
-            Ext.ux.Alert.alert(me.titleWarning, t('Select a ') + t('paymentmethods'), 'warning');
+            Ext.ux.Alert.alert(me.titleWarning, t('Select a payment methods'), 'warning');
             return;
         } else if (fieldAmount <= 0) {
-            Ext.ux.Alert.alert(me.titleWarning, t('Select a ') + t('valid') + ' ' + t('amount'), 'warning');
+            Ext.ux.Alert.alert(me.titleWarning, t('Select a valid amount'), 'warning');
             return;
         } else {
             url = 'index.php/buyCredit/method/?amount=' + fieldAmount + '&id_method=' + fieldMethod;

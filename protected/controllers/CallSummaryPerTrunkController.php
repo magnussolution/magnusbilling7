@@ -35,7 +35,7 @@ class CallSummaryPerTrunkController extends Controller
 
         $this->instanceModel = new CallSummaryPerTrunk;
         $this->abstractModel = CallSummaryPerTrunk::model();
-        $this->titleReport   = Yii::t('yii', 'Calls summary per trunk');
+        $this->titleReport   = Yii::t('zii', 'Summary per Trunk');
         parent::init();
 
     }

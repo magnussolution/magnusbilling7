@@ -29,7 +29,7 @@ class SmsController extends Controller
     {
         $this->instanceModel = new Sms;
         $this->abstractModel = Sms::model();
-        $this->titleReport   = 'Sms';
+        $this->titleReport   = 'SMS';
         parent::init();
     }
 

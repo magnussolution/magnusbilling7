@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -38,51 +38,51 @@ Ext.define('MBilling.view.services.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 reference: 'generalTab',
                 items: [{
                     xtype: 'servicestypecombo',
                     name: 'type',
-                    fieldLabel: t('type'),
+                    fieldLabel: t('Type'),
                     allowBlank: true,
                     hidden: App.user.isClient
                 }, {
                     name: 'name',
-                    fieldLabel: t('name'),
+                    fieldLabel: t('Name'),
                     readOnly: App.user.isClient
                 }, {
                     name: 'calllimit',
-                    fieldLabel: t('calllimit'),
+                    fieldLabel: t('Call limit'),
                     allowBlank: true,
                     hidden: true,
                     readOnly: App.user.isClient
                 }, {
                     name: 'disk_space',
-                    fieldLabel: t('disk_space'),
+                    fieldLabel: t('Disk space'),
                     allowBlank: true,
                     hidden: true,
                     readOnly: App.user.isClient
                 }, {
                     name: 'sipaccountlimit',
-                    fieldLabel: t('Sip Account Limit'),
+                    fieldLabel: t('Sip account limit'),
                     allowBlank: true,
                     hidden: true,
                     readOnly: App.user.isClient
                 }, {
                     xtype: 'moneyfield',
-                    mask: App.user.currency + ' #9.999.990,00',
                     name: 'price',
-                    fieldLabel: t('price'),
+                    fieldLabel: t('Price'),
+                    mask: App.user.currency + ' #9.999.990,00',
                     readOnly: App.user.isClient
                 }, {
                     xtype: 'yesnocombo',
                     name: 'return_credit',
-                    fieldLabel: t('return_credit'),
+                    fieldLabel: t('Return credit'),
                     hidden: !App.user.isAdmin
                 }, {
                     xtype: 'textarea',
                     name: 'description',
-                    fieldLabel: t('description'),
+                    fieldLabel: t('Description'),
                     allowBlank: true,
                     hidden: App.user.isClient,
                     height: 100,

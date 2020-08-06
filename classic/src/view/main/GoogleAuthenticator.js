@@ -76,8 +76,8 @@ Ext.define('MBilling.view.main.GoogleAuthenticator', {
                 src: me.keyGoogle,
                 hidden: !me.newKey && !me.showGoogleCode
             }, {
-                fieldLabel: t('Manual Code'),
                 xtype: 'displayfield',
+                fieldLabel: t('Manual code'),
                 value: secretKey[1],
                 allowBlank: true,
                 hidden: !me.newKey && !me.showGoogleCode
@@ -87,17 +87,17 @@ Ext.define('MBilling.view.main.GoogleAuthenticator', {
                 allowBlank: true,
                 hidden: !me.newKey && !me.showGoogleCode
             }, {
-                fieldLabel: t('Code Name'),
                 xtype: 'displayfield',
+                fieldLabel: t('Code name'),
                 value: 'VoIP-' + me.username + '-' + me.userId,
                 allowBlank: true,
                 hidden: !me.newKey
             }, {
                 layout: 'hbox',
                 items: [{
+                    xtype: 'button',
                     flex: 1,
                     margin: '0 0 0 5',
-                    xtype: 'button',
                     reference: 'cancelButton',
                     scale: 'large',
                     iconAlign: 'right',
@@ -106,9 +106,9 @@ Ext.define('MBilling.view.main.GoogleAuthenticator', {
                     formBind: true,
                     handler: 'onLogout'
                 }, {
+                    xtype: 'button',
                     flex: 1,
                     margin: '0 0 0 5',
-                    xtype: 'button',
                     reference: 'loginButton',
                     scale: 'large',
                     iconAlign: 'right',

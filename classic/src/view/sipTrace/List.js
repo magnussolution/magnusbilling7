@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -39,17 +39,17 @@ Ext.define('MBilling.view.sipTrace.List', {
             handler: 'onDeleteLog',
             width: 120
         }, {
-            text: t('Start Capture'),
+            text: t('Start capture'),
             iconCls: 'icon-save-all',
             handler: 'onNewFilter',
             width: 120
         }, {
-            text: t('Stop Capture'),
+            text: t('Stop capture'),
             iconCls: 'icon-clean-filter',
             handler: 'onClearAll',
             width: 120
         }, {
-            text: t('Export File'),
+            text: t('Export file'),
             iconCls: 'icon-save-all',
             handler: 'onExportPcap',
             width: 150
@@ -60,22 +60,22 @@ Ext.define('MBilling.view.sipTrace.List', {
             width: 150
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             menuDisabled: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('method'),
+            header: t('Method'),
             dataIndex: 'method',
             flex: 3
         }, {
-            header: t('callid'),
+            header: t('Call ID'),
             dataIndex: 'callid',
             flex: 7
         }, {
-            header: t('SIP To '),
+            header: t('SIP To'),
             dataIndex: 'sipto',
             flex: 5
         }, {
@@ -95,7 +95,7 @@ Ext.define('MBilling.view.sipTrace.List', {
             },
             flex: 4
         }, {
-            header: t('head'),
+            header: t('Head'),
             dataIndex: 'head',
             flex: 3,
             menuDisabled: true,

@@ -556,12 +556,12 @@ class Report extends FPDF
     {
         if ($value == 0) {
             $this->SetTextColor(255, 0, 0);
-            return Yii::t('yii', 'Error');
+            return Yii::t('zii', 'Error');
         } else if ($value == 1) {
             $this->SetTextColor(0, 128, 0);
-            return Yii::t('yii', 'Send');
+            return Yii::t('zii', 'Send');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Received');
+            return Yii::t('zii', 'Received');
         } else {
             return $value;
         }
@@ -570,11 +570,11 @@ class Report extends FPDF
     public function formatPackagetype($value)
     {
         if ($value == 0) {
-            return Yii::t('yii', 'Unlimited calls');
+            return Yii::t('zii', 'Unlimited calls');
         } else if ($value == 1) {
-            return Yii::t('yii', 'Number free calls');
+            return Yii::t('zii', 'Number free calls');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Free seconds');
+            return Yii::t('zii', 'Free seconds');
         } else {
             return $value;
         }
@@ -583,9 +583,9 @@ class Report extends FPDF
     public function formatBillingtype($value)
     {
         if ($value == 0) {
-            return Yii::t('yii', 'Monthly');
+            return Yii::t('zii', 'Monthly');
         } else if ($value == 1) {
-            return Yii::t('yii', 'Weekly');
+            return Yii::t('zii', 'Weekly');
         } else {
             return $value;
         }
@@ -595,12 +595,12 @@ class Report extends FPDF
     {
         if ($value == 0) {
             $this->SetTextColor(255, 0, 0);
-            return Yii::t('yii', 'Inactive');
+            return Yii::t('zii', 'Inactive');
         } else if ($value == 1) {
             $this->SetTextColor(0, 128, 0);
-            return Yii::t('yii', 'Active');
+            return Yii::t('zii', 'Active');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Pending');
+            return Yii::t('zii', 'Pending');
         } else {
             return $value;
         }
@@ -609,17 +609,17 @@ class Report extends FPDF
     public function formatVoipCall($value)
     {
         if ($value == 0) {
-            return Yii::t('yii', 'Callforpstn');
+            return Yii::t('zii', 'Call to PSTN');
         } else if ($value == 1) {
-            return Yii::t('yii', 'Sipcall');
+            return Yii::t('zii', 'SIP');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Ivr');
+            return Yii::t('zii', 'IVR');
         } else if ($value == 3) {
-            return Yii::t('yii', 'Callingcard');
+            return Yii::t('zii', 'CallingCard');
         } else if ($value == 4) {
-            return Yii::t('yii', 'Portal De Voz');
+            return Yii::t('zii', 'Direct extension');
         } else if ($value == 5) {
-            return Yii::t('yii', 'CID Callback');
+            return Yii::t('zii', 'CID Callback');
         } else {
             return $value;
         }
@@ -629,21 +629,21 @@ class Report extends FPDF
     public function formatSipiax($value)
     {
         if ($value == 0) {
-            return Yii::t('yii', 'Standard');
+            return Yii::t('zii', 'Standard');
         } else if ($value == 1) {
-            return Yii::t('yii', 'Sipcall');
+            return Yii::t('zii', 'SIP');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Did');
+            return Yii::t('zii', 'DID');
         } else if ($value == 3) {
-            return Yii::t('yii', 'Didvoip');
+            return Yii::t('zii', 'DID voip');
         } else if ($value == 4) {
-            return Yii::t('yii', 'Callback');
+            return Yii::t('zii', 'CallBack');
         } else if ($value == 5) {
-            return Yii::t('yii', 'Callcenter');
+            return Yii::t('zii', 'Voice Broadcasting');
         } else if ($value == 6) {
-            return Yii::t('yii', 'Sms');
+            return Yii::t('zii', 'SMS');
         } else if ($value == 7) {
-            return Yii::t('yii', 'Transfer');
+            return Yii::t('zii', 'Transfer');
         } else {
             return $value;
         }
@@ -653,23 +653,23 @@ class Report extends FPDF
     public function formatTerminatecauseid($value)
     {
         if ($value == 1) {
-            return Yii::t('yii', 'Answer');
+            return Yii::t('zii', 'Answer');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Busy');
+            return Yii::t('zii', 'Busy');
         } else if ($value == 3) {
-            return Yii::t('yii', 'No answer');
+            return Yii::t('zii', 'No answer');
         } else if ($value == 4) {
-            return Yii::t('yii', 'Cancelcall');
+            return Yii::t('zii', 'Cancel');
         } else if ($value == 5) {
-            return Yii::t('yii', 'Chanunavail');
+            return Yii::t('zii', 'Chanunavail');
         } else if ($value == 6) {
-            return Yii::t('yii', 'Congestion');
+            return Yii::t('zii', 'Congestion');
         } else if ($value == 7) {
-            return Yii::t('yii', 'Dontcall');
+            return Yii::t('zii', 'Dontcall');
         } else if ($value == 8) {
-            return Yii::t('yii', 'Torture');
+            return Yii::t('zii', 'Torture');
         } else if ($value == 9) {
-            return Yii::t('yii', 'Invalidargs');
+            return Yii::t('zii', 'Invalidargs');
         } else {
             return $value;
         }
@@ -679,11 +679,11 @@ class Report extends FPDF
     public function formatLcrtype($value)
     {
         if ($value == 0) {
-            return Yii::t('yii', 'LCRAccordingtothebuyerPrice');
+            return Yii::t('zii', 'LCR According buyer Price');
         } else if ($value == 1) {
-            return Yii::t('yii', 'LCRAccordingtothesellerPrice');
+            return Yii::t('zii', 'LCR According seseller Price');
         } else if ($value == 2) {
-            return Yii::t('yii', 'Load Balancer');
+            return Yii::t('zii', 'Load Balancer');
         } else {
             return $value;
         }

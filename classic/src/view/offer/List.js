@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -25,17 +25,17 @@ Ext.define('MBilling.view.offer.List', {
     initComponent: function() {
         var me = this;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'label',
             flex: 1
         }, {
-            header: t('packagetype'),
+            header: t('Package type'),
             dataIndex: 'packagetype',
             renderer: Helper.Util.formatPackageType,
             comboRelated: 'offertypecombo',
@@ -43,17 +43,17 @@ Ext.define('MBilling.view.offer.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('unlimitedcalls')],
-                    [1, t('numberfreecalls')],
-                    [2, t('freeseconds')]
+                    [0, t('Unlimited calls')],
+                    [1, t('Number free calls')],
+                    [2, t('Free seconds')]
                 ]
             }
         }, {
-            header: t('freetimetocall'),
+            header: t('Free time to call'),
             dataIndex: 'freetimetocall',
             flex: 1
         }, {
-            header: t('periode'),
+            header: t('Period'),
             dataIndex: 'billingtype',
             renderer: Helper.Util.formatBillingType,
             comboRelated: 'billingtypecombo',
@@ -61,19 +61,19 @@ Ext.define('MBilling.view.offer.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('monthly')],
-                    [1, t('weekly')]
+                    [0, t('Monthly')],
+                    [1, t('Weekly')]
                 ]
             }
         }, {
-            header: t('price'),
+            header: t('Price'),
             dataIndex: 'price',
             renderer: Helper.Util.formatMoneyDecimal,
             hidden: !App.user.isAdmin,
             hideable: App.user.isAdmin,
             flex: 2
         }, {
-            header: t('creationdate'),
+            header: t('Creation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
             flex: 1

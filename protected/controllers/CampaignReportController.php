@@ -24,7 +24,7 @@ class CampaignReportController extends Controller
     {
         $this->instanceModel = new Campaign;
         $this->abstractModel = Campaign::model();
-        $this->titleReport   = Yii::t('yii', 'Campaign Report');
+        $this->titleReport   = Yii::t('zii', 'Campaign Report');
         parent::init();
     }
 

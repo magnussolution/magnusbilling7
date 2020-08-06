@@ -35,7 +35,7 @@ class DidUseController extends Controller
     {
         $this->instanceModel = new DidUse;
         $this->abstractModel = DidUse::model();
-        $this->titleReport   = Yii::t('yii', 'Did Use');
+        $this->titleReport   = Yii::t('zii', 'DIDs Use');
         parent::init();
     }
 

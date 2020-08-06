@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -27,7 +27,7 @@ Ext.define('MBilling.view.phoneNumber.List', {
     initComponent: function() {
         var me = this;
         me.extraButtons = [{
-            text: t('Reprocessar'),
+            text: t('Reprocess'),
             iconCls: 'callshop',
             handler: 'reprocessar',
             disabled: false
@@ -35,17 +35,17 @@ Ext.define('MBilling.view.phoneNumber.List', {
         me.buttonUpdateLot = App.user.isAdmin && !window.isTablet;
         me.buttonCsv = !window.isTablet;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('number'),
+            header: t('Number'),
             dataIndex: 'number',
             flex: 4
         }, {
-            header: t('phonebook'),
+            header: t('Phonebook'),
             dataIndex: 'idPhonebookname',
             filter: {
                 type: 'string',
@@ -53,7 +53,7 @@ Ext.define('MBilling.view.phoneNumber.List', {
             },
             flex: 4
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             renderer: Helper.Util.formatBooleanActive,
             comboRelated: 'statuscombo',
@@ -70,24 +70,24 @@ Ext.define('MBilling.view.phoneNumber.List', {
                 ]
             }
         }, {
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             hidden: true,
             hideable: true,
             flex: 4
         }, {
-            header: t('city'),
+            header: t('City'),
             dataIndex: 'city',
             hidden: true,
             hideable: true,
             flex: 4
         }, {
-            header: t('description'),
+            header: t('Description'),
             dataIndex: 'info',
             hidden: true,
             flex: 4
         }, {
-            header: t('date'),
+            header: t('Date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
             hidden: true,

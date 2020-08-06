@@ -53,7 +53,7 @@ class DidController extends Controller
         $this->uploaddir     = $this->magnusFilesDirectory . 'sounds/';
         $this->instanceModel = new Did;
         $this->abstractModel = Did::model();
-        $this->titleReport   = Yii::t('yii', 'Did');
+        $this->titleReport   = Yii::t('zii', 'Did');
         parent::init();
 
         //for agents add filter for show only numbers free
@@ -133,14 +133,14 @@ class DidController extends Controller
                 {
                     //adiciona a recarga e pagamento do 1º mes
                     $credit      = $modelDid->fixrate;
-                    $description = Yii::t('yii', 'Monthly payment Did') . ' ' . $modelDid->did;
+                    $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $modelDid->did;
 
                     UserCreditManager::releaseUserCredit($id_user, $credit, $description, 0);
 
                     //adiciona a recarga e pagamento do custo de ativaçao
                     if ($modelDid->connection_charge > 0) {
                         $credit      = $modelDid->connection_charge;
-                        $description = Yii::t('yii', 'Activation Did') . ' ' . $modelDid->did;
+                        $description = Yii::t('zii', 'Activation DID') . ' ' . $modelDid->did;
 
                         UserCreditManager::releaseUserCredit($id_user, $credit, $description, 0);
 

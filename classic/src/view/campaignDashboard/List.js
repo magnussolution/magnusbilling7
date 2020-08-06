@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 28/07/2020
@@ -55,7 +55,7 @@ Ext.define('MBilling.view.campaignDashboard.List', {
             }
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
@@ -65,31 +65,31 @@ Ext.define('MBilling.view.campaignDashboard.List', {
             dataIndex: 'name',
             flex: 4
         }, {
-            header: t('Calls Being Placed'),
+            header: t('Calls being placed'),
             dataIndex: 'callsPlaced',
             flex: 4
         }, {
-            header: t('Calls Ringing'),
+            header: t('Calls ringing'),
             dataIndex: 'callsringing',
             flex: 4
         }, {
-            header: t('Calls in Transfer'),
+            header: t('Calls in transfer'),
             dataIndex: 'callsInTransfer',
             flex: 4
         }, {
-            header: t('Calls Transfered'),
+            header: t('Calls transfered'),
             dataIndex: 'callsTransfered',
             flex: 4
         }, {
-            header: t('Total Numbers'),
+            header: t('Total numbers'),
             dataIndex: 'callsTotalNumbers',
             flex: 4
         }, {
-            header: t('Diales Today'),
+            header: t('Dialed today'),
             dataIndex: 'callsDialedtoday',
             flex: 4
         }, {
-            header: t('Leads Remaining to Dial'),
+            header: t('Leads remaining to dial'),
             dataIndex: 'callsRemaningToDial',
             flex: 4
         }];

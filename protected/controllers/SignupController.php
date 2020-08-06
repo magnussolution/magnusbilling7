@@ -100,7 +100,7 @@ class SignupController extends Controller
                 unset($_POST['Signup']['password']);
             } else {
                 if ($_POST['Signup']['password'] != $_POST['Signup']['password2']) {
-                    $signup->addError('id_plan', Yii::t('yii', 'Password '));
+                    $signup->addError('id_plan', Yii::t('zii', 'Password '));
                 }
             }
 
@@ -124,7 +124,7 @@ class SignupController extends Controller
 
             if ($modelPlan->signup != 1) {
                 //error if invalid plan(tampered data)
-                $signup->addError('id_plan', Yii::t('yii', 'Invalid plan used to signup'));
+                $signup->addError('id_plan', Yii::t('zii', 'Invalid plan used to signup'));
             } else {
                 $success = $signup->save();
 

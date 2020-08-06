@@ -21,7 +21,7 @@
 /*
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
 
-<div id="load" ><?php echo Yii::t('yii', 'Please wait while loading...') ?></div>
+<div id="load" ><?php echo Yii::t('zii', 'Please wait while loading...') ?></div>
 
 <script languaje="JavaScript">
 window.onload = function () {
@@ -113,7 +113,7 @@ if ($_POST) {
 
     if (preg_match('/ssl_result_message=APPROV/', $result)) {
         $success = 'Your payment was successful.';
-        UserCreditManager::releaseUserCredit($modelUser->id, $_GET['amount']*0.97, 'Payment via Elevon', 1, $reference);
+        UserCreditManager::releaseUserCredit($modelUser->id, $_GET['amount'] * 0.97, 'Payment via Elevon', 1, $reference);
 
     } else {
         //$result = explode('errorMessage=', $result);
