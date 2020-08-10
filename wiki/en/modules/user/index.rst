@@ -13,7 +13,7 @@ SIP Users
 :ref:`sip-menu-list`
 
 
-Calls OnLine
+Calls Online
 ************
 :ref:`callonline-menu-list`
 
