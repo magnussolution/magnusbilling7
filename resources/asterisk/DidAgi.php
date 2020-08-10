@@ -299,7 +299,7 @@ class DidAgi
             if (AuthenticateAgi::authenticateUser($agi, $MAGNUS) != 1) {
                 $msg = "DID AUTHENTICATION ERROR";
             } else {
-
+                $agi->set_variable("DIDACCOUNTCODE", $MAGNUS->username);
                 $MAGNUS->record_call = $MAGNUS->modelUser->record_call;
 
                 $agi->verbose("DID call friend: IS LOCAL !!!", 1);
