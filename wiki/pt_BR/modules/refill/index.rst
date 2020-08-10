@@ -1,6 +1,6 @@
-*********
+**********
 Financeiro
-*********
+**********
 
 
 Recargas
@@ -8,7 +8,7 @@ Recargas
 :ref:`refill-menu-list`
 
 
-Metodos de Pagamentos
+Metódos de Pagamento
 *********************
 :ref:`methodpay-menu-list`
 
@@ -18,13 +18,13 @@ Voucher
 :ref:`voucher-menu-list`
 
 
-Recargas provedores
-*******************
+Refill Provider
+***************
 :ref:`refillprovider-menu-list`
 
 
-Boleto Bancário
-****************
+Boleto
+******
 :ref:`boleto-menu-list`
 
 

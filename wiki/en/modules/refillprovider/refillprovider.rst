@@ -6,12 +6,12 @@ Field list
 
 
 
-.. _refillprovider-id_provide:
+.. _refillprovider-id_provider:
 
 Provider
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Credit
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Add payment
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

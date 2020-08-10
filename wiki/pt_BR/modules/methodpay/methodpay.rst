@@ -1,35 +1,25 @@
 .. _methodPay-menu-list:
 
-**********************
-Descrição dos campos
-**********************
-
-
-
-.. _methodPay-payment_method:
-
-Metodos de Pagamentos
-"""""""""""""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
+***************
+Lista de campos
+***************
 
 
 
 .. _methodPay-show_name:
 
-showName
-""""""""
+Nome para mostrar
+"""""""""""""""""
 
 Nome que será mostrado no painel do cliente
 
 
 
 
-.. _methodPay-id_use:
+.. _methodPay-id_user:
 
-
-
+Usuário
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -58,8 +48,8 @@ Ative se quiser deixar disponivel para os clientes
 
 .. _methodPay-min:
 
-Min amount
-""""""""""
+Quantidade mínima
+""""""""""""""""""
 
 Valor minimo que deseja aceitar
 
@@ -68,8 +58,8 @@ Valor minimo que deseja aceitar
 
 .. _methodPay-max:
 
-Max amount
-""""""""""
+Quantidade máxima
+""""""""""""""""""
 
 Valor maximo que deseja aceitar
 
@@ -78,7 +68,7 @@ Valor maximo que deseja aceitar
 
 .. _methodPay-username:
 
-Username
+Usuário
 """"""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -88,7 +78,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-url:
 
-Url
+URL
 """
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -98,8 +88,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-fee:
 
-Descontar
-"""""""""
+Taxa de desconto
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -116,20 +106,10 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _methodPay-boleto_convenio:
-
-Número convenio
-""""""""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
 .. _methodPay-boleto_agencia:
 
-Agência
-""""""""
+Empresa bancária
+"""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -138,28 +118,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-boleto_conta_corrente:
 
-Conta
-"""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_inicio_nosso_numeroa:
-
-Inicio nosso nº
-""""""""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_carteira:
-
-Carteira
-""""""""
+Conta bancária
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -168,8 +128,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-boleto_taxa:
 
-Taxa
-""""
+Imposto
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -228,7 +188,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-boleto_cpf_emp:
 
-CNPJ CPF
+CPF/CNPJ
 """"""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -238,7 +198,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-pagseguro_TOKEN:
 
-TOKEN
+Token
 """""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -298,8 +258,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-client_id:
 
-Client id
-"""""""""
+ID do cliente
+"""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -308,8 +268,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _methodPay-client_secret:
 
-Client Secret
-"""""""""""""
+Secret do cliente
+"""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

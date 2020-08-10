@@ -1,6 +1,6 @@
-*********
+*****
 Rates
-*********
+*****
 
 
 Plans
@@ -18,13 +18,13 @@ Prefixes
 :ref:`prefix-menu-list`
 
 
-User Rate
-*********
+User Custom Rates
+*****************
 :ref:`userrate-menu-list`
 
 
-Offer
-*****
+Offers
+******
 :ref:`offer-menu-list`
 
 

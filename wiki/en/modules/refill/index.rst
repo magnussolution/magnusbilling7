@@ -1,14 +1,14 @@
-*********
+*******
 Billing
-*********
+*******
 
 
-Refill
-******
+Refills
+*******
 :ref:`refill-menu-list`
 
 
-Payment methods
+Payment Methods
 ***************
 :ref:`methodpay-menu-list`
 
@@ -18,13 +18,13 @@ Voucher
 :ref:`voucher-menu-list`
 
 
-Refill provider
+Refill Provider
 ***************
 :ref:`refillprovider-menu-list`
 
 
-Banking
-*******
+Boleto
+******
 :ref:`boleto-menu-list`
 
 

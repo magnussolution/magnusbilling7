@@ -11,7 +11,7 @@ Field list
 DID
 """
 
-We not write the description to this field.
+The exact number coming from the context. We recommend you to always use the E164 format.
 
 
 
@@ -21,27 +21,27 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _did-callerid:
 
-CallerID name
+Callerid name
 """""""""""""
 
-We not write the description to this field.
+Use this field to set a Callerid name, or leave blank to use the received callerid from the DID provider.
 
 
 
 
 .. _did-connection_charge:
 
-Activation cost
-"""""""""""""""
+Connection charge
+"""""""""""""""""
 
-We not write the description to this field.
+Activation cost. E.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Monthly price
 """""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We not write the description to this field.
 Connection charge
 """""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,17 +71,17 @@ We not write the description to this field.
 Minimum time to charge
 """"""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _did-initblock:
 
-Minimum sale
-""""""""""""
+Initial block
+"""""""""""""
 
-We not write the description to this field.
+Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 10s, charged for 30s.
 
 
 
@@ -91,27 +91,27 @@ We not write the description to this field.
 Billing block
 """""""""""""
 
-We not write the description to this field.
+This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, charged for 36.
 
 
 
 
 .. _did-charge_of:
 
-Charge
-""""""
+Charge who
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _did-calllimit:
 
-Channel Limit
+Channel limit
 """""""""""""
 
-We not write the description to this field.
+DID simultaneous calls
 
 
 
@@ -121,7 +121,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We not write the description to this field.
 Regular expression
 """"""""""""""""""
 
-We not write the description to this field.
+Use REGEX to able to bill the incomming calls by CallerID(ANI). E.g, if you are calling your DID and your number is 443432221234, suppose you want to charge all calls that start with 44 for 0.1. Therefore you can use ^44, and Sell price per min 0.1.
 
 
 
@@ -141,7 +141,7 @@ We not write the description to this field.
 Sell price per min
 """"""""""""""""""
 
-We not write the description to this field.
+Price per minute if the number matches the above regular expression.
 
 
 
@@ -151,7 +151,7 @@ We not write the description to this field.
 Block calls from this expression
 """"""""""""""""""""""""""""""""
 
-We not write the description to this field.
+Set to yes to block calls that matches with the above regular expression
 
 
 
@@ -161,7 +161,7 @@ We not write the description to this field.
 Send the call to callback
 """""""""""""""""""""""""
 
-We not write the description to this field.
+Send this call to CallBack if it matches with the above regular expression
 
 
 
@@ -171,7 +171,7 @@ We not write the description to this field.
 Regular expression
 """"""""""""""""""
 
-We not write the description to this field.
+Same as the field above but you can use 3 REGEXes to bill with 3 diferent rules. E.g, on the first REGEX you want to charge 0.1 for numbers that start with 44, the second rule charges 0.2 for numbers that start with 447. Therefore you can use ^447 and Sell price per min 0.2.
 
 
 
@@ -181,7 +181,7 @@ We not write the description to this field.
 Sell price per min
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -191,7 +191,7 @@ We not write the description to this field.
 Block calls from this expression
 """"""""""""""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -201,7 +201,7 @@ We not write the description to this field.
 Send the call to callback
 """""""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -211,7 +211,7 @@ We not write the description to this field.
 Regular expression
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We not write the description to this field.
 Sell price per min
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We not write the description to this field.
 Block calls from this expression
 """"""""""""""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -241,27 +241,27 @@ We not write the description to this field.
 Send the call to callback
 """""""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _did-cbr:
 
-CallBack Pro
+CallBack pro
 """"""""""""
 
-We not write the description to this field.
+Enables CallBack Pro. Only works if DID destination is a QUEUE.
 
 
 
 
 .. _did-cbr_ua:
 
-Use Audio
+Use audio
 """""""""
 
-We not write the description to this field.
+Tries to execute an audio when a call is received.
 
 
 
@@ -271,7 +271,7 @@ We not write the description to this field.
 Maximum trying
 """"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -281,17 +281,17 @@ We not write the description to this field.
 Interval beteween trying
 """"""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _did-cbr_em:
 
-Early Media
+Early media
 """""""""""
 
-We not write the description to this field.
+Tries to execute an audio before the call is answered. Your DID provider needs to allow early media.
 
 
 
@@ -301,7 +301,7 @@ We not write the description to this field.
 Mon-Fri
 """""""
 
-We not write the description to this field.
+E.g, your company will only callback to the callee if the call was in between 09-12PM and 
 
 
 
@@ -311,7 +311,7 @@ We not write the description to this field.
 Sat
 """
 
-We not write the description to this field.
+The same but for Sat.
 
 
 
@@ -321,27 +321,27 @@ We not write the description to this field.
 Sun
 """
 
-We not write the description to this field.
+The same but for Sun.
 
 
 
 
 .. _did-workaudio:
 
-Available audi
-""""""""""""""
+Work audio
+""""""""""
 
-We not write the description to this field.
+Audio to execute when a call is received at the time interval.
 
 
 
 
 .. _did-noworkaudio:
 
-Unavailable audio
-"""""""""""""""""
+Out work audio
+""""""""""""""
 
-We not write the description to this field.
+Audio to execute when a call is received out of the time interval.
 
 
 

@@ -1,8 +1,8 @@
 .. _configuration-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 

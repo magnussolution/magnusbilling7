@@ -1,8 +1,8 @@
 .. _call-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _call-src:
 
-Conta VoIP
-""""""""""
+Conta SIP
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _call-callerid:
 
-Callerid
+CallerID
 """"""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -88,8 +88,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _call-buycost:
 
-Compra
-""""""
+Preço de compra
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -98,8 +98,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _call-sessionbill:
 
-Venda
-"""""
+Preço de venda
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -108,8 +108,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _call-agent_bill:
 
-Venda
-"""""
+Preço de venda
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -118,8 +118,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _call-uniqueid:
 
-Uniqueid
-""""""""
+ID único
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

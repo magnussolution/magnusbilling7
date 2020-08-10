@@ -1,6 +1,6 @@
-*********
+***************
 Configurações
-*********
+***************
 
 
 Menus
@@ -8,7 +8,7 @@ Menus
 :ref:`module-menu-list`
 
 
-Grupo para Clientes
+Grupos para Cliente
 *******************
 :ref:`groupuser-menu-list`
 
@@ -18,17 +18,17 @@ Configurações
 :ref:`configuration-menu-list`
 
 
-E-mails
-*******
+Modelos de Email
+****************
 :ref:`templatemail-menu-list`
 
 
-Log Users
-*********
+Log de acessos
+**************
 :ref:`logusers-menu-list`
 
 
-Smtp
+SMTP
 ****
 :ref:`smtps-menu-list`
 
@@ -43,18 +43,18 @@ API
 :ref:`api-menu-list`
 
 
-Dashboard
-*********
+Monitoramento
+*************
 :ref:`dashboard-menu-list`
 
 
-Call per Minutes
-****************
+Chamadas por minuto
+*******************
 :ref:`campaignlog-menu-list`
 
 
-Group to Admins
-***************
+Grupos Administradores
+**********************
 :ref:`groupusergroup-menu-list`
 
 

@@ -1,35 +1,15 @@
 .. _callSummaryDayUser-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _callSummaryDayUser-sumsessiontime:
 
-Duração mínima
-"""""""""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _callSummaryDayUser-sumagent_bill:
-
-Venda
-"""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _callSummaryDayUser-sumbuycost:
-
-Compra
-""""""
+Duração
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callSummaryDayUser-sumnbcall:
 
-Total de Chamadas
+Total de chamadas
 """""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.

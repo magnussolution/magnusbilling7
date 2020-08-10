@@ -1,15 +1,25 @@
 .. _callerid-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _callerid-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _callerid-cid:
 
-Identificador de chamadas
-"""""""""""""""""""""""""
+CallerID
+""""""""
 
 Número do callerid para autenticar o CallingCard. É necessário cadastrar o número no formato que chega no servidor. Verifique o formato no Cli do Asterisk, ou consulte com o provedor do DID.
 
@@ -18,7 +28,7 @@ Número do callerid para autenticar o CallingCard. É necessário cadastrar o n�
 
 .. _callerid-activated:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.

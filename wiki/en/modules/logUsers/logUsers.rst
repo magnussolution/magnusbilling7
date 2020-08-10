@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,17 +21,17 @@ We not write the description to this field.
 Action
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _logUsers-ip:
 
-ip
+IP
 ""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

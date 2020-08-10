@@ -11,37 +11,37 @@ Field list
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _offer-packagetype:
 
-Offer type
-""""""""""
+Package type
+""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _offer-freetimetocall:
 
-Free
-""""
+Free time to call
+"""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _offer-billingtype:
 
-Period
-""""""
+Billing type
+""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Price
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

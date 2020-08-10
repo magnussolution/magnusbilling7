@@ -1,8 +1,8 @@
 .. _campaignPollInfo-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,7 +18,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaignPollInfo-resposta:
 
-Respostas
+Resultado
 """""""""
 
 Nós ainda não escrevemos a descrição deste campo.

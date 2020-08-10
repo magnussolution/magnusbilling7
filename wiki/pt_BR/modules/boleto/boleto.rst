@@ -1,15 +1,15 @@
 .. _boleto-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _boleto-id_user:
 
-
-
+Usuário
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _boleto-status:
 
-Pago
-""""
+Paago
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _boleto-vencimento:
 
-
-
+Vencimento
+""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

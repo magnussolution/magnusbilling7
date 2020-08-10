@@ -1,15 +1,15 @@
 .. _module-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _module-text:
 
-Texto
-"""""
+Text
+""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _module-icon_cls:
 
-Ícone
-""""""
+IconCls
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _module-id_module:
 
-Main Menu
-"""""""""
+Menu principal
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

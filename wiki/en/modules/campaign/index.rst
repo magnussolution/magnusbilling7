@@ -1,6 +1,6 @@
-*********
+******************
 Voice Broadcasting
-*********
+******************
 
 
 Campaigns
@@ -13,13 +13,13 @@ Campaign Report
 :ref:`campaignreport-menu-list`
 
 
-Phone books
-***********
+Phonebooks
+**********
 :ref:`phonebook-menu-list`
 
 
-Numbers
-*******
+Phonenumbers
+************
 :ref:`phonenumber-menu-list`
 
 
@@ -28,12 +28,12 @@ Polls
 :ref:`campaignpoll-menu-list`
 
 
-Poll CDR
-********
+Polls Reports
+*************
 :ref:`campaignpollinfo-menu-list`
 
 
-Restrict Phone
+Restrict phone
 **************
 :ref:`campaignrestrictphone-menu-list`
 
@@ -53,8 +53,8 @@ Report
 :ref:`extra2-menu-list`
 
 
-DashBoard
-*********
+Campaigns DashBoard
+*******************
 :ref:`campaigndashboard-menu-list`
 
 

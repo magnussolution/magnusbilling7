@@ -11,17 +11,17 @@ Field list
 From name
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _templateMail-fromemail:
 
-From e-Mail
-"""""""""""
+From email
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Subject
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

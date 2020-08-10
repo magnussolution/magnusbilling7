@@ -6,22 +6,32 @@ Field list
 
 
 
+.. _offerUse-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _offerUse-id_offer:
 
 Offer
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _offerUse-month_payed:
 
-Months paid
+Month payed
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +41,7 @@ We not write the description to this field.
 Reservation date
 """"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

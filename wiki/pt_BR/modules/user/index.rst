@@ -1,6 +1,6 @@
-*********
-Usuários
-*********
+********
+Clientes
+********
 
 
 Usuários
@@ -8,8 +8,8 @@ Usuários
 :ref:`user-menu-list`
 
 
-Contas VoIP
-***********
+Contas SIP
+**********
 :ref:`sip-menu-list`
 
 
@@ -18,12 +18,12 @@ Chamadas Online
 :ref:`callonline-menu-list`
 
 
-Caller Id
-*********
+CallerID
+********
 :ref:`callerid-menu-list`
 
 
-Linksys ATA
+ATA Linksys
 ***********
 :ref:`sipuras-menu-list`
 
@@ -33,7 +33,7 @@ Números Bloqueados
 :ref:`restrictedphonenumber-menu-list`
 
 
-CallBack
+Callback
 ********
 :ref:`callback-menu-list`
 
@@ -43,8 +43,8 @@ Comprar Crédito
 :ref:`buycredit-menu-list`
 
 
-Iax
-***
+Contas IAX
+**********
 :ref:`iax-menu-list`
 
 
@@ -53,8 +53,8 @@ Token
 :ref:`gauthenticator-menu-list`
 
 
-Send Credit
-***********
+Enviar crédito
+***************
 :ref:`transfertomobile-menu-list`
 
 

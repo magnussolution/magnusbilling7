@@ -1,8 +1,8 @@
 .. _smtps-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _smtps-port:
 
-Port
-""""
+Porta
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,8 +48,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _smtps-encryption:
 
-Encryption
-""""""""""
+Encriptação
+"""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

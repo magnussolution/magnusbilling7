@@ -11,7 +11,7 @@ Field list
 Prefix
 """"""
 
-We not write the description to this field.
+Prefix code. Prefix will be used to tariff and bill the calls.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+Destination name.
 
 
 

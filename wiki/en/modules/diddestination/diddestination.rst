@@ -11,7 +11,17 @@ Field list
 DID
 """
 
-We not write the description to this field.
+Select the DID that you want create new destination for.
+
+
+
+
+.. _diddestination-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
 
 
 
@@ -21,7 +31,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +41,7 @@ We not write the description to this field.
 Priority
 """"""""
 
-We not write the description to this field.
+You can create 5 destinations to your DID. If a try to the priority 1 is made and a error is received, MagnusBilling will try to send a call to the next destination priority available. Only works with the "SIP call" type.
 
 
 
@@ -41,7 +51,7 @@ We not write the description to this field.
 Type
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +61,7 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -61,7 +71,7 @@ We not write the description to this field.
 IVR
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,17 +81,17 @@ We not write the description to this field.
 Queue
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _diddestination-id_sip:
 
-SIP
-"""
+Sip user
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -91,7 +101,7 @@ We not write the description to this field.
 Context
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

@@ -1,15 +1,15 @@
 .. _rateProvider-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _rateProvider-id_provider:
 
-Provedor
-""""""""
+Nome do provedor
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateProvider-id_prefix:
 
-Destination
-"""""""""""
+Destino
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateProvider-buyrate:
 
-Compra
-""""""
+Preço de compra
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateProvider-buyrateinitblock:
 
-Mínimo compra
-""""""""""""""
+Bloco inicial
+"""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,8 +48,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateProvider-buyrateincrement:
 
-Bloco de compra
-"""""""""""""""
+Incremento
+""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

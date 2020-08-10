@@ -6,12 +6,12 @@ Field list
 
 
 
-.. _servicesUse-id:
+.. _servicesUse-id_user:
 
+Username
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Service
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Price
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Payment methods
 """""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Reservation date
 """"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

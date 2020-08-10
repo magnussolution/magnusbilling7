@@ -1,35 +1,15 @@
 .. _callSummaryMonthUser-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _callSummaryMonthUser-sumsessiontime:
 
-Duração mínima
-"""""""""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _callSummaryMonthUser-sumagent_bill:
-
-Venda
-"""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _callSummaryMonthUser-sumbuycost:
-
-Compra
-""""""
+Duração
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callSummaryMonthUser-sumnbcall:
 
-Total de Chamadas
+Total de chamadas
 """""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.

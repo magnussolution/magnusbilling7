@@ -1,8 +1,8 @@
 .. _offer-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,7 +18,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _offer-packagetype:
 
-Tipo de Pacote
+Tipo de pacote
 """"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _offer-freetimetocall:
 
-Gratis
-""""""
+Tempo gratuíto para ligar
+""""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _offer-billingtype:
 
-Periodo
-"""""""
+Tipo de tarifação
+"""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -6,22 +6,32 @@ Field list
 
 
 
-.. _sip-defaultuser:
+.. _sip-id_user:
 
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
+
+
+
+
+.. _sip-defaultuser:
+
+IAX user
+""""""""
+
+Username used to login in a SIP device.
 
 
 
 
 .. _sip-secret:
 
-Password
+IAX pass
 """"""""
 
-We not write the description to this field.
+Password to login in a SIP device.
 
 
 
@@ -31,7 +41,7 @@ We not write the description to this field.
 CallerID
 """"""""
 
-We not write the description to this field.
+The Caller ID number. Your trunk needs to accept CLI.
 
 
 
@@ -41,7 +51,7 @@ We not write the description to this field.
 Alias
 """""
 
-We not write the description to this field.
+Alias to dial between sip accounts from the same AccountCode (company).
 
 
 
@@ -51,17 +61,17 @@ We not write the description to this field.
 Disallow
 """"""""
 
-We not write the description to this field.
+Disallow all codecs and then select the codecs available below to enable them to the user.
 
 
 
 
 .. _sip-allow:
 
+Codec
+"""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,7 +81,7 @@ We not write the description to this field.
 Host
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -81,77 +91,77 @@ We not write the description to this field.
 Group
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-videosupport:
 
+Videosupport
+""""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-block_call_reg:
 
-Call blocking REGEX
-"""""""""""""""""""
+Block call regex
+""""""""""""""""
 
-We not write the description to this field.
+You can block calls with a regular expression. For example, if you want block all calls that start with a 9, use regex ^9 
 
 
 
 
 .. _sip-record_call:
 
-Record calls
-""""""""""""
+Record call
+"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-techprefix:
 
-Techprefix
-""""""""""
+Tech prefix
+"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-nat:
 
+NAT
+"""
 
-
-
-We not write the description to this field.
+Click here for more info|htt
 
 
 
 
 .. _sip-directmedia:
 
+Directmedia
+"""""""""""
 
-
-
-We not write the description to this field.
+If enabled, Asterisk tries to redirect the RTP media stream to go directly from the caller to the callee.
 
 
 
 
 .. _sip-qualify:
 
+Qualify
+"""""""
 
-
-
-We not write the description to this field.
+Send OPTION to user CONTACT field to qualify the user.
 
 
 
@@ -161,67 +171,67 @@ We not write the description to this field.
 Context
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-dtmfmode:
 
+Dtmfmode
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-insecure:
 
+Insecure
+""""""""
 
-
-
-We not write the description to this field.
+Needs to be NO if the host is dynamic. To IP authenticate set to invite.
 
 
 
 
 .. _sip-deny:
 
+Deny
+""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-permit:
 
+Permit
+""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-type:
 
+Type
+""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-allowtransfer:
 
+Allowtransfer
+"""""""""""""
 
-
-
-We not write the description to this field.
+Enable it to allow transfers between SIP accounts.
 
 
 
@@ -231,7 +241,7 @@ We not write the description to this field.
 Ring false
 """"""""""
 
-We not write the description to this field.
+If YES, generate a ringing tone for the calling party.
 
 
 
@@ -241,7 +251,7 @@ We not write the description to this field.
 Call limit
 """"""""""
 
-We not write the description to this field.
+Maximum simultaneous calls
 
 
 
@@ -251,27 +261,27 @@ We not write the description to this field.
 MOH
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-url_events:
 
-Url Events notify
+URL events notify
 """""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-addparameter:
 
-Add parameter
-"""""""""""""
+Addparameter
+""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -281,57 +291,57 @@ We not write the description to this field.
 AMD
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-type_forward:
 
+Forward
+"""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-id_ivr:
 
+IVR
+"""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-id_queue:
 
+Queue
+"""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-id_sip:
 
+Sip user
+""""""""
 
-
-
-We not write the description to this field.
-
-
-
-
-.. _sip-extensio:
+We did not write the description to this field.
 
 
 
 
-We not write the description to this field.
+.. _sip-extension:
+
+DialPlan
+""""""""
+
+We did not write the description to this field.
 
 
 
@@ -341,17 +351,17 @@ We not write the description to this field.
 Dial timeout
 """"""""""""
 
-We not write the description to this field.
+Timeout in seconds to wait for the call to be picked-up.
 
 
 
 
 .. _sip-voicemail:
 
-Enable
-""""""
+Enable voicemail
+""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -361,7 +371,7 @@ We not write the description to this field.
 Email
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -371,17 +381,17 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sip-sipshowpeer:
 
+Peer
+""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

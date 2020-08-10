@@ -1,15 +1,25 @@
 .. _offerUse-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _offerUse-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _offerUse-id_offer:
 
-Offer
-"""""
+Pacotes grátis
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -18,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _offerUse-month_payed:
 
-Meses Pagos
+Messes pago
 """""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -28,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _offerUse-reservationdate:
 
-Data de Ativação
-""""""""""""""""""
+Data de reserva
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -6,42 +6,32 @@ Field list
 
 
 
-.. _userRate-id_user:
-
-User
-""""
-
-We not write the description to this field.
-
-
-
-
 .. _userRate-id_prefix:
 
 Destination
 """""""""""
 
-We not write the description to this field.
+Select the prefix that you want set the price.
 
 
 
 
 .. _userRate-rateinitial:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+Sell price
 
 
 
 
 .. _userRate-initblock:
 
-Minimum sale
-""""""""""""
+Initial block
+"""""""""""""
 
-We not write the description to this field.
+Initial block
 
 
 
@@ -51,7 +41,7 @@ We not write the description to this field.
 Billing block
 """""""""""""
 
-We not write the description to this field.
+Increment block
 
 
 

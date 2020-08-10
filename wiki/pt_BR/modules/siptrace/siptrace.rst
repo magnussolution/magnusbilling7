@@ -1,8 +1,8 @@
 .. _sipTrace-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 

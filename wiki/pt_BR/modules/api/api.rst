@@ -1,15 +1,15 @@
 .. _api-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _api-id_user:
 
-
-
+Usuário
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _api-api_key:
 
-Api
-"""
+API key
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _api-api_secret:
 
-Api
-"""
+API secret
+""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,7 +38,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _api-status:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -49,16 +49,6 @@ Nós ainda não escrevemos a descrição deste campo.
 .. _api-action:
 
 Permissões
-"""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _api-api_restriction_ips:
-
-Restriction
 """""""""""
 
 Nós ainda não escrevemos a descrição deste campo.

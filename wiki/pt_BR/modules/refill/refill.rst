@@ -1,8 +1,18 @@
 .. _refill-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _refill-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
@@ -38,8 +48,8 @@ Esta opção é somente para seu controle. O crédito será liberado para o clie
 
 .. _refill-invoice_number:
 
-Invoice
-"""""""
+Fatura número
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -1,15 +1,15 @@
 .. _servicesUse-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
-.. _servicesUse-id:
+.. _servicesUse-id_user:
 
-
-
+Usuário
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,7 +38,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _servicesUse-method:
 
-Metodos de Pagamentos
+Metódos de Pagamento
 """""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.

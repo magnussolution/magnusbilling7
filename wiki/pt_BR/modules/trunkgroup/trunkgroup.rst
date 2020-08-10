@@ -1,8 +1,8 @@
 .. _trunkGroup-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _trunkGroup-id_trunk:
 
-
-
+Troncos
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

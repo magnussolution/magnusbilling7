@@ -1,14 +1,14 @@
 .. _diddestination-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _diddestination-id_did:
 
-Did
+DID
 """
 
 Selecione o DID para criar o novo destino
@@ -16,9 +16,19 @@ Selecione o DID para criar o novo destino
 
 
 
+.. _diddestination-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _diddestination-activated:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -48,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _diddestination-destination:
 
-Destination
-"""""""""""
+Destino
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -58,7 +68,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _diddestination-id_ivr:
 
-IVR
+URA
 """
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -68,8 +78,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _diddestination-id_queue:
 
-Queue
-"""""
+Fila de espera
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -78,8 +88,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _diddestination-id_sip:
 
-SIP
-"""
+Conta SIP
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -88,8 +98,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _diddestination-context:
 
-Context
-"""""""
+Contexto
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

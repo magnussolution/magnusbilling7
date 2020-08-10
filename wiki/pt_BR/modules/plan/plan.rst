@@ -1,8 +1,8 @@
 .. _Plan-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _Plan-signup:
 
-Usar para Registro
-""""""""""""""""""
+Usar no registro
+""""""""""""""""
 
 Disponibilizar este plano no formulário de registro. Se tiver somente 1 plano os clientes que se registrarem vão usar este plano, se tiver mais de 1, ai o cliente podera escolher. É necessário ter pelo menos 1 plano com esta opção ativada para funcionar o registro.
 
@@ -28,8 +28,8 @@ Disponibilizar este plano no formulário de registro. Se tiver somente 1 plano o
 
 .. _Plan-ini_credit:
 
-Initial Credit to new users
-"""""""""""""""""""""""""""
+Crédito inicial para novos usuários
+"""""""""""""""""""""""""""""""""""""
 
 Quanto de crédito você quer dar para clientes que se registram atraves do formulário de registro.
 
@@ -42,26 +42,6 @@ Executar audios
 """""""""""""""
 
 Executar audios para os cliente deste plano ou mandar somente erro? Por exemplo os auidos que acabou o crédito.
-
-
-
-
-.. _Plan-portabilidadeMobile:
-
-Para Celular
-""""""""""""
-
-Somente ative se você for usar a consulta de portabilidade. Pode saber mais no site ht
-
-
-
-
-.. _Plan-portabilidadeFixed:
-
-Para Fixo
-"""""""""
-
-Somente ative se você for usar a consulta de portabilidade. Pode saber mais no site ht
 
 
 

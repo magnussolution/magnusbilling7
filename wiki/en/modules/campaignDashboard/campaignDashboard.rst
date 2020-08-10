@@ -6,12 +6,12 @@ Field list
 
 
 
-.. _campaignDashboard-nam:
+.. _campaignDashboard-name:
 
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

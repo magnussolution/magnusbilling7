@@ -6,12 +6,22 @@ Field list
 
 
 
+.. _callerid-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _callerid-cid:
 
-CallerID number
-"""""""""""""""
+CallerID
+""""""""
 
-We not write the description to this field.
+The number to CID authenticate with CallingCard. Use the exact format that you received the callerID from your DID provider.
 
 
 
@@ -21,7 +31,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

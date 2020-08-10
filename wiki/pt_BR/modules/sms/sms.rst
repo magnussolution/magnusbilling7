@@ -1,8 +1,18 @@
 .. _sms-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _sms-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
@@ -18,7 +28,7 @@ Número no formato E164
 
 .. _sms-sms:
 
-Sms
+SMS
 """
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -28,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sms-sms_from:
 
-From
-""""
+De
+""
 
 Nós ainda não escrevemos a descrição deste campo.
 

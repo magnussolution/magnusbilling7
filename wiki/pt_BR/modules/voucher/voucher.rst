@@ -1,8 +1,8 @@
 .. _voucher-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Valor do VOUCHER
 
 .. _voucher-id_plan:
 
-Plan
-""""
+Plano
+"""""
 
 Plano que será usado no cliente que usar este crédito.
 
@@ -38,8 +38,8 @@ Idioma que será usado
 
 .. _voucher-prefix_local:
 
-DDD
-"""
+Regra prefixo
+"""""""""""""
 
 Regra que será usado no campo DDD do cliente
 
@@ -48,8 +48,8 @@ Regra que será usado no campo DDD do cliente
 
 .. _voucher-quantity:
 
-Quantity
-""""""""
+Quantidade
+""""""""""
 
 Quantos VOUCHER você deseja gerar?
 

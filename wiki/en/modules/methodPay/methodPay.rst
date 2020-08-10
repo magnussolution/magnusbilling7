@@ -6,32 +6,22 @@ Field list
 
 
 
-.. _methodPay-payment_method:
-
-Payment methods
-"""""""""""""""
-
-We not write the description to this field.
-
-
-
-
 .. _methodPay-show_name:
 
-showName
+Show name
+"""""""""
+
+Name to show to user in the Buy Credit option.
+
+
+
+
+.. _methodPay-id_user:
+
+Username
 """"""""
 
-We not write the description to this field.
-
-
-
-
-.. _methodPay-id_use:
-
-
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +31,7 @@ We not write the description to this field.
 Country
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +41,7 @@ We not write the description to this field.
 Active
 """"""
 
-We not write the description to this field.
+Activate this payment gateway to users?
 
 
 
@@ -61,7 +51,7 @@ We not write the description to this field.
 Min amount
 """"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,7 +61,7 @@ We not write the description to this field.
 Max amount
 """"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -81,27 +71,27 @@ We not write the description to this field.
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-url:
 
-Url
+URL
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-fee:
 
-Discount
-""""""""
+Discount fee
+""""""""""""
 
-We not write the description to this field.
+Discount the Paypal fee from the paid amount.
 
 
 
@@ -111,67 +101,37 @@ We not write the description to this field.
 Bank
 """"
 
-We not write the description to this field.
-
-
-
-
-.. _methodPay-boleto_convenio:
-
-Contract number
-"""""""""""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-boleto_agencia:
 
-Agency
-""""""
+Bank agency
+"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-boleto_conta_corrente:
 
-Bank Account
+Bank account
 """"""""""""
 
-We not write the description to this field.
-
-
-
-
-.. _methodPay-boleto_inicio_nosso_numeroa:
-
-Inicio nosso nº
-""""""""""""""""
-
-We not write the description to this field.
-
-
-
-
-.. _methodPay-boleto_carteira:
-
-Wallet
-""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-boleto_taxa:
 
-Rate
-""""
+Tax
+"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -181,7 +141,7 @@ We not write the description to this field.
 Instructions
 """"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -191,7 +151,7 @@ We not write the description to this field.
 Company
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -201,7 +161,7 @@ We not write the description to this field.
 Address
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -211,7 +171,7 @@ We not write the description to this field.
 City
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -221,17 +181,17 @@ We not write the description to this field.
 State
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-boleto_cpf_emp:
 
-CNPJ CPF
-""""""""
+DOC
+"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -241,7 +201,7 @@ We not write the description to this field.
 TOKEN
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -251,7 +211,7 @@ We not write the description to this field.
 P2P CustomerSiteID
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -261,7 +221,7 @@ We not write the description to this field.
 P2P KeyID
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -271,7 +231,7 @@ We not write the description to this field.
 P2P Passphrase
 """"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -281,7 +241,7 @@ We not write the description to this field.
 P2P RecipientKeyID
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -291,7 +251,7 @@ We not write the description to this field.
 P2P Tax Amount
 """"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -301,17 +261,17 @@ We not write the description to this field.
 Client id
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _methodPay-client_secret:
 
-Client Secret
+Client secret
 """""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

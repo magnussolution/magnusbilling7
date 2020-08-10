@@ -8,10 +8,10 @@ Field list
 
 .. _groupUser-id:
 
-Id
+ID
 ""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

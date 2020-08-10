@@ -1,8 +1,8 @@
 .. _groupUserGroup-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _groupUserGroup-user_prefix:
 
-User Prefix
-"""""""""""
+Prefixo para usuário
+"""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _groupUserGroup-id_group:
 
-
-
+Grupo
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

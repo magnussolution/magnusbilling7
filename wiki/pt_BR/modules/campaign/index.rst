@@ -1,6 +1,6 @@
-*********
-Torpedo de Voz e Sms
-*********
+********************
+Torpedo de voz & SMS
+********************
 
 
 Campanhas
@@ -8,8 +8,8 @@ Campanhas
 :ref:`campaign-menu-list`
 
 
-Campaign Report
-***************
+Relatório de Campanhas
+***********************
 :ref:`campaignreport-menu-list`
 
 
@@ -28,33 +28,33 @@ Enquetes
 :ref:`campaignpoll-menu-list`
 
 
-Enquete Respostas
-*****************
+Enquete Relatórios
+*******************
 :ref:`campaignpollinfo-menu-list`
 
 
-Números Bloqueados
+Telefone bloqueados
 *******************
 :ref:`campaignrestrictphone-menu-list`
 
 
-Sms
+SMS
 ***
 :ref:`sms-menu-list`
 
 
-Quick Campaign
-**************
+Campanha rápida
+****************
 :ref:`campaignsend-menu-list`
 
 
-Relatório
-**********
+Report
+******
 :ref:`extra2-menu-list`
 
 
-DashBoard
-*********
+Monitor de campanhas
+********************
 :ref:`campaigndashboard-menu-list`
 
 

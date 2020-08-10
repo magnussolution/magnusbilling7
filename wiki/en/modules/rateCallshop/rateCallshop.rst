@@ -11,7 +11,7 @@ Field list
 Prefix
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,47 +21,47 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _rateCallshop-buyrate:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _rateCallshop-minimo:
 
-Minimum purchase
-""""""""""""""""
+Buy price initblock
+"""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _rateCallshop-block:
 
-Buy increment
-"""""""""""""
+Buy price increment
+"""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _rateCallshop-minimal_time_charge:
 
-Minimal time to charge
+Minimum time to charge
 """"""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

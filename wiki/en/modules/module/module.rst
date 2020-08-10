@@ -11,27 +11,27 @@ Field list
 Text
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _module-icon_cls:
 
-Icon
-""""
+IconCls
+"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _module-id_module:
 
-Main Menu
+Main menu
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Order
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

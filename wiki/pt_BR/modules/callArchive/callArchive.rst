@@ -1,8 +1,8 @@
 .. _callArchive-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callArchive-buycost:
 
-Compra
-""""""
+Preço de compra
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callArchive-sessionbill:
 
-Venda
-"""""
+Preço de venda
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,8 +48,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callArchive-agent_bill:
 
-Venda
-"""""
+Preço de venda
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

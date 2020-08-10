@@ -11,7 +11,7 @@ Field list
 Credit
 """"""
 
-We not write the description to this field.
+How much credit is this voucher worth?
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Plan
 """"
 
-We not write the description to this field.
+Select the plan that is going to be used to create the user when the voucher is redeemed.
 
 
 
@@ -31,17 +31,17 @@ We not write the description to this field.
 Language
 """"""""
 
-We not write the description to this field.
+Language used to create the user when voucher when the voucher is redeemed.
 
 
 
 
 .. _voucher-prefix_local:
 
-Local prefix
+Prefix rules
 """"""""""""
 
-We not write the description to this field.
+Local Prefix used to the create user when the voucher is redeemed.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Quantity
 """"""""
 
-We not write the description to this field.
+How many vouchers do you want to generate?
 
 
 
@@ -61,7 +61,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We not write the description to this field.
 Voucher
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

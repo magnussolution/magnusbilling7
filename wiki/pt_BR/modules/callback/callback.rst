@@ -1,15 +1,25 @@
 .. _callBack-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _callBack-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _callBack-exten:
 
-Número Destino
-"""""""""""""""
+Número de destino
+""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -18,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callBack-status:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.

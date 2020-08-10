@@ -8,20 +8,20 @@ Field list
 
 .. _queueMember-queue_name:
 
+Queue name
+""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _queueMember-interface:
 
+Sip user
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Paused
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

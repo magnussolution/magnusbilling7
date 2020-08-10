@@ -8,20 +8,20 @@ Field list
 
 .. _callSummaryCallShop-sumsessiontime:
 
-Min duration
-""""""""""""
+Duration
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _callSummaryCallShop-sumprice:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,17 +31,17 @@ We not write the description to this field.
 Markup
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _callSummaryCallShop-sumbuycost:
 
-Buy cost
-""""""""
+Buy price
+"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Total calls
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

@@ -1,15 +1,15 @@
 .. _sipuras-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _sipuras-nserie:
 
-
-
+Serial
+""""""
 
 Linksys serial number
 
@@ -18,8 +18,8 @@ Linksys serial number
 
 .. _sipuras-macadr:
 
-
-
+MAC
+"""
 
 Linksys MAC address
 
@@ -28,8 +28,8 @@ Linksys MAC address
 
 .. _sipuras-senha_user:
 
-Senha
-"""""
+Senha do usuário
+"""""""""""""""""
 
 Usuário para entrar na configuração do LinkSys
 
@@ -38,8 +38,8 @@ Usuário para entrar na configuração do LinkSys
 
 .. _sipuras-senha_admin:
 
-Senha
-"""""
+Senha de administração
+""""""""""""""""""""""""
 
 Senha para entrar na configuração do LinkSys
 
@@ -48,8 +48,8 @@ Senha para entrar na configuração do LinkSys
 
 .. _sipuras-antireset:
 
-Anti Resete
-"""""""""""
+Bloquear reset
+""""""""""""""
 
 Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
 
@@ -58,7 +58,7 @@ Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
 
 .. _sipuras-Enable_Web_Server:
 
-Ativar Web Server
+Enable_Web_Server
 """""""""""""""""
 
 Tenha cuidadol. Se desativado, não será mais possível entrar nas configuraçōes do Linksys.
@@ -68,8 +68,8 @@ Tenha cuidadol. Se desativado, não será mais possível entrar nas configuraç�
 
 .. _sipuras-marca:
 
-
-
+Marca
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -78,8 +78,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-altera:
 
-
-
+Mudar
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -108,8 +108,8 @@ Senha da Conta VoIP
 
 .. _sipuras-Use_Pref_Codec_Only_1:
 
-Usar somente este codec
-"""""""""""""""""""""""
+Use_Pref_Codec
+""""""""""""""
 
 Somente usar o codec preferencial
 
@@ -128,8 +128,8 @@ Configurar codec preferencial
 
 .. _sipuras-Register_Expires_1:
 
-
-
+Register expires
+""""""""""""""""
 
 Tempo em segundos que o Linksys fica enviando o REGISTER para o servidor. Se for receber chamadas nesta linha, melhor deixar entre 120 e 480 segundos.
 
@@ -138,8 +138,8 @@ Tempo em segundos que o Linksys fica enviando o REGISTER para o servidor. Se for
 
 .. _sipuras-Dial_Plan_1:
 
-
-
+Dial plan
+"""""""""
 
 Read linkys documentation
 
@@ -148,8 +148,8 @@ Read linkys documentation
 
 .. _sipuras-NAT_Mapping_Enable_1_:
 
-
-
+NAT Mapping
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -158,8 +158,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-NAT_Keep_Alive_Enable_1_:
 
-
-
+NAT keep alive
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -188,8 +188,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-Use_Pref_Codec_Only_2:
 
-Usar somente este codec
-"""""""""""""""""""""""
+Use_Pref_Codec
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -208,8 +208,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-Register_Expires_2:
 
-
-
+Register expires
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -218,8 +218,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-Dial_Plan_2:
 
-
-
+Dial plan
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -228,8 +228,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-NAT_Mapping_Enable_2_:
 
-
-
+NAT Mapping
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -238,8 +238,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-NAT_Keep_Alive_Enable_2_:
 
-
-
+NAT keep alive
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -248,8 +248,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-STUN_Enable:
 
-Ativo
-"""""
+Habilitar STUN
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -258,8 +258,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-STUN_Test_Enable:
 
-
-
+STUN Test
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -268,8 +268,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-Substitute_VIA_Addr:
 
-
-
+Substitute VIA Addr
+"""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -278,8 +278,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-STUN_Server:
 
-
-
+STUN Server
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

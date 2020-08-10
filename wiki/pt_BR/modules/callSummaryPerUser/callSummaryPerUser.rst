@@ -1,35 +1,15 @@
 .. _callSummaryPerUser-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _callSummaryPerUser-sumsessiontime:
 
-Duração mínima
-"""""""""""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _callSummaryPerUser-sumagent_bill:
-
-Venda
-"""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _callSummaryPerUser-sumbuycost:
-
-Compra
-""""""
+Duração
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callSummaryPerUser-sumnbcall:
 
-Answered calls
-""""""""""""""
+Chamadas atendidas
+""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -58,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callSummaryPerUser-sumnbcallfail:
 
-Failed calls
-""""""""""""
+Chamadas falhadas
+"""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

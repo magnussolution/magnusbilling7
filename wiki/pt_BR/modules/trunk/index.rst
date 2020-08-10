@@ -1,10 +1,10 @@
-*********
+*****
 Rotas
-*********
+*****
 
 
-Provedor
-********
+Provedores
+**********
 :ref:`provider-menu-list`
 
 
@@ -13,7 +13,7 @@ Troncos
 :ref:`trunk-menu-list`
 
 
-Grupo de troncos
+Grupo de Troncos
 ****************
 :ref:`trunkgroup-menu-list`
 

@@ -1,8 +1,8 @@
 .. _campaignPoll-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaignPoll-repeat:
 
-
-
+How many time to repeat, if the client press invalid option?
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaignPoll-request_authorize:
 
-Solicitar
-"""""""""
+Solicitar autorização
+"""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaignPoll-digit_authorize:
 
-Digito para autorização
-"""""""""""""""""""""""""
+Digito para autorizar
+"""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -58,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaignPoll-arq_audio:
 
-
-
+Audio
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

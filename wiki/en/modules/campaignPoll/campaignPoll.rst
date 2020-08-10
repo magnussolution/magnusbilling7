@@ -11,27 +11,27 @@ Field list
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaignPoll-repeat:
 
+How many time to repeat, if the client press invalid option?
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaignPoll-request_authorize:
 
-Request
-"""""""
+Request authorization
+"""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Number for authorize
 """"""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,17 +51,17 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaignPoll-arq_audio:
 
+Audio
+"""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -121,7 +121,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -151,7 +151,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -161,7 +161,7 @@ We not write the description to this field.
 Option
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

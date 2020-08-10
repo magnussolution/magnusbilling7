@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Server IP
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Public IP
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,17 +51,17 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _servers-port:
 
-port
+Port
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We not write the description to this field.
 SIPport
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We not write the description to this field.
 Type
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We not write the description to this field.
 Weight
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

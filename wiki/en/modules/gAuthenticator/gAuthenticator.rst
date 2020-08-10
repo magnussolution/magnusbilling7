@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+Enable/Disable Google Authenticator.
 
 
 
@@ -31,17 +31,17 @@ We not write the description to this field.
 Code
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _gAuthenticator-google_authenticator_key:
 
-google_authenticator_key
+Google authenticator key
 """"""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

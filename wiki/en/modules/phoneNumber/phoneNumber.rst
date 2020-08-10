@@ -11,7 +11,7 @@ Field list
 Phonebook
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Number
 """"""
 
-We not write the description to this field.
+Number to send calls/sms. Use only E164 format
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Name
 """"
 
-We not write the description to this field.
+Used to TTS and SMS
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 City
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

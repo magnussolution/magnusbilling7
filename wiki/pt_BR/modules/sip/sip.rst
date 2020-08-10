@@ -1,15 +1,25 @@
 .. _sip-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _sip-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _sip-defaultuser:
 
-Usuário
-""""""""
+Conta IAX
+"""""""""
 
 Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
@@ -18,8 +28,8 @@ Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
 .. _sip-secret:
 
-Senha
-"""""
+Senha IAX
+"""""""""
 
 Senha que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
@@ -28,8 +38,8 @@ Senha que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
 .. _sip-callerid:
 
-Caller Id
-"""""""""
+CallerID
+""""""""
 
 Este é o CallerID que será mostrado no destino, em chamadas externas o provedor precisa permitir CLI para que seja identificado corretamente no destino.
 
@@ -48,8 +58,8 @@ Alias é um número para facilitar a discagem, pode colocar qualquer número. Po
 
 .. _sip-disallow:
 
-Disallow
-""""""""
+Não permitir
+"""""""""""""
 
 ESta opção destiva todos os codecs e deixa disponivel para o usuário somente os que você selecionar abaixo.
 
@@ -58,8 +68,8 @@ ESta opção destiva todos os codecs e deixa disponivel para o usuário somente 
 
 .. _sip-allow:
 
-
-
+Codec
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -88,8 +98,8 @@ Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar toda
 
 .. _sip-videosupport:
 
-
-
+Suporte a video
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -98,8 +108,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-block_call_reg:
 
-Bloquear Chamada com REGEX
-""""""""""""""""""""""""""
+REGEX para bloqueio de chamadas
+"""""""""""""""""""""""""""""""
 
 Bloquear chamadas usando REGEX. 
 
@@ -108,7 +118,7 @@ Bloquear chamadas usando REGEX.
 
 .. _sip-record_call:
 
-Gravar Chamadas
+Gravar chamadas
 """""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -118,8 +128,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-techprefix:
 
-Techprefix
-""""""""""
+Tech prefix
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -128,8 +138,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-nat:
 
-
-
+NAT
+"""
 
 Clique para mais informaçōes|htt
 
@@ -138,8 +148,8 @@ Clique para mais informaçōes|htt
 
 .. _sip-directmedia:
 
-
-
+Directmedia
+"""""""""""
 
 Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|htt
 
@@ -148,8 +158,8 @@ Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e se
 
 .. _sip-qualify:
 
-
-
+Qualify
+"""""""
 
 Enviar pacote OPTION para para verificar se o usuário esta online.
 
@@ -168,8 +178,8 @@ Somente altere se você sabe o que esta fazendo.
 
 .. _sip-dtmfmode:
 
-
-
+Dtmfmode
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -178,8 +188,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-insecure:
 
-
-
+Insecure
+""""""""
 
 Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentication alterar para port,invite.
 
@@ -188,8 +198,8 @@ Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentica
 
 .. _sip-deny:
 
-
-
+Negar
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -198,8 +208,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-permit:
 
-
-
+Permitir
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -208,8 +218,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-type:
 
-
-
+Tipo
+""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -218,8 +228,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-allowtransfer:
 
-
-
+Permitir transferência
+"""""""""""""""""""""""
 
 Permite esta conta VoIP fazer transferencia. O código para transferencia é *2ramal 
 
@@ -228,7 +238,7 @@ Permite esta conta VoIP fazer transferencia. O código para transferencia é *2r
 
 .. _sip-ringfalse:
 
-Ring false
+Ring falso
 """"""""""
 
 Ativa ring falso. Adiciona rR do comando Dial.
@@ -238,8 +248,8 @@ Ativa ring falso. Adiciona rR do comando Dial.
 
 .. _sip-calllimit:
 
-Limite de chamadas
-""""""""""""""""""
+Limite de chamada
+"""""""""""""""""
 
 Chamadas simultâneas permitidas.
 
@@ -258,8 +268,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-url_events:
 
-Url Events notify
-"""""""""""""""""
+URL notificaçōes de eventos
+"""""""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -268,8 +278,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-addparameter:
 
-Parametros adicionais
-"""""""""""""""""""""
+Adicionar parâmetro
+""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -288,8 +298,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-type_forward:
 
-
-
+Encaminhar
+""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -298,8 +308,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-id_ivr:
 
-
-
+URA
+"""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -308,8 +318,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-id_queue:
 
-
-
+Fila de espera
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -318,18 +328,18 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-id_sip:
 
-
-
+Conta SIP
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _sip-extensio:
+.. _sip-extension:
 
-
-
+DialPlan
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -338,8 +348,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-dial_timeout:
 
-Dial timeout
-""""""""""""
+Tempo de discagem expirado
+""""""""""""""""""""""""""
 
 Tempo em segundos que será aguardado para atender a chamada.
 
@@ -348,8 +358,8 @@ Tempo em segundos que será aguardado para atender a chamada.
 
 .. _sip-voicemail:
 
-Enable
-""""""
+Habilitar voicemail
+"""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -378,8 +388,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sip-sipshowpeer:
 
-
-
+Peer
+""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

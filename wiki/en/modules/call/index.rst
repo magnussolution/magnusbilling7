@@ -1,6 +1,6 @@
-*********
+*******
 Reports
-*********
+*******
 
 
 CDR
@@ -8,57 +8,57 @@ CDR
 :ref:`call-menu-list`
 
 
-Failed calls
-************
+CDR Failed
+**********
 :ref:`callfailed-menu-list`
 
 
-Summary per day
+Summary per Day
 ***************
 :ref:`callsummaryperday-menu-list`
 
 
-Summary per day/user
-********************
+Summary Day User
+****************
 :ref:`callsummarydayuser-menu-list`
 
 
-Summary day/trunk
+Summary Day Trunk
 *****************
 :ref:`callsummarydaytrunk-menu-list`
 
 
-Summary day/agent
+Summary Day Agent
 *****************
 :ref:`callsummarydayagent-menu-list`
 
 
-Summary per month
+Summary per Month
 *****************
 :ref:`callsummarypermonth-menu-list`
 
 
-Summary month/user
+Summary Month User
 ******************
 :ref:`callsummarymonthuser-menu-list`
 
 
-Summary month/trunk
+Summary Month Trunk
 *******************
 :ref:`callsummarymonthtrunk-menu-list`
 
 
-Summary per user
+Summary per User
 ****************
 :ref:`callsummaryperuser-menu-list`
 
 
-Summary per trunk
+Summary per Trunk
 *****************
 :ref:`callsummarypertrunk-menu-list`
 
 
-Call archive
+Call Archive
 ************
 :ref:`callarchive-menu-list`
 

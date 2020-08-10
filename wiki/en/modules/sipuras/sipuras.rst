@@ -8,80 +8,80 @@ Field list
 
 .. _sipuras-nserie:
 
+Serial
+""""""
 
-
-
-We not write the description to this field.
+LinkSys serial number
 
 
 
 
 .. _sipuras-macadr:
 
+MAC
+"""
 
-
-
-We not write the description to this field.
+LinkSys MAC address
 
 
 
 
 .. _sipuras-senha_user:
 
-Password
-""""""""
+User password
+"""""""""""""
 
-We not write the description to this field.
+User to set in LinkSys configuration
 
 
 
 
 .. _sipuras-senha_admin:
 
-Password
-""""""""
+Admin password
+""""""""""""""
 
-We not write the description to this field.
+Pass to set in LinkSys configuration
 
 
 
 
 .. _sipuras-antireset:
 
-Anti reset
-""""""""""
+Antireset
+"""""""""
 
-We not write the description to this field.
+Prevent resetting LinkSys with *73738#
 
 
 
 
 .. _sipuras-Enable_Web_Server:
 
-Active Web Server
+Enable_Web_Server
 """""""""""""""""
 
-We not write the description to this field.
+Enabling/Disabling LinkSys configuration WebPage
 
 
 
 
 .. _sipuras-marca:
 
+Mark
+""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-altera:
 
+Change
+""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We not write the description to this field.
 Username
 """"""""
 
-We not write the description to this field.
+SIP account username
 
 
 
@@ -101,17 +101,17 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+SIP account password
 
 
 
 
 .. _sipuras-Use_Pref_Codec_Only_1:
 
-Use preferred codec
-"""""""""""""""""""
+Use_Pref_Codec
+""""""""""""""
 
-We not write the description to this field.
+Only use the preferred CODEC
 
 
 
@@ -121,47 +121,47 @@ We not write the description to this field.
 Codec
 """""
 
-We not write the description to this field.
+Set the preferred CODEC
 
 
 
 
 .. _sipuras-Register_Expires_1:
 
+Register expires
+""""""""""""""""
 
-
-
-We not write the description to this field.
+Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.
 
 
 
 
 .. _sipuras-Dial_Plan_1:
 
+Dial plan
+"""""""""
 
-
-
-We not write the description to this field.
+Read LinkSys documentation
 
 
 
 
 .. _sipuras-NAT_Mapping_Enable_1_:
 
+NAT Mapping
+"""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-NAT_Keep_Alive_Enable_1_:
 
+NAT keep alive
+""""""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -171,7 +171,7 @@ We not write the description to this field.
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -181,17 +181,17 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-Use_Pref_Codec_Only_2:
 
-Use preferred codec
-"""""""""""""""""""
+Use_Pref_Codec
+""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -201,87 +201,87 @@ We not write the description to this field.
 Codec
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-Register_Expires_2:
 
+Register expires
+""""""""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-Dial_Plan_2:
 
+Dial plan
+"""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-NAT_Mapping_Enable_2_:
 
+NAT Mapping
+"""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-NAT_Keep_Alive_Enable_2_:
 
+NAT keep alive
+""""""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-STUN_Enable:
 
-Active
-""""""
+Enable STUN
+"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-STUN_Test_Enable:
 
+STUN Test
+"""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-Substitute_VIA_Addr:
 
+Substitute VIA Addr
+"""""""""""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sipuras-STUN_Server:
 
+STUN Server
+"""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

@@ -1,35 +1,35 @@
-*********
-Did
-*********
-
-
-Did
 ***
+DID
+***
+
+
+DIDs
+****
 :ref:`did-menu-list`
 
 
-Destino
-*******
+Destino de DID
+**************
 :ref:`diddestination-menu-list`
 
 
-Uso dos Dids
-************
+Uso de DIDs
+***********
 :ref:`diduse-menu-list`
 
 
-Ura
-***
+URAs
+****
 :ref:`ivr-menu-list`
 
 
-Fila de Espera
-**************
+Filas de Espera
+***************
 :ref:`queue-menu-list`
 
 
-Agentes Fila de Espera
-**********************
+Filas agentes
+*************
 :ref:`queuemember-menu-list`
 
 
@@ -38,17 +38,17 @@ Comprar DID
 :ref:`didbuy-menu-list`
 
 
-Queue DashBoard
-***************
+Monitor de Filas
+****************
 :ref:`dashboardqueue-menu-list`
 
 
-DIDWW
+DIDww
 *****
 :ref:`didww-menu-list`
 
 
-DIDWW
+DIDww
 *****
 :ref:`didww-menu-list`
 

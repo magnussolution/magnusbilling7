@@ -1,8 +1,18 @@
 .. _didUse-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _didUse-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
@@ -18,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _didUse-reservationdate:
 
-Data de Ativação
-""""""""""""""""""
+Data de reserva
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
