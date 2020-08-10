@@ -27,6 +27,6 @@ Ext.define('MBilling.view.general.LcrtypeCombo', {
     value: 1,
     store: [
         [1, t('LCR According buyer Price')],
-        [0, t('LCR According seseller Price')]
+        [0, t('LCR According seller Price')]
     ]
 });

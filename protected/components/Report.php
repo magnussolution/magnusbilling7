@@ -681,7 +681,7 @@ class Report extends FPDF
         if ($value == 0) {
             return Yii::t('zii', 'LCR According buyer Price');
         } else if ($value == 1) {
-            return Yii::t('zii', 'LCR According seseller Price');
+            return Yii::t('zii', 'LCR According seller Price');
         } else if ($value == 2) {
             return Yii::t('zii', 'Load Balancer');
         } else {

@@ -119,7 +119,7 @@ class Signup extends Model
         }
 
         if ($this->password == '123456' || $this->password == '12345678' || $this->password == '012345') {
-            $this->addError($attribute, Yii::t('zii', 'No use sequence in the pasword'));
+            $this->addError($attribute, Yii::t('zii', 'No use sequence in the password'));
         }
 
         if ($this->password == $this->username) {

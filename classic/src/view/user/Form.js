@@ -124,7 +124,7 @@ Ext.define('MBilling.view.user.Form', {
                     hidden: App.user.base_country = !'BRL'
                 }, {
                     name: 'lastname',
-                    fieldLabel: t('Lastname'),
+                    fieldLabel: t('Last name'),
                     allowBlank: true,
                     maxLength: 40,
                     minLength: 4
@@ -273,7 +273,7 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'enableexpire',
-                        fieldLabel: t('Enableexpire'),
+                        fieldLabel: t('Enable expire'),
                         allowBlank: true,
                         hidden: !App.user.isAdmin,
                         flex: 2

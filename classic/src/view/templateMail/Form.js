@@ -70,7 +70,7 @@ Ext.define('MBilling.view.templateMail.Form', {
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('Lastname'),
+                    fieldLabel: t('Last name'),
                     value: '<span style="color:green;">$lastname$</span>',
                     allowBlank: true
                 }, {

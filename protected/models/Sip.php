@@ -100,10 +100,10 @@ class Sip extends Model
             $length = $config['global']['ip_tech_length'];
 
             if (strlen($this->techprefix) != $length) {
-                $this->addError($attribute, Yii::t('zii', 'Techprefix have a invalid length'));
+                $this->addError($attribute, Yii::t('zii', 'Tech Prefix have a invalid length'));
             }
             if (strlen($this->techprefix) > 6) {
-                $this->addError($attribute, Yii::t('zii', 'Techprefix maximum length is 6'));
+                $this->addError($attribute, Yii::t('zii', 'Tech Prefix maximum length is 6'));
             }
         }
     }
@@ -150,7 +150,7 @@ class Sip extends Model
         }
 
         if ($this->secret == '123456' || $this->secret == '12345678' || $this->secret == '012345') {
-            $this->addError($attribute, Yii::t('zii', 'No use sequence in the pasword'));
+            $this->addError($attribute, Yii::t('zii', 'No use sequence in the password'));
         }
 
         if ($this->secret == $this->defaultuser) {

@@ -38,8 +38,8 @@ Quanto de crédito você quer dar para clientes que se registram atraves do form
 
 .. _Plan-play_audio:
 
-Executar audios
-"""""""""""""""
+Executar áudios
+""""""""""""""""
 
 Executar audios para os cliente deste plano ou mandar somente erro? Por exemplo os auidos que acabou o crédito.
 

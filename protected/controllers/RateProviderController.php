@@ -44,7 +44,7 @@ class RateProviderController extends Controller
     {
         $this->instanceModel = new RateProvider;
         $this->abstractModel = RateProvider::model();
-        $this->titleReport   = Yii::t('zii', 'RateProvider');
+        $this->titleReport   = Yii::t('zii', 'Provider rate');
         parent::init();
     }
 

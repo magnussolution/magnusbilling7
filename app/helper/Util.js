@@ -11,7 +11,7 @@ Ext.define('Helper.Util', {
     colorYesValue: 'green',
     colorNoValue: 'red',
     LCRbuy: t('LCR According buyer Price'),
-    LCRSell: t('LCR According seseller Price'),
+    LCRSell: t('LCR According seller Price'),
     prepaidValue: t('Pre paid'),
     pospaidValue: t('Pos paid'),
     yesValue: t('Yes'),
@@ -297,7 +297,7 @@ Ext.define('Helper.Util', {
     },
     formatLcrtype: function(value) {
         var me = Helper.Util,
-            value = value == 1 ? t('LCR According buyer Price') : value == 2 ? t('Load Balancer') : value == 0 ? t('LCR According seseller Price') : '';
+            value = value == 1 ? t('LCR According buyer Price') : value == 2 ? t('Load Balancer') : value == 0 ? t('LCR According seller Price') : '';
         return value;
     },
     formatMoneyDecimalWithoutColor: function(value) {

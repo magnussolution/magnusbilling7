@@ -118,8 +118,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-lastname:
 
-Sobrenome
-"""""""""
+Lastname
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -268,8 +268,8 @@ Se o crédito do cliente ficar menor que esta campo, MagnusBilling vai enviar um
 
 .. _user-enableexpire:
 
-Habilitar vencimento
-""""""""""""""""""""
+Enableexpire
+""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -318,8 +318,8 @@ Chamadas simultâneas permitidas para este usuário.
 
 .. _user-calllimit_error:
 
-Error ao superar limite
-"""""""""""""""""""""""
+Erro ao superar limite
+""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -308,8 +308,8 @@ Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usu
 
 .. _campaign-nb_callmade:
 
-Duração do audio
-""""""""""""""""""
+Duração do áudio
+"""""""""""""""""""
 
 Tempo do audio da campanha, usado para controlar quantidade de chamadas considerada sucesso
 

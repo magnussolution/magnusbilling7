@@ -165,9 +165,9 @@ class UserController extends Controller
             if (count($methodModel) > 0 && $idUserType == 3) {
 
                 if (strlen($values['lastname']) < 5) {
-                    $error = Yii::t('zii', 'Lastname');
+                    $error = Yii::t('zii', 'Last name');
                 } else if (strlen($values['firstname']) < 5) {
-                    $error = Yii::t('zii', 'Firstname');
+                    $error = Yii::t('zii', 'First name');
                 } else if (strlen($values['doc']) < 11) {
                     $error = Yii::t('zii', 'DOC');
                 } else if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $values['email'])) {

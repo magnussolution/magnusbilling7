@@ -23,7 +23,7 @@ Ext.define('MBilling.view.user.Lookup', {
             dataIndex: 'email',
             flex: 2
         }, {
-            header: t('Lastname'),
+            header: t('Last name'),
             dataIndex: 'lastname',
             flex: 2
         }, {

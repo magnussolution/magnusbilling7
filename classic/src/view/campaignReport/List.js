@@ -99,7 +99,7 @@ Ext.define('MBilling.view.campaignReport.List', {
             sortable: false,
             flex: 3
         }, {
-            header: t('Transfered'),
+            header: t('Transferred'),
             menuDisabled: true,
             dataIndex: 'transfered',
             sortable: false,

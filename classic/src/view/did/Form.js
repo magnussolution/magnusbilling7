@@ -278,7 +278,7 @@ Ext.define('MBilling.view.did.Form', {
                 }, {
                     xtype: 'numberfield',
                     name: 'cbr_time_try',
-                    fieldLabel: t('Interval beteween trying'),
+                    fieldLabel: t('Interval between trying'),
                     value: 30,
                     hidden: true,
                     allowBlank: true,

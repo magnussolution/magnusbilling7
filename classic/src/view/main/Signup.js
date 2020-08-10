@@ -110,7 +110,7 @@ Ext.define('MBilling.view.main.Signup', {
                     flex: 1
                 },
                 items: [{
-                    emptyText: t('Lastname'),
+                    emptyText: t('Last name'),
                     name: 'lastname',
                     allowBlank: true
                 }, {
