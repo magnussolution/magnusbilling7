@@ -1,8 +1,8 @@
 .. _sendCreditProducts-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-operator_name:
 
-Operator Name
-"""""""""""""
+Nome do operador
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-operator_id:
 
-Operator Id
+Operador ID
 """""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -48,7 +48,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-product:
 
-Product
+Produto
 """""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -58,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-send_value:
 
-Send Value
-""""""""""
+Enviar valor
+""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -68,8 +68,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-wholesale_price:
 
-Wholesale Price
-"""""""""""""""
+Preço atacado
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -88,7 +88,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-status:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -98,8 +98,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditProducts-info:
 
-info
-""""
+Descrição
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

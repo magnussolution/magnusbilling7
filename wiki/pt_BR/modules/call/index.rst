@@ -1,65 +1,65 @@
-*********
+***********
 Relatórios
-*********
+***********
 
 
-Extrato de Ligações
-*********************
+Extrato de Chamadas
+*******************
 :ref:`call-menu-list`
 
 
-Ligações incompletas
-**********************
+Chamadas Rejeitadas
+*******************
 :ref:`callfailed-menu-list`
 
 
-Summary per day
-***************
+Resumo por Dia
+**************
 :ref:`callsummaryperday-menu-list`
 
 
-CDR por Dia/Usuário
-********************
+Resumo por Dia/Usuário
+***********************
 :ref:`callsummarydayuser-menu-list`
 
 
-CDR por Dia/Tronco
-******************
+Resumo por Dia/Trono
+********************
 :ref:`callsummarydaytrunk-menu-list`
 
 
-CDR por Dia/Agente
-******************
+Resumo por Revendedor
+*********************
 :ref:`callsummarydayagent-menu-list`
 
 
-CDR por mês
-************
+Resumo por Mês
+***************
 :ref:`callsummarypermonth-menu-list`
 
 
-CDR por Mês/Usuário
-*********************
+Resumo por Mês/Usuário
+************************
 :ref:`callsummarymonthuser-menu-list`
 
 
-CDR por Mês/Tronco
-*******************
+Resumo por Mês/Tronco
+**********************
 :ref:`callsummarymonthtrunk-menu-list`
 
 
-CDR por Usuário
-****************
+Resumo por Usuário
+*******************
 :ref:`callsummaryperuser-menu-list`
 
 
-CDR por Tronco
-**************
+Resumo por Tronco
+*****************
 :ref:`callsummarypertrunk-menu-list`
 
 
-Ligações Arquivadas
-*********************
+Chamadas Arquivadas
+*******************
 :ref:`callarchive-menu-list`
 
 

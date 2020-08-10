@@ -1,8 +1,18 @@
 .. _iax-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _iax-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
@@ -28,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-callerid:
 
-Caller Id
-"""""""""
+CallerID
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +48,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-disallow:
 
-Disallow
-""""""""
+Não permitir
+"""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-allow:
 
-
-
+Codec
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -68,8 +78,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-nat:
 
-
-
+NAT
+"""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -88,8 +98,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-qualify:
 
-
-
+Qualify
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -98,8 +108,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-dtmfmode:
 
-
-
+Dtmfmode
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -108,8 +118,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-insecure:
 
-
-
+Insecure
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -118,8 +128,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-type:
 
-
-
+Tipo
+""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -128,8 +138,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _iax-calllimit:
 
-Limite de chamadas
-""""""""""""""""""
+Limite de chamada
+"""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -1,8 +1,8 @@
 .. _queue-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -16,20 +16,10 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _queue-language:
-
-Idioma
-""""""
-
-Idioma para os audios da fila de espera
-
-
-
-
 .. _queue-strategy:
 
-Strategy
-""""""""
+Estratégia
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _queue-ringinuse:
 
-Ringinuse
-"""""""""
+Chamar conta SIP em uso
+"""""""""""""""""""""""
 
 Chamar ou não agentes da fila que estejam em chamada.
 
@@ -48,8 +38,8 @@ Chamar ou não agentes da fila que estejam em chamada.
 
 .. _queue-timeout:
 
-Ring for
-""""""""
+Chamando por
+""""""""""""
 
 Por quanto tempo deve ficar chamadando um agente
 
@@ -58,8 +48,8 @@ Por quanto tempo deve ficar chamadando um agente
 
 .. _queue-retry:
 
-Time for another agent
-""""""""""""""""""""""
+Tempo para chamar proximo agente
+""""""""""""""""""""""""""""""""
 
 Tempo em segundos para tentar chamadas outro agente caso o anterior não atender
 
@@ -68,8 +58,8 @@ Tempo em segundos para tentar chamadas outro agente caso o anterior não atender
 
 .. _queue-wrapuptime:
 
-Time for another call
-"""""""""""""""""""""
+Tempo para próxima chamada
+"""""""""""""""""""""""""""
 
 Intervalo de tempo em segundos que o agente podera receber outra chamada
 
@@ -78,8 +68,8 @@ Intervalo de tempo em segundos que o agente podera receber outra chamada
 
 .. _queue-weight:
 
-Carga
-"""""
+Peso
+""""
 
 Importancia desta fila. Por exemplo, você tem o memos agente em 2 filas, e chega 12 chamadas ao mesmo tempo, o Asterisk vai enviar a chamada da fila com maior importancia para o agente.
 
@@ -98,8 +88,8 @@ Audio para os anuncios. Você pode colocar mais de um audio, separando por  (,).
 
 .. _queue-periodic-announce-frequency:
 
-Frequency
-"""""""""
+Frequência
+"""""""""""
 
 Frequancia que deve executar os anuncios.
 
@@ -128,8 +118,8 @@ Deveria ser incluido no anuncio da posiçao a estimativa de espera?
 
 .. _queue-announce-frequency:
 
-Announce frequency
-""""""""""""""""""
+Frequência de anúncio
+"""""""""""""""""""""""
 
 A cada quantos segundos deve informar a posiçao. Deixe em 0 para desativar o anuncio de posiçao.
 
@@ -138,28 +128,28 @@ A cada quantos segundos deve informar a posiçao. Deixe em 0 para desativar o an
 
 .. _queue-joinempty:
 
-Join empty
-""""""""""
+Aceitar quando vazia
+""""""""""""""""""""
 
 Permitir novas chamadas quando não tiver agente disponivel para atender a chamada
 
 
 
 
-.. _queue-leavewhenempt:
+.. _queue-leavewhenempty:
 
-Leave when empty
-""""""""""""""""
+Desligar fila sem agentes
+"""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+Desligar as chamadas em espera quando não tiver mais agente livres
 
 
 
 
 .. _queue-max_wait_time:
 
-Max wait time
-"""""""""""""
+Tempo máximo de espera
+"""""""""""""""""""""""
 
 Tempo maximo de espera para ser atendido
 
@@ -168,18 +158,18 @@ Tempo maximo de espera para ser atendido
 
 .. _queue-max_wait_time_action:
 
-Max wait time action
-""""""""""""""""""""
+Ação quando superar a espera
+""""""""""""""""""""""""""""""
 
 Conta VoIP, IVR ou Fila de espera, para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceit
 
 
 
 
-.. _queue-ring_or_mo:
+.. _queue-ring_or_moh:
 
-Ring or playing MOH
-"""""""""""""""""""
+Chamar ou executar MOH
+""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -188,8 +178,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _queue-musiconhold:
 
-Audio
-"""""
+Audio tom de espera
+"""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

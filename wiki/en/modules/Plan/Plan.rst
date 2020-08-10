@@ -11,27 +11,27 @@ Field list
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _Plan-signup:
 
-Use in signup
+Use on signup
 """""""""""""
 
-We not write the description to this field.
+Display this plan in the signup form?
 
 
 
 
 .. _Plan-ini_credit:
 
-Initial Credit to new users
+Initial credit to new users
 """""""""""""""""""""""""""
 
-We not write the description to this field.
+How much initial credit do you want to add to new users that select this plan in signup form?
 
 
 
@@ -41,27 +41,7 @@ We not write the description to this field.
 Notices with audio
 """"""""""""""""""
 
-We not write the description to this field.
-
-
-
-
-.. _Plan-portabilidadeMobile:
-
-Para Celular
-""""""""""""
-
-We not write the description to this field.
-
-
-
-
-.. _Plan-portabilidadeFixed:
-
-Para Fixo
-"""""""""
-
-We not write the description to this field.
+Should the system execute audios li
 
 
 
@@ -71,7 +51,7 @@ We not write the description to this field.
 Tech prefix
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -81,7 +61,7 @@ We not write the description to this field.
 Services
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

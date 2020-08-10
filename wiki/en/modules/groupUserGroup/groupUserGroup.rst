@@ -11,27 +11,27 @@ Field list
 Group
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _groupUserGroup-user_prefix:
 
-User Prefix
+User prefix
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _groupUserGroup-id_group:
 
+Group
+"""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

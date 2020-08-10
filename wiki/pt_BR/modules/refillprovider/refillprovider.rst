@@ -1,12 +1,12 @@
 .. _refillprovider-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
-.. _refillprovider-id_provide:
+.. _refillprovider-id_provider:
 
 Provedor
 """"""""

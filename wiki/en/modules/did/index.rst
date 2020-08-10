@@ -1,35 +1,35 @@
-*********
-DID
-*********
-
-
+***
 DID
 ***
+
+
+DIDs
+****
 :ref:`did-menu-list`
 
 
-Destination DID
+DID Destination
 ***************
 :ref:`diddestination-menu-list`
 
 
-DID Use
-*******
+DIDs Use
+********
 :ref:`diduse-menu-list`
 
 
-Ivr
-***
+IVRs
+****
 :ref:`ivr-menu-list`
 
 
-Queue
-*****
+Queues
+******
 :ref:`queue-menu-list`
 
 
-Members queue
-*************
+Queues Members
+**************
 :ref:`queuemember-menu-list`
 
 
@@ -43,12 +43,12 @@ Queue DashBoard
 :ref:`dashboardqueue-menu-list`
 
 
-DIDWW
+DIDww
 *****
 :ref:`didww-menu-list`
 
 
-DIDWW
+DIDww
 *****
 :ref:`didww-menu-list`
 

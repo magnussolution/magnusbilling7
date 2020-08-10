@@ -6,12 +6,22 @@ Field list
 
 
 
+.. _sms-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _sms-telephone:
 
 Number
 """"""
 
-We not write the description to this field.
+Needs to be in E164 format
 
 
 
@@ -21,7 +31,7 @@ We not write the description to this field.
 SMS
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +41,7 @@ We not write the description to this field.
 From
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

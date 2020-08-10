@@ -1,6 +1,6 @@
-*********
-Users
-*********
+*******
+Clients
+*******
 
 
 Users
@@ -8,12 +8,12 @@ Users
 :ref:`user-menu-list`
 
 
-SIP accounts
-************
+SIP Users
+*********
 :ref:`sip-menu-list`
 
 
-Online calls
+Calls OnLine
 ************
 :ref:`callonline-menu-list`
 
@@ -23,28 +23,28 @@ CallerID
 :ref:`callerid-menu-list`
 
 
-Linksys ATA
+ATA Linksys
 ***********
 :ref:`sipuras-menu-list`
 
 
-Restricted numbers
-******************
+Restricted Number
+*****************
 :ref:`restrictedphonenumber-menu-list`
 
 
-CallBack
+Callback
 ********
 :ref:`callback-menu-list`
 
 
-Buy credit
+Buy Credit
 **********
 :ref:`buycredit-menu-list`
 
 
-Iax
-***
+IAX Users
+*********
 :ref:`iax-menu-list`
 
 

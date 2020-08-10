@@ -11,17 +11,7 @@ Field list
 Name
 """"
 
-We not write the description to this field.
-
-
-
-
-.. _queue-language:
-
-Language
-""""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +21,7 @@ We not write the description to this field.
 Strategy
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +31,7 @@ We not write the description to this field.
 Ringinuse
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +41,7 @@ We not write the description to this field.
 Ring for
 """"""""
 
-We not write the description to this field.
+How long the phone will ring until timeout
 
 
 
@@ -61,7 +51,7 @@ We not write the description to this field.
 Time for another agent
 """"""""""""""""""""""
 
-We not write the description to this field.
+Time in seconds to try another agent.
 
 
 
@@ -71,7 +61,7 @@ We not write the description to this field.
 Time for another call
 """""""""""""""""""""
 
-We not write the description to this field.
+Time in seconds until the agent receives another call.
 
 
 
@@ -81,7 +71,7 @@ We not write the description to this field.
 Weight
 """"""
 
-We not write the description to this field.
+Weight of queue - when compared to other queues, higher weights get the first try at available channels when the same channel is included in more than one queue.
 
 
 
@@ -91,7 +81,7 @@ We not write the description to this field.
 Periodic announce
 """""""""""""""""
 
-We not write the description to this field.
+A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.
 
 
 
@@ -101,7 +91,7 @@ We not write the description to this field.
 Frequency
 """""""""
 
-We not write the description to this field.
+How often to make a periodic announcement.
 
 
 
@@ -111,7 +101,7 @@ We not write the description to this field.
 Announce position
 """""""""""""""""
 
-We not write the description to this field.
+Queue position announce?
 
 
 
@@ -121,7 +111,7 @@ We not write the description to this field.
 Announce holdtime
 """""""""""""""""
 
-We not write the description to this field.
+Should we include an estimated hold time in the position announcements?
 
 
 
@@ -131,7 +121,7 @@ We not write the description to this field.
 Announce frequency
 """"""""""""""""""
 
-We not write the description to this field.
+How often to announce queue position and/or estimated holdtime to caller 0=off
 
 
 
@@ -141,17 +131,17 @@ We not write the description to this field.
 Join empty
 """"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _queue-leavewhenempt:
+.. _queue-leavewhenempty:
 
 Leave when empty
 """"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -161,7 +151,7 @@ We not write the description to this field.
 Max wait time
 """""""""""""
 
-We not write the description to this field.
+Maximum wait time on the queue
 
 
 
@@ -171,27 +161,27 @@ We not write the description to this field.
 Max wait time action
 """"""""""""""""""""
 
-We not write the description to this field.
+SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. U
 
 
 
 
-.. _queue-ring_or_mo:
+.. _queue-ring_or_moh:
 
 Ring or playing MOH
 """""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _queue-musiconhold:
 
-Audio
-"""""
+Audio musiconhold
+"""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

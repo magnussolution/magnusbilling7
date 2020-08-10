@@ -1,6 +1,6 @@
-*********
-Configurations
-*********
+********
+Settings
+********
 
 
 Menus
@@ -8,18 +8,18 @@ Menus
 :ref:`module-menu-list`
 
 
-User Group
-**********
+Group Users
+***********
 :ref:`groupuser-menu-list`
 
 
-Settings
-********
+Configuration
+*************
 :ref:`configuration-menu-list`
 
 
-E-mails
-*******
+Emails Templates
+****************
 :ref:`templatemail-menu-list`
 
 
@@ -28,7 +28,7 @@ Log Users
 :ref:`logusers-menu-list`
 
 
-Smtp
+SMTP
 ****
 :ref:`smtps-menu-list`
 

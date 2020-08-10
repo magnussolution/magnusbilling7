@@ -11,27 +11,27 @@ Field list
 Country
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sendCreditRates-idProductoperator_name:
 
-Operator Name
+Operator name
 """""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _sendCreditRates-sell_price:
 
-Sell Price
+Sell price
 """"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

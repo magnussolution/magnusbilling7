@@ -11,7 +11,7 @@ Field list
 Plan
 """"
 
-We not write the description to this field.
+The plan that you want to create a tariff for.
 
 
 
@@ -21,37 +21,37 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+The prefix that you want create a tariff for.
 
 
 
 
 .. _rate-id_trunk_group:
 
-Trunk Groups
+Trunk groups
 """"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _rate-rateinitial:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+How much do you want to charge per minute?
 
 
 
 
 .. _rate-initblock:
 
-Minimum sale
-""""""""""""
+Initial block
+"""""""""""""
 
-We not write the description to this field.
+Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s, charged for 30s.
 
 
 
@@ -61,37 +61,37 @@ We not write the description to this field.
 Billing block
 """""""""""""
 
-We not write the description to this field.
+This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, charged for 36.
 
 
 
 
 .. _rate-minimal_time_charge:
 
-Minimal time to charge
+Minimum time to charge
 """"""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _rate-additional_grace:
 
-Additional grace
-""""""""""""""""
+Additional time
+"""""""""""""""
 
-We not write the description to this field.
+Aditional time to add to call duration. 
 
 
 
 
 .. _rate-package_offer:
 
-Include in package
-""""""""""""""""""
+Include in offer
+""""""""""""""""
 
-We not write the description to this field.
+Set to yes if you want to include this tariff to a package offer.
 
 
 
@@ -101,7 +101,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

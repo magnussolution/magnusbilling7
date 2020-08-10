@@ -1,8 +1,8 @@
 .. _campaignRestrictPhone-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 

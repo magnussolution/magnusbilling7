@@ -6,12 +6,22 @@ Field list
 
 
 
+.. _didUse-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _didUse-id_did:
 
 DID
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +31,7 @@ We not write the description to this field.
 Reservation date
 """"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

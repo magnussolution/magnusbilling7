@@ -11,7 +11,7 @@ Field list
 Number
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,37 +21,37 @@ We not write the description to this field.
 Duration
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _callArchive-buycost:
 
-Buy cost
-""""""""
+Buy price
+"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _callArchive-sessionbill:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _callArchive-agent_bill:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

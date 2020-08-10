@@ -6,12 +6,22 @@ Field list
 
 
 
+.. _refill-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _refill-credit:
 
 Credit
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +31,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,17 +41,17 @@ We not write the description to this field.
 Add payment
 """""""""""
 
-We not write the description to this field.
+This setting is only to your control, the credit will be released to the user anyway if set to Payment NO
 
 
 
 
 .. _refill-invoice_number:
 
-Invoice
-"""""""
+Invoice number
+""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

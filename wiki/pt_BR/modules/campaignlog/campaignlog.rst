@@ -1,8 +1,8 @@
 .. _campaignLog-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 

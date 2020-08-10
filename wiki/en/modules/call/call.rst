@@ -11,27 +11,27 @@ Field list
 Date
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _call-src:
 
-SIP account
-"""""""""""
+Sip user
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _call-callerid:
 
-Callerid
+CallerID
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Number
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,17 +51,17 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _call-idUserusername:
 
-User
-""""
+Username
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We not write the description to this field.
 Trunk
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -81,37 +81,37 @@ We not write the description to this field.
 Duration
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _call-buycost:
 
-Buy cost
-""""""""
+Buy price
+"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _call-sessionbill:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _call-agent_bill:
 
-Sell
-""""
+Sell price
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -121,7 +121,7 @@ We not write the description to this field.
 Uniqueid
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

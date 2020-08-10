@@ -6,12 +6,22 @@ Field list
 
 
 
+.. _campaign-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _campaign-id_plan:
 
 Plan
 """"
 
-We not write the description to this field.
+What plan do you want to use to bill this campaign?
 
 
 
@@ -21,7 +31,7 @@ We not write the description to this field.
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,17 +41,17 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaign-startingdate:
 
-Start date
-""""""""""
+Starting date
+"""""""""""""
 
-We not write the description to this field.
+The campaign will start from this date.
 
 
 
@@ -51,7 +61,7 @@ We not write the description to this field.
 Expiration date
 """""""""""""""
 
-We not write the description to this field.
+The campaign will stop in this date
 
 
 
@@ -61,7 +71,7 @@ We not write the description to this field.
 Type
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -71,17 +81,17 @@ We not write the description to this field.
 Audio
 """""
 
-We not write the description to this field.
+Available to massive call. The audio needs to be compatible with Asterisk. The recomended format is GSM or WWAV(8k hz mono).
 
 
 
 
 .. _campaign-audio_2:
 
-Audio
-"""""
+Audio 2
+"""""""
 
-We not write the description to this field.
+If you use TTS, the name will be executed between Audio and Audio2
 
 
 
@@ -91,7 +101,7 @@ We not write the description to this field.
 Restrict phone
 """"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -101,17 +111,17 @@ We not write the description to this field.
 Auto reprocess
 """"""""""""""
 
-We not write the description to this field.
+If there are no active numbers in this campaign phone book, reactivates all pending numbers.
 
 
 
 
 .. _campaign-id_phonebook:
 
+Phonebook
+"""""""""
 
-
-
-We not write the description to this field.
+Select one or more phonebooks to to be used.
 
 
 
@@ -121,7 +131,7 @@ We not write the description to this field.
 Number to forward
 """""""""""""""""
 
-We not write the description to this field.
+Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.
 
 
 
@@ -131,7 +141,7 @@ We not write the description to this field.
 Forward type
 """"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -141,7 +151,7 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -151,7 +161,7 @@ We not write the description to this field.
 IVR
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -161,17 +171,17 @@ We not write the description to this field.
 Queue
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaign-id_sip_0:
 
-SIP
-"""
+Sip user
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -181,7 +191,7 @@ We not write the description to this field.
 Destination
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -191,7 +201,7 @@ We not write the description to this field.
 Daily start time
 """"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -201,77 +211,77 @@ We not write the description to this field.
 Daily stop time
 """""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-monda:
+.. _campaign-monday:
 
 Monday
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-tuesda:
+.. _campaign-tuesday:
 
 Tuesday
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-wednesda:
+.. _campaign-wednesday:
 
 Wednesday
 """""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-thursda:
+.. _campaign-thursday:
 
 Thursday
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-frida:
+.. _campaign-friday:
 
 Friday
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-saturda:
+.. _campaign-saturday:
 
 Saturday
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _campaign-sunda:
+.. _campaign-sunday:
 
 Sunday
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -281,7 +291,7 @@ We not write the description to this field.
 Call limit
 """"""""""
 
-We not write the description to this field.
+How many numbers will be processed per minute?
 
 
 
@@ -291,27 +301,27 @@ We not write the description to this field.
 Maximum call limit
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaign-nb_callmade:
 
-Total audio time
-""""""""""""""""
+Audio duration
+""""""""""""""
 
-We not write the description to this field.
+Used to control the max completed calls.
 
 
 
 
 .. _campaign-enable_max_call:
 
-Enable max completed calls
+Toggle max completed calls
 """"""""""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -321,7 +331,7 @@ We not write the description to this field.
 Max completed calls
 """""""""""""""""""
 
-We not write the description to this field.
+How many calls you want to send. You need the above parameters active to control it.
 
 
 
@@ -331,17 +341,17 @@ We not write the description to this field.
 From
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _campaign-description:
 
-SMS Text
-""""""""
+Description or SMS Text
+"""""""""""""""""""""""
 
-We not write the description to this field.
+Text to send to SMS. You can use %name% where you want to show the number name.
 
 
 
@@ -351,7 +361,7 @@ We not write the description to this field.
 Audio 1 TTS
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -361,7 +371,7 @@ We not write the description to this field.
 Audio 2 TTS
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -371,7 +381,7 @@ We not write the description to this field.
 Option to validate ASR
 """"""""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

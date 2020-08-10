@@ -11,7 +11,7 @@ Field list
 Host
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We not write the description to this field.
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Port
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Encryption
 """"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

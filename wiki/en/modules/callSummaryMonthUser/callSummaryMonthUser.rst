@@ -8,30 +8,10 @@ Field list
 
 .. _callSummaryMonthUser-sumsessiontime:
 
-Min duration
-""""""""""""
-
-We not write the description to this field.
-
-
-
-
-.. _callSummaryMonthUser-sumagent_bill:
-
-Sell
-""""
-
-We not write the description to this field.
-
-
-
-
-.. _callSummaryMonthUser-sumbuycost:
-
-Buy cost
+Duration
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +21,7 @@ We not write the description to this field.
 Markup
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +31,7 @@ We not write the description to this field.
 Total calls
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

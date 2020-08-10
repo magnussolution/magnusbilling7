@@ -1,8 +1,8 @@
 .. _servers-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -58,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _servers-port:
 
-port
-""""
+Porta
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -68,7 +68,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _servers-sip_port:
 
-Porta Sip
+Porta SIP
 """""""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -88,8 +88,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _servers-weight:
 
-Carga
-"""""
+Peso
+""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -98,7 +98,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _servers-status:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.

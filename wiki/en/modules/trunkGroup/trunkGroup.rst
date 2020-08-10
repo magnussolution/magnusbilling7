@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,17 +21,17 @@ We not write the description to this field.
 Type
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunkGroup-id_trunk:
 
+Trunk
+"""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

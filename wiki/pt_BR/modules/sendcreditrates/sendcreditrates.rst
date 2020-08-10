@@ -1,8 +1,8 @@
 .. _sendCreditRates-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -18,8 +18,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditRates-idProductoperator_name:
 
-Operator Name
-"""""""""""""
+Nome do operador
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sendCreditRates-sell_price:
 
-Sell Price
-""""""""""
+Preço de venda
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

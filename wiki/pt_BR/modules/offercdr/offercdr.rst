@@ -1,15 +1,35 @@
 .. _offerCdr-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _offerCdr-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _offerCdr-id_offer:
+
+Pacotes grátis
+"""""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _offerCdr-used_secondes:
 
-Duração em Segundos
-"""""""""""""""""""""
+Segundos usados
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

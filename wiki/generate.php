@@ -13,13 +13,19 @@ try {
 
 $langs = ['pt_BR', 'en'];
 
-//updateFromEXTJSFile($conn, $langs);
+generateENLocaleFile($conn, $langs);
 
-//get_columns($conn);
+checkTranslateFiles($conn, $langs);
 
-//updateValueFromJsFile($conn, $langs);
+whitePHPLocale($conn, $langs);
+
+updateFromEXTJSFile($conn, $langs);
+
+updateValueFromJsFile($conn, $langs);
 
 whiteToWiki($conn, $langs);
+
+exit;
 
 function whiteToWiki($conn, $langs)
 {
@@ -27,16 +33,16 @@ function whiteToWiki($conn, $langs)
     foreach ($langs as $key => $lang) {
 
         $main_menus = [
-            ['user' => 'users'],
-            ['refill' => 'billing'],
-            ['did' => 'did'],
-            ['plan' => 'rates'],
-            ['call' => 'reports'],
-            ['trunk' => 'routes'],
-            ['configuration' => 'config'],
-            ['campaign' => 'callcenter'],
-            ['callshop' => 'users'],
-            ['services' => 'Services'],
+            [1, 'user'],
+            [7, 'refill'],
+            [5, 'did'],
+            [8, 'plan'],
+            [9, 'call'],
+            [10, 'trunk'],
+            [12, 'configuration'],
+            [13, 'campaign'],
+            [14, 'callshop'],
+            [94, 'services'],
         ];
 
         $file = '/Library/WebServer/Documents/MBilling_7/wiki/' . $lang . '/modules/index.rst';
@@ -53,24 +59,40 @@ Menus
 
         foreach ($main_menus as $key => $menu) {
 
-            $content_index = '';
-            $content .= '   ' . array_keys($menu)[0] . '/index.rst' . "\n";
+            $sql     = "SELECT * FROM pkg_module WHERE id = " . $menu[0];
+            $command = $conn->prepare($sql);
+            $command->execute();
+            $module = $command->fetchAll(PDO::FETCH_OBJ);
 
-            $file_index = '/Library/WebServer/Documents/MBilling_7/wiki/' . $lang . '/modules/' . array_keys($menu)[0] . '/index.rst';
-            $content_index .= '*********
-' . getTranslation($menu[array_keys($menu)[0]], $lang) . '
-*********
+            $content_index = '';
+            $content .= '   ' . $menu[1] . '/index.rst' . "\n";
+
+            $file_index = '/Library/WebServer/Documents/MBilling_7/wiki/' . $lang . '/modules/' . $menu[1] . '/index.rst';
+
+            exec('touch ' . $file_index);
+
+            $h1 = '';
+            for ($i = 0; $i < strlen(getTranslation(substr($module[0]->text, 3, -2), $lang)); $i++) {
+                $h1 .= '*';
+            }
+
+            $content_index .= $h1 . '
+' . getTranslation(substr($module[0]->text, 3, -2), $lang) . '
+' . $h1 . '
 
 
 ';
 
-            $sql     = "SELECT * FROM pkg_module WHERE id_module = (SELECT id FROM pkg_module WHERE text LIKE '%" . $menu[array_keys($menu)[0]] . " Module%' AND id_module IS NULL) ORDER BY priority";
-            $command = $conn->prepare($sql);
+            echo $sql = "SELECT * FROM pkg_module WHERE id_module = '" . $menu[0] . "' ORDER BY priority";
+            $command  = $conn->prepare($sql);
             $command->execute();
             $sub_modules = $command->fetchAll(PDO::FETCH_OBJ);
 
             foreach ($sub_modules as $key => $sub_module) {
 
+                if (!strlen(getTranslation(substr($sub_module->text, 3, -2), $lang))) {
+                    continue;
+                }
                 $h5 = '';
                 for ($i = 0; $i < strlen(getTranslation(substr($sub_module->text, 3, -2), $lang)); $i++) {
                     $h5 .= '*';
@@ -142,7 +164,7 @@ Menus
                     $h5 .= '"';
                 }
 
-                $description = strlen($field->wiki_value) ? $field->wiki_value : getTranslation('We not write the description to this field.', $lang);
+                $description = strlen($field->wiki_value) ? $field->wiki_value : getTranslation('We did not write the description to this field', $lang) . '.';
 
                 $content .= '
 .. _' . $module->wiki_module . '-' . $field->wiki_field . ':
@@ -227,65 +249,22 @@ function updateFromEXTJSFile($conn, $langs)
             $data = file_get_contents($form);
             //$data = preg_replace('/ /', '', $data);
 
-            $fields = preg_split('/{/', $data);
+            preg_match_all("/name: '(.*)',(\r\n|\n|\r).*fieldLabel: t\('(.*)'\)/", $data, $result);
 
-            foreach ($fields as $key => $field) {
+            for ($i = 0; $i < count($result[0]); $i++) {
 
-                $lines = preg_split("/(\r\n|\n|\r)/", $field);
-
-                $label = $name = '';
-                foreach ($lines as $key => $line) {
-
-                    if (preg_match('/name:/', $line)) {
-
-                        $name = preg_split('/:/', substr($line, 0, -2));
-
-                        $name = preg_replace('/\'| /', '', $name[1]);
-
-                        if (preg_match('/\?/', $name)) {
-                            $name = preg_split('/\?/', $name);
-                            $name = $name[1];
-                        }
-
-                        continue;
-
-                    }
-                    if (preg_match('/fieldLabel:/', $line)) {
-                        $label = preg_split('/:/', substr($line, 0, -2));
-                        if (!isset($label[1])) {
-                            print_r($label);
-                            exit;
-                        }
-                        $label = preg_replace('/t\(\'/', '', $label[1]);
-                        $label = strtok($label, '\')');
-
-                        if (preg_match('/\?/', $label)) {
-                            $label = preg_split('/\?/', $label);
-                            $label = $label[1];
-                        }
-                        continue;
-                    }
-
-                }
-
-                if (!strlen($name)) {
-                    continue;
-                }
-
-                $sql     = "INSERT INTO wiki (wiki_module, wiki_field,wiki_label, wiki_value, wiki_language) VALUES ('" . $file . "','" . $name . "','" . $label . "','','" . $lang . "')";
+                $sql     = "INSERT INTO wiki (wiki_module, wiki_field,wiki_label, wiki_value, wiki_language) VALUES ('" . $file . "','" . $result[1][$i] . "','" . $result[3][$i] . "','','" . $lang . "')";
                 $command = $conn->prepare($sql);
                 try {
                     $command->execute();
                 } catch (Exception $e) {
 
                 }
-
             }
 
         }
     }
 
-    exit;
 }
 
 function scan_dir($dir)
@@ -312,17 +291,223 @@ function getTranslation($value, $lang)
 {
     $value = trim($value);
     $file  = file_get_contents('/Library/WebServer/Documents/MBilling_7/resources/locale/' . $lang . '.js');
-    $file  = str_replace('Help.load({', '', $file);
 
-    $line  = explode("\n", $file);
-    $lines = preg_replace('/    |\'/', '', $line);
-    foreach ($lines as $key => $line) {
+    preg_match_all("/'($value)':.*'(.*)'/i", $file, $result);
 
-        if (strtok($line, ':') == $value) {
-            return trim(substr(strtok(''), 0, -1));
-        }
-
+    if (isset($result[2][0]) && strlen($result[2][0])) {
+        return trim($result[2][0]);
     }
+
     return trim($value);
 
+}
+
+function generateENLocaleFile($conn, $lang)
+{
+
+    $fileds_texts = [];
+    //PHP
+
+    //Configuration MENU
+
+    $sql     = "SELECT * FROM pkg_configuration WHERE status = 1 ";
+    $command = $conn->prepare($sql);
+    $command->execute();
+    $configs = $command->fetchAll(PDO::FETCH_OBJ);
+
+    foreach ($configs as $key => $config) {
+
+        //$phpLocalteFile .= "    'config_title_" . $config->config_key . "'  => '" . $config->config_title . "',\n";
+        //$phpLocalteFile .= "    'config_desc_" . $config->config_key . "'  => '" . preg_replace(['/\n/', '/\'/'], ['\n ', '\\'], $config->config_description) . "',\n";
+    }
+
+    //PHP code
+    $main_directory = '/Library/WebServer/Documents/MBilling_7/protected/';
+
+    $di = new RecursiveDirectoryIterator($main_directory);
+    foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
+        if (!preg_match('/\.php$/', $filename) || preg_match('/UpdateMysql/', $filename)) {
+            continue;
+        }
+
+        $file = file_get_contents($filename);
+
+        preg_match_all("/Yii::t\('zii', '([a-z ]*)'\)/i", $file, $result);
+
+        $fileds_texts = array_merge($result[1], $fileds_texts);
+    }
+
+    $fileds_texts = array_values(array_unique($fileds_texts));
+    asort($fileds_texts);
+
+//EXTJS
+
+    $file = '/Library/WebServer/Documents/MBilling_7/app/helper/Util.js';
+    $file = file_get_contents($file);
+
+    preg_match_all("/ t\('([a-z ]*)'\)/i", $file, $result);
+
+    $main_directory = '/Library/WebServer/Documents/MBilling_7/classic/src/';
+
+    $di = new RecursiveDirectoryIterator($main_directory);
+    foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
+        if (!preg_match('/\.js$/', $filename)) {
+            continue;
+        }
+
+        $file = file_get_contents($filename);
+        preg_match_all("/ t\('([a-z ]*)'\)/i", $file, $result);
+        $fileds_texts = array_merge($result[1], $fileds_texts);
+    }
+
+//MENUS
+    $sql     = "SELECT * FROM pkg_module WHERE id_module IS NULL ORDER BY priority";
+    $command = $conn->prepare($sql);
+    $command->execute();
+    $menus = $command->fetchAll(PDO::FETCH_OBJ);
+
+    foreach ($menus as $key => $menu) {
+
+        $fileds_texts[] = substr($menu->text, 3, -2);
+
+        $sql     = "SELECT * FROM pkg_module WHERE id_module = " . $menu->id . " ORDER BY priority";
+        $command = $conn->prepare($sql);
+        $command->execute();
+        $sub_menus = $command->fetchAll(PDO::FETCH_OBJ);
+        foreach ($sub_menus as $key => $sub_menu) {
+
+            $fileds_texts[] = substr($sub_menu->text, 3, -2);
+        }
+    }
+
+    $fileds_texts = array_values(array_unique($fileds_texts));
+    asort($fileds_texts);
+
+    $locale = '/**
+ * Locale file(en)
+ * Adilson Leffa Magnus
+ * =======================================
+ * ###################################
+ * MagnusBilling
+ *
+ * @package MagnusBilling
+ * @author  Adilson Leffa Magnus.
+ * @copyright   Todos os direitos reservados.
+ * ###################################
+ * =======================================
+ * MagnusSolution.com <info@magnussolution.com>
+ * ' . date('Y-m-d') . '
+ */
+Locale.load({
+';
+
+//FIELDS
+    foreach ($fileds_texts as $key => $value) {
+        $locale .= "    '" . $value . "': '',\n";
+    }
+
+    $locale .= "\n});";
+
+    $file = '/Library/WebServer/Documents/MBilling_7/resources/locale/en.js';
+
+    $fd = fopen($file, "w");
+
+    if (fwrite($fd, $locale) === false) {
+        echo "Impossible to write to the file $file" . " ($content)";
+
+    }
+    fclose($fd);
+
+}
+
+function checkTranslateFiles($conn, $langs)
+{
+
+    $langs    = ['pt_BR'];
+    $filename = '/Library/WebServer/Documents/MBilling_7/resources/locale/en.js';
+    $file     = file_get_contents($filename);
+
+    preg_match_all("/'([a-z].*)'.*:/i", $file, $result_en);
+
+    foreach ($langs as $key => $lang) {
+
+        $filename = '/Library/WebServer/Documents/MBilling_7/resources/locale/' . $lang . '.js';
+        $file     = file_get_contents($filename);
+
+        $noTranslate = $inBlank = 0;
+        foreach ($result_en[1] as $key => $value) {
+            if (!preg_match('/' . $value . '/', $file)) {
+                echo "'$value' : '',\n";
+                $noTranslate++;
+                continue;
+            }
+
+            if (preg_match("/'$value'.*: ''/", $file)) {
+                $inBlank++;
+                echo "'$value' : '', esta sem tradução\n";
+            }
+
+        }
+
+        echo "\n\n" . $noTranslate . " nao encontrado e " . $inBlank . " no idioma: " . $lang . "\n\n";
+
+    }
+}
+
+function whitePHPLocale($conn, $langs)
+{
+
+    $langs = ['pt_BR', 'es', 'it', 'ru', 'fr'];
+
+    foreach ($langs as $key => $lang) {
+
+        $filename = '/Library/WebServer/Documents/MBilling_7/resources/locale/' . $lang . '.js';
+        $file     = file_get_contents($filename);
+
+        $fileLang = '/Library/WebServer/Documents/MBilling_7/resources/locale/php/' . $lang . '/zii.php';
+
+        $php_lang = '<?php
+        /**
+ * Message translations.
+ *
+ * This file is automatically generated by \'yiic message\' command.
+ * It contains the localizable messages extracted from source code.
+ * You may modify this file by translating the extracted messages.
+ *
+ * Each array element represents the translation (value) of a message (key).
+ * If the value is empty, the message is considered as not translated.
+ * Messages that no longer need translation will have their translations
+ * enclosed between a pair of \'@@\' marks.
+ *
+ * Message string can be used with plural forms format. Check i18n section
+ * of the guide for details.
+ *
+ * NOTE, this file must be saved in UTF-8 encoding.
+ *
+*
+ * Not edit this file.
+ * Edit /resources/locale/' . $lang . '.js
+          */
+return array(
+        ';
+
+        preg_match_all("/'([a-z].*': '[a-z].*)'/i", $file, $result);
+
+        foreach ($result[0] as $key => $value) {
+            $php_lang .= '    ' . preg_replace('/\:/', ' =>', $value) . ",\n";
+        }
+
+        $php_lang .= '
+);';
+
+        $file = '/Library/WebServer/Documents/MBilling_7/resources/locale/php/' . $lang . '/zii.php';
+
+        $fd = fopen($file, "w");
+
+        if (fwrite($fd, $php_lang) === false) {
+            echo "Impossible to write to the file $file" . " ($content)";
+
+        }
+        fclose($fd);
+    }
 }

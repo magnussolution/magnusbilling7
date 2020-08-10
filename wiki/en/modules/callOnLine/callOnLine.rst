@@ -6,102 +6,102 @@ Field list
 
 
 
-.. _callOnLine-idUserusernam:
+.. _callOnLine-idUserusername:
 
 Username
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _callOnLine-sip_accoun:
+.. _callOnLine-sip_account:
 
-SIP account
-"""""""""""
+Sip user
+""""""""
 
-We not write the description to this field.
-
-
+We did not write the description to this field.
 
 
-.. _callOnLine-idUsercredi:
+
+
+.. _callOnLine-idUsercredit:
 
 Credit
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _callOnLine-ndiscad:
+.. _callOnLine-ndiscado:
 
 Number
 """"""
 
-We not write the description to this field.
+Dialed number
 
 
 
 
-.. _callOnLine-code:
+.. _callOnLine-codec:
 
 Codec
 """""
 
-We not write the description to this field.
+Codec used
 
 
 
 
-.. _callOnLine-calleri:
+.. _callOnLine-callerid:
 
 CallerID
 """"""""
 
-We not write the description to this field.
+The CID number.
 
 
 
 
-.. _callOnLine-tronc:
+.. _callOnLine-tronco:
 
 Trunk
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
-.. _callOnLine-reinvit:
+.. _callOnLine-reinvite:
 
 Reinvite
 """"""""
 
-We not write the description to this field.
+If set to YES, means the RTP audio was sent directly between callee and caller
 
 
 
 
-.. _callOnLine-from_i:
+.. _callOnLine-from_ip:
 
 From IP
 """""""
 
-We not write the description to this field.
+IP of the caller
 
 
 
 
 .. _callOnLine-description:
 
+Description
+"""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

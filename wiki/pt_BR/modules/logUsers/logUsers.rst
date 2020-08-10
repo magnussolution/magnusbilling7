@@ -1,14 +1,14 @@
 .. _logUsers-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _logUsers-id_user:
 
-Username
+Usuário
 """"""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -28,7 +28,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _logUsers-ip:
 
-ip
+IP
 ""
 
 Nós ainda não escrevemos a descrição deste campo.

@@ -1,15 +1,15 @@
 .. _phoneNumber-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
 .. _phoneNumber-id_phonebook:
 
-Phonebook
-"""""""""
+Agenda
+""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,7 +48,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _phoneNumber-status:
 
-Estado
+Status
 """"""
 
 MagnusBilling somente tenta enviar quando o status esta ativo. Quando a chamada é enviada para seu provedor, o número fica com estado pendente. Se a chamada é completada, o estado muda para enviado, caso contrario ficara como pendente. Você pode usar o botão reprocessar para reativar os número que e

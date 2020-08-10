@@ -6,12 +6,32 @@ Field list
 
 
 
+.. _offerCdr-id_user:
+
+Username
+""""""""
+
+We did not write the description to this field.
+
+
+
+
+.. _offerCdr-id_offer:
+
+Offer
+"""""
+
+We did not write the description to this field.
+
+
+
+
 .. _offerCdr-used_secondes:
 
-Duration in seconds
-"""""""""""""""""""
+Used secondes
+"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -21,7 +41,7 @@ We not write the description to this field.
 Date
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

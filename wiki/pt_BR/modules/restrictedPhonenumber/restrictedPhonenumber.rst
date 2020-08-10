@@ -1,8 +1,18 @@
 .. _restrictedPhonenumber-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _restrictedPhonenumber-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
@@ -16,9 +26,9 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _restrictedPhonenumber-directio:
+.. _restrictedPhonenumber-direction:
 
-Direction
+Direção
 """""""""
 
 Nós ainda não escrevemos a descrição deste campo.

@@ -1,8 +1,8 @@
 .. _services-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -28,8 +28,8 @@ Nome para o serviço
 
 .. _services-calllimit:
 
-Limite de chamadas
-""""""""""""""""""
+Limite de chamada
+"""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,7 +38,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _services-disk_space:
 
-Espaço em Disco
+Espaço em disco
 """"""""""""""""
 
 Coloque o total de espaço em disco em GB.
@@ -48,8 +48,8 @@ Coloque o total de espaço em disco em GB.
 
 .. _services-sipaccountlimit:
 
-Limite contas voip
-""""""""""""""""""
+Limite de contas SIP
+""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -68,7 +68,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _services-return_credit:
 
-Devolver crédito
+Retornar crédito
 """""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.

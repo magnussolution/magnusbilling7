@@ -1,15 +1,25 @@
 .. _campaign-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
+
+
+
+.. _campaign-id_user:
+
+Usuário
+""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
 
 
 
 .. _campaign-id_plan:
 
-Plan
-""""
+Plano
+"""""
 
 Que plano será usado para tarifar as chamadas desta cmapanha, pode ser um plano diferente do plano cadastrado na conta do cliente
 
@@ -28,7 +38,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-status:
 
-Estado
+Status
 """"""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -48,8 +58,8 @@ Data que a campanha será considerada ativa.
 
 .. _campaign-expirationdate:
 
-Data do final
-"""""""""""""
+Data de expiração
+"""""""""""""""""""
 
 Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos
 
@@ -78,8 +88,8 @@ Somente usado se o tipo de campanha for de voz. O audio precisa ser compativel c
 
 .. _campaign-audio_2:
 
-Audio
-"""""
+Audio 2
+"""""""
 
 Se você usar TTS, o nome do número será executado entre o audio 1 e 2
 
@@ -88,8 +98,8 @@ Se você usar TTS, o nome do número será executado entre o audio 1 e 2
 
 .. _campaign-restrict_phone:
 
-Restrict phone
-""""""""""""""
+Telefone bloqueados
+"""""""""""""""""""
 
 Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
@@ -98,8 +108,8 @@ Ativando esta opção o MagnusBilling vai verificar se o número que será envia
 
 .. _campaign-auto_reprocess:
 
-Auto reprocess
-""""""""""""""
+Reprocessar automático
+"""""""""""""""""""""""
 
 Reativar automaticamente todos os numeros das agendas da campanha quando não tiver mais números ativos
 
@@ -108,8 +118,8 @@ Reativar automaticamente todos os numeros das agendas da campanha quando não ti
 
 .. _campaign-id_phonebook:
 
-
-
+Agenda
+""""""
 
 Selecione as agendas que esta campanha vai usar.
 
@@ -118,8 +128,8 @@ Selecione as agendas que esta campanha vai usar.
 
 .. _campaign-digit_authorize:
 
-Number to forward
-"""""""""""""""""
+Número para reenviar
+"""""""""""""""""""""
 
 Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, entao coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Digito", para enviar para o destino se o cliente marcar qu
 
@@ -128,8 +138,8 @@ Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente di
 
 .. _campaign-type_0:
 
-Forward type
-""""""""""""
+Tipo de encaminhamento
+""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -138,8 +148,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-extensions_0:
 
-Destination
-"""""""""""
+Destino
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -148,7 +158,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-id_ivr_0:
 
-IVR
+URA
 """
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -158,8 +168,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-id_queue_0:
 
-Queue
-"""""
+Fila de espera
+""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -168,8 +178,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-id_sip_0:
 
-SIP
-"""
+Conta SIP
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -178,8 +188,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-extension_0:
 
-Destination
-"""""""""""
+Destino
+"""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -188,8 +198,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-daily_start_time:
 
-Hora de início
-"""""""""""""""
+Horário de início diário
+"""""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -198,15 +208,15 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-daily_stop_time:
 
-Hora do final
-"""""""""""""
+Horário de finalização diário
+"""""""""""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _campaign-monda:
+.. _campaign-monday:
 
 Segunda
 """""""
@@ -216,37 +226,37 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _campaign-tuesda:
+.. _campaign-tuesday:
 
-Terça
-""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _campaign-wednesda:
-
-Quarta
-""""""
+Terça feira
+""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _campaign-thursda:
+.. _campaign-wednesday:
 
-Quinta
-""""""
+Quarta feira
+""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _campaign-frida:
+.. _campaign-thursday:
+
+Quinta feira
+""""""""""""
+
+Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _campaign-friday:
 
 Sexta
 """""
@@ -256,20 +266,20 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _campaign-saturda:
+.. _campaign-saturday:
 
-Sábado
-"""""""
+Saturday
+""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _campaign-sunda:
+.. _campaign-sunday:
 
-Domingo
-"""""""
+Sunday
+""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -278,8 +288,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-frequency:
 
-Call limit
-""""""""""
+Limite de chamada
+"""""""""""""""""
 
 Quantas chamadas o sistema pode gerar por minuto nesta campanha
 
@@ -288,8 +298,8 @@ Quantas chamadas o sistema pode gerar por minuto nesta campanha
 
 .. _campaign-max_frequency:
 
-Maximo de chamadas
-""""""""""""""""""
+Limite máximo de chamadas
+""""""""""""""""""""""""""
 
 Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.
 
@@ -298,8 +308,8 @@ Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usu
 
 .. _campaign-nb_callmade:
 
-Tempo do áudio
-"""""""""""""""
+Duração do audio
+""""""""""""""""""
 
 Tempo do audio da campanha, usado para controlar quantidade de chamadas considerada sucesso
 
@@ -308,8 +318,8 @@ Tempo do audio da campanha, usado para controlar quantidade de chamadas consider
 
 .. _campaign-enable_max_call:
 
-Habilitar max de chamadas completas
-"""""""""""""""""""""""""""""""""""
+Toggle max completed calls
+""""""""""""""""""""""""""
 
 Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e tiveram a duração igual ao tempo do audio, se a quantidade for igual ou mais que o campo abaixo, a campanha é desativada
 
@@ -318,8 +328,8 @@ Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e t
 
 .. _campaign-secondusedreal:
 
-Max chamadas completas
-""""""""""""""""""""""
+Quantidade máxima completada
+"""""""""""""""""""""""""""""
 
 Maximo de chamadas completas. Precisa ativar o campo acima
 
@@ -328,8 +338,8 @@ Maximo de chamadas completas. Precisa ativar o campo acima
 
 .. _campaign-from:
 
-From
-""""
+De
+""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -338,8 +348,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-description:
 
-Texto SMS
-"""""""""
+Descrição ou texto do SMS
+"""""""""""""""""""""""""""
 
 Texto do SMS. Você pode usar a variavel %name% onde você deseja usar o nome do dono do número
 
@@ -368,8 +378,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaign-asr_options:
 
-Option to validate ASR
-""""""""""""""""""""""
+Opção para validar ASR
+""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

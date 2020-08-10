@@ -6,22 +6,32 @@ Field list
 
 
 
+.. _trunk-id_provider:
+
+Provider
+""""""""
+
+We did not write the description to this field.
+
+
+
+
 .. _trunk-trunkcode:
 
-Trunk name
-""""""""""
+Name
+""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-user:
 
-User
-""""
+Username
+""""""""
 
-We not write the description to this field.
+Only used if the authentication is via user and pass.
 
 
 
@@ -31,7 +41,7 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+Only used if the authentication is via user and pass.
 
 
 
@@ -41,7 +51,7 @@ We not write the description to this field.
 Host
 """"
 
-We not write the description to this field.
+IP or SIP
 
 
 
@@ -51,7 +61,7 @@ We not write the description to this field.
 Add prefix
 """"""""""
 
-We not write the description to this field.
+Add a prefix to send to your trunk.
 
 
 
@@ -61,7 +71,7 @@ We not write the description to this field.
 Remove prefix
 """""""""""""
 
-We not write the description to this field.
+Remove a prefix to send to your trunk.
 
 
 
@@ -71,7 +81,7 @@ We not write the description to this field.
 Codec
 """""
 
-We not write the description to this field.
+Select the codecs that are allowed in this trunk.
 
 
 
@@ -81,7 +91,7 @@ We not write the description to this field.
 Provider tech
 """""""""""""
 
-We not write the description to this field.
+You need install appropriate drive to use card like dgv extra Dongle.
 
 
 
@@ -91,57 +101,57 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-allow_error:
 
-Use backup trunk if BUSY
-""""""""""""""""""""""""
+Allow error
+"""""""""""
 
-We not write the description to this field.
+If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.
 
 
 
 
 .. _trunk-register:
 
-Trunk register
-""""""""""""""
+Registertrunk
+"""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-register_string:
 
-Register String
+Register string
 """""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-fromuser:
 
+Fromuser
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-fromdomain:
 
+Fromdomain
+""""""""""
 
-
-
-We not write the description to this field.
+Set the Trunk IP or SIP, if required.
 
 
 
@@ -151,7 +161,7 @@ We not write the description to this field.
 Language
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -161,77 +171,77 @@ We not write the description to this field.
 Context
 """""""
 
-We not write the description to this field.
+Only change if you know what you are doing.
 
 
 
 
 .. _trunk-dtmfmode:
 
+Dtmfmode
+""""""""
 
-
-
-We not write the description to this field.
+Set default dtmfmode for sending DTMF. Defau
 
 
 
 
 .. _trunk-insecure:
 
+Insecure
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-maxuse:
 
-Max channels in use
-"""""""""""""""""""
+Max use
+"""""""
 
-We not write the description to this field.
+Maximum simultaneous call. If you set it, your server will need to use a lot of resources to control it. Not recommended.
 
 
 
 
 .. _trunk-nat:
 
+NAT
+"""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-directmedia:
 
+Directmedia
+"""""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-qualify:
 
+Qualify
+"""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-type:
 
+Type
+""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -241,27 +251,27 @@ We not write the description to this field.
 Disallow
 """"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-sendrpid:
 
+Sendrpid
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _trunk-addparameter:
 
-Add parameter
-"""""""""""""
+Addparameter
+""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -271,7 +281,7 @@ We not write the description to this field.
 Port
 """"
 
-We not write the description to this field.
+If you want to use a different than 5060, you will need open the port in IPTABLES.
 
 
 
@@ -281,27 +291,27 @@ We not write the description to this field.
 Link SMS
 """"""""
 
-We not write the description to this field.
+Set your SMS link here to send SMS. Repla
 
 
 
 
 .. _trunk-sms_res:
 
-Last IP
-"""""""
+SMS match result
+""""""""""""""""
 
-We not write the description to this field.
+Leave it empty to not wait URL result. If you want wait the any success message, write here the expected result.
 
 
 
 
 .. _trunk-sip_config:
 
-Asterisk config
-"""""""""""""""
+Parameters
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

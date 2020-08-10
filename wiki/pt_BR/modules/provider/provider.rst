@@ -1,8 +1,8 @@
 .. _provider-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -28,8 +28,8 @@ Quanto você tem de crédito com o provedor? Este campo é opcional.
 
 .. _provider-credit_control:
 
-Credit
-""""""
+Controle de crédito
+""""""""""""""""""""
 
 ------------ATENÇÃO------------.Se ativar esta opção e o provedor ficar com crédito = ou < que zero, os troncos deste provedor não aceitaram mais chamada.
 

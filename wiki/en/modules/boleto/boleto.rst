@@ -8,40 +8,40 @@ Field list
 
 .. _boleto-id_user:
 
+Username
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _boleto-payment:
 
-Value...
-""""""""
+Value
+"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _boleto-status:
 
-Pago
+Paid
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _boleto-vencimento:
 
+Due date
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

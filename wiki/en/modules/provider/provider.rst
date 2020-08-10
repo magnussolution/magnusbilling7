@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-We not write the description to this field.
+Provider name
 
 
 
@@ -21,17 +21,17 @@ We not write the description to this field.
 Credit
 """"""
 
-We not write the description to this field.
+How much credit do you have in your provider account? This field is optional.
 
 
 
 
 .. _provider-credit_control:
 
-Credit
-""""""
+Credit control
+""""""""""""""
 
-We not write the description to this field.
+If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Description
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

@@ -1,6 +1,6 @@
-*********
+*******
 Tarifas
-*********
+*******
 
 
 Planos
@@ -18,23 +18,23 @@ Prefixos
 :ref:`prefix-menu-list`
 
 
-User Rate
-*********
+Tarifas para Clientes
+*********************
 :ref:`userrate-menu-list`
 
 
-Pacotes Gratis
-**************
+Pacotes Grátis
+***************
 :ref:`offer-menu-list`
 
 
-Cdr dos Pacotes
-***************
+Relatório de Pacotes
+*********************
 :ref:`offercdr-menu-list`
 
 
-Uso dos Pacotes
-***************
+Uso de Pacotes
+**************
 :ref:`offeruse-menu-list`
 
 

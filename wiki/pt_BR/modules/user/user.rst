@@ -1,8 +1,8 @@
 .. _user-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -36,40 +36,20 @@ Existe 3 tipos de grup
 
 
 
-.. _user-id_group_agent:
-
-Grupo para clientes do agente
-"""""""""""""""""""""""""""""
-
-Grupo para os clientes deste revendedor.
-
-
-
-
 .. _user-id_plan:
 
-Plan
-""""
+Plano
+"""""
 
 Plano usado para tarifar este cliente.
 
 
 
 
-.. _user-language:
-
-Idioma
-""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
 .. _user-prefix_local:
 
-DDD
-"""
+Regra prefixo
+"""""""""""""
 
 Click para mais informaçōes|htt
 
@@ -98,8 +78,8 @@ Usado para CID Callback. O DDI do país será adicionado antes do CallerID to co
 
 .. _user-id_offer:
 
-Pacotes Gratis
-""""""""""""""
+Pacotes grátis
+"""""""""""""""
 
 Usado para ativar um pacote gratis. É necessario informar as tarifas que vão pertencer aos pacotes gratís.
 
@@ -108,8 +88,8 @@ Usado para ativar um pacote gratis. É necessario informar as tarifas que vão p
 
 .. _user-cpslimit:
 
-CPS Limit
-"""""""""
+Limite de CPS
+"""""""""""""
 
 Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar este limite seráenviado CONGESTION.
 
@@ -118,8 +98,8 @@ Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar e
 
 .. _user-company_name:
 
-Empresa
-"""""""
+Nome da empresa
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -128,7 +108,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-state_number:
 
-Inscrição Estadual
+Inscrição estadual
 """"""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -138,8 +118,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-lastname:
 
-Sobre nome
-""""""""""
+Sobrenome
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -148,8 +128,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-firstname:
 
-Nome
-""""
+Primeiro nome
+"""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -228,8 +208,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-email:
 
-E-mail
-""""""
+Email
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -238,7 +218,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-doc:
 
-CNPJ/CPF
+CPF/CNPJ
 """"""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -258,8 +238,8 @@ Usado em algums metodos de pagamento.
 
 .. _user-typepaid:
 
-Tipo de pagamento
-"""""""""""""""""
+Tipo pago
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -268,7 +248,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-creditlimit:
 
-Limite de Crédito
+Limite de crédito
 """"""""""""""""""
 
 Somente usado para Pos-Pago. O cliente poderá ligar até chegar a este limite negativo.
@@ -278,8 +258,8 @@ Somente usado para Pos-Pago. O cliente poderá ligar até chegar a este limite n
 
 .. _user-credit_notification:
 
-Aviso saldo baixo
-"""""""""""""""""
+Notificação de crédito
+"""""""""""""""""""""""""
 
 Se o crédito do cliente ficar menor que esta campo, MagnusBilling vai enviar um email para o cliente informando que esta com pouco crédito. NECESSARIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES
 
@@ -288,8 +268,8 @@ Se o crédito do cliente ficar menor que esta campo, MagnusBilling vai enviar um
 
 .. _user-enableexpire:
 
-Ativar Expiração
-""""""""""""""""""
+Habilitar vencimento
+""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -298,8 +278,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-expirationdate:
 
-Data do final
-"""""""""""""
+Data de expiração
+"""""""""""""""""""
 
 Data que este cliente não poderá mais efetuar chamadas
 
@@ -308,7 +288,7 @@ Data que este cliente não poderá mais efetuar chamadas
 
 .. _user-record_call:
 
-Gravar Chamadas
+Gravar chamadas
 """""""""""""""
 
 Esta opção é somente para chamadas de DID, para chamadas externas tem que ativar nas Contas VoIP.
@@ -318,8 +298,8 @@ Esta opção é somente para chamadas de DID, para chamadas externas tem que ati
 
 .. _user-mix_monitor_format:
 
-Formato da gravação
-"""""""""""""""""""""
+Formato das gravaçōes
+"""""""""""""""""""""""
 
 Formato que será usado para gravar chamadas.
 
@@ -328,8 +308,8 @@ Formato que será usado para gravar chamadas.
 
 .. _user-calllimit:
 
-Limite de chamadas
-""""""""""""""""""
+Limite de chamada
+"""""""""""""""""
 
 Chamadas simultâneas permitidas para este usuário.
 
@@ -338,8 +318,8 @@ Chamadas simultâneas permitidas para este usuário.
 
 .. _user-calllimit_error:
 
-Limit error
-"""""""""""
+Error ao superar limite
+"""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -348,8 +328,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-callshop:
 
-
-
+CallShop
+""""""""
 
 Ativa o modulo CallShop. Somente ative se realmente for usar. É necessário dar permissōes ao grupo selecionado.
 
@@ -358,8 +338,8 @@ Ativa o modulo CallShop. Somente ative se realmente for usar. É necessário dar
 
 .. _user-disk_space:
 
-Disk space
-""""""""""
+Espaço em disco
+""""""""""""""""
 
 Espaço em GB que o usuário podera usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UsuárioDiskSpace 
 
@@ -368,8 +348,8 @@ Espaço em GB que o usuário podera usar com as gravaçōes. Coloque -1 para dei
 
 .. _user-sipaccountlimit:
 
-Limite contas voip
-""""""""""""""""""
+Limite de contas SIP
+""""""""""""""""""""
 
 Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes no grupo para criar Contas VoIP.
 
@@ -378,7 +358,7 @@ Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes
 
 .. _user-callingcard_pin:
 
-PIN callingcarg
+CallingCard PIN
 """""""""""""""
 
 Usado para autentição do callingcard.
@@ -388,18 +368,8 @@ Usado para autentição do callingcard.
 
 .. _user-restriction:
 
-Restrição
+Restriction
 """""""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _user-transfer_international:
-
-CallerId Inteligente
-""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -408,18 +378,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-transfer_international_profit:
 
-Profit
-""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _user-transfer_flexiload:
-
-Procom
-""""""
+Lucro
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -428,18 +388,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-transfer_flexiload_profit:
 
-Profit
-""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _user-transfer_bkash:
-
-Não perturbe
-"""""""""""""
+Lucro
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -448,8 +398,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-transfer_bkash_profit:
 
-Profit
-""""""
+Lucro
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -468,18 +418,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-transfer_dbbl_rocket_profit:
 
-Profit
-""""""
-
-Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _user-transfer_bdservice_rate:
-
-BDService rate
-""""""""""""""
+Lucro
+"""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -488,8 +428,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-transfer_show_selling_price:
 
-show selling price
-""""""""""""""""""
+Mostrar preço de venda
+"""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

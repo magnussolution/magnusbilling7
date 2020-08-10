@@ -1,14 +1,14 @@
 .. _callOnLine-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
-.. _callOnLine-idUserusernam:
+.. _callOnLine-idUserusername:
 
-Username
+Usuário
 """"""""
 
 Nós ainda não escrevemos a descrição deste campo.
@@ -16,17 +16,17 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _callOnLine-sip_accoun:
+.. _callOnLine-sip_account:
 
-Conta VoIP
-""""""""""
+Conta SIP
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _callOnLine-idUsercredi:
+.. _callOnLine-idUsercredit:
 
 Crédito
 """"""""
@@ -36,17 +36,17 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _callOnLine-ndiscad:
+.. _callOnLine-ndiscado:
 
 Número
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+Número
 
 
 
 
-.. _callOnLine-code:
+.. _callOnLine-codec:
 
 Codec
 """""
@@ -56,17 +56,17 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _callOnLine-calleri:
+.. _callOnLine-callerid:
 
 CallerID
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+CallerID.
 
 
 
 
-.. _callOnLine-tronc:
+.. _callOnLine-tronco:
 
 Troncos
 """""""
@@ -76,7 +76,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _callOnLine-reinvit:
+.. _callOnLine-reinvite:
 
 Reinvite
 """"""""
@@ -86,20 +86,20 @@ Nós ainda não escrevemos a descrição deste campo.
 
 
 
-.. _callOnLine-from_i:
+.. _callOnLine-from_ip:
 
 From IP
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+Ip de origem
 
 
 
 
 .. _callOnLine-description:
 
-
-
+Descrição
+"""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

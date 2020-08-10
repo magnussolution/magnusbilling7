@@ -8,30 +8,30 @@ Field list
 
 .. _api-id_user:
 
+Username
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _api-api_key:
 
-Api
-"""
+Api key
+"""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _api-api_secret:
 
-Api
-"""
+Api secret
+""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We not write the description to this field.
 Status
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -51,17 +51,7 @@ We not write the description to this field.
 Permissions
 """""""""""
 
-We not write the description to this field.
-
-
-
-
-.. _api-api_restriction_ips:
-
-Restriction
-"""""""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 

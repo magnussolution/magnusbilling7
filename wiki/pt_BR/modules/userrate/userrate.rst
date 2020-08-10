@@ -1,25 +1,15 @@
 .. _userRate-menu-list:
 
-**********************
-Descrição dos campos
-**********************
-
-
-
-.. _userRate-id_user:
-
-Usuário
-""""""""
-
-Usuário que você quer criar uma tarifa substituta.
-
+***************
+Lista de campos
+***************
 
 
 
 .. _userRate-id_prefix:
 
-Destination
-"""""""""""
+Destino
+"""""""
 
 Selecione o prefixo que você deseja subscrever.
 
@@ -28,8 +18,8 @@ Selecione o prefixo que você deseja subscrever.
 
 .. _userRate-rateinitial:
 
-Venda
-"""""
+Preço de venda
+"""""""""""""""
 
 Novo preço de vendapara este prefixo
 
@@ -38,7 +28,7 @@ Novo preço de vendapara este prefixo
 
 .. _userRate-initblock:
 
-Mínimo venda
+Bloco mínimo
 """""""""""""
 
 Mínimo de venda
@@ -48,8 +38,8 @@ Mínimo de venda
 
 .. _userRate-billingblock:
 
-Bloco de venda
-""""""""""""""
+Bloco de tarifação
+""""""""""""""""""""
 
 Bloco de venda
 

@@ -1,8 +1,8 @@
 .. _rateCallshop-menu-list:
 
-**********************
-Descrição dos campos
-**********************
+***************
+Lista de campos
+***************
 
 
 
@@ -28,8 +28,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateCallshop-buyrate:
 
-Venda
-"""""
+Preço de venda
+"""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateCallshop-minimo:
 
-Mínimo compra
-""""""""""""""
+Bloco inicial
+"""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -48,8 +48,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateCallshop-block:
 
-Bloco de compra
-"""""""""""""""
+Incremento
+""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
@@ -58,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateCallshop-minimal_time_charge:
 
-Tempo minimo para tarifar
-"""""""""""""""""""""""""
+Tempo mínimo para tarifar
+""""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

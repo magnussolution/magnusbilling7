@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We not write the description to this field.
+Username used to login into the panel.
 
 
 
@@ -21,27 +21,17 @@ We not write the description to this field.
 Password
 """"""""
 
-We not write the description to this field.
+Password used to login into the panel.
 
 
 
 
 .. _user-id_group:
 
-IdGroup
-"""""""
+Group
+"""""
 
-We not write the description to this field.
-
-
-
-
-.. _user-id_group_agent:
-
-Group for Agent Users
-"""""""""""""""""""""
-
-We not write the description to this field.
+There are 3 grou
 
 
 
@@ -51,27 +41,17 @@ We not write the description to this field.
 Plan
 """"
 
-We not write the description to this field.
-
-
-
-
-.. _user-language:
-
-Language
-""""""""
-
-We not write the description to this field.
+Which plan will be used to bill calls for this user.
 
 
 
 
 .. _user-prefix_local:
 
-Local prefix
+Prefix rules
 """"""""""""
 
-We not write the description to this field.
+Click here for more info|htt
 
 
 
@@ -81,7 +61,7 @@ We not write the description to this field.
 Active
 """"""
 
-We not write the description to this field.
+Only active users can login into the panel and make calls
 
 
 
@@ -91,7 +71,7 @@ We not write the description to this field.
 Country
 """""""
 
-We not write the description to this field.
+Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164
 
 
 
@@ -101,7 +81,7 @@ We not write the description to this field.
 Offer
 """""
 
-We not write the description to this field.
+Used to give free minutes. You need to add your package in the me
 
 
 
@@ -111,47 +91,47 @@ We not write the description to this field.
 CPS Limit
 """""""""
 
-We not write the description to this field.
+How many Calls Per Second this user can send? The excess will receive CONGESTION.
 
 
 
 
 .. _user-company_name:
 
-Company
-"""""""
+Company name
+""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-state_number:
 
-state_number
+State number
 """"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-lastname:
 
-Last name
-"""""""""
+Lastname
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-firstname:
 
-First name
-""""""""""
+Firstname
+"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -161,7 +141,7 @@ We not write the description to this field.
 City
 """"
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -171,7 +151,7 @@ We not write the description to this field.
 State
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -181,7 +161,7 @@ We not write the description to this field.
 Address
 """""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -191,17 +171,17 @@ We not write the description to this field.
 Neighborhood
 """"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-zipcode:
 
-Zipcode
-"""""""
+Zip code
+""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -211,7 +191,7 @@ We not write the description to this field.
 Phone
 """""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -221,27 +201,27 @@ We not write the description to this field.
 Mobile
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-email:
 
-E-mail
-""""""
+Email
+"""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-doc:
 
-Doc
+DOC
 """
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -251,17 +231,17 @@ We not write the description to this field.
 VAT
 """
 
-We not write the description to this field.
+Used with some payment gateways.
 
 
 
 
 .. _user-typepaid:
 
-Payment method
-""""""""""""""
+Type paid
+"""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -271,7 +251,7 @@ We not write the description to this field.
 Credit limit
 """"""""""""
 
-We not write the description to this field.
+If the user is Post-paid, the user will be able to make calls until he reaches this limit.
 
 
 
@@ -281,17 +261,17 @@ We not write the description to this field.
 Credit notification
 """""""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-enableexpire:
 
-Expires
-"""""""
+Enableexpire
+""""""""""""
 
-We not write the description to this field.
+Makes the user expire at a determined date.
 
 
 
@@ -301,27 +281,27 @@ We not write the description to this field.
 Expiration date
 """""""""""""""
 
-We not write the description to this field.
+The date that the user will expire and be deactivated.
 
 
 
 
 .. _user-record_call:
 
-Record calls
-""""""""""""
+Record call
+"""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-mix_monitor_format:
 
-Recording format
-""""""""""""""""
+Record call format
+""""""""""""""""""
 
-We not write the description to this field.
+What format will used to record calls. Activate recording in the me
 
 
 
@@ -331,7 +311,7 @@ We not write the description to this field.
 Call limit
 """"""""""
 
-We not write the description to this field.
+How many simultaneous calls this user can have? The excess will receive CONGESTION.
 
 
 
@@ -341,17 +321,17 @@ We not write the description to this field.
 Limit error
 """""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-callshop:
 
+Callshop
+""""""""
 
-
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -361,27 +341,27 @@ We not write the description to this field.
 Disk space
 """"""""""
 
-We not write the description to this field.
+Insert the amount disk space available to record, in GB. Use -1 to remove the limit.
 
 
 
 
 .. _user-sipaccountlimit:
 
-SIP account limit
+Sip account limit
 """""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-callingcard_pin:
 
-Callingcard PIN
+CallingCard PIN
 """""""""""""""
 
-We not write the description to this field.
+Used to authenticate through CallingCard.
 
 
 
@@ -391,17 +371,7 @@ We not write the description to this field.
 Restriction
 """""""""""
 
-We not write the description to this field.
-
-
-
-
-.. _user-transfer_international:
-
-CallerId Inteligente
-""""""""""""""""""""
-
-We not write the description to this field.
+Used to restrict dialing. Add the numbers in the me
 
 
 
@@ -411,17 +381,7 @@ We not write the description to this field.
 Profit
 """"""
 
-We not write the description to this field.
-
-
-
-
-.. _user-transfer_flexiload:
-
-Procom
-""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -431,17 +391,7 @@ We not write the description to this field.
 Profit
 """"""
 
-We not write the description to this field.
-
-
-
-
-.. _user-transfer_bkash:
-
-Não perturbe
-"""""""""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -451,7 +401,7 @@ We not write the description to this field.
 Profit
 """"""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -461,7 +411,7 @@ We not write the description to this field.
 Enable DBBL/Rocket
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
@@ -471,27 +421,17 @@ We not write the description to this field.
 Profit
 """"""
 
-We not write the description to this field.
-
-
-
-
-.. _user-transfer_bdservice_rate:
-
-BDService rate
-""""""""""""""
-
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
 
 .. _user-transfer_show_selling_price:
 
-show selling price
+Show selling price
 """"""""""""""""""
 
-We not write the description to this field.
+We did not write the description to this field.
 
 
 
