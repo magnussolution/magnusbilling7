@@ -58,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _callSummaryPerDay-sumnbcallfail:
 
-Chamadas falhadas
-"""""""""""""""""
+Chamadas rejeitadas
+"""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
