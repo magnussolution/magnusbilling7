@@ -525,7 +525,7 @@ Ext.define('MBilling.view.general.CountryISOCombo', {
         ['ESH', 'Western Sahara'],
         ['YEM', 'Yemen'],
         ['ZMB', 'Zambia'],
-        ['ZWE', 'Zimbabwe'],
+        ['ZWE', 'Zimbabwe']
     ]
 });
 Ext.define('MBilling.view.general.CountryCombo', {

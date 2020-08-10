@@ -14,6 +14,9 @@
  * 2020-08-07
  */
 Locale.load({
+    'IAX password': 'Senha IAX',
+    'SIP password': 'Senha SIP',
+    'System': 'Sistema',
     'Select the method': 'Selecione um método',
     'Call per Minutes': 'Chamadas por minuto',
     'DID destination': 'Destino de DID',
