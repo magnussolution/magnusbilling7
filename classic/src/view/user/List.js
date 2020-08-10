@@ -28,7 +28,7 @@ Ext.define('MBilling.view.user.List', {
             dataIndex: 'username',
             flex: 2
         }, {
-            header: t('Lastname'),
+            header: t('Last name'),
             dataIndex: 'lastname',
             flex: 3
         }, {

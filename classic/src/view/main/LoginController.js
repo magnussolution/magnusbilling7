@@ -74,7 +74,7 @@ Ext.define('MBilling.view.main.LoginController', {
             success: function(response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
-                    Ext.ux.Alert.alert(t('Success'), t(response.msg) + ". <br>" + t('Your usernama is') + ' ' + response.username, 'success', true, false);
+                    Ext.ux.Alert.alert(t('Success'), t(response.msg) + ". <br>" + t('Your username is') + ' ' + response.username, 'success', true, false);
                 } else {
                     errors = Helper.Util.convertErrorsJsonToString(response.errors);
                     if (!Ext.isObject(response.errors)) {

@@ -58,8 +58,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _rateProvider-minimal_time_buy:
 
-Tempo minimo para compra
-""""""""""""""""""""""""
+Tempo mínimo para compra
+"""""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

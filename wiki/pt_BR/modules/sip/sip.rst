@@ -98,8 +98,8 @@ Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar toda
 
 .. _sip-videosupport:
 
-Suporte a video
-"""""""""""""""
+Suporte a vídeo
+""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -30,7 +30,7 @@ Ext.define('MBilling.view.firewall.Form', {
         }, {
             xtype: 'yesnocombo',
             name: 'action',
-            fieldLabel: t('Perm_ban')
+            fieldLabel: t('Perm ban')
         }, {
             xtype: 'textarea',
             name: 'description',

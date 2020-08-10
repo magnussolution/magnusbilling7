@@ -38,8 +38,8 @@ Chamar ou não agentes da fila que estejam em chamada.
 
 .. _queue-timeout:
 
-Chamando por
-""""""""""""
+Chamado por
+"""""""""""
 
 Por quanto tempo deve ficar chamadando um agente
 

@@ -58,7 +58,7 @@ Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
 
 .. _sipuras-Enable_Web_Server:
 
-Enable_Web_Server
+Ativar acesso WEB
 """""""""""""""""
 
 Tenha cuidadol. Se desativado, não será mais possível entrar nas configuraçōes do Linksys.
@@ -108,8 +108,8 @@ Senha da Conta VoIP
 
 .. _sipuras-Use_Pref_Codec_Only_1:
 
-Use_Pref_Codec
-""""""""""""""
+Usar codec preferencial
+"""""""""""""""""""""""
 
 Somente usar o codec preferencial
 
@@ -188,8 +188,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _sipuras-Use_Pref_Codec_Only_2:
 
-Use_Pref_Codec
-""""""""""""""
+Usar codec preferencial
+"""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

@@ -38,7 +38,7 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _servicesUse-method:
 
-Metódos de Pagamento
+Métodos de Pagamento
 """""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.

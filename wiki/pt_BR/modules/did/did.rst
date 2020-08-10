@@ -258,8 +258,8 @@ Ativa o CallBack Pro.
 
 .. _did-cbr_ua:
 
-Usar audio
-""""""""""
+Usar áudio
+"""""""""""
 
 Executar um audio
 
@@ -278,8 +278,8 @@ Quantas vezes o sistema vai tentar retornar para o cliente?
 
 .. _did-cbr_time_try:
 
-Intervalo entre tentativas
-""""""""""""""""""""""""""
+Interval beteween trying
+""""""""""""""""""""""""
 
 Intervalo de tempo entre cada tentativa, em minutos.
 

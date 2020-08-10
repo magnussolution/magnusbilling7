@@ -8,7 +8,7 @@ Recargas
 :ref:`refill-menu-list`
 
 
-Metódos de Pagamento
+Métodos de Pagamento
 *********************
 :ref:`methodpay-menu-list`
 

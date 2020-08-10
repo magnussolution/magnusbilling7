@@ -39,7 +39,7 @@ class SmsSend
         if (UserCreditManager::checkGlobalCredit($modelUser->id) === false) {
             return array(
                 'success' => false,
-                'errors'  => Yii::t('zii', 'Error : You don t have enough credit to call you SMS!'),
+                'errors'  => Yii::t('zii', 'Error : You do not have enough credit to call you SMS!'),
             );
         }
 

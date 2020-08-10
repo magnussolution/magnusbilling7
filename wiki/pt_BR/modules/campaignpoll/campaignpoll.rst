@@ -38,8 +38,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _campaignPoll-digit_authorize:
 
-Digito para autorizar
-"""""""""""""""""""""
+Dígito para autorizar
+""""""""""""""""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 
