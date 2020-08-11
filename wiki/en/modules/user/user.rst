@@ -31,7 +31,7 @@ Password used to login into the panel.
 Group
 """""
 
-There are 3 grou
+There are 3 groups: admin, agent and client. You can create more or edit any of these groups. Each group can have specific permissions. Check the menu Configuration->User Group.
 
 
 
@@ -51,7 +51,7 @@ Which plan will be used to bill calls for this user.
 Prefix rules
 """"""""""""
 
-Click here for more info|htt
+Click here for more info|https://www.magnusbilling.org/local_prefix
 
 
 
@@ -81,7 +81,7 @@ Used to CID Callback. The country prefix code will be added before the CID to co
 Offer
 """""
 
-Used to give free minutes. You need to add your package in the me
+Used to give free minutes. You need to add your package in the menu: Rates->Offer.
 
 
 
@@ -301,7 +301,7 @@ We did not write the description to this field.
 Record call format
 """"""""""""""""""
 
-What format will used to record calls. Activate recording in the me
+What format will used to record calls. Activate recording in the menu: Users->SIP accounts.
 
 
 
@@ -371,7 +371,7 @@ Used to authenticate through CallingCard.
 Restriction
 """""""""""
 
-Used to restrict dialing. Add the numbers in the me
+Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers.
 
 
 

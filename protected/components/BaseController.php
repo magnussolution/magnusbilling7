@@ -1303,7 +1303,7 @@ class BaseController extends CController
                     break;
             }
 
-            return $this->mapErrorsMySql[$codeErro] . "<br> " . Yii::t('zii', 'Please, first delete all related records in the module ') . Yii::t('zii', $erro) . "<br><br><a target = '_blank' href='http://en.wikipedia.org/wiki/Foreign_key'>http://en.wikipedia.org/wiki/Foreign_key</a>";
+            return $this->mapErrorsMySql[$codeErro] . "<br> " . Yii::t('zii', 'Please, first delete all related records in the module') . ' ' . Yii::t('zii', $erro) . "<br><br><a target = '_blank' href='http://en.wikipedia.org/wiki/Foreign_key'>http://en.wikipedia.org/wiki/Foreign_key</a>";
         } else {
             return $this->mapErrorsMySql[$codeErro] . $e->getMessage();
         }

@@ -71,10 +71,10 @@
 
 
 <div class="field">
-	<?php echo $form->labelEx($signup, Yii::t('zii', 'Firstname')) ?>
+	<?php echo $form->labelEx($signup, Yii::t('zii', 'First name')) ?>
 	<?php echo $form->textField($signup, 'firstname', array('class' => 'input')) ?>
 	<?php echo $form->error($signup, 'firstname') ?>
-	<p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Firstname') ?></p>
+	<p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'First name') ?></p>
 </div>
 <div class="field">
 	<?php echo $form->labelEx($signup, Yii::t('zii', 'Last name')) ?>

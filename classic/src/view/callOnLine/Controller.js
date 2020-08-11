@@ -36,15 +36,12 @@ Ext.define('MBilling.view.callOnLine.Controller', {
             scope: me,
             success: function(response) {
                 response = Ext.decode(response.responseText);
-                console.log(response);
                 if (response[me.nameSuccessRequest]) {
                     me.formPanel.getForm().findField('description').setValue(response.description);
                     me.formPanel.getForm().findField('reinvite').setValue(response.reinvite);
                     me.formPanel.getForm().findField('from_ip').setValue(response.from_ip);
                     me.formPanel.getForm().findField('ndiscado').setValue(response.ndiscado);
                     me.formPanel.getForm().findField('callerid').setValue(response.callerid);
-                } else {
-                    Ext.ux.Alert.alert(me.titleError, response[me.nameMsgRequest], 'error');
                 }
             }
         });
@@ -69,7 +66,7 @@ Ext.define('MBilling.view.callOnLine.Controller', {
                 }
             });
         } else {
-            Ext.ux.Alert.alert(me.titleError, 'Please Select only a record', 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
         };
         me.store.load();
     },

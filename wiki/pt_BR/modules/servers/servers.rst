@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 IP do servidor
 """"""""""""""
 
-Este menu é esclusivo para quem usa Slave e Proxy, clique para mais informaçōes|htt
+Este menu é esclusivo para quem usa Slave e Proxy, clique para mais informaçōes|https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html
 
 
 

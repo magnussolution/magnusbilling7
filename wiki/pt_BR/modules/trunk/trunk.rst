@@ -61,7 +61,7 @@ IP ou Dominio do tronco
 Adicionar prefixo
 """""""""""""""""
 
-Adiciona um prefixo no inicio do número to enviar para o tronco. Tambem usado para quando você precisa enviar um techprefix. 
+Adiciona um prefixo no inicio do número to enviar para o tronco. Tambem usado para quando você precisa enviar um techprefix. EX: Se você tem que enviar o número no formato 0DDD número, coloque aqui 0 e no campo abaixo 55. Isso vai remover o 55 e adiconar o 0 
 
 
 
@@ -181,7 +181,7 @@ Somente altere se você souber o que esta fazendo.
 Dtmfmode
 """"""""
 
-Clique para mais informaçōes|htt
+Clique para mais informaçōes|https://www.voip-info.org/asterisk-dtmf/
 
 
 
@@ -191,7 +191,7 @@ Clique para mais informaçōes|htt
 Insecure
 """"""""
 
-Clique para mais informaçōes|htt
+Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-insecure/
 
 
 
@@ -291,7 +291,7 @@ Porta do tronco. Se você precisar usar outra porta diferente da 5060, lembre-se
 Link SMS
 """"""""
 
-URL para enviar SMS. Subistituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é ht
+URL para enviar SMS. Subistituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuario=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% 
 
 
 

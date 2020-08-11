@@ -31,7 +31,7 @@ Senha para logar no painel de cliente.
 Grupo
 """""
 
-Existe 3 tipos de grup
+Existe 3 tipos de grupos: Administrador, Revendedor e Cliente. Você pode criar or editar qualquer destes grupos. Cada grupo tem suas permissōes especificas. Veja o menu Configurações, Grupo para Clientes.
 
 
 
@@ -51,7 +51,7 @@ Plano usado para tarifar este cliente.
 Regra prefixo
 """""""""""""
 
-Click para mais informaçōes|htt
+Click para mais informaçōes|https://www.magnusbilling.org/br/prefixo_local
 
 
 

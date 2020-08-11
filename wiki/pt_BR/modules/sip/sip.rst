@@ -111,7 +111,7 @@ Nós ainda não escrevemos a descrição deste campo.
 REGEX para bloqueio de chamadas
 """""""""""""""""""""""""""""""
 
-Bloquear chamadas usando REGEX. 
+Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com
 
 
 
@@ -141,7 +141,7 @@ Nós ainda não escrevemos a descrição deste campo.
 NAT
 """
 
-Clique para mais informaçōes|htt
+Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/
 
 
 
@@ -151,7 +151,7 @@ Clique para mais informaçōes|htt
 Directmedia
 """""""""""
 
-Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|htt
+Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/
 
 
 

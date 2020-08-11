@@ -61,7 +61,7 @@ Tempo minimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chama
 Bloco de tarifação
 """"""""""""""""""""
 
-Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. 
+Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 

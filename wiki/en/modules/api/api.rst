@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+You need use the MagnusBilling API from https://github.com/magnussolution/magnusbilling-api-php. The username owner this API
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Api key
 """""""
 
-We did not write the description to this field.
+This apy key will be necessary to execute the API
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Api secret
 """"""""""
 
-We did not write the description to this field.
+This apy secret will be necessary to execute the API
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Status
 """"""
 
-We did not write the description to this field.
+You can activete or inactivate this API
 
 
 
@@ -51,7 +51,17 @@ We did not write the description to this field.
 Permissions
 """""""""""
 
-We did not write the description to this field.
+Which action the user will have execute
+
+
+
+
+.. _api-api_restriction_ips:
+
+Restriction IPs
+"""""""""""""""
+
+What IPS you want allow access this API. Leave blank to allow any IP. It is very recomended set the IPS
 
 
 

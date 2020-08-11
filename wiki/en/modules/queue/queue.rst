@@ -81,7 +81,7 @@ Weight of queue - when compared to other queues, higher weights get the first tr
 Periodic announce
 """""""""""""""""
 
-A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.
+A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait
 
 
 
@@ -161,7 +161,7 @@ Maximum wait time on the queue
 Max wait time action
 """"""""""""""""""""
 
-SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. U
+SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.
 
 
 

@@ -28,7 +28,7 @@ Ext.define('MBilling.view.callFailed.Controller', {
         if (me.list.getSelectionModel().getSelection().length == 1) {
             window.open('index.php/callFailed/callInfo?id=' + selected.get('id'));
         } else {
-            Ext.ux.Alert.alert(me.titleError, 'Please Select only a record', 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
         };
     }
 });

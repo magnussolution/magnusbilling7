@@ -104,7 +104,7 @@ Ext.define('MBilling.view.callFailed.List', {
                 ]
             }
         }, {
-            header: t('HangupCause'),
+            header: t('Hangup cause'),
             dataIndex: 'hangupcause',
             renderer: Helper.Util.formatHangupCause,
             hidden: !window.dialC,

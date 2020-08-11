@@ -81,7 +81,7 @@ We did not write the description to this field.
 Additional time
 """""""""""""""
 
-Aditional time to add to call duration. 
+Aditional time to add to call duration. Ex: the call duration 20s and you add here 3s, will be charged 23 seconds.
 
 
 
