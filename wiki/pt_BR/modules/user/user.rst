@@ -128,8 +128,8 @@ Nós ainda não escrevemos a descrição deste campo.
 
 .. _user-firstname:
 
-Primeiro nome
-"""""""""""""
+Firstname
+"""""""""
 
 Nós ainda não escrevemos a descrição deste campo.
 

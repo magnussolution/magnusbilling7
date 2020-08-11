@@ -18,8 +18,8 @@ Voucher
 :ref:`voucher-menu-list`
 
 
-Refill Provider
-***************
+Refill Providers
+****************
 :ref:`refillprovider-menu-list`
 
 
