@@ -115,7 +115,7 @@ Ext.define('MBilling.view.main.Signup', {
                     allowBlank: true
                 }, {
                     margin: '5 0 0 10',
-                    emptyText: t('Firstname'),
+                    emptyText: t('First name'),
                     name: 'firstname',
                     allowBlank: true
                 }]

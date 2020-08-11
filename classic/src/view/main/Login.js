@@ -23,7 +23,7 @@ Ext.define('MBilling.view.main.Login', {
     },
     initComponent: function() {
         var me = this;
-        me.title = window.loginheader ? window.loginheader : t("Let's log in");
+        me.title = window.loginheader ? window.loginheader : t("Log in");
         me.items = [{
             defaultFocus: 'textfield:focusable:not([hidden]):not([disabled]):not([value])',
             cls: 'auth-dialog',

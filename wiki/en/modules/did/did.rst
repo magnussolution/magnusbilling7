@@ -301,7 +301,7 @@ Tries to execute an audio before the call is answered. Your DID provider needs t
 Mon-Fri
 """""""
 
-E.g, your company will only callback to the callee if the call was in between 09-12PM and 
+E.g, your company will only callback to the callee if the call was in between 09-12PM and 02:06PM MON-FRY, between this time interval the workaudio is going to be played and then callback to the callee. You can use multiple time intervals with | separated.
 
 
 

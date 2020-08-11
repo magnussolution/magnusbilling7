@@ -130,7 +130,7 @@ Ext.define('MBilling.view.user.Form', {
                     minLength: 4
                 }, {
                     name: 'firstname',
-                    fieldLabel: t('Firstname'),
+                    fieldLabel: t('First name'),
                     allowBlank: true,
                     maxLength: 40,
                     minLength: 4
@@ -371,7 +371,7 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'numberfield',
                     name: 'sipaccountlimit',
-                    fieldLabel: t('Sip account limit'),
+                    fieldLabel: t('SIP account limit'),
                     value: '-1',
                     minValue: -1,
                     allowBlank: !App.user.isAdmin,

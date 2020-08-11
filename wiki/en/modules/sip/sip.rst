@@ -141,7 +141,7 @@ We did not write the description to this field.
 NAT
 """
 
-Click here for more info|htt
+Click here for more info|https://www.voip-info.org/asterisk-sip-nat/
 
 
 

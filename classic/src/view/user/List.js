@@ -32,7 +32,7 @@ Ext.define('MBilling.view.user.List', {
             dataIndex: 'lastname',
             flex: 3
         }, {
-            header: t('Firstname'),
+            header: t('First name'),
             dataIndex: 'firstname',
             flex: 3,
             hidden: window.isTablet

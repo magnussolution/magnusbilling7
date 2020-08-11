@@ -64,7 +64,7 @@ Ext.define('MBilling.view.services.Form', {
                     readOnly: App.user.isClient
                 }, {
                     name: 'sipaccountlimit',
-                    fieldLabel: t('Sip account limit'),
+                    fieldLabel: t('SIP account limit'),
                     allowBlank: true,
                     hidden: true,
                     readOnly: App.user.isClient

@@ -97,7 +97,7 @@ Ext.define('MBilling.view.queue.Controller', {
                 }
             });
         } else {
-            Ext.ux.Alert.alert(me.titleError, 'Please Select only a record', 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
         };
     }
 });

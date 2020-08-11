@@ -91,7 +91,7 @@ Tempo minimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que d
 Bloco de tarifação
 """"""""""""""""""""
 
-Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. 
+Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 
@@ -301,7 +301,7 @@ Executar o audio antes de antender. O provedor do DID precisa aceitar EarlyMedia
 Seg-Sex
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+Ex: sua trabalha de 09 as 12 e de 14 as 18 horas, e dentro deste horario você quer executar o callback e retornar a chamada para a pessoa que ligou, entao coloque 09:00-12:00|14:00-18:00, os intervalos sao separados por |
 
 
 

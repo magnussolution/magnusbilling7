@@ -81,7 +81,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         $line = '';
         foreach ($result as $key => $value) {
 
-            if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
+            if (!is_numeric($value['id_user']) || $value['id_user'] < 1 || !is_numeric($value['sessiontime'])) {
                 continue;
             }
 

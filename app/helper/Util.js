@@ -12,8 +12,8 @@ Ext.define('Helper.Util', {
     colorNoValue: 'red',
     LCRbuy: t('LCR According buyer Price'),
     LCRSell: t('LCR According seller Price'),
-    prepaidValue: t('Pre paid'),
-    pospaidValue: t('Pos paid'),
+    prepaidValue: t('Prepaid'),
+    pospaidValue: t('Postpaid'),
     yesValue: t('Yes'),
     noValue: t('No'),
     activeValue: t('Active'),
@@ -365,7 +365,7 @@ Ext.define('Helper.Util', {
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatCampaignType: function(value) {
-        value = value == 1 ? t('Coice') : t('SMS');
+        value = value == 1 ? t('Voice') : t('SMS');
         return value;
     },
     formatDirection: function(value) {
@@ -387,7 +387,7 @@ Ext.define('Helper.Util', {
                 value = t('No route to destination');
                 break;
             case 5:
-                value = t('Misdialled trunk prefi');
+                value = t('Misdialled trunk prefix');
                 break;
             case 6:
                 value = t('Channel unacceptable');

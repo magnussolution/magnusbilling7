@@ -32,7 +32,7 @@ form {
 <?php if (isset($message)):
     echo Yii::t('zii', $message);
     ?>
-			<?php else: ?>
+				<?php else: ?>
 
 
 
@@ -40,7 +40,7 @@ form {
 
 
 	<div class="field">
-		<?php echo $form->labelEx($model, Yii::t('zii', 'MethodPay')) ?>
+		<?php echo $form->labelEx($model, Yii::t('zii', 'Method pay')) ?>
 		<div class="styled-select" style="width: 380px">
 		<?php echo $form->dropDownList($model, 'id_method', $modelMethodPay, array(
     'prompt' => Yii::t('zii', 'Select a method'),

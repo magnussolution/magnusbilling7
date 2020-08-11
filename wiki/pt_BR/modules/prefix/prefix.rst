@@ -21,7 +21,7 @@ Prefixo. Prefixo serão usados para criar as tarifas. EX. 5511.
 Destino
 """""""
 
-Nome do destino. 
+Nome do destino. EX: Brasil SP
 
 
 

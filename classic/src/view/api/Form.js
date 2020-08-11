@@ -71,8 +71,8 @@ Ext.define('MBilling.view.api.Form', {
         }, {
             xtype: 'textareafield',
             name: 'api_restriction_ips',
-            emptyText: t('Comma separated. EX: 200.200.200.200, 200.2.5.88'),
             fieldLabel: t('Restriction IPs'),
+            emptyText: t('Comma separated. EX: 200.200.200.200, 200.2.5.88'),
             allowBlank: true
         }];
         me.callParent(arguments);

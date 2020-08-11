@@ -181,7 +181,7 @@ Only change if you know what you are doing.
 Dtmfmode
 """"""""
 
-Set default dtmfmode for sending DTMF. Defau
+Set default dtmfmode for sending DTMF. Default: rfc2833 Other options: info : SIP INFO messages (application/dtmf-relay) shortinfo : SIP INFO messages (application/dtmf) inband : Inband audio (requires 64 kbit codec -alaw, ulaw) auto : Use rfc2833 if offered, inband otherwise.
 
 
 
@@ -291,7 +291,7 @@ If you want to use a different than 5060, you will need open the port in IPTABLE
 Link SMS
 """"""""
 
-Set your SMS link here to send SMS. Repla
+Set your SMS link here to send SMS. Replace: number variable per %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
 
 
 
