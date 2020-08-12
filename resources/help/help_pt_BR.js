@@ -1,6 +1,6 @@
 Help.load({
     //API
-    'api.id_user': `Usuário que poderá usar a API.||Para usar a API é necessário o uso do projeto publicado no GITHUB.
+    'api.id_user': `Usuário que poderá usar esta API.||Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
     
 O projeto esta publicado no link https://github.com/magnussolution/magnusbilling-api-php. 
 A API tem documentação, atualmente somente em Ingles, e esta publicado no link https://github.com/magnussolution/magnusbilling-api-php/wiki. `,
@@ -773,7 +773,7 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 digitos, sera adicio
     'userRate.billingblock': `Bloco de venda`,
     //VOUCHER
     'voucher.credit': `Valor do VOUCHER`,
-    'voucher.id_plan': `Plano que será usado no cliente que usar este crédito.`,
+    'voucher.id_plan': `Plano que será usado no cliente que usar este VOUCHER.`,
     'voucher.language': `Idioma que será usado`,
     'voucher.prefix_local': `Regra que será usado no campo DDD do cliente`,
     'voucher.quantity': `Quantos VOUCHER você deseja gerar?`,
