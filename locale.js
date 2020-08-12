@@ -25,7 +25,11 @@
         }
     };
     window.h = function(string) {
-        if (_constants[string] && _constants[string].match(/\|http/)) {
+        if (_constants[string] && _constants[string].match(/\|\|/)) {
+            partOfString = _constants[string].split('||');
+            data = string.split('.');
+            return '<a href="https://wiki.magnusbilling.org/' + window.lang + '/source/modules/' + data[0] + '/' + data[0] + '.html#' + data[1] + '" target="_blank" alt="' + partOfString[0] + '. ' + t('Click to more details') + '" class="tooltipHelp" > <img src="./resources/images/help.png" /> </a>&nbsp;&nbsp;&nbsp;';
+        } else if (_constants[string] && _constants[string].match(/\|http/)) {
             partOfString = _constants[string].split('|');
             return '<a href="' + partOfString[1] + '" target="_blank" alt="' + partOfString[0] + '" class="tooltipHelp" > <img src="./resources/images/help.png" /> </a>&nbsp;&nbsp;&nbsp;';
         } else {

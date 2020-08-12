@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Strategy
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Ringinuse
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Ring for
 """"""""
 
-How long the phone will ring until timeout
+| How long the phone will ring until timeout
 
 
 
@@ -51,7 +51,7 @@ How long the phone will ring until timeout
 Time for another agent
 """"""""""""""""""""""
 
-Time in seconds to try another agent.
+| Time in seconds to try another agent.
 
 
 
@@ -61,7 +61,7 @@ Time in seconds to try another agent.
 Time for another call
 """""""""""""""""""""
 
-Time in seconds until the agent receives another call.
+| Time in seconds until the agent receives another call.
 
 
 
@@ -71,7 +71,7 @@ Time in seconds until the agent receives another call.
 Weight
 """"""
 
-Weight of queue - when compared to other queues, higher weights get the first try at available channels when the same channel is included in more than one queue.
+| Weight of queue - when compared to other queues, higher weights get the first try at available channels when the same channel is included in more than one queue.
 
 
 
@@ -81,7 +81,7 @@ Weight of queue - when compared to other queues, higher weights get the first tr
 Periodic announce
 """""""""""""""""
 
-A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait
+| A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait
 
 
 
@@ -91,7 +91,7 @@ A set of periodic announcements can be created by separating each announcements 
 Frequency
 """""""""
 
-How often to make a periodic announcement.
+| How often to make a periodic announcement.
 
 
 
@@ -101,7 +101,7 @@ How often to make a periodic announcement.
 Announce position
 """""""""""""""""
 
-Queue position announce?
+| Queue position announce?
 
 
 
@@ -111,7 +111,7 @@ Queue position announce?
 Announce holdtime
 """""""""""""""""
 
-Should we include an estimated hold time in the position announcements?
+| Should we include an estimated hold time in the position announcements?
 
 
 
@@ -121,7 +121,7 @@ Should we include an estimated hold time in the position announcements?
 Announce frequency
 """"""""""""""""""
 
-How often to announce queue position and/or estimated holdtime to caller 0=off
+| How often to announce queue position and/or estimated holdtime to caller 0=off
 
 
 
@@ -131,7 +131,7 @@ How often to announce queue position and/or estimated holdtime to caller 0=off
 Join empty
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We did not write the description to this field.
 Leave when empty
 """"""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -151,7 +151,7 @@ We did not write the description to this field.
 Max wait time
 """""""""""""
 
-Maximum wait time on the queue
+| Maximum wait time on the queue
 
 
 
@@ -161,7 +161,7 @@ Maximum wait time on the queue
 Max wait time action
 """"""""""""""""""""
 
-SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.
+| SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.
 
 
 
@@ -171,7 +171,7 @@ SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached.
 Ring or playing MOH
 """""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +181,7 @@ We did not write the description to this field.
 Audio musiconhold
 """""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

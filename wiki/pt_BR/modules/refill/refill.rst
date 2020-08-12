@@ -11,7 +11,7 @@ Lista de campos
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Crédito
 """"""""
 
-Valor da recarga
+| Valor da recarga
 
 
 
@@ -31,7 +31,7 @@ Valor da recarga
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Adicionar pagamento
 """""""""""""""""""
 
-Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO
+| Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO
 
 
 
@@ -51,7 +51,7 @@ Esta opção é somente para seu controle. O crédito será liberado para o clie
 Fatura número
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

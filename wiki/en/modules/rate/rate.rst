@@ -11,7 +11,7 @@ Field list
 Plan
 """"
 
-The plan that you want to create a tariff for.
+| The plan that you want to create a tariff for.
 
 
 
@@ -21,7 +21,7 @@ The plan that you want to create a tariff for.
 Destination
 """""""""""
 
-The prefix that you want create a tariff for.
+| The prefix that you want create a tariff for.
 
 
 
@@ -31,7 +31,7 @@ The prefix that you want create a tariff for.
 Trunk groups
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Sell price
 """"""""""
 
-How much do you want to charge per minute?
+| How much do you want to charge per minute?
 
 
 
@@ -51,7 +51,7 @@ How much do you want to charge per minute?
 Initial block
 """""""""""""
 
-Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s, charged for 30s.
+| Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s, charged for 30s.
 
 
 
@@ -61,7 +61,7 @@ Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s
 Billing block
 """""""""""""
 
-This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, charged for 36.
+| This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, charged for 36.
 
 
 
@@ -71,7 +71,7 @@ This defines how the time is incremented after the minimum. E.g, if set to 6s an
 Minimum time to charge
 """"""""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Additional time
 """""""""""""""
 
-Aditional time to add to call duration. Ex: the call duration 20s and you add here 3s, will be charged 23 seconds.
+| Aditional time to add to call duration. Ex: the call duration 20s and you add here 3s, will be charged 23 seconds.
 
 
 
@@ -91,7 +91,7 @@ Aditional time to add to call duration. Ex: the call duration 20s and you add he
 Include in offer
 """"""""""""""""
 
-Set to yes if you want to include this tariff to a package offer.
+| Set to yes if you want to include this tariff to a package offer.
 
 
 
@@ -101,7 +101,7 @@ Set to yes if you want to include this tariff to a package offer.
 Status
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

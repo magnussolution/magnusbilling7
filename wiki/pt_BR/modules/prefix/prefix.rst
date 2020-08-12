@@ -11,7 +11,7 @@ Lista de campos
 Prefixo
 """""""
 
-Prefixo. Prefixo serão usados para criar as tarifas. EX. 5511.
+| Prefixo. Prefixo serão usados para criar as tarifas. EX. 5511.
 
 
 
@@ -21,7 +21,7 @@ Prefixo. Prefixo serão usados para criar as tarifas. EX. 5511.
 Destino
 """""""
 
-Nome do destino. EX: Brasil SP
+| Nome do destino. EX: Brasil SP
 
 
 

@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Credit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Number
 """"""
 
-Dialed number
+| Dialed number
 
 
 
@@ -51,7 +51,7 @@ Dialed number
 Codec
 """""
 
-Codec used
+| Codec used
 
 
 
@@ -61,7 +61,7 @@ Codec used
 CallerID
 """"""""
 
-The CID number.
+| The CID number.
 
 
 
@@ -71,7 +71,7 @@ The CID number.
 Trunk
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Reinvite
 """"""""
 
-If set to YES, means the RTP audio was sent directly between callee and caller
+| If set to YES, means the RTP audio was sent directly between callee and caller
 
 
 
@@ -91,7 +91,7 @@ If set to YES, means the RTP audio was sent directly between callee and caller
 From IP
 """""""
 
-IP of the caller
+| IP of the caller
 
 
 
@@ -101,7 +101,7 @@ IP of the caller
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

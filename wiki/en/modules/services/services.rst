@@ -11,7 +11,7 @@ Field list
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Name
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Call limit
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,17 +41,17 @@ We did not write the description to this field.
 Disk space
 """"""""""
 
-Insert the space available to record in GB.
+| Insert the space available to record in GB.
 
 
 
 
 .. _services-sipaccountlimit:
 
-Sip account limit
+SIP account limit
 """""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Price
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We did not write the description to this field.
 Return credit
 """""""""""""
 
-Return credit to the user if they cancel before the expiration date.
+| Return credit to the user if they cancel before the expiration date.
 
 
 
@@ -81,7 +81,7 @@ Return credit to the user if they cancel before the expiration date.
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

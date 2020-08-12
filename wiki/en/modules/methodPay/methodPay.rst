@@ -11,7 +11,7 @@ Field list
 Show name
 """""""""
 
-Name to show to user in the Buy Credit option.
+| Name to show to user in the Buy Credit option.
 
 
 
@@ -21,7 +21,7 @@ Name to show to user in the Buy Credit option.
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Country
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Active
 """"""
 
-Activate this payment gateway to users?
+| Activate this payment gateway to users?
 
 
 
@@ -51,7 +51,7 @@ Activate this payment gateway to users?
 Min amount
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Max amount
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We did not write the description to this field.
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 URL
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 Discount fee
 """"""""""""
 
-Discount the Paypal fee from the paid amount.
+| Discount the Paypal fee from the paid amount.
 
 
 
@@ -101,7 +101,7 @@ Discount the Paypal fee from the paid amount.
 Bank
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We did not write the description to this field.
 Bank agency
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -121,7 +121,7 @@ We did not write the description to this field.
 Bank account
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We did not write the description to this field.
 Tax
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We did not write the description to this field.
 Instructions
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -151,7 +151,7 @@ We did not write the description to this field.
 Company
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -161,7 +161,7 @@ We did not write the description to this field.
 Address
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -171,7 +171,7 @@ We did not write the description to this field.
 City
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +181,7 @@ We did not write the description to this field.
 State
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -191,7 +191,7 @@ We did not write the description to this field.
 DOC
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -201,7 +201,7 @@ We did not write the description to this field.
 TOKEN
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -211,7 +211,7 @@ We did not write the description to this field.
 P2P CustomerSiteID
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We did not write the description to this field.
 P2P KeyID
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We did not write the description to this field.
 P2P Passphrase
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -241,7 +241,7 @@ We did not write the description to this field.
 P2P RecipientKeyID
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -251,7 +251,7 @@ We did not write the description to this field.
 P2P Tax Amount
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -261,7 +261,7 @@ We did not write the description to this field.
 Client id
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -271,7 +271,7 @@ We did not write the description to this field.
 Client secret
 """""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

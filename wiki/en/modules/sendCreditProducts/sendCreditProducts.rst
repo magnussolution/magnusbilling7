@@ -11,7 +11,7 @@ Field list
 Country
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Operator name
 """""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Operator ID
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 SkuCode
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We did not write the description to this field.
 Product
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Send value
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We did not write the description to this field.
 Wholesale price
 """""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Provider
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 Status
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We did not write the description to this field.
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

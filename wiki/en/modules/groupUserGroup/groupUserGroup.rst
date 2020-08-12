@@ -11,7 +11,7 @@ Field list
 Group
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 User prefix
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Group
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

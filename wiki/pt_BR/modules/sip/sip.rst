@@ -11,27 +11,27 @@ Lista de campos
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _sip-defaultuser:
 
-Conta IAX
+Conta SIP
 """""""""
 
-Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.
+| Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
 
 
 
 .. _sip-secret:
 
-Senha IAX
+Senha SIP
 """""""""
 
-Senha que será usado para logar nos softphones ou qualquer dispositivo SIP.
+| Senha que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
 
 
@@ -41,7 +41,7 @@ Senha que será usado para logar nos softphones ou qualquer dispositivo SIP.
 CallerID
 """"""""
 
-Este é o CallerID que será mostrado no destino, em chamadas externas o provedor precisa permitir CLI para que seja identificado corretamente no destino.
+| Este é o CallerID que será mostrado no destino, em chamadas externas o provedor precisa permitir CLI para que seja identificado corretamente no destino.
 
 
 
@@ -51,7 +51,7 @@ Este é o CallerID que será mostrado no destino, em chamadas externas o provedo
 Alias
 """""
 
-Alias é um número para facilitar a discagem, pode colocar qualquer número. Pode repetir os mesmos números para contas diferente.
+| Alias é um número para facilitar a discagem, pode colocar qualquer número. Pode repetir os mesmos números para contas diferente.
 
 
 
@@ -61,7 +61,7 @@ Alias é um número para facilitar a discagem, pode colocar qualquer número. Po
 Não permitir
 """""""""""""
 
-ESta opção destiva todos os codecs e deixa disponivel para o usuário somente os que você selecionar abaixo.
+| ESta opção destiva todos os codecs e deixa disponivel para o usuário somente os que você selecionar abaixo.
 
 
 
@@ -71,7 +71,7 @@ ESta opção destiva todos os codecs e deixa disponivel para o usuário somente 
 Codec
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,7 +81,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Host
 """"
 
-Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em brando e coloque insecure para port/invite na TAB Informaçōes Adicionais.
+| Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em brando e coloque insecure para port/invite na TAB Informaçōes Adicionais.
 
 
 
@@ -91,7 +91,7 @@ Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. 
 Grupo
 """""
 
-Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar todas as contas que tiver no grupo. Você pode criar os grupos com qualquer nome
+| Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar todas as contas que tiver no grupo. Você pode criar os grupos com qualquer nome
 
 
 
@@ -101,7 +101,7 @@ Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar toda
 Suporte a vídeo
 """"""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -111,7 +111,7 @@ Nós ainda não escrevemos a descrição deste campo.
 REGEX para bloqueio de chamadas
 """""""""""""""""""""""""""""""
 
-Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com
+| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com
 
 
 
@@ -121,7 +121,7 @@ Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so co
 Gravar chamadas
 """""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -131,7 +131,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tech prefix
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -141,7 +141,7 @@ Nós ainda não escrevemos a descrição deste campo.
 NAT
 """
 
-Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/
+| Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/
 
 
 
@@ -151,7 +151,7 @@ Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/
 Directmedia
 """""""""""
 
-Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/
+| Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/
 
 
 
@@ -161,7 +161,7 @@ Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e se
 Qualify
 """""""
 
-Enviar pacote OPTION para para verificar se o usuário esta online.
+| Enviar pacote OPTION para para verificar se o usuário esta online.
 
 
 
@@ -171,7 +171,7 @@ Enviar pacote OPTION para para verificar se o usuário esta online.
 Contexto
 """"""""
 
-Somente altere se você sabe o que esta fazendo.
+| Somente altere se você sabe o que esta fazendo.
 
 
 
@@ -181,7 +181,7 @@ Somente altere se você sabe o que esta fazendo.
 Dtmfmode
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +191,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Insecure
 """"""""
 
-Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentication alterar para port,invite.
+| Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentication alterar para port,invite.
 
 
 
@@ -201,7 +201,7 @@ Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentica
 Negar
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +211,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Permitir
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -221,7 +221,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +231,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Permitir transferência
 """""""""""""""""""""""
 
-Permite esta conta VoIP fazer transferencia. O código para transferencia é *2ramal 
+| Permite esta conta VoIP fazer transferencia. O código para transferencia é *2ramal 
 
 
 
@@ -241,7 +241,7 @@ Permite esta conta VoIP fazer transferencia. O código para transferencia é *2r
 Ring falso
 """"""""""
 
-Ativa ring falso. Adiciona rR do comando Dial.
+| Ativa ring falso. Adiciona rR do comando Dial.
 
 
 
@@ -251,7 +251,7 @@ Ativa ring falso. Adiciona rR do comando Dial.
 Limite de chamada
 """""""""""""""""
 
-Chamadas simultâneas permitidas.
+| Chamadas simultâneas permitidas.
 
 
 
@@ -261,7 +261,7 @@ Chamadas simultâneas permitidas.
 MOH
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -271,7 +271,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URL notificaçōes de eventos
 """""""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -281,7 +281,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Adicionar parâmetro
 """"""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -291,7 +291,7 @@ Nós ainda não escrevemos a descrição deste campo.
 AMD
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -301,7 +301,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Encaminhar
 """"""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -311,7 +311,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -321,7 +321,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -331,7 +331,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -341,7 +341,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -351,7 +351,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tempo de discagem expirado
 """"""""""""""""""""""""""
 
-Tempo em segundos que será aguardado para atender a chamada.
+| Tempo em segundos que será aguardado para atender a chamada.
 
 
 
@@ -361,7 +361,7 @@ Tempo em segundos que será aguardado para atender a chamada.
 Habilitar voicemail
 """""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -371,7 +371,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Email
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -381,7 +381,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Senha
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -391,7 +391,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Peer
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

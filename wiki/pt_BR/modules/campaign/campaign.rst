@@ -11,7 +11,7 @@ Lista de campos
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Plano
 """""
 
-Que plano será usado para tarifar as chamadas desta cmapanha, pode ser um plano diferente do plano cadastrado na conta do cliente
+| Que plano será usado para tarifar as chamadas desta cmapanha, pode ser um plano diferente do plano cadastrado na conta do cliente
 
 
 
@@ -31,7 +31,7 @@ Que plano será usado para tarifar as chamadas desta cmapanha, pode ser um plano
 Nome
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Status
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -51,7 +51,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Data de início
 """""""""""""""
 
-Data que a campanha será considerada ativa.
+| Data que a campanha será considerada ativa.
 
 
 
@@ -61,7 +61,7 @@ Data que a campanha será considerada ativa.
 Data de expiração
 """""""""""""""""""
 
-Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos
+| Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos
 
 
 
@@ -71,7 +71,7 @@ Data que a campanha não será mais considerada ativa, mesmo ser tiver números 
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,7 +81,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Audio
 """""
 
-Somente usado se o tipo de campanha for de voz. O audio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz
+| Somente usado se o tipo de campanha for de voz. O audio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz
 
 
 
@@ -91,7 +91,7 @@ Somente usado se o tipo de campanha for de voz. O audio precisa ser compativel c
 Audio 2
 """""""
 
-Se você usar TTS, o nome do número será executado entre o audio 1 e 2
+| Se você usar TTS, o nome do número será executado entre o audio 1 e 2
 
 
 
@@ -101,7 +101,7 @@ Se você usar TTS, o nome do número será executado entre o audio 1 e 2
 Telefone bloqueados
 """""""""""""""""""
 
-Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
+| Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
 
 
@@ -111,7 +111,7 @@ Ativando esta opção o MagnusBilling vai verificar se o número que será envia
 Reprocessar automático
 """""""""""""""""""""""
 
-Reativar automaticamente todos os numeros das agendas da campanha quando não tiver mais números ativos
+| Reativar automaticamente todos os numeros das agendas da campanha quando não tiver mais números ativos
 
 
 
@@ -121,7 +121,7 @@ Reativar automaticamente todos os numeros das agendas da campanha quando não ti
 Agenda
 """"""
 
-Selecione as agendas que esta campanha vai usar.
+| Selecione as agendas que esta campanha vai usar.
 
 
 
@@ -131,7 +131,7 @@ Selecione as agendas que esta campanha vai usar.
 Número para reenviar
 """""""""""""""""""""
 
-Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, entao coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Digito", para enviar para o destino se o cliente marcar qu
+| Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, entao coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Digito", para enviar para o destino se o cliente marcar qu
 
 
 
@@ -141,7 +141,7 @@ Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente di
 Tipo de encaminhamento
 """"""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -151,7 +151,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Destino
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -161,7 +161,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -171,7 +171,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -181,7 +181,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +191,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Destino
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -201,7 +201,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Horário de início diário
 """""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +211,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Horário de finalização diário
 """""""""""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -221,7 +221,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Segunda
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +231,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Terça feira
 """"""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -241,7 +241,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Quarta feira
 """"""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -251,7 +251,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Quinta feira
 """"""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -261,7 +261,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Sexta
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -271,7 +271,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Saturday
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -281,7 +281,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Sunday
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -291,7 +291,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Limite de chamada
 """""""""""""""""
 
-Quantas chamadas o sistema pode gerar por minuto nesta campanha
+| Quantas chamadas o sistema pode gerar por minuto nesta campanha
 
 
 
@@ -301,7 +301,7 @@ Quantas chamadas o sistema pode gerar por minuto nesta campanha
 Limite máximo de chamadas
 """"""""""""""""""""""""""
 
-Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.
+| Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.
 
 
 
@@ -311,7 +311,7 @@ Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usu
 Duração do áudio
 """""""""""""""""""
 
-Tempo do audio da campanha, usado para controlar quantidade de chamadas considerada sucesso
+| Tempo do audio da campanha, usado para controlar quantidade de chamadas considerada sucesso
 
 
 
@@ -321,7 +321,7 @@ Tempo do audio da campanha, usado para controlar quantidade de chamadas consider
 Toggle max completed calls
 """"""""""""""""""""""""""
 
-Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e tiveram a duração igual ao tempo do audio, se a quantidade for igual ou mais que o campo abaixo, a campanha é desativada
+| Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e tiveram a duração igual ao tempo do audio, se a quantidade for igual ou mais que o campo abaixo, a campanha é desativada
 
 
 
@@ -331,7 +331,7 @@ Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e t
 Quantidade máxima completada
 """""""""""""""""""""""""""""
 
-Maximo de chamadas completas. Precisa ativar o campo acima
+| Maximo de chamadas completas. Precisa ativar o campo acima
 
 
 
@@ -341,7 +341,7 @@ Maximo de chamadas completas. Precisa ativar o campo acima
 De
 ""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -351,7 +351,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Descrição ou texto do SMS
 """""""""""""""""""""""""""
 
-Texto do SMS. Você pode usar a variavel %name% onde você deseja usar o nome do dono do número
+| Texto do SMS. Você pode usar a variavel %name% onde você deseja usar o nome do dono do número
 
 
 
@@ -361,7 +361,7 @@ Texto do SMS. Você pode usar a variavel %name% onde você deseja usar o nome do
 Audio 1 TTS
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -371,7 +371,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Audio 2 TTS
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -381,7 +381,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Opção para validar ASR
 """"""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -11,7 +11,7 @@ Lista de campos
 Destino
 """""""
 
-Selecione o prefixo que você deseja subscrever.
+| Selecione o prefixo que você deseja subscrever.
 
 
 
@@ -21,7 +21,7 @@ Selecione o prefixo que você deseja subscrever.
 Preço de venda
 """""""""""""""
 
-Novo preço de vendapara este prefixo
+| Novo preço de vendapara este prefixo
 
 
 
@@ -31,7 +31,7 @@ Novo preço de vendapara este prefixo
 Bloco mínimo
 """""""""""""
 
-Mínimo de venda
+| Mínimo de venda
 
 
 
@@ -41,7 +41,7 @@ Mínimo de venda
 Bloco de tarifação
 """"""""""""""""""""
 
-Bloco de venda
+| Bloco de venda
 
 
 

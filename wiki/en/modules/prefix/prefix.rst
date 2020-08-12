@@ -11,7 +11,7 @@ Field list
 Prefix
 """"""
 
-Prefix code. Prefix will be used to tariff and bill the calls.
+| Prefix code. Prefix will be used to tariff and bill the calls.
 
 
 
@@ -21,7 +21,7 @@ Prefix code. Prefix will be used to tariff and bill the calls.
 Destination
 """""""""""
 
-Destination name.
+| Destination name.
 
 
 
