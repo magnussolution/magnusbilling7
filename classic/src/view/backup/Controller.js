@@ -49,7 +49,7 @@ Ext.define('MBilling.view.backup.Controller', {
             Ext.Msg.confirm(me.titleConfirmation, msgConfirmation, function(btn) {
                 if (btn === 'yes') {
                     Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
-                        idRecord.push(record.get('Name'));
+                        idRecord.push(record.get('name'));
                     });
                     Ext.Ajax.request({
                         url: 'index.php/backup/destroy',

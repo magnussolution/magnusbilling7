@@ -25,7 +25,7 @@ Ext.define('MBilling.view.iax.Controller', {
         this.callParent(arguments);
         var me = this,
             record = me.list.getSelectionModel().getSelection()[0],
-            valueAllow = me.formPanel.idRecord ? record.get('Allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'],
+            valueAllow = me.formPanel.idRecord ? record.get('allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'],
             fieldAllow = me.formPanel.down('checkboxgroup');
         fieldAllow.setValue({
             allow: valueAllow

@@ -27,10 +27,10 @@ Ext.define('MBilling.view.callShop.List', {
         emptyText: '<center class="grid-empty">' + t('No record found') + '</center>',
         getRowClass: function(record) {
             if (App.user.l == 'callshop') {
-                if (record.get('Status') == 1) return 'callshoFree';
-                else if (record.get('Status') == 0) return 'callshoBlock';
-                else if (record.get('Status') == 2) return 'callshoInUse';
-                else if (record.get('Status') == 3) return 'callshoInCall';
+                if (record.get('status') == 1) return 'callshoFree';
+                else if (record.get('status') == 0) return 'callshoBlock';
+                else if (record.get('status') == 2) return 'callshoInUse';
+                else if (record.get('status') == 3) return 'callshoInCall';
             };
         }
     },

@@ -38,7 +38,7 @@ Ext.define('MBilling.view.trunk.Controller', {
             me.formPanel.getForm().findField('register_string')['hide']();
         }
         me.callParent(arguments);
-        valueAllow = me.formPanel.idRecord ? record.get('Allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'];
+        valueAllow = me.formPanel.idRecord ? record.get('allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'];
         fieldAllow = me.formPanel.down('checkboxgroup');
         fieldAllow.setValue({
             allow: valueAllow
