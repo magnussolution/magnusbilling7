@@ -52,7 +52,7 @@ Ext.define('MBilling.view.callOnLine.List', {
             fieldLabel: t('Refresh rate'),
             editable: false,
             minValue: 5,
-            labelWidth: 90,
+            labelWidth: 100,
             width: 150,
             selectOnFocus: true,
             allowDecimals: true,

@@ -14,11 +14,11 @@
  * 2020-08-10
  */
 Locale.load({
-    'Ringinuse': 'Llamaar en uso',
+    'Ringinuse': 'Llamar en uso',
     'Calls Online': 'Llamadas online',
     'Call Group': 'Grupo de llamada',
     'Call Rejected': 'Llamada rechazada',
-    'On Phone': 'En llamdas',
+    'On Phone': 'En llamda',
     'Preemption': 'Preemption',
     'Receiving': 'Recibiendo',
     'Redirected to new destination': 'Redirigido a un nuevo destino',
@@ -251,9 +251,9 @@ Locale.load({
     'Charge': 'Carga',
     'Charge who': 'A quien Cargar',
     'Charts': 'Graficos',
-    'Check campaign': 'Chequeo de Campaña',
+    'Check campaign': 'Chequear Campaña',
     'City': 'Ciudad',
-    'Clear filters': 'filtros claros',
+    'Clear filters': 'Limpiar filtros',
     'Client': 'Cliente',
     'Client id': 'ID de Cliente',
     'Client secret': 'Clave de Cliente',
