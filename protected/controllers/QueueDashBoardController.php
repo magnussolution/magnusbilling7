@@ -25,7 +25,7 @@ class QueueDashBoardController extends Controller
     {
         $this->instanceModel = new QueueDashBoard;
         $this->abstractModel = QueueDashBoard::model();
-        $this->titleReport   = Yii::t('yii', 'Queue DashBoard');
+        $this->titleReport   = Yii::t('zii', 'Queue DashBoard');
 
         parent::init();
     }

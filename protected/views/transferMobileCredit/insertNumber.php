@@ -14,23 +14,23 @@ $form = $this->beginWidget('CActiveForm', array(
 <br/>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
-        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Method') ?></p>
 </div>
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Number')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Number') ?></p>
 </div>
 
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('yii', 'Next'), array(
+<?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));

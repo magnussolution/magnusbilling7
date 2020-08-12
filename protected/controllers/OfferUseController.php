@@ -42,7 +42,7 @@ class OfferUseController extends Controller
     {
         $this->instanceModel = new OfferUse;
         $this->abstractModel = OfferUse::model();
-        $this->titleReport   = Yii::t('yii', 'Offer Use');
+        $this->titleReport   = Yii::t('zii', 'Offer Use');
         parent::init();
     }
 

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -26,23 +26,23 @@ Ext.define('MBilling.view.offer.Form', {
         var me = this;
         me.items = [{
             name: 'label',
-            fieldLabel: t('name')
+            fieldLabel: t('Name')
         }, {
             xtype: 'offertypecombo',
             name: 'packagetype',
-            fieldLabel: t('packagetype')
+            fieldLabel: t('Package type')
         }, {
             name: 'freetimetocall',
-            fieldLabel: t('freetimetocall')
+            fieldLabel: t('Free time to call')
         }, {
             xtype: 'billingtypecombo',
             name: 'billingtype',
-            fieldLabel: t('periode')
+            fieldLabel: t('Billing type')
         }, {
             xtype: 'moneyfield',
-            mask: App.user.currency + ' #9.999.990,00',
             name: 'price',
-            fieldLabel: t('price')
+            fieldLabel: t('Price'),
+            mask: App.user.currency + ' #9.999.990,00'
         }]
         me.callParent(arguments);
     }

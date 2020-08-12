@@ -99,7 +99,7 @@ class TransferToMobile extends Model
     public function checkmethod($attribute, $params)
     {
         if (preg_match('/ /', $this->username)) {
-            $this->addError($attribute, Yii::t('yii', 'Please select a moethod'));
+            $this->addError($attribute, Yii::t('zii', 'Please select a method'));
         }
     }
 

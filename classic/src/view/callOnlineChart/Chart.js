@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 13/02/2012
@@ -23,9 +23,9 @@ Ext.define('MBilling.view.callOnlineChart.Chart', {
     alias: 'widget.callonlinechartchart',
     controller: 'callsummaryperday',
     store: 'CallOnlineChart',
-    fieldValue: ['total', 'answer'],
+    fieldValue: [t('Total'), t('Answered')],
     fieldDescription: 'date',
-    labelYLine: t('total') + ' / Min',
+    labelYLine: t('Total / Min'),
     labelXLine: t('Time'),
     reference: 'callonlinechartchart',
     defaultChart: 'line',
@@ -44,37 +44,37 @@ Ext.define('MBilling.view.callOnlineChart.Chart', {
             return layoutContext.renderer(label);
         };
         me.tbarChart = [{
-            text: t('1') + ' ' + t('hour'),
+            text: '1' + ' ' + t('hour'),
             scope: me,
             handler: 'onPerMinute',
             value: '1'
         }, {
-            text: t('6') + ' ' + t('hours'),
+            text: '6' + ' ' + t('hours'),
             scope: me,
             handler: 'onPerMinute',
             value: '6'
         }, {
-            text: t('12') + ' ' + t('hours'),
+            text: '12' + ' ' + t('hours'),
             scope: me,
             handler: 'onPerMinute',
             value: '12'
         }, {
-            text: t('1') + ' ' + t('day'),
+            text: '1' + ' ' + t('Day'),
             scope: me,
             handler: 'onPerMinute',
             value: '24'
         }, {
-            text: t('2') + ' ' + t('days'),
+            text: '2' + ' ' + t('days'),
             scope: me,
             handler: 'onPerMinute',
             value: '48'
         }, {
-            text: t('3') + ' ' + t('days'),
+            text: '3' + ' ' + t('days'),
             scope: me,
             handler: 'onPerMinute',
             value: '36'
         }, {
-            text: t('1') + ' ' + t('week'),
+            text: '1' + ' ' + t('week'),
             scope: me,
             handler: 'onPerMinute',
             value: '168'

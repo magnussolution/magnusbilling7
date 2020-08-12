@@ -8,14 +8,14 @@ Ext.define('MBilling.view.iax.Lookup', {
     extend: 'Ext.ux.form.field.Lookup',
     alias: 'widget.siaxlookup',
     name: 'id_iax',
-    fieldLabel: t('Iax'),
+    fieldLabel: t('IAX'),
     displayField: 'idIaxname',
     displayFieldList: 'name',
     gridConfig: {
         xtype: 'iaxlist',
         fieldSearch: 'name',
         columns: [{
-            header: t('Account'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -23,7 +23,7 @@ Ext.define('MBilling.view.iax.Lookup', {
             },
             flex: 2
         }, {
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 2
         }]

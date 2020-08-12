@@ -37,7 +37,7 @@ class PhoneNumberController extends Controller
     {
         $this->instanceModel = new PhoneNumber;
         $this->abstractModel = PhoneNumber::model();
-        $this->titleReport   = Yii::t('yii', 'Phone Number');
+        $this->titleReport   = Yii::t('zii', 'Phonenumber');
         parent::init();
     }
 

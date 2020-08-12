@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 04/07/2012
@@ -30,18 +30,18 @@ Ext.define('MBilling.view.plan.Form', {
         };
         me.items = [{
             name: 'name',
-            fieldLabel: t('name'),
+            fieldLabel: t('Name'),
             maxLength: 100
         }, {
             xtype: 'noyescombo',
             name: 'signup',
-            fieldLabel: t('useInSignup'),
+            fieldLabel: t('Use on signup'),
             allowBlank: true
         }, {
             xtype: 'moneyfield',
             mask: App.user.currency + ' #9.999.990,00',
             name: 'ini_credit',
-            fieldLabel: t('Initial Credit to new users'),
+            fieldLabel: t('Initial credit to new users'),
             allowBlank: true,
             hidden: true,
             value: 0
@@ -52,9 +52,9 @@ Ext.define('MBilling.view.plan.Form', {
             allowBlank: true,
             hidden: App.user.isClient
         }, {
-            style: 'margin-top:25px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Ativar portabilidade?'),
+            style: 'margin-top:25px; overflow: visible;',
+            title: 'Ativar portabilidade?',
             collapsible: true,
             collapsed: false,
             hidden: App.user.language != 'pt_BR',
@@ -69,13 +69,13 @@ Ext.define('MBilling.view.plan.Form', {
             items: [{
                 xtype: 'noyescombo',
                 name: 'portabilidadeMobile',
-                fieldLabel: t('Para Celular'),
+                fieldLabel: 'Para Celular',
                 allowBlank: true,
                 hidden: App.user.language != 'pt_BR'
             }, {
                 xtype: 'noyescombo',
                 name: 'portabilidadeFixed',
-                fieldLabel: t('Para Fixo'),
+                fieldLabel: 'Para Fixo',
                 allowBlank: true,
                 hidden: App.user.language != 'pt_BR'
             }]
@@ -87,15 +87,16 @@ Ext.define('MBilling.view.plan.Form', {
             minLength: 5,
             hidden: !App.user.isAdmin
         }, {
-            style: 'margin-top:25px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Select one or more Services'),
+            style: 'margin-top:25px; overflow: visible;',
+            title: t('Select one or more services'),
             collapsible: true,
             collapsed: false,
             items: [{
-                anchor: '100%',
-                fieldLabel: '',
                 xtype: 'servicestag',
+                anchor: '100%',
+                name: 'id_service',
+                fieldLabel: t('Services'),
                 allowBlank: true
             }]
         }];

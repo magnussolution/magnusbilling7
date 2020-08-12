@@ -1,7 +1,7 @@
 Ext.define('MBilling.view.diddestination.Combo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.didtypecombo',
-    fieldLabel: t('typepaid'),
+    fieldLabel: t('Type paid'),
     displayField: 'name',
     valueField: 'id',
     forceSelection: true,
@@ -11,23 +11,23 @@ Ext.define('MBilling.view.diddestination.Combo', {
         fields: ['id', 'name'],
         data: [{
             id: '0',
-            name: t('callforpstn'),
+            name: t('Call to PSTN'),
             showFields: ['voip_call', 'destination', 'id_did', 'id_user', 'activated']
         }, {
             id: '1',
-            name: t('sipcall'),
+            name: t('SIP'),
             showFields: ['voip_call', 'id_sip', 'id_did', 'id_user', 'activated', 'priority']
         }, {
             id: '2',
-            name: t('ivr'),
+            name: t('IVR'),
             showFields: ['voip_call', 'id_did', 'id_ivr', 'id_user', 'activated']
         }, {
             id: '3',
-            name: 'CallingCard',
+            name: t('CallingCard'),
             showFields: ['voip_call', 'id_did', 'id_user', 'activated']
         }, {
             id: '4',
-            name: t('portalDeVoz'),
+            name: t('Direct extension'),
             showFields: ['voip_call', 'id_did', 'id_user', 'activated']
         }, {
             id: '5',
@@ -43,7 +43,7 @@ Ext.define('MBilling.view.diddestination.Combo', {
             showFields: ['voip_call', 'id_did', 'id_queue', 'id_user', 'activated']
         }, {
             id: '8',
-            name: t('Call Group'),
+            name: t('SIP group'),
             showFields: ['voip_call', 'destination', 'id_did', 'id_user', 'activated']
         }, {
             id: '9',

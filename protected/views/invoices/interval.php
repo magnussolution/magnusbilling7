@@ -13,13 +13,13 @@ $form = $this->beginWidget('CActiveForm', array(
 <br>
 
 <div class="field">
-    <label for="Call_StartTime"><?php echo Yii::t('yii', 'Filter call to username') . ' ' . $modelUser->username; ?></label>
+    <label for="Call_StartTime"><?php echo Yii::t('zii', 'Filter call to username') . ' ' . $modelUser->username; ?></label>
 
 </div>
 <br><br><br><br>
 
 <div class="field">
-    <?php echo $form->labelEx($model, Yii::t('yii', 'StartTime')) ?>
+    <?php echo $form->labelEx($model, Yii::t('zii', 'Start time')) ?>
 
 <?php
 $this->widget(
@@ -38,12 +38,12 @@ $this->widget(
 
 ?>
 <?php echo $form->error($model, 'starttime') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'starttime') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Start time') ?></p>
 
 </div>
 <br>
 <div class="field">
-    <?php echo $form->labelEx($model, Yii::t('yii', 'StopTime')) ?>
+    <?php echo $form->labelEx($model, Yii::t('zii', 'Stop time')) ?>
 <?php
 $this->widget(
     'ext.jui.EJuiDateTimePicker',
@@ -64,5 +64,5 @@ $this->widget(
 </div>
 <br>
 <?php echo $form->hiddenField($model, 'id_user', array('value' => $modelUser->id)); ?>
-<?php echo CHtml::submitButton(Yii::t('yii', 'Filter'), array('class' => 'button')); ?>
+<?php echo CHtml::submitButton(Yii::t('zii', 'Filter'), array('class' => 'button')); ?>
 <?php $this->endWidget();?>

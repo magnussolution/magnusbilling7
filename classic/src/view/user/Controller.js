@@ -171,7 +171,7 @@ Ext.define('MBilling.view.user.Controller', {
         var me = this,
             record = me.list.getSelectionModel().getSelection()[0];
         if (record.get('email').length < 5) {
-            Ext.ux.Alert.alert(me.titleError, t('User not have a email'), 'error');
+            Ext.ux.Alert.alert(me.titleError, t('User not have a Email'), 'error');
             return;
         }
         Ext.Ajax.request({

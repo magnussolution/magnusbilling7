@@ -17,13 +17,14 @@ Ext.define('MBilling.view.module.Form', {
         maxLength: 100
     }, {
         xtype: 'modulecombo',
-        fieldLabel: t('Main Menu'),
+        name: 'id_module',
+        fieldLabel: t('Main menu'),
         readOnly: true,
         allowBlank: true
     }, {
         xtype: 'numberfield',
-        fieldLabel: t('Order'),
         name: 'priority',
+        fieldLabel: t('Order'),
         minValue: 1,
         allowBlank: false
     }]

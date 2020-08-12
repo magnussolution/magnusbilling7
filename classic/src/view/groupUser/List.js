@@ -21,7 +21,7 @@ Ext.define('MBilling.view.groupUser.List', {
             disabled: true
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             hidden: true,
             hideable: App.user.isAdmin
@@ -29,7 +29,7 @@ Ext.define('MBilling.view.groupUser.List', {
             header: t('Name'),
             dataIndex: 'name'
         }, {
-            header: t('user_type'),
+            header: t('User type'),
             dataIndex: 'idUserTypename',
             filter: {
                 type: 'string',

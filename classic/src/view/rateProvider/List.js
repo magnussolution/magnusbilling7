@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 30/07/2012
@@ -27,7 +27,7 @@ Ext.define('MBilling.view.rateProvider.List', {
         var me = this;
         me.buttonImportCsv = !App.user.isClient;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
@@ -41,7 +41,7 @@ Ext.define('MBilling.view.rateProvider.List', {
             },
             flex: 3
         }, {
-            header: t('prefix'),
+            header: t('Prefix'),
             dataIndex: 'idPrefixprefix',
             filter: {
                 type: 'string',
@@ -50,23 +50,23 @@ Ext.define('MBilling.view.rateProvider.List', {
             flex: 3
         }, {
             dataIndex: 'idPrefixdestination',
-            header: t('destination'),
+            header: t('Destination'),
             filter: {
                 type: 'string',
                 field: 'idPrefix.destination'
             },
             flex: 4
         }, {
-            header: t('buyrate'),
+            header: t('Buy price'),
             dataIndex: 'buyrate',
             renderer: Helper.Util.formatMoneyDecimal4,
             flex: 2
         }, {
-            header: t('buyrateinitblock'),
+            header: t('Buy price initblock'),
             dataIndex: 'buyrateinitblock',
             flex: 2
         }, {
-            header: t('buyrateincrement'),
+            header: t('Buy price increment'),
             dataIndex: 'buyrateincrement',
             flex: 2
         }]

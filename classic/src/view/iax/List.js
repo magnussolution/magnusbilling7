@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2012
@@ -26,13 +26,13 @@ Ext.define('MBilling.view.iax.List', {
     initComponent: function() {
         var me = this;
         me.columns = me.columns || [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('username'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -40,65 +40,65 @@ Ext.define('MBilling.view.iax.List', {
             },
             flex: 3
         }, {
-            header: t('ramal'),
+            header: t('IAX user'),
             dataIndex: 'name',
             flex: 3
         }, {
-            header: t('password'),
+            header: t('IAX pass'),
             dataIndex: 'secret',
             flex: 2
         }, {
-            header: t('host'),
+            header: t('Host'),
             dataIndex: 'host',
             flex: 3
         }, {
-            header: 'IP',
+            header: t('IP'),
             dataIndex: 'ipaddr',
             flex: 5
         }, { //HIDDEN COLUNNS
-            header: t('context'),
+            header: t('Context'),
             dataIndex: 'context',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: t('callerid'),
+            header: t('CallerID'),
             dataIndex: 'callerid',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: t('codec'),
+            header: t('Codec'),
             dataIndex: 'allow',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: 'nat',
+            header: t('NAT'),
             dataIndex: 'nat',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: 'qualify',
+            header: t('Qualify'),
             dataIndex: 'qualify',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: 'dtmfmode',
+            header: t('Dtmfmode'),
             dataIndex: 'dtmfmode',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: 'insecure',
+            header: t('Insecure'),
             dataIndex: 'insecure',
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
         }, {
-            header: 'type',
+            header: t('Type'),
             dataIndex: 'type',
             hidden: true,
             hideable: !App.user.isClient,

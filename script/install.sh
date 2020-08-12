@@ -668,8 +668,7 @@ mysql -uroot -p${password} -e "CREATE USER 'mbillingUser'@'localhost' IDENTIFIED
 mysql -uroot -p${password} -e "GRANT ALL PRIVILEGES ON \`mbilling\` . * TO 'mbillingUser'@'localhost' WITH GRANT OPTION;FLUSH PRIVILEGES;"    
 mysql -uroot -p${password} -e "GRANT FILE ON * . * TO  'mbillingUser'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
 
-mysql mbilling -u root -p${password}  < /var/www/html/mbilling/database/script.sql
-rm -rf /var/www/html/mbilling/doc
+mysql mbilling -u root -p${password}  < /var/www/html/mbilling/script/database.sql
 rm -rf /var/www/html/mbilling/script
 
 echo "[general]

@@ -5,7 +5,7 @@ Ext.define('MBilling.view.dashboard.Trunks', {
     cls: 'service-type shadow',
     height: 320,
     bodyPadding: 15,
-    title: t('trunks'),
+    title: t('Trunks'),
     layout: {
         type: 'hbox',
         align: 'stretch'

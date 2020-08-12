@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 24/09/2012
@@ -27,37 +27,37 @@ Ext.define('MBilling.view.did.List', {
         var me = this;
         me.buttonUpdateLot = false;
         me.extraButtons = [{
-            text: t('crearToReleaseDid'),
+            text: t('Release DID'),
             iconCls: 'icon-delete',
             handler: 'onRelease',
             disabled: false
         }];
         me.columns = me.columns || [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('did'),
+            header: t('DID'),
             dataIndex: 'did',
             flex: 4
         }, {
-            header: t('reserved'),
+            header: t('Reserved'),
             dataIndex: 'reserved',
             renderer: Helper.Util.formattyyesno,
             flex: 2,
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('yes')],
-                    [0, t('no')]
+                    [1, t('Yes')],
+                    [0, t('No')]
                 ]
             },
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -66,31 +66,31 @@ Ext.define('MBilling.view.did.List', {
             flex: 3,
             menuDisabled: true
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'activated',
             renderer: Helper.Util.formatBooleanActive,
             flex: 2,
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [0, t('inactive')]
+                    [1, t('Active')],
+                    [0, t('Inactive')]
                 ]
             },
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('connection_charge'),
+            header: t('Connection charge'),
             dataIndex: 'connection_charge',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3
         }, {
-            header: t('monthly_price'),
+            header: t('Monthly price'),
             dataIndex: 'fixrate',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3
         }, {
-            header: t('secondusedreal'),
+            header: t('Time used'),
             renderer: Helper.Util.formatsecondsToTime,
             dataIndex: 'secondusedreal',
             flex: 3

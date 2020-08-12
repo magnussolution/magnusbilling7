@@ -24,16 +24,16 @@ use Gerencianet\Gerencianet;
 
 $modelUser->doc = preg_replace("/-|\.|\//", "", $modelUser->doc);
 if (!isset($modelUser->email) || strlen($modelUser->email) < 10 || !preg_match("/@/", $modelUser->email)) {
-    echo "<div id='load' > " . Yii::t('yii', 'Email invalido, por favor verifique seu email') . "</div> ";
+    echo "<div id='load' > " . Yii::t('zii', 'Invalid Email') . "</div> ";
     return;
 }
 
 if (!isset($modelUser->doc) || strlen($modelUser->doc) < 10) {
-    echo "<div id='load' > " . Yii::t('yii', 'Você precisa cadastrar seu CPF/CNPJ') . "</div> ";
+    echo "<div id='load' > " . Yii::t('zii', 'Invalid DOC') . "</div> ";
     return;
 }
 if (!preg_match("/^[1-9]{2}9?[0-9]./", $modelUser->phone)) {
-    echo "<div id='load' > " . Yii::t('yii', 'Você precisa cadastrar seu telefone: FORMATO DDD número') . "</div> ";
+    echo "<div id='load' > " . 'Você precisa cadastrar seu telefone: FORMATO DDD número' . "</div> ";
     return;
 }
 $tipo = strlen($modelUser->doc) == 11 ? 'fisica' : 'juridica';
@@ -132,4 +132,4 @@ try {
 }
 
 ?>
-<div id='load' ><?php echo Yii::t('yii', 'Please wait while loading...') ?></div>
+<div id='load' ><?php echo Yii::t('zii', 'Please wait while loading...') ?></div>

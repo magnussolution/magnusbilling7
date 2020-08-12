@@ -76,7 +76,7 @@ class Refill extends Model
         if ($this->getIsNewRecord()) {
             $modelUser         = User::model()->findByPk($this->id_user);
             $creditOld         = $modelUser->credit;
-            $this->description = $this->description . ', ' . Yii::t('yii', 'Old credit') . ' ' . round($creditOld, 2);
+            $this->description = $this->description . ', ' . Yii::t('zii', 'Old credit') . ' ' . round($creditOld, 2);
         }
 
         return parent::beforeSave();

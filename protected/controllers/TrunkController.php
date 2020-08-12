@@ -41,7 +41,7 @@ class TrunkController extends Controller
     {
         $this->instanceModel = new Trunk;
         $this->abstractModel = Trunk::model();
-        $this->titleReport   = Yii::t('yii', 'Trunk');
+        $this->titleReport   = Yii::t('zii', 'Trunk');
 
         parent::init();
     }
@@ -62,8 +62,8 @@ class TrunkController extends Controller
                 'success' => false,
                 'rows'    => array(),
                 'errors'  => [
-                    'register'        => Yii::t('yii', 'Invalid register string. Only use register option to Trunk authentication via user and password.'),
-                    'register_string' => Yii::t('yii', 'Invalid register string'),
+                    'register'        => Yii::t('zii', 'Invalid register string. Only use register option to Trunk authentication via user and password.'),
+                    'register_string' => Yii::t('zii', 'Invalid register string'),
                 ],
             ));
             exit();
@@ -113,7 +113,7 @@ class TrunkController extends Controller
             $modelTrunk                                = Trunk::model()->findByPk((int) $attributes[$i]['failover_trunk']);
             $attributes[$i]['failover_trunktrunkcode'] = count($modelTrunk)
             ? $modelTrunk->trunkcode
-            : Yii::t('yii', 'undefined');
+            : Yii::t('zii', 'Undefined');
             foreach ($trunkRegister as $key => $trunk) {
                 if (preg_match("/" . $attributes[$i]['host'] . ".*" . $attributes[$i]['username'] . ".*Registered/", $trunk) && $attributes[$i]['providertech'] == 'sip') {
                     $attributes[$i]['registered'] = 1;

@@ -79,7 +79,7 @@ Ext.define('Ext.ux.DateTimePicker', {
         dtAux.setSeconds(0);
         me.timeFormat = me.format.indexOf("h") !== -1 ? 'h' : 'H';
         me.hourSlider = new Ext.slider.Single({
-            fieldLabel: me.hourText,
+            fieldLabel: t('Hour'),
             labelAlign: 'top',
             labelSeparator: ' ',
             padding: '0 0 10 17',
@@ -98,7 +98,7 @@ Ext.define('Ext.ux.DateTimePicker', {
             }
         });
         me.minuteSlider = new Ext.slider.Single({
-            fieldLabel: me.minuteText,
+            fieldLabel: t('Minutes'),
             labelAlign: 'top',
             labelSeparator: ' ',
             padding: '0 10 10 0',

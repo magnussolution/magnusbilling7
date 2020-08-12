@@ -92,7 +92,7 @@ class CallController extends Controller
     {
         $this->instanceModel = new Call;
         $this->abstractModel = Call::model();
-        $this->titleReport   = Yii::t('yii', 'Calls');
+        $this->titleReport   = Yii::t('zii', 'Calls');
 
         parent::init();
 
@@ -202,7 +202,7 @@ class CallController extends Controller
 
                     header('Location: ' . $url);
                 } else {
-                    echo yii::t('yii', 'Audio no found');
+                    echo yii::t('zii', 'Audio no found');
                 }
             }
             exit;

@@ -18,8 +18,8 @@ class SignupController extends Controller
     public function actionView($id)
     {
         if (isset($_GET['loginkey']) && strlen($_GET['loginkey']) > 5 and strlen($_GET['loginkey']) < 30) {
-            $modelUser = User::model()->find('loginkey = :key AND id = :key1', array(':key' => $_GET['loginkey'], ':key1' => $_GET['id']));
-            if (count($modelUser) < 1) {
+            $modelUser = User::model()->find('active = 2 AND loginkey = :key AND id = :key1', array(':key' => $_GET['loginkey'], ':key1' => $_GET['id']));
+            if (!isset($modelUser->id)) {
                 $this->redirect(array('add'));
             }
 
@@ -52,9 +52,15 @@ class SignupController extends Controller
                 Yii::app()->session['googleAuthenticatorKey']   = false;
 
             }
-
             $this->redirect('/');
-        } else {
+        } else if (isset($_GET['username']) && is_numeric($_GET['username']) && isset($_GET['password']) && isset($_GET['id'])) {
+
+            $signup = Signup::model()->find('username = :key AND password = :key1 AND id = :key2', array(
+                ':key'  => $_GET['username'],
+                ':key1' => $_GET['password'],
+                ':key2' => (int) $_GET['id'],
+
+            ));
 
             $mail = new Mail(Mail::$TYPE_SIGNUP, $id);
             try {
@@ -67,8 +73,9 @@ class SignupController extends Controller
                 $mail->send($this->config['global']['admin_email']);
             }
 
-            $signup = Signup::model()->findByPk((int) $id);
             $this->render('view', array('signup' => $signup));
+        } else {
+            exit('Error');
         }
     }
 
@@ -116,7 +123,7 @@ class SignupController extends Controller
                 unset($_POST['Signup']['password']);
             } else {
                 if ($_POST['Signup']['password'] != $_POST['Signup']['password2']) {
-                    $signup->addError('id_plan', Yii::t('yii', 'Password '));
+                    $signup->addError('id_plan', Yii::t('zii', 'Password '));
                 }
             }
 
@@ -140,7 +147,7 @@ class SignupController extends Controller
 
             if ($modelPlan->signup != 1) {
                 //error if invalid plan(tampered data)
-                $signup->addError('id_plan', Yii::t('yii', 'Invalid plan used to signup'));
+                $signup->addError('id_plan', Yii::t('zii', 'Invalid plan used to signup'));
             } else {
                 $success = $signup->save();
 

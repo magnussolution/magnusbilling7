@@ -8,7 +8,7 @@ Ext.define('MBilling.view.phoneBook.Tag', {
     extend: 'Ext.form.field.Tag',
     alias: 'widget.phonebooktag',
     name: 'id_phonebook',
-    fieldLabel: t('phonebook'),
+    fieldLabel: t('Phonebook'),
     displayField: 'name',
     valueField: 'id',
     filterPickList: true,

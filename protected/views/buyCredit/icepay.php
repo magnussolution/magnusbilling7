@@ -55,7 +55,7 @@ if (isset($_GET['sussess'])) {
 <link rel="stylesheet" type="text/css" href="../../../resources/css/signup.css" />
 <form class="rounded" id="contactform" action="" method="post">
 
-    <h2><?php echo Yii::t('yii', 'Select the Bank') ?></h2>
+    <h2><?php echo Yii::t('zii', 'Select the Bank') ?></h2>
 
             <div class="field">
                 <div class="styled-select">
@@ -73,7 +73,7 @@ if (isset($_GET['sussess'])) {
                 </div>
             </div>
 
-            <input class="button" type="submit" value = "<?php echo Yii::t('yii', 'Continue') ?>" />
+            <input class="button" type="submit" value = "<?php echo Yii::t('zii', 'Continue') ?>" />
 </form>
 
 <?php exit;?>

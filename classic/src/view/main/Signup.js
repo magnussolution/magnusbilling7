@@ -26,8 +26,8 @@ Ext.define('MBilling.view.main.Signup', {
         var me = this;
         me.title = t('Create an account');
         me.items = [{
-            hidden: window.enable_signup == 0,
             xtype: 'form',
+            hidden: window.enable_signup == 0,
             reference: 'signupForm',
             defaultFocus: 'textfield:focusable:not([hidden]):not([disabled]):not([value])',
             cls: 'auth-dialog-register',
@@ -54,19 +54,19 @@ Ext.define('MBilling.view.main.Signup', {
                 value: me.id_user,
                 allowBlank: false
             }, {
-                emptyText: t('Select a plan'),
-                hideLabel: true,
                 xtype: 'plansignupcombo',
-                name: 'id_plan'
+                name: 'id_plan',
+                emptyText: t('Select a plan'),
+                hideLabel: true
             }, {
                 xtype: 'textfield',
-                emptyText: t('username'),
+                emptyText: t('Username'),
                 name: 'username',
                 hidden: window.auto_generate_user_signup == 1,
                 allowBlank: true
             }, {
                 xtype: 'textfield',
-                emptyText: t('email'),
+                emptyText: t('Email'),
                 name: 'email',
                 allowBlank: true
             }, {
@@ -75,8 +75,8 @@ Ext.define('MBilling.view.main.Signup', {
                 height: 45,
                 hidden: !window.signup_auto_pass == 0,
                 defaults: {
-                    height: 35,
                     xtype: 'textfield',
+                    height: 35,
                     cls: 'auth-textbox',
                     hideLabel: true,
                     allowBlank: false,
@@ -91,7 +91,7 @@ Ext.define('MBilling.view.main.Signup', {
                     allowBlank: true
                 }, {
                     margin: '5 0 0 10',
-                    emptyText: t('Confirm') + ' ' + t('password'),
+                    emptyText: t('Confirm') + ' ' + t('Password'),
                     name: 'password2',
                     values: window.signup_auto_pass == 0 ? '' : window.signup_auto_pass,
                     allowBlank: true
@@ -101,8 +101,8 @@ Ext.define('MBilling.view.main.Signup', {
                 margin: '3 0 0 0',
                 height: 45,
                 defaults: {
-                    height: 35,
                     xtype: 'textfield',
+                    height: 35,
                     cls: 'auth-textbox',
                     hideLabel: true,
                     allowBlank: false,
@@ -110,28 +110,28 @@ Ext.define('MBilling.view.main.Signup', {
                     flex: 1
                 },
                 items: [{
-                    emptyText: t('lastname'),
+                    emptyText: t('Last name'),
                     name: 'lastname',
                     allowBlank: true
                 }, {
                     margin: '5 0 0 10',
-                    emptyText: t('firstname'),
+                    emptyText: t('First name'),
                     name: 'firstname',
                     allowBlank: true
                 }]
             }, {
                 xtype: 'textfield',
-                emptyText: t('city'),
+                emptyText: t('City'),
                 name: 'city',
                 allowBlank: true
             }, {
                 xtype: window.lang == 'pt_BR' ? 'statecombo' : 'textfield',
-                emptyText: t('state'),
+                emptyText: t('State'),
                 name: 'state',
                 allowBlank: true
             }, {
                 xtype: 'textfield',
-                emptyText: t('address'),
+                emptyText: t('Address'),
                 name: 'address',
                 allowBlank: true
             }, {
@@ -139,8 +139,8 @@ Ext.define('MBilling.view.main.Signup', {
                 margin: '3 0 0 0',
                 height: 45,
                 defaults: {
-                    height: 35,
                     xtype: 'textfield',
+                    height: 35,
                     cls: 'auth-textbox',
                     hideLabel: true,
                     allowBlank: false,
@@ -153,7 +153,7 @@ Ext.define('MBilling.view.main.Signup', {
                     allowBlank: true
                 }, {
                     margin: '5 0 0 10',
-                    emptyText: t('zipcode'),
+                    emptyText: t('Zip code'),
                     name: 'zipcode',
                     flex: 2,
                     allowBlank: true
@@ -163,8 +163,8 @@ Ext.define('MBilling.view.main.Signup', {
                 margin: '3 0 0 0',
                 height: 45,
                 defaults: {
-                    height: 35,
                     xtype: 'textfield',
+                    height: 35,
                     cls: 'auth-textbox',
                     hideLabel: true,
                     allowBlank: false,
@@ -172,12 +172,12 @@ Ext.define('MBilling.view.main.Signup', {
                     flex: 1
                 },
                 items: [{
-                    emptyText: t('phone'),
+                    emptyText: t('Phone'),
                     name: 'phone',
                     allowBlank: true
                 }, {
                     margin: '5 0 0 10',
-                    emptyText: t('mobile'),
+                    emptyText: t('Mobile'),
                     name: 'mobile',
                     allowBlank: true
                 }]
@@ -192,8 +192,8 @@ Ext.define('MBilling.view.main.Signup', {
                 height: 45,
                 hidden: window.lang != 'pt_BR',
                 defaults: {
-                    height: 35,
                     xtype: 'textfield',
+                    height: 35,
                     cls: 'auth-textbox',
                     hideLabel: true,
                     allowBlank: false,
@@ -206,7 +206,7 @@ Ext.define('MBilling.view.main.Signup', {
                     allowBlank: true
                 }, {
                     margin: '5 0 0 10',
-                    emptyText: t('state_number'),
+                    emptyText: t('State number'),
                     name: 'state_number',
                     allowBlank: true
                 }]
@@ -215,18 +215,18 @@ Ext.define('MBilling.view.main.Signup', {
                 margin: '3 0 0 0',
                 height: 45,
                 defaults: {
-                    height: 35,
                     xtype: 'textfield',
+                    height: 35,
                     cls: 'auth-textbox',
                     hideLabel: true,
                     allowBlank: false,
                     margin: '5 0 0 0'
                 },
                 items: [{
+                    xtype: 'checkbox',
                     flex: 2,
                     inputValue: 1,
                     uncheckedValue: 0,
-                    xtype: 'checkbox',
                     checked: false,
                     boxLabel: t('I accept the terms'),
                     cls: 'form-panel-font-color rememberMeCheckbox',
@@ -234,18 +234,18 @@ Ext.define('MBilling.view.main.Signup', {
                     name: 'accept_terms',
                     allowBlank: false
                 }, {
+                    xtype: 'box',
                     flex: 5,
                     margin: '8 0 0 0',
-                    xtype: 'box',
-                    html: '<a href=http://google.com target=_blank >' + t('Read Terms') + '</a>'
+                    html: '<a href=http://google.com target=_blank >' + t('Read terms') + '</a>'
                 }]
             }, {
                 layout: 'hbox',
                 height: 40,
                 items: [{
+                    xtype: 'button',
                     flex: 1,
                     margin: '0 0 0 5',
-                    xtype: 'button',
                     scale: 'large',
                     iconAlign: 'right',
                     iconCls: 'x-fa fa-angle-left',
@@ -260,9 +260,9 @@ Ext.define('MBilling.view.main.Signup', {
                         }
                     }
                 }, {
+                    xtype: 'button',
                     flex: 3,
                     margin: '0 0 0 5',
-                    xtype: 'button',
                     reference: 'signupButton',
                     scale: 'large',
                     iconAlign: 'right',

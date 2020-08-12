@@ -93,7 +93,7 @@ class PlanCheckCommand extends ConsoleCommand
                         $refill              = new Refill;
                         $refill->id_user     = $offerUse->idUser->id;
                         $refill->credit      = $offerUse->idOffer->price * -1;
-                        $refill->description = Yii::t('yii', 'Monthly payment Plan') . ' ' . $offerUse->idOffer->label;
+                        $refill->description = Yii::t('zii', 'Monthly payment Plan') . ' ' . $offerUse->idOffer->label;
                         $refill->payment     = 1;
                         $refill->save();
 
@@ -129,7 +129,7 @@ class PlanCheckCommand extends ConsoleCommand
                         $refill              = new Refill;
                         $refill->id_user     = $offerUse->idUser->id;
                         $refill->credit      = $offerUse->idOffer->price * -1;
-                        $refill->description = Yii::t('yii', 'Monthly payment Plan') . ' ' . $offerUse->idOffer->label;
+                        $refill->description = Yii::t('zii', 'Monthly payment Plan') . ' ' . $offerUse->idOffer->label;
                         $refill->payment     = 1;
                         $refill->save();
 

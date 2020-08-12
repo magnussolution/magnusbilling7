@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 01/08/2012
@@ -41,7 +41,7 @@ Ext.define('MBilling.view.sipuras.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     xtype: 'userlookup',
                     ownerForm: me,
@@ -49,137 +49,137 @@ Ext.define('MBilling.view.sipuras.Form', {
                     allowBlank: App.user.isClient
                 }, {
                     name: 'nserie',
-                    fieldLabel: 'Serial'
+                    fieldLabel: t('Serial')
                 }, {
                     name: 'macadr',
-                    fieldLabel: 'Mac'
+                    fieldLabel: t('MAC')
                 }, {
                     name: 'senha_user',
-                    fieldLabel: t('password') + ' ' + t('username'),
+                    fieldLabel: t('User password'),
                     allowBlank: true
                 }, {
                     name: 'senha_admin',
-                    fieldLabel: t('password') + ' ' + t('admin'),
+                    fieldLabel: t('Admin password'),
                     allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'antireset',
-                    fieldLabel: t('antireset'),
-                    xtype: 'noyescombo'
+                    fieldLabel: t('Antireset')
                 }, {
+                    xtype: 'yesnocombo',
                     name: 'Enable_Web_Server',
-                    fieldLabel: t('Enable_Web_Server'),
-                    xtype: 'yesnocombo'
+                    fieldLabel: t('Enable_Web_Server')
                 }, {
                     name: 'marca',
-                    fieldLabel: 'marca',
+                    fieldLabel: t('Mark'),
                     value: '*',
                     hidden: true
                 }, {
                     name: 'altera',
-                    fieldLabel: 'altera',
+                    fieldLabel: t('Change'),
                     value: 'si',
                     hidden: true
                 }]
             }, {
-                title: t('line') + ' 1',
+                title: t('Line 1'),
                 items: [{
                     name: 'User_ID_1',
-                    fieldLabel: t('username'),
+                    fieldLabel: t('Username'),
                     allowBlank: true
                 }, {
                     name: 'Password_1',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('Password'),
                     allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'Use_Pref_Codec_Only_1',
-                    fieldLabel: t('Use_Pref_Codec'),
-                    xtype: 'noyescombo'
+                    fieldLabel: t('Use_Pref_Codec')
                 }, {
                     name: 'Preferred_Codec_1',
-                    fieldLabel: t('codec'),
+                    fieldLabel: t('Codec'),
                     allowBlank: true,
                     value: 'G729a'
                 }, {
                     name: 'Register_Expires_1',
-                    fieldLabel: 'Register Expires',
+                    fieldLabel: t('Register expires'),
                     allowBlank: true,
                     value: '360'
                 }, {
                     name: 'Dial_Plan_1',
-                    fieldLabel: 'Dial Plan',
+                    fieldLabel: t('Dial plan'),
                     allowBlank: true,
                     value: '(*xx|[3469]11|0|00|[2-9]xxxxxx|1xxx[2-9]xxxxxxS0|xxxxxxxxxxxx.)'
                 }, {
+                    xtype: 'noyescombo',
                     name: 'NAT_Mapping_Enable_1_',
-                    fieldLabel: 'NAT Mapping',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('NAT Mapping'),
+                    allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'NAT_Keep_Alive_Enable_1_',
-                    fieldLabel: 'NAT Keep Alive',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('NAT keep alive'),
+                    allowBlank: true
                 }]
             }, {
-                title: t('line') + ' 2',
+                title: t('Line 2'),
                 items: [{
                     name: 'User_ID_2',
-                    fieldLabel: t('username'),
+                    fieldLabel: t('Username'),
                     allowBlank: true
                 }, {
                     name: 'Password_2',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('Password'),
                     allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'Use_Pref_Codec_Only_2',
-                    fieldLabel: t('Use_Pref_Codec'),
-                    xtype: 'noyescombo'
+                    fieldLabel: t('Use_Pref_Codec')
                 }, {
                     name: 'Preferred_Codec_2',
-                    fieldLabel: t('codec'),
+                    fieldLabel: t('Codec'),
                     allowBlank: true,
                     value: 'G729a'
                 }, {
                     name: 'Register_Expires_2',
-                    fieldLabel: 'Register Expires',
+                    fieldLabel: t('Register expires'),
                     allowBlank: true,
                     value: '360'
                 }, {
                     name: 'Dial_Plan_2',
-                    fieldLabel: 'Dial Plan',
+                    fieldLabel: t('Dial plan'),
                     allowBlank: true,
                     value: '(*xx|[3469]11|0|00|[2-9]xxxxxx|1xxx[2-9]xxxxxxS0|xxxxxxxxxxxx.)'
                 }, {
+                    xtype: 'noyescombo',
                     name: 'NAT_Mapping_Enable_2_',
-                    fieldLabel: 'NAT Mapping',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('NAT Mapping'),
+                    allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'NAT_Keep_Alive_Enable_2_',
-                    fieldLabel: 'NAT Keep Alive',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('NAT keep alive'),
+                    allowBlank: true
                 }]
             }, {
                 title: 'Stun',
                 items: [{
+                    xtype: 'noyescombo',
                     name: 'STUN_Enable',
-                    fieldLabel: t('active') + 'Stun',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('Enable STUN'),
+                    allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'STUN_Test_Enable',
-                    fieldLabel: 'STUN Test',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('STUN Test'),
+                    allowBlank: true
                 }, {
+                    xtype: 'noyescombo',
                     name: 'Substitute_VIA_Addr',
-                    fieldLabel: 'Substitute VIA Addr',
-                    allowBlank: true,
-                    xtype: 'noyescombo'
+                    fieldLabel: t('Substitute VIA Addr'),
+                    allowBlank: true
                 }, {
                     name: 'STUN_Server',
-                    fieldLabel: 'STUN Server',
+                    fieldLabel: t('STUN Server'),
                     allowBlank: true
                 }]
             }]

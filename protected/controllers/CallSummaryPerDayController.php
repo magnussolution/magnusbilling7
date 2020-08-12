@@ -24,7 +24,7 @@ class CallSummaryPerDayController extends Controller
 
         $this->instanceModel = new CallSummaryPerDay;
         $this->abstractModel = CallSummaryPerDay::model();
-        $this->titleReport   = Yii::t('yii', 'Calls summary per day');
+        $this->titleReport   = Yii::t('zii', 'Summary per Day');
         parent::init();
     }
 

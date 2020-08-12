@@ -34,7 +34,7 @@ class ServicesController extends Controller
     {
         $this->instanceModel        = new Services;
         $this->abstractModel        = Services::model();
-        $this->titleReport          = Yii::t('yii', 'Services');
+        $this->titleReport          = Yii::t('zii', 'Services');
         $this->abstractModelRelated = ServicesModule::model();
         parent::init();
     }

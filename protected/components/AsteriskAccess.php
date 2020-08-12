@@ -790,6 +790,11 @@ class AsteriskAccess
                         $line .= "rtcp_mux=yes\n";
                     }
 
+                    if (strlen($sip->sip_group) > 0) {
+                        $line .= 'namedcallgroup=' . $sip->sip_group . "\n";
+                        $line .= 'namedpickupgroup=' . $sip->sip_group . "\n";
+                    }
+
                     if (fwrite($fd, $line) === false) {
                         echo gettext("Impossible to write to the file") . " ($buddyfile)";
                         break;

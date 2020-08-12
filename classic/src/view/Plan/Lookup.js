@@ -15,7 +15,7 @@ Ext.define('MBilling.view.plan.Lookup', {
         xtype: 'planlist',
         fieldSearch: 'name',
         columns: [{
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 2
         }]

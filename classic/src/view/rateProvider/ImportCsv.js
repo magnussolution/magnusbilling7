@@ -16,19 +16,20 @@
 Ext.define('MBilling.view.rateProvider.ImportCsv', {
     extend: 'Ext.ux.window.ImportCsv',
     alias: 'widget.rateproviderimportcsv',
-    htmlTipInfo: '<br><b>' + t('dialprefix') + ", " + t('destination') + ",  " + t('buyrate') + "</b><br>" + "5511, Brasil SP, 0.080<br>" + "34, Spain Fix, 0.056<br>" + "54, Argentina, 0.025<br><br>" + "</b>",
+    htmlTipInfo: '<br><b>' + t('Prefix') + ", " + t('Destination') + ",  " + t('Buy price') + "</b><br>" + "5511, Brasil SP, 0.080<br>" + "34, Spain Fix, 0.056<br>" + "54, Argentina, 0.025<br><br>" + "</b>",
     labelWidthFields: 160,
     height: window.isThemeTriton ? 350 : 275,
     initComponent: function() {
         var me = this;
         me.fieldsImport = [{
             xtype: 'providercombo',
+            name: 'id_provider',
             fieldLabel: t('Provider'),
             width: 350
         }, {
-            style: 'margin-top:25px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Csv Format'),
+            style: 'margin-top:25px; overflow: visible;',
+            title: t('CSV Format'),
             collapsible: true,
             collapsed: false,
             defaults: {

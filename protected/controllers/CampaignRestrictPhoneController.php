@@ -28,7 +28,7 @@ class CampaignRestrictPhoneController extends Controller
     {
         $this->instanceModel = new CampaignRestrictPhone;
         $this->abstractModel = CampaignRestrictPhone::model();
-        $this->titleReport   = Yii::t('yii', 'Campaign Restrict Phone');
+        $this->titleReport   = Yii::t('zii', 'Campaign Restrict Phone');
         parent::init();
     }
 

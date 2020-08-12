@@ -14,8 +14,8 @@ Ext.define('MBilling.view.buycredit.Module', {
     initComponent: function() {
         var me = this;
         me.items = [{
-            reference: 'buycreditPanel',
             xtype: 'form',
+            reference: 'buycreditPanel',
             margin: '10 10 10 10',
             autoShow: true,
             closable: false,
@@ -34,22 +34,22 @@ Ext.define('MBilling.view.buycredit.Module', {
             },
             items: [{
                 xtype: 'moneyfield',
-                mask: App.user.currency + ' #9.999.990,00',
-                fieldLabel: t('Amounts'),
+                mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                fieldLabel: t('Amount'),
                 value: 0,
                 name: 'amount'
             }, {
                 xtype: 'methodpaycombo',
-                fieldLabel: t('paymentmethods'),
-                name: 'method'
+                name: 'method',
+                fieldLabel: t('Payment methods')
             }, {
-                fieldLabel: t('CreditCard Number'),
+                fieldLabel: t('CreditCard number'),
                 name: 'card_num',
                 hidden: true
             }, {
                 xtype: 'datefield',
-                fieldLabel: t('Expiration Date'),
                 name: 'exp_date',
+                fieldLabel: t('Expiration date'),
                 format: 'm/y',
                 hidden: true
             }],

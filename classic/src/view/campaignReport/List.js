@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 28/07/2020
@@ -56,7 +56,7 @@ Ext.define('MBilling.view.campaignReport.List', {
             disabled: false
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
@@ -69,9 +69,15 @@ Ext.define('MBilling.view.campaignReport.List', {
             sortable: false,
             flex: 3
         }, {
-            header: t('Total Dialed'),
+            header: t('Total dialed'),
             dataIndex: 'totalDialed',
             menuDisabled: true,
+            sortable: false,
+            flex: 3
+        }, {
+            header: t('Total failed'),
+            menuDisabled: true,
+            dataIndex: 'totalFailed',
             sortable: false,
             flex: 3
         }, {
@@ -81,13 +87,19 @@ Ext.define('MBilling.view.campaignReport.List', {
             sortable: false,
             flex: 3
         }, {
-            header: t('Total Answered'),
+            header: t('Total answered'),
             dataIndex: 'totalAnswered',
             menuDisabled: true,
             sortable: false,
             flex: 3
         }, {
-            header: t('Transfered'),
+            header: t('Press any key'),
+            menuDisabled: true,
+            dataIndex: 'totalPressDigit',
+            sortable: false,
+            flex: 3
+        }, {
+            header: t('Transferred'),
             menuDisabled: true,
             dataIndex: 'transfered',
             sortable: false,

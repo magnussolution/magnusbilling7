@@ -88,11 +88,11 @@ class User extends Model
     public function checkusername($attribute, $params)
     {
         if (preg_match('/ /', $this->username)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in username'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in username'));
         }
 
         if (!preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->username)) {
-            $this->addError($attribute, Yii::t('yii', 'Username need start with numbers or letters'));
+            $this->addError($attribute, Yii::t('zii', 'Username need start with numbers or letters'));
         }
 
     }
@@ -100,15 +100,15 @@ class User extends Model
     public function checksecret($attribute, $params)
     {
         if (preg_match('/ /', $this->password)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in password'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in password'));
         }
 
         if ($this->password == '123456' || $this->password == '12345678' || $this->password == '012345') {
-            $this->addError($attribute, Yii::t('yii', 'No use sequence in the pasword'));
+            $this->addError($attribute, Yii::t('zii', 'No use sequence in the password'));
         }
 
         if ($this->password == $this->username) {
-            $this->addError($attribute, Yii::t('yii', 'Password cannot be equal username'));
+            $this->addError($attribute, Yii::t('zii', 'Password cannot be equal username'));
         }
 
     }

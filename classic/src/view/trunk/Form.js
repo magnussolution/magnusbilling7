@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2012
@@ -43,37 +43,39 @@ Ext.define('MBilling.view.trunk.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     xtype: 'providerlookup',
-                    ownerForm: me
+                    ownerForm: me,
+                    name: 'id_provider',
+                    fieldLabel: t('Provider')
                 }, {
                     name: 'trunkcode',
-                    fieldLabel: t('trunkcode')
+                    fieldLabel: t('Name')
                 }, {
                     name: 'user',
-                    fieldLabel: t('user'),
+                    fieldLabel: t('Username'),
                     allowBlank: true
                 }, {
                     name: 'secret',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('Password'),
                     allowBlank: true
                 }, {
                     name: 'host',
-                    fieldLabel: t('host')
+                    fieldLabel: t('Host')
                 }, {
                     name: 'trunkprefix',
-                    fieldLabel: t('add_prefix'),
+                    fieldLabel: t('Add prefix'),
                     allowBlank: true
                 }, {
                     name: 'removeprefix',
-                    fieldLabel: t('remove_prefix'),
+                    fieldLabel: t('Remove prefix'),
                     allowBlank: true
                 }, {
                     xtype: 'checkboxgroup',
-                    columns: 3,
                     name: 'allow',
-                    fieldLabel: t('codec'),
+                    fieldLabel: t('Codec'),
+                    columns: 3,
                     items: [{
                         boxLabel: 'g729',
                         name: 'allow',
@@ -132,28 +134,28 @@ Ext.define('MBilling.view.trunk.Form', {
                 }, {
                     xtype: 'sipcombo',
                     name: 'providertech',
-                    fieldLabel: t('providertech')
+                    fieldLabel: t('Provider tech')
                 }, {
                     xtype: 'booleancombo',
                     name: 'status',
-                    fieldLabel: t('status')
+                    fieldLabel: t('Status')
                 }, {
                     xtype: 'noyescombo',
                     name: 'allow_error',
-                    fieldLabel: t('allow_error'),
+                    fieldLabel: t('Allow error'),
                     hidden: true
                 }, {
                     xtype: 'noyescombo',
                     name: 'register',
-                    fieldLabel: t('registertrunk')
+                    fieldLabel: t('Register trunk')
                 }, {
                     name: 'register_string',
-                    fieldLabel: t('Register String'),
+                    fieldLabel: t('Register string'),
                     allowBlank: true,
                     hidden: true
                 }]
             }, {
-                title: t('suplementaryInfo'),
+                title: t('Supplementary info'),
                 defaults: {
                     labelAlign: 'right',
                     plugins: 'markallowblank',
@@ -164,73 +166,73 @@ Ext.define('MBilling.view.trunk.Form', {
                 },
                 items: [{
                     name: 'fromuser',
-                    fieldLabel: 'Fromuser',
+                    fieldLabel: t('Fromuser'),
                     allowBlank: true
                 }, {
                     name: 'fromdomain',
-                    fieldLabel: 'Fromdomain',
+                    fieldLabel: t('Fromdomain'),
                     allowBlank: true
                 }, {
                     name: 'language',
-                    fieldLabel: t('language'),
+                    fieldLabel: t('Language'),
                     allowBlank: true
                 }, {
                     name: 'context',
-                    fieldLabel: t('context'),
+                    fieldLabel: t('Context'),
                     allowBlank: true,
                     value: 'billing'
                 }, {
                     name: 'dtmfmode',
-                    fieldLabel: 'Dtmfmode',
+                    fieldLabel: t('Dtmfmode'),
                     allowBlank: true,
                     value: 'RFC2833'
                 }, {
                     name: 'insecure',
-                    fieldLabel: 'Insecure',
+                    fieldLabel: t('Insecure'),
                     allowBlank: true,
                     value: 'port,invite'
                 }, {
                     xtype: 'numberfield',
                     name: 'maxuse',
-                    fieldLabel: t('maxuse'),
+                    fieldLabel: t('Max use'),
                     allowBlank: true,
                     value: -1,
                     minValue: -1
                 }, {
                     name: 'nat',
-                    fieldLabel: 'Nat',
-                    value: App.user.asteriskVersion == '1.8' ? 'yes' : 'force_rport,comedia',
+                    fieldLabel: t('NAT'),
+                    value: 'force_rport,comedia',
                     allowBlank: true
                 }, {
                     name: 'directmedia',
+                    fieldLabel: t('Directmedia'),
                     allowBlank: true,
-                    value: 'no',
-                    fieldLabel: 'Directmedia'
+                    value: 'no'
                 }, {
                     name: 'qualify',
-                    fieldLabel: 'Qualify',
+                    fieldLabel: t('Qualify'),
                     allowBlank: true,
                     value: 'yes'
                 }, {
                     name: 'type',
-                    fieldLabel: 'Type',
+                    fieldLabel: t('Type'),
                     allowBlank: true,
                     value: 'peer'
                 }, {
                     name: 'disallow',
-                    fieldLabel: 'Disallow',
+                    fieldLabel: t('Disallow'),
                     allowBlank: true,
                     value: 'all'
                 }, {
                     name: 'sendrpid',
-                    fieldLabel: 'Sendrpid',
+                    fieldLabel: t('Sendrpid'),
                     allowBlank: true,
                     value: 'no'
                 }, {
                     name: 'addparameter',
-                    fieldLabel: t('addparameter'),
+                    fieldLabel: t('Addparameter'),
                     allowBlank: true,
-                    emptyText: t('parameterdial')
+                    emptyText: t('Dial parameter')
                 }, {
                     xtype: 'numberfield',
                     name: 'port',
@@ -242,25 +244,25 @@ Ext.define('MBilling.view.trunk.Form', {
                 }, {
                     xtype: 'textarea',
                     name: 'link_sms',
-                    fieldLabel: t('link_sms'),
+                    fieldLabel: t('Link SMS'),
                     allowBlank: true,
-                    emptyText: t('linksmsobs'),
+                    emptyText: t('Replace %number% and %text% on the provider URL- Ex: http://website.com/sms.php?username=USER&pass=PASS&number=%number%&msg=%text%'),
                     height: 100,
                     anchor: '100%'
                 }, {
                     name: 'sms_res',
-                    fieldLabel: t('sms_res'),
+                    fieldLabel: t('SMS match result'),
                     allowBlank: true
                 }]
             }, {
                 title: t('Asterisk extra config'),
                 items: [{
+                    xtype: 'textarea',
                     labelAlign: 'right',
                     plugins: 'markallowblank',
                     labelWidth: 90,
-                    xtype: 'textarea',
                     name: 'sip_config',
-                    fieldLabel: t('asterisk_config'),
+                    fieldLabel: t('Parameters'),
                     allowBlank: true,
                     height: 400,
                     anchor: '100%',

@@ -23,7 +23,7 @@ class StatusSystemController extends Controller
     {
         $this->instanceModel = new StatusSystem;
         $this->abstractModel = StatusSystem::model();
-        $this->titleReport   = Yii::t('yii', 'StatusSystem');
+        $this->titleReport   = Yii::t('zii', 'Status system');
         parent::init();
 
         if (!Yii::app()->session['isAdmin']) {

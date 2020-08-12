@@ -77,11 +77,11 @@ class DidwwwCommand extends ConsoleCommand
                         //adiciona a recarga e pagamento do custo de ativaçao
                         if ($did->connection_charge > 0) {
                             UserCreditManager::releaseUserCredit($model->id_user, $did->connection_charge,
-                                Yii::t('yii', 'Activation Did') . ' ' . $did->did, 0);
+                                Yii::t('zii', 'Activation DID') . ' ' . $did->did, 0);
                         }
 
                         UserCreditManager::releaseUserCredit($did->id_user, $did->fixrate,
-                            Yii::t('yii', 'Monthly payment Did') . ' ' . $did->did, 0);
+                            Yii::t('zii', 'Monthly payment DID') . ' ' . $did->did, 0);
 
                         $mail = new Mail(Mail::$TYPE_DID_CONFIRMATION, $did->id_user);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $modelUser->credit);

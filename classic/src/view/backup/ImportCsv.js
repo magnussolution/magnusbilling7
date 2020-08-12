@@ -18,6 +18,6 @@ Ext.define('MBilling.view.backup.ImportCsv', {
     alias: 'widget.backupimportcsv',
     htmlTipInfo: '',
     extAllowed: ['tgz'],
-    fieldLabel: 'Backup',
+    fieldLabel: t('Backup'),
     iconCls: 'icon-play'
 });

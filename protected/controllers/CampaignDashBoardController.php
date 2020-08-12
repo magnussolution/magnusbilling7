@@ -30,7 +30,7 @@ class CampaignDashBoardController extends Controller
     {
         $this->instanceModel = new Campaign;
         $this->abstractModel = Campaign::model();
-        $this->titleReport   = Yii::t('yii', 'Campaign');
+        $this->titleReport   = Yii::t('zii', 'Campaign');
         parent::init();
     }
 
@@ -60,7 +60,7 @@ class CampaignDashBoardController extends Controller
             //Calls Being Placed
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND sip_account LIKE :key1 ',
                 array(
-                    ':key'  => Yii::app()->session['id_user'],
+                    ':key'  => $attributes[$i]['id_user'],
                     ':key1' => 'MC!' . $attributes[$i]['name'] . '%',
                 ));
             $attributes[$i]['callsPlaced'] = $modelCallOnline;
@@ -68,7 +68,7 @@ class CampaignDashBoardController extends Controller
             // Calls Ringing
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND status LIKE :key1 ',
                 array(
-                    ':key'  => Yii::app()->session['id_user'],
+                    ':key'  => $attributes[$i]['id_user'],
                     ':key1' => 'Ring%',
                 ));
             $attributes[$i]['callsringing'] = $modelCallOnline;
@@ -76,7 +76,7 @@ class CampaignDashBoardController extends Controller
             //Calls in Transfer
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND status = :key1 ',
                 array(
-                    ':key'  => Yii::app()->session['id_user'],
+                    ':key'  => $attributes[$i]['id_user'],
                     ':key1' => 'Up',
                 ));
             $attributes[$i]['callsInTransfer'] = $modelCallOnline;

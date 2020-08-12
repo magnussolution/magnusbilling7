@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -30,20 +30,20 @@ Ext.define('MBilling.view.sendCreditRates.List', {
         me.buttonCsv = false;
         me.allowPrint = false;
         me.extraButtons = [{
-            text: t('Reset') + ' ' + t('Sell price'),
+            text: t('Reset buy price'),
             iconCls: 'icon-chart-column',
             width: 130,
             handler: 'onResetPrice',
             disabled: false
         }, {
-            text: t('Reset') + ' ' + t('Retail price'),
+            text: t('Reset retail price'),
             iconCls: 'icon-chart-column',
             width: 130,
             handler: 'onResetRetail',
             disabled: false
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
@@ -51,7 +51,7 @@ Ext.define('MBilling.view.sendCreditRates.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idProductoperator_name}',
-            header: t('Operator Name'),
+            header: t('Operator name'),
             dataIndex: 'idProductoperator_name',
             filter: {
                 type: 'string',
@@ -91,7 +91,7 @@ Ext.define('MBilling.view.sendCreditRates.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idProductcurrency_orig}',
-            header: t('Currency Origin'),
+            header: t('Currency origin'),
             dataIndex: 'idProductcurrency_orig',
             filter: {
                 type: 'string',
@@ -101,7 +101,7 @@ Ext.define('MBilling.view.sendCreditRates.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idProductwholesale_price}',
-            header: t('Wholesale Price'),
+            header: t('Wholesale price'),
             dataIndex: 'idProductwholesale_price',
             filter: {
                 type: 'string',
@@ -109,7 +109,7 @@ Ext.define('MBilling.view.sendCreditRates.List', {
             },
             flex: 2
         }, {
-            header: t('Sell Price'),
+            header: t('Buy price'),
             dataIndex: 'sell_price',
             flex: 2
         }]

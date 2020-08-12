@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 10/08/2012
@@ -37,14 +37,14 @@ Ext.define('MBilling.view.callOnLine.List', {
             xtype: 'tbtext',
             reference: 'tbTextTotal'
         }];
-        me.textDelete = t('Hangup Call'),
+        me.textDelete = t('Hangup call'),
             me.buttonDeleteWidth = 140,
             me.refreshTime = (localStorage && localStorage.getItem('callonlinerefresh')) || me.refreshTime;
         me.extraButtons = [{
-            text: window.isTablet ? '' : t('Spy') + ' ' + t('call'),
+            text: window.isTablet ? '' : t('Spy call'),
             iconCls: 'call',
             handler: 'onSpyCall',
-            width: window.isTablet ? 50 :130,
+            width: window.isTablet ? 50 : 130,
             disabled: false
         }, {
             xtype: 'numberfield',
@@ -52,7 +52,7 @@ Ext.define('MBilling.view.callOnLine.List', {
             fieldLabel: t('Refresh rate'),
             editable: false,
             minValue: 5,
-            labelWidth: 90,
+            labelWidth: 100,
             width: 150,
             selectOnFocus: true,
             allowDecimals: true,
@@ -68,7 +68,7 @@ Ext.define('MBilling.view.callOnLine.List', {
             }
         }];
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
@@ -79,11 +79,11 @@ Ext.define('MBilling.view.callOnLine.List', {
             hidden: true,
             flex: 3
         }, {
-            header: t('Sip Account'),
+            header: t('Sip user'),
             dataIndex: 'sip_account',
             flex: 3
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -92,7 +92,7 @@ Ext.define('MBilling.view.callOnLine.List', {
             flex: 3,
             hidden: window.isTablet
         }, {
-            header: t('credit'),
+            header: t('Credit'),
             dataIndex: 'idUsercredit',
             filter: {
                 type: 'int',
@@ -102,11 +102,11 @@ Ext.define('MBilling.view.callOnLine.List', {
             flex: 2,
             hidden: window.isTablet
         }, {
-            header: t('number'),
+            header: t('Number'),
             dataIndex: 'ndiscado',
             flex: 3
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             filter: {
                 type: 'string',
@@ -119,12 +119,12 @@ Ext.define('MBilling.view.callOnLine.List', {
             flex: 2,
             hidden: window.isTablet
         }, {
-            header: t('duration'),
+            header: t('Duration'),
             dataIndex: 'duration',
             renderer: Helper.Util.formatsecondsToTime,
             flex: 2
         }, {
-            header: t('trunk'),
+            header: t('Trunk'),
             dataIndex: 'tronco',
             flex: 4,
             hidden: !App.user.isAdmin || window.isTablet,
@@ -205,7 +205,7 @@ Ext.define('MBilling.view.callOnLine.List2', {
             }
         }];
         me.columns = [{
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -213,17 +213,17 @@ Ext.define('MBilling.view.callOnLine.List2', {
             },
             flex: 2
         }, {
-            header: t('Sip Account'),
+            header: t('Sip user'),
             dataIndex: 'canal',
             flex: 3,
             hidden: true,
             hideable: true
         }, {
-            header: t('number'),
+            header: t('Number'),
             dataIndex: 'ndiscado',
             flex: 3
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'status',
             filter: {
                 type: 'string',
@@ -231,12 +231,12 @@ Ext.define('MBilling.view.callOnLine.List2', {
             },
             flex: 2
         }, {
-            header: t('duration'),
+            header: t('Duration'),
             dataIndex: 'duration',
             renderer: Helper.Util.formatsecondsToTime,
             flex: 2
         }, {
-            header: t('trunk'),
+            header: t('Trunk'),
             dataIndex: 'tronco',
             flex: 4,
             hidden: App.user.isClient,

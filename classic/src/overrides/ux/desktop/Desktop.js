@@ -1,6 +1,6 @@
 Ext.define('Overrides.ux.desktop.Desktop', {
     override: 'Ext.ux.desktop.Desktop',
-    textTile: t('Tile'),
+    textTitle: t('Title'),
     textCascade: t('Cascade'),
     textRestore: t('Restore'),
     textMinimize: t('Minimize'),
@@ -27,7 +27,7 @@ Ext.define('Overrides.ux.desktop.Desktop', {
             ret.items.push('-');
         }
         ret.items.push({
-            text: me.textTile,
+            text: me.textTitle,
             handler: me.tileWindows,
             scope: me,
             minWindows: 1

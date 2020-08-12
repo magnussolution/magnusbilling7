@@ -28,7 +28,7 @@ class GAuthenticatorController extends Controller
     {
         $this->instanceModel = new GAuthenticator;
         $this->abstractModel = GAuthenticator::model();
-        $this->titleReport   = Yii::t('yii', 'GAuthenticator');
+        $this->titleReport   = Yii::t('zii', 'GAuthenticator');
         parent::init();
     }
 
@@ -65,7 +65,7 @@ class GAuthenticatorController extends Controller
             echo json_encode(array(
                 'success' => false,
                 'rows'    => array(),
-                'errors'  => Yii::t('yii', 'Invalid Code'),
+                'errors'  => Yii::t('zii', 'Invalid Code'),
             ));
             $info = 'Username ' . Yii::app()->session['username'] . ' try inactive GoogleToken with Invalid Code to user ' . $modelUser->username;
             MagnusLog::insertLOG(2, $info);

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -29,7 +29,7 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
         var me = this;
         me.buttonImportCsv = App.user.isAdmin,
             me.columns = [{
-                header: t('Id'),
+                header: t('ID'),
                 dataIndex: 'id',
                 flex: 1,
                 hidden: true,
@@ -39,7 +39,7 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
                 dataIndex: 'country',
                 flex: 4
             }, {
-                header: t('Country Code'),
+                header: t('Country code'),
                 dataIndex: 'country_code',
                 flex: 2
             }, {
@@ -51,7 +51,7 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
                 dataIndex: 'SkuCode',
                 flex: 2
             }, {
-                header: t('Operator Name'),
+                header: t('Operator name'),
                 dataIndex: 'operator_name',
                 flex: 5
             }, {
@@ -63,15 +63,15 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
                 dataIndex: 'product',
                 flex: 2
             }, {
-                header: t('Currency Origem'),
+                header: 'Currency origem',
                 dataIndex: 'currency_orig',
                 flex: 3
             }, {
-                header: t('Send Value'),
+                header: t('Send value'),
                 dataIndex: 'send_value',
                 flex: 2
             }, {
-                header: t('Wholesale Price'),
+                header: t('Wholesale price'),
                 dataIndex: 'wholesale_price',
                 flex: 2
             }, {
@@ -79,7 +79,7 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
                 dataIndex: 'provider',
                 flex: 2
             }, {
-                header: t('status'),
+                header: t('Status'),
                 dataIndex: 'status',
                 renderer: Helper.Util.formatBooleanActive,
                 comboRelated: 'booleancombo',
@@ -87,8 +87,8 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
                 filter: {
                     type: 'list',
                     options: [
-                        [1, t('active')],
-                        [0, t('inactive')]
+                        [1, t('Active')],
+                        [0, t('Inactive')]
                     ]
                 }
             }]

@@ -113,7 +113,7 @@ class MassiveCall
                     $tts  = true;
                     $file = $idPhonenumber . date("His");
 
-                    $audio_name = Tts::create($MAGNUS, $modelPhoneNumber->name);
+                    $audio_name = Tts::create($MAGNUS, $agi, $modelPhoneNumber->name);
 
                 }
 
@@ -126,7 +126,7 @@ class MassiveCall
                         $audio = '/tmp/' . $file;
                     } else {
                         $agi->verbose('Get audio from TTS');
-                        $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio);
+                        $audio = Tts::create($MAGNUS, $agi, $modelCampaign->tts_audio);
                     }
 
                 } else {
@@ -157,7 +157,7 @@ class MassiveCall
 
                     if (strlen($modelCampaign->tts_audio2) > 2) {
 
-                        $audio = Tts::create($MAGNUS, $modelCampaign->tts_audio2);
+                        $audio = Tts::create($MAGNUS, $agi, $modelCampaign->tts_audio2);
 
                     } else {
                         $audio = $uploaddir . "idCampaign_" . $idCampaign . "_2";
@@ -180,14 +180,14 @@ class MassiveCall
                         $agi->verbose('O texto que você acabou de dizer: ' . $textASR);
                         if (strlen($textASR) < 1) {
                             $text  = "Desculpe não consegui te compreender. Vamos tentar novamente?";
-                            $audio = Tts::create($MAGNUS, $text);
+                            $audio = Tts::create($MAGNUS, $agi, $text);
 
                             $agi->stream_file($audio, ' #');
 
                         } elseif (preg_match('/' . $modelCampaign->asr_options . '/', $textASR)) {
 
                             $text  = "Você disse. " . $textASR . ". Por favor aguarde.";
-                            $audio = Tts::create($MAGNUS, $text);
+                            $audio = Tts::create($MAGNUS, $agi, $text);
 
                             $agi->stream_file($audio, ' #');
 
@@ -196,7 +196,7 @@ class MassiveCall
                         } else {
 
                             $text  = "Você realmente não quer escutar o recado? Vamos tentar novamente?";
-                            $audio = Tts::create($MAGNUS, $text);
+                            $audio = Tts::create($MAGNUS, $agi, $text);
 
                             $agi->stream_file($audio, ' #');
                         }
@@ -209,6 +209,7 @@ class MassiveCall
                 $agi->verbose("forward_number $forward_number , res_dtmf: " . $res_dtmf['result'] . ", digit_authorize: " . $modelCampaignPoll[0]->digit_authorize, 10);
 
             }
+
             //if have a forward                         if res_dtmf is equal the digit_authorize                OR press any digit and digit_authorize equal -2 (any digit)    OR  digit_authorize equal -3 (every)
             if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || (strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
                 $agi->verbose("have Forward number $forward_number");
@@ -361,6 +362,9 @@ class MassiveCall
                     }
                 }
 
+            } else if (is_numeric($res_dtmf['result'])) {
+                $sql = "UPDATE pkg_campaign_report SET status = 4 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+                $agi->exec($sql);
             } else {
                 $MAGNUS->sip_account = $MAGNUS->username;
             }

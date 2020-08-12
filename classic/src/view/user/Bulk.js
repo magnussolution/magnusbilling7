@@ -49,7 +49,7 @@ Ext.define('MBilling.view.user.Bulk', {
                 mask: App.user.currency + ' #9.999.990,00',
                 name: 'credit',
                 value: 0,
-                fieldLabel: t('Add') + ' ' + t('Refill'),
+                fieldLabel: t('Add refill'),
                 readOnly: App.user.isClient
             }, {
                 xtype: 'groupusercombo',
@@ -59,7 +59,7 @@ Ext.define('MBilling.view.user.Bulk', {
                 xtype: 'languagecombo',
                 name: 'language',
                 value: App.user.language == 'pt_BR' ? 'br' : App.user.language,
-                fieldLabel: t('language')
+                fieldLabel: t('Language')
             }, {
                 xtype: 'plancombo',
                 hidden: App.user.isClient,
@@ -67,7 +67,7 @@ Ext.define('MBilling.view.user.Bulk', {
             }, {
                 xtype: 'textfield',
                 name: 'prefix_local',
-                fieldLabel: t('prefixlocal'),
+                fieldLabel: t('Prefix rules'),
                 value: App.user.base_country == 'BRL' ? '0/55,*/5511/8,*/5511/9' : App.user.base_country == 'ARG' ? '0/54,*/5411/8,15/54911/10,16/54911/10' : '',
                 allowBlank: true,
                 emptyText: 'match / replace / length',
@@ -84,7 +84,7 @@ Ext.define('MBilling.view.user.Bulk', {
         me.bbar = [{
             width: 150,
             iconCls: 'icon-import-csv',
-            text: t('Bulk') + ' ' + t('User'),
+            text: t('Bulk user'),
             scope: me,
             handler: me.onBulk
         }];

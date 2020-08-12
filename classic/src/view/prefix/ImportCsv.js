@@ -16,15 +16,15 @@
 Ext.define('MBilling.view.prefix.ImportCsv', {
     extend: 'Ext.ux.window.ImportCsv',
     alias: 'widget.prefiximportcsv',
-    htmlTipInfo: '<br><b>' + t('dialprefix') + ", " + t('destination') + "</b>",
+    htmlTipInfo: '<br><b>' + t('Prefix') + ", " + t('Destination') + "</b>",
     labelWidthFields: 160,
     height: window.isThemeTriton ? 300 : 205,
     initComponent: function() {
         var me = this;
         me.fieldsImport = [{
-            style: 'margin-top:25px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Csv Format'),
+            style: 'margin-top:25px; overflow: visible;',
+            title: t('CSV format'),
             collapsible: true,
             collapsed: false,
             defaults: {

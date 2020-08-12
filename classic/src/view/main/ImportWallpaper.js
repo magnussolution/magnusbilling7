@@ -7,7 +7,7 @@
 Ext.define('MBilling.view.main.ImportWallpaper', {
     extend: 'Ext.window.Window',
     alias: 'widget.importwallpaper',
-    title: t('import_wallpaper'),
+    title: t('Import wallpaper'),
     controller: 'main',
     resizable: false,
     autoShow: true,
@@ -30,10 +30,10 @@ Ext.define('MBilling.view.main.ImportWallpaper', {
         },
         items: [{
             xtype: 'uploadfield',
+            name: 'wallpaper',
             fieldLabel: t('Select file'),
             emptyText: t('Only PNG format'),
             allowBlank: false,
-            name: 'wallpaper',
             extAllowed: ['png'],
             anchor: '0'
         }]

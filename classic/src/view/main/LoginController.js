@@ -6,7 +6,7 @@ Ext.define('MBilling.view.main.LoginController', {
     msgAuthenticating: t('Authenticating...'),
     msgEnteringInSystem: t('Entering in system...'),
     msgWelcome: t('Welcome'),
-    titleErrorInAuthentication: t('Authentication Error'),
+    titleErrorInAuthentication: t('Authentication error'),
     onLogin: function(btn) {
         var me = this,
             loginWin = me.getView(),
@@ -58,7 +58,7 @@ Ext.define('MBilling.view.main.LoginController', {
         formPanel = me.lookupReference('signupForm').getForm();
         values = formPanel.getFieldValues();
         if (values.accept_terms == 0) {
-            Ext.ux.Alert.alert(me.titleWarning, t('You need accept the tems to signup'), 'warning');
+            Ext.ux.Alert.alert(me.titleWarning, t('You need accept the terms to signup'), 'warning');
             return;
         }
         if (!formPanel.isValid()) {
@@ -74,7 +74,7 @@ Ext.define('MBilling.view.main.LoginController', {
             success: function(response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
-                    Ext.ux.Alert.alert(t('Success'), t(response.msg) + ". <br>" + t('Your usernama is') + ' ' + response.username, 'success', true, false);
+                    Ext.ux.Alert.alert(t('Success'), t(response.msg) + ". <br>" + t('Your username is') + ' ' + response.username, 'success', true, false);
                 } else {
                     errors = Helper.Util.convertErrorsJsonToString(response.errors);
                     if (!Ext.isObject(response.errors)) {

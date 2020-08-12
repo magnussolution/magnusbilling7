@@ -8,7 +8,7 @@ Ext.define('MBilling.view.user.Combo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.usercombo',
     name: 'id_user',
-    fieldLabel: t('username'),
+    fieldLabel: t('Username'),
     displayField: 'username',
     forceSelection: true,
     editable: false,

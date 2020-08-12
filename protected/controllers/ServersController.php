@@ -28,7 +28,7 @@ class ServersController extends Controller
     {
         $this->instanceModel = new Servers;
         $this->abstractModel = Servers::model();
-        $this->titleReport   = Yii::t('yii', 'Callerid');
+        $this->titleReport   = Yii::t('zii', 'CallerID');
         parent::init();
     }
 

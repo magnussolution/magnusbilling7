@@ -29,7 +29,7 @@ class PrefixController extends Controller
     {
         $this->instanceModel = new Prefix;
         $this->abstractModel = Prefix::model();
-        $this->titleReport   = Yii::t('yii', 'Prefix');
+        $this->titleReport   = Yii::t('zii', 'Prefix');
 
         parent::init();
     }
@@ -69,7 +69,7 @@ class PrefixController extends Controller
             if (preg_match("/$checkDelimiter/", $row[0])) {
                 echo json_encode(array(
                     $this->nameSuccess => false,
-                    'errors'           => Yii::t('yii', 'ERROR: CSV delimiter, please select ( ' . $checkDelimiter . ' ) on the import form'),
+                    'errors'           => Yii::t('zii', 'ERROR: CSV delimiter, please select ( ' . $checkDelimiter . ' ) on the import form'),
                 ));
                 exit;
             }

@@ -37,7 +37,7 @@ class RefillproviderController extends Controller
     {
         $this->instanceModel = new Refillprovider;
         $this->abstractModel = Refillprovider::model();
-        $this->titleReport   = Yii::t('yii', 'Refill Provider');
+        $this->titleReport   = Yii::t('zii', 'Refill Provider');
 
         parent::init();
     }
@@ -47,7 +47,7 @@ class RefillproviderController extends Controller
         if ($this->isNewRecord) {
             $resultProvider     = Provider::model()->findByPk((int) $model->id_provider);
             $creditOld          = $resultProvider->credit;
-            $model->description = $model->description . ', ' . Yii::t('yii', 'Old credit') . ' ' . round($creditOld, 2);
+            $model->description = $model->description . ', ' . Yii::t('zii', 'Old credit') . ' ' . round($creditOld, 2);
 
             //add credit
             $resultProvider->credit = $model->credit > 0 ? $resultProvider->credit + $model->credit : $resultProvider->credit - ($model->credit * -1);

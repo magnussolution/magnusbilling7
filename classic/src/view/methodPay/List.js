@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 04/07/2012
@@ -26,21 +26,21 @@ Ext.define('MBilling.view.methodPay.List', {
         var me = this;
         me.buttonUpdateLot = false;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('paymentmethods'),
+            header: t('Payment methods'),
             dataIndex: 'payment_method',
             flex: 2
         }, {
-            header: t('country'),
+            header: t('Country'),
             dataIndex: 'country',
             flex: 2
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -48,7 +48,7 @@ Ext.define('MBilling.view.methodPay.List', {
             },
             flex: 2
         }, {
-            header: t('active'),
+            header: t('Active'),
             dataIndex: 'active',
             flex: 1,
             comboRelated: 'booleancombo',
@@ -56,8 +56,8 @@ Ext.define('MBilling.view.methodPay.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [1, t('active')],
-                    [0, t('inactive')]
+                    [1, t('Active')],
+                    [0, t('Inactive')]
                 ]
             }
         }];

@@ -44,7 +44,7 @@ class PhoneBookController extends Controller
     {
         $this->instanceModel = new PhoneBook;
         $this->abstractModel = PhoneBook::model();
-        $this->titleReport   = Yii::t('yii', 'Phone Book');
+        $this->titleReport   = Yii::t('zii', 'Phonenumbers');
 
         parent::init();
     }

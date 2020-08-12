@@ -21,20 +21,20 @@ $fieldOption = array('class' => 'input');
 ?>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
 </div>
 
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'country') ?>
 </div>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Type')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Type')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'type', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'type') ?>
 </div>
@@ -101,7 +101,7 @@ $fieldOption = array('class' => 'input');
 </div>
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('yii', 'Next'), array(
+<?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array(
     'class'   => 'button',
     'onclick' => 'button2(event)',
     'id'      => 'secondButton'));

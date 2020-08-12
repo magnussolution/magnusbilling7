@@ -26,28 +26,28 @@ $fieldOption = array('class' => 'input');
 ?>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
-        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Method') ?></p>
 </div>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'country') ?>
-        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Country') ?></p>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Country') ?></p>
 </div>
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Operator')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Operator')) ?>
     <div class="styled-select">
         <?php
 echo $form->dropDownList($modelTransferToMobile, 'method',
     $methods,
     array(
-        'empty'    => Yii::t('yii', 'Select the Operator'),
+        'empty'    => Yii::t('zii', 'Select the operator'),
         'onchange' => "this.form.submit()",
     )); ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -29,14 +29,14 @@ Ext.define('MBilling.view.callArchive.List', {
         me.grupableColumns = false;
         me.buttonUpdateLot = false;
         me.extraButtons = [{
-            text: t('Download rec'),
+            text: t('Download REC'),
             iconCls: 'call',
             handler: 'onRecordCall',
             disabled: false,
             width: 130
         }];
         me.columns = [{
-                header: t('Id'),
+                header: t('ID'),
                 dataIndex: 'id',
                 flex: 1,
                 hidden: true,
@@ -50,32 +50,32 @@ Ext.define('MBilling.view.callArchive.List', {
                 dataIndex: 'id',
                 items: [{
                     iconCls: 'icon-play',
-                    tooltip: t('Download Rec'),
+                    tooltip: t('Download REC'),
                     handler: 'onDownloadClick'
                 }],
                 hidden: App.user.show_playicon_cdr == 0,
                 hideable: true
             }, {
-                header: t('date'),
+                header: t('Date'),
                 renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
                 dataIndex: 'starttime',
                 flex: 4
             }, {
-                header: t('Sip Account'),
+                header: t('Sip user'),
                 dataIndex: 'src',
                 flex: 3
             }, {
-                header: t('CallerId'),
+                header: t('CallerID'),
                 dataIndex: 'callerid',
                 flex: 3,
                 hidden: true,
                 hideable: true
             }, {
-                header: t('number'),
+                header: t('Number'),
                 dataIndex: 'calledstation',
                 flex: 3
             }, {
-                header: t('destination'),
+                header: t('Destination'),
                 dataIndex: 'idPrefixdestination',
                 filter: {
                     type: 'string',
@@ -83,19 +83,19 @@ Ext.define('MBilling.view.callArchive.List', {
                 },
                 flex: 4
             }, {
-                header: t('sessiontime'),
+                header: t('Duration'),
                 dataIndex: 'sessiontime',
                 renderer: Helper.Util.formatsecondsToTime,
                 flex: 3
             }, {
-                header: t('Real') + ' ' + t('sessiontime'),
+                header: t('Real') + ' ' + t('Duration'),
                 dataIndex: 'real_sessiontime',
                 renderer: Helper.Util.formatsecondsToTime,
                 flex: 3,
                 hidden: true,
                 hideable: App.user.isAdmin
             }, {
-                header: t('user'),
+                header: t('Username'),
                 dataIndex: 'idUserusername',
                 filter: {
                     type: 'string',
@@ -107,53 +107,52 @@ Ext.define('MBilling.view.callArchive.List', {
             }, {
                 xtype: 'templatecolumn',
                 tpl: '{idTrunktrunkcode}',
-                header: t('trunk'),
+                header: t('Trunk'),
                 dataIndex: 'id_trunk',
                 comboFilter: 'trunkcombo',
-                header: t('trunk'),
                 flex: 3,
                 hidden: App.user.isClient || App.user.isAgent,
                 hideable: !App.user.isClient && !App.user.isAgent
             }, {
-                header: t('status'),
+                header: t('Status'),
                 dataIndex: 'terminatecauseid',
                 renderer: Helper.Util.formatDialStatus,
                 flex: 2,
                 filter: {
                     type: 'list',
                     options: [
-                        [1, t('answer')]
+                        [1, t('Answered')]
                     ]
                 }
             }, {
-                header: t('type'),
+                header: t('Type'),
                 dataIndex: 'sipiax',
                 renderer: Helper.Util.formatCallType,
                 flex: 2,
                 filter: {
                     type: 'list',
                     options: [
-                        [0, t('standard')],
-                        [1, t('sipcall')],
-                        [2, t('did')],
-                        [3, t('didvoip')],
-                        [4, t('callback')],
-                        [5, t('callcenter')],
-                        [6, 'sms'],
-                        [7, t('transfer')],
-                        [8, t('queue')],
-                        [9, t('ivr')]
+                        [0, t('Standard')],
+                        [1, t('SIP')],
+                        [2, t('DID')],
+                        [3, t('DID voip')],
+                        [4, t('CallBack')],
+                        [5, t('Voice Broadcasting')],
+                        [6, t('SMS')],
+                        [7, t('Transfer')],
+                        [8, t('Queue')],
+                        [9, t('IVR')]
                     ]
                 }
             }, { //oculta para cliente e revendedores
-                header: t('buycost'),
+                header: t('Buy price'),
                 dataIndex: 'buycost',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
                 hidden: App.user.isClient || App.user.isAgent,
                 hideable: !App.user.isClient && !App.user.isAgent
             }, {
-                header: t('sessionbill'),
+                header: t('Sell price'),
                 dataIndex: 'sessionbill',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
@@ -162,7 +161,7 @@ Ext.define('MBilling.view.callArchive.List', {
             }
             /*,{
             menuDisabled : true,
-            header       : t('markup'),
+            header       : t('Markup'),
             dataIndex    : 'lucro',
             flex         : 2,
             renderer     : Ext.util.Format.numberRenderer('0.00 %'),
@@ -170,28 +169,28 @@ Ext.define('MBilling.view.callArchive.List', {
             hideable     : !App.user.isClient && !App.user.isAgent
         }*/
             , { //mostra o preço de compra de revendedor
-                header: t('buycost'),
+                header: t('Buy price'),
                 dataIndex: 'sessionbill',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
                 hidden: !App.user.isAgent,
                 hideable: App.user.isAgent
             }, { //mostra o preço de venda de revendedor
-                header: t('sessionbill'),
+                header: t('Sell price'),
                 dataIndex: 'agent_bill',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
                 hidden: !App.user.isAgent,
                 hideable: App.user.isAgent
             }, { //mostra o preço de venda para clientes de revendedor
-                header: t('sessionbill'),
+                header: t('Sell price'),
                 dataIndex: 'agent_bill',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
                 hidden: !App.user.isClientAgent,
                 hideable: App.user.isClientAgent
             }, {
-                header: t('uniqueid'),
+                header: t('Uniqueid'),
                 dataIndex: 'uniqueid',
                 flex: 3,
                 hidden: true,

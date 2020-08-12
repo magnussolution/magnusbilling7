@@ -15,7 +15,7 @@ Ext.define('MBilling.view.queue.Lookup', {
         xtype: 'queuelist',
         fieldSearch: 'name',
         columns: [{
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 2
         }]
