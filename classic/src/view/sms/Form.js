@@ -22,19 +22,21 @@ Ext.define('MBilling.view.sms.Form', {
         me.items = [{
             xtype: 'userlookup',
             ownerForm: me,
+            name: 'id_user',
+            fieldLabel: t('Username'),
             hidden: App.user.isClient,
             allowBlank: App.user.isClient
         }, {
             xtype: 'numberfield',
             name: 'telephone',
-            fieldLabel: t('number'),
+            fieldLabel: t('Number'),
             emptyText: 'DDI DDD Nº',
             maxLength: 16,
             minLength: 11
         }, {
             xtype: 'textareafield',
             name: 'sms',
-            fieldLabel: t('sms'),
+            fieldLabel: t('SMS'),
             maxLength: 160
         }, {
             name: 'sms_from',

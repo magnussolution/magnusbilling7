@@ -43,7 +43,7 @@ Ext.define('MBilling.view.dashboard.DashboardController', {
     },
     onUpdateDashboardTrunk: function(record) {
         var me = this;
-        trunkDetails = '<div class="services-text">' + t('trunk_chart') + '</div>' + '<div class="services-legend">';
+        trunkDetails = '<div class="services-text">' + t('Trunk chart') + '</div>' + '<div class="services-legend">';
         if (record[0]) {
             avarege = (record[0].data.sessionbill * 100) / record[0].data.sumsessionbill;
             me.lookupReference('trunkDashboardFields').items.items[0].update('<div class="left-aligned-div">' + record[0].data.idTrunktrunkcode + '</div><div class="right-aligned-div">' + avarege.toFixed(2) + '%</div>');
@@ -68,7 +68,7 @@ Ext.define('MBilling.view.dashboard.DashboardController', {
     onUpdateDashboardNetWork: function(record) {
         var me = this;
         //cpu
-        me.lookupReference('cpuMediaUso').update('<span class="x-fa fa-hdd-o "> &nbsp;Cpu Actual usage: ' + record[0].data.cpuPercent + '% </span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="x-fa fa-hdd-o" style="text-align: right;"> Load Average: ' + record[0].data.cpuMediaUso + '%</span>');
+        me.lookupReference('cpuMediaUso').update('<span class="x-fa fa-hdd-o "> &nbsp;' + t('CPU actual usage') + ': ' + record[0].data.cpuPercent + '% </span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="x-fa fa-hdd-o" style="text-align: right;"> ' + t('Load Average') + ': ' + record[0].data.cpuMediaUso + '%</span>');
         me.lookupReference('cpuPercent').setValue(record[0].data.cpuPercent / 100);
         me.lookupReference('cpuModel').update('<span class="x-fa fa-server"> ' + record[0].data.cpuModel + '</span>');
         //memory
@@ -77,13 +77,13 @@ Ext.define('MBilling.view.dashboard.DashboardController', {
         me.lookupReference('uptime').update(record[0].data.uptime);
         //
         imageContainerHeight = me.lookupReference('totalusersdiv').height;
-        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/users-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('active_users') + '"/></div>' + '<div class="weather-details-container">' + '<div>' + record[0].data.totalActiveUsers + '</div>' + '<div>' + t('active_users') + '</div>' + '</div>'
+        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/users-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('Active users') + '"/></div>' + '<div class="weather-details-container">' + '<div>' + record[0].data.totalActiveUsers + '</div>' + '<div>' + t('Active users') + '</div>' + '</div>'
         me.lookupReference('totalusersdiv').update(userstpl);
-        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/profit-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('month_profit') + '"/></div>' + '<div class="weather-details-container">' + ' <div>' + App.user.currency + ' ' + record[0].data.monthprofit + '</div>' + '<div>' + t('month_profit') + '</div>' + '</div>'
+        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/profit-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('Month profit') + '"/></div>' + '<div class="weather-details-container">' + ' <div>' + App.user.currency + ' ' + record[0].data.monthprofit + '</div>' + '<div>' + t('Month profit') + '</div>' + '</div>'
         me.lookupReference('monthprofitdiv').update(userstpl);
-        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/calls-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('today_max_cc') + '"/></div>' + '<div class="weather-details-container">' + ' <div>' + ' ' + record[0].data.maximumcc + '</div>' + '<div>' + t('today_max_cc') + '</div>' + '</div>'
+        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/calls-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('Today max CC') + '"/></div>' + '<div class="weather-details-container">' + ' <div>' + ' ' + record[0].data.maximumcc + '</div>' + '<div>' + t('Today max CC') + '</div>' + '</div>'
         me.lookupReference('maximumcc').update(userstpl);
-        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/profit-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('month_refill') + '"/></div>' + '<div class="weather-details-container">' + ' <div>' + App.user.currency + ' ' + record[0].data.monthRefill + '</div>' + '<div>' + t('month_refill') + '</div>' + '</div>'
+        userstpl = '<div class="weather-image-container" style="height: ' + imageContainerHeight + 'px;"><img src="resources/images/icons/profit-icon.png" style="height: ' + imageContainerHeight * 0.6 + 'px;" alt="' + t('Month refill') + '"/></div>' + '<div class="weather-details-container">' + ' <div>' + App.user.currency + ' ' + record[0].data.monthRefill + '</div>' + '<div>' + t('Month refill') + '</div>' + '</div>'
         me.lookupReference('totalrefill').update(userstpl);
     }
 });

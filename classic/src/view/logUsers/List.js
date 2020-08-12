@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 19/09/2012
@@ -29,7 +29,7 @@ Ext.define('MBilling.view.logUsers.List', {
         me.allowCreate = false;
         me.allowUpdate = false;
         me.columns = [{
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -39,12 +39,12 @@ Ext.define('MBilling.view.logUsers.List', {
             hidden: App.user.isOperator,
             hideable: !App.user.isOperator
         }, {
-            header: t('action'),
+            header: t('Action'),
             dataIndex: 'idLogActionsname',
             renderer: Helper.Util.translate,
             flex: 3
         }, {
-            header: t('description'),
+            header: t('Description'),
             dataIndex: 'description',
             flex: 7
         }, {
@@ -52,7 +52,7 @@ Ext.define('MBilling.view.logUsers.List', {
             dataIndex: 'ip',
             flex: 4
         }, {
-            header: t('date'),
+            header: t('Date'),
             renderer: Helper.Util.formatDateTime,
             dataIndex: 'date',
             flex: 4

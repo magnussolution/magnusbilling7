@@ -33,9 +33,9 @@ class BuyCreditController extends Controller
         $modelMethodPay = Methodpay::model()->findByPK((int) $_GET['id_method']);
 
         if ($modelMethodPay->max > 0 && $_GET['amount'] > $modelMethodPay->max) {
-            exit(Yii::t('yii', 'The maximum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('yii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max);
+            exit(Yii::t('zii', 'The maximum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max);
         } elseif ($modelMethodPay->min > 0 && $_GET['amount'] < $modelMethodPay->min) {
-            exit(Yii::t('yii', 'The minimum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('yii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
+            exit(Yii::t('zii', 'The minimum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
         }
 
         $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
@@ -187,7 +187,7 @@ class BuyCreditController extends Controller
             }
 
             if ($_POST['ServicesUse']['id_method'] < 1) {
-                $model->addError('id_method', Yii::t('yii', 'Group no allow for Agent users'));
+                $model->addError('id_method', Yii::t('zii', 'Group no allow for agent users'));
 
             } else {
 

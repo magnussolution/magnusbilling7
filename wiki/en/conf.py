@@ -4,14 +4,23 @@
 
 import sys
 import os
+import re
 
 # -- General configuration ------------------------------------------------
 
 needs_sphinx = '1.3'
 
 # Sphinx extension module names and templates location
-sys.path.append(os.path.abspath('extensions'))
-extensions = ['gdscript', 'sphinx_tabs.tabs', 'sphinx.ext.imgmath']
+sys.path.append(os.path.abspath('../extensions'))
+
+import sphinx_rtd_theme
+
+extensions = [
+    'gdscript', 
+    'sphinx_tabs.tabs', 
+    'sphinx.ext.imgmath', 
+    'sphinx_rtd_theme'
+]
 templates_path = ['_templates']
 
 # You can specify multiple suffix as a list of string: ['.rst', '.md']
@@ -49,7 +58,7 @@ highlight_language = 'gdscript'
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
-
+html_theme = "sphinx_rtd_theme"
 
 # Theme options
 html_theme_options = {

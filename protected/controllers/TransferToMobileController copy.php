@@ -109,10 +109,10 @@ class TransferToMobileController extends Controller
                 // echo '<pre>';
 
                 if ($_POST['TransferToMobile']['amountValuesBDT'] < $min) {
-                    $this->modelTransferToMobile->addError('amountValuesBDT', Yii::t('yii', 'Amount is < then minimal allowed'));
+                    $this->modelTransferToMobile->addError('amountValuesBDT', Yii::t('zii', 'Amount is < then minimal allowed'));
 
                 } else if ($_POST['TransferToMobile']['amountValuesBDT'] > $max) {
-                    $this->modelTransferToMobile->addError('amountValuesBDT', Yii::t('yii', 'Amount is > then maximum allowed'));
+                    $this->modelTransferToMobile->addError('amountValuesBDT', Yii::t('zii', 'Amount is > then maximum allowed'));
                 }
                 $this->modelTransferToMobile->amountValuesEUR = $_POST['TransferToMobile']['amountValuesEUR'];
                 $this->modelTransferToMobile->amountValuesBDT = $_POST['TransferToMobile']['amountValuesBDT'];
@@ -120,9 +120,9 @@ class TransferToMobileController extends Controller
             }
 
             if ($this->modelTransferToMobile->method != 'international' && preg_match('/[A-Z][a-z]/', $_POST['TransferToMobile']['amountValuesBDT'])) {
-                $this->modelTransferToMobile->addError('amountValuesBDT', Yii::t('yii', 'Invalid amount'));
+                $this->modelTransferToMobile->addError('amountValuesBDT', Yii::t('zii', 'Invalid amount'));
             } elseif ($this->modelTransferToMobile->method == 'international' && !is_numeric($_POST['TransferToMobile']['amountValues'])) {
-                $this->modelTransferToMobile->addError('amountValues', Yii::t('yii', 'Invalid amount'));
+                $this->modelTransferToMobile->addError('amountValues', Yii::t('zii', 'Invalid amount'));
             } elseif (!count($this->modelTransferToMobile->getErrors())) {
 
                 if (!isset($_POST['TransferToMobile']['confirmed'])) {
@@ -163,13 +163,13 @@ class TransferToMobileController extends Controller
         //check the number and methods.
         elseif (isset($_POST['TransferToMobile']['method'])) {
             if ($_POST['TransferToMobile']['method'] == '') {
-                $this->modelTransferToMobile->addError('method', Yii::t('yii', 'Please select a method'));
+                $this->modelTransferToMobile->addError('method', Yii::t('zii', 'Please select a method'));
             }
 
             if ($_POST['TransferToMobile']['number'] == '' || !is_numeric($_POST['TransferToMobile']['number'])
                 || strlen($_POST['TransferToMobile']['number']) < 8
                 || preg_match('/ /', $_POST['TransferToMobile']['number'])) {
-                $this->modelTransferToMobile->addError('number', Yii::t('yii', 'Number invalid, try again'));
+                $this->modelTransferToMobile->addError('number', Yii::t('zii', 'Number invalid, try again'));
             }
 
             $this->modelTransferToMobile->method = $_POST['TransferToMobile']['method'];

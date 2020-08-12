@@ -43,17 +43,17 @@ Ext.define('Ext.ux.grid.Panel', {
     labelLandscape: t('Landscape'),
     buttonUpdateLot: true,
     iconButtonUpdateLot: 'icon-save-all',
-    textButtonUpdateLot: t('updateLot'),
-    labelSelected: t('selected'),
-    labelAll: t('all'),
+    textButtonUpdateLot: t('Batch  update'),
+    labelSelected: t('Selected'),
+    labelAll: t('All'),
     pagination: true,
     buttonCsv: true,
     buttonImportCsv: false,
     iconButtonCsv: 'icon-export-csv',
-    textButtonCsv: t('exportCsv'),
+    textButtonCsv: t('Export CSV'),
     widthButtonCsv: 140,
     iconButtonImportCsv: 'icon-import-csv',
-    textButtonImportCsv: t('importFromCsv'),
+    textButtonImportCsv: t('Import CSV'),
     actionButtonCsv: 'onExportCsv',
     buttonUpdateLotCallShopRate: false,
     extraFilters: [],
@@ -63,7 +63,7 @@ Ext.define('Ext.ux.grid.Panel', {
     collapsedExtraFilters: true,
     collapsibleExtraFilters: true,
     iconAddFilter: 'icon-add-filter',
-    titleAddFilter: t('addFilters'),
+    titleAddFilter: t('Add filters'),
     columnsHide: [],
     paginationButton: [],
     buttonCleanFilter: true,
@@ -90,7 +90,6 @@ Ext.define('Ext.ux.grid.Panel', {
             me.buttonNewWidth = 40;
             me.buttonDeleteWidth = 60;
             me.widthButtonCsv = 40;
-
         } else {
             me.buttonNewWidth = window.isThemeTriton ? 90 : me.buttonNewWidth;
             me.buttonDeleteWidth = window.isThemeTriton ? 120 : me.buttonDeleteWidth;
@@ -110,7 +109,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 filterOnClick: me.filterFieldOnClick,
                 store: me.store,
                 comparison: me.comparisonfilter,
-                width : window.isTablet ? 80 : 130
+                width: window.isTablet ? 80 : 130
             });
         }
         if (me.allowCreate) {

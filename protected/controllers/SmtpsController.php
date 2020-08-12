@@ -46,7 +46,7 @@ class SmtpsController extends Controller
     {
         $this->instanceModel = new Smtps;
         $this->abstractModel = Smtps::model();
-        $this->titleReport   = Yii::t('yii', 'Smtp');
+        $this->titleReport   = 'SMTP';
 
         parent::init();
     }
@@ -82,7 +82,7 @@ class SmtpsController extends Controller
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
-                    'errors'  => Yii::t('yii', 'Do you already have a SMTP'),
+                    'errors'  => Yii::t('zii', 'Do you already have a SMTP'),
                 ));
                 exit;
             }

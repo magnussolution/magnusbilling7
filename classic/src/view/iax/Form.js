@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 25/06/2016
@@ -42,38 +42,40 @@ Ext.define('MBilling.view.iax.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 items: [{
                     xtype: 'userlookup',
+                    name: 'id_user',
+                    fieldLabel: t('Username'),
                     ownerForm: me,
-                    fieldLabel: t('accountcode'),
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
                     name: 'username',
-                    fieldLabel: t('username'),
+                    fieldLabel: t('IAX user'),
                     minLength: 4,
                     readOnly: App.user.isClient
                 }, {
                     name: 'secret',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('IAX password'),
                     allowBlank: true,
                     minLength: 6,
                     readOnly: App.user.isClient
                 }, {
                     name: 'callerid',
-                    fieldLabel: t('callerid'),
+                    fieldLabel: t('CallerID'),
                     allowBlank: true
                 }, {
                     name: 'disallow',
-                    fieldLabel: 'Disallow',
+                    fieldLabel: t('Disallow'),
                     value: 'all',
                     hidden: !App.user.isAdmin,
                     allowBlank: App.user.isClient
                 }, {
                     xtype: 'checkboxgroup',
                     columns: 3,
-                    fieldLabel: t('codec'),
+                    name: 'allow',
+                    fieldLabel: t('Codec'),
                     items: [{
                         boxLabel: 'g729',
                         name: 'allow',
@@ -127,54 +129,54 @@ Ext.define('MBilling.view.iax.Form', {
                     allowBlank: App.user.isClient
                 }, {
                     name: 'host',
-                    fieldLabel: t('host'),
+                    fieldLabel: t('Host'),
                     value: 'dynamic',
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }]
             }, {
-                title: t('natdetails'),
+                title: t('NAT details'),
                 hidden: !App.user.isAdmin,
                 items: [{
                     name: 'nat',
-                    fieldLabel: 'Nat',
-                    value: App.user.asteriskVersion == '1.8' ? 'yes' : 'force_rport,comedia',
+                    fieldLabel: t('NAT'),
+                    value: 'force_rport,comedia',
                     allowBlank: !App.user.isAdmin
                 }]
             }, {
-                title: t('suplementaryInfo'),
+                title: t('Supplementary info'),
                 hidden: !App.user.isAdmin,
                 items: [{
                     name: 'context',
-                    fieldLabel: t('context'),
+                    fieldLabel: t('Context'),
                     value: 'billing',
                     hidden: !App.user.isAdmin,
                     allowBlank: true
                 }, {
                     xtype: 'yesnostringcombo',
                     name: 'qualify',
-                    fieldLabel: 'Qualify',
+                    fieldLabel: t('Qualify'),
                     value: 'no',
                     allowBlank: !App.user.isAdmin
                 }, {
                     name: 'dtmfmode',
-                    fieldLabel: 'Dtmfmode',
+                    fieldLabel: t('Dtmfmode'),
                     value: 'RFC2833',
                     allowBlank: !App.user.isAdmin
                 }, {
                     name: 'insecure',
-                    fieldLabel: 'Insecure',
+                    fieldLabel: t('Insecure'),
                     value: 'no',
                     allowBlank: true
                 }, {
                     name: 'type',
-                    fieldLabel: 'Type',
+                    fieldLabel: t('Type'),
                     value: 'friend',
                     allowBlank: !App.user.isAdmin
                 }, {
-                    name: 'calllimit',
                     xtype: 'numberfield',
-                    fieldLabel: t('calllimit'),
+                    name: 'calllimit',
+                    fieldLabel: t('Call limit'),
                     value: '0',
                     allowBlank: !App.user.isAdmin
                 }]

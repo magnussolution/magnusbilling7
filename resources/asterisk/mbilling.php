@@ -180,6 +180,10 @@ if ($MAGNUS->mode == 'standard') {
         $standardCall->processCall($MAGNUS, $agi, $CalcAgi);
     } else {
 
+        if ($agi->get_variable("DIDACCOUNTCODE", true)) {
+            $agi->verbose(25, "Get account code from trasnfered DID");
+            $MAGNUS->accountcode = $agi->get_variable("DIDACCOUNTCODE", true);
+        }
         $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
         $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 

@@ -29,7 +29,7 @@ class ProviderController extends Controller
     {
         $this->instanceModel = new Provider;
         $this->abstractModel = Provider::model();
-        $this->titleReport   = Yii::t('yii', 'Provider');
+        $this->titleReport   = Yii::t('zii', 'Provider');
         parent::init();
     }
 

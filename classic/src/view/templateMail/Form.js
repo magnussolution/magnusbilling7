@@ -24,25 +24,25 @@ Ext.define('MBilling.view.templateMail.Form', {
                 }
             },
             items: [{
-                title: t('general'),
+                title: t('General'),
                 reference: 'generalTab',
                 items: [{
                     name: 'fromname',
-                    fieldLabel: t('fromname')
+                    fieldLabel: t('From name')
                 }, {
                     name: 'fromemail',
-                    fieldLabel: t('fromemail')
+                    fieldLabel: t('From email')
                 }, {
                     name: 'subject',
-                    fieldLabel: t('subject')
+                    fieldLabel: t('Subject')
                 }]
             }, {
                 title: t('Email body'),
                 items: [{
-                    hideLabel: true,
                     xtype: 'htmleditor',
                     name: 'messagehtml',
-                    fieldLabel: t('description'),
+                    fieldLabel: t('Description'),
+                    hideLabel: true,
                     height: 1000,
                     anchor: '100%'
                 }]
@@ -50,47 +50,47 @@ Ext.define('MBilling.view.templateMail.Form', {
                 title: t('Variables'),
                 items: [{
                     xtype: 'displayfield',
-                    fieldLabel: t('username'),
+                    fieldLabel: t('Username'),
                     value: '<span style="color:green;">$login$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('password'),
+                    fieldLabel: t('Password'),
                     value: '<span style="color:green;">$password$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('email'),
+                    fieldLabel: t('Email'),
                     value: '<span style="color:green;">$email$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('firstname'),
+                    fieldLabel: t('First name'),
                     value: '<span style="color:green;">$firstname$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('lastname'),
+                    fieldLabel: t('Last name'),
                     value: '<span style="color:green;">$lastname$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('credit'),
+                    fieldLabel: t('Credit'),
                     value: '<span style="color:green;">$credit$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('date'),
+                    fieldLabel: t('Date'),
                     value: '<span style="color:green;">$time$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('description'),
+                    fieldLabel: t('Description'),
                     value: '<span style="color:green;">$description$</span>',
                     allowBlank: true
                 }, {
                     xtype: 'displayfield',
-                    fieldLabel: t('Url to cancel email credit notification'),
+                    fieldLabel: t('URL to cancel email credit notification'),
                     value: '<span style="color:green;">$cancel_credit_notification_email$</span>',
                     allowBlank: true
                 }]

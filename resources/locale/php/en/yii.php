@@ -1,7 +1,6 @@
 <?php
 return array(
-
-    /*MENU CONFIGURATION*/
+/*MENU CONFIGURATION*/
     'config_title_signup_unique_doc'               => 'Signup: Allow multiples users with same DOC',
     'config_title_signup_admin_email'              => 'Sends an email to the admin when a user signsup',
     'config_desc_signup_admin_email'               => 'Sends an email to the admin when a new account is created from the signup page \n 0 - Disable \n1 - Enable',
@@ -139,10 +138,4 @@ return array(
     'config_desc_username_generate'                => 'Generate username automatically',
     'config_title_version'                         => 'Version',
     'config_desc_version'                          => 'MagnusBilling Version',
-
-    /*END CONFIG MENU*/
-
-    'Name'                                         => 'Name',
-    'User or password incorrect.'                  => 'User or password incorrect............',
-
 );

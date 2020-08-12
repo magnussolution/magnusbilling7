@@ -8,7 +8,7 @@ Ext.define('MBilling.view.campaignPoll.Combo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.campaignpollcombo',
     name: 'id_campaign_poll',
-    fieldLabel: t('campaignpoll'),
+    fieldLabel: t('Poll'),
     displayField: 'name',
     valueField: 'id',
     initComponent: function() {

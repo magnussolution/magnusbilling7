@@ -14,8 +14,8 @@ Ext.define('MBilling.view.campaignSend.Module', {
     initComponent: function() {
         var me = this;
         me.items = [{
-            reference: 'campaignSendPanel',
             xtype: 'form',
+            reference: 'campaignSendPanel',
             margin: '10 10 10 10',
             autoShow: true,
             closable: false,
@@ -35,38 +35,38 @@ Ext.define('MBilling.view.campaignSend.Module', {
             items: [{
                 xtype: 'campaignsendcombo',
                 name: 'type',
-                fieldLabel: t('Campaign') + ' ' + t('type')
-            }, { //SMS
-                name: 'sms_text',
-                fieldLabel: 'SMS ' + t('Text'),
+                fieldLabel: t('Campaign type')
+            }, {
                 xtype: 'textarea',
+                name: 'sms_text',
+                fieldLabel: t('SMS Text'),
                 height: 100,
                 anchor: '100%',
                 allowBlank: true,
                 hidden: true
-            }, { //TORPEDO
+            }, {
                 xtype: 'filefield',
                 emptyText: 'Select an audio file',
-                fieldLabel: t('Audio file'),
                 name: 'audio_path',
+                fieldLabel: t('Audio file'),
                 buttonText: '',
                 buttonConfig: {
                     iconCls: 'upload-icon'
                 },
-                buttonText: t('Select Audio...'),
+                buttonText: t('Select audio'),
                 allowBlank: true,
                 hidden: true
             }, {
                 xtype: 'filefield',
                 emptyText: 'Select an csv file',
-                fieldLabel: t('CSV file'),
                 name: 'csv_path',
+                fieldLabel: t('CSV file'),
                 allowBlank: true,
                 hidden: true
             }, {
-                name: 'numbers',
-                fieldLabel: t('numbers'),
                 xtype: 'textarea',
+                name: 'numbers',
+                fieldLabel: t('Numbers'),
                 height: 100,
                 anchor: '100%',
                 allowBlank: true,

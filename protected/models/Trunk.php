@@ -78,7 +78,7 @@ class Trunk extends Model
     public function checkTrunkCode($attribute, $params)
     {
         if ($this->host == 'dynamic' && $this->trunkcode != $this->user) {
-            $this->addError($attribute, Yii::t('yii', 'When host =dynamic the trunk name and username need be equal.'));
+            $this->addError($attribute, Yii::t('zii', 'When host =dynamic the trunk name and username need be equal.'));
         }
     }
 

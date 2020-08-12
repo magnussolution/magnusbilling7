@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 24/09/2017
@@ -28,10 +28,10 @@ Ext.define('MBilling.view.servicesUse.List', {
         me.buttonPrint = false;
         me.buttonCsv = false;
         me.buttonNewHeight = App.user.isAdmin ? 25 : 50,
-            me.textNew = App.user.isAdmin ? t('Add New Service') : '<b><font color=green>' + t('Buy New Service') + '</font></b>';
+            me.textNew = App.user.isAdmin ? t('Add new service') : '<b><font color=green>' + t('Buy new service') + '</font></b>';
         me.buttonNewWidth = 175;
         me.extraButtons = [{
-            text: '<font color=red>' + t('Cancel Service') + '</font>',
+            text: '<font color=red>' + t('Cancel service') + '</font>',
             handler: 'onCancelService',
             disabled: true,
             iconCls: 'buycredit',
@@ -39,7 +39,7 @@ Ext.define('MBilling.view.servicesUse.List', {
             hidden: !me.allowDelete,
             reference: 'cancelService'
         }, {
-            text: '<font color=blue>' + t('Pay') + ' ' + t('services') + ' ' + t('pendings') + '</font>',
+            text: '<font color=blue>' + t('Pay pendings services') + '</font>',
             handler: 'onPayServiceLink',
             disabled: true,
             iconCls: 'buycredit',
@@ -48,7 +48,7 @@ Ext.define('MBilling.view.servicesUse.List', {
         }];
         me.allowDelete = false;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
@@ -58,7 +58,7 @@ Ext.define('MBilling.view.servicesUse.List', {
             dataIndex: 'idServicesname',
             flex: 5
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -68,7 +68,7 @@ Ext.define('MBilling.view.servicesUse.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('monthpayed'),
+            header: t('Month payed'),
             dataIndex: 'month_payed',
             flex: 2
         }, {
@@ -90,12 +90,12 @@ Ext.define('MBilling.view.servicesUse.List', {
             },
             flex: 2
         }, {
-            header: t('reservationdate'),
+            header: t('Reservation date'),
             renderer: Helper.Util.formatDateTime,
             dataIndex: 'reservationdate',
             flex: 5
         }, {
-            header: t('releasedate'),
+            header: t('Release date'),
             renderer: Helper.Util.formatDateTime,
             dataIndex: 'releasedate',
             flex: 5

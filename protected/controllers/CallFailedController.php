@@ -76,7 +76,7 @@ class CallFailedController extends Controller
     {
         $this->instanceModel = new CallFailed;
         $this->abstractModel = CallFailed::model();
-        $this->titleReport   = Yii::t('yii', 'Call Failed');
+        $this->titleReport   = Yii::t('zii', 'Call Failed');
 
         parent::init();
 

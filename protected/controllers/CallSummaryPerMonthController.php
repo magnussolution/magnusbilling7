@@ -23,7 +23,7 @@ class CallSummaryPerMonthController extends Controller
     {
         $this->instanceModel = new CallSummaryPerMonth;
         $this->abstractModel = CallSummaryPerMonth::model();
-        $this->titleReport   = Yii::t('yii', 'Calls Summary');
+        $this->titleReport   = Yii::t('zii', 'Summary per Month');
 
         parent::init();
     }

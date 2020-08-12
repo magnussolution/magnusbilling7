@@ -16,13 +16,13 @@ Ext.define('MBilling.view.templateMail.List', {
         me.allowCreate = false;
         me.allowDelete = false;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('type'),
+            header: t('Type'),
             dataIndex: 'mailtype',
             flex: 3
         }, {
@@ -31,7 +31,7 @@ Ext.define('MBilling.view.templateMail.List', {
             dataIndex: 'language',
             flex: 2
         }, {
-            header: t('subject'),
+            header: t('Subject'),
             dataIndex: 'subject',
             flex: 7
         }]

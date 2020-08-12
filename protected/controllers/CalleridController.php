@@ -42,7 +42,7 @@ class CalleridController extends Controller
     {
         $this->instanceModel = new Callerid;
         $this->abstractModel = Callerid::model();
-        $this->titleReport   = Yii::t('yii', 'Callerid');
+        $this->titleReport   = Yii::t('zii', 'CallerID');
         parent::init();
     }
 

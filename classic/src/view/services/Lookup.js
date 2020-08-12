@@ -15,11 +15,11 @@ Ext.define('MBilling.view.services.Lookup', {
         xtype: 'serviceslist',
         fieldSearch: 'name',
         columns: [{
-            header: t('name'),
+            header: t('Name'),
             dataIndex: 'name',
             flex: 2
         }, {
-            header: t('price'),
+            header: t('Price'),
             dataIndex: 'price',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 2

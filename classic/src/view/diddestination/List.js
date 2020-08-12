@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 24/09/2012
@@ -26,13 +26,13 @@ Ext.define('MBilling.view.diddestination.List', {
     initComponent: function() {
         var me = this;
         me.columns = [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('did'),
+            header: t('DID'),
             dataIndex: 'idDiddid',
             filter: {
                 type: 'string',
@@ -40,7 +40,7 @@ Ext.define('MBilling.view.diddestination.List', {
             },
             flex: 5
         }, {
-            header: t('user'),
+            header: t('Username'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -50,7 +50,7 @@ Ext.define('MBilling.view.diddestination.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('call_type'),
+            header: t('Call type'),
             dataIndex: 'voip_call',
             renderer: Helper.Util.formatDidType,
             comboRelated: 'didtypecombo',
@@ -58,25 +58,25 @@ Ext.define('MBilling.view.diddestination.List', {
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('callforpstn')],
-                    [1, t('sipcall')],
-                    [2, t('ivr')],
-                    [3, t('callingcard')],
-                    [4, t('portalDeVoz')],
+                    [0, t('Call to PSTN')],
+                    [1, t('SIP')],
+                    [2, t('IVR')],
+                    [3, t('CallingCard')],
+                    [4, t('Direct extension')],
                     [5, t('CID Callback')],
                     [6, t('0800 Callback')],
                     [7, t('Queue')],
-                    [8, t('Call Group')],
+                    [8, t('SIP group')],
                     [9, t('Custom')]
                 ]
             }
         }, {
-            header: t('secondusedreal'),
+            header: t('Time used'),
             renderer: Helper.Util.formatsecondsToTime,
             dataIndex: 'secondusedreal',
             flex: 3
         }, {
-            header: t('creationdate'),
+            header: t('Creation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
             flex: 5

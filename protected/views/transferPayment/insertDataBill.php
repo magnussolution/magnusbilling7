@@ -13,36 +13,36 @@ $form = $this->beginWidget('CActiveForm', array(
 <br>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
 </div>
 
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Country')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'id' => 'country', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'country') ?>
 </div>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Type')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Type')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'type', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'type') ?>
 </div>
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill Number')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Invoice number')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Bill Number') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Invoice number') ?></p>
 </div>
 
 
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill Date:')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Bill Date:')) ?>
 <?php
 $this->widget(
     'ext.jui.EJuiDateTimePicker',
@@ -67,7 +67,7 @@ $this->widget(
     <?php echo $form->labelEx($modelTransferToMobile, "Bill amount (" . Yii::app()->session['currency_dest'] . ')') ?>
     <?php echo $form->textField($modelTransferToMobile, 'bill_amount', array('id' => 'bill_amount', 'class' => 'input', 'onkeyup' => 'showPriceEUR()')) ?>
     <?php echo $form->error($modelTransferToMobile, 'bill_amount') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Bill amount') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Bill amount') ?></p>
 </div>
 
 
@@ -82,7 +82,7 @@ $this->widget(
 
 
 <div class="controls" id="sendButton" style="display: none">
-<?php echo CHtml::submitButton(Yii::t('yii', 'next'), array(
+<?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));

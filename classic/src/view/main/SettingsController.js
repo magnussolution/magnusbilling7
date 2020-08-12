@@ -97,7 +97,7 @@ Ext.define('MBilling.view.main.SettingsController', {
                 },
                 url: 'index.php/configuration/theme',
                 success: function() {
-                    Ext.ux.Alert.alert(view.changeThemeTitle, t('successOperation'), 'success');
+                    Ext.ux.Alert.alert(view.changeThemeTitle, t('Success'), 'success');
                 }
             });
         }

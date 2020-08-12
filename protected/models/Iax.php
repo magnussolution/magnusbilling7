@@ -83,7 +83,7 @@ class Iax extends Model
     public function checkusername($attribute, $params)
     {
         if (preg_match('/ /', $this->username)) {
-            $this->addError($attribute, Yii::t('yii', 'No space allow in username'));
+            $this->addError($attribute, Yii::t('zii', 'No space allow in username'));
         }
 
     }

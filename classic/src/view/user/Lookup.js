@@ -8,26 +8,26 @@ Ext.define('MBilling.view.user.Lookup', {
     extend: 'Ext.ux.form.field.Lookup',
     alias: 'widget.userlookup',
     name: 'id_user',
-    fieldLabel: t('User'),
+    fieldLabel: t('Username'),
     displayField: 'idUserusername',
     displayFieldList: 'username',
     gridConfig: {
         xtype: 'userlist',
         fieldSearch: 'username',
         columns: [{
-            header: t('username'),
+            header: t('Username'),
             dataIndex: 'username',
             flex: 2
         }, {
-            header: t('email'),
+            header: t('Email'),
             dataIndex: 'email',
             flex: 2
         }, {
-            header: t('lastname'),
+            header: t('Last name'),
             dataIndex: 'lastname',
             flex: 2
         }, {
-            header: t('credit'),
+            header: t('Credit'),
             dataIndex: 'credit',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 2

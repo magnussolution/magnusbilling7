@@ -141,11 +141,11 @@ class TransferPaymentController extends Controller
 
         if (strlen($_POST['TransferToMobile']['number']) < 5) {
 
-            $this->modelTransferToMobile->addError('number', Yii::t('yii', 'Invalid number'));
+            $this->modelTransferToMobile->addError('number', Yii::t('zii', 'Invalid number'));
         }
 
         if (!is_numeric($_POST['TransferToMobile']['bill_amount']) || $_POST['TransferToMobile']['bill_amount'] < 1) {
-            $this->modelTransferToMobile->addError('bill_amount', Yii::t('yii', 'Bill amount need be numeric > 1'));
+            $this->modelTransferToMobile->addError('bill_amount', Yii::t('zii', 'Bill amount need be numeric > 1'));
         }
 
         if (count($this->modelTransferToMobile->getErrors())) {

@@ -7,13 +7,13 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2020 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+ * Please submit bug reports, patches, etc to https://github.com/magnussolution/magnusbilling7/issues
  * =======================================
  * Magnusbilling.org <info@magnussolution.com>
  * 17/08/2012
@@ -33,7 +33,7 @@ Ext.define('MBilling.view.callSummaryCallShop.List', {
         me.allowUpdate = false;
         me.allowDelete = false;
         me.extraButtons = [{
-            text: t('charts'),
+            text: t('Charts'),
             iconCls: 'icon-chart-column',
             handler: 'onChart',
             reference: 'chart',
@@ -44,15 +44,15 @@ Ext.define('MBilling.view.callSummaryCallShop.List', {
         me.titleAddFilter = t('Filter');
         me.extraFilters = [{
             field: 't.cabina',
-            label: t('cabina'),
+            label: t('Booth'),
             type: 'string'
         }, {
             field: 't.calledstation',
-            label: t('prefix'),
+            label: t('Prefix'),
             type: 'string'
         }];
         me.columns = [{
-            header: t('day'),
+            header: t('Day'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d'),
             dataIndex: 'day',
             filter: {
@@ -62,23 +62,23 @@ Ext.define('MBilling.view.callSummaryCallShop.List', {
             flex: 3
         }, {
             menuDisabled: true,
-            header: t('min_sessiontime'),
+            header: t('Duration'),
             dataIndex: 'sessiontime',
             flex: 2
         }, {
             menuDisabled: true,
-            header: t('aloc_all_calls'),
+            header: t('ALOC all calls'),
             dataIndex: 'aloc_all_calls',
             renderer: Helper.Util.formatsecondsToTime,
             flex: 3
         }, {
             menuDisabled: true,
-            header: t('nbcall'),
+            header: t('Total calls'),
             dataIndex: 'nbcall',
             flex: 3
         }, {
             menuDisabled: true,
-            header: t('buycost'),
+            header: t('Buy price'),
             dataIndex: 'buycost',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,
@@ -86,14 +86,14 @@ Ext.define('MBilling.view.callSummaryCallShop.List', {
             hidden: !App.user.isClient
         }, {
             menuDisabled: true,
-            header: t('sessionbill'),
+            header: t('Sell price'),
             dataIndex: 'price',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,
             hidden: !App.user.isClient
         }, {
             menuDisabled: true,
-            header: t('markup'),
+            header: t('Markup'),
             dataIndex: 'lucro',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,

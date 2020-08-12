@@ -29,7 +29,7 @@ class SendCreditRatesController extends Controller
     {
         $this->instanceModel = new SendCreditRates;
         $this->abstractModel = SendCreditRates::model();
-        $this->titleReport   = Yii::t('yii', 'SendCreditProducts');
+        $this->titleReport   = Yii::t('zii', 'Send Credit Products');
         parent::init();
     }
 

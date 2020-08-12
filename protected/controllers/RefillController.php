@@ -37,7 +37,7 @@ class RefillController extends Controller
     {
         $this->instanceModel = new Refill;
         $this->abstractModel = Refill::model();
-        $this->titleReport   = Yii::t('yii', 'Refill');
+        $this->titleReport   = Yii::t('zii', 'Refill');
         parent::init();
     }
 
@@ -73,7 +73,7 @@ class RefillController extends Controller
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
-                    'errors'  => Yii::t('yii', 'You cannot add credit to yourself'),
+                    'errors'  => Yii::t('zii', 'You cannot add credit to yourself'),
                 ));
                 exit;
             }
@@ -99,7 +99,7 @@ class RefillController extends Controller
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => array(),
-                        'errors'  => Yii::t('yii', 'Limit refill exceeded, your limit is') . ' ' . $maximunCredit . '. ' . Yii::t('yii', 'You have') . ' ' . $limite . ' ' . Yii::t('yii', 'to refill'),
+                        'errors'  => Yii::t('zii', 'Limit refill exceeded, your limit is') . ' ' . $maximunCredit . '. ' . Yii::t('zii', 'You have') . ' ' . $limite . ' ' . Yii::t('zii', 'to refill'),
                     ));
                     exit;
                 }

@@ -15,11 +15,11 @@ Ext.define('MBilling.view.prefix.Lookup', {
         xtype: 'prefixlist',
         fieldSearch: 'destination',
         columns: [{
-            header: t('prefix'),
+            header: t('Prefix'),
             dataIndex: 'prefix',
             flex: 2
         }, {
-            header: t('destination'),
+            header: t('Destination'),
             dataIndex: 'destination',
             flex: 2
         }]

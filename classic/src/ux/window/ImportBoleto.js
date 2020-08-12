@@ -10,7 +10,7 @@ Ext.define('Ext.ux.window.ImportBoleto', {
     modal: true,
     layout: 'fit',
     iconCls: 'boleto',
-    title: t('Importa Retorno Boleto'),
+    title: 'Importa Retorno Boleto',
     width: 400,
     height: 175,
     labelWidthFields: 180,
@@ -20,7 +20,7 @@ Ext.define('Ext.ux.window.ImportBoleto', {
         var me = this,
             fieldsImport = Ext.Array.merge(me.fieldsImport, [{
                 xtype: 'uploadfield',
-                fieldLabel: t('Selecion o arquivo .RET'),
+                fieldLabel: t('Select a .RET file'),
                 htmlTipInfo: me.htmlTipInfo
             }]);
         me.items = [{
@@ -32,10 +32,10 @@ Ext.define('Ext.ux.window.ImportBoleto', {
         me.title = me.title + (me.titleModule ? ' - ' + me.titleModule : '');
         me.bbar = [{
             xtype: 'tbtext',
-            text: t('maxSizeFile') + window.uploadFaxFilesize
+            text: t('Max size file') + window.uploadFaxFilesize
         }, '->', {
             iconCls: 'boleto',
-            text: t('importText'),
+            text: t('Import text'),
             scope: me,
             handler: me.onImport
         }];

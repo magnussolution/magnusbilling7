@@ -35,7 +35,7 @@ class CallSummaryMonthTrunkController extends Controller
 
         $this->instanceModel = new CallSummaryMonthTrunk;
         $this->abstractModel = CallSummaryMonthTrunk::model();
-        $this->titleReport   = Yii::t('yii', 'Calls Summary per Month per trunk');
+        $this->titleReport   = Yii::t('zii', 'Summary Month Trunk');
         parent::init();
     }
 

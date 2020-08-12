@@ -65,8 +65,8 @@ Ext.define('MBilling.view.dashboard.Module', {
                     height: height,
                     userCls: 'big-60 small-100'
                 }, {
-                    bodyPadding: 5,
                     xtype: 'component',
+                    bodyPadding: 5,
                     baseCls: 'weather-panel',
                     border: false,
                     height: (height - 60) / 4,
@@ -98,12 +98,12 @@ Ext.define('MBilling.view.dashboard.Module', {
                     cls: 'weather-panel shadow',
                     userCls: 'big-40 small-100'
                 }, {
+                    xtype: 'callonlinechartchart',
                     title: t('Simultaneous calls'),
                     cls: 'dashboard-main-chart shadow',
                     height: height,
                     showDownload: false,
                     hiddenButtonsCharts: true,
-                    xtype: 'callonlinechartchart',
                     userCls: 'big-60 small-100'
                 }, {
                     xtype: 'trunks',
@@ -112,18 +112,18 @@ Ext.define('MBilling.view.dashboard.Module', {
             } else {
                 if (App.user.showMCDashBoard == true && showCampaignDashBoad) {
                     me.items = [{
-                        header: true,
-                        title: t('DashBoard') + ' ' + t('callcenter'),
                         xtype: 'campaigndashboardlist',
+                        header: true,
+                        title: t('DashBoard callcenter'),
                         height: Ext.Element.getViewportHeight() - 130,
                         userCls: 'big-100 small-100',
                         cls: 'dashboard-main-chart shadow'
                     }]
                 } else {
                     me.items = [{
-                        header: true,
-                        title: t('Buy') + ' ' + 'Credit',
                         xtype: 'buycreditmodule',
+                        header: true,
+                        title: t('Buy credit'),
                         // 60% width when viewport is big enough,
                         // 100% when viewport is small
                         height: height,
@@ -131,9 +131,9 @@ Ext.define('MBilling.view.dashboard.Module', {
                         hidden: !showBuy,
                         cls: 'dashboard-main-chart shadow'
                     }, {
-                        header: true,
-                        title: t('Buy') + ' ' + 'DID',
                         xtype: 'didbuymodule',
+                        header: true,
+                        title: t('Buy DID'),
                         height: height,
                         userCls: 'big-50 small-100',
                         hidden: !showDid || !App.user.isClient,

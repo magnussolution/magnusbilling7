@@ -86,7 +86,7 @@ class UserCreditManager
     {
         $exists = false;
 
-        $description = $description . ', ' . Yii::t('yii', 'Old credit') . ' ' . round($actualCredit, 2);
+        $description = $description . ', ' . Yii::t('zii', 'Old credit') . ' ' . round($actualCredit, 2);
 
         //check if already exists refill with code
         if ($code > 0) {

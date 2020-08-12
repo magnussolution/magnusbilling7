@@ -42,7 +42,7 @@ class OfferCdrController extends Controller
     {
         $this->instanceModel = new OfferCdr;
         $this->abstractModel = OfferCdr::model();
-        $this->titleReport   = Yii::t('yii', 'Offer') . ' CDR';
+        $this->titleReport   = Yii::t('zii', 'Offer') . ' CDR';
 
         /*Aplica filtro padrao por data e causa de temrinao*/
         $filter         = isset($_REQUEST['filter']) ? $_REQUEST['filter'] : null;

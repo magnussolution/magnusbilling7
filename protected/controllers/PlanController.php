@@ -33,7 +33,7 @@ class PlanController extends Controller
     {
         $this->instanceModel = new Plan;
         $this->abstractModel = Plan::model();
-        $this->titleReport   = Yii::t('yii', 'Plan');
+        $this->titleReport   = Yii::t('zii', 'Plan');
 
         $this->abstractModelRelated = ServicesPlan::model();
         if (Yii::app()->session['isAdmin']) {

@@ -18,7 +18,7 @@
  *
  */
 ?>
-<div id="load" ><?php echo Yii::t('yii', 'Please wait while loading...') ?></div>
+<div id="load" ><?php echo Yii::t('zii', 'Please wait while loading...') ?></div>
 
 <?php
 if (Yii::app()->session['currency'] == 'U$S') {
@@ -56,7 +56,7 @@ $preference = $mp->create_preference($preference_data);
 </script>
 <div id="load" >
     <a id='link' href="<?php echo $preference['response']['init_point']; ?>">
-        <?php echo Yii::t('yii', 'Pay now') ?>
+        <?php echo Yii::t('zii', 'Pay Now') ?>
     </a>
 
 </div>

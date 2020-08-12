@@ -30,10 +30,10 @@ Ext.define('MBilling.view.main.ImportLogo', {
         },
         items: [{
             xtype: 'uploadfield',
+            name: 'logo',
             fieldLabel: t('Select file'),
             emptyText: t('Only PNG format') + '. ' + t('Height') + ' 60px',
             allowBlank: false,
-            name: 'logo',
             extAllowed: window.isDesktop ? ['jpg'] : ['png'],
             anchor: '0'
         }]

@@ -881,6 +881,98 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-07-28
+        if ($version == '7.3.7') {
+
+            $sql = "
+                UPDATE `pkg_module` SET text = 't(''Clients'')' WHERE id = 1;
+                UPDATE `pkg_module` SET text = 't(''DIDs'')' WHERE id = 5;
+                UPDATE `pkg_module` SET text = 't(''Billing'')' WHERE id = 7;
+                UPDATE `pkg_module` SET text = 't(''Rates'')' WHERE id = 8;
+                UPDATE `pkg_module` SET text = 't(''Reports'')' WHERE id = 9;
+                UPDATE `pkg_module` SET text = 't(''Routes'')' WHERE id = 10;
+                UPDATE `pkg_module` SET text = 't(''Settings'')' WHERE id = 12;
+                UPDATE `pkg_module` SET text = 't(''Voice Broadcasting'')' WHERE id = 13;
+                UPDATE `pkg_module` SET text = 't(''CallShop'')' WHERE id = 14;
+            ";
+            $this->executeDB($sql);
+
+            $sql = "
+                UPDATE `pkg_module` SET text = 't(''Users'')' WHERE module = 'user';
+                UPDATE `pkg_module` SET text = 't(''SIP Users'')' WHERE module = 'sip';
+                UPDATE `pkg_module` SET text = 't(''Calls Online'')' WHERE module = 'callonline';
+                UPDATE `pkg_module` SET text = 't(''CallerID'')' WHERE module = 'callerid';
+                UPDATE `pkg_module` SET text = 't(''ATA Linksys'')' WHERE module = 'sipuras';
+                UPDATE `pkg_module` SET text = 't(''Restricted Number'')' WHERE module = 'restrictedphonenumber';
+                UPDATE `pkg_module` SET text = 't(''Callback'')' WHERE module = 'callback';
+                UPDATE `pkg_module` SET text = 't(''Buy Credit'')' WHERE module = 'buycredit';
+                UPDATE `pkg_module` SET text = 't(''Refill Providers'')' WHERE module = 'refillprovider';
+
+
+
+                UPDATE `pkg_module` SET text = 't(''Refills'')' WHERE module = 'refill';
+                UPDATE `pkg_module` SET text = 't(''Payment Methods'')' WHERE module = 'methodpay';
+                UPDATE `pkg_module` SET text = 't(''Voucher'')' WHERE module = 'voucher';
+                UPDATE `pkg_module` SET text = 't(''Boleto'')' WHERE module = 'boleto';
+
+
+                UPDATE `pkg_module` SET text = 't(''DIDs'')' WHERE module = 'did';
+                UPDATE `pkg_module` SET text = 't(''DID Destination'')' WHERE module = 'diddestination';
+                UPDATE `pkg_module` SET text = 't(''DIDs Use'')' WHERE module = 'diduse';
+                UPDATE `pkg_module` SET text = 't(''IVRs'')' WHERE module = 'ivr';
+                UPDATE `pkg_module` SET text = 't(''Queues'')' WHERE module = 'queue';
+                UPDATE `pkg_module` SET text = 't(''Queues Members'')' WHERE module = 'queuemember';
+                UPDATE `pkg_module` SET text = 't(''DIDww'')' WHERE module = 'didww';
+
+
+                UPDATE `pkg_module` SET text = 't(''Plans'')' WHERE module = 'plan';
+                UPDATE `pkg_module` SET text = 't(''Tariffs'')' WHERE module = 'rate';
+                UPDATE `pkg_module` SET text = 't(''Prefixes'')' WHERE module = 'prefix';
+                UPDATE `pkg_module` SET text = 't(''User Custom Rates'')' WHERE module = 'userrate';
+                UPDATE `pkg_module` SET text = 't(''Offers'')' WHERE module = 'offer';
+                UPDATE `pkg_module` SET text = 't(''Offer CDR'')' WHERE module = 'offercdr';
+                UPDATE `pkg_module` SET text = 't(''Offer Use'')' WHERE module = 'offeruse';
+
+
+                UPDATE `pkg_module` SET text = 't(''CDR'')' WHERE module = 'call';
+                UPDATE `pkg_module` SET text = 't(''CDR Failed'')' WHERE module = 'callfailed';
+                UPDATE `pkg_module` SET text = 't(''Summary per Day'')' WHERE module = 'callsummaryperday';
+
+
+                UPDATE `pkg_module` SET text = 't(''Providers'')' WHERE module = 'provider';
+                UPDATE `pkg_module` SET text = 't(''Trunks'')' WHERE module = 'trunk';
+
+                UPDATE `pkg_module` SET text = 't(''Group Users'')' WHERE module = 'groupuser';
+                UPDATE `pkg_module` SET text = 't(''Configuration'')' WHERE module = 'configuration';
+                UPDATE `pkg_module` SET text = 't(''Emails Templates'')' WHERE module = 'templatemail';
+                UPDATE `pkg_module` SET text = 't(''Log Users'')' WHERE module = 'logusers';
+                UPDATE `pkg_module` SET text = 't(''SMTP'')' WHERE module = 'smtps';
+
+
+                UPDATE `pkg_module` SET text = 't(''Campaigns'')' WHERE module = 'campaign';
+                UPDATE `pkg_module` SET text = 't(''Phonebooks'')' WHERE module = 'phonebook';
+                UPDATE `pkg_module` SET text = 't(''Phonenumbers'')' WHERE module = 'phonenumber';
+                UPDATE `pkg_module` SET text = 't(''Polls'')' WHERE module = 'campaignpoll';
+                UPDATE `pkg_module` SET text = 't(''Polls Reports'')' WHERE module = 'campaignpollinfo';
+                UPDATE `pkg_module` SET text = 't(''Restrict phone'')' WHERE module = 'campaignrestrictphone';
+                UPDATE `pkg_module` SET text = 't(''SMS'')' WHERE module = 'sms';
+                UPDATE `pkg_module` SET text = 't(''Campanha Rápida'')' WHERE module = 'Quick Campaign';
+                UPDATE `pkg_module` SET text = 't(''Campaigns DashBoard'')' WHERE module = 'campaigndashboard';
+
+
+                UPDATE `pkg_module` SET text = 't(''Booths'')' WHERE module = 'callshop';
+                UPDATE `pkg_module` SET text = 't(''Booths Report'')' WHERE module = 'callshopcdr';
+                UPDATE `pkg_module` SET text = 't(''Booths Tariffs'')' WHERE module = 'ratecallshop';
+                UPDATE `pkg_module` SET text = 't(''Summary per Day'')' WHERE module = 'callsummarycallshop';
+
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.3.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

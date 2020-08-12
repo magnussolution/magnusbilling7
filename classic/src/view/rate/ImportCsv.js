@@ -16,24 +16,26 @@
 Ext.define('MBilling.view.rate.ImportCsv', {
     extend: 'Ext.ux.window.ImportCsv',
     alias: 'widget.rateimportcsv',
-    htmlTipInfo: '<br><b>' + t('dialprefix') + ", " + t('destination') + ", " + t('rateinitial') + "</b><br>" + "5511, Brasil SP, 0.080<br>" + "34, Spain Fix, 0.056<br>" + "54, Argentina, 0.025<br><br>" + "<b>" + t('buyrateinitblock') + ' ' + t('and') + ' ' + t('buyrateincrement') + ' ' + t('optional') + "</b>",
+    htmlTipInfo: '<br><b>' + t('Prefix') + ", " + t('Destination') + ", " + t('Sell price') + "</b><br>" + "5511, Brasil SP, 0.080<br>" + "34, Spain Fix, 0.056<br>" + "54, Argentina, 0.025<br><br>" + "<b>" + t('Buy price initblock') + ', ' + t('Buy price increment') + ' ' + t('is optional') + "</b>",
     labelWidthFields: 160,
     height: window.isThemeTriton ? 350 : 275,
     initComponent: function() {
         var me = this;
         me.fieldsImport = [{
             xtype: 'plancombo',
+            name: 'id_plan',
             fieldLabel: t('Plan'),
             width: 350
         }, {
             xtype: 'trunkgroupcombo',
-            fieldLabel: t('Trunk Groups'),
+            name: 'id_trunk',
+            fieldLabel: t('Trunk groups'),
             width: 350,
             hidden: !App.user.isAdmin
         }, {
-            style: 'margin-top:25px; overflow: visible;',
             xtype: 'fieldset',
-            title: t('Csv Format'),
+            style: 'margin-top:25px; overflow: visible;',
+            title: t('CSV format'),
             collapsible: true,
             collapsed: false,
             defaults: {

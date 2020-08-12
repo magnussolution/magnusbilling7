@@ -29,18 +29,18 @@ $fieldOption['readonly'] = true;
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Number')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'number', $fieldOption) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Number') ?></p>
 </div>
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'country')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'country', $fieldOption) ?>
     <?php echo $form->error($modelTransferToMobile, 'country') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'country') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Country') ?></p>
 </div>
 
 
@@ -58,13 +58,13 @@ $modelSendCreditProducts = SendCreditProducts::model()->findAll(array(
 
 $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operator_name');?>
         <div class="field">
-            <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'operator')) ?>
+            <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Operator')) ?>
             <div class="styled-select">
                 <?php echo $form->dropDownList($modelTransferToMobile,
     'operator',
     $operators,
     array(
-        'empty'    => Yii::t('yii', 'Select the operator'),
+        'empty'    => Yii::t('zii', 'Select the operator'),
         'options'  => array(isset($_POST['TransferMobileCredit']['operator_name']) && strlen($_POST['TransferMobileCredit']['operator_name']) > 2 ? $_POST['TransferMobileCredit']['operator_name'] : null => array('selected' => true)),
         'onchange' => 'showProducts()',
         'id'       => 'operatorfield',
@@ -80,10 +80,10 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
     <div class="field" id='metric' style="display:none; border:0">
 <?php endif?>
 
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Meter')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Meter')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'metric', array('class' => 'input')) ?>
     <?php echo $form->error($modelTransferToMobile, 'metric') ?>
-    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Meter') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Meter') ?></p>
 </div>
 
 <?php if (Yii::app()->session['is_interval'] == true): ?>
@@ -147,7 +147,7 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
 </div>
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('yii', $buttonName), array(
+<?php echo CHtml::submitButton(Yii::t('zii', $buttonName), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));

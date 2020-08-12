@@ -49,7 +49,7 @@ Ext.define('MBilling.view.callOnLine.SpyCall', {
                 items: [{
                     xtype: 'siplookup',
                     name: 'id_sip',
-                    displayField: t('Sip Account')
+                    displayField: t('Sip user')
                 }, {
                     xtype: 'combobox',
                     name: 'type',
@@ -57,11 +57,11 @@ Ext.define('MBilling.view.callOnLine.SpyCall', {
                     forceSelection: true,
                     editable: false,
                     store: [
-                        ['b', t('Only Spy')],
+                        ['b', t('Only SPY')],
                         ['w', t('Whisper, can talk to the spied')],
                         ['W', t('Whisper, can talk to the spied but cannot listen the call')]
                     ],
-                    fieldLabel: t('Spy type')
+                    fieldLabel: t('SPY type')
                 }]
             }];
             me.title = me.title + (me.titleModule ? ' - ' + me.titleModule : '');
@@ -72,7 +72,7 @@ Ext.define('MBilling.view.callOnLine.SpyCall', {
                 handler: me.onSendSpy
             }];
         } else {
-            Ext.ux.Alert.alert(me.titleError, 'Please Select only a record', 'notification');
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
         }
         me.callParent(arguments);
     },
@@ -80,7 +80,7 @@ Ext.define('MBilling.view.callOnLine.SpyCall', {
         var me = this,
             store = me.list.store;
         if (!me.down('form').isValid()) {
-            Ext.ux.Alert.alert('Alert', t('Select sip account'), 'notification');
+            Ext.ux.Alert.alert('Alert', t('Select SIP user'), 'notification');
             return;
         }
         //btn.disable();
@@ -90,7 +90,7 @@ Ext.define('MBilling.view.callOnLine.SpyCall', {
             url: 'index.php/callOnLine/spyCall',
             params: {
                 id_sip: selected.get('id_sip'),
-                type: selected.get('type'),
+                type: selected.get('Type'),
                 channel: me.channel
             },
             scope: me,

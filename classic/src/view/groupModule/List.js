@@ -13,13 +13,13 @@ Ext.define('MBilling.view.groupModule.List', {
         me.columns = [{
             xtype: 'templatecolumn',
             tpl: '{idGroupname}',
-            text: t('IdGroup'),
+            text: t('Group'),
             dataIndex: 'id_group',
             comboFilter: 'groupusercombo'
         }, {
             xtype: 'templatecolumn',
             tpl: '{idModuletext}',
-            text: t('IdModule'),
+            text: t('Module'),
             dataIndex: 'id_module',
             comboFilter: 'modulecombo'
         }];

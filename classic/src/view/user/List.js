@@ -18,38 +18,38 @@ Ext.define('MBilling.view.user.List', {
             hidden: App.user.isClient || !me.allowCreate || window.isTablet
         }];
         me.columns = me.columns || [{
-            header: t('Id'),
+            header: t('ID'),
             dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin
         }, {
-            header: t('username'),
+            header: t('Username'),
             dataIndex: 'username',
             flex: 2
         }, {
-            header: t('lastname'),
+            header: t('Last name'),
             dataIndex: 'lastname',
             flex: 3
         }, {
-            header: t('firstname'),
+            header: t('First name'),
             dataIndex: 'firstname',
             flex: 3,
             hidden: window.isTablet
         }, {
-            header: t('email'),
+            header: t('Email'),
             dataIndex: 'email',
             flex: 4,
             hidden: window.isTablet
         }, {
-            header: t('credit'),
+            header: t('Credit'),
             dataIndex: 'credit',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 2
         }, {
             xtype: 'templatecolumn',
             tpl: '{idPlanname}',
-            header: t('plan'),
+            header: t('Plan'),
             dataIndex: 'id_plan',
             comboFilter: 'plancombo',
             hidden: window.isTablet,
@@ -57,14 +57,14 @@ Ext.define('MBilling.view.user.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idGroupname}',
-            header: t('group'),
+            header: t('Group'),
             dataIndex: 'id_group',
             comboFilter: 'groupusercombo',
             flex: 2,
             hidden: App.user.isClient || App.user.isAgent || window.isTablet,
             hideable: !App.user.isClient && !App.user.isAgent
         }, {
-            header: t('agent'),
+            header: t('Agent'),
             dataIndex: 'idUserusername',
             filter: {
                 type: 'string',
@@ -74,7 +74,7 @@ Ext.define('MBilling.view.user.List', {
             hidden: !App.user.isAdmin || window.isTablet,
             hideable: App.user.isAdmin
         }, {
-            header: t('status'),
+            header: t('Status'),
             dataIndex: 'active',
             renderer: Helper.Util.formatBooleanActive,
             flex: 2,
@@ -89,83 +89,83 @@ Ext.define('MBilling.view.user.List', {
             hidden: App.user.isClient || window.isTablet,
             hideable: !App.user.isClient
         }, {
-            header: t('creationdate'),
+            header: t('Creation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
             hidden: window.isTablet,
             flex: 4
         }, {
             dataIndex: 'id_offer',
-            header: t('offer'),
+            header: t('Offer'),
             flex: 2,
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent
         }, {
-            header: t('typepaid'),
+            header: t('Type paid'),
             dataIndex: 'typepaid',
             flex: 2,
             renderer: Helper.Util.formattypepaid,
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('prepaid')],
-                    [1, t('pospaid')]
+                    [0, t('Prepaid')],
+                    [1, t('Postpaid')]
                 ]
             },
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent
         }, {
-            header: t('company_name'),
+            header: t('Company name'),
             dataIndex: 'company_name',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 2
         }, {
-            header: t('city'),
+            header: t('City'),
             dataIndex: 'city',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('state'),
+            header: t('State'),
             dataIndex: 'state',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('country'),
+            header: t('Country'),
             dataIndex: 'country',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('zipcode'),
+            header: t('Zip code'),
             dataIndex: 'zipcode',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('phone'),
+            header: t('Phone'),
             dataIndex: 'phone',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('creditlimit'),
+            header: t('Credit limit'),
             dataIndex: 'creditlimit',
             hidden: true,
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('record_call'),
+            header: t('Record call'),
             dataIndex: 'record_call',
             flex: 1,
             renderer: Helper.Util.formattyyesno,
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('no')],
-                    [1, t('yes')]
+                    [0, t('No')],
+                    [1, t('Yes')]
                 ]
             },
             hidden: true,

@@ -18,11 +18,11 @@ Ext.define('MBilling.view.module.List', {
         me.allowCreate = false;
         me.allowDelete = false;
         me.columns = [{
-            text: t('Id'),
+            text: t('ID'),
             dataIndex: 'id',
             hidden: true
         }, {
-            text: t('menu_text'),
+            text: t('Menu title'),
             dataIndex: 'text'
         }, {
             text: t('IconCls'),
@@ -30,7 +30,7 @@ Ext.define('MBilling.view.module.List', {
         }, {
             xtype: 'templatecolumn',
             tpl: '{idModuletext}',
-            text: t('main_menu'),
+            text: t('Main menu'),
             dataIndex: 'id_module',
             comboFilter: 'modulecombo'
         }, {
