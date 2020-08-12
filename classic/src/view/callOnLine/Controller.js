@@ -24,12 +24,12 @@ Ext.define('MBilling.view.callOnLine.Controller', {
     onEdit: function() {
         var me = this,
             record = me.list.getSelectionModel().getSelection()[0],
-            id = record.get('Uniqueid');
+            id = record.get('uniqueid');
         me.callParent(arguments);
         Ext.Ajax.request({
             url: 'index.php/callOnLine/getChannelDetails',
             params: {
-                id: record.get('Uniqueid'),
+                id: record.get('uniqueid'),
                 channel: record.get('canal'),
                 server: record.get('server')
             },

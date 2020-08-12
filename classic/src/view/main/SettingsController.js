@@ -14,7 +14,7 @@ Ext.define('MBilling.view.main.SettingsController', {
     },
     onSelectLayout: function(tree, record) {
         var me = this,
-            type = record.get('Type');
+            type = record.get('type');
         me.getView().userLayout = type;
         me.lookupReference('imageLayout').setSrc(me.getView().pathScreens + (type === 'standard' ? 'blue-crisp' : 'blue-crisp-desktop') + '.png');
     },

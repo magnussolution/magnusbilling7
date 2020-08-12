@@ -128,7 +128,7 @@ Ext.define('MBilling.view.sip.Controller', {
             form.findField('extension').setVisible(false);
         }
         this.callParent(arguments);
-        valueAllow = me.formPanel.idRecord ? record.get('Allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'];
+        valueAllow = me.formPanel.idRecord ? record.get('allow').split(',') : ['g729', 'gsm', 'alaw', 'ulaw'];
         fieldAllow = me.formPanel.down('checkboxgroup');
         fieldAllow.setValue({
             allow: valueAllow
