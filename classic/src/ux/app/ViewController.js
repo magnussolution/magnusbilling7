@@ -37,7 +37,7 @@ Ext.define('Ext.ux.app.ViewController', {
     },
     msgConfirmation: t('Confirm delete'),
     msgDeleteAll: t('Confirm delete all'),
-    nameSuccessRequest: t('Success'),
+    nameSuccessRequest: 'success',
     nameMsgRequest: 'msg',
     init: function() {
         var me = this;

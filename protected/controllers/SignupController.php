@@ -53,6 +53,29 @@ class SignupController extends Controller
 
             }
             $this->redirect('/');
+        } else if (isset($_GET['username']) && is_numeric($_GET['username']) && isset($_GET['password']) && isset($_GET['id'])) {
+
+            $signup = Signup::model()->find('username = :key AND password = :key1 AND id = :key2', array(
+                ':key'  => $_GET['username'],
+                ':key1' => $_GET['password'],
+                ':key2' => (int) $_GET['id'],
+
+            ));
+
+            $mail = new Mail(Mail::$TYPE_SIGNUP, $id);
+            try {
+                $mail->send();
+            } catch (Exception $e) {
+            }
+
+            if ($this->config['global']['signup_admin_email'] == 1) {
+                $mail->setTitle('NEW USER SIGNUP FROM MAGNUSBILLING SIGNUP FORM. USERNAME ');
+                $mail->send($this->config['global']['admin_email']);
+            }
+
+            $this->render('view', array('signup' => $signup));
+        } else {
+            exit('Error');
         }
     }
 
