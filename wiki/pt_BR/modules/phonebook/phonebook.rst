@@ -11,7 +11,7 @@ Lista de campos
 Nome
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Status
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

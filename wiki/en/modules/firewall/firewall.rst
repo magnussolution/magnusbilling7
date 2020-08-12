@@ -11,17 +11,17 @@ Field list
 IP
 ""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _firewall-action:
 
-Perm_ban
+Perm ban
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

@@ -11,7 +11,7 @@ Lista de campos
 Serial
 """"""
 
-Linksys serial number
+| Linksys serial number
 
 
 
@@ -21,7 +21,7 @@ Linksys serial number
 MAC
 """
 
-Linksys MAC address
+| Linksys MAC address
 
 
 
@@ -31,7 +31,7 @@ Linksys MAC address
 Senha do usuário
 """""""""""""""""
 
-Usuário para entrar na configuração do LinkSys
+| Usuário para entrar na configuração do LinkSys
 
 
 
@@ -41,7 +41,7 @@ Usuário para entrar na configuração do LinkSys
 Senha de administração
 """"""""""""""""""""""""
 
-Senha para entrar na configuração do LinkSys
+| Senha para entrar na configuração do LinkSys
 
 
 
@@ -51,7 +51,7 @@ Senha para entrar na configuração do LinkSys
 Bloquear reset
 """"""""""""""
 
-Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
+| Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
 
 
 
@@ -61,7 +61,7 @@ Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
 Ativar acesso WEB
 """""""""""""""""
 
-Tenha cuidadol. Se desativado, não será mais possível entrar nas configuraçōes do Linksys.
+| Tenha cuidadol. Se desativado, não será mais possível entrar nas configuraçōes do Linksys.
 
 
 
@@ -71,7 +71,7 @@ Tenha cuidadol. Se desativado, não será mais possível entrar nas configuraç�
 Marca
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,7 +81,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Mudar
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -91,7 +91,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -101,7 +101,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Senha
 """""
 
-Senha da Conta VoIP
+| Senha da Conta VoIP
 
 
 
@@ -111,7 +111,7 @@ Senha da Conta VoIP
 Usar codec preferencial
 """""""""""""""""""""""
 
-Somente usar o codec preferencial
+| Somente usar o codec preferencial
 
 
 
@@ -121,7 +121,7 @@ Somente usar o codec preferencial
 Codec
 """""
 
-Configurar codec preferencial
+| Configurar codec preferencial
 
 
 
@@ -131,7 +131,7 @@ Configurar codec preferencial
 Register expires
 """"""""""""""""
 
-Tempo em segundos que o Linksys fica enviando o REGISTER para o servidor. Se for receber chamadas nesta linha, melhor deixar entre 120 e 480 segundos.
+| Tempo em segundos que o Linksys fica enviando o REGISTER para o servidor. Se for receber chamadas nesta linha, melhor deixar entre 120 e 480 segundos.
 
 
 
@@ -141,7 +141,7 @@ Tempo em segundos que o Linksys fica enviando o REGISTER para o servidor. Se for
 Dial plan
 """""""""
 
-Read linkys documentation
+| Read linkys documentation
 
 
 
@@ -151,7 +151,7 @@ Read linkys documentation
 NAT Mapping
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -161,7 +161,7 @@ Nós ainda não escrevemos a descrição deste campo.
 NAT keep alive
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -171,7 +171,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -181,7 +181,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Senha
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +191,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Usar codec preferencial
 """""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -201,7 +201,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Codec
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +211,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Register expires
 """"""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -221,7 +221,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Dial plan
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +231,7 @@ Nós ainda não escrevemos a descrição deste campo.
 NAT Mapping
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -241,7 +241,7 @@ Nós ainda não escrevemos a descrição deste campo.
 NAT keep alive
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -251,7 +251,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Habilitar STUN
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -261,7 +261,7 @@ Nós ainda não escrevemos a descrição deste campo.
 STUN Test
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -271,7 +271,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Substitute VIA Addr
 """""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -281,7 +281,7 @@ Nós ainda não escrevemos a descrição deste campo.
 STUN Server
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

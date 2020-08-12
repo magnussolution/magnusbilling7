@@ -11,7 +11,7 @@ Lista de campos
 ID
 ""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Nome
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

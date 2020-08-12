@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-Provider name
+| Provider name
 
 
 
@@ -21,7 +21,7 @@ Provider name
 Credit
 """"""
 
-How much credit do you have in your provider account? This field is optional.
+| How much credit do you have in your provider account? This field is optional.
 
 
 
@@ -31,7 +31,7 @@ How much credit do you have in your provider account? This field is optional.
 Credit control
 """"""""""""""
 
-If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.
+| If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.
 
 
 
@@ -41,7 +41,7 @@ If you set to YES and your provider credit is < 0, all trunks from this provider
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

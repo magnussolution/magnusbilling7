@@ -11,7 +11,7 @@ Lista de campos
 Nome
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Seg-Sex intervalos
 """"""""""""""""""
 
-Hora que inicia o horario de atendimento semanal
+| Hora que inicia o horario de atendimento semanal
 
 
 
@@ -41,7 +41,7 @@ Hora que inicia o horario de atendimento semanal
 Sábado intervalos
 """"""""""""""""""
 
-Hora que inicia o horario de atendimento no sabado
+| Hora que inicia o horario de atendimento no sabado
 
 
 
@@ -51,7 +51,7 @@ Hora que inicia o horario de atendimento no sabado
 Intervalos Domingo
 """"""""""""""""""
 
-Hora que inicia o horario de atendimento no domingo
+| Hora que inicia o horario de atendimento no domingo
 
 
 
@@ -61,7 +61,7 @@ Hora que inicia o horario de atendimento no domingo
 Áudio Trabalhando
 """"""""""""""""""
 
-Audio para executar dentro dos horarios de atendimento
+| Audio para executar dentro dos horarios de atendimento
 
 
 
@@ -71,7 +71,7 @@ Audio para executar dentro dos horarios de atendimento
 Trabalhando
 """""""""""
 
-Audio para executar fora de atendimento
+| Audio para executar fora de atendimento
 
 
 
@@ -81,7 +81,7 @@ Audio para executar fora de atendimento
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -91,7 +91,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -101,7 +101,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -111,7 +111,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -121,7 +121,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -131,7 +131,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -141,7 +141,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -151,7 +151,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -161,7 +161,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -171,7 +171,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -181,7 +181,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +191,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -201,7 +201,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +211,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -221,7 +221,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +231,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -241,7 +241,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -251,7 +251,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -261,7 +261,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -271,7 +271,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -281,7 +281,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -291,7 +291,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -301,7 +301,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -311,7 +311,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -321,7 +321,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -331,7 +331,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -341,7 +341,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -351,7 +351,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -361,7 +361,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -371,7 +371,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -381,7 +381,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -391,7 +391,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -401,7 +401,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -411,7 +411,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -421,7 +421,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -431,7 +431,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -441,7 +441,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -451,7 +451,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -461,7 +461,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -471,7 +471,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -481,7 +481,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -491,7 +491,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -501,7 +501,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -511,7 +511,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -521,7 +521,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -531,7 +531,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -541,7 +541,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -551,7 +551,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -561,7 +561,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -571,7 +571,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -581,7 +581,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -591,7 +591,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -601,7 +601,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -611,7 +611,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -621,7 +621,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -631,7 +631,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Discar direto conta SIP
 """""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -641,7 +641,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -651,7 +651,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -661,7 +661,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -671,7 +671,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -681,7 +681,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -691,7 +691,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -701,7 +701,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -711,7 +711,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -721,7 +721,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -731,7 +731,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -741,7 +741,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -751,7 +751,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -761,7 +761,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -771,7 +771,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -781,7 +781,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -791,7 +791,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -801,7 +801,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -811,7 +811,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -821,7 +821,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -831,7 +831,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -841,7 +841,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -851,7 +851,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -861,7 +861,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -871,7 +871,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -881,7 +881,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -891,7 +891,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -901,7 +901,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -911,7 +911,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -921,7 +921,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -931,7 +931,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -941,7 +941,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -951,7 +951,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -961,7 +961,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -971,7 +971,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -981,7 +981,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -991,7 +991,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1001,7 +1001,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1011,7 +1011,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1021,7 +1021,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1031,7 +1031,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1041,7 +1041,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1051,7 +1051,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1061,7 +1061,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1071,7 +1071,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1081,7 +1081,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1091,7 +1091,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1101,7 +1101,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1111,7 +1111,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1121,7 +1121,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1131,7 +1131,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1141,7 +1141,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1151,7 +1151,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1161,7 +1161,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1171,7 +1171,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -1181,7 +1181,7 @@ Nós ainda não escrevemos a descrição deste campo.
 DialPlan
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

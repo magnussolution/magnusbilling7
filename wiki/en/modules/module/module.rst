@@ -11,7 +11,7 @@ Field list
 Text
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 IconCls
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Main menu
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Order
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

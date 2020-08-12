@@ -14,6 +14,7 @@
  * 2020-08-07
  */
 Locale.load({
+    'Click to more details': 'Clique para mais informaçōes',
     'On Phone': 'Falando',
     'Receiving': 'Recebendo',
     'Ringing': 'Tocando',

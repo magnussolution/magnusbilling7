@@ -21,7 +21,8 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'On Phone' => 'Falando',
+            'Click to more details' => 'Clique para mais informaçōes',
+    'On Phone' => 'Falando',
     'Receiving' => 'Recebendo',
     'Ringing' => 'Tocando',
     'Waiting' => 'Esperando',

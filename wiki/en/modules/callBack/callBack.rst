@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Destination number
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Status
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

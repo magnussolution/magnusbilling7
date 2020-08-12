@@ -11,7 +11,7 @@ Lista de campos
 Crédito
 """"""""
 
-Valor do VOUCHER
+| Valor do VOUCHER
 
 
 
@@ -21,7 +21,7 @@ Valor do VOUCHER
 Plano
 """""
 
-Plano que será usado no cliente que usar este crédito.
+| Plano que será usado no cliente que usar este crédito.
 
 
 
@@ -31,7 +31,7 @@ Plano que será usado no cliente que usar este crédito.
 Idioma
 """"""
 
-Idioma que será usado
+| Idioma que será usado
 
 
 
@@ -41,7 +41,7 @@ Idioma que será usado
 Regra prefixo
 """""""""""""
 
-Regra que será usado no campo DDD do cliente
+| Regra que será usado no campo DDD do cliente
 
 
 
@@ -51,7 +51,7 @@ Regra que será usado no campo DDD do cliente
 Quantidade
 """"""""""
 
-Quantos VOUCHER você deseja gerar?
+| Quantos VOUCHER você deseja gerar?
 
 
 
@@ -61,7 +61,7 @@ Quantos VOUCHER você deseja gerar?
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -71,7 +71,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Voucher
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

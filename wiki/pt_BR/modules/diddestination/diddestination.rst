@@ -11,7 +11,7 @@ Lista de campos
 DID
 """
 
-Selecione o DID para criar o novo destino
+| Selecione o DID para criar o novo destino
 
 
 
@@ -21,7 +21,7 @@ Selecione o DID para criar o novo destino
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Status
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Prioridade
 """"""""""
 
-Você pode criar ate 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, ate completar. 
+| Você pode criar ate 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, ate completar. 
 
 
 
@@ -51,7 +51,7 @@ Você pode criar ate 5 destino para o mesmo DID. Se a chamada não completa no 1
 Tipo
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -61,7 +61,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Destino
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -71,7 +71,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URA
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,7 +81,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fila de espera
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -91,7 +91,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta SIP
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -101,7 +101,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Contexto
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

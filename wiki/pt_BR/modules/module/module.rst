@@ -11,7 +11,7 @@ Lista de campos
 Text
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 IconCls
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Menu principal
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Em ordem
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -11,7 +11,7 @@ Lista de campos
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Status
 """"""
 
-Após o usuário ativar o Token, somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.
+| Após o usuário ativar o Token, somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.
 
 
 
@@ -31,7 +31,7 @@ Após o usuário ativar o Token, somente será possível logar no painel ou desa
 Código
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Google authenticator key
 """"""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

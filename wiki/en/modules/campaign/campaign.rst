@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Plan
 """"
 
-What plan do you want to use to bill this campaign?
+| What plan do you want to use to bill this campaign?
 
 
 
@@ -31,7 +31,7 @@ What plan do you want to use to bill this campaign?
 Name
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Status
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We did not write the description to this field.
 Starting date
 """""""""""""
 
-The campaign will start from this date.
+| The campaign will start from this date.
 
 
 
@@ -61,7 +61,7 @@ The campaign will start from this date.
 Expiration date
 """""""""""""""
 
-The campaign will stop in this date
+| The campaign will stop in this date
 
 
 
@@ -71,7 +71,7 @@ The campaign will stop in this date
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Audio
 """""
 
-Available to massive call. The audio needs to be compatible with Asterisk. The recomended format is GSM or WWAV(8k hz mono).
+| Available to massive call. The audio needs to be compatible with Asterisk. The recomended format is GSM or WWAV(8k hz mono).
 
 
 
@@ -91,7 +91,7 @@ Available to massive call. The audio needs to be compatible with Asterisk. The r
 Audio 2
 """""""
 
-If you use TTS, the name will be executed between Audio and Audio2
+| If you use TTS, the name will be executed between Audio and Audio2
 
 
 
@@ -101,7 +101,7 @@ If you use TTS, the name will be executed between Audio and Audio2
 Restrict phone
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We did not write the description to this field.
 Auto reprocess
 """"""""""""""
 
-If there are no active numbers in this campaign phone book, reactivates all pending numbers.
+| If there are no active numbers in this campaign phone book, reactivates all pending numbers.
 
 
 
@@ -121,7 +121,7 @@ If there are no active numbers in this campaign phone book, reactivates all pend
 Phonebook
 """""""""
 
-Select one or more phonebooks to to be used.
+| Select one or more phonebooks to to be used.
 
 
 
@@ -131,7 +131,7 @@ Select one or more phonebooks to to be used.
 Number to forward
 """""""""""""""""
 
-Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.
+| Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.
 
 
 
@@ -141,7 +141,7 @@ Do you want to forward the call after the audio?  E.g, if the callee presses 1, 
 Forward type
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -151,7 +151,7 @@ We did not write the description to this field.
 Destination
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -161,7 +161,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -171,7 +171,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +181,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -191,7 +191,7 @@ We did not write the description to this field.
 Destination
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -201,7 +201,7 @@ We did not write the description to this field.
 Daily start time
 """"""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -211,7 +211,7 @@ We did not write the description to this field.
 Daily stop time
 """""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We did not write the description to this field.
 Monday
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We did not write the description to this field.
 Tuesday
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -241,7 +241,7 @@ We did not write the description to this field.
 Wednesday
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -251,7 +251,7 @@ We did not write the description to this field.
 Thursday
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -261,7 +261,7 @@ We did not write the description to this field.
 Friday
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -271,7 +271,7 @@ We did not write the description to this field.
 Saturday
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -281,7 +281,7 @@ We did not write the description to this field.
 Sunday
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -291,7 +291,7 @@ We did not write the description to this field.
 Call limit
 """"""""""
 
-How many numbers will be processed per minute?
+| How many numbers will be processed per minute?
 
 
 
@@ -301,7 +301,7 @@ How many numbers will be processed per minute?
 Maximum call limit
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -311,7 +311,7 @@ We did not write the description to this field.
 Audio duration
 """"""""""""""
 
-Used to control the max completed calls.
+| Used to control the max completed calls.
 
 
 
@@ -321,7 +321,7 @@ Used to control the max completed calls.
 Toggle max completed calls
 """"""""""""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -331,7 +331,7 @@ We did not write the description to this field.
 Max completed calls
 """""""""""""""""""
 
-How many calls you want to send. You need the above parameters active to control it.
+| How many calls you want to send. You need the above parameters active to control it.
 
 
 
@@ -341,7 +341,7 @@ How many calls you want to send. You need the above parameters active to control
 From
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -351,7 +351,7 @@ We did not write the description to this field.
 Description or SMS Text
 """""""""""""""""""""""
 
-Text to send to SMS. You can use %name% where you want to show the number name.
+| Text to send to SMS. You can use %name% where you want to show the number name.
 
 
 
@@ -361,7 +361,7 @@ Text to send to SMS. You can use %name% where you want to show the number name.
 Audio 1 TTS
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -371,7 +371,7 @@ We did not write the description to this field.
 Audio 2 TTS
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -381,7 +381,7 @@ We did not write the description to this field.
 Option to validate ASR
 """"""""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
