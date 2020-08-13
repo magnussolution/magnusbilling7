@@ -462,7 +462,9 @@ Help.load({
     'provider.credit_control': `If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.`,
     'provider.description': ``,
     //QUEUES
+    'queue.id_user': ``,
     'queue.name': ``,
+    'queue.language': ``,
     'queue.strategy': ``,
     'queue.ringinuse': ``,
     'queue.timeout': `How long the phone will ring until timeout`,

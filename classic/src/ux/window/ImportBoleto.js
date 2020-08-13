@@ -35,7 +35,7 @@ Ext.define('Ext.ux.window.ImportBoleto', {
             text: t('Max size file') + window.uploadFaxFilesize
         }, '->', {
             iconCls: 'boleto',
-            text: t('Import text'),
+            text: t('Import'),
             scope: me,
             handler: me.onImport
         }];

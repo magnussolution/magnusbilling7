@@ -37,7 +37,7 @@ Ext.define('MBilling.view.did.Form', {
                     allowBlank: false,
                     anchor: '100%',
                     enableKeyEvents: true,
-                    labelWidth: 140
+                    labelWidth: 180
                 }
             },
             items: [{
@@ -59,7 +59,7 @@ Ext.define('MBilling.view.did.Form', {
                 }, {
                     xtype: 'moneyfield',
                     name: 'connection_charge',
-                    fieldLabel: t('Connection charge'),
+                    fieldLabel: t('Setup price'),
                     mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                     value: '0',
                     hidden: App.user.isClient || App.user.isAgent
@@ -78,7 +78,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 160,
+                        labelWidth: 170,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -184,7 +184,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 160,
+                        labelWidth: 170,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -220,7 +220,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 160,
+                        labelWidth: 170,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },

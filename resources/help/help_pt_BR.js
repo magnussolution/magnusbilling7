@@ -468,7 +468,9 @@ Deixar em branco para permitir a conexão de qualquer IP.
     'provider.credit_control': ``,
     'provider.description': ``,
     //FILAS DE ESPERA
+    'queue.id_user': ``,
     'queue.name': ``,
+    'queue.language': ``,
     'queue.strategy': ``,
     'queue.ringinuse': `Chamar ou não agentes da fila que estejam em chamada.`,
     'queue.timeout': `Por quanto tempo deve ficar chamadando um agente`,

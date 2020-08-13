@@ -22,9 +22,11 @@ Ext.define('MBilling.view.rate.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.rateform',
     fieldsHideUpdateLot: ['id_prefix'],
-    labelWidthFields: 140,
     initComponent: function() {
         var me = this;
+        me.defaults = {
+            labelWidth: 200
+        };
         me.items = [{
             xtype: 'planlookup',
             ownerForm: me,

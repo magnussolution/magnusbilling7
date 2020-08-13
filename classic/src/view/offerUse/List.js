@@ -26,7 +26,6 @@ Ext.define('MBilling.view.offerUse.List', {
         var me = this;
         me.buttonUpdateLot = false;
         me.allowCreate = false;
-        me.allowUpdate = false;
         me.allowDelete = false;
         me.columns = [{
             header: t('Username'),

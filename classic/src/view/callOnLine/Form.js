@@ -59,6 +59,7 @@ Ext.define('MBilling.view.callOnLine.Form', {
             xtype: 'textarea',
             name: 'description',
             fieldLabel: t('Description'),
+            hideLabel: true,
             height: 350,
             anchor: '100%',
             hidden: !App.user.isAdmin

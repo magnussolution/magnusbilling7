@@ -33,7 +33,7 @@ Ext.define('MBilling.view.callFailed.List', {
             glyph: icons.info,
             handler: 'onCallDetails',
             disabled: false,
-            width: 130
+            width: App.user.language == 'en' ? 130 : 170
         }];
         me.columns = [{
             header: t('ID'),
