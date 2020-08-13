@@ -25,10 +25,14 @@ Ext.define('MBilling.view.queue.Form', {
     fileUpload: true,
     initComponent: function() {
         var me = this;
-        me.labelWidthFields = 175;
+        me.defaults = {
+            labelWidth: 200
+        };
         me.items = [{
             xtype: 'userlookup',
             ownerForm: me,
+            name: 'id_user',
+            fieldLabel: t('Username'),
             hidden: App.user.isClient,
             allowBlank: App.user.isClient
         }, {
@@ -37,8 +41,8 @@ Ext.define('MBilling.view.queue.Form', {
         }, {
             xtype: 'languagecombo',
             name: 'language',
-            value: App.user.language == 'pt_BR' ? 'br' : App.user.language,
-            fieldLabel: t('Language')
+            fieldLabel: t('Language'),
+            value: App.user.language == 'pt_BR' ? 'br' : App.user.language
         }, {
             xtype: 'queuestrategycombo',
             name: 'strategy',

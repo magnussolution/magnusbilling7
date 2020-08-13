@@ -82,4 +82,6 @@ build/index.html
 wiki/en/_build
 doc
 wiki/pt_BR/_build
-wiki/pt_BR/_build
+build/ApplicationBuild.js
+build/ApplicationPUBLIC.js
+wiki/generate.php

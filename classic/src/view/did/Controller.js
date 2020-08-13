@@ -99,7 +99,7 @@ Ext.define('MBilling.view.did.Controller', {
             allowDelete = true;
         Ext.each(records, function(selected) {
             if (selected.get('reserved') === 1) {
-                Ext.ux.Alert.alert(me.titleError, t('Please, first release the DID') + ' ' + selected.raw.did, 'error');
+                Ext.ux.Alert.alert(me.titleError, t('Please, first release the DID') + ' ' + selected.get('did'), 'error');
                 allowDelete = false;
                 return;
             }

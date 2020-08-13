@@ -40,7 +40,7 @@ Ext.define('Ext.ux.window.ImportCsv', {
             text: t('Max size file') + ' ' + window.uploadFaxFilesize
         }, '->', {
             iconCls: 'icon-import-csv',
-            text: t('Import text'),
+            text: t('Import'),
             width: 150,
             scope: me,
             handler: me.onImport

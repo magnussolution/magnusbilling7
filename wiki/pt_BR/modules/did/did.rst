@@ -38,8 +38,8 @@ Callerid name
 
 .. _did-connection_charge:
 
-Taxa de conexão
-""""""""""""""""
+Taxa de ativação
+""""""""""""""""""
 
 | Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.
 

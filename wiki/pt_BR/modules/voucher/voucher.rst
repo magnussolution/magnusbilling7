@@ -21,7 +21,7 @@ Crédito
 Plano
 """""
 
-| Plano que será usado no cliente que usar este crédito.
+| Plano que será usado no cliente que usar este VOUCHER.
 
 
 

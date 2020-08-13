@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-12
+ * 2020-08-13
  */
 Locale.load({
     '': '',
@@ -407,9 +407,9 @@ Locale.load({
     'IVR': '',
     'IVRs': '',
     'IconCls': '',
+    'Import': '',
     'Import CSV': '',
     'Import logo': '',
-    'Import text': '',
     'Import wallpaper': '',
     'In': '',
     'In use': '',
@@ -505,7 +505,6 @@ Locale.load({
     'Minutes': '',
     'Misdialled trunk prefix': '',
     'Mobile': '',
-    'Model content': '',
     'Module': '',
     'Modules': '',
     'Mon-Fri': '',
@@ -848,6 +847,7 @@ Locale.load({
     'Settings': '',
     'Settings theme': '',
     'Setup': '',
+    'Setup price': '',
     'Show desktop': '',
     'Show in groups': '',
     'Show menu': '',
@@ -995,7 +995,6 @@ Locale.load({
     'Use on signup': '',
     'Use that': '',
     'Use_Pref_Codec': '',
-    'Used secondes': '',
     'User': '',
     'User Custom Rates': '',
     'User busy': '',

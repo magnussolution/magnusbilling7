@@ -14,6 +14,8 @@
  * 2020-08-10
  */
 Locale.load({
+    'Setup price': 'Costo de activación',
+    'Allowed columns': 'Columnas permidas',
     'Click to more details': 'Click para más detalles',
     'Ringinuse': 'Llamar en uso',
     'Calls Online': 'Llamadas online',
@@ -153,7 +155,7 @@ Locale.load({
     'Apply': 'Aplicar',
     'Asterisk': 'Asterisk',
     'Asterisk extra config': 'Configuración adicional Asterisk',
-    'Audio': 'Audio/Sonido',
+    'Audio': 'Audio',
     'Audio duration': 'Duración del audio',
     'Audio file': 'Archivo de sonido',
     'Audio musiconhold': 'Música en espera',
@@ -279,7 +281,7 @@ Locale.load({
     'Confirm your password': 'Confirma Password',
     'Confirmation': 'Confirmación',
     'Congestion': 'Congestion',
-    'Connection charge': 'Carga de Conexión',
+    'Connection charge': 'Costo de Conexión',
     'Contact': 'Contacto',
     'Contains': 'Contenido',
     'Context': 'Contexto',
@@ -451,7 +453,6 @@ Locale.load({
     'IconCls': 'IconCls',
     'Import CSV': 'Importar CSV',
     'Import logo': 'Importar logo',
-    'Import text': 'Importar texto',
     'Import wallpaper': 'Importar fondo de pantalla',
     'In': 'En',
     'In use': 'En uso',
@@ -534,7 +535,6 @@ Locale.load({
     'Minimum time to charge': 'Tiempo mínimo de carga',
     'Minutes': 'Minutos',
     'Mobile': 'Celular',
-    'Model content': 'Contenido del modelo',
     'Module': 'Módulo',
     'Modules': 'Módulos',
     'MonFri intervals': 'Lunes-Viernes Intervalos',

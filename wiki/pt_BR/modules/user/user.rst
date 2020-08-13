@@ -273,8 +273,8 @@ CPF/CNPJ
 
 .. _user-vat:
 
-VAT
-"""
+Imposto
+"""""""
 
 | Usado em algums metodos de pagamento.
 

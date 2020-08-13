@@ -48,8 +48,8 @@ CallerID
 
 .. _iax-disallow:
 
-Não permitir
-"""""""""""""
+Disallow
+""""""""
 
 | Nós ainda não escrevemos a descrição deste campo.
 

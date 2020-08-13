@@ -6,10 +6,30 @@ Lista de campos
 
 
 
+.. _queue-id_user:
+
+Usuário
+""""""""
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _queue-name:
 
 Nome
 """"
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _queue-language:
+
+Idioma
+""""""
 
 | Nós ainda não escrevemos a descrição deste campo.
 

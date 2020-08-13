@@ -11,8 +11,8 @@ Lista de campos
 Usuário
 """"""""
 
-| Usuário que poderá usar a API.
-| Para usar a API é necessário o uso do projeto publicado no GITHUB.
+| Usuário que poderá usar esta API.
+| Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
 |     
 | O projeto esta publicado no link https://github.com/magnussolution/magnusbilling-api-php. 
 | A API tem documentação, atualmente somente em Ingles, e esta publicado no link https://github.com/magnussolution/magnusbilling-api-php/wiki. 

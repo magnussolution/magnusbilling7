@@ -58,8 +58,8 @@ Alias
 
 .. _sip-disallow:
 
-Não permitir
-"""""""""""""
+Disallow
+""""""""
 
 | ESta opção destiva todos os codecs e deixa disponivel para o usuário somente os que você selecionar abaixo.
 
@@ -198,8 +198,8 @@ Insecure
 
 .. _sip-deny:
 
-Negar
-"""""
+Deny
+""""
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -208,8 +208,8 @@ Negar
 
 .. _sip-permit:
 
-Permitir
-""""""""
+Permit
+""""""
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -348,8 +348,8 @@ DialPlan
 
 .. _sip-dial_timeout:
 
-Tempo de discagem expirado
-""""""""""""""""""""""""""
+Tocar por quantos seg.
+""""""""""""""""""""""
 
 | Tempo em segundos que será aguardado para atender a chamada.
 

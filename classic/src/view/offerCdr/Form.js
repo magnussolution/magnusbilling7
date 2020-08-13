@@ -34,7 +34,7 @@ Ext.define('MBilling.view.offerCdr.Form', {
             fieldLabel: t('Offer')
         }, {
             name: 'used_secondes',
-            fieldLabel: t('Used secondes')
+            fieldLabel: t('Duration')
         }, {
             xtype: 'datefield',
             name: 'date_consumption',
