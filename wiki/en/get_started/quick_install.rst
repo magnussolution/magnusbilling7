@@ -1,13 +1,13 @@
 *************
-Instalação
+Installation
 *************
 
-Para instalar MagnusBilling, você precisa apenas de um servidor com CentOS 7 ou Debian 8, 64 ou 32 bits, instalação básica.
+In order to install MagnusBilling you'll need a server with CentOS 7 or Debian 8, minimal install. Keep in mind that all testing and development of MagnusBilling occurs in CentOS 7, so we highly recommend using CentOS 7.
 
     
-**1.** Execute os comandos abaixo como root. O script vai instalar Magnusbilling, Asterisk e todas as dependências necessárias, como: IPTables, Fail2ban, Apache, PHP e mysql.
+**1.** Execute the following commands as root to run the script that will install MagnusBilling, Asterisk and all dependencies needed like: IPTables, Fail2ban, Apache, PHP and MySQL.
 
-Instale o Linux **minimal**.
+Install CentOS 7 **minimal**.
 
 ::
      
@@ -17,17 +17,16 @@ Instale o Linux **minimal**.
   chmod +x install.sh
   ./install.sh     
 
-**2.** Durante a instalação será solicitado o idioma padrão para o Mangusbilling. Escolha digitando o numero do idioma escolhido.
-
+**2.** During the install you'll be asked what language MagnusBilling should use. Choose by typing the number of the language.
 
 ::
 
-   Instalação completa. ATENÇÃO!! APÓS TERMINAR A INSTALAÇÃO, O SERVIDOR SERÁ REINICIADO AUTOMATICAMENTE!
+   Install complete. The server will restart.
 
-   Use um browser para login.
-      entre em: http://000.000.000.000
-      Usuário: root
-      Senha: magnus (Lembre-se de alterar a senha padrão)
+   Use a browser to access the interface.
+      Go to: http://xxx.xxx.xxx.xxx
+      User: root
+      Password: magnus (Remember to change the password)
 
 
 .. image:: ../img/ilogin.png
