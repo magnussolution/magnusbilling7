@@ -11,7 +11,7 @@ Field list
 Serial
 """"""
 
-LinkSys serial number
+| LinkSys serial number
 
 
 
@@ -21,7 +21,7 @@ LinkSys serial number
 MAC
 """
 
-LinkSys MAC address
+| LinkSys MAC address
 
 
 
@@ -31,7 +31,7 @@ LinkSys MAC address
 User password
 """""""""""""
 
-User to set in LinkSys configuration
+| User to set in LinkSys configuration
 
 
 
@@ -41,7 +41,7 @@ User to set in LinkSys configuration
 Admin password
 """"""""""""""
 
-Pass to set in LinkSys configuration
+| Pass to set in LinkSys configuration
 
 
 
@@ -51,7 +51,7 @@ Pass to set in LinkSys configuration
 Antireset
 """""""""
 
-Prevent resetting LinkSys with *73738#
+| Prevent resetting LinkSys with *73738#
 
 
 
@@ -61,7 +61,7 @@ Prevent resetting LinkSys with *73738#
 Enable_Web_Server
 """""""""""""""""
 
-Enabling/Disabling LinkSys configuration WebPage
+| Enabling/Disabling LinkSys configuration WebPage
 
 
 
@@ -71,7 +71,7 @@ Enabling/Disabling LinkSys configuration WebPage
 Mark
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Change
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 Username
 """"""""
 
-SIP account username
+| SIP account username
 
 
 
@@ -101,7 +101,7 @@ SIP account username
 Password
 """"""""
 
-SIP account password
+| SIP account password
 
 
 
@@ -111,7 +111,7 @@ SIP account password
 Use_Pref_Codec
 """"""""""""""
 
-Only use the preferred CODEC
+| Only use the preferred CODEC
 
 
 
@@ -121,7 +121,7 @@ Only use the preferred CODEC
 Codec
 """""
 
-Set the preferred CODEC
+| Set the preferred CODEC
 
 
 
@@ -131,7 +131,7 @@ Set the preferred CODEC
 Register expires
 """"""""""""""""
 
-Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.
+| Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.
 
 
 
@@ -141,7 +141,7 @@ Interval in seconds that LinkSys will send a REGISTER to your server. Useful to 
 Dial plan
 """""""""
 
-Read LinkSys documentation
+| Read LinkSys documentation
 
 
 
@@ -151,7 +151,7 @@ Read LinkSys documentation
 NAT Mapping
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -161,7 +161,7 @@ We did not write the description to this field.
 NAT keep alive
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -171,7 +171,7 @@ We did not write the description to this field.
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +181,7 @@ We did not write the description to this field.
 Password
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -191,7 +191,7 @@ We did not write the description to this field.
 Use_Pref_Codec
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -201,7 +201,7 @@ We did not write the description to this field.
 Codec
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -211,7 +211,7 @@ We did not write the description to this field.
 Register expires
 """"""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We did not write the description to this field.
 Dial plan
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We did not write the description to this field.
 NAT Mapping
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -241,7 +241,7 @@ We did not write the description to this field.
 NAT keep alive
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -251,7 +251,7 @@ We did not write the description to this field.
 Enable STUN
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -261,7 +261,7 @@ We did not write the description to this field.
 STUN Test
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -271,7 +271,7 @@ We did not write the description to this field.
 Substitute VIA Addr
 """""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -281,7 +281,7 @@ We did not write the description to this field.
 STUN Server
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

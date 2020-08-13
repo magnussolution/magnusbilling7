@@ -11,27 +11,27 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _iax-username:
 
-Username
+IAX user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _iax-secret:
 
-Password
-""""""""
+IAX password
+""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 CallerID
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We did not write the description to this field.
 Disallow
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Codec
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We did not write the description to this field.
 Host
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 NAT
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 Context
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We did not write the description to this field.
 Qualify
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We did not write the description to this field.
 Dtmfmode
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -121,7 +121,7 @@ We did not write the description to this field.
 Insecure
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We did not write the description to this field.
 Call limit
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

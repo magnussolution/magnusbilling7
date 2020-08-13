@@ -11,7 +11,7 @@ Lista de campos
 Nome
 """"
 
-Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter varios troncos
+| Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter varios troncos
 
 
 
@@ -21,7 +21,7 @@ Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo pro
 Crédito
 """"""""
 
-Quanto você tem de crédito com o provedor? Este campo é opcional.
+| Quanto você tem de crédito com o provedor? Este campo é opcional.
 
 
 
@@ -31,7 +31,7 @@ Quanto você tem de crédito com o provedor? Este campo é opcional.
 Controle de crédito
 """"""""""""""""""""
 
-------------ATENÇÃO------------.Se ativar esta opção e o provedor ficar com crédito = ou < que zero, os troncos deste provedor não aceitaram mais chamada.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Controle de crédito
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

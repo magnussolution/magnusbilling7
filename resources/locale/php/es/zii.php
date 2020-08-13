@@ -21,11 +21,12 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Ringinuse' => 'Llamaar en uso',
+            'Click to more details' => 'Click para más detalles',
+    'Ringinuse' => 'Llamar en uso',
     'Calls Online' => 'Llamadas online',
     'Call Group' => 'Grupo de llamada',
     'Call Rejected' => 'Llamada rechazada',
-    'On Phone' => 'En llamdas',
+    'On Phone' => 'En llamda',
     'Preemption' => 'Preemption',
     'Receiving' => 'Recibiendo',
     'Redirected to new destination' => 'Redirigido a un nuevo destino',
@@ -250,9 +251,9 @@ return array(
     'Charge' => 'Carga',
     'Charge who' => 'A quien Cargar',
     'Charts' => 'Graficos',
-    'Check campaign' => 'Chequeo de Campaña',
+    'Check campaign' => 'Chequear Campaña',
     'City' => 'Ciudad',
-    'Clear filters' => 'filtros claros',
+    'Clear filters' => 'Limpiar filtros',
     'Client' => 'Cliente',
     'Client id' => 'ID de Cliente',
     'Client secret' => 'Clave de Cliente',

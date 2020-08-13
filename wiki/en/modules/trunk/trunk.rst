@@ -11,7 +11,7 @@ Field list
 Provider
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Name
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Username
 """"""""
 
-Only used if the authentication is via user and pass.
+| Only used if the authentication is via user and pass.
 
 
 
@@ -41,7 +41,7 @@ Only used if the authentication is via user and pass.
 Password
 """"""""
 
-Only used if the authentication is via user and pass.
+| Only used if the authentication is via user and pass.
 
 
 
@@ -51,7 +51,7 @@ Only used if the authentication is via user and pass.
 Host
 """"
 
-IP or SIP
+| IP or SIP
 
 
 
@@ -61,7 +61,7 @@ IP or SIP
 Add prefix
 """"""""""
 
-Add a prefix to send to your trunk.
+| Add a prefix to send to your trunk.
 
 
 
@@ -71,7 +71,7 @@ Add a prefix to send to your trunk.
 Remove prefix
 """""""""""""
 
-Remove a prefix to send to your trunk.
+| Remove a prefix to send to your trunk.
 
 
 
@@ -81,7 +81,7 @@ Remove a prefix to send to your trunk.
 Codec
 """""
 
-Select the codecs that are allowed in this trunk.
+| Select the codecs that are allowed in this trunk.
 
 
 
@@ -91,7 +91,7 @@ Select the codecs that are allowed in this trunk.
 Provider tech
 """""""""""""
 
-You need install appropriate drive to use card like dgv extra Dongle.
+| You need install appropriate drive to use card like dgv extra Dongle.
 
 
 
@@ -101,7 +101,7 @@ You need install appropriate drive to use card like dgv extra Dongle.
 Status
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,17 +111,17 @@ We did not write the description to this field.
 Allow error
 """""""""""
 
-If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.
+| If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.
 
 
 
 
 .. _trunk-register:
 
-Registertrunk
-"""""""""""""
+Register trunk
+""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We did not write the description to this field.
 Register string
 """""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We did not write the description to this field.
 Fromuser
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -151,7 +151,7 @@ We did not write the description to this field.
 Fromdomain
 """"""""""
 
-Set the Trunk IP or SIP, if required.
+| Set the Trunk IP or SIP, if required.
 
 
 
@@ -161,7 +161,7 @@ Set the Trunk IP or SIP, if required.
 Language
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -171,7 +171,7 @@ We did not write the description to this field.
 Context
 """""""
 
-Only change if you know what you are doing.
+| Only change if you know what you are doing.
 
 
 
@@ -181,7 +181,7 @@ Only change if you know what you are doing.
 Dtmfmode
 """"""""
 
-Set default dtmfmode for sending DTMF. Default: rfc2833 Other options: info : SIP INFO messages (application/dtmf-relay) shortinfo : SIP INFO messages (application/dtmf) inband : Inband audio (requires 64 kbit codec -alaw, ulaw) auto : Use rfc2833 if offered, inband otherwise.
+| Set default dtmfmode for sending DTMF. Default: rfc2833 Other options: info : SIP INFO messages (application/dtmf-relay) shortinfo : SIP INFO messages (application/dtmf) inband : Inband audio (requires 64 kbit codec -alaw, ulaw) auto : Use rfc2833 if offered, inband otherwise.
 
 
 
@@ -191,7 +191,7 @@ Set default dtmfmode for sending DTMF. Default: rfc2833 Other options: info : SI
 Insecure
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -201,7 +201,7 @@ We did not write the description to this field.
 Max use
 """""""
 
-Maximum simultaneous call. If you set it, your server will need to use a lot of resources to control it. Not recommended.
+| Maximum simultaneous call. If you set it, your server will need to use a lot of resources to control it. Not recommended.
 
 
 
@@ -211,7 +211,7 @@ Maximum simultaneous call. If you set it, your server will need to use a lot of 
 NAT
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We did not write the description to this field.
 Directmedia
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We did not write the description to this field.
 Qualify
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -241,7 +241,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -251,7 +251,7 @@ We did not write the description to this field.
 Disallow
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -261,7 +261,7 @@ We did not write the description to this field.
 Sendrpid
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -271,7 +271,7 @@ We did not write the description to this field.
 Addparameter
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -281,7 +281,7 @@ We did not write the description to this field.
 Port
 """"
 
-If you want to use a different than 5060, you will need open the port in IPTABLES.
+| If you want to use a different than 5060, you will need open the port in IPTABLES.
 
 
 
@@ -291,7 +291,7 @@ If you want to use a different than 5060, you will need open the port in IPTABLE
 Link SMS
 """"""""
 
-Set your SMS link here to send SMS. Replace: number variable per %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
+| Set your SMS link here to send SMS. Replace: number variable per %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
 
 
 
@@ -301,7 +301,7 @@ Set your SMS link here to send SMS. Replace: number variable per %number% and te
 SMS match result
 """"""""""""""""
 
-Leave it empty to not wait URL result. If you want wait the any success message, write here the expected result.
+| Leave it empty to not wait URL result. If you want wait the any success message, write here the expected result.
 
 
 
@@ -311,7 +311,7 @@ Leave it empty to not wait URL result. If you want wait the any success message,
 Parameters
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

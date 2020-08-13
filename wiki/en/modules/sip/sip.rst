@@ -11,27 +11,27 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _sip-defaultuser:
 
-IAX user
+SIP user
 """"""""
 
-Username used to login in a SIP device.
+| Username used to login in a SIP device.
 
 
 
 
 .. _sip-secret:
 
-IAX pass
-""""""""
+SIP password
+""""""""""""
 
-Password to login in a SIP device.
+| Password to login in a SIP device.
 
 
 
@@ -41,7 +41,7 @@ Password to login in a SIP device.
 CallerID
 """"""""
 
-The Caller ID number. Your trunk needs to accept CLI.
+| The Caller ID number. Your trunk needs to accept CLI.
 
 
 
@@ -51,7 +51,7 @@ The Caller ID number. Your trunk needs to accept CLI.
 Alias
 """""
 
-Alias to dial between sip accounts from the same AccountCode (company).
+| Alias to dial between sip accounts from the same AccountCode (company).
 
 
 
@@ -61,7 +61,7 @@ Alias to dial between sip accounts from the same AccountCode (company).
 Disallow
 """"""""
 
-Disallow all codecs and then select the codecs available below to enable them to the user.
+| Disallow all codecs and then select the codecs available below to enable them to the user.
 
 
 
@@ -71,7 +71,7 @@ Disallow all codecs and then select the codecs available below to enable them to
 Codec
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Host
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 Group
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We did not write the description to this field.
 Videosupport
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We did not write the description to this field.
 Block call regex
 """"""""""""""""
 
-You can block calls with a regular expression. For example, if you want block all calls that start with a 9, use regex ^9 
+| You can block calls with a regular expression. For example, if you want block all calls that start with a 9, use regex ^9 
 
 
 
@@ -121,7 +121,7 @@ You can block calls with a regular expression. For example, if you want block al
 Record call
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We did not write the description to this field.
 Tech prefix
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We did not write the description to this field.
 NAT
 """
 
-Click here for more info|https://www.voip-info.org/asterisk-sip-nat/
+| Click here for more info|https://www.voip-info.org/asterisk-sip-nat/
 
 
 
@@ -151,7 +151,7 @@ Click here for more info|https://www.voip-info.org/asterisk-sip-nat/
 Directmedia
 """""""""""
 
-If enabled, Asterisk tries to redirect the RTP media stream to go directly from the caller to the callee.
+| If enabled, Asterisk tries to redirect the RTP media stream to go directly from the caller to the callee.
 
 
 
@@ -161,7 +161,7 @@ If enabled, Asterisk tries to redirect the RTP media stream to go directly from 
 Qualify
 """""""
 
-Send OPTION to user CONTACT field to qualify the user.
+| Send OPTION to user CONTACT field to qualify the user.
 
 
 
@@ -171,7 +171,7 @@ Send OPTION to user CONTACT field to qualify the user.
 Context
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +181,7 @@ We did not write the description to this field.
 Dtmfmode
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -191,7 +191,7 @@ We did not write the description to this field.
 Insecure
 """"""""
 
-Needs to be NO if the host is dynamic. To IP authenticate set to invite.
+| Needs to be NO if the host is dynamic. To IP authenticate set to invite.
 
 
 
@@ -201,7 +201,7 @@ Needs to be NO if the host is dynamic. To IP authenticate set to invite.
 Deny
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -211,7 +211,7 @@ We did not write the description to this field.
 Permit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We did not write the description to this field.
 Allowtransfer
 """""""""""""
 
-Enable it to allow transfers between SIP accounts.
+| Enable it to allow transfers between SIP accounts.
 
 
 
@@ -241,7 +241,7 @@ Enable it to allow transfers between SIP accounts.
 Ring false
 """"""""""
 
-If YES, generate a ringing tone for the calling party.
+| If YES, generate a ringing tone for the calling party.
 
 
 
@@ -251,7 +251,7 @@ If YES, generate a ringing tone for the calling party.
 Call limit
 """"""""""
 
-Maximum simultaneous calls
+| Maximum simultaneous calls
 
 
 
@@ -261,7 +261,7 @@ Maximum simultaneous calls
 MOH
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -271,7 +271,7 @@ We did not write the description to this field.
 URL events notify
 """""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -281,7 +281,7 @@ We did not write the description to this field.
 Addparameter
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -291,7 +291,7 @@ We did not write the description to this field.
 AMD
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -301,7 +301,7 @@ We did not write the description to this field.
 Forward
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -311,7 +311,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -321,7 +321,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -331,7 +331,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -341,7 +341,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -351,7 +351,7 @@ We did not write the description to this field.
 Dial timeout
 """"""""""""
 
-Timeout in seconds to wait for the call to be picked-up.
+| Timeout in seconds to wait for the call to be picked-up.
 
 
 
@@ -361,7 +361,7 @@ Timeout in seconds to wait for the call to be picked-up.
 Enable voicemail
 """"""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -371,7 +371,7 @@ We did not write the description to this field.
 Email
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -381,7 +381,7 @@ We did not write the description to this field.
 Password
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -391,7 +391,7 @@ We did not write the description to this field.
 Peer
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

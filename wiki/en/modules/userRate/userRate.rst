@@ -11,7 +11,7 @@ Field list
 Destination
 """""""""""
 
-Select the prefix that you want set the price.
+| Select the prefix that you want set the price.
 
 
 
@@ -21,7 +21,7 @@ Select the prefix that you want set the price.
 Sell price
 """"""""""
 
-Sell price
+| Sell price
 
 
 
@@ -31,7 +31,7 @@ Sell price
 Initial block
 """""""""""""
 
-Initial block
+| Initial block
 
 
 
@@ -41,7 +41,7 @@ Initial block
 Billing block
 """""""""""""
 
-Increment block
+| Increment block
 
 
 

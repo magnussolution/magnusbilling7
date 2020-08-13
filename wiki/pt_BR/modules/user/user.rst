@@ -11,7 +11,8 @@ Lista de campos
 Usuário
 """"""""
 
-Usuário para logar no painel de cliente.
+| Usuário para logar no painel de cliente.
+| Descriçao
 
 
 
@@ -21,7 +22,7 @@ Usuário para logar no painel de cliente.
 Senha
 """""
 
-Senha para logar no painel de cliente.
+| Senha para logar no painel de cliente.
 
 
 
@@ -31,7 +32,17 @@ Senha para logar no painel de cliente.
 Grupo
 """""
 
-Existe 3 tipos de grupos: Administrador, Revendedor e Cliente. Você pode criar or editar qualquer destes grupos. Cada grupo tem suas permissōes especificas. Veja o menu Configurações, Grupo para Clientes.
+| Existe 3 tipos de grupos: Administrador, Revendedor e Cliente. Você pode criar or editar qualquer destes grupos. Cada grupo tem suas permissōes especificas. Veja o menu Configurações, Grupo para Clientes.
+
+
+
+
+.. _user-id_group_agent:
+
+Grupo para os usuários do agente
+"""""""""""""""""""""""""""""""""
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +52,17 @@ Existe 3 tipos de grupos: Administrador, Revendedor e Cliente. Você pode criar 
 Plano
 """""
 
-Plano usado para tarifar este cliente.
+| Plano usado para tarifar este cliente.
+
+
+
+
+.. _user-language:
+
+Idioma
+""""""
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -51,7 +72,31 @@ Plano usado para tarifar este cliente.
 Regra prefixo
 """""""""""""
 
-Click para mais informaçōes|https://www.magnusbilling.org/br/prefixo_local
+| Esta regra permite o cliente discar no formato local. 
+|  EX 0ddd ou somente o número dentro de seu DDD. As regras são separadas por virgula e composta por 2 ou 3 parametros separados por /.
+| 1º é o número que sera subistituido. Pode ser * para pegar qualquer digito.
+| 2º é o número que vai subistituir o 1º.
+| 3º é a quantidade de digitos do número. Se nao colocar o 3º paramentro, nao sera verificado a quantidade de digitos.
+| 
+| Alguns exemplos.
+| 
+| Permite ligar 55DDDnº, 0DDDnº ou so numero
+| 
+| 0/55,*/5511/8,*/5511/9
+| Regra 1 -> números que iniciam com 0, o zero sera subistituido por 55, independente de quantos digitos tiver o numero. 
+| Regra 2 -> números que iniciam com qualquer valor e tem 8 digitos, sera adicionado 5511 na frente. 
+| Regra 3 -> números que iniciam com qualquer valor e tem 9 digitos, sera adicionado 5511 na frente
+| 
+| 
+| Permite ligar 55DDDnº, 0DDDnº, DDDnº ou so numero
+| 
+| 0/55,*/5511/8,*/5511/9,*/55/10,*/55/11
+| Regra 1 -> números que iniciam com 0, o zero sera subistituido por 55, independente de quantos digitos tiver o numero. 
+| Regra 2 -> números que iniciam com qualquer valor e tem 8 digitos, sera adicionado 55 na frente. 
+| Regra 3 -> números que iniciam com qualquer valor e tem 9 digitos, sera adicionado 55 na frente
+| Regra 4 -> números que iniciam com qualquer valor e tem 10 digitos, sera adicionado 5511 na frente. 
+| Regra 5 -> números que iniciam com qualquer valor e tem 11 digitos, sera adicionado 5511 na frente
+| 
 
 
 
@@ -61,7 +106,7 @@ Click para mais informaçōes|https://www.magnusbilling.org/br/prefixo_local
 Ativo
 """""
 
-Somente usuários ativos podem fazer chamadas.
+| Somente usuários ativos podem fazer chamadas.
 
 
 
@@ -71,7 +116,7 @@ Somente usuários ativos podem fazer chamadas.
 País
 """""
 
-Usado para CID Callback. O DDI do país será adicionado antes do CallerID to converter o CallerID para o formato DDI DDD nº
+| Usado para CID Callback. O DDI do país será adicionado antes do CallerID to converter o CallerID para o formato DDI DDD nº
 
 
 
@@ -81,7 +126,7 @@ Usado para CID Callback. O DDI do país será adicionado antes do CallerID to co
 Pacotes grátis
 """""""""""""""
 
-Usado para ativar um pacote gratis. É necessario informar as tarifas que vão pertencer aos pacotes gratís.
+| Usado para ativar um pacote gratis. É necessario informar as tarifas que vão pertencer aos pacotes gratís.
 
 
 
@@ -91,7 +136,7 @@ Usado para ativar um pacote gratis. É necessario informar as tarifas que vão p
 Limite de CPS
 """""""""""""
 
-Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar este limite seráenviado CONGESTION.
+| Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar este limite seráenviado CONGESTION.
 
 
 
@@ -101,7 +146,7 @@ Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar e
 Nome da empresa
 """""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| magnus
 
 
 
@@ -111,27 +156,27 @@ Nós ainda não escrevemos a descrição deste campo.
 Inscrição estadual
 """"""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _user-lastname:
 
-Lastname
-""""""""
+Sobrenome
+"""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
 .. _user-firstname:
 
-Firstname
-"""""""""
+Nome
+""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -141,7 +186,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Cidade
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -151,7 +196,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Estado
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -161,7 +206,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Endereço
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -171,7 +216,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Bairro
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -181,7 +226,7 @@ Nós ainda não escrevemos a descrição deste campo.
 CEP
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +236,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Fone
 """"
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -201,7 +246,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Celular
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +256,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Email
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -221,7 +266,7 @@ Nós ainda não escrevemos a descrição deste campo.
 CPF/CNPJ
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +276,7 @@ Nós ainda não escrevemos a descrição deste campo.
 VAT
 """
 
-Usado em algums metodos de pagamento.
+| Usado em algums metodos de pagamento.
 
 
 
@@ -241,7 +286,7 @@ Usado em algums metodos de pagamento.
 Tipo pago
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -251,7 +296,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Limite de crédito
 """"""""""""""""""
 
-Somente usado para Pos-Pago. O cliente poderá ligar até chegar a este limite negativo.
+| Somente usado para Pos-Pago. O cliente poderá ligar até chegar a este limite negativo.
 
 
 
@@ -261,17 +306,17 @@ Somente usado para Pos-Pago. O cliente poderá ligar até chegar a este limite n
 Notificação de crédito
 """""""""""""""""""""""""
 
-Se o crédito do cliente ficar menor que esta campo, MagnusBilling vai enviar um email para o cliente informando que esta com pouco crédito. NECESSARIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES
+| Se o crédito do cliente ficar menor que esta campo, MagnusBilling vai enviar um email para o cliente informando que esta com pouco crédito. NECESSARIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES
 
 
 
 
 .. _user-enableexpire:
 
-Enableexpire
-""""""""""""
+Habilitar vencimento
+""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -281,7 +326,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Data de expiração
 """""""""""""""""""
 
-Data que este cliente não poderá mais efetuar chamadas
+| Data que este cliente não poderá mais efetuar chamadas
 
 
 
@@ -291,7 +336,7 @@ Data que este cliente não poderá mais efetuar chamadas
 Gravar chamadas
 """""""""""""""
 
-Esta opção é somente para chamadas de DID, para chamadas externas tem que ativar nas Contas VoIP.
+| Esta opção é somente para chamadas de DID, para chamadas externas tem que ativar nas Contas VoIP.
 
 
 
@@ -301,7 +346,7 @@ Esta opção é somente para chamadas de DID, para chamadas externas tem que ati
 Formato das gravaçōes
 """""""""""""""""""""""
 
-Formato que será usado para gravar chamadas.
+| Formato que será usado para gravar chamadas.
 
 
 
@@ -311,7 +356,7 @@ Formato que será usado para gravar chamadas.
 Limite de chamada
 """""""""""""""""
 
-Chamadas simultâneas permitidas para este usuário.
+| Chamadas simultâneas permitidas para este usuário.
 
 
 
@@ -321,7 +366,7 @@ Chamadas simultâneas permitidas para este usuário.
 Erro ao superar limite
 """"""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -331,7 +376,7 @@ Nós ainda não escrevemos a descrição deste campo.
 CallShop
 """"""""
 
-Ativa o modulo CallShop. Somente ative se realmente for usar. É necessário dar permissōes ao grupo selecionado.
+| Ativa o modulo CallShop. Somente ative se realmente for usar. É necessário dar permissōes ao grupo selecionado.
 
 
 
@@ -341,7 +386,7 @@ Ativa o modulo CallShop. Somente ative se realmente for usar. É necessário dar
 Espaço em disco
 """"""""""""""""
 
-Espaço em GB que o usuário podera usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UsuárioDiskSpace 
+| Espaço em GB que o usuário podera usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UsuárioDiskSpace 
 
 
 
@@ -351,7 +396,7 @@ Espaço em GB que o usuário podera usar com as gravaçōes. Coloque -1 para dei
 Limite de contas SIP
 """"""""""""""""""""
 
-Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes no grupo para criar Contas VoIP.
+| Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes no grupo para criar Contas VoIP.
 
 
 
@@ -361,7 +406,7 @@ Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes
 CallingCard PIN
 """""""""""""""
 
-Usado para autentição do callingcard.
+| Usado para autentição do callingcard.
 
 
 
@@ -371,7 +416,7 @@ Usado para autentição do callingcard.
 Restriction
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -381,7 +426,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Lucro
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -391,7 +436,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Lucro
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -401,7 +446,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Lucro
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -411,7 +456,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Enable DBBL/Rocket
 """"""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -421,7 +466,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Lucro
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -431,7 +476,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Mostrar preço de venda
 """""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

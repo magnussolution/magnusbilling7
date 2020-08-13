@@ -11,7 +11,7 @@ Lista de campos
 Tipo
 """"
 
-Tipo de serviço
+| Tipo de serviço
 
 
 
@@ -21,7 +21,7 @@ Tipo de serviço
 Nome
 """"
 
-Nome para o serviço
+| Nome para o serviço
 
 
 
@@ -31,7 +31,7 @@ Nome para o serviço
 Limite de chamada
 """""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Espaço em disco
 """"""""""""""""
 
-Coloque o total de espaço em disco em GB.
+| Coloque o total de espaço em disco em GB.
 
 
 
@@ -51,7 +51,7 @@ Coloque o total de espaço em disco em GB.
 Limite de contas SIP
 """"""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -61,7 +61,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Preço
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -71,7 +71,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Retornar crédito
 """""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,7 +81,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

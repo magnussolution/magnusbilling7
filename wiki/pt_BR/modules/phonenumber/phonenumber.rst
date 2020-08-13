@@ -11,7 +11,7 @@ Lista de campos
 Agenda
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -21,7 +21,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Número
 """""""
 
-Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato DDI+DDD+número
+| Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato DDI+DDD+número
 
 
 
@@ -31,7 +31,7 @@ Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato DDI+DDD+núm
 Nome
 """"
 
-Nome do dono do número, usado para TTS ou SMS
+| Nome do dono do número, usado para TTS ou SMS
 
 
 
@@ -41,7 +41,7 @@ Nome do dono do número, usado para TTS ou SMS
 Cidade
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -51,7 +51,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Status
 """"""
 
-MagnusBilling somente tenta enviar quando o status esta ativo. Quando a chamada é enviada para seu provedor, o número fica com estado pendente. Se a chamada é completada, o estado muda para enviado, caso contrario ficara como pendente. Você pode usar o botão reprocessar para reativar os número que e
+| MagnusBilling somente tenta enviar quando o status esta ativo. Quando a chamada é enviada para seu provedor, o número fica com estado pendente. Se a chamada é completada, o estado muda para enviado, caso contrario ficara como pendente. Você pode usar o botão reprocessar para reativar os número que e
 
 
 
@@ -61,7 +61,7 @@ MagnusBilling somente tenta enviar quando o status esta ativo. Quando a chamada 
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -60,8 +60,8 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'groupuseragentcombo',
                     name: 'id_group_agent',
-                    emptyText: t('SELECT GROUP FOR AGENT USERS'),
                     fieldLabel: t('Group for agent users'),
+                    emptyText: t('SELECT GROUP FOR AGENT USERS'),
                     hidden: true,
                     allowBlank: true
                 }, {
@@ -74,8 +74,8 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'languagecombo',
                     name: 'language',
-                    value: App.user.language == 'pt_BR' ? 'br' : App.user.language,
-                    fieldLabel: t('Language')
+                    fieldLabel: t('Language'),
+                    value: App.user.language == 'pt_BR' ? 'br' : App.user.language
                 }, {
                     name: 'prefix_local',
                     fieldLabel: t('Prefix rules'),

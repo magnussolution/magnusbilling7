@@ -11,7 +11,7 @@ Lista de campos
 Host
 """"
 
-Você precisa verificar se o datacenter não bloqueia as portas usada pelo SMTP
+| Você precisa verificar se o datacenter não bloqueia as portas usada pelo SMTP
 
 
 
@@ -21,7 +21,7 @@ Você precisa verificar se o datacenter não bloqueia as portas usada pelo SMTP
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Senha
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Porta
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -51,7 +51,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Encriptação
 """""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -11,7 +11,7 @@ Field list
 DID
 """
 
-Select the DID that you want create new destination for.
+| Select the DID that you want create new destination for.
 
 
 
@@ -21,7 +21,7 @@ Select the DID that you want create new destination for.
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Status
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Priority
 """"""""
 
-You can create 5 destinations to your DID. If a try to the priority 1 is made and a error is received, MagnusBilling will try to send a call to the next destination priority available. Only works with the "SIP call" type.
+| You can create 5 destinations to your DID. If a try to the priority 1 is made and a error is received, MagnusBilling will try to send a call to the next destination priority available. Only works with the "SIP call" type.
 
 
 
@@ -51,7 +51,7 @@ You can create 5 destinations to your DID. If a try to the priority 1 is made an
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Destination
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -81,7 +81,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We did not write the description to this field.
 Context
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
