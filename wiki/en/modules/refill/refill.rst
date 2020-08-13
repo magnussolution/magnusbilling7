@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Credit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Add payment
 """""""""""
 
-This setting is only to your control, the credit will be released to the user anyway if set to Payment NO
+| This setting is only to your control, the credit will be released to the user anyway if set to Payment NO
 
 
 
@@ -51,7 +51,7 @@ This setting is only to your control, the credit will be released to the user an
 Invoice number
 """"""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-11
+ * 2020-08-12
  */
 Locale.load({
     '': '',
@@ -185,6 +185,7 @@ Locale.load({
     'Check campaign': '',
     'City': '',
     'Clear filters': '',
+    'Click to more details': '',
     'Client': '',
     'Client id': '',
     'Client secret': '',

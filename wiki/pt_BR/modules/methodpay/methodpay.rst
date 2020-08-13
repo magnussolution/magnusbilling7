@@ -11,7 +11,7 @@ Lista de campos
 Nome para mostrar
 """""""""""""""""
 
-Nome que será mostrado no painel do cliente
+| Nome que será mostrado no painel do cliente
 
 
 
@@ -21,7 +21,7 @@ Nome que será mostrado no painel do cliente
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 País
 """""
 
-Somente para referencia
+| Somente para referencia
 
 
 
@@ -41,7 +41,7 @@ Somente para referencia
 Ativo
 """""
 
-Ative se quiser deixar disponivel para os clientes
+| Ative se quiser deixar disponivel para os clientes
 
 
 
@@ -51,7 +51,7 @@ Ative se quiser deixar disponivel para os clientes
 Quantidade mínima
 """"""""""""""""""
 
-Valor minimo que deseja aceitar
+| Valor minimo que deseja aceitar
 
 
 
@@ -61,7 +61,7 @@ Valor minimo que deseja aceitar
 Quantidade máxima
 """"""""""""""""""
 
-Valor maximo que deseja aceitar
+| Valor maximo que deseja aceitar
 
 
 
@@ -71,7 +71,7 @@ Valor maximo que deseja aceitar
 Usuário
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -81,7 +81,7 @@ Nós ainda não escrevemos a descrição deste campo.
 URL
 """
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -91,7 +91,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Taxa de desconto
 """"""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -101,7 +101,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Banco
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -111,7 +111,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Empresa bancária
 """""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -121,7 +121,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Conta bancária
 """""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -131,7 +131,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Imposto
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -141,7 +141,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Instruções
 """"""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -151,7 +151,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Empresa
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -161,7 +161,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Endereço
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -171,7 +171,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Cidade
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -181,7 +181,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Estado
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +191,7 @@ Nós ainda não escrevemos a descrição deste campo.
 CPF/CNPJ
 """"""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -201,7 +201,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Token
 """""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +211,7 @@ Nós ainda não escrevemos a descrição deste campo.
 P2P CustomerSiteID
 """"""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -221,7 +221,7 @@ Nós ainda não escrevemos a descrição deste campo.
 P2P KeyID
 """""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +231,7 @@ Nós ainda não escrevemos a descrição deste campo.
 P2P Passphrase
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -241,7 +241,7 @@ Nós ainda não escrevemos a descrição deste campo.
 P2P RecipientKeyID
 """"""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -251,7 +251,7 @@ Nós ainda não escrevemos a descrição deste campo.
 P2P Tax Amount
 """"""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -261,7 +261,7 @@ Nós ainda não escrevemos a descrição deste campo.
 ID do cliente
 """""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -271,7 +271,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Secret do cliente
 """""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

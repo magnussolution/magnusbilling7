@@ -11,7 +11,7 @@ Field list
 Username
 """"""""
 
-Username used to login into the panel.
+| Username used to login into the panel.
 
 
 
@@ -21,7 +21,7 @@ Username used to login into the panel.
 Password
 """"""""
 
-Password used to login into the panel.
+| Password used to login into the panel.
 
 
 
@@ -31,7 +31,17 @@ Password used to login into the panel.
 Group
 """""
 
-There are 3 groups: admin, agent and client. You can create more or edit any of these groups. Each group can have specific permissions. Check the menu Configuration->User Group.
+| There are 3 groups: admin, agent and client. You can create more or edit any of these groups. Each group can have specific permissions. Check the menu Configuration->User Group.
+
+
+
+
+.. _user-id_group_agent:
+
+Group for agent users
+"""""""""""""""""""""
+
+| We did not write the description to this field.
 
 
 
@@ -41,7 +51,17 @@ There are 3 groups: admin, agent and client. You can create more or edit any of 
 Plan
 """"
 
-Which plan will be used to bill calls for this user.
+| Which plan will be used to bill calls for this user.
+
+
+
+
+.. _user-language:
+
+Language
+""""""""
+
+| We did not write the description to this field.
 
 
 
@@ -51,7 +71,7 @@ Which plan will be used to bill calls for this user.
 Prefix rules
 """"""""""""
 
-Click here for more info|https://www.magnusbilling.org/local_prefix
+| Click here for more info|https://www.magnusbilling.org/local_prefix
 
 
 
@@ -61,7 +81,7 @@ Click here for more info|https://www.magnusbilling.org/local_prefix
 Active
 """"""
 
-Only active users can login into the panel and make calls
+| Only active users can login into the panel and make calls
 
 
 
@@ -71,7 +91,7 @@ Only active users can login into the panel and make calls
 Country
 """""""
 
-Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164
+| Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164
 
 
 
@@ -81,7 +101,7 @@ Used to CID Callback. The country prefix code will be added before the CID to co
 Offer
 """""
 
-Used to give free minutes. You need to add your package in the menu: Rates->Offer.
+| Used to give free minutes. You need to add your package in the menu: Rates->Offer.
 
 
 
@@ -91,7 +111,7 @@ Used to give free minutes. You need to add your package in the menu: Rates->Offe
 CPS Limit
 """""""""
 
-How many Calls Per Second this user can send? The excess will receive CONGESTION.
+| How many Calls Per Second this user can send? The excess will receive CONGESTION.
 
 
 
@@ -101,7 +121,7 @@ How many Calls Per Second this user can send? The excess will receive CONGESTION
 Company name
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,27 +131,27 @@ We did not write the description to this field.
 State number
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _user-lastname:
 
-Lastname
-""""""""
+Last name
+"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _user-firstname:
 
-Firstname
-"""""""""
+First name
+""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +161,7 @@ We did not write the description to this field.
 City
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -151,7 +171,7 @@ We did not write the description to this field.
 State
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -161,7 +181,7 @@ We did not write the description to this field.
 Address
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -171,7 +191,7 @@ We did not write the description to this field.
 Neighborhood
 """"""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +201,7 @@ We did not write the description to this field.
 Zip code
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -191,7 +211,7 @@ We did not write the description to this field.
 Phone
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -201,7 +221,7 @@ We did not write the description to this field.
 Mobile
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -211,7 +231,7 @@ We did not write the description to this field.
 Email
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +241,7 @@ We did not write the description to this field.
 DOC
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +251,7 @@ We did not write the description to this field.
 VAT
 """
 
-Used with some payment gateways.
+| Used with some payment gateways.
 
 
 
@@ -241,7 +261,7 @@ Used with some payment gateways.
 Type paid
 """""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -251,7 +271,7 @@ We did not write the description to this field.
 Credit limit
 """"""""""""
 
-If the user is Post-paid, the user will be able to make calls until he reaches this limit.
+| If the user is Post-paid, the user will be able to make calls until he reaches this limit.
 
 
 
@@ -261,17 +281,17 @@ If the user is Post-paid, the user will be able to make calls until he reaches t
 Credit notification
 """""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
 
 .. _user-enableexpire:
 
-Enableexpire
-""""""""""""
+Enable expire
+"""""""""""""
 
-Makes the user expire at a determined date.
+| Makes the user expire at a determined date.
 
 
 
@@ -281,7 +301,7 @@ Makes the user expire at a determined date.
 Expiration date
 """""""""""""""
 
-The date that the user will expire and be deactivated.
+| The date that the user will expire and be deactivated.
 
 
 
@@ -291,7 +311,7 @@ The date that the user will expire and be deactivated.
 Record call
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -301,7 +321,7 @@ We did not write the description to this field.
 Record call format
 """"""""""""""""""
 
-What format will used to record calls. Activate recording in the menu: Users->SIP accounts.
+| What format will used to record calls. Activate recording in the menu: Users->SIP accounts.
 
 
 
@@ -311,7 +331,7 @@ What format will used to record calls. Activate recording in the menu: Users->SI
 Call limit
 """"""""""
 
-How many simultaneous calls this user can have? The excess will receive CONGESTION.
+| How many simultaneous calls this user can have? The excess will receive CONGESTION.
 
 
 
@@ -321,7 +341,7 @@ How many simultaneous calls this user can have? The excess will receive CONGESTI
 Limit error
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -331,7 +351,7 @@ We did not write the description to this field.
 Callshop
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -341,17 +361,17 @@ We did not write the description to this field.
 Disk space
 """"""""""
 
-Insert the amount disk space available to record, in GB. Use -1 to remove the limit.
+| Insert the amount disk space available to record, in GB. Use -1 to remove the limit.
 
 
 
 
 .. _user-sipaccountlimit:
 
-Sip account limit
+SIP account limit
 """""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -361,7 +381,7 @@ We did not write the description to this field.
 CallingCard PIN
 """""""""""""""
 
-Used to authenticate through CallingCard.
+| Used to authenticate through CallingCard.
 
 
 
@@ -371,7 +391,7 @@ Used to authenticate through CallingCard.
 Restriction
 """""""""""
 
-Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers.
+| Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers.
 
 
 
@@ -381,7 +401,7 @@ Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers
 Profit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -391,7 +411,7 @@ We did not write the description to this field.
 Profit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -401,7 +421,7 @@ We did not write the description to this field.
 Profit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -411,7 +431,7 @@ We did not write the description to this field.
 Enable DBBL/Rocket
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -421,7 +441,7 @@ We did not write the description to this field.
 Profit
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -431,7 +451,7 @@ We did not write the description to this field.
 Show selling price
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

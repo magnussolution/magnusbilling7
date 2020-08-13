@@ -11,7 +11,7 @@ Field list
 Prefix
 """"""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Destination
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 Sell price
 """"""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -41,7 +41,7 @@ We did not write the description to this field.
 Buy price initblock
 """""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We did not write the description to this field.
 Buy price increment
 """""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Minimum time to charge
 """"""""""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

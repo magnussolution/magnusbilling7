@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Use on signup
 """""""""""""
 
-Display this plan in the signup form?
+| Display this plan in the signup form?
 
 
 
@@ -31,7 +31,7 @@ Display this plan in the signup form?
 Initial credit to new users
 """""""""""""""""""""""""""
 
-How much initial credit do you want to add to new users that select this plan in signup form?
+| How much initial credit do you want to add to new users that select this plan in signup form?
 
 
 
@@ -41,7 +41,7 @@ How much initial credit do you want to add to new users that select this plan in
 Notices with audio
 """"""""""""""""""
 
-Should the system execute audios li
+| Should the system execute audios li
 
 
 
@@ -51,7 +51,7 @@ Should the system execute audios li
 Tech prefix
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Services
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

@@ -11,7 +11,7 @@ Field list
 Name
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -21,7 +21,7 @@ We did not write the description to this field.
 Username
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -31,7 +31,7 @@ We did not write the description to this field.
 MonFri intervals
 """"""""""""""""
 
-Time to start weekly work interval
+| Time to start weekly work interval
 
 
 
@@ -41,7 +41,7 @@ Time to start weekly work interval
 Saturday intervals
 """"""""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -51,7 +51,7 @@ We did not write the description to this field.
 Sunday intervals
 """"""""""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -61,7 +61,7 @@ We did not write the description to this field.
 Work audio
 """"""""""
 
-Audio to execute when a call is received in between work interval
+| Audio to execute when a call is received in between work interval
 
 
 
@@ -71,7 +71,7 @@ Audio to execute when a call is received in between work interval
 Out work audio
 """"""""""""""
 
-Audio to execute when a call is received out of the work interval
+| Audio to execute when a call is received out of the work interval
 
 
 
@@ -81,7 +81,7 @@ Audio to execute when a call is received out of the work interval
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -91,7 +91,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -101,7 +101,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -111,7 +111,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -121,7 +121,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -131,7 +131,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -141,7 +141,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -151,7 +151,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -161,7 +161,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -171,7 +171,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -181,7 +181,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -191,7 +191,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -201,7 +201,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -211,7 +211,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -221,7 +221,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -231,7 +231,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -241,7 +241,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -251,7 +251,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -261,7 +261,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -271,7 +271,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -281,7 +281,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -291,7 +291,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -301,7 +301,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -311,7 +311,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -321,7 +321,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -331,7 +331,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -341,7 +341,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -351,7 +351,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -361,7 +361,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -371,7 +371,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -381,7 +381,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -391,7 +391,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -401,7 +401,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -411,7 +411,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -421,7 +421,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -431,7 +431,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -441,7 +441,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -451,7 +451,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -461,7 +461,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -471,7 +471,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -481,7 +481,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -491,7 +491,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -501,7 +501,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -511,7 +511,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -521,7 +521,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -531,7 +531,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -541,7 +541,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -551,7 +551,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -561,7 +561,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -571,7 +571,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -581,7 +581,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -591,7 +591,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -601,7 +601,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -611,7 +611,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -621,7 +621,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -631,7 +631,7 @@ We did not write the description to this field.
 Enable known SIP user
 """""""""""""""""""""
 
-Makes the caller able to type the SIP account he wants to call directly. E.g, Press 1 to xxx, Press 2 to yyy or type the SIP account.
+| Makes the caller able to type the SIP account he wants to call directly. E.g, Press 1 to xxx, Press 2 to yyy or type the SIP account.
 
 
 
@@ -641,7 +641,7 @@ Makes the caller able to type the SIP account he wants to call directly. E.g, Pr
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -651,7 +651,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -661,7 +661,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -671,7 +671,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -681,7 +681,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -691,7 +691,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -701,7 +701,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -711,7 +711,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -721,7 +721,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -731,7 +731,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -741,7 +741,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -751,7 +751,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -761,7 +761,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -771,7 +771,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -781,7 +781,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -791,7 +791,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -801,7 +801,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -811,7 +811,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -821,7 +821,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -831,7 +831,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -841,7 +841,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -851,7 +851,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -861,7 +861,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -871,7 +871,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -881,7 +881,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -891,7 +891,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -901,7 +901,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -911,7 +911,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -921,7 +921,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -931,7 +931,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -941,7 +941,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -951,7 +951,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -961,7 +961,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -971,7 +971,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -981,7 +981,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -991,7 +991,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1001,7 +1001,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1011,7 +1011,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1021,7 +1021,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1031,7 +1031,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1041,7 +1041,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1051,7 +1051,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1061,7 +1061,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1071,7 +1071,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1081,7 +1081,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1091,7 +1091,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1101,7 +1101,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1111,7 +1111,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1121,7 +1121,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1131,7 +1131,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1141,7 +1141,7 @@ We did not write the description to this field.
 Type
 """"
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1151,7 +1151,7 @@ We did not write the description to this field.
 IVR
 """
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1161,7 +1161,7 @@ We did not write the description to this field.
 Queue
 """""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1171,7 +1171,7 @@ We did not write the description to this field.
 Sip user
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -1181,7 +1181,7 @@ We did not write the description to this field.
 DialPlan
 """"""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

@@ -11,7 +11,7 @@ Field list
 Credit
 """"""
 
-How much credit is this voucher worth?
+| How much credit is this voucher worth?
 
 
 
@@ -21,7 +21,7 @@ How much credit is this voucher worth?
 Plan
 """"
 
-Select the plan that is going to be used to create the user when the voucher is redeemed.
+| Select the plan that is going to be used to create the user when the voucher is redeemed.
 
 
 
@@ -31,7 +31,7 @@ Select the plan that is going to be used to create the user when the voucher is 
 Language
 """"""""
 
-Language used to create the user when voucher when the voucher is redeemed.
+| Language used to create the user when voucher when the voucher is redeemed.
 
 
 
@@ -41,7 +41,7 @@ Language used to create the user when voucher when the voucher is redeemed.
 Prefix rules
 """"""""""""
 
-Local Prefix used to the create user when the voucher is redeemed.
+| Local Prefix used to the create user when the voucher is redeemed.
 
 
 
@@ -51,7 +51,7 @@ Local Prefix used to the create user when the voucher is redeemed.
 Quantity
 """"""""
 
-How many vouchers do you want to generate?
+| How many vouchers do you want to generate?
 
 
 
@@ -61,7 +61,7 @@ How many vouchers do you want to generate?
 Description
 """""""""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 
@@ -71,7 +71,7 @@ We did not write the description to this field.
 Voucher
 """""""
 
-We did not write the description to this field.
+| We did not write the description to this field.
 
 
 

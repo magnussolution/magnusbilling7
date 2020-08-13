@@ -11,7 +11,7 @@ Lista de campos
 Plano
 """""
 
-O plano que você quer adiconar esta tarifa.
+| O plano que você quer adiconar esta tarifa.
 
 
 
@@ -21,7 +21,7 @@ O plano que você quer adiconar esta tarifa.
 Destino
 """""""
 
-Selecione o profixo que quer criar a tarifa
+| Selecione o profixo que quer criar a tarifa
 
 
 
@@ -31,7 +31,7 @@ Selecione o profixo que quer criar a tarifa
 Grupo de Troncos
 """"""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -41,7 +41,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Preço de venda
 """""""""""""""
 
-Preço de venda por minuto para este destino
+| Preço de venda por minuto para este destino
 
 
 
@@ -51,7 +51,7 @@ Preço de venda por minuto para este destino
 Bloco mínimo
 """""""""""""
 
-Tempo minimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
+| Tempo minimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
 
 
@@ -61,7 +61,7 @@ Tempo minimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chama
 Bloco de tarifação
 """"""""""""""""""""
 
-Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
+| Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 
@@ -71,7 +71,7 @@ Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colo
 Tempo mínimo para tarifar
 """"""""""""""""""""""""""
 
-Tempo minimo para tarifar. Se colocar 3, so vai tarifar chamadas que o tempo for => que 3 segundos
+| Tempo minimo para tarifar. Se colocar 3, so vai tarifar chamadas que o tempo for => que 3 segundos
 
 
 
@@ -81,7 +81,7 @@ Tempo minimo para tarifar. Se colocar 3, so vai tarifar chamadas que o tempo for
 Tempo adicional
 """""""""""""""
 
-Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
+| Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
 
 
 
@@ -91,7 +91,7 @@ Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar
 Incluir no pacotes grátis
 """"""""""""""""""""""""""
 
-Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
+| Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
 
 
 
@@ -101,7 +101,7 @@ Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
 Status
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -11,7 +11,7 @@ Lista de campos
 DID
 """
 
-O número extamente como chega no Asterisk.
+| O número extamente como chega no Asterisk.
 
 
 
@@ -21,7 +21,7 @@ O número extamente como chega no Asterisk.
 Status
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -31,7 +31,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Callerid name
 """""""""""""
 
-Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.
+| Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.
 
 
 
@@ -41,7 +41,7 @@ Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do D
 Taxa de conexão
 """"""""""""""""
 
-Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.
+| Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.
 
 
 
@@ -51,7 +51,7 @@ Custo de ativaçao. ESte custo será descontado do cliente somente no momento qu
 Preço mensal
 """""""""""""
 
-Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.
+| Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.
 
 
 
@@ -61,7 +61,7 @@ Custo mensal. Este valor será descontado automaticamente todos os meses do sald
 Taxa de conexão
 """"""""""""""""
 
-Este é o valor que será cobrado em cada chamada, simplismente por atender a chamada.
+| Este é o valor que será cobrado em cada chamada, simplismente por atender a chamada.
 
 
 
@@ -71,7 +71,7 @@ Este é o valor que será cobrado em cada chamada, simplismente por atender a ch
 Tempo mínimo para tarifar
 """"""""""""""""""""""""""
 
-Tempo minimo para tarifar o DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.
+| Tempo minimo para tarifar o DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.
 
 
 
@@ -81,7 +81,7 @@ Tempo minimo para tarifar o DID. Ex. Se colocar 3, qualquer chamada com tempo me
 Bloco mínimo
 """""""""""""
 
-Tempo minimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
+| Tempo minimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
 
 
@@ -91,7 +91,7 @@ Tempo minimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que d
 Bloco de tarifação
 """"""""""""""""""""
 
-Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
+| Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 
@@ -101,7 +101,7 @@ Bloco de quantos em quantos segundos ira cobrar apos o tempo minimo. Ex: se colo
 Quem será cobrado
 """"""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -111,7 +111,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Limite de canais
 """"""""""""""""
 
-Limite de chamadas simultâneas para este DID
+| Limite de chamadas simultâneas para este DID
 
 
 
@@ -121,7 +121,7 @@ Limite de chamadas simultâneas para este DID
 Descrição
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -131,7 +131,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Expressão regular
 """"""""""""""""""
 
-Esta é um REGEX(Expressão regular) para tarifar o DID conforme o número de quem liga para o DID, CallerID. Ex. Se você ligar para o DID e seu número for 51988445566, e você quer cobrar 0.1 por minuto quando o número iniciar com 2 digitos seguidos de um 9, que seria um celular no Brasil, é so colocar
+| Esta é um REGEX(Expressão regular) para tarifar o DID conforme o número de quem liga para o DID, CallerID. Ex. Se você ligar para o DID e seu número for 51988445566, e você quer cobrar 0.1 por minuto quando o número iniciar com 2 digitos seguidos de um 9, que seria um celular no Brasil, é so colocar
 
 
 
@@ -141,7 +141,7 @@ Esta é um REGEX(Expressão regular) para tarifar o DID conforme o número de qu
 Preço de venda por min
 """""""""""""""""""""""
 
-Preço por minuto a ser cobrado se validar a REGEX acima
+| Preço por minuto a ser cobrado se validar a REGEX acima
 
 
 
@@ -151,7 +151,7 @@ Preço por minuto a ser cobrado se validar a REGEX acima
 Bloquear chamadas a partir desta expressão
 """""""""""""""""""""""""""""""""""""""""""
 
-Se colocar como SIM, e o número de quem ligou se o número for validado com a REGEX acime, a chamada será desligada imeditamente.
+| Se colocar como SIM, e o número de quem ligou se o número for validado com a REGEX acime, a chamada será desligada imeditamente.
 
 
 
@@ -161,7 +161,7 @@ Se colocar como SIM, e o número de quem ligou se o número for validado com a R
 Enviar a chamada para callback
 """"""""""""""""""""""""""""""
 
-Envia a chamada para CallBack se o número for  validado com a REGEX acime, a chamada será desligada imeditamente.
+| Envia a chamada para CallBack se o número for  validado com a REGEX acime, a chamada será desligada imeditamente.
 
 
 
@@ -171,7 +171,7 @@ Envia a chamada para CallBack se o número for  validado com a REGEX acime, a ch
 Expressão regular
 """"""""""""""""""
 
-Igual a REGEX 1. Você pode usar ate 3 REGEX para diferenciara ate 3 tipos de tarifas para seu DID
+| Igual a REGEX 1. Você pode usar ate 3 REGEX para diferenciara ate 3 tipos de tarifas para seu DID
 
 
 
@@ -181,7 +181,7 @@ Igual a REGEX 1. Você pode usar ate 3 REGEX para diferenciara ate 3 tipos de ta
 Preço de venda por min
 """""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -191,7 +191,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Bloquear chamadas a partir desta expressão
 """""""""""""""""""""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -201,7 +201,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Enviar a chamada para callback
 """"""""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -211,7 +211,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Expressão regular
 """"""""""""""""""
 
-Igual a REGEX 1. Você pode usar ate 3 REGEX para diferenciara ate 3 tipos de tarifas para seu DID
+| Igual a REGEX 1. Você pode usar ate 3 REGEX para diferenciara ate 3 tipos de tarifas para seu DID
 
 
 
@@ -221,7 +221,7 @@ Igual a REGEX 1. Você pode usar ate 3 REGEX para diferenciara ate 3 tipos de ta
 Preço de venda por min
 """""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -231,7 +231,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Bloquear chamadas a partir desta expressão
 """""""""""""""""""""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -241,7 +241,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Enviar a chamada para callback
 """"""""""""""""""""""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -251,7 +251,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Callback pro
 """"""""""""
 
-Ativa o CallBack Pro.
+| Ativa o CallBack Pro.
 
 
 
@@ -261,7 +261,7 @@ Ativa o CallBack Pro.
 Usar áudio
 """""""""""
 
-Executar um audio
+| Executar um audio
 
 
 
@@ -271,17 +271,17 @@ Executar um audio
 Tentativa máxima
 """""""""""""""""
 
-Quantas vezes o sistema vai tentar retornar para o cliente?
+| Quantas vezes o sistema vai tentar retornar para o cliente?
 
 
 
 
 .. _did-cbr_time_try:
 
-Interval beteween trying
-""""""""""""""""""""""""
+Intervalo entre tentativas
+""""""""""""""""""""""""""
 
-Intervalo de tempo entre cada tentativa, em minutos.
+| Intervalo de tempo entre cada tentativa, em minutos.
 
 
 
@@ -291,7 +291,7 @@ Intervalo de tempo entre cada tentativa, em minutos.
 Early media
 """""""""""
 
-Executar o audio antes de antender. O provedor do DID precisa aceitar EarlyMedia.
+| Executar o audio antes de antender. O provedor do DID precisa aceitar EarlyMedia.
 
 
 
@@ -301,7 +301,7 @@ Executar o audio antes de antender. O provedor do DID precisa aceitar EarlyMedia
 Seg-Sex
 """""""
 
-Ex: sua trabalha de 09 as 12 e de 14 as 18 horas, e dentro deste horario você quer executar o callback e retornar a chamada para a pessoa que ligou, entao coloque 09:00-12:00|14:00-18:00, os intervalos sao separados por |
+| Ex: sua trabalha de 09 as 12 e de 14 as 18 horas, e dentro deste horario você quer executar o callback e retornar a chamada para a pessoa que ligou, entao coloque 09:00-12:00|14:00-18:00, os intervalos sao separados por |
 
 
 
@@ -311,7 +311,7 @@ Ex: sua trabalha de 09 as 12 e de 14 as 18 horas, e dentro deste horario você q
 Sab
 """
 
-Mesma regra so que para sabados
+| Mesma regra so que para sabados
 
 
 
@@ -321,7 +321,7 @@ Mesma regra so que para sabados
 Domingo
 """""""
 
-Mesma regra so que para domingos
+| Mesma regra so que para domingos
 
 
 
@@ -331,7 +331,7 @@ Mesma regra so que para domingos
 Áudio Trabalhando
 """"""""""""""""""
 
-Audio que será executado quando alguem ligar dentro do horario de atendimento.
+| Audio que será executado quando alguem ligar dentro do horario de atendimento.
 
 
 
@@ -341,7 +341,7 @@ Audio que será executado quando alguem ligar dentro do horario de atendimento.
 Trabalhando
 """""""""""
 
-Audio que será executado quando ligar fora do horario de atendimento
+| Audio que será executado quando ligar fora do horario de atendimento
 
 
 

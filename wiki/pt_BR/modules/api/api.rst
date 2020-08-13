@@ -11,7 +11,11 @@ Lista de campos
 Usuário
 """"""""
 
-teste teste
+| Usuário que poderá usar a API.
+| Para usar a API é necessário o uso do projeto publicado no GITHUB.
+|     
+| O projeto esta publicado no link https://github.com/magnussolution/magnusbilling-api-php. 
+| A API tem documentação, atualmente somente em Ingles, e esta publicado no link https://github.com/magnussolution/magnusbilling-api-php/wiki. 
 
 
 
@@ -21,7 +25,7 @@ teste teste
 API key
 """""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Key necessária para autenticar na API.
 
 
 
@@ -31,7 +35,7 @@ Nós ainda não escrevemos a descrição deste campo.
 API secret
 """"""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Secret necessário para autenticar na API.
 
 
 
@@ -41,7 +45,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Status
 """"""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Permitir ou não a conexão na API.
 
 
 
@@ -51,7 +55,7 @@ Nós ainda não escrevemos a descrição deste campo.
 Permissões
 """""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Quais as açōes será permitidas na conexão.
 
 
 
@@ -61,7 +65,10 @@ Nós ainda não escrevemos a descrição deste campo.
 IPs restritos
 """""""""""""
 
-Nós ainda não escrevemos a descrição deste campo.
+| Quais os IPs poderão conectar na API.
+| Deixar em branco para permitir a conexão de qualquer IP.
+| 
+| É extremamente recomendável somente liberar os IPs que realmente deseja conectar.
 
 
 

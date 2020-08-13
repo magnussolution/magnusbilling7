@@ -14,6 +14,7 @@
  * 2020-08-10
  */
 Locale.load({
+    'Click to more details': 'Click para más detalles',
     'Ringinuse': 'Llamar en uso',
     'Calls Online': 'Llamadas online',
     'Call Group': 'Grupo de llamada',
