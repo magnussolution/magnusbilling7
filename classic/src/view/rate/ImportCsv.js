@@ -28,7 +28,7 @@ Ext.define('MBilling.view.rate.ImportCsv', {
             width: 350
         }, {
             xtype: 'trunkgroupcombo',
-            name: 'id_trunk',
+            name: 'id_trunk_group',
             fieldLabel: t('Trunk groups'),
             width: 350,
             hidden: !App.user.isAdmin
