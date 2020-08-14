@@ -911,7 +911,7 @@ Locale.load({
     'To date': 'Hasta la fecha',
     'To day': 'Hasta dia',
     'Today': 'Hoy',
-    'Today max CC': 'Pico simultáneas de hoy',
+    'Today peak': 'Pico de hoy',
     'Toggle max completed calls': 'Toggle max completed calls',
     'Token': 'Token',
     'Torture': 'Torture',

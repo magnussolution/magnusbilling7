@@ -21,7 +21,8 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Setup price' => 'Costo de activación',
+            'Your account was created. Please check your email' => 'Su cuenta fue creada. Por favor verifique su email',
+    'Setup price' => 'Costo de activación',
     'Click to more details' => 'Click para más detalles',
     'Ringinuse' => 'Llamar en uso',
     'Calls Online' => 'Llamadas online',
@@ -901,7 +902,7 @@ return array(
     'To date' => 'Hasta la fecha',
     'To day' => 'Hasta dia',
     'Today' => 'Hoy',
-    'Today max CC' => 'Pico simultáneas de hoy',
+    'Today peak' => 'Pico de hoy',
     'Toggle max completed calls' => 'Toggle max completed calls',
     'Token' => 'Token',
     'Torture' => 'Torture',

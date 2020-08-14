@@ -23,7 +23,7 @@ Ext.define('MBilling.view.callOnlineChart.Chart', {
     alias: 'widget.callonlinechartchart',
     controller: 'callsummaryperday',
     store: 'CallOnlineChart',
-    fieldValue: [t('Total'), t('Answered')],
+    fieldValue: ['total', 'answer'],
     fieldDescription: 'date',
     labelYLine: t('Total / Min'),
     labelXLine: t('Time'),
