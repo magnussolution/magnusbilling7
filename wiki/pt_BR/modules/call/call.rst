@@ -4,7 +4,7 @@
 Data
 """"
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dia e hora do inicio da chamada
 
 
 
@@ -14,7 +14,7 @@ Data
 Conta SIP
 """""""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP que realizou a chamada
 
 
 
@@ -24,7 +24,11 @@ Conta SIP
 CallerID
 """"""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número enviado para o tronco como identificador de chamada.
+| 
+| Caso o tronco aceite o envio de callerid, entao este numero sera usado como identificador de chamada.
+| 
+| Para funcionar é necessário deixar o campo Fromuser no tronco em branco.
 
 
 
@@ -34,7 +38,7 @@ CallerID
 Número
 """""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Numero discado pelo cliente
 
 
 
@@ -44,7 +48,7 @@ Número
 Destino
 """""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do destino, este nome esta relacionado com o menu Prefixos
 
 
 
@@ -54,7 +58,7 @@ Destino
 Usuário
 """"""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado
 
 
 
@@ -64,7 +68,7 @@ Usuário
 Troncos
 """""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tronco que foi utilizado para completar a chamada
 
 
 
@@ -74,7 +78,7 @@ Troncos
 Duração
 """""""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Duração da chamada em segundos
 
 
 
@@ -84,7 +88,7 @@ Duração
 Preço de compra
 """"""""""""""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de compra. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
 
 
 
@@ -94,7 +98,7 @@ Preço de compra
 Preço de venda
 """""""""""""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de venda, este foi o valor descontado do cliente. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
 
 
 
@@ -104,7 +108,7 @@ Preço de venda
 Preço de venda
 """""""""""""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de venda, este foi o valor descontado do cliente. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
 
 
 
@@ -114,7 +118,7 @@ Preço de venda
 ID único
 """""""""
 
-| Nós ainda não escrevemos a descrição deste campo.
+| ID unico gerado pelo Asterisk, este campo é tambem a hora de inicio da chamada em Epoch Unix
 
 
 
