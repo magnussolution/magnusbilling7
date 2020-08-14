@@ -125,7 +125,7 @@ Ext.define('MBilling.view.campaign.Form', {
                     title: t('Forward to'),
                     collapsible: true,
                     collapsed: false,
-                    height: 110,
+                    height: window.isThemeTriton ? 180 : 110,
                     defaults: {
                         labelWidth: 190,
                         anchor: '100%',
@@ -280,7 +280,7 @@ Ext.define('MBilling.view.campaign.Form', {
                 title: t('SMS'),
                 items: [{
                     name: 'from',
-                    fieldLabel: t('From'),
+                    fieldLabel: 'From',
                     allowBlank: true
                 }, {
                     xtype: 'textareafield',
