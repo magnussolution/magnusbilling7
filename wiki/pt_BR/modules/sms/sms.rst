@@ -1,10 +1,3 @@
-.. _sms-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _sms-id_user:
 

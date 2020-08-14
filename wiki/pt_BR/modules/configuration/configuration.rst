@@ -1,10 +1,3 @@
-.. _configuration-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _configuration-config_value:
 

@@ -1,10 +1,3 @@
-.. _call-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _call-starttime:
 

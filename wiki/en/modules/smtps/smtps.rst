@@ -1,10 +1,3 @@
-.. _smtps-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _smtps-host:
 

@@ -1,10 +1,3 @@
-.. _sendCreditProducts-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _sendCreditProducts-country:
 

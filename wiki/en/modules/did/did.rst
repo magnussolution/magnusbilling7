@@ -1,10 +1,3 @@
-.. _did-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _did-did:
 
@@ -38,8 +31,8 @@ Callerid name
 
 .. _did-connection_charge:
 
-Connection charge
-"""""""""""""""""
+Setup price
+"""""""""""
 
 | Activation cost. E.
 

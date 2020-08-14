@@ -1,10 +1,3 @@
-.. _offerCdr-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _offerCdr-id_user:
 

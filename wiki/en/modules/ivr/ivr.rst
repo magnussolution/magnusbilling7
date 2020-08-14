@@ -1,10 +1,3 @@
-.. _ivr-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _ivr-name:
 

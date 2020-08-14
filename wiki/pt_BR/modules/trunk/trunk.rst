@@ -1,10 +1,3 @@
-.. _trunk-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _trunk-id_provider:
 

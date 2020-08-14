@@ -1,6 +1,6 @@
-*************
+**********
 Instalação
-*************
+**********
 
 Para instalar MagnusBilling, você precisa apenas de um servidor com CentOS 7 ou Debian 8, 64 ou 32 bits, instalação básica.
 

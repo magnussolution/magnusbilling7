@@ -1,10 +1,3 @@
-.. _voucher-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _voucher-credit:
 

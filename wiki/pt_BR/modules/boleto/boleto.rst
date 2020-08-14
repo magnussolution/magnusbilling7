@@ -1,10 +1,3 @@
-.. _boleto-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _boleto-id_user:
 

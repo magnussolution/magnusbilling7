@@ -1,10 +1,3 @@
-.. _callerid-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callerid-id_user:
 

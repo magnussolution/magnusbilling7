@@ -1,10 +1,3 @@
-.. _callSummaryDayAgent-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callSummaryDayAgent-sumsessiontime:
 

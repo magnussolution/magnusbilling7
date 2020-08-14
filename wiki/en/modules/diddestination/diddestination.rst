@@ -1,10 +1,3 @@
-.. _diddestination-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _diddestination-id_did:
 

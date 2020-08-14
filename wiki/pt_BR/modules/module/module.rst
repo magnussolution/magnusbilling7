@@ -1,10 +1,3 @@
-.. _module-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _module-text:
 

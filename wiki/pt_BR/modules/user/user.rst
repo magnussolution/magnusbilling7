@@ -1,10 +1,3 @@
-.. _user-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _user-username:
 

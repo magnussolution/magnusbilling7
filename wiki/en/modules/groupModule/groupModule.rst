@@ -1,10 +1,3 @@
-.. _groupModule-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _groupModule-id_group:
 

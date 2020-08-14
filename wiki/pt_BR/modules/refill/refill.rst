@@ -1,10 +1,3 @@
-.. _refill-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _refill-id_user:
 

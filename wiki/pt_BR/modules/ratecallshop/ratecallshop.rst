@@ -1,10 +1,3 @@
-.. _rateCallshop-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _rateCallshop-dialprefix:
 

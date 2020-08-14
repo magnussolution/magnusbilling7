@@ -1,10 +1,3 @@
-.. _sendCreditRates-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _sendCreditRates-idProductcountry:
 

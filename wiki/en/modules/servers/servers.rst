@@ -1,10 +1,3 @@
-.. _servers-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _servers-name:
 

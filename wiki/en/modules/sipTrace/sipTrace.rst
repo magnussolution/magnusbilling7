@@ -1,10 +1,3 @@
-.. _sipTrace-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _sipTrace-head:
 

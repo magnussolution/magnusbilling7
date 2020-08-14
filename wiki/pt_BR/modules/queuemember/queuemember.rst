@@ -1,10 +1,3 @@
-.. _queueMember-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _queueMember-queue_name:
 

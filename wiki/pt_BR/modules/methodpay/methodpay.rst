@@ -1,10 +1,3 @@
-.. _methodPay-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _methodPay-show_name:
 

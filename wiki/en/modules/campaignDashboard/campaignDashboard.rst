@@ -1,10 +1,3 @@
-.. _campaignDashboard-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _campaignDashboard-name:
 

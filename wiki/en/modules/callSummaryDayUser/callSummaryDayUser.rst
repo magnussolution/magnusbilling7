@@ -1,10 +1,3 @@
-.. _callSummaryDayUser-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callSummaryDayUser-sumsessiontime:
 

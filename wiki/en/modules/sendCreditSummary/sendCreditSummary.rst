@@ -1,10 +1,3 @@
-.. _sendCreditSummary-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _sendCreditSummary-id_user:
 

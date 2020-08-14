@@ -1,10 +1,3 @@
-.. _offer-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _offer-label:
 

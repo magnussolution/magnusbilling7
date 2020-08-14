@@ -1,10 +1,3 @@
-.. _sipuras-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _sipuras-nserie:
 

@@ -1,10 +1,3 @@
-.. _phoneBook-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _phoneBook-name:
 

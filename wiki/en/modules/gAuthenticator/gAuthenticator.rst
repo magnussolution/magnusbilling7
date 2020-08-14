@@ -1,10 +1,3 @@
-.. _gAuthenticator-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _gAuthenticator-username:
 

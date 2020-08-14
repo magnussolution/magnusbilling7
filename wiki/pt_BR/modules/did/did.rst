@@ -1,10 +1,3 @@
-.. _did-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _did-did:
 
