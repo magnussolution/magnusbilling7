@@ -64,9 +64,6 @@ MagnusBilling funções
 
    firewall/iptables.rst
 
-
-
-
 .. toctree::
    :maxdepth: 3
    :caption: Menu

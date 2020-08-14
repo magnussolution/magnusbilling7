@@ -223,7 +223,6 @@
     'uniqueid'=> ['Uniqueid', 'ID_único' , 'Uniqueid'],
     'url'=> ['URL', 'URL' , 'URL'],
     'url_events'=> ['URL_events_notify', 'URL_notificaçōes_de_eventos' , 'URL_notificación_de_eventos'],
-    'used_secondes'=> ['Used_secondes', 'Segundos_usados' , 'Segundos_usados'],
     'user_prefix'=> ['User_prefix', 'Prefixo_para_usuário' , 'Prefijo_Usuario'],
     'username'=> ['Username', 'Usuário' , 'Usuario'],
     'vat'=> ['VAT', 'Imposto' , 'VAT'],
