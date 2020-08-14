@@ -13,7 +13,7 @@ Instale o Linux **minimal**.
      
   cd /usr/src/
   yum -y install wget
-  wget https://raw.githubusercontent.com/magnussolution/magnusbilling6/master/script/install.sh
+  wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
   chmod +x install.sh
   ./install.sh     
 
@@ -25,7 +25,7 @@ Instale o Linux **minimal**.
    Instalação completa. ATENÇÃO!! APÓS TERMINAR A INSTALAÇÃO, O SERVIDOR SERÁ REINICIADO AUTOMATICAMENTE!
 
    Use um browser para login.
-      entre em: http://000.000.000.000
+      Entre em: http://000.000.000.000
       Usuário: root
       Senha: magnus (Lembre-se de alterar a senha padrão)
 

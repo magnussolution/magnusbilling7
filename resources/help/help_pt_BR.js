@@ -19,18 +19,21 @@ Deixar em branco para permitir a conexão de qualquer IP.
     'boleto.vencimento': ``,
     'boleto.description': ``,
     //EXTRATO DE CHAMADAS
-    'call.starttime': ``,
-    'call.src': ``,
-    'call.callerid': ``,
-    'call.calledstation': ``,
-    'call.idPrefixdestination': ``,
-    'call.idUserusername': ``,
-    'call.idTrunktrunkcode': ``,
-    'call.sessiontime': ``,
-    'call.buycost': ``,
-    'call.sessionbill': ``,
-    'call.agent_bill': ``,
-    'call.uniqueid': ``,
+    'call.starttime': `Dia e hora do inicio da chamada`,
+    'call.src': `Conta SIP que realizou a chamada`,
+    'call.callerid': `Número enviado para o tronco como identificador de chamada.||
+Caso o tronco aceite o envio de callerid, entao este numero sera usado como identificador de chamada.
+
+Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
+    'call.calledstation': `Numero discado pelo cliente`,
+    'call.idPrefixdestination': `Nome do destino, este nome esta relacionado com o menu Prefixos`,
+    'call.idUserusername': `Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado`,
+    'call.idTrunktrunkcode': `Tronco que foi utilizado para completar a chamada`,
+    'call.sessiontime': `Duração da chamada em segundos`,
+    'call.buycost': `Preço de compra. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html`,
+    'call.sessionbill': `Preço de venda, este foi o valor descontado do cliente. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html`,
+    'call.agent_bill': `Preço de venda, este foi o valor descontado do cliente. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html`,
+    'call.uniqueid': `ID unico gerado pelo Asterisk, este campo é tambem a hora de inicio da chamada em Epoch Unix`,
     //CHAMADAS ARQUIVADAS
     'callArchive.calledstation': ``,
     'callArchive.sessiontime': ``,
