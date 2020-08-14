@@ -1,10 +1,3 @@
-.. _servicesUse-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _servicesUse-id_user:
 

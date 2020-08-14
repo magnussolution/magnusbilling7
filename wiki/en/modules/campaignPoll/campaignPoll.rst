@@ -1,10 +1,3 @@
-.. _campaignPoll-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _campaignPoll-name:
 

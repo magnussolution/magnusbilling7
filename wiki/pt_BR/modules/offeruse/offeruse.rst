@@ -1,10 +1,3 @@
-.. _offerUse-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _offerUse-id_user:
 

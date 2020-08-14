@@ -1,10 +1,3 @@
-.. _callArchive-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callArchive-calledstation:
 

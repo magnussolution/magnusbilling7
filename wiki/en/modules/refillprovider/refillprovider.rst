@@ -1,10 +1,3 @@
-.. _refillprovider-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _refillprovider-id_provider:
 

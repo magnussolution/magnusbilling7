@@ -1,10 +1,3 @@
-.. _callSummaryPerMonth-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callSummaryPerMonth-sumsessiontime:
 

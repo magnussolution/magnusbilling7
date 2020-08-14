@@ -1,10 +1,3 @@
-.. _provider-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _provider-provider_name:
 

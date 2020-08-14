@@ -1,10 +1,3 @@
-.. _services-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _services-type:
 

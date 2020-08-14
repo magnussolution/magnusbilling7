@@ -1,10 +1,3 @@
-.. _rateProvider-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _rateProvider-id_provider:
 

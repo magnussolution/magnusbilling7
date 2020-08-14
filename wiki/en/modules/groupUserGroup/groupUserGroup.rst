@@ -1,10 +1,3 @@
-.. _groupUserGroup-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _groupUserGroup-name:
 

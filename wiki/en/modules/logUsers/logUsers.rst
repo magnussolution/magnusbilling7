@@ -1,10 +1,3 @@
-.. _logUsers-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _logUsers-id_user:
 

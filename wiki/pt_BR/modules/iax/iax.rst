@@ -1,10 +1,3 @@
-.. _iax-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _iax-id_user:
 

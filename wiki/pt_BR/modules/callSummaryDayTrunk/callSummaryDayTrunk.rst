@@ -1,10 +1,3 @@
-.. _callSummaryDayTrunk-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callSummaryDayTrunk-sumsessiontime:
 

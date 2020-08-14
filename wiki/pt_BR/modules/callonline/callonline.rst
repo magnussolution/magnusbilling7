@@ -1,10 +1,3 @@
-.. _callOnLine-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callOnLine-idUserusername:
 

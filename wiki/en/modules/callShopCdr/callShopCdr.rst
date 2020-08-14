@@ -1,10 +1,3 @@
-.. _callShopCdr-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callShopCdr-id_user:
 

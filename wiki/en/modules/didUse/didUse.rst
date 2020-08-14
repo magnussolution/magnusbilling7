@@ -1,10 +1,3 @@
-.. _didUse-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _didUse-id_user:
 

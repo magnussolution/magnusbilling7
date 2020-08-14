@@ -1,10 +1,3 @@
-.. _callSummaryCallShop-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callSummaryCallShop-sumsessiontime:
 

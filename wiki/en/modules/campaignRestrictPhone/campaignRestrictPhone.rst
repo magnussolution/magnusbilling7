@@ -1,10 +1,3 @@
-.. _campaignRestrictPhone-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _campaignRestrictPhone-number:
 

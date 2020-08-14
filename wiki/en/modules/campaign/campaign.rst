@@ -1,10 +1,3 @@
-.. _campaign-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _campaign-id_user:
 

@@ -1,10 +1,3 @@
-.. _rate-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _rate-id_plan:
 

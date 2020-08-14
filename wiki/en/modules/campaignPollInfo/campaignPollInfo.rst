@@ -1,10 +1,3 @@
-.. _campaignPollInfo-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _campaignPollInfo-number:
 

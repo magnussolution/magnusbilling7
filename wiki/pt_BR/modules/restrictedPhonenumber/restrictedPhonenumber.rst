@@ -1,10 +1,3 @@
-.. _restrictedPhonenumber-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _restrictedPhonenumber-id_user:
 

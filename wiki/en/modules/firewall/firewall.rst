@@ -1,10 +1,3 @@
-.. _firewall-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _firewall-ip:
 

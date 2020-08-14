@@ -1,10 +1,3 @@
-.. _phoneNumber-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _phoneNumber-id_phonebook:
 

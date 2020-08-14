@@ -64,17 +64,20 @@ MagnusBilling funções
 
    firewall/iptables.rst
 
+
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Menus
+   :maxdepth: 3
+   :caption: Menu
 
    modules/index.rst
 
 
-.. Indices and tables
-.. ------------------
-..
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`search`
+* :ref:`glossary`
 

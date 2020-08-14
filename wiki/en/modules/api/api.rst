@@ -1,10 +1,3 @@
-.. _api-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _api-id_user:
 

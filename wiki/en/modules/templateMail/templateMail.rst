@@ -1,10 +1,3 @@
-.. _templateMail-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _templateMail-fromname:
 

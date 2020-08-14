@@ -1,10 +1,3 @@
-.. _callBack-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callBack-id_user:
 

@@ -1,10 +1,3 @@
-.. _prefix-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _prefix-prefix:
 

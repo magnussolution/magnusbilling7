@@ -1,10 +1,3 @@
-.. _offerCdr-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _offerCdr-id_user:
 
@@ -28,8 +21,8 @@ Pacotes grátis
 
 .. _offerCdr-used_secondes:
 
-Segundos usados
-"""""""""""""""
+Used secondes
+"""""""""""""
 
 | Nós ainda não escrevemos a descrição deste campo.
 

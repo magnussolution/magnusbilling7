@@ -1,10 +1,3 @@
-.. _trunkGroup-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _trunkGroup-name:
 

@@ -1,10 +1,3 @@
-.. _sip-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _sip-id_user:
 

@@ -1,10 +1,3 @@
-.. _queue-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _queue-id_user:
 

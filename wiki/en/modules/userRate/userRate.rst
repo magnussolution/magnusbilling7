@@ -1,10 +1,3 @@
-.. _userRate-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _userRate-id_prefix:
 

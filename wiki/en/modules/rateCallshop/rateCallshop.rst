@@ -1,10 +1,3 @@
-.. _rateCallshop-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _rateCallshop-dialprefix:
 
@@ -28,8 +21,8 @@ Destination
 
 .. _rateCallshop-buyrate:
 
-Sell price
-""""""""""
+Price
+"""""
 
 | We did not write the description to this field.
 

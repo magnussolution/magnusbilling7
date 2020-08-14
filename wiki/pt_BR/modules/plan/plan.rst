@@ -1,10 +1,3 @@
-.. _Plan-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _Plan-name:
 
