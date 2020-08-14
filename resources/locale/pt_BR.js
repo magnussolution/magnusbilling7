@@ -259,7 +259,7 @@ Locale.load({
     'This username is in use by a trunk': 'Este usuário já está em uso por uma conta SIP',
     'Thursday': 'Quinta feira',
     'To date': 'Até a data',
-    'Today max CC': 'Máximo de simultâneas hoje',
+    'Today peak': 'Pico de hoje',
     'Token': 'Token',
     'Total Price': 'Preço total',
     'Total buy price': 'Total preço de compra',

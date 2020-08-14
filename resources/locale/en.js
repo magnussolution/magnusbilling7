@@ -945,7 +945,7 @@ Locale.load({
     'To date': '',
     'To day': '',
     'Today': '',
-    'Today max CC': '',
+    'Today peak': '',
     'Toggle max completed calls': '',
     'Token': '',
     'Torture': '',
