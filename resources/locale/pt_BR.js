@@ -14,6 +14,7 @@
  * 2020-08-07
  */
 Locale.load({
+    'Your account was created. Please check your email': 'Sua conta foi criada. Por favor verifique seu email',
     'Setup price': 'Taxa de ativação',
     'Click to more details': 'Clique para mais informaçōes',
     'On Phone': 'Falando',
