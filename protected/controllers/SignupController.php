@@ -176,11 +176,10 @@ class SignupController extends Controller
                     AsteriskAccess::instance()->generateSipPeers();
 
                     if (isset($_POST['extjs'])) {
-                        Yii::log('129', 'error');
                         echo json_encode(array(
                             'success'  => 'true',
                             'username' => $signup->username,
-                            'msg'      => 'Your account was created. Please check your email',
+                            'msg'      => Yii::t('zii', 'Your account was created. Please check your email'),
                         ));
 
                         $mail = new Mail(Mail::$TYPE_SIGNUP, $signup->id);

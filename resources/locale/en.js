@@ -1050,6 +1050,7 @@ Locale.load({
     'You only can set DID to CLIENTS': '',
     'Your': '',
     'Your SMS is not send!': '',
+    'Your account was created. Please check your email': '',
     'Your credit': '',
     'Your limit to download record is': '',
     'Your number': '',
