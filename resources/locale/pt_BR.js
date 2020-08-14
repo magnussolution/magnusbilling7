@@ -636,7 +636,7 @@ Locale.load({
     'ID': 'ID',
     'Import CSV': 'Importar CSV',
     'Import logo': 'Importar logo',
-    'Import wallpaper': 'papel de parede ',
+    'Import wallpaper': 'Papel de parede ',
     'In': 'em',
     'Inactive': 'Inativo',
     'Inbound': 'Entrada',

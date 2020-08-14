@@ -22,7 +22,6 @@
           */
 return array(
             'Setup price' => 'Costo de activación',
-    'Allowed columns' => 'Columnas permidas',
     'Click to more details' => 'Click para más detalles',
     'Ringinuse' => 'Llamar en uso',
     'Calls Online' => 'Llamadas online',
@@ -947,7 +946,6 @@ return array(
     'Use filters' => 'Usar filtros',
     'Use on signup' => 'Usar en el registro',
     'Use that' => 'Usar esto',
-    'Used secondes' => 'Segundos usados',
     'User Custom Rates' => 'Tarifas especiales',
     'User not have a Email' => 'Usuario no tiene email',
     'User password' => 'Contraseña usuario',

@@ -22,7 +22,6 @@
           */
 return array(
             'Setup price' => 'Taxa de ativação',
-    'Allowed columns' => 'Colunas permitidas',
     'Click to more details' => 'Clique para mais informaçōes',
     'On Phone' => 'Falando',
     'Receiving' => 'Recebendo',
@@ -278,7 +277,6 @@ return array(
     'Unlimited calls' => 'Chamadas ilimitadas',
     'Uptime' => 'Servidor ligado',
     'Use that' => 'Usar isso',
-    'Used secondes' => 'Segundos usados',
     'Username need start with numbers or letters' => 'O usuário precisa iniciar com número ou letra',
     'Version' => 'Versão',
     'Voted' => 'Votou',
@@ -639,7 +637,7 @@ return array(
     'ID' => 'ID',
     'Import CSV' => 'Importar CSV',
     'Import logo' => 'Importar logo',
-    'Import wallpaper' => 'papel de parede ',
+    'Import wallpaper' => 'Papel de parede ',
     'In' => 'em',
     'Inactive' => 'Inativo',
     'Inbound' => 'Entrada',
