@@ -180,7 +180,7 @@ class SignupController extends Controller
                         echo json_encode(array(
                             'success'  => 'true',
                             'username' => $signup->username,
-                            'msg'      => 'Your account was created. Please ckeck your email',
+                            'msg'      => 'Your account was created. Please check your email',
                         ));
 
                         $mail = new Mail(Mail::$TYPE_SIGNUP, $signup->id);
