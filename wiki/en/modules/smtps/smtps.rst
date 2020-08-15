@@ -2,7 +2,7 @@
 .. _smtps-host:
 
 Host
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Host
 .. _smtps-username:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Username
 .. _smtps-password:
 
 Password
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Password
 .. _smtps-port:
 
 Port
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ Port
 .. _smtps-encryption:
 
 Encryption
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

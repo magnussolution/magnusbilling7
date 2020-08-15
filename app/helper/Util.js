@@ -246,8 +246,8 @@ Ext.define('Helper.Util', {
         return value;
     },
     formatBooleancallback: function(value) {
-        color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'orange' : value == 4 ? 'black' : value == 5 ? 'green' : '#FFCC00';
-        value = value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 4 ? t('Not working') : value == 5 ? t('Complete') : t('Sent');
+        color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'orange' : value == 4 ? 'black' : '#FFCC00';
+        value = value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 4 ? t('Not working') : t('Sent');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatPorcente: function(value) {

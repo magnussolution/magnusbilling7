@@ -2,7 +2,7 @@
 .. _templateMail-fromname:
 
 Nome
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Nome
 .. _templateMail-fromemail:
 
 Email
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Email
 .. _templateMail-subject:
 
 Assunto
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Assunto
 .. _templateMail-messagehtml:
 
 Descrição
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

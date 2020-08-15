@@ -26,6 +26,7 @@ Ext.define('MBilling.view.api.Form', {
         t('Field list');
         t('We did not write the description to this field');
         t('Click to more details');
+        t('You can see more details at the link');
         me.items = [{
             xtype: 'userlookup',
             ownerForm: me,

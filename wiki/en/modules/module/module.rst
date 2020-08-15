@@ -2,7 +2,7 @@
 .. _module-text:
 
 Text
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Text
 .. _module-icon_cls:
 
 IconCls
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ IconCls
 .. _module-id_module:
 
 Main menu
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Main menu
 .. _module-priority:
 
 Order
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 

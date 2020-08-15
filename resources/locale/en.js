@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-14
+ * 2020-08-16
  */
 Locale.load({
     '': '',
@@ -200,7 +200,6 @@ Locale.load({
     'Comma': '',
     'Company': '',
     'Company name': '',
-    'Complete': '',
     'Config': '',
     'Configuration': '',
     'Confirm': '',
@@ -337,6 +336,7 @@ Locale.load({
     'Export file': '',
     'Extra3': '',
     'Facility rejected': '',
+    'Failed': '',
     'Failed calls': '',
     'Failed. Try again...': '',
     'Failover trunk': '',
@@ -1038,6 +1038,7 @@ Locale.load({
     'Yellow': '',
     'Yes': '',
     'You are not allowed to edit this field': '',
+    'You can see more details at the link': '',
     'You cannot EDIT your account.': '',
     'You cannot add credit to yourself': '',
     'You cannot change user type group': '',

@@ -2,9 +2,10 @@
 .. _callSummaryPerDay-sumsessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatorio de minutos chamadas.
+| É possível realizar filtros, por exemplo, filtrar os dias da última semana, neste caso. Este somatório mostrará somente os dados do filtro executado.
 
 
 
@@ -12,9 +13,9 @@ Duração
 .. _callSummaryPerDay-sumsessionbill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de venda
 
 
 
@@ -22,9 +23,9 @@ Preço de venda
 .. _callSummaryPerDay-sumbuycost:
 
 Preço de compra
-""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de compra
 
 
 
@@ -32,9 +33,9 @@ Preço de compra
 .. _callSummaryPerDay-sumlucro:
 
 Lucro
-"""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do lucro
 
 
 
@@ -42,9 +43,9 @@ Lucro
 .. _callSummaryPerDay-sumnbcall:
 
 Chamadas atendidas
-""""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas
 
 
 
@@ -52,9 +53,9 @@ Chamadas atendidas
 .. _callSummaryPerDay-sumnbcallfail:
 
 Chamadas rejeitadas
-"""""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas rejeitadas
 
 
 

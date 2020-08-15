@@ -2,7 +2,7 @@
 .. _servicesUse-id_user:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _servicesUse-id_services:
 
 Service
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Service
 .. _servicesUse-price:
 
 Price
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Price
 .. _servicesUse-method:
 
 Payment methods
-"""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ Payment methods
 .. _servicesUse-reservationdate:
 
 Reservation date
-""""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

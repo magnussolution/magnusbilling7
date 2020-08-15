@@ -2,7 +2,7 @@
 .. _callOnLine-idUserusername:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _callOnLine-sip_account:
 
 Sip user
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Sip user
 .. _callOnLine-idUsercredit:
 
 Credit
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Credit
 .. _callOnLine-ndiscado:
 
 Number
-""""""
+++++++++++++
 
 | Dialed number
 
@@ -42,7 +42,7 @@ Number
 .. _callOnLine-codec:
 
 Codec
-"""""
+++++++++++++
 
 | Codec used
 
@@ -52,7 +52,7 @@ Codec
 .. _callOnLine-callerid:
 
 CallerID
-""""""""
+++++++++++++
 
 | The CID number.
 
@@ -62,7 +62,7 @@ CallerID
 .. _callOnLine-tronco:
 
 Trunk
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -72,7 +72,7 @@ Trunk
 .. _callOnLine-reinvite:
 
 Reinvite
-""""""""
+++++++++++++
 
 | If set to YES, means the RTP audio was sent directly between callee and caller
 
@@ -82,7 +82,7 @@ Reinvite
 .. _callOnLine-from_ip:
 
 From IP
-"""""""
+++++++++++++
 
 | IP of the caller
 
@@ -92,7 +92,7 @@ From IP
 .. _callOnLine-description:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

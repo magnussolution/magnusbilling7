@@ -2,9 +2,9 @@
 .. _callBack-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono do DID que recebeu a solicitaçao de CallBack
 
 
 
@@ -12,9 +12,9 @@ Usuário
 .. _callBack-exten:
 
 Número de destino
-""""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número da pessoa que ligou para o DID solicitando o CallBack
 
 
 
@@ -22,9 +22,19 @@ Número de destino
 .. _callBack-status:
 
 Status
-""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Status da chamada
+| Os status podem ser:
+| * Ativa
+|     O CallBack ainda nao foi processado.
+| * Pendente
+|     O MagnusBilling processou o CallBack e enviou para o tronco.
+| * Enviado
+|     O CallBack foi processado com sucesso.
+| * Fora do horário
+|     A chamada foi recebida fora do horário de atendimento configurado no menu DID, tab CallBack pro.
+|     
 
 
 

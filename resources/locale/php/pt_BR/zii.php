@@ -21,7 +21,8 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Your account was created. Please check your email' => 'Sua conta foi criada. Por favor verifique seu email',
+            'You can see more details at the link' => 'Você pode ver mais detalhes no link',
+    'Your account was created. Please check your email' => 'Sua conta foi criada. Por favor verifique seu email',
     'Setup price' => 'Taxa de ativação',
     'Click to more details' => 'Clique para mais informaçōes',
     'On Phone' => 'Falando',
@@ -107,7 +108,6 @@ return array(
     'Cancel service' => 'Cancelar serviço',
     'Cannot call to restricted numbers' => 'Não pode ligar para números restritos',
     'Clone' => 'Clonar',
-    'Complete' => 'Completo',
     'Confirm release DID' => 'Confirmar a liberação do DID',
     'Confirm your password' => 'Confirme sua senha',
     'Contact' => 'Contato',
@@ -185,7 +185,7 @@ return array(
     'Not allowed delete in this module' => 'Não é permitido apagar este módulo',
     'Not allowed delete this user' => 'Não é permitido apagar este usuário',
     'Not have link in trunk' => 'Não tem link no tronco',
-    'Not working' => 'Não está funcionando',
+    'Not working' => 'Fora do horário',
     'Number free calls' => 'Nūmero de chamadas gratuitas',
     'ONE TIME PASSWORD' => 'CÓDIGO DE USO ÚNICO',
     'Old credit' => 'Crédito anterior',
@@ -377,7 +377,7 @@ return array(
     'Summary per User' => 'Resumo por Usuário',
     'Summary per Trunk' => 'Resumo por Tronco',
     'Call Archive' => 'Chamadas Arquivadas',
-    'ALOC all calls' => 'ALOC todas as chamadas',
+    'ALOC all calls' => 'ALOC',
     'AMD' => 'AMD',
     'ASR' => 'ASR',
     'About' => 'Sobre',

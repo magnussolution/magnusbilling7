@@ -21,7 +21,8 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Your account was created. Please check your email' => 'Su cuenta fue creada. Por favor verifique su email',
+            'You can see more details at the link' => 'Puedes ver mas detalles en el link',
+    'Your account was created. Please check your email' => 'Su cuenta fue creada. Por favor verifique su email',
     'Setup price' => 'Costo de activación',
     'Click to more details' => 'Click para más detalles',
     'Ringinuse' => 'Llamar en uso',
@@ -106,7 +107,7 @@ return array(
     'Whisper, can talk to the spied' => 'Susurro, puede hablar con el espiado',
     'Whisper, can talk to the spied but cannot listen the call' => 'Susurro, puede hablar con el espiado pero no puede escuchar la llamada',
     'Your session has expired. Log in again.' => 'Su sesión ha caducado. Ingresar de nuevo.',
-    'ALOC all calls' => 'ALOC todas las llamadas',
+    'ALOC all calls' => 'ALOC',
     'AMD' => 'AMD',
     'API' => 'API',
     'ASR' => 'ASR',
@@ -270,7 +271,6 @@ return array(
     'Comma' => 'Coma',
     'Company' => 'Empresa',
     'Company name' => 'Nombre de Empresa',
-    'Complete' => 'Completo',
     'Config' => 'Config',
     'Configuration' => 'Ajustes',
     'Confirm' => 'Confirmar',
@@ -572,7 +572,7 @@ return array(
     'Not allowed delete in this module' => 'No se permite eliminar en este módulo',
     'Not allowed delete this user' => 'No se permite eliminar este usuario',
     'Not have link in trunk' => 'No tener vínculo en el tronco',
-    'Not working' => 'No funciona',
+    'Not working' => 'Fuera del horario',
     'Notices with audio' => 'Avisos con audio',
     'Notification' => 'Notificación',
     'Now' => 'Ahora',

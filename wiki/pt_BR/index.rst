@@ -30,6 +30,12 @@ Bem vindo à documentação do MagnusBilling 7 em português.
    price_calculation.rst
 
 .. toctree::
+   :caption: Configaçōes do Asterisk
+   :maxdepth: 1
+
+   asterisk_options/directmedia.rst
+
+.. toctree::
    :maxdepth: 1
    :caption: Segurança
    :name: sec-Segurança
