@@ -2,7 +2,7 @@
 .. _callSummaryPerUser-sumsessiontime:
 
 Duration
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Duration
 .. _callSummaryPerUser-sumlucro:
 
 Markup
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Markup
 .. _callSummaryPerUser-sumnbcall:
 
 Answered calls
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Answered calls
 .. _callSummaryPerUser-sumnbcallfail:
 
 Failed calls
-""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

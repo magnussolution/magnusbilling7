@@ -51,20 +51,19 @@ Ext.define('MBilling.view.callSummaryDayAgent.List', {
             hideable: !App.user.isClient
         }, {
             menuDisabled: true,
-            header: t('Duration'),
+            header: t('Duration') + '/Min',
             dataIndex: 'sessiontime',
             flex: 2
         }, {
             header: t('ALOC all calls'),
             dataIndex: 'aloc_all_calls',
-            renderer: Helper.Util.formatsecondsToTime,
             flex: 3
         }, {
-            header: t('Answered calls'),
+            header: t('Answered'),
             dataIndex: 'nbcall',
             flex: 3
         }, {
-            header: t('Failed calls'),
+            header: t('Failed'),
             dataIndex: 'nbcall_fail',
             flex: 3
         }, {

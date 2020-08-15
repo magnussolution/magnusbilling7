@@ -2,7 +2,7 @@
 .. _sendCreditRates-idProductcountry:
 
 País
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ País
 .. _sendCreditRates-idProductoperator_name:
 
 Nome do operador
-""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Nome do operador
 .. _sendCreditRates-sell_price:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

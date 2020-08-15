@@ -2,7 +2,7 @@
 .. _smtps-host:
 
 Host
-""""
+++++++++++++++++
 
 | Você precisa verificar se o datacenter não bloqueia as portas usada pelo SMTP
 
@@ -12,7 +12,7 @@ Host
 .. _smtps-username:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Usuário
 .. _smtps-password:
 
 Senha
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Senha
 .. _smtps-port:
 
 Porta
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,7 +42,7 @@ Porta
 .. _smtps-encryption:
 
 Encriptação
-"""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

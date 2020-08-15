@@ -2,7 +2,7 @@
 .. _firewall-ip:
 
 IP
-""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ IP
 .. _firewall-action:
 
 Perm ban
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Perm ban
 .. _firewall-description:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

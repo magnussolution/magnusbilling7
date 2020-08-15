@@ -2,7 +2,7 @@
 .. _templateMail-fromname:
 
 From name
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ From name
 .. _templateMail-fromemail:
 
 From email
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ From email
 .. _templateMail-subject:
 
 Subject
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Subject
 .. _templateMail-messagehtml:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

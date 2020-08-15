@@ -63,7 +63,7 @@ Ext.define('MBilling.view.callSummaryDayUser.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('Duration'),
+            header: t('Duration') + '/Min',
             dataIndex: 'sessiontime',
             flex: 2
         }, {
@@ -72,11 +72,11 @@ Ext.define('MBilling.view.callSummaryDayUser.List', {
             renderer: Helper.Util.formatsecondsToTime,
             flex: 3
         }, {
-            header: t('Answered calls'),
+            header: t('Answered'),
             dataIndex: 'nbcall',
             flex: 3
         }, {
-            header: t('Failed calls'),
+            header: t('Failed'),
             dataIndex: 'nbcall_fail',
             flex: 3
         }, {

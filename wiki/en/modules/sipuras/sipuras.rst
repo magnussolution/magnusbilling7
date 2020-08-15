@@ -2,7 +2,7 @@
 .. _sipuras-nserie:
 
 Serial
-""""""
+++++++++++++
 
 | LinkSys serial number
 
@@ -12,7 +12,7 @@ Serial
 .. _sipuras-macadr:
 
 MAC
-"""
+++++++++++++
 
 | LinkSys MAC address
 
@@ -22,7 +22,7 @@ MAC
 .. _sipuras-senha_user:
 
 User password
-"""""""""""""
+++++++++++++
 
 | User to set in LinkSys configuration
 
@@ -32,7 +32,7 @@ User password
 .. _sipuras-senha_admin:
 
 Admin password
-""""""""""""""
+++++++++++++
 
 | Pass to set in LinkSys configuration
 
@@ -42,7 +42,7 @@ Admin password
 .. _sipuras-antireset:
 
 Antireset
-"""""""""
+++++++++++++
 
 | Prevent resetting LinkSys with *73738#
 
@@ -52,7 +52,7 @@ Antireset
 .. _sipuras-Enable_Web_Server:
 
 Enable_Web_Server
-"""""""""""""""""
+++++++++++++
 
 | Enabling/Disabling LinkSys configuration WebPage
 
@@ -62,7 +62,7 @@ Enable_Web_Server
 .. _sipuras-marca:
 
 Mark
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -72,7 +72,7 @@ Mark
 .. _sipuras-altera:
 
 Change
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -82,7 +82,7 @@ Change
 .. _sipuras-User_ID_1:
 
 Username
-""""""""
+++++++++++++
 
 | SIP account username
 
@@ -92,7 +92,7 @@ Username
 .. _sipuras-Password_1:
 
 Password
-""""""""
+++++++++++++
 
 | SIP account password
 
@@ -102,7 +102,7 @@ Password
 .. _sipuras-Use_Pref_Codec_Only_1:
 
 Use_Pref_Codec
-""""""""""""""
+++++++++++++
 
 | Only use the preferred CODEC
 
@@ -112,7 +112,7 @@ Use_Pref_Codec
 .. _sipuras-Preferred_Codec_1:
 
 Codec
-"""""
+++++++++++++
 
 | Set the preferred CODEC
 
@@ -122,7 +122,7 @@ Codec
 .. _sipuras-Register_Expires_1:
 
 Register expires
-""""""""""""""""
+++++++++++++
 
 | Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.
 
@@ -132,7 +132,7 @@ Register expires
 .. _sipuras-Dial_Plan_1:
 
 Dial plan
-"""""""""
+++++++++++++
 
 | Read LinkSys documentation
 
@@ -142,7 +142,7 @@ Dial plan
 .. _sipuras-NAT_Mapping_Enable_1_:
 
 NAT Mapping
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -152,7 +152,7 @@ NAT Mapping
 .. _sipuras-NAT_Keep_Alive_Enable_1_:
 
 NAT keep alive
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -162,7 +162,7 @@ NAT keep alive
 .. _sipuras-User_ID_2:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -172,7 +172,7 @@ Username
 .. _sipuras-Password_2:
 
 Password
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -182,7 +182,7 @@ Password
 .. _sipuras-Use_Pref_Codec_Only_2:
 
 Use_Pref_Codec
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -192,7 +192,7 @@ Use_Pref_Codec
 .. _sipuras-Preferred_Codec_2:
 
 Codec
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -202,7 +202,7 @@ Codec
 .. _sipuras-Register_Expires_2:
 
 Register expires
-""""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -212,7 +212,7 @@ Register expires
 .. _sipuras-Dial_Plan_2:
 
 Dial plan
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -222,7 +222,7 @@ Dial plan
 .. _sipuras-NAT_Mapping_Enable_2_:
 
 NAT Mapping
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -232,7 +232,7 @@ NAT Mapping
 .. _sipuras-NAT_Keep_Alive_Enable_2_:
 
 NAT keep alive
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -242,7 +242,7 @@ NAT keep alive
 .. _sipuras-STUN_Enable:
 
 Enable STUN
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -252,7 +252,7 @@ Enable STUN
 .. _sipuras-STUN_Test_Enable:
 
 STUN Test
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -262,7 +262,7 @@ STUN Test
 .. _sipuras-Substitute_VIA_Addr:
 
 Substitute VIA Addr
-"""""""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -272,7 +272,7 @@ Substitute VIA Addr
 .. _sipuras-STUN_Server:
 
 STUN Server
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

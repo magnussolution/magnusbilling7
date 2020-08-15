@@ -10,5 +10,5 @@ Ext.define('MBilling.view.callSummaryCallShop.Module', {
     controller: 'callsummarycallshop',
     titleForm: t('Total'),
     iconForm: 'icon-sum',
-    widthForm: 250
+    widthForm: 350
 });

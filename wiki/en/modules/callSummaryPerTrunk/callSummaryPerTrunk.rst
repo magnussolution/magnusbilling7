@@ -2,7 +2,7 @@
 .. _callSummaryPerTrunk-sumsessiontime:
 
 Duration
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Duration
 .. _callSummaryPerTrunk-sumsessionbill:
 
 Sell price
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Sell price
 .. _callSummaryPerTrunk-sumbuycost:
 
 Buy price
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Buy price
 .. _callSummaryPerTrunk-sumlucro:
 
 Markup
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ Markup
 .. _callSummaryPerTrunk-sumnbcall:
 
 Answered calls
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -52,7 +52,7 @@ Answered calls
 .. _callSummaryPerTrunk-sumnbcallfail:
 
 Failed calls
-""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

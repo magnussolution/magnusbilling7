@@ -2,9 +2,10 @@
 .. _callSummaryDayUser-sumsessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatorio de minutos chamadas.
+| É possível realizar filtros, por exemplo, filtrar os dias da última semana, ou de um usuário específico, neste caso. Este somatório mostrará somente os dados do filtro executado.
 
 
 
@@ -12,9 +13,9 @@ Duração
 .. _callSummaryDayUser-sumlucro:
 
 Lucro
-"""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do lucro
 
 
 
@@ -22,9 +23,9 @@ Lucro
 .. _callSummaryDayUser-sumnbcall:
 
 Total de chamadas
-"""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas
 
 
 

@@ -11,6 +11,6 @@ Ext.define('MBilling.view.callSummaryDayUser.Module', {
     titleDetails: t('Total'),
     iconForm: 'icon-sum',
     cfgEast: {
-        flex: 0.4
+        flex: 0.8
     }
 });

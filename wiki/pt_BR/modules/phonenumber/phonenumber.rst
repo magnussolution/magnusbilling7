@@ -2,7 +2,7 @@
 .. _phoneNumber-id_phonebook:
 
 Agenda
-""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Agenda
 .. _phoneNumber-number:
 
 Número
-"""""""
+++++++++++++++++
 
 | Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato DDI+DDD+número
 
@@ -22,7 +22,7 @@ Número
 .. _phoneNumber-name:
 
 Nome
-""""
+++++++++++++++++
 
 | Nome do dono do número, usado para TTS ou SMS
 
@@ -32,7 +32,7 @@ Nome
 .. _phoneNumber-city:
 
 Cidade
-""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,9 +42,9 @@ Cidade
 .. _phoneNumber-status:
 
 Status
-""""""
+++++++++++++++++
 
-| MagnusBilling somente tenta enviar quando o status esta ativo. Quando a chamada é enviada para seu provedor, o número fica com estado pendente. Se a chamada é completada, o estado muda para enviado, caso contrario ficara como pendente. Você pode usar o botão reprocessar para reativar os número que e
+| MagnusBilling somente tenta enviar quando o status está ativo. Quando a chamada é enviada para seu provedor, o número fica com estado pendente. Se a chamada é completada, o estado muda para enviado, caso contrário ficará como pendente. Você pode usar o botão processar para reativar os números que e
 
 
 
@@ -52,7 +52,7 @@ Status
 .. _phoneNumber-info:
 
 Descrição
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
