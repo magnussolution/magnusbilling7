@@ -1,15 +1,15 @@
 
-.. _campaign-id_user:
+.. _campaign-id-user:
 
 Usuário
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono da campanha
 
 
 
 
-.. _campaign-id_plan:
+.. _campaign-id-plan:
 
 Plano
 ++++++++++++++++
@@ -24,7 +24,7 @@ Plano
 Nome
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para a campanha.
 
 
 
@@ -34,7 +34,7 @@ Nome
 Status
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Status da campanha.
 
 
 
@@ -64,7 +64,7 @@ Data de expiração
 Tipo
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione entre VOZ ou SMS, se for audio, precisa importar áudio, se for SMS, preciso colocar o texto do SMS na tab SMS.
 
 
 
@@ -79,27 +79,27 @@ Audio
 
 
 
-.. _campaign-audio_2:
+.. _campaign-audio-2:
 
 Audio 2
 ++++++++++++++++
 
-| Se você usar TTS, o nome do número será executado entre o áudio 1 e 2
+| Se você usar TTS, o nome cadastrado do número será executado entre o áudio 1 e 2
 
 
 
 
-.. _campaign-restrict_phone:
+.. _campaign-restrict-phone:
 
-Telefone bloqueados
+Números bloqueados
 ++++++++++++++++
 
-| Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
+| Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
 
 
 
-.. _campaign-auto_reprocess:
+.. _campaign-auto-reprocess:
 
 Reprocessar automático
 ++++++++++++++++
@@ -109,7 +109,7 @@ Reprocessar automático
 
 
 
-.. _campaign-id_phonebook:
+.. _campaign-id-phonebook:
 
 Agenda
 ++++++++++++++++
@@ -119,7 +119,7 @@ Agenda
 
 
 
-.. _campaign-digit_authorize:
+.. _campaign-digit-authorize:
 
 Número para reenviar
 ++++++++++++++++
@@ -129,82 +129,86 @@ Número para reenviar
 
 
 
-.. _campaign-type_0:
+.. _campaign-type-0:
 
 Tipo de encaminhamento
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
 
 
 
 
-.. _campaign-extensions_0:
+.. _campaign-extensions-0:
 
 Destino
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| No tipo personalizado, é possível a execução opções válidas no comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
 
 
 
 
-.. _campaign-id_ivr_0:
+.. _campaign-id-ivr-0:
 
 URA
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma conta USA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha
 
 
 
 
-.. _campaign-id_queue_0:
+.. _campaign-id-queue-0:
 
 Fila de espera
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha
 
 
 
 
-.. _campaign-id_sip_0:
+.. _campaign-id-sip-0:
 
 Conta SIP
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha
 
 
 
 
-.. _campaign-extension_0:
+.. _campaign-extension-0:
 
 Destino
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Clique para mais detalhes
+| Temos duas opcōes, conforme o tipo selecionado, personalizado ou grupo.
+| 
+| * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
+| * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
 
 
 
 
-.. _campaign-daily_start_time:
+.. _campaign-daily-start-time:
 
 Horário de início diário
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Hora que a campanha vai iniciar o envio
 
 
 
 
-.. _campaign-daily_stop_time:
+.. _campaign-daily-stop-time:
 
 Horário de finalização diário
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Hora que a campanha vai parar o envio
 
 
 
@@ -214,7 +218,7 @@ Horário de finalização diário
 Segunda
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
 
 
 
@@ -224,7 +228,7 @@ Segunda
 Terça feira
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas terças feiras.
 
 
 
@@ -234,7 +238,7 @@ Terça feira
 Quarta feira
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
 
 
 
@@ -244,7 +248,7 @@ Quarta feira
 Quinta feira
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
 
 
 
@@ -254,7 +258,7 @@ Quinta feira
 Sexta
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
 
 
 
@@ -264,7 +268,7 @@ Sexta
 Saturday
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nos sabados.
 
 
 
@@ -274,7 +278,7 @@ Saturday
 Sunday
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nos domingos.
 
 
 
@@ -284,12 +288,13 @@ Sunday
 Limite de chamada
 ++++++++++++++++
 
-| Quantas chamadas o sistema pode gerar por minuto nesta campanha
+| Quantas chamadas o sistema deverá gerar por minuto nesta campanha.
+| Este valor será divido por 60 segundos, e as chamadas serão enviadas durante o minuto, e nao todas de uma vez.
 
 
 
 
-.. _campaign-max_frequency:
+.. _campaign-max-frequency:
 
 Limite máximo de chamadas
 ++++++++++++++++
@@ -299,7 +304,7 @@ Limite máximo de chamadas
 
 
 
-.. _campaign-nb_callmade:
+.. _campaign-nb-callmade:
 
 Duração do áudio
 ++++++++++++++++
@@ -309,12 +314,12 @@ Duração do áudio
 
 
 
-.. _campaign-enable_max_call:
+.. _campaign-enable-max-call:
 
 Toggle max completed calls
 ++++++++++++++++
 
-| Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e tiveram a duração igual ao tempo do audio, se a quantidade for igual ou mais que o campo abaixo, a campanha é desativada
+| Se ativado, MagnusBilling vai verificar quantas chamadas já foram realizadas e tiveram a duração igual à duração do áudio.  Se a quantidade for igual ou maior que o valor colocado no próximo campo , a campanha será desativada
 
 
 
@@ -324,7 +329,7 @@ Toggle max completed calls
 Quantidade máxima completada
 ++++++++++++++++
 
-| Máximo de chamadas completas. Precisa ativar o campo acima
+| Máximo de chamadas completas. Precisa ativar o campo acima.
 
 
 
@@ -334,7 +339,13 @@ Quantidade máxima completada
 De
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O valor colocado neste campo será substituído no link do SMS configurado no tronco que será usado para enviar o SMS.
+| Use a variável %from% no link.
+| 
+| Exemplo: https::/link_do_provedor_de_sms.com.br/send?user=USUARIO&pass=SENHA&number=%number%&sms=%text%&callerid=%from%
+| 
+| Neste exemplo, o valor colocado no campo from, será substituído pela variável %from% do link, e caso o provedor de SMS aceite o envio do from, este número será o número que vai ser mostrado como quem enviou o SMS.
+| 
 
 
 
@@ -344,34 +355,62 @@ De
 Descrição ou texto do SMS
 ++++++++++++++++
 
-| Texto do SMS. Você pode usar a variável %name% onde você deseja usar o nome do dono do número
+| Este campo tem uso diferente dependendo se a campanha é VOZ ou SMS.
+| Tipos possíveis:
+| 
+| * VOZ, neste caso este campo é simplesmente a descrição da campanha. 
+| * SMS, quando a campanha for do tipo SMS, então o texto colocado aqui será o SMS que será enviado aos números das agendas da campanha. 
+| 
+| No caso de SMS, você pode usar a variável %name% onde você deseja usar o nome do dono do número, exemplo:
+| 
+| Ola %name% temos uma promoção para você.....
+| 
+| Então digamos que tenha cadastrado na agenda utilizada por esta campanha uma lista de números contendo número e nome.
+| 
+| 5511998844334,Paulo Ricardo
+| 5511974635734,João Matos
+| 
+| Então para o número 5511998844334 a mensagem enviada será. 
+| Ola Paulo Ricardo temos uma promoção para você.....
+| 
+| e para 
+| 
+| 5511974635734 a mensagem enviada será. 
+| Ola João Matos temos uma promoção para você.....
+| 
+| 
 
 
 
 
-.. _campaign-tts_audio:
+.. _campaign-tts-audio:
 
 Audio 1 TTS
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio. 
+| 
+| Para que esta opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
+| 
+| Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
+| 
 
 
 
 
-.. _campaign-tts_audio2:
+.. _campaign-tts-audio2:
 
 Audio 2 TTS
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.
 
 
 
 
-.. _campaign-asr_options:
+.. _campaign-asr-options:
 
-Opção para validar ASR
+Option to validate ASR
 ++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.

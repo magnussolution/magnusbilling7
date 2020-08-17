@@ -19,7 +19,7 @@ Type
 
 
 
-.. _trunkGroup-id_trunk:
+.. _trunkGroup-id-trunk:
 
 Trunk
 ++++++++++++

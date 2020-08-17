@@ -223,8 +223,8 @@ Este menu tem os seguintes campos
 .. include:: queue/queue.rst
 
 
-Filas agentes
-+++++++++++++
+Agentes da Fila
++++++++++++++++
 
 Este menu tem os seguintes campos
 
@@ -539,8 +539,8 @@ Este menu tem os seguintes campos
 .. include:: groupuser/groupuser.rst
 
 
-Configurações
-+++++++++++++++
+Ajustes
++++++++
 
 Este menu tem os seguintes campos
 
@@ -555,7 +555,7 @@ Este menu tem os seguintes campos
 .. include:: templatemail/templatemail.rst
 
 
-Log de acessos
+Log de Acessos
 ++++++++++++++
 
 Este menu tem os seguintes campos
@@ -646,14 +646,6 @@ Este menu tem os seguintes campos
 .. include:: campaign/campaign.rst
 
 
-Relatório de Campanhas
-+++++++++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: campaignreport/campaignreport.rst
-
-
 Agendas
 +++++++
 
@@ -686,7 +678,7 @@ Este menu tem os seguintes campos
 .. include:: campaignpollinfo/campaignpollinfo.rst
 
 
-Telefone bloqueados
+Números bloqueados
 +++++++++++++++++++
 
 Este menu tem os seguintes campos
@@ -702,7 +694,7 @@ Este menu tem os seguintes campos
 .. include:: sms/sms.rst
 
 
-Campanha rápida
+Campanha Rápida
 ++++++++++++++++
 
 Este menu tem os seguintes campos
@@ -724,6 +716,14 @@ Monitor de campanhas
 Este menu tem os seguintes campos
 
 .. include:: campaigndashboard/campaigndashboard.rst
+
+
+Relatório de Campanhas
++++++++++++++++++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: campaignreport/campaignreport.rst
 
 
 
@@ -788,7 +788,7 @@ Este menu tem os seguintes campos
 .. include:: services/services.rst
 
 
-Uso de serviços
+Uso de Serviços
 ++++++++++++++++
 
 Este menu tem os seguintes campos

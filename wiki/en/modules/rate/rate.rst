@@ -1,5 +1,5 @@
 
-.. _rate-id_plan:
+.. _rate-id-plan:
 
 Plan
 ++++++++++++
@@ -9,7 +9,7 @@ Plan
 
 
 
-.. _rate-id_prefix:
+.. _rate-id-prefix:
 
 Destination
 ++++++++++++
@@ -19,7 +19,7 @@ Destination
 
 
 
-.. _rate-id_trunk_group:
+.. _rate-id-trunk-group:
 
 Trunk groups
 ++++++++++++
@@ -59,7 +59,7 @@ Billing block
 
 
 
-.. _rate-minimal_time_charge:
+.. _rate-minimal-time-charge:
 
 Minimum time to charge
 ++++++++++++
@@ -69,7 +69,7 @@ Minimum time to charge
 
 
 
-.. _rate-additional_grace:
+.. _rate-additional-grace:
 
 Additional time
 ++++++++++++
@@ -79,7 +79,7 @@ Additional time
 
 
 
-.. _rate-package_offer:
+.. _rate-package-offer:
 
 Include in offer
 ++++++++++++

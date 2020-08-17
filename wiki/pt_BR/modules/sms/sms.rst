@@ -1,5 +1,5 @@
 
-.. _sms-id_user:
+.. _sms-id-user:
 
 Usuário
 ++++++++++++++++
@@ -29,7 +29,7 @@ SMS
 
 
 
-.. _sms-sms_from:
+.. _sms-sms-from:
 
 De
 ++++++++++++++++

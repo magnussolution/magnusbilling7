@@ -14,6 +14,8 @@
  * 2020-08-10
  */
 Locale.load({
+    'Import Login Background': 'Importar fondo del login',
+    'Only JPEG format': 'Solo JPEG',
     'You can see more details at the link': 'Puedes ver más detalles en el link',
     'Your account was created. Please check your email': 'Su cuenta fue creada. Por favor verifique su email',
     'Setup price': 'Costo de activación',
@@ -609,7 +611,6 @@ Locale.load({
     'Operator ID': 'ID de operador',
     'Operator name': 'Nombre del operador',
     'Option': 'Opción',
-    'Option to validate ASR': 'Opción para validar ASR',
     'Options': 'Opciones',
     'Orange': 'Naranja',
     'Order': 'Orden',

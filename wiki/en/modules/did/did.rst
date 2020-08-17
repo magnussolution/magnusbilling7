@@ -29,7 +29,7 @@ Callerid name
 
 
 
-.. _did-connection_charge:
+.. _did-connection-charge:
 
 Setup price
 ++++++++++++
@@ -49,7 +49,7 @@ Monthly price
 
 
 
-.. _did-connection_sell:
+.. _did-connection-sell:
 
 Connection charge
 ++++++++++++
@@ -59,7 +59,7 @@ Connection charge
 
 
 
-.. _did-minimal_time_charge:
+.. _did-minimal-time-charge:
 
 Minimum time to charge
 ++++++++++++
@@ -89,7 +89,7 @@ Billing block
 
 
 
-.. _did-charge_of:
+.. _did-charge-of:
 
 Charge who
 ++++++++++++
@@ -119,7 +119,7 @@ Description
 
 
 
-.. _did-expression_1:
+.. _did-expression-1:
 
 Regular expression
 ++++++++++++
@@ -129,7 +129,7 @@ Regular expression
 
 
 
-.. _did-selling_rate_1:
+.. _did-selling-rate-1:
 
 Sell price per min
 ++++++++++++
@@ -139,7 +139,7 @@ Sell price per min
 
 
 
-.. _did-block_expression_1:
+.. _did-block-expression-1:
 
 Block calls from this expression
 ++++++++++++
@@ -149,7 +149,7 @@ Block calls from this expression
 
 
 
-.. _did-send_to_callback_1:
+.. _did-send-to-callback-1:
 
 Send the call to callback
 ++++++++++++
@@ -159,7 +159,7 @@ Send the call to callback
 
 
 
-.. _did-expression_2:
+.. _did-expression-2:
 
 Regular expression
 ++++++++++++
@@ -169,7 +169,7 @@ Regular expression
 
 
 
-.. _did-selling_rate_2:
+.. _did-selling-rate-2:
 
 Sell price per min
 ++++++++++++
@@ -179,7 +179,7 @@ Sell price per min
 
 
 
-.. _did-block_expression_2:
+.. _did-block-expression-2:
 
 Block calls from this expression
 ++++++++++++
@@ -189,7 +189,7 @@ Block calls from this expression
 
 
 
-.. _did-send_to_callback_2:
+.. _did-send-to-callback-2:
 
 Send the call to callback
 ++++++++++++
@@ -199,7 +199,7 @@ Send the call to callback
 
 
 
-.. _did-expression_3:
+.. _did-expression-3:
 
 Regular expression
 ++++++++++++
@@ -209,7 +209,7 @@ Regular expression
 
 
 
-.. _did-selling_rate_3:
+.. _did-selling-rate-3:
 
 Sell price per min
 ++++++++++++
@@ -219,7 +219,7 @@ Sell price per min
 
 
 
-.. _did-block_expression_3:
+.. _did-block-expression-3:
 
 Block calls from this expression
 ++++++++++++
@@ -229,7 +229,7 @@ Block calls from this expression
 
 
 
-.. _did-send_to_callback_3:
+.. _did-send-to-callback-3:
 
 Send the call to callback
 ++++++++++++
@@ -249,7 +249,7 @@ CallBack pro
 
 
 
-.. _did-cbr_ua:
+.. _did-cbr-ua:
 
 Use audio
 ++++++++++++
@@ -259,7 +259,7 @@ Use audio
 
 
 
-.. _did-cbr_total_try:
+.. _did-cbr-total-try:
 
 Maximum trying
 ++++++++++++
@@ -269,7 +269,7 @@ Maximum trying
 
 
 
-.. _did-cbr_time_try:
+.. _did-cbr-time-try:
 
 Interval between trying
 ++++++++++++
@@ -279,7 +279,7 @@ Interval between trying
 
 
 
-.. _did-cbr_em:
+.. _did-cbr-em:
 
 Early media
 ++++++++++++
@@ -289,7 +289,7 @@ Early media
 
 
 
-.. _did-TimeOfDay_monFri:
+.. _did-TimeOfDay-monFri:
 
 Mon-Fri
 ++++++++++++
@@ -299,7 +299,7 @@ Mon-Fri
 
 
 
-.. _did-TimeOfDay_sat:
+.. _did-TimeOfDay-sat:
 
 Sat
 ++++++++++++
@@ -309,7 +309,7 @@ Sat
 
 
 
-.. _did-TimeOfDay_sun:
+.. _did-TimeOfDay-sun:
 
 Sun
 ++++++++++++

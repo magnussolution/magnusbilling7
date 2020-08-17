@@ -1,5 +1,5 @@
 
-.. _groupModule-id_group:
+.. _groupModule-id-group:
 
 Grupo
 ++++++++++++++++
@@ -9,7 +9,7 @@ Grupo
 
 
 
-.. _groupModule-id_module:
+.. _groupModule-id-module:
 
 Módulo
 ++++++++++++++++

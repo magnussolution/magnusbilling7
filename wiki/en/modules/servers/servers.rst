@@ -19,7 +19,7 @@ Server IP
 
 
 
-.. _servers-public_ip:
+.. _servers-public-ip:
 
 Public IP
 ++++++++++++
@@ -59,7 +59,7 @@ Port
 
 
 
-.. _servers-sip_port:
+.. _servers-sip-port:
 
 SIPport
 ++++++++++++

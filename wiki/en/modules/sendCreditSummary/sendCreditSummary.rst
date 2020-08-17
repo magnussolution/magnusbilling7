@@ -1,5 +1,5 @@
 
-.. _sendCreditSummary-id_user:
+.. _sendCreditSummary-id-user:
 
 Username
 ++++++++++++

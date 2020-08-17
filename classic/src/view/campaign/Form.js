@@ -26,7 +26,6 @@ Ext.define('MBilling.view.campaign.Form', {
     fileUpload: true,
     initComponent: function() {
         var me = this;
-        me.labelWidthFields = 120;
         me.items = [{
             xtype: 'tabpanel',
             defaults: {
@@ -35,6 +34,7 @@ Ext.define('MBilling.view.campaign.Form', {
                 layout: 'anchor',
                 bodyPadding: 5,
                 defaults: {
+                    labelWidth: 150,
                     plugins: 'markallowblank',
                     allowBlank: false,
                     anchor: '100%',
@@ -234,7 +234,7 @@ Ext.define('MBilling.view.campaign.Form', {
                 defaults: {
                     anchor: '0',
                     enableKeyEvents: true,
-                    labelWidth: 200,
+                    labelWidth: 250,
                     msgTarget: 'side',
                     plugins: 'markallowblank',
                     allowBlank: false
@@ -285,7 +285,6 @@ Ext.define('MBilling.view.campaign.Form', {
                 }]
             }, {
                 title: t('TTS/ASR'),
-                hidden: !window.ttsasr,
                 items: [{
                     name: 'tts_audio',
                     fieldLabel: t('Audio 1 TTS'),
@@ -302,11 +301,6 @@ Ext.define('MBilling.view.campaign.Form', {
                     autoEl: {
                         tag: 'br'
                     }
-                }, {
-                    name: 'asr_options',
-                    fieldLabel: t('Option to validate ASR'),
-                    allowBlank: true,
-                    maxLength: 160
                 }]
             }]
         }];

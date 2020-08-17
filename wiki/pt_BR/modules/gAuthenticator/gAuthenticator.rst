@@ -9,7 +9,7 @@ Usuário
 
 
 
-.. _gAuthenticator-googleAuthenticator_enable:
+.. _gAuthenticator-googleAuthenticator-enable:
 
 Status
 ++++++++++++++++
@@ -29,7 +29,7 @@ Código
 
 
 
-.. _gAuthenticator-google_authenticator_key:
+.. _gAuthenticator-google-authenticator-key:
 
 Google authenticator key
 ++++++++++++++++

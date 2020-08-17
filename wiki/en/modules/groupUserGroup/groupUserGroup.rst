@@ -9,7 +9,7 @@ Group
 
 
 
-.. _groupUserGroup-user_prefix:
+.. _groupUserGroup-user-prefix:
 
 User prefix
 ++++++++++++
@@ -19,7 +19,7 @@ User prefix
 
 
 
-.. _groupUserGroup-id_group:
+.. _groupUserGroup-id-group:
 
 Group
 ++++++++++++

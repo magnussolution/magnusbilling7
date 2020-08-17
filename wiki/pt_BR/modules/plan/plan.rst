@@ -19,7 +19,7 @@ Usar no registro
 
 
 
-.. _Plan-ini_credit:
+.. _Plan-ini-credit:
 
 Crédito inicial para novos usuários
 ++++++++++++++++
@@ -29,7 +29,7 @@ Crédito inicial para novos usuários
 
 
 
-.. _Plan-play_audio:
+.. _Plan-play-audio:
 
 Executar áudios
 ++++++++++++++++
@@ -49,7 +49,7 @@ Tech prefix
 
 
 
-.. _Plan-id_service:
+.. _Plan-id-service:
 
 Serviços
 ++++++++++++++++

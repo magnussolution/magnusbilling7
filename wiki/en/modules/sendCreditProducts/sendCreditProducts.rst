@@ -9,7 +9,7 @@ Country
 
 
 
-.. _sendCreditProducts-operator_name:
+.. _sendCreditProducts-operator-name:
 
 Operator name
 ++++++++++++
@@ -19,7 +19,7 @@ Operator name
 
 
 
-.. _sendCreditProducts-operator_id:
+.. _sendCreditProducts-operator-id:
 
 Operator ID
 ++++++++++++
@@ -49,7 +49,7 @@ Product
 
 
 
-.. _sendCreditProducts-send_value:
+.. _sendCreditProducts-send-value:
 
 Send value
 ++++++++++++
@@ -59,7 +59,7 @@ Send value
 
 
 
-.. _sendCreditProducts-wholesale_price:
+.. _sendCreditProducts-wholesale-price:
 
 Wholesale price
 ++++++++++++

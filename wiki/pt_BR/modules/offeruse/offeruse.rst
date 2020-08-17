@@ -1,5 +1,5 @@
 
-.. _offerUse-id_user:
+.. _offerUse-id-user:
 
 Usuário
 ++++++++++++++++
@@ -9,7 +9,7 @@ Usuário
 
 
 
-.. _offerUse-id_offer:
+.. _offerUse-id-offer:
 
 Pacotes grátis
 ++++++++++++++++
@@ -19,7 +19,7 @@ Pacotes grátis
 
 
 
-.. _offerUse-month_payed:
+.. _offerUse-month-payed:
 
 Messes pago
 ++++++++++++++++

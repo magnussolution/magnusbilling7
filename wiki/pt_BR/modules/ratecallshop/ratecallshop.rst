@@ -49,7 +49,7 @@ Incremento
 
 
 
-.. _rateCallshop-minimal_time_charge:
+.. _rateCallshop-minimal-time-charge:
 
 Tempo mínimo para tarifar
 ++++++++++++++++

@@ -19,7 +19,7 @@ How many time to repeat, if the client press invalid option?
 
 
 
-.. _campaignPoll-request_authorize:
+.. _campaignPoll-request-authorize:
 
 Request authorization
 ++++++++++++
@@ -29,7 +29,7 @@ Request authorization
 
 
 
-.. _campaignPoll-digit_authorize:
+.. _campaignPoll-digit-authorize:
 
 Number for authorize
 ++++++++++++
@@ -49,7 +49,7 @@ Description
 
 
 
-.. _campaignPoll-arq_audio:
+.. _campaignPoll-arq-audio:
 
 Audio
 ++++++++++++

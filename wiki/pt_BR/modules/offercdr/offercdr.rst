@@ -1,5 +1,5 @@
 
-.. _offerCdr-id_user:
+.. _offerCdr-id-user:
 
 Usuário
 ++++++++++++++++
@@ -9,7 +9,7 @@ Usuário
 
 
 
-.. _offerCdr-id_offer:
+.. _offerCdr-id-offer:
 
 Pacotes grátis
 ++++++++++++++++
@@ -19,7 +19,7 @@ Pacotes grátis
 
 
 
-.. _offerCdr-used_secondes:
+.. _offerCdr-used-secondes:
 
 Used secondes
 ++++++++++++++++
@@ -29,7 +29,7 @@ Used secondes
 
 
 
-.. _offerCdr-date_consumption:
+.. _offerCdr-date-consumption:
 
 Data
 ++++++++++++++++

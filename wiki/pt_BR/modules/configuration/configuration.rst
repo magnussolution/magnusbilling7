@@ -1,5 +1,5 @@
 
-.. _configuration-config_value:
+.. _configuration-config-value:
 
 Valor
 ++++++++++++++++
@@ -9,7 +9,7 @@ Valor
 
 
 
-.. _configuration-config_description:
+.. _configuration-config-description:
 
 Descrição
 ++++++++++++++++

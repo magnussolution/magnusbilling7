@@ -9,7 +9,7 @@ Text
 
 
 
-.. _module-icon_cls:
+.. _module-icon-cls:
 
 IconCls
 ++++++++++++++++
@@ -19,7 +19,7 @@ IconCls
 
 
 
-.. _module-id_module:
+.. _module-id-module:
 
 Menu principal
 ++++++++++++++++

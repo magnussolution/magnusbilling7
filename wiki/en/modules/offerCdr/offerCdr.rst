@@ -1,5 +1,5 @@
 
-.. _offerCdr-id_user:
+.. _offerCdr-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _offerCdr-id_offer:
+.. _offerCdr-id-offer:
 
 Offer
 ++++++++++++
@@ -19,7 +19,7 @@ Offer
 
 
 
-.. _offerCdr-used_secondes:
+.. _offerCdr-used-secondes:
 
 Used secondes
 ++++++++++++
@@ -29,7 +29,7 @@ Used secondes
 
 
 
-.. _offerCdr-date_consumption:
+.. _offerCdr-date-consumption:
 
 Date
 ++++++++++++

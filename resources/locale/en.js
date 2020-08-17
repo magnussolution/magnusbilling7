@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-16
+ * 2020-08-17
  */
 Locale.load({
     '': '',
@@ -409,6 +409,7 @@ Locale.load({
     'IconCls': '',
     'Import': '',
     'Import CSV': '',
+    'Import Login Background': '',
     'Import logo': '',
     'Import wallpaper': '',
     'In': '',
@@ -582,6 +583,7 @@ Locale.load({
     'Ok': '',
     'Old credit': '',
     'On Phone': '',
+    'Only JPEG format': '',
     'Only PNG format': '',
     'Only SPY': '',
     'Only can call to restricted numbers': '',
@@ -590,7 +592,6 @@ Locale.load({
     'Operator ID': '',
     'Operator name': '',
     'Option': '',
-    'Option to validate ASR': '',
     'Options': '',
     'Orange': '',
     'Order': '',
@@ -749,6 +750,7 @@ Locale.load({
     'Reset retail price': '',
     'Response to STATUS ENQUIRY': '',
     'Restore': '',
+    'Restrict Phone': '',
     'Restrict phone': '',
     'Restricted Number': '',
     'Restriction': '',

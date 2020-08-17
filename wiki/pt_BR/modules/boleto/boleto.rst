@@ -1,5 +1,5 @@
 
-.. _boleto-id_user:
+.. _boleto-id-user:
 
 Usuário
 ++++++++++++++++
@@ -21,7 +21,7 @@ Valor
 
 .. _boleto-status:
 
-Paago
+Pago
 ++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.

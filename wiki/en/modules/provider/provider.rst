@@ -1,5 +1,5 @@
 
-.. _provider-provider_name:
+.. _provider-provider-name:
 
 Name
 ++++++++++++
@@ -19,7 +19,7 @@ Credit
 
 
 
-.. _provider-credit_control:
+.. _provider-credit-control:
 
 Credit control
 ++++++++++++

@@ -1,5 +1,5 @@
 
-.. _diddestination-id_did:
+.. _diddestination-id-did:
 
 DID
 ++++++++++++++++
@@ -9,7 +9,7 @@ DID
 
 
 
-.. _diddestination-id_user:
+.. _diddestination-id-user:
 
 Usuário
 ++++++++++++++++
@@ -39,7 +39,7 @@ Prioridade
 
 
 
-.. _diddestination-voip_call:
+.. _diddestination-voip-call:
 
 Tipo
 ++++++++++++++++
@@ -59,7 +59,7 @@ Destino
 
 
 
-.. _diddestination-id_ivr:
+.. _diddestination-id-ivr:
 
 URA
 ++++++++++++++++
@@ -69,7 +69,7 @@ URA
 
 
 
-.. _diddestination-id_queue:
+.. _diddestination-id-queue:
 
 Fila de espera
 ++++++++++++++++
@@ -79,7 +79,7 @@ Fila de espera
 
 
 
-.. _diddestination-id_sip:
+.. _diddestination-id-sip:
 
 Conta SIP
 ++++++++++++++++

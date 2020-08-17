@@ -9,7 +9,7 @@ Username
 
 
 
-.. _callOnLine-sip_account:
+.. _callOnLine-sip-account:
 
 Sip user
 ++++++++++++
@@ -79,7 +79,7 @@ Reinvite
 
 
 
-.. _callOnLine-from_ip:
+.. _callOnLine-from-ip:
 
 From IP
 ++++++++++++

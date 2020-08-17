@@ -4,10 +4,10 @@
  * Adilson L. Magnus <info@magnussolution.com>
  * 12/12/2012
  */
-Ext.define('MBilling.view.main.ImportWallpaper', {
+Ext.define('MBilling.view.main.ImportLoginBackground', {
     extend: 'Ext.window.Window',
-    alias: 'widget.importwallpaper',
-    title: t('Import wallpaper'),
+    alias: 'widget.importloginbackground',
+    title: t('Import Login Background'),
     controller: 'main',
     resizable: false,
     autoShow: true,
@@ -20,7 +20,7 @@ Ext.define('MBilling.view.main.ImportWallpaper', {
     msgFormInvalid: t('Fill in the fields correctly.'),
     items: {
         xtype: 'form',
-        reference: 'formImportWallpaper',
+        reference: 'formImportLoginBackground',
         border: false,
         layout: 'anchor',
         bodyPadding: 5,
@@ -30,7 +30,7 @@ Ext.define('MBilling.view.main.ImportWallpaper', {
         },
         items: [{
             xtype: 'uploadfield',
-            name: 'wallpaper',
+            name: 'loginbackground',
             fieldLabel: t('Select file'),
             emptyText: t('Only JPEG format'),
             allowBlank: false,
@@ -40,9 +40,9 @@ Ext.define('MBilling.view.main.ImportWallpaper', {
     },
     bbar: ['->', {
         text: t('Save'),
-        reference: 'saveImportWallpaper',
+        reference: 'saveImportLoginBackground',
         glyph: icons.disk,
         width: 100,
-        handler: 'saveWallpaper'
+        handler: 'saveImportLoginBackground'
     }]
 });

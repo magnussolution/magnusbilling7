@@ -9,7 +9,7 @@ Credit
 
 
 
-.. _voucher-id_plan:
+.. _voucher-id-plan:
 
 Plan
 ++++++++++++
@@ -29,7 +29,7 @@ Language
 
 
 
-.. _voucher-prefix_local:
+.. _voucher-prefix-local:
 
 Prefix rules
 ++++++++++++

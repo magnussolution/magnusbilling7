@@ -1,5 +1,5 @@
 
-.. _sip-id_user:
+.. _sip-id-user:
 
 Username
 ++++++++++++
@@ -79,7 +79,7 @@ Host
 
 
 
-.. _sip-sip_group:
+.. _sip-sip-group:
 
 Group
 ++++++++++++
@@ -99,7 +99,7 @@ Videosupport
 
 
 
-.. _sip-block_call_reg:
+.. _sip-block-call-reg:
 
 Block call regex
 ++++++++++++
@@ -109,7 +109,7 @@ Block call regex
 
 
 
-.. _sip-record_call:
+.. _sip-record-call:
 
 Record call
 ++++++++++++
@@ -259,7 +259,7 @@ MOH
 
 
 
-.. _sip-url_events:
+.. _sip-url-events:
 
 URL events notify
 ++++++++++++
@@ -289,7 +289,7 @@ AMD
 
 
 
-.. _sip-type_forward:
+.. _sip-type-forward:
 
 Forward
 ++++++++++++
@@ -299,7 +299,7 @@ Forward
 
 
 
-.. _sip-id_ivr:
+.. _sip-id-ivr:
 
 IVR
 ++++++++++++
@@ -309,7 +309,7 @@ IVR
 
 
 
-.. _sip-id_queue:
+.. _sip-id-queue:
 
 Queue
 ++++++++++++
@@ -319,7 +319,7 @@ Queue
 
 
 
-.. _sip-id_sip:
+.. _sip-id-sip:
 
 Sip user
 ++++++++++++
@@ -339,7 +339,7 @@ DialPlan
 
 
 
-.. _sip-dial_timeout:
+.. _sip-dial-timeout:
 
 Dial timeout
 ++++++++++++
@@ -359,7 +359,7 @@ Enable voicemail
 
 
 
-.. _sip-voicemail_email:
+.. _sip-voicemail-email:
 
 Email
 ++++++++++++
@@ -369,7 +369,7 @@ Email
 
 
 
-.. _sip-voicemail_password:
+.. _sip-voicemail-password:
 
 Password
 ++++++++++++

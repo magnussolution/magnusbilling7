@@ -19,7 +19,7 @@ Use on signup
 
 
 
-.. _Plan-ini_credit:
+.. _Plan-ini-credit:
 
 Initial credit to new users
 ++++++++++++
@@ -29,7 +29,7 @@ Initial credit to new users
 
 
 
-.. _Plan-play_audio:
+.. _Plan-play-audio:
 
 Notices with audio
 ++++++++++++
@@ -49,7 +49,7 @@ Tech prefix
 
 
 
-.. _Plan-id_service:
+.. _Plan-id-service:
 
 Services
 ++++++++++++

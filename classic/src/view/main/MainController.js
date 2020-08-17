@@ -140,7 +140,7 @@ Ext.define('MBilling.view.main.MainController', {
         btnSave.disable();
         formPanel.setLoading();
         formPanel.getForm().submit({
-            url: window.isDesktop ? 'index.php/authentication/importWallpapers' : 'index.php/authentication/importLogo',
+            url: 'index.php/authentication/importLogo',
             params: values,
             success: function(form, action) {
                 var obj = Ext.decode(action.response.responseText);
@@ -161,13 +161,63 @@ Ext.define('MBilling.view.main.MainController', {
     },
     importWallpaper: function(menuItem) {
         var me = this;
-        if (me.winLogo && me.winLogo.isVisible()) {
+        if (me.winImportwallpaper && me.winImportwallpaper.isVisible()) {
             return;
         }
-        me.winLogo = Ext.widget('importwallpaper', {
+        me.winImportwallpaper = Ext.widget('importwallpaper', {
             title: menuItem.text,
             glyph: menuItem.glyph
         });
+    },
+    importLoginBackground: function(menuItem) {
+        var me = this;
+        if (me.winLoginBackground && me.winLoginBackground.isVisible()) {
+            return;
+        }
+        me.winLoginBackground = Ext.widget('importloginbackground', {
+            title: menuItem.text,
+            glyph: menuItem.glyph
+        });
+    },
+    saveImportLoginBackground: function() {
+        var me = this,
+            view = me.getView(),
+            btnSave = me.lookupReference('saveImportLoginBackground'),
+            formPanel = me.lookupReference('formImportLoginBackground');
+        fieldImportLoginBackground = formPanel.getForm().findField('loginbackground');
+        values = Ext.apply(formPanel.getValues(), {
+            formImportLogo: fieldImportLoginBackground.getValue()
+        });
+        if (!formPanel.isValid()) {
+            Ext.ux.Alert.alert(view.titleWarning, view.msgFormInvalid, 'warning');
+            return;
+        }
+        if (fieldImportLoginBackground.getValue().toUpperCase().indexOf('JPG') == -1) {
+            Ext.ux.Alert.alert(view.titleWarning, view.msgFormInvalid + "<br>" + t('Invalid format'), 'warning');
+            return;
+        } else {
+            btnSave.disable();
+            formPanel.setLoading();
+            formPanel.getForm().submit({
+                url: 'index.php/authentication/importLoginBackground',
+                params: values,
+                success: function(form, action) {
+                    var obj = Ext.decode(action.response.responseText);
+                    if (obj.success) {
+                        Ext.ux.Alert.alert(me.titleSuccess, t(obj.msg), 'success');
+                    } else {
+                        errors = Helper.Util.convertErrorsJsonToString(obj.msg);
+                        if (!Ext.isObject(obj.errors)) {
+                            Ext.ux.Alert.alert(me.titleError, t(errors), 'error');
+                        } else {
+                            Ext.ux.Alert.alert(me.titleWarning, me.msgFormInvalid, 'warning');
+                        }
+                    }
+                    formPanel.setLoading(false);
+                    btnSave.enable();
+                }
+            });
+        }
     },
     saveWallpaper: function() {
         var me = this,

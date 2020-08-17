@@ -1,5 +1,5 @@
 
-.. _offerUse-id_user:
+.. _offerUse-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _offerUse-id_offer:
+.. _offerUse-id-offer:
 
 Offer
 ++++++++++++
@@ -19,7 +19,7 @@ Offer
 
 
 
-.. _offerUse-month_payed:
+.. _offerUse-month-payed:
 
 Month payed
 ++++++++++++

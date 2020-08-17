@@ -1,5 +1,5 @@
 
-.. _trunk-id_provider:
+.. _trunk-id-provider:
 
 Provider
 ++++++++++++
@@ -99,7 +99,7 @@ Status
 
 
 
-.. _trunk-allow_error:
+.. _trunk-allow-error:
 
 Allow error
 ++++++++++++
@@ -119,7 +119,7 @@ Register trunk
 
 
 
-.. _trunk-register_string:
+.. _trunk-register-string:
 
 Register string
 ++++++++++++
@@ -279,7 +279,7 @@ Port
 
 
 
-.. _trunk-link_sms:
+.. _trunk-link-sms:
 
 Link SMS
 ++++++++++++
@@ -289,7 +289,7 @@ Link SMS
 
 
 
-.. _trunk-sms_res:
+.. _trunk-sms-res:
 
 SMS match result
 ++++++++++++
@@ -299,7 +299,7 @@ SMS match result
 
 
 
-.. _trunk-sip_config:
+.. _trunk-sip-config:
 
 Parameters
 ++++++++++++
