@@ -49,7 +49,7 @@ Buy price increment
 
 
 
-.. _rateCallshop-minimal_time_charge:
+.. _rateCallshop-minimal-time-charge:
 
 Minimum time to charge
 ++++++++++++

@@ -1,5 +1,5 @@
 
-.. _methodPay-show_name:
+.. _methodPay-show-name:
 
 Show name
 ++++++++++++
@@ -9,7 +9,7 @@ Show name
 
 
 
-.. _methodPay-id_user:
+.. _methodPay-id-user:
 
 Username
 ++++++++++++
@@ -89,7 +89,7 @@ Discount fee
 
 
 
-.. _methodPay-boleto_banco:
+.. _methodPay-boleto-banco:
 
 Bank
 ++++++++++++
@@ -99,7 +99,7 @@ Bank
 
 
 
-.. _methodPay-boleto_agencia:
+.. _methodPay-boleto-agencia:
 
 Bank agency
 ++++++++++++
@@ -109,7 +109,7 @@ Bank agency
 
 
 
-.. _methodPay-boleto_conta_corrente:
+.. _methodPay-boleto-conta-corrente:
 
 Bank account
 ++++++++++++
@@ -119,7 +119,7 @@ Bank account
 
 
 
-.. _methodPay-boleto_taxa:
+.. _methodPay-boleto-taxa:
 
 Tax
 ++++++++++++
@@ -129,7 +129,7 @@ Tax
 
 
 
-.. _methodPay-boleto_instrucoes:
+.. _methodPay-boleto-instrucoes:
 
 Instructions
 ++++++++++++
@@ -139,7 +139,7 @@ Instructions
 
 
 
-.. _methodPay-boleto_nome_emp:
+.. _methodPay-boleto-nome-emp:
 
 Company
 ++++++++++++
@@ -149,7 +149,7 @@ Company
 
 
 
-.. _methodPay-boleto_end_emp:
+.. _methodPay-boleto-end-emp:
 
 Address
 ++++++++++++
@@ -159,7 +159,7 @@ Address
 
 
 
-.. _methodPay-boleto_cidade_emp:
+.. _methodPay-boleto-cidade-emp:
 
 City
 ++++++++++++
@@ -169,7 +169,7 @@ City
 
 
 
-.. _methodPay-boleto_estado_emp:
+.. _methodPay-boleto-estado-emp:
 
 State
 ++++++++++++
@@ -179,7 +179,7 @@ State
 
 
 
-.. _methodPay-boleto_cpf_emp:
+.. _methodPay-boleto-cpf-emp:
 
 DOC
 ++++++++++++
@@ -189,7 +189,7 @@ DOC
 
 
 
-.. _methodPay-pagseguro_TOKEN:
+.. _methodPay-pagseguro-TOKEN:
 
 TOKEN
 ++++++++++++
@@ -199,7 +199,7 @@ TOKEN
 
 
 
-.. _methodPay-P2P_CustomerSiteID:
+.. _methodPay-P2P-CustomerSiteID:
 
 P2P CustomerSiteID
 ++++++++++++
@@ -209,7 +209,7 @@ P2P CustomerSiteID
 
 
 
-.. _methodPay-P2P_KeyID:
+.. _methodPay-P2P-KeyID:
 
 P2P KeyID
 ++++++++++++
@@ -219,7 +219,7 @@ P2P KeyID
 
 
 
-.. _methodPay-P2P_Passphrase:
+.. _methodPay-P2P-Passphrase:
 
 P2P Passphrase
 ++++++++++++
@@ -229,7 +229,7 @@ P2P Passphrase
 
 
 
-.. _methodPay-P2P_RecipientKeyID:
+.. _methodPay-P2P-RecipientKeyID:
 
 P2P RecipientKeyID
 ++++++++++++
@@ -239,7 +239,7 @@ P2P RecipientKeyID
 
 
 
-.. _methodPay-P2P_tax_amount:
+.. _methodPay-P2P-tax-amount:
 
 P2P Tax Amount
 ++++++++++++
@@ -249,7 +249,7 @@ P2P Tax Amount
 
 
 
-.. _methodPay-client_id:
+.. _methodPay-client-id:
 
 Client id
 ++++++++++++
@@ -259,7 +259,7 @@ Client id
 
 
 
-.. _methodPay-client_secret:
+.. _methodPay-client-secret:
 
 Client secret
 ++++++++++++

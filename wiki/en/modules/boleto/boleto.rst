@@ -1,5 +1,5 @@
 
-.. _boleto-id_user:
+.. _boleto-id-user:
 
 Username
 ++++++++++++

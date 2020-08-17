@@ -19,7 +19,7 @@ MAC
 
 
 
-.. _sipuras-senha_user:
+.. _sipuras-senha-user:
 
 Senha do usuário
 ++++++++++++++++
@@ -29,7 +29,7 @@ Senha do usuário
 
 
 
-.. _sipuras-senha_admin:
+.. _sipuras-senha-admin:
 
 Senha de administração
 ++++++++++++++++
@@ -49,7 +49,7 @@ Bloquear reset
 
 
 
-.. _sipuras-Enable_Web_Server:
+.. _sipuras-Enable-Web-Server:
 
 Ativar acesso WEB
 ++++++++++++++++
@@ -79,7 +79,7 @@ Mudar
 
 
 
-.. _sipuras-User_ID_1:
+.. _sipuras-User-ID-1:
 
 Usuário
 ++++++++++++++++
@@ -89,7 +89,7 @@ Usuário
 
 
 
-.. _sipuras-Password_1:
+.. _sipuras-Password-1:
 
 Senha
 ++++++++++++++++
@@ -99,7 +99,7 @@ Senha
 
 
 
-.. _sipuras-Use_Pref_Codec_Only_1:
+.. _sipuras-Use-Pref-Codec-Only-1:
 
 Usar codec preferencial
 ++++++++++++++++
@@ -109,7 +109,7 @@ Usar codec preferencial
 
 
 
-.. _sipuras-Preferred_Codec_1:
+.. _sipuras-Preferred-Codec-1:
 
 Codec
 ++++++++++++++++
@@ -119,7 +119,7 @@ Codec
 
 
 
-.. _sipuras-Register_Expires_1:
+.. _sipuras-Register-Expires-1:
 
 Register expires
 ++++++++++++++++
@@ -129,7 +129,7 @@ Register expires
 
 
 
-.. _sipuras-Dial_Plan_1:
+.. _sipuras-Dial-Plan-1:
 
 Dial plan
 ++++++++++++++++
@@ -139,7 +139,7 @@ Dial plan
 
 
 
-.. _sipuras-NAT_Mapping_Enable_1_:
+.. _sipuras-NAT-Mapping-Enable-1-:
 
 NAT Mapping
 ++++++++++++++++
@@ -149,7 +149,7 @@ NAT Mapping
 
 
 
-.. _sipuras-NAT_Keep_Alive_Enable_1_:
+.. _sipuras-NAT-Keep-Alive-Enable-1-:
 
 NAT keep alive
 ++++++++++++++++
@@ -159,7 +159,7 @@ NAT keep alive
 
 
 
-.. _sipuras-User_ID_2:
+.. _sipuras-User-ID-2:
 
 Usuário
 ++++++++++++++++
@@ -169,7 +169,7 @@ Usuário
 
 
 
-.. _sipuras-Password_2:
+.. _sipuras-Password-2:
 
 Senha
 ++++++++++++++++
@@ -179,7 +179,7 @@ Senha
 
 
 
-.. _sipuras-Use_Pref_Codec_Only_2:
+.. _sipuras-Use-Pref-Codec-Only-2:
 
 Usar codec preferencial
 ++++++++++++++++
@@ -189,7 +189,7 @@ Usar codec preferencial
 
 
 
-.. _sipuras-Preferred_Codec_2:
+.. _sipuras-Preferred-Codec-2:
 
 Codec
 ++++++++++++++++
@@ -199,7 +199,7 @@ Codec
 
 
 
-.. _sipuras-Register_Expires_2:
+.. _sipuras-Register-Expires-2:
 
 Register expires
 ++++++++++++++++
@@ -209,7 +209,7 @@ Register expires
 
 
 
-.. _sipuras-Dial_Plan_2:
+.. _sipuras-Dial-Plan-2:
 
 Dial plan
 ++++++++++++++++
@@ -219,7 +219,7 @@ Dial plan
 
 
 
-.. _sipuras-NAT_Mapping_Enable_2_:
+.. _sipuras-NAT-Mapping-Enable-2-:
 
 NAT Mapping
 ++++++++++++++++
@@ -229,7 +229,7 @@ NAT Mapping
 
 
 
-.. _sipuras-NAT_Keep_Alive_Enable_2_:
+.. _sipuras-NAT-Keep-Alive-Enable-2-:
 
 NAT keep alive
 ++++++++++++++++
@@ -239,7 +239,7 @@ NAT keep alive
 
 
 
-.. _sipuras-STUN_Enable:
+.. _sipuras-STUN-Enable:
 
 Habilitar STUN
 ++++++++++++++++
@@ -249,7 +249,7 @@ Habilitar STUN
 
 
 
-.. _sipuras-STUN_Test_Enable:
+.. _sipuras-STUN-Test-Enable:
 
 STUN Test
 ++++++++++++++++
@@ -259,7 +259,7 @@ STUN Test
 
 
 
-.. _sipuras-Substitute_VIA_Addr:
+.. _sipuras-Substitute-VIA-Addr:
 
 Substitute VIA Addr
 ++++++++++++++++
@@ -269,7 +269,7 @@ Substitute VIA Addr
 
 
 
-.. _sipuras-STUN_Server:
+.. _sipuras-STUN-Server:
 
 STUN Server
 ++++++++++++++++

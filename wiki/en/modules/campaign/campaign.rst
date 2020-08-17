@@ -1,5 +1,5 @@
 
-.. _campaign-id_user:
+.. _campaign-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _campaign-id_plan:
+.. _campaign-id-plan:
 
 Plan
 ++++++++++++
@@ -79,7 +79,7 @@ Audio
 
 
 
-.. _campaign-audio_2:
+.. _campaign-audio-2:
 
 Audio 2
 ++++++++++++
@@ -89,7 +89,7 @@ Audio 2
 
 
 
-.. _campaign-restrict_phone:
+.. _campaign-restrict-phone:
 
 Restrict phone
 ++++++++++++
@@ -99,7 +99,7 @@ Restrict phone
 
 
 
-.. _campaign-auto_reprocess:
+.. _campaign-auto-reprocess:
 
 Auto reprocess
 ++++++++++++
@@ -109,7 +109,7 @@ Auto reprocess
 
 
 
-.. _campaign-id_phonebook:
+.. _campaign-id-phonebook:
 
 Phonebook
 ++++++++++++
@@ -119,7 +119,7 @@ Phonebook
 
 
 
-.. _campaign-digit_authorize:
+.. _campaign-digit-authorize:
 
 Number to forward
 ++++++++++++
@@ -129,7 +129,7 @@ Number to forward
 
 
 
-.. _campaign-type_0:
+.. _campaign-type-0:
 
 Forward type
 ++++++++++++
@@ -139,7 +139,7 @@ Forward type
 
 
 
-.. _campaign-extensions_0:
+.. _campaign-extensions-0:
 
 Destination
 ++++++++++++
@@ -149,7 +149,7 @@ Destination
 
 
 
-.. _campaign-id_ivr_0:
+.. _campaign-id-ivr-0:
 
 IVR
 ++++++++++++
@@ -159,7 +159,7 @@ IVR
 
 
 
-.. _campaign-id_queue_0:
+.. _campaign-id-queue-0:
 
 Queue
 ++++++++++++
@@ -169,7 +169,7 @@ Queue
 
 
 
-.. _campaign-id_sip_0:
+.. _campaign-id-sip-0:
 
 Sip user
 ++++++++++++
@@ -179,7 +179,7 @@ Sip user
 
 
 
-.. _campaign-extension_0:
+.. _campaign-extension-0:
 
 Destination
 ++++++++++++
@@ -189,7 +189,7 @@ Destination
 
 
 
-.. _campaign-daily_start_time:
+.. _campaign-daily-start-time:
 
 Daily start time
 ++++++++++++
@@ -199,7 +199,7 @@ Daily start time
 
 
 
-.. _campaign-daily_stop_time:
+.. _campaign-daily-stop-time:
 
 Daily stop time
 ++++++++++++
@@ -289,7 +289,7 @@ Call limit
 
 
 
-.. _campaign-max_frequency:
+.. _campaign-max-frequency:
 
 Maximum call limit
 ++++++++++++
@@ -299,7 +299,7 @@ Maximum call limit
 
 
 
-.. _campaign-nb_callmade:
+.. _campaign-nb-callmade:
 
 Audio duration
 ++++++++++++
@@ -309,7 +309,7 @@ Audio duration
 
 
 
-.. _campaign-enable_max_call:
+.. _campaign-enable-max-call:
 
 Toggle max completed calls
 ++++++++++++
@@ -349,7 +349,7 @@ Description or SMS Text
 
 
 
-.. _campaign-tts_audio:
+.. _campaign-tts-audio:
 
 Audio 1 TTS
 ++++++++++++
@@ -359,7 +359,7 @@ Audio 1 TTS
 
 
 
-.. _campaign-tts_audio2:
+.. _campaign-tts-audio2:
 
 Audio 2 TTS
 ++++++++++++
@@ -369,7 +369,7 @@ Audio 2 TTS
 
 
 
-.. _campaign-asr_options:
+.. _campaign-asr-options:
 
 Option to validate ASR
 ++++++++++++

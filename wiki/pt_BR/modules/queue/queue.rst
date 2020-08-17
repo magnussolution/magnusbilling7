@@ -1,5 +1,5 @@
 
-.. _queue-id_user:
+.. _queue-id-user:
 
 Usuário
 ++++++++++++++++
@@ -159,7 +159,7 @@ Desligar fila sem agentes
 
 
 
-.. _queue-max_wait_time:
+.. _queue-max-wait-time:
 
 Tempo máximo de espera
 ++++++++++++++++
@@ -169,7 +169,7 @@ Tempo máximo de espera
 
 
 
-.. _queue-max_wait_time_action:
+.. _queue-max-wait-time-action:
 
 Ação quando superar a espera
 ++++++++++++++++
@@ -179,7 +179,7 @@ Ação quando superar a espera
 
 
 
-.. _queue-ring_or_moh:
+.. _queue-ring-or-moh:
 
 Chamar ou executar MOH
 ++++++++++++++++

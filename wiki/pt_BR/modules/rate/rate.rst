@@ -1,5 +1,5 @@
 
-.. _rate-id_plan:
+.. _rate-id-plan:
 
 Plano
 ++++++++++++++++
@@ -9,7 +9,7 @@ Plano
 
 
 
-.. _rate-id_prefix:
+.. _rate-id-prefix:
 
 Destino
 ++++++++++++++++
@@ -19,7 +19,7 @@ Destino
 
 
 
-.. _rate-id_trunk_group:
+.. _rate-id-trunk-group:
 
 Grupo de Troncos
 ++++++++++++++++
@@ -59,7 +59,7 @@ Bloco de tarifação
 
 
 
-.. _rate-minimal_time_charge:
+.. _rate-minimal-time-charge:
 
 Tempo mínimo para tarifar
 ++++++++++++++++
@@ -69,7 +69,7 @@ Tempo mínimo para tarifar
 
 
 
-.. _rate-additional_grace:
+.. _rate-additional-grace:
 
 Tempo adicional
 ++++++++++++++++
@@ -79,7 +79,7 @@ Tempo adicional
 
 
 
-.. _rate-package_offer:
+.. _rate-package-offer:
 
 Incluir no pacotes grátis
 ++++++++++++++++

@@ -646,14 +646,6 @@ This menu has the following fields
 .. include:: campaign/campaign.rst
 
 
-Campaign Report
-+++++++++++++++
-
-This menu has the following fields
-
-.. include:: campaignreport/campaignreport.rst
-
-
 Phonebooks
 ++++++++++
 
@@ -686,7 +678,7 @@ This menu has the following fields
 .. include:: campaignpollinfo/campaignpollinfo.rst
 
 
-Restrict phone
+Restrict Phone
 ++++++++++++++
 
 This menu has the following fields
@@ -724,6 +716,14 @@ Campaigns DashBoard
 This menu has the following fields
 
 .. include:: campaigndashboard/campaigndashboard.rst
+
+
+Campaign Report
++++++++++++++++
+
+This menu has the following fields
+
+.. include:: campaignreport/campaignreport.rst
 
 
 

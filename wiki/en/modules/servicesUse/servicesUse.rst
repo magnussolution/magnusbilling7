@@ -1,5 +1,5 @@
 
-.. _servicesUse-id_user:
+.. _servicesUse-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _servicesUse-id_services:
+.. _servicesUse-id-services:
 
 Service
 ++++++++++++

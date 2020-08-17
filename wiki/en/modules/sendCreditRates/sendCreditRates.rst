@@ -9,7 +9,7 @@ Country
 
 
 
-.. _sendCreditRates-idProductoperator_name:
+.. _sendCreditRates-idProductoperator-name:
 
 Operator name
 ++++++++++++
@@ -19,7 +19,7 @@ Operator name
 
 
 
-.. _sendCreditRates-sell_price:
+.. _sendCreditRates-sell-price:
 
 Sell price
 ++++++++++++

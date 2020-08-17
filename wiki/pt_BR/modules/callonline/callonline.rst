@@ -9,7 +9,7 @@ Usuário
 
 
 
-.. _callOnLine-sip_account:
+.. _callOnLine-sip-account:
 
 Conta SIP
 ++++++++++++++++
@@ -24,7 +24,7 @@ Conta SIP
 Crédito
 ++++++++++++++++
 
-| Credito do usuario
+| Credito do usuário
 
 
 
@@ -34,7 +34,7 @@ Crédito
 Número
 ++++++++++++++++
 
-| Número no formato que o usuario discou.
+| Número no formato que o usuário discou.
 
 
 
@@ -84,7 +84,7 @@ Reinvite
 
 
 
-.. _callOnLine-from_ip:
+.. _callOnLine-from-ip:
 
 From IP
 ++++++++++++++++

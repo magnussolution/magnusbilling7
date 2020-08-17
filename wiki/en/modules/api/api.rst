@@ -1,5 +1,5 @@
 
-.. _api-id_user:
+.. _api-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _api-api_key:
+.. _api-api-key:
 
 Api key
 ++++++++++++
@@ -19,7 +19,7 @@ Api key
 
 
 
-.. _api-api_secret:
+.. _api-api-secret:
 
 Api secret
 ++++++++++++
@@ -49,7 +49,7 @@ Permissions
 
 
 
-.. _api-api_restriction_ips:
+.. _api-api-restriction-ips:
 
 Restriction IPs
 ++++++++++++

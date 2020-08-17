@@ -138,40 +138,72 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaign.status': `Status da campanha.`,
     'campaign.startingdate': `Data que a campanha será considerada ativa.`,
     'campaign.expirationdate': `Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos`,
-    'campaign.type': `Selecione entre VOZ ou SMS, se for audio, precisa importa audio, se for SMS, preciso colocar o texto do SMS na tab SMS.`,
+    'campaign.type': `Selecione entre VOZ ou SMS, se for audio, precisa importar áudio, se for SMS, preciso colocar o texto do SMS na tab SMS.`,
     'campaign.audio': `Somente usado se o tipo de campanha for de voz. O áudio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz`,
     'campaign.audio_2': `Se você usar TTS, o nome cadastrado do número será executado entre o áudio 1 e 2`,
-    'campaign.restrict_phone': `Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.`,
+    'campaign.restrict_phone': `Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.`,
     'campaign.auto_reprocess': `Reativar automaticamente todos os números das agendas da campanha quando não tiver mais números ativos`,
     'campaign.id_phonebook': `Selecione as agendas que esta campanha vai usar.`,
     'campaign.digit_authorize': `Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu`,
     'campaign.type_0': `Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido`,
-    'campaign.extensions_0': `No tipo personalizado, é possivel a execuçao opcaoes validas no comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr`,
+    'campaign.extensions_0': `No tipo personalizado, é possível a execução opções válidas no comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr`,
     'campaign.id_ivr_0': `Selecione uma conta USA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha`,
     'campaign.id_queue_0': `Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha`,
     'campaign.id_sip_0': `Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha`,
     'campaign.extension_0': `Clique para mais detalhes||Temos duas opcōes, conforme o tipo selecionado, personalizado ou grupo.
 
 * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
-* Personalizado, então é possivel a execuçao de qualque opcaoe valida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr`,
-    'campaign.daily_start_time': ``,
-    'campaign.daily_stop_time': ``,
-    'campaign.monday': ``,
-    'campaign.tuesday': ``,
-    'campaign.wednesday': ``,
-    'campaign.thursday': ``,
-    'campaign.friday': ``,
-    'campaign.saturday': ``,
-    'campaign.sunday': ``,
-    'campaign.frequency': `Quantas chamadas o sistema pode gerar por minuto nesta campanha`,
+* Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr`,
+    'campaign.daily_start_time': `Hora que a campanha vai iniciar o envio`,
+    'campaign.daily_stop_time': `Hora que a campanha vai parar o envio`,
+    'campaign.monday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.`,
+    'campaign.tuesday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nas terças feiras.`,
+    'campaign.wednesday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nas quartas feiras.`,
+    'campaign.thursday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nas quintas feiras.`,
+    'campaign.friday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nas sextas feiras.`,
+    'campaign.saturday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nos sabados.`,
+    'campaign.sunday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nos domingos.`,
+    'campaign.frequency': `Quantas chamadas o sistema deverá gerar por minuto nesta campanha.||Este valor será divido por 60 segundos, e as chamadas serão enviadas durante o minuto, e nao todas de uma vez.`,
     'campaign.max_frequency': `Este é o valor máximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.`,
     'campaign.nb_callmade': `Tempo do áudio da campanha, usado para controlar quantidade de chamadas considerada sucesso`,
-    'campaign.enable_max_call': `Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e tiveram a duração igual ao tempo do audio, se a quantidade for igual ou mais que o campo abaixo, a campanha é desativada`,
-    'campaign.secondusedreal': `Máximo de chamadas completas. Precisa ativar o campo acima`,
-    'campaign.from': ``,
-    'campaign.description': `Texto do SMS. Você pode usar a variável %name% onde você deseja usar o nome do dono do número`,
-    'campaign.tts_audio': ``,
-    'campaign.tts_audio2': ``,
+    'campaign.enable_max_call': `Se ativado, MagnusBilling vai verificar quantas chamadas já foram realizadas e tiveram a duração igual à duração do áudio.  Se a quantidade for igual ou maior que o valor colocado no próximo campo , a campanha será desativada`,
+    'campaign.secondusedreal': `Máximo de chamadas completas. Precisa ativar o campo acima.`,
+    'campaign.from': `O valor colocado neste campo será substituído no link do SMS configurado no tronco que será usado para enviar o SMS.||Use a variável %from% no link.
+
+Exemplo: https::/link_do_provedor_de_sms.com.br/send?user=USUARIO&pass=SENHA&number=%number%&sms=%text%&callerid=%from%
+
+Neste exemplo, o valor colocado no campo from, será substituído pela variável %from% do link, e caso o provedor de SMS aceite o envio do from, este número será o número que vai ser mostrado como quem enviou o SMS.
+`,
+    'campaign.description': `Este campo tem uso diferente dependendo se a campanha é VOZ ou SMS.||Tipos possíveis:
+
+* VOZ, neste caso este campo é simplesmente a descrição da campanha. 
+* SMS, quando a campanha for do tipo SMS, então o texto colocado aqui será o SMS que será enviado aos números das agendas da campanha. 
+
+No caso de SMS, você pode usar a variável %name% onde você deseja usar o nome do dono do número, exemplo:
+
+Ola %name% temos uma promoção para você.....
+
+Então digamos que tenha cadastrado na agenda utilizada por esta campanha uma lista de números contendo número e nome.
+
+5511998844334,Paulo Ricardo
+5511974635734,João Matos
+
+Então para o número 5511998844334 a mensagem enviada será. 
+Ola Paulo Ricardo temos uma promoção para você.....
+
+e para 
+
+5511974635734 a mensagem enviada será. 
+Ola João Matos temos uma promoção para você.....
+
+`,
+    'campaign.tts_audio': `Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio. 
+
+Para que esta opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
+
+Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
+`,
+    'campaign.tts_audio2': `Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.`,
     'campaign.asr_options': ``,
     //MONITOR DE CAMPANHAS
     'campaigndashboard.name': ``,
@@ -198,9 +230,9 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaignpollinfo.number': ``,
     'campaignpollinfo.resposta': ``,
     'campaignpollinfo.obs': ``,
-    //TELEFONE BLOQUEADOS
+    //NúMEROS BLOQUEADOS
     'campaignrestrictphone.number': ``,
-    //CONFIGURAçÜES
+    //AJUSTES
     'configuration.config_value': ``,
     'configuration.config_description': ``,
     //DIDS
@@ -507,7 +539,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'queue.max_wait_time_action': `Conta VoIP, IVR ou Fila de espera, para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceitos: SIP/conta_voip, QUEUE/nome_da_queue ou IRV/nome_da_ivr.`,
     'queue.ring_or_moh': ``,
     'queue.musiconhold': ``,
-    //FILAS AGENTES
+    //AGENTES DA FILA
     'queuemember.queue_name': ``,
     'queuemember.interface': ``,
     'queuemember.paused': ``,

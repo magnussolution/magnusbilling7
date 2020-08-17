@@ -29,7 +29,7 @@ Limite de chamada
 
 
 
-.. _services-disk_space:
+.. _services-disk-space:
 
 Espaço em disco
 ++++++++++++++++
@@ -59,7 +59,7 @@ Preço
 
 
 
-.. _services-return_credit:
+.. _services-return-credit:
 
 Retornar crédito
 ++++++++++++++++

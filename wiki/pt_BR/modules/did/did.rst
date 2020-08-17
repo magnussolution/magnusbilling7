@@ -29,7 +29,7 @@ Callerid name
 
 
 
-.. _did-connection_charge:
+.. _did-connection-charge:
 
 Taxa de ativação
 ++++++++++++++++
@@ -49,7 +49,7 @@ Preço mensal
 
 
 
-.. _did-connection_sell:
+.. _did-connection-sell:
 
 Taxa de conexão
 ++++++++++++++++
@@ -59,7 +59,7 @@ Taxa de conexão
 
 
 
-.. _did-minimal_time_charge:
+.. _did-minimal-time-charge:
 
 Tempo mínimo para tarifar
 ++++++++++++++++
@@ -89,7 +89,7 @@ Bloco de tarifação
 
 
 
-.. _did-charge_of:
+.. _did-charge-of:
 
 Quem será cobrado
 ++++++++++++++++
@@ -119,7 +119,7 @@ Descrição
 
 
 
-.. _did-expression_1:
+.. _did-expression-1:
 
 Expressão regular
 ++++++++++++++++
@@ -129,7 +129,7 @@ Expressão regular
 
 
 
-.. _did-selling_rate_1:
+.. _did-selling-rate-1:
 
 Preço de venda por min
 ++++++++++++++++
@@ -139,7 +139,7 @@ Preço de venda por min
 
 
 
-.. _did-block_expression_1:
+.. _did-block-expression-1:
 
 Bloquear chamadas a partir desta expressão
 ++++++++++++++++
@@ -149,7 +149,7 @@ Bloquear chamadas a partir desta expressão
 
 
 
-.. _did-send_to_callback_1:
+.. _did-send-to-callback-1:
 
 Enviar a chamada para callback
 ++++++++++++++++
@@ -159,7 +159,7 @@ Enviar a chamada para callback
 
 
 
-.. _did-expression_2:
+.. _did-expression-2:
 
 Expressão regular
 ++++++++++++++++
@@ -169,7 +169,7 @@ Expressão regular
 
 
 
-.. _did-selling_rate_2:
+.. _did-selling-rate-2:
 
 Preço de venda por min
 ++++++++++++++++
@@ -179,7 +179,7 @@ Preço de venda por min
 
 
 
-.. _did-block_expression_2:
+.. _did-block-expression-2:
 
 Bloquear chamadas a partir desta expressão
 ++++++++++++++++
@@ -189,7 +189,7 @@ Bloquear chamadas a partir desta expressão
 
 
 
-.. _did-send_to_callback_2:
+.. _did-send-to-callback-2:
 
 Enviar a chamada para callback
 ++++++++++++++++
@@ -199,7 +199,7 @@ Enviar a chamada para callback
 
 
 
-.. _did-expression_3:
+.. _did-expression-3:
 
 Expressão regular
 ++++++++++++++++
@@ -209,7 +209,7 @@ Expressão regular
 
 
 
-.. _did-selling_rate_3:
+.. _did-selling-rate-3:
 
 Preço de venda por min
 ++++++++++++++++
@@ -219,7 +219,7 @@ Preço de venda por min
 
 
 
-.. _did-block_expression_3:
+.. _did-block-expression-3:
 
 Bloquear chamadas a partir desta expressão
 ++++++++++++++++
@@ -229,7 +229,7 @@ Bloquear chamadas a partir desta expressão
 
 
 
-.. _did-send_to_callback_3:
+.. _did-send-to-callback-3:
 
 Enviar a chamada para callback
 ++++++++++++++++
@@ -249,7 +249,7 @@ Callback pro
 
 
 
-.. _did-cbr_ua:
+.. _did-cbr-ua:
 
 Usar áudio
 ++++++++++++++++
@@ -259,7 +259,7 @@ Usar áudio
 
 
 
-.. _did-cbr_total_try:
+.. _did-cbr-total-try:
 
 Tentativa máxima
 ++++++++++++++++
@@ -269,7 +269,7 @@ Tentativa máxima
 
 
 
-.. _did-cbr_time_try:
+.. _did-cbr-time-try:
 
 Intervalo entre tentativas
 ++++++++++++++++
@@ -279,7 +279,7 @@ Intervalo entre tentativas
 
 
 
-.. _did-cbr_em:
+.. _did-cbr-em:
 
 Early media
 ++++++++++++++++
@@ -289,7 +289,7 @@ Early media
 
 
 
-.. _did-TimeOfDay_monFri:
+.. _did-TimeOfDay-monFri:
 
 Seg-Sex
 ++++++++++++++++
@@ -299,7 +299,7 @@ Seg-Sex
 
 
 
-.. _did-TimeOfDay_sat:
+.. _did-TimeOfDay-sat:
 
 Sab
 ++++++++++++++++
@@ -309,7 +309,7 @@ Sab
 
 
 
-.. _did-TimeOfDay_sun:
+.. _did-TimeOfDay-sun:
 
 Domingo
 ++++++++++++++++

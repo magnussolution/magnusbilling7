@@ -1,5 +1,5 @@
 
-.. _logUsers-id_user:
+.. _logUsers-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _logUsers-id_log_actions:
+.. _logUsers-id-log-actions:
 
 Action
 ++++++++++++

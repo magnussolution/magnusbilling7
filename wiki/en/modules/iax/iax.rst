@@ -1,5 +1,5 @@
 
-.. _iax-id_user:
+.. _iax-id-user:
 
 Username
 ++++++++++++

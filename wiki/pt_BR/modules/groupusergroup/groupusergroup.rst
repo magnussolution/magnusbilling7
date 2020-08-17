@@ -9,7 +9,7 @@ Grupo
 
 
 
-.. _groupUserGroup-user_prefix:
+.. _groupUserGroup-user-prefix:
 
 Prefixo para usuário
 ++++++++++++++++
@@ -19,7 +19,7 @@ Prefixo para usuário
 
 
 
-.. _groupUserGroup-id_group:
+.. _groupUserGroup-id-group:
 
 Grupo
 ++++++++++++++++

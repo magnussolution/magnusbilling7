@@ -1,5 +1,5 @@
 
-.. _refill-id_user:
+.. _refill-id-user:
 
 Usuário
 ++++++++++++++++
@@ -39,7 +39,7 @@ Adicionar pagamento
 
 
 
-.. _refill-invoice_number:
+.. _refill-invoice-number:
 
 Fatura número
 ++++++++++++++++

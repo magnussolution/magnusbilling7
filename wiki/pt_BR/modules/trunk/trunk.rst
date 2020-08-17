@@ -1,5 +1,5 @@
 
-.. _trunk-id_provider:
+.. _trunk-id-provider:
 
 Provedor
 ++++++++++++++++
@@ -99,7 +99,7 @@ Status
 
 
 
-.. _trunk-allow_error:
+.. _trunk-allow-error:
 
 Permitir erro
 ++++++++++++++++
@@ -119,7 +119,7 @@ Registrar tronco
 
 
 
-.. _trunk-register_string:
+.. _trunk-register-string:
 
 Linha de registro
 ++++++++++++++++
@@ -279,17 +279,17 @@ Porta
 
 
 
-.. _trunk-link_sms:
+.. _trunk-link-sms:
 
 Link SMS
 ++++++++++++++++
 
-| URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuario=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% 
+| URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuário=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% 
 
 
 
 
-.. _trunk-sms_res:
+.. _trunk-sms-res:
 
 SMS Resposta esperada
 ++++++++++++++++
@@ -299,7 +299,7 @@ SMS Resposta esperada
 
 
 
-.. _trunk-sip_config:
+.. _trunk-sip-config:
 
 Parâmetros
 ++++++++++++++++

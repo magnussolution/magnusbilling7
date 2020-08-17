@@ -1,5 +1,5 @@
 
-.. _rateProvider-id_provider:
+.. _rateProvider-id-provider:
 
 Provider name
 ++++++++++++
@@ -9,7 +9,7 @@ Provider name
 
 
 
-.. _rateProvider-id_prefix:
+.. _rateProvider-id-prefix:
 
 Destination
 ++++++++++++
@@ -49,7 +49,7 @@ Buy price increment
 
 
 
-.. _rateProvider-minimal_time_buy:
+.. _rateProvider-minimal-time-buy:
 
 Minimum time to buy
 ++++++++++++

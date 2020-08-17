@@ -19,7 +19,7 @@ Senha
 
 
 
-.. _user-id_group:
+.. _user-id-group:
 
 Grupo
 ++++++++++++++++
@@ -29,7 +29,7 @@ Grupo
 
 
 
-.. _user-id_group_agent:
+.. _user-id-group-agent:
 
 Grupo para os usuários do agente
 ++++++++++++++++
@@ -39,7 +39,7 @@ Grupo para os usuários do agente
 
 
 
-.. _user-id_plan:
+.. _user-id-plan:
 
 Plano
 ++++++++++++++++
@@ -59,7 +59,7 @@ Idioma
 
 
 
-.. _user-prefix_local:
+.. _user-prefix-local:
 
 Regra prefixo
 ++++++++++++++++
@@ -113,7 +113,7 @@ País
 
 
 
-.. _user-id_offer:
+.. _user-id-offer:
 
 Pacotes grátis
 ++++++++++++++++
@@ -133,7 +133,7 @@ Limite de CPS
 
 
 
-.. _user-company_name:
+.. _user-company-name:
 
 Nome da empresa
 ++++++++++++++++
@@ -143,7 +143,7 @@ Nome da empresa
 
 
 
-.. _user-state_number:
+.. _user-state-number:
 
 Inscrição estadual
 ++++++++++++++++
@@ -293,7 +293,7 @@ Limite de crédito
 
 
 
-.. _user-credit_notification:
+.. _user-credit-notification:
 
 Notificação de crédito
 ++++++++++++++++
@@ -323,7 +323,7 @@ Data de expiração
 
 
 
-.. _user-record_call:
+.. _user-record-call:
 
 Gravar chamadas
 ++++++++++++++++
@@ -333,7 +333,7 @@ Gravar chamadas
 
 
 
-.. _user-mix_monitor_format:
+.. _user-mix-monitor-format:
 
 Formato das gravaçōes
 ++++++++++++++++
@@ -353,7 +353,7 @@ Limite de chamada
 
 
 
-.. _user-calllimit_error:
+.. _user-calllimit-error:
 
 Erro ao superar limite
 ++++++++++++++++
@@ -373,7 +373,7 @@ CallShop
 
 
 
-.. _user-disk_space:
+.. _user-disk-space:
 
 Espaço em disco
 ++++++++++++++++
@@ -393,7 +393,7 @@ Limite de contas SIP
 
 
 
-.. _user-callingcard_pin:
+.. _user-callingcard-pin:
 
 CallingCard PIN
 ++++++++++++++++
@@ -413,7 +413,7 @@ Restriction
 
 
 
-.. _user-transfer_international_profit:
+.. _user-transfer-international-profit:
 
 Lucro
 ++++++++++++++++
@@ -423,7 +423,7 @@ Lucro
 
 
 
-.. _user-transfer_flexiload_profit:
+.. _user-transfer-flexiload-profit:
 
 Lucro
 ++++++++++++++++
@@ -433,7 +433,7 @@ Lucro
 
 
 
-.. _user-transfer_bkash_profit:
+.. _user-transfer-bkash-profit:
 
 Lucro
 ++++++++++++++++
@@ -443,7 +443,7 @@ Lucro
 
 
 
-.. _user-transfer_dbbl_rocket:
+.. _user-transfer-dbbl-rocket:
 
 Enable DBBL/Rocket
 ++++++++++++++++
@@ -453,7 +453,7 @@ Enable DBBL/Rocket
 
 
 
-.. _user-transfer_dbbl_rocket_profit:
+.. _user-transfer-dbbl-rocket-profit:
 
 Lucro
 ++++++++++++++++
@@ -463,7 +463,7 @@ Lucro
 
 
 
-.. _user-transfer_show_selling_price:
+.. _user-transfer-show-selling-price:
 
 Mostrar preço de venda
 ++++++++++++++++

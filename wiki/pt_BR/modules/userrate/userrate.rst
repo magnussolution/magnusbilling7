@@ -1,5 +1,5 @@
 
-.. _userRate-id_prefix:
+.. _userRate-id-prefix:
 
 Destino
 ++++++++++++++++

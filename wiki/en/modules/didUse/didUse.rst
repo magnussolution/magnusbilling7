@@ -1,5 +1,5 @@
 
-.. _didUse-id_user:
+.. _didUse-id-user:
 
 Username
 ++++++++++++
@@ -9,7 +9,7 @@ Username
 
 
 
-.. _didUse-id_did:
+.. _didUse-id-did:
 
 DID
 ++++++++++++

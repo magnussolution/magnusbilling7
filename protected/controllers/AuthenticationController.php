@@ -423,14 +423,40 @@ class AuthenticationController extends Controller
 
     public function actionImportWallpapers()
     {
+        if (isset($_FILES['wallpaper']['tmp_name']) && strlen($_FILES['wallpaper']['tmp_name']) > 3) {
+
+            $uploaddir  = "resources/images/wallpapers/";
+            $typefile   = explode('.', $_FILES["wallpaper"]["name"]);
+            $uploadfile = $uploaddir . 'Customization.jpg';
+            move_uploaded_file($_FILES["wallpaper"]["tmp_name"], $uploadfile);
+        }
+
+        $modelConfiguration               = Configuration::model()->find("config_key LIKE 'wallpaper'");
+        $modelConfiguration->config_value = 'Customization';
+        try {
+            $success = $modelConfiguration->save();
+            $msg     = Yii::t('yii', 'Refresh the system to see the new logo');
+        } catch (Exception $e) {
+            $success = false;
+            $msg     = $this->getErrorMySql($e);
+        }
+        echo json_encode(array(
+            'success' => $success,
+            'msg'     => $msg,
+        ));
+
+    }
+
+    public function actionImportLoginBackground()
+    {
         $success = false;
         $msg     = 'error';
-        Yii::log(print_r($_FILES, true), 'error');
-        if (isset($_FILES['wallpaper']['tmp_name']) && strlen($_FILES['wallpaper']['tmp_name']) > 3) {
+
+        if (isset($_FILES['loginbackground']['tmp_name']) && strlen($_FILES['loginbackground']['tmp_name']) > 3) {
 
             $uploadfile = 'resources/images/lock-screen-background.jpg';
             try {
-                move_uploaded_file($_FILES["wallpaper"]["tmp_name"], $uploadfile);
+                move_uploaded_file($_FILES["loginbackground"]["tmp_name"], $uploadfile);
                 $success = true;
                 $msg     = 'Refresh the system to see the new wallpaper';
             } catch (Exception $e) {
@@ -442,7 +468,7 @@ class AuthenticationController extends Controller
         foreach ($colors as $key => $color) {
             $types = ['crisp', 'neptune', 'triton'];
             foreach ($types as $key => $type) {
-                exec("cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/");
+                exec("yes | cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/");
             }
         }
 

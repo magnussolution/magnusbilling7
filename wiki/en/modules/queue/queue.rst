@@ -1,5 +1,5 @@
 
-.. _queue-id_user:
+.. _queue-id-user:
 
 Username
 ++++++++++++
@@ -159,7 +159,7 @@ Leave when empty
 
 
 
-.. _queue-max_wait_time:
+.. _queue-max-wait-time:
 
 Max wait time
 ++++++++++++
@@ -169,7 +169,7 @@ Max wait time
 
 
 
-.. _queue-max_wait_time_action:
+.. _queue-max-wait-time-action:
 
 Max wait time action
 ++++++++++++
@@ -179,7 +179,7 @@ Max wait time action
 
 
 
-.. _queue-ring_or_moh:
+.. _queue-ring-or-moh:
 
 Ring or playing MOH
 ++++++++++++

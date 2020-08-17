@@ -5,7 +5,7 @@ Duração
 ++++++++++++++++
 
 | Somatorio de minutos chamadas por usuário.
-| É possível realizar filtros, por exemplo, somente usuarios que iniciam com a letra a, ou um usuário específico. Este somatório mostrará somente os dados do filtro executado.
+| É possível realizar filtros, por exemplo, somente usuários que iniciam com a letra a, ou um usuário específico. Este somatório mostrará somente os dados do filtro executado.
 
 
 

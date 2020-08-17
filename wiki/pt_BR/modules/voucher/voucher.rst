@@ -9,7 +9,7 @@ Crédito
 
 
 
-.. _voucher-id_plan:
+.. _voucher-id-plan:
 
 Plano
 ++++++++++++++++
@@ -29,7 +29,7 @@ Idioma
 
 
 
-.. _voucher-prefix_local:
+.. _voucher-prefix-local:
 
 Regra prefixo
 ++++++++++++++++
