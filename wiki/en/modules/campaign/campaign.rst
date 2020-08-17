@@ -111,7 +111,7 @@ Auto reprocess
 
 .. _campaign-id-phonebook:
 
-Phonebook
+
 ++++++++++++
 
 | Select one or more phonebooks to to be used.
@@ -132,16 +132,6 @@ Number to forward
 .. _campaign-type-0:
 
 Forward type
-++++++++++++
-
-| We did not write the description to this field.
-
-
-
-
-.. _campaign-extensions-0:
-
-Destination
 ++++++++++++
 
 | We did not write the description to this field.
@@ -329,16 +319,6 @@ Max completed calls
 
 
 
-.. _campaign-from:
-
-From
-++++++++++++
-
-| We did not write the description to this field.
-
-
-
-
 .. _campaign-description:
 
 Description or SMS Text
@@ -362,16 +342,6 @@ Audio 1 TTS
 .. _campaign-tts-audio2:
 
 Audio 2 TTS
-++++++++++++
-
-| We did not write the description to this field.
-
-
-
-
-.. _campaign-asr-options:
-
-Option to validate ASR
 ++++++++++++
 
 | We did not write the description to this field.

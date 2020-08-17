@@ -124,7 +124,6 @@ Help.load({
     'campaign.id_phonebook': `Select one or more phonebooks to to be used.`,
     'campaign.digit_authorize': `Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.`,
     'campaign.type_0': ``,
-    'campaign.extensions_0': ``,
     'campaign.id_ivr_0': ``,
     'campaign.id_queue_0': ``,
     'campaign.id_sip_0': ``,
@@ -143,16 +142,15 @@ Help.load({
     'campaign.nb_callmade': `Used to control the max completed calls.`,
     'campaign.enable_max_call': ``,
     'campaign.secondusedreal': `How many calls you want to send. You need the above parameters active to control it.`,
-    'campaign.from': ``,
     'campaign.description': `Text to send to SMS. You can use %name% where you want to show the number name.`,
     'campaign.tts_audio': ``,
     'campaign.tts_audio2': ``,
-    'campaign.asr_options': ``,
     //CAMPAIGNS DASHBOARD
     'campaigndashboard.name': ``,
     //CALL PER MINUTES
     'campaignlog.total': ``,
     //POLLS
+    'campaignpoll.id_campaign': ``,
     'campaignpoll.name': ``,
     'campaignpoll.repeat': ``,
     'campaignpoll.request_authorize': ``,

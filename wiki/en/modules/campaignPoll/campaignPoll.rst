@@ -1,4 +1,14 @@
 
+.. _campaignPoll-id-campaign:
+
+Campaign
+++++++++++++
+
+| We did not write the description to this field.
+
+
+
+
 .. _campaignPoll-name:
 
 Name

@@ -29,7 +29,9 @@ Ext.define('MBilling.view.campaignPoll.Form', {
             items: [{
                 title: t('General'),
                 items: [{
-                    xtype: 'campaigncombo'
+                    xtype: 'campaigncombo',
+                    name: 'id_campaign',
+                    fieldLabel: t('Campaign')
                 }, {
                     name: 'name',
                     fieldLabel: t('Name')

@@ -21,7 +21,9 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'You can see more details at the link' => 'Você pode ver mais detalhes no link',
+            'Import Login Background' => 'Importar fundo do login',
+    'Only JPEG format' => 'Somente JPEG',
+    'You can see more details at the link' => 'Você pode ver mais detalhes no link',
     'Your account was created. Please check your email' => 'Sua conta foi criada. Por favor verifique seu email',
     'Setup price' => 'Taxa de ativação',
     'Click to more details' => 'Clique para mais informaçōes',

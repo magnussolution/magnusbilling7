@@ -21,7 +21,7 @@ Pacotes grátis
 
 .. _offerCdr-used-secondes:
 
-Used secondes
+Duração
 ++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
