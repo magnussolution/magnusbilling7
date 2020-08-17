@@ -22,7 +22,7 @@ Ext.define('MBilling.view.callSummaryMonthUser.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.callsummarymonthuserform',
     defaults: {},
-    labelWidthFields: 100,
+    labelWidthFields: 150,
     defaultType: 'displayfield',
     initComponent: function() {
         var me = this;

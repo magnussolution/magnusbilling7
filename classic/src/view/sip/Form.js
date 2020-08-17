@@ -38,6 +38,7 @@ Ext.define('MBilling.view.sip.Form', {
                 layout: 'anchor',
                 bodyPadding: 5,
                 defaults: {
+                    labelWidth: 170,
                     labelAlign: 'right',
                     plugins: 'markallowblank',
                     allowBlank: false,
@@ -222,7 +223,7 @@ Ext.define('MBilling.view.sip.Form', {
                     allowBlank: false,
                     anchor: '100%',
                     enableKeyEvents: true,
-                    labelWidth: 142
+                    labelWidth: 170
                 },
                 items: [{
                     name: 'context',
@@ -315,7 +316,7 @@ Ext.define('MBilling.view.sip.Form', {
                     plugins: 'markallowblank',
                     allowBlank: true,
                     anchor: '100%',
-                    labelWidth: 60,
+                    labelWidth: 170,
                     defaults: {
                         hideLabel: true,
                         hidden: true,
@@ -356,8 +357,7 @@ Ext.define('MBilling.view.sip.Form', {
                     xtype: 'numberfield',
                     name: 'dial_timeout',
                     fieldLabel: t('Dial timeout'),
-                    value: '60',
-                    labelWidth: 90
+                    value: '60'
                 }]
             }, {
                 title: t('VoiceMail'),
@@ -369,12 +369,8 @@ Ext.define('MBilling.view.sip.Form', {
                     plugins: 'markallowblank',
                     allowBlank: true,
                     anchor: '100%',
-                    labelWidth: 150,
+                    labelWidth: 170,
                     defaults: {
-                        hideLabel: true,
-                        hidden: true,
-                        flex: 5,
-                        startX: 100,
                         allowBlank: true,
                         ownerForm: me
                     }
@@ -407,10 +403,6 @@ Ext.define('MBilling.view.sip.Form', {
                     anchor: '100%',
                     labelWidth: 150,
                     defaults: {
-                        hideLabel: true,
-                        hidden: true,
-                        flex: 5,
-                        startX: 100,
                         allowBlank: true,
                         ownerForm: me
                     }
@@ -419,6 +411,7 @@ Ext.define('MBilling.view.sip.Form', {
                     xtype: 'textarea',
                     name: 'sipshowpeer',
                     fieldLabel: t('Peer'),
+                    hideLabel: true,
                     labelWidth: 50,
                     readOnly: true,
                     allowBlank: true,

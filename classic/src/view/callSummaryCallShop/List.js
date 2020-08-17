@@ -62,7 +62,7 @@ Ext.define('MBilling.view.callSummaryCallShop.List', {
             flex: 3
         }, {
             menuDisabled: true,
-            header: t('Duration'),
+            header: t('Duration') + '/Min',
             dataIndex: 'sessiontime',
             flex: 2
         }, {
@@ -73,7 +73,7 @@ Ext.define('MBilling.view.callSummaryCallShop.List', {
             flex: 3
         }, {
             menuDisabled: true,
-            header: t('Total calls'),
+            header: t('Calls'),
             dataIndex: 'nbcall',
             flex: 3
         }, {

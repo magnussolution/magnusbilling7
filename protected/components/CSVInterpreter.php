@@ -17,7 +17,7 @@ class CSVInterpreter
         if (file_exists($filename)) {
             $handle = fopen($filename, 'r');
             if (($line1 = fgets($handle)) !== false) {
-                $this->columns = explode($delimiter, utf8_encode(trim($line1)));
+                $this->columns = explode($delimiter, trim($line1));
             } else {
                 $this->addError('The file cannot be read');
             }

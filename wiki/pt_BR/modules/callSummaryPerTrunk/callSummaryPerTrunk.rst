@@ -1,17 +1,11 @@
-.. _callSummaryPerTrunk-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callSummaryPerTrunk-sumsessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatorio de minutos chamadas.
+| É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, neste caso. Este somatório mostrará somente os dados do filtro executado.
 
 
 
@@ -19,9 +13,9 @@ Duração
 .. _callSummaryPerTrunk-sumsessionbill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de venda
 
 
 
@@ -29,9 +23,9 @@ Preço de venda
 .. _callSummaryPerTrunk-sumbuycost:
 
 Preço de compra
-""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de compra
 
 
 
@@ -39,9 +33,9 @@ Preço de compra
 .. _callSummaryPerTrunk-sumlucro:
 
 Lucro
-"""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do lucro
 
 
 
@@ -49,9 +43,9 @@ Lucro
 .. _callSummaryPerTrunk-sumnbcall:
 
 Chamadas atendidas
-""""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas
 
 
 
@@ -59,9 +53,9 @@ Chamadas atendidas
 .. _callSummaryPerTrunk-sumnbcallfail:
 
 Chamadas rejeitadas
-"""""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas rejeitadas
 
 
 

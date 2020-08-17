@@ -1,15 +1,8 @@
-.. _campaignPollInfo-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _campaignPollInfo-number:
 
 Number
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Number
 .. _campaignPollInfo-resposta:
 
 Result
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Result
 .. _campaignPollInfo-obs:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

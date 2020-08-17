@@ -1,17 +1,10 @@
-.. _callSummaryCallShop-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callSummaryCallShop-sumsessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatorio de minutos chamadas.
 
 
 
@@ -19,7 +12,7 @@ Duração
 .. _callSummaryCallShop-sumprice:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -29,9 +22,9 @@ Preço de venda
 .. _callSummaryCallShop-sumlucro:
 
 Lucro
-"""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do lucro
 
 
 
@@ -39,9 +32,9 @@ Lucro
 .. _callSummaryCallShop-sumbuycost:
 
 Preço de compra
-""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de compra
 
 
 
@@ -49,9 +42,9 @@ Preço de compra
 .. _callSummaryCallShop-sumnbcall:
 
 Total de chamadas
-"""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas
 
 
 

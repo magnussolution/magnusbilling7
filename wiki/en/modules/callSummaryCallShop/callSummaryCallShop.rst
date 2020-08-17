@@ -1,15 +1,8 @@
-.. _callSummaryCallShop-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _callSummaryCallShop-sumsessiontime:
 
 Duration
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Duration
 .. _callSummaryCallShop-sumprice:
 
 Sell price
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Sell price
 .. _callSummaryCallShop-sumlucro:
 
 Markup
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Markup
 .. _callSummaryCallShop-sumbuycost:
 
 Buy price
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -49,7 +42,7 @@ Buy price
 .. _callSummaryCallShop-sumnbcall:
 
 Total calls
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

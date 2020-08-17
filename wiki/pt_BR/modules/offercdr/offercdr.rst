@@ -1,15 +1,8 @@
-.. _offerCdr-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _offerCdr-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Usuário
 .. _offerCdr-id_offer:
 
 Pacotes grátis
-"""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -28,8 +21,8 @@ Pacotes grátis
 
 .. _offerCdr-used_secondes:
 
-Segundos usados
-"""""""""""""""
+Used secondes
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -39,7 +32,7 @@ Segundos usados
 .. _offerCdr-date_consumption:
 
 Data
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

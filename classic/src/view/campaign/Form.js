@@ -108,11 +108,12 @@ Ext.define('MBilling.view.campaign.Form', {
                     title: t('Select one or more phonebook'),
                     collapsible: true,
                     collapsed: false,
+                    height: 80,
                     items: [{
                         xtype: 'phonebooktag',
-                        labelWidth: 10,
                         name: 'id_phonebook',
-                        fieldLabel: t('Phonebook'),
+                        fieldLabel: t(''),
+                        labelWidth: 10,
                         anchor: '100%',
                         allowBlank: true
                     }]
@@ -125,7 +126,7 @@ Ext.define('MBilling.view.campaign.Form', {
                     title: t('Forward to'),
                     collapsible: true,
                     collapsed: false,
-                    height: 110,
+                    height: window.isThemeTriton ? 180 : 110,
                     defaults: {
                         labelWidth: 190,
                         anchor: '100%',
@@ -158,13 +159,6 @@ Ext.define('MBilling.view.campaign.Form', {
                         name: 'type_0',
                         fieldLabel: t('Forward type'),
                         allowBlank: true
-                    }, {
-                        xtype: 'textfield',
-                        name: 'extensions_0',
-                        fieldLabel: t('Destination'),
-                        value: '0',
-                        allowBlank: true,
-                        hidden: true
                     }, {
                         xtype: 'ivrlookup',
                         ownerForm: me,
@@ -280,7 +274,7 @@ Ext.define('MBilling.view.campaign.Form', {
                 title: t('SMS'),
                 items: [{
                     name: 'from',
-                    fieldLabel: t('From'),
+                    fieldLabel: 'From',
                     allowBlank: true
                 }, {
                     xtype: 'textareafield',

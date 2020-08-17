@@ -1,15 +1,8 @@
-.. _refillprovider-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _refillprovider-id_provider:
 
 Provider
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Provider
 .. _refillprovider-credit:
 
 Credit
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Credit
 .. _refillprovider-description:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Description
 .. _refillprovider-payment:
 
 Add payment
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

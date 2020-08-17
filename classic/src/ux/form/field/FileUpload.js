@@ -28,7 +28,7 @@ Ext.define('Ext.ux.form.field.FileUpload', {
     buttonText: undefined,
     maxSize: window.uploadFaxFilesizebites * 1000000,
     extAllowed: ['csv', 'ret'],
-    titleTipInfo: t('Model content'),
+    titleTipInfo: t('Example'),
     titleWarning: t('Warning'),
     msgInvalidFile: t('File not allow'),
     msgInvalidSize: t('Max size file'),

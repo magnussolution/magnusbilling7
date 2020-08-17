@@ -11,11 +11,11 @@ Install CentOS 7 **minimal**.
 
 ::
      
-  cd /usr/src/
-  yum -y install wget
-  wget https://raw.githubusercontent.com/magnussolution/magnusbilling6/master/script/install.sh
-  chmod +x install.sh
-  ./install.sh     
+    cd /usr/src/
+    yum -y install wget
+    wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
+    chmod +x install.sh
+    ./install.sh  
 
 **2.** During the install you'll be asked what language MagnusBilling should use. Choose by typing the number of the language.
 

@@ -1,15 +1,8 @@
-.. _api-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _api-id_user:
 
 Username
-""""""""
+++++++++++++
 
 | You need use the MagnusBilling API from https://github.com/magnussolution/magnusbilling-api-php. The username owner this API
 
@@ -19,7 +12,7 @@ Username
 .. _api-api_key:
 
 Api key
-"""""""
+++++++++++++
 
 | This apy key will be necessary to execute the API
 
@@ -29,7 +22,7 @@ Api key
 .. _api-api_secret:
 
 Api secret
-""""""""""
+++++++++++++
 
 | This apy secret will be necessary to execute the API
 
@@ -39,7 +32,7 @@ Api secret
 .. _api-status:
 
 Status
-""""""
+++++++++++++
 
 | You can activete or inactivate this API
 
@@ -49,7 +42,7 @@ Status
 .. _api-action:
 
 Permissions
-"""""""""""
+++++++++++++
 
 | Which action the user will have execute
 
@@ -59,7 +52,7 @@ Permissions
 .. _api-api_restriction_ips:
 
 Restriction IPs
-"""""""""""""""
+++++++++++++
 
 | What IPS you want allow access this API. Leave blank to allow any IP. It is very recomended set the IPS
 

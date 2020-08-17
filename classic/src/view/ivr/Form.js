@@ -33,6 +33,7 @@ Ext.define('MBilling.view.ivr.Form', {
                 layout: 'anchor',
                 bodyPadding: 5,
                 defaults: {
+                    labelWidth: 140,
                     plugins: 'markallowblank',
                     allowBlank: false,
                     anchor: '100%',
@@ -69,7 +70,6 @@ Ext.define('MBilling.view.ivr.Form', {
                     fieldLabel: t('Work audio'),
                     emptyText: 'Select an wav or gsm File',
                     allowBlank: true,
-                    labelWidth: 120,
                     extAllowed: ['wav', 'gsm']
                 }, {
                     xtype: 'uploadfield',
@@ -77,7 +77,6 @@ Ext.define('MBilling.view.ivr.Form', {
                     fieldLabel: t('Out work audio'),
                     emptyText: 'Select an wav or gsm File',
                     allowBlank: true,
-                    labelWidth: 120,
                     extAllowed: ['wav', 'gsm']
                 }]
             }, {

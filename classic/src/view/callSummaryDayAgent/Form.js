@@ -22,7 +22,7 @@ Ext.define('MBilling.view.callSummaryDayAgent.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.callsummarydayagentform',
     defaults: {},
-    labelWidthFields: 100,
+    labelWidthFields: 150,
     defaultType: 'displayfield',
     initComponent: function() {
         var me = this;

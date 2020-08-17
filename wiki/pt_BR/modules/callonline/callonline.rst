@@ -1,17 +1,10 @@
-.. _callOnLine-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callOnLine-idUserusername:
 
 Usuário
-""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário principal da conta SIP que inicou a chamada.
 
 
 
@@ -19,9 +12,9 @@ Usuário
 .. _callOnLine-sip_account:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP que solicitou a chamada.
 
 
 
@@ -29,9 +22,9 @@ Conta SIP
 .. _callOnLine-idUsercredit:
 
 Crédito
-""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Credito do usuario
 
 
 
@@ -39,9 +32,9 @@ Crédito
 .. _callOnLine-ndiscado:
 
 Número
-"""""""
+++++++++++++++++
 
-| Número
+| Número no formato que o usuario discou.
 
 
 
@@ -49,9 +42,9 @@ Número
 .. _callOnLine-codec:
 
 Codec
-"""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Codec usado na chamada
 
 
 
@@ -59,9 +52,14 @@ Codec
 .. _callOnLine-callerid:
 
 CallerID
-""""""""
+++++++++++++++++
 
-| CallerID.
+| Número enviado para o tronco como identificador de chamada.
+| 
+| Caso o tronco aceite o envio de callerid, então este número será usado como identificador de chamada.
+| 
+| Você pode confirmar este valor no campo abaixo onde mostra o resultado do comando core show channel, no valor [Caller ID] => 3341185338
+| Para funcionar é necessário deixar o campo Fromuser no tronco em branco.
 
 
 
@@ -69,9 +67,9 @@ CallerID
 .. _callOnLine-tronco:
 
 Troncos
-"""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tronco que foi utilizado para completar a chamada
 
 
 
@@ -79,9 +77,9 @@ Troncos
 .. _callOnLine-reinvite:
 
 Reinvite
-""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Reinvite é o parametro que informa se o audio esta passando pelo Asterisk, ou se esta passando diretamente entre o cliente e o tronco. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html  <https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html>`_.
 
 
 
@@ -89,9 +87,9 @@ Reinvite
 .. _callOnLine-from_ip:
 
 From IP
-"""""""
+++++++++++++++++
 
-| Ip de origem
+| Ip do terminal SIP que foi iniciado a chamada
 
 
 
@@ -99,9 +97,9 @@ From IP
 .. _callOnLine-description:
 
 Descrição
-"""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dados do comando sip show channel
 
 
 

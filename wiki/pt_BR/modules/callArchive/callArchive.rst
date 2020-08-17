@@ -1,17 +1,10 @@
-.. _callArchive-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callArchive-calledstation:
 
 Número
-"""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número discado pelo cliente
 
 
 
@@ -19,9 +12,9 @@ Número
 .. _callArchive-sessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Duração da chamada em segundos
 
 
 
@@ -29,9 +22,9 @@ Duração
 .. _callArchive-buycost:
 
 Preço de compra
-""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
 
 
@@ -39,9 +32,9 @@ Preço de compra
 .. _callArchive-sessionbill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
 
 
@@ -49,9 +42,9 @@ Preço de venda
 .. _callArchive-agent_bill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
 
 

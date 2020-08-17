@@ -1,15 +1,8 @@
-.. _gAuthenticator-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _gAuthenticator-username:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Username
 .. _gAuthenticator-googleAuthenticator_enable:
 
 Status
-""""""
+++++++++++++
 
 | Enable/Disable Google Authenticator.
 
@@ -29,7 +22,7 @@ Status
 .. _gAuthenticator-code:
 
 Code
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Code
 .. _gAuthenticator-google_authenticator_key:
 
 Google authenticator key
-""""""""""""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

@@ -48,7 +48,14 @@ class StatusSystemController extends Controller
             'params'    => [':key' => date('Y-m-d')],
             'order'     => 'total DESC',
         ]);
-        $attributes[0]['maximumcc'] = isset($modelCallOnlineChart->total) ? $modelCallOnlineChart->total : 0;
+
+        $totalCPS = StatusSystem::model()->find([
+            'condition' => 'date > :key',
+            'params'    => [':key' => date('Y-m-d 00:00:00')],
+            'order'     => 'cps DESC',
+        ]);
+
+        $attributes[0]['maximumcc'] = isset($modelCallOnlineChart->total) ? 'CC ' . $modelCallOnlineChart->total . ' | CPS ' . $totalCPS->cps : 'CC 0 | CPS ' . $totalCPS->cps;
 
         $modelRefill = Refill::model()->find([
             'select'    => 'sum(credit) as credit',

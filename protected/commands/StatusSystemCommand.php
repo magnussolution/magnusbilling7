@@ -22,6 +22,22 @@ class StatusSystemCommand extends ConsoleCommand
     public function run($args)
     {
 
+        if (fmod(date('i'), 5) == 0) {
+
+            $sql    = "SELECT starttime AS time, count(*) Total_failed, (SELECT count(*) FROM pkg_cdr WHERE starttime = time) Total_answered FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' GROUP BY starttime";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            foreach ($result as $key => $minute) {
+                $sql = "UPDATE pkg_status_system SET cps = " . ($minute['Total_failed'] + $minute['Total_answered']) . "  WHERE date = '" . $minute['time'] . "' ";
+                try {
+                    Yii::app()->db->createCommand($sql)->execute();
+                } catch (Exception $e) {
+
+                }
+
+            }
+
+        }
+
         $sysinfo = new sysinfo;
 
         $loadavg  = $sysinfo->loadavg(true);

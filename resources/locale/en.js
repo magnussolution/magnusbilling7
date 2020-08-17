@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-12
+ * 2020-08-16
  */
 Locale.load({
     '': '',
@@ -200,7 +200,6 @@ Locale.load({
     'Comma': '',
     'Company': '',
     'Company name': '',
-    'Complete': '',
     'Config': '',
     'Configuration': '',
     'Confirm': '',
@@ -337,6 +336,7 @@ Locale.load({
     'Export file': '',
     'Extra3': '',
     'Facility rejected': '',
+    'Failed': '',
     'Failed calls': '',
     'Failed. Try again...': '',
     'Failover trunk': '',
@@ -407,9 +407,9 @@ Locale.load({
     'IVR': '',
     'IVRs': '',
     'IconCls': '',
+    'Import': '',
     'Import CSV': '',
     'Import logo': '',
-    'Import text': '',
     'Import wallpaper': '',
     'In': '',
     'In use': '',
@@ -505,7 +505,6 @@ Locale.load({
     'Minutes': '',
     'Misdialled trunk prefix': '',
     'Mobile': '',
-    'Model content': '',
     'Module': '',
     'Modules': '',
     'Mon-Fri': '',
@@ -848,6 +847,7 @@ Locale.load({
     'Settings': '',
     'Settings theme': '',
     'Setup': '',
+    'Setup price': '',
     'Show desktop': '',
     'Show in groups': '',
     'Show menu': '',
@@ -945,7 +945,7 @@ Locale.load({
     'To date': '',
     'To day': '',
     'Today': '',
-    'Today max CC': '',
+    'Today peak': '',
     'Toggle max completed calls': '',
     'Token': '',
     'Torture': '',
@@ -995,7 +995,6 @@ Locale.load({
     'Use on signup': '',
     'Use that': '',
     'Use_Pref_Codec': '',
-    'Used secondes': '',
     'User': '',
     'User Custom Rates': '',
     'User busy': '',
@@ -1039,6 +1038,7 @@ Locale.load({
     'Yellow': '',
     'Yes': '',
     'You are not allowed to edit this field': '',
+    'You can see more details at the link': '',
     'You cannot EDIT your account.': '',
     'You cannot add credit to yourself': '',
     'You cannot change user type group': '',
@@ -1051,6 +1051,7 @@ Locale.load({
     'You only can set DID to CLIENTS': '',
     'Your': '',
     'Your SMS is not send!': '',
+    'Your account was created. Please check your email': '',
     'Your credit': '',
     'Your limit to download record is': '',
     'Your number': '',

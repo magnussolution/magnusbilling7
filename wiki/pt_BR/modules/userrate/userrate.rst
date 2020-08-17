@@ -1,15 +1,8 @@
-.. _userRate-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _userRate-id_prefix:
 
 Destino
-"""""""
+++++++++++++++++
 
 | Selecione o prefixo que você deseja subscrever.
 
@@ -19,9 +12,9 @@ Destino
 .. _userRate-rateinitial:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Novo preço de vendapara este prefixo
+| Novo preço de venda para este prefixo
 
 
 
@@ -29,7 +22,7 @@ Preço de venda
 .. _userRate-initblock:
 
 Bloco mínimo
-"""""""""""""
+++++++++++++++++
 
 | Mínimo de venda
 
@@ -39,7 +32,7 @@ Bloco mínimo
 .. _userRate-billingblock:
 
 Bloco de tarifação
-""""""""""""""""""""
+++++++++++++++++
 
 | Bloco de venda
 
