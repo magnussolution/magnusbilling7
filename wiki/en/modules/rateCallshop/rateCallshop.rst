@@ -21,7 +21,7 @@ Destination
 
 .. _rateCallshop-buyrate:
 
-Price
+Sell price
 ++++++++++++
 
 | We did not write the description to this field.

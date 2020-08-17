@@ -21,7 +21,7 @@ Destino
 
 .. _rateCallshop-buyrate:
 
-Preço
+Preço de venda
 ++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.

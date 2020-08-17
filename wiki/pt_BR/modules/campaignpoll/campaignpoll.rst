@@ -1,10 +1,20 @@
 
+.. _campaignPoll-id-campaign:
+
+Campanha
+++++++++++++++++
+
+| Selecione a campanha que esta enquete será executa
+
+
+
+
 .. _campaignPoll-name:
 
 Nome
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para a enquete, este nome é somente para seu contro
 
 
 
@@ -14,7 +24,16 @@ Nome
 How many time to repeat, if the client press invalid option?
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Quantas vezes o MagnusBilling deve repetir o áudio da enquete caso o cliente não digite nenhuma opção ou digite uma opção inválida.
+| 
+| O que é opção inválida?
+| 
+| É quando a opção digitada pelo cliente está vazia na TAB opções. Conforme a imagem abaixo.
+| 
+.. image:: ../img/pool_blank.png
+   :scale: 100%
+| 
+| 
 
 
 
@@ -24,7 +43,28 @@ How many time to repeat, if the client press invalid option?
 Solicitar autorização
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Em alguns casos, é necessário solicitar autorização para executar a enquete, nestes casos, deixe esta opção para sim
+| Um exemplo de caso seria:
+| 
+| Digamos que seja necessário enviar uma campanha com o seguinte áudio.
+| 
+| 
+|     Ola, temos uma oferta incrível para você. Se deseja escutar digite 1.
+| 
+| caso o cliente digitar 1, executar o áudio.
+| 
+| 
+|     Que bom que não perdeu esta chance de contratar seu plano de saúde …...
+| 
+| Neste caso, o áudio “Ola, temos uma oferta incrível para você. Se deseja escutar digite 1” seria o áudio da campanha.
+| 
+| E o áudio “Que bom que não perdeu esta chance de contratar seu plano de saúde …...” seria o áudio da enquete.
+| 
+| As opções, solicitar autorização deverá ser SIM e a opção dígito para autorizar deve ser 1.
+| 
+| Neste exemplo somente seria executado áudio da enquete caso o cliente digitar a tecla 1, caso contrário a chamada seria finalizada.
+| 
+| 
 
 
 
@@ -34,7 +74,7 @@ Solicitar autorização
 Dígito para autorizar
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Digito que para autorizar a execução da enquete.
 
 
 
@@ -44,7 +84,7 @@ Dígito para autorizar
 Descrição
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a enquete
 
 
 
@@ -54,7 +94,7 @@ Descrição
 Audio
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Arquivo de audio, lembre-se que somente é valido audios em GSM ou WAV 8khz mono
 
 
 
@@ -64,7 +104,24 @@ Audio
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção
+| Vamos supor que uma enquete política.
+| 
+| Onde a pergunta é:
+| Nas próximas eleições em quem você votaria?
+|     Digite 1 se você votaria no Roberto Matos
+|     Digite 2 se você votaria no Heleno Souza
+|     Digite 3 se você votaria na Roberta Silva
+| 
+| Neste exemplo você completaria as opções da seguinte forma
+| 
+| 
+.. image:: ../img/poll_options.png
+   :scale: 100% 
+| 
+| Estas opções será útil para ver os relatórios no menu Relatório de Enquete
+| 
+| 
 
 
 
@@ -74,7 +131,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -84,7 +141,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -94,7 +151,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -104,7 +161,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -114,7 +171,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -124,7 +181,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -134,7 +191,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -144,7 +201,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
@@ -154,7 +211,7 @@ Opção
 Opção
 ++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 

@@ -21,7 +21,7 @@ Offer
 
 .. _offerCdr-used-secondes:
 
-Used secondes
+Duration
 ++++++++++++
 
 | We did not write the description to this field.

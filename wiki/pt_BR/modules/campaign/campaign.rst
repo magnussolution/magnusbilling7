@@ -111,7 +111,7 @@ Reprocessar automático
 
 .. _campaign-id-phonebook:
 
-Agenda
+
 ++++++++++++++++
 
 | Selecione as agendas que esta campanha vai usar.
@@ -135,16 +135,6 @@ Tipo de encaminhamento
 ++++++++++++++++
 
 | Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
-
-
-
-
-.. _campaign-extensions-0:
-
-Destino
-++++++++++++++++
-
-| No tipo personalizado, é possível a execução opções válidas no comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
 
 
 
@@ -334,22 +324,6 @@ Quantidade máxima completada
 
 
 
-.. _campaign-from:
-
-De
-++++++++++++++++
-
-| O valor colocado neste campo será substituído no link do SMS configurado no tronco que será usado para enviar o SMS.
-| Use a variável %from% no link.
-| 
-| Exemplo: https::/link_do_provedor_de_sms.com.br/send?user=USUARIO&pass=SENHA&number=%number%&sms=%text%&callerid=%from%
-| 
-| Neste exemplo, o valor colocado no campo from, será substituído pela variável %from% do link, e caso o provedor de SMS aceite o envio do from, este número será o número que vai ser mostrado como quem enviou o SMS.
-| 
-
-
-
-
 .. _campaign-description:
 
 Descrição ou texto do SMS
@@ -404,16 +378,6 @@ Audio 2 TTS
 ++++++++++++++++
 
 | Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.
-
-
-
-
-.. _campaign-asr-options:
-
-Option to validate ASR
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
 
 
 

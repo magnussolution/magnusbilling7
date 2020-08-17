@@ -146,7 +146,6 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaign.id_phonebook': `Selecione as agendas que esta campanha vai usar.`,
     'campaign.digit_authorize': `Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu`,
     'campaign.type_0': `Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido`,
-    'campaign.extensions_0': `No tipo personalizado, é possível a execução opções válidas no comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr`,
     'campaign.id_ivr_0': `Selecione uma conta USA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha`,
     'campaign.id_queue_0': `Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha`,
     'campaign.id_sip_0': `Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha`,
@@ -168,12 +167,6 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaign.nb_callmade': `Tempo do áudio da campanha, usado para controlar quantidade de chamadas considerada sucesso`,
     'campaign.enable_max_call': `Se ativado, MagnusBilling vai verificar quantas chamadas já foram realizadas e tiveram a duração igual à duração do áudio.  Se a quantidade for igual ou maior que o valor colocado no próximo campo , a campanha será desativada`,
     'campaign.secondusedreal': `Máximo de chamadas completas. Precisa ativar o campo acima.`,
-    'campaign.from': `O valor colocado neste campo será substituído no link do SMS configurado no tronco que será usado para enviar o SMS.||Use a variável %from% no link.
-
-Exemplo: https::/link_do_provedor_de_sms.com.br/send?user=USUARIO&pass=SENHA&number=%number%&sms=%text%&callerid=%from%
-
-Neste exemplo, o valor colocado no campo from, será substituído pela variável %from% do link, e caso o provedor de SMS aceite o envio do from, este número será o número que vai ser mostrado como quem enviou o SMS.
-`,
     'campaign.description': `Este campo tem uso diferente dependendo se a campanha é VOZ ou SMS.||Tipos possíveis:
 
 * VOZ, neste caso este campo é simplesmente a descrição da campanha. 
@@ -204,28 +197,73 @@ Para que esta opção funcione, será necessário a configuração da url TTS no
 Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
 `,
     'campaign.tts_audio2': `Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.`,
-    'campaign.asr_options': ``,
     //MONITOR DE CAMPANHAS
-    'campaigndashboard.name': ``,
+    'campaigndashboard.name': `Nome da campanha`,
     //CHAMADAS POR MINUTO
-    'campaignlog.total': ``,
+    'campaignlog.total': `Total de chamadas`,
     //ENQUETES
-    'campaignpoll.name': ``,
-    'campaignpoll.repeat': ``,
-    'campaignpoll.request_authorize': ``,
-    'campaignpoll.digit_authorize': ``,
-    'campaignpoll.description': ``,
-    'campaignpoll.arq_audio': ``,
-    'campaignpoll.option0': ``,
-    'campaignpoll.option1': ``,
-    'campaignpoll.option2': ``,
-    'campaignpoll.option3': ``,
-    'campaignpoll.option4': ``,
-    'campaignpoll.option5': ``,
-    'campaignpoll.option6': ``,
-    'campaignpoll.option7': ``,
-    'campaignpoll.option8': ``,
-    'campaignpoll.option9': ``,
+    'campaignpoll.id_campaign': `Selecione a campanha que esta enquete será executa`,
+    'campaignpoll.name': `Nome para a enquete, este nome é somente para seu contro`,
+    'campaignpoll.repeat': `Quantas vezes o MagnusBilling deve repetir o áudio da enquete caso o cliente não digite nenhuma opção ou digite uma opção inválida.
+
+O que é opção inválida?
+
+É quando a opção digitada pelo cliente está vazia na TAB opções. Conforme a imagem abaixo.
+
+.. image:: ../img/pool_blank.png
+        :scale: 100%
+
+`,
+    'campaignpoll.request_authorize': `Em alguns casos, é necessário solicitar autorização para executar a enquete, nestes casos, deixe esta opção para sim||Um exemplo de caso seria:
+
+Digamos que seja necessário enviar uma campanha com o seguinte áudio.
+
+
+    Ola, temos uma oferta incrível para você. Se deseja escutar digite 1.
+
+caso o cliente digitar 1, executar o áudio.
+
+
+    Que bom que não perdeu esta chance de contratar seu plano de saúde …...
+
+Neste caso, o áudio “Ola, temos uma oferta incrível para você. Se deseja escutar digite 1” seria o áudio da campanha.
+
+E o áudio “Que bom que não perdeu esta chance de contratar seu plano de saúde …...” seria o áudio da enquete.
+
+As opções, solicitar autorização deverá ser SIM e a opção dígito para autorizar deve ser 1.
+
+Neste exemplo somente seria executado áudio da enquete caso o cliente digitar a tecla 1, caso contrário a chamada seria finalizada.
+
+`,
+    'campaignpoll.digit_authorize': `Digito que para autorizar a execução da enquete.`,
+    'campaignpoll.description': `Descrição para a enquete`,
+    'campaignpoll.arq_audio': `Arquivo de audio, lembre-se que somente é valido audios em GSM ou WAV 8khz mono`,
+    'campaignpoll.option0': `Descreva a opção||Vamos supor que uma enquete política.
+
+Onde a pergunta é:
+Nas próximas eleições em quem você votaria?
+    Digite 1 se você votaria no Roberto Matos
+    Digite 2 se você votaria no Heleno Souza
+    Digite 3 se você votaria na Roberta Silva
+
+Neste exemplo você completaria as opções da seguinte forma
+
+
+.. image:: ../img/poll_options.png
+    :scale: 100% 
+
+Estas opções será útil para ver os relatórios no menu Relatório de Enquete
+
+`,
+    'campaignpoll.option1': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option2': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option3': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option4': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option5': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option6': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option7': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option8': `Descreva a opção, veja a descriçao da opção 0`,
+    'campaignpoll.option9': `Descreva a opção, veja a descriçao da opção 0`,
     //ENQUETE RELATóRIOS
     'campaignpollinfo.number': ``,
     'campaignpollinfo.resposta': ``,
