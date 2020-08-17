@@ -39,7 +39,7 @@ Ext.define('MBilling.view.callSummaryPerMonth.List', {
             },
             flex: 3
         }, {
-            header: t('Duration'),
+            header: t('Duration') + '/Min',
             dataIndex: 'sessiontime',
             flex: 2
         }, {
@@ -52,7 +52,11 @@ Ext.define('MBilling.view.callSummaryPerMonth.List', {
             dataIndex: 'nbcall',
             flex: 3
         }, {
-            header: t('Failed calls'),
+            header: t('Answered'),
+            dataIndex: 'nbcall',
+            flex: 3
+        }, {
+            header: t('Failed'),
             dataIndex: 'nbcall_fail',
             flex: 3
         }, {

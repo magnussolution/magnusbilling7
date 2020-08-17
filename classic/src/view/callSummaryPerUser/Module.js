@@ -9,6 +9,6 @@ Ext.define('MBilling.view.callSummaryPerUser.Module', {
     alias: 'widget.callsummaryperusermodule',
     controller: 'callsummaryperuser',
     cfgEast: {
-        flex: 0.4
+        flex: 0.8
     }
 });

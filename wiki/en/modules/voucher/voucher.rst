@@ -1,15 +1,8 @@
-.. _voucher-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _voucher-credit:
 
 Credit
-""""""
+++++++++++++
 
 | How much credit is this voucher worth?
 
@@ -19,7 +12,7 @@ Credit
 .. _voucher-id_plan:
 
 Plan
-""""
+++++++++++++
 
 | Select the plan that is going to be used to create the user when the voucher is redeemed.
 
@@ -29,7 +22,7 @@ Plan
 .. _voucher-language:
 
 Language
-""""""""
+++++++++++++
 
 | Language used to create the user when voucher when the voucher is redeemed.
 
@@ -39,7 +32,7 @@ Language
 .. _voucher-prefix_local:
 
 Prefix rules
-""""""""""""
+++++++++++++
 
 | Local Prefix used to the create user when the voucher is redeemed.
 
@@ -49,7 +42,7 @@ Prefix rules
 .. _voucher-quantity:
 
 Quantity
-""""""""
+++++++++++++
 
 | How many vouchers do you want to generate?
 
@@ -59,7 +52,7 @@ Quantity
 .. _voucher-tag:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -69,7 +62,7 @@ Description
 .. _voucher-voucher:
 
 Voucher
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 

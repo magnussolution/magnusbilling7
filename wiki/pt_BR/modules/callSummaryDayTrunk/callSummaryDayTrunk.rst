@@ -1,17 +1,11 @@
-.. _callSummaryDayTrunk-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _callSummaryDayTrunk-sumsessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatorio de minutos chamadas.
+| É possível realizar filtros, por exemplo, filtrar os dias da última semana, ou de um tronco específico, neste caso. Este somatório mostrará somente os dados do filtro executado.
 
 
 
@@ -19,9 +13,9 @@ Duração
 .. _callSummaryDayTrunk-sumsessionbill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de venda
 
 
 
@@ -29,9 +23,9 @@ Preço de venda
 .. _callSummaryDayTrunk-sumbuycost:
 
 Preço de compra
-""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de compra
 
 
 
@@ -39,9 +33,9 @@ Preço de compra
 .. _callSummaryDayTrunk-sumlucro:
 
 Lucro
-"""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do lucro
 
 
 
@@ -49,9 +43,9 @@ Lucro
 .. _callSummaryDayTrunk-sumnbcall:
 
 Total de chamadas
-"""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas
 
 
 

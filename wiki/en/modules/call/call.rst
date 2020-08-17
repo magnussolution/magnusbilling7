@@ -1,15 +1,8 @@
-.. _call-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _call-starttime:
 
 Date
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Date
 .. _call-src:
 
 Sip user
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Sip user
 .. _call-callerid:
 
 CallerID
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ CallerID
 .. _call-calledstation:
 
 Number
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -49,7 +42,7 @@ Number
 .. _call-idPrefixdestination:
 
 Destination
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -59,7 +52,7 @@ Destination
 .. _call-idUserusername:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -69,7 +62,7 @@ Username
 .. _call-idTrunktrunkcode:
 
 Trunk
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -79,7 +72,7 @@ Trunk
 .. _call-sessiontime:
 
 Duration
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -89,7 +82,7 @@ Duration
 .. _call-buycost:
 
 Buy price
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -99,7 +92,7 @@ Buy price
 .. _call-sessionbill:
 
 Sell price
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -109,7 +102,7 @@ Sell price
 .. _call-agent_bill:
 
 Sell price
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -119,7 +112,7 @@ Sell price
 .. _call-uniqueid:
 
 Uniqueid
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

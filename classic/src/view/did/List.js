@@ -23,6 +23,7 @@ Ext.define('MBilling.view.did.List', {
     alias: 'widget.didlist',
     store: 'Did',
     fieldSearch: 'did',
+    buttonImportCsv: true,
     initComponent: function() {
         var me = this;
         me.buttonUpdateLot = false;
@@ -80,7 +81,7 @@ Ext.define('MBilling.view.did.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('Connection charge'),
+            header: t('Setup price'),
             dataIndex: 'connection_charge',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3

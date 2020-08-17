@@ -1,15 +1,8 @@
-.. _sip-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _sip-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Usuário
 .. _sip-defaultuser:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
 | Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
@@ -29,7 +22,7 @@ Conta SIP
 .. _sip-secret:
 
 Senha SIP
-"""""""""
+++++++++++++++++
 
 | Senha que será usado para logar nos softphones ou qualquer dispositivo SIP.
 
@@ -39,7 +32,7 @@ Senha SIP
 .. _sip-callerid:
 
 CallerID
-""""""""
+++++++++++++++++
 
 | Este é o CallerID que será mostrado no destino, em chamadas externas o provedor precisa permitir CLI para que seja identificado corretamente no destino.
 
@@ -49,7 +42,7 @@ CallerID
 .. _sip-alias:
 
 Alias
-"""""
+++++++++++++++++
 
 | Alias é um número para facilitar a discagem, pode colocar qualquer número. Pode repetir os mesmos números para contas diferente.
 
@@ -58,10 +51,10 @@ Alias
 
 .. _sip-disallow:
 
-Não permitir
-"""""""""""""
+Disallow
+++++++++++++++++
 
-| ESta opção destiva todos os codecs e deixa disponivel para o usuário somente os que você selecionar abaixo.
+| Esta opção desativa todos os codecs e deixa disponível para o usuário somente os que você selecionar abaixo.
 
 
 
@@ -69,7 +62,7 @@ Não permitir
 .. _sip-allow:
 
 Codec
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -79,9 +72,9 @@ Codec
 .. _sip-host:
 
 Host
-""""
+++++++++++++++++
 
-| Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em brando e coloque insecure para port/invite na TAB Informaçōes Adicionais.
+| Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em branco e coloque insecure para port/invite na TAB Informaçōes Adicionais.
 
 
 
@@ -89,7 +82,7 @@ Host
 .. _sip-sip_group:
 
 Grupo
-"""""
+++++++++++++++++
 
 | Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar todas as contas que tiver no grupo. Você pode criar os grupos com qualquer nome
 
@@ -99,7 +92,7 @@ Grupo
 .. _sip-videosupport:
 
 Suporte a vídeo
-""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -109,9 +102,9 @@ Suporte a vídeo
 .. _sip-block_call_reg:
 
 REGEX para bloqueio de chamadas
-"""""""""""""""""""""""""""""""
+++++++++++++++++
 
-| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com
+| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com  <https://regex101.com>`_.
 
 
 
@@ -119,7 +112,7 @@ REGEX para bloqueio de chamadas
 .. _sip-record_call:
 
 Gravar chamadas
-"""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -129,7 +122,7 @@ Gravar chamadas
 .. _sip-techprefix:
 
 Tech prefix
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -139,9 +132,9 @@ Tech prefix
 .. _sip-nat:
 
 NAT
-"""
+++++++++++++++++
 
-| Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/
+| O cliente esta atras de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
 
 
 
@@ -149,9 +142,9 @@ NAT
 .. _sip-directmedia:
 
 Directmedia
-"""""""""""
+++++++++++++++++
 
-| Se ativado, Asterisk vai tentar enviar a midia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/
+| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/  <https://www.voip-info.org/asterisk-sip-canreinvite/>`_.
 
 
 
@@ -159,9 +152,9 @@ Directmedia
 .. _sip-qualify:
 
 Qualify
-"""""""
+++++++++++++++++
 
-| Enviar pacote OPTION para para verificar se o usuário esta online.
+| Enviar pacote OPTION para verificar se o usuário está online.
 
 
 
@@ -169,9 +162,9 @@ Qualify
 .. _sip-context:
 
 Contexto
-""""""""
+++++++++++++++++
 
-| Somente altere se você sabe o que esta fazendo.
+| Somente altere se você sabe o que está fazendo.
 
 
 
@@ -179,7 +172,7 @@ Contexto
 .. _sip-dtmfmode:
 
 Dtmfmode
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -189,7 +182,7 @@ Dtmfmode
 .. _sip-insecure:
 
 Insecure
-""""""""
+++++++++++++++++
 
 | Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentication alterar para port,invite.
 
@@ -198,8 +191,8 @@ Insecure
 
 .. _sip-deny:
 
-Negar
-"""""
+Deny
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -208,8 +201,8 @@ Negar
 
 .. _sip-permit:
 
-Permitir
-""""""""
+Permit
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -219,7 +212,7 @@ Permitir
 .. _sip-type:
 
 Tipo
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -229,9 +222,9 @@ Tipo
 .. _sip-allowtransfer:
 
 Permitir transferência
-"""""""""""""""""""""""
+++++++++++++++++
 
-| Permite esta conta VoIP fazer transferencia. O código para transferencia é *2ramal 
+| Permite esta conta VoIP fazer transferência. O código para transferência é *2ramal. É necessário ativar a transferência no arquivo features.conf do Asterisk
 
 
 
@@ -239,7 +232,7 @@ Permitir transferência
 .. _sip-ringfalse:
 
 Ring falso
-""""""""""
+++++++++++++++++
 
 | Ativa ring falso. Adiciona rR do comando Dial.
 
@@ -249,7 +242,7 @@ Ring falso
 .. _sip-calllimit:
 
 Limite de chamada
-"""""""""""""""""
+++++++++++++++++
 
 | Chamadas simultâneas permitidas.
 
@@ -259,7 +252,7 @@ Limite de chamada
 .. _sip-mohsuggest:
 
 MOH
-"""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -269,7 +262,7 @@ MOH
 .. _sip-url_events:
 
 URL notificaçōes de eventos
-"""""""""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -279,7 +272,7 @@ URL notificaçōes de eventos
 .. _sip-addparameter:
 
 Adicionar parâmetro
-""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -289,7 +282,7 @@ Adicionar parâmetro
 .. _sip-amd:
 
 AMD
-"""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -299,7 +292,7 @@ AMD
 .. _sip-type_forward:
 
 Encaminhar
-""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -309,7 +302,7 @@ Encaminhar
 .. _sip-id_ivr:
 
 URA
-"""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -319,7 +312,7 @@ URA
 .. _sip-id_queue:
 
 Fila de espera
-""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -329,7 +322,7 @@ Fila de espera
 .. _sip-id_sip:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -339,7 +332,7 @@ Conta SIP
 .. _sip-extension:
 
 DialPlan
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -348,8 +341,8 @@ DialPlan
 
 .. _sip-dial_timeout:
 
-Tempo de discagem expirado
-""""""""""""""""""""""""""
+Tocar por quantos seg.
+++++++++++++++++
 
 | Tempo em segundos que será aguardado para atender a chamada.
 
@@ -359,7 +352,7 @@ Tempo de discagem expirado
 .. _sip-voicemail:
 
 Habilitar voicemail
-"""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -369,7 +362,7 @@ Habilitar voicemail
 .. _sip-voicemail_email:
 
 Email
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -379,7 +372,7 @@ Email
 .. _sip-voicemail_password:
 
 Senha
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -389,7 +382,7 @@ Senha
 .. _sip-sipshowpeer:
 
 Peer
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

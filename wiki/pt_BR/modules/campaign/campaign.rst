@@ -1,15 +1,8 @@
-.. _campaign-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _campaign-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,9 +12,9 @@ Usuário
 .. _campaign-id_plan:
 
 Plano
-"""""
+++++++++++++++++
 
-| Que plano será usado para tarifar as chamadas desta cmapanha, pode ser um plano diferente do plano cadastrado na conta do cliente
+| Que plano será usado para tarifar as chamadas desta campanha, pode ser um plano diferente do plano cadastrado na conta do cliente
 
 
 
@@ -29,7 +22,7 @@ Plano
 .. _campaign-name:
 
 Nome
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -39,7 +32,7 @@ Nome
 .. _campaign-status:
 
 Status
-""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -49,7 +42,7 @@ Status
 .. _campaign-startingdate:
 
 Data de início
-"""""""""""""""
+++++++++++++++++
 
 | Data que a campanha será considerada ativa.
 
@@ -59,7 +52,7 @@ Data de início
 .. _campaign-expirationdate:
 
 Data de expiração
-"""""""""""""""""""
+++++++++++++++++
 
 | Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos
 
@@ -69,7 +62,7 @@ Data de expiração
 .. _campaign-type:
 
 Tipo
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -79,9 +72,9 @@ Tipo
 .. _campaign-audio:
 
 Audio
-"""""
+++++++++++++++++
 
-| Somente usado se o tipo de campanha for de voz. O audio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz
+| Somente usado se o tipo de campanha for de voz. O áudio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz
 
 
 
@@ -89,9 +82,9 @@ Audio
 .. _campaign-audio_2:
 
 Audio 2
-"""""""
+++++++++++++++++
 
-| Se você usar TTS, o nome do número será executado entre o audio 1 e 2
+| Se você usar TTS, o nome do número será executado entre o áudio 1 e 2
 
 
 
@@ -99,7 +92,7 @@ Audio 2
 .. _campaign-restrict_phone:
 
 Telefone bloqueados
-"""""""""""""""""""
+++++++++++++++++
 
 | Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada esta cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
@@ -109,9 +102,9 @@ Telefone bloqueados
 .. _campaign-auto_reprocess:
 
 Reprocessar automático
-"""""""""""""""""""""""
+++++++++++++++++
 
-| Reativar automaticamente todos os numeros das agendas da campanha quando não tiver mais números ativos
+| Reativar automaticamente todos os números das agendas da campanha quando não tiver mais números ativos
 
 
 
@@ -119,7 +112,7 @@ Reprocessar automático
 .. _campaign-id_phonebook:
 
 Agenda
-""""""
+++++++++++++++++
 
 | Selecione as agendas que esta campanha vai usar.
 
@@ -129,9 +122,9 @@ Agenda
 .. _campaign-digit_authorize:
 
 Número para reenviar
-"""""""""""""""""""""
+++++++++++++++++
 
-| Você quer enviar o cliente para algum destino apos o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, entao coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Digito", para enviar para o destino se o cliente marcar qu
+| Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu
 
 
 
@@ -139,7 +132,7 @@ Número para reenviar
 .. _campaign-type_0:
 
 Tipo de encaminhamento
-""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -149,7 +142,7 @@ Tipo de encaminhamento
 .. _campaign-extensions_0:
 
 Destino
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -159,7 +152,7 @@ Destino
 .. _campaign-id_ivr_0:
 
 URA
-"""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -169,7 +162,7 @@ URA
 .. _campaign-id_queue_0:
 
 Fila de espera
-""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -179,7 +172,7 @@ Fila de espera
 .. _campaign-id_sip_0:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -189,7 +182,7 @@ Conta SIP
 .. _campaign-extension_0:
 
 Destino
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -199,7 +192,7 @@ Destino
 .. _campaign-daily_start_time:
 
 Horário de início diário
-"""""""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -209,7 +202,7 @@ Horário de início diário
 .. _campaign-daily_stop_time:
 
 Horário de finalização diário
-"""""""""""""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -219,7 +212,7 @@ Horário de finalização diário
 .. _campaign-monday:
 
 Segunda
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -229,7 +222,7 @@ Segunda
 .. _campaign-tuesday:
 
 Terça feira
-""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -239,7 +232,7 @@ Terça feira
 .. _campaign-wednesday:
 
 Quarta feira
-""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -249,7 +242,7 @@ Quarta feira
 .. _campaign-thursday:
 
 Quinta feira
-""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -259,7 +252,7 @@ Quinta feira
 .. _campaign-friday:
 
 Sexta
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -269,7 +262,7 @@ Sexta
 .. _campaign-saturday:
 
 Saturday
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -279,7 +272,7 @@ Saturday
 .. _campaign-sunday:
 
 Sunday
-""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -289,7 +282,7 @@ Sunday
 .. _campaign-frequency:
 
 Limite de chamada
-"""""""""""""""""
+++++++++++++++++
 
 | Quantas chamadas o sistema pode gerar por minuto nesta campanha
 
@@ -299,9 +292,9 @@ Limite de chamada
 .. _campaign-max_frequency:
 
 Limite máximo de chamadas
-""""""""""""""""""""""""""
+++++++++++++++++
 
-| Este é o valor maximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.
+| Este é o valor máximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.
 
 
 
@@ -309,9 +302,9 @@ Limite máximo de chamadas
 .. _campaign-nb_callmade:
 
 Duração do áudio
-"""""""""""""""""""
+++++++++++++++++
 
-| Tempo do audio da campanha, usado para controlar quantidade de chamadas considerada sucesso
+| Tempo do áudio da campanha, usado para controlar quantidade de chamadas considerada sucesso
 
 
 
@@ -319,7 +312,7 @@ Duração do áudio
 .. _campaign-enable_max_call:
 
 Toggle max completed calls
-""""""""""""""""""""""""""
+++++++++++++++++
 
 | Se ativado, MagnusBilling vai verificar quantas chamadas ja foram realizadas e tiveram a duração igual ao tempo do audio, se a quantidade for igual ou mais que o campo abaixo, a campanha é desativada
 
@@ -329,9 +322,9 @@ Toggle max completed calls
 .. _campaign-secondusedreal:
 
 Quantidade máxima completada
-"""""""""""""""""""""""""""""
+++++++++++++++++
 
-| Maximo de chamadas completas. Precisa ativar o campo acima
+| Máximo de chamadas completas. Precisa ativar o campo acima
 
 
 
@@ -339,7 +332,7 @@ Quantidade máxima completada
 .. _campaign-from:
 
 De
-""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -349,9 +342,9 @@ De
 .. _campaign-description:
 
 Descrição ou texto do SMS
-"""""""""""""""""""""""""""
+++++++++++++++++
 
-| Texto do SMS. Você pode usar a variavel %name% onde você deseja usar o nome do dono do número
+| Texto do SMS. Você pode usar a variável %name% onde você deseja usar o nome do dono do número
 
 
 
@@ -359,7 +352,7 @@ Descrição ou texto do SMS
 .. _campaign-tts_audio:
 
 Audio 1 TTS
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -369,7 +362,7 @@ Audio 1 TTS
 .. _campaign-tts_audio2:
 
 Audio 2 TTS
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -379,7 +372,7 @@ Audio 2 TTS
 .. _campaign-asr_options:
 
 Opção para validar ASR
-""""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

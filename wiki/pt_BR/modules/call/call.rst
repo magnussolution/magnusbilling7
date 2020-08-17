@@ -1,17 +1,10 @@
-.. _call-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _call-starttime:
 
 Data
-""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dia e hora do início da chamada
 
 
 
@@ -19,9 +12,9 @@ Data
 .. _call-src:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP que realizou a chamada
 
 
 
@@ -29,9 +22,13 @@ Conta SIP
 .. _call-callerid:
 
 CallerID
-""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número enviado para o tronco como identificador de chamada.
+| 
+| Caso o tronco aceite o envio de callerid, então este número será usado como identificador de chamada.
+| 
+| Para funcionar é necessário deixar o campo Fromuser no tronco em branco.
 
 
 
@@ -39,9 +36,9 @@ CallerID
 .. _call-calledstation:
 
 Número
-"""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número discado pelo cliente
 
 
 
@@ -49,9 +46,9 @@ Número
 .. _call-idPrefixdestination:
 
 Destino
-"""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do destino, este nome está relacionado com o menu Prefixos
 
 
 
@@ -59,9 +56,9 @@ Destino
 .. _call-idUserusername:
 
 Usuário
-""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado
 
 
 
@@ -69,9 +66,9 @@ Usuário
 .. _call-idTrunktrunkcode:
 
 Troncos
-"""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tronco que foi utilizado para completar a chamada
 
 
 
@@ -79,9 +76,9 @@ Troncos
 .. _call-sessiontime:
 
 Duração
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Duração da chamada em segundos
 
 
 
@@ -89,9 +86,9 @@ Duração
 .. _call-buycost:
 
 Preço de compra
-""""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
 
 
@@ -99,9 +96,9 @@ Preço de compra
 .. _call-sessionbill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
 
 
@@ -109,9 +106,9 @@ Preço de venda
 .. _call-agent_bill:
 
 Preço de venda
-"""""""""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
 
 
@@ -119,9 +116,9 @@ Preço de venda
 .. _call-uniqueid:
 
 ID único
-"""""""""
+++++++++++++++++
 
-| Nós ainda não escrevemos a descrição deste campo.
+| ID único gerado pelo Asterisk, este campo é também a hora de início da chamada em Epoch Unix
 
 
 

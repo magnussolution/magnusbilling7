@@ -9,6 +9,6 @@ Ext.define('MBilling.view.callSummaryPerTrunk.Module', {
     alias: 'widget.callsummarypertrunkmodule',
     controller: 'callsummarypertrunk',
     cfgEast: {
-        flex: 0.4
+        flex: 0.8
     }
 });

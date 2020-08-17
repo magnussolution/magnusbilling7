@@ -1,15 +1,8 @@
-.. _sendCreditProducts-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _sendCreditProducts-country:
 
 Country
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Country
 .. _sendCreditProducts-operator_name:
 
 Operator name
-"""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Operator name
 .. _sendCreditProducts-operator_id:
 
 Operator ID
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Operator ID
 .. _sendCreditProducts-SkuCode:
 
 SkuCode
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -49,7 +42,7 @@ SkuCode
 .. _sendCreditProducts-product:
 
 Product
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -59,7 +52,7 @@ Product
 .. _sendCreditProducts-send_value:
 
 Send value
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -69,7 +62,7 @@ Send value
 .. _sendCreditProducts-wholesale_price:
 
 Wholesale price
-"""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -79,7 +72,7 @@ Wholesale price
 .. _sendCreditProducts-provider:
 
 Provider
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -89,7 +82,7 @@ Provider
 .. _sendCreditProducts-status:
 
 Status
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -99,7 +92,7 @@ Status
 .. _sendCreditProducts-info:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

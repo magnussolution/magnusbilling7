@@ -1,15 +1,8 @@
-.. _queueMember-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _queueMember-queue_name:
 
 Fila nome
-"""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Fila nome
 .. _queueMember-interface:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -29,7 +22,7 @@ Conta SIP
 .. _queueMember-paused:
 
 Pausado
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

@@ -1,15 +1,8 @@
-.. _campaignPoll-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _campaignPoll-name:
 
 Nome
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Nome
 .. _campaignPoll-repeat:
 
 How many time to repeat, if the client press invalid option?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -29,7 +22,7 @@ How many time to repeat, if the client press invalid option?
 .. _campaignPoll-request_authorize:
 
 Solicitar autorização
-"""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -39,7 +32,7 @@ Solicitar autorização
 .. _campaignPoll-digit_authorize:
 
 Dígito para autorizar
-""""""""""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -49,7 +42,7 @@ Dígito para autorizar
 .. _campaignPoll-description:
 
 Descrição
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -59,7 +52,7 @@ Descrição
 .. _campaignPoll-arq_audio:
 
 Audio
-"""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -69,7 +62,7 @@ Audio
 .. _campaignPoll-option0:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -79,7 +72,7 @@ Opção
 .. _campaignPoll-option1:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -89,7 +82,7 @@ Opção
 .. _campaignPoll-option2:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -99,7 +92,7 @@ Opção
 .. _campaignPoll-option3:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -109,7 +102,7 @@ Opção
 .. _campaignPoll-option4:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -119,7 +112,7 @@ Opção
 .. _campaignPoll-option5:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -129,7 +122,7 @@ Opção
 .. _campaignPoll-option6:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -139,7 +132,7 @@ Opção
 .. _campaignPoll-option7:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -149,7 +142,7 @@ Opção
 .. _campaignPoll-option8:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -159,7 +152,7 @@ Opção
 .. _campaignPoll-option9:
 
 Opção
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

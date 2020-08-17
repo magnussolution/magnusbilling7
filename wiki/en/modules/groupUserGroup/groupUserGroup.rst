@@ -1,15 +1,8 @@
-.. _groupUserGroup-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _groupUserGroup-name:
 
 Group
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Group
 .. _groupUserGroup-user_prefix:
 
 User prefix
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ User prefix
 .. _groupUserGroup-id_group:
 
 Group
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 

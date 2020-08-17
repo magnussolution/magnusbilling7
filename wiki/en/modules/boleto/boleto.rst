@@ -1,15 +1,8 @@
-.. _boleto-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _boleto-id_user:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Username
 .. _boleto-payment:
 
 Value
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Value
 .. _boleto-status:
 
 Paid
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Paid
 .. _boleto-vencimento:
 
 Due date
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -49,7 +42,7 @@ Due date
 .. _boleto-description:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

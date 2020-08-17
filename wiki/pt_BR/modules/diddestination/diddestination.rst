@@ -1,15 +1,8 @@
-.. _diddestination-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _diddestination-id_did:
 
 DID
-"""
+++++++++++++++++
 
 | Selecione o DID para criar o novo destino
 
@@ -19,7 +12,7 @@ DID
 .. _diddestination-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -29,7 +22,7 @@ Usuário
 .. _diddestination-activated:
 
 Status
-""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -39,9 +32,9 @@ Status
 .. _diddestination-priority:
 
 Prioridade
-""""""""""
+++++++++++++++++
 
-| Você pode criar ate 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, ate completar. 
+| Você pode criar até 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, até completar. 
 
 
 
@@ -49,7 +42,7 @@ Prioridade
 .. _diddestination-voip_call:
 
 Tipo
-""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -59,7 +52,7 @@ Tipo
 .. _diddestination-destination:
 
 Destino
-"""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -69,7 +62,7 @@ Destino
 .. _diddestination-id_ivr:
 
 URA
-"""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -79,7 +72,7 @@ URA
 .. _diddestination-id_queue:
 
 Fila de espera
-""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -89,7 +82,7 @@ Fila de espera
 .. _diddestination-id_sip:
 
 Conta SIP
-"""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -99,7 +92,7 @@ Conta SIP
 .. _diddestination-context:
 
 Contexto
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

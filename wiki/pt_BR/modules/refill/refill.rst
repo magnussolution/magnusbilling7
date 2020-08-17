@@ -1,15 +1,8 @@
-.. _refill-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _refill-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Usuário
 .. _refill-credit:
 
 Crédito
-""""""""
+++++++++++++++++
 
 | Valor da recarga
 
@@ -29,7 +22,7 @@ Crédito
 .. _refill-description:
 
 Descrição
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -39,7 +32,7 @@ Descrição
 .. _refill-payment:
 
 Adicionar pagamento
-"""""""""""""""""""
+++++++++++++++++
 
 | Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO
 
@@ -49,7 +42,7 @@ Adicionar pagamento
 .. _refill-invoice_number:
 
 Fatura número
-""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

@@ -1,18 +1,11 @@
-.. _api-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _api-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
-| Usuário que poderá usar a API.
-| Para usar a API é necessário o uso do projeto publicado no GITHUB.
+| Usuário que poderá usar esta API.
+| Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
 |     
 | O projeto esta publicado no link https://github.com/magnussolution/magnusbilling-api-php. 
 | A API tem documentação, atualmente somente em Ingles, e esta publicado no link https://github.com/magnussolution/magnusbilling-api-php/wiki. 
@@ -23,7 +16,7 @@ Usuário
 .. _api-api_key:
 
 API key
-"""""""
+++++++++++++++++
 
 | Key necessária para autenticar na API.
 
@@ -33,7 +26,7 @@ API key
 .. _api-api_secret:
 
 API secret
-""""""""""
+++++++++++++++++
 
 | Secret necessário para autenticar na API.
 
@@ -43,7 +36,7 @@ API secret
 .. _api-status:
 
 Status
-""""""
+++++++++++++++++
 
 | Permitir ou não a conexão na API.
 
@@ -53,7 +46,7 @@ Status
 .. _api-action:
 
 Permissões
-"""""""""""
+++++++++++++++++
 
 | Quais as açōes será permitidas na conexão.
 
@@ -63,7 +56,7 @@ Permissões
 .. _api-api_restriction_ips:
 
 IPs restritos
-"""""""""""""
+++++++++++++++++
 
 | Quais os IPs poderão conectar na API.
 | Deixar em branco para permitir a conexão de qualquer IP.

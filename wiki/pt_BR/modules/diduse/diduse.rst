@@ -1,15 +1,8 @@
-.. _didUse-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _didUse-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Usuário
 .. _didUse-id_did:
 
 DID
-"""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -29,7 +22,7 @@ DID
 .. _didUse-reservationdate:
 
 Data de reserva
-"""""""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

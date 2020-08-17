@@ -1,15 +1,8 @@
-.. _trunk-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _trunk-id_provider:
 
 Provider
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Provider
 .. _trunk-trunkcode:
 
 Name
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Name
 .. _trunk-user:
 
 Username
-""""""""
+++++++++++++
 
 | Only used if the authentication is via user and pass.
 
@@ -39,7 +32,7 @@ Username
 .. _trunk-secret:
 
 Password
-""""""""
+++++++++++++
 
 | Only used if the authentication is via user and pass.
 
@@ -49,7 +42,7 @@ Password
 .. _trunk-host:
 
 Host
-""""
+++++++++++++
 
 | IP or SIP
 
@@ -59,7 +52,7 @@ Host
 .. _trunk-trunkprefix:
 
 Add prefix
-""""""""""
+++++++++++++
 
 | Add a prefix to send to your trunk.
 
@@ -69,7 +62,7 @@ Add prefix
 .. _trunk-removeprefix:
 
 Remove prefix
-"""""""""""""
+++++++++++++
 
 | Remove a prefix to send to your trunk.
 
@@ -79,7 +72,7 @@ Remove prefix
 .. _trunk-allow:
 
 Codec
-"""""
+++++++++++++
 
 | Select the codecs that are allowed in this trunk.
 
@@ -89,7 +82,7 @@ Codec
 .. _trunk-providertech:
 
 Provider tech
-"""""""""""""
+++++++++++++
 
 | You need install appropriate drive to use card like dgv extra Dongle.
 
@@ -99,7 +92,7 @@ Provider tech
 .. _trunk-status:
 
 Status
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -109,7 +102,7 @@ Status
 .. _trunk-allow_error:
 
 Allow error
-"""""""""""
+++++++++++++
 
 | If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.
 
@@ -119,7 +112,7 @@ Allow error
 .. _trunk-register:
 
 Register trunk
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -129,7 +122,7 @@ Register trunk
 .. _trunk-register_string:
 
 Register string
-"""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -139,7 +132,7 @@ Register string
 .. _trunk-fromuser:
 
 Fromuser
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -149,7 +142,7 @@ Fromuser
 .. _trunk-fromdomain:
 
 Fromdomain
-""""""""""
+++++++++++++
 
 | Set the Trunk IP or SIP, if required.
 
@@ -159,7 +152,7 @@ Fromdomain
 .. _trunk-language:
 
 Language
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -169,7 +162,7 @@ Language
 .. _trunk-context:
 
 Context
-"""""""
+++++++++++++
 
 | Only change if you know what you are doing.
 
@@ -179,7 +172,7 @@ Context
 .. _trunk-dtmfmode:
 
 Dtmfmode
-""""""""
+++++++++++++
 
 | Set default dtmfmode for sending DTMF. Default: rfc2833 Other options: info : SIP INFO messages (application/dtmf-relay) shortinfo : SIP INFO messages (application/dtmf) inband : Inband audio (requires 64 kbit codec -alaw, ulaw) auto : Use rfc2833 if offered, inband otherwise.
 
@@ -189,7 +182,7 @@ Dtmfmode
 .. _trunk-insecure:
 
 Insecure
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -199,7 +192,7 @@ Insecure
 .. _trunk-maxuse:
 
 Max use
-"""""""
+++++++++++++
 
 | Maximum simultaneous call. If you set it, your server will need to use a lot of resources to control it. Not recommended.
 
@@ -209,7 +202,7 @@ Max use
 .. _trunk-nat:
 
 NAT
-"""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -219,7 +212,7 @@ NAT
 .. _trunk-directmedia:
 
 Directmedia
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -229,7 +222,7 @@ Directmedia
 .. _trunk-qualify:
 
 Qualify
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -239,7 +232,7 @@ Qualify
 .. _trunk-type:
 
 Type
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -249,7 +242,7 @@ Type
 .. _trunk-disallow:
 
 Disallow
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -259,7 +252,7 @@ Disallow
 .. _trunk-sendrpid:
 
 Sendrpid
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -269,7 +262,7 @@ Sendrpid
 .. _trunk-addparameter:
 
 Addparameter
-""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -279,7 +272,7 @@ Addparameter
 .. _trunk-port:
 
 Port
-""""
+++++++++++++
 
 | If you want to use a different than 5060, you will need open the port in IPTABLES.
 
@@ -289,7 +282,7 @@ Port
 .. _trunk-link_sms:
 
 Link SMS
-""""""""
+++++++++++++
 
 | Set your SMS link here to send SMS. Replace: number variable per %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
 
@@ -299,7 +292,7 @@ Link SMS
 .. _trunk-sms_res:
 
 SMS match result
-""""""""""""""""
+++++++++++++
 
 | Leave it empty to not wait URL result. If you want wait the any success message, write here the expected result.
 
@@ -309,7 +302,7 @@ SMS match result
 .. _trunk-sip_config:
 
 Parameters
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

@@ -1,15 +1,8 @@
-.. _logUsers-menu-list:
-
-***************
-Lista de campos
-***************
-
-
 
 .. _logUsers-id_user:
 
 Usuário
-""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -19,7 +12,7 @@ Usuário
 .. _logUsers-id_log_actions:
 
 Ação
-""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -29,7 +22,7 @@ Ação
 .. _logUsers-ip:
 
 IP
-""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -39,7 +32,7 @@ IP
 .. _logUsers-description:
 
 Descrição
-"""""""""""
+++++++++++++++++
 
 | Nós ainda não escrevemos a descrição deste campo.
 

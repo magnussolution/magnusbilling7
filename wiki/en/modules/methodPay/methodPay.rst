@@ -1,15 +1,8 @@
-.. _methodPay-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _methodPay-show_name:
 
 Show name
-"""""""""
+++++++++++++
 
 | Name to show to user in the Buy Credit option.
 
@@ -19,7 +12,7 @@ Show name
 .. _methodPay-id_user:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Username
 .. _methodPay-country:
 
 Country
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Country
 .. _methodPay-active:
 
 Active
-""""""
+++++++++++++
 
 | Activate this payment gateway to users?
 
@@ -49,7 +42,7 @@ Active
 .. _methodPay-min:
 
 Min amount
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -59,7 +52,7 @@ Min amount
 .. _methodPay-max:
 
 Max amount
-""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -69,7 +62,7 @@ Max amount
 .. _methodPay-username:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -79,7 +72,7 @@ Username
 .. _methodPay-url:
 
 URL
-"""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -89,7 +82,7 @@ URL
 .. _methodPay-fee:
 
 Discount fee
-""""""""""""
+++++++++++++
 
 | Discount the Paypal fee from the paid amount.
 
@@ -99,7 +92,7 @@ Discount fee
 .. _methodPay-boleto_banco:
 
 Bank
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -109,7 +102,7 @@ Bank
 .. _methodPay-boleto_agencia:
 
 Bank agency
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -119,7 +112,7 @@ Bank agency
 .. _methodPay-boleto_conta_corrente:
 
 Bank account
-""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -129,7 +122,7 @@ Bank account
 .. _methodPay-boleto_taxa:
 
 Tax
-"""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -139,7 +132,7 @@ Tax
 .. _methodPay-boleto_instrucoes:
 
 Instructions
-""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -149,7 +142,7 @@ Instructions
 .. _methodPay-boleto_nome_emp:
 
 Company
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -159,7 +152,7 @@ Company
 .. _methodPay-boleto_end_emp:
 
 Address
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -169,7 +162,7 @@ Address
 .. _methodPay-boleto_cidade_emp:
 
 City
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -179,7 +172,7 @@ City
 .. _methodPay-boleto_estado_emp:
 
 State
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -189,7 +182,7 @@ State
 .. _methodPay-boleto_cpf_emp:
 
 DOC
-"""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -199,7 +192,7 @@ DOC
 .. _methodPay-pagseguro_TOKEN:
 
 TOKEN
-"""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -209,7 +202,7 @@ TOKEN
 .. _methodPay-P2P_CustomerSiteID:
 
 P2P CustomerSiteID
-""""""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -219,7 +212,7 @@ P2P CustomerSiteID
 .. _methodPay-P2P_KeyID:
 
 P2P KeyID
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -229,7 +222,7 @@ P2P KeyID
 .. _methodPay-P2P_Passphrase:
 
 P2P Passphrase
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -239,7 +232,7 @@ P2P Passphrase
 .. _methodPay-P2P_RecipientKeyID:
 
 P2P RecipientKeyID
-""""""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -249,7 +242,7 @@ P2P RecipientKeyID
 .. _methodPay-P2P_tax_amount:
 
 P2P Tax Amount
-""""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -259,7 +252,7 @@ P2P Tax Amount
 .. _methodPay-client_id:
 
 Client id
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -269,7 +262,7 @@ Client id
 .. _methodPay-client_secret:
 
 Client secret
-"""""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 

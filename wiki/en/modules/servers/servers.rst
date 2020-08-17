@@ -1,15 +1,8 @@
-.. _servers-menu-list:
-
-**********
-Field list
-**********
-
-
 
 .. _servers-name:
 
 Name
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -19,7 +12,7 @@ Name
 .. _servers-host:
 
 Server IP
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -29,7 +22,7 @@ Server IP
 .. _servers-public_ip:
 
 Public IP
-"""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -39,7 +32,7 @@ Public IP
 .. _servers-username:
 
 Username
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -49,7 +42,7 @@ Username
 .. _servers-password:
 
 Password
-""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -59,7 +52,7 @@ Password
 .. _servers-port:
 
 Port
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -69,7 +62,7 @@ Port
 .. _servers-sip_port:
 
 SIPport
-"""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -79,7 +72,7 @@ SIPport
 .. _servers-type:
 
 Type
-""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -89,7 +82,7 @@ Type
 .. _servers-weight:
 
 Weight
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -99,7 +92,7 @@ Weight
 .. _servers-status:
 
 Status
-""""""
+++++++++++++
 
 | We did not write the description to this field.
 
@@ -109,7 +102,7 @@ Status
 .. _servers-description:
 
 Description
-"""""""""""
+++++++++++++
 
 | We did not write the description to this field.
 
