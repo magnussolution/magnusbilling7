@@ -155,6 +155,7 @@
     'register_string'=> ['Register_string', 'Linha_de_registro' , 'Linea_de_registro'],
     'reinvite'=> ['Reinvite', 'Reinvite' , 'Reinvite'],
     'removeprefix'=> ['Remove_prefix', 'Remover_prefixo' , 'Eliminar_prefijo'],
+    'repeat'=> ['Repeat_if_press_invalid_option', 'Repetir_se_apertar_opção_inválida' , 'Repetir_si_marcar_opción_inválida'],
     'request_authorize'=> ['Request_authorization', 'Solicitar_autorização' , 'Solicitar_autorización'],
     'reservationdate'=> ['Reservation_date', 'Data_de_reserva' , 'Fecha_de_reserva'],
     'resposta'=> ['Result', 'Resultado' , 'Resultado'],

@@ -31,12 +31,6 @@ Ext.define('MBilling.view.campaignPollInfo.Form', {
             name: 'resposta',
             fieldLabel: t('Result'),
             readOnly: true
-        }, {
-            xtype: 'textareafield',
-            name: 'obs',
-            fieldLabel: t('Description'),
-            allowBlank: true,
-            maxLength: 200
         }];
         me.callParent(arguments);
     }

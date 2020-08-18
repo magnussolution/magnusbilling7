@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-17
+ * 2020-08-18
  */
 Locale.load({
     '': '',
@@ -394,7 +394,6 @@ Locale.load({
     'Home': '',
     'Host': '',
     'Hour': '',
-    'How many time to repeat, if the client press invalid option?': '',
     'How many users?': '',
     'I accept the terms': '',
     'IAX': '',
@@ -616,7 +615,6 @@ Locale.load({
     'Penalty, Paused, Invalid, Unavailable': '',
     'Pending': '',
     'Per': '',
-    'Percentage': '',
     'Period': '',
     'Periodic announce': '',
     'Perm ban': '',
@@ -735,6 +733,7 @@ Locale.load({
     'Remove duplicate': '',
     'Remove prefix': '',
     'Repeat IVR': '',
+    'Repeat if press invalid option': '',
     'Report': '',
     'Report of': '',
     'Reports': '',
@@ -811,6 +810,7 @@ Locale.load({
     'Select a plan': '',
     'Select a user': '',
     'Select a valid amount': '',
+    'Select an wav or gsm File': '',
     'Select audio': '',
     'Select file': '',
     'Select one or more groups': '',
