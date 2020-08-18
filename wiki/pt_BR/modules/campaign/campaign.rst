@@ -144,7 +144,7 @@ Tipo de encaminhamento
 URA
 ---
 
-| Selecione uma conta USA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha
+| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha
 
 
 

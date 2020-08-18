@@ -53,7 +53,7 @@ Ext.define('MBilling.view.diddestination.Form', {
             collapsible: true,
             collapsed: false,
             defaults: {
-                labelWidth: 75,
+                labelWidth: 90,
                 anchor: '100%',
                 labelAlign: me.labelAlignFields
             },
@@ -91,7 +91,7 @@ Ext.define('MBilling.view.diddestination.Form', {
                 name: 'context',
                 fieldLabel: t('Context'),
                 allowBlank: true,
-                emptyText: t('Asterisk dial plan. Example: exten => _X.,1,Dial(SIP/3333@39.5.5.5,30); )'),
+                emptyText: t('Asterisk dial plan. Example: exten => _X.=>1,Dial(SIP/3333@39.5.5.5,30); )'),
                 height: 300,
                 anchor: '100%'
             }]

@@ -146,7 +146,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaign.id_phonebook': `Selecione as agendas que esta campanha vai usar.`,
     'campaign.digit_authorize': `Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu`,
     'campaign.type_0': `Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido`,
-    'campaign.id_ivr_0': `Selecione uma conta USA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha`,
+    'campaign.id_ivr_0': `Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha`,
     'campaign.id_queue_0': `Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha`,
     'campaign.id_sip_0': `Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha`,
     'campaign.extension_0': `Clique para mais detalhes||Temos duas opcōes, conforme o tipo selecionado, personalizado ou grupo.
@@ -328,15 +328,34 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento`,
     //DESTINO DE DID
     'diddestination.id_did': `Selecione o DID para criar o novo destino`,
-    'diddestination.id_user': ``,
-    'diddestination.activated': ``,
+    'diddestination.id_user': `Usuário que sera o dono deste DID`,
+    'diddestination.activated': `Somente destinos ativos serão usados.`,
     'diddestination.priority': `Você pode criar até 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, até completar. `,
-    'diddestination.voip_call': ``,
+    'diddestination.voip_call': `Tipo de destinos. Esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido.`,
     'diddestination.destination': ``,
-    'diddestination.id_ivr': ``,
-    'diddestination.id_queue': ``,
-    'diddestination.id_sip': ``,
-    'diddestination.context': ``,
+    'diddestination.id_ivr': `Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono do DID`,
+    'diddestination.id_queue': `Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono do DID`,
+    'diddestination.id_sip': `Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono do DID`,
+    'diddestination.context': `Nesta opção poderá ser usado um contexto no formato aceito pelo Asterisk||Como por exemplo:
+
+_X. => 1,Dial(SIP/contavoip,45)
+    same => n,Goto(s-\${DIALSTATUS},1)
+
+
+exten => s-NOANSWER,1,Hangup
+exten => s-CONGESTION,1,Congestion
+exten => s-CANCEL,1,Hangup
+exten => s-BUSY,1,Busy
+exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
+exten => s-CHANUNAVAIL,2,Dial(SIP/contavoip2,,T)
+
+
+NÃO deve ser colocado o nomer para o context, pois o nome do contexto sera [did-numero-do-did]
+
+Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
+
+
+    `,
     //USO DE DIDS
     'diduse.id_user': ``,
     'diduse.id_did': ``,
