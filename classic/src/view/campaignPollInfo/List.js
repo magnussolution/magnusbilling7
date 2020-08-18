@@ -55,10 +55,6 @@ Ext.define('MBilling.view.campaignPollInfo.List', {
             dataIndex: 'resposta',
             flex: 4
         }, {
-            header: t('Description'),
-            dataIndex: 'obs',
-            flex: 4
-        }, {
             header: t('City'),
             dataIndex: 'city',
             flex: 4

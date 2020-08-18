@@ -190,11 +190,9 @@ e para
 Ola João Matos temos uma promoção para você.....
 
 `,
-    'campaign.tts_audio': `Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio. 
+    'campaign.tts_audio': `Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio||Para que esta opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
 
-Para que esta opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
-
-Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
+Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
 `,
     'campaign.tts_audio2': `Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.`,
     //MONITOR DE CAMPANHAS
@@ -204,9 +202,7 @@ Clique neste link para saber mais cobre como configurar TTS no Magnusbilling htt
     //ENQUETES
     'campaignpoll.id_campaign': `Selecione a campanha que esta enquete será executa`,
     'campaignpoll.name': `Nome para a enquete, este nome é somente para seu contro`,
-    'campaignpoll.repeat': `Quantas vezes o MagnusBilling deve repetir o áudio da enquete caso o cliente não digite nenhuma opção ou digite uma opção inválida.
-
-O que é opção inválida?
+    'campaignpoll.repeat': `Quantas vezes o MagnusBilling deve repetir o áudio da enquete caso o cliente não digite nenhuma opção ou digite uma opção inválida.||O que é opção inválida?
 
 É quando a opção digitada pelo cliente está vazia na TAB opções. Conforme a imagem abaixo.
 
@@ -233,11 +229,10 @@ E o áudio “Que bom que não perdeu esta chance de contratar seu plano de saú
 As opções, solicitar autorização deverá ser SIM e a opção dígito para autorizar deve ser 1.
 
 Neste exemplo somente seria executado áudio da enquete caso o cliente digitar a tecla 1, caso contrário a chamada seria finalizada.
-
 `,
     'campaignpoll.digit_authorize': `Digito que para autorizar a execução da enquete.`,
-    'campaignpoll.description': `Descrição para a enquete`,
     'campaignpoll.arq_audio': `Arquivo de audio, lembre-se que somente é valido audios em GSM ou WAV 8khz mono`,
+    'campaignpoll.description': `Descrição para a enquete`,
     'campaignpoll.option0': `Descreva a opção||Vamos supor que uma enquete política.
 
 Onde a pergunta é:
@@ -265,8 +260,8 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'campaignpoll.option8': `Descreva a opção, veja a descriçao da opção 0`,
     'campaignpoll.option9': `Descreva a opção, veja a descriçao da opção 0`,
     //ENQUETE RELATóRIOS
-    'campaignpollinfo.number': ``,
-    'campaignpollinfo.resposta': ``,
+    'campaignpollinfo.number': `Número da pessao que votou`,
+    'campaignpollinfo.resposta': `Opção votada`,
     'campaignpollinfo.obs': ``,
     //NúMEROS BLOQUEADOS
     'campaignrestrictphone.number': ``,

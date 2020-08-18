@@ -284,7 +284,7 @@ Ext.define('MBilling.view.campaign.Form', {
                     maxLength: 300
                 }]
             }, {
-                title: t('TTS/ASR'),
+                title: 'TTS',
                 items: [{
                     name: 'tts_audio',
                     fieldLabel: t('Audio 1 TTS'),
@@ -295,12 +295,6 @@ Ext.define('MBilling.view.campaign.Form', {
                     fieldLabel: t('Audio 2 TTS'),
                     allowBlank: true,
                     maxLength: 200
-                }, {
-                    xtype: 'box',
-                    hidden: false,
-                    autoEl: {
-                        tag: 'br'
-                    }
                 }]
             }]
         }];
