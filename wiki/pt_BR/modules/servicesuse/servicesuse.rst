@@ -2,7 +2,7 @@
 .. _servicesUse-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Usuário
 .. _servicesUse-id-services:
 
 Serviço
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Serviço
 .. _servicesUse-price:
 
 Preço
-++++++++++++++++
+------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Preço
 .. _servicesUse-method:
 
 Métodos de Pagamento
-++++++++++++++++
+---------------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,7 +42,7 @@ Métodos de Pagamento
 .. _servicesUse-reservationdate:
 
 Data de reserva
-++++++++++++++++
+---------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

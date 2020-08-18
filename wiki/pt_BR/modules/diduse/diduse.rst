@@ -2,7 +2,7 @@
 .. _didUse-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Usuário
 .. _didUse-id-did:
 
 DID
-++++++++++++++++
+---
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ DID
 .. _didUse-reservationdate:
 
 Data de reserva
-++++++++++++++++
+---------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

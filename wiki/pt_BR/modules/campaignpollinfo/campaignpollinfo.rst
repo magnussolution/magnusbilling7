@@ -2,9 +2,9 @@
 .. _campaignPollInfo-number:
 
 Número
-++++++++++++++++
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número da pessao que votou
 
 
 
@@ -12,9 +12,9 @@ Número
 .. _campaignPollInfo-resposta:
 
 Resultado
-++++++++++++++++
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Opção votada
 
 
 
@@ -22,7 +22,7 @@ Resultado
 .. _campaignPollInfo-obs:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

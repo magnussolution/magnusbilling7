@@ -2,7 +2,7 @@
 .. _offerCdr-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Usuário
 .. _offerCdr-id-offer:
 
 Pacotes grátis
-++++++++++++++++
+---------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Pacotes grátis
 .. _offerCdr-used-secondes:
 
 Duração
-++++++++++++++++
+---------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Duração
 .. _offerCdr-date-consumption:
 
 Data
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 

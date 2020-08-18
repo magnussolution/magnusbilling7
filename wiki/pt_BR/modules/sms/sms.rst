@@ -2,7 +2,7 @@
 .. _sms-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Usuário
 .. _sms-telephone:
 
 Número
-++++++++++++++++
+-------
 
 | Número no formato E 164
 
@@ -22,7 +22,7 @@ Número
 .. _sms-sms:
 
 SMS
-++++++++++++++++
+---
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ SMS
 .. _sms-sms-from:
 
 De
-++++++++++++++++
+--
 
 | Nós ainda não escrevemos a descrição deste campo.
 

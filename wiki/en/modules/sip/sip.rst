@@ -2,7 +2,7 @@
 .. _sip-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _sip-defaultuser:
 
 SIP user
-++++++++++++
+--------
 
 | Username used to login in a SIP device.
 
@@ -22,7 +22,7 @@ SIP user
 .. _sip-secret:
 
 SIP password
-++++++++++++
+------------
 
 | Password to login in a SIP device.
 
@@ -32,7 +32,7 @@ SIP password
 .. _sip-callerid:
 
 CallerID
-++++++++++++
+--------
 
 | The Caller ID number. Your trunk needs to accept CLI.
 
@@ -42,7 +42,7 @@ CallerID
 .. _sip-alias:
 
 Alias
-++++++++++++
+-----
 
 | Alias to dial between sip accounts from the same AccountCode (company).
 
@@ -52,7 +52,7 @@ Alias
 .. _sip-disallow:
 
 Disallow
-++++++++++++
+--------
 
 | Disallow all codecs and then select the codecs available below to enable them to the user.
 
@@ -62,7 +62,7 @@ Disallow
 .. _sip-allow:
 
 Codec
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -72,7 +72,7 @@ Codec
 .. _sip-host:
 
 Host
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -82,7 +82,7 @@ Host
 .. _sip-sip-group:
 
 Group
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -92,7 +92,7 @@ Group
 .. _sip-videosupport:
 
 Videosupport
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -102,7 +102,7 @@ Videosupport
 .. _sip-block-call-reg:
 
 Block call regex
-++++++++++++
+----------------
 
 | You can block calls with a regular expression. For example, if you want block all calls that start with a 9, use regex ^9 
 
@@ -112,7 +112,7 @@ Block call regex
 .. _sip-record-call:
 
 Record call
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -122,7 +122,7 @@ Record call
 .. _sip-techprefix:
 
 Tech prefix
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -132,7 +132,7 @@ Tech prefix
 .. _sip-nat:
 
 NAT
-++++++++++++
+---
 
 | Nat. You can see more details at the link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
 
@@ -142,7 +142,7 @@ NAT
 .. _sip-directmedia:
 
 Directmedia
-++++++++++++
+-----------
 
 | If enabled, Asterisk tries to redirect the RTP media stream to go directly from the caller to the callee.
 
@@ -152,7 +152,7 @@ Directmedia
 .. _sip-qualify:
 
 Qualify
-++++++++++++
+-------
 
 | Send OPTION to user CONTACT field to qualify the user.
 
@@ -162,7 +162,7 @@ Qualify
 .. _sip-context:
 
 Context
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -172,7 +172,7 @@ Context
 .. _sip-dtmfmode:
 
 Dtmfmode
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -182,7 +182,7 @@ Dtmfmode
 .. _sip-insecure:
 
 Insecure
-++++++++++++
+--------
 
 | Needs to be NO if the host is dynamic. To IP authenticate set to invite.
 
@@ -192,7 +192,7 @@ Insecure
 .. _sip-deny:
 
 Deny
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -202,7 +202,7 @@ Deny
 .. _sip-permit:
 
 Permit
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -212,7 +212,7 @@ Permit
 .. _sip-type:
 
 Type
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -222,7 +222,7 @@ Type
 .. _sip-allowtransfer:
 
 Allowtransfer
-++++++++++++
+-------------
 
 | Enable it to allow transfers between SIP accounts.
 
@@ -232,7 +232,7 @@ Allowtransfer
 .. _sip-ringfalse:
 
 Ring false
-++++++++++++
+----------
 
 | If YES, generate a ringing tone for the calling party.
 
@@ -242,7 +242,7 @@ Ring false
 .. _sip-calllimit:
 
 Call limit
-++++++++++++
+----------
 
 | Maximum simultaneous calls
 
@@ -252,7 +252,7 @@ Call limit
 .. _sip-mohsuggest:
 
 MOH
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -262,7 +262,7 @@ MOH
 .. _sip-url-events:
 
 URL events notify
-++++++++++++
+-----------------
 
 | We did not write the description to this field.
 
@@ -272,7 +272,7 @@ URL events notify
 .. _sip-addparameter:
 
 Addparameter
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -282,7 +282,7 @@ Addparameter
 .. _sip-amd:
 
 AMD
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -292,7 +292,7 @@ AMD
 .. _sip-type-forward:
 
 Forward
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -302,7 +302,7 @@ Forward
 .. _sip-id-ivr:
 
 IVR
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -312,7 +312,7 @@ IVR
 .. _sip-id-queue:
 
 Queue
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -322,7 +322,7 @@ Queue
 .. _sip-id-sip:
 
 Sip user
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -332,7 +332,7 @@ Sip user
 .. _sip-extension:
 
 DialPlan
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -342,7 +342,7 @@ DialPlan
 .. _sip-dial-timeout:
 
 Dial timeout
-++++++++++++
+------------
 
 | Timeout in seconds to wait for the call to be picked-up.
 
@@ -352,7 +352,7 @@ Dial timeout
 .. _sip-voicemail:
 
 Enable voicemail
-++++++++++++
+----------------
 
 | We did not write the description to this field.
 
@@ -362,7 +362,7 @@ Enable voicemail
 .. _sip-voicemail-email:
 
 Email
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -372,7 +372,7 @@ Email
 .. _sip-voicemail-password:
 
 Password
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -382,7 +382,7 @@ Password
 .. _sip-sipshowpeer:
 
 Peer
-++++++++++++
+----
 
 | We did not write the description to this field.
 

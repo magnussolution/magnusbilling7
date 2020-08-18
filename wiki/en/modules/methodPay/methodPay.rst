@@ -2,7 +2,7 @@
 .. _methodPay-show-name:
 
 Show name
-++++++++++++
+---------
 
 | Name to show to user in the Buy Credit option.
 
@@ -12,7 +12,7 @@ Show name
 .. _methodPay-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Username
 .. _methodPay-country:
 
 Country
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Country
 .. _methodPay-active:
 
 Active
-++++++++++++
+------
 
 | Activate this payment gateway to users?
 
@@ -42,7 +42,7 @@ Active
 .. _methodPay-min:
 
 Min amount
-++++++++++++
+----------
 
 | We did not write the description to this field.
 
@@ -52,7 +52,7 @@ Min amount
 .. _methodPay-max:
 
 Max amount
-++++++++++++
+----------
 
 | We did not write the description to this field.
 
@@ -62,7 +62,7 @@ Max amount
 .. _methodPay-username:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -72,7 +72,7 @@ Username
 .. _methodPay-url:
 
 URL
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -82,7 +82,7 @@ URL
 .. _methodPay-fee:
 
 Discount fee
-++++++++++++
+------------
 
 | Discount the Paypal fee from the paid amount.
 
@@ -92,7 +92,7 @@ Discount fee
 .. _methodPay-boleto-banco:
 
 Bank
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -102,7 +102,7 @@ Bank
 .. _methodPay-boleto-agencia:
 
 Bank agency
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -112,7 +112,7 @@ Bank agency
 .. _methodPay-boleto-conta-corrente:
 
 Bank account
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -122,7 +122,7 @@ Bank account
 .. _methodPay-boleto-taxa:
 
 Tax
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -132,7 +132,7 @@ Tax
 .. _methodPay-boleto-instrucoes:
 
 Instructions
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -142,7 +142,7 @@ Instructions
 .. _methodPay-boleto-nome-emp:
 
 Company
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -152,7 +152,7 @@ Company
 .. _methodPay-boleto-end-emp:
 
 Address
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -162,7 +162,7 @@ Address
 .. _methodPay-boleto-cidade-emp:
 
 City
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -172,7 +172,7 @@ City
 .. _methodPay-boleto-estado-emp:
 
 State
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -182,7 +182,7 @@ State
 .. _methodPay-boleto-cpf-emp:
 
 DOC
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -192,7 +192,7 @@ DOC
 .. _methodPay-pagseguro-TOKEN:
 
 TOKEN
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -202,7 +202,7 @@ TOKEN
 .. _methodPay-P2P-CustomerSiteID:
 
 P2P CustomerSiteID
-++++++++++++
+------------------
 
 | We did not write the description to this field.
 
@@ -212,7 +212,7 @@ P2P CustomerSiteID
 .. _methodPay-P2P-KeyID:
 
 P2P KeyID
-++++++++++++
+---------
 
 | We did not write the description to this field.
 
@@ -222,7 +222,7 @@ P2P KeyID
 .. _methodPay-P2P-Passphrase:
 
 P2P Passphrase
-++++++++++++
+--------------
 
 | We did not write the description to this field.
 
@@ -232,7 +232,7 @@ P2P Passphrase
 .. _methodPay-P2P-RecipientKeyID:
 
 P2P RecipientKeyID
-++++++++++++
+------------------
 
 | We did not write the description to this field.
 
@@ -242,7 +242,7 @@ P2P RecipientKeyID
 .. _methodPay-P2P-tax-amount:
 
 P2P Tax Amount
-++++++++++++
+--------------
 
 | We did not write the description to this field.
 
@@ -252,7 +252,7 @@ P2P Tax Amount
 .. _methodPay-client-id:
 
 Client id
-++++++++++++
+---------
 
 | We did not write the description to this field.
 
@@ -262,7 +262,7 @@ Client id
 .. _methodPay-client-secret:
 
 Client secret
-++++++++++++
+-------------
 
 | We did not write the description to this field.
 

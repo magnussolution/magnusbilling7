@@ -2,7 +2,7 @@
 .. _callSummaryPerTrunk-sumsessiontime:
 
 Duração
-++++++++++++++++
+---------
 
 | Somatorio de minutos chamadas.
 | É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, neste caso. Este somatório mostrará somente os dados do filtro executado.
@@ -13,7 +13,7 @@ Duração
 .. _callSummaryPerTrunk-sumsessionbill:
 
 Preço de venda
-++++++++++++++++
+---------------
 
 | Somatório do preço de venda
 
@@ -23,7 +23,7 @@ Preço de venda
 .. _callSummaryPerTrunk-sumbuycost:
 
 Preço de compra
-++++++++++++++++
+----------------
 
 | Somatório do preço de compra
 
@@ -33,7 +33,7 @@ Preço de compra
 .. _callSummaryPerTrunk-sumlucro:
 
 Lucro
-++++++++++++++++
+-----
 
 | Somatório do lucro
 
@@ -43,7 +43,7 @@ Lucro
 .. _callSummaryPerTrunk-sumnbcall:
 
 Chamadas atendidas
-++++++++++++++++
+------------------
 
 | Total de chamadas
 
@@ -53,7 +53,7 @@ Chamadas atendidas
 .. _callSummaryPerTrunk-sumnbcallfail:
 
 Chamadas rejeitadas
-++++++++++++++++
+-------------------
 
 | Total de chamadas rejeitadas
 

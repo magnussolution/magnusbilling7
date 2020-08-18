@@ -2,7 +2,7 @@
 .. _sendCreditProducts-country:
 
 País
-++++++++++++++++
+-----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ País
 .. _sendCreditProducts-operator-name:
 
 Nome do operador
-++++++++++++++++
+----------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Nome do operador
 .. _sendCreditProducts-operator-id:
 
 Operador ID
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Operador ID
 .. _sendCreditProducts-SkuCode:
 
 SkuCode
-++++++++++++++++
+-------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,7 +42,7 @@ SkuCode
 .. _sendCreditProducts-product:
 
 Produto
-++++++++++++++++
+-------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -52,7 +52,7 @@ Produto
 .. _sendCreditProducts-send-value:
 
 Enviar valor
-++++++++++++++++
+------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -62,7 +62,7 @@ Enviar valor
 .. _sendCreditProducts-wholesale-price:
 
 Preço atacado
-++++++++++++++++
+--------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -72,7 +72,7 @@ Preço atacado
 .. _sendCreditProducts-provider:
 
 Provedor
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -82,7 +82,7 @@ Provedor
 .. _sendCreditProducts-status:
 
 Status
-++++++++++++++++
+------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -92,7 +92,7 @@ Status
 .. _sendCreditProducts-info:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

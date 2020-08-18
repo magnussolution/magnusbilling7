@@ -2,7 +2,7 @@
 .. _sendCreditRates-idProductcountry:
 
 Country
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Country
 .. _sendCreditRates-idProductoperator-name:
 
 Operator name
-++++++++++++
+-------------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Operator name
 .. _sendCreditRates-sell-price:
 
 Sell price
-++++++++++++
+----------
 
 | We did not write the description to this field.
 

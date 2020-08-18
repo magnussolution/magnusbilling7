@@ -32,7 +32,7 @@ Voicerss
 Para configurar o primeiro passo é criar sua conta no site http://www.voicerss.org
 Agora temos que configurar a URL da API no menu Configurações sub menu Ajustes. Localize a opção TTS URL e altere a URL para
 
-http://api.voicerss.org/?key=YOUR API&hl=pt-br&src=$name&f=8khz_16bit_mono
+http://api.voicerss.org/?key=YOUR_API&hl=pt-br&src=$name&f=8khz_16bit_mono
 
 Nesta empresa, Você somente precisa colocar sua API, neste exemplo ja deixamos o idioma em Português do Brasil.
 

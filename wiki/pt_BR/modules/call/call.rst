@@ -2,7 +2,7 @@
 .. _call-starttime:
 
 Data
-++++++++++++++++
+----
 
 | Dia e hora do início da chamada
 
@@ -12,7 +12,7 @@ Data
 .. _call-src:
 
 Conta SIP
-++++++++++++++++
+---------
 
 | Conta SIP que realizou a chamada
 
@@ -22,7 +22,7 @@ Conta SIP
 .. _call-callerid:
 
 CallerID
-++++++++++++++++
+--------
 
 | Número enviado para o tronco como identificador de chamada.
 | 
@@ -36,7 +36,7 @@ CallerID
 .. _call-calledstation:
 
 Número
-++++++++++++++++
+-------
 
 | Número discado pelo cliente
 
@@ -46,7 +46,7 @@ Número
 .. _call-idPrefixdestination:
 
 Destino
-++++++++++++++++
+-------
 
 | Nome do destino, este nome está relacionado com o menu Prefixos
 
@@ -56,7 +56,7 @@ Destino
 .. _call-idUserusername:
 
 Usuário
-++++++++++++++++
+--------
 
 | Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado
 
@@ -66,7 +66,7 @@ Usuário
 .. _call-idTrunktrunkcode:
 
 Troncos
-++++++++++++++++
+-------
 
 | Tronco que foi utilizado para completar a chamada
 
@@ -76,7 +76,7 @@ Troncos
 .. _call-sessiontime:
 
 Duração
-++++++++++++++++
+---------
 
 | Duração da chamada em segundos
 
@@ -86,7 +86,7 @@ Duração
 .. _call-buycost:
 
 Preço de compra
-++++++++++++++++
+----------------
 
 | Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
@@ -96,7 +96,7 @@ Preço de compra
 .. _call-sessionbill:
 
 Preço de venda
-++++++++++++++++
+---------------
 
 | Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
@@ -106,7 +106,7 @@ Preço de venda
 .. _call-agent-bill:
 
 Preço de venda
-++++++++++++++++
+---------------
 
 | Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
 
@@ -116,7 +116,7 @@ Preço de venda
 .. _call-uniqueid:
 
 ID único
-++++++++++++++++
+---------
 
 | ID único gerado pelo Asterisk, este campo é também a hora de início da chamada em Epoch Unix
 

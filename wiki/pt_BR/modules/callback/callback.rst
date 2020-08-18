@@ -2,7 +2,7 @@
 .. _callBack-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Usuário dono do DID que recebeu a solicitaçao de CallBack
 
@@ -12,7 +12,7 @@ Usuário
 .. _callBack-exten:
 
 Número de destino
-++++++++++++++++
+------------------
 
 | Número da pessoa que ligou para o DID solicitando o CallBack
 
@@ -22,7 +22,7 @@ Número de destino
 .. _callBack-status:
 
 Status
-++++++++++++++++
+------
 
 | Status da chamada
 | Os status podem ser:

@@ -2,7 +2,7 @@
 .. _offerCdr-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _offerCdr-id-offer:
 
 Offer
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Offer
 .. _offerCdr-used-secondes:
 
 Duration
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Duration
 .. _offerCdr-date-consumption:
 
 Date
-++++++++++++
+----
 
 | We did not write the description to this field.
 

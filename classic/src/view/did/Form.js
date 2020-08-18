@@ -144,7 +144,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 170,
+                        labelWidth: 220,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -156,7 +156,7 @@ Ext.define('MBilling.view.did.Form', {
                         xtype: 'textfield',
                         name: 'expression_1',
                         fieldLabel: t('Regular expression'),
-                        value: '*',
+                        value: '.*',
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
@@ -184,7 +184,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 170,
+                        labelWidth: 220,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -192,7 +192,7 @@ Ext.define('MBilling.view.did.Form', {
                         xtype: 'textfield',
                         name: 'expression_2',
                         fieldLabel: t('Regular expression'),
-                        value: '*',
+                        value: '.*',
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
@@ -220,7 +220,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 170,
+                        labelWidth: 220,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -228,7 +228,7 @@ Ext.define('MBilling.view.did.Form', {
                         xtype: 'textfield',
                         name: 'expression_3',
                         fieldLabel: t('Regular expression'),
-                        value: '*',
+                        value: '.*',
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',

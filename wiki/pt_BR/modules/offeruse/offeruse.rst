@@ -2,7 +2,7 @@
 .. _offerUse-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Usuário
 .. _offerUse-id-offer:
 
 Pacotes grátis
-++++++++++++++++
+---------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Pacotes grátis
 .. _offerUse-month-payed:
 
 Messes pago
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Messes pago
 .. _offerUse-reservationdate:
 
 Data de reserva
-++++++++++++++++
+---------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

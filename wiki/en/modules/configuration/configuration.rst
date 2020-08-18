@@ -2,7 +2,7 @@
 .. _configuration-config-value:
 
 Value
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Value
 .. _configuration-config-description:
 
 Description
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

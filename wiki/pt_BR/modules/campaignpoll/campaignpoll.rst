@@ -2,7 +2,7 @@
 .. _campaignPoll-id-campaign:
 
 Campanha
-++++++++++++++++
+--------
 
 | Selecione a campanha que esta enquete será executa
 
@@ -12,7 +12,7 @@ Campanha
 .. _campaignPoll-name:
 
 Nome
-++++++++++++++++
+----
 
 | Nome para a enquete, este nome é somente para seu contro
 
@@ -21,11 +21,10 @@ Nome
 
 .. _campaignPoll-repeat:
 
-How many time to repeat, if the client press invalid option?
-++++++++++++++++
+Repetir se apertar opção inválida
+------------------------------------
 
 | Quantas vezes o MagnusBilling deve repetir o áudio da enquete caso o cliente não digite nenhuma opção ou digite uma opção inválida.
-| 
 | O que é opção inválida?
 | 
 | É quando a opção digitada pelo cliente está vazia na TAB opções. Conforme a imagem abaixo.
@@ -41,7 +40,7 @@ How many time to repeat, if the client press invalid option?
 .. _campaignPoll-request-authorize:
 
 Solicitar autorização
-++++++++++++++++
+-----------------------
 
 | Em alguns casos, é necessário solicitar autorização para executar a enquete, nestes casos, deixe esta opção para sim
 | Um exemplo de caso seria:
@@ -64,7 +63,6 @@ Solicitar autorização
 | 
 | Neste exemplo somente seria executado áudio da enquete caso o cliente digitar a tecla 1, caso contrário a chamada seria finalizada.
 | 
-| 
 
 
 
@@ -72,19 +70,9 @@ Solicitar autorização
 .. _campaignPoll-digit-authorize:
 
 Dígito para autorizar
-++++++++++++++++
+----------------------
 
 | Digito que para autorizar a execução da enquete.
-
-
-
-
-.. _campaignPoll-description:
-
-Descrição
-++++++++++++++++
-
-| Descrição para a enquete
 
 
 
@@ -92,17 +80,27 @@ Descrição
 .. _campaignPoll-arq-audio:
 
 Audio
-++++++++++++++++
+-----
 
 | Arquivo de audio, lembre-se que somente é valido audios em GSM ou WAV 8khz mono
 
 
 
 
+.. _campaignPoll-description:
+
+Descrição
+-----------
+
+| Descrição para a enquete
+
+
+
+
 .. _campaignPoll-option0:
 
-Opção
-++++++++++++++++
+Opção 0
+---------
 
 | Descreva a opção
 | Vamos supor que uma enquete política.
@@ -128,8 +126,8 @@ Opção
 
 .. _campaignPoll-option1:
 
-Opção
-++++++++++++++++
+Opção 1
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -138,8 +136,8 @@ Opção
 
 .. _campaignPoll-option2:
 
-Opção
-++++++++++++++++
+Opção 2
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -148,8 +146,8 @@ Opção
 
 .. _campaignPoll-option3:
 
-Opção
-++++++++++++++++
+Opção 3
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -158,8 +156,8 @@ Opção
 
 .. _campaignPoll-option4:
 
-Opção
-++++++++++++++++
+Opção 4
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -168,8 +166,8 @@ Opção
 
 .. _campaignPoll-option5:
 
-Opção
-++++++++++++++++
+Opção 5
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -178,8 +176,8 @@ Opção
 
 .. _campaignPoll-option6:
 
-Opção
-++++++++++++++++
+Opção 6
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -188,8 +186,8 @@ Opção
 
 .. _campaignPoll-option7:
 
-Opção
-++++++++++++++++
+Opção 7
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -198,8 +196,8 @@ Opção
 
 .. _campaignPoll-option8:
 
-Opção
-++++++++++++++++
+Opção 8
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 
@@ -208,8 +206,8 @@ Opção
 
 .. _campaignPoll-option9:
 
-Opção
-++++++++++++++++
+Opção 9
+---------
 
 | Descreva a opção, veja a descriçao da opção 0
 

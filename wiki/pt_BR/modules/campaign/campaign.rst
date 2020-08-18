@@ -2,7 +2,7 @@
 .. _campaign-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Usuário dono da campanha
 
@@ -12,7 +12,7 @@ Usuário
 .. _campaign-id-plan:
 
 Plano
-++++++++++++++++
+-----
 
 | Que plano será usado para tarifar as chamadas desta campanha, pode ser um plano diferente do plano cadastrado na conta do cliente
 
@@ -22,7 +22,7 @@ Plano
 .. _campaign-name:
 
 Nome
-++++++++++++++++
+----
 
 | Nome para a campanha.
 
@@ -32,7 +32,7 @@ Nome
 .. _campaign-status:
 
 Status
-++++++++++++++++
+------
 
 | Status da campanha.
 
@@ -42,7 +42,7 @@ Status
 .. _campaign-startingdate:
 
 Data de início
-++++++++++++++++
+---------------
 
 | Data que a campanha será considerada ativa.
 
@@ -52,7 +52,7 @@ Data de início
 .. _campaign-expirationdate:
 
 Data de expiração
-++++++++++++++++
+-------------------
 
 | Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos
 
@@ -62,7 +62,7 @@ Data de expiração
 .. _campaign-type:
 
 Tipo
-++++++++++++++++
+----
 
 | Selecione entre VOZ ou SMS, se for audio, precisa importar áudio, se for SMS, preciso colocar o texto do SMS na tab SMS.
 
@@ -72,7 +72,7 @@ Tipo
 .. _campaign-audio:
 
 Audio
-++++++++++++++++
+-----
 
 | Somente usado se o tipo de campanha for de voz. O áudio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz
 
@@ -82,7 +82,7 @@ Audio
 .. _campaign-audio-2:
 
 Audio 2
-++++++++++++++++
+-------
 
 | Se você usar TTS, o nome cadastrado do número será executado entre o áudio 1 e 2
 
@@ -92,7 +92,7 @@ Audio 2
 .. _campaign-restrict-phone:
 
 Números bloqueados
-++++++++++++++++
+-------------------
 
 | Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
@@ -102,7 +102,7 @@ Números bloqueados
 .. _campaign-auto-reprocess:
 
 Reprocessar automático
-++++++++++++++++
+-----------------------
 
 | Reativar automaticamente todos os números das agendas da campanha quando não tiver mais números ativos
 
@@ -112,7 +112,7 @@ Reprocessar automático
 .. _campaign-id-phonebook:
 
 
-++++++++++++++++
+
 
 | Selecione as agendas que esta campanha vai usar.
 
@@ -122,7 +122,7 @@ Reprocessar automático
 .. _campaign-digit-authorize:
 
 Número para reenviar
-++++++++++++++++
+---------------------
 
 | Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu
 
@@ -132,7 +132,7 @@ Número para reenviar
 .. _campaign-type-0:
 
 Tipo de encaminhamento
-++++++++++++++++
+----------------------
 
 | Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
 
@@ -142,7 +142,7 @@ Tipo de encaminhamento
 .. _campaign-id-ivr-0:
 
 URA
-++++++++++++++++
+---
 
 | Selecione uma conta USA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha
 
@@ -152,7 +152,7 @@ URA
 .. _campaign-id-queue-0:
 
 Fila de espera
-++++++++++++++++
+--------------
 
 | Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha
 
@@ -162,7 +162,7 @@ Fila de espera
 .. _campaign-id-sip-0:
 
 Conta SIP
-++++++++++++++++
+---------
 
 | Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha
 
@@ -172,7 +172,7 @@ Conta SIP
 .. _campaign-extension-0:
 
 Destino
-++++++++++++++++
+-------
 
 | Clique para mais detalhes
 | Temos duas opcōes, conforme o tipo selecionado, personalizado ou grupo.
@@ -186,7 +186,7 @@ Destino
 .. _campaign-daily-start-time:
 
 Horário de início diário
-++++++++++++++++
+---------------------------
 
 | Hora que a campanha vai iniciar o envio
 
@@ -196,7 +196,7 @@ Horário de início diário
 .. _campaign-daily-stop-time:
 
 Horário de finalização diário
-++++++++++++++++
+---------------------------------
 
 | Hora que a campanha vai parar o envio
 
@@ -206,7 +206,7 @@ Horário de finalização diário
 .. _campaign-monday:
 
 Segunda
-++++++++++++++++
+-------
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
 
@@ -216,7 +216,7 @@ Segunda
 .. _campaign-tuesday:
 
 Terça feira
-++++++++++++++++
+------------
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nas terças feiras.
 
@@ -226,7 +226,7 @@ Terça feira
 .. _campaign-wednesday:
 
 Quarta feira
-++++++++++++++++
+------------
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
 
@@ -236,7 +236,7 @@ Quarta feira
 .. _campaign-thursday:
 
 Quinta feira
-++++++++++++++++
+------------
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
 
@@ -246,7 +246,7 @@ Quinta feira
 .. _campaign-friday:
 
 Sexta
-++++++++++++++++
+-----
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
 
@@ -256,7 +256,7 @@ Sexta
 .. _campaign-saturday:
 
 Saturday
-++++++++++++++++
+--------
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nos sabados.
 
@@ -266,7 +266,7 @@ Saturday
 .. _campaign-sunday:
 
 Sunday
-++++++++++++++++
+------
 
 | Ativando esta opção o sistema vai enviar chamadas desta campanha nos domingos.
 
@@ -276,7 +276,7 @@ Sunday
 .. _campaign-frequency:
 
 Limite de chamada
-++++++++++++++++
+-----------------
 
 | Quantas chamadas o sistema deverá gerar por minuto nesta campanha.
 | Este valor será divido por 60 segundos, e as chamadas serão enviadas durante o minuto, e nao todas de uma vez.
@@ -287,7 +287,7 @@ Limite de chamada
 .. _campaign-max-frequency:
 
 Limite máximo de chamadas
-++++++++++++++++
+--------------------------
 
 | Este é o valor máximo que o cliente poderá alterar. Se você colocar 50, o usuário poderá alterar, desde que um valor igual ou menor que 50.
 
@@ -297,7 +297,7 @@ Limite máximo de chamadas
 .. _campaign-nb-callmade:
 
 Duração do áudio
-++++++++++++++++
+-------------------
 
 | Tempo do áudio da campanha, usado para controlar quantidade de chamadas considerada sucesso
 
@@ -307,7 +307,7 @@ Duração do áudio
 .. _campaign-enable-max-call:
 
 Toggle max completed calls
-++++++++++++++++
+--------------------------
 
 | Se ativado, MagnusBilling vai verificar quantas chamadas já foram realizadas e tiveram a duração igual à duração do áudio.  Se a quantidade for igual ou maior que o valor colocado no próximo campo , a campanha será desativada
 
@@ -317,7 +317,7 @@ Toggle max completed calls
 .. _campaign-secondusedreal:
 
 Quantidade máxima completada
-++++++++++++++++
+-----------------------------
 
 | Máximo de chamadas completas. Precisa ativar o campo acima.
 
@@ -327,7 +327,7 @@ Quantidade máxima completada
 .. _campaign-description:
 
 Descrição ou texto do SMS
-++++++++++++++++
+---------------------------
 
 | Este campo tem uso diferente dependendo se a campanha é VOZ ou SMS.
 | Tipos possíveis:
@@ -360,13 +360,12 @@ Descrição ou texto do SMS
 .. _campaign-tts-audio:
 
 Audio 1 TTS
-++++++++++++++++
+-----------
 
-| Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio. 
-| 
+| Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio
 | Para que esta opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
 | 
-| Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html
+| Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
 | 
 
 
@@ -375,7 +374,7 @@ Audio 1 TTS
 .. _campaign-tts-audio2:
 
 Audio 2 TTS
-++++++++++++++++
+-----------
 
 | Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.
 
