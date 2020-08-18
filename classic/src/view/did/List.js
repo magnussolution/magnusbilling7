@@ -83,12 +83,12 @@ Ext.define('MBilling.view.did.List', {
         }, {
             header: t('Setup price'),
             dataIndex: 'connection_charge',
-            renderer: Helper.Util.formatMoneyDecimal,
+            renderer: Helper.Util.formatMoneyDecimal4,
             flex: 3
         }, {
             header: t('Monthly price'),
             dataIndex: 'fixrate',
-            renderer: Helper.Util.formatMoneyDecimal,
+            renderer: Helper.Util.formatMoneyDecimal4,
             flex: 3
         }, {
             header: t('Time used'),

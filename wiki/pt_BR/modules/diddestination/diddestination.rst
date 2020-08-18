@@ -14,7 +14,7 @@ DID
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que sera o dono deste DID
 
 
 
@@ -24,7 +24,7 @@ Usuário
 Status
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somente destinos ativos serão usados.
 
 
 
@@ -44,7 +44,7 @@ Prioridade
 Tipo
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de destinos. Esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido.
 
 
 
@@ -64,7 +64,7 @@ Destino
 URA
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono do DID
 
 
 
@@ -74,7 +74,7 @@ URA
 Fila de espera
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono do DID
 
 
 
@@ -84,7 +84,7 @@ Fila de espera
 Conta SIP
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono do DID
 
 
 
@@ -94,7 +94,27 @@ Conta SIP
 Contexto
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nesta opção poderá ser usado um contexto no formato aceito pelo Asterisk
+| Como por exemplo:
+| 
+| _X. => 1,Dial(SIP/contavoip,45)
+|     same => n,Goto(s-\${DIALSTATUS},1)
+| 
+| 
+| exten => s-NOANSWER,1,Hangup
+| exten => s-CONGESTION,1,Congestion
+| exten => s-CANCEL,1,Hangup
+| exten => s-BUSY,1,Busy
+| exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
+| exten => s-CHANUNAVAIL,2,Dial(SIP/contavoip2,,T)
+| 
+| 
+| NÃO deve ser colocado o nomer para o context, pois o nome do contexto sera [did-numero-do-did]
+| 
+| Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
+| 
+| 
+|     
 
 
 
