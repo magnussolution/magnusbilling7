@@ -2,7 +2,7 @@
 .. _callOnLine-idUserusername:
 
 Usuário
-++++++++++++++++
+--------
 
 | Usuário principal da conta SIP que inicou a chamada.
 
@@ -12,7 +12,7 @@ Usuário
 .. _callOnLine-sip-account:
 
 Conta SIP
-++++++++++++++++
+---------
 
 | Conta SIP que solicitou a chamada.
 
@@ -22,7 +22,7 @@ Conta SIP
 .. _callOnLine-idUsercredit:
 
 Crédito
-++++++++++++++++
+--------
 
 | Credito do usuário
 
@@ -32,7 +32,7 @@ Crédito
 .. _callOnLine-ndiscado:
 
 Número
-++++++++++++++++
+-------
 
 | Número no formato que o usuário discou.
 
@@ -42,7 +42,7 @@ Número
 .. _callOnLine-codec:
 
 Codec
-++++++++++++++++
+-----
 
 | Codec usado na chamada
 
@@ -52,7 +52,7 @@ Codec
 .. _callOnLine-callerid:
 
 CallerID
-++++++++++++++++
+--------
 
 | Número enviado para o tronco como identificador de chamada.
 | 
@@ -67,7 +67,7 @@ CallerID
 .. _callOnLine-tronco:
 
 Troncos
-++++++++++++++++
+-------
 
 | Tronco que foi utilizado para completar a chamada
 
@@ -77,7 +77,7 @@ Troncos
 .. _callOnLine-reinvite:
 
 Reinvite
-++++++++++++++++
+--------
 
 | Reinvite é o parametro que informa se o audio esta passando pelo Asterisk, ou se esta passando diretamente entre o cliente e o tronco. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html  <https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html>`_.
 
@@ -87,7 +87,7 @@ Reinvite
 .. _callOnLine-from-ip:
 
 From IP
-++++++++++++++++
+-------
 
 | Ip do terminal SIP que foi iniciado a chamada
 
@@ -97,7 +97,7 @@ From IP
 .. _callOnLine-description:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Dados do comando sip show channel
 

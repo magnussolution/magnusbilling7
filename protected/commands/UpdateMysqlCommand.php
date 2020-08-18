@@ -995,6 +995,19 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-08-18
+        if ($version == '7.4.0') {
+
+            $sql = " UPDATE `pkg_did` SET expression_1 = '.*' WHERE expression_1 = '*';
+            UPDATE `pkg_did` SET expression_2 = '.*' WHERE expression_2 = '*';
+            UPDATE `pkg_did` SET expression_3 = '.*' WHERE expression_3 = '*';";
+            $this->executeDB($sql);
+
+            $version = '7.4.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

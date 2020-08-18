@@ -2,7 +2,7 @@
 .. _offer-label:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Name
 .. _offer-packagetype:
 
 Package type
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Package type
 .. _offer-freetimetocall:
 
 Free time to call
-++++++++++++
+-----------------
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Free time to call
 .. _offer-billingtype:
 
 Billing type
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ Billing type
 .. _offer-price:
 
 Price
-++++++++++++
+-----
 
 | We did not write the description to this field.
 

@@ -2,7 +2,7 @@
 .. _groupUser-id:
 
 ID
-++++++++++++++++
+--
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ ID
 .. _groupUser-name:
 
 Nome
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 

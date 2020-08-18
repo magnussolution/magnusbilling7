@@ -2,7 +2,7 @@
 .. _refillprovider-id-provider:
 
 Provedor
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Provedor
 .. _refillprovider-credit:
 
 Crédito
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Crédito
 .. _refillprovider-description:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Descrição
 .. _refillprovider-payment:
 
 Adicionar pagamento
-++++++++++++++++
+-------------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

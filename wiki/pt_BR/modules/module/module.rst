@@ -2,7 +2,7 @@
 .. _module-text:
 
 Text
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Text
 .. _module-icon-cls:
 
 IconCls
-++++++++++++++++
+-------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ IconCls
 .. _module-id-module:
 
 Menu principal
-++++++++++++++++
+--------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Menu principal
 .. _module-priority:
 
 Em ordem
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

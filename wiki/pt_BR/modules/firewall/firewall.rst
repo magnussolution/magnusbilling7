@@ -2,7 +2,7 @@
 .. _firewall-ip:
 
 IP
-++++++++++++++++
+--
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ IP
 .. _firewall-action:
 
 Banido permanente
-++++++++++++++++
+-----------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Banido permanente
 .. _firewall-description:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

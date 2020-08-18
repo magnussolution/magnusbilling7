@@ -2,7 +2,7 @@
 .. _Plan-name:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Name
 .. _Plan-signup:
 
 Use on signup
-++++++++++++
+-------------
 
 | Display this plan in the signup form?
 
@@ -22,7 +22,7 @@ Use on signup
 .. _Plan-ini-credit:
 
 Initial credit to new users
-++++++++++++
+---------------------------
 
 | How much initial credit do you want to add to new users that select this plan in signup form?
 
@@ -32,7 +32,7 @@ Initial credit to new users
 .. _Plan-play-audio:
 
 Notices with audio
-++++++++++++
+------------------
 
 | Should the system execute audios li
 
@@ -42,7 +42,7 @@ Notices with audio
 .. _Plan-techprefix:
 
 Tech prefix
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -52,7 +52,7 @@ Tech prefix
 .. _Plan-id-service:
 
 Services
-++++++++++++
+--------
 
 | We did not write the description to this field.
 

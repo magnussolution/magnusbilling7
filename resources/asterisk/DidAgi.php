@@ -629,14 +629,13 @@ class DidAgi
         //brazil mobile - ^[4,5,6][1-9][7-9].{7}$|^[1,2,3,7,8,9][1-9]9.{8}$
         //brazil fixed - ^[1-9][0-9][1-5].
         $agi->verbose(print_r($this->modelDestination[0], true), 25);
-        if (strlen($this->modelDid->expression_1) > 0 && preg_match('/' . $this->modelDid->expression_1 . '/', $MAGNUS->CallerID) || $this->modelDid->expression_1 == '*') {
+        if (strlen($this->modelDid->expression_1) > 0 && preg_match('/' . $this->modelDid->expression_1 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDid->selling_rate_1;
-
-        } elseif (strlen($this->modelDid->expression_2) > 0 && preg_match('/' . $this->modelDid->expression_2 . '/', $MAGNUS->CallerID) || $this->modelDid->expression_2 == '*') {
+        } elseif (strlen($this->modelDid->expression_2) > 0 && preg_match('/' . $this->modelDid->expression_2 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 2 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDid->selling_rate_2;
-        } elseif (strlen($this->modelDid->expression_3) > 0 && preg_match('/' . $this->modelDid->expression_3 . '/', $MAGNUS->CallerID) || $this->modelDid->expression_3 == '*') {
+        } elseif (strlen($this->modelDid->expression_3) > 0 && preg_match('/' . $this->modelDid->expression_3 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 3 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDid->selling_rate_3;
         } else {

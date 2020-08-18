@@ -2,7 +2,7 @@
 .. _provider-provider-name:
 
 Name
-++++++++++++
+----
 
 | Provider name
 
@@ -12,7 +12,7 @@ Name
 .. _provider-credit:
 
 Credit
-++++++++++++
+------
 
 | How much credit do you have in your provider account? This field is optional.
 
@@ -22,7 +22,7 @@ Credit
 .. _provider-credit-control:
 
 Credit control
-++++++++++++
+--------------
 
 | If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.
 
@@ -32,7 +32,7 @@ Credit control
 .. _provider-description:
 
 Description
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

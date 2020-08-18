@@ -2,7 +2,7 @@
 .. _campaign-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _campaign-id-plan:
 
 Plan
-++++++++++++
+----
 
 | What plan do you want to use to bill this campaign?
 
@@ -22,7 +22,7 @@ Plan
 .. _campaign-name:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Name
 .. _campaign-status:
 
 Status
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ Status
 .. _campaign-startingdate:
 
 Starting date
-++++++++++++
+-------------
 
 | The campaign will start from this date.
 
@@ -52,7 +52,7 @@ Starting date
 .. _campaign-expirationdate:
 
 Expiration date
-++++++++++++
+---------------
 
 | The campaign will stop in this date
 
@@ -62,7 +62,7 @@ Expiration date
 .. _campaign-type:
 
 Type
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -72,7 +72,7 @@ Type
 .. _campaign-audio:
 
 Audio
-++++++++++++
+-----
 
 | Available to massive call. The audio needs to be compatible with Asterisk. The recomended format is GSM or WWAV(8k hz mono).
 
@@ -82,7 +82,7 @@ Audio
 .. _campaign-audio-2:
 
 Audio 2
-++++++++++++
+-------
 
 | If you use TTS, the name will be executed between Audio and Audio2
 
@@ -92,7 +92,7 @@ Audio 2
 .. _campaign-restrict-phone:
 
 Restrict phone
-++++++++++++
+--------------
 
 | We did not write the description to this field.
 
@@ -102,7 +102,7 @@ Restrict phone
 .. _campaign-auto-reprocess:
 
 Auto reprocess
-++++++++++++
+--------------
 
 | If there are no active numbers in this campaign phone book, reactivates all pending numbers.
 
@@ -112,7 +112,7 @@ Auto reprocess
 .. _campaign-id-phonebook:
 
 
-++++++++++++
+
 
 | Select one or more phonebooks to to be used.
 
@@ -122,7 +122,7 @@ Auto reprocess
 .. _campaign-digit-authorize:
 
 Number to forward
-++++++++++++
+-----------------
 
 | Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.
 
@@ -132,7 +132,7 @@ Number to forward
 .. _campaign-type-0:
 
 Forward type
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -142,7 +142,7 @@ Forward type
 .. _campaign-id-ivr-0:
 
 IVR
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -152,7 +152,7 @@ IVR
 .. _campaign-id-queue-0:
 
 Queue
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -162,7 +162,7 @@ Queue
 .. _campaign-id-sip-0:
 
 Sip user
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -172,7 +172,7 @@ Sip user
 .. _campaign-extension-0:
 
 Destination
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -182,7 +182,7 @@ Destination
 .. _campaign-daily-start-time:
 
 Daily start time
-++++++++++++
+----------------
 
 | We did not write the description to this field.
 
@@ -192,7 +192,7 @@ Daily start time
 .. _campaign-daily-stop-time:
 
 Daily stop time
-++++++++++++
+---------------
 
 | We did not write the description to this field.
 
@@ -202,7 +202,7 @@ Daily stop time
 .. _campaign-monday:
 
 Monday
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -212,7 +212,7 @@ Monday
 .. _campaign-tuesday:
 
 Tuesday
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -222,7 +222,7 @@ Tuesday
 .. _campaign-wednesday:
 
 Wednesday
-++++++++++++
+---------
 
 | We did not write the description to this field.
 
@@ -232,7 +232,7 @@ Wednesday
 .. _campaign-thursday:
 
 Thursday
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -242,7 +242,7 @@ Thursday
 .. _campaign-friday:
 
 Friday
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -252,7 +252,7 @@ Friday
 .. _campaign-saturday:
 
 Saturday
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -262,7 +262,7 @@ Saturday
 .. _campaign-sunday:
 
 Sunday
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -272,7 +272,7 @@ Sunday
 .. _campaign-frequency:
 
 Call limit
-++++++++++++
+----------
 
 | How many numbers will be processed per minute?
 
@@ -282,7 +282,7 @@ Call limit
 .. _campaign-max-frequency:
 
 Maximum call limit
-++++++++++++
+------------------
 
 | We did not write the description to this field.
 
@@ -292,7 +292,7 @@ Maximum call limit
 .. _campaign-nb-callmade:
 
 Audio duration
-++++++++++++
+--------------
 
 | Used to control the max completed calls.
 
@@ -302,7 +302,7 @@ Audio duration
 .. _campaign-enable-max-call:
 
 Toggle max completed calls
-++++++++++++
+--------------------------
 
 | We did not write the description to this field.
 
@@ -312,7 +312,7 @@ Toggle max completed calls
 .. _campaign-secondusedreal:
 
 Max completed calls
-++++++++++++
+-------------------
 
 | How many calls you want to send. You need the above parameters active to control it.
 
@@ -322,7 +322,7 @@ Max completed calls
 .. _campaign-description:
 
 Description or SMS Text
-++++++++++++
+-----------------------
 
 | Text to send to SMS. You can use %name% where you want to show the number name.
 
@@ -332,7 +332,7 @@ Description or SMS Text
 .. _campaign-tts-audio:
 
 Audio 1 TTS
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -342,7 +342,7 @@ Audio 1 TTS
 .. _campaign-tts-audio2:
 
 Audio 2 TTS
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

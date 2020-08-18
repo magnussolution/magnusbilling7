@@ -2,7 +2,7 @@
 .. _callSummaryPerDay-sumsessiontime:
 
 Duração
-++++++++++++++++
+---------
 
 | Somatorio de minutos chamadas.
 | É possível realizar filtros, por exemplo, filtrar os dias da última semana, neste caso. Este somatório mostrará somente os dados do filtro executado.
@@ -13,7 +13,7 @@ Duração
 .. _callSummaryPerDay-sumsessionbill:
 
 Preço de venda
-++++++++++++++++
+---------------
 
 | Somatório do preço de venda
 
@@ -23,7 +23,7 @@ Preço de venda
 .. _callSummaryPerDay-sumbuycost:
 
 Preço de compra
-++++++++++++++++
+----------------
 
 | Somatório do preço de compra
 
@@ -33,7 +33,7 @@ Preço de compra
 .. _callSummaryPerDay-sumlucro:
 
 Lucro
-++++++++++++++++
+-----
 
 | Somatório do lucro
 
@@ -43,7 +43,7 @@ Lucro
 .. _callSummaryPerDay-sumnbcall:
 
 Chamadas atendidas
-++++++++++++++++
+------------------
 
 | Total de chamadas
 
@@ -53,7 +53,7 @@ Chamadas atendidas
 .. _callSummaryPerDay-sumnbcallfail:
 
 Chamadas rejeitadas
-++++++++++++++++
+-------------------
 
 | Total de chamadas rejeitadas
 

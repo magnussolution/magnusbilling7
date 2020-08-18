@@ -270,29 +270,52 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'configuration.config_description': ``,
     //DIDS
     'did.did': `O número exatamente como chega no Asterisk.`,
-    'did.activated': ``,
+    'did.activated': `Somente os números ativos podem receber chamadas`,
     'did.callerid': `Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.`,
-    'did.connection_charge': `Custo de ativaçao. ESte custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.`,
+    'did.connection_charge': `Custo de ativaçao. Este custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.`,
     'did.fixrate': `Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.`,
     'did.connection_sell': `Este é o valor que será cobrado em cada chamada, simplesmente por atender a chamada.`,
     'did.minimal_time_charge': `Tempo mínimo para tarifar o DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.`,
     'did.initblock': `Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
-    'did.increment': `Bloco de quantos em quantos segundos ira cobrar após o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
-    'did.charge_of': ``,
+    'did.increment': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
+    'did.charge_of': `Esta opção é para quando o DID tiver custo, neste caso poderá cobrar do usuario dono do DID, ou somente permitir chamadas de números cadastrado no menu CallerID.||Neste caso, o custo será cobrado do usuário ao qual o número foi atrelado.`,
     'did.calllimit': `Limite de chamadas simultâneas para este DID`,
-    'did.description': ``,
-    'did.expression_1': `Esta é um REGEX(Expressão regular) para tarifar o DID conforme o número de quem liga para o DID, CallerID. Ex. Se você ligar para o DID e seu número for 51988445566, e você quer cobrar 0.1 por minuto quando o número iniciar com 2 dígitos seguidos de um 9, que seria um celular no Brasil, é só colocar`,
-    'did.selling_rate_1': `Preço por minuto a ser cobrado se validar a REGEX acima`,
-    'did.block_expression_1': `Se colocar como SIM, e o número de quem ligou se o número for validado com a REGEX acima, a chamada será desligada imediatamente.`,
-    'did.send_to_callback_1': `Envia a chamada para CallBack se o número for  validado com a REGEX acime, a chamada será desligada imediatamente.`,
-    'did.expression_2': `Igual a REGEX 1. Você pode usar até 3 REGEX para diferenciar até 3 tipos de tarifas para seu DID`,
-    'did.selling_rate_2': ``,
-    'did.block_expression_2': ``,
-    'did.send_to_callback_2': ``,
-    'did.expression_3': `Igual a REGEX 1. Você pode usar até 3 REGEX para diferenciar até 3 tipos de tarifas para seu DID`,
-    'did.selling_rate_3': ``,
-    'did.block_expression_3': ``,
-    'did.send_to_callback_3': ``,
+    'did.description': `Usado para seu controle interno.`,
+    'did.expression_1': `Esta é uma Expressão regular para tarifar o DID conforme o número de quem liga para o DID||Vamos analisar um exemplo real:
+
+Digamos que queremos cobrar 0.10 quando recebemos uma chamada de um telefone fixo, e 0.20 se for de um celular, e bloquear qualquer outro formato.
+
+Neste exemplo vamos criar regras para identificar o CallerID nos formatos 0 DDD número, DDD número ou 55 DDD número.
+
+Veja na imagem abaixo como ficaria.
+
+.. image:: ../img/did_regex.png
+    :scale: 100% 
+
+
+Expressão regular para celular
+^[1-9][0-9]9\d{8}$|^0[1-9][0-9]9\d{8}$|^55[1-9][0-9]9\d{8}$
+
+Expressão regular para fixo
+^[1-9][0-9]\d{8}$|^0[1-9][0-9]\d{8}$|^55[1-9][0-9]\d{8}$
+
+
+
+`,
+    'did.selling_rate_1': `Preço por minuto a ser cobrado se validar a Expressão regular acima`,
+    'did.block_expression_1': `Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.`,
+    'did.send_to_callback_1': `Envia a chamada para CallBack se o número for validado com a Expressão regular acima||Como a chamada será enviada para um CallBack, então a chamada será desligada imediatamente. 
+E se todas as configurações estiverem corretas, o CallBack este executado e o telefone do cliente tocará.`,
+    'did.expression_2': `Igual a opçao 1. Clique para mais informaçōes.|https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1`,
+    'did.selling_rate_2': `Preço por minuto a ser cobrado se validar a Expressão regular acima`,
+    'did.block_expression_2': `Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.`,
+    'did.send_to_callback_2': `Envia a chamada para CallBack se o número for validado com a Expressão regular acima||Como a chamada será enviada para um CallBack, então a chamada será desligada imediatamente. 
+E se todas as configurações estiverem corretas, o CallBack este executado e o telefone do cliente tocará.`,
+    'did.expression_3': `Igual a opçao 1. Clique para mais informaçōes.|https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1`,
+    'did.selling_rate_3': `Preço por minuto a ser cobrado se validar a Expressão regular acima`,
+    'did.block_expression_3': `Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.`,
+    'did.send_to_callback_3': `Envia a chamada para CallBack se o número for validado com a Expressão regular acima||Como a chamada será enviada para um CallBack, então a chamada será desligada imediatamente. 
+E se todas as configurações estiverem corretas, o CallBack este executado e o telefone do cliente tocará.`,
     'did.cbr': `Ativa o CallBack Pro.`,
     'did.cbr_ua': `Executar um áudio`,
     'did.cbr_total_try': `Quantas vezes o sistema vai tentar retornar para o cliente?`,
@@ -301,7 +324,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'did.TimeOfDay_monFri': `Ex: sua trabalha de 09 as 12 e de 14h às 18h, e dentro deste horário você quer executar o callback e retornar a chamada para a pessoa que ligou, então coloque 09:00-12:00|14:00-18:00, os intervalos são separados por |`,
     'did.TimeOfDay_sat': `Mesma regra só que para sábados`,
     'did.TimeOfDay_sun': `Mesma regra só que para domingos`,
-    'did.workaudio': `Audio que será executado quando alguém ligar dentro do horário de atendimento.`,
+    'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento`,
     //DESTINO DE DID
     'diddestination.id_did': `Selecione o DID para criar o novo destino`,
@@ -790,7 +813,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'user.id_group_agent': ``,
     'user.id_plan': `Plano usado para tarifar este cliente.`,
     'user.language': ``,
-    'user.prefix_local': `Esta regra permite o cliente discar no formato local. || EX 0 DDD ou somente o número dentro de seu DDD. As regras são separadas por vírgula e composta por 2 ou 3 parâmetros separados por /.
+    'user.prefix_local': `Esta regra permite o cliente discar no formato local. ||EX 0 DDD ou somente o número dentro de seu DDD. As regras são separadas por vírgula e composta por 2 ou 3 parâmetros separados por /.
 1º é o número que será substituído. Pode ser * para pegar qualquer dígito.
 2º é o número que vai substituir o 1º.
 3º é a quantidade de dígitos do número. Se nao colocar o 3º parametro, nao sera verificado a quantidade de dígitos.

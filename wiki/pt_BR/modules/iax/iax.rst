@@ -2,7 +2,7 @@
 .. _iax-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Usuário
 .. _iax-username:
 
 Conta IAX
-++++++++++++++++
+---------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Conta IAX
 .. _iax-secret:
 
 Senha IAX
-++++++++++++++++
+---------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Senha IAX
 .. _iax-callerid:
 
 CallerID
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,7 +42,7 @@ CallerID
 .. _iax-disallow:
 
 Disallow
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -52,7 +52,7 @@ Disallow
 .. _iax-allow:
 
 Codec
-++++++++++++++++
+-----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -62,7 +62,7 @@ Codec
 .. _iax-host:
 
 Host
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -72,7 +72,7 @@ Host
 .. _iax-nat:
 
 NAT
-++++++++++++++++
+---
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -82,7 +82,7 @@ NAT
 .. _iax-context:
 
 Contexto
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -92,7 +92,7 @@ Contexto
 .. _iax-qualify:
 
 Qualify
-++++++++++++++++
+-------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -102,7 +102,7 @@ Qualify
 .. _iax-dtmfmode:
 
 Dtmfmode
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -112,7 +112,7 @@ Dtmfmode
 .. _iax-insecure:
 
 Insecure
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -122,7 +122,7 @@ Insecure
 .. _iax-type:
 
 Tipo
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -132,7 +132,7 @@ Tipo
 .. _iax-calllimit:
 
 Limite de chamada
-++++++++++++++++
+-----------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

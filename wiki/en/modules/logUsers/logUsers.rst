@@ -2,7 +2,7 @@
 .. _logUsers-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _logUsers-id-log-actions:
 
 Action
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Action
 .. _logUsers-ip:
 
 IP
-++++++++++++
+--
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ IP
 .. _logUsers-description:
 
 Description
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

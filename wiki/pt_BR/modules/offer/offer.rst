@@ -2,7 +2,7 @@
 .. _offer-label:
 
 Nome
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,7 +12,7 @@ Nome
 .. _offer-packagetype:
 
 Tipo de pacote
-++++++++++++++++
+--------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Tipo de pacote
 .. _offer-freetimetocall:
 
 Tempo gratuíto para ligar
-++++++++++++++++
+--------------------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ Tempo gratuíto para ligar
 .. _offer-billingtype:
 
 Tipo de tarifação
-++++++++++++++++
+-------------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,7 +42,7 @@ Tipo de tarifação
 .. _offer-price:
 
 Preço
-++++++++++++++++
+------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

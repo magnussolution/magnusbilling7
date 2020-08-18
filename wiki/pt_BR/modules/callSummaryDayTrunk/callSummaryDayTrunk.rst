@@ -2,7 +2,7 @@
 .. _callSummaryDayTrunk-sumsessiontime:
 
 Duração
-++++++++++++++++
+---------
 
 | Somatorio de minutos chamadas.
 | É possível realizar filtros, por exemplo, filtrar os dias da última semana, ou de um tronco específico, neste caso. Este somatório mostrará somente os dados do filtro executado.
@@ -13,7 +13,7 @@ Duração
 .. _callSummaryDayTrunk-sumsessionbill:
 
 Preço de venda
-++++++++++++++++
+---------------
 
 | Somatório do preço de venda
 
@@ -23,7 +23,7 @@ Preço de venda
 .. _callSummaryDayTrunk-sumbuycost:
 
 Preço de compra
-++++++++++++++++
+----------------
 
 | Somatório do preço de compra
 
@@ -33,7 +33,7 @@ Preço de compra
 .. _callSummaryDayTrunk-sumlucro:
 
 Lucro
-++++++++++++++++
+-----
 
 | Somatório do lucro
 
@@ -43,7 +43,7 @@ Lucro
 .. _callSummaryDayTrunk-sumnbcall:
 
 Total de chamadas
-++++++++++++++++
+-----------------
 
 | Total de chamadas
 
