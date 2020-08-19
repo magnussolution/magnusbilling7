@@ -33,6 +33,7 @@ Help.load({
     'callerid.id_user': ``,
     'callerid.cid': `The number to CID authenticate with CallingCard. Use the exact format that you received the callerID from your DID provider.`,
     'callerid.activated': ``,
+    'callerid.name': ``,
     //CALLS ONLINE
     'callonline.idUserusername': ``,
     'callonline.sip_account': ``,
