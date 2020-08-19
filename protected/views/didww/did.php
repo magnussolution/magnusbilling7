@@ -17,7 +17,7 @@
 
 <?php if (count($dids) > 1): ?>
 <div class="field">
-	<?php echo $form->labelEx($did, Yii::t('zii', 'Did')) ?>
+	<?php echo $form->labelEx($did, Yii::t('zii', 'DID')) ?>
 	<div class="styled-select">
 	<?php echo $form->dropDownList($did, 'did', $dids, array('prompt' => Yii::t('zii', 'Select a number'))); ?>
 	</div>

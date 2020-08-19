@@ -91,10 +91,10 @@ Audio 2
 
 .. _campaign-restrict-phone:
 
-Números bloqueados
--------------------
+Números Restritos
+------------------
 
-| Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
+| Ativando está opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
 
 
@@ -114,7 +114,7 @@ Reprocessar automático
 
 
 
-| Selecione as agendas que esta campanha vai usar.
+| Selecione as agendas que está campanha vai usar.
 
 
 
@@ -134,7 +134,7 @@ Número para reenviar
 Tipo de encaminhamento
 ----------------------
 
-| Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
+| Selecionar o tipo de reenvio, está opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
 
 
 
@@ -208,7 +208,7 @@ Horário de finalização diário
 Segunda
 -------
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
 
 
 
@@ -218,7 +218,7 @@ Segunda
 Terça feira
 ------------
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nas terças feiras.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nas terças feiras.
 
 
 
@@ -228,7 +228,7 @@ Terça feira
 Quarta feira
 ------------
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
 
 
 
@@ -238,7 +238,7 @@ Quarta feira
 Quinta feira
 ------------
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
 
 
 
@@ -248,27 +248,27 @@ Quinta feira
 Sexta
 -----
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
 
 
 
 
 .. _campaign-saturday:
 
-Saturday
---------
+Sábado
+-------
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nos sabados.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nos sabados.
 
 
 
 
 .. _campaign-sunday:
 
-Sunday
-------
+Domingo
+-------
 
-| Ativando esta opção o sistema vai enviar chamadas desta campanha nos domingos.
+| Ativando está opção o sistema vai enviar chamadas desta campanha nos domingos.
 
 
 
@@ -339,7 +339,7 @@ Descrição ou texto do SMS
 | 
 | Ola %name% temos uma promoção para você.....
 | 
-| Então digamos que tenha cadastrado na agenda utilizada por esta campanha uma lista de números contendo número e nome.
+| Então digamos que tenha cadastrado na agenda utilizada por está campanha uma lista de números contendo número e nome.
 | 
 | 5511998844334,Paulo Ricardo
 | 5511974635734,João Matos
@@ -362,8 +362,8 @@ Descrição ou texto do SMS
 Audio 1 TTS
 -----------
 
-| Com esta opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio
-| Para que esta opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
+| Com está opção de TTS, o sistema vai gerar o áudio 1 da campanha via TTS, text to speech, tradução livre, texto para áudio
+| Para que está opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
 | 
 | Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
 | 

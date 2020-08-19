@@ -4,7 +4,7 @@
 Campanha
 --------
 
-| Selecione a campanha que esta enquete será executa
+| Selecione a campanha que está enquete será executa
 
 
 
@@ -42,7 +42,7 @@ Repetir se apertar opção inválida
 Solicitar autorização
 -----------------------
 
-| Em alguns casos, é necessário solicitar autorização para executar a enquete, nestes casos, deixe esta opção para sim
+| Em alguns casos, é necessário solicitar autorização para executar a enquete, nestes casos, deixe está opção para sim
 | Um exemplo de caso seria:
 | 
 | Digamos que seja necessário enviar uma campanha com o seguinte áudio.
@@ -53,11 +53,11 @@ Solicitar autorização
 | caso o cliente digitar 1, executar o áudio.
 | 
 | 
-|     Que bom que não perdeu esta chance de contratar seu plano de saúde …...
+|     Que bom que não perdeu está chance de contratar seu plano de saúde …...
 | 
 | Neste caso, o áudio “Ola, temos uma oferta incrível para você. Se deseja escutar digite 1” seria o áudio da campanha.
 | 
-| E o áudio “Que bom que não perdeu esta chance de contratar seu plano de saúde …...” seria o áudio da enquete.
+| E o áudio “Que bom que não perdeu está chance de contratar seu plano de saúde …...” seria o áudio da enquete.
 | 
 | As opções, solicitar autorização deverá ser SIM e a opção dígito para autorizar deve ser 1.
 | 

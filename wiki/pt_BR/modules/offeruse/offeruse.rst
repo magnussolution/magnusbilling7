@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que realizou a chamada
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Pacotes grátis
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do pacote de gratís
 
 
 
@@ -24,7 +24,7 @@ Pacotes grátis
 Messes pago
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Meses que foram pagos
 
 
 
@@ -34,7 +34,7 @@ Messes pago
 Data de reserva
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Data e hora que foi cancelado o pacote gratís
 
 
 

@@ -142,6 +142,7 @@ Ext.define('MBilling.view.ivr.Form', {
                     items: [{
                         xtype: 'typedestinationcombo',
                         fieldLabel: t('Type'),
+                        name: 'type_1',
                         hidden: false,
                         flex: 2
                     }, {

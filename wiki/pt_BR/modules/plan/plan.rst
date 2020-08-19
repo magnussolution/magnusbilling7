@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do plano
 
 
 
@@ -14,7 +14,7 @@ Nome
 Usar no registro
 ----------------
 
-| Disponibilizar este plano no formulário de registro. Se tiver somente 1 plano os clientes que se registrarem vão usar este plano, se tiver mais de 1, aí o cliente poderá escolher. É necessário ter pelo menos 1 plano com esta opção ativada para funcionar o registro.
+| Disponibilizar este plano no formulário de registro. Se tiver somente 1 plano os clientes que se registrarem vão usar este plano, se tiver mais de 1, aí o cliente poderá escolher. É necessário ter pelo menos 1 plano com está opção ativada para funcionar o registro.
 
 
 
@@ -54,7 +54,7 @@ Tech prefix
 Serviços
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione aqui os serviços que estarão disponível para os usuários deste plano
 
 
 

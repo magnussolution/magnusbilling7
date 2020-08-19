@@ -4,7 +4,7 @@
 Fila nome
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Fila de espera que quer adicionar a conta SIP
 
 
 
@@ -14,7 +14,7 @@ Fila nome
 Conta SIP
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP para adicionar como agente da fila de espera
 
 
 
@@ -24,7 +24,7 @@ Conta SIP
 Pausado
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Agentes pausados não receberam chamadas, é possível pausar e despausar discando *180 para pausar, e *181 para despausar
 
 
 

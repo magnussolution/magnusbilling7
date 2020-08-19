@@ -34,7 +34,7 @@ Grupo
 Grupo para os usuários do agente
 ---------------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o grupo que os clientes deste revendedor usaram
 
 
 
@@ -54,7 +54,7 @@ Plano
 Idioma
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Idioma. Esta idioma é usado para algumas funçōes do sistema, mas não para o idioma do painel.
 
 
 
@@ -138,7 +138,7 @@ Limite de CPS
 Nome da empresa
 ---------------
 
-| magnus
+| Nome da empresa.
 
 
 
@@ -148,7 +148,7 @@ Nome da empresa
 Inscrição estadual
 --------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Inscrição estadual
 
 
 
@@ -158,7 +158,7 @@ Inscrição estadual
 Sobrenome
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Sobrenome
 
 
 
@@ -168,7 +168,7 @@ Sobrenome
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome
 
 
 
@@ -178,7 +178,7 @@ Nome
 Cidade
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Cidade
 
 
 
@@ -188,7 +188,7 @@ Cidade
 Estado
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Estado
 
 
 
@@ -198,7 +198,7 @@ Estado
 Endereço
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Endereço
 
 
 
@@ -208,7 +208,7 @@ Endereço
 Bairro
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Bairro
 
 
 
@@ -218,7 +218,7 @@ Bairro
 CEP
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| CEP
 
 
 
@@ -228,7 +228,7 @@ CEP
 Fone
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Telefone fixo.
 
 
 
@@ -238,7 +238,7 @@ Fone
 Celular
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Telefone celular.
 
 
 
@@ -248,7 +248,7 @@ Celular
 Email
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Email, é necessário para o envio de notificaçōes do sistema
 
 
 
@@ -258,7 +258,7 @@ Email
 CPF/CNPJ
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Documento do cliente
 
 
 
@@ -278,7 +278,7 @@ Imposto
 Tipo pago
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Cliente pós-pago poderá ficar com saldo negativo ate o limite de crédito informado no campo abaixo.
 
 
 
@@ -298,7 +298,7 @@ Limite de crédito
 Notificação de crédito
 -------------------------
 
-| Se o crédito do cliente ficar menor que esta campo, MagnusBilling vai enviar um email para o cliente informando que está com pouco crédito. NECESSÁRIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES
+| Se o crédito do cliente ficar menor que está campo, MagnusBilling vai enviar um email para o cliente informando que está com pouco crédito. NECESSÁRIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES
 
 
 
@@ -308,7 +308,7 @@ Notificação de crédito
 Habilitar vencimento
 --------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativar expiração. Necessário informar a data da expiração no campo Data de expiração.
 
 
 
@@ -358,7 +358,7 @@ Limite de chamada
 Erro ao superar limite
 ----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Sinalização a ser enviada caso o limite de chamadas for superador.
 
 
 
@@ -405,10 +405,10 @@ CallingCard PIN
 
 .. _user-restriction:
 
-Restriction
+Restrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta opção permite restringir o usuário para somente discar para alguns números, ou proibir discar para alguns números, confome for selecionado. Os números deverão ser adicionado no menu Números Bloqueados.
 
 
 
@@ -418,7 +418,7 @@ Restriction
 Lucro
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
 
 
 
@@ -428,7 +428,7 @@ Lucro
 Lucro
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
 
 
 
@@ -438,7 +438,7 @@ Lucro
 Lucro
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
 
 
 
@@ -448,7 +448,7 @@ Lucro
 Enable DBBL/Rocket
 ------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
 
 
 
@@ -458,7 +458,7 @@ Enable DBBL/Rocket
 Lucro
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
 
 
 
@@ -468,7 +468,7 @@ Lucro
 Mostrar preço de venda
 -----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
 
 
 

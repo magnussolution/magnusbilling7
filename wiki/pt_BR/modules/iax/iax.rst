@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário ao qual esta conta IAX vai pertencer
+| Usuário ao qual está conta IAX vai pertencer
 
 
 
@@ -114,7 +114,7 @@ Dtmfmode
 Insecure
 --------
 
-| Se o host estiver dynamic esta opção precisa estar como NO.Para autenticação por IP alterar para port. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/  <https://www.voip-info.org/asterisk-sip-insecure/>`_.
+| Se o host estiver dynamic está opção precisa estar como NO.Para autenticação por IP alterar para port. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/  <https://www.voip-info.org/asterisk-sip-insecure/>`_.
 
 
 
@@ -134,7 +134,7 @@ Tipo
 Limite de chamada
 -----------------
 
-| Total de chamadas simultâneas permitida para esta conta IAX.
+| Total de chamadas simultâneas permitida para está conta IAX.
 
 
 
