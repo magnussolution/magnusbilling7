@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário ao qual esta conta IAX vai pertencer
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Conta IAX
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que será usado para autenticar no softphone.
 
 
 
@@ -24,7 +24,7 @@ Conta IAX
 Senha IAX
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Senha que será usado para autenticar no softphone.
 
 
 
@@ -34,7 +34,7 @@ Senha IAX
 CallerID
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este é o CallerID que será mostrado no destino, em chamadas externas o provedor precisa permitir CLI para que seja identificado corretamente no destino.
 
 
 
@@ -44,7 +44,7 @@ CallerID
 Disallow
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta opção desativa todos os codecs e deixa disponível para o usuário somente os que você selecionar abaixo.
 
 
 
@@ -54,7 +54,7 @@ Disallow
 Codec
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Codecs que será aceito
 
 
 
@@ -64,7 +64,7 @@ Codec
 Host
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em branco e coloque insecure para port/invite na TAB Informaçōes Adicionais.
 
 
 
@@ -74,7 +74,7 @@ Host
 NAT
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O cliente está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
 
 
 
@@ -84,7 +84,7 @@ NAT
 Contexto
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este é o contexto que a chamada será processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.
 
 
 
@@ -94,7 +94,7 @@ Contexto
 Qualify
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Enviar pacote OPTION para verificar se o usuário está online.
 
 
 
@@ -104,7 +104,7 @@ Qualify
 Dtmfmode
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/  <https://www.voip-info.org/asterisk-sip-dtmfmode/>`_.
 
 
 
@@ -114,7 +114,7 @@ Dtmfmode
 Insecure
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Se o host estiver dynamic esta opção precisa estar como NO.Para autenticação por IP alterar para port. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/  <https://www.voip-info.org/asterisk-sip-insecure/>`_.
 
 
 
@@ -124,7 +124,7 @@ Insecure
 Tipo
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
 
 
 
@@ -134,7 +134,7 @@ Tipo
 Limite de chamada
 -----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas simultâneas permitida para esta conta IAX.
 
 
 

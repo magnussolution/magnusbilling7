@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que deseja ativar TOKEN
 
 
 
@@ -14,7 +14,18 @@ Usuário
 Status
 ------
 
-| Após o usuário ativar o Token, somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.
+| Após ativar o TOKEN para o usuário, somente será possível logar usando o TOKEN gerado pela APP do google
+| Após ativar o TOKEN, no próximo login do usuário será solicitado que escaneie o QR CODE conforme a imagem abaixo
+| 
+.. image:: ../img/token.png
+   :scale: 100% 
+| 
+| Para escanear o código é necessário instalar a APP Google authenticator, esta APP está disponível na loja de aplicativos IOS e Android.
+| 
+| É importante guardar o código manual mostrado na imagem, pois será com este código que será possível ativar o token em outro celular caso necessário.
+| 
+| 
+| Ativando o token para o usuário somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.
 
 
 
@@ -24,7 +35,7 @@ Status
 Código
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O código é necessário para poder desativar o TOKEN. Caso não tiver mais o código, então será necessário desativar pelo banco de dados.
 
 
 
@@ -34,7 +45,7 @@ Código
 Google authenticator key
 ------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta KEY é necessário para poder ativar o TOKEN em outro celular.
 
 
 

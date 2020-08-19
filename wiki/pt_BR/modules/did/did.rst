@@ -94,7 +94,7 @@ Bloco de tarifação
 Quem será cobrado
 ------------------
 
-| Esta opção é para quando o DID tiver custo, neste caso poderá cobrar do usuario dono do DID, ou somente permitir chamadas de números cadastrado no menu CallerID.
+| Esta opção é para quando o DID tiver custo, neste caso poderá cobrar do usuário dono do DID, ou somente permitir chamadas de números cadastrado no menu CallerID.
 | Neste caso, o custo será cobrado do usuário ao qual o número foi atrelado.
 
 

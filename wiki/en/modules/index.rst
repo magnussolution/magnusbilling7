@@ -571,7 +571,7 @@ This menu has the following fields
 .. include:: smtps/smtps.rst
 
 
-Firewall
+Fail2ban
 ++++++++
 
 This menu has the following fields

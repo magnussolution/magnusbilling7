@@ -68,7 +68,7 @@ Regra prefixo
 | EX 0 DDD ou somente o número dentro de seu DDD. As regras são separadas por vírgula e composta por 2 ou 3 parâmetros separados por /.
 | 1º é o número que será substituído. Pode ser * para pegar qualquer dígito.
 | 2º é o número que vai substituir o 1º.
-| 3º é a quantidade de dígitos do número. Se nao colocar o 3º parametro, nao sera verificado a quantidade de dígitos.
+| 3º é a quantidade de dígitos do número. Se nao colocar o 3º parametro, nao será verificado a quantidade de dígitos.
 | 
 | Alguns exemplos.
 | 

@@ -4,7 +4,7 @@
 Grupo
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Grupo de usuário
 
 
 
@@ -14,7 +14,7 @@ Grupo
 Módulo
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Menu
 
 
 

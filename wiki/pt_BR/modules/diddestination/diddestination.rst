@@ -14,7 +14,7 @@ DID
 Usuário
 --------
 
-| Usuário que sera o dono deste DID
+| Usuário que será o dono deste DID
 
 
 
@@ -109,7 +109,7 @@ Contexto
 | exten => s-CHANUNAVAIL,2,Dial(SIP/contavoip2,,T)
 | 
 | 
-| NÃO deve ser colocado o nomer para o context, pois o nome do contexto sera [did-numero-do-did]
+| NÃO deve ser colocado o nomer para o context, pois o nome do contexto será [did-numero-do-did]
 | 
 | Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
 | 

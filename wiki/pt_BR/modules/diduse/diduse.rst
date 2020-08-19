@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono do DID
 
 
 
@@ -14,7 +14,7 @@ Usuário
 DID
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número DID
 
 
 
@@ -24,7 +24,7 @@ DID
 Data de reserva
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dia que o DID foi reservado para o usuário
 
 
 
