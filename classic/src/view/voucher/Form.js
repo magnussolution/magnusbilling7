@@ -52,7 +52,7 @@ Ext.define('MBilling.view.voucher.Form', {
         }, {
             name: 'prefix_local',
             fieldLabel: t('Prefix rules'),
-            value: App.user.base_country == 'BRL' ? '0/55,*/5511/8,*/5511/9' : App.user.base_country == 'ARG' ? '0/54,*/5411/8,15/54911/10,16/54911/10' : '',
+            value: App.user.base_country == 'BRL' ? '0/55/11,0/55/12,*/5511/8,*/5511/9' : '',
             emptyText: 'match / replace / length',
             hidden: !App.user.isAdmin,
             allowBlank: true
@@ -72,11 +72,11 @@ Ext.define('MBilling.view.voucher.Form', {
             xtype: 'numberfield',
             name: 'voucher',
             fieldLabel: t('Voucher'),
-            value: '',
+            emptyText: t('Will be generated automatically'),
             maxLength: 6,
             minLength: 6,
-            hidden: !App.user.isClient,
-            allowBlank: !App.user.isClient
+            readOnly: true,
+            allowBlank: true
         }];
         me.callParent(arguments);
     }

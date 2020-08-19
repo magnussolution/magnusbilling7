@@ -111,6 +111,14 @@ Ext.define('MBilling.view.user.Form', {
                     allowBlank: true
                 }]
             }, {
+                defaults: {
+                    labelAlign: 'right',
+                    plugins: 'markallowblank',
+                    allowBlank: false,
+                    anchor: '100%',
+                    enableKeyEvents: true,
+                    labelWidth: 145
+                },
                 title: t('Personal data'),
                 itemId: 'personalData',
                 items: [, {
@@ -137,7 +145,6 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
-                    labelWidth: 100,
                     defaults: {
                         xtype: 'textfield',
                         labelAlign: 'right',
@@ -147,6 +154,7 @@ Ext.define('MBilling.view.user.Form', {
                         name: 'city',
                         fieldLabel: t('City'),
                         allowBlank: true,
+                        labelWidth: 145,
                         maxLength: 40,
                         minLength: 4,
                         flex: 2
@@ -164,7 +172,6 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
-                    labelWidth: 100,
                     defaults: {
                         xtype: 'textfield',
                         labelAlign: 'right',
@@ -174,6 +181,7 @@ Ext.define('MBilling.view.user.Form', {
                         name: 'neighborhood',
                         fieldLabel: t('Neighborhood'),
                         allowBlank: true,
+                        labelWidth: 145,
                         flex: 2
                     }, {
                         name: 'zipcode',
@@ -184,7 +192,6 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
-                    labelWidth: 100,
                     defaults: {
                         xtype: 'textfield',
                         labelAlign: 'right',
@@ -194,6 +201,7 @@ Ext.define('MBilling.view.user.Form', {
                         name: 'phone',
                         fieldLabel: t('Phone'),
                         allowBlank: true,
+                        labelWidth: 145,
                         maxLength: 13,
                         minLength: 8
                     }, {
@@ -255,7 +263,7 @@ Ext.define('MBilling.view.user.Form', {
                         xtype: 'numberfield',
                         name: 'credit_notification',
                         fieldLabel: t('Credit notification'),
-                        labelWidth: 150,
+                        labelWidth: 170,
                         value: '-1',
                         minValue: -1,
                         allowBlank: true,
@@ -284,7 +292,7 @@ Ext.define('MBilling.view.user.Form', {
                         format: 'Y-m-d H:i:s',
                         allowBlank: true,
                         hidden: !App.user.isAdmin,
-                        labelWidth: 150,
+                        labelWidth: 170,
                         flex: 3
                     }]
                 }, {
@@ -306,7 +314,7 @@ Ext.define('MBilling.view.user.Form', {
                         flex: 2
                     }, {
                         xtype: 'combobox',
-                        labelWidth: 150,
+                        labelWidth: 170,
                         store: [
                             ['gsm', 'gsm'],
                             ['wav', 'wav'],
@@ -344,7 +352,7 @@ Ext.define('MBilling.view.user.Form', {
                         xtype: 'combobox',
                         name: 'calllimit_error',
                         fieldLabel: t('Limit error'),
-                        labelWidth: 150,
+                        labelWidth: 170,
                         forceSelection: true,
                         editable: false,
                         value: '503',

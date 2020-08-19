@@ -4,7 +4,7 @@
 Text
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do menu
 
 
 
@@ -14,7 +14,7 @@ Text
 IconCls
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Icone, padrão font awesome V4
 
 
 
@@ -24,7 +24,7 @@ IconCls
 Menu principal
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Menu ao qual este menu pertence. Caso estiver em branco é porque é um menu principal.
 
 
 
@@ -34,7 +34,7 @@ Menu principal
 Em ordem
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ordem em que o menu vai aparecer no menu.
 
 
 

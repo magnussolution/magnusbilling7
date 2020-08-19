@@ -44,7 +44,7 @@ Ativo
 Quantidade mínima
 ------------------
 
-| Valor mínimo que deseja aceitar
+| Valor mínimo que deseja aceitar.
 
 
 
@@ -54,7 +54,7 @@ Quantidade mínima
 Quantidade máxima
 ------------------
 
-| Valor máximo que deseja aceitar
+| Valor máximo que deseja aceitar.
 
 
 
@@ -64,7 +64,7 @@ Quantidade máxima
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário do metodo de pagamento.
 
 
 
@@ -74,7 +74,7 @@ Usuário
 URL
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| URL do metodo de pagamento, na maioria dos metodos está URL ja está preconfigurada.
 
 
 
@@ -84,7 +84,7 @@ URL
 Taxa de desconto
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Taxa cobrada pelo metodo de pagamento.
 
 
 
@@ -94,7 +94,7 @@ Taxa de desconto
 Token
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| TOKEN do metodo de pagamento.
 
 
 
@@ -104,7 +104,7 @@ Token
 P2P CustomerSiteID
 ------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 
@@ -114,7 +114,7 @@ P2P CustomerSiteID
 P2P KeyID
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 
@@ -124,7 +124,7 @@ P2P KeyID
 P2P Passphrase
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 
@@ -134,7 +134,7 @@ P2P Passphrase
 P2P RecipientKeyID
 ------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 
@@ -144,7 +144,7 @@ P2P RecipientKeyID
 P2P Tax Amount
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 
@@ -154,7 +154,7 @@ P2P Tax Amount
 ID do cliente
 -------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 
@@ -164,7 +164,7 @@ ID do cliente
 Secret do cliente
 -----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 

@@ -4,7 +4,7 @@
 Plano
 -----
 
-| O plano que você quer adicionar esta tarifa.
+| O plano que você quer adicionar está tarifa.
 
 
 
@@ -24,7 +24,7 @@ Destino
 Grupo de Troncos
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Grupo de troncos que será usado para enviar está chamada.
 
 
 
@@ -54,7 +54,7 @@ Bloco mínimo
 Bloco de tarifação
 --------------------
 
-| Bloco de quantos em quantos segundos ira cobrar após o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
+| Bloco de quantos em quantos segundos irá cobrar após o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 
@@ -64,7 +64,7 @@ Bloco de tarifação
 Tempo mínimo para tarifar
 --------------------------
 
-| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for => que 3 segundos
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
 
 
 
@@ -84,7 +84,7 @@ Tempo adicional
 Incluir no pacotes grátis
 --------------------------
 
-| Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
+| Ative está opção se você quer que está tarifa seja usada nos pacotes grátis
 
 
 
@@ -94,7 +94,7 @@ Incluir no pacotes grátis
 Status
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Desativando a tarifa, o MagnusBilling vai desconsiderar completamente está tarifa. Ou seja, deletar ou desativar terá o mesmo efeito.
 
 
 

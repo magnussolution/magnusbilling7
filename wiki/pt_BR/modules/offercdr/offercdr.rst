@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que realizou a chamada
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Pacotes grátis
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do pacote de gratís
 
 
 
@@ -24,17 +24,17 @@ Pacotes grátis
 Duração
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Duração da chamada
 
 
 
 
 .. _offerCdr-date-consumption:
 
-Data
+data
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Data de hora da chamada
 
 
 

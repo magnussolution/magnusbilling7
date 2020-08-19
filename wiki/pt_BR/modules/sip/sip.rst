@@ -134,7 +134,7 @@ Tech prefix
 NAT
 ---
 
-| O cliente esta atras de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
+| O cliente está atras de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
 
 
 
@@ -184,7 +184,7 @@ Dtmfmode
 Insecure
 --------
 
-| Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentication alterar para port,invite.
+| Se o host estiver dynamic está opção precisa estar como NO. Para IP authentication alterar para port,invite.
 
 
 
@@ -224,7 +224,7 @@ Tipo
 Permitir transferência
 -----------------------
 
-| Permite esta conta VoIP fazer transferência. O código para transferência é *2ramal. É necessário ativar a transferência no arquivo features.conf do Asterisk
+| Permite está conta VoIP fazer transferência. O código para transferência é *2ramal. É necessário ativar a transferência no arquivo features.conf do Asterisk
 
 
 
@@ -244,7 +244,7 @@ Ring falso
 Limite de chamada
 -----------------
 
-| Total de chamadas simultâneas permitida para esta conta SIP.
+| Total de chamadas simultâneas permitida para está conta SIP.
 
 
 

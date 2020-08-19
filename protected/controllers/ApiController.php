@@ -37,7 +37,7 @@ class ApiController extends Controller
     {
         $this->instanceModel = new Api;
         $this->abstractModel = Api::model();
-        $this->titleReport   = Yii::t('zii', 'Api');
+        $this->titleReport   = Yii::t('zii', 'API');
         parent::init();
     }
 

@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que será realizado a recarga.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Crédito
 --------
 
-| Valor da recarga
+| Valor da recarga. Pode ser valor possitvo ou negativo, caso o valor for negativo, vai retirar o valor da recarga do crédito do cliente.
 
 
 
@@ -24,7 +24,7 @@ Crédito
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a agenda, somente para controle proprio.
 
 
 
@@ -44,7 +44,7 @@ Adicionar pagamento
 Fatura número
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número da fatura
 
 
 

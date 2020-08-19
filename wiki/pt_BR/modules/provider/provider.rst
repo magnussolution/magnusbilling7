@@ -24,7 +24,7 @@ Crédito
 Controle de crédito
 --------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Se está opção for ativada os troncos deste provedor serão desativados quando o crédito do provedor ficar em zero.
 
 
 
@@ -34,7 +34,7 @@ Controle de crédito
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a agenda, somente para controle proprio.
 
 
 

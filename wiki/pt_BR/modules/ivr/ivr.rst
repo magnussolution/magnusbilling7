@@ -205,7 +205,7 @@ Opção padrão
 Discar direto conta SIP
 -----------------------
 
-| Ativando esta opção será possível digitar uma conta SIP para chamar diretamente.
+| Ativando está opção será possível digitar uma conta SIP para chamar diretamente.
 
 
 

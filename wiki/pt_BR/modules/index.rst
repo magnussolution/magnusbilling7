@@ -670,8 +670,8 @@ Este menu tem os seguintes campos
 .. include:: campaignpollinfo/campaignpollinfo.rst
 
 
-Números bloqueados
-+++++++++++++++++++
+Números Restritos
+++++++++++++++++++
 
 Este menu tem os seguintes campos
 
@@ -694,8 +694,8 @@ Este menu tem os seguintes campos
 .. include:: campaignsend/campaignsend.rst
 
 
-Report
-++++++
+Relatório
+++++++++++
 
 Este menu tem os seguintes campos
 
