@@ -29,11 +29,6 @@ Ext.define('MBilling.view.groupUser.Form', {
                 title: t('General'),
                 reference: 'generalTab',
                 items: [{
-                    name: 'id',
-                    fieldLabel: t('ID'),
-                    disabled: true,
-                    hidden: true
-                }, {
                     name: 'name',
                     fieldLabel: t('Name'),
                     maxLength: 100

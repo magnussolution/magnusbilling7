@@ -262,7 +262,6 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     //ENQUETE RELATóRIOS
     'campaignpollinfo.number': `Número da pessao que votou`,
     'campaignpollinfo.resposta': `Opção votada`,
-    'campaignpollinfo.obs': ``,
     //NúMEROS BLOQUEADOS
     'campaignrestrictphone.number': ``,
     //AJUSTES
@@ -278,7 +277,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'did.minimal_time_charge': `Tempo mínimo para tarifar o DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.`,
     'did.initblock': `Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
     'did.increment': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
-    'did.charge_of': `Esta opção é para quando o DID tiver custo, neste caso poderá cobrar do usuario dono do DID, ou somente permitir chamadas de números cadastrado no menu CallerID.||Neste caso, o custo será cobrado do usuário ao qual o número foi atrelado.`,
+    'did.charge_of': `Esta opção é para quando o DID tiver custo, neste caso poderá cobrar do usuário dono do DID, ou somente permitir chamadas de números cadastrado no menu CallerID.||Neste caso, o custo será cobrado do usuário ao qual o número foi atrelado.`,
     'did.calllimit': `Limite de chamadas simultâneas para este DID`,
     'did.description': `Usado para seu controle interno.`,
     'did.expression_1': `Esta é uma Expressão regular para tarifar o DID conforme o número de quem liga para o DID||Vamos analisar um exemplo real:
@@ -328,7 +327,7 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento`,
     //DESTINO DE DID
     'diddestination.id_did': `Selecione o DID para criar o novo destino`,
-    'diddestination.id_user': `Usuário que sera o dono deste DID`,
+    'diddestination.id_user': `Usuário que será o dono deste DID`,
     'diddestination.activated': `Somente destinos ativos serão usados.`,
     'diddestination.priority': `Você pode criar até 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, até completar. `,
     'diddestination.voip_call': `Tipo de destinos. Esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido.`,
@@ -350,174 +349,121 @@ exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
 exten => s-CHANUNAVAIL,2,Dial(SIP/contavoip2,,T)
 
 
-NÃO deve ser colocado o nomer para o context, pois o nome do contexto sera [did-numero-do-did]
+NÃO deve ser colocado o nomer para o context, pois o nome do contexto será [did-numero-do-did]
 
 Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
 
 
     `,
     //USO DE DIDS
-    'diduse.id_user': ``,
-    'diduse.id_did': ``,
-    'diduse.reservationdate': ``,
-    //FIREWALL
-    'firewall.ip': ``,
-    'firewall.action': ``,
-    'firewall.description': ``,
+    'diduse.id_user': `Usuário dono do DID`,
+    'diduse.id_did': `Número DID`,
+    'diduse.reservationdate': `Dia que o DID foi reservado para o usuário`,
+    //FAIL2BAN
+    'firewall.ip': `IP`,
+    'firewall.action': `Com esta opção em SIM, o ip será colocado na lista de ip-blacklist do fail2ban e ficará bloqueado para sempre.||A opção NÃO vai bloquear o ip momentaneamente conforme os parâmetros no arquivo /etc/fail2ba/jail.local.
+
+    Por padrão o IP ficará bloqueado por 10 minutos.`,
+    'firewall.description': `Estas informaçōes são capturadas do arquivo de log /var/log/fail2ban.log||É possível acompanhar esse LOG com o comando 
+
+
+tail -f /var/log/fail2ban.log
+
+    `,
     //TOKEN
-    'gauthenticator.username': ``,
-    'gauthenticator.googleAuthenticator_enable': `Após o usuário ativar o Token, somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.`,
-    'gauthenticator.code': ``,
-    'gauthenticator.google_authenticator_key': ``,
+    'gauthenticator.username': `Usuário que deseja ativar TOKEN`,
+    'gauthenticator.googleAuthenticator_enable': `Após ativar o TOKEN para o usuário, somente será possível logar usando o TOKEN gerado pela APP do google||Após ativar o TOKEN, no próximo login do usuário será solicitado que escaneie o QR CODE conforme a imagem abaixo
+
+.. image:: ../img/token.png
+    :scale: 100% 
+
+Para escanear o código é necessário instalar a APP Google authenticator, esta APP está disponível na loja de aplicativos IOS e Android.
+
+É importante guardar o código manual mostrado na imagem, pois será com este código que será possível ativar o token em outro celular caso necessário.
+
+
+Ativando o token para o usuário somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.`,
+    'gauthenticator.code': `O código é necessário para poder desativar o TOKEN. Caso não tiver mais o código, então será necessário desativar pelo banco de dados.`,
+    'gauthenticator.google_authenticator_key': `Esta KEY é necessário para poder ativar o TOKEN em outro celular.`,
     //GROUPMODULE
-    'groupmodule.id_group': ``,
-    'groupmodule.id_module': ``,
+    'groupmodule.id_group': `Grupo de usuário`,
+    'groupmodule.id_module': `Menu`,
     //GRUPOS PARA CLIENTE
-    'groupuser.id': ``,
-    'groupuser.name': ``,
+    'groupuser.name': `Nome para o grupo de usuários`,
     //GRUPOS ADMINISTRADORES
-    'groupusergroup.name': ``,
-    'groupusergroup.user_prefix': ``,
-    'groupusergroup.id_group': ``,
+    'groupusergroup.name': `Nome do Grupo`,
+    'groupusergroup.user_prefix': `Preenchendo este campo, todos os usuários criados por um administrador que usa este grupo será iniciado com este prefixo`,
+    'groupusergroup.id_group': `Quais os grupos de cliente este grupo de administrador terá acesso.||Quando um administrador que está neste grupo logar no sistema, ele somente vai ver os dados dos clientes dos grupos selecionados aqui`,
     //CONTAS IAX
-    'iax.id_user': ``,
-    'iax.username': ``,
-    'iax.secret': ``,
-    'iax.callerid': ``,
-    'iax.disallow': ``,
-    'iax.allow': ``,
-    'iax.host': ``,
-    'iax.nat': ``,
-    'iax.context': ``,
-    'iax.qualify': ``,
-    'iax.dtmfmode': ``,
-    'iax.insecure': ``,
-    'iax.type': ``,
-    'iax.calllimit': ``,
+    'iax.id_user': `Usuário ao qual esta conta IAX vai pertencer`,
+    'iax.username': `Usuário que será usado para autenticar no softphone.`,
+    'iax.secret': `Senha que será usado para autenticar no softphone.`,
+    'iax.callerid': `Este é o CallerID que será mostrado no destino, em chamadas externas o provedor precisa permitir CLI para que seja identificado corretamente no destino.`,
+    'iax.disallow': `Esta opção desativa todos os codecs e deixa disponível para o usuário somente os que você selecionar abaixo.`,
+    'iax.allow': `Codecs que será aceito`,
+    'iax.host': `Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em branco e coloque insecure para port/invite na TAB Informaçōes Adicionais.`,
+    'iax.nat': `O cliente está atrás de NAT? Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/`,
+    'iax.context': `Este é o contexto que a chamada será processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.`,
+    'iax.qualify': `Enviar pacote OPTION para verificar se o usuário está online.`,
+    'iax.dtmfmode': `Tipo de DTMF. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-dtmfmode/`,
+    'iax.insecure': `Se o host estiver dynamic esta opção precisa estar como NO.Para autenticação por IP alterar para port. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-insecure/`,
+    'iax.type': `Tipo padrão é friend, ou seja pode fazer e receber chamadas. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-type/`,
+    'iax.calllimit': `Total de chamadas simultâneas permitida para esta conta IAX.`,
     //URAS
-    'ivr.name': ``,
-    'ivr.id_user': ``,
-    'ivr.monFriStart': `Hora que inicia o horário de atendimento semanal`,
-    'ivr.satStart': `Hora que inicia o horário de atendimento no sábado`,
-    'ivr.sunStart': `Hora que inicia o horário de atendimento no domingo`,
+    'ivr.name': `Nome para a URA`,
+    'ivr.id_user': `Usuário dono da URA`,
+    'ivr.monFriStart': `Intervalo de atendimento de segunda a sexta, pode ser configurado multiplos horarios||Exemplo:
+
+Digamos que o horário de atendimento é de 08h as 12h e das 14h as 19h. Neste caso a regra ficaria
+
+08:00-12:00|14:00-19:00
+
+`,
+    'ivr.satStart': `Intervalo de atendimento nos sabados, pode ser configurado multiplos horarios||Exemplo:
+
+Digamos que o horário de atendimento no sabado é de de 08h as 13h. Neste caso a regra ficaria
+
+08:00-13:00
+
+`,
+    'ivr.sunStart': `Intervalo de atendimento nos domingos, pode ser configurado multiplos horarios||Exemplo:
+
+Digamos que o não existe horário de atendimento no domingo. Neste caso a regra ficaria
+
+00:00-00:00
+
+`,
     'ivr.workaudio': `Audio para executar dentro dos horários de atendimento`,
     'ivr.noworkaudio': `Áudio para executar fora de atendimento`,
-    'ivr.type_0': ``,
-    'ivr.id_ivr_0': ``,
-    'ivr.id_queue_0': ``,
-    'ivr.id_sip_0': ``,
-    'ivr.extension_0': ``,
-    'ivr.type_1': ``,
-    'ivr.id_ivr_1': ``,
-    'ivr.id_queue_1': ``,
-    'ivr.id_sip_1': ``,
-    'ivr.extension_1': ``,
-    'ivr.type_2': ``,
-    'ivr.id_ivr_2': ``,
-    'ivr.id_queue_2': ``,
-    'ivr.id_sip_2': ``,
-    'ivr.extension_2': ``,
-    'ivr.type_3': ``,
-    'ivr.id_ivr_3': ``,
-    'ivr.id_queue_3': ``,
-    'ivr.id_sip_3': ``,
-    'ivr.extension_3': ``,
-    'ivr.type_4': ``,
-    'ivr.id_ivr_4': ``,
-    'ivr.id_queue_4': ``,
-    'ivr.id_sip_4': ``,
-    'ivr.extension_4': ``,
-    'ivr.type_5': ``,
-    'ivr.id_ivr_5': ``,
-    'ivr.id_queue_5': ``,
-    'ivr.id_sip_5': ``,
-    'ivr.extension_5': ``,
-    'ivr.type_6': ``,
-    'ivr.id_ivr_6': ``,
-    'ivr.id_queue_6': ``,
-    'ivr.id_sip_6': ``,
-    'ivr.extension_6': ``,
-    'ivr.type_7': ``,
-    'ivr.id_ivr_7': ``,
-    'ivr.id_queue_7': ``,
-    'ivr.id_sip_7': ``,
-    'ivr.extension_7': ``,
-    'ivr.type_8': ``,
-    'ivr.id_ivr_8': ``,
-    'ivr.id_queue_8': ``,
-    'ivr.id_sip_8': ``,
-    'ivr.extension_8': ``,
-    'ivr.type_9': ``,
-    'ivr.id_ivr_9': ``,
+    'ivr.option_0': `Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_1': `Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_2': `Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_3': `Selecione o destino caso for digitado a opção 3. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_4': `Selecione o destino caso for digitado a opção 4. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_5': `Selecione o destino caso for digitado a opção 5. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_6': `Selecione o destino caso for digitado a opção 6. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_7': `Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_8': `Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_9': `Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.`,
     'ivr.id_queue_9': ``,
-    'ivr.id_sip_9': ``,
-    'ivr.extension_9': ``,
-    'ivr.type_10': ``,
-    'ivr.id_ivr_10': ``,
-    'ivr.id_queue_10': ``,
-    'ivr.id_sip_10': ``,
-    'ivr.extension_10': ``,
-    'ivr.direct_extension': ``,
-    'ivr.type_out_0': ``,
-    'ivr.id_ivr_out_0': ``,
-    'ivr.id_queue_out_0': ``,
-    'ivr.id_sip_out_0': ``,
-    'ivr.extension_out_0': ``,
-    'ivr.type_out_1': ``,
-    'ivr.id_ivr_out_1': ``,
-    'ivr.id_queue_out_1': ``,
-    'ivr.id_sip_out_1': ``,
-    'ivr.extension_out_1': ``,
-    'ivr.type_out_2': ``,
-    'ivr.id_ivr_out_2': ``,
-    'ivr.id_queue_out_2': ``,
-    'ivr.id_sip_out_2': ``,
-    'ivr.extension_out_2': ``,
-    'ivr.type_out_3': ``,
-    'ivr.id_ivr_out_3': ``,
-    'ivr.id_queue_out_3': ``,
-    'ivr.id_sip_out_3': ``,
-    'ivr.extension_out_3': ``,
-    'ivr.type_out_4': ``,
-    'ivr.id_ivr_out_4': ``,
-    'ivr.id_queue_out_4': ``,
-    'ivr.id_sip_out_4': ``,
-    'ivr.extension_out_4': ``,
-    'ivr.type_out_5': ``,
-    'ivr.id_ivr_out_5': ``,
-    'ivr.id_queue_out_5': ``,
-    'ivr.id_sip_out_5': ``,
-    'ivr.extension_out_5': ``,
-    'ivr.type_out_6': ``,
-    'ivr.id_ivr_out_6': ``,
-    'ivr.id_queue_out_6': ``,
-    'ivr.id_sip_out_6': ``,
-    'ivr.extension_out_6': ``,
-    'ivr.type_out_7': ``,
-    'ivr.id_ivr_out_7': ``,
-    'ivr.id_queue_out_7': ``,
-    'ivr.id_sip_out_7': ``,
-    'ivr.extension_out_7': ``,
-    'ivr.type_out_8': ``,
-    'ivr.id_ivr_out_8': ``,
-    'ivr.id_queue_out_8': ``,
-    'ivr.id_sip_out_8': ``,
-    'ivr.extension_out_8': ``,
-    'ivr.type_out_9': ``,
-    'ivr.id_ivr_out_9': ``,
-    'ivr.id_queue_out_9': ``,
-    'ivr.id_sip_out_9': ``,
-    'ivr.extension_out_9': ``,
-    'ivr.type_out_10': ``,
-    'ivr.id_ivr_out_10': ``,
-    'ivr.id_queue_out_10': ``,
-    'ivr.id_sip_out_10': ``,
-    'ivr.extension_out_10': ``,
+    'ivr.option_10': `Selecione o destino caso não for digitado nada.`,
+    'ivr.direct_extension': `Ativando esta opção será possível digitar uma conta SIP para chamar diretamente.`,
+    'ivr.option_out_0': `Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_1': `Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_2': `Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_3': `Selecione o destino caso for digitado a opção 3. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_4': `Selecione o destino caso for digitado a opção 4. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_5': `Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_6': `Selecione o destino caso for digitado a opção 6. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_7': `Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_8': `Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_9': `Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.`,
+    'ivr.option_out_10': `Selecione o destino caso não for digitado nada.`,
     //LOG DE ACESSOS
-    'logusers.id_user': ``,
-    'logusers.id_log_actions': ``,
-    'logusers.ip': ``,
-    'logusers.description': ``,
+    'logusers.id_user': `Usuário que executou a ação`,
+    'logusers.id_log_actions': `Tipo de ação`,
+    'logusers.ip': `IP utilizado para realizar a ação`,
+    'logusers.description': `O que foi feito, normalmente está em JSON`,
     //MéTODOS DE PAGAMENTO
     'methodpay.show_name': `Nome que será mostrado no painel do cliente`,
     'methodpay.id_user': ``,
@@ -719,15 +665,15 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
     'sip.nat': `O cliente esta atras de NAT? Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/`,
     'sip.directmedia': `Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/`,
     'sip.qualify': `Enviar pacote OPTION para verificar se o usuário está online.`,
-    'sip.context': `Somente altere se você sabe o que está fazendo.`,
-    'sip.dtmfmode': ``,
+    'sip.context': `Este é o contexto que a chamada sera processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.`,
+    'sip.dtmfmode': `Tipo de DTMF. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-dtmfmode/`,
     'sip.insecure': `Se o host estiver dynamic esta opção precisa estar como NO. Para IP authentication alterar para port,invite.`,
     'sip.deny': ``,
     'sip.permit': ``,
-    'sip.type': ``,
+    'sip.type': `Tipo padrão é friend, ou seja pode fazer e receber chamadas. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-type/`,
     'sip.allowtransfer': `Permite esta conta VoIP fazer transferência. O código para transferência é *2ramal. É necessário ativar a transferência no arquivo features.conf do Asterisk`,
     'sip.ringfalse': `Ativa ring falso. Adiciona rR do comando Dial.`,
-    'sip.calllimit': `Chamadas simultâneas permitidas.`,
+    'sip.calllimit': `Total de chamadas simultâneas permitida para esta conta SIP.`,
     'sip.mohsuggest': ``,
     'sip.url_events': ``,
     'sip.addparameter': ``,
@@ -835,7 +781,7 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
     'user.prefix_local': `Esta regra permite o cliente discar no formato local. ||EX 0 DDD ou somente o número dentro de seu DDD. As regras são separadas por vírgula e composta por 2 ou 3 parâmetros separados por /.
 1º é o número que será substituído. Pode ser * para pegar qualquer dígito.
 2º é o número que vai substituir o 1º.
-3º é a quantidade de dígitos do número. Se nao colocar o 3º parametro, nao sera verificado a quantidade de dígitos.
+3º é a quantidade de dígitos do número. Se nao colocar o 3º parametro, nao será verificado a quantidade de dígitos.
 
 Alguns exemplos.
 

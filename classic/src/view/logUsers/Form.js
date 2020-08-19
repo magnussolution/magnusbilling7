@@ -31,8 +31,22 @@ Ext.define('MBilling.view.logUsers.Form', {
             allowBlank: true,
             readOnly: true
         }, {
+            xtype: 'combobox',
             name: 'id_log_actions',
             fieldLabel: t('Action'),
+            forceSelection: true,
+            editable: false,
+            value: '1',
+            store: [
+                [1, 'Login'],
+                [2, 'Edit'],
+                [3, 'Delete'],
+                [4, 'New'],
+                [5, 'Import'],
+                [6, 'UpdateAll'],
+                [7, 'Export'],
+                [8, 'Logout']
+            ],
             readOnly: true
         }, {
             name: 'ip',
