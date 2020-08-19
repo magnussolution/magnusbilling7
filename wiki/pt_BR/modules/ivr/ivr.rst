@@ -92,8 +92,8 @@ Trabalhando
 
 .. _ivr-option-0:
 
-Opção
--------
+Opção 0
+---------
 
 | Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.
 
@@ -102,8 +102,8 @@ Opção
 
 .. _ivr-option-1:
 
-Opção
--------
+Opção 1
+---------
 
 | Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.
 
@@ -112,8 +112,8 @@ Opção
 
 .. _ivr-option-2:
 
-Opção
--------
+Opção 2
+---------
 
 | Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.
 
@@ -122,8 +122,8 @@ Opção
 
 .. _ivr-option-3:
 
-Opção
--------
+Opção 3
+---------
 
 | Selecione o destino caso for digitado a opção 3. Deixe em branco se não desejar nenhuma ação.
 
@@ -132,8 +132,8 @@ Opção
 
 .. _ivr-option-4:
 
-Opção
--------
+Opção 4
+---------
 
 | Selecione o destino caso for digitado a opção 4. Deixe em branco se não desejar nenhuma ação.
 
@@ -142,8 +142,8 @@ Opção
 
 .. _ivr-option-5:
 
-Opção
--------
+Opção 5
+---------
 
 | Selecione o destino caso for digitado a opção 5. Deixe em branco se não desejar nenhuma ação.
 
@@ -152,8 +152,8 @@ Opção
 
 .. _ivr-option-6:
 
-Opção
--------
+Opção 6
+---------
 
 | Selecione o destino caso for digitado a opção 6. Deixe em branco se não desejar nenhuma ação.
 
@@ -162,8 +162,8 @@ Opção
 
 .. _ivr-option-7:
 
-Opção
--------
+Opção 7
+---------
 
 | Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.
 
@@ -172,8 +172,8 @@ Opção
 
 .. _ivr-option-8:
 
-Opção
--------
+Opção 8
+---------
 
 | Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.
 
@@ -182,20 +182,10 @@ Opção
 
 .. _ivr-option-9:
 
-Opção
--------
+Opção 9
+---------
 
 | Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.
-
-
-
-
-.. _ivr-id-queue-9:
-
-Fila de espera
---------------
-
-| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -222,8 +212,8 @@ Discar direto conta SIP
 
 .. _ivr-option-out-0:
 
-Opção
--------
+Opção 0
+---------
 
 | Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.
 
@@ -232,8 +222,8 @@ Opção
 
 .. _ivr-option-out-1:
 
-Opção
--------
+Opção 1
+---------
 
 | Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.
 
@@ -242,8 +232,8 @@ Opção
 
 .. _ivr-option-out-2:
 
-Opção
--------
+Opção 2
+---------
 
 | Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.
 
@@ -252,8 +242,8 @@ Opção
 
 .. _ivr-option-out-3:
 
-Opção
--------
+Opção 3
+---------
 
 | Selecione o destino caso for digitado a opção 3. Deixe em branco se não desejar nenhuma ação.
 
@@ -262,8 +252,8 @@ Opção
 
 .. _ivr-option-out-4:
 
-Opção
--------
+Opção 4
+---------
 
 | Selecione o destino caso for digitado a opção 4. Deixe em branco se não desejar nenhuma ação.
 
@@ -272,8 +262,8 @@ Opção
 
 .. _ivr-option-out-5:
 
-Opção
--------
+Opção 5
+---------
 
 | Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.
 
@@ -282,8 +272,8 @@ Opção
 
 .. _ivr-option-out-6:
 
-Opção
--------
+Opção 6
+---------
 
 | Selecione o destino caso for digitado a opção 6. Deixe em branco se não desejar nenhuma ação.
 
@@ -292,8 +282,8 @@ Opção
 
 .. _ivr-option-out-7:
 
-Opção
--------
+Opção 7
+---------
 
 | Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.
 
@@ -302,8 +292,8 @@ Opção
 
 .. _ivr-option-out-8:
 
-Opção
--------
+Opção 8
+---------
 
 | Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.
 
@@ -312,8 +302,8 @@ Opção
 
 .. _ivr-option-out-9:
 
-Opção
--------
+Opção 9
+---------
 
 | Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.
 

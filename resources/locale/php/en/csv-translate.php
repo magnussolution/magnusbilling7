@@ -226,7 +226,6 @@
     'user_prefix'=> ['User_prefix', 'Prefixo_para_usuário' , 'Prefijo_Usuario'],
     'username'=> ['Username', 'Usuário' , 'Usuario'],
     'vat'=> ['VAT', 'Imposto' , 'VAT'],
-    'vencimento'=> ['Due_date', 'Vencimento' , 'Fecha_de_vencimiento'],
     'videosupport'=> ['Videosupport', 'Suporte_a_vídeo' , 'video_soporte'],
     'voicemail'=> ['Enable_voicemail', 'Habilitar_voicemail' , 'Habilitar_correo_de_voz'],
     'voicemail_email'=> ['Email', 'Email' , 'Email'],

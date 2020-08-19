@@ -12,12 +12,6 @@ A API tem documentação, atualmente somente em Ingles, e esta publicado no link
 Deixar em branco para permitir a conexão de qualquer IP.
 
 É extremamente recomendável somente liberar os IPs que realmente deseja conectar.`,
-    //BOLETO
-    'boleto.id_user': ``,
-    'boleto.payment': ``,
-    'boleto.status': ``,
-    'boleto.vencimento': ``,
-    'boleto.description': ``,
     //EXTRATO DE CHAMADAS
     'call.starttime': `Dia e hora do início da chamada`,
     'call.src': `Conta SIP que realizou a chamada`,
@@ -445,7 +439,6 @@ Digamos que o não existe horário de atendimento no domingo. Neste caso a regra
     'ivr.option_7': `Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.`,
     'ivr.option_8': `Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.`,
     'ivr.option_9': `Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.`,
-    'ivr.id_queue_9': ``,
     'ivr.option_10': `Selecione o destino caso não for digitado nada.`,
     'ivr.direct_extension': `Ativando esta opção será possível digitar uma conta SIP para chamar diretamente.`,
     'ivr.option_out_0': `Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.`,
@@ -474,16 +467,6 @@ Digamos que o não existe horário de atendimento no domingo. Neste caso a regra
     'methodpay.username': ``,
     'methodpay.url': ``,
     'methodpay.fee': ``,
-    'methodpay.boleto_banco': ``,
-    'methodpay.boleto_agencia': ``,
-    'methodpay.boleto_conta_corrente': ``,
-    'methodpay.boleto_taxa': ``,
-    'methodpay.boleto_instrucoes': ``,
-    'methodpay.boleto_nome_emp': ``,
-    'methodpay.boleto_end_emp': ``,
-    'methodpay.boleto_cidade_emp': ``,
-    'methodpay.boleto_estado_emp': ``,
-    'methodpay.boleto_cpf_emp': ``,
     'methodpay.pagseguro_TOKEN': ``,
     'methodpay.P2P_CustomerSiteID': ``,
     'methodpay.P2P_KeyID': ``,

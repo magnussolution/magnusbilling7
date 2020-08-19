@@ -35,15 +35,6 @@ class MethodpayController extends Controller
 
     public $fieldsInvisibleClient = array(
         'pagseguro_TOKEN',
-        'boleto_convenio',
-        'boleto_banco',
-        'boleto_agencia',
-        'boleto_conta_corrente',
-        'boleto_inicio_nosso_numeroa',
-        'boleto_carteira',
-        'boleto_taxa',
-        'boleto_instrucoes',
-        'boleto_cpf_emp',
         'P2P_CustomerSiteID',
         'P2P_KeyID',
         'P2P_Passphrase',

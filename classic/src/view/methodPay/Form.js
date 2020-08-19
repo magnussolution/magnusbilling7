@@ -70,60 +70,6 @@ Ext.define('MBilling.view.methodPay.Form', {
             fieldLabel: t('Discount fee'),
             allowBlank: true
         }, {
-            xtype: 'paymentbanckcombo',
-            name: 'boleto_banco',
-            fieldLabel: t('Bank'),
-            allowBlank: true
-        }, {
-            name: 'boleto_convenio',
-            fieldLabel: 'Convenio',
-            allowBlank: true
-        }, {
-            name: 'boleto_agencia',
-            fieldLabel: t('Bank agency'),
-            allowBlank: true
-        }, {
-            name: 'boleto_conta_corrente',
-            fieldLabel: t('Bank account'),
-            allowBlank: true
-        }, {
-            name: 'boleto_inicio_nosso_numeroa',
-            fieldLabel: 'Inicio nosso numero',
-            allowBlank: true
-        }, {
-            name: 'boleto_carteira',
-            fieldLabel: 'Carteira',
-            allowBlank: true
-        }, {
-            name: 'boleto_taxa',
-            fieldLabel: t('Tax'),
-            allowBlank: true
-        }, {
-            name: 'boleto_instrucoes',
-            fieldLabel: t('Instructions'),
-            maxLength: '100',
-            allowBlank: true
-        }, {
-            name: 'boleto_nome_emp',
-            fieldLabel: t('Company'),
-            allowBlank: true
-        }, {
-            name: 'boleto_end_emp',
-            fieldLabel: t('Address'),
-            allowBlank: true
-        }, {
-            name: 'boleto_cidade_emp',
-            fieldLabel: t('City'),
-            allowBlank: true
-        }, {
-            name: 'boleto_estado_emp',
-            fieldLabel: t('State'),
-            allowBlank: true
-        }, {
-            name: 'boleto_cpf_emp',
-            fieldLabel: t('DOC'),
-            allowBlank: true
-        }, {
             name: 'pagseguro_TOKEN',
             fieldLabel: t('TOKEN'),
             allowBlank: true

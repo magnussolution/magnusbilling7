@@ -1,5 +1,5 @@
 /**
- * Classe que define o panel de "Boleto"
+ * Classe que define o panel de "dashboardQueue"
  *
  * MagnusSolution.com <info@magnussolution.com>
  * 17/08/2012

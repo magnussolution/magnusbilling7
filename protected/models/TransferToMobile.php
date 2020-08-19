@@ -1,6 +1,6 @@
 <?php
 /**
- * Modelo para a tabela "Boleto".
+ * Modelo para a tabela "TransferToMobile".
  * =======================================
  * ###################################
  * MagnusBilling

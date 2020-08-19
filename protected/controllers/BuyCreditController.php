@@ -44,9 +44,7 @@ class BuyCreditController extends Controller
             exit('invalid option');
         }
 
-        if ($modelMethodPay->payment_method == 'BoletoBancario') {
-            $this->actionBoletoBancario();
-        } else if ($modelMethodPay->payment_method == 'SuperLogica') {
+        if ($modelMethodPay->payment_method == 'SuperLogica') {
             SLUserSave::criarBoleto($modelMethodPay, $modelUser);
         } else {
             $this->render(strtolower($modelMethodPay->payment_method), array(
@@ -57,26 +55,6 @@ class BuyCreditController extends Controller
         }
     }
 
-    public function actionBoletoBancario()
-    {
-        $dataVencimento = date("Y-m-d ", mktime(0, 0, 0, date("m"), date("d") + 12, date("Y"))) . date('H:i:s');
-
-        $modelBoleto              = new Boleto();
-        $modelBoleto->id_user     = Yii::app()->session['id_user'];
-        $modelBoleto->date        = date("Y-m-d H:i:s");
-        $modelBoleto->description = 'Credito';
-        $modelBoleto->status      = '0';
-        $modelBoleto->payment     = $_GET['amount'];
-        $modelBoleto->vencimento  = $dataVencimento;
-        $modelBoleto->save();
-        $idBoleto = $modelBoleto->getPrimaryKey();
-        $this->redirect(
-            array(
-                'Boleto/secondVia',
-                'id' => $idBoleto,
-            ));
-
-    }
     public function actionPayServiceLink()
     {
 
