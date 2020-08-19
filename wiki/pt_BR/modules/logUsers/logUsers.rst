@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que executou a ação
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Ação
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de ação
 
 
 
@@ -24,7 +24,7 @@ Ação
 IP
 --
 
-| Nós ainda não escrevemos a descrição deste campo.
+| IP utilizado para realizar a ação
 
 
 
@@ -34,7 +34,7 @@ IP
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O que foi feito, normalmente está em JSON
 
 
 

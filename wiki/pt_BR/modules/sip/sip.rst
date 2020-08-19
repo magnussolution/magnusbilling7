@@ -164,7 +164,7 @@ Qualify
 Contexto
 --------
 
-| Somente altere se você sabe o que está fazendo.
+| Este é o contexto que a chamada sera processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.
 
 
 
@@ -174,7 +174,7 @@ Contexto
 Dtmfmode
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/  <https://www.voip-info.org/asterisk-sip-dtmfmode/>`_.
 
 
 
@@ -214,7 +214,7 @@ Permit
 Tipo
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
 
 
 
@@ -244,7 +244,7 @@ Ring falso
 Limite de chamada
 -----------------
 
-| Chamadas simultâneas permitidas.
+| Total de chamadas simultâneas permitida para esta conta SIP.
 
 
 

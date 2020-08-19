@@ -36,7 +36,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     labelWidth: 140,
                     plugins: 'markallowblank',
                     allowBlank: false,
-                    anchor: '100%'
+                    anchor: '100%',
+                    labelAlign: 'right'
                 }
             },
             items: [{
@@ -94,6 +95,7 @@ Ext.define('MBilling.view.ivr.Form', {
                         flex: 5,
                         startX: 100,
                         allowBlank: true,
+                        labelAlign: 'right',
                         ownerForm: me
                     }
                 },
@@ -110,7 +112,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     width: '100%'
                 }, {
                     name: 'option_0',
-                    fieldLabel: t('Option') + ' 0',
+                    fieldLabel: t('Option 0'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_0',
@@ -134,7 +137,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_1',
-                    fieldLabel: t('Option') + ' 1',
+                    fieldLabel: t('Option 1'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         fieldLabel: t('Type'),
@@ -158,7 +162,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_2',
-                    fieldLabel: t('Option') + ' 2',
+                    fieldLabel: t('Option 2'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_2',
@@ -182,7 +187,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_3',
-                    fieldLabel: t('Option') + ' 3',
+                    fieldLabel: t('Option 3'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_3',
@@ -206,7 +212,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_4',
-                    fieldLabel: t('Option') + ' 4',
+                    fieldLabel: t('Option 4'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_4',
@@ -230,7 +237,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_5',
-                    fieldLabel: t('Option') + ' 5',
+                    fieldLabel: t('Option 5'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_5',
@@ -254,7 +262,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_6',
-                    fieldLabel: t('Option') + ' 6',
+                    fieldLabel: t('Option 6'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_6',
@@ -278,7 +287,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_7',
-                    fieldLabel: t('Option') + ' 7',
+                    fieldLabel: t('Option 7'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_7',
@@ -302,7 +312,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_8',
-                    fieldLabel: t('Option') + ' 8',
+                    fieldLabel: t('Option 8'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_8',
@@ -326,7 +337,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_9',
-                    fieldLabel: t('Option') + ' 9',
+                    fieldLabel: t('Option 9'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_9',
@@ -351,6 +363,7 @@ Ext.define('MBilling.view.ivr.Form', {
                 }, {
                     name: 'option_10',
                     fieldLabel: t('Default option'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_10',
@@ -375,7 +388,8 @@ Ext.define('MBilling.view.ivr.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'direct_extension',
-                    fieldLabel: t('Enable known SIP user')
+                    fieldLabel: t('Enable known SIP user'),
+                    labelAlign: 'right'
                 }]
             }, {
                 title: t('Unavailable options'),
@@ -409,7 +423,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     width: '100%'
                 }, {
                     name: 'option_out_0',
-                    fieldLabel: t('Option') + ' 0',
+                    fieldLabel: t('Option 0'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_0',
@@ -433,7 +448,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_1',
-                    fieldLabel: t('Option') + ' 1',
+                    fieldLabel: t('Option 1'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_1',
@@ -457,7 +473,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_2',
-                    fieldLabel: t('Option') + ' 2',
+                    fieldLabel: t('Option 2'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_2',
@@ -481,7 +498,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_3',
-                    fieldLabel: t('Option') + ' 3',
+                    fieldLabel: t('Option 3'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_3',
@@ -505,7 +523,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_4',
-                    fieldLabel: t('Option') + ' 4',
+                    fieldLabel: t('Option 4'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_4',
@@ -529,7 +548,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_5',
-                    fieldLabel: t('Option') + ' 5',
+                    fieldLabel: t('Option 5'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_5',
@@ -553,7 +573,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_6',
-                    fieldLabel: t('Option') + ' 6',
+                    fieldLabel: t('Option 6'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_6',
@@ -577,7 +598,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_7',
-                    fieldLabel: t('Option') + ' 7',
+                    fieldLabel: t('Option 7'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_7',
@@ -601,7 +623,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_8',
-                    fieldLabel: t('Option') + ' 8',
+                    fieldLabel: t('Option 8'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_8',
@@ -625,7 +648,8 @@ Ext.define('MBilling.view.ivr.Form', {
                     }]
                 }, {
                     name: 'option_out_9',
-                    fieldLabel: t('Option') + ' 9',
+                    fieldLabel: t('Option 9'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_9',
@@ -650,6 +674,7 @@ Ext.define('MBilling.view.ivr.Form', {
                 }, {
                     name: 'option_out_10',
                     fieldLabel: t('Default option'),
+                    labelAlign: 'right',
                     items: [{
                         xtype: 'typedestinationcombo',
                         name: 'type_out_10',

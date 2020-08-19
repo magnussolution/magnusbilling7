@@ -4,7 +4,7 @@
 Grupo
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do Grupo
 
 
 
@@ -14,7 +14,7 @@ Grupo
 Prefixo para usuário
 ---------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preenchendo este campo, todos os usuários criados por um administrador que usa este grupo será iniciado com este prefixo
 
 
 
@@ -24,7 +24,8 @@ Prefixo para usuário
 Grupo
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Quais os grupos de cliente este grupo de administrador terá acesso.
+| Quando um administrador que está neste grupo logar no sistema, ele somente vai ver os dados dos clientes dos grupos selecionados aqui
 
 
 

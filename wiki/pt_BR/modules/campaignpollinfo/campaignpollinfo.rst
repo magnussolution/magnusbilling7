@@ -18,13 +18,3 @@ Resultado
 
 
 
-
-.. _campaignPollInfo-obs:
-
-Descrição
------------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
