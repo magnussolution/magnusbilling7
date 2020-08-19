@@ -1029,6 +1029,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2020-08-19
+        if ($version == '7.4.3') {
+
+            $sql = "ALTER TABLE `pkg_callerid` ADD `name` VARCHAR(100) NOT NULL DEFAULT '' AFTER `cid`;";
+            $this->executeDB($sql);
+
+            $version = '7.4.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
     }
 

@@ -212,7 +212,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 xtype: 'splitbutton',
                 glyph: me.glyphPrint,
                 text: window.isTablet ? '' : me.textPrint,
-                width: 100,
+                width: App.user.language == 'en' ? 100 : 110,
                 hidden: !me.allowPrint,
                 handler: 'onPrint',
                 menu: [{
@@ -235,7 +235,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 iconCls: me.iconClsCleanFilter,
                 text: window.isTablet ? '' : me.textCleanFilter,
                 scope: me,
-                width: window.isTablet ? 50 : 110,
+                width: window.isTablet ? 50 : App.user.language == 'en' ? 110 : 120,
                 handler: me.cleanFilters
             });
         }

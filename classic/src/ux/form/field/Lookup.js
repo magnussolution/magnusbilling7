@@ -48,6 +48,7 @@ Ext.define('Ext.ux.form.field.Lookup', {
             iconCls: 'ux-gridfilter-text-icon',
             scope: me,
             text: t('Search'),
+            width: 80,
             handler: me.onClickSearch,
             hidden: me.hiddenSearchButton
         });

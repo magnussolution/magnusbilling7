@@ -51,6 +51,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'callerid.id_user': ``,
     'callerid.cid': `Número do callerid para autenticar o Calling Card. É necessário cadastrar o número no formato que chega no servidor. Verifique o formato no Cli do Asterisk, ou consulte com o provedor do DID.`,
     'callerid.activated': ``,
+    'callerid.name': ``,
     //CHAMADAS ONLINE
     'callonline.idUserusername': `Usuário principal da conta SIP que inicou a chamada.`,
     'callonline.sip_account': `Conta SIP que solicitou a chamada.`,
