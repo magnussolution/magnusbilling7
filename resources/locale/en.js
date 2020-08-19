@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-18
+ * 2020-08-19
  */
 Locale.load({
     '': '',
@@ -336,6 +336,7 @@ Locale.load({
     'Export file': '',
     'Extra3': '',
     'Facility rejected': '',
+    'Fail2ban': '',
     'Failed': '',
     'Failed calls': '',
     'Failed. Try again...': '',
