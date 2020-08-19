@@ -1,5 +1,5 @@
 /**
- * Classe que define a model "Boleto"
+ * Classe que define a model "Backup"
  *
  * =======================================
  * ###################################

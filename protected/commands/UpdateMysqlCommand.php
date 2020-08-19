@@ -1018,6 +1018,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2020-08-19
+        if ($version == '7.4.2') {
+
+            $sql = "DELETE FROM `pkg_group_module` WHERE id_module = (SELECT id FROM pkg_module WHERE module = 'boleto');
+            DELETE FROM  pkg_module WHERE module = 'boleto';";
+            $this->executeDB($sql);
+
+            $version = '7.4.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
     }
 

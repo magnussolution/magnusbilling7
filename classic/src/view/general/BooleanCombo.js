@@ -240,18 +240,6 @@ Ext.define('MBilling.view.general.TypeFullCampaign', {
         [0, t('SMS')]
     ]
 });
-Ext.define('MBilling.view.general.TypeBoleto', {
-    extend: 'Ext.form.field.ComboBox',
-    alias: 'widget.boletocombo',
-    fieldLabel: t('Status'),
-    forceSelection: true,
-    editable: false,
-    value: 'D',
-    store: [
-        ['D', t('No')],
-        ['P', t('Yes')]
-    ]
-});
 Ext.define('MBilling.view.general.RestrictionCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.restrictioncombo',

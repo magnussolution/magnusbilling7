@@ -156,14 +156,6 @@ Este menu tem os seguintes campos
 .. include:: refillprovider/refillprovider.rst
 
 
-Boleto
-++++++
-
-Este menu tem os seguintes campos
-
-.. include:: boleto/boleto.rst
-
-
 Fatura
 ++++++
 
