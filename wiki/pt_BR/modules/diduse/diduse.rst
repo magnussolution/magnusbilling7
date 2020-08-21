@@ -1,20 +1,20 @@
 
-.. _didUse-id_user:
+.. _didUse-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Usuário dono do DID
 
 
-.. _didUse-id_did:
+
+
+.. _didUse-id-did:
 
 DID
-++++++++++++++++
+---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número DID
 
 
 
@@ -22,9 +22,9 @@ DID
 .. _didUse-reservationdate:
 
 Data de reserva
-++++++++++++++++
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dia que o DID foi reservado para o usuário
 
 
 

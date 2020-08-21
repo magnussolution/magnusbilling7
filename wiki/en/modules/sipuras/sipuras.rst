@@ -2,7 +2,7 @@
 .. _sipuras-nserie:
 
 Serial
-++++++++++++
+------
 
 | LinkSys serial number
 
@@ -12,27 +12,27 @@ Serial
 .. _sipuras-macadr:
 
 MAC
-++++++++++++
+---
 
 | LinkSys MAC address
 
 
 
 
-.. _sipuras-senha_user:
+.. _sipuras-senha-user:
 
 User password
-++++++++++++
+-------------
 
 | User to set in LinkSys configuration
 
 
 
 
-.. _sipuras-senha_admin:
+.. _sipuras-senha-admin:
 
 Admin password
-++++++++++++
+--------------
 
 | Pass to set in LinkSys configuration
 
@@ -42,17 +42,17 @@ Admin password
 .. _sipuras-antireset:
 
 Antireset
-++++++++++++
+---------
 
 | Prevent resetting LinkSys with *73738#
 
 
 
 
-.. _sipuras-Enable_Web_Server:
+.. _sipuras-Enable-Web-Server:
 
 Enable_Web_Server
-++++++++++++
+-----------------
 
 | Enabling/Disabling LinkSys configuration WebPage
 
@@ -62,7 +62,7 @@ Enable_Web_Server
 .. _sipuras-marca:
 
 Mark
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -72,207 +72,207 @@ Mark
 .. _sipuras-altera:
 
 Change
-++++++++++++
+------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-User_ID_1:
+.. _sipuras-User-ID-1:
 
 Username
-++++++++++++
+--------
 
 | SIP account username
 
 
 
 
-.. _sipuras-Password_1:
+.. _sipuras-Password-1:
 
 Password
-++++++++++++
+--------
 
 | SIP account password
 
 
 
 
-.. _sipuras-Use_Pref_Codec_Only_1:
+.. _sipuras-Use-Pref-Codec-Only-1:
 
 Use_Pref_Codec
-++++++++++++
+--------------
 
 | Only use the preferred CODEC
 
 
 
 
-.. _sipuras-Preferred_Codec_1:
+.. _sipuras-Preferred-Codec-1:
 
 Codec
-++++++++++++
+-----
 
 | Set the preferred CODEC
 
 
 
 
-.. _sipuras-Register_Expires_1:
+.. _sipuras-Register-Expires-1:
 
 Register expires
-++++++++++++
+----------------
 
 | Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.
 
 
 
 
-.. _sipuras-Dial_Plan_1:
+.. _sipuras-Dial-Plan-1:
 
 Dial plan
-++++++++++++
+---------
 
 | Read LinkSys documentation
 
 
 
 
-.. _sipuras-NAT_Mapping_Enable_1_:
+.. _sipuras-NAT-Mapping-Enable-1-:
 
 NAT Mapping
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-NAT_Keep_Alive_Enable_1_:
+.. _sipuras-NAT-Keep-Alive-Enable-1-:
 
 NAT keep alive
-++++++++++++
+--------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-User_ID_2:
+.. _sipuras-User-ID-2:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-Password_2:
+.. _sipuras-Password-2:
 
 Password
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-Use_Pref_Codec_Only_2:
+.. _sipuras-Use-Pref-Codec-Only-2:
 
 Use_Pref_Codec
-++++++++++++
+--------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-Preferred_Codec_2:
+.. _sipuras-Preferred-Codec-2:
 
 Codec
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-Register_Expires_2:
+.. _sipuras-Register-Expires-2:
 
 Register expires
-++++++++++++
+----------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-Dial_Plan_2:
+.. _sipuras-Dial-Plan-2:
 
 Dial plan
-++++++++++++
+---------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-NAT_Mapping_Enable_2_:
+.. _sipuras-NAT-Mapping-Enable-2-:
 
 NAT Mapping
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-NAT_Keep_Alive_Enable_2_:
+.. _sipuras-NAT-Keep-Alive-Enable-2-:
 
 NAT keep alive
-++++++++++++
+--------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-STUN_Enable:
+.. _sipuras-STUN-Enable:
 
 Enable STUN
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-STUN_Test_Enable:
+.. _sipuras-STUN-Test-Enable:
 
 STUN Test
-++++++++++++
+---------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-Substitute_VIA_Addr:
+.. _sipuras-Substitute-VIA-Addr:
 
 Substitute VIA Addr
-++++++++++++
+-------------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _sipuras-STUN_Server:
+.. _sipuras-STUN-Server:
 
 STUN Server
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

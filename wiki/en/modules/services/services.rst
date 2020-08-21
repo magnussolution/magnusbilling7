@@ -2,7 +2,7 @@
 .. _services-type:
 
 Type
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Type
 .. _services-name:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -22,17 +22,17 @@ Name
 .. _services-calllimit:
 
 Call limit
-++++++++++++
+----------
 
 | We did not write the description to this field.
 
 
 
 
-.. _services-disk_space:
+.. _services-disk-space:
 
 Disk space
-++++++++++++
+----------
 
 | Insert the space available to record in GB.
 
@@ -42,7 +42,7 @@ Disk space
 .. _services-sipaccountlimit:
 
 SIP account limit
-++++++++++++
+-----------------
 
 | We did not write the description to this field.
 
@@ -52,17 +52,17 @@ SIP account limit
 .. _services-price:
 
 Price
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
 
 
 
-.. _services-return_credit:
+.. _services-return-credit:
 
 Return credit
-++++++++++++
+-------------
 
 | Return credit to the user if they cancel before the expiration date.
 
@@ -72,7 +72,7 @@ Return credit
 .. _services-description:
 
 Description
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

@@ -1,8 +1,8 @@
 
-.. _provider-provider_name:
+.. _provider-provider-name:
 
 Nome
-++++++++++++++++
+----
 
 | Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter vários troncos
 
@@ -12,19 +12,19 @@ Nome
 .. _provider-credit:
 
 Crédito
-++++++++++++++++
+--------
 
 | Quanto você tem de crédito com o provedor? Este campo é opcional.
 
 
 
 
-.. _provider-credit_control:
+.. _provider-credit-control:
 
 Controle de crédito
-++++++++++++++++
+--------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Se está opção for ativada os troncos deste provedor serão desativados quando o crédito do provedor ficar em zero.
 
 
 
@@ -32,9 +32,9 @@ Controle de crédito
 .. _provider-description:
 
 Descrição
-++++++++++++++++
+-----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a agenda, somente para controle proprio.
 
 
 

@@ -1,18 +1,18 @@
 
-.. _methodPay-show_name:
+.. _methodPay-show-name:
 
 Nome para mostrar
-++++++++++++++++
+-----------------
 
 | Nome que será mostrado no painel do cliente
 
 
 
 
-.. _methodPay-id_user:
+.. _methodPay-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -22,7 +22,7 @@ Usuário
 .. _methodPay-country:
 
 País
-++++++++++++++++
+-----
 
 | Somente para referencia
 
@@ -32,7 +32,7 @@ País
 .. _methodPay-active:
 
 Ativo
-++++++++++++++++
+-----
 
 | Ative se quiser deixar disponível para os clientes
 
@@ -42,9 +42,9 @@ Ativo
 .. _methodPay-min:
 
 Quantidade mínima
-++++++++++++++++
+------------------
 
-| Valor mínimo que deseja aceitar
+| Valor mínimo que deseja aceitar.
 
 
 
@@ -52,9 +52,9 @@ Quantidade mínima
 .. _methodPay-max:
 
 Quantidade máxima
-++++++++++++++++
+------------------
 
-| Valor máximo que deseja aceitar
+| Valor máximo que deseja aceitar.
 
 
 
@@ -62,9 +62,9 @@ Quantidade máxima
 .. _methodPay-username:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário do metodo de pagamento.
 
 
 
@@ -72,9 +72,9 @@ Usuário
 .. _methodPay-url:
 
 URL
-++++++++++++++++
+---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| URL do metodo de pagamento, na maioria dos metodos está URL ja está preconfigurada.
 
 
 
@@ -82,189 +82,89 @@ URL
 .. _methodPay-fee:
 
 Taxa de desconto
-++++++++++++++++
+----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Taxa cobrada pelo metodo de pagamento.
 
 
 
 
-.. _methodPay-boleto_banco:
-
-Banco
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_agencia:
-
-Empresa bancária
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_conta_corrente:
-
-Conta bancária
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_taxa:
-
-Imposto
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_instrucoes:
-
-Instruções
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_nome_emp:
-
-Empresa
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_end_emp:
-
-Endereço
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_cidade_emp:
-
-Cidade
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_estado_emp:
-
-Estado
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-boleto_cpf_emp:
-
-CPF/CNPJ
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _methodPay-pagseguro_TOKEN:
+.. _methodPay-pagseguro-TOKEN:
 
 Token
-++++++++++++++++
+-----
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| TOKEN do metodo de pagamento.
 
 
-.. _methodPay-P2P_CustomerSiteID:
+
+
+.. _methodPay-P2P-CustomerSiteID:
 
 P2P CustomerSiteID
-++++++++++++++++
+------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
-.. _methodPay-P2P_KeyID:
+
+
+.. _methodPay-P2P-KeyID:
 
 P2P KeyID
-++++++++++++++++
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
-.. _methodPay-P2P_Passphrase:
+
+
+.. _methodPay-P2P-Passphrase:
 
 P2P Passphrase
-++++++++++++++++
+--------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
-.. _methodPay-P2P_RecipientKeyID:
+
+
+.. _methodPay-P2P-RecipientKeyID:
 
 P2P RecipientKeyID
-++++++++++++++++
+------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
-.. _methodPay-P2P_tax_amount:
+
+
+.. _methodPay-P2P-tax-amount:
 
 P2P Tax Amount
-++++++++++++++++
+--------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
-.. _methodPay-client_id:
+
+
+.. _methodPay-client-id:
 
 ID do cliente
-++++++++++++++++
+-------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
-.. _methodPay-client_secret:
+
+
+.. _methodPay-client-secret:
 
 Secret do cliente
-++++++++++++++++
+-----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este campo é exclusivo para alguns metodos de pagamento.
 
 
 

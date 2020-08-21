@@ -30,6 +30,9 @@ Ext.define('MBilling.model.Callerid', {
         name: 'cid',
         type: 'string'
     }, {
+        name: 'name',
+        type: 'string'
+    }, {
         name: 'activated',
         type: 'int'
     }, 'idUserusername'],

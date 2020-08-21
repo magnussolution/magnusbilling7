@@ -32,9 +32,9 @@ Ext.define('MBilling.view.main.ImportWallpaper', {
             xtype: 'uploadfield',
             name: 'wallpaper',
             fieldLabel: t('Select file'),
-            emptyText: t('Only PNG format'),
+            emptyText: t('Only JPEG format'),
             allowBlank: false,
-            extAllowed: ['png'],
+            extAllowed: ['jpg', 'jpeg'],
             anchor: '0'
         }]
     },

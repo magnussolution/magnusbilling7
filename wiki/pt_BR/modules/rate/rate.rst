@@ -1,30 +1,30 @@
 
-.. _rate-id_plan:
+.. _rate-id-plan:
 
 Plano
-++++++++++++++++
+-----
 
-| O plano que você quer adicionar esta tarifa.
-
-
+| O plano que você quer adicionar está tarifa.
 
 
-.. _rate-id_prefix:
+
+
+.. _rate-id-prefix:
 
 Destino
-++++++++++++++++
+-------
 
 | Selecione o prefixo que quer criar a tarifa
 
 
 
 
-.. _rate-id_trunk_group:
+.. _rate-id-trunk-group:
 
 Grupo de Troncos
-++++++++++++++++
+----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Grupo de troncos que será usado para enviar está chamada.
 
 
 
@@ -32,7 +32,7 @@ Grupo de Troncos
 .. _rate-rateinitial:
 
 Preço de venda
-++++++++++++++++
+---------------
 
 | Preço de venda por minuto para este destino
 
@@ -42,7 +42,7 @@ Preço de venda
 .. _rate-initblock:
 
 Bloco mínimo
-++++++++++++++++
+-------------
 
 | Tempo mínimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
@@ -52,39 +52,39 @@ Bloco mínimo
 .. _rate-billingblock:
 
 Bloco de tarifação
-++++++++++++++++
+--------------------
 
-| Bloco de quantos em quantos segundos ira cobrar após o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
-
-
+| Bloco de quantos em quantos segundos irá cobrar após o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
-.. _rate-minimal_time_charge:
+
+
+.. _rate-minimal-time-charge:
 
 Tempo mínimo para tarifar
-++++++++++++++++
+--------------------------
 
-| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for => que 3 segundos
-
-
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
 
 
-.. _rate-additional_grace:
+
+
+.. _rate-additional-grace:
 
 Tempo adicional
-++++++++++++++++
+---------------
 
 | Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
 
 
 
 
-.. _rate-package_offer:
+.. _rate-package-offer:
 
 Incluir no pacotes grátis
-++++++++++++++++
+--------------------------
 
-| Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
+| Ative está opção se você quer que está tarifa seja usada nos pacotes grátis
 
 
 
@@ -92,9 +92,9 @@ Incluir no pacotes grátis
 .. _rate-status:
 
 Status
-++++++++++++++++
+------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Desativando a tarifa, o MagnusBilling vai desconsiderar completamente está tarifa. Ou seja, deletar ou desativar terá o mesmo efeito.
 
 
 

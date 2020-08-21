@@ -1,38 +1,38 @@
 
-.. _offerCdr-id_user:
+.. _offerCdr-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
 
 
 
-.. _offerCdr-id_offer:
+.. _offerCdr-id-offer:
 
 Offer
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
 
 
 
-.. _offerCdr-used_secondes:
+.. _offerCdr-used-secondes:
 
-Used secondes
-++++++++++++
+Duration
+--------
 
 | We did not write the description to this field.
 
 
 
 
-.. _offerCdr-date_consumption:
+.. _offerCdr-date-consumption:
 
 Date
-++++++++++++
+----
 
 | We did not write the description to this field.
 

@@ -1,20 +1,20 @@
 
-.. _logUsers-id_user:
+.. _logUsers-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Usuário que executou a ação
 
 
-.. _logUsers-id_log_actions:
+
+
+.. _logUsers-id-log-actions:
 
 Ação
-++++++++++++++++
+------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de ação
 
 
 
@@ -22,9 +22,9 @@ Ação
 .. _logUsers-ip:
 
 IP
-++++++++++++++++
+--
 
-| Nós ainda não escrevemos a descrição deste campo.
+| IP utilizado para realizar a ação
 
 
 
@@ -32,9 +32,9 @@ IP
 .. _logUsers-description:
 
 Descrição
-++++++++++++++++
+-----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O que foi feito, normalmente está em JSON
 
 
 

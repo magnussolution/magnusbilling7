@@ -1,18 +1,18 @@
 
-.. _didUse-id_user:
+.. _didUse-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
 
 
 
-.. _didUse-id_did:
+.. _didUse-id-did:
 
 DID
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ DID
 .. _didUse-reservationdate:
 
 Reservation date
-++++++++++++
+----------------
 
 | We did not write the description to this field.
 

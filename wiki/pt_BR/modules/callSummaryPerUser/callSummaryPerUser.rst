@@ -2,10 +2,10 @@
 .. _callSummaryPerUser-sumsessiontime:
 
 Duração
-++++++++++++++++
+---------
 
 | Somatorio de minutos chamadas por usuário.
-| É possível realizar filtros, por exemplo, somente usuarios que iniciam com a letra a, ou um usuário específico. Este somatório mostrará somente os dados do filtro executado.
+| É possível realizar filtros, por exemplo, somente usuários que iniciam com a letra a, ou um usuário específico. Este somatório mostrará somente os dados do filtro executado.
 
 
 
@@ -13,7 +13,7 @@ Duração
 .. _callSummaryPerUser-sumlucro:
 
 Lucro
-++++++++++++++++
+-----
 
 | Somatório do lucro
 
@@ -23,7 +23,7 @@ Lucro
 .. _callSummaryPerUser-sumnbcall:
 
 Chamadas atendidas
-++++++++++++++++
+------------------
 
 | Total de chamadas
 
@@ -33,7 +33,7 @@ Chamadas atendidas
 .. _callSummaryPerUser-sumnbcallfail:
 
 Chamadas rejeitadas
-++++++++++++++++
+-------------------
 
 | Total de chamadas rejeitadas
 

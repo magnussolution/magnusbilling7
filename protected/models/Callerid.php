@@ -55,7 +55,7 @@ class Callerid extends Model
         return array(
             array('cid, id_user', 'required'),
             array('id_user', 'numerical', 'integerOnly' => true),
-            array('cid', 'length', 'max' => 100),
+            array('cid, name', 'length', 'max' => 100),
             array('activated', 'length', 'max' => 1),
         );
     }

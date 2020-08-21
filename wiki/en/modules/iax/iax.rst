@@ -1,8 +1,8 @@
 
-.. _iax-id_user:
+.. _iax-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _iax-username:
 
 IAX user
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ IAX user
 .. _iax-secret:
 
 IAX password
-++++++++++++
+------------
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ IAX password
 .. _iax-callerid:
 
 CallerID
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ CallerID
 .. _iax-disallow:
 
 Disallow
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -52,7 +52,7 @@ Disallow
 .. _iax-allow:
 
 Codec
-++++++++++++
+-----
 
 | We did not write the description to this field.
 
@@ -62,7 +62,7 @@ Codec
 .. _iax-host:
 
 Host
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -72,7 +72,7 @@ Host
 .. _iax-nat:
 
 NAT
-++++++++++++
+---
 
 | We did not write the description to this field.
 
@@ -82,7 +82,7 @@ NAT
 .. _iax-context:
 
 Context
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -92,7 +92,7 @@ Context
 .. _iax-qualify:
 
 Qualify
-++++++++++++
+-------
 
 | We did not write the description to this field.
 
@@ -102,7 +102,7 @@ Qualify
 .. _iax-dtmfmode:
 
 Dtmfmode
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -112,7 +112,7 @@ Dtmfmode
 .. _iax-insecure:
 
 Insecure
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -122,7 +122,7 @@ Insecure
 .. _iax-type:
 
 Type
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -132,7 +132,7 @@ Type
 .. _iax-calllimit:
 
 Call limit
-++++++++++++
+----------
 
 | We did not write the description to this field.
 

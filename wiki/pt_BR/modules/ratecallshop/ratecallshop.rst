@@ -2,9 +2,9 @@
 .. _rateCallshop-dialprefix:
 
 Prefixo
-++++++++++++++++
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Prefixo que quer criar a tarifa. Esta tarifa será exclusiva para o CALLSHOP.
 
 
 
@@ -12,19 +12,19 @@ Prefixo
 .. _rateCallshop-destination:
 
 Destino
-++++++++++++++++
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do destino para este prefixo.
 
 
 
 
 .. _rateCallshop-buyrate:
 
-Preço
-++++++++++++++++
+Preço de venda
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor cobrado por minuto do cliente do Callshop
 
 
 
@@ -32,9 +32,9 @@ Preço
 .. _rateCallshop-minimo:
 
 Bloco inicial
-++++++++++++++++
+-------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
 
 
@@ -42,19 +42,19 @@ Bloco inicial
 .. _rateCallshop-block:
 
 Incremento
-++++++++++++++++
+----------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
-.. _rateCallshop-minimal_time_charge:
+
+
+.. _rateCallshop-minimal-time-charge:
 
 Tempo mínimo para tarifar
-++++++++++++++++
+--------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
 
 
 

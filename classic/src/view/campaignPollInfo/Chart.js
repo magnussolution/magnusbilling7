@@ -24,21 +24,22 @@ Ext.define('MBilling.view.campaignPollInfo.Chart', {
     controller: 'campaignpollinfo',
     store: 'CampaignPollInfoChart',
     fieldValue: 'sumresposta',
-    fieldDescription: 'resposta2',
+    fieldDescription: 'resposta_name',
     labelYLine: t('Count votes'),
-    labelXLine: t('Result'),
-    fieldLabel: t('Percentage'),
+    labelXLine: t('Options'),
+    fieldLabel: 'percentage',
     initComponent: function() {
         var me = this,
             buttonsChart;
-        if (window.newChartCampaignInfo) {
-            me.fieldDescription = 'resposta_name';
-        }
         me.bbarChart = [{
             xtype: 'tbtext',
             itemId: 'tbTextSum',
             reference: 'tbTextSum'
         }];
+        me.rendererFieldValue = Ext.util.Format.numberRenderer('0'),
+            me.rendererFieldValue = function(axis, label, layoutContext) {
+                return layoutContext.renderer(label);
+            };
         me.store = Ext.data.StoreManager.lookup(me.store);
         me.store.setRemoteFilter(true);
         filters = me.list.filters.getFilterData();
@@ -47,7 +48,7 @@ Ext.define('MBilling.view.campaignPollInfo.Chart', {
             scope: me,
             callback: function() {
                 if (me.store.getData().items[0]) me.sumData = me.store.getData().items[0].getData();
-                if (window.newChartCampaignInfo) me.lookupReference('tbTextSum').setText(me.sumData.total_votos);
+                me.lookupReference('tbTextSum').setText(me.sumData.total_votos);
             }
         });
         me.callParent(arguments);

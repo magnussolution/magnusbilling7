@@ -68,9 +68,9 @@ Ext.define('MBilling.view.main.Main', {
                         handler: 'importLogo',
                         hidden: !App.user.isAdmin || window.isTablet || window.isTablets
                     }, {
-                        text: t('Import wallpaper'),
+                        text: t('Import Login Background'),
                         glyph: icons.cog,
-                        handler: 'importWallpaper',
+                        handler: 'importLoginBackground',
                         hidden: !App.user.isAdmin || window.isTablet || window.isTablets
                     }, {
                         text: t('Theme settings'),

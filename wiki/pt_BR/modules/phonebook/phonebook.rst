@@ -2,9 +2,9 @@
 .. _phoneBook-name:
 
 Nome
-++++++++++++++++
+----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome da agenda.
 
 
 
@@ -12,9 +12,9 @@ Nome
 .. _phoneBook-status:
 
 Status
-++++++++++++++++
+------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Status da agenda.
 
 
 
@@ -22,9 +22,9 @@ Status
 .. _phoneBook-description:
 
 Descrição
-++++++++++++++++
+-----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a agenda, somente para controle proprio.
 
 
 

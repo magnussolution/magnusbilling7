@@ -1,8 +1,18 @@
 
+.. _campaignPoll-id-campaign:
+
+Campaign
+--------
+
+| We did not write the description to this field.
+
+
+
+
 .. _campaignPoll-name:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -11,28 +21,38 @@ Name
 
 .. _campaignPoll-repeat:
 
-How many time to repeat, if the client press invalid option?
-++++++++++++
+Repeat if press invalid option
+------------------------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _campaignPoll-request_authorize:
+.. _campaignPoll-request-authorize:
 
 Request authorization
-++++++++++++
+---------------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _campaignPoll-digit_authorize:
+.. _campaignPoll-digit-authorize:
 
 Number for authorize
-++++++++++++
+--------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _campaignPoll-arq-audio:
+
+Audio
+-----
 
 | We did not write the description to this field.
 
@@ -42,17 +62,7 @@ Number for authorize
 .. _campaignPoll-description:
 
 Description
-++++++++++++
-
-| We did not write the description to this field.
-
-
-
-
-.. _campaignPoll-arq_audio:
-
-Audio
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -61,8 +71,8 @@ Audio
 
 .. _campaignPoll-option0:
 
-Option
-++++++++++++
+Option 0
+--------
 
 | We did not write the description to this field.
 
@@ -71,8 +81,8 @@ Option
 
 .. _campaignPoll-option1:
 
-Option
-++++++++++++
+Option 1
+--------
 
 | We did not write the description to this field.
 
@@ -81,8 +91,8 @@ Option
 
 .. _campaignPoll-option2:
 
-Option
-++++++++++++
+Option 2
+--------
 
 | We did not write the description to this field.
 
@@ -91,8 +101,8 @@ Option
 
 .. _campaignPoll-option3:
 
-Option
-++++++++++++
+Option 3
+--------
 
 | We did not write the description to this field.
 
@@ -101,8 +111,8 @@ Option
 
 .. _campaignPoll-option4:
 
-Option
-++++++++++++
+Option 4
+--------
 
 | We did not write the description to this field.
 
@@ -111,8 +121,8 @@ Option
 
 .. _campaignPoll-option5:
 
-Option
-++++++++++++
+Option 5
+--------
 
 | We did not write the description to this field.
 
@@ -121,8 +131,8 @@ Option
 
 .. _campaignPoll-option6:
 
-Option
-++++++++++++
+Option 6
+--------
 
 | We did not write the description to this field.
 
@@ -131,8 +141,8 @@ Option
 
 .. _campaignPoll-option7:
 
-Option
-++++++++++++
+Option 7
+--------
 
 | We did not write the description to this field.
 
@@ -141,8 +151,8 @@ Option
 
 .. _campaignPoll-option8:
 
-Option
-++++++++++++
+Option 8
+--------
 
 | We did not write the description to this field.
 
@@ -151,8 +161,8 @@ Option
 
 .. _campaignPoll-option9:
 
-Option
-++++++++++++
+Option 9
+--------
 
 | We did not write the description to this field.
 

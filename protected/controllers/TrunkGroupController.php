@@ -32,7 +32,7 @@ class TrunkGroupController extends Controller
         $this->instanceModel        = new TrunkGroup;
         $this->abstractModel        = TrunkGroup::model();
         $this->abstractModelRelated = TrunkGroupTrunk::model();
-        $this->titleReport          = Yii::t('zii', 'Trunk Group');
+        $this->titleReport          = Yii::t('zii', 'Trunk Groups');
 
         parent::init();
     }

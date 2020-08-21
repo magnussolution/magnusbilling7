@@ -1,8 +1,8 @@
 
-.. _queueMember-queue_name:
+.. _queueMember-queue-name:
 
 Queue name
-++++++++++++
+----------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Queue name
 .. _queueMember-interface:
 
 Sip user
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Sip user
 .. _queueMember-paused:
 
 Paused
-++++++++++++
+------
 
 | We did not write the description to this field.
 

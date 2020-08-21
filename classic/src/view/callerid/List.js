@@ -47,6 +47,10 @@ Ext.define('MBilling.view.callerid.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
+            header: t('Name'),
+            dataIndex: 'name',
+            flex: 4
+        }, {
             header: t('Status'),
             dataIndex: 'activated',
             renderer: Helper.Util.formatBooleanActive,

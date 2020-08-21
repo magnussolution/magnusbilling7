@@ -1,10 +1,10 @@
 
-.. _refill-id_user:
+.. _refill-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que será realizado a recarga.
 
 
 
@@ -12,9 +12,9 @@ Usuário
 .. _refill-credit:
 
 Crédito
-++++++++++++++++
+--------
 
-| Valor da recarga
+| Valor da recarga. Pode ser valor possitvo ou negativo, caso o valor for negativo, vai retirar o valor da recarga do crédito do cliente.
 
 
 
@@ -22,9 +22,9 @@ Crédito
 .. _refill-description:
 
 Descrição
-++++++++++++++++
+-----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a agenda, somente para controle proprio.
 
 
 
@@ -32,19 +32,19 @@ Descrição
 .. _refill-payment:
 
 Adicionar pagamento
-++++++++++++++++
+-------------------
 
 | Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO
 
 
 
 
-.. _refill-invoice_number:
+.. _refill-invoice-number:
 
 Fatura número
-++++++++++++++++
+--------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número da fatura
 
 
 

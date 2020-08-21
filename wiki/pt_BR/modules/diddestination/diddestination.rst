@@ -1,20 +1,20 @@
 
-.. _diddestination-id_did:
+.. _diddestination-id-did:
 
 DID
-++++++++++++++++
+---
 
 | Selecione o DID para criar o novo destino
 
 
 
 
-.. _diddestination-id_user:
+.. _diddestination-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que será o dono deste DID
 
 
 
@@ -22,9 +22,9 @@ Usuário
 .. _diddestination-activated:
 
 Status
-++++++++++++++++
+------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somente destinos ativos serão usados.
 
 
 
@@ -32,19 +32,19 @@ Status
 .. _diddestination-priority:
 
 Prioridade
-++++++++++++++++
+----------
 
 | Você pode criar até 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, até completar. 
 
 
 
 
-.. _diddestination-voip_call:
+.. _diddestination-voip-call:
 
 Tipo
-++++++++++++++++
+----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de destinos. Esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido.
 
 
 
@@ -52,39 +52,39 @@ Tipo
 .. _diddestination-destination:
 
 Destino
-++++++++++++++++
+-------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _diddestination-id_ivr:
+.. _diddestination-id-ivr:
 
 URA
-++++++++++++++++
+---
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono do DID
 
 
-.. _diddestination-id_queue:
+
+
+.. _diddestination-id-queue:
 
 Fila de espera
-++++++++++++++++
+--------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono do DID
 
 
-.. _diddestination-id_sip:
+
+
+.. _diddestination-id-sip:
 
 Conta SIP
-++++++++++++++++
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono do DID
 
 
 
@@ -92,9 +92,29 @@ Conta SIP
 .. _diddestination-context:
 
 Contexto
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nesta opção poderá ser usado um contexto no formato aceito pelo Asterisk
+| Como por exemplo:
+| 
+| _X. => 1,Dial(SIP/contavoip,45)
+|     same => n,Goto(s-\${DIALSTATUS},1)
+| 
+| 
+| exten => s-NOANSWER,1,Hangup
+| exten => s-CONGESTION,1,Congestion
+| exten => s-CANCEL,1,Hangup
+| exten => s-BUSY,1,Busy
+| exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
+| exten => s-CHANUNAVAIL,2,Dial(SIP/contavoip2,,T)
+| 
+| 
+| NÃO deve ser colocado o nomer para o context, pois o nome do contexto será [did-numero-do-did]
+| 
+| Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
+| 
+| 
+|     
 
 
 

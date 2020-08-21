@@ -13,7 +13,7 @@ Ext.define('MBilling.view.user.List', {
         me.extraButtons = [{
             text: t('Bulk user'),
             handler: 'onBulk',
-            width: 80,
+            width: App.user.language == 'en' ? 80 : 110,
             disabled: false,
             hidden: App.user.isClient || !me.allowCreate || window.isTablet
         }];

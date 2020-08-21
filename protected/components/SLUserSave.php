@@ -105,21 +105,5 @@ class SLUserSave
         $response = (array) json_decode(curl_exec($ch));
         curl_close($ch);
 
-        if ($response[0]->status != 200) {
-            echo $response[0]->msg;
-            exit();
-        } else {
-            $modelBoleto              = new Boleto();
-            $modelBoleto->id_user     = $modelUser->id;
-            $modelBoleto->payment     = $_GET['amount'];
-            $modelBoleto->description = "Boleto gerado ID: " . $response[0]->data->st_nossonumero_recb .
-            ", Status:Aguardando pagamento. Segunda VIA:
-                                        " . $response[0]->data->link_2via;
-            $modelBoleto->status     = 0;
-            $modelBoleto->vencimento = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") + 7, date("Y")));
-            $modelBoleto->save();
-
-            header('Location: ' . $response[0]->data->link_2via);
-        }
     }
 }

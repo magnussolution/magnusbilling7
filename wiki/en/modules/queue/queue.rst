@@ -1,8 +1,8 @@
 
-.. _queue-id_user:
+.. _queue-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _queue-name:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Name
 .. _queue-language:
 
 Language
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Language
 .. _queue-strategy:
 
 Strategy
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -42,7 +42,7 @@ Strategy
 .. _queue-ringinuse:
 
 Ringinuse
-++++++++++++
+---------
 
 | We did not write the description to this field.
 
@@ -52,7 +52,7 @@ Ringinuse
 .. _queue-timeout:
 
 Ring for
-++++++++++++
+--------
 
 | How long the phone will ring until timeout
 
@@ -62,7 +62,7 @@ Ring for
 .. _queue-retry:
 
 Time for another agent
-++++++++++++
+----------------------
 
 | Time in seconds to try another agent.
 
@@ -72,7 +72,7 @@ Time for another agent
 .. _queue-wrapuptime:
 
 Time for another call
-++++++++++++
+---------------------
 
 | Time in seconds until the agent receives another call.
 
@@ -82,7 +82,7 @@ Time for another call
 .. _queue-weight:
 
 Weight
-++++++++++++
+------
 
 | Weight of queue - when compared to other queues, higher weights get the first try at available channels when the same channel is included in more than one queue.
 
@@ -92,7 +92,7 @@ Weight
 .. _queue-periodic-announce:
 
 Periodic announce
-++++++++++++
+-----------------
 
 | A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait
 
@@ -102,7 +102,7 @@ Periodic announce
 .. _queue-periodic-announce-frequency:
 
 Frequency
-++++++++++++
+---------
 
 | How often to make a periodic announcement.
 
@@ -112,7 +112,7 @@ Frequency
 .. _queue-announce-position:
 
 Announce position
-++++++++++++
+-----------------
 
 | Queue position announce?
 
@@ -122,7 +122,7 @@ Announce position
 .. _queue-announce-holdtime:
 
 Announce holdtime
-++++++++++++
+-----------------
 
 | Should we include an estimated hold time in the position announcements?
 
@@ -132,7 +132,7 @@ Announce holdtime
 .. _queue-announce-frequency:
 
 Announce frequency
-++++++++++++
+------------------
 
 | How often to announce queue position and/or estimated holdtime to caller 0=off
 
@@ -142,7 +142,7 @@ Announce frequency
 .. _queue-joinempty:
 
 Join empty
-++++++++++++
+----------
 
 | We did not write the description to this field.
 
@@ -152,37 +152,37 @@ Join empty
 .. _queue-leavewhenempty:
 
 Leave when empty
-++++++++++++
+----------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _queue-max_wait_time:
+.. _queue-max-wait-time:
 
 Max wait time
-++++++++++++
+-------------
 
 | Maximum wait time on the queue
 
 
 
 
-.. _queue-max_wait_time_action:
+.. _queue-max-wait-time-action:
 
 Max wait time action
-++++++++++++
+--------------------
 
 | SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.
 
 
 
 
-.. _queue-ring_or_moh:
+.. _queue-ring-or-moh:
 
 Ring or playing MOH
-++++++++++++
+-------------------
 
 | We did not write the description to this field.
 
@@ -192,7 +192,7 @@ Ring or playing MOH
 .. _queue-musiconhold:
 
 Audio musiconhold
-++++++++++++
+-----------------
 
 | We did not write the description to this field.
 
