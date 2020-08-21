@@ -114,7 +114,8 @@ class AuthenticateAgi
                 $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser, $modelSip);
-                $MAGNUS->dnid = substr($MAGNUS->dnid, $MAGNUS->config['global']['ip_tech_length']);
+                $MAGNUS->sip_account = $modelSip->name;
+                $MAGNUS->dnid        = substr($MAGNUS->dnid, $MAGNUS->config['global']['ip_tech_length']);
                 $agi->verbose("AUTHENTICATION BY TECHPREFIX $tech_prefix - Username: " . $MAGNUS->username . '  ' . $MAGNUS->dnid, 6);
                 $authentication = true;
             }
