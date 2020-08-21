@@ -2,7 +2,7 @@
 .. _rateCallshop-dialprefix:
 
 Prefix
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Prefix
 .. _rateCallshop-destination:
 
 Destination
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 
@@ -21,8 +21,8 @@ Destination
 
 .. _rateCallshop-buyrate:
 
-Price
-++++++++++++
+Sell price
+----------
 
 | We did not write the description to this field.
 
@@ -32,7 +32,7 @@ Price
 .. _rateCallshop-minimo:
 
 Buy price initblock
-++++++++++++
+-------------------
 
 | We did not write the description to this field.
 
@@ -42,17 +42,17 @@ Buy price initblock
 .. _rateCallshop-block:
 
 Buy price increment
-++++++++++++
+-------------------
 
 | We did not write the description to this field.
 
 
 
 
-.. _rateCallshop-minimal_time_charge:
+.. _rateCallshop-minimal-time-charge:
 
 Minimum time to charge
-++++++++++++
+----------------------
 
 | We did not write the description to this field.
 

@@ -1,8 +1,8 @@
 
-.. _sendCreditSummary-id_user:
+.. _sendCreditSummary-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

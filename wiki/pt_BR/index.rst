@@ -28,6 +28,9 @@ Bem vindo à documentação do MagnusBilling 7 em português.
    :maxdepth: 1
 
    price_calculation.rst
+   tts.rst
+   offer.rst
+   how_to_use_voucher.rst
 
 .. toctree::
    :caption: Configaçōes do Asterisk

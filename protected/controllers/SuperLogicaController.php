@@ -57,10 +57,6 @@ class SuperLogicaController extends CController
                 ));
 
             if (count($modelboleto)) {
-                $modelboleto->status      = 1;
-                $modelboleto->description = "Boleto Pago ID: " . $_POST['data']['st_nossonumero_recb'];
-                $modelboleto->save();
-
                 UserCreditManager::releaseUserCredit($modelboleto->id_user, $modelboleto->payment, 'Boleto Pago', $modelboleto->description);
             }
 

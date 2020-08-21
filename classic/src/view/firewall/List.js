@@ -32,6 +32,7 @@ Ext.define('MBilling.view.firewall.List', {
         me.allowPrint = false;
         me.allowCreate = true;
         me.allowDelete = true;
+        me.buttonNewWidth = 120;
         me.columns = [{
             header: t('IP'),
             dataIndex: 'ip',

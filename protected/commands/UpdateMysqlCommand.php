@@ -954,7 +954,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                 UPDATE `pkg_module` SET text = 't(''Phonenumbers'')' WHERE module = 'phonenumber';
                 UPDATE `pkg_module` SET text = 't(''Polls'')' WHERE module = 'campaignpoll';
                 UPDATE `pkg_module` SET text = 't(''Polls Reports'')' WHERE module = 'campaignpollinfo';
-                UPDATE `pkg_module` SET text = 't(''Restrict phone'')' WHERE module = 'campaignrestrictphone';
+                UPDATE `pkg_module` SET text = 't(''Restrict Phone'')' WHERE module = 'campaignrestrictphone';
                 UPDATE `pkg_module` SET text = 't(''SMS'')' WHERE module = 'sms';
                 UPDATE `pkg_module` SET text = 't(''Campanha Rápida'')' WHERE module = 'Quick Campaign';
                 UPDATE `pkg_module` SET text = 't(''Campaigns DashBoard'')' WHERE module = 'campaigndashboard';
@@ -980,6 +980,62 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2020-08-17
+        if ($version == '7.3.9') {
+
+            $sql = "UPDATE `pkg_module` SET text = 't(''Restrict Phone'')' WHERE module = 'campaignrestrictphone';";
+            $this->executeDB($sql);
+
+            $version = '7.4.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2020-08-18
+        if ($version == '7.4.0') {
+
+            $sql = " UPDATE `pkg_did` SET expression_1 = '.*' WHERE expression_1 = '*';
+            UPDATE `pkg_did` SET expression_2 = '.*' WHERE expression_2 = '*';
+            UPDATE `pkg_did` SET expression_3 = '.*' WHERE expression_3 = '*';";
+            $this->executeDB($sql);
+
+            $version = '7.4.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2020-08-18
+        if ($version == '7.4.1') {
+
+            $sql = " UPDATE `pkg_module` SET text = 't(''Fail2ban'')' WHERE text = 't(''Firewall'')';";
+            $this->executeDB($sql);
+
+            $version = '7.4.2';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        //2020-08-19
+        if ($version == '7.4.2') {
+
+            $sql = "DELETE FROM `pkg_group_module` WHERE id_module = (SELECT id FROM pkg_module WHERE module = 'boleto');
+            DELETE FROM  pkg_module WHERE module = 'boleto';";
+            $this->executeDB($sql);
+
+            $version = '7.4.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        //2020-08-19
+        if ($version == '7.4.3') {
+
+            $sql = "ALTER TABLE `pkg_callerid` ADD `name` VARCHAR(100) NOT NULL DEFAULT '' AFTER `cid`;";
+            $this->executeDB($sql);
+
+            $version = '7.4.4';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

@@ -2,7 +2,7 @@
 .. _phoneBook-name:
 
 Name
-++++++++++++
+----
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Name
 .. _phoneBook-status:
 
 Status
-++++++++++++
+------
 
 | We did not write the description to this field.
 
@@ -22,7 +22,7 @@ Status
 .. _phoneBook-description:
 
 Description
-++++++++++++
+-----------
 
 | We did not write the description to this field.
 

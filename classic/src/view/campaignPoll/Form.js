@@ -20,6 +20,7 @@ Ext.define('MBilling.view.campaignPoll.Form', {
                 layout: 'anchor',
                 bodyPadding: 5,
                 defaults: {
+                    labelWidth: 220,
                     plugins: 'markallowblank',
                     allowBlank: false,
                     anchor: '100%',
@@ -29,17 +30,19 @@ Ext.define('MBilling.view.campaignPoll.Form', {
             items: [{
                 title: t('General'),
                 items: [{
-                    xtype: 'campaigncombo'
+                    xtype: 'campaigncombo',
+                    name: 'id_campaign',
+                    fieldLabel: t('Campaign')
                 }, {
                     name: 'name',
                     fieldLabel: t('Name')
                 }, {
                     xtype: 'numberfield',
                     name: 'repeat',
-                    fieldLabel: t('How many time to repeat, if the client press invalid option?'),
+                    fieldLabel: t('Repeat if press invalid option'),
                     minValue: 0,
                     maxValue: 9,
-                    allowBlank: true
+                    value: 0
                 }, {
                     xtype: 'noyescombo',
                     name: 'request_authorize',
@@ -50,63 +53,77 @@ Ext.define('MBilling.view.campaignPoll.Form', {
                     fieldLabel: t('Number for authorize'),
                     value: '1',
                     minValue: 1,
-                    maxValue: 9,
-                    allowBlank: true
+                    maxValue: 9
                 }, {
-                    xtype: 'textareafield',
-                    name: 'description',
-                    fieldLabel: t('Description'),
-                    allowBlank: true
+                    xtype: 'box',
+                    hidden: false,
+                    autoEl: {
+                        tag: 'br'
+                    }
                 }, {
                     xtype: 'uploadfield',
                     name: 'arq_audio',
                     fieldLabel: t('Audio'),
-                    emptyText: 'Select an wav or gsm File',
+                    labelWidth: 100,
+                    emptyText: t('Select an wav or gsm File'),
                     allowBlank: true,
                     extAllowed: ['wav', 'gsm']
+                }, {
+                    xtype: 'textareafield',
+                    name: 'description',
+                    fieldLabel: t('Description'),
+                    labelWidth: 100,
+                    allowBlank: true
                 }]
             }, {
                 title: t('Options'),
                 itemId: 'optionsData',
+                defaults: {
+                    border: false,
+                    plugins: 'markallowblank',
+                    allowBlank: false,
+                    anchor: '100%',
+                    labelAlign: 'right'
+                },
                 items: [{
                     name: 'option0',
-                    fieldLabel: t('Option') + ' 0',
+                    fieldLabel: t('Option 0'),
                     allowBlank: true
                 }, {
                     name: 'option1',
-                    fieldLabel: t('Option') + ' 1',
+                    fieldLabel: t('Option 1'),
                     allowBlank: true
                 }, {
                     name: 'option2',
-                    fieldLabel: t('Option') + ' 2',
+                    fieldLabel: t('Option 2'),
                     allowBlank: true
                 }, {
                     name: 'option3',
-                    fieldLabel: t('Option') + ' 3',
+                    fieldLabel: t('Option 3'),
                     allowBlank: true
                 }, {
                     name: 'option4',
-                    fieldLabel: t('Option') + ' 4',
+                    fieldLabel: t('Option 4'),
                     allowBlank: true
                 }, {
                     name: 'option5',
-                    fieldLabel: t('Option') + ' 5',
+                    fieldLabel: t('Option 5'),
                     allowBlank: true
                 }, {
                     name: 'option6',
-                    fieldLabel: t('Option') + ' 6',
+                    fieldLabel: t('Option 6'),
                     allowBlank: true
                 }, {
                     name: 'option7',
-                    fieldLabel: t('Option') + ' 7',
+                    fieldLabel: t('Option 7'),
                     allowBlank: true
                 }, {
                     name: 'option8',
-                    fieldLabel: t('Option') + ' 8',
+                    fieldLabel: t('Option 8'),
                     allowBlank: true
                 }, {
                     name: 'option9',
-                    fieldLabel: t('Option') + ' 9',
+                    fieldLabel: t('Option 9'),
                     allowBlank: true
                 }]
             }]

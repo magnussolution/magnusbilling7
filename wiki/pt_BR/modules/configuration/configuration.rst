@@ -1,18 +1,18 @@
 
-.. _configuration-config_value:
+.. _configuration-config-value:
 
 Valor
-++++++++++++++++
+-----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _configuration-config_description:
+.. _configuration-config-description:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

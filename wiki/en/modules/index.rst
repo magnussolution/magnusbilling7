@@ -156,14 +156,6 @@ This menu has the following fields
 .. include:: refillprovider/refillprovider.rst
 
 
-Boleto
-++++++
-
-This menu has the following fields
-
-.. include:: boleto/boleto.rst
-
-
 Fatura
 ++++++
 
@@ -571,7 +563,7 @@ This menu has the following fields
 .. include:: smtps/smtps.rst
 
 
-Firewall
+Fail2ban
 ++++++++
 
 This menu has the following fields
@@ -646,14 +638,6 @@ This menu has the following fields
 .. include:: campaign/campaign.rst
 
 
-Campaign Report
-+++++++++++++++
-
-This menu has the following fields
-
-.. include:: campaignreport/campaignreport.rst
-
-
 Phonebooks
 ++++++++++
 
@@ -686,7 +670,7 @@ This menu has the following fields
 .. include:: campaignpollinfo/campaignpollinfo.rst
 
 
-Restrict phone
+Restrict Phone
 ++++++++++++++
 
 This menu has the following fields
@@ -724,6 +708,14 @@ Campaigns DashBoard
 This menu has the following fields
 
 .. include:: campaigndashboard/campaigndashboard.rst
+
+
+Campaign Report
++++++++++++++++
+
+This menu has the following fields
+
+.. include:: campaignreport/campaignreport.rst
 
 
 

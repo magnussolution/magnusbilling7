@@ -1,8 +1,8 @@
 
-.. _sms-id_user:
+.. _sms-id-user:
 
 Username
-++++++++++++
+--------
 
 | We did not write the description to this field.
 
@@ -12,7 +12,7 @@ Username
 .. _sms-telephone:
 
 Number
-++++++++++++
+------
 
 | Needs to be in E164 format
 
@@ -22,17 +22,17 @@ Number
 .. _sms-sms:
 
 SMS
-++++++++++++
+---
 
 | We did not write the description to this field.
 
 
 
 
-.. _sms-sms_from:
+.. _sms-sms-from:
 
 From
-++++++++++++
+----
 
 | We did not write the description to this field.
 

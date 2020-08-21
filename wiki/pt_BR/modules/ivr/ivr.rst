@@ -2,19 +2,19 @@
 .. _ivr-name:
 
 Nome
-++++++++++++++++
+----
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Nome para a URA
 
 
-.. _ivr-id_user:
+
+
+.. _ivr-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono da URA
 
 
 
@@ -22,9 +22,16 @@ Usuário
 .. _ivr-monFriStart:
 
 Seg-Sex intervalos
-++++++++++++++++
+------------------
 
-| Hora que inicia o horário de atendimento semanal
+| Intervalo de atendimento de segunda a sexta, pode ser configurado multiplos horarios
+| Exemplo:
+| 
+| Digamos que o horário de atendimento é de 08h as 12h e das 14h as 19h. Neste caso a regra ficaria
+| 
+| 08:00-12:00|14:00-19:00
+| 
+| 
 
 
 
@@ -32,9 +39,16 @@ Seg-Sex intervalos
 .. _ivr-satStart:
 
 Sábado intervalos
-++++++++++++++++
+------------------
 
-| Hora que inicia o horário de atendimento no sábado
+| Intervalo de atendimento nos sabados, pode ser configurado multiplos horarios
+| Exemplo:
+| 
+| Digamos que o horário de atendimento no sabado é de de 08h as 13h. Neste caso a regra ficaria
+| 
+| 08:00-13:00
+| 
+| 
 
 
 
@@ -42,9 +56,16 @@ Sábado intervalos
 .. _ivr-sunStart:
 
 Intervalos Domingo
-++++++++++++++++
+------------------
 
-| Hora que inicia o horário de atendimento no domingo
+| Intervalo de atendimento nos domingos, pode ser configurado multiplos horarios
+| Exemplo:
+| 
+| Digamos que o não existe horário de atendimento no domingo. Neste caso a regra ficaria
+| 
+| 00:00-00:00
+| 
+| 
 
 
 
@@ -52,7 +73,7 @@ Intervalos Domingo
 .. _ivr-workaudio:
 
 Áudio Trabalhando
-++++++++++++++++
+------------------
 
 | Audio para executar dentro dos horários de atendimento
 
@@ -62,1119 +83,239 @@ Intervalos Domingo
 .. _ivr-noworkaudio:
 
 Trabalhando
-++++++++++++++++
+-----------
 
 | Áudio para executar fora de atendimento
 
 
 
 
-.. _ivr-type_0:
+.. _ivr-option-0:
 
-Tipo
-++++++++++++++++
+Opção 0
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_ivr_0:
+.. _ivr-option-1:
 
-URA
-++++++++++++++++
+Opção 1
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_queue_0:
+.. _ivr-option-2:
 
-Fila de espera
-++++++++++++++++
+Opção 2
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_sip_0:
+.. _ivr-option-3:
 
-Conta SIP
-++++++++++++++++
+Opção 3
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 3. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-extension_0:
+.. _ivr-option-4:
 
-DialPlan
-++++++++++++++++
+Opção 4
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 4. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-type_1:
+.. _ivr-option-5:
 
-Tipo
-++++++++++++++++
+Opção 5
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 5. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_ivr_1:
+.. _ivr-option-6:
 
-URA
-++++++++++++++++
+Opção 6
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 6. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_queue_1:
+.. _ivr-option-7:
 
-Fila de espera
-++++++++++++++++
+Opção 7
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_sip_1:
+.. _ivr-option-8:
 
-Conta SIP
-++++++++++++++++
+Opção 8
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-extension_1:
+.. _ivr-option-9:
 
-DialPlan
-++++++++++++++++
+Opção 9
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-type_2:
+.. _ivr-option-10:
 
-Tipo
-++++++++++++++++
+Opção padrão
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso não for digitado nada.
 
 
 
 
-.. _ivr-id_ivr_2:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_2:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_2:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_2:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_3:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_3:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_3:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_3:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_3:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_4:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_4:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_4:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_4:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_4:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_5:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_5:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_5:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_5:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_5:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_6:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_6:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_6:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_6:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_6:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_7:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_7:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_7:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_7:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_7:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_8:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_8:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_8:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_8:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_8:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_9:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_9:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_9:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_9:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_9:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_10:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_10:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_10:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_10:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_10:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-direct_extension:
+.. _ivr-direct-extension:
 
 Discar direto conta SIP
-++++++++++++++++
+-----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativando está opção será possível digitar uma conta SIP para chamar diretamente.
 
 
 
 
-.. _ivr-type_out_0:
+.. _ivr-option-out-0:
 
-Tipo
-++++++++++++++++
+Opção 0
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_ivr_out_0:
+.. _ivr-option-out-1:
 
-URA
-++++++++++++++++
+Opção 1
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_queue_out_0:
+.. _ivr-option-out-2:
 
-Fila de espera
-++++++++++++++++
+Opção 2
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_sip_out_0:
+.. _ivr-option-out-3:
 
-Conta SIP
-++++++++++++++++
+Opção 3
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 3. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-extension_out_0:
+.. _ivr-option-out-4:
 
-DialPlan
-++++++++++++++++
+Opção 4
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 4. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-type_out_1:
+.. _ivr-option-out-5:
 
-Tipo
-++++++++++++++++
+Opção 5
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_ivr_out_1:
+.. _ivr-option-out-6:
 
-URA
-++++++++++++++++
+Opção 6
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 6. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_queue_out_1:
+.. _ivr-option-out-7:
 
-Fila de espera
-++++++++++++++++
+Opção 7
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 7. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-id_sip_out_1:
+.. _ivr-option-out-8:
 
-Conta SIP
-++++++++++++++++
+Opção 8
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 8. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-extension_out_1:
+.. _ivr-option-out-9:
 
-DialPlan
-++++++++++++++++
+Opção 9
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso for digitado a opção 9. Deixe em branco se não desejar nenhuma ação.
 
 
 
 
-.. _ivr-type_out_2:
+.. _ivr-option-out-10:
 
-Tipo
-++++++++++++++++
+Opção padrão
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_2:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_2:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_2:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_2:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_3:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_3:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_3:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_3:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_3:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_4:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_4:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_4:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_4:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_4:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_5:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_5:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_5:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_5:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_5:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_6:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_6:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_6:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_6:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_6:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_7:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_7:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_7:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_7:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_7:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_8:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_8:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_8:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_8:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_8:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_9:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_9:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_9:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_9:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_9:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-type_out_10:
-
-Tipo
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_ivr_out_10:
-
-URA
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_queue_out_10:
-
-Fila de espera
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-id_sip_out_10:
-
-Conta SIP
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _ivr-extension_out_10:
-
-DialPlan
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione o destino caso não for digitado nada.
 
 
 

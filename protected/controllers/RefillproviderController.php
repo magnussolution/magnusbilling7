@@ -37,7 +37,7 @@ class RefillproviderController extends Controller
     {
         $this->instanceModel = new Refillprovider;
         $this->abstractModel = Refillprovider::model();
-        $this->titleReport   = Yii::t('zii', 'Refill Provider');
+        $this->titleReport   = Yii::t('zii', 'Refill Providers');
 
         parent::init();
     }

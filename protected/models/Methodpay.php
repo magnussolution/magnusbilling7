@@ -1,6 +1,6 @@
 <?php
 /**
- * Modelo para a tabela "Boleto".
+ * Modelo para a tabela "Methodpay".
  * =======================================
  * ###################################
  * MagnusBilling
@@ -65,9 +65,7 @@ class Methodpay extends Model
             array('obs, client_id, client_secret', 'length', 'max' => 500),
             array('P2P_tax_amount', 'length', 'max' => 10),
             array('P2P_CustomerSiteID, P2P_KeyID, P2P_Passphrase, P2P_RecipientKeyID, username', 'length', 'max' => 100),
-            array('boleto_convenio,boleto_banco,pagseguro_TOKEN,url, show_name, SLvalidationtoken', 'length', 'max' => 100),
-            array('boleto_taxa, boleto_instrucoes, boleto_carteira, boleto_inicio_nosso_numeroa, boleto_conta_corrente, boleto_agencia', 'length', 'max' => 100),
-            array('boleto_estado_emp, boleto_cpf_emp, boleto_cidade_emp, boleto_end_emp, boleto_nome_emp', 'length', 'max' => 100),
+            array('pagseguro_TOKEN,url, show_name, SLvalidationtoken', 'length', 'max' => 100),
             array('SLAppToken,SLAccessToken,SLSecret', 'length', 'max' => 50),
         );
     }

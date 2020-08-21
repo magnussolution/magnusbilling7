@@ -2,7 +2,7 @@
 .. _servers-name:
 
 Nome
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -12,17 +12,17 @@ Nome
 .. _servers-host:
 
 IP do servidor
-++++++++++++++++
+--------------
 
 | Este menu é exclusivo para quem usa Slave e Proxy. Você pode ver mais detalhes no link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html>`_.
 
 
 
 
-.. _servers-public_ip:
+.. _servers-public-ip:
 
 IP público
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -32,7 +32,7 @@ IP público
 .. _servers-username:
 
 Usuário
-++++++++++++++++
+--------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -42,7 +42,7 @@ Usuário
 .. _servers-password:
 
 Senha
-++++++++++++++++
+-----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -52,17 +52,17 @@ Senha
 .. _servers-port:
 
 Porta
-++++++++++++++++
+-----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
 
 
 
-.. _servers-sip_port:
+.. _servers-sip-port:
 
 Porta SIP
-++++++++++++++++
+---------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -72,7 +72,7 @@ Porta SIP
 .. _servers-type:
 
 Tipo
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -82,7 +82,7 @@ Tipo
 .. _servers-weight:
 
 Peso
-++++++++++++++++
+----
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -92,7 +92,7 @@ Peso
 .. _servers-status:
 
 Status
-++++++++++++++++
+------
 
 | Nós ainda não escrevemos a descrição deste campo.
 
@@ -102,7 +102,7 @@ Status
 .. _servers-description:
 
 Descrição
-++++++++++++++++
+-----------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

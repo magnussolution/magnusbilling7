@@ -1,10 +1,10 @@
 
-.. _queueMember-queue_name:
+.. _queueMember-queue-name:
 
 Fila nome
-++++++++++++++++
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Fila de espera que quer adicionar a conta SIP
 
 
 
@@ -12,9 +12,9 @@ Fila nome
 .. _queueMember-interface:
 
 Conta SIP
-++++++++++++++++
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP para adicionar como agente da fila de espera
 
 
 
@@ -22,9 +22,9 @@ Conta SIP
 .. _queueMember-paused:
 
 Pausado
-++++++++++++++++
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Agentes pausados não receberam chamadas, é possível pausar e despausar discando *180 para pausar, e *181 para despausar
 
 
 

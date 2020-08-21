@@ -51,45 +51,6 @@ Ext.define('MBilling.model.MethodPay', {
         name: 'pagseguro_TOKEN',
         type: 'string'
     }, {
-        name: 'boleto_convenio',
-        type: 'string'
-    }, {
-        name: 'boleto_banco',
-        type: 'string'
-    }, {
-        name: 'boleto_agencia',
-        type: 'string'
-    }, {
-        name: 'boleto_conta_corrente',
-        type: 'string'
-    }, {
-        name: 'boleto_inicio_nosso_numeroa',
-        type: 'string'
-    }, {
-        name: 'boleto_carteira',
-        type: 'string'
-    }, {
-        name: 'boleto_taxa',
-        type: 'string'
-    }, {
-        name: 'boleto_instrucoes',
-        type: 'string'
-    }, {
-        name: 'boleto_nome_emp',
-        type: 'string'
-    }, {
-        name: 'boleto_end_emp',
-        type: 'string'
-    }, {
-        name: 'boleto_cidade_emp',
-        type: 'string'
-    }, {
-        name: 'boleto_estado_emp',
-        type: 'string'
-    }, {
-        name: 'boleto_cpf_emp',
-        type: 'string'
-    }, {
         name: 'fee',
         type: 'int'
     }, {

@@ -1,20 +1,20 @@
 
-.. _rateProvider-id_provider:
+.. _rateProvider-id-provider:
 
 Nome do provedor
-++++++++++++++++
+----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Provedor
 
 
-.. _rateProvider-id_prefix:
+
+
+.. _rateProvider-id-prefix:
 
 Destino
-++++++++++++++++
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Prefixo
 
 
 
@@ -22,9 +22,9 @@ Destino
 .. _rateProvider-buyrate:
 
 Preço de compra
-++++++++++++++++
+----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor pago ao provedor por minuto
 
 
 
@@ -32,9 +32,9 @@ Preço de compra
 .. _rateProvider-buyrateinitblock:
 
 Bloco inicial
-++++++++++++++++
+-------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
 
 
@@ -42,19 +42,19 @@ Bloco inicial
 .. _rateProvider-buyrateincrement:
 
 Incremento
-++++++++++++++++
+----------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
-.. _rateProvider-minimal_time_buy:
+
+
+.. _rateProvider-minimal-time-buy:
 
 Tempo mínimo para compra
-++++++++++++++++
+-------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
 
 
 

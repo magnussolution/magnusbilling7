@@ -1,30 +1,30 @@
 
-.. _offerUse-id_user:
+.. _offerUse-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Usuário que realizou a chamada
 
 
-.. _offerUse-id_offer:
+
+
+.. _offerUse-id-offer:
 
 Pacotes grátis
-++++++++++++++++
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Nome do pacote de gratís
 
 
-.. _offerUse-month_payed:
+
+
+.. _offerUse-month-payed:
 
 Messes pago
-++++++++++++++++
+-----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Meses que foram pagos
 
 
 
@@ -32,9 +32,9 @@ Messes pago
 .. _offerUse-reservationdate:
 
 Data de reserva
-++++++++++++++++
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Data e hora que foi cancelado o pacote gratís
 
 
 

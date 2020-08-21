@@ -1,40 +1,40 @@
 
-.. _offerCdr-id_user:
+.. _offerCdr-id-user:
 
 Usuário
-++++++++++++++++
+--------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Usuário que realizou a chamada
 
 
-.. _offerCdr-id_offer:
+
+
+.. _offerCdr-id-offer:
 
 Pacotes grátis
-++++++++++++++++
+---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _offerCdr-used_secondes:
-
-Used secondes
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do pacote de gratís
 
 
 
 
-.. _offerCdr-date_consumption:
+.. _offerCdr-used-secondes:
 
-Data
-++++++++++++++++
+Duração
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Duração da chamada
+
+
+
+
+.. _offerCdr-date-consumption:
+
+data
+----
+
+| Data de hora da chamada
 
 
 

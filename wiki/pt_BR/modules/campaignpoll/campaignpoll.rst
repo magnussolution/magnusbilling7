@@ -1,40 +1,88 @@
 
+.. _campaignPoll-id-campaign:
+
+Campanha
+--------
+
+| Selecione a campanha que está enquete será executa
+
+
+
+
 .. _campaignPoll-name:
 
 Nome
-++++++++++++++++
+----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para a enquete, este nome é somente para seu contro
 
 
 
 
 .. _campaignPoll-repeat:
 
-How many time to repeat, if the client press invalid option?
-++++++++++++++++
+Repetir se apertar opção inválida
+------------------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Quantas vezes o MagnusBilling deve repetir o áudio da enquete caso o cliente não digite nenhuma opção ou digite uma opção inválida.
+| O que é opção inválida?
+| 
+| É quando a opção digitada pelo cliente está vazia na TAB opções. Conforme a imagem abaixo.
+| 
+.. image:: ../img/pool_blank.png
+   :scale: 100%
+| 
+| 
 
 
 
 
-.. _campaignPoll-request_authorize:
+.. _campaignPoll-request-authorize:
 
 Solicitar autorização
-++++++++++++++++
+-----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Em alguns casos, é necessário solicitar autorização para executar a enquete, nestes casos, deixe está opção para sim
+| Um exemplo de caso seria:
+| 
+| Digamos que seja necessário enviar uma campanha com o seguinte áudio.
+| 
+| 
+|     Ola, temos uma oferta incrível para você. Se deseja escutar digite 1.
+| 
+| caso o cliente digitar 1, executar o áudio.
+| 
+| 
+|     Que bom que não perdeu está chance de contratar seu plano de saúde …...
+| 
+| Neste caso, o áudio “Ola, temos uma oferta incrível para você. Se deseja escutar digite 1” seria o áudio da campanha.
+| 
+| E o áudio “Que bom que não perdeu está chance de contratar seu plano de saúde …...” seria o áudio da enquete.
+| 
+| As opções, solicitar autorização deverá ser SIM e a opção dígito para autorizar deve ser 1.
+| 
+| Neste exemplo somente seria executado áudio da enquete caso o cliente digitar a tecla 1, caso contrário a chamada seria finalizada.
+| 
 
 
 
 
-.. _campaignPoll-digit_authorize:
+.. _campaignPoll-digit-authorize:
 
 Dígito para autorizar
-++++++++++++++++
+----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Digito que para autorizar a execução da enquete.
+
+
+
+
+.. _campaignPoll-arq-audio:
+
+Audio
+-----
+
+| Arquivo de audio, lembre-se que somente é valido audios em GSM ou WAV 8khz mono
 
 
 
@@ -42,119 +90,126 @@ Dígito para autorizar
 .. _campaignPoll-description:
 
 Descrição
-++++++++++++++++
+-----------
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _campaignPoll-arq_audio:
-
-Audio
-++++++++++++++++
-
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para a enquete
 
 
 
 
 .. _campaignPoll-option0:
 
-Opção
-++++++++++++++++
+Opção 0
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção
+| Vamos supor que uma enquete política.
+| 
+| Onde a pergunta é:
+| Nas próximas eleições em quem você votaria?
+|     Digite 1 se você votaria no Roberto Matos
+|     Digite 2 se você votaria no Heleno Souza
+|     Digite 3 se você votaria na Roberta Silva
+| 
+| Neste exemplo você completaria as opções da seguinte forma
+| 
+| 
+.. image:: ../img/poll_options.png
+   :scale: 100% 
+| 
+| Estas opções será útil para ver os relatórios no menu Relatório de Enquete
+| 
+| 
 
 
 
 
 .. _campaignPoll-option1:
 
-Opção
-++++++++++++++++
+Opção 1
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option2:
 
-Opção
-++++++++++++++++
+Opção 2
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option3:
 
-Opção
-++++++++++++++++
+Opção 3
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option4:
 
-Opção
-++++++++++++++++
+Opção 4
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option5:
 
-Opção
-++++++++++++++++
+Opção 5
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option6:
 
-Opção
-++++++++++++++++
+Opção 6
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option7:
 
-Opção
-++++++++++++++++
+Opção 7
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option8:
 
-Opção
-++++++++++++++++
+Opção 8
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 
 
 .. _campaignPoll-option9:
 
-Opção
-++++++++++++++++
+Opção 9
+---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descreva a opção, veja a descriçao da opção 0
 
 
 

@@ -177,9 +177,14 @@ Ext.define('Overrides.ux.desktop.App', {
                 text: t('Change password'),
                 hidden: !App.user.isAdmin
             }, {
+                text: t('Import Login Background'),
+                glyph: icons.cog,
+                handler: 'importLoginBackground',
+                hidden: !App.user.isAdmin
+            }, {
                 text: t('Import wallpaper'),
                 glyph: icons.cog,
-                handler: 'importLogo',
+                handler: 'importWallpaper',
                 hidden: !App.user.isAdmin
             }, {
                 text: t('Settings theme'),

@@ -7,5 +7,8 @@
 Ext.define('MBilling.view.did.Module', {
     extend: 'Ext.ux.panel.Module',
     alias: 'widget.didmodule',
-    controller: 'did'
+    controller: 'did',
+    cfgEast: {
+        flex: 3
+    }
 });

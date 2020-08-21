@@ -57,8 +57,15 @@ Ext.define('Ext.ux.form.Panel', {
                 });
             } else {
                 for (var i in me.items) {
-                    var helpString = h(formName + '.' + me.items[i].name);
-                    if (helpString.length > 10) me.items[i].fieldLabel = me.items[i].fieldLabel + ' ' + helpString
+                    if (me.items[i].xtype == 'fieldset') {
+                        me.items[i].items.forEach(function(field) {
+                            var helpString = h(formName + '.' + field.name);
+                            if (helpString.length > 10) field.fieldLabel = field.fieldLabel + ' ' + helpString
+                        });
+                    } else {
+                        var helpString = h(formName + '.' + me.items[i].name);
+                        if (helpString.length > 10) me.items[i].fieldLabel = me.items[i].fieldLabel + ' ' + helpString
+                    }
                 }
             }
         }

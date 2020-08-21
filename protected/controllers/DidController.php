@@ -53,7 +53,7 @@ class DidController extends Controller
         $this->uploaddir     = $this->magnusFilesDirectory . 'sounds/';
         $this->instanceModel = new Did;
         $this->abstractModel = Did::model();
-        $this->titleReport   = Yii::t('zii', 'Did');
+        $this->titleReport   = Yii::t('zii', 'DID');
         parent::init();
 
         //for agents add filter for show only numbers free

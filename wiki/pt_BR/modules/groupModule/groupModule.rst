@@ -1,20 +1,20 @@
 
-.. _groupModule-id_group:
+.. _groupModule-id-group:
 
 Grupo
-++++++++++++++++
+-----
 
-| Nós ainda não escrevemos a descrição deste campo.
-
-
+| Grupo de usuário
 
 
-.. _groupModule-id_module:
+
+
+.. _groupModule-id-module:
 
 Módulo
-++++++++++++++++
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Menu
 
 
 
