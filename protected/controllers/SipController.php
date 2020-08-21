@@ -239,7 +239,7 @@ class SipController extends Controller
                     $attributes[$i]['lineStatus'] = $value['Status'];
 
                     if (preg_match('/OK/', $value['Status'])) {
-                        $attributes[$i]['lineStatus'] .= ' ' . $value['server'];
+                        $attributes[$i]['lineStatus'] .= ' ' . $value['Host'];
                         break;
                     }
                 }
