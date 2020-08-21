@@ -524,12 +524,14 @@ class AuthenticationController extends Controller
         if (isset($_GET['key']) && isset($_GET['id'])) {
 
             $modelUser = User::model()->findByPk((int) $_GET['id']);
-            if (is_array($modelUser) && count($modelUser)) {
+
+            if (isset($modelUser->id)) {
+
                 $key = sha1($modelUser->id . $modelUser->username . $modelUser->password);
                 if ($key == $_GET['key']) {
                     $modelUser->credit_notification = '-1';
                     $modelUser->save();
-                    echo '<br><center><font color=green>Success</font></center>';
+                    echo '<br><center><font color=green>' . Yii::t('zii', "Success") . '</font></center>';
                 }
             }
         }

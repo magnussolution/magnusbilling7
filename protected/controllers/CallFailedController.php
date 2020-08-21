@@ -199,26 +199,17 @@ table.blueTable tfoot .links a{
 $model = CallFailed::model()->findByPk((int) $_GET['id']);
 
         if (!isset($model->idServer->id) || $model->idServer->type == 'mbilling') {
-            $pattern = "/" . $model->calledstation . "/i";
 
-            $ora_books = [];
+            $lines = shell_exec('grep ' . $model->calledstation . ' /var/log/asterisk/magnus');
 
-            $data = @file_get_contents('/var/log/asterisk/magnus');
+            $lines = htmlentities($lines);
 
-            $fh = fopen('/var/log/asterisk/magnus', 'r') or die($php_errormsg);
-            while (!feof($fh)) {
-                $line   = fgets($fh, 4096);
-                $result = htmlentities($line);
-                if (preg_match($pattern, $result)) {
-                    $ora_books[] = $result;
-                }
-            }
+            $ora_books = preg_split('/\n/', $lines);
 
-            fclose($fh);
             echo '<br>';
             echo '<table class="blueTable" width=100%><tr>';
             echo '<tr>';
-            echo '<th  colspan=4>Below data is the last SIP sinalization from trunk to the number ' . $model->calledstation . '</th>';
+            echo '<th  colspan=4>Below data is the last SIP sinalization from trunk to the number ' . $model->calledstation . $model->starttime . '</th>';
 
             echo '</tr>';
             echo '<th>Date</th>';
