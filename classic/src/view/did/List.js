@@ -24,15 +24,18 @@ Ext.define('MBilling.view.did.List', {
     store: 'Did',
     fieldSearch: 'did',
     buttonImportCsv: true,
+    extraButtons: [{
+        text: t('Release DID'),
+        iconCls: 'icon-delete',
+        handler: 'onRelease',
+        disabled: false
+    }],
     initComponent: function() {
         var me = this;
         me.buttonUpdateLot = false;
-        me.extraButtons = [{
-            text: t('Release DID'),
-            iconCls: 'icon-delete',
-            handler: 'onRelease',
-            disabled: false
-        }];
+        if (App.user.isClient) {
+            me.buttonImportCsv = false;
+        }
         me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',
