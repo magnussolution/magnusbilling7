@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que enviou/recebeu o SMS
 
 
 
@@ -24,7 +24,7 @@ Número
 SMS
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Testo no SMS.
 
 
 
@@ -34,7 +34,7 @@ SMS
 De
 --
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Se seu provedor de SMS aceita o envio do FROM, coloque aqui. Este valor será subistituido pela variável %from% na URL do tronco.
 
 
 

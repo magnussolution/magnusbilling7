@@ -24,10 +24,10 @@ Usuário
 Seg-Sex intervalos
 ------------------
 
-| Intervalo de atendimento de segunda a sexta, pode ser configurado multiplos horarios
+| Intervalo de atendimento de segunda a sexta, pode ser configurado múltiplos horarios
 | Exemplo:
 | 
-| Digamos que o horário de atendimento é de 08h as 12h e das 14h as 19h. Neste caso a regra ficaria
+| Digamos que o horário de atendimento é de 08h as 12h e das 14h às 19h. Neste caso a regra ficaria
 | 
 | 08:00-12:00|14:00-19:00
 | 
@@ -41,10 +41,10 @@ Seg-Sex intervalos
 Sábado intervalos
 ------------------
 
-| Intervalo de atendimento nos sabados, pode ser configurado multiplos horarios
+| Intervalo de atendimento aos sábados, pode ser configurado múltiplos horários
 | Exemplo:
 | 
-| Digamos que o horário de atendimento no sabado é de de 08h as 13h. Neste caso a regra ficaria
+| Digamos que o horário de atendimento aos sábado é dia de 08h às 13h. Neste caso a regra ficaria
 | 
 | 08:00-13:00
 | 
@@ -58,7 +58,7 @@ Sábado intervalos
 Intervalos Domingo
 ------------------
 
-| Intervalo de atendimento nos domingos, pode ser configurado multiplos horarios
+| Intervalo de atendimento nos domingos, pode ser configurado múltiplos horarios
 | Exemplo:
 | 
 | Digamos que o não existe horário de atendimento no domingo. Neste caso a regra ficaria
@@ -75,7 +75,7 @@ Intervalos Domingo
 Áudio Trabalhando
 ------------------
 
-| Audio para executar dentro dos horários de atendimento
+| Áudio para executar dentro dos horários de atendimento
 
 
 
@@ -205,7 +205,7 @@ Opção padrão
 Discar direto conta SIP
 -----------------------
 
-| Ativando está opção será possível digitar uma conta SIP para chamar diretamente.
+| Ativando esta opção será possível digitar uma conta SIP para chamar diretamente.
 
 
 

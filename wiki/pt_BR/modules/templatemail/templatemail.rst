@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Este é o nome que será usado com fromname no email.
 
 
 
@@ -14,7 +14,7 @@ Nome
 Email
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Email usado no fromemail, deve ser o mesmo email do usuário do SMTP.
 
 
 
@@ -24,7 +24,7 @@ Email
 Assunto
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Assunto para o email.
 
 
 
@@ -34,7 +34,7 @@ Assunto
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Mensagem. É possível usar variáveis, veja a tab variáveis para ver a lista de variáveis disponível.
 
 
 

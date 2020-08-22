@@ -4,7 +4,7 @@
 País
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| País
 
 
 
@@ -14,7 +14,7 @@ País
 Nome do operador
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome da operadora
 
 
 
@@ -24,7 +24,7 @@ Nome do operador
 Operador ID
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Id da operadora
 
 
 
@@ -34,7 +34,7 @@ Operador ID
 SkuCode
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| SkuCode
 
 
 
@@ -44,7 +44,7 @@ SkuCode
 Produto
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Produto
 
 
 
@@ -54,7 +54,7 @@ Produto
 Enviar valor
 ------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor a ser enviado.
 
 
 
@@ -64,7 +64,7 @@ Enviar valor
 Preço atacado
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de venda.
 
 
 
@@ -74,7 +74,7 @@ Preço atacado
 Provedor
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Provedor
 
 
 
@@ -84,7 +84,7 @@ Provedor
 Status
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Status.
 
 
 
@@ -94,7 +94,7 @@ Status
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usado para seu controle interno.
 
 
 

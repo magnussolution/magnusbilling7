@@ -44,7 +44,7 @@ CallerID
 Disallow
 --------
 
-| Esta opção desativa todos os codecs e deixa disponível para o usuário somente os que você selecionar abaixo.
+| Nesta opção é possível desativar codecs. Use all para desativar todos os codecs e deixar disponível para o usuário somente os que você selecionar abaixo.
 
 
 
@@ -95,6 +95,16 @@ Qualify
 -------
 
 | Enviar pacote OPTION para verificar se o usuário está online.
+| Sintaxe:
+| 
+| qualify = xxx | no | yes
+| 
+| onde XXX é o número de milissegundos usados. Se sim, o tempo configurado no sip.conf é usado, padrão é usado 2 segundos.
+| 
+| Se você ativar o qualify, o Asterisk enviará um comando OPTION o SIP peer regularmente para verificar se o dispositivo ainda está online. 
+| Se o dispositivo não responder o OPTION dentro do período configurado (ou padrão) (em ms), o Asterisk considera o dispositivo off-line para chamadas futuras.
+| 
+| Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.
 
 
 
@@ -134,7 +144,7 @@ Tipo
 Limite de chamada
 -----------------
 
-| Total de chamadas simultâneas permitida para está conta IAX.
+| Total de chamadas simultâneas permitida para esta conta IAX.
 
 
 

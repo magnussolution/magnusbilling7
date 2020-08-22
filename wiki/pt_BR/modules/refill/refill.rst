@@ -14,7 +14,7 @@ Usuário
 Crédito
 --------
 
-| Valor da recarga. Pode ser valor possitvo ou negativo, caso o valor for negativo, vai retirar o valor da recarga do crédito do cliente.
+| Valor da recarga. Pode ser valor positivo ou negativo, caso o valor for negativo, vai retirar o valor da recarga do crédito do cliente.
 
 
 
@@ -24,7 +24,7 @@ Crédito
 Descrição
 -----------
 
-| Descrição para a agenda, somente para controle proprio.
+| Descrição para a agenda, somente para controle próprio.
 
 
 

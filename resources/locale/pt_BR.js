@@ -150,7 +150,6 @@ Locale.load({
     'DID owner': 'Dono do DID',
     'Developed by': 'Desenvolvido por',
     'Dial parameter': 'Parâmetro DIAL',
-    'DialPlan': 'DialPlan',
     'DID billing per minute rate': 'Valor da tarifa por minuto',
     'Direct extension': 'Extensão direta',
     'Disallowed action': 'Ação não permitida',

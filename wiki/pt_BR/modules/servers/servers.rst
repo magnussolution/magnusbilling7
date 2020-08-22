@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para o servidor
 
 
 
@@ -14,7 +14,7 @@ Nome
 IP do servidor
 --------------
 
-| Este menu é exclusivo para quem usa Slave e Proxy. Você pode ver mais detalhes no link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html>`_.
+| IP do servidor. Você pode ver mais detalhes no link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html>`_.
 
 
 
@@ -24,7 +24,7 @@ IP do servidor
 IP público
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ip Público
 
 
 
@@ -34,7 +34,7 @@ IP público
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário para conectar no servidor.
 
 
 
@@ -44,7 +44,7 @@ Usuário
 Senha
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Senha para conectar no servidor.
 
 
 
@@ -54,7 +54,7 @@ Senha
 Porta
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Porta para conectar no servidor.
 
 
 
@@ -64,7 +64,7 @@ Porta
 Porta SIP
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Porta SIP que o servidor usar.
 
 
 
@@ -74,7 +74,7 @@ Porta SIP
 Tipo
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de servidor.
 
 
 
@@ -84,7 +84,12 @@ Tipo
 Peso
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta opção é para balancear as chamadas por peso.
+| Exemplo. 
+| 
+| Digamos que tenha 1 servidor MagnusBilling 3 servidores slaves, e você deseja enviar o dobro de chamadas para cada slave, comparado com o MagnusBilling, então, é só colocar no servidor MagnusBilling o peso 1, e nos slaves peso 2.
+| 
+| 
 
 
 
@@ -94,7 +99,7 @@ Peso
 Status
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O proxy somente envia chamadas para servidores ativos e com peso maior que 0.
 
 
 
@@ -104,7 +109,7 @@ Status
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usado para seu controle interno.
 
 
 

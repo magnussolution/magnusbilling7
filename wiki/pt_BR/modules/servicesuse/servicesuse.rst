@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono do serviço.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Serviço
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Serviço.
 
 
 
@@ -24,7 +24,7 @@ Serviço
 Preço
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor do serviço.
 
 
 
@@ -34,7 +34,7 @@ Preço
 Métodos de Pagamento
 ---------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Forma de pagamento
 
 
 
@@ -44,7 +44,7 @@ Métodos de Pagamento
 Data de reserva
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dia que o serviço foi ativado.
 
 
 

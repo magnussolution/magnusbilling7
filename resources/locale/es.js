@@ -382,7 +382,6 @@ Locale.load({
     'Dial parameter': 'Parámetro Dial',
     'Dial plan': 'Dial plan',
     'Dial timeout': 'Dial timeout',
-    'DialPlan': 'DialPlan',
     'Dialed today': 'Llamadas hoy',
     'Did': 'Did',
     'Did is not in use': 'DID no está en uso',

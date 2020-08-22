@@ -54,7 +54,7 @@ Tipo
 Destino
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usado para seu controle interno.
 
 
 
@@ -109,7 +109,7 @@ Contexto
 | exten => s-CHANUNAVAIL,2,Dial(SIP/contavoip2,,T)
 | 
 | 
-| NÃO deve ser colocado o nomer para o context, pois o nome do contexto será [did-numero-do-did]
+| NÃO deve ser colocado o nome para o context, pois o nome do contexto será [did-numero-do-did]
 | 
 | Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
 | 

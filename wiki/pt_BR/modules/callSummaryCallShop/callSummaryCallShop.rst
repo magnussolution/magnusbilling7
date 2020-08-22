@@ -4,7 +4,7 @@
 Duração
 ---------
 
-| Somatorio de minutos chamadas.
+| Somatório de minutos chamadas.
 
 
 
@@ -14,7 +14,7 @@ Duração
 Preço de venda
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor total
 
 
 

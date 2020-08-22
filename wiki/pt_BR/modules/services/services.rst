@@ -24,7 +24,7 @@ Nome
 Limite de chamada
 -----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Limite de chamadas simultâneas.
 
 
 
@@ -44,7 +44,7 @@ Espaço em disco
 Limite de contas SIP
 --------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Quantidade máxima de contas SIP este cliente poderá criar.
 
 
 
@@ -54,7 +54,7 @@ Limite de contas SIP
 Preço
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Custo mensal para descontar do cliente que ativar este serviço.
 
 
 
@@ -64,7 +64,7 @@ Preço
 Retornar crédito
 -----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Caso o serviço seja cancelado antes do dia do vencimento, e esta opção esteja como sim, será devolvido o valor proporcional dos dias não usado ao crédito do cliente
 
 
 
@@ -74,7 +74,7 @@ Retornar crédito
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usado para seu controle interno.
 
 
 

@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário dono do DID que recebeu a solicitaçao de CallBack
+| Usuário dono do DID que recebeu a solicitação de CallBack
 
 
 
@@ -27,7 +27,7 @@ Status
 | Status da chamada
 | Os status podem ser:
 | * Ativa
-|     O CallBack ainda nao foi processado.
+|     O CallBack ainda não foi processado.
 | * Pendente
 |     O MagnusBilling processou o CallBack e enviou para o tronco.
 | * Enviado

@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecionar o usuário
 
 
 
@@ -19,22 +19,22 @@ CallerID
 
 
 
-.. _callerid-activated:
-
-Status
-------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
 .. _callerid-name:
 
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Opcional
+
+
+
+
+.. _callerid-activated:
+
+Status
+------
+
+| Status do CallerID
 
 
 

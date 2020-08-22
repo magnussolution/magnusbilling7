@@ -188,7 +188,7 @@ Enviar a chamada para callback
 Expressão regular
 ------------------
 
-| Igual a opçao 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1>`_.
+| Igual a opção 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1>`_.
 
 
 
@@ -230,7 +230,7 @@ Enviar a chamada para callback
 Expressão regular
 ------------------
 
-| Igual a opçao 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1>`_.
+| Igual a opção 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1>`_.
 
 
 

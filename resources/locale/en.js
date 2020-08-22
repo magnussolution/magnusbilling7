@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-19
+ * 2020-08-22
  */
 Locale.load({
     '': '',
@@ -263,7 +263,6 @@ Locale.load({
     'Dial parameter': '',
     'Dial plan': '',
     'Dial timeout': '',
-    'DialPlan': '',
     'Dialed today': '',
     'Did is not in use': '',
     'Direct extension': '',
@@ -469,7 +468,6 @@ Locale.load({
     'Main menu': '',
     'Mandatory information element is missing': '',
     'Manual code': '',
-    'Mark': '',
     'Markup': '',
     'Max amount': '',
     'Max complete call': '',
