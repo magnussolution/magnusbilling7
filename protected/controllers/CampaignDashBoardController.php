@@ -95,9 +95,9 @@ class CampaignDashBoardController extends Controller
             $attributes[$i]['callsTotalNumbers'] = $modelPhoneNumber;
 
             //Diales Today
-            $modelCdr = Call::model()->count('starttime > :key AND id_campaign = :key1 AND sessiontime > 0',
+            $modelCdr = CampaignReport::model()->count('unix_timestamp > :key AND id_campaign = :key1',
                 [
-                    ':key'  => date('Y-m-d'),
+                    ':key'  => strtotime(date('Y-m-d')),
                     ':key1' => $attributes[$i]['id'],
                 ]);
             $attributes[$i]['callsDialedtoday'] = $modelCdr;
