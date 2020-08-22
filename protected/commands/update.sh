@@ -69,6 +69,7 @@ if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; 
 	do
 		for type in crisp neptune triton
 		do
+			chmod -R 755 /var/www/html/mbilling/$color-$type/resources/images/
 			cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/
 		done	
 	done	
