@@ -59,32 +59,12 @@ Ativar acesso WEB
 
 
 
-.. _sipuras-marca:
-
-Marca
------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _sipuras-altera:
-
-Mudar
------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
 .. _sipuras-User-ID-1:
 
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP que vai será usado na linha 1 do ATA
 
 
 
@@ -144,7 +124,7 @@ Dial plan
 NAT Mapping
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Recomendado ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -154,7 +134,7 @@ NAT Mapping
 NAT keep alive
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Recomendado ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -164,7 +144,7 @@ NAT keep alive
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Conta SIP que vai será usado na linha 1 do ATA
 
 
 
@@ -174,7 +154,7 @@ Usuário
 Senha
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Senha da Conta VoIP
 
 
 
@@ -184,7 +164,7 @@ Senha
 Usar codec preferencial
 -----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somente usar o codec preferencial
 
 
 
@@ -194,7 +174,7 @@ Usar codec preferencial
 Codec
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Configurar codec preferencial
 
 
 
@@ -204,7 +184,7 @@ Codec
 Register expires
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tempo em segundos que o Linksys fica enviando o REGISTER para o servidor. Se for receber chamadas nesta linha, melhor deixar entre 120 e 480 segundos.
 
 
 
@@ -214,7 +194,7 @@ Register expires
 Dial plan
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Read linksys documentation
 
 
 
@@ -224,7 +204,7 @@ Dial plan
 NAT Mapping
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Recomendado ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -234,7 +214,7 @@ NAT Mapping
 NAT keep alive
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Recomendado ativar esta opção se o ATA estiver atrás de NAT.
 
 
 
@@ -244,7 +224,7 @@ NAT keep alive
 Habilitar STUN
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativar servidor STUN.
 
 
 
@@ -254,7 +234,7 @@ Habilitar STUN
 STUN Test
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Validar o servidor STUN periodicamente.
 
 
 
@@ -264,7 +244,7 @@ STUN Test
 Substitute VIA Addr
 -------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Substituir o IP publico no VIA
 
 
 
@@ -274,7 +254,7 @@ Substitute VIA Addr
 STUN Server
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Dominio do servidor STUN.
 
 
 

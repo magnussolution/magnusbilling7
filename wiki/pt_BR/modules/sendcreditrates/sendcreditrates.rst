@@ -4,7 +4,7 @@
 País
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| País
 
 
 
@@ -14,7 +14,7 @@ País
 Nome do operador
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome da operadora
 
 
 
@@ -24,7 +24,7 @@ Nome do operador
 Preço de venda
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço de venda.
 
 
 

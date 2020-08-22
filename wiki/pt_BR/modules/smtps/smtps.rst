@@ -4,7 +4,8 @@
 Host
 ----
 
-| Você precisa verificar se o datacenter não bloqueia as portas usada pelo SMTP
+| Domínio só SMST
+| Você precisa verificar se o datacenter onde seu servidor está hospedado não bloqueia as portas usada pelo SMTP.
 
 
 
@@ -14,7 +15,7 @@ Host
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário para autenticar no servidor SMTP
 
 
 
@@ -24,7 +25,7 @@ Usuário
 Senha
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Senha para autenticar no servidor SMTP
 
 
 
@@ -34,7 +35,7 @@ Senha
 Porta
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Porta usada pelo servidor SMTP.
 
 
 
@@ -44,7 +45,7 @@ Porta
 Encriptação
 -------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de encriptação.
 
 
 

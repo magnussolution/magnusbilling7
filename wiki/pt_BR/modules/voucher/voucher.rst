@@ -54,7 +54,7 @@ Quantidade
 Descrição
 -----------
 
-| Descrição para a agenda, somente para controle proprio.
+| Descrição para a agenda, somente para controle próprio.
 
 
 

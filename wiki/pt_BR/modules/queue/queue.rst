@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono da fila.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para a fina.
 
 
 
@@ -24,7 +24,7 @@ Nome
 Idioma
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Idioma da fila
 
 
 
@@ -34,7 +34,7 @@ Idioma
 Estratégia
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Estratégia para a fila.
 
 
 
@@ -94,7 +94,7 @@ Peso
 Periodic announce
 -----------------
 
-| Audio para os anúncios. Você pode colocar mais de um áudio, separando por  (,). Estes dados devem estar no diretório /var/lib/asterisk/sounds/
+| Áudio para os anúncios. Você pode colocar mais de um áudio, separando por  (,). Estes dados devem estar no diretório /var/lib/asterisk/sounds/
 
 
 
@@ -134,7 +134,7 @@ Announce holdtime
 Frequência de anúncio
 -----------------------
 
-| A cada quantos segundos deve informar a posição. Deixe em 0 para desativar o anuncio de posição.
+| A cada quantos segundos deve informar a posição. Deixe em 0 para desativar o anúncio de posição.
 
 
 
@@ -164,7 +164,7 @@ Desligar fila sem agentes
 Tempo máximo de espera
 -----------------------
 
-| Tempo maximo de espera para ser atendido
+| Tempo máximo de espera para ser atendido
 
 
 
@@ -184,7 +184,7 @@ Ação quando superar a espera
 Chamar ou executar MOH
 ----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tocar a música de espera ou tom de chamando quando o cliente estiver aguardando na fila.
 
 
 
@@ -194,7 +194,7 @@ Chamar ou executar MOH
 Audio tom de espera
 -------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Importar uma música de espera para esta fila.
 
 
 

@@ -24,7 +24,7 @@ Senha
 Grupo
 -----
 
-| Existe 3 tipos de grupos: Administrador, Revendedor e Cliente. Você pode criar or editar qualquer destes grupos. Cada grupo tem suas permissōes específicas. Veja o menu Configurações, Grupo para Clientes.
+| Existe 3 tipos de grupos: Administrador, Revendedor e Cliente. Você pode criar ou editar qualquer destes grupos. Cada grupo tem suas permissōes específicas. Veja o menu Configurações, Grupo para Clientes.
 
 
 
@@ -68,14 +68,14 @@ Regra prefixo
 | EX 0 DDD ou somente o número dentro de seu DDD. As regras são separadas por vírgula e composta por 2 ou 3 parâmetros separados por /.
 | 1º é o número que será substituído. Pode ser * para pegar qualquer dígito.
 | 2º é o número que vai substituir o 1º.
-| 3º é a quantidade de dígitos do número. Se nao colocar o 3º parametro, nao será verificado a quantidade de dígitos.
+| 3º é a quantidade de dígitos do número. Se nao colocar o 3º parâmetro, não será verificado a quantidade de dígitos.
 | 
 | Alguns exemplos.
 | 
 | Permite ligar 55DDDnº, 0DDDnº ou somente o número
 | 
 | 0/55,*/5511/8,*/5511/9
-| Regra 1 -> números que iniciam com 0, o zero será substituído por 55, independente de quantos digitos tiver o número. 
+| Regra 1 -> números que iniciam com 0, o zero será substituído por 55, independente de quantos dígitos tiver o número. 
 | Regra 2 -> números que iniciam com qualquer valor e tem 8 dígitos, será adicionado 5511 na frente. 
 | Regra 3 -> números que iniciam com qualquer valor e tem 9 dígitos, será adicionado 5511 na frente
 | 
@@ -83,7 +83,7 @@ Regra prefixo
 | Permite ligar 55DDDnº, 0DDDnº, DDDnº ou somente o número
 | 
 | 0/55,*/5511/8,*/5511/9,*/55/10,*/55/11
-| Regra 1 -> números que iniciam com 0, o zero será substituído por 55, independente de quantos digitos tiver o número. 
+| Regra 1 -> números que iniciam com 0, o zero será substituído por 55, independente de quantos dígitos tiver o número. 
 | Regra 2 -> números que iniciam com qualquer valor e tem 8 dígitos, será adicionado 55 na frente. 
 | Regra 3 -> números que iniciam com qualquer valor e tem 9 dígitos, será adicionado 55 na frente
 | Regra 4 -> números que iniciam com qualquer valor e tem 10 dígitos, será adicionado 5511 na frente. 
@@ -278,7 +278,7 @@ Imposto
 Tipo pago
 ---------
 
-| Cliente pós-pago poderá ficar com saldo negativo ate o limite de crédito informado no campo abaixo.
+| Cliente pós-pago poderá ficar com saldo negativo até o limite de crédito informado no campo abaixo.
 
 
 
@@ -378,7 +378,7 @@ CallShop
 Espaço em disco
 ----------------
 
-| Espaço em GB que o usuário poderá usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UsuárioDiskSpace 
+| Espaço em GB que o usuário poderá usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UserDiskSpace 
 
 
 
@@ -408,7 +408,7 @@ CallingCard PIN
 Restrição
 -----------
 
-| Esta opção permite restringir o usuário para somente discar para alguns números, ou proibir discar para alguns números, confome for selecionado. Os números deverão ser adicionado no menu Números Bloqueados.
+| Esta opção permite restringir o usuário para somente discar para alguns números, ou proibir discar para alguns números, conforme for selecionado. Os números deverão ser adicionado no menu Números Bloqueados.
 
 
 

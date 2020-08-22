@@ -4,7 +4,7 @@
 Número
 -------
 
-| Número da pessao que votou
+| Número da pessoa que votou
 
 
 

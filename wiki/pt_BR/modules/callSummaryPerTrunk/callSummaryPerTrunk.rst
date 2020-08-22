@@ -4,7 +4,7 @@
 Duração
 ---------
 
-| Somatorio de minutos chamadas.
+| Somatório de minutos chamadas.
 | É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, neste caso. Este somatório mostrará somente os dados do filtro executado.
 
 

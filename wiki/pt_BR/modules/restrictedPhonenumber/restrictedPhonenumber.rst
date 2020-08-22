@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário que deseja cadastrar o número
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Número
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número.
 
 
 
@@ -24,7 +24,7 @@ Número
 Direção
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Será analisado em ligaçōes conforme selecionado.
 
 
 

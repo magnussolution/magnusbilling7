@@ -94,7 +94,7 @@ Audio 2
 Números Restritos
 ------------------
 
-| Ativando está opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
+| Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
 
 
@@ -114,7 +114,7 @@ Reprocessar automático
 
 
 
-| Selecione as agendas que está campanha vai usar.
+| Selecione as agendas que esta campanha vai usar.
 
 
 
@@ -134,7 +134,7 @@ Número para reenviar
 Tipo de encaminhamento
 ----------------------
 
-| Selecionar o tipo de reenvio, está opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
+| Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
 
 
 
@@ -208,7 +208,7 @@ Horário de finalização diário
 Segunda
 -------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
 
 
 
@@ -218,7 +218,7 @@ Segunda
 Terça feira
 ------------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas terças feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas terças feiras.
 
 
 
@@ -228,7 +228,7 @@ Terça feira
 Quarta feira
 ------------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
 
 
 
@@ -238,7 +238,7 @@ Quarta feira
 Quinta feira
 ------------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
 
 
 
@@ -248,7 +248,7 @@ Quinta feira
 Sexta
 -----
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
 
 
 
@@ -258,7 +258,7 @@ Sexta
 Sábado
 -------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nos sabados.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nos sábados.
 
 
 
@@ -268,7 +268,7 @@ Sábado
 Domingo
 -------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nos domingos.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nos domingos.
 
 
 
@@ -339,7 +339,7 @@ Descrição ou texto do SMS
 | 
 | Ola %name% temos uma promoção para você.....
 | 
-| Então digamos que tenha cadastrado na agenda utilizada por está campanha uma lista de números contendo número e nome.
+| Então digamos que tenha cadastrado na agenda utilizada por esta campanha uma lista de números contendo número e nome.
 | 
 | 5511998844334,Paulo Ricardo
 | 5511974635734,João Matos

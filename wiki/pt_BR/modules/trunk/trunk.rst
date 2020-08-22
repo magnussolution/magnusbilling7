@@ -4,7 +4,7 @@
 Provedor
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Provedor ao qual este tronco pertence.
 
 
 
@@ -14,7 +14,7 @@ Provedor
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para o tronco, deve ser único.
 
 
 
@@ -124,27 +124,34 @@ Registrar tronco
 Linha de registro
 -----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| <usuario>:<senha>@<host>/contact.
+| usuário é a id de usuário para este servidor SIP (ex 2345).
+| senha é a senha do usuário.
+| host é o domínio ou nome do host do servidor SIP.
+| port envia a solicitação de registro para esta porta no host. Padrões para 5060
+| contact é a extensão de contato do Asterisk. Exemplo 1234 é colocado no cabeçalho do contato na mensagem de registro SIP. O ramal de contato é usado pelo servidor SIP remoto quando ele precisa enviar uma chamada para o Asterisk.
+| 
+| 
 
 
 
 
 .. _trunk-fromuser:
 
-Do usuário
------------
+Fromuser
+--------
 
-| Many SIP providers require this. Normally it is the some username
+| Muitos provedores exigem esta opção para autenticar, principalmente quando é autenticado via USER/SENHA. Deixe em branco para enviar o CallerID da conta SIP no From
 
 
 
 
 .. _trunk-fromdomain:
 
-Do domínio
------------
+Fromdomain
+----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Define o domínio no FROM: nas mensagens SIP ao atuar como um SIP UAC (cliente)
 
 
 
@@ -154,7 +161,7 @@ Do domínio
 Idioma
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Idioma padrão usado para qualquer Playback()/Background().
 
 
 
@@ -191,10 +198,10 @@ Insecure
 
 .. _trunk-maxuse:
 
-Máximo uso
------------
+Limite de chamadas
+------------------
 
-| Número máximo de chamadas simultâneas.
+| Número máximo de chamadas simultâneas para este tronco.
 
 
 
@@ -204,7 +211,7 @@ Máximo uso
 NAT
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| O tronco está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
 
 
 
@@ -214,7 +221,7 @@ NAT
 Directmedia
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/  <https://www.voip-info.org/asterisk-sip-canreinvite/>`_.
 
 
 
@@ -224,7 +231,18 @@ Directmedia
 Qualify
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Enviar pacote OPTION para verificar se o usuário está online.
+| Sintaxe:
+| 
+| qualify = xxx | no | yes
+| 
+| onde XXX é o número de milissegundos usados. Se sim, o tempo configurado no sip.conf é usado, padrão é usado 2 segundos.
+| 
+| Se você ativar o qualify, o Asterisk enviará um comando OPTION o SIP peer regularmente para verificar se o dispositivo ainda está online. 
+| Se o dispositivo não responder o OPTION dentro do período configurado (ou padrão) (em ms), o Asterisk considera o dispositivo off-line para chamadas futuras.
+| 
+| Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.
+| 
 
 
 
@@ -234,7 +252,7 @@ Qualify
 Tipo
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
 
 
 
@@ -244,7 +262,7 @@ Tipo
 Disallow
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nesta opção é possível desativar codecs. Use all para desativar todos os codecs e deixar disponível para o usuário somente os que você selecionar abaixo.
 
 
 
@@ -254,7 +272,10 @@ Disallow
 Sendrpid
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Define se um cabeçalho SIP Remote-Party-ID deve ser enviado.
+| O padrão é não.
+| 
+| Este campo é freqüentemente usado por provedores VoIP de atacado para fornecer a identidade do chamador, independentemente das configurações de privacidade (o From SIP header).
 
 
 
@@ -264,7 +285,12 @@ Sendrpid
 Adicionar parâmetro
 --------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Estes parâmetros serão adicionados no final do comando AGI - Comando Dial, que está no menu configurações ajustes.
+| Por padrão o comando DIAL é:
+| ,60,L(%timeout%:61000:30000)
+| 
+| Digamos que queira adicionar um MACRO no tronco, estão neste campo, adicionar parâmetro, só colocar M(nome_do_macro) e criar seu MACRO nos extensions do Asterisk.
+|     
 
 
 
@@ -305,6 +331,11 @@ Parâmetros
 -----------
 
 | Formato válido no Asterisk sip.conf, uma opção por linha.
+| Exemplo, digamos que vc precise colocar o parâmetro useragent então coloque neste campo:
+| 
+| useragent=meu agente
+| 
+| 
 
 
 

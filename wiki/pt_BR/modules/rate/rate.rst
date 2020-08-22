@@ -4,7 +4,7 @@
 Plano
 -----
 
-| O plano que você quer adicionar está tarifa.
+| O plano que você quer adicionar esta tarifa.
 
 
 
@@ -24,7 +24,7 @@ Destino
 Grupo de Troncos
 ----------------
 
-| Grupo de troncos que será usado para enviar está chamada.
+| Grupo de troncos que será usado para enviar esta chamada.
 
 
 
@@ -54,7 +54,7 @@ Bloco mínimo
 Bloco de tarifação
 --------------------
 
-| Bloco de quantos em quantos segundos irá cobrar após o tempo minimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
+| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 
@@ -84,7 +84,7 @@ Tempo adicional
 Incluir no pacotes grátis
 --------------------------
 
-| Ative está opção se você quer que está tarifa seja usada nos pacotes grátis
+| Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
 
 
 

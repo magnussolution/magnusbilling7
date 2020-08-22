@@ -4,7 +4,7 @@
 Valor
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/config.html  <https://wiki.magnusbilling.org/pt_BR/source/config.html>`_.
 
 
 
@@ -14,7 +14,7 @@ Valor
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/config.html  <https://wiki.magnusbilling.org/pt_BR/source/config.html>`_.
 
 
 
