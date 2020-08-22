@@ -65,6 +65,7 @@ Ext.define('Ext.ux.form.field.Lookup', {
                 selModel: {
                     mode: 'SINGLE'
                 },
+                buttonImportCsv: false,
                 allowCreate: false,
                 allowUpdate: false,
                 allowDelete: false,
