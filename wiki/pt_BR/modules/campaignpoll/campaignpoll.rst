@@ -4,7 +4,7 @@
 Campanha
 --------
 
-| Selecione a campanha que esta enquete será executa
+| Selecione a campanha que esta enquete será executa.
 
 
 
@@ -14,7 +14,7 @@ Campanha
 Nome
 ----
 
-| Nome para a enquete, este nome é somente para seu contro
+| Nome para a enquete, este nome é somente para seu contro.
 
 
 
@@ -32,7 +32,7 @@ Repetir se apertar opção inválida
 .. image:: ../img/pool_blank.png
    :scale: 100%
 | 
-| 
+| .
 
 
 
@@ -62,7 +62,7 @@ Solicitar autorização
 | As opções, solicitar autorização deverá ser SIM e a opção dígito para autorizar deve ser 1.
 | 
 | Neste exemplo somente seria executado áudio da enquete caso o cliente digitar a tecla 1, caso contrário a chamada seria finalizada.
-| 
+| .
 
 
 
@@ -82,7 +82,7 @@ Dígito para autorizar
 Audio
 -----
 
-| Arquivo de áudio, lembre-se que somente é valido áudios em GSM ou WAV 8khz mono
+| Arquivo de áudio, lembre-se que somente é valido áudios em GSM ou WAV 8khz mono.
 
 
 
@@ -92,7 +92,7 @@ Audio
 Descrição
 -----------
 
-| Descrição para a enquete
+| Descrição para a enquete.
 
 
 
@@ -119,7 +119,7 @@ Opção 0
 | 
 | Estas opções será útil para ver os relatórios no menu Relatório de Enquete
 | 
-| 
+| .
 
 
 
@@ -129,7 +129,7 @@ Opção 0
 Opção 1
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -139,7 +139,7 @@ Opção 1
 Opção 2
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -149,7 +149,7 @@ Opção 2
 Opção 3
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -159,7 +159,7 @@ Opção 3
 Opção 4
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -169,7 +169,7 @@ Opção 4
 Opção 5
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -179,7 +179,7 @@ Opção 5
 Opção 6
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -189,7 +189,7 @@ Opção 6
 Opção 7
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -199,7 +199,7 @@ Opção 7
 Opção 8
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 
@@ -209,7 +209,7 @@ Opção 8
 Opção 9
 ---------
 
-| Descreva a opção, veja a descrição da opção 0
+| Descreva a opção, veja a descrição da opção 0.
 
 
 

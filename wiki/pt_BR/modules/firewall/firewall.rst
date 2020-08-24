@@ -4,7 +4,7 @@
 IP
 --
 
-| IP
+| IP.
 
 
 
@@ -33,7 +33,7 @@ Descrição
 | 
 | tail -f /var/log/fail2ban.log
 | 
-|     
+|     .
 
 
 

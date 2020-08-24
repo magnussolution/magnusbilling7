@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário ao qual está conta IAX vai pertencer
+| Usuário ao qual está conta IAX vai pertencer.
 
 
 
@@ -54,7 +54,7 @@ Disallow
 Codec
 -----
 
-| Codecs que será aceito
+| Codecs que será aceito.
 
 
 
@@ -74,7 +74,7 @@ Host
 NAT
 ---
 
-| O cliente está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
+| O cliente está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
@@ -114,7 +114,7 @@ Qualify
 Dtmfmode
 --------
 
-| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/  <https://www.voip-info.org/asterisk-sip-dtmfmode/>`_.
+| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
 
 
 
@@ -124,7 +124,7 @@ Dtmfmode
 Insecure
 --------
 
-| Se o host estiver dynamic está opção precisa estar como NO.Para autenticação por IP alterar para port. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/  <https://www.voip-info.org/asterisk-sip-insecure/>`_.
+| Se o host estiver dynamic está opção precisa estar como NO.Para autenticação por IP alterar para port. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
 
 
 
@@ -134,7 +134,7 @@ Insecure
 Tipo
 ----
 
-| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 

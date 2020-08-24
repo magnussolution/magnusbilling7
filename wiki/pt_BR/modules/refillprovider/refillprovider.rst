@@ -14,7 +14,7 @@ Provedor
 Crédito
 --------
 
-| Valor da recarga
+| Valor da recarga.
 
 
 
@@ -34,7 +34,7 @@ Descrição
 Adicionar pagamento
 -------------------
 
-| Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO
+| Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO.
 
 
 

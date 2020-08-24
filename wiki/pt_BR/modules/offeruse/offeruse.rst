@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que realizou a chamada
+| Usuário que realizou a chamada.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Pacotes grátis
 ---------------
 
-| Nome do pacote de gratís
+| Nome do pacote de gratís.
 
 
 
@@ -24,7 +24,7 @@ Pacotes grátis
 Messes pago
 -----------
 
-| Meses que foram pagos
+| Meses que foram pagos.
 
 
 
@@ -34,7 +34,7 @@ Messes pago
 Data de reserva
 ---------------
 
-| Data e hora que foi cancelado o pacote gratís
+| Data e hora que foi cancelado o pacote gratís.
 
 
 

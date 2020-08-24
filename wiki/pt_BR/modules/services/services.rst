@@ -4,7 +4,7 @@
 Tipo
 ----
 
-| Tipo de serviço
+| Tipo de serviço.
 
 
 
@@ -14,7 +14,7 @@ Tipo
 Nome
 ----
 
-| Nome para o serviço
+| Nome para o serviço.
 
 
 
@@ -64,7 +64,7 @@ Preço
 Retornar crédito
 -----------------
 
-| Caso o serviço seja cancelado antes do dia do vencimento, e esta opção esteja como sim, será devolvido o valor proporcional dos dias não usado ao crédito do cliente
+| Caso o serviço seja cancelado antes do dia do vencimento, e esta opção esteja como sim, será devolvido o valor proporcional dos dias não usado ao crédito do cliente.
 
 
 

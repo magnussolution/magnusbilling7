@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter vários troncos
+| Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter vários troncos.
 
 
 

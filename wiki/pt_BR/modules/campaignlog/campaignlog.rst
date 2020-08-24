@@ -4,7 +4,7 @@
 Total
 -----
 
-| Total de chamadas
+| Total de chamadas.
 
 
 

@@ -34,7 +34,7 @@ Preço
 Métodos de Pagamento
 ---------------------
 
-| Forma de pagamento
+| Forma de pagamento.
 
 
 

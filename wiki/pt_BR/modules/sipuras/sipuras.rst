@@ -4,7 +4,7 @@
 Serial
 ------
 
-| Linksys serial number
+| Linksys serial number.
 
 
 
@@ -14,7 +14,7 @@ Serial
 MAC
 ---
 
-| Linksys MAC address
+| Linksys MAC address.
 
 
 
@@ -24,7 +24,7 @@ MAC
 Senha do usuário
 -----------------
 
-| Usuário para entrar na configuração do LinkSys
+| Usuário para entrar na configuração do LinkSys.
 
 
 
@@ -34,7 +34,7 @@ Senha do usuário
 Senha de administração
 ------------------------
 
-| Senha para entrar na configuração do LinkSys
+| Senha para entrar na configuração do LinkSys.
 
 
 
@@ -44,7 +44,7 @@ Senha de administração
 Bloquear reset
 --------------
 
-| Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#
+| Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#.
 
 
 
@@ -64,7 +64,7 @@ Ativar acesso WEB
 Usuário
 --------
 
-| Conta SIP que vai será usado na linha 1 do ATA
+| Conta SIP que vai será usado na linha 1 do ATA.
 
 
 
@@ -74,7 +74,7 @@ Usuário
 Senha
 -----
 
-| Senha da Conta VoIP
+| Senha da Conta VoIP.
 
 
 
@@ -84,7 +84,7 @@ Senha
 Usar codec preferencial
 -----------------------
 
-| Somente usar o codec preferencial
+| Somente usar o codec preferencial.
 
 
 
@@ -94,7 +94,7 @@ Usar codec preferencial
 Codec
 -----
 
-| Configurar codec preferencial
+| Configurar codec preferencial.
 
 
 
@@ -114,7 +114,7 @@ Register expires
 Dial plan
 ---------
 
-| Read linksys documentation
+| Read linksys documentation.
 
 
 
@@ -144,7 +144,7 @@ NAT keep alive
 Usuário
 --------
 
-| Conta SIP que vai será usado na linha 1 do ATA
+| Conta SIP que vai será usado na linha 1 do ATA.
 
 
 
@@ -154,7 +154,7 @@ Usuário
 Senha
 -----
 
-| Senha da Conta VoIP
+| Senha da Conta VoIP.
 
 
 
@@ -164,7 +164,7 @@ Senha
 Usar codec preferencial
 -----------------------
 
-| Somente usar o codec preferencial
+| Somente usar o codec preferencial.
 
 
 
@@ -174,7 +174,7 @@ Usar codec preferencial
 Codec
 -----
 
-| Configurar codec preferencial
+| Configurar codec preferencial.
 
 
 
@@ -194,7 +194,7 @@ Register expires
 Dial plan
 ---------
 
-| Read linksys documentation
+| Read linksys documentation.
 
 
 
@@ -244,7 +244,7 @@ STUN Test
 Substitute VIA Addr
 -------------------
 
-| Substituir o IP publico no VIA
+| Substituir o IP publico no VIA.
 
 
 

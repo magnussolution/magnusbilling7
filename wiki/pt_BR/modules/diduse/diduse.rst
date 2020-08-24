@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário dono do DID
+| Usuário dono do DID.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 DID
 ---
 
-| Número DID
+| Número DID.
 
 
 
@@ -24,7 +24,7 @@ DID
 Data de reserva
 ---------------
 
-| Dia que o DID foi reservado para o usuário
+| Dia que o DID foi reservado para o usuário.
 
 
 

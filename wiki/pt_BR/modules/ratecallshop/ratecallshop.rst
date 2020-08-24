@@ -24,7 +24,7 @@ Destino
 Preço de venda
 ---------------
 
-| Valor cobrado por minuto do cliente do Callshop
+| Valor cobrado por minuto do cliente do Callshop.
 
 
 
@@ -54,7 +54,7 @@ Incremento
 Tempo mínimo para tarifar
 --------------------------
 
-| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.
 
 
 

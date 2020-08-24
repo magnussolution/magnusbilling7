@@ -14,7 +14,7 @@ Agenda
 Número
 -------
 
-| Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato 55 DDD número
+| Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato 55 DDD número.
 
 
 

@@ -44,7 +44,7 @@ Senha
 Host
 ----
 
-| IP ou Domínio do tronco
+| IP ou Domínio do tronco.
 
 
 
@@ -54,7 +54,7 @@ Host
 Adicionar prefixo
 -----------------
 
-| Adiciona um prefixo no inicio do número to enviar para o tronco. Também usado para quando você precisa enviar um techprefix. EX: Se você tem que enviar o número no formato 0DDD número, coloque aqui 0 e no campo abaixo 55. Isso vai remover o 55 e adiconar o 0 
+| Adiciona um prefixo no inicio do número to enviar para o tronco. Também usado para quando você precisa enviar um techprefix. EX: Se você tem que enviar o número no formato 0DDD número, coloque aqui 0 e no campo abaixo 55. Isso vai remover o 55 e adiconar o 0 .
 
 
 
@@ -94,7 +94,7 @@ Tipo sinalização
 Status
 ------
 
-| Se o tronco for inativado, Magnusbilling enviara a chamada para o tronco backup
+| Se o tronco for inativado, Magnusbilling enviara a chamada para o tronco backup.
 
 
 
@@ -131,7 +131,7 @@ Linha de registro
 | port envia a solicitação de registro para esta porta no host. Padrões para 5060
 | contact é a extensão de contato do Asterisk. Exemplo 1234 é colocado no cabeçalho do contato na mensagem de registro SIP. O ramal de contato é usado pelo servidor SIP remoto quando ele precisa enviar uma chamada para o Asterisk.
 | 
-| 
+| .
 
 
 
@@ -141,7 +141,7 @@ Linha de registro
 Fromuser
 --------
 
-| Muitos provedores exigem esta opção para autenticar, principalmente quando é autenticado via USER/SENHA. Deixe em branco para enviar o CallerID da conta SIP no From
+| Muitos provedores exigem esta opção para autenticar, principalmente quando é autenticado via USER/SENHA. Deixe em branco para enviar o CallerID da conta SIP no From.
 
 
 
@@ -151,7 +151,7 @@ Fromuser
 Fromdomain
 ----------
 
-| Define o domínio no FROM: nas mensagens SIP ao atuar como um SIP UAC (cliente)
+| Define o domínio no FROM: nas mensagens SIP ao atuar como um SIP UAC (cliente).
 
 
 
@@ -181,7 +181,7 @@ Contexto
 Dtmfmode
 --------
 
-| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-dtmf/  <https://www.voip-info.org/asterisk-dtmf/>`_.
+| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-dtmf/.  <https://www.voip-info.org/asterisk-dtmf/.>`_.
 
 
 
@@ -191,7 +191,7 @@ Dtmfmode
 Insecure
 --------
 
-| Insecure. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/  <https://www.voip-info.org/asterisk-sip-insecure/>`_.
+| Insecure. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
 
 
 
@@ -211,7 +211,7 @@ Limite de chamadas
 NAT
 ---
 
-| O tronco está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
+| O tronco está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
@@ -221,7 +221,7 @@ NAT
 Directmedia
 -----------
 
-| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/  <https://www.voip-info.org/asterisk-sip-canreinvite/>`_.
+| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/.  <https://www.voip-info.org/asterisk-sip-canreinvite/.>`_.
 
 
 
@@ -242,7 +242,7 @@ Qualify
 | Se o dispositivo não responder o OPTION dentro do período configurado (ou padrão) (em ms), o Asterisk considera o dispositivo off-line para chamadas futuras.
 | 
 | Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.
-| 
+| .
 
 
 
@@ -252,7 +252,7 @@ Qualify
 Tipo
 ----
 
-| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -290,7 +290,7 @@ Adicionar parâmetro
 | ,60,L(%timeout%:61000:30000)
 | 
 | Digamos que queira adicionar um MACRO no tronco, estão neste campo, adicionar parâmetro, só colocar M(nome_do_macro) e criar seu MACRO nos extensions do Asterisk.
-|     
+|     .
 
 
 
@@ -310,7 +310,7 @@ Porta
 Link SMS
 --------
 
-| URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuário=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% 
+| URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuário=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% .
 
 
 
@@ -335,7 +335,7 @@ Parâmetros
 | 
 | useragent=meu agente
 | 
-| 
+| .
 
 
 

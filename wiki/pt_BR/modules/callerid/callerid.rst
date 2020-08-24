@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Selecionar o usuário
+| Selecionar o usuário.
 
 
 
@@ -24,7 +24,7 @@ CallerID
 Nome
 ----
 
-| Opcional
+| Opcional.
 
 
 
@@ -34,7 +34,7 @@ Nome
 Status
 ------
 
-| Status do CallerID
+| Status do CallerID.
 
 
 

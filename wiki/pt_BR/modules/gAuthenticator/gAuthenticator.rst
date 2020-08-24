@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que deseja ativar TOKEN
+| Usuário que deseja ativar TOKEN.
 
 
 

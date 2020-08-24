@@ -4,7 +4,7 @@
 Nome para mostrar
 -----------------
 
-| Nome que será mostrado no painel do cliente
+| Nome que será mostrado no painel do cliente.
 
 
 
@@ -24,7 +24,7 @@ Usuário
 País
 -----
 
-| Somente para referencia
+| Somente para referencia.
 
 
 
@@ -34,7 +34,7 @@ País
 Ativo
 -----
 
-| Ative se quiser deixar disponível para os clientes
+| Ative se quiser deixar disponível para os clientes.
 
 
 

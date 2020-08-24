@@ -15,7 +15,7 @@ Host
 Usuário
 --------
 
-| Usuário para autenticar no servidor SMTP
+| Usuário para autenticar no servidor SMTP.
 
 
 
@@ -25,7 +25,7 @@ Usuário
 Senha
 -----
 
-| Senha para autenticar no servidor SMTP
+| Senha para autenticar no servidor SMTP.
 
 
 

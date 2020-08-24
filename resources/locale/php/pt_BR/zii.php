@@ -21,7 +21,13 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Will be generated automatically' => 'Será gerado automaticamente',
+            'This option is only available to clients.' => 'Esta opção está disponível somente para clientes.',
+    'The DID has already been activated for another user.' => 'O DID já foi ativado para outro usuário.',
+    'Not allowed' => 'Não permitido',
+    'The DID has been activated for you.' => 'O DID foi ativado para você.',
+    'This option is only available to clients.' => 'Esta opção está disponível apenas para clientes.',
+    'You not have enough credit to buy the DID' => 'Você não tem crédito suficiente para comprar o DID',
+    'Will be generated automatically' => 'Será gerado automaticamente',
     'Admin' => 'Administrador',
     'Asterisk' => 'Asterisk',
     'Calling' => 'Chamando',
