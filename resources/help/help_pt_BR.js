@@ -21,7 +21,7 @@ Caso o tronco aceite o envio de callerid, então este número será usado como i
 Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'call.calledstation': `Número discado pelo cliente.`,
     'call.idPrefixdestination': `Nome do destino, este nome está relacionado com o menu Prefixos.`,
-    'call.idUserusername': `Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado.`,
+    'call.idUserusername': `Usuário que realizou a chamada, e ao qual o custo da chamada foi descontado.`,
     'call.idTrunktrunkcode': `Tronco que foi utilizado para completar a chamada.`,
     'call.sessiontime': `Duração da chamada em segundos.`,
     'call.buycost': `Preço de compra. Clique para entender como é calculado o preço|https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.`,
