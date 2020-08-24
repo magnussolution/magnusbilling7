@@ -7,8 +7,8 @@ Help.load({
     'api.action': `Which action the user will have execute`,
     'api.api_restriction_ips': `What IPS you want allow access this API. Leave blank to allow any IP. It is very recomended set the IPS`,
     //CDR
-    'call.starttime': ``,
-    'call.src': ``,
+    'call.starttime': `Start time of the call`,
+    'call.src': `SIP Account that made the call`,
     'call.callerid': ``,
     'call.calledstation': ``,
     'call.idPrefixdestination': ``,
