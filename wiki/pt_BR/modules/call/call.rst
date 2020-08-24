@@ -58,7 +58,7 @@ Destino
 Usuário
 --------
 
-| Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado.
+| Usuário que realizou a chamada, e ao qual o custo da chamada foi descontado.
 
 
 
