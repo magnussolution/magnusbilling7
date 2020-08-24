@@ -31,7 +31,7 @@ Quantidade gratuita
 | * Chamadas gratuitas: Colocar a quantidade de chamadas que deseja dar gratís.
 | * Segundos gratís: Colocar quantos segundos deseja permitir o cliente chamar.
 | 
-| 
+| .
 
 
 
@@ -49,7 +49,7 @@ Tipo de tarifação
 | 
 | Quando o cliente chegar no limite do pacote, o MagnusBilling vai verificar se o usuário tem crédito para completar a chamada, caso o usuário não tenha crédito a chamada será finalizada.
 | 
-| 
+| .
 
 
 
@@ -71,7 +71,7 @@ Preço
 | 
 | Para saber como funciona os pacotes gratís veja o link https://wiki.magnusbilling.org/pt_BR/source/offer.html.
 | 
-|     
+|     .
 
 
 

@@ -4,7 +4,7 @@
 Número
 -------
 
-| Número discado pelo cliente
+| Número discado pelo cliente.
 
 
 
@@ -14,7 +14,7 @@ Número
 Duração
 ---------
 
-| Duração da chamada em segundos
+| Duração da chamada em segundos.
 
 
 
@@ -24,7 +24,7 @@ Duração
 Preço de compra
 ----------------
 
-| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.>`_.
 
 
 
@@ -34,7 +34,7 @@ Preço de compra
 Preço de venda
 ---------------
 
-| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.>`_.
 
 
 
@@ -44,7 +44,7 @@ Preço de venda
 Preço de venda
 ---------------
 
-| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.>`_.
 
 
 

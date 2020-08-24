@@ -14,6 +14,12 @@
  * 2020-08-10
  */
 Locale.load({
+    'The DID has already been activated for another user.': 'El DID ya se ha activado para otro usuario.',
+    'This option is only available to clients.': 'Esta opción solo está disponible para clientes.',
+    'Not allowed': 'No permitido',
+    'The DID has been activated for you.': 'El DID está activado para usted.',
+    'This option is only available to clients.': 'Esta opción solo está disponible para clientes.',
+    'You not have enough credit to buy the DID': 'No tienes suficiente crédito para comprar el DID',
     'Will be generated automatically': 'Sera gerado automaticamente',
     '': '',
     ',': ',',
@@ -382,7 +388,6 @@ Locale.load({
     'Dial parameter': 'Parámetro Dial',
     'Dial plan': 'Dial plan',
     'Dial timeout': 'Dial timeout',
-    'DialPlan': 'DialPlan',
     'Dialed today': 'Llamadas hoy',
     'Did': 'Did',
     'Did is not in use': 'DID no está en uso',
@@ -498,7 +503,7 @@ Locale.load({
     'Import logo': 'Importar logo',
     'Import wallpaper': 'Importar fondo de pantalla',
     'In': 'En',
-    'In use': 'En uso',
+    'In use': 'Máximo de llamadas',
     'Inactivated': 'Inactivado',
     'Inactive': 'Inactivo',
     'Inbound': 'Entrante',
@@ -557,7 +562,7 @@ Locale.load({
     'Max complete call': 'Max llamada completa',
     'Max completed calls': 'Max de llamadas completadas',
     'Max size file': 'Archivo de tamaño máximo',
-    'Max use': 'Uso máximo',
+    'Max use': 'Máximo de llamadas',
     'Max wait time': 'Tiempo máximo de espera',
     'Max wait time action': 'Acción al finalizar el tiempo',
     'Maximize': 'Maximizar',

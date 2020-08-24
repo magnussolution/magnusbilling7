@@ -4,7 +4,7 @@
 Provedor
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome do provedor.
 
 
 
@@ -14,7 +14,7 @@ Provedor
 Crédito
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor da recarga.
 
 
 
@@ -24,7 +24,7 @@ Crédito
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usado para seu controle interno.
 
 
 
@@ -34,7 +34,7 @@ Descrição
 Adicionar pagamento
 -------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO.
 
 
 

@@ -69,16 +69,6 @@ Ext.define('MBilling.view.sipuras.Form', {
                     xtype: 'yesnocombo',
                     name: 'Enable_Web_Server',
                     fieldLabel: t('Enable_Web_Server')
-                }, {
-                    name: 'marca',
-                    fieldLabel: t('Mark'),
-                    value: '*',
-                    hidden: true
-                }, {
-                    name: 'altera',
-                    fieldLabel: t('Change'),
-                    value: 'si',
-                    hidden: true
                 }]
             }, {
                 title: t('Line 1'),

@@ -59,26 +59,6 @@ Enable_Web_Server
 
 
 
-.. _sipuras-marca:
-
-Mark
-----
-
-| We did not write the description to this field.
-
-
-
-
-.. _sipuras-altera:
-
-Change
-------
-
-| We did not write the description to this field.
-
-
-
-
 .. _sipuras-User-ID-1:
 
 Username

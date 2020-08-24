@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário ao qual esta conta SIP está vinculada.
 
 
 
@@ -54,7 +54,7 @@ Alias
 Disallow
 --------
 
-| Esta opção desativa todos os codecs e deixa disponível para o usuário somente os que você selecionar abaixo.
+| Nesta opção é possível desativar codecs. Use all para desativar todos os codecs e deixar disponível para o usuário somente os que você selecionar abaixo.
 
 
 
@@ -64,7 +64,7 @@ Disallow
 Codec
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione os codecs que o tronco aceita.
 
 
 
@@ -84,7 +84,11 @@ Host
 Grupo
 -----
 
-| Usado a chamadas recebidas. Quando enviar um DID parar um grupo, vai chamar todas as contas que tiver no grupo. Você pode criar os grupos com qualquer nome
+| Quando enviar um chamada de um DID, ou campanha para um grupo, será chamado todas as contas SIP que estiverem no grupo. Você pode criar os grupos com qualquer nome.
+| 
+| 
+| Também usado para capturar chamada com *8, dever se configura a opção pickupexten = *8  no arquivo feature.conf.
+| .
 
 
 
@@ -94,7 +98,7 @@ Grupo
 Suporte a vídeo
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativa chamadas de vídeo.
 
 
 
@@ -104,7 +108,7 @@ Suporte a vídeo
 REGEX para bloqueio de chamadas
 -------------------------------
 
-| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com  <https://regex101.com>`_.
+| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
@@ -114,7 +118,7 @@ REGEX para bloqueio de chamadas
 Gravar chamadas
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Grava as chamadas desta conta SIP.
 
 
 
@@ -124,7 +128,7 @@ Gravar chamadas
 Tech prefix
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Opção útil para quando for necessário autenticar mais de uma cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.
 
 
 
@@ -134,7 +138,7 @@ Tech prefix
 NAT
 ---
 
-| O cliente está atras de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
+| O cliente está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
@@ -144,7 +148,7 @@ NAT
 Directmedia
 -----------
 
-| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/  <https://www.voip-info.org/asterisk-sip-canreinvite/>`_.
+| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/.  <https://www.voip-info.org/asterisk-sip-canreinvite/.>`_.
 
 
 
@@ -155,6 +159,16 @@ Qualify
 -------
 
 | Enviar pacote OPTION para verificar se o usuário está online.
+| Sintaxe:
+| 
+| qualify = xxx | no | yes
+| 
+| onde XXX é o número de milissegundos usados. Se sim, o tempo configurado no sip.conf é usado, padrão é usado 2 segundos.
+| 
+| Se você ativar o qualify, o Asterisk enviará um comando OPTION o SIP peer regularmente para verificar se o dispositivo ainda está online. 
+| Se o dispositivo não responder o OPTION dentro do período configurado (ou padrão) (em ms), o Asterisk considera o dispositivo off-line para chamadas futuras.
+| 
+| Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.
 
 
 
@@ -164,7 +178,7 @@ Qualify
 Contexto
 --------
 
-| Este é o contexto que a chamada sera processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.
+| Este é o contexto que a chamada será processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.
 
 
 
@@ -174,7 +188,7 @@ Contexto
 Dtmfmode
 --------
 
-| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/  <https://www.voip-info.org/asterisk-sip-dtmfmode/>`_.
+| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
 
 
 
@@ -194,7 +208,7 @@ Insecure
 Deny
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Você pode limitar o tráfego SIP de um determinado IP ou rede.
 
 
 
@@ -204,7 +218,7 @@ Deny
 Permit
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Você pode permitir o tráfego SIP de um determinado IP ou rede.
 
 
 
@@ -214,7 +228,7 @@ Permit
 Tipo
 ----
 
-| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -224,7 +238,7 @@ Tipo
 Permitir transferência
 -----------------------
 
-| Permite está conta VoIP fazer transferência. O código para transferência é *2ramal. É necessário ativar a transferência no arquivo features.conf do Asterisk
+| Permite esta conta VoIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk.
 
 
 
@@ -244,7 +258,7 @@ Ring falso
 Limite de chamada
 -----------------
 
-| Total de chamadas simultâneas permitida para está conta SIP.
+| Total de chamadas simultâneas permitida para esta conta SIP.
 
 
 
@@ -254,7 +268,7 @@ Limite de chamada
 MOH
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Música de espera para esta conta SIP.
 
 
 
@@ -264,7 +278,7 @@ MOH
 URL notificaçōes de eventos
 -----------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| .
 
 
 
@@ -274,7 +288,7 @@ URL notificaçōes de eventos
 Adicionar parâmetro
 --------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Os parâmetros colocado aqui irão substituir os parâmetros padrão do sistema, e também os do tronco, caso houver.
 
 
 
@@ -284,17 +298,17 @@ Adicionar parâmetro
 AMD
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| .
 
 
 
 
 .. _sip-type-forward:
 
-Encaminhar
-----------
+Tipo de encaminhamento
+----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tipo de destino do reenvio. Este reenvio não funciona em fila de espera.
 
 
 
@@ -304,7 +318,7 @@ Encaminhar
 URA
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione a URA que deseja enviar a chamadas caso a conta SIP não atender.
 
 
 
@@ -314,7 +328,7 @@ URA
 Fila de espera
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione a fila de espera que deseja enviar a chamadas caso a conta SIP não atender.
 
 
 
@@ -324,17 +338,23 @@ Fila de espera
 Conta SIP
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Selecione a conta SIP que deseja enviar a chamadas caso a conta SIP não atender.
 
 
 
 
 .. _sip-extension:
 
-DialPlan
---------
+Destino
+-------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Clique para mais detalhes
+| Temos três opcōes, conforme o tipo selecionado, grupo, número ou personalizado.
+| 
+| * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
+| * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
+| * Número, pode ser um número fixo ou celular, deve estar no formato 55 DDD número.
+| .
 
 
 
@@ -344,7 +364,7 @@ DialPlan
 Tocar por quantos seg.
 ----------------------
 
-| Tempo em segundos que será aguardado para atender a chamada.
+| Tempo em segundos que será aguardado para atender a chamada. Após este tempo será executado o encaminhamento caso for configurado.
 
 
 
@@ -354,7 +374,7 @@ Tocar por quantos seg.
 Habilitar voicemail
 -------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Ativar voicemail. É necessário a configuração do SMTP no Linux para receber o email com a mensagem. Você pode ver mais detalhes no link `https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.  <https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.>`_.
 
 
 
@@ -364,7 +384,7 @@ Habilitar voicemail
 Email
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Email que será enviado o email com a gravação.
 
 
 
@@ -374,7 +394,7 @@ Email
 Senha
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Senha do VOICEMAIL. É possível entrar no VOICEMAIL digitando *111.
 
 
 
@@ -384,7 +404,7 @@ Senha
 Peer
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| sip show peer.
 
 
 

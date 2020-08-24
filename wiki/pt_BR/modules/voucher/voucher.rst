@@ -4,7 +4,7 @@
 Crédito
 --------
 
-| Valor do VOUCHER. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/how_to_use_voucher.html  <https://wiki.magnusbilling.org/pt_BR/source/how_to_use_voucher.html>`_.
+| Valor do VOUCHER. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/how_to_use_voucher.html.  <https://wiki.magnusbilling.org/pt_BR/source/how_to_use_voucher.html.>`_.
 
 
 
@@ -24,7 +24,7 @@ Plano
 Idioma
 ------
 
-| Idioma que será usado
+| Idioma que será usado.
 
 
 
@@ -34,7 +34,7 @@ Idioma
 Regra prefixo
 -------------
 
-| Regra que será usado no campo Regra prefixo
+| Regra que será usado no campo Regra prefixo.
 
 
 
@@ -44,7 +44,7 @@ Regra prefixo
 Quantidade
 ----------
 
-| Quantos VOUCHERs você deseja gerar?
+| Quantos VOUCHERs você deseja gerar?.
 
 
 
@@ -54,7 +54,7 @@ Quantidade
 Descrição
 -----------
 
-| Descrição para a agenda, somente para controle proprio.
+| Descrição para a agenda, somente para controle próprio.
 
 
 

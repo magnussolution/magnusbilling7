@@ -14,7 +14,7 @@ Prefixo
 Destino
 -------
 
-| Nome do destino. EX: Brasil SP
+| Nome do destino. EX: Brasil SP.
 
 
 

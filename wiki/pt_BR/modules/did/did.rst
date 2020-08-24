@@ -14,7 +14,7 @@ DID
 Status
 ------
 
-| Somente os números ativos podem receber chamadas
+| Somente os números ativos podem receber chamadas.
 
 
 
@@ -105,7 +105,7 @@ Quem será cobrado
 Limite de canais
 ----------------
 
-| Limite de chamadas simultâneas para este DID
+| Limite de chamadas simultâneas para este DID.
 
 
 
@@ -146,7 +146,7 @@ Expressão regular
 | 
 | 
 | 
-| 
+| .
 
 
 
@@ -156,7 +156,7 @@ Expressão regular
 Preço de venda por min
 -----------------------
 
-| Preço por minuto a ser cobrado se validar a Expressão regular acima
+| Preço por minuto a ser cobrado se validar a Expressão regular acima.
 
 
 
@@ -188,7 +188,7 @@ Enviar a chamada para callback
 Expressão regular
 ------------------
 
-| Igual a opçao 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1>`_.
+| Igual a opção 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1.>`_.
 
 
 
@@ -198,7 +198,7 @@ Expressão regular
 Preço de venda por min
 -----------------------
 
-| Preço por minuto a ser cobrado se validar a Expressão regular acima
+| Preço por minuto a ser cobrado se validar a Expressão regular acima.
 
 
 
@@ -230,7 +230,7 @@ Enviar a chamada para callback
 Expressão regular
 ------------------
 
-| Igual a opçao 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1>`_.
+| Igual a opção 1. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1.>`_.
 
 
 
@@ -240,7 +240,7 @@ Expressão regular
 Preço de venda por min
 -----------------------
 
-| Preço por minuto a ser cobrado se validar a Expressão regular acima
+| Preço por minuto a ser cobrado se validar a Expressão regular acima.
 
 
 
@@ -282,7 +282,7 @@ Callback pro
 Usar áudio
 -----------
 
-| Executar um áudio
+| Executar um áudio.
 
 
 
@@ -292,7 +292,7 @@ Usar áudio
 Tentativa máxima
 -----------------
 
-| Quantas vezes o sistema vai tentar retornar para o cliente?
+| Quantas vezes o sistema vai tentar retornar para o cliente?.
 
 
 
@@ -322,7 +322,7 @@ Early media
 Seg-Sex
 -------
 
-| Ex: sua trabalha de 09 as 12 e de 14h às 18h, e dentro deste horário você quer executar o callback e retornar a chamada para a pessoa que ligou, então coloque 09:00-12:00|14:00-18:00, os intervalos são separados por |
+| Ex: sua trabalha de 09 as 12 e de 14h às 18h, e dentro deste horário você quer executar o callback e retornar a chamada para a pessoa que ligou, então coloque 09:00-12:00|14:00-18:00, os intervalos são separados por |.
 
 
 
@@ -332,7 +332,7 @@ Seg-Sex
 Sab
 ---
 
-| Mesma regra só que para sábados
+| Mesma regra só que para sábados.
 
 
 
@@ -342,7 +342,7 @@ Sab
 Domingo
 -------
 
-| Mesma regra só que para domingos
+| Mesma regra só que para domingos.
 
 
 
@@ -362,7 +362,7 @@ Domingo
 Trabalhando
 -----------
 
-| Áudio que será executado quando ligar fora do horário de atendimento
+| Áudio que será executado quando ligar fora do horário de atendimento.
 
 
 

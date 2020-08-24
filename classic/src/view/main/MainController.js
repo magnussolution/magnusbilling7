@@ -321,7 +321,7 @@ Ext.define('MBilling.view.main.MainController', {
         if (me.winAbout && me.winAbout.isVisible()) {
             return;
         }
-        me.winAbout = Ext.widget('About', {
+        me.winAbout = Ext.widget('about', {
             title: menuItem.text,
             glyph: menuItem.glyph
         });

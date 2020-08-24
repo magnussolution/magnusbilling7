@@ -8,7 +8,7 @@ Usuário
 | Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
 |     
 | O projeto está publicado no link https://github.com/magnussolution/magnusbilling-api-php. 
-| A API tem documentação, atualmente somente em Ingles, e está publicado no link https://github.com/magnussolution/magnusbilling-api-php/wiki. 
+| A API tem documentação, atualmente somente em Ingles, e está publicado no link https://github.com/magnussolution/magnusbilling-api-php/wiki. .
 
 
 

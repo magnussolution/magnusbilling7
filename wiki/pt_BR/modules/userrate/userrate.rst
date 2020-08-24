@@ -14,7 +14,7 @@ Destino
 Preço de venda
 ---------------
 
-| Novo preço de venda para este prefixo
+| Novo preço de venda para este prefixo.
 
 
 
@@ -24,7 +24,7 @@ Preço de venda
 Bloco mínimo
 -------------
 
-| Mínimo de venda
+| Mínimo de venda.
 
 
 
@@ -34,7 +34,7 @@ Bloco mínimo
 Bloco de tarifação
 --------------------
 
-| Bloco de venda
+| Bloco de venda.
 
 
 

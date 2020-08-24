@@ -4,7 +4,7 @@
 Nome para mostrar
 -----------------
 
-| Nome que será mostrado no painel do cliente
+| Nome que será mostrado no painel do cliente.
 
 
 
@@ -14,7 +14,7 @@ Nome para mostrar
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário do método de pagamento. Pode ser criado métodos de pagamento para o administrado ou revendedores.
 
 
 
@@ -24,7 +24,7 @@ Usuário
 País
 -----
 
-| Somente para referencia
+| Somente para referencia.
 
 
 
@@ -34,7 +34,7 @@ País
 Ativo
 -----
 
-| Ative se quiser deixar disponível para os clientes
+| Ative se quiser deixar disponível para os clientes.
 
 
 
@@ -64,7 +64,7 @@ Quantidade máxima
 Usuário
 --------
 
-| Usuário do metodo de pagamento.
+| Usuário do método de pagamento.
 
 
 
@@ -74,7 +74,7 @@ Usuário
 URL
 ---
 
-| URL do metodo de pagamento, na maioria dos metodos está URL ja está preconfigurada.
+| URL do método de pagamento, na maioria dos métodos está URL já está preconfigurada.
 
 
 
@@ -84,7 +84,7 @@ URL
 Taxa de desconto
 ----------------
 
-| Taxa cobrada pelo metodo de pagamento.
+| Taxa cobrada pelo método de pagamento.
 
 
 
@@ -94,7 +94,7 @@ Taxa de desconto
 Token
 -----
 
-| TOKEN do metodo de pagamento.
+| TOKEN do método de pagamento.
 
 
 
@@ -104,7 +104,7 @@ Token
 P2P CustomerSiteID
 ------------------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 
@@ -114,7 +114,7 @@ P2P CustomerSiteID
 P2P KeyID
 ---------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 
@@ -124,7 +124,7 @@ P2P KeyID
 P2P Passphrase
 --------------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 
@@ -134,7 +134,7 @@ P2P Passphrase
 P2P RecipientKeyID
 ------------------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 
@@ -144,7 +144,7 @@ P2P RecipientKeyID
 P2P Tax Amount
 --------------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 
@@ -154,7 +154,7 @@ P2P Tax Amount
 ID do cliente
 -------------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 
@@ -164,7 +164,7 @@ ID do cliente
 Secret do cliente
 -----------------
 
-| Este campo é exclusivo para alguns metodos de pagamento.
+| Este campo é exclusivo para alguns métodos de pagamento.
 
 
 

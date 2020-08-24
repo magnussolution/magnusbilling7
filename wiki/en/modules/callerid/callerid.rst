@@ -19,20 +19,20 @@ CallerID
 
 
 
-.. _callerid-activated:
+.. _callerid-name:
 
-Status
-------
+Name
+----
 
 | We did not write the description to this field.
 
 
 
 
-.. _callerid-name:
+.. _callerid-activated:
 
-Name
-----
+Status
+------
 
 | We did not write the description to this field.
 

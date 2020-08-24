@@ -4,7 +4,7 @@
 Nome do provedor
 ----------------
 
-| Provedor
+| Provedor.
 
 
 
@@ -14,7 +14,7 @@ Nome do provedor
 Destino
 -------
 
-| Prefixo
+| Prefixo.
 
 
 
@@ -24,7 +24,7 @@ Destino
 Preço de compra
 ----------------
 
-| Valor pago ao provedor por minuto
+| Valor pago ao provedor por minuto.
 
 
 
@@ -54,7 +54,7 @@ Incremento
 Tempo mínimo para compra
 -------------------------
 
-| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.
 
 
 

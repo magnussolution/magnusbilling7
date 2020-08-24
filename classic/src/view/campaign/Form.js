@@ -122,7 +122,7 @@ Ext.define('MBilling.view.campaign.Form', {
                 title: t('Forward'),
                 items: [{
                     xtype: 'fieldset',
-                    style: 'margin-top:25px; overflow: visible;',
+                    style: 'margin-top:10px; overflow: visible;',
                     title: t('Forward to'),
                     collapsible: true,
                     collapsed: false,

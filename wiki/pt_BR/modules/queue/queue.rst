@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Usuário dono da fila.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Nome
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome para a fina.
 
 
 
@@ -24,7 +24,7 @@ Nome
 Idioma
 ------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Idioma da fila.
 
 
 
@@ -34,7 +34,7 @@ Idioma
 Estratégia
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Estratégia para a fila.
 
 
 
@@ -54,7 +54,7 @@ Chamar conta SIP em uso
 Chamado por
 -----------
 
-| Por quanto tempo deve ficar chamando um agente
+| Por quanto tempo deve ficar chamando um agente.
 
 
 
@@ -64,7 +64,7 @@ Chamado por
 Tempo para chamar proximo agente
 --------------------------------
 
-| Tempo em segundos para tentar chamadas outro agente caso o anterior não atender
+| Tempo em segundos para tentar chamadas outro agente caso o anterior não atender.
 
 
 
@@ -74,7 +74,7 @@ Tempo para chamar proximo agente
 Tempo para próxima chamada
 ---------------------------
 
-| Intervalo de tempo em segundos que o agente poderá receber outra chamada
+| Intervalo de tempo em segundos que o agente poderá receber outra chamada.
 
 
 
@@ -94,7 +94,7 @@ Peso
 Periodic announce
 -----------------
 
-| Audio para os anúncios. Você pode colocar mais de um áudio, separando por  (,). Estes dados devem estar no diretório /var/lib/asterisk/sounds/
+| Áudio para os anúncios. Você pode colocar mais de um áudio, separando por  (,). Estes dados devem estar no diretório /var/lib/asterisk/sounds/.
 
 
 
@@ -114,7 +114,7 @@ Frequência
 Announce position
 -----------------
 
-| Informar a posição que a pessoa se encontra na fila
+| Informar a posição que a pessoa se encontra na fila.
 
 
 
@@ -124,7 +124,7 @@ Announce position
 Announce holdtime
 -----------------
 
-| Deveria ser incluso no anuncio da posição a estimativa de espera?
+| Deveria ser incluso no anuncio da posição a estimativa de espera?.
 
 
 
@@ -134,7 +134,7 @@ Announce holdtime
 Frequência de anúncio
 -----------------------
 
-| A cada quantos segundos deve informar a posição. Deixe em 0 para desativar o anuncio de posição.
+| A cada quantos segundos deve informar a posição. Deixe em 0 para desativar o anúncio de posição.
 
 
 
@@ -144,7 +144,7 @@ Frequência de anúncio
 Aceitar quando vazia
 --------------------
 
-| Permitir novas chamadas quando não tiver agente disponível para atender a chamada
+| Permitir novas chamadas quando não tiver agente disponível para atender a chamada.
 
 
 
@@ -154,7 +154,7 @@ Aceitar quando vazia
 Desligar fila sem agentes
 -------------------------
 
-| Desligar as chamadas em espera quando não tiver mais agente livres
+| Desligar as chamadas em espera quando não tiver mais agente livres.
 
 
 
@@ -164,7 +164,7 @@ Desligar fila sem agentes
 Tempo máximo de espera
 -----------------------
 
-| Tempo maximo de espera para ser atendido
+| Tempo máximo de espera para ser atendido.
 
 
 
@@ -184,7 +184,7 @@ Ação quando superar a espera
 Chamar ou executar MOH
 ----------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tocar a música de espera ou tom de chamando quando o cliente estiver aguardando na fila.
 
 
 
@@ -194,7 +194,7 @@ Chamar ou executar MOH
 Audio tom de espera
 -------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Importar uma música de espera para esta fila.
 
 
 

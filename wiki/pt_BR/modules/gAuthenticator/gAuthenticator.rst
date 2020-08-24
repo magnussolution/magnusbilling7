@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que deseja ativar TOKEN
+| Usuário que deseja ativar TOKEN.
 
 
 
@@ -20,7 +20,7 @@ Status
 .. image:: ../img/token.png
    :scale: 100% 
 | 
-| Para escanear o código é necessário instalar a APP Google authenticator, está APP está disponível na loja de aplicativos IOS e Android.
+| Para escanear o código é necessário instalar a APP Google authenticator, esta APP está disponível na loja de aplicativos IOS e Android.
 | 
 | É importante guardar o código manual mostrado na imagem, pois será com este código que será possível ativar o token em outro celular caso necessário.
 | 
@@ -45,7 +45,7 @@ Código
 Google authenticator key
 ------------------------
 
-| Esta KEY é necessário para poder ativar o TOKEN em outro celular.
+| Está KEY é necessário para poder ativar o TOKEN em outro celular.
 
 
 

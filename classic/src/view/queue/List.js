@@ -32,13 +32,13 @@ Ext.define('MBilling.view.queue.List', {
             iconCls: 'call',
             handler: 'onResetQueueStats',
             disabled: false,
-            hidden: !App.user.isAdmin
+            hidden: !App.user.isAdmin || !me.allowDelete
         }, {
             text: t('Delete musiconhold'),
             iconCls: 'call',
             handler: 'onDeleteMusic',
             disabled: false,
-            hidden: !App.user.isAdmin
+            hidden: !App.user.isAdmin || !me.allowDelete
         }];
         me.columns = me.columns || [{
             header: t('ID'),
