@@ -1,11 +1,9 @@
 #########
 Interface
 #########
-A interface do MagnusBilling é uma interface padrão do EXTJS, sendo formada por:
-Menu lateral, contendo todos os módulos, divididos em submódulos ordenados por categoria.
-Areá principal, onde é exibidos os módulos abertos, mostrados em abas ativas e inativas.
-Menu superior, com opções de idioma, botões alterar senha, ajuda e sair do sistema.
-
+MagnusBilling's interface is made with ExtJS, and is composed by a lateral menu which has all the modules listed with their respective submodules.
+A main area, where all the modules are opened at, with active and inactive tabs.
+A suspended menu with the language options, change password, about and leave.
 
 
 Barra de status do servidor
