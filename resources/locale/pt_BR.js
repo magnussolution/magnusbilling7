@@ -14,8 +14,8 @@
  * 2020-08-07
  */
 Locale.load({
-    'This option is only available to clients.': 'Esta opção está disponível somente para clientes.'
-    'The DID has already been activated for another user.': 'O DID já foi ativado para outro usuário.'
+    'This option is only available to clients.': 'Esta opção está disponível somente para clientes.',
+    'The DID has already been activated for another user.': 'O DID já foi ativado para outro usuário.',
     'Not allowed': 'Não permitido',
     'The DID has been activated for you.': 'O DID foi ativado para você.',
     'This option is only available to clients.': 'Esta opção está disponível apenas para clientes.',

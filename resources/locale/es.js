@@ -15,7 +15,7 @@
  */
 Locale.load({
     'The DID has already been activated for another user.': 'El DID ya se ha activado para otro usuario.',
-    'This option is only available to clients.': 'Esta opción solo está disponible para clientes.'
+    'This option is only available to clients.': 'Esta opción solo está disponible para clientes.',
     'Not allowed': 'No permitido',
     'The DID has been activated for you.': 'El DID está activado para usted.',
     'This option is only available to clients.': 'Esta opción solo está disponible para clientes.',
