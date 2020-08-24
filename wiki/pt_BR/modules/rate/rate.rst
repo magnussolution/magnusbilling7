@@ -14,7 +14,7 @@ Plano
 Destino
 -------
 
-| Selecione o prefixo que quer criar a tarifa
+| Selecione o prefixo que quer criar a tarifa.
 
 
 
@@ -34,7 +34,7 @@ Grupo de Troncos
 Preço de venda
 ---------------
 
-| Preço de venda por minuto para este destino
+| Preço de venda por minuto para este destino.
 
 
 
@@ -64,7 +64,7 @@ Bloco de tarifação
 Tempo mínimo para tarifar
 --------------------------
 
-| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.
 
 
 
@@ -84,7 +84,7 @@ Tempo adicional
 Incluir no pacotes grátis
 --------------------------
 
-| Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis
+| Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis.
 
 
 

@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que deseja cadastrar o número
+| Usuário que deseja cadastrar o número.
 
 
 

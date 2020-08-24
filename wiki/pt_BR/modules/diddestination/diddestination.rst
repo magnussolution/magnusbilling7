@@ -4,7 +4,7 @@
 DID
 ---
 
-| Selecione o DID para criar o novo destino
+| Selecione o DID para criar o novo destino.
 
 
 
@@ -14,7 +14,7 @@ DID
 Usuário
 --------
 
-| Usuário que será o dono deste DID
+| Usuário que será o dono deste DID.
 
 
 
@@ -34,7 +34,7 @@ Status
 Prioridade
 ----------
 
-| Você pode criar até 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, até completar. 
+| Você pode criar até 5 destino para o mesmo DID. Se a chamada não completa no 1º tenta o 2º, até completar. .
 
 
 
@@ -64,7 +64,7 @@ Destino
 URA
 ---
 
-| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono do DID
+| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono do DID.
 
 
 
@@ -74,7 +74,7 @@ URA
 Fila de espera
 --------------
 
-| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono do DID
+| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono do DID.
 
 
 
@@ -84,7 +84,7 @@ Fila de espera
 Conta SIP
 ---------
 
-| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono do DID
+| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono do DID.
 
 
 
@@ -114,7 +114,7 @@ Contexto
 | Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.conf
 | 
 | 
-|     
+|     .
 
 
 

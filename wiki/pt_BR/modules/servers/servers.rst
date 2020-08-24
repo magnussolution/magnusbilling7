@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nome para o servidor
+| Nome para o servidor.
 
 
 
@@ -14,7 +14,7 @@ Nome
 IP do servidor
 --------------
 
-| IP do servidor. Você pode ver mais detalhes no link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html>`_.
+| IP do servidor. Você pode ver mais detalhes no link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.>`_.
 
 
 
@@ -24,7 +24,7 @@ IP do servidor
 IP público
 -----------
 
-| Ip Público
+| Ip Público.
 
 
 
@@ -89,7 +89,7 @@ Peso
 | 
 | Digamos que tenha 1 servidor MagnusBilling 3 servidores slaves, e você deseja enviar o dobro de chamadas para cada slave, comparado com o MagnusBilling, então, é só colocar no servidor MagnusBilling o peso 1, e nos slaves peso 2.
 | 
-| 
+| .
 
 
 

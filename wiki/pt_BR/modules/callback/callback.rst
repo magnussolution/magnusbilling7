@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário dono do DID que recebeu a solicitação de CallBack
+| Usuário dono do DID que recebeu a solicitação de CallBack.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Número de destino
 ------------------
 
-| Número da pessoa que ligou para o DID solicitando o CallBack
+| Número da pessoa que ligou para o DID solicitando o CallBack.
 
 
 
@@ -34,7 +34,7 @@ Status
 |     O CallBack foi processado com sucesso.
 | * Fora do horário
 |     A chamada foi recebida fora do horário de atendimento configurado no menu DID, tab CallBack pro.
-|     
+|     .
 
 
 

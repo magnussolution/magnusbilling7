@@ -4,7 +4,7 @@
 País
 -----
 
-| País
+| País.
 
 
 
@@ -14,7 +14,7 @@ País
 Nome do operador
 ----------------
 
-| Nome da operadora
+| Nome da operadora.
 
 
 

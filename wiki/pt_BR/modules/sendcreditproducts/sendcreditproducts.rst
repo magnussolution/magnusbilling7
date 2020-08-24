@@ -4,7 +4,7 @@
 País
 -----
 
-| País
+| País.
 
 
 
@@ -14,7 +14,7 @@ País
 Nome do operador
 ----------------
 
-| Nome da operadora
+| Nome da operadora.
 
 
 
@@ -24,7 +24,7 @@ Nome do operador
 Operador ID
 -----------
 
-| Id da operadora
+| Id da operadora.
 
 
 
@@ -34,7 +34,7 @@ Operador ID
 SkuCode
 -------
 
-| SkuCode
+| SkuCode.
 
 
 
@@ -44,7 +44,7 @@ SkuCode
 Produto
 -------
 
-| Produto
+| Produto.
 
 
 
@@ -74,7 +74,7 @@ Preço atacado
 Provedor
 --------
 
-| Provedor
+| Provedor.
 
 
 

@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nome para a URA
+| Nome para a URA.
 
 
 
@@ -14,7 +14,7 @@ Nome
 Usuário
 --------
 
-| Usuário dono da URA
+| Usuário dono da URA.
 
 
 
@@ -31,7 +31,7 @@ Seg-Sex intervalos
 | 
 | 08:00-12:00|14:00-19:00
 | 
-| 
+| .
 
 
 
@@ -48,7 +48,7 @@ Sábado intervalos
 | 
 | 08:00-13:00
 | 
-| 
+| .
 
 
 
@@ -65,7 +65,7 @@ Intervalos Domingo
 | 
 | 00:00-00:00
 | 
-| 
+| .
 
 
 
@@ -75,7 +75,7 @@ Intervalos Domingo
 Áudio Trabalhando
 ------------------
 
-| Áudio para executar dentro dos horários de atendimento
+| Áudio para executar dentro dos horários de atendimento.
 
 
 
@@ -85,7 +85,7 @@ Intervalos Domingo
 Trabalhando
 -----------
 
-| Áudio para executar fora de atendimento
+| Áudio para executar fora de atendimento.
 
 
 

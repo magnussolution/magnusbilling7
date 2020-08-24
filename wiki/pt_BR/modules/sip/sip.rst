@@ -88,7 +88,7 @@ Grupo
 | 
 | 
 | Também usado para capturar chamada com *8, dever se configura a opção pickupexten = *8  no arquivo feature.conf.
-| 
+| .
 
 
 
@@ -108,7 +108,7 @@ Suporte a vídeo
 REGEX para bloqueio de chamadas
 -------------------------------
 
-| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com  <https://regex101.com>`_.
+| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
@@ -118,7 +118,7 @@ REGEX para bloqueio de chamadas
 Gravar chamadas
 ---------------
 
-| Grava as chamadas desta conta SIP
+| Grava as chamadas desta conta SIP.
 
 
 
@@ -128,7 +128,7 @@ Gravar chamadas
 Tech prefix
 -----------
 
-| Opção útil para quando for necessário autenticar mais de uma cliente via IP que usa o mesmo IP. Comum em BBX multi tenant
+| Opção útil para quando for necessário autenticar mais de uma cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.
 
 
 
@@ -138,7 +138,7 @@ Tech prefix
 NAT
 ---
 
-| O cliente está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/  <https://www.voip-info.org/asterisk-sip-nat/>`_.
+| O cliente está atrás de NAT. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
@@ -148,7 +148,7 @@ NAT
 Directmedia
 -----------
 
-| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/  <https://www.voip-info.org/asterisk-sip-canreinvite/>`_.
+| Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-canreinvite/.  <https://www.voip-info.org/asterisk-sip-canreinvite/.>`_.
 
 
 
@@ -188,7 +188,7 @@ Contexto
 Dtmfmode
 --------
 
-| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/  <https://www.voip-info.org/asterisk-sip-dtmfmode/>`_.
+| Tipo de DTMF. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
 
 
 
@@ -228,7 +228,7 @@ Permit
 Tipo
 ----
 
-| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/  <https://www.voip-info.org/asterisk-sip-type/>`_.
+| Tipo padrão é friend, ou seja pode fazer e receber chamadas. Você pode ver mais detalhes no link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -238,7 +238,7 @@ Tipo
 Permitir transferência
 -----------------------
 
-| Permite esta conta VoIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk
+| Permite esta conta VoIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk.
 
 
 
@@ -268,7 +268,7 @@ Limite de chamada
 MOH
 ---
 
-| Música de espera para esta conta SIP
+| Música de espera para esta conta SIP.
 
 
 
@@ -278,7 +278,7 @@ MOH
 URL notificaçōes de eventos
 -----------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| .
 
 
 
@@ -298,7 +298,7 @@ Adicionar parâmetro
 AMD
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| .
 
 
 
@@ -354,7 +354,7 @@ Destino
 | * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
 | * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
 | * Número, pode ser um número fixo ou celular, deve estar no formato 55 DDD número.
-| 
+| .
 
 
 
@@ -374,7 +374,7 @@ Tocar por quantos seg.
 Habilitar voicemail
 -------------------
 
-| Ativar voicemail. É necessário a configuração do SMTP no Linux para receber o email com a mensagem. Você pode ver mais detalhes no link `https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html  <https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html>`_.
+| Ativar voicemail. É necessário a configuração do SMTP no Linux para receber o email com a mensagem. Você pode ver mais detalhes no link `https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.  <https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.>`_.
 
 
 
@@ -394,7 +394,7 @@ Email
 Senha
 -----
 
-| Senha do VOICEMAIL. É possível entrar no VOICEMAIL digitando *111
+| Senha do VOICEMAIL. É possível entrar no VOICEMAIL digitando *111.
 
 
 
@@ -404,7 +404,7 @@ Senha
 Peer
 ----
 
-| sip show peer
+| sip show peer.
 
 
 

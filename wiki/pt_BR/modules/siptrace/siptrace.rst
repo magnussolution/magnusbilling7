@@ -4,7 +4,7 @@
 
 
 
-| Corpo da mensagem SIP
+| Corpo da mensagem SIP.
 
 
 

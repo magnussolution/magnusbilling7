@@ -15,7 +15,7 @@ Duração
 Lucro
 -----
 
-| Somatório do lucro
+| Somatório do lucro.
 
 
 
@@ -25,7 +25,7 @@ Lucro
 Total de chamadas
 -----------------
 
-| Total de chamadas
+| Total de chamadas.
 
 
 

@@ -14,7 +14,7 @@ Duração
 Preço de venda
 ---------------
 
-| Valor total
+| Valor total.
 
 
 
@@ -24,7 +24,7 @@ Preço de venda
 Lucro
 -----
 
-| Somatório do lucro
+| Somatório do lucro.
 
 
 
@@ -34,7 +34,7 @@ Lucro
 Preço de compra
 ----------------
 
-| Somatório do preço de compra
+| Somatório do preço de compra.
 
 
 
@@ -44,7 +44,7 @@ Preço de compra
 Total de chamadas
 -----------------
 
-| Total de chamadas
+| Total de chamadas.
 
 
 

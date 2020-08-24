@@ -34,7 +34,7 @@ Descrição
 Adicionar pagamento
 -------------------
 
-| Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO
+| Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO.
 
 
 
@@ -44,7 +44,7 @@ Adicionar pagamento
 Fatura número
 --------------
 
-| Número da fatura
+| Número da fatura.
 
 
 

@@ -34,7 +34,7 @@ Grupo
 Grupo para os usuários do agente
 ---------------------------------
 
-| Selecione o grupo que os clientes deste revendedor usaram
+| Selecione o grupo que os clientes deste revendedor usaram.
 
 
 
@@ -88,7 +88,7 @@ Regra prefixo
 | Regra 3 -> números que iniciam com qualquer valor e tem 9 dígitos, será adicionado 55 na frente
 | Regra 4 -> números que iniciam com qualquer valor e tem 10 dígitos, será adicionado 5511 na frente. 
 | Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adicionado 5511 na frente
-| 
+| .
 
 
 
@@ -108,7 +108,7 @@ Ativo
 País
 -----
 
-| Usado para CID Callback. O DDI do país será adicionado antes do CallerID to converter o CallerID para o formato DDI DDD nº
+| Usado para CID Callback. O DDI do país será adicionado antes do CallerID to converter o CallerID para o formato DDI DDD nº.
 
 
 
@@ -148,7 +148,7 @@ Nome da empresa
 Inscrição estadual
 --------------------
 
-| Inscrição estadual
+| Inscrição estadual.
 
 
 
@@ -158,7 +158,7 @@ Inscrição estadual
 Sobrenome
 ---------
 
-| Sobrenome
+| Sobrenome.
 
 
 
@@ -168,7 +168,7 @@ Sobrenome
 Nome
 ----
 
-| Nome
+| Nome.
 
 
 
@@ -178,7 +178,7 @@ Nome
 Cidade
 ------
 
-| Cidade
+| Cidade.
 
 
 
@@ -188,7 +188,7 @@ Cidade
 Estado
 ------
 
-| Estado
+| Estado.
 
 
 
@@ -198,7 +198,7 @@ Estado
 Endereço
 ---------
 
-| Endereço
+| Endereço.
 
 
 
@@ -208,7 +208,7 @@ Endereço
 Bairro
 ------
 
-| Bairro
+| Bairro.
 
 
 
@@ -218,7 +218,7 @@ Bairro
 CEP
 ---
 
-| CEP
+| CEP.
 
 
 
@@ -248,7 +248,7 @@ Celular
 Email
 -----
 
-| Email, é necessário para o envio de notificaçōes do sistema
+| Email, é necessário para o envio de notificaçōes do sistema.
 
 
 
@@ -258,7 +258,7 @@ Email
 CPF/CNPJ
 --------
 
-| Documento do cliente
+| Documento do cliente.
 
 
 
@@ -298,7 +298,7 @@ Limite de crédito
 Notificação de crédito
 -------------------------
 
-| Se o crédito do cliente ficar menor que está campo, MagnusBilling vai enviar um email para o cliente informando que está com pouco crédito. NECESSÁRIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES
+| Se o crédito do cliente ficar menor que está campo, MagnusBilling vai enviar um email para o cliente informando que está com pouco crédito. NECESSÁRIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES.
 
 
 
@@ -318,7 +318,7 @@ Habilitar vencimento
 Data de expiração
 -------------------
 
-| Data que este cliente não poderá mais efetuar chamadas
+| Data que este cliente não poderá mais efetuar chamadas.
 
 
 
@@ -378,7 +378,7 @@ CallShop
 Espaço em disco
 ----------------
 
-| Espaço em GB que o usuário poderá usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UserDiskSpace 
+| Espaço em GB que o usuário poderá usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UserDiskSpace .
 
 
 
@@ -418,7 +418,7 @@ Restrição
 Lucro
 -----
 
-| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
 
 
 
@@ -428,7 +428,7 @@ Lucro
 Lucro
 -----
 
-| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
 
 
 
@@ -438,7 +438,7 @@ Lucro
 Lucro
 -----
 
-| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
 
 
 
@@ -448,7 +448,7 @@ Lucro
 Enable DBBL/Rocket
 ------------------
 
-| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
 
 
 
@@ -458,7 +458,7 @@ Enable DBBL/Rocket
 Lucro
 -----
 
-| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países
+| Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
 
 
 

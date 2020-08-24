@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nome da campanha
+| Nome da campanha.
 
 
 

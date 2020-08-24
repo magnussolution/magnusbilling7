@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que executou a ação
+| Usuário que executou a ação.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Ação
 ------
 
-| Tipo de ação
+| Tipo de ação.
 
 
 
@@ -24,7 +24,7 @@ Ação
 IP
 --
 
-| IP utilizado para realizar a ação
+| IP utilizado para realizar a ação.
 
 
 
@@ -34,7 +34,7 @@ IP
 Descrição
 -----------
 
-| O que foi feito, normalmente está em JSON
+| O que foi feito, normalmente está em JSON.
 
 
 

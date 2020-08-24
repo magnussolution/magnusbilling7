@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-22
+ * 2020-08-24
  */
 Locale.load({
     '': '',
@@ -546,6 +546,7 @@ Locale.load({
     'None': '',
     'Normal Clearing': '',
     'Normal, unspecified': '',
+    'Not allowed': '',
     'Not allowed delete in this module': '',
     'Not allowed delete this user': '',
     'Not available to multi refill.': '',
@@ -907,6 +908,8 @@ Locale.load({
     'Terms': '',
     'Test SMTP': '',
     'Text': '',
+    'The DID has already been activated for another user.': '',
+    'The DID has been activated for you.': '',
     'The call limit need be less than': '',
     'The maximum amount to': '',
     'The minimum amount to': '',
@@ -919,6 +922,7 @@ Locale.load({
     'This is useful in order to get a different ratio of traffic between servers.': '',
     'This item already exists': '',
     'This option is exclusive to users': '',
+    'This option is only available to clients.': '',
     'This password in in use': '',
     'This service already is canceled': '',
     'This trunk name is in use by a SIP user': '',
@@ -1036,6 +1040,7 @@ Locale.load({
     'You need accept the terms to signup': '',
     'You need add a existent Sip Account, IVR or Queue.': '',
     'You need to commit or cancel your changes': '',
+    'You not have enough credit to buy the DID': '',
     'You only can set DID to CLIENTS': '',
     'Your': '',
     'Your SMS is not send!': '',

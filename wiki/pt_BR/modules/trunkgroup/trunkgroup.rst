@@ -26,7 +26,7 @@ Tipo
 | O MagnusBilling tentará enviar a chamada para o próximo tronco do grupo desde que o tronco testado responda CHANUNAVAIL ou CONGESTION, estes valores são retornados pelo Asterisk, e não é possível alterar.
 | 
 | 
-| 
+| .
 
 
 

@@ -15,7 +15,7 @@ Duração
 Preço de venda
 ---------------
 
-| Somatório do preço de venda
+| Somatório do preço de venda.
 
 
 
@@ -25,7 +25,7 @@ Preço de venda
 Preço de compra
 ----------------
 
-| Somatório do preço de compra
+| Somatório do preço de compra.
 
 
 
@@ -35,7 +35,7 @@ Preço de compra
 Lucro
 -----
 
-| Somatório do lucro
+| Somatório do lucro.
 
 
 
@@ -45,7 +45,7 @@ Lucro
 Chamadas atendidas
 ------------------
 
-| Total de chamadas
+| Total de chamadas.
 
 
 
@@ -55,7 +55,7 @@ Chamadas atendidas
 Chamadas rejeitadas
 -------------------
 
-| Total de chamadas rejeitadas
+| Total de chamadas rejeitadas.
 
 
 

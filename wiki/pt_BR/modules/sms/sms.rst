@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que enviou/recebeu o SMS
+| Usuário que enviou/recebeu o SMS.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Número
 -------
 
-| Número no formato E 164
+| Número no formato E 164.
 
 
 
