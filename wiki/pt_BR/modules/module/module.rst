@@ -4,7 +4,7 @@
 Text
 ----
 
-| Nome do menu
+| Nome do menu.
 
 
 
@@ -14,7 +14,7 @@ Text
 IconCls
 -------
 
-| Icone, padrão font awesome V4
+| Icone, padrão font awesome V4.
 
 
 

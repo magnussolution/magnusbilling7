@@ -83,10 +83,10 @@ class DidController extends Controller
     {
         $success = false;
 
-        if (!Yii::app()->session['isAdmin']) {
+        if (!Yii::app()->session['isClient']) {
             echo json_encode(array(
                 $this->nameSuccess => false,
-                $this->nameMsg     => 'This option is only available to clients.',
+                $this->nameMsg     => Yii::t('zii', 'This option is only available to clients.'),
             ));
             exit;
         }
@@ -101,9 +101,9 @@ class DidController extends Controller
         $totalDid = $modelDid->fixrate + $modelDid->connection_charge;
 
         if ($modelUser->credit < $totalDid) {
-            $this->msgSuccess = 'you not have credit';
+            $this->msgSuccess = Yii::t('zii', 'You not have enough credit to buy the DID');
         } elseif ($modelDid->reserved == 1) {
-            $this->msgSuccess = 'Did already active';
+            $this->msgSuccess = Yii::t('zii', 'The DID has already been activated for another user.');
         } else {
             if ($modelUser->id_user == 1) //se for cliente do master
             {
@@ -154,9 +154,9 @@ class DidController extends Controller
                 }
 
                 $success          = true;
-                $this->msgSuccess = 'The Did is activated for you.';
+                $this->msgSuccess = Yii::t('zii', 'The DID has been activated for you.');
             } else {
-                $this->msgSuccess = 'Not allow ' . $modelUser->id_user;
+                $this->msgSuccess = Yii::t('zii', 'Not allowed');
             }
         }
 

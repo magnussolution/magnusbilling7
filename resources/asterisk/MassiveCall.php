@@ -41,8 +41,11 @@ class MassiveCall
         $sql = "UPDATE pkg_campaign_report SET status = 3 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
         $agi->exec($sql);
 
-        sleep(1);
-        $now = time();
+        if ($agi->get_variable("STARTTIME", true) && $agi->get_variable("STARTTIME", true) > 1) {
+            $now = $agi->get_variable("STARTTIME", true);
+        } else {
+            $now = time();
+        }
 
         if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
             $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed", 25);
@@ -74,8 +77,6 @@ class MassiveCall
 
             $sql = "UPDATE pkg_phonenumber SET status = 5, info = '" . $agi->get_variable("AMDCAUSE", true) . "' WHERE id = $idPhonenumber LIMIT 1";
             $agi->exec($sql);
-
-            $now = $agi->get_variable('STARTTIME', true);
 
         } else {
 

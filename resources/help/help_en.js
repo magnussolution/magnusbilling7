@@ -32,8 +32,8 @@ Help.load({
     //CALLERID
     'callerid.id_user': ``,
     'callerid.cid': `The number to CID authenticate with CallingCard. Use the exact format that you received the callerID from your DID provider.`,
-    'callerid.activated': ``,
     'callerid.name': ``,
+    'callerid.activated': ``,
     //CALLS ONLINE
     'callonline.idUserusername': ``,
     'callonline.sip_account': ``,
@@ -512,8 +512,6 @@ Help.load({
     'sipuras.senha_admin': `Pass to set in LinkSys configuration`,
     'sipuras.antireset': `Prevent resetting LinkSys with *73738#`,
     'sipuras.Enable_Web_Server': `Enabling/Disabling LinkSys configuration WebPage`,
-    'sipuras.marca': ``,
-    'sipuras.altera': ``,
     'sipuras.User_ID_1': `SIP account username`,
     'sipuras.Password_1': `SIP account password`,
     'sipuras.Use_Pref_Codec_Only_1': `Only use the preferred CODEC`,

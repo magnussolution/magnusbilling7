@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário principal da conta SIP que inicou a chamada.
+| Usuário principal da conta SIP que iniciou a chamada.
 
 
 
@@ -24,7 +24,7 @@ Conta SIP
 Crédito
 --------
 
-| Credito do usuário
+| Crédito do usuário.
 
 
 
@@ -44,7 +44,7 @@ Número
 Codec
 -----
 
-| Codec usado na chamada
+| Codec usado na chamada.
 
 
 
@@ -69,7 +69,7 @@ CallerID
 Troncos
 -------
 
-| Tronco que foi utilizado para completar a chamada
+| Tronco que foi utilizado para completar a chamada.
 
 
 
@@ -79,7 +79,7 @@ Troncos
 Reinvite
 --------
 
-| Reinvite é o parametro que informa se o audio está passando pelo Asterisk, ou se está passando diretamente entre o cliente e o tronco. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html  <https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html>`_.
+| Reinvite é o parâmetro que informa se o áudio está passando pelo Asterisk, ou se está passando diretamente entre o cliente e o tronco. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html.  <https://wiki.magnusbilling.org/pt_BR/source/asterisk_options/directmedia.html.>`_.
 
 
 
@@ -89,7 +89,7 @@ Reinvite
 From IP
 -------
 
-| Ip do terminal SIP que foi iniciado a chamada
+| Ip do terminal SIP que foi iniciado a chamada.
 
 
 
@@ -99,7 +99,7 @@ From IP
 Descrição
 -----------
 
-| Dados do comando sip show channel
+| Dados do comando sip show channel.
 
 
 

@@ -291,8 +291,8 @@ AMD
 
 .. _sip-type-forward:
 
-Forward
--------
+Forward type
+------------
 
 | We did not write the description to this field.
 
@@ -331,8 +331,8 @@ Sip user
 
 .. _sip-extension:
 
-DialPlan
---------
+Destination
+-----------
 
 | We did not write the description to this field.
 

@@ -4,7 +4,7 @@
 Duração
 ---------
 
-| Somatorio de minutos chamadas.
+| Somatório de minutos chamadas.
 
 
 
@@ -14,7 +14,7 @@ Duração
 Preço de venda
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor total.
 
 
 
@@ -24,7 +24,7 @@ Preço de venda
 Lucro
 -----
 
-| Somatório do lucro
+| Somatório do lucro.
 
 
 
@@ -34,7 +34,7 @@ Lucro
 Preço de compra
 ----------------
 
-| Somatório do preço de compra
+| Somatório do preço de compra.
 
 
 
@@ -44,7 +44,7 @@ Preço de compra
 Total de chamadas
 -----------------
 
-| Total de chamadas
+| Total de chamadas.
 
 
 

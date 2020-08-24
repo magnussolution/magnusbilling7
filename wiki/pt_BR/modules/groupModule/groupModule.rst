@@ -4,7 +4,7 @@
 Grupo
 -----
 
-| Grupo de usuário
+| Grupo de usuário.
 
 
 
@@ -14,7 +14,7 @@ Grupo
 Módulo
 -------
 
-| Menu
+| Menu.
 
 
 

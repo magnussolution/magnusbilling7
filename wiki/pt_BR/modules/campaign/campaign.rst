@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário dono da campanha
+| Usuário dono da campanha.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Plano
 -----
 
-| Que plano será usado para tarifar as chamadas desta campanha, pode ser um plano diferente do plano cadastrado na conta do cliente
+| Que plano será usado para tarifar as chamadas desta campanha, pode ser um plano diferente do plano cadastrado na conta do cliente.
 
 
 
@@ -54,7 +54,7 @@ Data de início
 Data de expiração
 -------------------
 
-| Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos
+| Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos.
 
 
 
@@ -74,7 +74,7 @@ Tipo
 Audio
 -----
 
-| Somente usado se o tipo de campanha for de voz. O áudio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz
+| Somente usado se o tipo de campanha for de voz. O áudio precisa ser compativel com Asterisk. Recomendamos usar GSM. Se usar WAV, tem que ser mono e 8k hz.
 
 
 
@@ -84,7 +84,7 @@ Audio
 Audio 2
 -------
 
-| Se você usar TTS, o nome cadastrado do número será executado entre o áudio 1 e 2
+| Se você usar TTS, o nome cadastrado do número será executado entre o áudio 1 e 2.
 
 
 
@@ -94,7 +94,7 @@ Audio 2
 Números Restritos
 ------------------
 
-| Ativando está opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
+| Ativando esta opção o MagnusBilling vai verificar se o número que será enviado a chamada está cadastrado no menu Números Bloqueados, se tiver, o sistema vai mudar o status do número para bloqueado e não vai enviar a chamada.
 
 
 
@@ -104,7 +104,7 @@ Números Restritos
 Reprocessar automático
 -----------------------
 
-| Reativar automaticamente todos os números das agendas da campanha quando não tiver mais números ativos
+| Reativar automaticamente todos os números das agendas da campanha quando não tiver mais números ativos.
 
 
 
@@ -114,7 +114,7 @@ Reprocessar automático
 
 
 
-| Selecione as agendas que está campanha vai usar.
+| Selecione as agendas que esta campanha vai usar.
 
 
 
@@ -124,7 +124,7 @@ Reprocessar automático
 Número para reenviar
 ---------------------
 
-| Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu
+| Você quer enviar o cliente para algum destino após o audio? Ex. Se o cliente digitar 1 transferir para uma conta SIP, então coloque aqui o número 1, e abaixo selecione SIP, e abaixo a conta VOIP que quer enviar a chamada. Selecione "Qualquer Dígito", para enviar para o destino se o cliente marcar qu.
 
 
 
@@ -134,7 +134,7 @@ Número para reenviar
 Tipo de encaminhamento
 ----------------------
 
-| Selecionar o tipo de reenvio, está opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido
+| Selecionar o tipo de reenvio, esta opção vai redirecionar a chamada para o destino selecionado conforme o tipo escolhido.
 
 
 
@@ -144,7 +144,7 @@ Tipo de encaminhamento
 URA
 ---
 
-| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha
+| Selecione uma URA para enviar a chamada, a URA precisa ser do mesmo usuário dono da campanha.
 
 
 
@@ -154,7 +154,7 @@ URA
 Fila de espera
 --------------
 
-| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha
+| Selecione uma fila de espera para enviar a chamada, a fila de espera precisa ser do mesmo usuário dono da campanha.
 
 
 
@@ -164,7 +164,7 @@ Fila de espera
 Conta SIP
 ---------
 
-| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha
+| Selecione uma conta SIP para enviar a chamada, a conta SIP precisa ser do mesmo usuário dono da campanha.
 
 
 
@@ -178,7 +178,7 @@ Destino
 | Temos duas opcōes, conforme o tipo selecionado, personalizado ou grupo.
 | 
 | * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
-| * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
+| * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr.
 
 
 
@@ -188,7 +188,7 @@ Destino
 Horário de início diário
 ---------------------------
 
-| Hora que a campanha vai iniciar o envio
+| Hora que a campanha vai iniciar o envio.
 
 
 
@@ -198,7 +198,7 @@ Horário de início diário
 Horário de finalização diário
 ---------------------------------
 
-| Hora que a campanha vai parar o envio
+| Hora que a campanha vai parar o envio.
 
 
 
@@ -208,7 +208,7 @@ Horário de finalização diário
 Segunda
 -------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.
 
 
 
@@ -218,7 +218,7 @@ Segunda
 Terça feira
 ------------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas terças feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas terças feiras.
 
 
 
@@ -228,7 +228,7 @@ Terça feira
 Quarta feira
 ------------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quartas feiras.
 
 
 
@@ -238,7 +238,7 @@ Quarta feira
 Quinta feira
 ------------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas quintas feiras.
 
 
 
@@ -248,7 +248,7 @@ Quinta feira
 Sexta
 -----
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nas sextas feiras.
 
 
 
@@ -258,7 +258,7 @@ Sexta
 Sábado
 -------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nos sabados.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nos sábados.
 
 
 
@@ -268,7 +268,7 @@ Sábado
 Domingo
 -------
 
-| Ativando está opção o sistema vai enviar chamadas desta campanha nos domingos.
+| Ativando esta opção o sistema vai enviar chamadas desta campanha nos domingos.
 
 
 
@@ -299,7 +299,7 @@ Limite máximo de chamadas
 Duração do áudio
 -------------------
 
-| Tempo do áudio da campanha, usado para controlar quantidade de chamadas considerada sucesso
+| Tempo do áudio da campanha, usado para controlar quantidade de chamadas considerada sucesso.
 
 
 
@@ -309,7 +309,7 @@ Duração do áudio
 Toggle max completed calls
 --------------------------
 
-| Se ativado, MagnusBilling vai verificar quantas chamadas já foram realizadas e tiveram a duração igual à duração do áudio.  Se a quantidade for igual ou maior que o valor colocado no próximo campo , a campanha será desativada
+| Se ativado, MagnusBilling vai verificar quantas chamadas já foram realizadas e tiveram a duração igual à duração do áudio.  Se a quantidade for igual ou maior que o valor colocado no próximo campo , a campanha será desativada.
 
 
 
@@ -339,7 +339,7 @@ Descrição ou texto do SMS
 | 
 | Ola %name% temos uma promoção para você.....
 | 
-| Então digamos que tenha cadastrado na agenda utilizada por está campanha uma lista de números contendo número e nome.
+| Então digamos que tenha cadastrado na agenda utilizada por esta campanha uma lista de números contendo número e nome.
 | 
 | 5511998844334,Paulo Ricardo
 | 5511974635734,João Matos
@@ -352,7 +352,7 @@ Descrição ou texto do SMS
 | 5511974635734 a mensagem enviada será. 
 | Ola João Matos temos uma promoção para você.....
 | 
-| 
+| .
 
 
 
@@ -366,7 +366,7 @@ Audio 1 TTS
 | Para que está opção funcione, será necessário a configuração da url TTS no menu Configurações, sub menu Ajustes, opção Tts URL.
 | 
 | Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
-| 
+| .
 
 
 

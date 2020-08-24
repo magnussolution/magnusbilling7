@@ -4,7 +4,7 @@
 
 
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Corpo da mensagem SIP.
 
 
 

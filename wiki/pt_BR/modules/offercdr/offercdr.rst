@@ -4,7 +4,7 @@
 Usuário
 --------
 
-| Usuário que realizou a chamada
+| Usuário que realizou a chamada.
 
 
 
@@ -14,7 +14,7 @@ Usuário
 Pacotes grátis
 ---------------
 
-| Nome do pacote de gratís
+| Nome do pacote de gratís.
 
 
 
@@ -24,7 +24,7 @@ Pacotes grátis
 Duração
 ---------
 
-| Duração da chamada
+| Duração da chamada.
 
 
 
@@ -34,7 +34,7 @@ Duração
 data
 ----
 
-| Data de hora da chamada
+| Data de hora da chamada.
 
 
 

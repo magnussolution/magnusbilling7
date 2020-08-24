@@ -4,7 +4,7 @@
 Grupo
 -----
 
-| Nome do Grupo
+| Nome do Grupo.
 
 
 
@@ -14,7 +14,7 @@ Grupo
 Prefixo para usuário
 ---------------------
 
-| Preenchendo este campo, todos os usuários criados por um administrador que usa este grupo será iniciado com este prefixo
+| Preenchendo este campo, todos os usuários criados por um administrador que usa este grupo será iniciado com este prefixo.
 
 
 
@@ -25,7 +25,7 @@ Grupo
 -----
 
 | Quais os grupos de cliente este grupo de administrador terá acesso.
-| Quando um administrador que está neste grupo logar no sistema, ele somente vai ver os dados dos clientes dos grupos selecionados aqui
+| Quando um administrador que está neste grupo logar no sistema, ele somente vai ver os dados dos clientes dos grupos selecionados aqui.
 
 
 

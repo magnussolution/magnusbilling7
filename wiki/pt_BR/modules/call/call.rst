@@ -4,7 +4,7 @@
 data
 ----
 
-| Dia e hora do início da chamada
+| Dia e hora do início da chamada.
 
 
 
@@ -14,7 +14,7 @@ data
 Conta SIP
 ---------
 
-| Conta SIP que realizou a chamada
+| Conta SIP que realizou a chamada.
 
 
 
@@ -38,7 +38,7 @@ CallerID
 Número
 -------
 
-| Número discado pelo cliente
+| Número discado pelo cliente.
 
 
 
@@ -48,7 +48,7 @@ Número
 Destino
 -------
 
-| Nome do destino, este nome está relacionado com o menu Prefixos
+| Nome do destino, este nome está relacionado com o menu Prefixos.
 
 
 
@@ -58,7 +58,7 @@ Destino
 Usuário
 --------
 
-| Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado
+| Usuário que realizou a chamada, e ao qual o custo da chamada foi discontado.
 
 
 
@@ -68,7 +68,7 @@ Usuário
 Troncos
 -------
 
-| Tronco que foi utilizado para completar a chamada
+| Tronco que foi utilizado para completar a chamada.
 
 
 
@@ -78,7 +78,7 @@ Troncos
 Duração
 ---------
 
-| Duração da chamada em segundos
+| Duração da chamada em segundos.
 
 
 
@@ -88,7 +88,7 @@ Duração
 Preço de compra
 ----------------
 
-| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
+| Preço de compra. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.>`_.
 
 
 
@@ -98,7 +98,7 @@ Preço de compra
 Preço de venda
 ---------------
 
-| Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
+| Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.>`_.
 
 
 
@@ -108,7 +108,7 @@ Preço de venda
 Preço de venda
 ---------------
 
-| Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html>`_.
+| Preço de venda, este foi o valor descontado do cliente. Você pode ver mais detalhes no link `https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.  <https://wiki.magnusbilling.org/pt_BR/source/price_calculation.html.>`_.
 
 
 
@@ -118,7 +118,7 @@ Preço de venda
 ID único
 ---------
 
-| ID único gerado pelo Asterisk, este campo é também a hora de início da chamada em Epoch Unix
+| ID único gerado pelo Asterisk, este campo é também a hora de início da chamada em Epoch Unix.
 
 
 

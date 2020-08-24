@@ -309,55 +309,61 @@ Ext.define('MBilling.view.sip.Form', {
             }, {
                 title: t('Forward'),
                 itemId: 'option',
+                name: 'forwardtype',
                 bodyPadding: 10,
-                defaults: {
-                    xtype: 'fieldcontainer',
-                    layout: 'hbox',
-                    plugins: 'markallowblank',
-                    allowBlank: true,
-                    anchor: '100%',
-                    labelWidth: 170,
-                    defaults: {
-                        hideLabel: true,
-                        hidden: true,
-                        flex: 5,
-                        startX: 100,
-                        allowBlank: true,
-                        ownerForm: me
-                    }
-                },
                 items: [{
-                    fieldLabel: t('Forward'),
+                    xtype: 'fieldset',
+                    style: 'margin-top:10px; overflow: visible;',
+                    title: t('Forward to'),
+                    collapsible: true,
+                    collapsed: false,
+                    height: window.isThemeTriton ? 180 : 110,
+                    defaults: {
+                        labelWidth: 190,
+                        anchor: '100%',
+                        labelAlign: me.labelAlignFields
+                    },
                     items: [{
                         xtype: 'typesipforwardcombo',
                         name: 'type_forward',
-                        fieldLabel: t('Forward'),
-                        flex: 2
+                        fieldLabel: t('Forward type'),
+                        allowBlank: true
                     }, {
                         xtype: 'ivrlookup',
+                        ownerForm: me,
                         name: 'id_ivr',
                         fieldLabel: t('IVR'),
-                        displayField: 'id_ivr_name'
+                        displayField: 'id_ivr_name',
+                        allowBlank: true,
+                        hidden: true
                     }, {
                         xtype: 'queuelookup',
+                        ownerForm: me,
                         name: 'id_queue',
                         fieldLabel: t('Queue'),
-                        displayField: 'id_queue_name'
+                        displayField: 'id_queue_name',
+                        allowBlank: true,
+                        hidden: true
                     }, {
-                        xtype: 'sip2lookup',
+                        xtype: 'siplookup',
+                        ownerForm: me,
                         name: 'id_sip',
                         fieldLabel: t('Sip user'),
-                        displayField: 'id_sip_name'
+                        displayField: 'id_sip_name',
+                        allowBlank: true,
+                        hidden: true
                     }, {
                         xtype: 'textfield',
                         name: 'extension',
-                        fieldLabel: t('DialPlan')
+                        fieldLabel: t('Destination'),
+                        allowBlank: true,
+                        hidden: true
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'dial_timeout',
+                        fieldLabel: t('Dial timeout'),
+                        value: '60'
                     }]
-                }, {
-                    xtype: 'numberfield',
-                    name: 'dial_timeout',
-                    fieldLabel: t('Dial timeout'),
-                    value: '60'
                 }]
             }, {
                 title: t('VoiceMail'),

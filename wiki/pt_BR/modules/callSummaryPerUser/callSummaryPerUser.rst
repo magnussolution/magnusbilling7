@@ -4,7 +4,7 @@
 Duração
 ---------
 
-| Somatorio de minutos chamadas por usuário.
+| Somatório de minutos chamadas por usuário.
 | É possível realizar filtros, por exemplo, somente usuários que iniciam com a letra a, ou um usuário específico. Este somatório mostrará somente os dados do filtro executado.
 
 
@@ -15,7 +15,7 @@ Duração
 Lucro
 -----
 
-| Somatório do lucro
+| Somatório do lucro.
 
 
 
@@ -25,7 +25,7 @@ Lucro
 Chamadas atendidas
 ------------------
 
-| Total de chamadas
+| Total de chamadas.
 
 
 
@@ -35,7 +35,7 @@ Chamadas atendidas
 Chamadas rejeitadas
 -------------------
 
-| Total de chamadas rejeitadas
+| Total de chamadas rejeitadas.
 
 
 

@@ -4,7 +4,7 @@
 Nome
 ----
 
-| Nome para o grupo de usuários
+| Nome para o grupo de usuários.
 
 
 

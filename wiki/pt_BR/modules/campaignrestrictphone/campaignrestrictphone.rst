@@ -4,7 +4,7 @@
 Número
 -------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Número a ser bloqueado. É necessário ativar a opção números bloqueados na campanha.
 
 
 

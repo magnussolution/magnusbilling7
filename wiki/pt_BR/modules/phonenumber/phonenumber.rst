@@ -14,7 +14,7 @@ Agenda
 Número
 -------
 
-| Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato 55 DDD número
+| Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato 55 DDD número.
 
 
 
@@ -48,7 +48,7 @@ Status
 | Quando a chamada é enviada para seu provedor, o número fica com status pendente. 
 | Se a chamada é completada, o status muda para enviado.
 | Caso contrário ficará como pendente, isso quer dizer que seu tronco rejeitou completou a chamada por algum motivo.
-| Se for ativado na campanha a opção números bloqeuados, e o número estiver cadastrado no menu torpedo de voz & SMS, submenu números Restritos, o status bloqueado
+| Se for ativado na campanha a opção números bloqueados, e o número estiver cadastrado no menu torpedo de voz & SMS, submenu números Restritos, o status bloqueado
 | Você pode usar o botão processar para reativar os números que estão com status pendente.
 
 
@@ -59,8 +59,8 @@ Status
 Descrição
 -----------
 
-| Descrição para a agenda, somente para controle proprio.
-| Quando for usado enquete, sera salvo aqui o número que o cliente digitou.
+| Descrição para a agenda, somente para controle próprio.
+| Quando for usado enquete, será salvo aqui o número que o cliente digitou.
 
 
 

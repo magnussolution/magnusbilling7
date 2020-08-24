@@ -4,7 +4,7 @@
 Duração
 ---------
 
-| Somatorio de minutos chamadas.
+| Somatório de minutos chamadas.
 | É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, ou de um usuário específico, neste caso. Este somatório mostrará somente os dados do filtro executado.
 
 
@@ -15,7 +15,7 @@ Duração
 Lucro
 -----
 
-| Somatório do lucro
+| Somatório do lucro.
 
 
 
@@ -25,7 +25,7 @@ Lucro
 Total de chamadas
 -----------------
 
-| Total de chamadas
+| Total de chamadas.
 
 
 

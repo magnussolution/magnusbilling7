@@ -4,7 +4,7 @@
 Número
 -------
 
-| Número da pessao que votou
+| Número da pessoa que votou.
 
 
 
@@ -14,7 +14,7 @@ Número
 Resultado
 ---------
 
-| Opção votada
+| Opção votada.
 
 
 

@@ -24,11 +24,14 @@ Ext.define('MBilling.view.prefix.List', {
     store: 'Prefix',
     requires: ['MBilling.view.prefix.ImportCsv'],
     fieldSearch: 'prefix',
+    buttonImportCsv: true,
     initComponent: function() {
         var me = this;
-        me.buttonImportCsv = !App.user.isClient,
-            me.buttonUpdateLot = false;
-        me.columns = [{
+        if (App.user.isClient) {
+            me.buttonImportCsv = false;
+        }
+        me.buttonUpdateLot = false;
+        me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',
             flex: 1,
