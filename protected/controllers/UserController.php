@@ -58,7 +58,6 @@ class UserController extends Controller
         'last_notification',
         'restriction',
         'plan_day',
-        'record_call',
         'idGroupid_user_type',
         'idPlanname',
     );
@@ -67,7 +66,6 @@ class UserController extends Controller
         'idGroupname',
         'enableexpire',
         'expirationdate',
-        'record_call',
         'id_offer',
         'loginkey',
     );
@@ -268,12 +266,6 @@ class UserController extends Controller
             }
 
             AsteriskAccess::instance()->generateSipPeers();
-        }
-
-        if (isset($values['record_call'])) {
-            Sip::model()->updateAll(array('record_call' => $values['record_call']), 'id_user = :key',
-                array(':key' => $model->id));
-
         }
 
         if (!$this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {

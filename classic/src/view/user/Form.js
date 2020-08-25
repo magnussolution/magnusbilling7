@@ -298,40 +298,6 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
-                    defaults: {
-                        xtype: 'textfield',
-                        labelAlign: 'right',
-                        labelWidth: 145,
-                        flex: 1
-                    },
-                    items: [{
-                        xtype: 'noyescombo',
-                        name: 'record_call',
-                        fieldLabel: t('Record call'),
-                        allowBlank: true,
-                        hidden: !haveServiceMenu || !App.user.isAdmin,
-                        readOnly: !App.user.isAdmin,
-                        flex: 2
-                    }, {
-                        xtype: 'combobox',
-                        labelWidth: 170,
-                        store: [
-                            ['gsm', 'gsm'],
-                            ['wav', 'wav'],
-                            ['wav49', 'wav49']
-                        ],
-                        name: 'mix_monitor_format',
-                        fieldLabel: t('Record call format'),
-                        forceSelection: true,
-                        editable: false,
-                        allowBlank: true,
-                        value: 'gsm',
-                        hidden: !haveServiceMenu,
-                        flex: 3
-                    }]
-                }, {
-                    xtype: 'fieldcontainer',
-                    layout: 'hbox',
                     labelWidth: 145,
                     defaults: {
                         labelAlign: 'right',
@@ -362,6 +328,20 @@ Ext.define('MBilling.view.user.Form', {
                         ],
                         flex: 3
                     }]
+                }, {
+                    xtype: 'combobox',
+                    store: [
+                        ['gsm', 'gsm'],
+                        ['wav', 'wav'],
+                        ['wav49', 'wav49']
+                    ],
+                    name: 'mix_monitor_format',
+                    fieldLabel: t('Record call format'),
+                    forceSelection: true,
+                    editable: false,
+                    allowBlank: true,
+                    value: 'gsm',
+                    hidden: !App.user.isAdmin
                 }, {
                     xtype: 'noyescombo',
                     name: 'callshop',

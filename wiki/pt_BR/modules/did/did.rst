@@ -366,3 +366,13 @@ Trabalhando
 
 
 
+
+.. _did-record-call:
+
+Gravar chamadas
+---------------
+
+| Gravar chamadas deste DID. Será gravado independente do destino da chamada.
+
+
+

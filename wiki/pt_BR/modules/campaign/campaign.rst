@@ -380,3 +380,13 @@ Audio 2 TTS
 
 
 
+
+.. _campaign-record-call:
+
+Gravar chamadas
+---------------
+
+| Gravar chamadas data campanha. Será gravado somente se a chamada for transferida.
+
+
+

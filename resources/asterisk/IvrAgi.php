@@ -33,10 +33,9 @@ class IvrAgi
         $sql      = "SELECT *, pkg_ivr.id id, pkg_ivr.id_user id_user FROM pkg_ivr LEFT JOIN pkg_user ON pkg_ivr.id_user = pkg_user.id WHERE pkg_ivr.id = " . $DidAgi->modelDestination[0]['id_ivr'] . " LIMIT 1";
         $modelIvr = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-        $username            = $modelIvr->username;
-        $MAGNUS->id_user     = $modelIvr->id_user;
-        $MAGNUS->id_plan     = $modelIvr->id_plan;
-        $MAGNUS->record_call = $modelIvr->record_call;
+        $username        = $modelIvr->username;
+        $MAGNUS->id_user = $modelIvr->id_user;
+        $MAGNUS->id_plan = $modelIvr->id_plan;
 
         $work = $MAGNUS->checkIVRSchedule($modelIvr->monFriStart, $modelIvr->satStart, $modelIvr->sunStart);
 
@@ -93,12 +92,10 @@ class IvrAgi
             } else if (isset($is_direct_extention) && $is_direct_extention == 1 && strlen($option) > 1) {
                 $agi->verbose('Dial to expecific SIP ACCOUNT', 5);
 
-                $sql      = "SELECT name, dial_timeout, record_call FROM pkg_sip WHERE name = '$option' OR (alias = '$option' AND id_user = " . $MAGNUS->id_user . ")  LIMIT 1";
+                $sql      = "SELECT name, dial_timeout FROM pkg_sip WHERE name = '$option' OR (alias = '$option' AND id_user = " . $MAGNUS->id_user . ")  LIMIT 1";
                 $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 if (isset($modelSip->name)) {
-
-                    $MAGNUS->record_call = $modelSip->record_call;
 
                     $dialparams = $dialparams = $MAGNUS->agiconfig['dialcommand_param_sipiax_friend'];
                     $dialparams = str_replace("%timeout%", 3600, $dialparams);
@@ -157,10 +154,9 @@ class IvrAgi
                 if ($optionType == 'sip') // QUEUE
                 {
                     $agi->verbose('Sip call, active insertCDR', 25);
-                    $insertCDR           = true;
-                    $sql                 = "SELECT name, dial_timeout, record_call FROM pkg_sip WHERE id = $optionValue LIMIT 1";
-                    $modelSip            = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                    $MAGNUS->record_call = $modelSip->record_call;
+                    $insertCDR = true;
+                    $sql       = "SELECT name, dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
+                    $modelSip  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                     $dialparams = $dialparams = $MAGNUS->agiconfig['dialcommand_param_sipiax_friend'];
                     $dialparams = str_replace("%timeout%", 3600, $dialparams);

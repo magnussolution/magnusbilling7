@@ -142,6 +142,7 @@ Help.load({
     'campaign.description': `Text to send to SMS. You can use %name% where you want to show the number name.`,
     'campaign.tts_audio': ``,
     'campaign.tts_audio2': ``,
+    'campaign.record_call': ``,
     //CAMPAIGNS DASHBOARD
     'campaigndashboard.name': ``,
     //CALL PER MINUTES
@@ -207,6 +208,7 @@ Help.load({
     'did.TimeOfDay_sun': `The same but for Sun.`,
     'did.workaudio': `Audio to execute when a call is received at the time interval.`,
     'did.noworkaudio': `Audio to execute when a call is received out of the time interval.`,
+    'did.record_call': ``,
     //DID DESTINATION
     'diddestination.id_did': `Select the DID that you want create new destination for.`,
     'diddestination.id_user': ``,

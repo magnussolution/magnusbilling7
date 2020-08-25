@@ -126,7 +126,7 @@ Ext.define('MBilling.view.campaign.Form', {
                     title: t('Forward to'),
                     collapsible: true,
                     collapsed: false,
-                    height: window.isThemeTriton ? 180 : 110,
+                    height: window.isThemeTriton ? 280 : 200,
                     defaults: {
                         labelWidth: 190,
                         anchor: '100%',
@@ -188,6 +188,11 @@ Ext.define('MBilling.view.campaign.Form', {
                         name: 'extension_0',
                         fieldLabel: t('Destination'),
                         hidden: true
+                    }, {
+                        xtype: 'noyescombo',
+                        name: 'record_call',
+                        fieldLabel: t('Record call'),
+                        allowBlank: true
                     }]
                 }]
             }, {

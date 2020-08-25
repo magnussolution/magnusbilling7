@@ -24,7 +24,6 @@ Help.load({
     'user.sipaccountlimit': 'How many SipAccount this user can create. You need add permissions on the group to allow user create SipAccout. Or use Services menu to control permissions.',
     'user.callingcard_pin': 'Used to callingcard authentication.',
     'user.restriction': 'Used to restriction dial. Add the numbers in User menu, Restricted numbers sub-menu.',
-    'user.record_call': 'When you change this field it will change record call option to all SIP accounts too. You can set user record call to NO and activate record call individually to each SipAccount. This option need be activated to record incomming DID call.',
     //SIP ACCOUNT
     'sip.defaultuser': 'Username to login on the SIP device.',
     'sip.secret': 'Password to login on the SIP device.',

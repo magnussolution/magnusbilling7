@@ -109,6 +109,9 @@ Ext.define('MBilling.model.Campaign', {
     }, {
         name: 'auto_reprocess',
         type: 'int'
+    }, {
+        name: 'record_call',
+        type: 'int'
     }, 'audio', 'audio_2', 'idUserusername', 'subRecords', 'id_phonebook'],
     proxy: {
         type: 'uxproxy',
