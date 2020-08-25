@@ -121,10 +121,13 @@ class DidController extends Controller
                 $modelDidUse->month_payed = 1;
                 $modelDidUse->save();
 
+                $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
+
                 $modelDiddestination              = new Diddestination();
                 $modelDiddestination->id_user     = $id_user;
                 $modelDiddestination->id_did      = $id_did;
-                $modelDiddestination->destination = 'SIP/' . $modelUser->username;
+                $modelDiddestination->id_sip      = $modelSip->id;
+                $modelDiddestination->destination = '';
                 $modelDiddestination->priority    = 1;
                 $modelDiddestination->voip_call   = 1;
                 $modelDiddestination->save();

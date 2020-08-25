@@ -83,7 +83,7 @@ class IvrController extends Controller
         if ($values['id_user'] != $model_id_user) {
 
             $key = $i == 10 ? substr($key, -2) : substr($key, -1);
-            $msg = $model_id_user == 0 ? ['The ' . $name . ' cannot be blank'] : ['The ' . $name . ' must belong to the IVR owner'];
+            $msg = $model_id_user == 0 ? [$name . ' ' . Yii::t('zii', 'cannot be blank')] : [$name . ' ' . Yii::t('zii', 'must belong to the IVR owner')];
             echo json_encode(array(
                 'success' => false,
                 'rows'    => array(),

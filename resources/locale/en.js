@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-24
+ * 2020-08-25
  */
 Locale.load({
     '': '',
@@ -1051,6 +1051,7 @@ Locale.load({
     'Your session has expired. Log in again.': '',
     'Your username is': '',
     'Zip code': '',
+    'cannot be blank': '',
     'date': '',
     'days': '',
     'hour': '',
@@ -1058,6 +1059,7 @@ Locale.load({
     'id': '',
     'is': '',
     'is optional': '',
+    'must belong to the IVR owner': '',
     'to refill': '',
     'week': '',
 
