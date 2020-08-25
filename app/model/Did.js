@@ -125,6 +125,9 @@ Ext.define('MBilling.model.Did', {
     }, {
         name: 'cbr_total_try',
         type: 'int'
+    }, {
+        name: 'record_call',
+        type: 'int'
     }],
     proxy: {
         type: 'uxproxy',

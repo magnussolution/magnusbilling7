@@ -157,20 +157,6 @@ Ext.define('MBilling.view.user.List', {
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
-            header: t('Record call'),
-            dataIndex: 'record_call',
-            flex: 1,
-            renderer: Helper.Util.formattyyesno,
-            filter: {
-                type: 'list',
-                options: [
-                    [0, t('No')],
-                    [1, t('Yes')]
-                ]
-            },
-            hidden: true,
-            hideable: !App.user.isClient && !App.user.isAgent
-        }, {
             header: t('CPS Limit'),
             dataIndex: 'cpslimit',
             hidden: true,

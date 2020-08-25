@@ -52,9 +52,7 @@ class MassiveCall
             $MAGNUS->hangup($agi);
         }
 
-        $sql = "SELECT *, pkg_campaign.id AS id, pkg_campaign.id_user AS id_user, pkg_campaign.description AS description FROM pkg_campaign
-                            LEFT JOIN pkg_user ON pkg_campaign.id_user = pkg_user.id
-                            WHERE pkg_campaign.id = $idCampaign LIMIT 1";
+        $sql           = "SELECT *, pkg_campaign.id AS id, pkg_campaign.id_user AS id_user, pkg_campaign.description AS description, pkg_campaign.record_call AS record_call FROM pkg_campaign LEFT JOIN pkg_user ON pkg_campaign.id_user = pkg_user.id WHERE pkg_campaign.id = $idCampaign LIMIT 1";
         $modelCampaign = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if (!isset($modelCampaign->id)) {
@@ -358,7 +356,7 @@ class MassiveCall
                     $agi->set_callerid($destination . ' ' . $modelPhoneNumber->name);
                     $MAGNUS->CallerID = $destination . ' ' . $modelPhoneNumber->name;
 
-                    if ($MAGNUS->agiconfig['record_call'] == 1 || $MAGNUS->record_call == 1) {
+                    if ($MAGNUS->record_call == 1) {
                         $myres = $agi->execute("StopMixMonitor");
                     }
                 }

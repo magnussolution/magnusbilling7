@@ -107,7 +107,6 @@ Ext.define('MBilling.view.user.Controller', {
             fieldExpirationDate = record.get('expirationdate'),
             fieldCreditNot = record.get('credit_notification'),
             fieldCallshop = record.get('callshop'),
-            fieldRecordCall = record.get('record_call'),
             fieldLock_pin = record.get('lock_pin'),
             fieldRestriction = record.get('restriction'),
             fieldPasswordGen = record.get('password'),

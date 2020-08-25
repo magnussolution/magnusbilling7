@@ -1039,6 +1039,28 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2020-08-25
+        if ($version == '7.4.4') {
+
+            $sql = "DELETE FROM `pkg_configuration` WHERE `config_key` LIKE 'record_call'";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_did` ADD `record_call` INT(11) NOT NULL DEFAULT '0';";
+            $this->executeDB($sql);
+
+            $sql = "UPDATE pkg_did LEFT JOIN  pkg_user ON pkg_did.id_user = pkg_user.id  SET pkg_did.record_call = pkg_user.record_call;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_campaign` ADD `record_call` INT(11) NOT NULL DEFAULT '0';";
+            $this->executeDB($sql);
+
+            $sql = "UPDATE pkg_campaign LEFT JOIN  pkg_user ON pkg_campaign.id_user = pkg_user.id  SET pkg_campaign.record_call = pkg_user.record_call;";
+            $this->executeDB($sql);
+
+            $version = '7.4.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
     }
 

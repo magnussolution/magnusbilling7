@@ -78,9 +78,6 @@ Ext.define('MBilling.model.User', {
         name: 'plan_day',
         type: 'int'
     }, {
-        name: 'record_call',
-        type: 'int'
-    }, {
         name: 'active_paypal',
         type: 'int'
     }, {

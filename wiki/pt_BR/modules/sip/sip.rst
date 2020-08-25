@@ -118,7 +118,7 @@ REGEX para bloqueio de chamadas
 Gravar chamadas
 ---------------
 
-| Grava as chamadas desta conta SIP.
+| Grava as chamadas saintes desta conta SIP.
 
 
 

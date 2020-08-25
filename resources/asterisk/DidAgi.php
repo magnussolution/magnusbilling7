@@ -46,7 +46,8 @@ class DidAgi
             if (count($this->modelDestination)) {
                 $agi->verbose("Did have destination", 15);
 
-                $this->did = $this->modelDid->did;
+                $this->did           = $this->modelDid->did;
+                $MAGNUS->record_call = $this->modelDid->record_call;
 
                 $sql               = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
                 $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -136,7 +137,6 @@ class DidAgi
                 $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
             }
 
-            $MAGNUS->record_call = $MAGNUS->modelUser->record_call;
             $MAGNUS->accountcode = $MAGNUS->username = $MAGNUS->modelUser->username;
 
             $this->voip_call = $this->modelDestination[0]['voip_call'];
@@ -300,7 +300,6 @@ class DidAgi
                 $msg = "DID AUTHENTICATION ERROR";
             } else {
                 $agi->set_variable("DIDACCOUNTCODE", $MAGNUS->username);
-                $MAGNUS->record_call = $MAGNUS->modelUser->record_call;
 
                 $agi->verbose("DID call friend: IS LOCAL !!!", 1);
 

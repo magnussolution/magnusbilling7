@@ -171,7 +171,7 @@ class QueueAgi
         $callerid            = $agi->get_variable("QUEUCALLERID", true);
         $holdtime            = $agi->get_variable("QEHOLDTIME", true);
 
-        $sql      = "SELECT id_user, mohsuggest, record_call FROM pkg_sip WHERE name = '$operator' LIMIT 1";
+        $sql      = "SELECT id_user, mohsuggest FROM pkg_sip WHERE name = '$operator' LIMIT 1";
         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($modelSip->mohsuggest) && strlen($modelSip->mohsuggest) > 1) {
             $agi->execute('SetMusicOnHold', $modelSip->mohsuggest);
@@ -186,7 +186,6 @@ class QueueAgi
         $sql       = "SELECT mix_monitor_format FROM pkg_user WHERE id = $modelSip->id_user LIMIT 1";
         $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-        $MAGNUS->record_call        = $modelSip->record_call;
         $MAGNUS->mix_monitor_format = $modelUser->mix_monitor_format;
         $MAGNUS->startRecordCall($agi);
         exit;

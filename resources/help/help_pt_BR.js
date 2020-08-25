@@ -190,6 +190,7 @@ Ola João Matos temos uma promoção para você.....
 Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
 .`,
     'campaign.tts_audio2': `Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.`,
+    'campaign.record_call': `Gravar chamadas data campanha. Será gravado somente se a chamada for transferida.`,
     //MONITOR DE CAMPANHAS
     'campaigndashboard.name': `Nome da campanha.`,
     //CHAMADAS POR MINUTO
@@ -320,6 +321,7 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.TimeOfDay_sun': `Mesma regra só que para domingos.`,
     'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento.`,
+    'did.record_call': `Gravar chamadas deste DID. Será gravado independente do destino da chamada.`,
     //DESTINO DE DID
     'diddestination.id_did': `Selecione o DID para criar o novo destino.`,
     'diddestination.id_user': `Usuário que será o dono deste DID.`,
@@ -688,7 +690,7 @@ Também usado para capturar chamada com *8, dever se configura a opção pickupe
 .`,
     'sip.videosupport': `Ativa chamadas de vídeo.`,
     'sip.block_call_reg': `Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com.`,
-    'sip.record_call': `Grava as chamadas desta conta SIP.`,
+    'sip.record_call': `Grava as chamadas saintes desta conta SIP.`,
     'sip.techprefix': `Opção útil para quando for necessário autenticar mais de uma cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.`,
     'sip.nat': `O cliente está atrás de NAT? Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/.`,
     'sip.directmedia': `Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/.`,

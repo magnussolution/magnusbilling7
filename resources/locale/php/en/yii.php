@@ -104,8 +104,6 @@ return array(
     'config_desc_planbilling_daytopay'             => 'Set how many days before maturity you wanna collect the bid offers.',
     'config_title_reCaptchaKey'                    => 'reCaptchaKey sitekey',
     'config_desc_reCaptchaKey'                     => 'Generate your sitekey in https://www.google.com/recaptcha/admin#list',
-    'config_title_record_call'                     => 'AGI - Record calls',
-    'config_desc_record_call'                      => 'Enables recording of all customers.\nCAUTION, THIS OPTION REQUIRES A LOT OF SERVER PERFORMANCE. SO YOU CAN RECORD CUSTOMER SPECIFIC.\n\n0: Disable\n1: Enable.',
     'config_title_say_balance_after_call'          => 'AGI - Say balance after call',
     'config_desc_say_balance_after_call'           => 'Play the balance to the user after the call\n\n0 - No\n1 - Yes',
     'config_title_say_rateinitial'                 => 'AGI - Say sell price',
