@@ -62,6 +62,8 @@ class SipTraceController extends Controller
             exit('invalid Josn');
         }
 
+        $dateOld = 0;
+
         foreach ($result as $key => $value) {
 
             $callid = '';
@@ -111,9 +113,13 @@ class SipTraceController extends Controller
             $server_id_to   = array_search($toIp, array_column($modelServers, 'host'));
 
             $time = explode('.', $date);
-            $date = date('Y') . $time[0];
-            $mils = ($time[1] - $mils) / 1000000;
 
+            $date = date('Y') . $time[0];
+
+            $unixtime = strtotime($date) . '.' . $time[1];
+
+            $mils    = $unixtime - $dateOld;
+            $dateOld = $unixtime;
             if ($id == 1) {
                 $firstPacket = $fromIp;
                 $mils        = $time[1];
@@ -127,7 +133,7 @@ class SipTraceController extends Controller
                 'sipto'  => $sipto,
                 'callid' => $callid,
                 'head'   => date('Y') . preg_replace('/\#/', '', $value),
-                'date'   => $id == 1 ? $date : $date . ' + ' . number_format($mils, 4) . 's',
+                'date'   => $id == 1 ? $date : $date . ' + ' . number_format($mils, 3) . 's',
             ));
 
             $id++;
