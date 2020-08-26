@@ -115,8 +115,8 @@ class Mail
     public static $DID_NUMBER_KEY          = '$did$';
     public static $DID_COST_KEY            = '$did_cost$';
     public static $DID_NUMBER_CONFIRMATION = '$did_confirmation$';
-    public static $ITEM_ID_FACTURA         = '$id_factura$';
-    public static $DIAS_VENCIMENTO         = '$dias_vencimento$';
+    public static $INVOICE_ID              = '$invoice_id$';
+    public static $DAYS_TO_PAY             = '$days_to_pay$';
 
     //Used by mail type = did_unpaid  & subscription_unpaid
     public static $DAY_REMAINING_KEY = '$days_remaining$';
@@ -177,7 +177,7 @@ class Mail
             $this->id_agent = isset($modelUser->id) ? $modelUser->id_user : null;
             $this->id_user  = isset($modelUser->id) ? $modelUser->id : null;
 
-            if ($modelTemplate->id) {
+            if ($modelTemplate->id && $modelTemplate->status == 1) {
                 $mail_tmpl        = isset($modelTemplate->id) ? $modelTemplate->id : null;
                 $this->message    = $modelTemplate->messagehtml;
                 $this->title      = isset($modelTemplate->subject) ? $modelTemplate->subject : null;
@@ -185,7 +185,7 @@ class Mail
                 $this->from_name  = isset($modelTemplate->fromname) ? $modelTemplate->fromname : null;
                 $this->language   = isset($modelTemplate->language) ? $modelTemplate->language : null;
             } else {
-                Yii::log("Template Type '$type' cannot be found into the database!", 'info');
+                Yii::log("Template Type '$type' cannot be found into the database! or not active", 'error');
                 return true;
             }
 

@@ -48,6 +48,7 @@ class DidAgi
 
                 $this->did           = $this->modelDid->did;
                 $MAGNUS->record_call = $this->modelDid->record_call;
+                $agi->set_variable("RECORD_CALL_DID", $MAGNUS->record_call);
 
                 $sql               = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
                 $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -303,9 +304,11 @@ class DidAgi
 
                 $agi->verbose("DID call friend: IS LOCAL !!!", 1);
 
+                $MAGNUS->record_call = $this->modelDid->record_call;
+
                 /* IF SIP CALL*/
                 if ($inst_listdestination['voip_call'] == 1) {
-
+                    $agi->verbose("DID destination type SIP user ", 6);
                     $sql              = "SELECT * FROM pkg_sip WHERE id = " . $inst_listdestination['id_sip'] . " LIMIT 1";
                     $MAGNUS->modelSip = $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
@@ -335,8 +338,7 @@ class DidAgi
                 }
                 /* Call to group*/
                 else if ($inst_listdestination['voip_call'] == 8) {
-
-                    $agi->verbose("Call group $group ", 6);
+                    $agi->verbose("DID destination type SIP group ", 6);
                     $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '" . $inst_listdestination['destination'] . "'";
                     $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
                     $agi->verbose("Call group $group ", 6);
@@ -376,6 +378,7 @@ class DidAgi
                 }
                 /* Call to custom dial*/
                 else if ($inst_listdestination['voip_call'] == 9) {
+                    $agi->verbose("DID destination type CUSTOM ", 6);
                     //SMS@O numero %callerid% acabou de  ligar.
                     if (strtoupper(substr($inst_listdestination['destination'], 0, 3)) == 'SMS') {
                         //url format ->  SMS|Text|trunkname
@@ -420,7 +423,6 @@ class DidAgi
                         $agi->execute('Congestion', '5');
                         break;
                     } else {
-                        $agi->verbose("Ccall group $group ", 6);
                         $dialstr = $inst_listdestination['destination'];
 
                         $MAGNUS->startRecordCall($agi, $this->did, true);
@@ -463,8 +465,11 @@ class DidAgi
                     }
 
                 } elseif ($inst_listdestination['voip_call'] == 10) {
+                    $agi->verbose("DID destination type DIALPLAN ", 6);
                     $MAGNUS->run_dial($agi, "LOCAL/" . $this->did . "@did-" . $this->did);
                 } else {
+
+                    $agi->verbose("DID destination type PSTN NUMBER ", 6);
                     /* CHECK IF DESTINATION IS SET*/
                     if (strlen($inst_listdestination['destination']) == 0) {
                         continue;

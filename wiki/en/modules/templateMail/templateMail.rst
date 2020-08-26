@@ -38,3 +38,13 @@ Description
 
 
 
+
+.. _templateMail-status:
+
+Status
+------
+
+| We did not write the description to this field.
+
+
+

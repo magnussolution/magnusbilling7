@@ -170,6 +170,7 @@ class QueueAgi
         $id_queue            = $agi->get_variable("IDQUEUE", true);
         $callerid            = $agi->get_variable("QUEUCALLERID", true);
         $holdtime            = $agi->get_variable("QEHOLDTIME", true);
+        $MAGNUS->record_call = $agi->get_variable("RECORD_CALL_DID", true);
 
         $sql      = "SELECT id_user, mohsuggest FROM pkg_sip WHERE name = '$operator' LIMIT 1";
         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);

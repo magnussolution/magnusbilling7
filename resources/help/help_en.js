@@ -552,6 +552,7 @@ Help.load({
     'templatemail.fromemail': ``,
     'templatemail.subject': ``,
     'templatemail.messagehtml': ``,
+    'templatemail.status': ``,
     //TRUNKS
     'trunk.id_provider': ``,
     'trunk.trunkcode': ``,

@@ -38,3 +38,13 @@ Descrição
 
 
 
+
+.. _templateMail-status:
+
+Status
+------
+
+| Esta opção permite desativar o envio exclusivamente deste email.
+
+
+

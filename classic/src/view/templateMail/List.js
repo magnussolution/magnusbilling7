@@ -26,6 +26,20 @@ Ext.define('MBilling.view.templateMail.List', {
             dataIndex: 'mailtype',
             flex: 3
         }, {
+            header: t('Status'),
+            dataIndex: 'status',
+            renderer: Helper.Util.formatBooleanActive,
+            flex: 2,
+            filter: {
+                type: 'list',
+                options: [
+                    [1, t('Active')],
+                    [0, t('Inactive')]
+                ]
+            },
+            hidden: App.user.isClient || window.isTablet,
+            hideable: !App.user.isClient
+        }, {
             header: t('Language'),
             renderer: Helper.Util.formatLanguageImage,
             dataIndex: 'language',

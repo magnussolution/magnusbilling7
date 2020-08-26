@@ -27,6 +27,9 @@ Ext.define('MBilling.model.TemplateMail', {
     }, {
         name: 'language',
         type: 'string'
+    }, {
+        name: 'status',
+        type: 'int'
     }],
     proxy: {
         type: 'uxproxy',
