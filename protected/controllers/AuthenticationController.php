@@ -384,7 +384,7 @@ class AuthenticationController extends Controller
                 ":currentPassword" => $currentPassword,
             ));
 
-        if (is_object($modelUser) && count($modelUser)) {
+        if (isset($modelUser->id)) {
             try
             {
                 $modelUser->password = $newPassword;

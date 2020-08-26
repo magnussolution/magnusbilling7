@@ -129,10 +129,9 @@ class CallSummaryPerUserController extends Controller
 
         $this->setfilter($_GET);
 
-        $username = explode(' - ', $_GET['id'])[0];
         $this->filter .= ' AND username = :keyusername';
 
-        $this->paramsFilter[':keyusername'] = $username;
+        $this->paramsFilter[':keyusername'] = $_GET['id'];
 
         $this->magnusFilesDirectory = '/var/www/tmpmagnus/';
         $nameFileCsv                = $this->nameFileReport . time();
@@ -146,15 +145,14 @@ class CallSummaryPerUserController extends Controller
         $sql = "SELECT " . $columns . " FROM pkg_cdr t $this->join WHERE $this->filter";
 
         $command = Yii::app()->db->createCommand($sql);
-        if (count($this->paramsFilter)) {
-            foreach ($this->paramsFilter as $key => $value) {
-                $command->bindValue($key, $value, PDO::PARAM_STR);
-            }
 
+        foreach ($this->paramsFilter as $key => $value) {
+            $command->bindValue($key, $value, PDO::PARAM_STR);
         }
 
         //create a file pointer
         $f = fopen('php://memory', 'w');
+
         foreach ($command->queryAll() as $key => $fields) {
             $fieldsCsv = array();
             foreach ($fields as $key => $value) {
@@ -162,6 +160,13 @@ class CallSummaryPerUserController extends Controller
             }
             fputcsv($f, $fieldsCsv, ';');
         }
+
+        fseek($f, 0);
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . Yii::t('zii', 'Summary Day User') . '_' . date('Y-m-d') . '.csv"');
+
+        fpassthru($f);
 
     }
 
