@@ -113,6 +113,8 @@ class PlanCheckCommand extends ConsoleCommand
                         $mail->replaceInEmail(Mail::$PLAN_LABEL, $offerUse->idOffer->label);
                         $mail->replaceInEmail(Mail::$PLAN_COST, round($offerUse->idOffer->price, 2));
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($offerUse->idUser->credit, 2));
+                        $mail->replaceInEmail(Mail::$DAYS_TO_PAY, $daytopay);
+
                         $mail->send();
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
