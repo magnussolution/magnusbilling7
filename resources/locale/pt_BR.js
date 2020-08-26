@@ -410,7 +410,7 @@ Locale.load({
     'CDR Failed': 'Chamadas Rejeitadas',
     'Summary per Day': 'Resumo por Dia',
     'Summary Day User': 'Resumo por Dia/Usuário',
-    'Summary Day Trunk': 'Resumo por Dia/Trono',
+    'Summary Day Trunk': 'Resumo por Dia/Tronco',
     'Summary Day Agent': 'Resumo por Revendedor',
     'Summary per Month': 'Resumo por Mês',
     'Summary Month User': 'Resumo por Mês/Usuário',

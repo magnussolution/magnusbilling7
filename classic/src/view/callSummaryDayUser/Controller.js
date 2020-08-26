@@ -36,6 +36,6 @@ Ext.define('MBilling.view.callSummaryDayUser.Controller', {
         var me = this,
             store = me.list.getStore(),
             filter = me.list.filters.getFilterData().length ? Ext.encode(me.list.filters.getFilterData()) : store.proxy.extraParams.filter;
-        window.open('index.php/callSummaryDayUser/exportCsvCalls?id=' + grid.getStore().getAt(rowIndex).getData().idUserusername + '&filter=' + filter);
+        window.open('index.php/callSummaryPerUser/exportCsvCalls?id=' + grid.getStore().getAt(rowIndex).getData().idUserusername + '&filter=' + filter);
     }
 });
