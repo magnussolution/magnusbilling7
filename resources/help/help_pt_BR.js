@@ -81,7 +81,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'callsummarydayagent.sumbuycost': `Somatório do preço de compra.`,
     'callsummarydayagent.sumlucro': `Somatório do lucro.`,
     'callsummarydayagent.sumnbcall': `Total de chamadas.`,
-    //RESUMO POR DIA/TRONO
+    //RESUMO POR DIA/TRONCO
     'callsummarydaytrunk.sumsessiontime': `Somatório de minutos chamadas.||É possível realizar filtros, por exemplo, filtrar os dias da última semana, ou de um tronco específico, neste caso. Este somatório mostrará somente os dados do filtro executado.`,
     'callsummarydaytrunk.sumsessionbill': `Somatório do preço de venda.`,
     'callsummarydaytrunk.sumbuycost': `Somatório do preço de compra.`,
@@ -777,6 +777,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'templatemail.fromemail': `Email usado no fromemail, deve ser o mesmo email do usuário do SMTP.`,
     'templatemail.subject': `Assunto para o email.`,
     'templatemail.messagehtml': `Mensagem. É possível usar variáveis, veja a tab variáveis para ver a lista de variáveis disponível.`,
+    'templatemail.status': `Esta opção permite desativar o envio exclusivamente deste email.`,
     //TRONCOS
     'trunk.id_provider': `Provedor ao qual este tronco pertence.`,
     'trunk.trunkcode': `Nome para o tronco, deve ser único.`,

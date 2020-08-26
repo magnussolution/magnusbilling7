@@ -1062,6 +1062,20 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-08-26
+        if ($version == '7.4.5') {
+
+            $sql = "ALTER TABLE `pkg_templatemail` ADD `status` INT(11) NOT NULL DEFAULT '1'; ";
+            $this->executeDB($sql);
+
+            $sql = 'UPDATE `pkg_templatemail` SET messagehtml = REPLACE(messagehtml, "$dias_vencimento$", "$days_to_pay$"") WHERE `mailtype` LIKE "plan_unpaid";';
+            $this->executeDB($sql);
+
+            $version = '7.4.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

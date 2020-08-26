@@ -53,7 +53,7 @@ class TemplateMail extends Model
     public function rules()
     {
         return array(
-            array('id_user', 'numerical', 'integerOnly' => true),
+            array('id_user,status', 'numerical', 'integerOnly' => true),
             array('mailtype', 'length', 'max' => 50),
             array('fromname, fromemail, language', 'length', 'max' => 70),
             array('subject', 'length', 'max' => 130),

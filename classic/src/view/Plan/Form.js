@@ -88,9 +88,10 @@ Ext.define('MBilling.view.plan.Form', {
             hidden: !App.user.isAdmin
         }, {
             xtype: 'fieldset',
-            style: 'margin-top:25px; overflow: visible;',
+            style: 'margin-top:10px; overflow: visible;',
             title: t('Select one or more services'),
             collapsible: true,
+            height: 100,
             collapsed: false,
             items: [{
                 xtype: 'servicestag',

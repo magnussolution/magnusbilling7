@@ -20,6 +20,7 @@ Ext.define('MBilling.view.templateMail.Form', {
                     plugins: 'markallowblank',
                     allowBlank: false,
                     anchor: '100%',
+                    labelAlign: 'right',
                     enableKeyEvents: true
                 }
             },
@@ -35,6 +36,11 @@ Ext.define('MBilling.view.templateMail.Form', {
                 }, {
                     name: 'subject',
                     fieldLabel: t('Subject')
+                }, {
+                    xtype: 'booleancombo',
+                    name: 'status',
+                    fieldLabel: t('Status'),
+                    hidden: App.user.isClient
                 }]
             }, {
                 title: t('Email body'),
@@ -48,6 +54,14 @@ Ext.define('MBilling.view.templateMail.Form', {
                 }]
             }, {
                 title: t('Variables'),
+                defaults: {
+                    plugins: 'markallowblank',
+                    allowBlank: false,
+                    anchor: '100%',
+                    labelAlign: 'right',
+                    enableKeyEvents: true,
+                    labelWidth: 200
+                },
                 items: [{
                     xtype: 'displayfield',
                     fieldLabel: t('Username'),

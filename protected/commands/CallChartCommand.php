@@ -28,6 +28,9 @@ class CallChartCommand extends ConsoleCommand
         $this->debug = 0;
 
         for (;;) {
+            if (date('s') > 58) {
+                break;
+            }
             try {
                 $calls = AsteriskAccess::getCoreShowCdrChannels();
             } catch (Exception $e) {
@@ -45,7 +48,6 @@ class CallChartCommand extends ConsoleCommand
                 echo "use cdr show \n\n";
                 $this->user_cdr_show($calls);
             }
-
         }
     }
 

@@ -222,6 +222,7 @@ class MassiveCall
                 if ($chanStatus['result'] == 6) {
 
                     $MAGNUS->record_call = $modelCampaign->record_call;
+                    $agi->set_variable("RECORD_CALL_DID", $MAGNUS->record_call);
 
                     $forwardOption     = explode("|", $forward_number);
                     $forwardOptionType = $forwardOption[0];

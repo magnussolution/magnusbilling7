@@ -373,8 +373,8 @@ Este menu tem os seguintes campos
 .. include:: callsummarydayuser/callsummarydayuser.rst
 
 
-Resumo por Dia/Trono
-++++++++++++++++++++
+Resumo por Dia/Tronco
++++++++++++++++++++++
 
 Este menu tem os seguintes campos
 

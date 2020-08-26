@@ -820,7 +820,7 @@ Locale.load({
     'SIP Users': 'Cuentas SIP',
     'SIP group': 'Grupo SIP',
     'SIP user': 'Usuario SIP',
-    'SIPport': 'Porta SIP',
+    'SIPport': 'Puerto SIP',
     'SMS': 'SMS',
     'SMS Text': 'Texto SMS ',
     'SMS match result': 'Resultado de coincidencia de SMS',
