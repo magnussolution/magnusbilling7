@@ -415,7 +415,6 @@ Locale.load({
     'Initial block': '',
     'Initial credit to new users': '',
     'Insecure': '',
-    'Insert voucher': '',
     'Interval between trying': '',
     'Invalid Code': '',
     'Invalid DOC': '',

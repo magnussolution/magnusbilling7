@@ -23,13 +23,6 @@ Ext.define('MBilling.view.voucher.Form', {
     alias: 'widget.voucherform',
     initComponent: function() {
         var me = this;
-        if (!App.user.isClient) {
-            me.fieldsHideEdit = ['quantity'];
-        }
-        if (App.user.isClient) {
-            me.textNew = t('Insert voucher');
-            me.buttonNewWidth = 150;
-        }
         me.items = [{
             xtype: 'moneyfield',
             name: 'credit',

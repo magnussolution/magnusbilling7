@@ -4,7 +4,7 @@
 Number
 ------
 
-| We did not write the description to this field.
+| Number dialed by the client.
 
 
 
@@ -14,7 +14,7 @@ Number
 Duration
 --------
 
-| We did not write the description to this field.
+| Duration of the call in seconds.
 
 
 
@@ -24,7 +24,7 @@ Duration
 Buy price
 ---------
 
-| We did not write the description to this field.
+| Buy cost. You can see more details at the link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
 
 
 
@@ -34,7 +34,7 @@ Buy price
 Sell price
 ----------
 
-| We did not write the description to this field.
+| Buy cost. You can see more details at the link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
 
 
 
@@ -44,7 +44,7 @@ Sell price
 Sell price
 ----------
 
-| We did not write the description to this field.
+| Buy cost. You can see more details at the link `https://wiki.magnusbilling.org/en/source/price_calculation.html  <https://wiki.magnusbilling.org/en/source/price_calculation.html>`_.
 
 
 

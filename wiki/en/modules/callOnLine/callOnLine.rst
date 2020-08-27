@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| Main user of the SIP account that started the call.
 
 
 
@@ -14,7 +14,7 @@ Username
 Sip user
 --------
 
-| We did not write the description to this field.
+| SIP Account that requested the call.
 
 
 
@@ -24,7 +24,7 @@ Sip user
 Credit
 ------
 
-| We did not write the description to this field.
+| User credit.
 
 
 
@@ -34,7 +34,7 @@ Credit
 Number
 ------
 
-| Dialed number
+| Dialed number.
 
 
 
@@ -44,7 +44,7 @@ Number
 Codec
 -----
 
-| Codec used
+| Codec used.
 
 
 
@@ -54,7 +54,7 @@ Codec
 CallerID
 --------
 
-| The CID number.
+| The CallerID number.
 
 
 
@@ -64,7 +64,7 @@ CallerID
 Trunk
 -----
 
-| We did not write the description to this field.
+| Trunk that was used to complete the call.
 
 
 
@@ -74,7 +74,7 @@ Trunk
 Reinvite
 --------
 
-| If set to YES, means the RTP audio was sent directly between callee and caller
+| Reinvite is the parameter that informs if the audio is passing through Asterisk or if its going through the client and trunk. You can see more details at the link `https://wiki.magnusbilling.org/en/source/asterisk_options/directmedia.html.  <https://wiki.magnusbilling.org/en/source/asterisk_options/directmedia.html.>`_.
 
 
 
@@ -84,7 +84,7 @@ Reinvite
 From IP
 -------
 
-| IP of the caller
+| IP of the caller.
 
 
 
@@ -94,7 +94,7 @@ From IP
 Description
 -----------
 
-| We did not write the description to this field.
+| Data from the sip show channel command.
 
 
 

@@ -89,58 +89,38 @@ class VoucherController extends Controller
         } else {
 
             $values = $this->getAttributesRequest();
-            if (isset($values['quantity']) && $values['quantity'] > 1) {
-                for ($i = 0; $i < $values['quantity']; $i++) {
+            for ($i = 0; $i < $values['quantity']; $i++) {
 
-                    $voucher                    = $this->geraVoucher();
-                    $modelVoucher               = new Voucher();
-                    $modelVoucher->id_plan      = $values['id_plan'];
-                    $modelVoucher->voucher      = $voucher;
-                    $modelVoucher->credit       = $values['credit'];
-                    $modelVoucher->tag          = $values['tag'];
-                    $modelVoucher->language     = $values['language'];
-                    $modelVoucher->prefix_local = $values['prefix_local'];
-                    try {
-                        $modelVoucher->save();
-                    } catch (Exception $e) {
-                        //print_r($e);
-                    }
+                $voucher                    = $this->geraVoucher();
+                $modelVoucher               = new Voucher();
+                $modelVoucher->id_plan      = $values['id_plan'];
+                $modelVoucher->voucher      = $voucher;
+                $modelVoucher->credit       = $values['credit'];
+                $modelVoucher->tag          = $values['tag'];
+                $modelVoucher->language     = $values['language'];
+                $modelVoucher->prefix_local = $values['prefix_local'];
+                try {
+                    $modelVoucher->save();
+                } catch (Exception $e) {
+                    print_r($e);
                 }
-
-                $newRecord = $this->abstractModel->findAll(array(
-                    'select' => $this->select,
-                    'join'   => $this->join,
-                ));
-
-                echo json_encode(array(
-                    $this->nameSuccess => true,
-                    $this->nameRoot    => $this->getAttributesModels($newRecord, $this->extraValues),
-                    $this->nameMsg     => $this->msgSuccess,
-                ));
-                exit;
-
-            } else {
-                parent::actionSave();
             }
 
+            $newRecord = $this->abstractModel->findAll(array(
+                'select' => $this->select,
+                'join'   => $this->join,
+                'order'  => 'id DESC',
+                'limit'  => 1,
+            ));
+
+            echo json_encode(array(
+                $this->nameSuccess => true,
+                $this->nameRoot    => $this->getAttributesModels($newRecord, $this->extraValues),
+                $this->nameMsg     => $this->msgSuccess,
+            ));
+            exit;
+
         }
-    }
-
-    public function getAttributesRequest()
-    {
-
-        if (isset($_POST[$this->nameRoot])) {
-            $values = json_decode($_POST[$this->nameRoot], true);
-            if (isset($values['quantity']) && $values['quantity'] == 1) {
-                unset($values['quantity']);
-                unset($values['idUserusername']);
-                $values['voucher'] = $this->geraVoucher();
-            }
-        } else {
-            $values = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
-        }
-
-        return $values;
     }
 
     public function extraFilterCustom($filter)

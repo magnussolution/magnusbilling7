@@ -690,7 +690,6 @@ return array(
     'Incompatible destination' => 'Destino incompatível',
     'Initial block' => 'Bloco mínimo',
     'Insecure' => 'Insecure',
-    'Insert voucher' => 'Inserir voucher',
     'Interval between trying' => 'Intervalo entre tentativas',
     'Invalid call reference value' => 'Invalid call reference value',
     'Invalid format' => 'Formato Inválido',

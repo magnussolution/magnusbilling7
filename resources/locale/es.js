@@ -515,7 +515,6 @@ Locale.load({
     'Initial block': 'Bloque inicial',
     'Initial credit to new users': 'Crédito inicial para nuevos usuarios',
     'Insecure': 'Insecure',
-    'Insert voucher': 'Insertar voucher',
     'Interval between trying': 'Intervalo entre intentos',
     'Invalid Code': 'Codigo inválido',
     'Invalid Email': 'Email inválido',
