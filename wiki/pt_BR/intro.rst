@@ -18,8 +18,8 @@ Funções
 ========
 
 * O sistema conta com muitas funcionalidade para dar uma incrível robustez ao seu servidor.
-* Torna o Asterisk mais fácil de administrar, e permite você trabalhar sem conhecimento previos Asterisk, tudo é feito pelo painel WEB. 
-* Painel WEB completo para o administrador, revendor e clientes.
+* Torna o Asterisk mais fácil de administrar, e permite você trabalhar sem conhecimento prévios Asterisk, tudo é feito pelo painel WEB. 
+* Painel WEB completo para o administrador, revendedor e clientes.
 
 Funções suportadas
 ==================
@@ -39,3 +39,5 @@ Funções suportadas
 .. _Asterisk: http://www.asterisk.org
 .. _Canal youtube: https://www.youtube.com/channel/UCish_6Lxfkh29n4CLVEd90Q
 .. _MagnusBilling: https://www.magnusbilling.org
+
+

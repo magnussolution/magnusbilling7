@@ -122,7 +122,7 @@
     'number'=> ['Number', 'Número' , 'Número'],
     'operator_id'=> ['Operator_ID', 'Operador_ID' , 'ID_de_operador'],
     'operator_name'=> ['Operator_name', 'Nome_do_operador' , 'Nombre_del_operador'],
-    'package_offer'=> ['Include_in_offer', 'Incluir_no_pacotes_grátis' , 'Incluir_en_oferta'],
+    'package_offer'=> ['Include_in_offer', 'Incluir_nos_pacotes_grátis' , 'Incluir_en_oferta'],
     'packagetype'=> ['Package_type', 'Tipo_de_pacote' , 'Tipo_de_paquete'],
     'pagseguro_TOKEN'=> ['TOKEN', 'TOKEN' , 'TOKEN'],
     'password'=> ['Password', 'Senha' , 'Contraseña'],

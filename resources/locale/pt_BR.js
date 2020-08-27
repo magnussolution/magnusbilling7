@@ -14,6 +14,7 @@
  * 2020-08-07
  */
 Locale.load({
+    'Activate offer': 'Ativar pacote grátis',
     'Voucher inexistente or already used': 'Voucher inexistente ou já usado',
     'must belong to the IVR owner': 'deve pertencer ao mesmo usuário dono da IRV',
     'cannot be blank': 'não pode ser vazio',
@@ -326,7 +327,7 @@ Locale.load({
     'Votes': 'Votos',
     'Wednesday': 'Quarta feira',
     'Activation DID': 'Ativação do DID',
-    'Active users': 'Ativar usuário',
+    'Active users': 'Usuário ativos',
     'You are not allowed to edit this field': 'Você não tem autorização para editar este campo',
     'You cannot add credit to yourself': 'Você não pode adicionar crédito para você mesmo',
     'You cannot change user type group': 'Você não pode alterar o grupo de usuário',
@@ -685,7 +686,7 @@ Locale.load({
     'In': 'em',
     'Inactive': 'Inativo',
     'Inbound': 'Entrada',
-    'Include in offer': 'Incluir no pacotes grátis',
+    'Include in offer': 'Incluir nos pacotes grátis',
     'Incoming call barred': 'Chamada recebida barrada',
     'Incompatible destination': 'Destino incompatível',
     'Initial block': 'Bloco mínimo',

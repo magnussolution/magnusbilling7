@@ -21,7 +21,8 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Voucher inexistente or already used' => 'Voucher inexistente ou já usado',
+            'Activate offer' => 'Ativar pacote grátis',
+    'Voucher inexistente or already used' => 'Voucher inexistente ou já usado',
     'must belong to the IVR owner' => 'deve pertencer ao mesmo usuário dono da IRV',
     'cannot be blank' => 'não pode ser vazio',
     'This option is only available to clients.' => 'Esta opção está disponível somente para clientes.',
@@ -330,7 +331,7 @@ return array(
     'Votes' => 'Votos',
     'Wednesday' => 'Quarta feira',
     'Activation DID' => 'Ativação do DID',
-    'Active users' => 'Ativar usuário',
+    'Active users' => 'Usuário ativos',
     'You are not allowed to edit this field' => 'Você não tem autorização para editar este campo',
     'You cannot add credit to yourself' => 'Você não pode adicionar crédito para você mesmo',
     'You cannot change user type group' => 'Você não pode alterar o grupo de usuário',
@@ -684,7 +685,7 @@ return array(
     'In' => 'em',
     'Inactive' => 'Inativo',
     'Inbound' => 'Entrada',
-    'Include in offer' => 'Incluir no pacotes grátis',
+    'Include in offer' => 'Incluir nos pacotes grátis',
     'Incoming call barred' => 'Chamada recebida barrada',
     'Incompatible destination' => 'Destino incompatível',
     'Initial block' => 'Bloco mínimo',

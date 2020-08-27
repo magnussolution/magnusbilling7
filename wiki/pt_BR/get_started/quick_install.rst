@@ -17,7 +17,7 @@ Instale o Linux **minimal**.
   chmod +x install.sh
   ./install.sh     
 
-**2.** Durante a instalação será solicitado o idioma padrão para o Mangusbilling. Escolha digitando o numero do idioma escolhido.
+**2.** Durante a instalação será solicitado o idioma padrão para o Magnus Billing. Escolha digitando o número do idioma escolhido.
 
 
 ::
@@ -32,3 +32,5 @@ Instale o Linux **minimal**.
 
 .. image:: ../img/ilogin.png
         :scale: 80%
+
+

@@ -85,7 +85,15 @@ Ext.define('MBilling.view.rate.List', {
                 dataIndex: 'package_offer',
                 hidden: true,
                 hideable: App.user.isAdmin,
-                flex: 1
+                flex: 1,
+                renderer: Helper.Util.formattyyesno,
+                filter: {
+                    type: 'list',
+                    options: [
+                        [1, t('Yes')],
+                        [0, t('No')]
+                    ]
+                }
             }, {
                 header: t('Status'),
                 dataIndex: 'status',

@@ -29,6 +29,7 @@ Locale.load({
     'Access information discarded': '',
     'Action': '',
     'Actions': '',
+    'Activate offer': '',
     'Activation DID': '',
     'Active': '',
     'Active users': '',
