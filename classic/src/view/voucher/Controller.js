@@ -24,8 +24,6 @@ Ext.define('MBilling.view.voucher.Controller', {
     onSave: function() {
         var me = this;
         me.callParent(arguments);
-        me.formPanel.setLoading(false);
-        me.saveButton.enable();
         me.store.load();
     }
 });

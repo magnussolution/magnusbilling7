@@ -100,6 +100,10 @@ if ($MAGNUS->dnid == '*120') {
         $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if (isset($modelUser->id)) {
+
+            $sql = "UPDATE pkg_voucher SET id_user = $modelUser->id, usedate = NOW(), used = 1 WHERE voucher = '$modelVoucher->voucher' LIMIT 1";
+            $agi->exec($sql);
+
             $sql = "UPDATE pkg_user SET credit = credit + " . $modelVoucher->credit . " WHERE username = '$voucher' LIMIT 1";
             $agi->exec($sql);
 
@@ -115,7 +119,7 @@ if ($MAGNUS->dnid == '*120') {
         $prompt = "prepaid-invalid-digits";
     }
 
-    $MAGNUS->executePlayAudio($prompt, $agi);
+    $agi->stream_file($prompt, '#');
     exit;
 }
 

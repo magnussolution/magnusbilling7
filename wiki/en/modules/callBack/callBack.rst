@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| Owner of the DID that received the CallBack request.
 
 
 
@@ -14,7 +14,7 @@ Username
 Destination number
 ------------------
 
-| We did not write the description to this field.
+| Number of who called the DID requesting the CallBack
 
 
 
@@ -24,7 +24,17 @@ Destination number
 Status
 ------
 
-| We did not write the description to this field.
+| Status of the call
+| The statuses are:
+|     * Active
+|         The CallBack still hasn't been processed.
+|     * Pending
+|         MagnusBilling processed the CallBack and sent it to the trunk.
+|     * Sent
+|         The CallBack has been processed successfully.
+|     * Outside of the time range
+|         The call was received outside of the time range configured in the DID menu, tab CallBack Pro.
+|     .
 
 
 
