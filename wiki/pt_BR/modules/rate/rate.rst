@@ -81,8 +81,8 @@ Tempo adicional
 
 .. _rate-package-offer:
 
-Incluir no pacotes grátis
---------------------------
+Incluir nos pacotes grátis
+---------------------------
 
 | Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis.
 

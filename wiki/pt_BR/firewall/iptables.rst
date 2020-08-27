@@ -2,7 +2,7 @@
 Iptables
 *****************
 
-Iptables regras aplicadas na instalacao
+Iptables regras aplicadas na instalação
 
 Basic Rules
 ^^^^^^^^^^^^
@@ -97,5 +97,7 @@ Debian / Ubuntu
 	apt-get install iptables-persistent
 	service iptables-persistent save
 	dpkg-reconfigure iptables-persistent
+
+
 
 

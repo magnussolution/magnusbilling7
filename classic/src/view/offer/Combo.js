@@ -26,6 +26,8 @@ Ext.define('MBilling.view.offer.Combo', {
     displayField: 'label',
     valueField: 'id',
     value: 0,
+    forceSelection: true,
+    editable: false,
     extraValues: [{
         id: 0,
         label: t('Undefined')

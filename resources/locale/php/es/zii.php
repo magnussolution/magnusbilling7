@@ -21,7 +21,8 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Voucher inexistente or already used' => 'Voucher inexistente o ya usado',
+            'Activate offer' => 'Ativar oferta',
+    'Voucher inexistente or already used' => 'Voucher inexistente o ya usado',
     'must belong to the IVR owner' => 'tiene que pertenecer al mismo usuario de la IRV',
     'cannot be blank' => 'no puede estar en blanco',
     'The DID has already been activated for another user.' => 'El DID ya se ha activado para otro usuario.',

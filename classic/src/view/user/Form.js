@@ -98,7 +98,7 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'offercombo',
                     name: 'id_offer',
-                    fieldLabel: t('Offer'),
+                    fieldLabel: t('Activate offer'),
                     allowBlank: true
                 }, {
                     xtype: 'numberfield',
