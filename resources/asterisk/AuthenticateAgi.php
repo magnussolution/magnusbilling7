@@ -226,6 +226,10 @@ class AuthenticateAgi
             $sql = "UPDATE pkg_voucher SET id_user = $MAGNUS->id_user, usedate = NOW(), used = 1 WHERE voucher = '$pin' LIMIT 1";
             $agi->exec($sql);
 
+            $values = "" . $MAGNUS->id_user . ",'" . $modelVoucher->credit . "','Voucher " . $modelVoucher->voucher . ". Old credit " . $modelUser->credit . "',1";
+            $sql    = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES ($values)";
+            $agi->exec($sql);
+
             $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE id = $MAGNUS->id_user LIMIT 1";
             $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 

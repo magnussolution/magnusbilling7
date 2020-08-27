@@ -21,7 +21,8 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'must belong to the IVR owner' => 'tiene que pertenecer al mismo usuario de la IRV',
+            'Voucher inexistente or already used' => 'Voucher inexistente o ya usado',
+    'must belong to the IVR owner' => 'tiene que pertenecer al mismo usuario de la IRV',
     'cannot be blank' => 'no puede estar en blanco',
     'The DID has already been activated for another user.' => 'El DID ya se ha activado para otro usuario.',
     'This option is only available to clients.' => 'Esta opción solo está disponible para clientes.',
@@ -808,7 +809,7 @@ return array(
     'SIP Users' => 'Cuentas SIP',
     'SIP group' => 'Grupo SIP',
     'SIP user' => 'Usuario SIP',
-    'SIPport' => 'Porta SIP',
+    'SIPport' => 'Puerto SIP',
     'SMS' => 'SMS',
     'SMS Text' => 'Texto SMS ',
     'SMS match result' => 'Resultado de coincidencia de SMS',

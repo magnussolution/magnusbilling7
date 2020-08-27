@@ -60,7 +60,7 @@ class VoucherController extends Controller
                     ':key1'    => '0000-00-00 00:00:00',
                 ));
 
-            if (count($modelVoucher)) {
+            if (isset($modelVoucher->id)) {
                 $modelVoucher->id_user = Yii::app()->session['id_user'];
                 $modelVoucher->used    = 1;
                 $modelVoucher->usedate = date('Y-m-d H:i:s');
@@ -71,14 +71,14 @@ class VoucherController extends Controller
                 }
 
                 $this->success = true;
-                $this->msg     = 'Operacao realizada com successo.';
+                $this->msg     = $this->msgSuccess;
 
                 UserCreditManager::releaseUserCredit(Yii::app()->session['id_user'], $modelVoucher->credit, 'Voucher ' . $values['voucher']);
 
             } else {
-                $this->success  = false;
-                $this->msg      = 'Voucher inexistente or already used';
-                $$this->nameMsg = 'errors';
+                $this->success = false;
+                $this->msg     = Yii::t('zii', 'Voucher inexistente or already used');
+                $this->nameMsg = 'errors';
             }
 
             # retorna o resultado da execucao
