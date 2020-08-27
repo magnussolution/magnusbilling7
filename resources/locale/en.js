@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-26
+ * 2020-08-27
  */
 Locale.load({
     '': '',
@@ -1009,6 +1009,7 @@ Locale.load({
     'Voted': '',
     'Votes': '',
     'Voucher': '',
+    'Voucher inexistente or already used': '',
     'Wait time': '',
     'Wait, your phone ring in few seconds': '',
     'Wait...': '',

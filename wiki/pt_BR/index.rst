@@ -31,6 +31,7 @@ Bem vindo à documentação do MagnusBilling 7 em português.
    tts.rst
    offer.rst
    how_to_use_voucher.rst
+   conf.rst
 
 .. toctree::
    :caption: Configaçōes do Asterisk

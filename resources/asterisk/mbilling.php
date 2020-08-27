@@ -83,6 +83,41 @@ if ($MAGNUS->dnid == '*180' || $MAGNUS->dnid == '*181') {
     $MAGNUS->hangup($agi);
     exit;
 }
+if ($MAGNUS->dnid == '*120') {
+    $agi->answer();
+
+    $res_dtmf = $agi->get_data('prepaid-enter-pin-number', 6000, 6);
+    $agi->verbose('VOUCHER ' . $res_dtmf["result"], 20);
+
+    $dtmf = $res_dtmf["result"];
+
+    $sql          = "SELECT * FROM pkg_voucher WHERE voucher = '$dtmf' AND used = 0 LIMIT 1";
+    $modelVoucher = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+    if (isset($modelVoucher->id)) {
+        $agi->verbose("Found valid voucher Number $modelVoucher->voucher");
+
+        $sql       = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "'";
+        $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+        if (isset($modelUser->id)) {
+            $sql = "UPDATE pkg_user SET credit = credit + " . $modelVoucher->credit . " WHERE username = '$voucher' LIMIT 1";
+            $agi->exec($sql);
+
+            $values = "" . $modelUser->id . ",'" . $modelVoucher->credit . "','Voucher " . $modelVoucher->voucher . ". Old credit " . $modelUser->credit . "',1";
+            $sql    = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES ($values)";
+            $agi->exec($sql);
+            $prompt = "prepaid-final";
+
+        } else {
+            $prompt = "prepaid-invalid-digits";
+        }
+    } else {
+        $prompt = "prepaid-invalid-digits";
+    }
+
+    $MAGNUS->executePlayAudio($prompt, $agi);
+    exit;
+}
 
 //Hangup call that start with 1111, avoid fake call to Brasilian portability
 if (substr($MAGNUS->dnid, 0, 4) == 1111) {

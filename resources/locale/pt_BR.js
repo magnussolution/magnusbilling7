@@ -14,6 +14,7 @@
  * 2020-08-07
  */
 Locale.load({
+    'Voucher inexistente or already used': 'Voucher inexistente ou já usado',
     'must belong to the IVR owner': 'deve pertencer ao mesmo usuário dono da IRV',
     'cannot be blank': 'não pode ser vazio',
     'This option is only available to clients.': 'Esta opção está disponível somente para clientes.',

@@ -72,11 +72,11 @@ Ext.define('MBilling.view.voucher.Form', {
             xtype: 'numberfield',
             name: 'voucher',
             fieldLabel: t('Voucher'),
-            emptyText: t('Will be generated automatically'),
+            emptyText: App.user.isClient ? '' : t('Will be generated automatically'),
             maxLength: 6,
             minLength: 6,
-            readOnly: true,
-            allowBlank: true
+            readOnly: App.user.isClient ? false : true,
+            allowBlank: App.user.isClient ? false : true
         }];
         me.callParent(arguments);
     }

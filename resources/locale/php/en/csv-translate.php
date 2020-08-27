@@ -181,7 +181,7 @@
     'sip_account'=> ['Sip_user', 'Conta_SIP' , 'Usuario_SIP'],
     'sip_config'=> ['Parameters', 'Parâmetros' , 'Parámetros'],
     'sip_group'=> ['Group', 'Grupo' , 'Grupo'],
-    'sip_port'=> ['SIPport', 'Porta_SIP' , 'Porta_SIP'],
+    'sip_port'=> ['SIPport', 'Porta_SIP' , 'Puerto_SIP'],
     'sipaccountlimit'=> ['SIP_account_limit', 'Limite_de_contas_SIP' , 'Límite_de_cuentas_SIP'],
     'sipshowpeer'=> ['Peer', 'Peer' , 'Peer'],
     'SkuCode'=> ['SkuCode', 'SkuCode' , 'SkuCode'],
