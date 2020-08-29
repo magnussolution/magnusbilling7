@@ -176,20 +176,14 @@ class CallController extends Controller
             if (isset($output[0])) {
 
                 $file_name = explode("/", $output[0]);
-                if (preg_match('/gsm/', end($file_name))) {
-                    header("Cache-Control: public");
-                    header("Content-Description: File Transfer");
-                    header("Content-Disposition: attachment; filename=" . end($file_name));
-                    header("Content-Type: audio/x-gsm");
-                    header("Content-Transfer-Encoding: binary");
-                    readfile($output[0]);
-                } else {
-                    exec('rm -rf /var/www/html/mbilling/tmp/*');
-                    exec('cp -rf ' . $output[0] . ' /var/www/html/mbilling/tmp/');
-                    echo '<body style="margin:0px;padding:0px;overflow:hidden">
-                            <iframe src="../../tmp/' . end($file_name) . '" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
-                        </body>';
-                }
+
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=" . end($file_name));
+                header("Content-Type: audio/x-gsm");
+                header("Content-Transfer-Encoding: binary");
+                readfile($output[0]);
+
             } else {
 
                 if (strlen($this->config['global']['external_record_link']) > 20) {

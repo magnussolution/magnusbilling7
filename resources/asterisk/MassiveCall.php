@@ -70,7 +70,7 @@ class MassiveCall
             $amd_status = $agi->get_variable("AMDSTATUS", true);
             $agi->verbose(date("Y-m-d H:i:s") . " => " . $MAGNUS->dnid . ': amd_status ' . $amd_status . ", hangup call", 5);
 
-            $sql = "UPDATE pkg_campaign_report SET status = 5 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+            $sql = "UPDATE pkg_campaign_report SET status = 4 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
             $agi->exec($sql);
 
             $sql = "UPDATE pkg_phonenumber SET status = 5, info = '" . $agi->get_variable("AMDCAUSE", true) . "' WHERE id = $idPhonenumber LIMIT 1";
@@ -619,7 +619,27 @@ class MassiveCall
 
         $id_trunk = $modelRate->id_trunk;
 
-        $duration = time() - $now;
+        $duration = $real_sessiontime = time() - $now;
+
+        /*recondeo call*/
+        if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $duration > 0) {
+            $initblock    = ($initblock < 1) ? 1 : $initblock;
+            $billingblock = ($billingblock < 1) ? 1 : $billingblock;
+
+            if ($duration > $initblock) {
+                $restominutos   = $duration % $billingblock;
+                $calculaminutos = ($duration - $restominutos) / $billingblock;
+                if ($restominutos > '0') {
+                    $calculaminutos++;
+                }
+                $duration = $calculaminutos * $billingblock;
+
+            } elseif ($duration < '1') {
+                $duration = 0;
+            } else {
+                $duration = $initblock;
+            }
+        }
 
         /* ####     CALCUL BUYRATE COST     #####*/
         $buyratecost  = $MAGNUS->calculation_price($buyrate, $duration, $buyrateinitblock, $buyrateincrement);
@@ -640,7 +660,7 @@ class MassiveCall
             }
             $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $duration);
             $CalcAgi->sessiontime      = $duration;
-            $CalcAgi->real_sessiontime = intval($duration);
+            $CalcAgi->real_sessiontime = intval($real_sessiontime);
             $MAGNUS->destination       = $destination;
             $CalcAgi->terminatecauseid = 1;
             $CalcAgi->sessionbill      = $sellratecost;
