@@ -46,4 +46,18 @@ class CalleridController extends Controller
         parent::init();
     }
 
+    public function importCsvSetAdditionalParams()
+    {
+        $values = $this->getAttributesRequest();
+        return [
+            [
+                'key'   => 'id_user',
+                'value' => $values['id_user'],
+            ], [
+                'key'   => 'activated',
+                'value' => 1,
+            ],
+        ];
+    }
+
 }
