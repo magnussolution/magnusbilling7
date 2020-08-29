@@ -83,20 +83,12 @@ class DidController extends Controller
     {
         $success = false;
 
-        if (!Yii::app()->session['isClient']) {
-            echo json_encode(array(
-                $this->nameSuccess => false,
-                $this->nameMsg     => Yii::t('zii', 'This option is only available to clients.'),
-            ));
-            exit;
-        }
-
         $id_did  = isset($_POST['id']) ? json_decode($_POST['id']) : null;
-        $id_user = Yii::app()->session['id_user'];
+        $id_user = isset($_POST['id_user']) ? json_decode($_POST['id_user']) : Yii::app()->session['id_user'];
 
         $modelDid = Did::model()->findByPk($id_did);
 
-        $modelUser = User::model()->findByPK(Yii::app()->session['id_user']);
+        $modelUser = User::model()->findByPK($id_user);
 
         $totalDid = $modelDid->fixrate + $modelDid->connection_charge;
 

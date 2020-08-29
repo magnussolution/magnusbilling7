@@ -170,6 +170,8 @@ class ApiAccess
             $action = 'u';
         } else if ($_POST['action'] == 'destroy') {
             $action = 'd';
+        } else if ($_POST['action'] == 'buy') {
+            $action = 'r';
         }
 
         if (!preg_match('/' . $action . '/', $modelApi->action)) {
