@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that owns the DID.
 
 
 
@@ -14,7 +14,7 @@ Username
 DID
 ---
 
-| We did not write the description to this field.
+| DID Number
 
 
 
@@ -24,7 +24,7 @@ DID
 Reservation date
 ----------------
 
-| We did not write the description to this field.
+| Day that the DID was reserved for the user.
 
 
 

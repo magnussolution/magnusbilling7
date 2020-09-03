@@ -4,7 +4,7 @@
 DID
 ---
 
-| The exact number coming from the context. We recommend you to always use the E164 format.
+| The exact number coming from the context in Asterisk. We recommend you to always use the E164 format.
 
 
 
@@ -14,7 +14,7 @@ DID
 Status
 ------
 
-| We did not write the description to this field.
+| Only active numbers can receive calls.
 
 
 
@@ -24,7 +24,7 @@ Status
 Callerid name
 -------------
 
-| Use this field to set a Callerid name, or leave blank to use the received callerid from the DID provider.
+| Use this field to set a CallerID name or leave it blank to use the received CallerID from the DID provider.
 
 
 
@@ -34,7 +34,7 @@ Callerid name
 Setup price
 -----------
 
-| Activation cost. E.
+| Activation cost. This value will be deducted from the client the moment that the DID is associated with the user.
 
 
 
@@ -44,7 +44,7 @@ Setup price
 Monthly price
 -------------
 
-| We did not write the description to this field.
+| Monthly price. This value will be deducted automatically every month from the user's balance. If the client doesn't have enough credit the DID will be cancelled automatically.
 
 
 
@@ -54,7 +54,7 @@ Monthly price
 Connection charge
 -----------------
 
-| We did not write the description to this field.
+| This is the value that will be charged for each call. Simply by picking up the call, this value will be deducted.
 
 
 
@@ -64,7 +64,7 @@ Connection charge
 Minimum time to charge
 ----------------------
 
-| We did not write the description to this field.
+| Minimum time to tariff the DID. If you set it to 3 any call that with lower duration will not be charged for.
 
 
 
@@ -74,7 +74,7 @@ Minimum time to charge
 Initial block
 -------------
 
-| Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 10s, charged for 30s.
+| Minimum time in seconds to buy. If you set it to 30 and the call duration is 10, the call will be billed as 30.
 
 
 
@@ -84,7 +84,7 @@ Initial block
 Billing block
 -------------
 
-| This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, charged for 36.
+| This defines the block in which the call billing time will be incremented, in seconds. If set to 6 and call duration is 32, the call will be billed as 36.
 
 
 
@@ -94,7 +94,7 @@ Billing block
 Charge who
 ----------
 
-| We did not write the description to this field.
+| The user that will be charged for the DID cost.
 
 
 
@@ -104,7 +104,7 @@ Charge who
 Channel limit
 -------------
 
-| DID simultaneous calls
+| Maximum simultaneous calls for this DID.
 
 
 
@@ -114,7 +114,7 @@ Channel limit
 Description
 -----------
 
-| We did not write the description to this field.
+| You may take notes here!
 
 
 
@@ -124,7 +124,25 @@ Description
 Regular expression
 ------------------
 
-| Use REGEX to able to bill the incomming calls by CallerID(ANI). E.g, if you are calling your DID and your number is 443432221234, suppose you want to charge all calls that start with 44 for 0.1. Therefore you can use ^44, and Sell price per min 0.1.
+| This is a regular expression to tariff the DID depending on who is calling it.
+| Lets analyze a real example:
+|     Suppose we want to charge 0.10 when we receive a call from a landline and 0.20 if its a mobile phone and block any other format.
+|     In this example we will create rules to identify the CallerID in the format 0 + area code + number, area code + number, or 55 + area code + number.
+| 
+|     Take a look at the following image on what the result would look like:
+|     
+|     .. image:: ../img/did_regex.png
+   :scale: 100% 
+| 
+| 
+|     Regular expression for mobile
+|     ^[1-9][0-9]9\d{8}$|^0[1-9][0-9]9\d{8}$|^55[1-9][0-9]9\d{8}$
+| 
+|     Regular expression for landline
+|     ^[1-9][0-9]\d{8}$|^0[1-9][0-9]\d{8}$|^55[1-9][0-9]\d{8}$
+| 
+| 
+|     
 
 
 
@@ -144,7 +162,7 @@ Sell price per min
 Block calls from this expression
 --------------------------------
 
-| Set to yes to block calls that matches with the above regular expression
+| Set to yes to block calls that matches with the above regular expression.
 
 
 
@@ -154,7 +172,7 @@ Block calls from this expression
 Send the call to callback
 -------------------------
 
-| Send this call to CallBack if it matches with the above regular expression
+| Send this call to CallBack if it matches with the above regular expression.
 
 
 
@@ -164,7 +182,7 @@ Send the call to callback
 Regular expression
 ------------------
 
-| Same as the field above but you can use 3 REGEXes to bill with 3 diferent rules. E.g, on the first REGEX you want to charge 0.1 for numbers that start with 44, the second rule charges 0.2 for numbers that start with 447. Therefore you can use ^447 and Sell price per min 0.2.
+| Same as the first expression. You can see more details at the link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
 
 
 
@@ -174,7 +192,7 @@ Regular expression
 Sell price per min
 ------------------
 
-| We did not write the description to this field.
+| Price per minute if the number matches the above regular expression.
 
 
 
@@ -184,7 +202,7 @@ Sell price per min
 Block calls from this expression
 --------------------------------
 
-| We did not write the description to this field.
+| Set to yes to block calls that matches with the above regular expression.
 
 
 
@@ -194,7 +212,7 @@ Block calls from this expression
 Send the call to callback
 -------------------------
 
-| We did not write the description to this field.
+| Send this call to CallBack if it matches with the above regular expression.
 
 
 
@@ -204,7 +222,7 @@ Send the call to callback
 Regular expression
 ------------------
 
-| We did not write the description to this field.
+| Same as the first expression. You can see more details at the link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
 
 
 
@@ -214,7 +232,7 @@ Regular expression
 Sell price per min
 ------------------
 
-| We did not write the description to this field.
+| Price per minute if the number matches the above regular expression.
 
 
 
@@ -224,7 +242,7 @@ Sell price per min
 Block calls from this expression
 --------------------------------
 
-| We did not write the description to this field.
+| Set to yes to block calls that matches with the above regular expression.
 
 
 
@@ -234,7 +252,7 @@ Block calls from this expression
 Send the call to callback
 -------------------------
 
-| We did not write the description to this field.
+| Send this call to CallBack if it matches with the above regular expression.
 
 
 
@@ -244,7 +262,7 @@ Send the call to callback
 CallBack pro
 ------------
 
-| Enables CallBack Pro. Only works if DID destination is a QUEUE.
+| Enables CallBack Pro.
 
 
 
@@ -254,7 +272,7 @@ CallBack pro
 Use audio
 ---------
 
-| Tries to execute an audio when a call is received.
+| Execute an audio.
 
 
 
@@ -264,7 +282,7 @@ Use audio
 Maximum trying
 --------------
 
-| We did not write the description to this field.
+| How many times will the system try to return the call?
 
 
 
@@ -274,7 +292,7 @@ Maximum trying
 Interval between trying
 -----------------------
 
-| We did not write the description to this field.
+| Time interval between each try, in minutes.
 
 
 
@@ -284,7 +302,7 @@ Interval between trying
 Early media
 -----------
 
-| Tries to execute an audio before the call is answered. Your DID provider needs to allow early media.
+| Execute an audio before the call is answered. Your DID provider needs to allow early media.
 
 
 
@@ -294,7 +312,7 @@ Early media
 Mon-Fri
 -------
 
-| E.g, your company will only callback to the callee if the call was in between 09-12PM and 02:06PM MON-FRY, between this time interval the workaudio is going to be played and then callback to the callee. You can use multiple time intervals with | separated.
+| Example: if your company only callbacks to the callee if the call was placed in between 09:00-12:00 and 14:00-18:00 MON-FRY, between this time interval the workaudio is going to be played and then callback to the callee. You can use multiple time intervals separated by |.
 
 
 
@@ -304,7 +322,7 @@ Mon-Fri
 Sat
 ---
 
-| The same but for Sat.
+| The same but for Saturday.
 
 
 
@@ -314,7 +332,7 @@ Sat
 Sun
 ---
 
-| The same but for Sun.
+| The same but for Sunday.
 
 
 
@@ -324,7 +342,7 @@ Sun
 Work audio
 ----------
 
-| Audio to execute when a call is received at the time interval.
+| Audio that will be executed when a call is received at the time interval.
 
 
 
@@ -334,7 +352,7 @@ Work audio
 Out work audio
 --------------
 
-| Audio to execute when a call is received out of the time interval.
+| Audio that will be executed when a call is received out of the time interval.
 
 
 
@@ -344,7 +362,7 @@ Out work audio
 Record call
 -----------
 
-| We did not write the description to this field.
+| Record calls for this DID. Recorded regardless of destination.
 
 
 

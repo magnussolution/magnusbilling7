@@ -1076,6 +1076,19 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-08-26
+        if ($version == '7.4.6') {
+
+            $sql = "ALTER TABLE `pkg_queue_member` CHANGE `uniqueid` `id` INT(11) NOT NULL AUTO_INCREMENT;
+            ALTER TABLE `pkg_queue_member` ADD `uniqueid` INT(11) NULL DEFAULT NULL AFTER `id`;
+            UPDATE `pkg_queue_member` SET uniqueid=id;";
+            $this->executeDB($sql);
+
+            $version = '7.4.7';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

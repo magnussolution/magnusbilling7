@@ -4,7 +4,7 @@
 Value
 -----
 
-| We did not write the description to this field.
+| Value. You can see more details at the link `https://wiki.magnusbilling.org/en/source/config.html.  <https://wiki.magnusbilling.org/en/source/config.html.>`_.
 
 
 
@@ -14,7 +14,7 @@ Value
 Description
 -----------
 
-| We did not write the description to this field.
+| Description. You can see more details at the link `https://wiki.magnusbilling.org/en/source/config.html  <https://wiki.magnusbilling.org/en/source/config.html>`_.
 
 
 

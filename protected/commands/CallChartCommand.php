@@ -22,11 +22,16 @@ class CallChartCommand extends ConsoleCommand
 {
     private $totalCalls;
     private $totalUpCalls;
+    private $dids;
+    private $sips;
+    private $sipNames;
+    private $didsNumbers;
     public function run($args)
     {
 
         $this->debug = 0;
-
+        $this->isDid();
+        $this->isSIPCall();
         for (;;) {
             if (date('s') > 58) {
                 break;
@@ -87,12 +92,13 @@ class CallChartCommand extends ConsoleCommand
             if ($this->debug > 1) {
                 print_r($calls);
             }
-
-            $sql = array();
+            $config         = LoadConfig::getConfig();
+            $ip_tech_length = $config['global']['ip_tech_length'];
+            $sql            = array();
             foreach ($calls as $key => $call) {
-
-                $type    = '';
-                $channel = $call[0];
+                $modelDid = $modelSip = [];
+                $type     = '';
+                $channel  = $call[0];
 
                 $status = $call[4];
                 if ((preg_match("/Congestion/", $status) || preg_match("/Busy/", $status)) ||
@@ -130,17 +136,22 @@ class CallChartCommand extends ConsoleCommand
                         $id_user       = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
                         $trunk         = "Campaign " . $campaingName[1];
                     } else {
+
                         //check if is a DID call
-                        $modelDid = $this->isDid($ndiscado);
+                        if ($key = array_search($ndiscado, $this->didsNumbers)) {
+                            $modelDid = $this->dids[$key];
+
+                        }
                         //check if is a call to sip account
-                        $modelSip = Sip::model()->find('name = :key', array(':key' => $ndiscado));
+                        else if ($key = array_search($ndiscado, $this->sipNames)) {
+                            $modelSip = $this->sips[$key];
+                        }
 
-                        if (isset($modelDid[0]->id)) {
-                            echo "is a DID call\n";
+                        if (isset($modelDid['id'])) {
                             $type    = 'DID';
-                            $trunk   = 'DID Call ' . $modelDid[0]->idDid->did;
-                            $id_user = isset($modelDid[0]->id_user) ? $modelDid[0]->id_user : null;
-
+                            $trunk   = 'DID Call ' . $modelDid['did'];
+                            $id_user = isset($modelDid['id_user']) ? $modelDid['id_user'] : null;
+                            continue;
                             $didChannel = AsteriskAccess::getCoreShowChannel($channel);
                             $cdr        = time() - intval($didChannel['UniqueID']);
                             if ($des_chan != '<none>') {
@@ -149,37 +160,38 @@ class CallChartCommand extends ConsoleCommand
                                 }
                             }
 
-                        } else if (isset($modelSip->id)) {
-                            echo "is a SIP call\n";
+                        } else if (isset($modelSip['id'])) {
+                            echo "is a SIP call $ndiscado\n";
                             $type        = 'SIP';
                             $sip_account = $originate;
-                            $modelSip    = Sip::model()->find('name = :key', array(':key' => $sip_account));
                             $trunk       = Yii::t('zii', 'SIP Call');
-                            $id_user     = $modelSip->id_user;
+                            $id_user     = $modelSip['id_user'];
                             $is_sip_call = true;
                         } else {
+
                             //se é autenticado por techprefix
-                            $config = LoadConfig::getConfig();
-                            $tech   = substr($ndiscado, 0, $config['global']['ip_tech_length']);
 
                             //try get user
                             if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
-                                $modelSip = Sip::model()->find('name = :key',
-                                    array(
-                                        ':key' => $sip_account,
-                                    ));
-                            } else {
 
+                                if ($key = array_search($sip_account, $this->sipNames)) {
+                                    $modelSip = $this->sips[$key];
+                                } else {
+                                    continue;
+                                }
+
+                            } else if (strlen($ndiscado) > 15) {
+                                $tech     = substr($ndiscado, 0, $ip_tech_length);
                                 $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', array(':key' => $tech));
                             }
+
                             if (!count($modelSip)) {
 
                                 if (strlen($sip_account) > 3) {
                                     //echo "check per sip_account $originate\n";
-                                    $modelSip = Sip::model()->find('name = :key',
-                                        array(
-                                            ':key' => $originate,
-                                        ));
+                                    if ($key = array_search($originate, $this->sipNames)) {
+                                        $modelSip = $this->sips[$key];
+                                    }
 
                                 } else if (strlen($accountcode)) {
                                     //echo "check per accountcode $accountcode\n";
@@ -212,8 +224,8 @@ class CallChartCommand extends ConsoleCommand
 
                             $type        = 'pstn';
                             $trunk       = isset($trunk[1]) ? $trunk[1] : 0;
-                            $id_user     = $modelSip->id_user;
-                            $sip_account = $modelSip->name;
+                            $id_user     = $modelSip['id_user'];
+                            $sip_account = $modelSip['name'];
 
                         }
 
@@ -296,6 +308,12 @@ class CallChartCommand extends ConsoleCommand
                     }
                 } else {
                     echo "continue because last_app is not valid $last_app\n";
+                    continue;
+                }
+
+                if (!is_numeric($id_user)) {
+
+                    echo "continue becausse not found id_user\n";
                     continue;
                 }
 
@@ -661,11 +679,18 @@ class CallChartCommand extends ConsoleCommand
         }
     }
 
-    private function isDid($id_did)
+    private function isDid()
     {
-        return Diddestination::model()->findAll(array(
-            'join'      => 'JOIN pkg_did AS d ON t.id_did = d.id',
-            'condition' => "did = '" . $id_did . "'",
-        ));
+        $sql               = "SELECT did, id, id_user FROM pkg_did WHERE reserved = 1";
+        $this->dids        = Yii::app()->db->createCommand($sql)->queryAll();
+        $this->didsNumbers = array_column($this->dids, 'did');
+
+    }
+    private function isSIPCall()
+    {
+        $sql            = "SELECT name, id_user FROM pkg_sip";
+        $this->sips     = Yii::app()->db->createCommand($sql)->queryAll();
+        $this->sipNames = array_column($this->sips, 'name');
+
     }
 }

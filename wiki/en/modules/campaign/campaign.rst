@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that owns the campaign.
 
 
 
@@ -24,7 +24,7 @@ Plan
 Name
 ----
 
-| We did not write the description to this field.
+| Name of the campaign.
 
 
 
@@ -34,7 +34,7 @@ Name
 Status
 ------
 
-| We did not write the description to this field.
+| Status of the campaign.
 
 
 
@@ -54,7 +54,7 @@ Starting date
 Expiration date
 ---------------
 
-| The campaign will stop in this date
+| The campaign will stop in this date.
 
 
 
@@ -64,7 +64,7 @@ Expiration date
 Type
 ----
 
-| We did not write the description to this field.
+| Choose Voice or SMS. If you choose Voice you will need to import audio. If you choose SMS you will need to set the text in the SMS tab.
 
 
 
@@ -74,7 +74,7 @@ Type
 Audio
 -----
 
-| Available to massive call. The audio needs to be compatible with Asterisk. The recomended format is GSM or WWAV(8k hz mono).
+| Available to massive calling. The audio needs to be compatible with Asterisk. The recomended format is GSM or WAV(8k hz mono).
 
 
 
@@ -84,7 +84,7 @@ Audio
 Audio 2
 -------
 
-| If you use TTS, the name will be executed between Audio and Audio2
+| If you use TTS, the name will be executed between Audio and Audio2.
 
 
 
@@ -134,7 +134,7 @@ Number to forward
 Forward type
 ------------
 
-| We did not write the description to this field.
+| Choose the type of redirect. This will send the call to the chosen destination.
 
 
 
@@ -144,7 +144,7 @@ Forward type
 IVR
 ---
 
-| We did not write the description to this field.
+| Choose a IVR to send the call to. The IVR needs to belong to the owner of the campaign.
 
 
 
@@ -154,7 +154,7 @@ IVR
 Queue
 -----
 
-| We did not write the description to this field.
+| Choose a Queue to send the call to. The Queue needs to belong to the owner of the campaign.
 
 
 
@@ -164,7 +164,7 @@ Queue
 Sip user
 --------
 
-| We did not write the description to this field.
+| Choose a SIP Account to send the call to. The SIP Account needs to belong to the owner of the campaign.
 
 
 
@@ -174,7 +174,10 @@ Sip user
 Destination
 -----------
 
-| We did not write the description to this field.
+| Click for more details
+| There are two options available.
+|     *Group, the group name should be put here exactly as it is in the SIP Accounts that should receive the calls.
+|     *Personalized, you may execute any valid option via Asterisk's DIAL command. Example: SIP/sipaccount,45,tTr.
 
 
 
@@ -184,7 +187,7 @@ Destination
 Daily start time
 ----------------
 
-| We did not write the description to this field.
+| Time that the campaign will start sending.
 
 
 
@@ -194,7 +197,7 @@ Daily start time
 Daily stop time
 ---------------
 
-| We did not write the description to this field.
+| Time that the campaign will stop sending.
 
 
 
@@ -204,7 +207,7 @@ Daily stop time
 Monday
 ------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Mondays.
 
 
 
@@ -214,7 +217,7 @@ Monday
 Tuesday
 -------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Tuesdays.
 
 
 
@@ -224,7 +227,7 @@ Tuesday
 Wednesday
 ---------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Wednesdays.
 
 
 
@@ -234,7 +237,7 @@ Wednesday
 Thursday
 --------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Thursdays.
 
 
 
@@ -244,7 +247,7 @@ Thursday
 Friday
 ------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Fridays.
 
 
 
@@ -254,7 +257,7 @@ Friday
 Saturday
 --------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Saturdays.
 
 
 
@@ -264,7 +267,7 @@ Saturday
 Sunday
 ------
 
-| We did not write the description to this field.
+| Activating this option the system will send calls on Sundays.
 
 
 
@@ -275,6 +278,7 @@ Call limit
 ----------
 
 | How many numbers will be processed per minute?
+| This value will be divided by 60 seconds and the calls will be sent every minute at the same time.
 
 
 
@@ -284,7 +288,7 @@ Call limit
 Maximum call limit
 ------------------
 
-| We did not write the description to this field.
+| This is the maximum value that the client will be able to set. If you set it to 50 the user will be able to change to any value that is 50 or less than 50.
 
 
 
@@ -304,7 +308,7 @@ Audio duration
 Toggle max completed calls
 --------------------------
 
-| We did not write the description to this field.
+| If activated MagnusBilling will check how many calls were already made and have a duration total bigger than the audios. If the quantity is equal or bigger than the value set in the field, the campaign will be deactivated.
 
 
 
@@ -314,7 +318,7 @@ Toggle max completed calls
 Max completed calls
 -------------------
 
-| How many calls you want to send. You need the above parameters active to control it.
+| Maximum amount of complete calls. You need to activate the field above to use this.
 
 
 
@@ -324,7 +328,11 @@ Max completed calls
 Description or SMS Text
 -----------------------
 
-| Text to send to SMS. You can use %name% where you want to show the number name.
+| This field has different uses if the campaign is sending Voice or SMS.
+| Uses:
+|     * Voice: This field is simply a description of the campaign.
+|     * SMS: The text in here is going to be sent to the numbers. You may use the var %name% where you want to use the name of the customer. Example:
+|     Hello %name%
 
 
 
@@ -334,7 +342,8 @@ Description or SMS Text
 Audio 1 TTS
 -----------
 
-| We did not write the description to this field.
+| With this setting the system will generate the audio 1 for the campaign via TTS.
+| In order for this to work, you will need to set the TTS URL under Settings, Configuration, TTS URL.
 
 
 
@@ -344,7 +353,7 @@ Audio 1 TTS
 Audio 2 TTS
 -----------
 
-| We did not write the description to this field.
+| Same setting as the previous field but for audio 2. Keep in mind that in between audio 1 and 2, the TTS executes the name imported with the number.
 
 
 
@@ -354,7 +363,7 @@ Audio 2 TTS
 Record call
 -----------
 
-| We did not write the description to this field.
+| Record the calls of the campaign. They only will be recorded if the call is transferred.
 
 
 

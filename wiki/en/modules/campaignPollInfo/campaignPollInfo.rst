@@ -4,7 +4,7 @@
 Number
 ------
 
-| We did not write the description to this field.
+| Number of the person who voted.
 
 
 
@@ -14,7 +14,7 @@ Number
 Result
 ------
 
-| We did not write the description to this field.
+| Option chosen.
 
 
 

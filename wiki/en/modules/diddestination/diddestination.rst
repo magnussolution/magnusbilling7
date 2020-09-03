@@ -14,7 +14,7 @@ DID
 Username
 --------
 
-| We did not write the description to this field.
+| User that will be the owner of this DID.
 
 
 
@@ -24,7 +24,7 @@ Username
 Status
 ------
 
-| We did not write the description to this field.
+| Only active destinations will be used.
 
 
 
@@ -34,7 +34,7 @@ Status
 Priority
 --------
 
-| You can create 5 destinations to your DID. If a try to the priority 1 is made and a error is received, MagnusBilling will try to send a call to the next destination priority available. Only works with the "SIP call" type.
+| You can create up to 5 destinations for your DID. If a try is made and a error is received, MagnusBilling will try to send the call to the next destination priority available. Only works with the "SIP call" type.
 
 
 
@@ -44,7 +44,7 @@ Priority
 Type
 ----
 
-| We did not write the description to this field.
+| Type of destination.
 
 
 
@@ -54,7 +54,7 @@ Type
 Destination
 -----------
 
-| We did not write the description to this field.
+| Use this to take notes!
 
 
 
@@ -64,7 +64,7 @@ Destination
 IVR
 ---
 
-| We did not write the description to this field.
+| Select a IVR to send the call to. The IVR needs to belong to the owner of the DID aswell.
 
 
 
@@ -74,7 +74,7 @@ IVR
 Queue
 -----
 
-| We did not write the description to this field.
+| Select a Queue  to send the call to. The Queue needs to belong to the owner of the DID aswell.
 
 
 
@@ -84,7 +84,7 @@ Queue
 Sip user
 --------
 
-| We did not write the description to this field.
+| Select a SIP Account to send the call to. The SIP Account needs to belong to the owner of the DID aswell.
 
 
 
@@ -94,7 +94,26 @@ Sip user
 Context
 -------
 
-| We did not write the description to this field.
+| In this field you may use a context in the format supported by Asterisk
+| Example:
+|     
+| _X. => 1,Dial(SIP/sipaccount,45)
+| same => n,Goto(s-\${DIALSTATUS},1)
+| 
+| 
+| exten => s-NOANSWER,1,Hangup
+| exten => s-CONGESTION,1,Congestion
+| exten => s-CANCEL,1,Hangup
+| exten => s-BUSY,1,Busy
+| exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
+| exten => s-CHANUNAVAIL,2,Dial(SIP/sipaccount2,,T)
+| 
+| 
+| You should NOT set a name for the context because the name will be set automatically as [did-number-of-the-did]
+| 
+| You may take a look at the context at /etc/asterisk/extensions_magnus_did.conf
+|     
+|     
 
 
 

@@ -4,7 +4,8 @@
 Duration
 --------
 
-| We did not write the description to this field.
+| Sum of call minutes.
+| Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.
 
 
 
@@ -14,7 +15,7 @@ Duration
 Sell price
 ----------
 
-| We did not write the description to this field.
+| Sum of the sell price.
 
 
 
@@ -24,7 +25,7 @@ Sell price
 Buy price
 ---------
 
-| We did not write the description to this field.
+| Sum of the buy cost.
 
 
 
@@ -34,7 +35,7 @@ Buy price
 Markup
 ------
 
-| We did not write the description to this field.
+| Sum of the earnings.
 
 
 
@@ -44,7 +45,7 @@ Markup
 Answered calls
 --------------
 
-| We did not write the description to this field.
+| Call total.
 
 
 
@@ -54,7 +55,7 @@ Answered calls
 Failed calls
 ------------
 
-| We did not write the description to this field.
+| Failed call total.
 
 
 

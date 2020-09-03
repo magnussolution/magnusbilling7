@@ -22,6 +22,9 @@ Ext.define('MBilling.model.QueueMember', {
     extend: 'Ext.data.Model',
     idProperty: 'uniqueid',
     fields: [{
+        name: 'id',
+        type: 'int'
+    }, {
         name: 'uniqueid',
         type: 'int'
     }, {
