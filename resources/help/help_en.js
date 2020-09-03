@@ -253,21 +253,39 @@ Help.load({
     'did.record_call': `Record calls for this DID. Recorded regardless of destination.`,
     //DID DESTINATION
     'diddestination.id_did': `Select the DID that you want create new destination for.`,
-    'diddestination.id_user': ``,
-    'diddestination.activated': ``,
-    'diddestination.priority': `You can create 5 destinations to your DID. If a try to the priority 1 is made and a error is received, MagnusBilling will try to send a call to the next destination priority available. Only works with the "SIP call" type.`,
-    'diddestination.voip_call': ``,
-    'diddestination.destination': ``,
-    'diddestination.id_ivr': ``,
-    'diddestination.id_queue': ``,
-    'diddestination.id_sip': ``,
-    'diddestination.context': ``,
+    'diddestination.id_user': `User that will be the owner of this DID.`,
+    'diddestination.activated': `Only active destinations will be used.`,
+    'diddestination.priority': `You can create up to 5 destinations for your DID. If a try is made and a error is received, MagnusBilling will try to send the call to the next destination priority available. Only works with the "SIP call" type.`,
+    'diddestination.voip_call': `Type of destination.`,
+    'diddestination.destination': `Use this to take notes!`,
+    'diddestination.id_ivr': `Select a IVR to send the call to. The IVR needs to belong to the owner of the DID aswell.`,
+    'diddestination.id_queue': `Select a Queue  to send the call to. The Queue needs to belong to the owner of the DID aswell.`,
+    'diddestination.id_sip': `Select a SIP Account to send the call to. The SIP Account needs to belong to the owner of the DID aswell.`,
+    'diddestination.context': `In this field you may use a context in the format supported by Asterisk||Example:
+    
+_X. => 1,Dial(SIP/sipaccount,45)
+same => n,Goto(s-\${DIALSTATUS},1)
+
+
+exten => s-NOANSWER,1,Hangup
+exten => s-CONGESTION,1,Congestion
+exten => s-CANCEL,1,Hangup
+exten => s-BUSY,1,Busy
+exten => s-CHANUNAVAIL,1,SetCallerId(4545454545)
+exten => s-CHANUNAVAIL,2,Dial(SIP/sipaccount2,,T)
+
+
+You should NOT set a name for the context because the name will be set automatically as [did-number-of-the-did]
+
+You may take a look at the context at /etc/asterisk/extensions_magnus_did.conf
+    
+    `,
     //DIDS USE
-    'diduse.id_user': ``,
-    'diduse.id_did': ``,
-    'diduse.reservationdate': ``,
+    'diduse.id_user': `User that owns the DID.`,
+    'diduse.id_did': `DID Number`,
+    'diduse.reservationdate': `Day that the DID was reserved for the user.`,
     //FAIL2BAN
-    'firewall.ip': ``,
+    'firewall.ip': `IP Address.`,
     'firewall.action': ``,
     'firewall.description': ``,
     //TOKEN
