@@ -4,7 +4,7 @@
 Campaign
 --------
 
-| We did not write the description to this field.
+| Choose the campaign that will execute this poll.
 
 
 
@@ -14,7 +14,7 @@ Campaign
 Name
 ----
 
-| We did not write the description to this field.
+| Name of the poll. This name is seen on your end only.
 
 
 
@@ -24,7 +24,8 @@ Name
 Repeat if press invalid option
 ------------------------------
 
-| We did not write the description to this field.
+| How many times should MagnusBilling repeat the poll audio if the client didn't press any valid option.
+| You may check what are the options under the option tab.
 
 
 
@@ -34,7 +35,7 @@ Repeat if press invalid option
 Request authorization
 ---------------------
 
-| We did not write the description to this field.
+| In some cases, you will need to request for compliance in order to execute the poll. If that's the case, select Yes.
 
 
 
@@ -44,7 +45,7 @@ Request authorization
 Number for authorize
 --------------------
 
-| We did not write the description to this field.
+| Digit to authorize the excution of the poll.
 
 
 
@@ -54,7 +55,7 @@ Number for authorize
 Audio
 -----
 
-| We did not write the description to this field.
+| Audio file. Please use a GSM or WAV 8khz mono audio file.
 
 
 
@@ -64,7 +65,7 @@ Audio
 Description
 -----------
 
-| We did not write the description to this field.
+| Description of the poll.
 
 
 
@@ -74,7 +75,19 @@ Description
 Option 0
 --------
 
-| We did not write the description to this field.
+| Describe the option
+| Example poll:
+|     Who will you vote for?
+|     Press 1 for option one
+|     Press 2 for option two
+|     Press 3 for option three
+|     
+|     .. image:: ../img/poll_options.png
+   :scale: 100% 
+|     
+|     These settings will be useful when reading the poll summary.
+| 
+|     
 
 
 
@@ -84,7 +97,7 @@ Option 0
 Option 1
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -94,7 +107,7 @@ Option 1
 Option 2
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -104,7 +117,7 @@ Option 2
 Option 3
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -114,7 +127,7 @@ Option 3
 Option 4
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -124,7 +137,7 @@ Option 4
 Option 5
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -134,7 +147,7 @@ Option 5
 Option 6
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -144,7 +157,7 @@ Option 6
 Option 7
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -154,7 +167,7 @@ Option 7
 Option 8
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 
@@ -164,7 +177,7 @@ Option 8
 Option 9
 --------
 
-| We did not write the description to this field.
+| Describe the option. Read the description of option 0.
 
 
 

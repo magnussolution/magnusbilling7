@@ -44,7 +44,7 @@ class QueueMember extends Model
      */
     public function primaryKey()
     {
-        return 'uniqueid';
+        return 'id';
     }
 
     /**
@@ -53,7 +53,7 @@ class QueueMember extends Model
     public function rules()
     {
         return array(
-            array('interface, id_user', 'required'),
+            array('id,interface, id_user', 'required'),
             array('id_user, paused', 'numerical', 'integerOnly' => true),
             array('membername', 'length', 'max' => 40),
             array('queue_name, interface', 'length', 'max' => 128),
@@ -68,6 +68,12 @@ class QueueMember extends Model
         return array(
             'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
         );
+    }
+
+    public function beforeSave()
+    {
+        $this->uniqueid = $this->id;
+        return parent::beforeSave();
     }
 
     public function truncateQueueAgentStatus()

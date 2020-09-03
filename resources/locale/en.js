@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-08-27
+ * 2020-09-03
  */
 Locale.load({
     '': '',
@@ -922,7 +922,6 @@ Locale.load({
     'This is useful in order to get a different ratio of traffic between servers.': '',
     'This item already exists': '',
     'This option is exclusive to users': '',
-    'This option is only available to clients.': '',
     'This password in in use': '',
     'This service already is canceled': '',
     'This trunk name is in use by a SIP user': '',

@@ -25,8 +25,8 @@ Ext.define('MBilling.view.queueMember.List', {
     initComponent: function() {
         var me = this;
         me.columns = [{
-            header: t('Uniqueid'),
-            dataIndex: 'uniqueid',
+            header: t('ID'),
+            dataIndex: 'id',
             flex: 1,
             hidden: true,
             hideable: App.user.isAdmin

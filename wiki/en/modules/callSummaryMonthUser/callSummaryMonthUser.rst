@@ -4,7 +4,8 @@
 Duration
 --------
 
-| We did not write the description to this field.
+| Sum of call minutes.
+| Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.
 
 
 
@@ -14,7 +15,7 @@ Duration
 Markup
 ------
 
-| We did not write the description to this field.
+| Sum of the earnings.
 
 
 
@@ -24,7 +25,7 @@ Markup
 Total calls
 -----------
 
-| We did not write the description to this field.
+| Call total.
 
 
 

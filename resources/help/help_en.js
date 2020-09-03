@@ -64,7 +64,7 @@ Help.load({
     'callsummarycallshop.sumlucro': `Sum of the earnings.`,
     'callsummarycallshop.sumbuycost': `Sum of the buy cost.`,
     'callsummarycallshop.sumnbcall': `Call total.`,
-        //SUMMARY DAY AGENT
+    //SUMMARY DAY AGENT
     'callsummarydayagent.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarydayagent.sumsessionbill': `Sum of the sell price.`,
     'callsummarydayagent.sumbuycost': `Sum of the buy cost.`,
