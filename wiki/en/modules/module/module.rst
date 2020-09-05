@@ -4,7 +4,7 @@
 Text
 ----
 
-| We did not write the description to this field.
+| Menu name 
 
 
 
@@ -14,7 +14,7 @@ Text
 IconCls
 -------
 
-| We did not write the description to this field.
+| Icon, default font "awesome V4".
 
 
 
@@ -24,7 +24,7 @@ IconCls
 Main menu
 ---------
 
-| We did not write the description to this field.
+| Menu which this menu belongs. In case the menu is blank, it's a main menu
 
 
 
@@ -34,7 +34,7 @@ Main menu
 Order
 -----
 
-| We did not write the description to this field.
+| Order that the menu will be shown in the menu
 
 
 

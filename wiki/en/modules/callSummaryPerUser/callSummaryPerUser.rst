@@ -25,7 +25,7 @@ Markup
 Answered calls
 --------------
 
-| Call total.
+| Total of calls.
 
 
 
@@ -35,7 +35,7 @@ Answered calls
 Failed calls
 ------------
 
-| Failed call total.
+| Total of calls that failed.
 
 
 

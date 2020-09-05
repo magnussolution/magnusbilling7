@@ -4,7 +4,7 @@
 Name
 ----
 
-| We did not write the description to this field.
+| Name of the IVR
 
 
 
@@ -14,7 +14,7 @@ Name
 Username
 --------
 
-| We did not write the description to this field.
+| User who owns the IVR
 
 
 
@@ -24,7 +24,13 @@ Username
 MonFri intervals
 ----------------
 
-| Time to start weekly work interval
+| Weekly interval of attendance, can be configurated with multiples shifts.
+| Example:
+| Supposing that the attendance hours are 08h to 12h and 14h to 19h. In this case the rule would be
+| 
+| 08:00-12:00|14:00-19:00
+| 
+| 
 
 
 
@@ -34,7 +40,12 @@ MonFri intervals
 Saturday intervals
 ------------------
 
-| We did not write the description to this field.
+| Interval of attendance in saturdays, can be configurated with multiple shifts
+| Example:
+| 
+| Supposing that the attendance hours in the saturdays are 08h to 13h. In this case the rule would be
+|     
+| 08:00-13:00
 
 
 
@@ -44,7 +55,14 @@ Saturday intervals
 Sunday intervals
 ----------------
 
-| We did not write the description to this field.
+| Interval of attendance in sundays, can be configurated with multiple shifts
+| Example:
+|     
+| Supposing that theres no attendance hours in the sundays. In this case the rule would be
+|     
+| 00:00-00:00
+|     
+| 
 
 
 
@@ -54,7 +72,7 @@ Sunday intervals
 Work audio
 ----------
 
-| Audio to execute when a call is received in between work interval
+| Audio to play in the attendance hours.
 
 
 
@@ -64,7 +82,7 @@ Work audio
 Out work audio
 --------------
 
-| Audio to execute when a call is received out of the work interval
+| Audio to play when it's not attendance hours
 
 
 
@@ -74,7 +92,7 @@ Out work audio
 Option 0
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 0 is pressed. Let it in blank if don't want any action
 
 
 
@@ -84,7 +102,7 @@ Option 0
 Option 1
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 1 is pressed. Let it in blank if don't want any action
 
 
 
@@ -94,7 +112,7 @@ Option 1
 Option 2
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 2 is pressed. Let it in blank if don't want any action
 
 
 
@@ -104,7 +122,7 @@ Option 2
 Option 3
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 3 is pressed. Let it in blank if don't want any action
 
 
 
@@ -114,7 +132,7 @@ Option 3
 Option 4
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 4 is pressed. Let it in blank if don't want any action
 
 
 
@@ -124,7 +142,7 @@ Option 4
 Option 5
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 5 is pressed. Let it in blank if don't want any action
 
 
 
@@ -134,7 +152,7 @@ Option 5
 Option 6
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 6 is pressed. Let it in blank if don't want any action
 
 
 
@@ -144,7 +162,7 @@ Option 6
 Option 7
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 7 is pressed. Let it in blank if don't want any action
 
 
 
@@ -154,7 +172,7 @@ Option 7
 Option 8
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 8 is pressed. Let it in blank if don't want any action
 
 
 
@@ -164,7 +182,7 @@ Option 8
 Option 9
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option  is pressed. Let it in blank if don't want any action
 
 
 
@@ -174,7 +192,7 @@ Option 9
 Default option
 --------------
 
-| We did not write the description to this field.
+| Select the destiny if none of the options was selected.
 
 
 
@@ -184,7 +202,7 @@ Default option
 Enable known SIP user
 ---------------------
 
-| Makes the caller able to type the SIP account he wants to call directly. E.g, Press 1 to xxx, Press 2 to yyy or type the SIP account.
+| Activating this option will be able to type an SIP account to call it directly.
 
 
 
@@ -194,7 +212,7 @@ Enable known SIP user
 Option 0
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 0 is pressed. Let it in blank if don't want any action
 
 
 
@@ -204,7 +222,7 @@ Option 0
 Option 1
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 1 is pressed. Let it in blank if don't want any action
 
 
 
@@ -214,7 +232,7 @@ Option 1
 Option 2
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 2 is pressed. Let it in blank if don't want any action
 
 
 
@@ -224,7 +242,7 @@ Option 2
 Option 3
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 3 is pressed. Let it in blank if don't want any action
 
 
 
@@ -234,7 +252,7 @@ Option 3
 Option 4
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 4 is pressed. Let it in blank if don't want any action
 
 
 
@@ -244,7 +262,7 @@ Option 4
 Option 5
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 5 is pressed. Let it in blank if don't want any action
 
 
 
@@ -254,7 +272,7 @@ Option 5
 Option 6
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 6 is pressed. Let it in blank if don't want any action
 
 
 
@@ -264,7 +282,7 @@ Option 6
 Option 7
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 7 is pressed. Let it in blank if don't want any action
 
 
 
@@ -274,7 +292,7 @@ Option 7
 Option 8
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 8 is pressed. Let it in blank if don't want any action
 
 
 
@@ -284,7 +302,7 @@ Option 8
 Option 9
 --------
 
-| We did not write the description to this field.
+| Select the destiny if the option 9 is pressed. Let it in blank if don't want any action
 
 
 
@@ -294,7 +312,7 @@ Option 9
 Default option
 --------------
 
-| We did not write the description to this field.
+| Select the destiny if none of the options was selected.
 
 
 

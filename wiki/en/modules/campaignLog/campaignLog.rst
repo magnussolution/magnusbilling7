@@ -4,7 +4,7 @@
 Total
 -----
 
-| Call total.
+| Total of calls.
 
 
 

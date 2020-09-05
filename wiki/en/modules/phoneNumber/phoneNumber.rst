@@ -4,7 +4,7 @@
 Phonebook
 ---------
 
-| We did not write the description to this field.
+| Phonebook that this number belongs to.
 
 
 
@@ -24,7 +24,7 @@ Number
 Name
 ----
 
-| Used to TTS and SMS
+| Number owner name, used for TTS or SMS
 
 
 
@@ -34,7 +34,7 @@ Name
 City
 ----
 
-| We did not write the description to this field.
+| Client city, not required field.
 
 
 
@@ -54,7 +54,8 @@ Status
 Description
 -----------
 
-| We did not write the description to this field.
+| Phonebook description, personal control only
+| When used for survey, will be saved here what the number that the client typed.
 
 
 

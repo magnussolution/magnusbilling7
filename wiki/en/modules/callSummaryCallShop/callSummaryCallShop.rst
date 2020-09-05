@@ -44,7 +44,7 @@ Buy price
 Total calls
 -----------
 
-| Call total.
+| Total of calls.
 
 
 

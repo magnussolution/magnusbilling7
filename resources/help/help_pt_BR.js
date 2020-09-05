@@ -358,28 +358,26 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
     'diduse.reservationdate': `Dia que o DID foi reservado para o usuário.`,
     //FAIL2BAN
     'firewall.ip': `IP.`,
-    'firewall.action': `Com está opção em SIM, o ip será colocado na lista de ip-blacklist do fail2ban e ficará bloqueado para sempre.||A opção NÃO vai bloquear o ip momentaneamente conforme os parâmetros no arquivo /etc/fail2ba/jail.local.
+    'firewall.action': `Com está opção em SIM, o IP será colocado na lista de ip-blacklist do fail2ban e ficará bloqueado para sempre.||A opção NÃO vai bloquear o IP momentaneamente conforme os parâmetros no arquivo /etc/fail2ba/jail.local.
 
     Por padrão o IP ficará bloqueado por 10 minutos.`,
     'firewall.description': `Estas informaçōes são capturadas do arquivo de log /var/log/fail2ban.log||É possível acompanhar esse LOG com o comando 
 
 
-tail -f /var/log/fail2ban.log
-
-    .`,
+tail -f /var/log/fail2ban.log.`,
     //TOKEN
     'gauthenticator.username': `Usuário que deseja ativar TOKEN.`,
-    'gauthenticator.googleAuthenticator_enable': `Após ativar o TOKEN para o usuário, somente será possível logar usando o TOKEN gerado pela APP do google||Após ativar o TOKEN, no próximo login do usuário será solicitado que escaneie o QR CODE conforme a imagem abaixo
+    'gauthenticator.googleAuthenticator_enable': `Após ativar o TOKEN para o usuário, somente será possível logar usando o TOKEN gerado pelo APP do Google Aunthenticator.||Após ativar o TOKEN, no próximo login do usuário será solicitado que escaneie o QR CODE conforme a imagem abaixo
 
 .. image:: ../img/token.png
     :scale: 100% 
 
-Para escanear o código é necessário instalar a APP Google authenticator, esta APP está disponível na loja de aplicativos IOS e Android.
+Para escanear o código é necessário instalar a APP Google authenticator, este APP está disponível para download na loja de aplicativos IOS e Android.
 
 É importante guardar o código manual mostrado na imagem, pois será com este código que será possível ativar o token em outro celular caso necessário.
 
 
-Ativando o token para o usuário somente será possível logar no painel ou desativar o token com o token gerado pela APP Google Authenticator.`,
+Com o token do APP Google Aunthenticator somente será possível logar no painel ou desativar a opção de token.`,
     'gauthenticator.code': `O código é necessário para poder desativar o TOKEN. Caso não tiver mais o código, então será necessário desativar pelo banco de dados.`,
     'gauthenticator.google_authenticator_key': `Está KEY é necessário para poder ativar o TOKEN em outro celular.`,
     //GROUPMODULE
@@ -420,14 +418,14 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'ivr.id_user': `Usuário dono da URA.`,
     'ivr.monFriStart': `Intervalo de atendimento de segunda a sexta, pode ser configurado múltiplos horarios||Exemplo:
 
-Digamos que o horário de atendimento é de 08h as 12h e das 14h às 19h. Neste caso a regra ficaria
+Digamos que o horário de atendimento é de 08h às 12h e das 14h às 19h. Neste caso a regra ficaria
 
 08:00-12:00|14:00-19:00
 
 .`,
     'ivr.satStart': `Intervalo de atendimento aos sábados, pode ser configurado múltiplos horários||Exemplo:
 
-Digamos que o horário de atendimento aos sábado é dia de 08h às 13h. Neste caso a regra ficaria
+Digamos que o horário de atendimento aos sábados é dia de 08h às 13h. Neste caso a regra ficaria
 
 08:00-13:00
 
@@ -440,7 +438,7 @@ Digamos que o não existe horário de atendimento no domingo. Neste caso a regra
 
 .`,
     'ivr.workaudio': `Áudio para executar dentro dos horários de atendimento.`,
-    'ivr.noworkaudio': `Áudio para executar fora de atendimento.`,
+    'ivr.noworkaudio': `Áudio para executar fora dos horários de atendimento.`,
     'ivr.option_0': `Selecione o destino caso for digitado a opção 0. Deixe em branco se não desejar nenhuma ação.`,
     'ivr.option_1': `Selecione o destino caso for digitado a opção 1. Deixe em branco se não desejar nenhuma ação.`,
     'ivr.option_2': `Selecione o destino caso for digitado a opção 2. Deixe em branco se não desejar nenhuma ação.`,

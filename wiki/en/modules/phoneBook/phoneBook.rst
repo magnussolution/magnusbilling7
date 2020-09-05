@@ -4,7 +4,7 @@
 Name
 ----
 
-| We did not write the description to this field.
+| Phonebook name.
 
 
 
@@ -14,7 +14,7 @@ Name
 Status
 ------
 
-| We did not write the description to this field.
+| Phonebook status.
 
 
 
@@ -24,7 +24,7 @@ Status
 Description
 -----------
 
-| We did not write the description to this field.
+| Phonebook description, personal control only.
 
 
 

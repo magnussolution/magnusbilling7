@@ -4,7 +4,7 @@
 Show name
 ---------
 
-| Name to show to user in the Buy Credit option.
+| The name that is shown in the client panel.
 
 
 
@@ -14,7 +14,7 @@ Show name
 Username
 --------
 
-| We did not write the description to this field.
+| The user payment method. You can create payment methods for administrators or resellers. 
 
 
 
@@ -24,7 +24,7 @@ Username
 Country
 -------
 
-| We did not write the description to this field.
+| Only for reference.
 
 
 
@@ -34,7 +34,7 @@ Country
 Active
 ------
 
-| Activate this payment gateway to users?
+| Activate this if you want to be avaible for the clients.
 
 
 
@@ -44,7 +44,7 @@ Active
 Min amount
 ----------
 
-| We did not write the description to this field.
+| Mininum accepted value.
 
 
 
@@ -54,7 +54,7 @@ Min amount
 Max amount
 ----------
 
-| We did not write the description to this field.
+| Maximun accepted value.
 
 
 
@@ -64,7 +64,7 @@ Max amount
 Username
 --------
 
-| We did not write the description to this field.
+| User payment method
 
 
 
@@ -74,7 +74,7 @@ Username
 URL
 ---
 
-| We did not write the description to this field.
+| Payment method URL, in the most cases the methods this URL is already preconfigurated.
 
 
 
@@ -84,7 +84,7 @@ URL
 Discount fee
 ------------
 
-| Discount the Paypal fee from the paid amount.
+| Payment method fee.
 
 
 
@@ -94,7 +94,7 @@ Discount fee
 TOKEN
 -----
 
-| We did not write the description to this field.
+| Payment method TOKEN
 
 
 
@@ -104,7 +104,7 @@ TOKEN
 P2P CustomerSiteID
 ------------------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 
@@ -114,7 +114,7 @@ P2P CustomerSiteID
 P2P KeyID
 ---------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 
@@ -124,7 +124,7 @@ P2P KeyID
 P2P Passphrase
 --------------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 
@@ -134,7 +134,7 @@ P2P Passphrase
 P2P RecipientKeyID
 ------------------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 
@@ -144,7 +144,7 @@ P2P RecipientKeyID
 P2P Tax Amount
 --------------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 
@@ -154,7 +154,7 @@ P2P Tax Amount
 Client id
 ---------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 
@@ -164,7 +164,7 @@ Client id
 Client secret
 -------------
 
-| We did not write the description to this field.
+| This field is exclusive for some payments methods.
 
 
 

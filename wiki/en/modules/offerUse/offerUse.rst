@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that made  the call.
 
 
 
@@ -14,7 +14,7 @@ Username
 Offer
 -----
 
-| We did not write the description to this field.
+| Name of the offer.
 
 
 
@@ -24,7 +24,7 @@ Offer
 Month payed
 -----------
 
-| We did not write the description to this field.
+| Paid months.
 
 
 
@@ -34,7 +34,7 @@ Month payed
 Reservation date
 ----------------
 
-| We did not write the description to this field.
+| Date and hour that the offer was canceled.
 
 
 

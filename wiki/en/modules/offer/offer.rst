@@ -4,7 +4,7 @@
 Name
 ----
 
-| We did not write the description to this field.
+| Offer name
 
 
 
@@ -14,7 +14,7 @@ Name
 Package type
 ------------
 
-| We did not write the description to this field.
+| Type of package, there's 3 types. Unlimited calls, free calls or free seconds. 
 
 
 
@@ -24,7 +24,11 @@ Package type
 Free time to call
 -----------------
 
-| We did not write the description to this field.
+| In this field is where the package avaible quantity configuration will occur.
+| Example:
+| * Unlimited calls: In this option the field is blank, because will be allowed to call without any control.
+| * Free calls: Configure the amount of free calls that you want to give.
+| * Free seconds: Configure the amount of seconds that you want to allow the client to call.
 
 
 
@@ -34,7 +38,10 @@ Free time to call
 Billing type
 ------------
 
-| We did not write the description to this field.
+| This is the period that the package will be calculated.
+|  Look the description:
+| * Monthly: The system will verify the day of the plan activation + 30 days that the client reached the package limit.
+| * Weekly: The system will verify the day of the plan activation + 7 days that the client reached the package limit.
 
 
 
@@ -44,7 +51,17 @@ Billing type
 Price
 -----
 
-| We did not write the description to this field.
+| Price that will be charged monthly to the client.
+| If on the expiry day the client don't have the sufficient funds to pay the package // NEED TO FINISH "dar baixa?" //
+|     
+| In the settings menu, ajusts, exist one option named Package Offer Notification, this value`
+| 
+| 
+|                         //NEED TO FINISH UPPER LINE "offer.price"
+| 
+| 
+|     //OFFER CDR
+|     'offercdr.id_user': `User that made the call.
 
 
 

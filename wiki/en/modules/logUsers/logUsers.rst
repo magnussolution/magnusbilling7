@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that executed the action.
 
 
 
@@ -14,7 +14,7 @@ Username
 Action
 ------
 
-| We did not write the description to this field.
+| Type of action.
 
 
 
@@ -24,7 +24,7 @@ Action
 IP
 --
 
-| We did not write the description to this field.
+| IP utilized for the action.
 
 
 
@@ -34,7 +34,7 @@ IP
 Description
 -----------
 
-| We did not write the description to this field.
+| What was done, normally is in JSON.
 
 
 

@@ -63,58 +63,58 @@ Help.load({
     'callsummarycallshop.sumprice': `Total value.`,
     'callsummarycallshop.sumlucro': `Sum of the earnings.`,
     'callsummarycallshop.sumbuycost': `Sum of the buy cost.`,
-    'callsummarycallshop.sumnbcall': `Call total.`,
+    'callsummarycallshop.sumnbcall': `Total of calls.`,
     //SUMMARY DAY AGENT
     'callsummarydayagent.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarydayagent.sumsessionbill': `Sum of the sell price.`,
     'callsummarydayagent.sumbuycost': `Sum of the buy cost.`,
     'callsummarydayagent.sumlucro': `Sum of the earnings.`,
-    'callsummarydayagent.sumnbcall': `Call total.`,
+    'callsummarydayagent.sumnbcall': `Total of calls.`,
     //SUMMARY DAY TRUNK
     'callsummarydaytrunk.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarydaytrunk.sumsessionbill': `Sum of the sell price.`,
     'callsummarydaytrunk.sumbuycost': `Sum of the buy cost.`,
     'callsummarydaytrunk.sumlucro': `Sum of the earnings.`,
-    'callsummarydaytrunk.sumnbcall': `Call total.`,
+    'callsummarydaytrunk.sumnbcall': `Total of calls.`,
     //SUMMARY DAY USER
     'callsummarydayuser.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarydayuser.sumlucro': `Sum of the earnings.`,
-    'callsummarydayuser.sumnbcall': `Call total.`,
+    'callsummarydayuser.sumnbcall': `Total of calls.`,
     //SUMMARY MONTH TRUNK
     'callsummarymonthtrunk.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarymonthtrunk.sumsessionbill': `Sum of the sell price.`,
     'callsummarymonthtrunk.sumbuycost': `Sum of the buy cost.`,
     'callsummarymonthtrunk.sumlucro': `Sum of the earnings.`,
-    'callsummarymonthtrunk.sumnbcall': `Call total.`,
+    'callsummarymonthtrunk.sumnbcall': `Total of calls.`,
     //SUMMARY MONTH USER
     'callsummarymonthuser.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarymonthuser.sumlucro': `Sum of the earnings.`,
-    'callsummarymonthuser.sumnbcall': `Call total.`,
+    'callsummarymonthuser.sumnbcall': `Total of calls.`,
     //SUMMARY PER DAY
     'callsummaryperday.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummaryperday.sumsessionbill': `Sum of the sell price.`,
     'callsummaryperday.sumbuycost': `Sum of the buy cost.`,
     'callsummaryperday.sumlucro': `Sum of the earnings.`,
-    'callsummaryperday.sumnbcall': `Call total.`,
-    'callsummaryperday.sumnbcallfail': `Failed call total.`,
+    'callsummaryperday.sumnbcall': `Total of calls.`,
+    'callsummaryperday.sumnbcallfail': `Total of calls that failed.`,
     //SUMMARY PER MONTH
     'callsummarypermonth.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarypermonth.sumsessionbill': `Sum of the sell price.`,
     'callsummarypermonth.sumbuycost': `Sum of the buy cost.`,
     'callsummarypermonth.sumlucro': `Sum of the earnings.`,
-    'callsummarypermonth.sumnbcall': `Call total.`,
+    'callsummarypermonth.sumnbcall': `Total of calls.`,
     //SUMMARY PER TRUNK
     'callsummarypertrunk.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummarypertrunk.sumsessionbill': `Sum of the sell price.`,
     'callsummarypertrunk.sumbuycost': `Sum of the buy cost.`,
     'callsummarypertrunk.sumlucro': `Sum of the earnings.`,
-    'callsummarypertrunk.sumnbcall': `Call total.`,
-    'callsummarypertrunk.sumnbcallfail': `Failed call total.`,
+    'callsummarypertrunk.sumnbcall': `Total of calls.`,
+    'callsummarypertrunk.sumnbcallfail': `Total of calls that failed.`,
     //SUMMARY PER USER
     'callsummaryperuser.sumsessiontime': `Sum of call minutes.||Its possible to use filters like showing only the last few days of the week or a specific reseller. This summary will only show the data related to the filter made.`,
     'callsummaryperuser.sumlucro': `Sum of the earnings.`,
-    'callsummaryperuser.sumnbcall': `Call total.`,
-    'callsummaryperuser.sumnbcallfail': `Failed call total.`,
+    'callsummaryperuser.sumnbcall': `Total of calls.`,
+    'callsummaryperuser.sumnbcallfail': `Total of calls that failed.`,
     //CAMPAIGNS
     'campaign.id_user': `User that owns the campaign.`,
     'campaign.id_plan': `What plan do you want to use to bill this campaign?`,
@@ -160,7 +160,7 @@ Help.load({
     //CAMPAIGNS DASHBOARD
     'campaigndashboard.name': `Name of the campaign.`,
     //CALL PER MINUTES
-    'campaignlog.total': `Call total.`,
+    'campaignlog.total': `Total of calls.`,
     //POLLS
     'campaignpoll.id_campaign': `Choose the campaign that will execute this poll.`,
     'campaignpoll.name': `Name of the poll. This name is seen on your end only.`,
@@ -286,128 +286,180 @@ You may take a look at the context at /etc/asterisk/extensions_magnus_did.conf
     'diduse.reservationdate': `Day that the DID was reserved for the user.`,
     //FAIL2BAN
     'firewall.ip': `IP Address.`,
-    'firewall.action': ``,
-    'firewall.description': ``,
+    'firewall.action': `With this option marked on YES, the IP will be placed on the ip-blacklist list of fail2ban and will be blocked forever. ||The option will NOT block the IP momentarily according the parameters of the file /etc/fail2ba/jail.local.
+    
+    By default the IP is going to stay blocked for 10 minutes`,
+    'firewall.description': `These informations are captured from the log file /var/log/fail2ban.log || It's possible to track this LOG with the command 
+    
+    tail -f /var/log/fail2ban.log`,
     //TOKEN
-    'gauthenticator.username': ``,
-    'gauthenticator.googleAuthenticator_enable': `Enable/Disable Google Authenticator.`,
-    'gauthenticator.code': ``,
-    'gauthenticator.google_authenticator_key': ``,
+    'gauthenticator.username': `The user that wants to activate TOKEN`,
+    'gauthenticator.googleAuthenticator_enable': `After activating the TOKEN for the user, login will be only possible using the generated TOKEN by the Google Aunthenticator APP.||After activating the TOKEN, in the next user login will be requested to scan the QR CODE as shown in the image below
+    
+.. image:: ../img/token.png
+    :scale: 100% 
+    
+To scan the code will be necessary to install the Google Aunthenticator APP, this APP wil be avaible to download in the app store for IOS and Android.
+
+It's important to save the manual code shown in the image, in case if you ever need to activate the token in another cellphone the code will be necessary.
+
+
+With the token of Google Aunthentitor will be only possible to login into the panel or deactivate the token function`,
+    'gauthenticator.code': `The code will be necessary to deactivate the TOKEN. In case if you don't have the code anymore, will be necessary to deactivate via the database.`,
+    'gauthenticator.google_authenticator_key': `This KEY will be necessary to activate the TOKEN in a different cellphone`,
     //GROUPMODULE
-    'groupmodule.id_group': ``,
-    'groupmodule.id_module': ``,
+    'groupmodule.id_group': `User group`,
+    'groupmodule.id_module': `Menu`,
     //GROUP USERS
-    'groupuser.name': ``,
+    'groupuser.name': `Name of the user group`,
     //GROUP TO ADMINS
-    'groupusergroup.name': ``,
-    'groupusergroup.user_prefix': ``,
-    'groupusergroup.id_group': ``,
+    'groupusergroup.name': `Group name`,
+    'groupusergroup.user_prefix': `Filling this field, all users created by an administrator that uses this group will be initialized with this prefix.`,
+    'groupusergroup.id_group': `Which client groups will the administrator group have access.|| When an administrator that belongs to this group login, only the administrator will see the client data of the selected groups`,
     //IAX USERS
-    'iax.id_user': ``,
-    'iax.username': ``,
-    'iax.secret': ``,
-    'iax.callerid': ``,
-    'iax.disallow': ``,
-    'iax.allow': ``,
-    'iax.host': ``,
-    'iax.nat': ``,
-    'iax.context': ``,
-    'iax.qualify': ``,
-    'iax.dtmfmode': ``,
-    'iax.insecure': ``,
-    'iax.type': ``,
-    'iax.calllimit': ``,
+    'iax.id_user': `The user whose IAX account will belong`,
+    'iax.username': `The user that will be used to authenticate in the softphone`,
+    'iax.secret': `The Password that will be used to authenticate in the softphone`,
+    'iax.callerid': `This is the CallerID that will be shown in their destination, in external calls the provider will need to permit CLI to be correctly identified in their destination.`,
+    'iax.disallow': `In this option will be possible to deactivate codecs. To deactivate all the codecs and letting avaible to the user only what you select below, use "Use all"`,
+    'iax.allow': `Codecs that will be accepted.`,
+    'iax.host': `"Dynamic" is an option that will let the user register his account in any IP. If you want to to authenticate the user by their IP, fill here the IP of the client, let the password field blank and put "insecure" for the port/invite in the tab "Additional Information"`,
+    'iax.nat': `The client is behind NAT? Click here for more information|https://www.voip-info.org/asterisk-sip-nat/.`,
+    'iax.context': `This is the context that the call will be processed, by default is set to "billing". Only alter if you have knowledge of Asterisk.`,
+    'iax.qualify': `Sent the "OPTION" package to verify if the user is online.||Sintaxe:
+    
+qualify = xxx | no | yes
+    
+Where the XXX is the number of milliseconds used. If "yes", the time configurated in sip.conf is used, by default is set to 2 seconds.
+
+If you activate "qualify", the Asterisk will sent the command "OPTION" to SIP peer regulary to verify if the device is still online.
+If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.
+
+This status can be verified with the function "sip show peer XXXX", this funcition will only provide status informations to the SIP peer that have "qualify = yes".`,
+    'iax.dtmfmode': `Type of DTMF. Click here for more informations|https://www.voip-info.org/asterisk-sip-dtmfmode/.`,
+    'iax.insecure': `If the host is set to "dynamic", this option will need to be set to "no". To authenticate via IP and alter to port. Click here for more information|https://www.voip-info.org/asterisk-sip-insecure/.`,
+    'iax.type': `Default type is "friend", in other words they can make and receive calls. Click here for more informations|https://www.voip-info.org/asterisk-sip-type/.`,
+    'iax.calllimit': `Total of simultaneous calls allowed for this IAX account.`,
     //IVRS
-    'ivr.name': ``,
-    'ivr.id_user': ``,
-    'ivr.monFriStart': `Time to start weekly work interval`,
-    'ivr.satStart': ``,
-    'ivr.sunStart': ``,
-    'ivr.workaudio': `Audio to execute when a call is received in between work interval`,
-    'ivr.noworkaudio': `Audio to execute when a call is received out of the work interval`,
-    'ivr.option_0': ``,
-    'ivr.option_1': ``,
-    'ivr.option_2': ``,
-    'ivr.option_3': ``,
-    'ivr.option_4': ``,
-    'ivr.option_5': ``,
-    'ivr.option_6': ``,
-    'ivr.option_7': ``,
-    'ivr.option_8': ``,
-    'ivr.option_9': ``,
-    'ivr.option_10': ``,
-    'ivr.direct_extension': `Makes the caller able to type the SIP account he wants to call directly. E.g, Press 1 to xxx, Press 2 to yyy or type the SIP account.`,
-    'ivr.option_out_0': ``,
-    'ivr.option_out_1': ``,
-    'ivr.option_out_2': ``,
-    'ivr.option_out_3': ``,
-    'ivr.option_out_4': ``,
-    'ivr.option_out_5': ``,
-    'ivr.option_out_6': ``,
-    'ivr.option_out_7': ``,
-    'ivr.option_out_8': ``,
-    'ivr.option_out_9': ``,
-    'ivr.option_out_10': ``,
+    'ivr.name': `Name of the IVR`,
+    'ivr.id_user': `User who owns the IVR`,
+    'ivr.monFriStart': `Weekly interval of attendance, can be configurated with multiples shifts.||Example:
+Supposing that the attendance hours are 08h to 12h and 14h to 19h. In this case the rule would be
+
+08:00-12:00|14:00-19:00
+
+`,
+    'ivr.satStart': `Interval of attendance in saturdays, can be configurated with multiple shifts||Example:
+
+Supposing that the attendance hours in the saturdays are 08h to 13h. In this case the rule would be
+    
+08:00-13:00`,
+    'ivr.sunStart': `Interval of attendance in sundays, can be configurated with multiple shifts||Example:
+    
+Supposing that theres no attendance hours in the sundays. In this case the rule would be
+    
+00:00-00:00
+    
+`,
+    'ivr.workaudio': `Audio to play in the attendance hours.`,
+    'ivr.noworkaudio': `Audio to play when it's not attendance hours`,
+    'ivr.option_0': `Select the destiny if the option 0 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_1': `Select the destiny if the option 1 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_2': `Select the destiny if the option 2 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_3': `Select the destiny if the option 3 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_4': `Select the destiny if the option 4 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_5': `Select the destiny if the option 5 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_6': `Select the destiny if the option 6 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_7': `Select the destiny if the option 7 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_8': `Select the destiny if the option 8 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_9': `Select the destiny if the option  is pressed. Let it in blank if don't want any action`,
+    'ivr.option_10': `Select the destiny if none of the options was selected.`,
+    'ivr.direct_extension': `Activating this option will be able to type an SIP account to call it directly.`,
+    'ivr.option_out_0': `Select the destiny if the option 0 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_1': `Select the destiny if the option 1 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_2': `Select the destiny if the option 2 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_3': `Select the destiny if the option 3 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_4': `Select the destiny if the option 4 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_5': `Select the destiny if the option 5 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_6': `Select the destiny if the option 6 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_7': `Select the destiny if the option 7 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_8': `Select the destiny if the option 8 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_9': `Select the destiny if the option 9 is pressed. Let it in blank if don't want any action`,
+    'ivr.option_out_10': `Select the destiny if none of the options was selected.`,
     //LOG USERS
-    'logusers.id_user': ``,
-    'logusers.id_log_actions': ``,
-    'logusers.ip': ``,
-    'logusers.description': ``,
+    'logusers.id_user': `User that executed the action.`,
+    'logusers.id_log_actions': `Type of action.`,
+    'logusers.ip': `IP utilized for the action.`,
+    'logusers.description': `What was done, normally is in JSON.`,
     //PAYMENT METHODS
-    'methodpay.show_name': `Name to show to user in the Buy Credit option.`,
-    'methodpay.id_user': ``,
-    'methodpay.country': ``,
-    'methodpay.active': `Activate this payment gateway to users?`,
-    'methodpay.min': ``,
-    'methodpay.max': ``,
-    'methodpay.username': ``,
-    'methodpay.url': ``,
-    'methodpay.fee': `Discount the Paypal fee from the paid amount.`,
-    'methodpay.pagseguro_TOKEN': ``,
-    'methodpay.P2P_CustomerSiteID': ``,
-    'methodpay.P2P_KeyID': ``,
-    'methodpay.P2P_Passphrase': ``,
-    'methodpay.P2P_RecipientKeyID': ``,
-    'methodpay.P2P_tax_amount': ``,
-    'methodpay.client_id': ``,
-    'methodpay.client_secret': ``,
+    'methodpay.show_name': `The name that is shown in the client panel.`,
+    'methodpay.id_user': `The user payment method. You can create payment methods for administrators or resellers. `,
+    'methodpay.country': `Only for reference.`,
+    'methodpay.active': `Activate this if you want to be avaible for the clients.`,
+    'methodpay.min': `Mininum accepted value.`,
+    'methodpay.max': `Maximun accepted value.`,
+    'methodpay.username': `User payment method`,
+    'methodpay.url': `Payment method URL, in the most cases the methods this URL is already preconfigurated.`,
+    'methodpay.fee': `Payment method fee.`,
+    'methodpay.pagseguro_TOKEN': `Payment method TOKEN`,
+    'methodpay.P2P_CustomerSiteID': `This field is exclusive for some payments methods.`,
+    'methodpay.P2P_KeyID': `This field is exclusive for some payments methods.`,
+    'methodpay.P2P_Passphrase': `This field is exclusive for some payments methods.`,
+    'methodpay.P2P_RecipientKeyID': `This field is exclusive for some payments methods.`,
+    'methodpay.P2P_tax_amount': `This field is exclusive for some payments methods.`,
+    'methodpay.client_id': `This field is exclusive for some payments methods.`,
+    'methodpay.client_secret': `This field is exclusive for some payments methods.`,
     //MENUS
-    'module.text': ``,
-    'module.icon_cls': ``,
-    'module.id_module': ``,
-    'module.priority': ``,
+    'module.text': `Menu name `,
+    'module.icon_cls': `Icon, default font "awesome V4".`,
+    'module.id_module': `Menu which this menu belongs. In case the menu is blank, it's a main menu`,
+    'module.priority': `Order that the menu will be shown in the menu`,
     //OFFERS
-    'offer.label': ``,
-    'offer.packagetype': ``,
-    'offer.freetimetocall': ``,
-    'offer.billingtype': ``,
-    'offer.price': ``,
+    'offer.label': `Offer name`,
+    'offer.packagetype': `Type of package, there's 3 types. Unlimited calls, free calls or free seconds. `,
+    'offer.freetimetocall': `In this field is where the package avaible quantity configuration will occur.||Example:
+* Unlimited calls: In this option the field is blank, because will be allowed to call without any control.
+* Free calls: Configure the amount of free calls that you want to give.
+* Free seconds: Configure the amount of seconds that you want to allow the client to call.`,
+    'offer.billingtype': `This is the period that the package will be calculated.|| Look the description:
+* Monthly: The system will verify the day of the plan activation + 30 days that the client reached the package limit.
+* Weekly: The system will verify the day of the plan activation + 7 days that the client reached the package limit.`,
+    'offer.price': `Price that will be charged monthly to the client.||If on the expiry day the client don't have the sufficient funds to pay the package // NEED TO FINISH "dar baixa?" //
+    
+In the settings menu, ajusts, exist one option named Package Offer Notification, this value`
+
+
+                        //NEED TO FINISH UPPER LINE "offer.price"
+
+
+    //OFFER CDR
+    'offercdr.id_user': `User that made the call.`,
     //OFFER CDR
     'offercdr.id_user': ``,
-    'offercdr.id_offer': ``,
-    'offercdr.used_secondes': ``,
-    'offercdr.date_consumption': ``,
+    'offercdr.id_offer': `Name of the offer.`,
+    'offercdr.used_secondes': `Call duration.`,
+    'offercdr.date_consumption': `Date and hour of the call.`,
     //OFFER USE
-    'offeruse.id_user': ``,
-    'offeruse.id_offer': ``,
-    'offeruse.month_payed': ``,
-    'offeruse.reservationdate': ``,
+    'offeruse.id_user': `User that made  the call.`,
+    'offeruse.id_offer': `Name of the offer.`,
+    'offeruse.month_payed': `Paid months.`,
+    'offeruse.reservationdate': `Date and hour that the offer was canceled.`,
     //PHONEBOOKS
-    'phonebook.name': ``,
-    'phonebook.status': ``,
-    'phonebook.description': ``,
+    'phonebook.name': `Phonebook name.`,
+    'phonebook.status': `Phonebook status.`,
+    'phonebook.description': `Phonebook description, personal control only.`,
     //PHONENUMBERS
-    'phonenumber.id_phonebook': ``,
+    'phonenumber.id_phonebook': `Phonebook that this number belongs to.`,
     'phonenumber.number': `Number to send calls/sms. Use only E164 format`,
-    'phonenumber.name': `Used to TTS and SMS`,
-    'phonenumber.city': ``,
+    'phonenumber.name': `Number owner name, used for TTS or SMS`,
+    'phonenumber.city': `Client city, not required field.`,
     'phonenumber.status': ``,
-    'phonenumber.info': ``,
+    'phonenumber.info': `Phonebook description, personal control only||When used for survey, will be saved here what the number that the client typed.`,
     //PLANS
-    'plan.name': ``,
-    'plan.signup': `Display this plan in the signup form?`,
-    'plan.ini_credit': `How much initial credit do you want to add to new users that select this plan in signup form?`,
-    'plan.play_audio': `Should the system execute audios li`,
+    'plan.name': `Plan name`,
+    'plan.signup': ``,
+    'plan.ini_credit': ``,
+    'plan.play_audio': ``,
     'plan.techprefix': ``,
     'plan.id_service': ``,
     //PREFIXES
