@@ -27,7 +27,7 @@ Seg-Sex intervalos
 | Intervalo de atendimento de segunda a sexta, pode ser configurado múltiplos horarios
 | Exemplo:
 | 
-| Digamos que o horário de atendimento é de 08h as 12h e das 14h às 19h. Neste caso a regra ficaria
+| Digamos que o horário de atendimento é de 08h às 12h e das 14h às 19h. Neste caso a regra ficaria
 | 
 | 08:00-12:00|14:00-19:00
 | 
@@ -44,7 +44,7 @@ Sábado intervalos
 | Intervalo de atendimento aos sábados, pode ser configurado múltiplos horários
 | Exemplo:
 | 
-| Digamos que o horário de atendimento aos sábado é dia de 08h às 13h. Neste caso a regra ficaria
+| Digamos que o horário de atendimento aos sábados é dia de 08h às 13h. Neste caso a regra ficaria
 | 
 | 08:00-13:00
 | 
@@ -85,7 +85,7 @@ Intervalos Domingo
 Trabalhando
 -----------
 
-| Áudio para executar fora de atendimento.
+| Áudio para executar fora dos horários de atendimento.
 
 
 

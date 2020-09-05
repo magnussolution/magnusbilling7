@@ -25,7 +25,7 @@ Markup
 Total calls
 -----------
 
-| Call total.
+| Total of calls.
 
 
 

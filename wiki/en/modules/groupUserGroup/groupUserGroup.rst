@@ -4,7 +4,7 @@
 Group
 -----
 
-| We did not write the description to this field.
+| Group name
 
 
 
@@ -14,7 +14,7 @@ Group
 User prefix
 -----------
 
-| We did not write the description to this field.
+| Filling this field, all users created by an administrator that uses this group will be initialized with this prefix.
 
 
 
@@ -24,7 +24,8 @@ User prefix
 Group
 -----
 
-| We did not write the description to this field.
+| Which client groups will the administrator group have access.
+|  When an administrator that belongs to this group login, only the administrator will see the client data of the selected groups
 
 
 

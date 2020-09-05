@@ -4,7 +4,7 @@
 Group
 -----
 
-| We did not write the description to this field.
+| User group
 
 
 
@@ -14,7 +14,7 @@ Group
 Module
 ------
 
-| We did not write the description to this field.
+| Menu
 
 
 

@@ -4,7 +4,7 @@
 Name
 ----
 
-| We did not write the description to this field.
+| Plan name
 
 
 
@@ -14,7 +14,7 @@ Name
 Use on signup
 -------------
 
-| Display this plan in the signup form?
+| We did not write the description to this field.
 
 
 
@@ -24,7 +24,7 @@ Use on signup
 Initial credit to new users
 ---------------------------
 
-| How much initial credit do you want to add to new users that select this plan in signup form?
+| We did not write the description to this field.
 
 
 
@@ -34,7 +34,7 @@ Initial credit to new users
 Notices with audio
 ------------------
 
-| Should the system execute audios li
+| We did not write the description to this field.
 
 
 

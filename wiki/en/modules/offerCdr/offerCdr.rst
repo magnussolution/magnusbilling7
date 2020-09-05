@@ -14,7 +14,7 @@ Username
 Offer
 -----
 
-| We did not write the description to this field.
+| Name of the offer.
 
 
 
@@ -24,7 +24,7 @@ Offer
 Duration
 --------
 
-| We did not write the description to this field.
+| Call duration.
 
 
 
@@ -34,7 +34,7 @@ Duration
 Date
 ----
 
-| We did not write the description to this field.
+| Date and hour of the call.
 
 
 
