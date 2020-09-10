@@ -463,18 +463,7 @@ class CalcAgi
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . ' - ' .
                     $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
                 $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
-            } else {
-
-                $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($costCdr)) . "
-                        WHERE id=" . $MAGNUS->modelUser->id . " LIMIT 1 ";
-                $agi->exec($sql);
-
-                $agi->verbose("Update credit username $MAGNUS->username, " . $MAGNUS->round_precision(abs($cost)), 6);
             }
-            $sql = "UPDATE pkg_trunk SET call_answered = call_answered +1, secondusedreal = secondusedreal + $sessiontime
-                        WHERE id=$this->usedtrunk LIMIT 1 ;
-                    UPDATE pkg_provider SET credit = credit - $this->buycost WHERE id=" . $this->id_provider . " LIMIT 1;";
-            $agi->exec($sql);
 
         }
         $this->callShop($agi, $MAGNUS, $sessiontime, $id_prefix, $cost);
@@ -493,10 +482,6 @@ class CalcAgi
                 $this->didAgi->increment);
 
             $agi->verbose('did_sell_price ' . $did_sell_price);
-
-            $sql = "UPDATE pkg_user SET credit = credit - $MAGNUS->round_precision(abs($did_sell_price))
-                        WHERE id=$this->did_charge_of_id_user LIMIT 1 ";
-            $agi->exec($sql);
 
             $agi->verbose('Add CDR the DID cost to CallerID. Cost =' . $did_sell_price . ', duration' . $didDuration);
 
@@ -561,15 +546,6 @@ class CalcAgi
             $agi->verbose("Tempo meno que o tempo minimo para", 15);
             $cost_customer = 0;
         }
-
-        $agi->verbose("Sellratecost_customer: $cost_customer", 15);
-        $sql = "UPDATE pkg_user SET credit = credit - $cost WHERE id= $MAGNUS->id_agent LIMIT 1";
-        $agi->exec($sql);
-
-        $agi->verbose("Update credit Agent $MAGNUS->agentUsername, " . $cost, 15);
-
-        $sql = "UPDATE pkg_user SET credit = credit - $cost_customer WHERE id= $MAGNUS->id_user LIMIT 1";
-        $agi->exec($sql);
 
         $agi->verbose("Update credit customer Agent $MAGNUS->username, " . $MAGNUS->round_precision(abs($cost_customer)), 6);
 
@@ -685,8 +661,6 @@ class CalcAgi
             $agi->execute("hangup request $this->channel");
             $MAGNUS->hangup($agi);
         }
-        $sql = "UPDATE pkg_trunk SET  call_total = call_total + 1 WHERE id=" . $this->usedtrunk . " LIMIT 1";
-        $agi->exec($sql);
 
         $MAGNUS->startRecordCall($agi);
         try {

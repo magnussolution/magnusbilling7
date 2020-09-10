@@ -251,9 +251,6 @@ class DidAgi
                         WHERE id = " . $agi->get_variable("IDCALLBACK", true);
                 $agi->exec($sql);
 
-                $sql = "UPDATE pkg_user SET credit = credit - $sell_price WHERE id = " . $MAGNUS->id_user;
-                $agi->exec($sql);
-
                 $MAGNUS->hangup($agi);
             }
 
@@ -713,12 +710,6 @@ class DidAgi
         }
 
         $this->billDidCall($agi, $MAGNUS, $answeredtime);
-
-        if ($this->sell_price > 0) {
-            $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($this->sell_price)) . "
-                 WHERE  id = " . $MAGNUS->modelUser->id . " LIMIT 1";
-            $agi->exec($sql);
-        }
 
         $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $answeredtime);
         $CalcAgi->sessiontime      = $answeredtime;

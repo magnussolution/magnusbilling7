@@ -1089,6 +1089,32 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-09-10
+        if ($version == '7.4.7') {
+
+            $sql = "
+                CREATE TRIGGER update_user_credit_after_insert
+                AFTER INSERT
+                ON pkg_cdr FOR EACH ROW
+                BEGIN
+                    IF NEW.sessionbill > 0 THEN
+                        IF NEW.agent_bill > 0 THEN
+                            SET @IDAGENT = (SELECT id_user FROM pkg_user WHERE id = new.id_user LIMIT 1);
+                            UPDATE pkg_user SET credit = credit - new.agent_bill WHERE pkg_user.id = new.id_user;
+                            UPDATE pkg_user SET credit = credit - new.sessionbill WHERE pkg_user.id = @IDAGENT;
+                        ELSE
+                            UPDATE pkg_user SET credit = credit - new.sessionbill WHERE pkg_user.id = new.id_user;
+                        END IF;
+                    END IF;
+                END
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.5.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
