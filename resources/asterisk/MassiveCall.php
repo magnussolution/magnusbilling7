@@ -658,6 +658,11 @@ class MassiveCall
                 $agi->exec($sql);
 
             }
+
+            if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
+                $CalcAgi->agent_bill = $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost, $duration);
+            }
+
             $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $duration);
             $CalcAgi->sessiontime      = $duration;
             $CalcAgi->real_sessiontime = intval($real_sessiontime);
@@ -673,24 +678,6 @@ class MassiveCall
 
             $id_call = $CalcAgi->saveCDR($agi, $MAGNUS, true);
 
-            if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
-
-                $sql                   = "SELECT * FROM pkg_user WHERE id_user = " . $MAGNUS->id_agent . " LIMIT 1";
-                $modelAgent            = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                $MAGNUS->id_plan_agent = $modelAgent->id_plan;
-                $agi->verbose($MAGNUS->id_plan_agent);
-                $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' $id_call' . $id_call . '$destination' . $destination, 10);
-
-                $CalcAgi->sessiontime = $duration;
-                $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost, $duration);
-            } else {
-                $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($sellratecost)) . "
-                        WHERE id =  $MAGNUS->id_user LIMIT 1";
-                $agi->exec($sql);
-            }
-            $sql = "UPDATE pkg_trunk SET secondusedreal = secondusedreal + $duration
-                        WHERE id =  $MAGNUS->id_trunk LIMIT 1";
-            $agi->exec($sql);
         }
 
         $MAGNUS->hangup($agi);

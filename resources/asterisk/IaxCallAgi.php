@@ -45,11 +45,7 @@ class IaxCallAgi
 
         if ($answeredtime > 0 && $terminatecauseid == 1) {
             if ($MAGNUS->config['global']['charge_sip_call'] > 0) {
-
                 $cost = ($MAGNUS->config['global']['charge_sip_call'] / 60) * $answeredtime;
-                $sql  = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($cost)) . "
-                            WHERE id = $MAGNUS->modelUser->id LIMIT 1  ";
-                $agi->exec($sql);
                 $agi->verbose("Update credit username after transfer $MAGNUS->username, " . $cost, 15);
             } else {
                 $cost = 0;

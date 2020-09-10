@@ -108,4 +108,23 @@ class ConfigurationController extends Controller
         }
         return $attributes;
     }
+
+    public function afterSave($model, $values)
+    {
+        $this->config = LoadConfig::getConfig();
+        $cpstotal     = isset($this->config['global']['cpstotal']) ? $this->config['global']['cpstotal'] : 0;
+        $lines        = '
+[config]
+base_country = ' . $this->config['global']['base_country'] . '
+cpstotal = ' . $cpstotal . '
+ip_tech_length = ' . $this->config['global']['ip_tech_length'] . '
+bloc_time_call = ' . $this->config['global']['bloc_time_call'] . '
+';
+
+        $fd = fopen('/etc/asterisk/mbilling.conf', "w");
+        fwrite($fd, $lines);
+        fclose($fd);
+
+        return;
+    }
 }

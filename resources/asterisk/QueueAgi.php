@@ -125,12 +125,6 @@ class QueueAgi
                 $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime);
             }
 
-            if ($DidAgi->sell_price > 0) {
-                $sql = "UPDATE pkg_user SET credit = credit - " . $DidAgi->sell_price . "
-                 WHERE  id = " . $DidAgi->modelDid->id_user . " LIMIT 1";
-                $agi->exec($sql);
-            }
-
             $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('$MAGNUS->destination',1,length(prefix))
                                 ORDER BY LENGTH(prefix) DESC  ";
             $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);

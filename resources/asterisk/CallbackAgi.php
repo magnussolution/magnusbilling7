@@ -208,13 +208,8 @@ class CallbackAgi
 
             if ($sessiontime == 0) {
 
-                $sell30    = $sell / 2;
-                $buycost30 = $buycos / 2;
-
-                //desconto 1 minuto assim que o cliente atende a chamada
-                $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($sell30)) . " WHERE id = '$MAGNUS->id_user' LIMIT 1";
-                $agi->exec($sql);
-
+                $sell30            = $sell / 2;
+                $buycost30         = $buycos / 2;
                 $sessiontime1fsLeg = 30;
 
                 $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $sessiontime1fsLeg);

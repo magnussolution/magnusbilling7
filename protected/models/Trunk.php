@@ -100,14 +100,4 @@ class Trunk extends Model
         $this->providerip      = $this->providertech != 'sip' && $this->providertech != 'iax2' ? $this->host : $this->trunkcode;
         return parent::beforeSave();
     }
-
-    public function updateTotalCall($usedtrunk)
-    {
-        $sql = "UPDATE pkg_trunk SET  call_total = call_total + 1 WHERE id=" . $usedtrunk;
-        try {
-            Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
-            //
-        }
-    }
 }
