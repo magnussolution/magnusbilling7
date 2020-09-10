@@ -138,12 +138,12 @@ class CallChartCommand extends ConsoleCommand
                     } else {
 
                         //check if is a DID call
-                        if ($key = array_search($ndiscado, $this->didsNumbers)) {
+                        if (false !== $key = array_search($ndiscado, $this->didsNumbers)) {
                             $modelDid = $this->dids[$key];
 
                         }
                         //check if is a call to sip account
-                        else if ($key = array_search($ndiscado, $this->sipNames)) {
+                        else if (false !== $key = array_search($ndiscado, $this->sipNames)) {
                             $modelSip = $this->sips[$key];
                         }
 
@@ -174,7 +174,7 @@ class CallChartCommand extends ConsoleCommand
                             //try get user
                             if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
 
-                                if ($key = array_search($sip_account, $this->sipNames)) {
+                                if (false !== $key = array_search($sip_account, $this->sipNames)) {
                                     $modelSip = $this->sips[$key];
                                 } else {
                                     continue;
@@ -189,7 +189,7 @@ class CallChartCommand extends ConsoleCommand
 
                                 if (strlen($sip_account) > 3) {
                                     //echo "check per sip_account $originate\n";
-                                    if ($key = array_search($originate, $this->sipNames)) {
+                                    if (false !== $key = array_search($originate, $this->sipNames)) {
                                         $modelSip = $this->sips[$key];
                                     }
 

@@ -125,6 +125,8 @@ bloc_time_call = ' . $this->config['global']['bloc_time_call'] . '
         fwrite($fd, $lines);
         fclose($fd);
 
+        AsteriskAccess::instance()->reload();
+
         return;
     }
 }
