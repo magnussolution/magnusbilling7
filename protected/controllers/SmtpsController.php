@@ -127,33 +127,13 @@ class SmtpsController extends Controller
             ));
             exit;
         }
-        $modelSmtp = $this->abstractModel->findByPk((int) $_POST['id']);
 
-        Yii::import('application.extensions.phpmailer.JPhpMailer');
-        $language = Yii::app()->language == 'pt_BR' ? 'br' : Yii::app()->language;
-        $mail     = new JPhpMailer;
-        $mail->IsSMTP();
-        $mail->SMTPAuth = true;
+        $mail = new Mail(Mail::$TYPE_SIGNUP, $modelUser->id);
+        $mail->setTitle('MagnusBilling email test');
+        $mail->setMessage('<br>Hi, this is a email from MagnusBilling.');
+        $mail->send();
 
-        $mail->Host       = $modelSmtp->host;
-        $mail->SMTPSecure = $modelSmtp->encryption;
-        $mail->Username   = $modelSmtp->username;
-        $mail->Password   = $modelSmtp->password;
-        $mail->Port       = $modelSmtp->port;
-        $mail->SetFrom($modelSmtp->username);
-        $mail->SetLanguage($language);
-        $mail->Subject = 'MagnusBilling email test';
-        $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
-        $mail->MsgHTML('<br>Hi, this is a email from MagnusBilling.');
-        $mail->AddAddress($modelUser->email);
-        $mail->CharSet = 'utf-8';
-
-        ob_start();
-        $mail->Send();
-        $output = ob_get_contents();
-        ob_end_clean();
-
-        if (preg_match("/Erro/", $output)) {
+        if (preg_match("/Erro/", $mail->output)) {
             $sussess = false;
         } else {
             $output  = $this->msgSuccess;
@@ -162,7 +142,7 @@ class SmtpsController extends Controller
 
         echo json_encode(array(
             $this->nameSuccess => $sussess,
-            $this->nameMsg     => $output,
+            $this->nameMsg     => $mail->output,
         ));
     }
 
