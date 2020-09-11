@@ -1089,18 +1089,6 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
-        //2020-09-11
-        if ($version == '7.4.7') {
-
-            $sql = "ALTER TABLE `pkg_smtp` ADD COLUMN `sender` VARCHAR(100) NOT NULL AFTER `username`;
-            UPDATE `pkg_smtp` SET sender = username";
-            $this->executeDB($sql);
-
-            $version = '7.4.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
-        }
-
     }
 
     public function executeDB($sql)
