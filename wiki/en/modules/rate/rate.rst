@@ -24,7 +24,7 @@ Destination
 Trunk groups
 ------------
 
-| We did not write the description to this field.
+| The group of trunks that will be used to send this call.
 
 
 
@@ -34,7 +34,7 @@ Trunk groups
 Sell price
 ----------
 
-| How much do you want to charge per minute?
+| The amount that you want to charge per minute.
 
 
 
@@ -44,7 +44,7 @@ Sell price
 Initial block
 -------------
 
-| Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s, charged for 30s.
+| Minimum time in seconds to buy. E.g., if set to 30s and the call duration is 21s, will be charged for 30s.
 
 
 
@@ -54,7 +54,7 @@ Initial block
 Billing block
 -------------
 
-| This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, charged for 36.
+| This defines how the time is incremented after the minimum. E.g, if set to 6s and call duration is 32s, will becharged for 36.
 
 
 
@@ -64,7 +64,7 @@ Billing block
 Minimum time to charge
 ----------------------
 
-| We did not write the description to this field.
+| Minimun time to tariff. If it's set to 3, will only tariff calls when the time is equal or more than 3 seconds.
 
 
 
@@ -74,7 +74,7 @@ Minimum time to charge
 Additional time
 ---------------
 
-| Aditional time to add to call duration. Ex: the call duration 20s and you add here 3s, will be charged 23 seconds.
+| Aditional time to add to all call duration. If it's set to 10, will be added 10 seconds to all call time duration, this affects tarrifs.
 
 
 
@@ -94,7 +94,7 @@ Include in offer
 Status
 ------
 
-| We did not write the description to this field.
+| Deactivating Tariffs, MagnusBilling will completely desconsider this tariff. Therefore, deleting or deactivating will have the sam effect.
 
 
 

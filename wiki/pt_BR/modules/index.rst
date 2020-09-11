@@ -169,11 +169,11 @@ Este menu tem os seguintes campos
 
 
 .. _did-menu-list:
-Menu DID
-========
+Menu DIDs
+=========
 
 
-Esta é a lista dos campos com sua respectiva descrição do menu DID
+Esta é a lista dos campos com sua respectiva descrição do menu DIDs
 
 DIDs
 ++++

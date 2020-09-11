@@ -24,7 +24,7 @@ MAC
 User password
 -------------
 
-| User to set in LinkSys configuration
+| Username to login in LinkSys settings
 
 
 
@@ -34,7 +34,7 @@ User password
 Admin password
 --------------
 
-| Pass to set in LinkSys configuration
+| Password to login in LinkSys settings
 
 
 
@@ -44,7 +44,7 @@ Admin password
 Antireset
 ---------
 
-| Prevent resetting LinkSys with *73738#
+| Be cautious.*73738# command prevents resetting LinkSys.
 
 
 
@@ -54,7 +54,7 @@ Antireset
 Enable_Web_Server
 -----------------
 
-| Enabling/Disabling LinkSys configuration WebPage
+| Beware! If deactivated, will not be able to login in the Linksys settings.
 
 
 
@@ -64,7 +64,7 @@ Enable_Web_Server
 Username
 --------
 
-| SIP account username
+| SIP account username that will be used in ATA line 1.
 
 
 
@@ -124,7 +124,7 @@ Dial plan
 NAT Mapping
 -----------
 
-| We did not write the description to this field.
+| It's recommended to activate this option if ATA is behind NAT.
 
 
 
@@ -134,7 +134,7 @@ NAT Mapping
 NAT keep alive
 --------------
 
-| We did not write the description to this field.
+| It's recommended to activate this option if ATA is behind NAT.
 
 
 
@@ -144,7 +144,7 @@ NAT keep alive
 Username
 --------
 
-| We did not write the description to this field.
+| SIP account username that will be used in ATA line 1.
 
 
 
@@ -154,7 +154,7 @@ Username
 Password
 --------
 
-| We did not write the description to this field.
+| VOIP account password.
 
 
 
@@ -164,7 +164,7 @@ Password
 Use_Pref_Codec
 --------------
 
-| We did not write the description to this field.
+| Only use preferencial codec.
 
 
 
@@ -174,7 +174,7 @@ Use_Pref_Codec
 Codec
 -----
 
-| We did not write the description to this field.
+| Settings of preferincial codec.
 
 
 
@@ -184,7 +184,7 @@ Codec
 Register expires
 ----------------
 
-| We did not write the description to this field.
+| Time in seconds that Linksys sends "REGISTER" to the server. If it's going to get calls in this line, it's better set it up between 120 and 480 seconds.
 
 
 
@@ -194,7 +194,7 @@ Register expires
 Dial plan
 ---------
 
-| We did not write the description to this field.
+| Read linksys documentation
 
 
 
@@ -204,7 +204,7 @@ Dial plan
 NAT Mapping
 -----------
 
-| We did not write the description to this field.
+| It's recommended to activate this option if ATA is behind NAT.
 
 
 
@@ -214,7 +214,7 @@ NAT Mapping
 NAT keep alive
 --------------
 
-| We did not write the description to this field.
+| It's recommended to activate this option if ATA is behind NAT.
 
 
 
@@ -224,7 +224,7 @@ NAT keep alive
 Enable STUN
 -----------
 
-| We did not write the description to this field.
+| Activate STUN server.
 
 
 
@@ -234,7 +234,7 @@ Enable STUN
 STUN Test
 ---------
 
-| We did not write the description to this field.
+| Validate STUN server periodically..
 
 
 
@@ -244,7 +244,7 @@ STUN Test
 Substitute VIA Addr
 -------------------
 
-| We did not write the description to this field.
+| Replace publia IP in the VIA.
 
 
 
@@ -254,7 +254,7 @@ Substitute VIA Addr
 STUN Server
 -----------
 
-| We did not write the description to this field.
+| STUN server domain.
 
 
 

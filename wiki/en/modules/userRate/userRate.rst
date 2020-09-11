@@ -4,7 +4,7 @@
 Destination
 -----------
 
-| Select the prefix that you want set the price.
+| Select the prefix that you want to subscribe.
 
 
 
@@ -14,7 +14,7 @@ Destination
 Sell price
 ----------
 
-| Sell price
+| New sell price for this prefix.
 
 
 
@@ -24,7 +24,7 @@ Sell price
 Initial block
 -------------
 
-| Initial block
+| Minimum sell price.
 
 
 
@@ -34,7 +34,7 @@ Initial block
 Billing block
 -------------
 
-| Increment block
+| Sell block.
 
 
 

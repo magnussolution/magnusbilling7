@@ -4,7 +4,7 @@
 Prefix
 ------
 
-| We did not write the description to this field.
+| Prefix that wants to create a tariff. This tariff will be exclusive to CALLSHOP.
 
 
 
@@ -14,7 +14,7 @@ Prefix
 Destination
 -----------
 
-| We did not write the description to this field.
+| Prefix destination name.
 
 
 
@@ -24,7 +24,7 @@ Destination
 Sell price
 ----------
 
-| We did not write the description to this field.
+| Charged value per minute in the Callshop.
 
 
 
@@ -34,7 +34,7 @@ Sell price
 Buy price initblock
 -------------------
 
-| We did not write the description to this field.
+| Minimum time in seconds to tariff. Ex: if it's set to 30, any calll that lasts less than 30 seconds will be charged 30 seconds.
 
 
 
@@ -44,7 +44,7 @@ Buy price initblock
 Buy price increment
 -------------------
 
-| We did not write the description to this field.
+| Time period that will be charged after minimun time. Ex: if it's set to 6, this means that will always round up to 6 seconds, therefore, a call that lasted 32 seconds will be charged 36 seconds.
 
 
 
@@ -54,7 +54,7 @@ Buy price increment
 Minimum time to charge
 ----------------------
 
-| We did not write the description to this field.
+| Minimum time to tarrif. Ex: If is set to 3, will only tariff calls that lasted 3 or more seconds.
 
 
 

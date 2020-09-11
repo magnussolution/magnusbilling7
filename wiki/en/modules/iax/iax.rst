@@ -95,11 +95,11 @@ Qualify
 -------
 
 | Sent the "OPTION" package to verify if the user is online.
-| Sintaxe:
+| Sintax:
 |     
 | qualify = xxx | no | yes
 |     
-| Where the XXX is the number of milliseconds used. If "yes", the time configurated in sip.conf is used, by default is set to 2 seconds.
+| Where the XXX is the number of milliseconds used. If "yes", the time configurated in sip.conf is used, 2 seconds is the standard.
 | 
 | If you activate "qualify", the Asterisk will sent the command "OPTION" to SIP peer regulary to verify if the device is still online.
 | If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.

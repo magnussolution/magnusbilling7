@@ -14,7 +14,7 @@ Usuário
 Nome
 ----
 
-| Nome para a fina.
+| Nome para a fila.
 
 
 
@@ -84,7 +84,7 @@ Tempo para próxima chamada
 Peso
 ----
 
-| Importância desta fila. Por exemplo, você tem o mesmo agente em 2 filas, e chega 12 chamadas ao mesmo tempo, o Asterisk vai enviar a chamada da fila com maior importancia para o agente.
+| Prioridade de fila. Por exemplo, você tem o mesmo agente em 2 filas, e chega 12 chamadas ao mesmo tempo, o Asterisk vai enviar a chamada da fila com maior prioridade para o agente.
 
 
 

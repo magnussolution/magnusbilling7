@@ -92,7 +92,7 @@ Out work audio
 Option 0
 --------
 
-| Select the destiny if the option 0 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 0 is pressed. Let it in blank if don't want any action
 
 
 
@@ -102,7 +102,7 @@ Option 0
 Option 1
 --------
 
-| Select the destiny if the option 1 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 1 is pressed. Let it in blank if don't want any action
 
 
 
@@ -112,7 +112,7 @@ Option 1
 Option 2
 --------
 
-| Select the destiny if the option 2 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 2 is pressed. Let it in blank if don't want any action
 
 
 
@@ -122,7 +122,7 @@ Option 2
 Option 3
 --------
 
-| Select the destiny if the option 3 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 3 is pressed. Let it in blank if don't want any action
 
 
 
@@ -132,7 +132,7 @@ Option 3
 Option 4
 --------
 
-| Select the destiny if the option 4 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 4 is pressed. Let it in blank if don't want any action
 
 
 
@@ -142,7 +142,7 @@ Option 4
 Option 5
 --------
 
-| Select the destiny if the option 5 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 5 is pressed. Let it in blank if don't want any action
 
 
 
@@ -152,7 +152,7 @@ Option 5
 Option 6
 --------
 
-| Select the destiny if the option 6 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 6 is pressed. Let it in blank if don't want any action
 
 
 
@@ -162,7 +162,7 @@ Option 6
 Option 7
 --------
 
-| Select the destiny if the option 7 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 7 is pressed. Let it in blank if don't want any action
 
 
 
@@ -172,7 +172,7 @@ Option 7
 Option 8
 --------
 
-| Select the destiny if the option 8 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 8 is pressed. Let it in blank if don't want any action
 
 
 
@@ -182,7 +182,7 @@ Option 8
 Option 9
 --------
 
-| Select the destiny if the option  is pressed. Let it in blank if don't want any action
+| Select the destination if the option  is pressed. Let it in blank if don't want any action
 
 
 
@@ -192,7 +192,7 @@ Option 9
 Default option
 --------------
 
-| Select the destiny if none of the options was selected.
+| Select the destination if none of the options was selected.
 
 
 
@@ -212,7 +212,7 @@ Enable known SIP user
 Option 0
 --------
 
-| Select the destiny if the option 0 is pressed. Let it in blank if don't want any action
+| Select the destinationif the option 0 is pressed. Let it in blank if don't want any action
 
 
 
@@ -222,7 +222,7 @@ Option 0
 Option 1
 --------
 
-| Select the destiny if the option 1 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 1 is pressed. Let it in blank if don't want any action
 
 
 
@@ -232,7 +232,7 @@ Option 1
 Option 2
 --------
 
-| Select the destiny if the option 2 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 2 is pressed. Let it in blank if don't want any action
 
 
 
@@ -242,7 +242,7 @@ Option 2
 Option 3
 --------
 
-| Select the destiny if the option 3 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 3 is pressed. Let it in blank if don't want any action
 
 
 
@@ -252,7 +252,7 @@ Option 3
 Option 4
 --------
 
-| Select the destiny if the option 4 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 4 is pressed. Let it in blank if don't want any action
 
 
 
@@ -262,7 +262,7 @@ Option 4
 Option 5
 --------
 
-| Select the destiny if the option 5 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 5 is pressed. Let it in blank if don't want any action
 
 
 
@@ -272,7 +272,7 @@ Option 5
 Option 6
 --------
 
-| Select the destiny if the option 6 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 6 is pressed. Let it in blank if don't want any action
 
 
 
@@ -282,7 +282,7 @@ Option 6
 Option 7
 --------
 
-| Select the destiny if the option 7 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 7 is pressed. Let it in blank if don't want any action
 
 
 
@@ -292,7 +292,7 @@ Option 7
 Option 8
 --------
 
-| Select the destiny if the option 8 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 8 is pressed. Let it in blank if don't want any action
 
 
 
@@ -302,7 +302,7 @@ Option 8
 Option 9
 --------
 
-| Select the destiny if the option 9 is pressed. Let it in blank if don't want any action
+| Select the destination if the option 9 is pressed. Let it in blank if don't want any action
 
 
 
@@ -312,7 +312,7 @@ Option 9
 Default option
 --------------
 
-| Select the destiny if none of the options was selected.
+| Select the destination if none of the options was selected.
 
 
 

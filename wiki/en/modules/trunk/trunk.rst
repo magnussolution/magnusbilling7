@@ -4,7 +4,7 @@
 Provider
 --------
 
-| We did not write the description to this field.
+| Provider which the trunk belongs.
 
 
 
@@ -14,7 +14,7 @@ Provider
 Name
 ----
 
-| We did not write the description to this field.
+| Trunk name, must be unique.
 
 
 
@@ -24,7 +24,7 @@ Name
 Username
 --------
 
-| Only used if the authentication is via user and pass.
+| Only used if the authentication is via username and password.
 
 
 
@@ -34,7 +34,7 @@ Username
 Password
 --------
 
-| Only used if the authentication is via user and pass.
+| Only used if the authentication is via username and password.
 
 
 
@@ -44,7 +44,7 @@ Password
 Host
 ----
 
-| IP or SIP
+| IP or Trunk domain.
 
 
 
@@ -94,7 +94,7 @@ Provider tech
 Status
 ------
 
-| We did not write the description to this field.
+| If the trunk is inactive, Magnusbilling will sent the call to the backup trunk.
 
 
 
@@ -114,7 +114,7 @@ Allow error
 Register trunk
 --------------
 
-| We did not write the description to this field.
+| Only active this if the trunk is authenticated via username and password.
 
 
 
@@ -124,7 +124,13 @@ Register trunk
 Register string
 ---------------
 
-| We did not write the description to this field.
+| <user>:<password>@<host>/contact.
+| "user" is the user ID for this SIP server (ex 2345).
+| "password" is the user password
+| "host" is the SIP server domain or host name.
+| "port" send an solicitation of the register to this host port. Standard for 5060
+| "contact" is the extension of Asterisk contact. Example 1234 is set in the contact header of the SIP register message. The contact ramal is used by the SIP server remotely when it's needed to send one call to Asterisk.
+|     
 
 
 
@@ -134,7 +140,7 @@ Register string
 Fromuser
 --------
 
-| We did not write the description to this field.
+| Several providers demand this option to authenticate, primarly when it's authenticated via user and paswword. Let it blank to send the CallerID of the SIP account of From.
 
 
 
@@ -144,7 +150,7 @@ Fromuser
 Fromdomain
 ----------
 
-| Set the Trunk IP or SIP, if required.
+| Defines the FROM domain: in the SIP messages when act like a UAC SIP (client).
 
 
 
@@ -154,7 +160,7 @@ Fromdomain
 Language
 --------
 
-| We did not write the description to this field.
+| Default launguage used in any Playback()/Background().
 
 
 
@@ -164,7 +170,7 @@ Language
 Context
 -------
 
-| Only change if you know what you are doing.
+| Only change this if you know what you are doing.
 
 
 
@@ -174,7 +180,7 @@ Context
 Dtmfmode
 --------
 
-| Set default dtmfmode for sending DTMF. Default: rfc2833 Other options: info : SIP INFO messages (application/dtmf-relay) shortinfo : SIP INFO messages (application/dtmf) inband : Inband audio (requires 64 kbit codec -alaw, ulaw) auto : Use rfc2833 if offered, inband otherwise.
+| DMTF type. You can see more details at the link `https://www.voip-info.org/asterisk-dtmf/.  <https://www.voip-info.org/asterisk-dtmf/.>`_.
 
 
 
@@ -184,7 +190,7 @@ Dtmfmode
 Insecure
 --------
 
-| We did not write the description to this field.
+| Insecure. You can see more details at the link `https://www.voip-info.org/asterisk-sip-insecure/.  <https://www.voip-info.org/asterisk-sip-insecure/.>`_.
 
 
 
@@ -194,7 +200,7 @@ Insecure
 Max use
 -------
 
-| Maximum simultaneous call. If you set it, your server will need to use a lot of resources to control it. Not recommended.
+| Maximum simultaneous calls for this trunk.
 
 
 
@@ -204,7 +210,7 @@ Max use
 NAT
 ---
 
-| We did not write the description to this field.
+| Is the trunk behind NAT. You can see more details at the link `https://www.voip-info.org/asterisk-sip-nat/.  <https://www.voip-info.org/asterisk-sip-nat/.>`_.
 
 
 
@@ -214,7 +220,7 @@ NAT
 Directmedia
 -----------
 
-| We did not write the description to this field.
+| If activated, Asterisk will try to send the RTP media directly between your client and provider. It's necessary to active on the trunk as well. You can see more details at the link `https://www.voip-info.org/asterisk-sip-canreinvite/.  <https://www.voip-info.org/asterisk-sip-canreinvite/.>`_.
 
 
 
@@ -224,7 +230,17 @@ Directmedia
 Qualify
 -------
 
-| We did not write the description to this field.
+| Sent the "OPTION" package to verify if the user is online.
+| Sintax:
+|     
+| qualify = xxx | no | yes
+|             
+| Where the XXX is the number of milliseconds used. If "yes", the time configurated in sip.conf is used, 2 seconds is the standard.
+|         
+| If you activate "qualify", the Asterisk will sent the command "OPTION" to SIP peer regulary to verify if the device is still online.
+| If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.
+|         
+| This status can be verified with the funcion "sip show peer XXXX", this funcion will only provide informations of status for the SIP peer that possess "qualify = yes.
 
 
 
@@ -234,7 +250,7 @@ Qualify
 Type
 ----
 
-| We did not write the description to this field.
+| Default type is "friend", in other words they can make and receive calls. You can see more details at the link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -244,7 +260,7 @@ Type
 Disallow
 --------
 
-| We did not write the description to this field.
+| In this option is possible to deactivate codecs. Use "Use all" to deactive all codects and make it avaible to the user only what you selected below.
 
 
 
@@ -254,7 +270,10 @@ Disallow
 Sendrpid
 --------
 
-| We did not write the description to this field.
+| Defines if one Remote-Party-ID SIP header task to be send.
+| The default is "no".
+|     
+| This field is frequently used by VoIP wholesalers providers to supply the callers identity, independently of the privacy settings (From SIP header).    
 
 
 
@@ -264,7 +283,12 @@ Sendrpid
 Addparameter
 ------------
 
-| We did not write the description to this field.
+| These parameters will be added in the final AGI command - Dial command, where is in the ajust settings menu.
+| By default the DIAL command is:
+| ,60,L(%timeout%:61000:30000) 
+| 
+| Let's say that you wanted to add an MACRO in the trunk, therefore in this field you will add the parameter, set it up M(macro_name) and create your MACRO in the Asterisk extensions.
+|     
 
 
 
@@ -274,7 +298,7 @@ Addparameter
 Port
 ----
 
-| If you want to use a different than 5060, you will need open the port in IPTABLES.
+| If you want to use a different port than 5060, you will need open the IPTABLES port.
 
 
 
@@ -284,7 +308,7 @@ Port
 Link SMS
 --------
 
-| Set your SMS link here to send SMS. Replace: number variable per %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
+| URL to send SMS. Replace the number variable to %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
 
 
 
@@ -294,7 +318,7 @@ Link SMS
 SMS match result
 ----------------
 
-| Leave it empty to not wait URL result. If you want wait the any success message, write here the expected result.
+| Leave it blank to not wait the provider answer. Or write the text that needs to consist in the providers answer to be considered SENT.
 
 
 
@@ -304,7 +328,12 @@ SMS match result
 Parameters
 ----------
 
-| We did not write the description to this field.
+| Valid format of Asterisk sip.conf, one option per line.
+| Example, let's say that you need to put the useragent parameter, so put it in this field:
+|     
+| useragent=my agent
+| 
+| .
 
 
 

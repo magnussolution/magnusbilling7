@@ -4,7 +4,7 @@
 Name
 ----
 
-| We did not write the description to this field.
+| Server name.
 
 
 
@@ -14,7 +14,7 @@ Name
 Server IP
 ---------
 
-| We did not write the description to this field.
+| Server IP. You can see more details at the link `https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.  <https://magnussolution.com/br/servicos/auto-desempenho/servidor-slave.html.>`_.
 
 
 
@@ -24,7 +24,7 @@ Server IP
 Public IP
 ---------
 
-| We did not write the description to this field.
+| Public IP.
 
 
 
@@ -34,7 +34,7 @@ Public IP
 Username
 --------
 
-| We did not write the description to this field.
+| User to connect to the server.
 
 
 
@@ -44,7 +44,7 @@ Username
 Password
 --------
 
-| We did not write the description to this field.
+| Password to connect to the server.
 
 
 
@@ -54,7 +54,7 @@ Password
 Port
 ----
 
-| We did not write the description to this field.
+| Port to connect to the server.
 
 
 
@@ -64,7 +64,7 @@ Port
 SIPport
 -------
 
-| We did not write the description to this field.
+| SIP port that the server will use.
 
 
 
@@ -74,7 +74,7 @@ SIPport
 Type
 ----
 
-| We did not write the description to this field.
+| Server type.
 
 
 
@@ -84,7 +84,12 @@ Type
 Weight
 ------
 
-| We did not write the description to this field.
+| This option is to balance the calls by weight.
+| Example.
+|     
+| Let's say there's 1 MagnusBilling server and 3 slave servers, and you want to send the double of calls to each slave, proporcionaly to the MagnusBilling server. Then just set the MagnusBilling server to weight 1, and for the slave servers weight 2.
+| 
+| 
 
 
 
@@ -94,7 +99,7 @@ Weight
 Status
 ------
 
-| We did not write the description to this field.
+| The proxy will only send calls to active servers and with weight higher than 0.
 
 
 
@@ -104,7 +109,7 @@ Status
 Description
 -----------
 
-| We did not write the description to this field.
+| Used for internal control.
 
 
 

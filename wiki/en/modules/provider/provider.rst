@@ -14,7 +14,7 @@ Name
 Credit
 ------
 
-| How much credit do you have in your provider account? This field is optional.
+| The amount of credit you have in your provider's account. This field is optional.
 
 
 
@@ -34,7 +34,7 @@ Credit control
 Description
 -----------
 
-| We did not write the description to this field.
+| Description to the calendar, only for self control.
 
 
 

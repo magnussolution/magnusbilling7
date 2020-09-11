@@ -4,7 +4,7 @@
 Country
 -------
 
-| We did not write the description to this field.
+| Country
 
 
 
@@ -14,7 +14,7 @@ Country
 Operator name
 -------------
 
-| We did not write the description to this field.
+| Operator name.
 
 
 
@@ -24,7 +24,7 @@ Operator name
 Operator ID
 -----------
 
-| We did not write the description to this field.
+| Operator ID.
 
 
 
@@ -34,7 +34,7 @@ Operator ID
 SkuCode
 -------
 
-| We did not write the description to this field.
+| SkuCode
 
 
 
@@ -44,7 +44,7 @@ SkuCode
 Product
 -------
 
-| We did not write the description to this field.
+| Product
 
 
 
@@ -54,7 +54,7 @@ Product
 Send value
 ----------
 
-| We did not write the description to this field.
+| Send value
 
 
 
@@ -64,7 +64,7 @@ Send value
 Wholesale price
 ---------------
 
-| We did not write the description to this field.
+| Sales price.
 
 
 
@@ -74,7 +74,7 @@ Wholesale price
 Provider
 --------
 
-| We did not write the description to this field.
+| Provider.
 
 
 
@@ -84,7 +84,7 @@ Provider
 Status
 ------
 
-| We did not write the description to this field.
+| Status.
 
 
 
@@ -94,7 +94,7 @@ Status
 Description
 -----------
 
-| We did not write the description to this field.
+| Used for internal control.
 
 
 

@@ -4,7 +4,7 @@
 Provider
 --------
 
-| We did not write the description to this field.
+| Providers name.
 
 
 
@@ -14,7 +14,7 @@ Provider
 Credit
 ------
 
-| We did not write the description to this field.
+| Refill value.
 
 
 
@@ -24,7 +24,7 @@ Credit
 Description
 -----------
 
-| We did not write the description to this field.
+| Used for internal control.
 
 
 
@@ -34,7 +34,7 @@ Description
 Add payment
 -----------
 
-| We did not write the description to this field.
+| This option is to your control only. The credit authorized to the client even if it's set to "NO".
 
 
 

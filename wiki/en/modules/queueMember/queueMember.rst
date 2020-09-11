@@ -4,7 +4,7 @@
 Queue name
 ----------
 
-| We did not write the description to this field.
+| Queue that wants to add SIP account.
 
 
 
@@ -14,7 +14,7 @@ Queue name
 Sip user
 --------
 
-| We did not write the description to this field.
+| SIP account to add like a agent to the queue.
 
 
 
@@ -24,7 +24,7 @@ Sip user
 Paused
 ------
 
-| We did not write the description to this field.
+| Paused agents won't get calls, is possible to pause and unpause dialing *180 to pause, and *181 to unpause.
 
 
 

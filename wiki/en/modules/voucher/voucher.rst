@@ -4,7 +4,7 @@
 Credit
 ------
 
-| How much credit is this voucher worth?
+| Voucher price. You can see more details at the link `https://wiki.magnusbilling.org/en/source/how_to_use_voucher.html.  <https://wiki.magnusbilling.org/en/source/how_to_use_voucher.html.>`_.
 
 
 
@@ -14,7 +14,7 @@ Credit
 Plan
 ----
 
-| Select the plan that is going to be used to create the user when the voucher is redeemed.
+| Plan that will be linked to the client that will use this VOUCHER.
 
 
 
@@ -24,7 +24,7 @@ Plan
 Language
 --------
 
-| Language used to create the user when voucher when the voucher is redeemed.
+| Language that will be used.
 
 
 
@@ -34,7 +34,7 @@ Language
 Prefix rules
 ------------
 
-| Local Prefix used to the create user when the voucher is redeemed.
+| Rule that will be used in the "prefix rule" field
 
 
 
@@ -44,7 +44,7 @@ Prefix rules
 Quantity
 --------
 
-| How many vouchers do you want to generate?
+| The amount of VOUCHERS to be generated.
 
 
 
@@ -54,7 +54,7 @@ Quantity
 Description
 -----------
 
-| We did not write the description to this field.
+| Description to the calendar, only for self control.
 
 
 
@@ -64,7 +64,7 @@ Description
 Voucher
 -------
 
-| We did not write the description to this field.
+| VOUCHER number.
 
 
 

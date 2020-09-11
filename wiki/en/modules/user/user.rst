@@ -34,7 +34,7 @@ Group
 Group for agent users
 ---------------------
 
-| We did not write the description to this field.
+| Select the group that the clients of this retailer used.
 
 
 
@@ -44,7 +44,7 @@ Group for agent users
 Plan
 ----
 
-| Which plan will be used to bill calls for this user.
+| Plan that will be used to charge the clients.
 
 
 
@@ -54,7 +54,7 @@ Plan
 Language
 --------
 
-| We did not write the description to this field.
+| Language. This languague is used for some system function, but not for the panel language.
 
 
 
@@ -94,7 +94,7 @@ Country
 Offer
 -----
 
-| Used to give free minutes. You need to add your package in the menu: Rates->Offer.
+| Used to give free minutes. It's necessary to inform the tariffs that will belongs to the free packages.
 
 
 
@@ -104,7 +104,8 @@ Offer
 CPS Limit
 ---------
 
-| How many Calls Per Second this user can send? The excess will receive CONGESTION.
+| CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.` , 
+|     'user.company_name': `Company name.
 
 
 
@@ -124,7 +125,7 @@ Company name
 State number
 ------------
 
-| We did not write the description to this field.
+| State number.
 
 
 
@@ -134,7 +135,7 @@ State number
 Last name
 ---------
 
-| We did not write the description to this field.
+| Lastname.
 
 
 
@@ -144,7 +145,7 @@ Last name
 First name
 ----------
 
-| We did not write the description to this field.
+| Firstname.
 
 
 
@@ -154,7 +155,7 @@ First name
 City
 ----
 
-| We did not write the description to this field.
+| City.
 
 
 
@@ -164,7 +165,7 @@ City
 State
 -----
 
-| We did not write the description to this field.
+| State.
 
 
 
@@ -174,7 +175,7 @@ State
 Address
 -------
 
-| We did not write the description to this field.
+| Address.
 
 
 
@@ -184,7 +185,7 @@ Address
 Neighborhood
 ------------
 
-| We did not write the description to this field.
+| Neighborhood.
 
 
 
@@ -194,7 +195,7 @@ Neighborhood
 Zip code
 --------
 
-| We did not write the description to this field.
+| Zipcode.
 
 
 
@@ -204,7 +205,7 @@ Zip code
 Phone
 -----
 
-| We did not write the description to this field.
+| Landline phone.
 
 
 
@@ -214,7 +215,7 @@ Phone
 Mobile
 ------
 
-| We did not write the description to this field.
+| Mobile phone.
 
 
 
@@ -224,7 +225,7 @@ Mobile
 Email
 -----
 
-| We did not write the description to this field.
+| Email, it's necessary to send system notifications.
 
 
 
@@ -234,7 +235,7 @@ Email
 DOC
 ---
 
-| We did not write the description to this field.
+| Client document.
 
 
 
@@ -244,7 +245,7 @@ DOC
 VAT
 ---
 
-| Used with some payment gateways.
+| Used in some payment methods.
 
 
 
@@ -254,7 +255,7 @@ VAT
 Type paid
 ---------
 
-| We did not write the description to this field.
+| Pos-paid clients can stay with negative balance until the credit limit informed in the field below.
 
 
 
@@ -274,7 +275,7 @@ Credit limit
 Credit notification
 -------------------
 
-| We did not write the description to this field.
+| If the client credit get lower than this field value, MagnusBilling will send an email to the client warning that he is with low credits. IT'S NECESSARY HAVE A REGISTERED SMTP SERVER IN THE SETTINGS MENU.
 
 
 
@@ -284,7 +285,7 @@ Credit notification
 Enable expire
 -------------
 
-| Makes the user expire at a determined date.
+| Activate expire. It's necessary to inform the expiry date in the "Expiry date" field.
 
 
 
@@ -294,7 +295,7 @@ Enable expire
 Expiration date
 ---------------
 
-| The date that the user will expire and be deactivated.
+| The date that the user will not be able to make calls anymore.
 
 
 
@@ -304,7 +305,7 @@ Expiration date
 Record call
 -----------
 
-| We did not write the description to this field.
+| This option is only for DID calls, to external calls it's necessary to activate in the VoIP accounts.
 
 
 
@@ -314,7 +315,7 @@ Record call
 Record call format
 ------------------
 
-| What format will used to record calls. Activate recording in the menu: Users->SIP accounts.
+| Format used to record calls.
 
 
 
@@ -324,7 +325,7 @@ Record call format
 Call limit
 ----------
 
-| How many simultaneous calls this user can have? The excess will receive CONGESTION.
+| The amount of  simultaneous calls allowed for this client.
 
 
 
@@ -334,7 +335,7 @@ Call limit
 Limit error
 -----------
 
-| We did not write the description to this field.
+| Warning to be send if the call limit is exceeded.
 
 
 
@@ -344,7 +345,7 @@ Limit error
 Callshop
 --------
 
-| We did not write the description to this field.
+| Activate the CallShop module. Only active if you really are going to use it. It's necessary give permition to the selected group.
 
 
 
@@ -354,7 +355,7 @@ Callshop
 Disk space
 ----------
 
-| Insert the amount disk space available to record, in GB. Use -1 to remove the limit.
+| Insert the amount disk space available to record, in GB. Use -1 to save it without limit. It's necessary to add in the cron the following php command /var/www/html/mbilling/cron.php UserDiskSpace .
 
 
 
@@ -364,7 +365,7 @@ Disk space
 SIP account limit
 -----------------
 
-| We did not write the description to this field.
+| The amount of VoIP accounts allowed by this user. Will be necessary give permission to the group to create VoIP accounts.
 
 
 
@@ -374,7 +375,7 @@ SIP account limit
 CallingCard PIN
 ---------------
 
-| Used to authenticate through CallingCard.
+| Used to authenticate the CallingCard.
 
 
 
@@ -394,7 +395,7 @@ Restriction
 Profit
 ------
 
-| We did not write the description to this field.
+| This function is not avaible in Brazil. It's only used to mobile refills in some countries.
 
 
 
@@ -404,7 +405,7 @@ Profit
 Profit
 ------
 
-| We did not write the description to this field.
+| This function is not avaible in Brazil. It's only used to mobile refills in some countries.
 
 
 
@@ -414,7 +415,7 @@ Profit
 Profit
 ------
 
-| We did not write the description to this field.
+| This function is not avaible in Brazil. It's only used to mobile refills in some countries.
 
 
 
@@ -424,7 +425,7 @@ Profit
 Enable DBBL/Rocket
 ------------------
 
-| We did not write the description to this field.
+| This function is not avaible in Brazil. It's only used to mobile refills in some countries.
 
 
 
@@ -434,7 +435,7 @@ Enable DBBL/Rocket
 Profit
 ------
 
-| We did not write the description to this field.
+| This function is not avaible in Brazil. It's only used to mobile refills in some countries.
 
 
 
@@ -444,7 +445,7 @@ Profit
 Show selling price
 ------------------
 
-| We did not write the description to this field.
+| This function is not avaible in Brazil. It's only used to mobile refills in some countries.
 
 
 

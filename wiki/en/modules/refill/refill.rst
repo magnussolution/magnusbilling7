@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that will be realized the refill.
 
 
 
@@ -14,7 +14,7 @@ Username
 Credit
 ------
 
-| We did not write the description to this field.
+| Refill amount. Can be a positive or negative value, if the value is negative will remove from the total amount of credit of the client.
 
 
 
@@ -24,7 +24,7 @@ Credit
 Description
 -----------
 
-| We did not write the description to this field.
+| Description to the calendar, only for self control.
 
 
 
@@ -44,7 +44,7 @@ Add payment
 Invoice number
 --------------
 
-| We did not write the description to this field.
+| Invoice number.
 
 
 

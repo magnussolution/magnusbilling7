@@ -4,7 +4,7 @@
 From name
 ---------
 
-| We did not write the description to this field.
+| This is the name that will be use with the fromname from the email.
 
 
 
@@ -14,7 +14,7 @@ From name
 From email
 ----------
 
-| We did not write the description to this field.
+| Email used in the frommail, must be the same email used by the SMTP user.
 
 
 
@@ -24,7 +24,7 @@ From email
 Subject
 -------
 
-| We did not write the description to this field.
+| Email subject.
 
 
 
@@ -34,7 +34,7 @@ Subject
 Description
 -----------
 
-| We did not write the description to this field.
+| Message. It's possible to variables, look at the variables tab to see the list of avaible variables.
 
 
 
@@ -44,7 +44,7 @@ Description
 Status
 ------
 
-| We did not write the description to this field.
+| This option let's you deactivate the exclusive mailings of this email.
 
 
 

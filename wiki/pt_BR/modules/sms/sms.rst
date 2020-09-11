@@ -24,7 +24,7 @@ Número
 SMS
 ---
 
-| Testo no SMS.
+| Texto no SMS.
 
 
 

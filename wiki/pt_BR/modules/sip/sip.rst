@@ -87,7 +87,7 @@ Grupo
 | Quando enviar um chamada de um DID, ou campanha para um grupo, será chamado todas as contas SIP que estiverem no grupo. Você pode criar os grupos com qualquer nome.
 | 
 | 
-| Também usado para capturar chamada com *8, dever se configura a opção pickupexten = *8  no arquivo feature.conf.
+| Também usado para capturar chamada com *8, deve ser configurada a opção pickupexten = *8  no arquivo feature.conf.
 | .
 
 
@@ -108,7 +108,7 @@ Suporte a vídeo
 REGEX para bloqueio de chamadas
 -------------------------------
 
-| Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com.  <https://regex101.com.>`_.
+| Bloquear chamadas usando REGEX. Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Você pode ver mais detalhes no link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
@@ -128,7 +128,7 @@ Gravar chamadas
 Tech prefix
 -----------
 
-| Opção útil para quando for necessário autenticar mais de uma cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.
+| Opção útil para quando for necessário autenticar mais de um cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.
 
 
 
@@ -198,7 +198,7 @@ Dtmfmode
 Insecure
 --------
 
-| Se o host estiver dynamic está opção precisa estar como NO. Para IP authentication alterar para port,invite.
+| Se o host estiver dynamic está opção precisa estar como NO, para o IP authentication alterar para port,invite.
 
 
 
@@ -238,7 +238,7 @@ Tipo
 Permitir transferência
 -----------------------
 
-| Permite esta conta VoIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk.
+| Permite esta conta VOIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk.
 
 
 
@@ -318,7 +318,7 @@ Tipo de encaminhamento
 URA
 ---
 
-| Selecione a URA que deseja enviar a chamadas caso a conta SIP não atender.
+| Selecione a URA que deseja enviar para as chamadas caso a conta SIP não atender.
 
 
 
@@ -328,7 +328,7 @@ URA
 Fila de espera
 --------------
 
-| Selecione a fila de espera que deseja enviar a chamadas caso a conta SIP não atender.
+| Selecione a fila de espera que deseja enviar para as chamadas caso a conta SIP não atender.
 
 
 
@@ -338,7 +338,7 @@ Fila de espera
 Conta SIP
 ---------
 
-| Selecione a conta SIP que deseja enviar a chamadas caso a conta SIP não atender.
+| Selecione a conta SIP que deseja enviar para as chamadas caso a conta SIP não atender.
 
 
 
@@ -352,7 +352,7 @@ Destino
 | Temos três opcōes, conforme o tipo selecionado, grupo, número ou personalizado.
 | 
 | * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
-| * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
+| * Personalizado, é possível a execução de qualquer opção válida do comando DIAL do Asterisk, exemplo: SIP/contaSIP,45,tTr
 | * Número, pode ser um número fixo ou celular, deve estar no formato 55 DDD número.
 | .
 

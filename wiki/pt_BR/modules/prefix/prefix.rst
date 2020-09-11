@@ -4,7 +4,7 @@
 Prefixo
 -------
 
-| Prefixo. Prefixo serão usados para criar as tarifas. EX. 5511.
+| Prefixo. Prefixos serão usados para criar as tarifas. EX. 5511.
 
 
 

@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that this SIP account is associated with.
 
 
 
@@ -14,7 +14,7 @@ Username
 SIP user
 --------
 
-| Username used to login in a SIP device.
+| Username used to login in a Softphone or any SIP device.
 
 
 
@@ -24,7 +24,7 @@ SIP user
 SIP password
 ------------
 
-| Password to login in a SIP device.
+| Password to login in a Softphone or any SIP device.
 
 
 
@@ -34,7 +34,7 @@ SIP password
 CallerID
 --------
 
-| The Caller ID number. Your trunk needs to accept CLI.
+| The Caller ID number that will be shown in their destination. Your trunk needs to accept CLI.
 
 
 
@@ -64,7 +64,7 @@ Disallow
 Codec
 -----
 
-| We did not write the description to this field.
+| Select the codecs that the trunk will accept.
 
 
 
@@ -74,7 +74,7 @@ Codec
 Host
 ----
 
-| We did not write the description to this field.
+| Dynamic is an option that allows the user to register their account under any IP. If you want to authenticate the user via IP, put the client IP here, let the password field blank and set it to "insecure" to por/invite in the Aditional Informations tab.
 
 
 
@@ -84,7 +84,11 @@ Host
 Group
 -----
 
-| We did not write the description to this field.
+| When sending an call from DID, or campaign to a group, will be called all SIP accounts that are in the group. You can create the groups with any name.
+| 
+| 
+| Is used as well to capture calls with *8, need to configurate the option "pickupexten = *8" in the file "feature.comf".
+| 
 
 
 
@@ -94,7 +98,7 @@ Group
 Videosupport
 ------------
 
-| We did not write the description to this field.
+| Activate video calls.
 
 
 
@@ -104,7 +108,7 @@ Videosupport
 Block call regex
 ----------------
 
-| You can block calls with a regular expression. For example, if you want block all calls that start with a 9, use regex ^9 
+| Block calls using REGEX. To block calls from cellphones, just put it ^55\\d\\d9. You can see more details at the link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
@@ -114,7 +118,7 @@ Block call regex
 Record call
 -----------
 
-| We did not write the description to this field.
+| Record calls of this SIP account.
 
 
 
@@ -124,7 +128,7 @@ Record call
 Tech prefix
 -----------
 
-| We did not write the description to this field.
+| Useful option for when it's necessary to authenticate more than one client via IP that uses the same IP. Common in BBX multi tenant.
 
 
 
@@ -154,7 +158,17 @@ Directmedia
 Qualify
 -------
 
-| Send OPTION to user CONTACT field to qualify the user.
+| Sent the "OPTION" package to verify if the user is online.
+| Sintax:
+|     
+| qualify = xxx | no | yes
+|         
+| Where the XXX is the number of milliseconds used. If "yes", the time configurated in sip.conf is used, 2 seconds is the standard.
+|     
+| If you activate "qualify", the Asterisk will sent the command "OPTION" to SIP peer regulary to verify if the device is still online.
+| If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.
+|     
+| This status can be verified with the funcion "sip show peer XXXX", this funcion will only provide informations of status for the SIP peer that possess "qualify = yes.
 
 
 
@@ -164,7 +178,7 @@ Qualify
 Context
 -------
 
-| We did not write the description to this field.
+| This is the context that the call will be processed, "billing" is the standard option. Only change configuration if you have knowledge of Asterisk.
 
 
 
@@ -174,7 +188,7 @@ Context
 Dtmfmode
 --------
 
-| We did not write the description to this field.
+| DTMF type. You can see more details at the link `https://www.voip-info.org/asterisk-sip-dtmfmode/.  <https://www.voip-info.org/asterisk-sip-dtmfmode/.>`_.
 
 
 
@@ -184,7 +198,7 @@ Dtmfmode
 Insecure
 --------
 
-| Needs to be NO if the host is dynamic. To IP authenticate set to invite.
+| This option need to be "NO" if the host is dynamic, so the IP authentication changes to port,invite.
 
 
 
@@ -194,7 +208,7 @@ Insecure
 Deny
 ----
 
-| We did not write the description to this field.
+| You can limit SIP traffic of a determined IP or network.
 
 
 
@@ -204,7 +218,7 @@ Deny
 Permit
 ------
 
-| We did not write the description to this field.
+| You can allow SIP traffic of a determined IP or network.
 
 
 
@@ -214,7 +228,7 @@ Permit
 Type
 ----
 
-| We did not write the description to this field.
+| Standard type is "friend", in other words, can make and receive calls. You can see more details at the link `https://www.voip-info.org/asterisk-sip-type/.  <https://www.voip-info.org/asterisk-sip-type/.>`_.
 
 
 
@@ -224,7 +238,7 @@ Type
 Allowtransfer
 -------------
 
-| Enable it to allow transfers between SIP accounts.
+| Enable this VOIP account to do tranference. The code to transfer is *2 + ramal. It's necessary to activa the option atxfer => *2 in the file "features.conf" of Asterisk.
 
 
 
@@ -234,7 +248,7 @@ Allowtransfer
 Ring false
 ----------
 
-| If YES, generate a ringing tone for the calling party.
+| Activate false ring. Add rR of the "Dial" command.
 
 
 
@@ -244,7 +258,7 @@ Ring false
 Call limit
 ----------
 
-| Maximum simultaneous calls
+| Maximum simultaneous calls allowed for this SIP account.
 
 
 
@@ -254,7 +268,7 @@ Call limit
 MOH
 ---
 
-| We did not write the description to this field.
+| Waiting music for this SIP account.
 
 
 
@@ -264,7 +278,7 @@ MOH
 URL events notify
 -----------------
 
-| We did not write the description to this field.
+| .
 
 
 
@@ -274,7 +288,7 @@ URL events notify
 Addparameter
 ------------
 
-| We did not write the description to this field.
+| The parameters set in here will replace the system default parameters, as well of the trunks, if there's any.
 
 
 
@@ -284,7 +298,7 @@ Addparameter
 AMD
 ---
 
-| We did not write the description to this field.
+| .
 
 
 
@@ -294,7 +308,7 @@ AMD
 Forward type
 ------------
 
-| We did not write the description to this field.
+| Resend destination type. This resend will not work in queues.
 
 
 
@@ -304,7 +318,7 @@ Forward type
 IVR
 ---
 
-| We did not write the description to this field.
+| Select the IVR that you want to to send to calls if the SIP account don't answer.
 
 
 
@@ -314,7 +328,7 @@ IVR
 Queue
 -----
 
-| We did not write the description to this field.
+| Select the queue that you want to to send to calls if the SIP account don't answer.
 
 
 
@@ -324,7 +338,7 @@ Queue
 Sip user
 --------
 
-| We did not write the description to this field.
+| Select the SIP accounts that you want to to send to calls if the SIP account don't answer.
 
 
 
@@ -334,7 +348,12 @@ Sip user
 Destination
 -----------
 
-| We did not write the description to this field.
+| Click for more details
+| We have 3 options, conform the selected type, group, number or custom.
+| 
+| * Group, the group name set here, needs to be exatcly the same group of SIP accounts that wants to receive the calls, is going to call all SIP accounts in the group.
+| * Custom, it's possible to execute any valid option of the DIAL command of Asterisk, example: SIP/contaSIP,45,tTr
+| * Number, can be a landline number or mobile number, needs to be in the 55 DDD format
 
 
 
@@ -344,7 +363,7 @@ Destination
 Dial timeout
 ------------
 
-| Timeout in seconds to wait for the call to be picked-up.
+| Timeout in seconds to wait for the call to be picked-up. After the timeout will be execute the channeling if it's configurated.
 
 
 
@@ -354,7 +373,7 @@ Dial timeout
 Enable voicemail
 ----------------
 
-| We did not write the description to this field.
+| Activate voicemail. It's necessary the configuration of SMTP in Linux to receive the email with the message. You can see more details at the link `https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.  <https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.>`_.
 
 
 
@@ -364,7 +383,7 @@ Enable voicemail
 Email
 -----
 
-| We did not write the description to this field.
+| Email that will be send the email with the voicemail.
 
 
 
@@ -374,7 +393,7 @@ Email
 Password
 --------
 
-| We did not write the description to this field.
+| Voicemail password. It's possible to enter in the Voicemail typing *111
 
 
 
@@ -384,7 +403,7 @@ Password
 Peer
 ----
 
-| We did not write the description to this field.
+| sip show peer
 
 
 
