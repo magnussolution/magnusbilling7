@@ -4,7 +4,7 @@
 Type
 ----
 
-| We did not write the description to this field.
+| Service type.
 
 
 
@@ -14,7 +14,7 @@ Type
 Name
 ----
 
-| We did not write the description to this field.
+| Service name.
 
 
 
@@ -24,7 +24,7 @@ Name
 Call limit
 ----------
 
-| We did not write the description to this field.
+| Limit of simultaneos calls..
 
 
 
@@ -34,7 +34,7 @@ Call limit
 Disk space
 ----------
 
-| Insert the space available to record in GB.
+| Insert total disk space in GB.
 
 
 
@@ -44,7 +44,7 @@ Disk space
 SIP account limit
 -----------------
 
-| We did not write the description to this field.
+| Maximum value of SIP accounts that this client can create.
 
 
 
@@ -54,7 +54,7 @@ SIP account limit
 Price
 -----
 
-| We did not write the description to this field.
+| Monthly cost to charge the client that activates this service.
 
 
 
@@ -64,7 +64,7 @@ Price
 Return credit
 -------------
 
-| Return credit to the user if they cancel before the expiration date.
+| If this service is cancelled before the expiry date, and if this option is set to "yes", will be refunded the proporcional value of not used days to the client.
 
 
 
@@ -74,7 +74,7 @@ Return credit
 Description
 -----------
 
-| We did not write the description to this field.
+| Used for internal control.
 
 
 

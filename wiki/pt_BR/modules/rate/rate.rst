@@ -74,7 +74,7 @@ Tempo mínimo para tarifar
 Tempo adicional
 ---------------
 
-| Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
+| Tempo para adicionar na duração da chamada. Se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.
 
 
 

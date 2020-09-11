@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that wants to register the number.
 
 
 
@@ -14,7 +14,7 @@ Username
 Number
 ------
 
-| We did not write the description to this field.
+| Number.
 
 
 
@@ -24,7 +24,7 @@ Number
 Direction
 ---------
 
-| We did not write the description to this field.
+| Calls ill be analysed according to the selected options.
 
 
 

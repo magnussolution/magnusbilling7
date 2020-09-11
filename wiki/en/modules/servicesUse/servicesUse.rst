@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that owns the service.
 
 
 
@@ -14,7 +14,7 @@ Username
 Service
 -------
 
-| We did not write the description to this field.
+| Service.
 
 
 
@@ -24,7 +24,7 @@ Service
 Price
 -----
 
-| We did not write the description to this field.
+| Service price.
 
 
 
@@ -34,7 +34,7 @@ Price
 Payment methods
 ---------------
 
-| We did not write the description to this field.
+| Payment method.
 
 
 
@@ -44,7 +44,7 @@ Payment methods
 Reservation date
 ----------------
 
-| We did not write the description to this field.
+| Day of service activation.
 
 
 

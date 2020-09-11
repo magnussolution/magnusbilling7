@@ -14,7 +14,7 @@ Name
 Use on signup
 -------------
 
-| We did not write the description to this field.
+| Making avaible this plan in the signup formulary. If only has 1 plan, the clients that register will use this plan, if theres more than 1 plan, then the client will be able to choose. It's necessary to have at least 1 plan with this option activated to make the registers work.
 
 
 
@@ -24,7 +24,7 @@ Use on signup
 Initial credit to new users
 ---------------------------
 
-| We did not write the description to this field.
+| The amount of credit you want to give to the clients whom registered through signup formulary.
 
 
 
@@ -34,7 +34,7 @@ Initial credit to new users
 Notices with audio
 ------------------
 
-| We did not write the description to this field.
+| Execute audios to the client from this plan or just send the error only? For example, the audios that theres no more credit.
 
 
 
@@ -44,7 +44,7 @@ Notices with audio
 Tech prefix
 -----------
 
-| We did not write the description to this field.
+| Techprefix is like a password to the client, that allows the use of more plans.
 
 
 
@@ -54,7 +54,7 @@ Tech prefix
 Services
 --------
 
-| We did not write the description to this field.
+| Select here the services that will be avaible to the users of this plan.
 
 
 

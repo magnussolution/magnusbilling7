@@ -4,7 +4,8 @@
 Host
 ----
 
-| We did not write the description to this field.
+| SMST domain
+| You need to verify if the datacenter where the server will be hosted don't block the ports used by SMTP.
 
 
 
@@ -14,7 +15,7 @@ Host
 Username
 --------
 
-| We did not write the description to this field.
+| Username used to authenticate the SMTP server.
 
 
 
@@ -24,7 +25,7 @@ Username
 Password
 --------
 
-| We did not write the description to this field.
+| Password used to authenticate the SMTP server.
 
 
 
@@ -34,7 +35,7 @@ Password
 Port
 ----
 
-| We did not write the description to this field.
+| Port used by the SMTP server.
 
 
 
@@ -43,6 +44,16 @@ Port
 
 Encryption
 ----------
+
+| Encryption type.
+
+
+
+
+.. _smtps-sender:
+
+Sender
+------
 
 | We did not write the description to this field.
 

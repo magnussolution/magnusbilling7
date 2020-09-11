@@ -44,7 +44,7 @@ Regra prefixo
 Quantidade
 ----------
 
-| Quantos VOUCHERs você deseja gerar?.
+| Quantidade de VOUCHERs para serem gerados.
 
 
 
@@ -64,7 +64,7 @@ Descrição
 Voucher
 -------
 
-| Este é o número do VOUCHER.
+| Número do VOUCHER.
 
 
 

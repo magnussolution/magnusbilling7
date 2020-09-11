@@ -34,7 +34,7 @@ Preço de venda
 Bloco inicial
 -------------
 
-| Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
+| Tempo mínimo em segundos para tarifar. Ex: se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
 
 
 
@@ -54,7 +54,7 @@ Incremento
 Tempo mínimo para tarifar
 --------------------------
 
-| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.
+| Tempo mínimo para tarifar. Ex: Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.
 
 
 

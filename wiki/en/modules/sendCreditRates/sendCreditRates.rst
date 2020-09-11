@@ -4,7 +4,7 @@
 Country
 -------
 
-| We did not write the description to this field.
+| Country.
 
 
 
@@ -14,7 +14,7 @@ Country
 Operator name
 -------------
 
-| We did not write the description to this field.
+| Operator name.
 
 
 
@@ -24,7 +24,7 @@ Operator name
 Sell price
 ----------
 
-| We did not write the description to this field.
+| Sales price.
 
 
 

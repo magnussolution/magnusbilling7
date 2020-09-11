@@ -14,7 +14,7 @@ Nome
 Crédito
 --------
 
-| Quanto você tem de crédito com o provedor? Este campo é opcional.
+| A quantidade de crédito que você possuí com seu provedor. Este campo é opcional.
 
 
 

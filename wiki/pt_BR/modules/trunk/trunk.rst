@@ -275,7 +275,7 @@ Sendrpid
 | Define se um cabeçalho SIP Remote-Party-ID deve ser enviado.
 | O padrão é não.
 | 
-| Este campo é freqüentemente usado por provedores VoIP de atacado para fornecer a identidade do chamador, independentemente das configurações de privacidade (o From SIP header).
+| Este campo é frequentemente usado por provedores VoIP de atacado para fornecer a identidade do chamador, independentemente das configurações de privacidade (o From SIP header).
 
 
 
@@ -331,7 +331,7 @@ Parâmetros
 -----------
 
 | Formato válido no Asterisk sip.conf, uma opção por linha.
-| Exemplo, digamos que vc precise colocar o parâmetro useragent então coloque neste campo:
+| Exemplo, digamos que você precise colocar o parâmetro useragent então coloque neste campo:
 | 
 | useragent=meu agente
 | 

@@ -60,7 +60,7 @@ Preço
 ------
 
 | Preço que será cobrado mensalmente do cliente.
-| Se no dia do vencimento o cliente não tem saldo suficiente para pagar o pacote o MagnusBilling vai dar baixa no pacote automaticamente.
+| Se no dia do vencimento o cliente não tem saldo suficiente para pagar o pacote o MagnusBilling vai cancelar o pacote automaticamente.
 | 
 | No menu configurações, ajustes, existe uma opção chamada Notificação de Pacote de Oferta, este valor é quantos dias antes do vencimento do pacote o sistema tentará cobrar a mensalidade, caso o cliente não tiver saldo, então o MagnusBilling vai enviar um Email para o cliente informando a falta de crédito.
 | 

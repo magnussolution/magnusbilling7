@@ -49,3 +49,13 @@ Encriptação
 
 
 
+
+.. _smtps-sender:
+
+Sender
+------
+
+| Remetente para enviar o email.
+
+
+

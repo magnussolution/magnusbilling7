@@ -356,6 +356,7 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
     'diduse.id_user': `Usuário dono do DID.`,
     'diduse.id_did': `Número DID.`,
     'diduse.reservationdate': `Dia que o DID foi reservado para o usuário.`,
+    'diduse.month_payed': ``,
     //FAIL2BAN
     'firewall.ip': `IP.`,
     'firewall.action': `Com está opção em SIM, o IP será colocado na lista de ip-blacklist do fail2ban e ficará bloqueado para sempre.||A opção NÃO vai bloquear o IP momentaneamente conforme os parâmetros no arquivo /etc/fail2ba/jail.local.
@@ -508,7 +509,7 @@ Digamos que o não existe horário de atendimento no domingo. Neste caso a regra
 Quando o cliente chegar no limite do pacote, o MagnusBilling vai verificar se o usuário tem crédito para completar a chamada, caso o usuário não tenha crédito a chamada será finalizada.
 
 .`,
-    'offer.price': `Preço que será cobrado mensalmente do cliente.||Se no dia do vencimento o cliente não tem saldo suficiente para pagar o pacote o MagnusBilling vai dar baixa no pacote automaticamente.
+    'offer.price': `Preço que será cobrado mensalmente do cliente.||Se no dia do vencimento o cliente não tem saldo suficiente para pagar o pacote o MagnusBilling vai cancelar o pacote automaticamente.
 
 No menu configurações, ajustes, existe uma opção chamada Notificação de Pacote de Oferta, este valor é quantos dias antes do vencimento do pacote o sistema tentará cobrar a mensalidade, caso o cliente não tiver saldo, então o MagnusBilling vai enviar um Email para o cliente informando a falta de crédito.
 
@@ -541,8 +542,8 @@ Para saber como funciona os pacotes gratís veja o link https://wiki.magnusbilli
     'phonenumber.city': `Cidade do cliente, campo não obrigatório.`,
     'phonenumber.status': `MagnusBilling somente tenta enviar quando o status está ativo.||Quando a chamada é enviada para seu provedor, o número fica com status pendente. 
 Se a chamada é completada, o status muda para enviado.
-Caso contrário ficará como pendente, isso quer dizer que seu tronco rejeitou completou a chamada por algum motivo.
-Se for ativado na campanha a opção números bloqueados, e o número estiver cadastrado no menu torpedo de voz & SMS, submenu números Restritos, o status bloqueado
+Caso contrário ficará como pendente, isso quer dizer que seu tronco rejeitou e completou a chamada por algum motivo.
+Se for ativado na campanha a opção números bloqueados, e o número estiver cadastrado no menu torpedo de voz & SMS, submenu números Restritos, o status bloqueado.
 Você pode usar o botão processar para reativar os números que estão com status pendente.`,
     'phonenumber.info': `Descrição para a agenda, somente para controle próprio.||Quando for usado enquete, será salvo aqui o número que o cliente digitou.`,
     //PLANOS
@@ -553,23 +554,23 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'plan.techprefix': `Techprefix é como uma senha para o cliente poder usar mais de uma plano. Por exemplo, digamos que você tem 3 tipos de planos,GSM, TDM e CLI, e quer deixar seu cliente escolher qual plano ele deseja usar. Então coloque techprefix nos planos e solicite ao seu cliente que para usar cada um dos planos e.`,
     'plan.id_service': `Selecione aqui os serviços que estarão disponível para os usuários deste plano.`,
     //PREFIXOS
-    'prefix.prefix': `Prefixo. Prefixo serão usados para criar as tarifas. EX. 5511.`,
+    'prefix.prefix': `Prefixo. Prefixos serão usados para criar as tarifas. EX. 5511.`,
     'prefix.destination': `Nome do destino. EX: Brasil SP.`,
     //PROVEDORES
     'provider.provider_name': `Nome do provedor. Provedor é a empresa que você compra os minutos. O mesmo provedor pode ter vários troncos.`,
-    'provider.credit': `Quanto você tem de crédito com o provedor? Este campo é opcional.`,
+    'provider.credit': `A quantidade de crédito que você possuí com seu provedor. Este campo é opcional.`,
     'provider.credit_control': `Se esta opção for ativada os troncos deste provedor serão desativados quando o crédito do provedor ficar em zero.`,
     'provider.description': `Descrição para a agenda, somente para controle próprio.`,
     //FILAS DE ESPERA
     'queue.id_user': `Usuário dono da fila.`,
-    'queue.name': `Nome para a fina.`,
+    'queue.name': `Nome para a fila.`,
     'queue.language': `Idioma da fila.`,
     'queue.strategy': `Estratégia para a fila.`,
     'queue.ringinuse': `Chamar ou não agentes da fila que estejam em chamada.`,
     'queue.timeout': `Por quanto tempo deve ficar chamando um agente.`,
     'queue.retry': `Tempo em segundos para tentar chamadas outro agente caso o anterior não atender.`,
     'queue.wrapuptime': `Intervalo de tempo em segundos que o agente poderá receber outra chamada.`,
-    'queue.weight': `Importância desta fila. Por exemplo, você tem o mesmo agente em 2 filas, e chega 12 chamadas ao mesmo tempo, o Asterisk vai enviar a chamada da fila com maior importancia para o agente.`,
+    'queue.weight': `Prioridade de fila. Por exemplo, você tem o mesmo agente em 2 filas, e chega 12 chamadas ao mesmo tempo, o Asterisk vai enviar a chamada da fila com maior prioridade para o agente.`,
     'queue.periodic-announce': `Áudio para os anúncios. Você pode colocar mais de um áudio, separando por  (,). Estes dados devem estar no diretório /var/lib/asterisk/sounds/.`,
     'queue.periodic-announce-frequency': `Frequência que deve executar os anúncios.`,
     'queue.announce-position': `Informar a posição que a pessoa se encontra na fila.`,
@@ -593,16 +594,16 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'rate.initblock': `Tempo mínimo em segundos para tarifar a venda. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
     'rate.billingblock': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
     'rate.minimal_time_charge': `Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.`,
-    'rate.additional_grace': `Tempo para adicionar na duração da chamada. EX. se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.`,
+    'rate.additional_grace': `Tempo para adicionar na duração da chamada. Se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.`,
     'rate.package_offer': `Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis.`,
     'rate.status': `Desativando a tarifa, o MagnusBilling vai desconsiderar completamente está tarifa. Ou seja, deletar ou desativar terá o mesmo efeito.`,
     //TARIFAS
     'ratecallshop.dialprefix': `Prefixo que quer criar a tarifa. Esta tarifa será exclusiva para o CALLSHOP.`,
     'ratecallshop.destination': `Nome do destino para este prefixo.`,
     'ratecallshop.buyrate': `Valor cobrado por minuto do cliente do Callshop.`,
-    'ratecallshop.minimo': `Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
+    'ratecallshop.minimo': `Tempo mínimo em segundos para tarifar. Ex: se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
     'ratecallshop.block': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
-    'ratecallshop.minimal_time_charge': `Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.`,
+    'ratecallshop.minimal_time_charge': `Tempo mínimo para tarifar. Ex: Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.`,
     //TARIFAS PROVEDORES
     'rateprovider.id_provider': `Provedor.`,
     'rateprovider.id_prefix': `Prefixo.`,
@@ -684,12 +685,12 @@ Digamos que tenha 1 servidor MagnusBilling 3 servidores slaves, e você deseja e
     'sip.host': `Dynamic é a opção para deixar o usuário registrar sua conta em qualquer IP. Se você deseja autenticar o usuário por IP, coloque aqui o IP do cliente, deixe a senha em branco e coloque insecure para port/invite na TAB Informaçōes Adicionais.`,
     'sip.sip_group': `Quando enviar um chamada de um DID, ou campanha para um grupo, será chamado todas as contas SIP que estiverem no grupo. Você pode criar os grupos com qualquer nome.||
 
-Também usado para capturar chamada com *8, dever se configura a opção pickupexten = *8  no arquivo feature.conf.
+Também usado para capturar chamada com *8, deve ser configurada a opção pickupexten = *8  no arquivo feature.conf.
 .`,
     'sip.videosupport': `Ativa chamadas de vídeo.`,
-    'sip.block_call_reg': `Bloquear chamadas usando REGEX. EX: Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com.`,
+    'sip.block_call_reg': `Bloquear chamadas usando REGEX. Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com.`,
     'sip.record_call': `Grava as chamadas saintes desta conta SIP.`,
-    'sip.techprefix': `Opção útil para quando for necessário autenticar mais de uma cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.`,
+    'sip.techprefix': `Opção útil para quando for necessário autenticar mais de um cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.`,
     'sip.nat': `O cliente está atrás de NAT? Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/.`,
     'sip.directmedia': `Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/.`,
     'sip.qualify': `Enviar pacote OPTION para verificar se o usuário está online.||Sintaxe:
@@ -704,11 +705,11 @@ Se o dispositivo não responder o OPTION dentro do período configurado (ou padr
 Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.`,
     'sip.context': `Este é o contexto que a chamada será processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.`,
     'sip.dtmfmode': `Tipo de DTMF. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-dtmfmode/.`,
-    'sip.insecure': `Se o host estiver dynamic está opção precisa estar como NO. Para IP authentication alterar para port,invite.`,
+    'sip.insecure': `Se o host estiver dynamic está opção precisa estar como NO, para o IP authentication alterar para port,invite.`,
     'sip.deny': `Você pode limitar o tráfego SIP de um determinado IP ou rede.`,
     'sip.permit': `Você pode permitir o tráfego SIP de um determinado IP ou rede.`,
     'sip.type': `Tipo padrão é friend, ou seja pode fazer e receber chamadas. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-type/.`,
-    'sip.allowtransfer': `Permite esta conta VoIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk.`,
+    'sip.allowtransfer': `Permite esta conta VOIP fazer transferência. O código para transferência é *2 + ramal. É necessário ativar a opção atxfer => *2 no arquivo features.conf do Asterisk.`,
     'sip.ringfalse': `Ativa ring falso. Adiciona rR do comando Dial.`,
     'sip.calllimit': `Total de chamadas simultâneas permitida para esta conta SIP.`,
     'sip.mohsuggest': `Música de espera para esta conta SIP.`,
@@ -716,13 +717,13 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sip.addparameter': `Os parâmetros colocado aqui irão substituir os parâmetros padrão do sistema, e também os do tronco, caso houver.`,
     'sip.amd': `.`,
     'sip.type_forward': `Tipo de destino do reenvio. Este reenvio não funciona em fila de espera.`,
-    'sip.id_ivr': `Selecione a URA que deseja enviar a chamadas caso a conta SIP não atender.`,
-    'sip.id_queue': `Selecione a fila de espera que deseja enviar a chamadas caso a conta SIP não atender.`,
-    'sip.id_sip': `Selecione a conta SIP que deseja enviar a chamadas caso a conta SIP não atender.`,
+    'sip.id_ivr': `Selecione a URA que deseja enviar para as chamadas caso a conta SIP não atender.`,
+    'sip.id_queue': `Selecione a fila de espera que deseja enviar para as chamadas caso a conta SIP não atender.`,
+    'sip.id_sip': `Selecione a conta SIP que deseja enviar para as chamadas caso a conta SIP não atender.`,
     'sip.extension': `Clique para mais detalhes||Temos três opcōes, conforme o tipo selecionado, grupo, número ou personalizado.
 
 * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
-* Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr
+* Personalizado, é possível a execução de qualquer opção válida do comando DIAL do Asterisk, exemplo: SIP/contaSIP,45,tTr
 * Número, pode ser um número fixo ou celular, deve estar no formato 55 DDD número.
 .`,
     'sip.dial_timeout': `Tempo em segundos que será aguardado para atender a chamada. Após este tempo será executado o encaminhamento caso for configurado.`,
@@ -762,7 +763,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     //SMS
     'sms.id_user': `Usuário que enviou/recebeu o SMS.`,
     'sms.telephone': `Número no formato E 164.`,
-    'sms.sms': `Testo no SMS.`,
+    'sms.sms': `Texto no SMS.`,
     'sms.sms_from': `Se seu provedor de SMS aceita o envio do FROM, coloque aqui. Este valor será subistituido pela variável %from% na URL do tronco.`,
     //SMTP
     'smtps.host': `Domínio só SMST||Você precisa verificar se o datacenter onde seu servidor está hospedado não bloqueia as portas usada pelo SMTP.`,
@@ -770,6 +771,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'smtps.password': `Senha para autenticar no servidor SMTP.`,
     'smtps.port': `Porta usada pelo servidor SMTP.`,
     'smtps.encryption': `Tipo de encriptação.`,
+    'smtps.sender': `Remetente para enviar o email.`,
     //MODELOS DE EMAIL
     'templatemail.fromname': `Este é o nome que será usado com fromname no email.`,
     'templatemail.fromemail': `Email usado no fromemail, deve ser o mesmo email do usuário do SMTP.`,
@@ -820,7 +822,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'trunk.disallow': `Nesta opção é possível desativar codecs. Use all para desativar todos os codecs e deixar disponível para o usuário somente os que você selecionar abaixo.`,
     'trunk.sendrpid': `Define se um cabeçalho SIP Remote-Party-ID deve ser enviado.||O padrão é não.
 
-Este campo é freqüentemente usado por provedores VoIP de atacado para fornecer a identidade do chamador, independentemente das configurações de privacidade (o From SIP header).`,
+Este campo é frequentemente usado por provedores VoIP de atacado para fornecer a identidade do chamador, independentemente das configurações de privacidade (o From SIP header).`,
     'trunk.addparameter': `Estes parâmetros serão adicionados no final do comando AGI - Comando Dial, que está no menu configurações ajustes.||Por padrão o comando DIAL é:
 ,60,L(%timeout%:61000:30000)
 
@@ -829,7 +831,7 @@ Digamos que queira adicionar um MACRO no tronco, estão neste campo, adicionar p
     'trunk.port': `Porta do tronco. Se você precisar usar outra porta diferente da 5060, lembre-se de liberar a porta no IPTABLES.`,
     'trunk.link_sms': `URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuário=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% .`,
     'trunk.sms_res': `Deixe em branco para não aguardar resposta do provedor. Ou coloque o texto que deve constar na resposta do provedor para ser considerado ENVIADO.`,
-    'trunk.sip_config': `Formato válido no Asterisk sip.conf, uma opção por linha.||Exemplo, digamos que vc precise colocar o parâmetro useragent então coloque neste campo:
+    'trunk.sip_config': `Formato válido no Asterisk sip.conf, uma opção por linha.||Exemplo, digamos que você precise colocar o parâmetro useragent então coloque neste campo:
 
 useragent=meu agente
 
@@ -928,7 +930,7 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'voucher.id_plan': `Plano que será vinculado ao cliente que usar este VOUCHER.`,
     'voucher.language': `Idioma que será usado.`,
     'voucher.prefix_local': `Regra que será usado no campo Regra prefixo.`,
-    'voucher.quantity': `Quantos VOUCHERs você deseja gerar?.`,
+    'voucher.quantity': `Quantidade de VOUCHERs para serem gerados.`,
     'voucher.tag': `Descrição para a agenda, somente para controle próprio.`,
-    'voucher.voucher': `Este é o número do VOUCHER.`,
+    'voucher.voucher': `Número do VOUCHER.`,
 });

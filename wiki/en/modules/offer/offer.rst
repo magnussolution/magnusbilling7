@@ -4,7 +4,7 @@
 Name
 ----
 
-| Offer name
+| Free package name
 
 
 
@@ -52,12 +52,15 @@ Price
 -----
 
 | Price that will be charged monthly to the client.
-| If on the expiry day the client don't have the sufficient funds to pay the package // NEED TO FINISH "dar baixa?" //
+| If on the expiry day the client don't have the sufficient funds to pay the package MagnusBilling will automatically cancel the package.
 |     
-| In the settings menu, ajusts, exist one option named Package Offer Notification, this value`
+| In the settings menu, ajusts, exist one option named Package Offer Notification, this value means how many days are left until the expiration of the package, the system will try to charge the subscription, if the client don't have the balance, MagnusBilling will send an email to the client informing the lack of funds.
 | 
+| The email can be edited in the menu, Email models , type, plan_unpaid, Expiry of Monthly Plan Notice subject.
 | 
-|                         //NEED TO FINISH UPPER LINE "offer.price"
+| To send emails it's necessary the configuration of SMTP in the SMTP menu.
+| 
+| To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.`
 | 
 | 
 |     //OFFER CDR

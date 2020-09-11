@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that sent/received the SMS.
 
 
 
@@ -14,7 +14,7 @@ Username
 Number
 ------
 
-| Needs to be in E164 format
+| Number in the E164 format.
 
 
 
@@ -24,7 +24,7 @@ Number
 SMS
 ---
 
-| We did not write the description to this field.
+| SMS text.
 
 
 
@@ -34,7 +34,7 @@ SMS
 From
 ----
 
-| We did not write the description to this field.
+| If your SMS provider accepts the submission of FROM, put it here. This value will be replaced for the variable %from% in the trunk URL.
 
 
 

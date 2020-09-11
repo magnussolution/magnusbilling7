@@ -14,7 +14,7 @@ Phonebook
 Number
 ------
 
-| Number to send calls/sms. Use only E164 format
+| Number to send calls/sms. Always need to be used in the E164 format.
 
 
 
@@ -44,7 +44,12 @@ City
 Status
 ------
 
-| We did not write the description to this field.
+| MagnusBilling will only try to send when the status is active
+| When the call is sent to your provider, the number stays with pending status.
+| If the call is completed, the status switches to sent.
+| Otherwise will stay pending, this means that your trunk rejected the call and completed it self for some reason.
+| If is activated in the campaign the "blocked numbers" option, if the number is registered in the "calls & SMS" menu, "restricted numbers" submenu, blocked status.
+| You can use the button "process" to reactivate the numbers with pending status.
 
 
 

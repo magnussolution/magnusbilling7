@@ -4,7 +4,7 @@
 Username
 --------
 
-| We did not write the description to this field.
+| User that owns the queue. 
 
 
 
@@ -14,7 +14,7 @@ Username
 Name
 ----
 
-| We did not write the description to this field.
+| Queue name.
 
 
 
@@ -24,7 +24,7 @@ Name
 Language
 --------
 
-| We did not write the description to this field.
+| Queue language.
 
 
 
@@ -34,7 +34,7 @@ Language
 Strategy
 --------
 
-| We did not write the description to this field.
+| Queue strategy.
 
 
 
@@ -44,7 +44,7 @@ Strategy
 Ringinuse
 ---------
 
-| We did not write the description to this field.
+| Call or not the agents of the queue that are in call.
 
 
 
@@ -64,7 +64,7 @@ Ring for
 Time for another agent
 ----------------------
 
-| Time in seconds to try another agent.
+| The amount of time in seconds that will retry the call.
 
 
 
@@ -74,7 +74,7 @@ Time for another agent
 Time for another call
 ---------------------
 
-| Time in seconds until the agent receives another call.
+| Time in seconds until the agent can receive another call.
 
 
 
@@ -84,7 +84,7 @@ Time for another call
 Weight
 ------
 
-| Weight of queue - when compared to other queues, higher weights get the first try at available channels when the same channel is included in more than one queue.
+| Queue Priority.
 
 
 
@@ -94,7 +94,7 @@ Weight
 Periodic announce
 -----------------
 
-| A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait
+| A set of periodic announcements can be created by separating each announcements to reproduce whit commas. E.g.: queue-periodic-announce,your-call-is-important,please-wait. This data need to be in /var/lib/asterisk/sounds/ directory.
 
 
 
@@ -114,7 +114,7 @@ Frequency
 Announce position
 -----------------
 
-| Queue position announce?
+| Informs the postition in the queue.
 
 
 
@@ -144,7 +144,7 @@ Announce frequency
 Join empty
 ----------
 
-| We did not write the description to this field.
+| Allow calls when theres no one to answer the call.
 
 
 
@@ -154,7 +154,7 @@ Join empty
 Leave when empty
 ----------------
 
-| We did not write the description to this field.
+| Hang the calls in queue when there's no one to answer.
 
 
 
@@ -184,7 +184,7 @@ Max wait time action
 Ring or playing MOH
 -------------------
 
-| We did not write the description to this field.
+| Play waiting music or tone when the client is in the queue.
 
 
 
@@ -194,7 +194,7 @@ Ring or playing MOH
 Audio musiconhold
 -----------------
 
-| We did not write the description to this field.
+| Import one waiting music to this queue.
 
 
 
