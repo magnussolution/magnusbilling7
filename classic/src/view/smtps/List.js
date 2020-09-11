@@ -46,6 +46,10 @@ Ext.define('MBilling.view.smtps.List', {
             dataIndex: 'username',
             flex: 2
         }, {
+            header: t('Sender'),
+            dataIndex: 'sender',
+            flex: 2
+        }, {
             header: t('Port'),
             dataIndex: 'port',
             flex: 3

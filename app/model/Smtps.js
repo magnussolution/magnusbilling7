@@ -33,6 +33,9 @@ Ext.define('MBilling.model.Smtps', {
         name: 'username',
         type: 'string'
     }, {
+        name: 'sender',
+        type: 'string'
+    }, {
         name: 'password',
         type: 'string'
     }, {

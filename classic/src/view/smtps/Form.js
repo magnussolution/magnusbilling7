@@ -32,6 +32,10 @@ Ext.define('MBilling.view.smtps.Form', {
             fieldLabel: t('Username'),
             hidden: App.user.isClient
         }, {
+            name: 'sender',
+            fieldLabel: t('Sender'),
+            hidden: App.user.isClient
+        }, {
             name: 'password',
             fieldLabel: t('Password'),
             inputType: 'password',

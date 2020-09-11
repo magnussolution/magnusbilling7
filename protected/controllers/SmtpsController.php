@@ -37,6 +37,7 @@ class SmtpsController extends Controller
         'id_user',
         'password',
         'username',
+        'sender',
         'host',
         'port',
         'encryption',
@@ -140,7 +141,7 @@ class SmtpsController extends Controller
         $mail->Username   = $modelSmtp->username;
         $mail->Password   = $modelSmtp->password;
         $mail->Port       = $modelSmtp->port;
-        $mail->SetFrom($modelSmtp->username);
+        $mail->SetFrom($modelSmtp->sender);
         $mail->SetLanguage($language);
         $mail->Subject = 'MagnusBilling email test';
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';

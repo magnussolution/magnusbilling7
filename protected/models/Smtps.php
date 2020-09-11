@@ -54,7 +54,7 @@ class Smtps extends Model
     {
         return array(
             array('id_user', 'numerical', 'integerOnly' => true),
-            array('host, username, ', 'length', 'max' => 100),
+            array('host, username, sender', 'length', 'max' => 100),
             array('password', 'length', 'max' => 50),
             array('encryption, port', 'length', 'max' => 10),
         );
