@@ -28,7 +28,6 @@ Ext.define('MBilling.view.didUse.List', {
         me.allowPrint = false;
         me.buttonUpdateLot = false;
         me.allowCreate = false;
-        me.allowUpdate = false;
         me.allowDelete = false;
         me.columns = [{
             header: t('ID'),
@@ -51,7 +50,7 @@ Ext.define('MBilling.view.didUse.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('Monthly price'),
+            header: t('Month payed'),
             dataIndex: 'month_payed',
             flex: 2
         }, {

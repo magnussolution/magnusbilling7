@@ -24,17 +24,14 @@ Ext.define('MBilling.view.didUse.Form', {
     initComponent: function() {
         var me = this;
         me.items = [{
-            xtype: 'userlookup',
-            name: 'id_user',
-            fieldLabel: t('Username'),
-            ownerForm: me,
-            hidden: App.user.isClient,
-            readOnly: true
-        }, {
             xtype: 'didcombo',
             name: 'id_did',
             fieldLabel: t('DID'),
             readOnly: true
+        }, {
+            xtype: 'numberfield',
+            name: 'month_payed',
+            fieldLabel: t('Month payed')
         }, {
             xtype: 'datefield',
             name: 'reservationdate',
