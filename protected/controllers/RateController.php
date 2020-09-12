@@ -222,7 +222,7 @@ class RateController extends Controller
         " IGNORE INTO TABLE pkg_rate" .
         " CHARACTER SET UTF8 " .
         " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
-        " LINES TERMINATED BY '\\r\\n' (dialprefix,destination,rateinitial,initblock,billingblock,minimal_time_charge,connectcharge,disconnectcharge)" .
+        " LINES TERMINATED BY '\\r\\n' (dialprefix,destination,rateinitial,initblock,billingblock,minimal_time_charge,connectcharge,disconnectcharge,package_offer)" .
         " SET id_plan = " . $values['id_plan'] . ", id_trunk_group = " . $values['id_trunk_group'] . ", id_prefix = " . $modelPrefix->id . "";
 
         try {
