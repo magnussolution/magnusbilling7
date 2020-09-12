@@ -23,7 +23,6 @@ Ext.define('MBilling.view.offerUse.Form', {
     alias: 'widget.offeruseform',
     initComponent: function() {
         var me = this;
-        me.allowCreate = false;
         me.items = [{
             xtype: 'userlookup',
             ownerForm: me,
