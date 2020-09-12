@@ -91,7 +91,9 @@ class DidAgi
                 $agi->verbose("Is a DID call But not have destination Hangup Call");
                 $MAGNUS->hangup($agi);
             }
-            exit;
+            if ($this->voip_call != 3) {
+                exit;
+            }
         }
 
     }
