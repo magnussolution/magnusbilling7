@@ -345,7 +345,7 @@ Ext.define('MBilling.view.sip.Form', {
                         allowBlank: true,
                         hidden: true
                     }, {
-                        xtype: 'siplookup',
+                        xtype: 'sip2lookup',
                         ownerForm: me,
                         name: 'id_sip',
                         fieldLabel: t('Sip user'),
