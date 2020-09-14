@@ -8,7 +8,7 @@ Introduction
 
 * MagnusBilling can be installed on Linux Centos or Debian. The team of developers does all the development and testing only on Centos 7, so we recommend using it.
 
-* MagnusBilling has a modern and robust interface that makes the administration of all functions very easy.
+* MagnusBilling has a modern and robust interface that makes the administration of all functions very easy to understand.
 
 * MagnusBilling has everything that small, medium and large companies need to put in place a robust IP PBX system `Canal youtube`_.
 
