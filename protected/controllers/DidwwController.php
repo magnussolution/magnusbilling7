@@ -239,6 +239,13 @@ class DidwwController extends Controller
 
             $countries = json_decode($result);
 
+            if (isset($countries->errors)) {
+
+                echo '<pre>';
+                print_r($countries->errors);
+                exit;
+            }
+
             $result = [];
             foreach ($countries->data as $key => $country) {
                 $result[] = [
