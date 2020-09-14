@@ -104,8 +104,7 @@ Offer
 CPS Limit
 ---------
 
-| CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.` , 
-|     'user.company_name': `Company name.
+| CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.
 
 
 

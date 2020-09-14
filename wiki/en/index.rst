@@ -46,7 +46,7 @@ Welcome to MagnusBilling 7 wiki.
    :caption: Segurança
    :name: sec-Segurança
 
-   firewall/iptables.rst
+   security/iptables.rst
 
 .. toctree::
    :maxdepth: 3
