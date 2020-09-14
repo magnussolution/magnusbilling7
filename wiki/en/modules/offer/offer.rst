@@ -60,11 +60,7 @@ Price
 | 
 | To send emails it's necessary the configuration of SMTP in the SMTP menu.
 | 
-| To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.`
-| 
-| 
-|     //OFFER CDR
-|     'offercdr.id_user': `User that made the call.
+| To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.
 
 
 

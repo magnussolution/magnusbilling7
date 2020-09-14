@@ -433,11 +433,7 @@ The email can be edited in the menu, Email models , type, plan_unpaid, Expiry of
 
 To send emails it's necessary the configuration of SMTP in the SMTP menu.
 
-To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.`
-
-
-    //OFFER CDR
-    'offercdr.id_user': `User that made the call.`,
+To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.`,
     //OFFER CDR
     'offercdr.id_user': ``,
     'offercdr.id_offer': `Name of the offer.`,
@@ -777,8 +773,7 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.active': `Only active users can login into the panel and make calls`,
     'user.country': `Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164`,
     'user.id_offer': `Used to give free minutes. It's necessary to inform the tariffs that will belongs to the free packages.`,
-    'user.cpslimit': `CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.` , 
-    'user.company_name': `Company name.`,
+    'user.cpslimit': `CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.`,
     'user.company_name': ``,
     'user.state_number': `State number.`,
     'user.lastname': `Lastname.`,
