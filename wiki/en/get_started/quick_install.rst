@@ -21,10 +21,10 @@ Install CentOS 7 **minimal**.
 
 ::
 
-   Install complete. The server will restart.
+   Install complete. The server will restart automatically..
 
    Use a browser to access the interface.
-      Go to: http://xxx.xxx.xxx.xxx
+      Go to: http://000.000.000.000
       User: root
       Password: magnus (Remember to change the password)
 
