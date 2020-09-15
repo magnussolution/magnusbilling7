@@ -149,6 +149,7 @@
 
 .icon-play {
     background-image: url(images/icons/play.png) !important;
+    background-repeat: no-repeat;
 }
 .icon-stop {
     background-image: url(images/icons/stop.png) !important;
