@@ -4,13 +4,13 @@ Introduction
 ============
 
 
-`MagnusBilling`_ is an open source tool written in PHP and JAVASCRIPT, using the EXTJS 6 and YII FRAMEWORK frameworks, aimed at IP telephony providers MagnusBilling provides a complete, really powerful system for anyone to start an IP telephony provider in a matter of minutes. MagnusBilling uses `Asterisk`_ for connection between customers and providers.
+`MagnusBilling`_ is an open source tool written in PHP and JAVASCRIPT, using the EXTJS 6 and YII FRAMEWORK frameworks, aimed at IP telephony providers. MagnusBilling provides a complete and powerful system for anyone to start an IP telephony provider in a matter of minutes. MagnusBilling uses `Asterisk`_ for connection between customers and providers.
 
 * MagnusBilling can be installed on Linux Centos or Debian. The team of developers does all the development and testing only on Centos 7, so we recommend using it.
 
 * MagnusBilling has a modern and robust interface that makes the administration of all functions very easy to understand.
 
-* MagnusBilling has everything that small, medium and large companies need to put in place a robust IP PBX system `Canal youtube`_.
+* MagnusBilling has everything that a small, medium and large companies need to start a robust IP PBX system `Youtube Channel`_.
 
 
 Functions
