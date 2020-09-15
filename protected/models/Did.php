@@ -63,7 +63,7 @@ class Did extends Model
             array('fixrate', 'numerical'),
             array('did,callerid', 'length', 'max' => 50),
             array('description', 'length', 'max' => 150),
-            array('expression_1, expression_2,expression_2,TimeOfDay_monFri,TimeOfDay_sat,TimeOfDay_sun,workaudio,noworkaudio', 'length', 'max' => 150),
+            array('expression_1, expression_2,expression_2,expression_3,TimeOfDay_monFri,TimeOfDay_sat,TimeOfDay_sun,workaudio,noworkaudio', 'length', 'max' => 150),
             array('connection_charge, selling_rate_1, selling_rate_2,selling_rate_3, connection_sell', 'length', 'max' => 15),
         );
     }
