@@ -18,7 +18,7 @@ Welcome to MagnusBilling 7 wiki.
 
 
 .. toctree::
-   :caption: Primeiros passos
+   :caption: First Steps
    :maxdepth: 2
 
    get_started/quick_install.rst
@@ -26,7 +26,7 @@ Welcome to MagnusBilling 7 wiki.
    get_started/backup.rst
    
 .. toctree::
-   :caption: Informações técnicas
+   :caption: Technical Information
    :maxdepth: 1
 
    price_calculation.rst
@@ -36,15 +36,15 @@ Welcome to MagnusBilling 7 wiki.
    conf.rst
 
 .. toctree::
-   :caption: Configaçōes do Asterisk
+   :caption: Asterisk option
    :maxdepth: 1
 
    asterisk_options/directmedia.rst
 
 .. toctree::
    :maxdepth: 1
-   :caption: Segurança
-   :name: sec-Segurança
+   :caption: Security
+   :name: sec-Security
 
    security/iptables.rst
 
