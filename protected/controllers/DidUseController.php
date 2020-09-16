@@ -22,7 +22,7 @@
 
 class DidUseController extends Controller
 {
-    public $attributeOrder = 'status DESC, DAY( reservationdate ) DESC';
+    public $attributeOrder = 'status DESC, DAY( reservationdate ) ASC';
     public $extraValues    = array('idDid' => 'did', 'idUser' => 'username');
 
     public $fieldsInvisibleClient = array(

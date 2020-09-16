@@ -67,8 +67,7 @@ Ext.define('MBilling.view.did.List', {
                 type: 'string',
                 field: 'idUser.username'
             },
-            flex: 3,
-            menuDisabled: true
+            flex: 3
         }, {
             header: t('Status'),
             dataIndex: 'activated',
