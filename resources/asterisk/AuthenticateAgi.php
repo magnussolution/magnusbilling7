@@ -82,7 +82,13 @@ class AuthenticateAgi
             if (isset($modelCallerid->id)) {
                 $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = '$modelCallerid->id_user' LIMIT 1";
                 $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser);
+                $sql       = "SELECT * FROM pkg_sip  WHERE id_user = '$modelUser->id' LIMIT 1";
+                $modelSip  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+                $MAGNUS->sip_account = $modelSip->name;
+
+                AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser, $modelSip);
+
                 $agi->verbose("AUTHENTICATION BY CALLERID:" . $MAGNUS->CallerID, 6);
                 $authentication = true;
             }
