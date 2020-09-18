@@ -409,6 +409,6 @@ Ext.define('Ext.ux.panel.Chart', {
         return value;
     },
     rendererLegend: function(value) {
-        return t(value);
+        return t(value.charAt(0).toUpperCase() + value.slice(1));
     }
 });

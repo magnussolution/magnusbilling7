@@ -40,6 +40,12 @@ Ext.define('MBilling.view.callOnlineChart.Chart', {
     insetPadding: 0,
     initComponent: function() {
         var me = this;
+        me.rendererLegend = function(value) {
+            if (value == 'answer') {
+                value = 'answered';
+            }
+            return t(value.charAt(0).toUpperCase() + value.slice(1));
+        }
         me.rendererFieldValue = function(axis, label, layoutContext) {
             return layoutContext.renderer(label);
         };
