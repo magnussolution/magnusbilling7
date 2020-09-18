@@ -6,127 +6,132 @@ A main area, where all the modules are opened at, with active and inactive tabs.
 A suspended menu with the language options, change password, about and leave.
 
 
-Barra de status do servidor
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Monitoring Panel
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Na parte inferior, esta barra somente é mostrada na aba Home. barra de status do servidor
+In the main page we have some graphs and information about the server. This bar is only shown in the Home tab, server status bar.
 
-	*  Quantidade de processadores
-	*  Modelo do processador
-	*  Uso atual do processador
-	*  Media de uso do processador
-	*  Memoria total do servidor
-	*  Memoria em uso
-	*  Consumo do link upload
-	*  Consumo do link download
-	*  Tempo que o servidor esta Up
-	*  Botão para dar reload no Asterisk
+	*  Processors model;
+	*  Current processor usage;
+	*  Average processor usage;
+	*  Server total memory;
+	*  Memory in use;
+	*  Link upload and download usage graph;
+	*  Time that the server is online;
+	*  Active users;
+	*  Simultaneous calls and CPS(Calls per second) peak;
+	*  Profit from the month;
+	*  Recharges held in the month.
+	*  Simultaneous Calls graph, with the "show" option last hour, 6 hours, 12 hours, 1 day, 2 days, 3 days or 1 week;
+	*  Graph of the 3 most used trunks.
 
-.. image:: ../img/barra.png
+.. image:: ../img/dashboard.png
         :scale: 85%	   
 	   	   
 
-Barra de botões
+Button bar
 ^^^^^^^^^^^^^^^
 
-O MagnusBilling é um sistema modular, cada menu ou sub-menu corresponde a um modulo. Todos os módulos são idênticos em sua estrutura.
-Cada modulo é composto por uma barra de ferramentas composto por estes botões:
+MagnusBilling is a modular system, each menu or submenu corresponds to a module. All the modules are identical in their structure. 
+Each module is composed of one bar of tools composed by this buttons:
 
-Barra de botões dos módulos
+Modules buttons bar
 
-- Botão Adicionar.
-	Adicionar um novo registro ao módulo.
+- Add Button.
+	Adds a new record to the module.
 
-- Botão Editar.
-	Editar um registro, somente clicando sobre um registro, já é aberto do formulário para editar.
+- Edit Button.
+	Edits one record, only clicking on top of a register, already open from the formulary to edit.
 
-- Botão Excluir.
-	Ao selecionar um ou mais registros e clicando em Excluir, sera solicitado a confirmação e sendo confirmado, sera excluído o registro.
-	O botão excluir tem uma propriedade chamada Todos, encontrada ao clicar sobre a flecha ao lado do botão, esta propriedade exclui todos os registros listados no modulo. Propriedade muito útil para excluir grande quantidade de dados.
-	**OBS**: O banco de dados do MagnusBilling usa InnoDB com foreign key, isso relaciona todos os dados, por tanto, não é possível excluir dados que estão relacionados com outro. EX: Não é possível excluir um cliente, se este cliente tem um pagamento realizado, caso seja necessário excluir o cliente, primeiro tem que ser excluído todos os registros relacionados a este cliente.
+- Delete Button.
+	Selection one or more records and clicking in Delete, will be requested the confirmation, when confirmed the record will be deleted. The delete button have a property called All, found when clicked on top of the arrow besides the button, this property deletes all the records
+listed in the module. A very useful tool to delete a large amout of data.
+	**OBS**: MagnusBilling databank uses InnoDB with foreign key, this links every data, therefore is not possible to delete data that are already linked with others. EX: Is not possible to delete an client, if this client made an purchase. Will be necessary to delete all the records linked to this client to be able to delete this client.
 
-- Botão Atualizar em Lote.
-	Este botão é fundamental para uso eficiente do sistema. Este botão é usado, como sugere o nome, para atualizar vários registros ao mesmo tempo, facilitando uma tarefa que seria impossível de ser realizada manualmente em módulos com muitos registros, como o modulo tarifas que pode facilmente passar dos 100 mil registros. O uso é bastante simples, basta buscar os registros que se queira atualizar, e clicar no botão Atualizar em Lote, abrira o formulário de edição com todos os campos em branco, altere somente os campos que queira atualizara, deixando o restante em branco, e clique em salvar, este processo pode demorar alguns segundos, e atualizara todos os registros.
-	O botão Atualizar em Lote tem uma propriedade chamada Selecionados, encontrada ao clicar sobre a flecha ao lado do botão, esta propriedade ira atualizar só os registros selecionados.
+- Batch Update button.
+	This button is fundamental to the server efficiency. This button is used, as the names suggests, is to update a large amount of records at the same time, making it easy one taks that would be impossible to be done manually in modules with a lot of records, with the tariff module that can easily surpass the 100 thousand records. It's use is pretty simple, search the records that you want to update and click the Batch Update button, will open a formulary with all it's fields blank, just change the fields that you want to update, letting the rest of them in blank, and then press save, this process can take a few seconds, and will update all the records.
+	Batch Update button have a property called Selected, found when clicked on the arrow besides the button, this property will only update the selected records.
+	
 
-- Botão Imprimir
-	Este botão gera um Excel no formato CSV dos registros selecionados.
+- Print button.
+	This button generates a Excel file in CSV format of the selected records.
 
-- Botão Imprimir
-	Este botão gera um PDF dos registros selecionados.
+- Print button.
+	This button generates a PDF file of the selected records.
 
-- Botão Limpar Filtros
-	Este botão limpa os filtros realizados.
+- Clear Filters Button.
+	This button clears used filters.
 
 .. image:: ../img/buttons.png
         :scale: 85%	
 
 
-Colunas
+Columns
 ^^^^^^^
 
-Cada coluna do MagnusBilling tem varias opções muito útil para o bom uso do sistema.
+Each columns in MagnusBilling have nemerous options, very useful for a good use of the system.
 
-Para encontrar estas opções coloque o mouse sobre a coluna desejada, e clique na flecha.
+To find these options put your mouse pointer on top of the desired column, then press the arrow.
 
-- Ordem Ascendente e Descendente.
-	Classifica os registros pela coluna seleciona de forma ascendente ou descendente. Esta opção também pode ser usada clicando sobre a coluna.
+- Ascending and Descending order.
+	Classifies the records of the selected column in a ascending or descending manner. This option can be used when clicked on top of the column as well.
 
-- Colunas.
-	Com esta opção se pode mostrar ou ocultar colunas, muito útil para mostrar somente dados necessários, exemplo, para gerar uma tabela de preço para enviar a um cliente contendo somente o nome do destino e o preço de venda.
-- Agrupar por Esta Coluna.
-	Agrupa os registros por esta coluna, muito útil para o modulo Chamadas Online, podendo agrupar as ligações por cliente, para poder ver separadamente as ligações de um cliente, ou de qualquer outra coluna.
+- Columns.
+	With this option you can show or hide columns, very useful to shown only necessary data. Example, to generate a price table to send to a client including only the name of destination and the sales price.
+	
+- Group by this Column.
+	Group the records by this column, very useful for the Online Calls modules, making it possible to group the calls per client. To be able to see individually the calls of one client or any other column.
 
-- Exibir em Grupos.
-	Esta opção é usada para desativar a opção anterior.
+- Show in groups.
+	This option is used to disable the previous option.
 
-- Filtro
-	Esta opção também é de fundamental entendimento, por tanto será escrito um tutorial exclusivo.
+- Filter.
+	This option is fundamental as well, therefore will be written a dedicated tutorial for it.
 
 .. image:: ../img/colluns.png
         :scale: 85%
 
 
-Sistema de Filtro
+Filter System
 ^^^^^^^^^^^^^^^^^
 
-O MagnusBilling conta com um poderoso sistema de filtro para encontrar os registros desejados em cada modulo.
+MagnusBilling counts on a powerful filter system to find desired records in each module.
 
-Para encontrar esta opções coloque o mouse sobre a coluna que deseja realizar a busca, e clique na flecha, deslizar ate Filtro, abrira o sub-menu contendo as opções para a coluna, continue deslizando o mouse ate o campo e coloque o valor que deseja buscar e aperte Enter.
-OSB: O sistema de filtro é case sensitive.
+To find this option put your mouse pointer on top of the column that you want to make search, press in the arrow, slide it until Filter, will open a sub-menu containing the option for the column, keep sliding the mouse pointer unil the field and put the value that you want to search, then press enter.
+OBS: The filter system is Case Sensitive.
 
-Existe tipos de filtro dependendo do tipo dos dados da coluna:
+Exists different filters depending on the type of the column;
 
 
-- Filtro por texto.
+- Text filter.
 
-	Este filtro encontra dados em colunas com texto que inicia com, termina com, contém ou que seja igual a. Por exemplo, buscar um cliente que tem o nome que Inicia com 'José', sera listado todos os clientes que tem nome que inicia com José.
+	This filter search for data in the columns with a text that begins with, ends with, contains or that is equal to. For example , if you search for the name that begins with "Peter", will be listed all the clients that have Peter in the begining of their names.
 
 .. image:: ../img/filter_text.png
         :scale: 85%
 
-- Filtro por números inteiros.
+- Whole numbers filter.
 
-	Este filtro sera mostrado em colunas que contem valores numéricos, como a coluna crédito de um cliente.
+	This filter show in columns that contains numeric numbers, like the client credit column.
 
 .. image:: ../img/filter_int.png
         :scale: 85%
 
 
-- Filtro por datas.
+- Filter by dates.
 
-	Este filtro sera mostrado em colunas que contem datas, este filtro é muito útil nos relatórios.
+	This filter show the columns that contains dates, this filter is really useful in the reports.
 
 .. image:: ../img/filter_date.png
         :scale: 85%
 
 
-- Filtro combo.
+- Combo filter.
 
-	Este filtro é usando em casos de relacionamento entre módulos.
+	This filter is used in cases of modules relationships.
 
 .. image:: ../img/filter_combo.png
         :scale: 85%
 
  
-Para desfazer um filtro, tire a seleção do menu filtro, e para limpara todos os filtros aplicado a um módulo, clique no botão Limpar Filtros.
+To undo an filter, remove the selection of filter menu. And to clean all the aplicable filters in a module, click on the Clean Filters button.
