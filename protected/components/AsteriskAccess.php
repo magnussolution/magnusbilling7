@@ -245,7 +245,7 @@ class AsteriskAccess
                         $modelMember = QueueMember::model()->findAll([
                             'condition' => 'queue_name = :key AND paused = 0',
                             'params'    => array(':key' => $data['name']),
-                            'order'     => 'uniqueid ASC',
+                            'order'     => 'id ASC',
                         ]);
                         foreach ($modelMember as $member) {
                             $line .= 'member=' . $member['interface'] . "\n";
