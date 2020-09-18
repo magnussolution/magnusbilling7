@@ -643,6 +643,7 @@ Ext.define('Helper.Util', {
     },
     formatStatusImage: function(value) {
         if (value.match(/^OK/g)) return '<img src="resources/images/registered.png" /> ' + t(value);
+        else if (value.match(/^LAGGED/g)) return '<img src="resources/images/Unmonitored.png" /> ' + t(value);
         else return '<img src="resources/images/' + value + '.png" /> ' + t(value);
     },
     formatSipDirection: function(value) {
