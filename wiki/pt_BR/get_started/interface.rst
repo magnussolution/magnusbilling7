@@ -11,20 +11,20 @@ Menu superior, com opções de idioma, botões alterar senha, ajuda e sair do si
 Painel de monitoramento
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Na página principal, temos alguns gráficos e informações sobre o servidor. esta barra somente é mostrada na aba Home. barra de status do servidor
+Na página principal, temos alguns gráficos e informações sobre o servidor. Esta barra somente é mostrada na aba Home. barra de status do servidor
 
-	*  Modelo do processador
-	*  Uso atual do processador
-	*  Média de uso do processador
-	*  Memória total do servidor
-	*  Memória em uso
-	*  Gráfico do uso do link upload e download
-	*  Tempo que o servidor está Up
-	*  Usuários ativos
-	*  Pico de chamadas simultâneas e de CPS(Chamadas por segundo)
-	*  Lucro no mês
-	*  Recargas realizada no mês.
-	*  Gráfico de chamadas simultâneas, com opção de mostrar  ultima hora, 6 horas, 12 horas, 1 dia, 2 dias, 3 dias ou 1 semana.
+	*  Modelo do processador;
+	*  Uso atual do processador;
+	*  Média de uso do processador;
+	*  Memória total do servidor;
+	*  Memória em uso;
+	*  Gráfico do uso de link upload e download;
+	*  Tempo que o servidor está online;
+	*  Usuários ativos;
+	*  Pico de chamadas simultâneas e de CPS(Chamadas por segundo);
+	*  Lucro no mês;
+	*  Recargas realizada no mês;
+	*  Gráfico de chamadas simultâneas, com opção de mostrar  ultima hora, 6 horas, 12 horas, 1 dia, 2 dias, 3 dias ou 1 semana;
 	*  Gráfico dos 3 troncos mais usados.
 
 .. image:: ../img/dashboard.png
@@ -54,13 +54,13 @@ Barra de botões dos módulos
 	Este botão é fundamental para uso eficiente do sistema. Este botão é usado, como sugere o nome, para atualizar vários registros ao mesmo tempo, facilitando uma tarefa que seria impossível de ser realizada manualmente em módulos com muitos registros, como o módulo tarifas que pode facilmente passar dos 100 mil registros. O uso é bastante simples, basta buscar os registros que se queira atualizar, e clicar no botão Atualizar em Lote, abrirá o formulário de edição com todos os campos em branco, altere somente os campos que queira atualizar, deixando o restante em branco, e clique em salvar, este processo pode demorar alguns segundos, e atualizará todos os registros.
 	O botão Atualizar em Lote tem uma propriedade chamada Selecionados, encontrada ao clicar sobre a flecha ao lado do botão, esta propriedade irá atualizar só os registros selecionados.
 
-- Botão Imprimir
-	Este botão gera um Excel no formato CSV dos registros seleccionados.
+- Botão Imprimir.
+	Este botão gera um arquivo em Excel no formato CSV dos registros seleccionados.
 
-- Botão Imprimir
-	Este botão gera um PDF dos registros selecionados.
+- Botão Imprimir.
+	Este botão gera um arquivo em PDF dos registros selecionados.
 
-- Botão Limpar Filtros
+- Botão Limpar Filtros.
 	Este botão limpar os filtros realizados.
 
 .. image:: ../img/buttons.png
@@ -78,14 +78,15 @@ Para encontrar estas opções coloque o mouse sobre a coluna desejada, e clique 
 	Classifica os registros pela coluna selecionada de forma ascendente ou descendente. Esta opção também pode ser usada clicando sobre a coluna.
 
 - Colunas.
-	Com esta opção se pode mostrar ou ocultar colunas, muito útil para mostrar somente dados necessários, exemplo, para gerar uma tabela de preço para enviar a um cliente contendo somente o nome do destino e o preço de venda.
+	Com esta opção se pode mostrar ou ocultar colunas, muito útil para mostrar somente dados necessários. Exemplo, para gerar uma tabela de preço para enviar a um cliente contendo somente o nome do destino e o preço de venda.
+	
 - Agrupar por Esta Coluna.
-	Agrupa os registros por esta coluna, muito útil para o módulo Chamadas Online, podendo agrupar as ligações por cliente, para poder ver separadamente as ligações de um cliente, ou de qualquer outra coluna.
+	Agrupa os registros por esta coluna, muito útil para o módulo Chamadas Online, podendo agrupar as ligações por cliente. Para poder ver separadamente as ligações de um cliente, ou de qualquer outra coluna.
 
 - Exibir em Grupos.
 	Esta opção é usada para desativar a opção anterior.
 
-- Filtro
+- Filtro.
 	Esta opção também é de fundamental entendimento, por tanto será escrito um tutorial exclusivo.
 
 .. image:: ../img/colluns.png
@@ -134,6 +135,6 @@ Existe tipos de filtro dependendo do tipo dos dados da coluna:
         :scale: 85%
 
  
-Para desfazer um filtro, tire a seleção do menu filtro, e para limpar todos os filtros aplicado a um módulo, clique no botão Limpar Filtros.
+Para desfazer um filtro, tire a seleção do menu filtro. E para limpar todos os filtros aplicado a um módulo, clique no botão Limpar Filtros.
 
 
