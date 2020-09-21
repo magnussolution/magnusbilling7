@@ -38,6 +38,6 @@ Procure a linha abaixo e altere para o horário desejado, ou comente a linha com
 Menu Backup
 ^^^^^^^^^^^
 
-Também é possível ver os backups, baixar, e deletar através do menu Backup localizado em configurações.
+Também é possível ver, baixar e deletar os backups através do menu Backup localizado em configurações.
 
 
