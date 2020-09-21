@@ -2,32 +2,42 @@
 Backup
 ******
 
-É sempre uma boa ideia ter um backup.
+It`s always a good idea to have a backup.
 
-Backup manual
+The backup don`t saves the rejected calls table, since normally it`s enourmous.
+
+Manual Backup
 ^^^^^^^^^^^^^
 
-O projeto ja conta com um script para fazer o backup do Banco de dados e dos arquivos do Asterisk.
-Na instalaçao ja é adicionado o script no crontab do linux para que realize um backup por dia. Por padrao as 02:00.
-O backup é salvo no diretorio /usr/local/src
+The project already has a script to do backups of the Databank and Asterisk files.
+In the installation is already added an script in the Linux crontab to perform one backup per day. Default is set to 02:00 am.
 
-Manualmente
+Manually
 ^^^^^^^^^^^
 
-Execute este comando no SHELL do seu servidor.
+Execute this command in SHELL of your server..
 php /var/www/html/mbilling/cron.php Backup
 
 Crontab
 ^^^^^^^
 
-Configurando o crontab -e
+Setting up crontab -e
  
 ::
 
  crontab -e
 
-Procure a linha abaixo e altere para o horario desejado, ou comente a linha com ; para nao fazer backup automatico.
+Search the line below and change the time as you see fit, or only comment in the line with ; to not make automated backups.
 
 ::
 
  0 2 * * * php /var/www/html/mbilling/cron.php Backup
+ 
+Backup Menu
+^^^^^^^^^^^
+
+It`s possible to view, download and delete backups via the Backup menu as well. The menu is located in the settings.
+
+
+
+
