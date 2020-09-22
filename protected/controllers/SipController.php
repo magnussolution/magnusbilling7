@@ -169,12 +169,16 @@ class SipController extends Controller
 
         $this->siproxyServer($model, 'save');
 
+        AsteriskAccess::instance()->generateSipDid();
+
         return;
     }
 
     public function afterDestroy($values)
     {
         AsteriskAccess::instance()->generateSipPeers();
+
+        AsteriskAccess::instance()->generateSipDid();
         $this->siproxyServer($values, 'destroy');
         return;
     }

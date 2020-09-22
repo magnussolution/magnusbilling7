@@ -661,6 +661,34 @@ class AsteriskAccess
 
     }
 
+    public function generateSipDid()
+    {
+
+        $sipDidfile = '/etc/asterisk/milling_sip_did.conf';
+        $sipDid     = '';
+
+        $modelSip = Sip::model()->findAll();
+        $modelDID = Did::model()->findAll('reserved = 1 AND activated = 1');
+
+        if (isset($modelDID[0]->id)) {
+            foreach ($modelDID as $key => $did) {
+                $sipDid .= "[" . $did->did . "]\n";
+            }
+        }
+
+        if (isset($modelSip[0]->id)) {
+            foreach ($modelSip as $key => $sip) {
+                $sipDid .= "[" . $sip->name . "]\n";
+            }
+        }
+
+        $fdSD = fopen($sipDidfile, "w");
+
+        fwrite($fdSD, $sipDid);
+        fclose($fdSD);
+
+    }
+
     public function generateSipPeers()
     {
         $modelSip = Sip::model()->findAll();

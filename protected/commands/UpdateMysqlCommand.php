@@ -1115,6 +1115,24 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-09-21
+        if ($version == '7.5.0') {
+
+            $sql = "
+                CREATE TRIGGER update_sip_status_after_insert
+                AFTER INSERT
+                ON pkg_callshop FOR EACH ROW
+                BEGIN
+                    UPDATE pkg_sip SET status = 2 WHERE name = new.cabina;
+                END
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.5.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

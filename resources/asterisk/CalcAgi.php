@@ -686,9 +686,6 @@ class CalcAgi
     {
 
         if ($MAGNUS->callshop == 1) {
-            $sql = "UPDATE pkg_sip SET status = 2 WHERE name = '$MAGNUS->sip_account' ";
-            $agi->exec($sql);
-
             if ($sessiontime > 0) {
                 $sql = "SELECT * FROM pkg_rate_callshop WHERE dialprefix = SUBSTRING($MAGNUS->destination,1,length(dialprefix))
                                 AND id_user= $MAGNUS->id_user   ORDER BY LENGTH(dialprefix) DESC LIMIT 1";
