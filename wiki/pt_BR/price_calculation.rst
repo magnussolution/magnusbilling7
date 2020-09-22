@@ -9,10 +9,10 @@ Esse valor foi calculado em base ao preço configurado para o provedor que o tro
 
 O valor é calculado usado 4 valores. 
 
-* Duração da chamada
-* Preço de compra
-* Bloco inicial
-* Incremento
+* Duração da chamada;
+* Preço de compra;
+* Bloco inicial;
+* Incremento.
 
 Exemplo.
 
@@ -25,7 +25,7 @@ E existe uma tarifa no menu Tarifas Provedores para o prefixo 55119, com:
 
 A fórmula do cálculo é:
 
-Caso a Duração da chamada menor que Bloco inicial a fórmula será
+Caso a Duração da chamada for menor que o Bloco inicial a fórmula será
 
 ::
      
@@ -46,7 +46,7 @@ No exemplo anterior, a duração foi 45 segundos, e o Incremento é 6, então a 
 
 ::
      
-  (Duração da chamada / Incremento ) da 7 com resto 3, então temos que somar 3 ao resto que será 48, então neste exemplo será calculado
+  (Duração da chamada / Incremento ) da 7 com resto 3. Então temos que somar 3 ao resto que será 48, portanto neste exemplo será calculado
 
 ::
      
@@ -54,7 +54,7 @@ No exemplo anterior, a duração foi 45 segundos, e o Incremento é 6, então a 
 
 
 
-O código abaixa é o utilizado para o calculo
+O código abaixa é o utilizado para o cálculo.
 
 .. code-block:: php
 
@@ -72,9 +72,9 @@ O código abaixa é o utilizado para o calculo
    $cost += ($callduration / 60) * $rateinitial;
 
 
-A variável $callduration é a duração da chamada
-A variável $initblock é Bloco inicial
-A variável $billingblock é Incremento
+A variável $callduration é a duração da chamada;
+A variável $initblock é Bloco inicial;
+A variável $billingblock é Incremento.
 
 
 
