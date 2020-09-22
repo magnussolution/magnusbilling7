@@ -14,7 +14,7 @@ Vocalware
 +++++++++
 
 Para configurar o primeiro passo é criar sua conta no site https://www.vocalware.com/ 
-Agora temos que configurar a URL da API no menu Configurações sub menu Ajustes. Localize a opção TTS URL e altere a URL para
+Agora temos que configurar a URL da API no menu Configurações sub menu Ajustes. Localize a opção TTS URL e altere a URL para:
 
 https://www.vocalware.com/tts/gen.php?EID=3&LID=6&VID=1&TXT=$name&EXT=mp3&FX_TYPE=&FX_LEVEL=&ACC=YOUR_ACC&API=YPUR_API&SESSION=&HTTP_ERR=&CS=&SECRET=YOUR_SECRET
 
@@ -30,19 +30,19 @@ Voicerss
 ++++++++
 
 Para configurar o primeiro passo é criar sua conta no site http://www.voicerss.org
-Agora temos que configurar a URL da API no menu Configurações sub menu Ajustes. Localize a opção TTS URL e altere a URL para
+Agora temos que configurar a URL da API no menu Configurações sub menu Ajustes. Localize a opção TTS URL e altere a URL para:
 
 http://api.voicerss.org/?key=YOUR_API&hl=pt-br&src=$name&f=8khz_16bit_mono
 
-Nesta empresa, Você somente precisa colocar sua API, neste exemplo ja deixamos o idioma em Português do Brasil.
+Nesta empresa você somente precisa colocar sua API. Neste exemplo ja deixamos o idioma em Português do Brasil.
 
 
 Google
 ++++++
 
-Você pode ver mais informações sobre o Google TTS no link https://cloud.google.com/text-to-speech?hl=pt_br
+Você pode ver mais informações sobre o Google TTS no link: https://cloud.google.com/text-to-speech?hl=pt_br
 
-A URL do Google é
+A URL do Google é:
 
 https://translate.google.com/translate_tts?ie=UTF-8&q=$name&tl=pt-BR&total=1&idx=0&textlen=5&client=tw-ob&tk=$token
 
