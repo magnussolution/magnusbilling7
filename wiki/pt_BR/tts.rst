@@ -34,7 +34,7 @@ Agora temos que configurar a URL da API no menu Configurações sub menu Ajustes
 
 http://api.voicerss.org/?key=YOUR_API&hl=pt-br&src=$name&f=8khz_16bit_mono
 
-Nesta empresa você somente precisa colocar sua API. Neste exemplo ja deixamos o idioma em Português do Brasil.
+Nesta empresa você somente precisa colocar sua API. Neste exemplo já deixamos o idioma em Português do Brasil.
 
 
 Google
