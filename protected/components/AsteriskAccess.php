@@ -664,7 +664,7 @@ class AsteriskAccess
     public function generateSipDid()
     {
 
-        $sipDidfile = '/etc/asterisk/milling_sip_did.conf';
+        $sipDidfile = '/etc/asterisk/mbilling_sip_did.conf';
         $sipDid     = '';
 
         $modelSip = Sip::model()->findAll();
