@@ -53,6 +53,31 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
         $con->active = true;
         $time        = time();
 
+        if (file_exists('/var/log/asterisk/cdr-csv/MBilling_Offer.csv')) {
+            exec('mv /var/log/asterisk/cdr-csv/MBilling_Offer.csv /var/log/asterisk/cdr-csv/MBilling_Offer_' . $time . '.csv');
+            $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Offer_" . $time . ".csv' INTO TABLE pkg_offer_cdr FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (id_user, id_offer, used_secondes)";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                print_r($e);
+            }
+
+            exec("rm -rf /var/log/asterisk/cdr-csv/MBilling_Offer_" . $time . ".csv");
+        }
+
+        if (file_exists('/var/log/asterisk/cdr-csv/MBilling_CallShop.csv')) {
+            exec('mv /var/log/asterisk/cdr-csv/MBilling_Success.csv /var/log/asterisk/cdr-csv/MBilling_Success_CallShop_' . $time . '.csv');
+            $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Success_CallShop_" . $time . ".csv' INTO TABLE pkg_callshop FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (sessionid, id_user, status, price, buycost, calledstation, destination,price_min, cabina, sessiontime)";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                print_r($e);
+            }
+
+            exec("rm -rf /var/log/asterisk/cdr-csv/MBilling_Success_CallShop_" . $time . ".csv");
+
+        }
+
         if ($result = $this->scan_dir('/var/log/asterisk/cdr-csv/', 1)) {
 
             foreach ($result as $file) {

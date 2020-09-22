@@ -188,6 +188,9 @@ class DidController extends Controller
 
     public function afterSave($model, $values)
     {
+
+        AsteriskAccess::instance()->generateSipDid();
+
         if (isset($_FILES["workaudio"]) && strlen($_FILES["workaudio"]["name"]) > 1) {
             if (file_exists($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav');
@@ -242,5 +245,11 @@ class DidController extends Controller
                 $this->nameMsg     => 'Did not selected',
             ));
         }
+    }
+
+    public function afterDestroy($values)
+    {
+        AsteriskAccess::instance()->generateSipDid();
+        return;
     }
 }
