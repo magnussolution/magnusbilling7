@@ -8,7 +8,7 @@ Help.load({
     'api.api_restriction_ips': `What IPS you want allow access this API. Leave blank to allow any IP. It is very recomended set the IPS`,
     //CDR
     'call.starttime': `Start time of the call`,
-    'call.src': `SIP Account that made the call`,
+    'call.src': `SIP user that made the call`,
     'call.callerid': `Number sent to the trunk as the identifier of the call.||
     If the trunk accepts the sent CallerID, then this number will be used as the identifier.
     In order to this work its going to be necessary to have the Fromuser field in the trunk empty.`,
@@ -46,8 +46,8 @@ Help.load({
     'callerid.name': `Optional.`,
     'callerid.activated': `Status of the CallerID.`,
     //CALLS ONLINE
-    'callonline.idUserusername': `Main user of the SIP account that started the call.`,
-    'callonline.sip_account': `SIP Account that requested the call.`,
+    'callonline.idUserusername': `Main user of the SIP user that started the call.`,
+    'callonline.sip_account': `SIP user that requested the call.`,
     'callonline.idUsercredit': `User credit.`,
     'callonline.ndiscado': `Dialed number.`,
     'callonline.codec': `Codec used.`,
@@ -128,13 +128,13 @@ Help.load({
     'campaign.restrict_phone': ``,
     'campaign.auto_reprocess': `If there are no active numbers in this campaign phone book, reactivates all pending numbers.`,
     'campaign.id_phonebook': `Select one or more phonebooks to to be used.`,
-    'campaign.digit_authorize': `Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.`,
+    'campaign.digit_authorize': `Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP user XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP user to send the callee to. Set -1 to disable.`,
     'campaign.type_0': `Choose the type of redirect. This will send the call to the chosen destination.`,
     'campaign.id_ivr_0': `Choose a IVR to send the call to. The IVR needs to belong to the owner of the campaign.`,
     'campaign.id_queue_0': `Choose a Queue to send the call to. The Queue needs to belong to the owner of the campaign.`,
-    'campaign.id_sip_0': `Choose a SIP Account to send the call to. The SIP Account needs to belong to the owner of the campaign.`,
+    'campaign.id_sip_0': `Choose a SIP user to send the call to. The SIP user needs to belong to the owner of the campaign.`,
     'campaign.extension_0': `Click for more details||There are two options available.
-    *Group, the group name should be put here exactly as it is in the SIP Accounts that should receive the calls.
+    *Group, the group name should be put here exactly as it is in the SIP users that should receive the calls.
     *Personalized, you may execute any valid option via Asterisk's DIAL command. Example: SIP/sipaccount,45,tTr.`,
     'campaign.daily_start_time': `Time that the campaign will start sending.`,
     'campaign.daily_stop_time': `Time that the campaign will stop sending.`,
@@ -260,7 +260,7 @@ Help.load({
     'diddestination.destination': `Use this to take notes!`,
     'diddestination.id_ivr': `Select a IVR to send the call to. The IVR needs to belong to the owner of the DID aswell.`,
     'diddestination.id_queue': `Select a Queue  to send the call to. The Queue needs to belong to the owner of the DID aswell.`,
-    'diddestination.id_sip': `Select a SIP Account to send the call to. The SIP Account needs to belong to the owner of the DID aswell.`,
+    'diddestination.id_sip': `Select a SIP user to send the call to. The SIP user needs to belong to the owner of the DID aswell.`,
     'diddestination.context': `In this field you may use a context in the format supported by Asterisk||Example:
     
 _X. => 1,Dial(SIP/sipaccount,45)
@@ -375,7 +375,7 @@ Supposing that theres no attendance hours in the sundays. In this case the rule 
     'ivr.option_8': `Select the destination if the option 8 is pressed. Let it in blank if don't want any action`,
     'ivr.option_9': `Select the destination if the option  is pressed. Let it in blank if don't want any action`,
     'ivr.option_10': `Select the destination if none of the options was selected.`,
-    'ivr.direct_extension': `Activating this option will be able to type an SIP account to call it directly.`,
+    'ivr.direct_extension': `Activating this option will be able to type an SIP user to call it directly.`,
     'ivr.option_out_0': `Select the destinationif the option 0 is pressed. Let it in blank if don't want any action`,
     'ivr.option_out_1': `Select the destination if the option 1 is pressed. Let it in blank if don't want any action`,
     'ivr.option_out_2': `Select the destination if the option 2 is pressed. Let it in blank if don't want any action`,
@@ -496,8 +496,8 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'queue.ring_or_moh': `Play waiting music or tone when the client is in the queue.`,
     'queue.musiconhold': `Import one waiting music to this queue.`,
     //QUEUES MEMBERS
-    'queuemember.queue_name': `Queue that wants to add SIP account.`,
-    'queuemember.interface': `SIP account to add like a agent to the queue.`,
+    'queuemember.queue_name': `Queue that wants to add SIP user.`,
+    'queuemember.interface': `SIP user to add like a agent to the queue.`,
     'queuemember.paused': `Paused agents won't get calls, is possible to pause and unpause dialing *180 to pause, and *181 to unpause.`,
     //TARIFFS
     'rate.id_plan': `The plan that you want to create a tariff for.`,
@@ -577,7 +577,7 @@ Let's say there's 1 MagnusBilling server and 3 slave servers, and you want to se
     'services.name': `Service name.`,
     'services.calllimit': `Limit of simultaneos calls..`,
     'services.disk_space': `Insert total disk space in GB.`,
-    'services.sipaccountlimit': `Maximum value of SIP accounts that this client can create.`,
+    'services.sipaccountlimit': `Maximum value of SIP users that this client can create.`,
     'services.price': `Monthly cost to charge the client that activates this service.`,
     'services.return_credit': `If this service is cancelled before the expiry date, and if this option is set to "yes", will be refunded the proporcional value of not used days to the client.`,
     'services.description': `Used for internal control.`,
@@ -588,21 +588,21 @@ Let's say there's 1 MagnusBilling server and 3 slave servers, and you want to se
     'servicesuse.method': `Payment method.`,
     'servicesuse.reservationdate': `Day of service activation.`,
     //SIP USERS
-    'sip.id_user': `User that this SIP account is associated with.`,
+    'sip.id_user': `User that this SIP user is associated with.`,
     'sip.defaultuser': `Username used to login in a Softphone or any SIP device.`,
     'sip.secret': `Password to login in a Softphone or any SIP device.`,
     'sip.callerid': `The Caller ID number that will be shown in their destination. Your trunk needs to accept CLI.`,
-    'sip.alias': `Alias to dial between sip accounts from the same AccountCode (company).`,
+    'sip.alias': `Alias to dial between SIP users from the same AccountCode (company).`,
     'sip.disallow': `Disallow all codecs and then select the codecs available below to enable them to the user.`,
     'sip.allow': `Select the codecs that the trunk will accept.`,
     'sip.host': `Dynamic is an option that allows the user to register their account under any IP. If you want to authenticate the user via IP, put the client IP here, let the password field blank and set it to "insecure" to por/invite in the Aditional Informations tab.`,
-    'sip.sip_group': `When sending an call from DID, or campaign to a group, will be called all SIP accounts that are in the group. You can create the groups with any name.||
+    'sip.sip_group': `When sending an call from DID, or campaign to a group, will be called all SIP users that are in the group. You can create the groups with any name.||
 
 Is used as well to capture calls with *8, need to configurate the option "pickupexten = *8" in the file "feature.comf".
 `,
     'sip.videosupport': `Activate video calls.`,
     'sip.block_call_reg': `Block calls using REGEX. To block calls from cellphones, just put it ^55\\d\\d9. Click here to visit the link that tests REGEX.|https://regex101.com.`,
-    'sip.record_call': `Record calls of this SIP account.`,
+    'sip.record_call': `Record calls of this SIP user.`,
     'sip.techprefix': `Useful option for when it's necessary to authenticate more than one client via IP that uses the same IP. Common in BBX multi tenant.`,
     'sip.nat': `Nat. Click here for more info|https://www.voip-info.org/asterisk-sip-nat/`,
     'sip.directmedia': `If enabled, Asterisk tries to redirect the RTP media stream to go directly from the caller to the callee.`,
@@ -624,18 +624,18 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sip.type': `Standard type is "friend", in other words, can make and receive calls. Click here for more informations|https://www.voip-info.org/asterisk-sip-type/.`,
     'sip.allowtransfer': `Enable this VOIP account to do tranference. The code to transfer is *2 + ramal. It's necessary to activa the option atxfer => *2 in the file "features.conf" of Asterisk.`,
     'sip.ringfalse': `Activate false ring. Add rR of the "Dial" command.`,
-    'sip.calllimit': `Maximum simultaneous calls allowed for this SIP account.`,
-    'sip.mohsuggest': `Waiting music for this SIP account.`,
+    'sip.calllimit': `Maximum simultaneous calls allowed for this SIP user.`,
+    'sip.mohsuggest': `Waiting music for this SIP user.`,
     'sip.url_events': `.`,
     'sip.addparameter': `The parameters set in here will replace the system default parameters, as well of the trunks, if there's any.`,
     'sip.amd': `.`,
     'sip.type_forward': `Resend destination type. This resend will not work in queues.`,
-    'sip.id_ivr': `Select the IVR that you want to to send to calls if the SIP account don't answer.`,
-    'sip.id_queue': `Select the queue that you want to to send to calls if the SIP account don't answer.`,
-    'sip.id_sip': `Select the SIP accounts that you want to to send to calls if the SIP account don't answer.`,
+    'sip.id_ivr': `Select the IVR that you want to to send to calls if the SIP user don't answer.`,
+    'sip.id_queue': `Select the queue that you want to to send to calls if the SIP user don't answer.`,
+    'sip.id_sip': `Select the SIP users that you want to to send to calls if the SIP user don't answer.`,
     'sip.extension': `Click for more details||We have 3 options, conform the selected type, group, number or custom.
 
-* Group, the group name set here, needs to be exatcly the same group of SIP accounts that wants to receive the calls, is going to call all SIP accounts in the group.
+* Group, the group name set here, needs to be exatcly the same group of SIP users that wants to receive the calls, is going to call all SIP users in the group.
 * Custom, it's possible to execute any valid option of the DIAL command of Asterisk, example: SIP/contaSIP,45,tTr
 * Number, can be a landline number or mobile number, needs to be in the 55 DDD format`,
     'sip.dial_timeout': `Timeout in seconds to wait for the call to be picked-up. After the timeout will be execute the channeling if it's configurated.`,
@@ -652,15 +652,15 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sipuras.senha_admin': `Password to login in LinkSys settings`,
     'sipuras.antireset': `Be cautious.*73738# command prevents resetting LinkSys.`,
     'sipuras.Enable_Web_Server': `Beware! If deactivated, will not be able to login in the Linksys settings.`,
-    'sipuras.User_ID_1': `SIP account username that will be used in ATA line 1.`,
-    'sipuras.Password_1': `SIP account password`,
+    'sipuras.User_ID_1': `SIP user username that will be used in ATA line 1.`,
+    'sipuras.Password_1': `SIP user password`,
     'sipuras.Use_Pref_Codec_Only_1': `Only use the preferred CODEC`,
     'sipuras.Preferred_Codec_1': `Set the preferred CODEC`,
     'sipuras.Register_Expires_1': `Interval in seconds that LinkSys will send a REGISTER to your server. Useful to avoid a loss of connection when you receive a call.`,
     'sipuras.Dial_Plan_1': `Read LinkSys documentation`,
     'sipuras.NAT_Mapping_Enable_1_': `It's recommended to activate this option if ATA is behind NAT.`,
     'sipuras.NAT_Keep_Alive_Enable_1_': `It's recommended to activate this option if ATA is behind NAT.`,
-    'sipuras.User_ID_2': `SIP account username that will be used in ATA line 1.`,
+    'sipuras.User_ID_2': `SIP user username that will be used in ATA line 1.`,
     'sipuras.Password_2': `VOIP account password.`,
     'sipuras.Use_Pref_Codec_Only_2': `Only use preferencial codec.`,
     'sipuras.Preferred_Codec_2': `Settings of preferincial codec.`,
@@ -709,7 +709,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
 "port" send an solicitation of the register to this host port. Standard for 5060
 "contact" is the extension of Asterisk contact. Example 1234 is set in the contact header of the SIP register message. The contact ramal is used by the SIP server remotely when it's needed to send one call to Asterisk.
     `,
-    'trunk.fromuser': `Several providers demand this option to authenticate, primarly when it's authenticated via user and paswword. Let it blank to send the CallerID of the SIP account of From.`,
+    'trunk.fromuser': `Several providers demand this option to authenticate, primarly when it's authenticated via user and paswword. Let it blank to send the CallerID of the SIP user of From.`,
     'trunk.fromdomain': `Defines the FROM domain: in the SIP messages when act like a UAC SIP (client).`,
     'trunk.language': `Default launguage used in any Playback()/Background().`,
     'trunk.context': `Only change this if you know what you are doing.`,
