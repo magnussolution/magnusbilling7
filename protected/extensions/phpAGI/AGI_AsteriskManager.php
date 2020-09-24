@@ -196,7 +196,8 @@ class AGI_AsteriskManager
         $this->log("Sending Request down socket:", 10);
         $this->log($req, 10);
         if (!$this->connected()) {
-            echo ("Asterisk is not connected");
+            echo ("Asterisk is not connected\n");
+            return;
         }
         fwrite($this->socket, $req);
         $response = $this->wait_response();
@@ -210,7 +211,8 @@ class AGI_AsteriskManager
             $this->disconnect();
             if ($this->connect($this->server . ':' . $this->port, $this->username, $this->secret, $this->events) !== false) {
                 if (!$this->connected()) {
-                    echo ("Asterisk is not connected");
+                    echo ("Asterisk is not connected\n");
+                    break;
                 }
                 fwrite($this->socket, $req);
                 $response = $this->wait_response();
