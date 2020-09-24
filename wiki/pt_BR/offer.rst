@@ -3,7 +3,7 @@
 Pacotes Grátis
 ==============
 
-Que é pacotes grátis?
+O que é pacotes grátis?
 +++++++++++++++++++++
 
 Pacotes grátis são para poder dar aos clientes um quantidade de chamadas sem custo, por um valor mensal ou sem custo algum.
@@ -11,7 +11,7 @@ Pacotes grátis são para poder dar aos clientes um quantidade de chamadas sem c
 Como configurar?
 ++++++++++++++++
 
-A configuração dos pacotes grátis são em várias etapas
+A configuração dos pacotes grátis são em várias etapas.
 
 1 - Criar o pacote.
 
@@ -27,7 +27,7 @@ A configuração dos pacotes grátis são em várias etapas
 	
 2 - Selecionar as tarifas que deseja incluir nos pacotes.
 
-	É necessário informar qual serão os prefixos que serão incluídos nos pacotes grátis. Para isso, ir ao menu tarifas submenu tarifas, clicar sobre a tarifa que deseja incluir nos pacotes e colocar em sim a opção "Incluir nos pacotes grátis"
+	É necessário informar qual serão os prefixos que serão incluídos nos pacotes grátis. Para isso, vá ao menu tarifas submenu tarifas, clicar sobre a tarifa que deseja incluir nos pacotes e colocar em sim a opção "Incluir nos pacotes grátis"
 
 
 3 - Ativar os pacotes grátis para os usuários.
@@ -52,7 +52,7 @@ Processo realizado pelo sistema.
 
 Cliente 24315 liga para o número 551140040001, o sistema vai verificar o plano do cliente, e logo buscará a tarifa mais adequada para o número discado, neste caso será a tarifa 55114, Fixo São Paulo.
 
-Agora verificará se esta tarifa tem a opção "Incluir nos pacotes grátis", se sim, e no nosso exemplo esta sim, o MagnusBilling vai verificar se o cliente já realizou 100 minutos a partir do dia de ativação, considerando se o tipo de tarifação é mensal ou semana, no nosso exemplo é mensal. Se ainda não foi usado os 100 minutos, o sistema vai permitir o cliente ligar mesmo o saldo do cliente seja 0. E caso o cliente tenha saldo, a chamada será gratuita.
+Agora verificará se esta tarifa tem a opção "Incluir nos pacotes grátis", se sim, e no nosso exemplo está sim, o MagnusBilling vai verificar se o cliente já realizou 100 minutos a partir do dia de ativação, considerando se o tipo de tarifação é mensal ou semana, no nosso exemplo é mensal. Se ainda não foi usado os 100 minutos, o sistema vai permitir o cliente ligar mesmo o saldo do cliente seja 0. E caso o cliente tenha saldo, a chamada será gratuita.
 
 Caso o tarifa esteja incluída nos pacotes, mas o cliente já superou o limite do pacote, o MagnusBilling somente vai permitir a chamada se o cliente tiver crédito.
 
