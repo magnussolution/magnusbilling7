@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-09-14
+ * 2020-09-29
  */
 Locale.load({
     '': '',
@@ -196,6 +196,7 @@ Locale.load({
     'Columns': '',
     'Comma': '',
     'Company name': '',
+    'Company website': '',
     'Config': '',
     'Configuration': '',
     'Confirm': '',
@@ -465,6 +466,7 @@ Locale.load({
     'MOH': '',
     'MYSQL message.': '',
     'MagnusBilling': '',
+    'MagnusBilling System': '',
     'Main menu': '',
     'Mandatory information element is missing': '',
     'Manual code': '',
@@ -895,7 +897,6 @@ Locale.load({
     'Sunday intervals': '',
     'Supplementary info': '',
     'Switching equipment congestion': '',
-    'System': '',
     'TLS': '',
     'TOKEN': '',
     'Table': '',

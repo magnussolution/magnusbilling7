@@ -270,7 +270,7 @@ class UserController extends Controller
 
         if (!$this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
             $modelUser = User::model()->find("id_user = :key", array(':key' => $model->id));
-            if (count($modelUser)) {
+            if (isset($modelUser->id)) {
                 $modelUser->id_group = $model->id_group_agent;
                 $modelUser->save();
             }

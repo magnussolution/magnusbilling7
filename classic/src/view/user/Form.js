@@ -121,7 +121,11 @@ Ext.define('MBilling.view.user.Form', {
                 },
                 title: t('Personal data'),
                 itemId: 'personalData',
-                items: [, {
+                items: [{
+                    name: 'company_website',
+                    fieldLabel: t('Company website'),
+                    allowBlank: true
+                }, {
                     name: 'company_name',
                     fieldLabel: t('Company name'),
                     allowBlank: true

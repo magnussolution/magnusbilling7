@@ -14,6 +14,8 @@
  * 2020-08-07
  */
 Locale.load({
+    'Company website': 'Site da empresa',
+    'MagnusBilling System': 'Sistema MagnusBilling',
     'Activate offer': 'Ativar pacote grátis',
     'Voucher inexistente or already used': 'Voucher inexistente ou já usado',
     'must belong to the IVR owner': 'deve pertencer ao mesmo usuário dono da IRV',

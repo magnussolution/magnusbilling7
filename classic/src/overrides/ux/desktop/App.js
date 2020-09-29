@@ -220,7 +220,7 @@ Ext.define('Overrides.ux.desktop.App', {
                     text: t('Import wallpaper'),
                     glyph: icons.cog,
                     handler: 'importLogo',
-                    hidden: !App.user.isAdmin
+                    hidden: App.user.isCdmin
                 }, {
                     text: t('Settings theme'),
                     iconCls: 'icon-wallpaper',

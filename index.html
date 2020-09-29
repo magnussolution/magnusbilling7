@@ -4,7 +4,7 @@
         <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes" name="viewport"/>
-        <link href="resources/images/logo.ico" rel="shortcut icon" type="image/x-icon"/>
+        <link href="resources/images/logo.ico" id="favicon" rel="shortcut icon" type="image/x-icon"/>
         <title>
             MagnusBilling
         </title>
@@ -16,6 +16,12 @@
         </script>
         <link href="resources/init.css" rel="stylesheet"/>
         <script>
+
+            if (window.agentTitle) {
+                window.show_signup_button = false;
+                window.document.title = window.agentTitle;
+            }
+
             if (window.reCaptchaKey.length >15) {
                 document.write('<script async="" defer="" src="https://www.google.com/recaptcha/api.js?render=' + window.reCaptchaKey+ '"> <\/script>');
             }
@@ -27,7 +33,7 @@
 <div id="loading">
     <div class="loading-indicator">
         <div style="text-align:center">
-            <img src="resources/images/loading.gif" style="vertical-align:top;" width="90px"/>
+            <img id="loadinggif" src="resources/images/loading.gif" style="vertical-align:top;" width="90px"/>
             <br/>
             <span id="name-system">
             </span>
@@ -41,6 +47,12 @@
     </div>
 </div>
 <script type="text/javascript">
+
+    if (window.agentTitle) {
+        document.getElementById('loadinggif').src = 'resources/images/logo_custom_'+window.agentId+'.png';
+    }
+
+
     document.getElementById('loading-mask').style.backgroundColor = window.backgroundColor;
     window.theme = window.theme || 'blue-dark';
             window.themeApp = window.theme;
@@ -51,9 +63,15 @@
             window.layout=1;
 </script>
 <script type="text/javascript">
-    document.getElementById('name-system').innerHTML = t('MagnusBilling System');
-            document.getElementById('text-msg').innerHTML = 'Voip System';
-            document.getElementById('loading-msg').innerHTML = t('Loading...');
+
+        if (window.agentTitle) {
+            document.getElementById('name-system').innerHTML = window.agentTitle;
+        }else{
+            document.getElementById('name-system').innerHTML = t('MagnusBilling System'); 
+        }
+    
+        document.getElementById('text-msg').innerHTML = 'Voip System';
+        document.getElementById('loading-msg').innerHTML = t('Starting...');
 </script>
 <script type="text/javascript">
     var defaultLang= localStorage.getItem('lang') && localStorage.getItem('lang') != 'undefined' 

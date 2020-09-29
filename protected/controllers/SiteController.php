@@ -11,6 +11,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+
+        $modelUser = User::model()->find('company_website LIKE :key', array(':key' => $_SERVER['HTTP_HOST']));
+
+        if (isset($modelUser->id)) {
+            echo 'window.agentTitle = ' . json_encode($modelUser->company_name) . ';';
+            echo 'window.agentId = ' . json_encode($modelUser->id) . ';';
+        }
+
         if (isset($_GET['paypal'])) {
             exit(isset($this->config['global']['paypal-softphone']) ? $this->config['global']['paypal-softphone'] : 0);
         }
