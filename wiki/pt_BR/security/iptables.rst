@@ -4,7 +4,7 @@ Iptables
 
 Iptables regras aplicadas na instalação
 
-Basic Rules
+Regras Básicas
 ^^^^^^^^^^^^
 
 ::
@@ -22,7 +22,7 @@ Basic Rules
 	iptablesA INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 	iptablesA INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 
-Optional Rules
+Regras Opcionais
 ^^^^^^^^^^^^^^^^
 
 | OPENVPN: ``iptables -A INPUT -p udp --dport 1194 -j ACCEPT`` 
@@ -30,10 +30,10 @@ Optional Rules
 | IAX: ``iptables -A INPUT -p udp -m udp --dport 4569 -j ACCEPT``
 | HTTPS: ``iptablesA INPUT -p tcp -m tcp --dport 443 -j ACCEPT``
 
-Friendly Scanner
+Scanner Amigável
 ^^^^^^^^^^^^^^^^^
 
-Rules to block not so friendly scanner
+Regras para bloquear scanner que não é amigável.
 
 ::
      
@@ -42,7 +42,7 @@ Rules to block not so friendly scanner
 	iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "friendly-scanner" --algo bm
 	iptables -I INPUT -j DROP -p udp --dport 5080 -m string --string "friendly-scanner" --algo bm
 
-| *Optional*
+| *Opicional*
 
 
 ::
@@ -53,36 +53,36 @@ Rules to block not so friendly scanner
 	iptables -I INPUT -j DROP -p tcp --dport 5080 -m string --string "VaxIPUserAgent" --algo bm
 
 
-Show iptable rules
+Mostrar regras iptables
 ^^^^^^^^^^^^^^^^^^^
 ::
      
   sudo iptables -L -v
 
-Show line numbers
+Mostrar número de linha
 ^^^^^^^^^^^^^^^^^^
 
 ::
      
   iptables -L -v --line-numbers
 
-Delete a line
+Deletar Linha
 ^^^^^^^^^^^^^^
 
-Delete line 2
+Deletar linha 2
 
 ::
      
   iptables -D INPUT 2
 
-Block IP address
+Bloquear endereço de IP
 ^^^^^^^^^^^^^^^^^
 
 ::
      
   iptables -I INPUT -s 62.210.245.132 -j DROP
 
-Save Changes
+Salvar mudanças
 ^^^^^^^^^^^^^
 
 Centos
