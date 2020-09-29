@@ -2,7 +2,7 @@
 Iptables
 *****************
 
-Iptables regras aplicadas na instalacao
+Iptables rules applicable in the instalation.
 
 Basic Rules
 ^^^^^^^^^^^^
@@ -33,7 +33,7 @@ Optional Rules
 Friendly Scanner
 ^^^^^^^^^^^^^^^^^
 
-Rules to block not so friendly scanner
+Rules to block unfriendly scanner
 
 ::
      
@@ -97,5 +97,7 @@ Debian / Ubuntu
 	apt-get install iptables-persistent
 	service iptables-persistent save
 	dpkg-reconfigure iptables-persistent
+
+
 
 
