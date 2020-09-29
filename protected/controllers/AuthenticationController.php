@@ -299,6 +299,13 @@ class AuthenticationController extends Controller
             Yii::log('file existe', 'info');
         }
 
+        if (Yii::app()->session['isClientAgent']) {
+            $logo = file_exists('resources/images/logo_custom_' . Yii::app()->session['id_agent'] . '.png') ? 'resources/images/logo_custom_' . Yii::app()->session['id_agent'] . '.png' : 'resources/images/logo.png';
+        } else if (Yii::app()->session['isAgent']) {
+            $logo = file_exists('resources/images/logo_custom_' . Yii::app()->session['id_user'] . '.png') ? 'resources/images/logo_custom_' . Yii::app()->session['id_user'] . '.png' : 'resources/images/logo.png';
+        } else {
+            $logo = file_exists('resources/images/logo_custom.png') ? 'resources/images/logo_custom.png' : 'resources/images/logo.png';
+        }
         echo json_encode(array(
             'id'                       => $id_user,
             'id_agent'                 => $id_agent,
@@ -331,7 +338,7 @@ class AuthenticationController extends Controller
             'googleAuthenticatorKey'   => $googleAuthenticatorKey,
             'newGoogleAuthenticator'   => $newGoogleAuthenticator,
             'showGoogleCode'           => $showGoogleCode,
-            'logo'                     => file_exists('resources/images/logo_custom.png') ? 'resources/images/logo_custom.png' : 'resources/images/logo.png',
+            'logo'                     => $logo,
             'show_filed_help'          => $this->config['global']['show_filed_help'],
             'campaign_user_limit'      => $this->config['global']['campaign_user_limit'],
             'showMCDashBoard'          => $this->config['global']['showMCDashBoard'],
@@ -409,9 +416,15 @@ class AuthenticationController extends Controller
     {
         if (isset($_FILES['logo']['tmp_name']) && strlen($_FILES['logo']['tmp_name']) > 3) {
 
-            $uploaddir  = "resources/images/";
-            $typefile   = explode('.', $_FILES["logo"]["name"]);
-            $uploadfile = $uploaddir . 'logo_custom.png';
+            $uploaddir = "resources/images/";
+            $typefile  = explode('.', $_FILES["logo"]["name"]);
+
+            if (Yii::app()->session['isAgent']) {
+                $uploadfile = $uploaddir . 'logo_custom_' . Yii::app()->session['id_user'] . '.png';
+            } else {
+                $uploadfile = $uploaddir . 'logo_custom.png';
+            }
+
             move_uploaded_file($_FILES["logo"]["tmp_name"], $uploadfile);
         }
 

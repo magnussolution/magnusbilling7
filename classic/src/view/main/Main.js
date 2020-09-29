@@ -66,7 +66,7 @@ Ext.define('MBilling.view.main.Main', {
                         text: t('Import logo'),
                         glyph: icons.cog,
                         handler: 'importLogo',
-                        hidden: !App.user.isAdmin || window.isTablet || window.isTablets
+                        hidden: App.user.isClient || window.isTablet || window.isTablets
                     }, {
                         text: t('Import Login Background'),
                         glyph: icons.cog,
