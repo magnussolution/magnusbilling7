@@ -46,7 +46,8 @@ if ($tipo == 'juridica') {
 }
 
 if (!isset($_GET['id'])) {
-    $amount = preg_replace("/\.|\,/", '', $_GET['amount']);
+    $amount = number_format($_GET['amount'], 2);
+    $amount = preg_replace("/\.|\,/", '', $amount);
 
     $clientId     = $modelMethodPay->client_id; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
     $clientSecret = $modelMethodPay->client_secret; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
