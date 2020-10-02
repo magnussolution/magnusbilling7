@@ -14,7 +14,7 @@ Date
 Sip user
 --------
 
-| SIP Account that made the call
+| SIP user that made the call
 
 
 

@@ -115,8 +115,8 @@ País
 
 .. _user-id-offer:
 
-Pacotes grátis
----------------
+Ativar pacote grátis
+---------------------
 
 | Usado para ativar um pacote grátis. É necessário informar as tarifas que vão pertencer aos pacotes gratís.
 
@@ -133,12 +133,22 @@ Limite de CPS
 
 
 
+.. _user-company-website:
+
+Site da empresa
+---------------
+
+| Site da empresa|Tambem usado para customizar o painel de login para um revendedor. Neste caso, o dominio ou subdominio deve ser colocado sem http ou www
+
+
+
+
 .. _user-company-name:
 
 Nome da empresa
 ---------------
 
-| Nome da empresa.
+| Nome da empresa.|Tambem usado para customizar o painel de login para um revendedor
 
 
 
@@ -323,26 +333,6 @@ Data de expiração
 
 
 
-.. _user-record-call:
-
-Gravar chamadas
----------------
-
-| Esta opção é somente para chamadas de DID, para chamadas externas tem que ativar nas Contas VoIP.
-
-
-
-
-.. _user-mix-monitor-format:
-
-Formato das gravaçōes
------------------------
-
-| Formato que será usado para gravar as chamadas.
-
-
-
-
 .. _user-calllimit:
 
 Limite de chamada
@@ -359,6 +349,16 @@ Erro ao superar limite
 ----------------------
 
 | Sinalização a ser enviada caso o limite de chamadas for superador.
+
+
+
+
+.. _user-mix-monitor-format:
+
+Formato das gravaçōes
+-----------------------
+
+| Formato que será usado para gravar as chamadas.
 
 
 

@@ -140,7 +140,7 @@ Register string
 Fromuser
 --------
 
-| Several providers demand this option to authenticate, primarly when it's authenticated via user and paswword. Let it blank to send the CallerID of the SIP account of From.
+| Several providers demand this option to authenticate, primarly when it's authenticated via user and paswword. Let it blank to send the CallerID of the SIP user of From.
 
 
 

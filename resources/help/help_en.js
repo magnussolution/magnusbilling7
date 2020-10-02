@@ -774,7 +774,7 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.country': `Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164`,
     'user.id_offer': `Used to give free minutes. It's necessary to inform the tariffs that will belongs to the free packages.`,
     'user.cpslimit': `CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.`,
-    'user.company_name': ``,
+    'user.company_name': `Company name. Also used to agent panel customization.|Whether is a agent this name will be used on the login panel. Need set the compnay website and use the agent domain to working the customization`,
     'user.state_number': `State number.`,
     'user.lastname': `Lastname.`,
     'user.firstname': `Firstname.`,
@@ -808,6 +808,7 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.transfer_dbbl_rocket': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_dbbl_rocket_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_show_selling_price': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
+    'user.company_website': `Company website.|Also used to agent panel customization. To agent, set the domain without http or wwww.`,
     //USER CUSTOM RATES
     'userrate.id_prefix': `Select the prefix that you want to subscribe.`,
     'userrate.rateinitial': `New sell price for this prefix.`,

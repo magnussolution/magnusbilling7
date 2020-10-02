@@ -91,8 +91,8 @@ Country
 
 .. _user-id-offer:
 
-Offer
------
+Activate offer
+--------------
 
 | Used to give free minutes. It's necessary to inform the tariffs that will belongs to the free packages.
 
@@ -109,12 +109,22 @@ CPS Limit
 
 
 
+.. _user-company-website:
+
+Company website
+---------------
+
+| Company website.|Also used to agent panel customization. To agent, set the domain without http or wwww.
+
+
+
+
 .. _user-company-name:
 
 Company name
 ------------
 
-| We did not write the description to this field.
+| Company name. Also used to agent panel customization.|Whether is a agent this name will be used on the login panel. Need set the compnay website and use the agent domain to working the customization
 
 
 
@@ -299,26 +309,6 @@ Expiration date
 
 
 
-.. _user-record-call:
-
-Record call
------------
-
-| This option is only for DID calls, to external calls it's necessary to activate in the VoIP accounts.
-
-
-
-
-.. _user-mix-monitor-format:
-
-Record call format
-------------------
-
-| Format used to record calls.
-
-
-
-
 .. _user-calllimit:
 
 Call limit
@@ -335,6 +325,16 @@ Limit error
 -----------
 
 | Warning to be send if the call limit is exceeded.
+
+
+
+
+.. _user-mix-monitor-format:
+
+Record call format
+------------------
+
+| Format used to record calls.
 
 
 

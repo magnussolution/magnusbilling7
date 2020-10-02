@@ -84,7 +84,7 @@ Queue
 Sip user
 --------
 
-| Select a SIP Account to send the call to. The SIP Account needs to belong to the owner of the DID aswell.
+| Select a SIP user to send the call to. The SIP user needs to belong to the owner of the DID aswell.
 
 
 
