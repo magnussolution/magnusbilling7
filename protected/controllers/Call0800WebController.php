@@ -63,7 +63,7 @@ class Call0800WebController extends Controller
             $call = "Channel: " . $dialstr . "\n";
             $call .= "Callerid: " . $model->callerid . "\n";
             $call .= "Context: billing\n";
-            $call .= "Extension: " . $user . "\n";
+            $call .= "Extension: " . $destination . "\n";
             $call .= "Priority: 1\n";
             $call .= "Setvar:IDUSER=" . $model->id_user . "\n";
             $call .= "Setvar:SECCALL=" . $destination . "\n";
