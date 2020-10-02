@@ -4,7 +4,7 @@
 Username
 --------
 
-| User that this SIP account is associated with.
+| User that this SIP user is associated with.
 
 
 
@@ -44,7 +44,7 @@ CallerID
 Alias
 -----
 
-| Alias to dial between sip accounts from the same AccountCode (company).
+| Alias to dial between SIP users from the same AccountCode (company).
 
 
 
@@ -84,7 +84,7 @@ Host
 Group
 -----
 
-| When sending an call from DID, or campaign to a group, will be called all SIP accounts that are in the group. You can create the groups with any name.
+| When sending an call from DID, or campaign to a group, will be called all SIP users that are in the group. You can create the groups with any name.
 | 
 | 
 | Is used as well to capture calls with *8, need to configurate the option "pickupexten = *8" in the file "feature.comf".
@@ -108,7 +108,7 @@ Videosupport
 Block call regex
 ----------------
 
-| Block calls using REGEX. To block calls from cellphones, just put it ^55\\d\\d9. You can see more details at the link `https://regex101.com.  <https://regex101.com.>`_.
+| Block calls using REGEX. To block calls from cellphones, just put it ^55\d\d9. You can see more details at the link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
@@ -118,7 +118,7 @@ Block call regex
 Record call
 -----------
 
-| Record calls of this SIP account.
+| Record calls of this SIP user.
 
 
 
@@ -258,7 +258,7 @@ Ring false
 Call limit
 ----------
 
-| Maximum simultaneous calls allowed for this SIP account.
+| Maximum simultaneous calls allowed for this SIP user.
 
 
 
@@ -268,7 +268,7 @@ Call limit
 MOH
 ---
 
-| Waiting music for this SIP account.
+| Waiting music for this SIP user.
 
 
 
@@ -318,7 +318,7 @@ Forward type
 IVR
 ---
 
-| Select the IVR that you want to to send to calls if the SIP account don't answer.
+| Select the IVR that you want to to send to calls if the SIP user don't answer.
 
 
 
@@ -328,7 +328,7 @@ IVR
 Queue
 -----
 
-| Select the queue that you want to to send to calls if the SIP account don't answer.
+| Select the queue that you want to to send to calls if the SIP user don't answer.
 
 
 
@@ -338,7 +338,7 @@ Queue
 Sip user
 --------
 
-| Select the SIP accounts that you want to to send to calls if the SIP account don't answer.
+| Select the SIP users that you want to to send to calls if the SIP user don't answer.
 
 
 
@@ -351,7 +351,7 @@ Destination
 | Click for more details
 | We have 3 options, conform the selected type, group, number or custom.
 | 
-| * Group, the group name set here, needs to be exatcly the same group of SIP accounts that wants to receive the calls, is going to call all SIP accounts in the group.
+| * Group, the group name set here, needs to be exatcly the same group of SIP users that wants to receive the calls, is going to call all SIP users in the group.
 | * Custom, it's possible to execute any valid option of the DIAL command of Asterisk, example: SIP/contaSIP,45,tTr
 | * Number, can be a landline number or mobile number, needs to be in the 55 DDD format
 

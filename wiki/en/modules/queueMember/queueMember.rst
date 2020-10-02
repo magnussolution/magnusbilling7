@@ -4,7 +4,7 @@
 Queue name
 ----------
 
-| Queue that wants to add SIP account.
+| Queue that wants to add SIP user.
 
 
 
@@ -14,7 +14,7 @@ Queue name
 Sip user
 --------
 
-| SIP account to add like a agent to the queue.
+| SIP user to add like a agent to the queue.
 
 
 

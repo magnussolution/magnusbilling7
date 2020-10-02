@@ -64,7 +64,7 @@ Enable_Web_Server
 Username
 --------
 
-| SIP account username that will be used in ATA line 1.
+| SIP user username that will be used in ATA line 1.
 
 
 
@@ -74,7 +74,7 @@ Username
 Password
 --------
 
-| SIP account password
+| SIP user password
 
 
 
@@ -144,7 +144,7 @@ NAT keep alive
 Username
 --------
 
-| SIP account username that will be used in ATA line 1.
+| SIP user username that will be used in ATA line 1.
 
 
 

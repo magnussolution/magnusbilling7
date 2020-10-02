@@ -21,7 +21,9 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Activate offer' => 'Ativar pacote grátis',
+            'Company website' => 'Site da empresa',
+    'MagnusBilling System' => 'Sistema MagnusBilling',
+    'Activate offer' => 'Ativar pacote grátis',
     'Voucher inexistente or already used' => 'Voucher inexistente ou já usado',
     'must belong to the IVR owner' => 'deve pertencer ao mesmo usuário dono da IRV',
     'cannot be blank' => 'não pode ser vazio',

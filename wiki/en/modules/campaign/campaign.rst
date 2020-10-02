@@ -124,7 +124,7 @@ Auto reprocess
 Number to forward
 -----------------
 
-| Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP account XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP account to send the callee to. Set -1 to disable.
+| Do you want to forward the call after the audio?  E.g, if the callee presses 1, he gets sent to SIP user XXXX. Set Number to Forward = 1, Forward Type = SIP and select the SIP user to send the callee to. Set -1 to disable.
 
 
 
@@ -164,7 +164,7 @@ Queue
 Sip user
 --------
 
-| Choose a SIP Account to send the call to. The SIP Account needs to belong to the owner of the campaign.
+| Choose a SIP user to send the call to. The SIP user needs to belong to the owner of the campaign.
 
 
 
@@ -176,8 +176,18 @@ Destination
 
 | Click for more details
 | There are two options available.
-|     *Group, the group name should be put here exactly as it is in the SIP Accounts that should receive the calls.
+|     *Group, the group name should be put here exactly as it is in the SIP users that should receive the calls.
 |     *Personalized, you may execute any valid option via Asterisk's DIAL command. Example: SIP/sipaccount,45,tTr.
+
+
+
+
+.. _campaign-record-call:
+
+Record call
+-----------
+
+| Record the calls of the campaign. They only will be recorded if the call is transferred.
 
 
 
@@ -354,16 +364,6 @@ Audio 2 TTS
 -----------
 
 | Same setting as the previous field but for audio 2. Keep in mind that in between audio 1 and 2, the TTS executes the name imported with the number.
-
-
-
-
-.. _campaign-record-call:
-
-Record call
------------
-
-| Record the calls of the campaign. They only will be recorded if the call is transferred.
 
 
 

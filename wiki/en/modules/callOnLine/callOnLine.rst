@@ -4,7 +4,7 @@
 Username
 --------
 
-| Main user of the SIP account that started the call.
+| Main user of the SIP user that started the call.
 
 
 
@@ -14,7 +14,7 @@ Username
 Sip user
 --------
 
-| SIP Account that requested the call.
+| SIP user that requested the call.
 
 
 

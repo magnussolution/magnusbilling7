@@ -44,7 +44,7 @@ Disk space
 SIP account limit
 -----------------
 
-| Maximum value of SIP accounts that this client can create.
+| Maximum value of SIP users that this client can create.
 
 
 

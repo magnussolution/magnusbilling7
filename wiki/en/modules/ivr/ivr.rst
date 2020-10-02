@@ -202,7 +202,7 @@ Default option
 Enable known SIP user
 ---------------------
 
-| Activating this option will be able to type an SIP account to call it directly.
+| Activating this option will be able to type an SIP user to call it directly.
 
 
 
