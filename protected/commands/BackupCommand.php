@@ -27,8 +27,12 @@ class BackupCommand extends ConsoleCommand
         $username = Yii::app()->db->username;
         $password = Yii::app()->db->password;
         $data     = date("d-m-Y");
-        $comando  = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed > /tmp/base.sql";
+        $comando  = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed --ignore-table=" . $dataBase . ".pkg_cdr_failed_archive > /tmp/base.sql";
         LinuxAccess::exec($comando);
+
+        $comando = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --no-data pkg_cdr_failed --no-data pkg_cdr_archive --no-data pkg_cdr_failed_archive >> /tmp/base.sql";
+        LinuxAccess::exec($comando);
+
         LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_Magnus.$data.tgz /tmp/base.sql /etc/asterisk");
         LinuxAccess::exec("rm -f /tmp/base.sql");
     }
