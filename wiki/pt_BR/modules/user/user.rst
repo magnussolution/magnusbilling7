@@ -115,8 +115,8 @@ País
 
 .. _user-id-offer:
 
-Ativar pacote grátis
----------------------
+Pacotes grátis
+---------------
 
 | Usado para ativar um pacote grátis. É necessário informar as tarifas que vão pertencer aos pacotes gratís.
 
@@ -129,16 +129,6 @@ Limite de CPS
 -------------
 
 | Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar este limite será enviado CONGESTION.
-
-
-
-
-.. _user-company-website:
-
-Site da empresa
----------------
-
-| Site da empresa|Tambem usado para customizar o painel de login para um revendedor. Neste caso, o dominio ou subdominio deve ser colocado sem http ou www
 
 
 
@@ -333,6 +323,26 @@ Data de expiração
 
 
 
+.. _user-record-call:
+
+Gravar chamadas
+---------------
+
+| Esta opção é somente para chamadas de DID, para chamadas externas tem que ativar nas Contas VoIP.
+
+
+
+
+.. _user-mix-monitor-format:
+
+Formato das gravaçōes
+-----------------------
+
+| Formato que será usado para gravar as chamadas.
+
+
+
+
 .. _user-calllimit:
 
 Limite de chamada
@@ -349,16 +359,6 @@ Erro ao superar limite
 ----------------------
 
 | Sinalização a ser enviada caso o limite de chamadas for superador.
-
-
-
-
-.. _user-mix-monitor-format:
-
-Formato das gravaçōes
------------------------
-
-| Formato que será usado para gravar as chamadas.
 
 
 
@@ -469,6 +469,16 @@ Mostrar preço de venda
 -----------------------
 
 | Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
+
+
+
+
+.. _user-company-website:
+
+Site da empresa
+---------------
+
+| Site da empresa|Tambem usado para customizar o painel de login para um revendedor. Neste caso, o dominio ou subdominio deve ser colocado sem http ou www
 
 
 

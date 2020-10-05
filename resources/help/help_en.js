@@ -683,7 +683,6 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'smtps.password': `Password used to authenticate the SMTP server.`,
     'smtps.port': `Port used by the SMTP server.`,
     'smtps.encryption': `Encryption type.`,
-    'smtps.sender': ``,
     //EMAILS TEMPLATES
     'templatemail.fromname': `This is the name that will be use with the fromname from the email.`,
     'templatemail.fromemail': `Email used in the frommail, must be the same email used by the SMTP user.`,

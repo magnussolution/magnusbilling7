@@ -29,22 +29,22 @@ Assunto
 
 
 
-.. _templateMail-status:
-
-Status
-------
-
-| Esta opção permite desativar o envio exclusivamente deste email.
-
-
-
-
 .. _templateMail-messagehtml:
 
 Descrição
 -----------
 
 | Mensagem. É possível usar variáveis, veja a tab variáveis para ver a lista de variáveis disponível.
+
+
+
+
+.. _templateMail-status:
+
+Status
+------
+
+| Esta opção permite desativar o envio exclusivamente deste email.
 
 
 

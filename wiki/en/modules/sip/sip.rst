@@ -108,7 +108,7 @@ Videosupport
 Block call regex
 ----------------
 
-| Block calls using REGEX. To block calls from cellphones, just put it ^55\d\d9. You can see more details at the link `https://regex101.com.  <https://regex101.com.>`_.
+| Block calls using REGEX. To block calls from cellphones, just put it ^55\\d\\d9. You can see more details at the link `https://regex101.com.  <https://regex101.com.>`_.
 
 
 
