@@ -9,16 +9,6 @@ DID
 
 
 
-.. _did-record-call:
-
-Record call
------------
-
-| Record calls for this DID. Recorded regardless of destination.
-
-
-
-
 .. _did-activated:
 
 Status
@@ -363,6 +353,16 @@ Out work audio
 --------------
 
 | Audio that will be executed when a call is received out of the time interval.
+
+
+
+
+.. _did-record-call:
+
+Record call
+-----------
+
+| Record calls for this DID. Recorded regardless of destination.
 
 
 

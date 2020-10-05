@@ -169,11 +169,11 @@ This menu has the following fields
 
 
 .. _did-menu-list:
-Menu DIDs
-=========
+Menu DID
+========
 
 
-This is the list of all fields with their description of the menu  DIDs
+This is the list of all fields with their description of the menu  DID
 
 DIDs
 ++++

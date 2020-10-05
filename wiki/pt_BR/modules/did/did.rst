@@ -9,16 +9,6 @@ DID
 
 
 
-.. _did-record-call:
-
-Gravar chamadas
----------------
-
-| Gravar chamadas deste DID. Será gravado independente do destino da chamada.
-
-
-
-
 .. _did-activated:
 
 Status
@@ -373,6 +363,16 @@ Trabalhando
 -----------
 
 | Áudio que será executado quando ligar fora do horário de atendimento.
+
+
+
+
+.. _did-record-call:
+
+Gravar chamadas
+---------------
+
+| Gravar chamadas deste DID. Será gravado independente do destino da chamada.
 
 
 
