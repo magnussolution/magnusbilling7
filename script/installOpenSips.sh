@@ -33,7 +33,7 @@ proxyip=$1
 ipMbilling=$2
 
 if [ -z "$3" ]; then
-  localIP=$2
+  localIP=$1
 else
   localIP=$3
 fi
