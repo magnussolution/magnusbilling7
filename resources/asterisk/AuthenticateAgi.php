@@ -76,7 +76,7 @@ class AuthenticateAgi
     {
         if ($authentication == false && $MAGNUS->agiconfig['cid_enable'] == 1 && is_numeric($MAGNUS->CallerID) && $MAGNUS->CallerID > 0) {
             $agi->verbose('Try callerID authentication ' . $MAGNUS->CallerID, 15);
-            $sql           = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID' LIMIT 1";
+            $sql           = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID' AND activated = 1 LIMIT 1";
             $modelCallerid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelCallerid->id)) {
