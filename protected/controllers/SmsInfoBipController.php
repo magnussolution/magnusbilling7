@@ -3,7 +3,7 @@
 /**
  * Url for http://localhost/mbilling/index.php/smsInfoBip/send?user=6964554610&pass=6964554610&number=57325064403&text=test_sms .
  */
-class SmsInfoBipController extends Controller
+class SmsInfoBipController extends CController
 {
 
     public function init()
