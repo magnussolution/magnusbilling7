@@ -671,13 +671,16 @@ class CalcAgi
         }
 
         if ($MAGNUS->is_callingcard == true) {
-            $answeredtime = time() - $agi->get_variable("TRUNKANSWERTIME");
+            $answeredtime = $agi->get_variable("TRUNKANSWERTIME");
+
+            $this->real_answeredtime = $this->answeredtime = time() - $answeredtime['data'];
         } else {
-            $answeredtime = $agi->get_variable("ANSWEREDTIME");
+            $answeredtime            = $agi->get_variable("ANSWEREDTIME");
+            $this->real_answeredtime = $this->answeredtime = $answeredtime['data'];
         }
-        $this->real_answeredtime = $this->answeredtime = $answeredtime['data'];
-        $dialstatus              = $agi->get_variable("DIALSTATUS");
-        $this->dialstatus        = $dialstatus['data'];
+
+        $dialstatus       = $agi->get_variable("DIALSTATUS");
+        $this->dialstatus = $dialstatus['data'];
 
         $MAGNUS->stopRecordCall($agi);
     }
