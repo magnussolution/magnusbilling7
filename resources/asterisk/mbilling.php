@@ -148,7 +148,7 @@ if ($agi->get_variable("CIDCALLBACK", true)) {
 
 if ($agi->get_variable("MEMBERNAME", true) || $agi->get_variable("QUEUEPOSITION", true)) {
 
-    $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
+    $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = (SELECT accountcode FROM pkg_sip WHERE name = '" . substr($agi->get_variable("MEMBERNAME", true), 4) . "') ) LIMIT 1";
     $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
     if (isset($MAGNUS->modelSip->id) && strlen($MAGNUS->modelSip->name) > 3) {
 
