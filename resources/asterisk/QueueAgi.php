@@ -144,7 +144,6 @@ class QueueAgi
 
         }
         if ($type == 'queue') {
-            $MAGNUS->hangup($agi);
             exit;
         } else {
             return;
