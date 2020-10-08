@@ -51,6 +51,11 @@ Ext.define('MBilling.view.callerid.List', {
             dataIndex: 'name',
             flex: 4
         }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            flex: 5,
+            hidden: window.isTablet
+        }, {
             header: t('Status'),
             dataIndex: 'activated',
             renderer: Helper.Util.formatBooleanActive,
