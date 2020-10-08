@@ -1144,6 +1144,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-10-08
+        if ($version == '7.5.2') {
+
+            $sql = "ALTER TABLE `mbilling`.`pkg_callerid` 
+            ADD COLUMN `description` MEDIUMTEXT CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL AFTER `name`;";
+            $this->executeDB($sql);
+
+            $version = '7.5.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
