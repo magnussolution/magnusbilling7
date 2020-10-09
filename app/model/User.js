@@ -99,6 +99,9 @@ Ext.define('MBilling.model.User', {
         name: 'company_name',
         type: 'string'
     }, {
+        name: 'commercial_name',
+        type: 'string'
+    }, {
         name: 'address',
         type: 'string'
     }, {
