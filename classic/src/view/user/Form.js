@@ -130,6 +130,11 @@ Ext.define('MBilling.view.user.Form', {
                     fieldLabel: t('Company name'),
                     allowBlank: true
                 }, {
+                    name: 'commercial_name',
+                    fieldLabel: t('Commercial name'),
+                    allowBlank: true,
+                    hidden: App.user.base_country = !'BRL'
+                },  {
                     name: 'state_number',
                     fieldLabel: t('State number'),
                     allowBlank: true,
