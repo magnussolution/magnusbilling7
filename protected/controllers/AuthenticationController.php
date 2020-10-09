@@ -477,7 +477,7 @@ class AuthenticationController extends Controller
 
         }
 
-        $colors = ['black', 'blue', 'gray', 'orange', 'purple', 'red', 'yellow'];
+        $colors = ['black', 'blue', 'gray', 'orange', 'purple', 'red', 'yellow', 'green'];
         foreach ($colors as $key => $color) {
             $types = ['crisp', 'neptune', 'triton'];
             foreach ($types as $key => $type) {

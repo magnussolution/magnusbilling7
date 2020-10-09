@@ -65,12 +65,12 @@ chmod -R 100 /var/www/html/mbilling/resources/asterisk/
 
 
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
-	for color in black blue gray orange purple red yellow
+	for color in black blue gray orange purple red yellow green
 	do
 		for type in crisp neptune triton
 		do
 			chmod -R 755 /var/www/html/mbilling/$color-$type/resources/images/
-			cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/
+			yes | cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/
 		done	
 	done	
 fi
