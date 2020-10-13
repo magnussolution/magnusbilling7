@@ -73,6 +73,10 @@ Ext.define('MBilling.view.sipuras.Form', {
             }, {
                 title: t('Line 1'),
                 items: [{
+                    name: 'Proxy_1',
+                    fieldLabel: t('Proxy') + ' 1',
+                    allowBlank: true
+                }, {
                     name: 'User_ID_1',
                     fieldLabel: t('Username'),
                     allowBlank: true
@@ -113,6 +117,10 @@ Ext.define('MBilling.view.sipuras.Form', {
             }, {
                 title: t('Line 2'),
                 items: [{
+                    name: 'Proxy_2',
+                    fieldLabel: t('Proxy') + ' 2',
+                    allowBlank: true
+                }, {
                     name: 'User_ID_2',
                     fieldLabel: t('Username'),
                     allowBlank: true
