@@ -247,14 +247,17 @@ class CallChartCommand extends ConsoleCommand
                     } else {
                         //check if is a DID number
                         //DID call ivr   -> SIP/addphone-000000|           |9999999999    |           |Up|(g729)|<none>             |AGI  |4|5
-                        $resultDid = $this->isDid($call[2]);
-                        if (isset($resultDid[0]->id)) {
+                        if (false !== $key = array_search($call[2], $this->didsNumbers)) {
+                            $modelDid = $this->dids[$key];
 
-                            $id_user = $resultDid[0]->id_user;
+                        }
+                        if (isset($modelDid['id'])) {
 
-                            switch ($resultDid[0]['voip_call']) {
+                            $id_user = $modelDid['id_user'];
+
+                            switch ($modelDid['voip_call']) {
                                 case 2:
-                                    $trunk = $originate . ' IVR' . $resultDid[0]->idIvr->name;
+                                    $trunk = $originate . ' IVR';
                                     break;
                                 case 3:
                                     $trunk = $originate . ' CallingCard';
@@ -294,10 +297,14 @@ class CallChartCommand extends ConsoleCommand
                     } else {
 
                         //check if is a DID number
-                        $resultDid = $this->isDid($ndiscado);
-                        if (isset($resultDid[0]->id)) {
-                            $id_user = $resultDid[0]->id_user;
-                            $trunk   = $ndiscado . ' Queue ' . $resultDid[0]->idQueue->name;
+                        if (false !== $key = array_search($call[2], $this->didsNumbers)) {
+                            $modelDid = $this->dids[$key];
+
+                        }
+
+                        if (isset($modelDid['id'])) {
+                            $id_user = $modelDid['id_user'];
+                            $trunk   = $ndiscado . ' Queue ';
                             if ($status == 'Up') {
                                 $callQueue = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
                                 $cdr       = time() - intval($callQueue['UniqueID']);

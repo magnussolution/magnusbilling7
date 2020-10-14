@@ -170,6 +170,15 @@ class MassiveCallCommand extends ConsoleCommand
                     continue;
                 }
 
+                if (!strlen($destination)) {
+                    $phone->status = 0;
+                    $phone->save();
+                    if ($this->debug >= 1) {
+                        echo "DISABLE NUMBER  id =" . $phone->id . " NO DESTINATION \n\n\n";
+                    }
+                    continue;
+                }
+
                 $destination = Portabilidade::getDestination($destination, $id_plan);
 
                 $searchTariff = Plan::model()->searchTariff($id_plan, $destination);
@@ -273,7 +282,9 @@ class MassiveCallCommand extends ConsoleCommand
                 $ids[] = $phone->id;
 
             }
-            CampaignReport::insertReport(substr($reportValues, 0, -1));
+            if (strlen($reportValues)) {
+                CampaignReport::insertReport(substr($reportValues, 0, -1));
+            }
             echo "Campain " . $campaign->name . " sent " . $i . " calls \n\n";
         }
     }
