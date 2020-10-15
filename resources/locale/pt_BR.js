@@ -14,7 +14,7 @@
  * 2020-08-07
  */
 Locale.load({
-    'Company website': 'Site da empresa',
+    'Company website': 'Site da empresasjsjte',
     'MagnusBilling System': 'Sistema MagnusBilling',
     'Activate offer': 'Ativar pacote grátis',
     'Voucher inexistente or already used': 'Voucher inexistente ou já usado',
