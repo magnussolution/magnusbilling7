@@ -238,6 +238,10 @@ if ($MAGNUS->mode == 'standard') {
                     $MAGNUS->CallerID = $modelSipCallerID->alias;
                 }
             }
+            
+            if ($agi->request['agi_calleridname'] !== 'unknown' && !empty($agi->request['agi_calleridname'])) {
+                $agi->set_variable("CALLERID(name)",$agi->request['agi_calleridname']);
+            }
 
             $MAGNUS->destination = $MAGNUS->dnid = $MAGNUS->modelSip->name;
             $MAGNUS->mode        = 'call-sip';
