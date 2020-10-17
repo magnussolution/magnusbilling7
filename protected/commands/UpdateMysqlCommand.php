@@ -690,7 +690,6 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             foreach ($resultRate as $key => $rate) {
 
-                echo "---------\n\n";
                 $sql        = "SELECT * FROM pkg_trunk WHERE id = " . $rate['id_trunk_group'];
                 $modelTrunk = Yii::app()->db->createCommand($sql)->queryAll();
 
@@ -705,14 +704,12 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                 }
 
                 $sql = "UPDATE pkg_rate SET id_trunk_group = $id_trunk_group WHERE id_trunk_group = " . $rate['id_trunk_group'];
-                echo $sql . "\n";
                 Yii::app()->db->createCommand($sql)->execute();
 
                 for ($i = 0; $i < 5; $i++) {
 
                     $sql = "INSERT INTO pkg_trunk_group_trunk (id_trunk_group, id_trunk) VALUES ( $id_trunk_group, " . $modelTrunk[0]['id'] . " )";
                     Yii::app()->db->createCommand($sql)->execute();
-                    echo $sql . "\n";
 
                     if (!is_numeric($modelTrunk[0]['failover_trunk'])) {
                         break;
@@ -836,7 +833,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $result = Yii::app()->db->createCommand($sql)->queryAll();
             if (!isset($result[0])) {
 
-                echo $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Backup'')', 'backup', 'x-fa fa-desktop', 12,15)";
+                $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Backup'')', 'backup', 'x-fa fa-desktop', 12,15)";
                 $this->executeDB($sql);
 
                 $idServiceModule = Yii::app()->db->lastInsertID;
@@ -1147,7 +1144,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         //2020-10-08
         if ($version == '7.5.2') {
 
-            $sql = "ALTER TABLE `mbilling`.`pkg_callerid` 
+            $sql = "ALTER TABLE `pkg_callerid`
             ADD COLUMN `description` MEDIUMTEXT CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL AFTER `name`;";
             $this->executeDB($sql);
 
@@ -1159,7 +1156,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         //2020-10-08
         if ($version == '7.5.3') {
 
-            $sql = "ALTER TABLE `mbilling`.`pkg_user` 
+            $sql = "ALTER TABLE `pkg_user`
             ADD COLUMN `commercial_name` VARCHAR(100) NULL DEFAULT NULL AFTER `company_name`;";
             $this->executeDB($sql);
 
