@@ -592,6 +592,7 @@ write = system,call,agent,user,config,command,reporting,originate
 
 
 echo "#include extensions_magnus.conf" >> /etc/asterisk/extensions.conf
+echo '#include extensions_magnus_did.conf' >> /etc/asterisk/extensions.conf
 echo "#include musiconhold_magnus.conf" >> /etc/asterisk/musiconhold.conf
 
 echo "[settings]
@@ -743,11 +744,11 @@ echo "
 * * * * * php /var/www/html/mbilling/cron.php Sms
 0 2 * * * php /var/www/html/mbilling/cron.php Backup
 0 4 * * * /var/www/html/mbilling/protected/commands/clear_memory
-0 4 * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr processCdrLast30Days
-*/2 * * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr processCdrToday
+*/2 * * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr
 * * * * * php /var/www/html/mbilling/cron.php cryptocurrency
 */3 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess
 * * * * * php /var/www/html/mbilling/cron.php statussystem
+* * * * * php /var/www/html/mbilling/cron.php didwww
 " > $CRONPATH
 chmod 600 $CRONPATH
 crontab $CRONPATH
