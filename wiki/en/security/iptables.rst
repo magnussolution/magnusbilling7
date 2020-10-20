@@ -2,7 +2,7 @@
 Iptables
 *****************
 
-Iptables regras aplicadas na instalacao
+Applicable Iptables rules in the installation.
 
 Basic Rules
 ^^^^^^^^^^^^
