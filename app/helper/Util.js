@@ -555,6 +555,12 @@ Ext.define('Helper.Util', {
             value = value == 0 ? t('Error') : value == 1 ? t('Sent') : value == 2 ? t('Received') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
+    formatBooleanServers: function(value) {
+        var me = Helper.Util,
+            color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? '#FFCC00' : '#FFCC00',
+            value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('OffLine') : t('Pending');
+        return '<span style="color:' + color + '">' + value + '</span>';
+    },
     formatLanguageImage: function(value) {
         return '<img src="resources/images/flags/' + value + '.png" />';
     },

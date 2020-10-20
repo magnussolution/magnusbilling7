@@ -54,14 +54,15 @@ Ext.define('MBilling.view.servers.List', {
         }, {
             header: t('Status'),
             dataIndex: 'status',
-            renderer: Helper.Util.formatBooleanActive,
+            renderer: Helper.Util.formatBooleanServers,
             comboRelated: 'booleancombo',
             flex: 2,
             filter: {
                 type: 'list',
                 options: [
                     [1, t('Active')],
-                    [0, t('Inactive')]
+                    [0, t('Inactive')],
+                    [2, t('OffLine')]
                 ]
             }
         }]
