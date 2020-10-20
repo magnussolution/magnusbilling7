@@ -73,7 +73,14 @@ Ext.define('MBilling.view.servers.Form', {
             xtype: 'booleancombo',
             name: 'status',
             fieldLabel: t('Status'),
-            allowBlank: true
+            forceSelection: true,
+            editable: false,
+            value: '1',
+            store: [
+                [1, t('Active')],
+                [0, t('Inactive')],
+                [2, t('OffLine')]
+            ]
         }, {
             xtype: 'textareafield',
             name: 'description',
