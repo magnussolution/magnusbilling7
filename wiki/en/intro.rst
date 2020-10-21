@@ -10,7 +10,7 @@ Introduction
 
 * MagnusBilling has a modern and robust interface that makes the administration of all functions very easy to understand.
 
-* MagnusBilling has everything that a small, medium and large companies need to start a robust IP PBX system `Youtube Channel`_.
+* MagnusBilling has everything that a small, medium and large companies need to start a robust IP PBX system `Youtube Channel`.
 
 
 Functions
