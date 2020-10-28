@@ -36,6 +36,8 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
             $local_command = '';
         }
 
+        $archive = false;
+
         $configFile = '/etc/odbc.ini';
         $array      = parse_ini_file($configFile);
         $server     = $array['Server'];
@@ -106,7 +108,13 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
             $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Success_" . $time . ".csv' IGNORE INTO TABLE pkg_cdr FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,buycost,sessionbill,sessiontime,real_sessiontime,agent_bill,sipiax,id_campaign)  $server_set ";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
-                exec("rm -rf /var/log/asterisk/cdr-csv/MBilling_Success_" . $time . ".csv");
+
+                if ($archive == true) {
+                    exec("mv /var/log/asterisk/cdr-csv/MBilling_Success_" . $time . ".csv /tmp/");
+                } else {
+                    exec("rm -rf /var/log/asterisk/cdr-csv/MBilling_Success_" . $time . ".csv");
+                }
+
             } catch (Exception $e) {
                 print_r($e);
             }
@@ -118,7 +126,11 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
             $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Failed_" . $time . ".csv' IGNORE INTO TABLE pkg_cdr_failed FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,terminatecauseid,hangupcause)  $server_set ";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
-                exec("rm -rf /var/log/asterisk/cdr-csv/MBilling_Failed_" . $time . ".csv");
+                if ($archive == true) {
+                    exec("mv /var/log/asterisk/cdr-csv/MBilling_Failed_" . $time . ".csv /tmp/");
+                } else {
+                    exec("rm -rf /var/log/asterisk/cdr-csv/MBilling_Failed_" . $time . ".csv");
+                }
             } catch (Exception $e) {
                 print_r($e);
 
