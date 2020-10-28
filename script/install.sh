@@ -1092,6 +1092,7 @@ chmod -R 755 /var/www/html/mbilling/assets/
 chown -R asterisk:asterisk /var/www/html/mbilling
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
 chmod -R 100 /var/www/html/mbilling/resources/asterisk/
+chown -R asterisk:asterisk /var/lib/asterisk/moh/
 echo
 echo
 echo ===============================================================

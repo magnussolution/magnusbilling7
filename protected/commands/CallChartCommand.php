@@ -37,6 +37,7 @@ class CallChartCommand extends ConsoleCommand
                 break;
             }
             try {
+                Servers::model()->updateAll(array('status' => 1), 'status = 2');
                 $calls = AsteriskAccess::getCoreShowCdrChannels();
             } catch (Exception $e) {
                 sleep(4);
@@ -153,7 +154,10 @@ class CallChartCommand extends ConsoleCommand
                             $id_user = isset($modelDid['id_user']) ? $modelDid['id_user'] : null;
 
                             $didChannel = AsteriskAccess::getCoreShowChannel($channel);
-                            $cdr        = time() - intval($didChannel['UniqueID']);
+                            if (isset($callQueue['UniqueID'])) {
+                                $cdr = time() - intval($callQueue['UniqueID']);
+                            }
+
                             if ($des_chan != '<none>') {
                                 if (isset($didChannel['DIALEDPEERNUMBER'])) {
                                     $sip_account = $didChannel['DIALEDPEERNUMBER'];
@@ -307,7 +311,9 @@ class CallChartCommand extends ConsoleCommand
                             $trunk   = $ndiscado . ' Queue ';
                             if ($status == 'Up') {
                                 $callQueue = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                                $cdr       = time() - intval($callQueue['UniqueID']);
+                                if (isset($callQueue['UniqueID'])) {
+                                    $cdr = time() - intval($callQueue['UniqueID']);
+                                }
                             }
                         } else {
                             $id_user = 'NULL';
