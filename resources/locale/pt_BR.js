@@ -812,7 +812,7 @@ Locale.load({
     'Options': 'Opçãos',
     'Orange': 'Laranja',
     'Order': 'Em ordem',
-    'Out work audio': 'Trabalhando',
+    'Out work audio': 'Não trabalhando',
     'Outgoing call barred': 'Outgoing call barred',
     'P2P CustomerSiteID': 'P2P CustomerSiteID',
     'P2P KeyID': 'P2P KeyID',
