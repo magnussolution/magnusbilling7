@@ -25,7 +25,7 @@ A new User will be created, the username and password will be created automatica
 
 Now you need to select the group of the user. In this case we are creating an client, so select the client option.
 
-.. image:: ../img/users_clientimg.png
+.. image:: ../img/user_clientimg.png
         :scale: 80%    
 
 We have no plans created, so let's create one so we assign one plan to the client.
@@ -36,7 +36,7 @@ For this guide we will only name the plan Golden, and not change any other of th
 
 Back at the Users tab, you select the newly created plan in the search button.
 
-.. image:: ../img/users_selectplan.png
+.. image:: ../img/users_selectplan2.png
         :scale: 80%
 
 After successfully  creating an user, MagnusBilling will automatically create a Sip account for this user.
