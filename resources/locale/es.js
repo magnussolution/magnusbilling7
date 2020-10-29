@@ -14,8 +14,11 @@
  * 2020-08-10
  */
 Locale.load({
+    'Commercial name': 'Nombre comercial',
+    'Extra': 'Extra',
+    'OffLine': 'OffLine',
+    'Proxy': 'Proxy',
     'Company website': 'Site de la empresa',
-    'MagnusBilling System': 'Sistema MagnusBilling',
     'Activate offer': 'Ativar oferta',
     'Voucher inexistente or already used': 'Voucher inexistente o ya usado',
     'must belong to the IVR owner': 'tiene que pertenecer al mismo usuario de la IRV',
@@ -131,7 +134,6 @@ Locale.load({
     'Failed. Try again...': 'Ha fallado. Inténtalo de nuevo...',
     'Failed': 'Fallidas',
     'Failover trunk': 'Troncal de backup',
-    'Fatura': 'Factura',
     'Field list': 'Lista de campo',
     'Fill in the fields correctly.': 'Rellena los campos correctamente.',
     'Forgot your password?': '¿Olvidaste tu contraseña?',
@@ -867,7 +869,6 @@ Locale.load({
     'Send Credit Products': 'Send Credit Products',
     'Send Credit Summary': 'Send Credit Summary',
     'Send credit': 'Send credit',
-    'Send credit rates': 'Send credit rates',
     'Send the call to callback': 'Enviar la llamada para el callback',
     'Send value': 'Enviar valor',
     'Sendrpid': 'Sendrpid',

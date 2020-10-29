@@ -21,8 +21,11 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Company website' => 'Site de la empresa',
-    'MagnusBilling System' => 'Sistema MagnusBilling',
+            'Commercial name' => 'Nombre comercial',
+    'Extra' => 'Extra',
+    'OffLine' => 'OffLine',
+    'Proxy' => 'Proxy',
+    'Company website' => 'Site de la empresa',
     'Activate offer' => 'Ativar oferta',
     'Voucher inexistente or already used' => 'Voucher inexistente o ya usado',
     'must belong to the IVR owner' => 'tiene que pertenecer al mismo usuario de la IRV',
@@ -131,7 +134,6 @@ return array(
     'Failed. Try again...' => 'Ha fallado. Inténtalo de nuevo...',
     'Failed' => 'Fallidas',
     'Failover trunk' => 'Troncal de backup',
-    'Fatura' => 'Factura',
     'Field list' => 'Lista de campo',
     'Fill in the fields correctly.' => 'Rellena los campos correctamente.',
     'Repeat if press invalid option' => 'Repetir si marcar opción inválida',
@@ -855,7 +857,6 @@ return array(
     'Send Credit Products' => 'Send Credit Products',
     'Send Credit Summary' => 'Send Credit Summary',
     'Send credit' => 'Send credit',
-    'Send credit rates' => 'Send credit rates',
     'Send the call to callback' => 'Enviar la llamada para el callback',
     'Send value' => 'Enviar valor',
     'Sendrpid' => 'Sendrpid',

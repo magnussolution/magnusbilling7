@@ -21,8 +21,11 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Company website' => 'Site da empresa',
-    'MagnusBilling System' => 'Sistema MagnusBilling',
+            'Commercial name' => 'Nome fantasia',
+    'Extra' => 'Extra',
+    'OffLine' => 'OffLine',
+    'Proxy' => 'Proxy',
+    'Company website' => 'Site da empresa',
     'Activate offer' => 'Ativar pacote grátis',
     'Voucher inexistente or already used' => 'Voucher inexistente ou já usado',
     'must belong to the IVR owner' => 'deve pertencer ao mesmo usuário dono da IRV',
@@ -288,7 +291,6 @@ return array(
     'Send Credit' => 'Enviar crédito',
     'Send Credit Products' => 'Send Credit Products',
     'Send Credit Summary' => 'Send Credit Summary',
-    'Send credit rates' => 'Send credit rates',
     'Server IP' => 'IP do servidor',
     'Setup' => 'Instalação',
     'Show name' => 'Nome para mostrar',
@@ -807,7 +809,7 @@ return array(
     'Options' => 'Opçãos',
     'Orange' => 'Laranja',
     'Order' => 'Em ordem',
-    'Out work audio' => 'Trabalhando',
+    'Out work audio' => 'Não trabalhando',
     'Outgoing call barred' => 'Outgoing call barred',
     'P2P CustomerSiteID' => 'P2P CustomerSiteID',
     'P2P KeyID' => 'P2P KeyID',
