@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-10-02
+ * 2020-10-29
  */
 Locale.load({
     '': '',
@@ -195,6 +195,7 @@ Locale.load({
     'Column': '',
     'Columns': '',
     'Comma': '',
+    'Commercial name': '',
     'Company name': '',
     'Company website': '',
     'Config': '',
@@ -327,6 +328,8 @@ Locale.load({
     'Expiration date': '',
     'Export CSV': '',
     'Export file': '',
+    'Extra': '',
+    'Extra2': '',
     'Extra3': '',
     'Facility rejected': '',
     'Fail2ban': '',
@@ -334,7 +337,6 @@ Locale.load({
     'Failed calls': '',
     'Failed. Try again...': '',
     'Failover trunk': '',
-    'Fatura': '',
     'Field list': '',
     'File': '',
     'File CSV': '',
@@ -466,7 +468,6 @@ Locale.load({
     'MOH': '',
     'MYSQL message.': '',
     'MagnusBilling': '',
-    'MagnusBilling System': '',
     'Main menu': '',
     'Mandatory information element is missing': '',
     'Manual code': '',
@@ -567,6 +568,7 @@ Locale.load({
     'Numbers': '',
     'ONE TIME PASSWORD': '',
     'OR': '',
+    'OffLine': '',
     'Offer': '',
     'Offer CDR': '',
     'Offer Use': '',
@@ -673,6 +675,7 @@ Locale.load({
     'Provider rate': '',
     'Provider tech': '',
     'Providers': '',
+    'Proxy': '',
     'Public IP': '',
     'Purple': '',
     'QoR: ported number': '',
@@ -821,7 +824,6 @@ Locale.load({
     'Send Credit Products': '',
     'Send Credit Summary': '',
     'Send credit': '',
-    'Send credit rates': '',
     'Send the call to callback': '',
     'Send value': '',
     'Sendrpid': '',
@@ -897,6 +899,7 @@ Locale.load({
     'Sunday intervals': '',
     'Supplementary info': '',
     'Switching equipment congestion': '',
+    'System': '',
     'TLS': '',
     'TOKEN': '',
     'Table': '',

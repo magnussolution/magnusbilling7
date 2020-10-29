@@ -14,8 +14,11 @@
  * 2020-08-07
  */
 Locale.load({
+    'Commercial name': 'Nome fantasia',
+    'Extra': 'Extra',
+    'OffLine': 'OffLine',
+    'Proxy': 'Proxy',
     'Company website': 'Site da empresa',
-    'MagnusBilling System': 'Sistema MagnusBilling',
     'Activate offer': 'Ativar pacote grátis',
     'Voucher inexistente or already used': 'Voucher inexistente ou já usado',
     'must belong to the IVR owner': 'deve pertencer ao mesmo usuário dono da IRV',
@@ -284,7 +287,6 @@ Locale.load({
     'Send Credit': 'Enviar crédito',
     'Send Credit Products': 'Send Credit Products',
     'Send Credit Summary': 'Send Credit Summary',
-    'Send credit rates': 'Send credit rates',
     'Server IP': 'IP do servidor',
     'Setup': 'Instalação',
     'Show name': 'Nome para mostrar',
