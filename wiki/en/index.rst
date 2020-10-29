@@ -23,7 +23,6 @@ Welcome to MagnusBilling 7 wiki.
 
    get_started/quick_install.rst
    get_started/interface.rst
-   get_started/first_call.rst
    get_started/backup.rst
    
 .. toctree::
