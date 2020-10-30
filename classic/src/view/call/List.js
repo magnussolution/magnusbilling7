@@ -191,6 +191,15 @@ Ext.define('MBilling.view.call.List', {
             hideable: true
         }, {
             xtype: 'templatecolumn',
+            tpl: '{idPlanname}',
+            header: t('Plan'),
+            dataIndex: 'id_plan',
+            comboFilter: 'plancombo',
+            flex: 3,
+            hidden: true,
+            hideable: !App.user.isClient
+        }, {
+            xtype: 'templatecolumn',
             tpl: '{idCampaignname}',
             header: t('Campaign'),
             dataIndex: 'id_campaign',
