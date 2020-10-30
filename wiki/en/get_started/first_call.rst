@@ -36,7 +36,7 @@ For this guide we will only name the plan Golden, and not change any other of th
 
 Back at the Users tab, you select the newly created plan in the search button.
 
-.. image:: ../img/users_selectplan2.png
+.. image:: ../img/user_selectplan2.png
         :scale: 80%
 
 After successfully  creating an user, MagnusBilling will automatically create a Sip account for this user.
