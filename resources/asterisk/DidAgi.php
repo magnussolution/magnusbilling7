@@ -128,134 +128,124 @@ class DidAgi
             }
         }
 
-        //check if is a call betewen 2 sipcounts.
-        if (strlen($MAGNUS->accountcode) > 0) {
-            $sql      = "SELECT * FROM pkg_sip WHERE name = '$this->did' LIMIT 1";
-            $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        if (strlen($this->modelDid->callerid)) {
+            $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
         }
 
-        if (!isset($modelSip->id)) {
+        $MAGNUS->accountcode = $MAGNUS->username = $MAGNUS->modelUser->username;
 
-            if (strlen($this->modelDid->callerid)) {
-                $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
+        $this->voip_call = $this->modelDestination[0]['voip_call'];
+        $this->checkBlockCallerID($agi, $MAGNUS);
+
+        $agi->verbose('voip_call ' . $this->voip_call, 5);
+
+        if ($this->modelDid->cbr == 1 && !$agi->get_variable("ISFROMCALLBACKPRO", true)) {
+            if (!$agi->get_variable("SECCALL", true)) {
+                $agi->verbose('RECEIVED 0800 CALLBACPRO', 5);
+                CallbackAgi::advanced0800CallBack($agi, $MAGNUS, $this, $CalcAgi);
+                return;
             }
+        } else if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
+            $sql              = "SELECT * FROM pkg_callback WHERE id = '" . $agi->get_variable("IDCALLBACK", true) . "' LIMIT 1";
+            $modelCallback    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $MAGNUS->CallerID = $modelCallback->exten;
+            $agi->set_callerid($MAGNUS->CallerID);
+        }
 
-            $MAGNUS->accountcode = $MAGNUS->username = $MAGNUS->modelUser->username;
+        switch ($this->voip_call) {
+            case 2:
+                $MAGNUS->mode = 'ivr';
+                IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $this);
+                break;
+            case 3:
+                //callingcard
+                $MAGNUS->mode = 'standard';
+                $agi->answer();
+                sleep(1);
+                $MAGNUS->callingcardConnection = $this->modelDid->connection_sell;
 
-            $this->voip_call = $this->modelDestination[0]['voip_call'];
-            $this->checkBlockCallerID($agi, $MAGNUS);
-
-            $agi->verbose('voip_call ' . $this->voip_call, 5);
-
-            if ($this->modelDid->cbr == 1 && !$agi->get_variable("ISFROMCALLBACKPRO", true)) {
+                $MAGNUS->agiconfig['use_dnid']        = 0;
+                $MAGNUS->agiconfig['answer']          = $MAGNUS->agiconfig['callingcard_answer'];
+                $MAGNUS->agiconfig['cid_enable']      = $MAGNUS->agiconfig['callingcard_cid_enable'];
+                $MAGNUS->agiconfig['number_try']      = $MAGNUS->agiconfig['callingcard_number_try'];
+                $MAGNUS->agiconfig['say_rateinitial'] = $MAGNUS->agiconfig['callingcard_say_rateinitial'];
+                $MAGNUS->agiconfig['say_timetocall']  = $MAGNUS->agiconfig['callingcard_say_timetocall'];
+                $MAGNUS->accountcode                  = null;
+                $MAGNUS->CallerID                     = is_numeric($MAGNUS->CallerID) ? $MAGNUS->CallerID : $agi->request['agi_calleridname'];
+                $agi->verbose('CallerID ' . $MAGNUS->CallerID);
+                break;
+            case 4:
+                $MAGNUS->mode = 'portalDeVoz';
+                $agi->verbose('PortalDeVozAgi');
+                PortalDeVozAgi::send($agi, $MAGNUS, $CalcAgi, $this);
+                break;
+            case 5:
+                $agi->verbose('RECEIVED ANY CALLBACK', 5);
+                CallbackAgi::callbackCID($agi, $MAGNUS, $CalcAgi, $this);
+                break;
+            case 6:
                 if (!$agi->get_variable("SECCALL", true)) {
-                    $agi->verbose('RECEIVED 0800 CALLBACPRO', 5);
-                    CallbackAgi::advanced0800CallBack($agi, $MAGNUS, $this, $CalcAgi);
-                    return;
+                    $agi->verbose('RECEIVED 0800 CALLBACK', 5);
+                    CallbackAgi::callback0800($agi, $MAGNUS, $CalcAgi, $this);
                 }
-            } else if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
-                $sql              = "SELECT * FROM pkg_callback WHERE id = '" . $agi->get_variable("IDCALLBACK", true) . "' LIMIT 1";
-                $modelCallback    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                $MAGNUS->CallerID = $modelCallback->exten;
-                $agi->set_callerid($MAGNUS->CallerID);
+                break;
+            case 7:
+                $MAGNUS->mode = 'queue';
+                QueueAgi::callQueue($agi, $MAGNUS, $CalcAgi, $this);
+                break;
+            default:
+                $agi->verbose('Mode = did', 5);
+                $MAGNUS->mode = 'did';
+                $this->call_did($agi, $MAGNUS, $CalcAgi);
+                break;
+        }
+
+        if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
+            $MAGNUS->id_trunk = $agi->get_variable("IDTRUNK", true);
+
+            $max_len_prefix = strlen($MAGNUS->CallerID);
+            $prefixclause   = '(';
+            while ($max_len_prefix >= 1) {
+                $prefixclause .= "prefix='" . substr($MAGNUS->CallerID, 0, $max_len_prefix) . "' OR ";
+                $max_len_prefix--;
             }
 
-            switch ($this->voip_call) {
-                case 2:
-                    $MAGNUS->mode = 'ivr';
-                    IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $this);
-                    break;
-                case 3:
-                    //callingcard
-                    $MAGNUS->mode = 'standard';
-                    $agi->answer();
-                    sleep(1);
-                    $MAGNUS->callingcardConnection = $this->modelDid->connection_sell;
+            $prefixclause = substr($prefixclause, 0, -3) . ")";
 
-                    $MAGNUS->agiconfig['use_dnid']        = 0;
-                    $MAGNUS->agiconfig['answer']          = $MAGNUS->agiconfig['callingcard_answer'];
-                    $MAGNUS->agiconfig['cid_enable']      = $MAGNUS->agiconfig['callingcard_cid_enable'];
-                    $MAGNUS->agiconfig['number_try']      = $MAGNUS->agiconfig['callingcard_number_try'];
-                    $MAGNUS->agiconfig['say_rateinitial'] = $MAGNUS->agiconfig['callingcard_say_rateinitial'];
-                    $MAGNUS->agiconfig['say_timetocall']  = $MAGNUS->agiconfig['callingcard_say_timetocall'];
-                    $MAGNUS->accountcode                  = null;
-                    $MAGNUS->CallerID                     = is_numeric($MAGNUS->CallerID) ? $MAGNUS->CallerID : $agi->request['agi_calleridname'];
-                    $agi->verbose('CallerID ' . $MAGNUS->CallerID);
-                    break;
-                case 4:
-                    $MAGNUS->mode = 'portalDeVoz';
-                    $agi->verbose('PortalDeVozAgi');
-                    PortalDeVozAgi::send($agi, $MAGNUS, $CalcAgi, $this);
-                    break;
-                case 5:
-                    $agi->verbose('RECEIVED ANY CALLBACK', 5);
-                    CallbackAgi::callbackCID($agi, $MAGNUS, $CalcAgi, $this);
-                    break;
-                case 6:
-                    if (!$agi->get_variable("SECCALL", true)) {
-                        $agi->verbose('RECEIVED 0800 CALLBACK', 5);
-                        CallbackAgi::callback0800($agi, $MAGNUS, $CalcAgi, $this);
-                    }
-                    break;
-                case 7:
-                    $MAGNUS->mode = 'queue';
-                    QueueAgi::callQueue($agi, $MAGNUS, $CalcAgi, $this);
-                    break;
-                default:
-                    $agi->verbose('Mode = did', 5);
-                    $MAGNUS->mode = 'did';
-                    $this->call_did($agi, $MAGNUS, $CalcAgi);
-                    break;
-            }
+            $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
+            "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $MAGNUS->id_trunk . ") AND " . $prefixclause .
+                "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+            $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
-            if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
-                $MAGNUS->id_trunk = $agi->get_variable("IDTRUNK", true);
+            $sessiontime         = time() - $this->startCall;
+            $sell                = $agi->get_variable("SELLCOST", true);
+            $sellinitblock       = $agi->get_variable("SELLINITBLOCK", true);
+            $sellincrement       = $agi->get_variable("SELLINCREMENT", true);
+            $buy                 = $modelRateProvider[0]->buyrate;
+            $buyinitblock        = $modelRateProvider[0]->buyrateinitblock;
+            $buyincrement        = $modelRateProvider[0]->buyrateincrement;
+            $MAGNUS->id_user     = $agi->get_variable("IDUSER", true);
+            $MAGNUS->id_plan     = $agi->get_variable("IDPLAN", true);
+            $MAGNUS->sip_account = $MAGNUS->destination;
+            $MAGNUS->destination = $MAGNUS->CallerID;
 
-                $max_len_prefix = strlen($MAGNUS->CallerID);
-                $prefixclause   = '(';
-                while ($max_len_prefix >= 1) {
-                    $prefixclause .= "prefix='" . substr($MAGNUS->CallerID, 0, $max_len_prefix) . "' OR ";
-                    $max_len_prefix--;
-                }
+            $sell_price = $MAGNUS->roudRatePrice($sessiontime, $sell, $sellinitblock, $sellincrement);
+            $buy_price  = $MAGNUS->roudRatePrice($sessiontime, $buy, $buyinitblock, $buyincrement);
 
-                $prefixclause = substr($prefixclause, 0, -3) . ")";
+            $CalcAgi->starttime        = date("Y-m-d H:i:s", $this->startCall);
+            $CalcAgi->sessiontime      = $sessiontime;
+            $CalcAgi->terminatecauseid = 1;
+            $CalcAgi->sessionbill      = $sell_price;
+            $CalcAgi->sipiax           = 4;
+            $CalcAgi->buycost          = $buy_price;
+            $CalcAgi->id_prefix        = $agi->get_variable("IDPREFIX", true);
+            $CalcAgi->saveCDR($agi, $MAGNUS);
 
-                $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
-                "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $MAGNUS->id_trunk . ") AND " . $prefixclause .
-                    "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
-                $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
-
-                $sessiontime         = time() - $this->startCall;
-                $sell                = $agi->get_variable("SELLCOST", true);
-                $sellinitblock       = $agi->get_variable("SELLINITBLOCK", true);
-                $sellincrement       = $agi->get_variable("SELLINCREMENT", true);
-                $buy                 = $modelRateProvider[0]->buyrate;
-                $buyinitblock        = $modelRateProvider[0]->buyrateinitblock;
-                $buyincrement        = $modelRateProvider[0]->buyrateincrement;
-                $MAGNUS->id_user     = $agi->get_variable("IDUSER", true);
-                $MAGNUS->id_plan     = $agi->get_variable("IDPLAN", true);
-                $MAGNUS->sip_account = $MAGNUS->destination;
-                $MAGNUS->destination = $MAGNUS->CallerID;
-
-                $sell_price = $MAGNUS->roudRatePrice($sessiontime, $sell, $sellinitblock, $sellincrement);
-                $buy_price  = $MAGNUS->roudRatePrice($sessiontime, $buy, $buyinitblock, $buyincrement);
-
-                $CalcAgi->starttime        = date("Y-m-d H:i:s", $this->startCall);
-                $CalcAgi->sessiontime      = $sessiontime;
-                $CalcAgi->terminatecauseid = 1;
-                $CalcAgi->sessionbill      = $sell_price;
-                $CalcAgi->sipiax           = 4;
-                $CalcAgi->buycost          = $buy_price;
-                $CalcAgi->id_prefix        = $agi->get_variable("IDPREFIX", true);
-                $CalcAgi->saveCDR($agi, $MAGNUS);
-
-                $sql = "UPDATE pkg_callback SET status = 3, last_attempt_time = '" . date('Y-m-d H:i:s') . "', sessiontime = $sessiontime
+            $sql = "UPDATE pkg_callback SET status = 3, last_attempt_time = '" . date('Y-m-d H:i:s') . "', sessiontime = $sessiontime
                         WHERE id = " . $agi->get_variable("IDCALLBACK", true);
-                $agi->exec($sql);
+            $agi->exec($sql);
 
-                $MAGNUS->hangup($agi);
-            }
-
+            $MAGNUS->hangup($agi);
         }
     }
 
