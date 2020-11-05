@@ -188,30 +188,6 @@ class SmsSend
                 $modelSms->sms_from  = $sms_from;
                 $modelSms->save();
 
-                //RETIRA CREDITO DO CLIENTE
-                if ($modelUser->id_user > 1) {
-
-                    User::model()->updateByPk($modelUser->id,
-                        array(
-                            'credit' => new CDbExpression('credit - ' . $rateInitialClientAgent),
-                        )
-                    );
-                } else {
-                    User::model()->updateByPk($modelUser->id,
-                        array(
-                            'credit' => new CDbExpression('credit - ' . $rateInitial),
-                        )
-                    );
-                }
-
-                //RETIRA CREDITO DO REVENDEDOR
-                if ($modelUser->id_user > 1) {
-                    User::model()->updateByPk($modelUser->id_user,
-                        array(
-                            'credit' => new CDbExpression('credit - ' . $buyRate),
-                        )
-                    );
-                }
             } else {
                 $buyRate          = 0;
                 $terminateCauseid = 4;
