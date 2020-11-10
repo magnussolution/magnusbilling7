@@ -54,6 +54,7 @@ class Api extends Model
     {
         return array(
             array('api_key, api_secret', 'required'),
+            array('api_key, api_secret', 'unique'),
             array('id_user, status', 'numerical', 'integerOnly' => true),
             array('api_key, api_secret, api_restriction_ips', 'length', 'max' => 150),
             array('api_key, api_secret', 'length', 'min' => 15),
