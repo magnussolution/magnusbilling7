@@ -28,11 +28,12 @@
 </script>
 <?php
 //need receive two decimal.
-$precioReal = preg_replace("/\.|\,/", '', $_GET['amount']);
+$amount = number_format($_GET['amount'], 2);
+$amount = preg_replace("/\.|\,/", '', $amount);
 ?>
 <form method="POST" action="<?php echo $modelMethodPay->url ?>" target="_parent" id="buyForm">
 	<input type='hidden' name='id_carteira' value='<?php echo $modelMethodPay->username ?>'/>
-	<input type='hidden' name='valor' value='<?php echo $precioReal; ?>'/>
+	<input type='hidden' name='valor' value='<?php echo $amount; ?>'/>
 	<input type='hidden' name='nome' value='Credito VoIP'/>
 	<input type='hidden' name='id_transacao' value='<?php echo $reference; ?>'/>
 	<input id="pagador_nome" type="hidden" name="pagador_nome" value="<?php echo $modelUser->firstname . ' ' . $modelUser->lastname ?>"/>
