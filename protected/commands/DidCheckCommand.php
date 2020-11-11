@@ -39,7 +39,7 @@ class DidCheckCommand extends ConsoleCommand
             exit;
         }
 
-        $daytopay = 5;
+        $daytopay = $this->config['global']['service_daytopay'];
         $oneday   = 60 * 60 * 24;
 
         foreach ($modelDidUse as $didUse) {
