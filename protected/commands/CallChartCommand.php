@@ -154,8 +154,8 @@ class CallChartCommand extends ConsoleCommand
                             $id_user = isset($modelDid['id_user']) ? $modelDid['id_user'] : null;
 
                             $didChannel = AsteriskAccess::getCoreShowChannel($channel);
-                            if (isset($callQueue['UniqueID'])) {
-                                $cdr = time() - intval($callQueue['UniqueID']);
+                            if (isset($didChannel['UniqueID'])) {
+                                $cdr = time() - intval($didChannel['UniqueID']);
                             }
 
                             if ($des_chan != '<none>') {
