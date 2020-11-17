@@ -172,6 +172,14 @@ class ApiAccess
             $action = 'd';
         } else if ($_POST['action'] == 'buy') {
             $action = 'r';
+        } else if ($_POST['action'] == 'getNewUsername') {
+            $action = 'r';
+        } else if ($_POST['action'] == 'getNewPassword') {
+            $action = 'r';
+        } else if ($_POST['action'] == 'getNewPinCallingcard') {
+            $action = 'r';
+        } else if ($_POST['action'] == 'resendActivationEmail') {
+            $action = 'r';
         }
 
         if (!preg_match('/' . $action . '/', $modelApi->action)) {
@@ -273,7 +281,7 @@ class ApiAccess
 
             echo json_encode([
                 'success' => true,
-                'data'    => print_r($attributes),
+                'data'    => $attributes,
             ]);
 
         } else {
