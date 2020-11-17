@@ -679,7 +679,7 @@ class Magnus
         $destination = $type == 'outbound' ? $this->destination : $this->CallerID;
         $direction   = $type == 'outbound' ? 1 : 2;
 
-        if ($check_block_call_reg == 'outbound' && $this->modelSip->block_call_reg != '') {
+        if ($type == 'outbound' && $this->modelSip->block_call_reg != '') {
 
             if (preg_match("/" . $this->modelSip->block_call_reg . "/", $destination)) {
                 $agi->verbose("NUMBER NOT AUHTORIZED - NOT ALLOW TO CALL BY REGEX SIP ACCOUNT " . $this->sip_account, 1);
