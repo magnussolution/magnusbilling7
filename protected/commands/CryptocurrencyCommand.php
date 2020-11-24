@@ -21,7 +21,7 @@ class CryptocurrencyCommand extends CConsoleCommand
 {
     public function run($args)
     {
-        $modelMethodPay = MethodPay::model()->find('payment_method = :key', array(':key' => 'cryptocurrency'));
+        $modelMethodPay = Methodpay::model()->find('payment_method = :key', array(':key' => 'cryptocurrency'));
         if (!count($modelMethodPay)) {
             exit;
         }
