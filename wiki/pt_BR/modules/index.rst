@@ -97,22 +97,6 @@ Este menu tem os seguintes campos
 .. include:: transfertomobile/transfertomobile.rst
 
 
-Send Credit Products
-++++++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: sendcreditproducts/sendcreditproducts.rst
-
-
-Token
-+++++
-
-Este menu tem os seguintes campos
-
-.. include:: gauthenticator/gauthenticator.rst
-
-
 
 
 
@@ -156,24 +140,16 @@ Este menu tem os seguintes campos
 .. include:: refillprovider/refillprovider.rst
 
 
-Fatura
-++++++
-
-Este menu tem os seguintes campos
-
-.. include:: extra/extra.rst
-
-
 
 
 
 
 .. _did-menu-list:
-Menu DID
-========
+Menu DIDs
+=========
 
 
-Esta é a lista dos campos com sua respectiva descrição do menu DID
+Esta é a lista dos campos com sua respectiva descrição do menu DIDs
 
 DIDs
 ++++
@@ -237,14 +213,6 @@ Monitor de Filas
 Este menu tem os seguintes campos
 
 .. include:: dashboardqueue/dashboardqueue.rst
-
-
-DIDww
-+++++
-
-Este menu tem os seguintes campos
-
-.. include:: didww/didww.rst
 
 
 DIDww
@@ -320,14 +288,6 @@ Uso de Pacotes
 Este menu tem os seguintes campos
 
 .. include:: offeruse/offeruse.rst
-
-
-Send credit rates
-+++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: sendcreditrates/sendcreditrates.rst
 
 
 
@@ -595,6 +555,14 @@ Este menu tem os seguintes campos
 .. include:: campaignlog/campaignlog.rst
 
 
+Extra2
+++++++
+
+Este menu tem os seguintes campos
+
+.. include:: extra2/extra2.rst
+
+
 Grupos Administradores
 ++++++++++++++++++++++
 
@@ -617,6 +585,14 @@ Backup
 Este menu tem os seguintes campos
 
 .. include:: backup/backup.rst
+
+
+Extra
++++++
+
+Este menu tem os seguintes campos
+
+.. include:: extra/extra.rst
 
 
 
@@ -694,14 +670,6 @@ Este menu tem os seguintes campos
 .. include:: campaignsend/campaignsend.rst
 
 
-Relatório
-++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: extra2/extra2.rst
-
-
 Monitor de campanhas
 ++++++++++++++++++++
 
@@ -729,6 +697,14 @@ Menu CallShop
 
 Esta é a lista dos campos com sua respectiva descrição do menu CallShop
 
+Cabines
++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: callshop/callshop.rst
+
+
 Relatório
 ++++++++++
 
@@ -753,38 +729,14 @@ Este menu tem os seguintes campos
 .. include:: callsummarycallshop/callsummarycallshop.rst
 
 
-Cabines
-+++++++
-
-Este menu tem os seguintes campos
-
-.. include:: callshop/callshop.rst
-
-
 
 
 
 
 .. _services-menu-list:
-Menu Serviços
-==============
+Menu Resumo por Mês/Tronco
+===========================
 
 
-Esta é a lista dos campos com sua respectiva descrição do menu Serviços
-
-Serviços
-+++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: services/services.rst
-
-
-Uso de Serviços
-++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: servicesuse/servicesuse.rst
-
+Esta é a lista dos campos com sua respectiva descrição do menu Resumo por Mês/Tronco
 

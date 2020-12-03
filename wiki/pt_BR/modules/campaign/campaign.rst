@@ -183,6 +183,16 @@ Destino
 
 
 
+.. _campaign-record-call:
+
+Gravar chamadas
+---------------
+
+| Gravar chamadas data campanha. Será gravado somente se a chamada for transferida.
+
+
+
+
 .. _campaign-daily-start-time:
 
 Horário de início diário
@@ -377,16 +387,6 @@ Audio 2 TTS
 -----------
 
 | Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.
-
-
-
-
-.. _campaign-record-call:
-
-Gravar chamadas
----------------
-
-| Gravar chamadas data campanha. Será gravado somente se a chamada for transferida.
 
 
 

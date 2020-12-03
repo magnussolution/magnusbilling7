@@ -82,8 +82,8 @@ Intervalos Domingo
 
 .. _ivr-noworkaudio:
 
-Trabalhando
------------
+Não trabalhando
+----------------
 
 | Áudio para executar fora dos horários de atendimento.
 

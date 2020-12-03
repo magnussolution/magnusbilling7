@@ -97,22 +97,6 @@ This menu has the following fields
 .. include:: transfertomobile/transfertomobile.rst
 
 
-Send Credit Products
-++++++++++++++++++++
-
-This menu has the following fields
-
-.. include:: sendcreditproducts/sendcreditproducts.rst
-
-
-Token
-+++++
-
-This menu has the following fields
-
-.. include:: gauthenticator/gauthenticator.rst
-
-
 
 
 
@@ -156,24 +140,16 @@ This menu has the following fields
 .. include:: refillprovider/refillprovider.rst
 
 
-Fatura
-++++++
-
-This menu has the following fields
-
-.. include:: extra/extra.rst
-
-
 
 
 
 
 .. _did-menu-list:
-Menu DID
-========
+Menu DIDs
+=========
 
 
-This is the list of all fields with their description of the menu  DID
+This is the list of all fields with their description of the menu  DIDs
 
 DIDs
 ++++
@@ -237,14 +213,6 @@ Queue DashBoard
 This menu has the following fields
 
 .. include:: dashboardqueue/dashboardqueue.rst
-
-
-DIDww
-+++++
-
-This menu has the following fields
-
-.. include:: didww/didww.rst
 
 
 DIDww
@@ -320,14 +288,6 @@ Offer Use
 This menu has the following fields
 
 .. include:: offeruse/offeruse.rst
-
-
-Send credit rates
-+++++++++++++++++
-
-This menu has the following fields
-
-.. include:: sendcreditrates/sendcreditrates.rst
 
 
 
@@ -595,6 +555,14 @@ This menu has the following fields
 .. include:: campaignlog/campaignlog.rst
 
 
+Extra2
+++++++
+
+This menu has the following fields
+
+.. include:: extra2/extra2.rst
+
+
 Group to Admins
 +++++++++++++++
 
@@ -617,6 +585,14 @@ Backup
 This menu has the following fields
 
 .. include:: backup/backup.rst
+
+
+Extra
++++++
+
+This menu has the following fields
+
+.. include:: extra/extra.rst
 
 
 
@@ -694,14 +670,6 @@ This menu has the following fields
 .. include:: campaignsend/campaignsend.rst
 
 
-Report
-++++++
-
-This menu has the following fields
-
-.. include:: extra2/extra2.rst
-
-
 Campaigns DashBoard
 +++++++++++++++++++
 
@@ -729,6 +697,14 @@ Menu CallShop
 
 This is the list of all fields with their description of the menu  CallShop
 
+Booths
+++++++
+
+This menu has the following fields
+
+.. include:: callshop/callshop.rst
+
+
 Booths Report
 +++++++++++++
 
@@ -753,38 +729,14 @@ This menu has the following fields
 .. include:: callsummarycallshop/callsummarycallshop.rst
 
 
-Booths
-++++++
-
-This menu has the following fields
-
-.. include:: callshop/callshop.rst
-
-
 
 
 
 
 .. _services-menu-list:
-Menu Services
-=============
+Menu Summary Month Trunk
+========================
 
 
-This is the list of all fields with their description of the menu  Services
-
-Services
-++++++++
-
-This menu has the following fields
-
-.. include:: services/services.rst
-
-
-Services Use
-++++++++++++
-
-This menu has the following fields
-
-.. include:: servicesuse/servicesuse.rst
-
+This is the list of all fields with their description of the menu  Summary Month Trunk
 
