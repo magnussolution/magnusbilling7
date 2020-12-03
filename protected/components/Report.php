@@ -629,7 +629,7 @@ class Report extends FPDF
     public function formatSipiax($value)
     {
         if ($value == 0) {
-            return Yii::t('zii', 'Standard');
+            return utf8_decode(Yii::t('zii', 'Standard'));
         } else if ($value == 1) {
             return Yii::t('zii', 'SIP');
         } else if ($value == 2) {
@@ -644,6 +644,10 @@ class Report extends FPDF
             return Yii::t('zii', 'SMS');
         } else if ($value == 7) {
             return Yii::t('zii', 'Transfer');
+        } else if ($value == 8) {
+            return Yii::t('zii', 'Queue');
+        } else if ($value == 9) {
+            return Yii::t('zii', 'IVR');
         } else {
             return $value;
         }
