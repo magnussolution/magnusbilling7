@@ -101,7 +101,7 @@ class SmsCommand extends ConsoleCommand
 
                 if (UserCreditManager::checkGlobalCredit($id_user) === false) {
                     if ($this->debug >= 1) {
-                        echo " USER NO CREDIT FOR CALL " . $sms['username'] . "\n\n\n";
+                        echo " USER NO CREDIT FOR CALL " . $username . "\n\n\n";
                     }
 
                     continue;
