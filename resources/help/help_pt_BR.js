@@ -51,6 +51,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'callerid.id_user': `Selecionar o usuário.`,
     'callerid.cid': `Número do callerid para autenticar o Calling Card. É necessário cadastrar o número no formato que chega no servidor. Verifique o formato no Cli do Asterisk, ou consulte com o provedor do DID.`,
     'callerid.name': `Opcional.`,
+    'callerid.description': ``,
     'callerid.activated': `Status do CallerID.`,
     //CHAMADAS ONLINE
     'callonline.idUserusername': `Usuário principal da conta SIP que iniciou a chamada.`,
@@ -148,6 +149,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
 
 * Grupo, o nome do grupo colocado aqui, deve ser exatamente o mesmo do grupo das contas SIP que deseja receber as chamadas, vai chamar todas as contas SIP do grupo. 
 * Personalizado, então é possível a execução de qualquer opção válida do comando DIAL do asterisk, exemplo: SIP/contaSIP,45,tTr.`,
+    'campaign.record_call': `Gravar chamadas data campanha. Será gravado somente se a chamada for transferida.`,
     'campaign.daily_start_time': `Hora que a campanha vai iniciar o envio.`,
     'campaign.daily_stop_time': `Hora que a campanha vai parar o envio.`,
     'campaign.monday': `Ativando esta opção o sistema vai enviar chamadas desta campanha nas segundas feiras.`,
@@ -190,7 +192,6 @@ Ola João Matos temos uma promoção para você.....
 Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
 .`,
     'campaign.tts_audio2': `Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.`,
-    'campaign.record_call': `Gravar chamadas data campanha. Será gravado somente se a chamada for transferida.`,
     //MONITOR DE CAMPANHAS
     'campaigndashboard.name': `Nome da campanha.`,
     //CHAMADAS POR MINUTO
@@ -265,6 +266,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'configuration.config_description': `Descrição. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     //DIDS
     'did.did': `O número exatamente como chega no Asterisk.`,
+    'did.record_call': `Gravar chamadas deste DID. Será gravado independente do destino da chamada.`,
     'did.activated': `Somente os números ativos podem receber chamadas.`,
     'did.callerid': `Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.`,
     'did.connection_charge': `Custo de ativaçao. Este custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.`,
@@ -321,7 +323,6 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.TimeOfDay_sun': `Mesma regra só que para domingos.`,
     'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento.`,
-    'did.record_call': `Gravar chamadas deste DID. Será gravado independente do destino da chamada.`,
     //DESTINO DE DID
     'diddestination.id_did': `Selecione o DID para criar o novo destino.`,
     'diddestination.id_user': `Usuário que será o dono deste DID.`,
@@ -353,10 +354,9 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
 
     .`,
     //USO DE DIDS
-    'diduse.id_user': `Usuário dono do DID.`,
     'diduse.id_did': `Número DID.`,
-    'diduse.reservationdate': `Dia que o DID foi reservado para o usuário.`,
     'diduse.month_payed': `Total de meses pagos.`,
+    'diduse.reservationdate': `Dia que o DID foi reservado para o usuário.`,
     //FAIL2BAN
     'firewall.ip': `IP.`,
     'firewall.action': `Com está opção em SIM, o IP será colocado na lista de ip-blacklist do fail2ban e ficará bloqueado para sempre.||A opção NÃO vai bloquear o IP momentaneamente conforme os parâmetros no arquivo /etc/fail2ba/jail.local.
@@ -626,7 +626,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'restrictedphonenumber.id_user': `Usuário que deseja cadastrar o número.`,
     'restrictedphonenumber.number': `Número.`,
     'restrictedphonenumber.direction': `Será analisado em ligaçōes conforme selecionado.`,
-    //SEND CREDIT PRODUCTS
+    //SENDCREDITPRODUCTS
     'sendcreditproducts.country': `País.`,
     'sendcreditproducts.operator_name': `Nome da operadora.`,
     'sendcreditproducts.operator_id': `Id da operadora.`,
@@ -637,7 +637,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'sendcreditproducts.provider': `Provedor.`,
     'sendcreditproducts.status': `Status.`,
     'sendcreditproducts.info': `Usado para seu controle interno.`,
-    //SEND CREDIT RATES
+    //SENDCREDITRATES
     'sendcreditrates.idProductcountry': `País.`,
     'sendcreditrates.idProductoperator_name': `Nome da operadora.`,
     'sendcreditrates.sell_price': `Preço de venda.`,
@@ -740,6 +740,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sipuras.senha_admin': `Senha para entrar na configuração do LinkSys.`,
     'sipuras.antireset': `Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#.`,
     'sipuras.Enable_Web_Server': `Tenha cuidado! Se desativado, não será mais possível entrar nas configuraçōes do Linksys.`,
+    'sipuras.Proxy_1': ``,
     'sipuras.User_ID_1': `Conta SIP que vai será usado na linha 1 do ATA.`,
     'sipuras.Password_1': `Senha da Conta VoIP.`,
     'sipuras.Use_Pref_Codec_Only_1': `Somente usar o codec preferencial.`,
@@ -748,6 +749,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sipuras.Dial_Plan_1': `Read linksys documentation.`,
     'sipuras.NAT_Mapping_Enable_1_': `Recomendado ativar esta opção se o ATA estiver atrás de NAT.`,
     'sipuras.NAT_Keep_Alive_Enable_1_': `Recomendado ativar esta opção se o ATA estiver atrás de NAT.`,
+    'sipuras.Proxy_2': ``,
     'sipuras.User_ID_2': `Conta SIP que vai será usado na linha 1 do ATA.`,
     'sipuras.Password_2': `Senha da Conta VoIP.`,
     'sipuras.Use_Pref_Codec_Only_2': `Somente usar o codec preferencial.`,
@@ -775,8 +777,8 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'templatemail.fromname': `Este é o nome que será usado com fromname no email.`,
     'templatemail.fromemail': `Email usado no fromemail, deve ser o mesmo email do usuário do SMTP.`,
     'templatemail.subject': `Assunto para o email.`,
-    'templatemail.messagehtml': `Mensagem. É possível usar variáveis, veja a tab variáveis para ver a lista de variáveis disponível.`,
     'templatemail.status': `Esta opção permite desativar o envio exclusivamente deste email.`,
+    'templatemail.messagehtml': `Mensagem. É possível usar variáveis, veja a tab variáveis para ver a lista de variáveis disponível.`,
     //TRONCOS
     'trunk.id_provider': `Provedor ao qual este tronco pertence.`,
     'trunk.trunkcode': `Nome para o tronco, deve ser único.`,
@@ -885,7 +887,9 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.country': `Usado para CID Callback. O DDI do país será adicionado antes do CallerID to converter o CallerID para o formato DDI DDD nº.`,
     'user.id_offer': `Usado para ativar um pacote grátis. É necessário informar as tarifas que vão pertencer aos pacotes gratís.`,
     'user.cpslimit': `Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar este limite será enviado CONGESTION.`,
+    'user.company_website': `Site da empresa|Tambem usado para customizar o painel de login para um revendedor. Neste caso, o dominio ou subdominio deve ser colocado sem http ou www`,
     'user.company_name': `Nome da empresa.|Tambem usado para customizar o painel de login para um revendedor`,
+    'user.commercial_name': ``,
     'user.state_number': `Inscrição estadual.`,
     'user.lastname': `Sobrenome.`,
     'user.firstname': `Nome.`,
@@ -904,10 +908,9 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.credit_notification': `Se o crédito do cliente ficar menor que está campo, MagnusBilling vai enviar um email para o cliente informando que está com pouco crédito. NECESSÁRIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES.`,
     'user.enableexpire': `Ativar expiração. Necessário informar a data da expiração no campo Data de expiração.`,
     'user.expirationdate': `Data que este cliente não poderá mais efetuar chamadas.`,
-    'user.record_call': `Esta opção é somente para chamadas de DID, para chamadas externas tem que ativar nas Contas VoIP.`,
-    'user.mix_monitor_format': `Formato que será usado para gravar as chamadas.`,
     'user.calllimit': `Chamadas simultâneas permitidas para este usuário.`,
     'user.calllimit_error': `Sinalização a ser enviada caso o limite de chamadas for superador.`,
+    'user.mix_monitor_format': `Formato que será usado para gravar as chamadas.`,
     'user.callshop': `Ativa o módulo CallShop. Somente ative se realmente for usar. É necessário dar permissōes ao grupo selecionado.`,
     'user.disk_space': `Espaço em GB que o usuário poderá usar com as gravaçōes. Coloque -1 para deixar sem limite.É necessário adicionar no cron o seguinte comando php /var/www/html/mbilling/cron.php UserDiskSpace .`,
     'user.sipaccountlimit': `Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes no grupo para criar Contas VoIP.`,
@@ -919,7 +922,6 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.transfer_dbbl_rocket': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_dbbl_rocket_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_show_selling_price': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
-    'user.company_website': `Site da empresa|Tambem usado para customizar o painel de login para um revendedor. Neste caso, o dominio ou subdominio deve ser colocado sem http ou www`,
     //TARIFAS PARA CLIENTES
     'userrate.id_prefix': `Selecione o prefixo que você deseja subscrever.`,
     'userrate.rateinitial': `Novo preço de venda para este prefixo.`,

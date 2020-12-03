@@ -44,6 +44,7 @@ Help.load({
     'callerid.id_user': `Select user.`,
     'callerid.cid': `The number to CID authenticate with CallingCard. Use the exact format that you received the CallerID from your DID provider.`,
     'callerid.name': `Optional.`,
+    'callerid.description': ``,
     'callerid.activated': `Status of the CallerID.`,
     //CALLS ONLINE
     'callonline.idUserusername': `Main user of the SIP user that started the call.`,
@@ -136,6 +137,7 @@ Help.load({
     'campaign.extension_0': `Click for more details||There are two options available.
     *Group, the group name should be put here exactly as it is in the SIP users that should receive the calls.
     *Personalized, you may execute any valid option via Asterisk's DIAL command. Example: SIP/sipaccount,45,tTr.`,
+    'campaign.record_call': `Record the calls of the campaign. They only will be recorded if the call is transferred.`,
     'campaign.daily_start_time': `Time that the campaign will start sending.`,
     'campaign.daily_stop_time': `Time that the campaign will stop sending.`,
     'campaign.monday': `Activating this option the system will send calls on Mondays.`,
@@ -156,7 +158,6 @@ Help.load({
     Hello %name%`,
     'campaign.tts_audio': `With this setting the system will generate the audio 1 for the campaign via TTS.||In order for this to work, you will need to set the TTS URL under Settings, Configuration, TTS URL.`,
     'campaign.tts_audio2': `Same setting as the previous field but for audio 2. Keep in mind that in between audio 1 and 2, the TTS executes the name imported with the number.`,
-    'campaign.record_call': `Record the calls of the campaign. They only will be recorded if the call is transferred.`,
     //CAMPAIGNS DASHBOARD
     'campaigndashboard.name': `Name of the campaign.`,
     //CALL PER MINUTES
@@ -200,6 +201,7 @@ Help.load({
     'configuration.config_description': `Description. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html`,
     //DIDS
     'did.did': `The exact number coming from the context in Asterisk. We recommend you to always use the E164 format.`,
+    'did.record_call': `Record calls for this DID. Recorded regardless of destination.`,
     'did.activated': `Only active numbers can receive calls.`,
     'did.callerid': `Use this field to set a CallerID name or leave it blank to use the received CallerID from the DID provider.`,
     'did.connection_charge': `Activation cost. This value will be deducted from the client the moment that the DID is associated with the user.`,
@@ -250,7 +252,6 @@ Help.load({
     'did.TimeOfDay_sun': `The same but for Sunday.`,
     'did.workaudio': `Audio that will be executed when a call is received at the time interval.`,
     'did.noworkaudio': `Audio that will be executed when a call is received out of the time interval.`,
-    'did.record_call': `Record calls for this DID. Recorded regardless of destination.`,
     //DID DESTINATION
     'diddestination.id_did': `Select the DID that you want create new destination for.`,
     'diddestination.id_user': `User that will be the owner of this DID.`,
@@ -281,10 +282,9 @@ You may take a look at the context at /etc/asterisk/extensions_magnus_did.conf
     
     `,
     //DIDS USE
-    'diduse.id_user': `User that owns the DID.`,
     'diduse.id_did': `DID Number`,
-    'diduse.reservationdate': `Day that the DID was reserved for the user.`,
     'diduse.month_payed': ``,
+    'diduse.reservationdate': `Day that the DID was reserved for the user.`,
     //FAIL2BAN
     'firewall.ip': `IP Address.`,
     'firewall.action': `With this option marked on YES, the IP will be placed on the ip-blacklist list of fail2ban and will be blocked forever. ||The option will NOT block the IP momentarily according the parameters of the file /etc/fail2ba/jail.local.
@@ -539,7 +539,7 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'restrictedphonenumber.id_user': `User that wants to register the number.`,
     'restrictedphonenumber.number': `Number.`,
     'restrictedphonenumber.direction': `Calls ill be analysed according to the selected options.`,
-    //SEND CREDIT PRODUCTS
+    //SENDCREDITPRODUCTS
     'sendcreditproducts.country': `Country`,
     'sendcreditproducts.operator_name': `Operator name.`,
     'sendcreditproducts.operator_id': `Operator ID.`,
@@ -550,7 +550,7 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'sendcreditproducts.provider': `Provider.`,
     'sendcreditproducts.status': `Status.`,
     'sendcreditproducts.info': `Used for internal control.`,
-    //SEND CREDIT RATES
+    //SENDCREDITRATES
     'sendcreditrates.idProductcountry': `Country.`,
     'sendcreditrates.idProductoperator_name': `Operator name.`,
     'sendcreditrates.sell_price': `Sales price.`,
@@ -652,6 +652,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sipuras.senha_admin': `Password to login in LinkSys settings`,
     'sipuras.antireset': `Be cautious.*73738# command prevents resetting LinkSys.`,
     'sipuras.Enable_Web_Server': `Beware! If deactivated, will not be able to login in the Linksys settings.`,
+    'sipuras.Proxy_1': ``,
     'sipuras.User_ID_1': `SIP user username that will be used in ATA line 1.`,
     'sipuras.Password_1': `SIP user password`,
     'sipuras.Use_Pref_Codec_Only_1': `Only use the preferred CODEC`,
@@ -660,6 +661,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sipuras.Dial_Plan_1': `Read LinkSys documentation`,
     'sipuras.NAT_Mapping_Enable_1_': `It's recommended to activate this option if ATA is behind NAT.`,
     'sipuras.NAT_Keep_Alive_Enable_1_': `It's recommended to activate this option if ATA is behind NAT.`,
+    'sipuras.Proxy_2': ``,
     'sipuras.User_ID_2': `SIP user username that will be used in ATA line 1.`,
     'sipuras.Password_2': `VOIP account password.`,
     'sipuras.Use_Pref_Codec_Only_2': `Only use preferencial codec.`,
@@ -687,8 +689,8 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'templatemail.fromname': `This is the name that will be use with the fromname from the email.`,
     'templatemail.fromemail': `Email used in the frommail, must be the same email used by the SMTP user.`,
     'templatemail.subject': `Email subject.`,
-    'templatemail.messagehtml': `Message. It's possible to variables, look at the variables tab to see the list of avaible variables.`,
     'templatemail.status': `This option let's you deactivate the exclusive mailings of this email.`,
+    'templatemail.messagehtml': `Message. It's possible to variables, look at the variables tab to see the list of avaible variables.`,
     //TRUNKS
     'trunk.id_provider': `Provider which the trunk belongs.`,
     'trunk.trunkcode': `Trunk name, must be unique.`,
@@ -773,7 +775,9 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.country': `Used to CID Callback. The country prefix code will be added before the CID to convert the CID to E164`,
     'user.id_offer': `Used to give free minutes. It's necessary to inform the tariffs that will belongs to the free packages.`,
     'user.cpslimit': `CPS(calls per second) limit to this client. The calls that exceed this limit will be send CONGESTION.`,
+    'user.company_website': `Company website.|Also used to agent panel customization. To agent, set the domain without http or wwww.`,
     'user.company_name': `Company name. Also used to agent panel customization.|Whether is a agent this name will be used on the login panel. Need set the compnay website and use the agent domain to working the customization`,
+    'user.commercial_name': ``,
     'user.state_number': `State number.`,
     'user.lastname': `Lastname.`,
     'user.firstname': `Firstname.`,
@@ -792,10 +796,9 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.credit_notification': `If the client credit get lower than this field value, MagnusBilling will send an email to the client warning that he is with low credits. IT'S NECESSARY HAVE A REGISTERED SMTP SERVER IN THE SETTINGS MENU.`,
     'user.enableexpire': `Activate expire. It's necessary to inform the expiry date in the "Expiry date" field.`,
     'user.expirationdate': `The date that the user will not be able to make calls anymore.`,
-    'user.record_call': `This option is only for DID calls, to external calls it's necessary to activate in the VoIP accounts.`,
-    'user.mix_monitor_format': `Format used to record calls.`,
     'user.calllimit': `The amount of  simultaneous calls allowed for this client.`,
     'user.calllimit_error': `Warning to be send if the call limit is exceeded.`,
+    'user.mix_monitor_format': `Format used to record calls.`,
     'user.callshop': `Activate the CallShop module. Only active if you really are going to use it. It's necessary give permition to the selected group.`,
     'user.disk_space': `Insert the amount disk space available to record, in GB. Use -1 to save it without limit. It's necessary to add in the cron the following php command /var/www/html/mbilling/cron.php UserDiskSpace .`,
     'user.sipaccountlimit': `The amount of VoIP accounts allowed by this user. Will be necessary give permission to the group to create VoIP accounts.`,
@@ -807,7 +810,6 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.transfer_dbbl_rocket': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_dbbl_rocket_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_show_selling_price': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
-    'user.company_website': `Company website.|Also used to agent panel customization. To agent, set the domain without http or wwww.`,
     //USER CUSTOM RATES
     'userrate.id_prefix': `Select the prefix that you want to subscribe.`,
     'userrate.rateinitial': `New sell price for this prefix.`,
