@@ -34,8 +34,8 @@ Type
 
 .. _trunkGroup-id-trunk:
 
-Trunk
------
+Trunks
+------
 
 | Select the trunks that belongs to this group. If selected the type, order, then select the trunks in the desired order.
 

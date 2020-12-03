@@ -182,6 +182,16 @@ Destination
 
 
 
+.. _campaign-record-call:
+
+Record call
+-----------
+
+| Record the calls of the campaign. They only will be recorded if the call is transferred.
+
+
+
+
 .. _campaign-daily-start-time:
 
 Daily start time
@@ -354,16 +364,6 @@ Audio 2 TTS
 -----------
 
 | Same setting as the previous field but for audio 2. Keep in mind that in between audio 1 and 2, the TTS executes the name imported with the number.
-
-
-
-
-.. _campaign-record-call:
-
-Record call
------------
-
-| Record the calls of the campaign. They only will be recorded if the call is transferred.
 
 
 

@@ -59,6 +59,16 @@ Enable_Web_Server
 
 
 
+.. _sipuras-Proxy-1:
+
+Proxy
+-----
+
+| We did not write the description to this field.
+
+
+
+
 .. _sipuras-User-ID-1:
 
 Username
@@ -135,6 +145,16 @@ NAT keep alive
 --------------
 
 | It's recommended to activate this option if ATA is behind NAT.
+
+
+
+
+.. _sipuras-Proxy-2:
+
+Proxy
+-----
+
+| We did not write the description to this field.
 
 
 

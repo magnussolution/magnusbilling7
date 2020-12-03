@@ -29,6 +29,16 @@ Nome
 
 
 
+.. _callerid-description:
+
+Descrição
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _callerid-activated:
 
 Status

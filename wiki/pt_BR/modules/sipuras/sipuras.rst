@@ -59,6 +59,16 @@ Ativar acesso WEB
 
 
 
+.. _sipuras-Proxy-1:
+
+Proxy
+-----
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _sipuras-User-ID-1:
 
 Usuário
@@ -135,6 +145,16 @@ NAT keep alive
 --------------
 
 | Recomendado ativar esta opção se o ATA estiver atrás de NAT.
+
+
+
+
+.. _sipuras-Proxy-2:
+
+Proxy
+-----
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
