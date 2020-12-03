@@ -196,13 +196,26 @@ class ApiAccess
         $modelUser = User::model()->find('email = :key', array(':key' => $values['email']));
 
         if (count($modelUser)) {
-            exit('This email already in use');
+
+            echo json_encode([
+                'success' => false,
+                'errors'  => 'This email already in use',
+            ]);
+
+            exit;
 
         }
-        $modelUser = User::model()->find('username = :key', array(':key' => $values['username']));
 
-        if (count($modelUser)) {
-            exit('This username already in use');
+        if (isset($values['username'])) {
+            $modelUser = User::model()->find('username = :key', array(':key' => $values['username']));
+
+            if (isset($modelUser->id)) {
+                echo json_encode([
+                    'success' => false,
+                    'errors'  => 'This username already in use',
+                ]);
+                exit;
+            }
         }
 
         $values['username']        = isset($values['username']) ? $values['username'] : Util::getNewUsername();
@@ -217,7 +230,13 @@ class ApiAccess
             if (count($modelPlan)) {
                 $values['id_plan'] = $modelPlan->id;
             } else {
-                exit('No plan active');
+                if (isset($modelUser->id)) {
+                    echo json_encode([
+                        'success' => false,
+                        'errors'  => 'No plan active',
+                    ]);
+                    exit;
+                }
             }
         }
 
@@ -232,7 +251,11 @@ class ApiAccess
             if (count($modelGroupUser)) {
                 $values['id_group'] = $modelGroupUser[0]['id'];
             } else {
-                exit('No plan group for user');
+                echo json_encode([
+                    'success' => false,
+                    'errors'  => 'No plan group for user',
+                ]);
+                exit;
             }
         }
 
