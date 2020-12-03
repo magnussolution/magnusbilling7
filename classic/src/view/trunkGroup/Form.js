@@ -46,13 +46,13 @@ Ext.define('MBilling.view.trunkGroup.Form', {
             title: t('Select one or more trunks'),
             collapsible: false,
             collapsed: false,
+            height: 120,
             items: [{
                 xtype: 'trunktag',
                 name: 'id_trunk',
-                fieldLabel: t('Trunk'),
-                labelWidth: 10,
+                fieldLabel: t('Trunks'),
+                labelWidth: 70,
                 anchor: '100%',
-                fieldLabel: t('Trunk'),
                 allowBlank: true
             }]
         }];
