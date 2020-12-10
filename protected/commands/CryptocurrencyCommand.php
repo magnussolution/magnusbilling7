@@ -22,18 +22,18 @@ class CryptocurrencyCommand extends CConsoleCommand
     public function run($args)
     {
         $modelMethodPay = Methodpay::model()->find('payment_method = :key', array(':key' => 'cryptocurrency'));
-        if (!count($modelMethodPay)) {
+        if (!isset($modelMethodPay->id)) {
             exit;
         }
-        $poloniex = new poloniex($modelMethodPay->client_id, $modelMethodPay->client_secret);
+        $poloniex = new Poloniex($modelMethodPay->client_id, $modelMethodPay->client_secret);
         //'1314121820'
-        $ticker = $poloniex->get_deposits_and_withdrawals(time() - 1800, time());
+        $ticker = $poloniex->get_deposits_and_withdrawals(time() - 18000, time());
         foreach ($ticker as $type => $payment) {
             if ($type == 'deposits') {
                 foreach ($payment as $key => $value) {
                     $modelCryptocurrency = Cryptocurrency::model()->find('amountCrypto = :key AND date > :key1',
                         array(':key' => $value['amount'], ':key1' => date('Y-m-d')));
-                    if (count($modelCryptocurrency)) {
+                    if (isset($modelCryptocurrency->id_user)) {
                         if (Refill::model()->countRefill($value['txid'], $modelCryptocurrency->id_user) == 0) {
                             $description = 'CriptoCurrency ' . $value['currency'] . ', txid: ' . $value['txid'];
                             echo ($modelCryptocurrency->id_user . ' ' . $modelCryptocurrency->amount . ' ' . $description . ' ' . $value['txid']);
