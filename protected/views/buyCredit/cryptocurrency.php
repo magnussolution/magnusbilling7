@@ -39,7 +39,7 @@ $amountCrypto = number_format($bitcoinPrice, 6) . rand(11, 99);
 for (;;) {
     $modelCryptocurrency = Cryptocurrency::model()->find('amountCrypto = :key AND date > :key1',
         array(':key' => $amountCrypto, ':key1' => date('Y-m-d')));
-    if (count($modelCryptocurrency)) {
+    if (isset($modelCryptocurrency->id)) {
         $amountCrypto = number_format($bitcoinPrice, 6) . rand(11, 99);
 
     } else {

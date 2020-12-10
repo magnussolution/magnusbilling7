@@ -17,7 +17,7 @@
  * Magnusbilling.com <info@magnusbilling.com>
  *
  */
-class poloniex
+class Poloniex
 {
     protected $api_key;
     protected $api_secret;
