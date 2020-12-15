@@ -196,8 +196,7 @@ Ext.define('MBilling.view.call.List', {
             dataIndex: 'id_plan',
             comboFilter: 'plancombo',
             flex: 3,
-            hidden: true,
-            hideable: !App.user.isClient
+            hidden: true
         }, {
             xtype: 'templatecolumn',
             tpl: '{idCampaignname}',
