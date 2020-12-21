@@ -157,15 +157,13 @@ gpgcheck=1' > /etc/yum.repos.d/MariaDB.repo
 fi
 
 if [ ${DIST} = "DEBIAN" ]; then
-    
     apt-get -o Acquire::Check-Valid-Until=false update 
-    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet libmyodbc unixodbc-bin apache2 libjansson-dev git
-    apt-get install -y php-fpm php php-mcrypt php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
+    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet unixodbc-bin apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev
+    apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
     echo mysql-server mysql-server/root_password password ${password} | debconf-set-selections
     echo mysql-server mysql-server/root_password_again password ${password} | debconf-set-selections            
     apt-get install -y mysql-server php-mysql mysql-client unzip git
-    apt-get install -y unixODBC unixODBC-dev
-    apt-get install -y libmysqlclient15-dev libcurl4-openssl-dev ssmtp
+    apt-get install -y libcurl4-openssl-dev ssmtp htop
 elif  [ ${DIST} = "CENTOS" ]; then
     yum clean all
     yum -y install kernel-devel.`uname -m` epel-release
@@ -177,7 +175,7 @@ elif  [ ${DIST} = "CENTOS" ]; then
     yum -y install mysql mariadb-server  mariadb-devel mariadb php-mysql mysql-connector-odbc
     yum -y install xmlstarlet libsrtp libsrtp-devel dmidecode gtk2-devel binutils-devel svn libtermcap-devel libtiff-devel audiofile-devel cronie cronie-anacron
     yum -y install perl perl-libwww-perl perl-LWP-Protocol-https perl-JSON cpan flac libcurl-devel nss
-    yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp
+    yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp htop
 fi
 
 
@@ -239,6 +237,12 @@ echo '----------- Install SNGRP ----------'
 echo
 sleep 1
 
+if [ ${DIST} = "DEBIAN" ]; then
+  apt-get -y install sngrep
+fi
+
+
+if [ ${DIST} = "CENTOS" ]; then
 cd /usr/src
 git clone https://github.com/irontec/sngrep.git
 cd sngrep
@@ -246,19 +250,6 @@ cd sngrep
 ./configure
 make && make install 
 clear
-
-if [ ${DIST} = "CENTOS" ]; then
-echo 'set filter.methods INVITE
-set cl.column0 method
-set cl.column1 sipfromuser
-set cl.column1.width 15
-set cl.column2 siptouser
-set cl.column3 src
-set cl.column4 dst
-set cl.column4.width 22
-set cl.column5 starting
-set cl.column6 warning
-set cl.column6.width 0' > /usr/local/etc/sngreprc
 fi
 
 
