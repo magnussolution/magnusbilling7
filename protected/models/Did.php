@@ -88,6 +88,7 @@ class Did extends Model
         $this->id_user        = $this->getIsNewRecord() && $this->id_user < 1 ? null : $this->id_user;
         $this->startingdate   = date('Y-m-d H:i:s');
         $this->expirationdate = '2030-08-21 00:00:00';
+        $this->creationdate   = date('Y-m-d H:i:s');
         $this->selling_rate_1 = $this->selling_rate_1 == '' ? '0.0000' : $this->selling_rate_1;
         $this->selling_rate_2 = $this->selling_rate_2 == '' ? '0.0000' : $this->selling_rate_2;
         $this->selling_rate_3 = $this->selling_rate_3 == '' ? '0.0000' : $this->selling_rate_3;

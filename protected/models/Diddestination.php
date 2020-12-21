@@ -74,4 +74,11 @@ class Diddestination extends Model
             'idSip'   => array(self::BELONGS_TO, 'Sip', 'id_sip'),
         );
     }
+
+    public function beforeSave()
+    {
+
+        $this->creationdate = date('Y-m-d H:i:s');
+        return parent::beforeSave();
+    }
 }
