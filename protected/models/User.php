@@ -113,6 +113,13 @@ class User extends Model
 
     }
 
+    public function beforeSave()
+    {
+
+        $this->creationdate = date('Y-m-d H:i:s');
+        return parent::beforeSave();
+    }
+
     public function relations()
     {
         return array(
