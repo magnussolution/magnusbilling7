@@ -35,8 +35,8 @@ Ext.define('Ext.ux.app.ViewController', {
             keyup: 'onKeyUpField'
         }
     },
-    msgConfirmation: t('Confirm delete'),
-    msgDeleteAll: t('Confirm delete all'),
+    msgConfirmation: 'Confirm delete',
+    msgDeleteAll: 'Confirm delete all',
     nameSuccessRequest: 'success',
     nameMsgRequest: 'msg',
     init: function() {
@@ -359,7 +359,7 @@ Ext.define('Ext.ux.app.ViewController', {
         var me = this,
             records,
             destroyType = btn.menu.down('menucheckitem[checked=true]').value;
-        var msgConfirmation = (destroyType === 'all') ? me.msgDeleteAll : me.msgConfirmation;
+        var msgConfirmation = (destroyType === 'all') ? t(me.msgDeleteAll) : t(me.msgConfirmation);
         if (!me.list.allowDelete) {
             return;
         }
