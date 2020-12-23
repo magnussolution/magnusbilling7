@@ -81,31 +81,12 @@ class AsteriskAccess
         return $this->asmanager->Command("moh reload");
     }
 
-    public function hangupRequest($channel, $server = null)
+    public function hangupRequest($channel, $server = 'localhost')
     {
-        if ($server == null) {
-            $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
-            $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
-            array_push($modelServers, array(
-                'host'     => 'localhost',
-                'username' => 'magnus',
-                'password' => 'magnussolution',
-            ));
-        } else {
-            $modelServers = array();
-            array_push($modelServers, array(
-                'host'     => $server,
-                'username' => 'magnus',
-                'password' => 'magnussolution',
-            ));
-        }
+        AsteriskAccess::instance($server, 'magnus', 'magnussolution');
+        $this->asmanager->Command("hangup request " . $channel);
 
-        $channels = array();
-        foreach ($modelServers as $key => $server) {
-            AsteriskAccess::instance($server['host'], $server['username'], $server['password']);
-            $this->asmanager->Command("hangup request " . $channel);
-        }
     }
 
     public function dialPlanReload()

@@ -105,20 +105,31 @@ class CallOnLineController extends Controller
 
     public function actionDestroy()
     {
-        $model = $this->abstractModel->find('canal = :key', array('key' => $_POST['channel']));
-        if (strlen($model->canal) < 30 && preg_match('/SIP\//', $model->canal)) {
-            AsteriskAccess::instance()->hangupRequest($model->canal);
-            $success = true;
-            $msn     = Yii::t('zii', 'Operation was successful.') . Yii::app()->language;
-        } else {
-            $success = false;
-            $msn     = 'error';
+        if (!AccessManager::getInstance($this->instanceModel->getModule())->canDelete()) {
+            header('HTTP/1.0 401 Unauthorized');
+            die("Access denied to delete in module:" . $this->instanceModel->getModule());
         }
+
+        # recebe os parametros da exclusao
+        $values       = $this->getAttributesRequest();
+        $namePk       = $this->abstractModel->primaryKey();
+        $arrayPkAlias = explode('.', $this->abstractModel->primaryKey());
+        $ids          = array();
+
+        foreach ($values as $key => $channel) {
+
+            $modelChannel = $this->abstractModel->find('canal = :key', array(':key' => $channel['channel']));
+            if (isset($modelChannel->canal)) {
+                AsteriskAccess::instance()->hangupRequest($modelChannel->canal, $modelChannel->server);
+            }
+        }
+
+        # retorna o resultado da execucao
         echo json_encode(array(
-            'success' => $success,
-            'msg'     => $msn,
+            $this->nameSuccess => true,
+            $this->nameMsg     => $this->success,
         ));
-        exit();
+
     }
 
     public function actionSpyCall()

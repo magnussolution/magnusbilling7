@@ -46,30 +46,6 @@ Ext.define('MBilling.view.callOnLine.Controller', {
             }
         });
     },
-    onDelete: function(btn) {
-        var me = this,
-            selected = me.list.getSelectionModel().getSelection()[0];
-        if (me.list.getSelectionModel().getSelection().length == 1) {
-            Ext.Ajax.request({
-                url: 'index.php/callOnLine/destroy',
-                params: {
-                    channel: selected.get('canal')
-                },
-                scope: me,
-                success: function(response) {
-                    response = Ext.decode(response.responseText);
-                    if (response[me.nameSuccessRequest]) {
-                        Ext.ux.Alert.alert(me.titleSuccess, response[me.nameMsgRequest], 'success');
-                    } else {
-                        Ext.ux.Alert.alert(me.titleError, response[me.nameMsgRequest], 'error');
-                    }
-                }
-            });
-        } else {
-            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
-        };
-        me.store.load();
-    },
     onRenderModule: function() {
         var me = this;
         me.callParent(arguments);
@@ -94,5 +70,39 @@ Ext.define('MBilling.view.callOnLine.Controller', {
             return;
         }
         me.lookupReference('tbTextTotal') && me.lookupReference('tbTextTotal').setText('<b>' + me.sumData.serverSum + '</b>');
-    }
+    },
+    onDelete: function(btn) {
+        var me = this,
+            arrRecords = [],
+            objRecord;
+        Ext.Msg.confirm(t('Confirmation'), 'Confirm hangup call?', function(btn) {
+            if (btn === 'yes') {
+                records = me.list.getSelectionModel().getSelection();
+                records = Ext.isArray(records) ? records : [records];
+                Ext.each(records, function(record) {
+                    objRecord = {};
+                    Ext.each(me.idProperty, function(pk) {
+                        objRecord['channel'] = record.get('canal');
+                    });
+                    arrRecords.push(Ext.clone(objRecord));
+                });
+                Ext.Ajax.request({
+                    url: me.store.getProxy().api.destroy,
+                    params: {
+                        rows: Ext.encode(arrRecords)
+                    },
+                    success: function(response) {
+                        response = Ext.decode(response.responseText);
+                        if (response.success) {
+                            Ext.ux.Alert.alert(me.titleSuccess, t(response.msg), 'success');
+                            me.list.fireEvent('afterdestroy', me.formPanel);
+                            me.store.load();
+                        } else {
+                            Ext.ux.Alert.alert(me.titleError, t(response.msg), 'error');
+                        }
+                    }
+                });
+            }
+        }, me);
+    },
 });

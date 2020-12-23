@@ -28,6 +28,7 @@ Ext.define('Ext.ux.grid.Panel', {
     textEdit: t('Edit'),
     glyphEdit: icons.pencil,
     textDelete: t('Delete'),
+    hiddenDeleteAll: false,
     glyphDelete: icons.remove,
     textCleanFilter: t('Clear filters'),
     iconClsCleanFilter: 'icon-clean-filter',
@@ -145,7 +146,7 @@ Ext.define('Ext.ux.grid.Panel', {
                 menu: [{
                     text: me.labelAll,
                     checked: false,
-                    hidden: window.isTablet || !App.user.isAdmin,
+                    hidden: window.isTablet || !App.user.isAdmin || me.hiddenDeleteAll,
                     group: groupDelete,
                     value: 'all'
                 }, {

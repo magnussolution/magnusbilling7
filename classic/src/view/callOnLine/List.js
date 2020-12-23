@@ -37,14 +37,14 @@ Ext.define('MBilling.view.callOnLine.List', {
             xtype: 'tbtext',
             reference: 'tbTextTotal'
         }];
-        me.textDelete = t('Hangup call'),
-            me.buttonDeleteWidth = 140,
-            me.refreshTime = (localStorage && localStorage.getItem('callonlinerefresh')) || me.refreshTime;
+        me.textDelete = t('Hangup call');
+        me.hiddenDeleteAll = true;
+        me.buttonDeleteWidth = App.user.language == 'pt_BR' ? 160 : 140;
+        me.refreshTime = (localStorage && localStorage.getItem('callonlinerefresh')) || me.refreshTime;
         me.extraButtons = [{
             text: window.isTablet ? '' : t('Spy call'),
-            iconCls: 'call',
             handler: 'onSpyCall',
-            width: window.isTablet ? 50 : 130,
+            width: window.isTablet ? 50 : 120,
             disabled: false
         }, {
             xtype: 'numberfield',
