@@ -65,6 +65,10 @@ Ext.define('MBilling.view.ivr.Form', {
                     fieldLabel: t('Sunday intervals'),
                     value: '00:00'
                 }, {
+                    xtype: 'yesnocombo',
+                    name: 'use_holidays',
+                    fieldLabel: t('Use holidays')
+                }, {
                     xtype: 'uploadfield',
                     name: 'workaudio',
                     fieldLabel: t('Work audio'),

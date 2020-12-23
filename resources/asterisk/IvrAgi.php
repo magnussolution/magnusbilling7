@@ -39,6 +39,14 @@ class IvrAgi
 
         $work = $MAGNUS->checkIVRSchedule($modelIvr->monFriStart, $modelIvr->satStart, $modelIvr->sunStart);
 
+        if ($modelIvr->use_holidays == 1) {
+            $sql           = "SELECT * FROM pkg_holidays  WHERE day = " . date('Y-m-d') . " LIMIT 1";
+            $modelHolidays = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            if (isset($modelHolidays->id)) {
+                $work = 'closed';
+            }
+        }
+
         //esta dentro do hario de atencao
         if ($work == 'open') {
             $audioURA   = 'idIvrDidWork_';

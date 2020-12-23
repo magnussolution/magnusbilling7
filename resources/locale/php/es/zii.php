@@ -21,7 +21,9 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Commercial name' => 'Nombre comercial',
+            'Use holidays' => 'Usar feriados',
+    'Holidays' => 'Feriados',
+    'Commercial name' => 'Nombre comercial',
     'Extra' => 'Extra',
     'OffLine' => 'OffLine',
     'Proxy' => 'Proxy',

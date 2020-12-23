@@ -141,5 +141,28 @@ Ext.define('MBilling.view.ivr.Controller', {
             form.findField('id_queue_out_' + i).setVisible(false);
         }
         me.callParent(arguments);
+    },
+    onDeleteAudio: function(btn) {
+        var me = this,
+            selected = me.list.getSelectionModel().getSelection()[0];
+        if (me.list.getSelectionModel().getSelection().length == 1) {
+            Ext.Ajax.request({
+                url: 'index.php/ivr/deleteAudio',
+                params: {
+                    id_ivr: selected.get('id')
+                },
+                scope: me,
+                success: function(response) {
+                    response = Ext.decode(response.responseText);
+                    if (response[me.nameSuccessRequest]) {
+                        Ext.ux.Alert.alert(me.titleSuccess, response[me.nameMsgRequest], 'success');
+                    } else {
+                        Ext.ux.Alert.alert(me.titleError, response[me.nameMsgRequest], 'error');
+                    }
+                }
+            });
+        } else {
+            Ext.ux.Alert.alert(me.titleError, t('Please select only a record'), 'notification');
+        };
     }
 });

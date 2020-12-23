@@ -246,4 +246,16 @@ class IvrController extends Controller
 
         return $attributes;
     }
+
+    public function actionDeleteAudio()
+    {
+
+        shell_exec('rm -rf ' . $this->uploaddir . '/idIvrDidWork_*_' . $_POST['id_ivr'] . '*');
+        shell_exec('rm -rf ' . $this->uploaddir . '/idIvrDidNoWork_*_' . $_POST['id_ivr'] . '*');
+        echo json_encode(array(
+            $this->nameSuccess => true,
+            $this->nameMsg     => $this->msgSuccess,
+        ));
+
+    }
 }

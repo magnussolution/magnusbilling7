@@ -14,6 +14,8 @@
  * 2020-08-10
  */
 Locale.load({
+    'Use holidays': 'Usar feriados',
+    'Holidays': 'Feriados',
     'Commercial name': 'Nombre comercial',
     'Extra': 'Extra',
     'OffLine': 'OffLine',
