@@ -21,7 +21,9 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Commercial name' => 'Nome fantasia',
+            'Use holidays' => 'Usar feriados',
+    'Holidays' => 'Feriados',
+    'Commercial name' => 'Nome fantasia',
     'Extra' => 'Extra',
     'OffLine' => 'OffLine',
     'Proxy' => 'Proxy',

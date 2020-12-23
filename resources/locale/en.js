@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-10-29
+ * 2020-12-22
  */
 Locale.load({
     '': '',
@@ -387,6 +387,7 @@ Locale.load({
     'Height': '',
     'Help': '',
     'History': '',
+    'Holidays': '',
     'Home': '',
     'Host': '',
     'Hour': '',
@@ -986,6 +987,7 @@ Locale.load({
     'Use audio': '',
     'Use date': '',
     'Use filters': '',
+    'Use holidays': '',
     'Use on signup': '',
     'Use that': '',
     'Use_Pref_Codec': '',

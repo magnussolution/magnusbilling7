@@ -26,6 +26,13 @@ Ext.define('MBilling.view.ivr.List', {
         var me = this;
         me.allowPrint = false;
         me.buttonCsv = false;
+        me.extraButtons = [{
+            text: t('Delete audios'),
+            handler: 'onDeleteAudio',
+            which: 100,
+            disabled: false,
+            hidden: !App.user.isAdmin || !me.allowDelete
+        }];
         me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',
