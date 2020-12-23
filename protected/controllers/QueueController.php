@@ -63,6 +63,24 @@ class QueueController extends Controller
             AsteriskAccess::instance()->mohReload();
         }
 
+        if (isset($_FILES["periodic-announce"]) && strlen($_FILES["periodic-announce"]["name"]) > 1) {
+
+            $uploaddir = '/var/lib/asterisk/sounds/';
+
+            $typefile   = explode('.', $_FILES["periodic-announce"]["name"]);
+            $uploadfile = $uploaddir . 'queue-periodic-announce-' . $model->id . '.' . $typefile[1];
+            move_uploaded_file($_FILES["periodic-announce"]["tmp_name"], $uploadfile);
+            $model->{'periodic-announce'} = 'queue-periodic-announce-' . $model->id;
+            $model->save();
+        }
+
+        $files = glob('/var/lib/asterisk/sounds/queue-periodic-announce-' . $model->id . '*');
+
+        if (!isset($files[0])) {
+            $model->{'periodic-announce'} = 'queue-periodic-announce';
+            $model->save();
+        }
+
         $modelQueue = Queue::model()->findAll(array(
             'condition' => 'musiconhold != "default"',
             'group'     => 'musiconhold',
