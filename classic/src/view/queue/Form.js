@@ -72,9 +72,12 @@ Ext.define('MBilling.view.queue.Form', {
             fieldLabel: t('Weight'),
             value: 0
         }, {
+            xtype: 'uploadfield',
             name: 'periodic-announce',
             fieldLabel: t('Periodic announce'),
-            value: 'queue-periodic-announce'
+            emptyText: t('Select an wav mono 8khz or gsm File'),
+            allowBlank: true,
+            extAllowed: ['wav', 'gsm']
         }, {
             xtype: 'numberfield',
             name: 'periodic-announce-frequency',
