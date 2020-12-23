@@ -26,7 +26,17 @@ class PlayAudioController extends Controller
     public function actionIndex()
     {
 
-        $file_name = $this->magnusFilesDirectory . 'sounds/' . $_GET['audio'];
+        if (preg_match('/queue-periodic/', $_GET['audio'])) {
+            $file_name = '/var/lib/asterisk/sounds/' . $_GET['audio'];
+
+            if (file_exists($file_name . '.gsm')) {
+                $file_name .= '.gsm';
+            } else {
+                $file_name .= '.wav';
+            }
+        } else {
+            $file_name = $this->magnusFilesDirectory . 'sounds/' . $_GET['audio'];
+        }
 
         if (!file_exists($file_name)) {
             exit('<center><br>' . Yii::t('zii', 'File not found') . '</center>');
