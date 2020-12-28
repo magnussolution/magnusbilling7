@@ -1208,6 +1208,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2020-12-26
+        if ($version == '7.5.6') {
+
+            $sql = "UPDATE  pkg_configuration SET status = 1 WHERE config_key = 'apply_local_prefix_did_sip' ";
+            $this->executeDB($sql);
+
+            $version = '7.5.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

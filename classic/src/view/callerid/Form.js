@@ -42,12 +42,11 @@ Ext.define('MBilling.view.callerid.Form', {
             xtype: 'textareafield',
             name: 'description',
             fieldLabel: t('Description'),
-            readOnly: App.user.isClient
-        },  {
+            allowBlank: true
+        }, {
             xtype: 'booleancombo',
             name: 'activated',
-            fieldLabel: t('Status'),
-            allowBlank: true
+            fieldLabel: t('Status')
         }];
         me.callParent(arguments);
     }
