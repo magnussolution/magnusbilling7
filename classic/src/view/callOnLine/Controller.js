@@ -104,5 +104,5 @@ Ext.define('MBilling.view.callOnLine.Controller', {
                 });
             }
         }, me);
-    },
+    }
 });
