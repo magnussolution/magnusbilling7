@@ -123,6 +123,303 @@ class CallFailedController extends Controller
         return $arrPost;
     }
 
+    public function createCondition($filter)
+    {
+        $condition = '1';
+
+        if (!is_array($filter)) {
+            return $condition;
+        }
+
+        foreach ($filter as $key => $f) {
+            $isSubSelect = false;
+
+            if (!isset($f->type)) {
+                continue;
+            }
+
+            $type  = $f->type;
+            $field = $f->field;
+
+            if ($this->actionName != 'destroy' && !preg_match("/^id[A-Z]/", $field)) {
+
+                if (is_array($field)) {
+                    foreach ($field as $key => $fieldOr) {
+                        $field[$key] = strpos($fieldOr, '.') === false ? 't.' . $fieldOr : $fieldOr;
+                    }
+                } else {
+                    $field = strpos($field, '#') === 0 ? str_replace('#', '', $field) : (strpos($field, '.') === false ? 't.' . $field : $field);
+                }
+            }
+
+            $value     = isset($f->value) ? $f->value : new CDbExpression('NULL');
+            $paramName = "p$key";
+
+            if (isset($f->data->comparison)) {
+                $comparison = $f->data->comparison;
+            } else if (isset($f->comparison)) {
+                $comparison = $f->comparison;
+            } else {
+                $comparison = null;
+            }
+            switch ($type) {
+                case 'date':
+                    switch ($comparison) {
+                        case 'eq':
+                            $this->paramsFilter[$paramName] = strtok($value, ' ') . "%";
+                            $condition .= " AND $field LIKE :$paramName";
+                            break;
+                        case 'lt':
+                            $this->paramsFilter[$paramName] = $value;
+                            $condition .= " AND $field < :$paramName";
+                            break;
+                        case 'gt':
+                            $this->paramsFilter[$paramName] = $value;
+                            $condition .= " AND $field > :$paramName";
+                            break;
+                    }
+                    break;
+                case 'string':
+                    $field = isset($f->caseSensitive) && $f->caseSensitive && !is_array($field) ? "BINARY $field" : $field;
+
+                    switch ($comparison) {
+                        case 'st':
+
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->find('username LIKE :key', array(':key' => $value . '%'));
+                                if (isset($modelUser->id)) {
+                                    $condition .= ' AND id_user = :id_user_username';
+                                    $this->paramsFilter['id_user_username'] = $modelUser->id;
+                                    continue;
+                                }
+                            }
+
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field LIKE :$paramName",
+                                    );
+                                }
+
+                            } else {
+                                $condition .= " AND $field LIKE :$paramName";
+                            }
+
+                            $this->paramsFilter[$paramName] = "$value%";
+
+                            break;
+                        case 'ed':
+
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->find('username LIKE :key', array(':key' => '%' . $value));
+                                if (isset($modelUser->id)) {
+                                    $condition .= ' AND id_user = :id_user_username';
+                                    $this->paramsFilter['id_user_username'] = $modelUser->id;
+                                    continue;
+                                }
+                            }
+
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field LIKE :$paramName",
+                                    );
+                                }
+                            } else {
+                                $condition .= " AND $field LIKE :$paramName";
+                            }
+
+                            $this->paramsFilter[$paramName] = "%$value";
+
+                            break;
+                        case 'ct':
+
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->find('username LIKE :key', array(':key' => '%' . $value . '%'));
+                                if (isset($modelUser->id)) {
+                                    $condition .= ' AND id_user = :id_user_username';
+                                    $this->paramsFilter['id_user_username'] = $modelUser->id;
+                                    continue;
+                                }
+                            }
+
+                            if (is_array($field)) {
+                                $conditionsOr = array();
+
+                                foreach ($field as $keyOr => $fieldOr) {
+                                    $this->paramsFilter["pOr$keyOr"] = "%$value%";
+                                    $fieldOr                         = isset($f->caseSensitive) && $f->caseSensitive ? "BINARY $fieldOr" : $fieldOr;
+                                    array_push($conditionsOr, "$fieldOr LIKE :pOr$keyOr");
+                                }
+
+                                $conditionsOr = implode(' OR ', $conditionsOr);
+                                $condition .= " AND ($conditionsOr)";
+                            } else {
+
+                                if (preg_match("/^id[A-Z].*\./", $field)) {
+
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field LIKE :$paramName",
+                                        );
+                                    }
+                                    $this->paramsFilter[$paramName] = "%" . $value . "%";
+                                } else {
+                                    $condition .= " AND LOWER($field) LIKE :$paramName";
+                                    $this->paramsFilter[$paramName] = "%" . strtolower($value) . "%";
+                                }
+
+                            }
+                            break;
+                        case 'eq':
+
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->find('username = :key', array(':key' => $value));
+                                if (isset($modelUser->id)) {
+                                    $condition .= ' AND id_user = :id_user_username';
+                                    $this->paramsFilter['id_user_username'] = $modelUser->id;
+                                    continue;
+                                }
+                            }
+
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field = :$paramName",
+                                    );
+                                }
+                            } else {
+                                $condition .= " AND $field = :$paramName";
+                            }
+
+                            $this->paramsFilter[$paramName] = $value;
+                            break;
+                        case 'df':
+                            $this->paramsFilter[$paramName] = $value;
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field != :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field != :$paramName",
+                                    );
+                                }
+                            } else {
+                                $condition .= " AND $field != :$paramName";
+                            }
+
+                            break;
+                    }
+
+                    break;
+                case 'boolean':
+                    $this->paramsFilter[$paramName] = (int) $value;
+                    $condition .= " AND $field = :$paramName";
+                    break;
+                case 'numeric':
+                    $this->paramsFilter[$paramName] = $value;
+                    switch ($comparison) {
+                        case 'eq':
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field = :$paramName",
+                                    );
+                                }
+                            } else {
+                                $condition .= " AND $field = :$paramName";
+                            }
+
+                            break;
+                        case 'lt':
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field < :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field < :$paramName",
+                                    );
+                                }
+                            } else {
+                                $condition .= " AND $field < :$paramName";
+                            }
+
+                            break;
+                        case 'gt':
+                            if (preg_match("/^id[A-Z].*\./", $field)) {
+                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field > :$paramName";
+                                } else {
+                                    $this->relationFilter[strtok($field, '.')] = array(
+                                        'condition' => "$field > :$paramName",
+                                    );
+                                }
+                            } else {
+                                $condition .= " AND $field > :$paramName";
+                            }
+
+                            break;
+                    }
+
+                case 'list':
+                    $value = is_array($value) ? $value : array($value);
+
+                    if (!isset($f->tableRelated)) {
+                        $paramsIn = array();
+
+                        foreach ($value as $keyIn => $v) {
+                            $this->paramsFilter["pIn$key$keyIn"] = $v;
+                            array_push($paramsIn, ":pIn$key$keyIn");
+                        }
+
+                        $paramsIn = implode(',', $paramsIn);
+                        $condition .= " AND $field IN($paramsIn)";
+                    } else {
+                        $value             = $value[0];
+                        $operatorSubSelect = isset($f->operatorSubSelect) ? $f->operatorSubSelect : '=';
+                        $subSelect         = "SELECT DISTINCT $f->fieldSubSelect FROM $f->tableRelated WHERE $f->fieldWhere $operatorSubSelect $value";
+                        $condition .= " AND $field IN($subSelect)";
+                    }
+                    break;
+                case 'notlist':
+                    $value = is_array($value) ? $value : array($value);
+
+                    if (!isset($f->tableRelated)) {
+                        $paramsNotIn = array();
+
+                        if (count($value)) {
+                            foreach ($value as $keyNotIn => $v) {
+                                $this->paramsFilter["pNotIn$keyNotIn"] = $v;
+                                array_push($paramsNotIn, ":pNotIn$keyNotIn");
+                            }
+
+                            $paramsNotIn = implode(',', $paramsNotIn);
+                            $condition .= " AND $field NOT IN($paramsNotIn)";
+                        }
+                    } else {
+                        $value                          = $value[0];
+                        $operatorSubSelect              = isset($f->operatorSubSelect) ? $f->operatorSubSelect : '=';
+                        $this->paramsFilter[$paramName] = $value;
+                        $subSelect                      = "SELECT DISTINCT $f->fieldSubSelect FROM $f->tableRelated WHERE $f->fieldWhere $operatorSubSelect :$paramName";
+                        $condition .= " AND $field NOT IN($subSelect)";
+                    }
+                    break;
+            }
+        }
+
+        return $condition;
+    }
+
     public function actionCallInfo()
     {
         ?>

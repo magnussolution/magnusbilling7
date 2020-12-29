@@ -907,7 +907,7 @@ Locale.load({
     'Size': 'Tamaño',
     'SkuCode': 'SkuCode',
     'SMTP': 'SMTP',
-    'Source': 'Codigo',
+    'Source': 'Origem',
     'Spanish': 'Español',
     'SPY type': 'Tipo de SPY',
     'Standard': 'Estándar',

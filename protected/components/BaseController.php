@@ -1350,6 +1350,22 @@ class BaseController extends CController
                 $comparison = null;
             }
             switch ($type) {
+                case 'date':
+                    switch ($comparison) {
+                        case 'eq':
+                            $this->paramsFilter[$paramName] = strtok($value, ' ') . "%";
+                            $condition .= " AND $field LIKE :$paramName";
+                            break;
+                        case 'lt':
+                            $this->paramsFilter[$paramName] = $value;
+                            $condition .= " AND $field < :$paramName";
+                            break;
+                        case 'gt':
+                            $this->paramsFilter[$paramName] = $value;
+                            $condition .= " AND $field > :$paramName";
+                            break;
+                    }
+                    break;
                 case 'string':
                     $field = isset($f->caseSensitive) && $f->caseSensitive && !is_array($field) ? "BINARY $field" : $field;
 
@@ -1503,23 +1519,6 @@ class BaseController extends CController
 
                             break;
                     }
-
-                case 'date':
-                    switch ($comparison) {
-                        case 'eq':
-                            $this->paramsFilter[$paramName] = strtok($value, ' ') . "%";
-                            $condition .= " AND $field LIKE :$paramName";
-                            break;
-                        case 'lt':
-                            $this->paramsFilter[$paramName] = $value;
-                            $condition .= " AND $field < :$paramName";
-                            break;
-                        case 'gt':
-                            $this->paramsFilter[$paramName] = $value;
-                            $condition .= " AND $field > :$paramName";
-                            break;
-                    }
-                    break;
                 case 'list':
                     $value = is_array($value) ? $value : array($value);
 
