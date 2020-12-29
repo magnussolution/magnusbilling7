@@ -988,7 +988,7 @@ Locale.load({
     'SipTrace filter': 'SipTrace filtro',
     'Size': 'Tamanho',
     'SkuCode': 'SkuCode',
-    'Source': 'Código',
+    'Source': 'Origem',
     'Spanish': 'Espanhol',
     'Spy call': 'Espiar chamada',
     'Standard': 'Padrão',
