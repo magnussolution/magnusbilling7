@@ -694,6 +694,11 @@ class AsteriskAccess
                     if ($sip->idUser->active != 1) {
                         continue;
                     }
+
+                    $sip->name        = trim($sip->name);
+                    $sip->defaultuser = trim($sip->defaultuser);
+                    $sip->fromuser    = trim($sip->fromuser);
+
                     if ($sip->techprefix > 1) {
                         $line = "\n\n[" . $sip->host . "]\n";
                     } else {

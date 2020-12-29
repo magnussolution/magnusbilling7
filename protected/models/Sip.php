@@ -125,6 +125,11 @@ class Sip extends Model
         if ($this->host == 'dynamic') {
             $this->insecure = 'no';
         }
+
+        $this->name        = trim($this->name);
+        $this->defaultuser = trim($this->defaultuser);
+        $this->fromuser    = trim($this->fromuser);
+
         return parent::beforeSave();
     }
 
