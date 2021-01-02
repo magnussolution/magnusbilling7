@@ -14,7 +14,7 @@ DID
 Month payed
 -----------
 
-| We did not write the description to this field.
+| The total month paid to this DID.
 
 
 

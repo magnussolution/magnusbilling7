@@ -64,7 +64,7 @@ Ativar acesso WEB
 Proxy
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| IP do proxy 1
 
 
 
@@ -154,7 +154,7 @@ NAT keep alive
 Proxy
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| IP do proxy 2
 
 
 

@@ -37,18 +37,19 @@ Ext.define('MBilling.view.callSummaryDayAgent.Form', {
             name: 'sumsessionbill',
             fieldLabel: t('Sell price'),
             renderer: Helper.Util.formatMoneyDecimal,
-            allowBlank: true
+            allowBlank: true,
+            hidden: App.user.hidden_prices == 1
         }, {
             name: 'sumbuycost',
             fieldLabel: t('Buy price'),
             renderer: Helper.Util.formatMoneyDecimal,
-            hidden: !App.user.isAdmin,
+            hidden: !App.user.isAdmin || App.user.hidden_prices == 1,
             allowBlank: true
         }, {
             name: 'sumlucro',
             fieldLabel: t('Markup'),
             renderer: Helper.Util.formatMoneyDecimal,
-            hidden: !App.user.isAdmin,
+            hidden: !App.user.isAdmin || App.user.hidden_prices == 1,
             allowBlank: true
         }, {
             name: 'sumnbcall',

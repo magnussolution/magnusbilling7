@@ -158,7 +158,7 @@ Nome da empresa
 Nome fantasia
 -------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Nome fantasia.
 
 
 

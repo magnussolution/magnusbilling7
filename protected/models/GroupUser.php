@@ -78,7 +78,7 @@ class GroupUser extends Model
     {
         return array(
             array('name', 'required'),
-            array('id_user_type', 'numerical', 'integerOnly' => true),
+            array('id_user_type, hidden_prices', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 100),
             array('user_prefix', 'length', 'max' => 6),
         );

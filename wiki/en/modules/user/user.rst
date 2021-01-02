@@ -134,7 +134,7 @@ Company name
 Commercial name
 ---------------
 
-| We did not write the description to this field.
+| Brand name.
 
 
 

@@ -34,7 +34,7 @@ Nome
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição para o CallerID.
 
 
 

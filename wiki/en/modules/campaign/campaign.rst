@@ -94,7 +94,7 @@ Audio 2
 Restrict phone
 --------------
 
-| We did not write the description to this field.
+| Activating this option, MagnusBilling will check if the number that will be sent the call is registered in the Restrict Phone menu, if it has, the system will change the status of the number to blocked and will not send the call.
 
 
 

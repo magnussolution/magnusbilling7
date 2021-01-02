@@ -223,6 +223,14 @@ Este menu tem os seguintes campos
 .. include:: didww/didww.rst
 
 
+Feriados
+++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: holidays/holidays.rst
+
+
 
 
 

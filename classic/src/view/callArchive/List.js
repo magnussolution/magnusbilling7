@@ -149,15 +149,15 @@ Ext.define('MBilling.view.callArchive.List', {
                 dataIndex: 'buycost',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
-                hidden: App.user.isClient || App.user.isAgent,
-                hideable: !App.user.isClient && !App.user.isAgent
+                hidden: App.user.isClient || App.user.isAgent || App.user.hidden_prices == 1,
+                hideable: !App.user.isClient && !App.user.isAgent && App.user.hidden_prices == 0
             }, {
                 header: t('Sell price'),
                 dataIndex: 'sessionbill',
                 renderer: Helper.Util.formatMoneyDecimal4,
                 flex: 3,
-                hidden: App.user.isAgent || App.user.isClientAgent,
-                hideable: !App.user.isAgent && !App.user.isClientAgent
+                hidden: App.user.isAgent || App.user.isClientAgent || App.user.hidden_prices == 1,
+                hideable: !App.user.isAgent && !App.user.isClientAgent && App.user.hidden_prices == 0
             }
             /*,{
             menuDisabled : true,

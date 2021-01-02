@@ -64,7 +64,7 @@ Enable_Web_Server
 Proxy
 -----
 
-| We did not write the description to this field.
+| Proxy 1.
 
 
 
@@ -154,7 +154,7 @@ NAT keep alive
 Proxy
 -----
 
-| We did not write the description to this field.
+| Proxy 2.
 
 
 
