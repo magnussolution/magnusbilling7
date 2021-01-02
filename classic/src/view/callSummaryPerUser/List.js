@@ -73,20 +73,22 @@ Ext.define('MBilling.view.callSummaryPerUser.List', {
             dataIndex: App.user.isAdmin ? 'buycost' : 'sessionbill',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,
-            hidden: App.user.isClient,
-            hideable: App.user.isAdmin
+            hidden: App.user.isClient || App.user.hidden_prices == 1,
+            hideable: App.user.isAdmin && App.user.hidden_prices == 0
         }, {
             header: t('Sell price'),
             dataIndex: App.user.isAgent || App.user.isClientAgent ? 'agent_bill' : 'sessionbill',
             renderer: Helper.Util.formatMoneyDecimal,
-            flex: 3
+            flex: 3,
+            hidden: App.user.hidden_prices == 1,
+            hideable: App.user.hidden_prices == 0
         }, {
             header: t('Markup'),
             dataIndex: 'lucro',
             renderer: Helper.Util.formatMoneyDecimal,
             flex: 3,
-            hidden: App.user.isClient,
-            hideable: App.user.isAdmin
+            hidden: App.user.isClient || App.user.hidden_prices == 1,
+            hideable: App.user.isAdmin && App.user.hidden_prices == 0
         }, {
             header: t('ASR'),
             dataIndex: 'asr',

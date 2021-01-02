@@ -33,7 +33,14 @@ Ext.define('MBilling.view.groupUser.Form', {
                     fieldLabel: t('Name'),
                     maxLength: 100
                 }, {
-                    xtype: 'usertypecombo'
+                    xtype: 'usertypecombo',
+                    name: 'id_user_type',
+                    fieldLabel: t('User type')
+                }, {
+                    xtype: 'noyescombo',
+                    name: 'hidden_prices',
+                    fieldLabel: t('Hidden prices'),
+                    hidden: true
                 }]
             }, {
                 title: t('Permissions'),

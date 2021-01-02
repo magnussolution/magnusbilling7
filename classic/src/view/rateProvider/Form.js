@@ -39,7 +39,8 @@ Ext.define('MBilling.view.rateProvider.Form', {
             xtype: 'moneyfield',
             name: 'buyrate',
             fieldLabel: t('Buy price'),
-            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision
+            mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+            hidden: App.user.hidden_prices == 1
         }, {
             xtype: 'numberfield',
             name: 'buyrateinitblock',

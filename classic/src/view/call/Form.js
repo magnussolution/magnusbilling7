@@ -69,7 +69,7 @@ Ext.define('MBilling.view.call.Form', {
             name: 'buycost',
             fieldLabel: t('Buy price'),
             mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
-            hidden: App.user.isClient || App.user.isAgent,
+            hidden: App.user.isClient || App.user.isAgent || App.user.hidden_prices == 1,
             readOnly: !App.user.isAdmin
         }, {
             xtype: 'moneyfield',
@@ -77,7 +77,7 @@ Ext.define('MBilling.view.call.Form', {
             fieldLabel: t('Sell price'),
             mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             readOnly: App.user.isClient || App.user.isAgent,
-            hidden: App.user.isAgent || App.user.isClientAgent
+            hidden: App.user.isAgent || App.user.isClientAgent || App.user.hidden_prices == 1
         }, {
             xtype: 'moneyfield',
             name: 'agent_bill',

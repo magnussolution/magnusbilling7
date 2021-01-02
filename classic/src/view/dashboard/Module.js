@@ -88,7 +88,8 @@ Ext.define('MBilling.view.dashboard.Module', {
                     height: (height - 60) / 4,
                     reference: 'monthprofitdiv',
                     cls: 'weather-panel shadow',
-                    userCls: 'big-40 small-100'
+                    userCls: 'big-40 small-100',
+                    hidden: App.user.hidden_prices == 1
                 }, {
                     xtype: 'component',
                     baseCls: 'weather-panel',
@@ -96,7 +97,8 @@ Ext.define('MBilling.view.dashboard.Module', {
                     height: (height - 60) / 4,
                     reference: 'totalrefill',
                     cls: 'weather-panel shadow',
-                    userCls: 'big-40 small-100'
+                    userCls: 'big-40 small-100',
+                    hidden: App.user.hidden_prices == 1
                 }, {
                     xtype: 'callonlinechartchart',
                     title: t('Simultaneous calls'),

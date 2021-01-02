@@ -60,7 +60,8 @@ Ext.define('MBilling.view.rateProvider.List', {
             header: t('Buy price'),
             dataIndex: 'buyrate',
             renderer: Helper.Util.formatMoneyDecimal4,
-            flex: 2
+            flex: 2,
+            hidden: App.user.hidden_prices == 1
         }, {
             header: t('Buy price initblock'),
             dataIndex: 'buyrateinitblock',

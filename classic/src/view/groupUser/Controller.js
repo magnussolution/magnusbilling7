@@ -1,8 +1,40 @@
 Ext.define('MBilling.view.groupUser.Controller', {
     extend: 'Ext.ux.app.ViewController',
     alias: 'controller.groupuser',
-    onEdit: function() {
+    init: function() {
         var me = this;
+        me.control({
+            'usertypecombo': {
+                select: me.onSelectType
+            }
+        });
+        me.callParent(arguments);
+    },
+    onSelectType: function(combo, records) {
+        var me = this,
+            fields = me.formPanel.getForm().getFields(),
+            fieldHiddenPrices = me.formPanel.getForm().findField('hidden_prices'),
+            typeUser = me.formPanel.getForm().findField('id_user_type').getValue(),
+            form = me.formPanel.getForm();
+        if (typeUser == 1) {
+            fieldHiddenPrices['show']();
+        } else {
+            fieldHiddenPrices['hide']();
+        }
+    },
+    onNew: function() {
+        var me = this,
+            fieldHiddenPrices = me.formPanel.getForm().findField('hidden_prices');
+        fieldHiddenPrices['hide']();
+    },
+    onEdit: function() {
+        var me = this,
+            record = me.list.getSelectionModel().getSelection()[0];
+        if (record.get('id_user_type') == 1) {
+            me.formPanel.getForm().findField('hidden_prices')['show']();
+        } else {
+            me.formPanel.getForm().findField('hidden_prices')['hide']();
+        }
         me.lookupReference('generalTab').show();
         me.callParent(arguments);
     },

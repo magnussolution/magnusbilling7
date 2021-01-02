@@ -53,7 +53,8 @@ Ext.define('MBilling.view.rate.List', {
                 header: t('Sell price'),
                 dataIndex: 'rateinitial',
                 renderer: Helper.Util.formatMoneyDecimal4,
-                flex: 2
+                flex: 2,
+                hidden: App.user.hidden_prices == 1
             }, {
                 header: t('Initial block'),
                 dataIndex: 'initblock',

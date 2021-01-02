@@ -120,6 +120,7 @@ class AuthenticationController extends Controller
         Yii::app()->session['systemName']    = $_SERVER['SCRIPT_FILENAME'];
         Yii::app()->session['session_start'] = time();
         Yii::app()->session['userCount']     = User::model()->count("credit != 0");
+        Yii::app()->session['hidden_prices'] = $modelUser->idGroup->hidden_prices;
 
         if ($modelUser->googleAuthenticator_enable > 0) {
 
@@ -207,6 +208,7 @@ class AuthenticationController extends Controller
         Yii::app()->session['systemName']    = false;
         Yii::app()->session['base_country']  = false;
         Yii::app()->session['version']       = false;
+        Yii::app()->session['hidden_prices'] = false;
         Yii::app()->session->clear();
         Yii::app()->session->destroy();
 
@@ -222,6 +224,9 @@ class AuthenticationController extends Controller
             $this->mountMenu();
             $modelGroupUserGroup = GroupUserGroup::model()->count('id_group_user = :key',
                 array(':key' => Yii::app()->session['id_group']));
+
+            $modelGroupUser = GroupUser::model()->findByPk(Yii::app()->session['id_group']);
+
             Yii::app()->session['adminLimitUsers']      = $modelGroupUserGroup;
             Yii::app()->session['licence']              = $this->config['global']['licence'];
             Yii::app()->session['email']                = $this->config['global']['admin_email'];
@@ -262,6 +267,7 @@ class AuthenticationController extends Controller
             $googleAuthenticatorKey   = Yii::app()->session['googleAuthenticatorKey'];
             $newGoogleAuthenticator   = Yii::app()->session['newGoogleAuthenticator'];
             $showGoogleCode           = Yii::app()->session['showGoogleCode'];
+            $hidden_prices            = Yii::app()->session['hidden_prices']            = $modelGroupUser->hidden_prices;
         } else {
             $id_user                  = false;
             $id_agent                 = false;
@@ -291,6 +297,7 @@ class AuthenticationController extends Controller
             $showGoogleCode           = false;
             $social_media_network     = false;
             $show_playicon_cdr        = false;
+            $hidden_prices            = false;
         }
         $language = isset(Yii::app()->session['language']) ? Yii::app()->session['language'] : Yii::app()->sourceLanguage;
         $theme    = isset(Yii::app()->session['theme']) ? Yii::app()->session['theme'] : 'blue-neptune';
@@ -342,6 +349,7 @@ class AuthenticationController extends Controller
             'show_filed_help'          => $this->config['global']['show_filed_help'],
             'campaign_user_limit'      => $this->config['global']['campaign_user_limit'],
             'showMCDashBoard'          => $this->config['global']['showMCDashBoard'],
+            'hidden_prices'            => $hidden_prices,
         ));
     }
 

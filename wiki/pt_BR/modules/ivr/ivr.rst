@@ -70,6 +70,16 @@ Intervalos Domingo
 
 
 
+.. _ivr-use-holidays:
+
+Usar feriados
+-------------
+
+| Se ativado esta opção então o sistema irá verificar se existe um feriado cadastrado para o dia, se sim, então será executado o audio não trabalhando.
+
+
+
+
 .. _ivr-workaudio:
 
 Áudio Trabalhando

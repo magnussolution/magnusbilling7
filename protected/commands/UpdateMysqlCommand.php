@@ -1214,7 +1214,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "UPDATE  pkg_configuration SET status = 1 WHERE config_key = 'apply_local_prefix_did_sip' ";
             $this->executeDB($sql);
 
-            $version = '7.5.6';
+            $version = '7.5.7';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2021-01-02
+        if ($version == '7.5.7') {
+
+            $sql = "ALTER TABLE `pkg_group_user` ADD `hidden_prices` TINYINT(1) NOT NULL DEFAULT '0'";
+            $this->executeDB($sql);
+
+            $version = '7.5.8';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

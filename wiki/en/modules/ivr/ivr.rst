@@ -67,6 +67,16 @@ Sunday intervals
 
 
 
+.. _ivr-use-holidays:
+
+Use holidays
+------------
+
+| If this option is activated then the system will check if there is a holiday registered for the day, if so, then the audio, not working, will be played.
+
+
+
+
 .. _ivr-workaudio:
 
 Work audio

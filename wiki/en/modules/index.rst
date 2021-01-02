@@ -223,6 +223,14 @@ This menu has the following fields
 .. include:: didww/didww.rst
 
 
+Holidays
+++++++++
+
+This menu has the following fields
+
+.. include:: holidays/holidays.rst
+
+
 
 
 

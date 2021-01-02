@@ -37,18 +37,19 @@ Ext.define('MBilling.view.callSummaryMonthUser.Form', {
             name: App.user.isAgent || App.user.isClientAgent ? 'sumagent_bill' : 'sumsessionbill',
             fieldLabel: t('Sell price'),
             renderer: Helper.Util.formatMoneyDecimal,
-            allowBlank: true
+            allowBlank: true,
+            hidden: App.user.hidden_prices == 1
         }, {
             name: App.user.isAdmin ? 'sumbuycost' : 'sumsessionbill',
             fieldLabel: t('Buy price'),
             renderer: Helper.Util.formatMoneyDecimal,
-            hidden: App.user.isClient,
+            hidden: App.user.isClient || App.user.hidden_prices == 1,
             allowBlank: true
         }, {
             name: 'sumlucro',
             fieldLabel: t('Markup'),
             renderer: Helper.Util.formatMoneyDecimal,
-            hidden: !App.user.isAdmint,
+            hidden: !App.user.isAdmint || App.user.hidden_prices == 1,
             allowBlank: true
         }, {
             name: 'sumnbcall',
