@@ -60,7 +60,6 @@ class QueueController extends Controller
             $model->musiconhold = $model->name;
             $model->save();
 
-            AsteriskAccess::instance()->mohReload();
         }
 
         if (isset($_FILES["periodic-announce"]) && strlen($_FILES["periodic-announce"]["name"]) > 1) {
@@ -166,6 +165,8 @@ class QueueController extends Controller
         if (count($model)) {
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/queues_magnus.conf', 'name');
         }
+        
+        AsteriskAccess::instance()->mohReload();
 
     }
 
