@@ -1241,7 +1241,9 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                 `condition` int(11) NOT NULL,
                 `status` int(11) NOT NULL,
                 `creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `period` int(11) DEFAULT NULL,
                 `id_plan` int(11) DEFAULT NULL,
+                `email` varchar(100) DEFAULT NULL,
                 PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
                 ";
@@ -1253,6 +1255,8 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
             $this->executeDB($sql);
+
+            exec("echo '\n*/5 * * * * php /var/www/html/mbilling/cron.php alarm' >> /var/spool/cron/root");
 
             $version = '7.5.9';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
