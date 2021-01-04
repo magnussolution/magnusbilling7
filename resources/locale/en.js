@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2020-12-22
+ * 2021-01-02
  */
 Locale.load({
     '': '',
@@ -201,8 +201,6 @@ Locale.load({
     'Config': '',
     'Configuration': '',
     'Confirm': '',
-    'Confirm delete': '',
-    'Confirm delete all': '',
     'Confirm delete all log file?': '',
     'Confirm release DID': '',
     'Confirm your password': '',
@@ -252,6 +250,7 @@ Locale.load({
     'Day': '',
     'Default option': '',
     'Delete': '',
+    'Delete audios': '',
     'Delete musiconhold': '',
     'Delimiter': '',
     'Deny': '',
@@ -386,6 +385,7 @@ Locale.load({
     'Head': '',
     'Height': '',
     'Help': '',
+    'Hidden prices': '',
     'History': '',
     'Holidays': '',
     'Home': '',

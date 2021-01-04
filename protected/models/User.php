@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2018 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -115,8 +115,10 @@ class User extends Model
 
     public function beforeSave()
     {
+        if ($this->getIsNewRecord()) {
+            $this->creationdate = date('Y-m-d H:i:s');
+        }
 
-        $this->creationdate = date('Y-m-d H:i:s');
         return parent::beforeSave();
     }
 

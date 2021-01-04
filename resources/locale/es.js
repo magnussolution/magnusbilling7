@@ -14,6 +14,8 @@
  * 2020-08-10
  */
 Locale.load({
+    'Hidden prices': 'Ocultar pricios',
+    'Delete audios': 'Apagar audios',
     'Use holidays': 'Usar feriados',
     'Holidays': 'Feriados',
     'Commercial name': 'Nombre comercial',

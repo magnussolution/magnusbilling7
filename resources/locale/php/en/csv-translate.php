@@ -82,6 +82,7 @@
     'fromemail'=> ['From_email', 'Email' , 'From_email'],
     'fromname'=> ['From_name', 'Nome' , 'From_name'],
     'fromuser'=> ['Fromuser', 'Fromuser' , 'Fromuser'],
+    'hidden_prices'=> ['Hidden_prices', 'Ocultar_preços' , 'Ocultar_pricios'],
     'host'=> ['Host', 'Host' , 'Host'],
     'icon_cls'=> ['IconCls', 'IconCls' , 'IconCls'],
     'ini_credit'=> ['Initial_credit_to_new_users', 'Crédito_inicial_para_novos_usuários' , 'Crédito_inicial_para_nuevos_usuarios'],

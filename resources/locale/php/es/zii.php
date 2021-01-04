@@ -21,7 +21,9 @@
  * Edit /resources/locale/es.js
           */
 return array(
-            'Use holidays' => 'Usar feriados',
+            'Hidden prices' => 'Ocultar pricios',
+    'Delete audios' => 'Apagar audios',
+    'Use holidays' => 'Usar feriados',
     'Holidays' => 'Feriados',
     'Commercial name' => 'Nombre comercial',
     'Extra' => 'Extra',
@@ -895,7 +897,7 @@ return array(
     'Size' => 'Tamaño',
     'SkuCode' => 'SkuCode',
     'SMTP' => 'SMTP',
-    'Source' => 'Codigo',
+    'Source' => 'Origem',
     'Spanish' => 'Español',
     'SPY type' => 'Tipo de SPY',
     'Standard' => 'Estándar',

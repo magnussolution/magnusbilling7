@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2018 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -1226,6 +1226,35 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2021-01-03
+        if ($version == '7.5.8') {
+
+            $sql = "
+            CREATE TABLE IF NOT EXISTS `pkg_alarm` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `type` int(11) NOT NULL,
+                `amount` int(11) NOT NULL,
+                `condition` int(11) NOT NULL,
+                `status` int(11) NOT NULL,
+                `creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `id_plan` int(11) DEFAULT NULL,
+                PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                ";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Alarms'')', 'alarm', 'x-fa fa-desktop', 12,16)";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            $version = '7.5.9';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
