@@ -21,7 +21,9 @@
  * Edit /resources/locale/pt_BR.js
           */
 return array(
-            'Use holidays' => 'Usar feriados',
+            'Hidden prices' => 'Ocultar preços',
+    'Delete audios' => 'Apagar audios',
+    'Use holidays' => 'Usar feriados',
     'Holidays' => 'Feriados',
     'Commercial name' => 'Nome fantasia',
     'Extra' => 'Extra',
@@ -982,7 +984,7 @@ return array(
     'SipTrace filter' => 'SipTrace filtro',
     'Size' => 'Tamanho',
     'SkuCode' => 'SkuCode',
-    'Source' => 'Código',
+    'Source' => 'Origem',
     'Spanish' => 'Espanhol',
     'Spy call' => 'Espiar chamada',
     'Standard' => 'Padrão',

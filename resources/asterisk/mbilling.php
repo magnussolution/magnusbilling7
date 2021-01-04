@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2018 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2021 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -238,9 +238,9 @@ if ($MAGNUS->mode == 'standard') {
                     $MAGNUS->CallerID = $modelSipCallerID->alias;
                 }
             }
-            
+
             if ($agi->request['agi_calleridname'] !== 'unknown' && !empty($agi->request['agi_calleridname'])) {
-                $agi->set_variable("CALLERID(name)",$agi->request['agi_calleridname']);
+                $agi->set_variable("CALLERID(name)", $agi->request['agi_calleridname']);
             }
 
             $MAGNUS->destination = $MAGNUS->dnid = $MAGNUS->modelSip->name;

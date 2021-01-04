@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2016 MagnusBilling. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2021 MagnusBilling. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -35,7 +35,7 @@ Ext.define('MBilling.model.Callerid', {
     }, 'description', {
         name: 'description',
         type: 'string'
-    },  {
+    }, {
         name: 'activated',
         type: 'int'
     }, 'idUserusername'],

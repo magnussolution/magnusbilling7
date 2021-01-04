@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2018 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -131,7 +131,7 @@ class ModuleController extends Controller
     public function setAttributesModels($attributes, $models)
     {
 
-        $pkCount       = is_array($attributes) || is_object($attributes) ? $attributes : [];
+        $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
             if ($attributes[$i]['id_module'] < 1) {
                 $attributes[$i]['text'] = preg_replace('/ Module\'\)/', '\')', $attributes[$i]['text']);
