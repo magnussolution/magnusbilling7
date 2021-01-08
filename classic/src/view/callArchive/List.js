@@ -28,6 +28,7 @@ Ext.define('MBilling.view.callArchive.List', {
         me.fieldSearch = App.user.isAdmin ? 'idUser.username' : '';
         me.grupableColumns = false;
         me.buttonUpdateLot = false;
+        me.allowPrint = false;
         me.extraButtons = [{
             text: t('Download REC'),
             iconCls: 'call',

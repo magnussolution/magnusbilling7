@@ -1519,6 +1519,7 @@ class BaseController extends CController
 
                             break;
                     }
+                    break;
                 case 'list':
                     $value = is_array($value) ? $value : array($value);
 
