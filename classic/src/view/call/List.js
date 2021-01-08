@@ -25,6 +25,8 @@ Ext.define('MBilling.view.call.List', {
     standardSubmit: true,
     initComponent: function() {
         var me = this;
+        me.allowPrint = false;
+        me.buttonUpdateLot = false;
         me.fieldSearch = App.user.isAdmin ? 'idUser.username' : '';
         me.grupableColumns = false;
         me.paginationButton = ['-', {
@@ -45,7 +47,6 @@ Ext.define('MBilling.view.call.List', {
             disabled: false,
             width: 130
         }];
-        me.buttonUpdateLot = App.user.isAdmin;
         me.columns = [{
             header: t('ID'),
             dataIndex: 'id',

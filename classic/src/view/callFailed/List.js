@@ -28,6 +28,7 @@ Ext.define('MBilling.view.callFailed.List', {
         me.buttonUpdateLot = false;
         me.allowCreate = false;
         me.grupableColumns = false;
+        me.allowPrint = false;
         me.extraButtons = [{
             text: t('Call details'),
             glyph: icons.info,
