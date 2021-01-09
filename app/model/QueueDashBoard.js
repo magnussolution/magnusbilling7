@@ -24,6 +24,15 @@ Ext.define('MBilling.model.QueueDashBoard', {
         name: 'callId',
         type: 'int'
     }, {
+        name: 'agentName',
+        type: 'string'
+    }, {
+        name: 'queue_name',
+        type: 'string'
+    }, {
+        name: 'channel',
+        type: 'string'
+    }, {
         name: 'id_queue',
         type: 'string'
     }, {
@@ -46,6 +55,9 @@ Ext.define('MBilling.model.QueueDashBoard', {
         type: 'string'
     }, {
         name: 'callduration',
+        type: 'int'
+    }, {
+        name: 'duration',
         type: 'int'
     }],
     proxy: {
