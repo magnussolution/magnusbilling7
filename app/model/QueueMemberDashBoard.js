@@ -24,6 +24,18 @@ Ext.define('MBilling.model.QueueMemberDashBoard', {
         name: 'id',
         type: 'int'
     }, {
+        name: 'agentName',
+        type: 'string'
+    }, {
+        name: 'number',
+        type: 'string'
+    }, {
+        name: 'totalCalls',
+        type: 'string'
+    }, {
+        name: 'last_call',
+        type: 'string'
+    }, {
         name: 'agentId',
         type: 'string'
     }, {
