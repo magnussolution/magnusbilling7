@@ -76,6 +76,21 @@ class AsteriskAccess
         return $this->asmanager->Command("queue reset stats " . $queue);
     }
 
+    public function generateQueueFile()
+    {
+
+        $select = '`name`, `language`, `musiconhold`, `announce`, `context`, `timeout`, `announce-frequency`, `announce-round-seconds`, `announce-holdtime`, `announce-position`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `reportholdtime`, `memberdelay`, `weight`, `timeoutrestart`, `periodic-announce`, `periodic-announce-frequency`, `ringinuse`, `setinterfacevar`, `setqueuevar`, `setqueueentryvar`';
+        $model  = Queue::model()->findAll(
+            array(
+                'select' => $select,
+            ));
+
+        if (count($model)) {
+            AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/queues_magnus.conf', 'name');
+        }
+
+    }
+
     public function mohReload()
     {
         return $this->asmanager->Command("moh reload");
