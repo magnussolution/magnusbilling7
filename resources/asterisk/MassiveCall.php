@@ -238,8 +238,9 @@ class MassiveCall
 
                         $MAGNUS->startRecordCall($agi);
 
-                        $agi->set_callerid($destination);
+                        $agi->set_variable("CALLERID(num)", $destination);
                         $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
+                        $MAGNUS->CallerID = $destination;
 
                         $myres      = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_sipiax_friend']);
                         $dialstatus = $agi->get_variable("DIALSTATUS");
@@ -256,9 +257,9 @@ class MassiveCall
                         $DidAgi->modelDestination[0]['id_queue'] = $forwardOption[1];
                         $DidAgi->modelDid->did                   = $destination;
 
-                        $agi->set_variable("CALLERID(num)", $destination . ' ' . $modelPhoneNumber->name);
-                        $agi->set_callerid($destination . ' ' . $modelPhoneNumber->name);
-                        $MAGNUS->CallerID = $destination . ' ' . $modelPhoneNumber->name;
+                        $agi->set_variable("CALLERID(num)", $destination);
+                        $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
+                        $MAGNUS->CallerID = $destination;
 
                         QueueAgi::callQueue($agi, $MAGNUS, $CalcAgi, $DidAgi, 'torpedo');
                     } elseif ($forwardOptionType == 'ivr') {
@@ -267,9 +268,9 @@ class MassiveCall
                         $DidAgi->modelDestination[0]['id_ivr'] = $forwardOption[1];
                         $DidAgi->modelDid->did                 = $destination;
 
-                        $agi->set_variable("CALLERID(num)", $destination . ' ' . $modelPhoneNumber->name);
-                        $agi->set_callerid($destination . ' ' . $modelPhoneNumber->name);
-                        $MAGNUS->CallerID = $destination . ' ' . $modelPhoneNumber->name;
+                        $agi->set_variable("CALLERID(num)", $destination);
+                        $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
+                        $MAGNUS->CallerID = $destination;
 
                         IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'torpedo');
                     } elseif ($forwardOptionType == 'group') {
@@ -294,9 +295,9 @@ class MassiveCall
                         }
 
                     } elseif ($forwardOptionType == 'custom') {
-                        $agi->set_variable("CALLERID(num)", $destination . ' ' . $modelPhoneNumber->name);
-                        $agi->set_callerid($destination . ' ' . $modelPhoneNumber->name);
-                        $MAGNUS->CallerID = $destination . ' ' . $modelPhoneNumber->name;
+                        $agi->set_variable("CALLERID(num)", $destination);
+                        $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
+                        $MAGNUS->CallerID = $destination;
 
                         if (preg_match('/^http/', $forwardOption[1])) {
 
@@ -353,9 +354,9 @@ class MassiveCall
                         }
                     }
 
-                    $agi->set_variable("CALLERID(num)", $destination . ' ' . $modelPhoneNumber->name);
-                    $agi->set_callerid($destination . ' ' . $modelPhoneNumber->name);
-                    $MAGNUS->CallerID = $destination . ' ' . $modelPhoneNumber->name;
+                    $agi->set_variable("CALLERID(num)", $destination);
+                    $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
+                    $MAGNUS->CallerID = $destination;
 
                     if ($MAGNUS->record_call == 1) {
                         $myres = $agi->execute("StopMixMonitor");
