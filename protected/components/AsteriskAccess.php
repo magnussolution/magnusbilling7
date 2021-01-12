@@ -89,6 +89,8 @@ class AsteriskAccess
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/queues_magnus.conf', 'name');
         }
 
+        AsteriskAccess::instance()->mohReload();
+
     }
 
     public function mohReload()
