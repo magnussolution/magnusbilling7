@@ -42,6 +42,10 @@ class AlarmCommand extends ConsoleCommand
                     # CONSECUTIVE NUMBER
                     $this->consecutiveCalls($alarm);
                     break;
+                case 5:
+                    # ONLINE CALLS ON THE SAME NUMBER
+                    $this->onlineCallsSameNumber($alarm);
+                    break;
             }
         }
     }
@@ -161,6 +165,25 @@ class AlarmCommand extends ConsoleCommand
                     $this->notification($message, $alarm);
 
                 }
+            }
+
+        }
+
+    }
+
+    public function onlineCallsSameNumber($alarm)
+    {
+        $connection=Yii::app()->db;
+        $sql   = "SELECT ndiscado, COUNT(*) AS amount FROM pkg_call_online GROUP BY ndiscado HAVING amount >= " . $alarm->amount . " ORDER BY amount DESC";
+        $command = $connection->createCommand($sql);
+        $dataReader=$command->query();    
+        $rows=$dataReader->readAll();
+
+        foreach ($rows as $key => $call) {
+            print_r($call);
+            if(($call["amount"])>=($alarm->amount)) {
+                $message = "MagnusBilling ALERT. Multiple online calls to the same number(" . $call["ndiscado"] . ") detected! ";
+                $this->notification($message, $alarm);
             }
 
         }
