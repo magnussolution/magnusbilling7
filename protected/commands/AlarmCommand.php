@@ -42,6 +42,10 @@ class AlarmCommand extends ConsoleCommand
                     # CONSECUTIVE NUMBER
                     $this->consecutiveCalls($alarm);
                     break;
+                case 5:
+                    # ONLINE CALLS ON THE SAME NUMBER
+                    $this->onlineCallsSameNumber($alarm);
+                    break;
             }
         }
     }
@@ -67,12 +71,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'ASR ' . $asr . "\n";
         if ($alarm->condition == 1) {
             if ($asr > $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ASR is bigger than your alarme configuration";
+                $message = "MagnusBilling ALERT. The ASR is bigger than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($asr < $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ASR is less than your alarme configuration";
+                $message = "MagnusBilling ALERT. The ASR is less than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }
@@ -94,12 +98,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'ALOC ' . $aloc . "\n";
         if ($alarm->condition == 1) {
             if ($aloc > $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ALOC is bigger than your alarme configuration";
+                $message = "MagnusBilling ALERT. The ALOC is bigger than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($aloc < $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ALOC is less than your alarme configuration";
+                $message = "MagnusBilling ALERT. The ALOC is less than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }
@@ -124,12 +128,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'CALLS PER MINUTE ' . $callPerMin . "\n";
         if ($alarm->condition == 1) {
             if ($callPerMin > $alarm->amount) {
-                $message = "MagnusBilling ALERT. You had more call per minute than your alarme configuration";
+                $message = "MagnusBilling ALERT. You had more call per minute than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($callPerMin < $alarm->amount) {
-                $message = "MagnusBilling ALERT. You had less call per minute than your alarme configuration";
+                $message = "MagnusBilling ALERT. You had less call per minute than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }
@@ -163,6 +167,24 @@ class AlarmCommand extends ConsoleCommand
                 }
             }
 
+        }
+
+    }
+
+    public function onlineCallsSameNumber($alarm)
+    {
+
+        $modelCallOnLine = CallOnLine::model()->findAll([
+            'select' => 'ndiscado, COUNT(*) AS canal',
+            'group'  => 'ndiscado HAVING canal >= ' . $alarm->amount,
+            'order'  => 'canal DESC',
+        ]);
+        foreach ($modelCallOnLine as $key => $call) {
+
+            if (($call->canal) >= ($alarm->amount)) {
+                $message = "MagnusBilling ALERT. Multiple online calls to the same number(" . $call->ndiscado . ") detected! ";
+                $this->notification($message, $alarm);
+            }
         }
 
     }
