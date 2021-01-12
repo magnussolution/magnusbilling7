@@ -59,8 +59,6 @@ class QueueController extends Controller
 
             $model->musiconhold = $model->name;
             $model->save();
-
-            AsteriskAccess::instance()->mohReload();
         }
 
         if (isset($_FILES["periodic-announce"]) && strlen($_FILES["periodic-announce"]["name"]) > 1) {
