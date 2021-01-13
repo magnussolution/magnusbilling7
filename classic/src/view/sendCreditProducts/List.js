@@ -91,6 +91,10 @@ Ext.define('MBilling.view.sendCreditProducts.List', {
                         [0, t('Inactive')]
                     ]
                 }
+            }, {
+                header: t('Retail price'),
+                dataIndex: 'retail_price',
+                flex: 3
             }]
         me.callParent(arguments);
     }

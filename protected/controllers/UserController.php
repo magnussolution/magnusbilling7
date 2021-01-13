@@ -117,7 +117,7 @@ class UserController extends Controller
                     array(':key' => $values['id_group_agent'])
                 );
 
-                if (count($modelGroupUser) == 0) {
+                if (!isset($modelGroupUser)) {
                     echo json_encode(array(
                         'success' => false,
                         'rows'    => array(),
@@ -144,6 +144,23 @@ class UserController extends Controller
             $values['id_group'] = $modelUser->id_group_agent;
 
             $this->checkAgentEdit($values);
+
+            if (isset($values['transfer_international']) && $values['transfer_international'] == 1 && $modelUser->transfer_international == 0) {
+                $error = 'You cant enable Mobile Credit';
+            } elseif (isset($values['transfer_flexiload']) && $values['transfer_flexiload'] == 1 && $modelUser->transfer_flexiload == 0) {
+                $error = 'You cant enable Mobile Money';
+            } elseif (isset($values['transfer_bkash']) && $values['transfer_bkash'] == 1 && $modelUser->transfer_bkash == 0) {
+                $error = 'You cant enable Payment';
+            }
+
+            if (isset($error)) {
+                echo json_encode(array(
+                    'success' => false,
+                    'rows'    => array(),
+                    'errors'  => $error,
+                ));
+                exit();
+            }
         }
 
         if ($this->isNewRecord) {

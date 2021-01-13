@@ -134,7 +134,7 @@ Ext.define('MBilling.view.user.Form', {
                     fieldLabel: t('Commercial name'),
                     allowBlank: true,
                     hidden: App.user.base_country = !'BRL'
-                },  {
+                }, {
                     name: 'state_number',
                     fieldLabel: t('State number'),
                     allowBlank: true,
@@ -405,7 +405,7 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'transfer_international',
-                        fieldLabel: window.showservices ? t('Dynamic callerID') : t('Enable International')
+                        fieldLabel: window.showservices ? t('Dynamic callerID') : t('Enable Mobile Credit')
                     }, {
                         xtype: 'numberfield',
                         name: 'transfer_international_profit',
@@ -427,7 +427,7 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'transfer_flexiload',
-                        fieldLabel: window.showservices ? t('Procom') : t('Enable flexiload')
+                        fieldLabel: window.showservices ? t('Procom') : t('Enable Mobile Money')
                     }, {
                         xtype: 'numberfield',
                         name: 'transfer_flexiload_profit',
@@ -449,7 +449,7 @@ Ext.define('MBilling.view.user.Form', {
                     items: [{
                         xtype: 'noyescombo',
                         name: 'transfer_bkash',
-                        fieldLabel: window.showservices ? t('Não perturbe') : t('Enable Bkash')
+                        fieldLabel: window.showservices ? t('Não perturbe') : t('Enable Payment')
                     }, {
                         xtype: 'numberfield',
                         name: 'transfer_bkash_profit',
@@ -461,7 +461,7 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
-                    hidden: App.user.isClient || !window.transferToMobile,
+                    hidden: !App.user.isAdmin || !window.showservices,
                     defaults: {
                         labelAlign: 'right',
                         labelWidth: 145,

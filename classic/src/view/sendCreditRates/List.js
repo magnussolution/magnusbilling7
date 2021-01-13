@@ -30,15 +30,13 @@ Ext.define('MBilling.view.sendCreditRates.List', {
         me.buttonCsv = false;
         me.allowPrint = false;
         me.extraButtons = [{
-            text: t('Reset buy price'),
-            iconCls: 'icon-chart-column',
-            width: 130,
+            text: t('Reset to wholesale price'),
+            width: 160,
             handler: 'onResetPrice',
             disabled: false
         }, {
-            text: t('Reset retail price'),
-            iconCls: 'icon-chart-column',
-            width: 130,
+            text: t('Reset to retail price'),
+            width: 135,
             handler: 'onResetRetail',
             disabled: false
         }];
@@ -107,11 +105,11 @@ Ext.define('MBilling.view.sendCreditRates.List', {
                 type: 'string',
                 field: 'idProduct.wholesale_price'
             },
-            flex: 2
+            flex: 3
         }, {
-            header: t('Buy price'),
+            header: t('Sell price'),
             dataIndex: 'sell_price',
-            flex: 2
+            flex: 3
         }]
         me.callParent(arguments);
     }
