@@ -677,6 +677,7 @@ class Magnus
     {
 
         $destination = $type == 'outbound' ? $this->destination : $this->CallerID;
+        $destination = preg_replace('/\+|\#|\*|\-|\.|\(|\)/', '', $destination);
         $direction   = $type == 'outbound' ? 1 : 2;
 
         if ($type == 'outbound' && $this->modelSip->block_call_reg != '') {

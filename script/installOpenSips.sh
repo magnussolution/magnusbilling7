@@ -88,7 +88,7 @@ mysqladmin -u root password $password
 
 cd /usr/src
 yum install -y epel-release
-yum install https://yum.opensips.org/2.4/releases/el/7/x86_64/opensips-yum-releases-2.4-5.el7.noarch.rpm
+yum install -y https://yum.opensips.org/2.4/releases/el/7/x86_64/opensips-yum-releases-2.4-6.el7.noarch.rpm
 yum install -y opensips opensips-db_mysql
 
 touch /var/log/opensips.log
@@ -132,7 +132,7 @@ echo "
 
 cd /etc/opensips/
 mv opensips.cfg opensips.cfg_old
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling6/master/script/opensips.cfg
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/opensips.cfg
 
 sed -i "s/MYSQLUSER:MYSQLPASS/root:$password/g" /etc/opensips/opensips.cfg
 sed -i "s/MYIP/$proxyip/g" /etc/opensips/opensips.cfg

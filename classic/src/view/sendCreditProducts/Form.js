@@ -29,8 +29,7 @@ Ext.define('MBilling.view.sendCreditProducts.Form', {
             readOnly: true
         }, {
             name: 'operator_name',
-            fieldLabel: t('Operator name'),
-            readOnly: true
+            fieldLabel: t('Operator name')
         }, {
             name: 'operator_id',
             fieldLabel: t('Operator ID')
@@ -74,6 +73,24 @@ Ext.define('MBilling.view.sendCreditProducts.Form', {
             name: 'info',
             fieldLabel: t('Description'),
             allowBlank: true
+        }, {
+            xtype: 'moneyfield',
+            name: 'retail_price',
+            fieldLabel: t('Retail price'),
+            mask: '#9.999.990,000000',
+            readOnly: !App.user.isAdmin
+        }, {
+            xtype: 'combobox',
+            name: 'method',
+            fieldLabel: t('Type'),
+            value: 'mobileCredit',
+            forceSelection: true,
+            editable: false,
+            store: [
+                ['mobileCredit', 'Mobile Credit'],
+                ['mobileMoney', 'Mobile Money'],
+                ['payment', 'Payment']
+            ]
         }];
         me.callParent(arguments);
     }
