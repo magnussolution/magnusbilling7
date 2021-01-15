@@ -97,6 +97,14 @@ This menu has the following fields
 .. include:: transfertomobile/transfertomobile.rst
 
 
+Send Credit Products
+++++++++++++++++++++
+
+This menu has the following fields
+
+.. include:: sendcreditproducts/sendcreditproducts.rst
+
+
 
 
 
@@ -231,6 +239,14 @@ This menu has the following fields
 .. include:: holidays/holidays.rst
 
 
+Holidays
+++++++++
+
+This menu has the following fields
+
+.. include:: holidays/holidays.rst
+
+
 
 
 
@@ -296,6 +312,14 @@ Offer Use
 This menu has the following fields
 
 .. include:: offeruse/offeruse.rst
+
+
+Send credit rates
++++++++++++++++++
+
+This menu has the following fields
+
+.. include:: sendcreditrates/sendcreditrates.rst
 
 
 
@@ -403,6 +427,14 @@ Call Archive
 This menu has the following fields
 
 .. include:: callarchive/callarchive.rst
+
+
+Summary Month DID
++++++++++++++++++
+
+This menu has the following fields
+
+.. include:: callsummarymonthdid/callsummarymonthdid.rst
 
 
 Send Credit Summary
@@ -593,6 +625,22 @@ Backup
 This menu has the following fields
 
 .. include:: backup/backup.rst
+
+
+Alarms
+++++++
+
+This menu has the following fields
+
+.. include:: alarm/alarm.rst
+
+
+Alarms
+++++++
+
+This menu has the following fields
+
+.. include:: alarm/alarm.rst
 
 
 Extra

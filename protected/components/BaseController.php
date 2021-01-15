@@ -439,7 +439,7 @@ class BaseController extends CController
             echo $sql = "SELECT $this->select FROM  " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter GROUP BY $this->group LIMIT $this->limit";
             try {
                 $command = Yii::app()->db->createCommand($sql);
-                if (count($this->paramsFilter)) {
+                if (is_array($this->paramsFilter)) {
                     foreach ($this->paramsFilter as $key => $value) {
                         $command->bindValue($key, $value, PDO::PARAM_STR);
                     }

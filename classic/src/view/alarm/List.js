@@ -45,7 +45,7 @@ Ext.define('MBilling.view.alarm.List', {
                         value = t('ASR');
                         break;
                     case 3:
-                        value = t('Call per minute');
+                        value = t('Calls per minute');
                         break;
                     case 4:
                         value = t('Consecutive number');
@@ -62,7 +62,7 @@ Ext.define('MBilling.view.alarm.List', {
                 options: [
                     ['1', t('ALOC')],
                     ['2', t('ASR')],
-                    ['3', t('Call per minute')],
+                    ['3', t('Calls per minute')],
                     ['4', t('Consecutive number')],
                     ['5', t('Online calls on same number')]
                 ]

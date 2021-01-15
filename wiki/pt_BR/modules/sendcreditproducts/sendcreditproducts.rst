@@ -98,3 +98,23 @@ Descrição
 
 
 
+
+.. _sendCreditProducts-retail-price:
+
+Preço de venda
+---------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _sendCreditProducts-method:
+
+Tipo
+----
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

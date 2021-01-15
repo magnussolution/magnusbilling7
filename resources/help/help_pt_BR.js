@@ -1,4 +1,11 @@
 Help.load({
+    //ALARMES
+    'alarm.type': ``,
+    'alarm.period': ``,
+    'alarm.condition': ``,
+    'alarm.amount': ``,
+    'alarm.email': ``,
+    'alarm.status': ``,
     //API
     'api.id_user': `Usuário que poderá usar está API.||Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
     
@@ -92,6 +99,10 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'callsummarydayuser.sumsessiontime': `Somatório de minutos chamadas.||É possível realizar filtros, por exemplo, filtrar os dias da última semana, ou de um usuário específico, neste caso. Este somatório mostrará somente os dados do filtro executado.`,
     'callsummarydayuser.sumlucro': `Somatório do lucro.`,
     'callsummarydayuser.sumnbcall': `Total de chamadas.`,
+    //RESUMO POR MêS/DID
+    'callsummarymonthdid.sumsessionbill': ``,
+    'callsummarymonthdid.sumsessiontime': ``,
+    'callsummarymonthdid.sumnbcall': ``,
     //RESUMO POR MêS/TRONCO
     'callsummarymonthtrunk.sumsessiontime': `Somatorio de minutos chamadas.||É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, ou de um tronco específico, neste caso. Este somatório mostrará somente os dados do filtro executado.`,
     'callsummarymonthtrunk.sumsessionbill': `Somatório do preço de venda.`,
@@ -632,7 +643,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'restrictedphonenumber.id_user': `Usuário que deseja cadastrar o número.`,
     'restrictedphonenumber.number': `Número.`,
     'restrictedphonenumber.direction': `Será analisado em ligaçōes conforme selecionado.`,
-    //SENDCREDITPRODUCTS
+    //SEND CREDIT PRODUCTS
     'sendcreditproducts.country': `País.`,
     'sendcreditproducts.operator_name': `Nome da operadora.`,
     'sendcreditproducts.operator_id': `Id da operadora.`,
@@ -643,7 +654,9 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'sendcreditproducts.provider': `Provedor.`,
     'sendcreditproducts.status': `Status.`,
     'sendcreditproducts.info': `Usado para seu controle interno.`,
-    //SENDCREDITRATES
+    'sendcreditproducts.retail_price': ``,
+    'sendcreditproducts.method': ``,
+    //SEND CREDIT RATES
     'sendcreditrates.idProductcountry': `País.`,
     'sendcreditrates.idProductoperator_name': `Nome da operadora.`,
     'sendcreditrates.sell_price': `Preço de venda.`,
