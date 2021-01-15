@@ -30,12 +30,12 @@ Ext.define('MBilling.view.sendCreditRates.List', {
         me.buttonCsv = false;
         me.allowPrint = false;
         me.extraButtons = [{
-            text: t('Reset to wholesale price'),
+            text: 'Reset to wholesale price',
             width: 160,
             handler: 'onResetPrice',
             disabled: false
         }, {
-            text: t('Reset to retail price'),
+            text: 'Reset to retail price',
             width: 135,
             handler: 'onResetRetail',
             disabled: false

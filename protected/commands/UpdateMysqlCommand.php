@@ -1263,6 +1263,40 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2021-01-03
+        if ($version == '7.5.9') {
+
+            $sql = "
+            CREATE TABLE IF NOT EXISTS `pkg_cdr_summary_month_did` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `month` varchar(20) NOT NULL,
+                `id_did` int(11) NOT NULL,
+                `sessiontime` int(11) NOT NULL,
+                `aloc_all_calls` int(11) NOT NULL,
+                `nbcall` int(11) NOT NULL,
+                `sessionbill` float NOT NULL DEFAULT '0',
+                PRIMARY KEY (`id`),
+                KEY month (`month`),
+                FOREIGN KEY (`id_did`) REFERENCES `pkg_did` (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                ";
+            $this->executeDB($sql);
+
+            $sql    = "SELECT priority + 1 AS priority FROM `pkg_module` WHERE `id_module` = 9 ORDER BY `priority` DESC LIMIT 1";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Summary Month DID'')', 'callsummarymonthdid', 'x-fa fa-desktop', 9," . $result[0]['priority'] . ")";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            $version = '7.6.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

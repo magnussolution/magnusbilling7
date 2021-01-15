@@ -98,3 +98,23 @@ Description
 
 
 
+
+.. _sendCreditProducts-retail-price:
+
+Retail price
+------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _sendCreditProducts-method:
+
+Type
+----
+
+| We did not write the description to this field.
+
+
+

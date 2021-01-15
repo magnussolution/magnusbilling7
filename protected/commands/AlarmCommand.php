@@ -128,12 +128,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'CALLS PER MINUTE ' . $callPerMin . "\n";
         if ($alarm->condition == 1) {
             if ($callPerMin > $alarm->amount) {
-                $message = "MagnusBilling ALERT. You had more call per minute than your alarm configuration";
+                $message = "MagnusBilling ALERT. You had more calls per minute than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($callPerMin < $alarm->amount) {
-                $message = "MagnusBilling ALERT. You had less call per minute than your alarm configuration";
+                $message = "MagnusBilling ALERT. You had less calls per minute than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }

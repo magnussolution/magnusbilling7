@@ -57,6 +57,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         $this->perMonthTrunk();
         $this->perUser();
         $this->perTrunk();
+        $this->perMonthDid();
     }
 
     public function perDayUser()
@@ -426,6 +427,52 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         Yii::app()->db->createCommand($sql)->execute();
     }
 
+    public function perMonthDid()
+    {
+        $firstDay     = date('Y-m-01');
+        $lastDay      = date('Y-m-01', strtotime("+1 months"));
+        $this->filter = 't.starttime >= "' . $firstDay . '" AND starttime <= "' . $lastDay . ' 23:59:59"';
+
+        $sql       = "SELECT * FROM pkg_did WHERE activated = 1 AND reserved = 1";
+        $resultDid = Yii::app()->db->createCommand($sql)->queryAll();
+
+        if (!isset($resultDid[0]['id'])) {
+            return;
+        }
+        //convert month to YYYYMM
+        $month = preg_replace('/-/', '', substr($this->day, 0, -3));
+
+        $sql = "DELETE FROM pkg_cdr_summary_month_did WHERE month = '" . $month . "' ";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        foreach ($resultDid as $key => $did) {
+
+            $sql = "SELECT
+                sum(sessiontime) AS sessiontime,
+                SUM(sessiontime) / COUNT(*) AS aloc_all_calls,
+                count(*) as nbcall,
+                sum(sessionbill) AS sessionbill
+                FROM pkg_cdr t WHERE $this->filter AND calledstation = '" . $did['did'] . "' AND sipiax IN(2,3)";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+            if (!isset($result[0]['sessiontime'])) {
+                continue;
+            }
+
+            $result[0]['sessionbill'] = $result[0]['sessionbill'] == null ? 0 : $result[0]['sessionbill'];
+
+            $line = "('" . $month . "','" . $did['id'] . "', '" . $result[0]['sessiontime'] . "','" . $result[0]['aloc_all_calls'] . "','" . $result[0]['nbcall'] . "','" . $result[0]['sessionbill'] . "')";
+
+            $sql = "INSERT INTO pkg_cdr_summary_month_did (month, id_did, sessiontime, aloc_all_calls, nbcall, sessionbill) VALUES " . $line . ";";
+
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                //
+            }
+
+        }
+    }
     public function perMonthTrunk()
     {
 
