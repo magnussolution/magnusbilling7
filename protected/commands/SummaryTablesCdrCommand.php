@@ -48,15 +48,17 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         echo $this->filter . "\n\n";
 
-        $this->perDayUser();
-        $this->perDayTrunk();
-        $this->perDayAgent();
-        $this->perDay();
-        $this->perMonth();
-        $this->perMonthUser();
-        $this->perMonthTrunk();
-        $this->perUser();
-        $this->perTrunk();
+        // $this->perDayUser();
+        // $this->perDayTrunk();
+        // $this->perDayAgent();
+        // $this->perDay();
+        // $this->perMonth();
+        // $this->perMonthUser();
+        // $this->perMonthTrunk();
+        // $this->perUser();
+        // $this->perTrunk();
+
+        $this->perMonthDid();
     }
 
     public function perDayUser()
@@ -424,6 +426,28 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $sql = "UPDATE  pkg_cdr_summary_month_user SET asr = (nbcall / ( nbcall_fail + nbcall) ) * 100 ";
         Yii::app()->db->createCommand($sql)->execute();
+    }
+
+    public function perMonthDid()
+    {
+        $firstDay = date('Y-m-01');
+        $lastDay = date('Y-m-01', strtotime("+1 months"));
+        $this->filter = 't.starttime >= "' . $firstDay . '" AND starttime <= "' . $lastDay . ' 23:59:59"';
+
+        $sql = "SELECT
+                calledstation,
+                sum(sessiontime) AS sessiontime,
+                SUM(sessiontime) / COUNT(*) AS aloc_all_calls,
+                count(*) as nbcall,
+                sum(buycost) AS buycost,
+                sum(sessionbill) AS sessionbill,
+                sum(agent_bill) AS agent_bill
+                FROM pkg_cdr t WHERE $this->filter  GROUP BY calledstation";
+
+        $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+        print_r($result);
+
     }
 
     public function perMonthTrunk()
