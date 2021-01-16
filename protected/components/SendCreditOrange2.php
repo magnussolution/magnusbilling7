@@ -1,12 +1,12 @@
 <?php
 /**
- * Class to send credit to mobile via Orange2
+ * Class to send credit to mobile via SendCreditOrange2
  *
  * MagnusBilling <info@magnusbilling.com>
  * 08/07/2018
  */
 
-class Orange2
+class SendCreditOrange2
 {
 
     public function billElectricity($post, $modelSendCreditRates, $test)
@@ -30,7 +30,7 @@ class Orange2
 
         );
 
-        return Orange2::sendOrder($order);
+        return SendCreditOrange2::sendOrder($order);
 
     }
 
@@ -48,7 +48,7 @@ class Orange2
             "meterId"     => $_POST['TransferToMobile']['meter'],
         );
 
-        return Orange2::sendOrder($order);
+        return SendCreditOrange2::sendOrder($order);
 
     }
 

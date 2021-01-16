@@ -14,7 +14,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php
 
 if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobile']['metric'])) {
-    $metric_operator_name = Orange2::checkMetric($_POST['TransferToMobile']['metric']);
+    $metric_operator_name = SendCreditOrange2::checkMetric($_POST['TransferToMobile']['metric']);
 
     if ($metric_operator_name === false) {
         echo '<div align=center id="container">';
@@ -41,7 +41,13 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<label>Operator:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['operator'] ?></div>
 	<label>Product:</label>
+	<?php if (preg_match_all('/-/', $modelSendCreditRates->idProduct->product) && isset($_POST['TransferToMobile']['amountValuesBDT']) && $_POST['TransferToMobile']['amountValuesBDT'] > 0): ?>
+
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $_POST['TransferToMobile']['amountValuesBDT'] ?></div>
+	<?php else: ?>
+
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
+	<?php endif?>
 	<label>Amount to be collected:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
 
@@ -64,6 +70,13 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 <?php echo $form->hiddenField($modelTransferToMobile, 'country', array('value' => $_POST['TransferToMobile']['country'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'operator', array('value' => $_POST['TransferToMobile']['operator'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'amountValues', array('value' => $_POST['TransferToMobile']['amountValues'])); ?>
+
+<?php if (isset($_POST['TransferToMobile']['amountValuesBDT'])): ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesBDT', array('value' => $_POST['TransferToMobile']['amountValuesBDT'])); ?>
+<?php endif?>
+<?php if (isset($_POST['TransferToMobile']['amountValuesEUR'])): ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesEUR', array('value' => $_POST['TransferToMobile']['amountValuesEUR'])); ?>
+<?php endif?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'confirmed', array('value' => 'ok')); ?>
 
 
