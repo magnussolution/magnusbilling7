@@ -740,6 +740,7 @@ echo "
 */3 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess
 * * * * * php /var/www/html/mbilling/cron.php statussystem
 * * * * * php /var/www/html/mbilling/cron.php didwww
+*/5 * * * * php /var/www/html/mbilling/cron.php alarm
 " > $CRONPATH
 chmod 600 $CRONPATH
 crontab $CRONPATH
