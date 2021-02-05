@@ -65,8 +65,8 @@ class Call0800WebController extends Controller
             $call .= "Context: billing\n";
             $call .= "Extension: " . $user . "\n";
             $call .= "Priority: 1\n";
-            $call .= "Set:IDUSER=" . $model->id_user . "\n";
-            $call .= "Set:SECCALL=" . $destination . "\n";
+            $call .= "Setvar:IDUSER=" . $model->id_user . "\n";
+            $call .= "Setvar:SECCALL=" . $destination . "\n";
 
             AsteriskAccess::generateCallFile($call);
 
@@ -204,17 +204,17 @@ class Call0800WebController extends Controller
                 $call .= "Context: billing\n";
                 $call .= "Extension: " . $yournumber . "\n";
                 $call .= "Priority: 1\n";
-                $call .= "Set:CALLED=" . $yournumber . "\n";
-                $call .= "Set:TARRIFID=" . $callTrunk[0]['id_rate'] . "\n";
-                $call .= "Set:SELLCOST=" . $callTrunk[0]['rateinitial'] . "\n";
-                $call .= "Set:BUYCOST=" . $callTrunk[0]['buyrate'] . "\n";
-                $call .= "Set:CIDCALLBACK=1\n";
-                $call .= "Set:IDUSER=" . $result[0]['id'] . "\n";
-                $call .= "Set:IDPREFIX=" . $callTrunk[0]['id_prefix'] . "\n";
-                $call .= "Set:IDTRUNK=" . $idTrunk . "\n";
-                $call .= "Set:IDPLAN=" . $result[0]['id_plan'] . "\n";
+                $call .= "Setvar:CALLED=" . $yournumber . "\n";
+                $call .= "Setvar:TARRIFID=" . $callTrunk[0]['id_rate'] . "\n";
+                $call .= "Setvar:SELLCOST=" . $callTrunk[0]['rateinitial'] . "\n";
+                $call .= "Setvar:BUYCOST=" . $callTrunk[0]['buyrate'] . "\n";
+                $call .= "Setvar:CIDCALLBACK=1\n";
+                $call .= "Setvar:IDUSER=" . $result[0]['id'] . "\n";
+                $call .= "Setvar:IDPREFIX=" . $callTrunk[0]['id_prefix'] . "\n";
+                $call .= "Setvar:IDTRUNK=" . $idTrunk . "\n";
+                $call .= "Setvar:IDPLAN=" . $result[0]['id_plan'] . "\n";
 
-                $call .= "Set:SECCALL=" . $destination . "\n";
+                $call .= "Setvar:SECCALL=" . $destination . "\n";
                 AsteriskAccess::generateCallFile($call, 5);
                 echo Yii::t('zii', 'CallBack Success');
             }
