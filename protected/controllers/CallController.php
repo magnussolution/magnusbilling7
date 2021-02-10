@@ -397,7 +397,7 @@ class CallController extends Controller
         $fileName = 'cdr_' . time();
         exec("echo '" . substr($header, 0, -1) . "' >  /var/www/html/mbilling/tmp/" . $fileName . ".csv ");
 
-        $this->filter = preg_replace('/:clfby/', Yii::app()->session['id_user'], $this->filter);
+        $this->filter = preg_replace('/:clfby|:agfby/', Yii::app()->session['id_user'], $this->filter);
         $sql          = "SELECT " . $this->getColumnsFromReport($columns) . " FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
         $configFile   = '/etc/asterisk/res_config_mysql.conf';
         $array        = parse_ini_file($configFile);
