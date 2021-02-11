@@ -113,7 +113,9 @@ echo "----------------USE this password $password--------------------"
 echo ""
 echo ""
 
-opensipsdbctl create
+PW=$password
+export PW
+yes | opensipsdbctl create
 chkconfig opensips on
 systemctl enable opensips
 
