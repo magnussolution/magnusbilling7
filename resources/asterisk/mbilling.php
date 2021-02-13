@@ -214,6 +214,11 @@ if ($MAGNUS->mode == 'standard') {
         $sql                 = "SELECT * FROM pkg_user WHERE id = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
         $MAGNUS->modelUser   = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         $MAGNUS->accountcode = isset($MAGNUS->modelUser->username) ? $MAGNUS->modelUser->username : null;
+
+        $sql                 = "SELECT * FROM pkg_sip WHERE id_user = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
+        $MAGNUS->modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        $MAGNUS->sip_account = $MAGNUS->modelSip->name;
+
         $agi->verbose("CALL TO PSTN FROM CLIC TO CALL", 15);
         $standardCall = new StandardCallAgi();
         $standardCall->processCall($MAGNUS, $agi, $CalcAgi);
