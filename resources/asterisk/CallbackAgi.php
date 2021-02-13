@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2018 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -197,8 +197,10 @@ class CallbackAgi
         if ($agi->get_variable("IDPREFIX", true) > 0) {
 
             $agi->verbose("Callback: CHARGE FOR THE 1ST LEG callback_username=$MAGNUS->username", 10);
-            $sell             = $agi->get_variable("SELLCOST", true);
-            $buycost          = $agi->get_variable("BUYCOST", true);
+            $sell = $agi->get_variable("SELLCOST", true);
+
+            $buycost = $agi->get_variable("BUYCOST", true);
+
             $MAGNUS->id_user  = $agi->get_variable("IDUSER", true);
             $called           = $agi->get_variable("CALLED", true);
             $MAGNUS->id_plan  = $agi->get_variable("IDPLAN", true);
@@ -206,10 +208,19 @@ class CallbackAgi
             $idPrefix         = $agi->get_variable("IDPREFIX", true);
             $called           = $agi->get_variable("CALLED", true);
 
+            $sql                 = "SELECT * FROM pkg_sip WHERE id_user = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
+            $MAGNUS->modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $MAGNUS->sip_account = $MAGNUS->modelSip->name;
+
             if ($sessiontime == 0) {
 
-                $sell30            = $sell / 2;
-                $buycost30         = $buycos / 2;
+                $sell30    = $sell / 2;
+                $buycost30 = $buycos / 2;
+
+                //desconto 1 minuto assim que o cliente atende a chamada
+                $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($sell30)) . " WHERE id = '$MAGNUS->id_user' LIMIT 1";
+                $agi->exec($sql);
+
                 $sessiontime1fsLeg = 30;
 
                 $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $sessiontime1fsLeg);
@@ -231,8 +242,7 @@ class CallbackAgi
                 $sell        = ($sell / 60) * $sessiontime;
                 $buycost     = ($buycost / 60) * $sessiontime;
 
-                $sql = "UPDATE pkg_cdr SET sessiontime = '$sessiontime', sessionbill = '$sell', buycost = $buycost
-                            WHERE id = '$CalcAgi->idCallCallBack' LIMIT 1 ";
+                $sql = "UPDATE pkg_cdr SET sessiontime = '$sessiontime', sessionbill = '$sell', buycost = '$buycost', calledstation = '$called' WHERE id = '$CalcAgi->idCallCallBack' LIMIT 1 ";
                 $agi->exec($sql);
 
                 $sql = "UPDATE pkg_user SET credit = credit - $MAGNUS->round_precision(abs($selltNew))

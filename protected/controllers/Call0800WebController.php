@@ -61,12 +61,21 @@ class Call0800WebController extends Controller
 
             // gerar os arquivos .call
             $call = "Channel: " . $dialstr . "\n";
-            $call .= "Callerid: " . $model->callerid . "\n";
+            if (isset($_GET['callerid'])) {
+                $call .= "Callerid: " . $_GET['callerid'] . "\n";
+            } else {
+                $call .= "Callerid: " . $model->callerid . "\n";
+            }
+
             $call .= "Context: billing\n";
             $call .= "Extension: " . $user . "\n";
             $call .= "Priority: 1\n";
             $call .= "Set:IDUSER=" . $model->id_user . "\n";
             $call .= "Set:SECCALL=" . $destination . "\n";
+
+            if (isset($_GET['max_duration'])) {
+                $call .= "Set:TIMEOUT(absolute)=" . $_GET['max_duration'] . "\n";
+            }
 
             AsteriskAccess::generateCallFile($call);
 
@@ -106,7 +115,7 @@ class Call0800WebController extends Controller
 
                 $modelSip = AccessManager::checkAccess($user, $pass);
 
-                if (!is_array($modelSip) || !count($modelSip)) {
+                if (!isset($modelSip->id)) {
                     echo 'User or password is invalid';
                     exit;
                 }
@@ -114,14 +123,22 @@ class Call0800WebController extends Controller
                 if ($modelSip->id_user > 1) {
                     $modelUserAgent = User::model()->findByPk((int) $modelSip->id_user);
 
+                    $modelUserAgent->credit = $modelUserAgent->typepaid == 1
+                    ? $modelUserAgent->credit + $modelUserAgent->creditlimit
+                    : $modelUserAgent->credit;
+
                     //VERIFICA SE O AGENT TEM CREDITO
-                    if (isset($modelUserAgent->credit) && $modelUserAgent->credit <= 0) {
+                    if ($modelUserAgent->credit <= 0) {
                         echo Yii::t('zii', 'You don t have enough credit to call');
                         exit;
                     }
                 }
 
-                if (isset($modelSip->idUser->credit) && $modelSip->idUser->credit <= 0.5) {
+                $modelSip->idUser->credit = $modelSip->idUser->typepaid == 1
+                ? $modelSip->idUser->credit + $modelSip->idUser->creditlimit
+                : $modelSip->idUser->credit;
+
+                if ($modelSip->idUser->credit <= 0) {
                     echo 'You don t have enough credit to call';
                     exit;
                 }
@@ -147,6 +164,27 @@ class Call0800WebController extends Controller
                 $SearchTariff = new SearchTariff();
                 $callTrunk    = $SearchTariff->find($yournumber, $modelSip->idUser->id_plan, $modelSip->idUser->id);
 
+                $result = Plan::model()->searchTariff($modelSip->idUser->id_plan, $yournumber);
+                if (!is_array($result) || count($result) == 0) {
+                    return 0;
+                }
+
+                $prefixclause = $result[2];
+                $result       = $result[1];
+
+                //Select custom rate to user
+                $modelUserRate = UserRate::model()->find('id_prefix = :key AND id_user = :key1', array(
+                    ':key'  => $result[0]['id_prefix'],
+                    ':key1' => $modelSip->idUser->id,
+                ));
+
+                //change custom rate to user
+                if (count($modelUserRate)) {
+                    $result[0]['rateinitial']  = $modelUserRate->rateinitial;
+                    $result[0]['initblock']    = $modelUserRate->initblock;
+                    $result[0]['billingblock'] = $modelUserRate->billingblock;
+                }
+
                 if (!is_array($callTrunk) || !count($callTrunk)) {
                     echo Yii::t('zii', 'Prefix not found to you number');
                     exit;
@@ -163,24 +201,33 @@ class Call0800WebController extends Controller
                     exit;
                 }
 
-                if ($searchTariff[0]['trunk_group_type'] == 1) {
-                    $order = 'id ASC';
-                } else if ($searchTariff[0]['trunk_group_type'] == 2) {
-                    $order = 'RAND()';
+                if ($callTrunk[0]['trunk_group_type'] == 1) {
+                    $sql = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $callTrunk[0]['id_trunk_group'] . " ORDER BY id ASC";
+                } else if ($callTrunk[0]['trunk_group_type'] == 2) {
+                    $sql = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $callTrunk[0]['id_trunk_group'] . " ORDER BY RAND() ";
+
+                } else if ($callTrunk[0]['trunk_group_type'] == 3) {
+                    $sql = "SELECT *, (SELECT buyrate FROM pkg_rate_provider WHERE id_provider = tr.id_provider AND id_prefix = " . $callTrunk[0]['id_prefix'] . " LIMIT 1) AS buyrate  FROM pkg_trunk_group_trunk t  JOIN pkg_trunk tr ON t.id_trunk = tr.id WHERE id_trunk_group = " . $callTrunk[0]['id_trunk_group'] . " ORDER BY buyrate IS NULL , buyrate ";
+                }
+                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->findBySql($sql);
+
+                foreach ($modelTrunkGroupTrunk as $key => $trunk) {
+                    $modelTrunk = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+                    if ($modelTrunk->status == 0) {
+                        continue;
+                    }
+                    $idTrunk      = $modelTrunk->id;
+                    $ipaddress    = $modelTrunk->trunkcode;
+                    $prefix       = $modelTrunk->trunkprefix;
+                    $removeprefix = $modelTrunk->removeprefix;
+                    $providertech = $modelTrunk->providertech;
+                    break;
                 }
 
-                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->find([
-                    'condition' => 'id_trunk_group = :key',
-                    'params'    => [':key' => $searchTariff[0]['id_trunk_group']],
-                    'order'     => $order,
-                ]);
-
-                $modelTrunk   = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
-                $idTrunk      = $modelTrunk->id;
-                $providertech = $modelTrunk->providertech;
-                $ipaddress    = $modelTrunk->trunkcode;
-                $removeprefix = $modelTrunk->removeprefix;
-                $prefix       = $modelTrunk->trunkprefix;
+                $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
+                "id_provider = " . $modelTrunk->id_provider . " AND " . $prefixclause .
+                    "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+                $modelRateProvider = Yii::app()->db->createCommand($sql)->queryAll();
 
                 if (substr("$yournumber", 0, 4) == 1111) {
                     $yournumber = str_replace(substr($yournumber, 0, 7), "", $yournumber);
@@ -200,21 +247,31 @@ class Call0800WebController extends Controller
 
                 // gerar os arquivos .call
                 $call = "Channel: " . $dialstr . "\n";
-                $call .= "Callerid: " . $user . "\n";
+                if (isset($data[4])) {
+                    $call .= "Callerid: " . $data[4] . "\n";
+                } else {
+                    $call .= "Callerid: " . $user . "\n";
+                }
+
                 $call .= "Context: billing\n";
                 $call .= "Extension: " . $yournumber . "\n";
                 $call .= "Priority: 1\n";
                 $call .= "Set:CALLED=" . $yournumber . "\n";
                 $call .= "Set:TARRIFID=" . $callTrunk[0]['id_rate'] . "\n";
                 $call .= "Set:SELLCOST=" . $callTrunk[0]['rateinitial'] . "\n";
-                $call .= "Set:BUYCOST=" . $callTrunk[0]['buyrate'] . "\n";
+                $call .= "Set:BUYCOST=" . $modelRateProvider[0]['buyrate'] . "\n";
                 $call .= "Set:CIDCALLBACK=1\n";
-                $call .= "Set:IDUSER=" . $result[0]['id'] . "\n";
+                $call .= "Set:IDUSER=" . $modelSip->idUser->id . "\n";
                 $call .= "Set:IDPREFIX=" . $callTrunk[0]['id_prefix'] . "\n";
                 $call .= "Set:IDTRUNK=" . $idTrunk . "\n";
-                $call .= "Set:IDPLAN=" . $result[0]['id_plan'] . "\n";
+                $call .= "Set:IDPLAN=" . $modelSip->idUser->id_plan . "\n";
 
                 $call .= "Set:SECCALL=" . $destination . "\n";
+
+                if (isset($data[5])) {
+                    $call .= "Set:TIMEOUT(absolute)=" . $data[5] . "\n";
+                }
+
                 AsteriskAccess::generateCallFile($call, 5);
                 echo Yii::t('zii', 'CallBack Success');
             }
