@@ -227,6 +227,7 @@ class CampaignController extends Controller
         $modelCampaign->type             = $type;
         $modelCampaign->description      = $description;
         $modelCampaign->frequency        = 10;
+        $modelCampaign->max_frequency    = 10;
         $modelCampaign->daily_start_time = $_POST['startingtime'];
         $modelCampaign->save();
 
@@ -238,14 +239,14 @@ class CampaignController extends Controller
             exit;
         }
 
-        $id_campaign = $modelCampaign->getPrimaryKey();
+        $id_campaign = $modelCampaign->id;
 
         $modelPhoneBook          = new PhoneBook();
         $modelPhoneBook->id_user = $modelUser->id;
         $modelPhoneBook->name    = $name;
         $modelPhoneBook->status  = 1;
         $modelPhoneBook->save();
-        $id_phonebook = $modelPhoneBook->getPrimaryKey();
+        $id_phonebook = $modelPhoneBook->id;
 
         $modelCampaignPhonebook               = new CampaignPhonebook();
         $modelCampaignPhonebook->id_campaign  = $id_campaign;
