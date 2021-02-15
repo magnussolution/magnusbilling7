@@ -129,7 +129,7 @@ mysql -u root -p$(awk '{print $1}' /root/passwordMysql) opensips -e "ALTER TABLE
 echo "
 * * * * * /usr/sbin/opensipsctl fifo ds_reload
 * * * * * /usr/sbin/opensipsctl address reload
-" >> /var/spool/cron/root
+" > /var/spool/cron/root
 
 
 cd /etc/opensips/

@@ -215,6 +215,7 @@ class MassiveCallCommand extends ConsoleCommand
                     $trunkprefix  = $modelTrunk->trunkprefix;
                     $removeprefix = $modelTrunk->removeprefix;
                     $providertech = $modelTrunk->providertech;
+                    break;
                 }
 
                 if (substr($destination, 0, 4) == '1111') {
