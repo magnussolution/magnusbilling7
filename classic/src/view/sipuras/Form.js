@@ -69,6 +69,10 @@ Ext.define('MBilling.view.sipuras.Form', {
                     xtype: 'yesnocombo',
                     name: 'Enable_Web_Server',
                     fieldLabel: t('Enable_Web_Server')
+                }, {
+                    name: 'Dial_Tone',
+                    fieldLabel: t('Dial Tone'),
+                    value: '420@-16;10(*/0/1)'
                 }]
             }, {
                 title: t('Line 1'),
