@@ -42,7 +42,8 @@ echo "TRIS SCRIPT WILL INSTALL OPENSIPS IN THIS SERVER PUBLIC IP $proxyip LOCALN
 
 
 sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > borra && mv -f borra /etc/selinux/config
-
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php71
 yum -y install gcc gcc-c++ bison flex zlib-devel openssl-devel  subversion pcre-devel
 yum -y install  unixODBC unixODBC-devel libtool-ltdl libtool-ltdl-devel  php-mbstring php-mcrypt flex screen php php-gd php-pear
 yum -y install gcc-c++ bison lynx subversion flex curl-devel libxslt libxml2-devel libxml2 pcre-devel wget make php-mysql  wget make rsyslog sqlite*
@@ -71,14 +72,14 @@ do
   ((pwd_len++)) 
 done 
 
-if [ -e "/root/passwordMysql" ] && [ ! -z "/root/passwordMysql" ]
+if [ -e "/root/passwordMysql.log" ] && [ ! -z "/root/passwordMysql.log" ]
 then
-    password=$(awk '{print $1}' /root/passwordMysql)
+    password=$(awk '{print $1}' /root/passwordMysql.log)
 fi
 
 
-touch /root/passwordMysql
-echo "$password" > /root/passwordMysql
+touch /root/passwordMysql.log
+echo "$password" > /root/passwordMysql.log
 
 chmod -R 777 /tmp
 
@@ -121,10 +122,10 @@ systemctl enable opensips
 
 systemctl restart opensips 
 
-mysql -u root -p$(awk '{print $1}' /root/passwordMysql) opensips -e "ALTER TABLE subscriber ADD accountcode VARCHAR( 50 ) NOT NULL"
-mysql -u root -p$(awk '{print $1}' /root/passwordMysql) opensips -e "ALTER TABLE subscriber ADD trace TINYINT(1) NOT NULL DEFAULT '0'"
-mysql -u root -p$(awk '{print $1}' /root/passwordMysql) opensips -e "ALTER TABLE subscriber ADD  cpslimit INT( 11 ) NOT NULL DEFAULT  '-1'"
-mysql -u root -p$(awk '{print $1}' /root/passwordMysql) opensips -e "ALTER TABLE address CHANGE context_info  context_info CHAR( 70 ) NULL DEFAULT NULL ;"
+mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber ADD accountcode VARCHAR( 50 ) NOT NULL"
+mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber ADD trace TINYINT(1) NOT NULL DEFAULT '0'"
+mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber ADD  cpslimit INT( 11 ) NOT NULL DEFAULT  '-1'"
+mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE address CHANGE context_info  context_info CHAR( 70 ) NULL DEFAULT NULL ;"
 
 echo "
 * * * * * /usr/sbin/opensipsctl fifo ds_reload
@@ -446,7 +447,7 @@ ulimit -l unlimited # The maximum size that may be locked into memory.
 ulimit -a           # All current limits are reported.
 
 yum install -y monit
-password=$(awk '{print $1}' /root/passwordMysql)
+password=$(awk '{print $1}' /root/passwordMysql.log)
 
 echo "
 set daemon  60
