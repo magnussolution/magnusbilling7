@@ -200,21 +200,30 @@ class DidwwController extends Controller
 
         $result = [];
 
-        $url = $this->url . "/cities?filter\[country.id\]=" . $country_id;
+        for ($i = 1; $i < 5; $i++) {
 
-        $result_url = exec("
+            $url = $this->url . "/cities?filter\[country.id\]=" . $country_id . '&page\[number\]=' . $i;
+
+            $result_url = exec("
             curl -H 'Accept: application/vnd.api+json' \
                  -H  'Api-Key: " . $this->api_key . "' \
                  '$url'");
 
-        $did_groups = json_decode($result_url);
+            $did_groups = json_decode($result_url);
 
-        foreach ($did_groups->data as $key => $did_group) {
+            foreach ($did_groups->data as $key => $did_group) {
 
-            $result[] = [
-                'id'   => $did_group->id,
-                'name' => $did_group->attributes->name,
-            ];
+                $result[] = [
+                    'id'   => $did_group->id,
+                    'name' => $did_group->attributes->name,
+                ];
+            }
+
+            if (count($did_groups->data) >= 000) {
+                echo 'break';
+                break;
+            }
+
         }
 
         if (!isset($result[0])) {
