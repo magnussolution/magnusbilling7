@@ -174,7 +174,7 @@ class SipCallAgi
             $sql              = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
             $modelUserForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            $agi->set_variable("CALLERID(all)", $modelSipForward->callerid);
+            $agi->set_variable("CALLERID(nun)", $MAGNUS->CallerID);
 
             $MAGNUS->accountcode = $modelUserForward->accountcode;
             $agi->verbose("CALL number $optionValue");
