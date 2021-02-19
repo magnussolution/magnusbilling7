@@ -537,49 +537,43 @@ class DidAgi
         $expression_2 = $this->modelDid->expression_2;
         $expression_3 = $this->modelDid->expression_3;
 
-        if ($block_expression_1 == 1 || $send_to_callback_1) {
-            $agi->verbose("try blocked number match with expression 1, " . $MAGNUS->CallerID . ' ' . $expression_2, 10);
-            if (strlen($expression_1) > 1 && preg_match('/' . $expression_1 . '/', $MAGNUS->CallerID)) {
+        $agi->verbose("try blocked number match with expression 1, " . $MAGNUS->CallerID . ' ' . $expression_1, 10);
+        if (strlen($expression_1) && preg_match('/' . $expression_1 . '/', $MAGNUS->CallerID)) {
 
-                if ($block_expression_1 == 1) {
-                    $agi->verbose("Call blocked becouse this number match with expression 1, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
-                    $MAGNUS->hangup($agi);
-                } elseif ($send_to_callback_1 == 1) {
-                    $agi->verbose('Send to Callback expression 1', 10);
-                    $this->voip_call = 6;
-                }
+            if ($block_expression_1 == 1) {
+                $agi->verbose("Call blocked becouse this number match with expression 1, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
+                $MAGNUS->hangup($agi);
+            } elseif ($send_to_callback_1 == 1) {
+                $agi->verbose('Send to Callback expression 1', 10);
+                $this->voip_call = 6;
             }
+            return;
         }
 
-        if ($block_expression_2 == 1 || $send_to_callback_2) {
-            $agi->verbose("try blocked number match with expression 2, " . $MAGNUS->CallerID . ' ' . $expression_2, 1);
-            if (strlen($expression_2) > 1 && preg_match('/' . $expression_2 . '/', $MAGNUS->CallerID)) {
-                if ($block_expression_2 == 1) {
-                    $agi->verbose("Call blocked becouse this number match with expression 2, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
-                    $MAGNUS->hangup($agi);
-                } elseif ($send_to_callback_2 == 1) {
-                    $agi->verbose('Send to Callback expression 2', 10);
-                    $this->voip_call = 6;
-                }
+        if (strlen($expression_2) && preg_match('/' . $expression_2 . '/', $MAGNUS->CallerID)) {
+
+            if ($block_expression_2 == 1) {
+                $agi->verbose("Call blocked becouse this number match with expression 2, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
+                $MAGNUS->hangup($agi);
+            } elseif ($send_to_callback_2 == 1) {
+                $agi->verbose('Send to Callback expression 2', 10);
+                $this->voip_call = 6;
             }
+            return;
         }
 
-        if ($block_expression_3 == 1 || $send_to_callback_3) {
-            $agi->verbose("try blocked number match with expression 3, " . $MAGNUS->CallerID . ' ' . $expression_3, 10);
-            if (strlen($expression_3) > 0 && (preg_match('/' . $expression_3 . '/', $MAGNUS->CallerID) || $expression_3 == '*') &&
-                strlen($expression_1) > 1 && !preg_match('/' . $expression_1 . '/', $MAGNUS->CallerID) &&
-                strlen($expression_2) > 1 && !preg_match('/' . $expression_2 . '/', $MAGNUS->CallerID)
-            ) {
+        if (strlen($expression_3) && preg_match('/' . $expression_3 . '/', $MAGNUS->CallerID)) {
 
-                if ($block_expression_3 == 1) {
-                    $agi->verbose("Call blocked becouse this number match with expression 3, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
-                    $MAGNUS->hangup($agi);
-                } elseif ($send_to_callback_3 == 1) {
-                    $agi->verbose('Send to Callback expression 3', 10);
-                    $this->voip_call = 6;
-                }
+            if ($block_expression_2 == 1) {
+                $agi->verbose("Call blocked becouse this number match with expression 3, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
+                $MAGNUS->hangup($agi);
+            } elseif ($send_to_callback_3 == 1) {
+                $agi->verbose('Send to Callback expression 3', 10);
+                $this->voip_call = 6;
             }
+            return;
         }
+
     }
 
     public function parseDialStatus(&$agi, $dialstatus, $answeredtime)
