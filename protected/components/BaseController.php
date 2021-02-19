@@ -1799,10 +1799,10 @@ class BaseController extends CController
     {
         //se é agente filtrar pelo user.id_user
         if (array_key_exists('idUser', $this->relationFilter)) {
-            $this->relationFilter['idUser']['condition'] .= " AND idUser.id_user LIKE :agfby";
+            $this->relationFilter['idUser']['condition'] .= " AND idUser.id_user = :agfby";
         } else {
             $this->relationFilter['idUser'] = array(
-                'condition' => "idUser.id_user LIKE :agfby",
+                'condition' => "idUser.id_user = :agfby",
             );
         }
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
