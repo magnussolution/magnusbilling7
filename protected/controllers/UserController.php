@@ -499,4 +499,133 @@ class UserController extends Controller
         } catch (Exception $e) {
         }
     }
+
+    public function setAttributesModels($attributes, $models)
+    {
+
+        $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
+        for ($i = 0; $i < count($pkCount); $i++) {
+
+            if ($attributes[$i]['id_offer'] > 0) {
+
+                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1', array(
+                    ':key'  => $attributes[$i]['id_offer'],
+                    ':key1' => $attributes[$i]['id'],
+                ));
+                $modelOffer     = Offer::model()->findByPk($attributes[$i]['id_offer']);
+                $freetimetocall = $modelOffer->freetimetocall;
+                $packagetype    = $modelOffer->packagetype;
+                $billingtype    = $modelOffer->billingtype;
+                $startday       = date('d', strtotime($modelOfferUse->reservationdate));
+                $id_offer       = $modelOffer->id;
+                $id_user        = $attributes[$i]['id'];
+
+                switch ($packagetype) {
+                    case 0:
+                        $attributes[$i]['offer'] = -1;
+                        break;
+                    case 1:
+
+                        if ($freetimetocall > 0) {
+
+                            $number_calls_used = $this->freeCallUsed($id_user, $id_offer, $billingtype, $startday);
+
+                            if ($number_calls_used < $freetimetocall) {
+                                $attributes[$i]['offer'] = $freetimetocall - $number_calls_used;
+
+                            } else {
+                                $attributes[$i]['offer'] = $freetimetocall;
+                            }
+                        } else {
+                            $attributes[$i]['offer'] = $freetimetocall;
+                        }
+                        break;
+                    case 2:
+                        if ($freetimetocall > 0) {
+                            $freetimetocall_used = $this->packageUsedSeconds($id_user, $id_offer, $billingtype, $startday);
+
+                            $freetimetocall_left = $freetimetocall - $freetimetocall_used;
+
+                            if ($freetimetocall_left > 0) {
+                                $attributes[$i]['offer'] = ($freetimetocall - $freetimetocall_left) / 60;
+                            } else {
+                                $attributes[$i]['offer'] = $freetimetocall;
+                            }
+                        } else {
+                            $attributes[$i]['offer'] = $freetimetocall;
+                        }
+                        break;
+                }
+
+            } else {
+                $attributes[$i]['offer'] = 0;
+            }
+
+        }
+        return $attributes;
+    }
+
+    public function freeCallUsed($id_user, $id_offer, $billingtype, $startday)
+    {
+
+        $CLAUSE_DATE   = $this->checkDaysPackage($startday, $billingtype);
+        $sql           = "SELECT  COUNT(*) AS status FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
+        $modelOfferCdr = Yii::app()->db->createCommand($sql)->queryAll();
+
+        return isset($modelOfferCdr[0]['status']) ? $modelOfferCdr[0]['status'] : 0;
+    }
+
+    public function packageUsedSeconds($id_user, $id_offer, $billingtype, $startday)
+    {
+        $CLAUSE_DATE = $this->checkDaysPackage($startday, $billingtype);
+        $sql         = "SELECT sum(used_secondes) AS used_secondes FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' ";
+
+        $modelOfferCdr = Yii::app()->db->createCommand($sql)->queryAll();
+
+        return isset($modelOfferCdr[0]['used_secondes']) ? $modelOfferCdr[0]['used_secondes'] : 0;
+
+    }
+
+    public function checkDaysPackage($startday, $billingtype)
+    {
+        if ($billingtype == 0) {
+            /* PROCESSING FOR MONTHLY*/
+            /* if > last day of the month*/
+            if ($startday > date("t")) {
+                $startday = date("t");
+            }
+
+            if ($startday <= 0) {
+                $startday = 1;
+            }
+
+            /* Check if the startday is upper that the current day*/
+            if ($startday > date("j")) {
+                $year_month = date('Y-m', strtotime('-1 month'));
+            } else {
+                $year_month = date('Y-m');
+            }
+
+            $yearmonth   = sprintf("%s-%02d", $year_month, $startday);
+            $CLAUSE_DATE = " TIMESTAMP(date_consumption) >= TIMESTAMP('$yearmonth')";
+        } else {
+
+            /* PROCESSING FOR WEEKLY*/
+            $startday  = $startday % 7;
+            $dayofweek = date("w");
+            /* Numeric representation of the day of the week 0 (for Sunday) through 6 (for Saturday)*/
+            if ($dayofweek == 0) {
+                $dayofweek = 7;
+            }
+
+            if ($dayofweek < $startday) {
+                $dayofweek = $dayofweek + 7;
+            }
+
+            $diffday     = $dayofweek - $startday;
+            $CLAUSE_DATE = "date_consumption >= DATE_SUB(CURRENT_DATE, INTERVAL $diffday DAY) ";
+        }
+
+        return $CLAUSE_DATE;
+    }
 }

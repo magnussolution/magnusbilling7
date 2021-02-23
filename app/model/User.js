@@ -30,6 +30,9 @@ Ext.define('MBilling.model.User', {
         name: 'id_plan',
         type: 'int'
     }, {
+        name: 'offer',
+        type: 'int'
+    }, {
         name: 'id_user',
         type: 'int'
     }, {

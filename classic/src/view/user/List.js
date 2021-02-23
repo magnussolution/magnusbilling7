@@ -55,6 +55,11 @@ Ext.define('MBilling.view.user.List', {
             hidden: window.isTablet,
             flex: 3
         }, {
+            header: t('Offer balance'),
+            dataIndex: 'offer',
+            hidden: !App.user.isClient || window.isTablet,
+            flex: 2
+        }, {
             xtype: 'templatecolumn',
             tpl: '{idGroupname}',
             header: t('Group'),
