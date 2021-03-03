@@ -57,6 +57,8 @@ class ConfigurationController extends Controller
         if (!isset($_POST['field']) || !isset($_POST['value'])) {
             exit;
         }
+        $info = 'User change the theme ' . $_POST['value'];
+        MagnusLog::insertLOG(2, $info);
 
         $model               = Configuration::model()->find('config_key = :config_key', array(':config_key' => $_POST['field']));
         $model->config_value = $_POST['value'];
