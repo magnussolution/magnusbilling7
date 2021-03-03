@@ -512,6 +512,12 @@ class UserController extends Controller
                     ':key'  => $attributes[$i]['id_offer'],
                     ':key1' => $attributes[$i]['id'],
                 ));
+
+                if (!isset($modelOfferUse->id)) {
+                    $attributes[$i]['offer'] = 0;
+                    continue;
+                }
+
                 $modelOffer     = Offer::model()->findByPk($attributes[$i]['id_offer']);
                 $freetimetocall = $modelOffer->freetimetocall;
                 $packagetype    = $modelOffer->packagetype;
@@ -525,34 +531,24 @@ class UserController extends Controller
                         $attributes[$i]['offer'] = -1;
                         break;
                     case 1:
-
+                        $attributes[$i]['offer'] = $freetimetocall;
                         if ($freetimetocall > 0) {
 
                             $number_calls_used = $this->freeCallUsed($id_user, $id_offer, $billingtype, $startday);
 
-                            if ($number_calls_used < $freetimetocall) {
+                            if ($number_calls_used > 0) {
                                 $attributes[$i]['offer'] = $freetimetocall - $number_calls_used;
-
-                            } else {
-                                $attributes[$i]['offer'] = $freetimetocall;
                             }
-                        } else {
-                            $attributes[$i]['offer'] = $freetimetocall;
                         }
                         break;
                     case 2:
+
+                        $attributes[$i]['offer'] = $freetimetocall / 60;
                         if ($freetimetocall > 0) {
                             $freetimetocall_used = $this->packageUsedSeconds($id_user, $id_offer, $billingtype, $startday);
-
-                            $freetimetocall_left = $freetimetocall - $freetimetocall_used;
-
-                            if ($freetimetocall_left > 0) {
-                                $attributes[$i]['offer'] = ($freetimetocall - $freetimetocall_left) / 60;
-                            } else {
-                                $attributes[$i]['offer'] = $freetimetocall;
+                            if ($freetimetocall_used > 0) {
+                                $attributes[$i]['offer'] = ($freetimetocall - $freetimetocall_used) / 60;
                             }
-                        } else {
-                            $attributes[$i]['offer'] = $freetimetocall;
                         }
                         break;
                 }
