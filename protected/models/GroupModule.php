@@ -98,20 +98,20 @@ class GroupModule extends Model
     public function getGroupModule($id_group, $isClient, $id_user)
     {
         if ($isClient) {
-            $sql = "(SELECT m.id, action, show_menu, text, module, icon_cls, m.id_module, gm.createShortCut, gm.createQuickStart
+            $sql = "(SELECT m.id, action, show_menu, text, module, icon_cls, m.id_module, gm.createShortCut, gm.createQuickStart, priority
                     FROM pkg_group_module gm
                     INNER JOIN pkg_module m ON gm.id_module = m.id
                     WHERE id_group = :id_group)
                 UNION
                     (
-                        SELECT m.id, action, show_menu, text, module, icon_cls, m.id_module, gm.createShortCut, gm.createQuickStart
+                        SELECT m.id, action, show_menu, text, module, icon_cls, m.id_module, gm.createShortCut, gm.createQuickStart, priority
                         FROM pkg_services_module gm
                         INNER JOIN pkg_module m ON gm.id_module = m.id
                         WHERE gm.id_services IN (
                             SELECT id_services FROM pkg_services_use WHERE id_user = :id_user AND status = 1
                             )
                     )
-                ORDER BY id, LENGTH(ACTION) DESC, show_menu DESC";
+                 ORDER BY priority";
             $command = Yii::app()->db->createCommand($sql);
             $command->bindValue(":id_group", $id_group, PDO::PARAM_INT);
             $command->bindValue(":id_user", $id_user, PDO::PARAM_INT);
