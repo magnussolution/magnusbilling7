@@ -162,13 +162,13 @@ gpgcheck=1' > /etc/yum.repos.d/MariaDB.repo
 fi
 
 if [ ${DIST} = "DEBIAN" ]; then
+    apt-get update --allow-releaseinfo-change
+    export LC_ALL="en_US.UTF-8"
     apt-get -o Acquire::Check-Valid-Until=false update 
     apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet unixodbc-bin apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev
     apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
-    echo mysql-server mysql-server/root_password password ${password} | debconf-set-selections
-    echo mysql-server mysql-server/root_password_again password ${password} | debconf-set-selections            
-    apt-get install -y mysql-server php-mysql mysql-client unzip git
-    apt-get install -y libcurl4-openssl-dev ssmtp htop
+    apt-get -y install mariadb-server php-mysql
+    apt-get install -y  unzip git libcurl4-openssl-dev htop
 elif  [ ${DIST} = "CENTOS" ]; then
     yum clean all
     yum -y install kernel-devel.`uname -m` epel-release
@@ -379,9 +379,9 @@ echo
 
 
 if [ ${DIST} = "DEBIAN" ]; then
-    systemctl start mysql
+    systemctl start mariadb
     systemctl enable apache2 
-    systemctl enable mysql
+    systemctl enable mariadb
     chkconfig ntp on
 else [ -f /etc/redhat-release ]
     systemctl enable httpd
@@ -391,9 +391,9 @@ else [ -f /etc/redhat-release ]
 fi
 
 
-if [ ${DIST} = "CENTOS" ]; then
+
   mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
-fi
+
 
 
 if [ ${DIST} = "CENTOS" ]; then
@@ -426,7 +426,6 @@ datadir   = /var/lib/mysql
 tmpdir    = /tmp
 lc-messages-dir = /usr/share/mysql
 skip-external-locking
-bind-address    = 127.0.0.1
 max_connections = 500
 key_buffer_size   = 16M
 max_allowed_packet  = 16M
@@ -439,7 +438,7 @@ expire_logs_days  = 10
 max_binlog_size   = 100M
 secure-file-priv = ""
 symbolic-links=0
-sql-mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 
 [embedded]
 
@@ -664,7 +663,9 @@ mysql -uroot -p${password} -e "create database mbilling;"
 mysql -uroot -p${password} -e "CREATE USER 'mbillingUser'@'localhost' IDENTIFIED BY '${MBillingMysqlPass}';"
 mysql -uroot -p${password} -e "GRANT ALL PRIVILEGES ON \`mbilling\` . * TO 'mbillingUser'@'localhost' WITH GRANT OPTION;FLUSH PRIVILEGES;"    
 mysql -uroot -p${password} -e "GRANT FILE ON * . * TO  'mbillingUser'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
-
+if [ ${DIST} = "DEBIAN" ]; then
+mysql -uroot -p${password} -e "update mysql.user set plugin='' where User='root';"
+fi;
 mysql mbilling -u root -p${password}  < /var/www/html/mbilling/script/database.sql
 rm -rf /var/www/html/mbilling/script
 
@@ -812,14 +813,16 @@ systemctl daemon-reload
 
 install_fail2ban()
 {
-  yum install -y iptables-services
-  rm -rf /etc/fail2ban
-  cd /tmp
-  git clone https://github.com/fail2ban/fail2ban.git
-  cd /tmp/fail2ban
-  python setup.py install
-
   if [ ${DIST} = "CENTOS" ]; then
+    yum install -y iptables-services
+
+    rm -rf /etc/fail2ban
+    cd /tmp
+    git clone https://github.com/fail2ban/fail2ban.git
+    cd /tmp/fail2ban
+    python setup.py install
+
+
     systemctl mask firewalld.service
     systemctl enable iptables.service
     systemctl enable ip6tables.service
@@ -829,7 +832,10 @@ install_fail2ban()
     systemctl enable iptables
     systemctl stop firewalld
     chkconfig --levels 123456 firewalld off
-  fi       
+  fi      
+  if [ ${DIST} = "DEBIAN" ]; then
+    apt-get -y install fail2ban
+  fi 
       
 }
 
@@ -1044,9 +1050,7 @@ messages => notice,warning,error
 magnus => debug
 " > /etc/asterisk/logger.conf
 
-if [ ${DIST} = "DEBIAN" ]; then
-  cp -rf /tmp/fail2ban/build/fail2ban.service /usr/lib/systemd/fail2ban.service
-elif [ ${DIST} = "CENTOS" ]; then  
+if [ ${DIST} = "CENTOS" ]; then  
   cp -rf /tmp/fail2ban/build/fail2ban.service /usr/lib/systemd/system/fail2ban.service
 fi
 
