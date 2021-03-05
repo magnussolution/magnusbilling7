@@ -50,7 +50,8 @@ Ext.define('MBilling.view.did.Form', {
                     xtype: 'noyescombo',
                     name: 'record_call',
                     fieldLabel: t('Record call'),
-                    allowBlank: true
+                    allowBlank: true,
+                    hidden: window.global_record_calls
                 }, {
                     xtype: 'booleancombo',
                     name: 'activated',

@@ -58,7 +58,7 @@ class SiteController extends Controller
         echo 'window.uploadFaxFilesize = "' . $upload_max_size . '";';
         echo 'window.uploadFaxFilesizebites = "' . intval($upload_max_size) . '";';
         echo 'window.show_signup_button = ' . $this->config['global']['show_signup_button'] . ';';
-        echo 'window.auto_generate_user_signup = ' . $this->config['global']['auto_generate_user_signup'] . ';';
+        echo 'window.auto_generate_user_signup = "' . $this->config['global']['auto_generate_user_signup'] . '";';
         echo 'window.enable_signup = ' . $this->config['global']['enable_signup'] . ';';
         if (isset($this->config['global']['login_header']) && strlen($this->config['global']['login_header']) > 5) {
             echo 'window.loginheader = "' . $this->config['global']['login_header'] . '";';
@@ -71,5 +71,6 @@ class SiteController extends Controller
         echo 'window.signup_auto_pass = ' . $pass . ';';
         echo 'window.backgroundColor = "' . $this->config['global']['backgroundColor'] . '";';
         echo 'window.default_codes = "' . $this->config['global']['default_codeds'] . '";';
+        echo 'window.global_record_calls = "' . $this->config['global']['global_record_calls'] . '";';
     }
 }

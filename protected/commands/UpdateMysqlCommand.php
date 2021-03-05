@@ -1339,6 +1339,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2021-03-05
+        if ($version == '7.6.3') {
+
+            $sql = " INSERT INTO `pkg_configuration`  VALUES
+                (NULL, 'Record all calls', 'global_record_calls', '0', '0=Disable \n1=Enable\n Record all calls, the fields record calls will be hidden if this option is activated.', 'global', '1');";
+            $this->executeDB($sql);
+
+            $version = '7.6.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
