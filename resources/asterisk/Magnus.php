@@ -733,7 +733,7 @@ class Magnus
 
     public function startRecordCall(&$agi, $addicional = '', $isDid = false)
     {
-        if ($this->record_call == 1) {
+        if ($this->record_call == 1 || $this->config['global']['global_record_calls'] == 1) {
 
             if ($isDid == true) {
                 $command_mixmonitor = "MixMonitor /var/spool/asterisk/monitor/$this->accountcode/{$addicional}-{$this->CallerID}.{$this->uniqueid}." . $this->mix_monitor_format . ",b";
