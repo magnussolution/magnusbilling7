@@ -185,7 +185,7 @@ Ext.define('MBilling.view.sip.Form', {
                     name: 'record_call',
                     fieldLabel: t('Record call'),
                     allowBlank: true,
-                    hidden: !App.user.isAdmin || window.global_record_calls
+                    hidden: !App.user.isAdmin || window.global_record_calls == true
                 }, {
                     xtype: 'numberfield',
                     name: 'techprefix',
