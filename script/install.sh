@@ -691,7 +691,7 @@ astlogdir => /var/log/asterisk
 
 echo "
 [options]
-verbose = 0
+verbose = 5
 debug = 0
 maxfiles = 500000
 
