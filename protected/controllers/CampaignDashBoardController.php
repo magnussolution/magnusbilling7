@@ -36,7 +36,7 @@ class CampaignDashBoardController extends Controller
 
     public function extraFilterCustomClient($filter)
     {
-        $filter .= ' AND t.id_user = :clfby AND status = :key AND type = :key ';
+        $filter .= ' AND t.id_user = :clfby AND status = :key';
 
         $this->paramsFilter[':clfby'] = Yii::app()->session['id_user'];
         $this->paramsFilter[':key']   = 1;
