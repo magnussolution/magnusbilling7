@@ -48,7 +48,6 @@ class UserController extends Controller
         'firstusedate',
         'id_group',
         'idGroupname',
-        'id_offer',
         'id_user',
         'idAgentlogin',
         'creationdate',
@@ -66,7 +65,6 @@ class UserController extends Controller
         'idGroupname',
         'enableexpire',
         'expirationdate',
-        'id_offer',
         'loginkey',
     );
 

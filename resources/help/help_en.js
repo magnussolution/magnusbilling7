@@ -695,6 +695,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sipuras.STUN_Test_Enable': `Validate STUN server periodically..`,
     'sipuras.Substitute_VIA_Addr': `Replace publia IP in the VIA.`,
     'sipuras.STUN_Server': `STUN server domain.`,
+    'sipuras.Dial_Tone': ``,
     //SMS
     'sms.id_user': `User that sent/received the SMS.`,
     'sms.telephone': `Number in the E164 format.`,
