@@ -278,3 +278,13 @@ STUN Server
 
 
 
+
+.. _sipuras-Dial-Tone:
+
+Dial Tone
+---------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

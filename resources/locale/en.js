@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2021-01-29
+ * 2021-03-12
  */
 Locale.load({
     '': '',
@@ -269,6 +269,7 @@ Locale.load({
     'Destination out of order': '',
     'Details': '',
     'Developed by': '',
+    'Dial Tone': '',
     'Dial parameter': '',
     'Dial plan': '',
     'Dial timeout': '',
@@ -581,6 +582,7 @@ Locale.load({
     'Offer': '',
     'Offer CDR': '',
     'Offer Use': '',
+    'Offer balance': '',
     'Offer type': '',
     'Offers': '',
     'Ok': '',

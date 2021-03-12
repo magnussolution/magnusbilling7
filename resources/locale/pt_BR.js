@@ -14,6 +14,8 @@
  * 2020-08-07
  */
 Locale.load({
+    'Dial Tone' : 'Dial Tone',
+    'Offer balance' :'Saldo do pacote',
     'Alarm': 'Alarme',
     'Alarms': 'Alarmes',
     'Bigger than': 'Maior que',

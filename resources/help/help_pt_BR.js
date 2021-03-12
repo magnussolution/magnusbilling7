@@ -783,6 +783,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sipuras.STUN_Test_Enable': `Validar o servidor STUN periodicamente.`,
     'sipuras.Substitute_VIA_Addr': `Substituir o IP publico no VIA.`,
     'sipuras.STUN_Server': `Dominio do servidor STUN.`,
+    'sipuras.Dial_Tone': ``,
     //SMS
     'sms.id_user': `Usuário que enviou/recebeu o SMS.`,
     'sms.telephone': `Número no formato E 164.`,
