@@ -636,7 +636,6 @@ class CalcAgi
             $this->real_answeredtime = $this->answeredtime = 0;
         } elseif (($this->dialstatus == "CHANUNAVAIL") || ($this->dialstatus == "CONGESTION")) {
             $this->real_answeredtime = $this->answeredtime = 0;
-            return false;
         }
         return true;
     }
