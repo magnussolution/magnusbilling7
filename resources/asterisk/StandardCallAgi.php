@@ -30,11 +30,6 @@ class StandardCallAgi
                     // INSERT CDR  & UPDATE SYSTEM
                     $CalcAgi->updateSystem($MAGNUS, $agi);
 
-                    if (!$result_callperf) {
-                        $MAGNUS->executePlayAudio("prepaid-dest-unreachable", $agi);
-                        break;
-                    }
-
                     if ($MAGNUS->agiconfig['say_balance_after_call'] == 1) {
                         $MAGNUS->sayBalance($agi, $MAGNUS->credit);
                     }

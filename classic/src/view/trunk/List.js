@@ -25,6 +25,7 @@ Ext.define('MBilling.view.trunk.List', {
     fieldSearch: 'trunkcode',
     initComponent: function() {
         var me = this;
+
         me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',

@@ -190,7 +190,9 @@ class CallChartCommand extends ConsoleCommand
                             }
 
                             if (!count($modelSip)) {
-
+                                if ($status == 'Ring') {
+                                    $sip_account =  $originate;
+                                }
                                 if (strlen($sip_account) > 3) {
                                     //echo "check per sip_account $originate\n";
                                     if (false !== $key = array_search($originate, $this->sipNames)) {

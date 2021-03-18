@@ -70,4 +70,5 @@ Ext.define('MBilling.view.trunk.Controller', {
             }
         });
     }
+
 });

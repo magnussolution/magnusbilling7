@@ -23,6 +23,12 @@ class UpdateMysqlCommand extends ConsoleCommand
     public function run($args)
     {
 
+        if (file_exists('/var/spool/cron/root')) {
+            $CRONPATH = '/var/spool/cron/root';
+        } elseif (file_exists('/var/spool/cron/crontabs/root')) {
+            $CRONPATH = '/var/spool/cron/crontabs/root';
+        }
+
         $version  = $this->config['global']['version'];
         $language = $this->config['global']['base_language'];
 
@@ -490,7 +496,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
 
-            exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php didwww' >> /var/spool/cron/root");
+            exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php didwww' >> $CRONPATH");
         }
 
         if ($version == '7.1.4') {
@@ -1256,7 +1262,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
             $this->executeDB($sql);
 
-            exec("echo '\n*/5 * * * * php /var/www/html/mbilling/cron.php alarm' >> /var/spool/cron/root");
+            exec("echo '\n*/5 * * * * php /var/www/html/mbilling/cron.php alarm' >> $CRONPATH");
 
             $version = '7.5.9';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
@@ -1347,6 +1353,35 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2021-03-18
+        if ($version == '7.6.4') {
+
+            $sql = "
+            CREATE TABLE IF NOT EXISTS `pkg_trunk_error` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `ip` varchar(100) NOT NULL,
+                `code` int(5) NOT NULL,
+                `total` int(11) NOT NULL,
+                PRIMARY KEY (`id`),
+                UNIQUE KEY `unique_index` (`ip`,`code`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                ";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Trunk Errors'')', 'trunksipcodes', 'x-fa fa-desktop', 10,7)";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php TrunkSIPCodes' >> $CRONPATH");
+
+            $version = '7.6.5';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
