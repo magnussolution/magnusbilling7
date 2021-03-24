@@ -1,10 +1,10 @@
 {
   "name": "gerencianet/gerencianet-sdk-php",
   "description": "GN API SDK PHP",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "require": {
     "guzzlehttp/guzzle": "^6.0.0",
-    "php": ">=5.5.0"
+    "php": ">=5.6.0"
   },
   "require-dev": {
     "codeclimate/php-test-reporter": "^0.1.2",
@@ -23,6 +23,20 @@
     "name": "Thomaz Feitoza"
   }, {
     "name": "Filipe Mata"
+  }, {
+    "name": "Thiago Resende"
+  },{
+    "name": "Jéssica Gava"
+  },{
+    "name": "Guilherme Cota"
+  },{
+    "name": "Sady Coimbra"
+  },{
+    "name": "Matheus Rodrigues"
+  },{
+    "name": "João Oliveira"
+  },{
+    "name": "Paloma Brito"
   }],
   "autoload": {
     "psr-0": {
