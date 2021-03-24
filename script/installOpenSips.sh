@@ -42,9 +42,10 @@ echo "TRIS SCRIPT WILL INSTALL OPENSIPS IN THIS SERVER PUBLIC IP $proxyip LOCALN
 
 
 sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > borra && mv -f borra /etc/selinux/config
+yum -y install kernel-devel.`uname -m` epel-release
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install yum-utils gcc gcc-c++ bison flex zlib-devel openssl-devel  subversion pcre-devel
 yum-config-manager --enable remi-php71
-yum -y install gcc gcc-c++ bison flex zlib-devel openssl-devel  subversion pcre-devel
 yum -y install  unixODBC unixODBC-devel libtool-ltdl libtool-ltdl-devel  php-mbstring php-mcrypt flex screen php php-gd php-pear
 yum -y install gcc-c++ bison lynx subversion flex curl-devel libxslt libxml2-devel libxml2 pcre-devel wget make php-mysql  wget make rsyslog sqlite*
 
