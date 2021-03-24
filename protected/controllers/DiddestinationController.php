@@ -176,6 +176,7 @@ class DiddestinationController extends Controller
     public function afterSave($model, $values)
     {
         AsteriskAccess::instance()->writeDidContext();
+        AsteriskAccess::instance()->generateSipDid();
 
         if ($this->isNewRecord) {
             $modelDid = Did::model()->findByPk($model->id_did);
@@ -232,6 +233,12 @@ class DiddestinationController extends Controller
 
             }
         }
+        return;
+    }
+
+    public function afterDestroy($values)
+    {
+        AsteriskAccess::instance()->generateSipDid();
         return;
     }
 
