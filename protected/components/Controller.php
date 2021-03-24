@@ -29,6 +29,7 @@ class Controller extends BaseController
         'groupuser',
         'configuration',
         'invoices',
+        'statusSystem',
     );
 
     //Allowed controllers to no admin users use updateall
