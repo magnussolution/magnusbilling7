@@ -66,17 +66,19 @@ class UserCreditManager
             $modelUser->credit += $credit;
         }
 
-        $modelUser->save();
-
         //add the refill
         if ($paymount_type != 2) {
-            UserCreditManager::insertRefill($id_user, $credit, $description, $code, $actualCredit, $signal);
+            $res = UserCreditManager::insertRefill($id_user, $credit, $description, $code, $actualCredit, $signal);
         } else {
             $mail = new Mail(Mail::$TYPE_REFILL, $id_user);
             $mail->replaceInEmail(Mail::$ITEM_ID_KEY, $id_user);
             $mail->replaceInEmail(Mail::$ITEM_AMOUNT_KEY, $credit);
             $mail->replaceInEmail(Mail::$DESCRIPTION, $description);
             $mail->send();
+            $res = true;
+        }
+        if ($res == true) {
+            $modelUser->save();
         }
 
         ServicesProcess::checkIfServiceToPayAfterRefill($id_user);
@@ -84,38 +86,36 @@ class UserCreditManager
 
     public static function insertRefill($id_user, $credit, $description, $code, $actualCredit, $signal)
     {
-        $exists = false;
-
-        $description = $description . ', ' . Yii::t('zii', 'Old credit') . ' ' . round($actualCredit, 2);
 
         //check if already exists refill with code
-        if ($code > 0) {
+        if (strlen($code)) {
             $modelRefill = Refill::model()->find("description LIKE '%$code%' AND id_user = $id_user");
 
-            if (count($modelRefill)) {
+            if (isset($modelRefill->id)) {
                 if ($modelRefill->payment == 0) {
                     //marca recarga como pago
                     $modelRefill->payment = 1;
                     $modelRefill->save();
-                    $exists = true;
+
                 }
+                return false;
             }
         }
 
-        if ($exists == false) {
-            //add new refill
-            $modelRefill              = new Refill;
-            $modelRefill->id_user     = $id_user;
-            $modelRefill->credit      = $signal == '-' ? $credit * -1 : $credit;
-            $modelRefill->description = $description;
-            $modelRefill->payment     = 1;
-            $modelRefill->save();
-        }
+        //add new refill
+        $modelRefill              = new Refill;
+        $modelRefill->id_user     = $id_user;
+        $modelRefill->credit      = $signal == '-' ? $credit * -1 : $credit;
+        $modelRefill->description = $description;
+        $modelRefill->payment     = 1;
+        $modelRefill->save();
 
         $mail = new Mail(Mail::$TYPE_REFILL, $id_user);
         $mail->replaceInEmail(Mail::$ITEM_ID_KEY, $modelRefill->id);
         $mail->replaceInEmail(Mail::$ITEM_AMOUNT_KEY, $credit);
         $mail->replaceInEmail(Mail::$DESCRIPTION, $description);
         $mail->send();
+
+        return true;
     }
 }

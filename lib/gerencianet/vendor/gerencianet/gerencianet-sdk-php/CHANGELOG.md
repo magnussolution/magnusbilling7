@@ -1,3 +1,24 @@
+# 3.0.0
+- Added: api Pix
+- Fix: updated dependencies
+
+# 2.4.1
+
+- Fix: Files with endpoint oneStep charge
+
+# 2.4.0
+
+- Added: new endpoint (oneStep charge)
+
+# 2.3.0
+
+- Added: new endpoint (settle charge)
+- Added: new endpoint (settle carnet parcel)
+
+# 2.2.0
+
+- Added: new endpoint (create charge balance sheet)
+
 # 2.1.0
 
 - Added: new endpoint (update plan)
