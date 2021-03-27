@@ -32,12 +32,26 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Invoice number')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
-    <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Invoice number') ?></p>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Mobile number')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'phone', array('class' => 'input')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'phone') ?>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Mobile number') ?></p>
 </div>
 
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Contract no')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'number') ?>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Contract no') ?></p>
+</div>
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Distribution code')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'zipcode', array('class' => 'input')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'zipcode') ?>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Distribution code') ?></p>
+</div>
 
 
 
@@ -47,11 +61,10 @@ $form = $this->beginWidget('CActiveForm', array(
 $this->widget(
     'ext.jui.EJuiDateTimePicker',
     array(
+
         'model'     => $modelTransferToMobile,
         'attribute' => 'creationdate',
         'language'  => Yii::app()->language,
-        //'mode'    => 'datetime',//'datetime' or 'time' ('datetime' default)
-
         'options'   => array(
             'dateFormat' => 'yy-mm-dd',
             'timeFormat' => '',
@@ -64,17 +77,22 @@ $this->widget(
 </div>
 <br>
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, "Bill amount (" . Yii::app()->session['currency_dest'] . ')') ?>
+      <?php echo $form->labelEx($modelTransferToMobile, 'bill_amount', array('label' => 'Bill Amount (' . strtoupper(Yii::app()->session['currency_dest']) . ')')); ?>
     <?php echo $form->textField($modelTransferToMobile, 'bill_amount', array('id' => 'bill_amount', 'class' => 'input', 'onkeyup' => 'showPriceEUR()')) ?>
     <?php echo $form->error($modelTransferToMobile, 'bill_amount') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Bill amount') ?></p>
+     <p class="hint"><?php echo $amountDetails ?></p>
 </div>
 
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, "Paid Amount (" . Yii::app()->session['currency_orig'] . ')') ?>
-    <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR', array('id' => 'amountValuesEUR', 'class' => 'input', 'onkeyup' => 'showPriceBDT()')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (' . strtoupper(Yii::app()->session['currency_orig']) . ')')); ?>
+    <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR', array(
+    'id'       => 'amountValuesEUR',
+    'class'    => 'input',
+    'onkeyup'  => 'showPriceBDT()',
+    'readonly' => true,
+)) ?>
     <?php echo $form->error($modelTransferToMobile, 'amountValuesEUR') ?>
 </div>
 
@@ -87,9 +105,10 @@ $this->widget(
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));
 ?>
-<input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
+
 <input id ='buying_price'  class="button" style="display:none; width: 100px;" onclick="getBuyingPrice()" value="R" readonly>
 </div>
+<input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
 <div class="controls" id="buttondivWait"></div>
 <?php
 
@@ -98,6 +117,42 @@ $this->endWidget();?>
 
 
 <script type="text/javascript">
+
+
+
+    document.getElementById('TransferToMobile_creationdate').value = '';
+     function getBuyingPrice(argument) {
+
+
+
+        valueAmoutBDT = document.getElementById('bill_amount').value;
+        var id = 0;
+
+
+
+        amountValuesEUR = document.getElementById('amountValuesEUR').value;
+
+        if (document.getElementById('buying_price').value != 'R') {
+            document.getElementById('buying_price').value = 'R';
+        }else{
+
+
+                var http = new XMLHttpRequest()
+
+                http.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById('buying_price').value = this.responseText;
+                    }
+                };
+
+                http.open("GET", "../../index.php/transferPayment/getBuyingPriceBill?id="+id+"&valueAmoutBDT="+valueAmoutBDT+"&valueAmoutEUR="+amountValuesEUR+"&country=<?php echo isset($_POST['TransferToMobile']['country']) ? $_POST['TransferToMobile']['method'] : 0 ?>",true)
+                http.send(null);
+
+        }
+
+
+    }
+
 
     function showPriceEUR() {
 

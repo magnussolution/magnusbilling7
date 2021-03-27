@@ -42,14 +42,19 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->country ?></div>
 	<label>Type:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->type ?></div>
-	<label>Bill Number:</label>
+	<label>Mobile Number:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->phone ?></div>
+	<label>Contract No:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
-	<label>Bill amount <?php echo Yii::app()->session['currency_dest'] ?>:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->bill_amount ?></div>
-	<label>Paid Amount  <?php echo Yii::app()->session['currency_orig'] ?>:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo Yii::app()->session['sell_price'] ?></div>
+	<label>Distribution code:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->zipcode ?></div>
 	<label>Bill Date:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->creationdate ?></div>
+	<br>
+	<label>Bill amount (<?php echo Yii::app()->session['currency_dest'] ?>):</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->bill_amount ?></div>
+	<label>Paid Amount  (<?php echo Yii::app()->session['currency_orig'] ?>):</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo Yii::app()->session['sell_price'] ?></div>
 
 </div>
 
@@ -60,7 +65,9 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 <?php echo $form->hiddenField($modelTransferToMobile, 'type', array('value' => $this->modelTransferToMobile->type)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $this->modelTransferToMobile->number)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'bill_amount', array('value' => $this->modelTransferToMobile->bill_amount)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'zipcode', array('value' => $this->modelTransferToMobile->zipcode)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'creationdate', array('value' => $this->modelTransferToMobile->creationdate)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'phone', array('value' => $this->modelTransferToMobile->phone)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'confirmed', array('value' => 'ok')); ?>
 
 

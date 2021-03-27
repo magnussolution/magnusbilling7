@@ -16,18 +16,18 @@ if (Yii::app()->session['isAdmin'] == 1):
 
     $modelUser = User::model()->findAll();
     $users     = CHtml::listData($modelUser, 'id', 'username');?>
-                                                                                                                                        <div class="field">
-                                                                                                                                            <?php echo $form->labelEx($model, Yii::t('zii', 'Select a user')) ?>
-                                                                                                                                            <div class="styled-select">
-                                                                                                                                                <?php echo $form->dropDownList($model,
+                                                                                                                                                                                                                                                                                                                                <div class="field">
+                                                                                                                                                                                                                                                                                                                                <?php echo $form->labelEx($model, Yii::t('zii', 'Select a user')) ?>
+                                                                                                                                                                                                                                                                                                                                <div class="styled-select">
+                                                                                                                                                                                                                                                                                                                                <?php echo $form->dropDownList($model,
         'id',
         $users,
         array('options' => array($_POST['SendCreditSummary']['id'] => array('selected' => true)))
     ); ?>
-                                                                                                                                            </div>
-                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                </div>
 
-                                                                                                                                    <?php endif;?>
+                                                                                                                                                                                                                                                                                                                                <?php endif;?>
 
 
 <div class="field">
@@ -53,9 +53,9 @@ $this->widget(
     <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'date') ?></p>
 
 </div>
-<br>
+
 <div class="field">
-    <?php echo $form->labelEx($model, Yii::t('zii', 'To date')) ?>
+    <?php echo $form->labelEx($model, 'To date') ?>
 <?php
 $this->widget(
     'ext.jui.EJuiDateTimePicker',
@@ -64,7 +64,6 @@ $this->widget(
         'attribute' => 'stopdate',
         'language'  => 'en', //default Yii::app()->language
         'mode'      => 'date', //'datetime' or 'time' ('datetime' default)
-
         'options'   => array(
             'dateFormat' => 'yy-mm-dd',
             'timeFormat' => 'HH:mm:ss',
@@ -73,16 +72,21 @@ $this->widget(
 );
 ?>
 </div>
-<br>
+
+<div class="field">
+        <?php echo $form->labelEx($model, Yii::t('zii', 'Number')) ?>
+        <?php echo $form->textField($model, 'number', array('class' => 'input')) ?>
+        <?php echo $form->error($model, 'number') ?>
+</div>
+
 <div class="field">
     <?php echo $form->labelEx($model, Yii::t('zii', 'Service')) ?>
 <?php
 echo $form->dropDownList($model, 'service', array(
     'all'           => 'All',
-    'International' => 'International',
-    'flexiload'     => 'Flexiload',
-    'bkash'         => 'Bkash',
-    'DBBL/Rocket'   => 'DBBL/Rocket',
+    'Mobile Credit' => 'Mobile Credit',
+    'Mobile Money'  => 'Mobile Money',
+    'Payment'       => 'Payment',
 ));
 
 ?>
@@ -92,68 +96,83 @@ echo $form->dropDownList($model, 'service', array(
 <br>
 <?php echo CHtml::submitButton(Yii::t('zii', 'Filter'), array('class' => 'button')); ?>
 <?php $this->endWidget();?>
-<div class="rounded">
 
-  <table class="blueTable">
-<thead>
-<tr>
-<th>Day</th>
-<th>Service</th>
-<th>Amount</th>
-<th>Total_cost</th>
-<th>Total_sale</th>
-<th>Earned</th>
-</tr>
-</thead>
-<tfoot>
-<tr>
-<td colspan="5">
-</td>
-</tr>
-</tfoot>
-<tbody>
 
-<?php $total_cost = 0;?>
-<?php $total_sale = 0;?>
-<?php $earned     = 0;?>
-<?php $amount     = 0;?>
+
+<?php $total_cost   = 0;?>
+<?php $total_sale   = 0;?>
+<?php $total_earned = 0;?>
 <?php foreach ($modelSendCreditSummary as $key => $value): ?>
-    <?php $amount     = $amount + $value->count;?>
-    <?php $total_cost = $total_cost + $value->total_cost;?>
-    <?php $total_sale = $total_sale + $value->total_sale;?>
-    <?php $earned     = $earned + $value->earned;?>
 
-    <tr>
-<td><?php echo $value->day; ?></td>
-<td><?php echo $value->service; ?></td>
-<td><?php echo $value->count; ?></td>
-<td><?php echo number_format($value->total_cost, 2); ?></td>
-<td><?php echo number_format($value->total_sale, 2); ?></td>
-<td><?php echo number_format($value->earned, 2); ?></td>
-</tr>
- <?php endforeach;?>
+    <?php $total_cost += $value->cost;?>
+    <?php $total_sale += $value->sell;?>
+    <?php $total_earned += $value->earned;?>
+<?php endforeach?>
+<div class="rounded">
+    <br>
+  <table class="blueTable" align="right" style="width: 420px; ">
+    <thead style="background: #4676b1">
+        <tr>
+      <th width="100px">Total</th>
+      <th width="100px"><?php echo number_format($total_cost, 2) ?></th>
+      <th width="100px"><?php echo number_format($total_sale, 2) ?></th>
+      <th width="100px"><?php echo number_format($total_earned, 2) ?></th>
+      </tr>
+  </thead>
+  </table>
+  <br>
+  <br>
+  <table class="blueTable">
+    <thead>
+        <tr> <th>Date</th>
+            <th>Service</th>
+            <th>Number</th>
+            <th>Operator</th>
+            <th>Received Amount</th>
+            <th width="100px">Cost</th>
+            <th width="100px">Sell</th>
+            <th width="100px">Profit</th>
+        </tr>
+    </thead>
 
-<tr>
+    <tbody>
 
-<td></td>
-<td><b>Total</b></td>
-<td><b><?php echo $amount; ?></b></td>
-<td><b><?php echo number_format($total_cost, 2); ?></b></td>
-<td><b><?php echo number_format($total_sale, 2); ?></b></td>
-<td><b><?php echo number_format($earned, 2); ?></b></td>
-</tr>
 
- </tbody>
+        <?php foreach ($modelSendCreditSummary as $key => $value): ?>
+            <tr>
+               <td><?php echo $value->date; ?></td>
+                <td><?php echo $value->service; ?></td>
+                <td><?php echo $value->number; ?></td>
+                <td><?php echo $value->operator_name; ?></td>
+                <td><?php echo $value->received_amout; ?></td>
+                <td><?php echo number_format($value->cost, 2); ?></td>
+                <td><?php echo number_format($value->sell, 2); ?></td>
+                <td><?php echo number_format($value->earned, 2); ?></td>
+            </tr>
+        <?php endforeach;?>
+
+
+     </tbody>
 </table>
- </div>
+</div>
 
  <style type="text/css">
+
+.hasDatepicker{
+font-family: Arial, Verdana;
+font-size: 15px;
+padding: 5px;
+border: 1px solid #b9bdc1;
+width: 380px;
+color: #797979;
+}
+
 
   table.blueTable {
   border: 1px solid #5b855b;
   background-color: #EEEEEE;
   width: 100%;
-  text-align: left;
+  text-align: center;
   border-collapse: collapse;
 }
 table.blueTable td, table.blueTable th {
@@ -173,6 +192,7 @@ table.blueTable thead {
   background: linear-gradient(to bottom, #9ecea1 0%, #9ecea1 66%, #9ecea1 100%);
   border-bottom: 2px solid #444444;
 }
+
 table.blueTable thead th {
   font-size: 15px;
   font-weight: bold;

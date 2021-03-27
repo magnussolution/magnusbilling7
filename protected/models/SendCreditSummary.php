@@ -45,7 +45,8 @@ class SendCreditSummary extends Model
     {
         return array(
             array('id_user, confirmed', 'numerical', 'integerOnly' => true),
-            array('service', 'length', 'max' => 50),
+            array('service,provider,received_amout', 'length', 'max' => 50),
+            array('operator_name', 'length', 'max' => 100),
             array('number, cost, sell, earned, amount', 'length', 'max' => 20),
         );
     }

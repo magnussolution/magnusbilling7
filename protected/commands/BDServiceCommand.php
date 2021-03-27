@@ -38,6 +38,91 @@ class BDServiceCommand extends CConsoleCommand
         }
         $log = DEBUG >= 1 ? Log::writeLog(LOGFILE, ' line:' . __LINE__ . " START NOTIFY CLIENT ") : null;
 
+        $this->tanaSend();
+
+        $this->ezzeapi();
+
+    }
+
+    public function tanaSend()
+    {
+
+        $config = LoadConfig::getConfig();
+
+        $userBD = $config['global']['BDService_username'];
+        $keyBD  = $config['global']['BDService_token'];
+
+        $modelSendCreditSummary = SendCreditSummary::model()->findAll('confirmed = 0 AND service != :key AND date > :key1 AND provider = :key2', [
+            ':key'  => 'international',
+            ':key1' => date('Y-m-d'),
+            ':key2' => 'TanaSend',
+        ]);
+
+        foreach ($modelSendCreditSummary as $key => $sendCredit) {
+            $url = "http://takasend.org/ezzeapi/status?id=" . $sendCredit->id . "&user=" . $userBD . "&key=" . $keyBD . "";
+            if (!$result = @file_get_contents($url, false)) {
+                $result = '';
+            }
+            echo $result . " $sendCredit->id \n";
+            $modelRefill = Refill::model()->find('invoice_number = :key AND id_user = :key1',
+                array(
+                    ':key'  => $sendCredit->id,
+                    ':key1' => $sendCredit->id_user,
+                ));
+
+            if (preg_match("/ERROR|CANCELLED/", strtoupper($result))) {
+
+                $result = explode(':', $result);
+
+                $sendCredit->confirmed = 3;
+                $sendCredit->save();
+
+                if (isset($modelRefill->id)) {
+
+                    $modelRefill->description = $modelRefill->description . '. Status: ' . $result[0] . '. Ref:' . $result[1];
+                    $modelRefill->payment     = 0;
+                    try {
+                        $modelRefill->save();
+                    } catch (Exception $e) {
+
+                    }
+
+                    $modelUser         = User::model()->findByPk($sendCredit->id_user);
+                    $modelUser->credit = $modelUser->credit + ($modelRefill->credit * -1);
+
+                    try {
+                        $modelUser->save();
+                    } catch (Exception $e) {
+
+                    }
+                }
+
+            } else if (preg_match("/SUCCESS|COMPLETED|ERROR/", $result)) {
+
+                $result = explode(':', $result);
+
+                $sendCredit->confirmed = 1;
+                $sendCredit->save();
+
+                if (isset($modelRefill->id)) {
+
+                    $modelRefill->description = @$modelRefill->description . '. Status: ' . $result[0] . '. Ref:' . $result[1];
+                    $modelRefill->payment     = 1;
+                    try {
+                        $modelRefill->save();
+                    } catch (Exception $e) {
+
+                    }
+                }
+
+            }
+
+        }
+
+    }
+    public function ezzeapi()
+    {
+
         /*$_POST = array(
 
         "refid" => 23597,
@@ -57,7 +142,10 @@ class BDServiceCommand extends CConsoleCommand
         Configuration::model()->updateAll(array('config_value' => $result), 'config_key = :key',
             array(':key' => 'BDService_credit_provider'));
 
-        $modelSendCreditSummary = SendCreditSummary::model()->findAll('confirmed = 0 AND service != "international"');
+        $modelSendCreditSummary = SendCreditSummary::model()->findAll('confirmed = 0 AND service != :key AND date > :key1 ', [
+            ':key'  => 'international',
+            ':key1' => date('Y-m-d'),
+        ]);
 
         foreach ($modelSendCreditSummary as $key => $sendCredit) {
 

@@ -27,7 +27,11 @@ $fieldOption = array('class' => 'input');
 
 <div class="field">
         <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'country', array(
+    'class'    => 'input',
+    'readonly' => true,
+    'id'       => 'country',
+)) ?>
         <?php echo $form->error($modelTransferToMobile, 'country') ?>
         <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Country') ?></p>
 </div>
@@ -80,6 +84,7 @@ $fieldOption = array('class' => 'input');
 
      </div>
 <br>
+<br>
 <?php endif?>
 
 <div class="sp-page companies__content" >
@@ -88,7 +93,7 @@ $fieldOption = array('class' => 'input');
         <?php foreach (Yii::app()->session['amounts'] as $key => $value): ?>
             <label for="2" class="company__row" id="productLabel<?php echo $id ?>">
                     <input type="radio"  id="productinput<?php echo $id ?>" name="amountValues" value="<?php echo $key ?>">
-                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo count(Yii::app()->session['amounts']) ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
+                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo count(Yii::app()->session['amounts']) ?>,<?php echo $key ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
                 </label>
                 <?php $id++;?>
         <?php endforeach;?>
@@ -123,6 +128,7 @@ $fieldOption = array('class' => 'input');
 
         amountValuesEUR = document.getElementById('amountfielEUR').value;
         valueAmoutBDT = document.getElementById('amountfielBDT').value;
+        country = document.getElementById('country').value;
         if (document.getElementById('buying_price').value != 'R') {
             document.getElementById('buying_price').value = 'R';
         }else{
@@ -136,7 +142,21 @@ $fieldOption = array('class' => 'input');
                     }
                 };
 
-                http.open("GET", "../../index.php/transferMobileMoney/getBuyingPriceDBService?valueAmoutBDT="+valueAmoutBDT+"&valueAmoutEUR="+amountValuesEUR+"&method=<?php echo isset($_POST['TransferToMobile']['method']) ? $_POST['TransferToMobile']['method'] : 0 ?>",true)
+                http.open("GET", "../../index.php/transferMobileMoney/getBuyingPriceDBService?valueAmoutBDT="+valueAmoutBDT+"&valueAmoutEUR="+amountValuesEUR+"&method=<?php echo $_POST['TransferToMobile']['method'] ?>&country="+country,true)
+                http.send(null);
+            }else{
+
+                 var id =  document.getElementById('productinput'+window.productInputSelected).value;
+
+                var http = new XMLHttpRequest()
+
+                http.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById('buying_price').value = this.responseText;
+                        }
+                    };
+
+                http.open("GET", "../../index.php/transferMobileMoney/getBuyingPriceDBService?id="+id+"&method=<?php echo $_POST['TransferToMobile']['method'] ?>&method=<?php echo $_POST['TransferToMobile']['method'] ?>",true)
                 http.send(null);
             }
         }
@@ -195,6 +215,9 @@ $fieldOption = array('class' => 'input');
 
             http.open("GET", "../../index.php/transferMobileMoney/convertCurrency?currency=EUR&amount="+valueAmoutEUR+"&method=<?php echo $_POST['TransferToMobile']['method']; ?>",true)
             http.send(null);
+        }else{
+            document.getElementById('amountfielBDT').value = 'Invalid';
+            document.getElementById('secondButton').style.display = 'none';
         }
 
 
@@ -220,6 +243,11 @@ $fieldOption = array('class' => 'input');
             http.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
 
+                    if (this.responseText =='invalid') {
+                        document.getElementById('secondButton').style.display = 'none';
+                    }else{
+                        document.getElementById('secondButton').style.display = 'inline';
+                    }
                     document.getElementById('amountfielEUR').value = this.responseText;
                     document.getElementById('buying_price').style.display = 'inline';
                     document.getElementById('buying_price').value = 'R';
@@ -228,18 +256,23 @@ $fieldOption = array('class' => 'input');
 
             http.open("GET", "../../index.php/transferMobileMoney/convertCurrency?currency=BDT&amount="+valueAmoutBDT+"&method=<?php echo $_POST['TransferToMobile']['method']; ?>",true)
             http.send(null);
+        }else{
+            document.getElementById('amountfielEUR').value = 'Invalid';
+            document.getElementById('secondButton').style.display = 'none';
         }
 
 
     }
 
 
-    function handleChange1(argument,total) {
+    function handleChange1(argument,total,id) {
 
         for (var i = 0; i < total ; i++) {
             document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
         }
         document.getElementById('productLabel'+argument).style.backgroundColor = 'dd8980';
+
+        document.getElementById('secondButton').style.display = 'inline';
 
         document.getElementById('productinput'+argument).checked = true;
         window.productInputSelected = argument
@@ -247,8 +280,15 @@ $fieldOption = array('class' => 'input');
         document.getElementById('buying_price').style.display = 'inline';
         document.getElementById('buying_price').value = 'R';
 
-         document.getElementById('amountfielEUR').value = '';
-          document.getElementById('amountfielBDT').value = '';
+        document.getElementById('amountfielEUR').value = '';
+        document.getElementById('amountfielBDT').value = '';
+
+        var http = new XMLHttpRequest();
+
+
+        http.open("GET", "../../index.php/transferMobileMoney/setProductId?id="+id,true)
+        http.send(null);
+
     }
 
 </script>

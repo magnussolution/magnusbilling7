@@ -68,10 +68,12 @@ $fieldOption = array('class' => 'input');
         'style'   => 'color:blue; font-size:20',
     )) ?>
             <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
+             <p class="hint"><?php echo $amountDetails ?></p>
 
         </div>
 
      </div>
+<br>
 <br>
 <?php endif?>
 
@@ -81,7 +83,7 @@ $fieldOption = array('class' => 'input');
         <?php foreach (Yii::app()->session['amounts'] as $key => $value): ?>
             <label for="2" class="company__row" id="productLabel<?php echo $id ?>">
                     <input type="radio"  id="productinput<?php echo $id ?>" name="amountValues" value="<?php echo $key ?>">
-                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo count(Yii::app()->session['amounts']) ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
+                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo $id + 1 ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
                 </label>
                 <?php $id++;?>
         <?php endforeach;?>
@@ -90,8 +92,10 @@ $fieldOption = array('class' => 'input');
 </div>
 
 
-
-
+<div class='field' id="aditionalInfo" style="display:none; border:0">
+    <label>Additional Info</label>
+    <div id="aditionalInfoText" class="input" style="border:0; width:650px" ></div>
+</div>
 
 
 
@@ -119,13 +123,23 @@ $fieldOption = array('class' => 'input');
 
     function getBuyingPrice(argument) {
 
+
+        if (document.getElementById('amountfielBDT') && document.getElementById('amountfielBDT').value > 0) {
+             valueAmoutBDT = document.getElementById('amountfielBDT').value;
+            var id = 0;
+        }else{
+            var id =  document.getElementById('productinput'+window.productInputSelected).value;
+            valueAmoutBDT = 0;
+        }
+
+
         amountValuesEUR = document.getElementById('amountfielEUR').value;
-        valueAmoutBDT = document.getElementById('amountfielBDT').value;
+
         if (document.getElementById('buying_price').value != 'R') {
             document.getElementById('buying_price').value = 'R';
         }else{
 
-            if (amountValuesEUR > 0) {
+
                 var http = new XMLHttpRequest()
 
                 http.onreadystatechange = function() {
@@ -134,9 +148,9 @@ $fieldOption = array('class' => 'input');
                     }
                 };
 
-                http.open("GET", "../../index.php/transferPayment/getBuyingPriceDBService?valueAmoutBDT="+valueAmoutBDT+"&valueAmoutEUR="+amountValuesEUR+"&country=<?php echo isset($_POST['TransferToMobile']['country']) ? $_POST['TransferToMobile']['method'] : 0 ?>",true)
+                http.open("GET", "../../index.php/transferPayment/getBuyingPrice?id="+id+"&valueAmoutBDT="+valueAmoutBDT+"&valueAmoutEUR="+amountValuesEUR+"&country=<?php echo isset($_POST['TransferToMobile']['country']) ? $_POST['TransferToMobile']['method'] : 0 ?>",true)
                 http.send(null);
-            }
+
         }
 
 
@@ -193,6 +207,9 @@ $fieldOption = array('class' => 'input');
 
             http.open("GET", "../../index.php/transferPayment/convertCurrency?currency=EUR&amount="+valueAmoutEUR+"&country=<?php echo $_POST['TransferToMobile']['country']; ?>",true)
             http.send(null);
+        }else{
+            document.getElementById('amountfielEUR').value = 'Invalid';
+            document.getElementById('secondButton').style.display = 'none';
         }
 
 
@@ -210,9 +227,22 @@ $fieldOption = array('class' => 'input');
         }
 
         valueAmoutBDT = document.getElementById('amountfielBDT').value;
+         //verify if inserted amount is allowed
+        min = '<?php echo Yii::app()->session['allowedAmountmin']; ?>';
+        max = '<?php echo Yii::app()->session['allowedAmountmax']; ?>';
 
 
-        if (valueAmoutBDT > 0) {
+        if (parseInt(valueAmoutBDT) < parseInt(min)) {
+           document.getElementById('amountfielEUR').value = 'Invalid Min';
+           document.getElementById('secondButton').style.display = 'none';
+        }
+        else if (parseInt(valueAmoutBDT) > parseInt(max)) {
+
+            console.log(parseInt(valueAmoutBDT) + ' > '+parseInt(max));
+           document.getElementById('amountfielEUR').value = 'Invalid Max';
+           document.getElementById('secondButton').style.display = 'none';
+        }
+        else if (valueAmoutBDT > 0) {
             var http = new XMLHttpRequest()
 
             http.onreadystatechange = function() {
@@ -221,11 +251,15 @@ $fieldOption = array('class' => 'input');
                     document.getElementById('amountfielEUR').value = this.responseText;
                     document.getElementById('buying_price').style.display = 'inline';
                     document.getElementById('buying_price').value = 'R';
+                    document.getElementById('secondButton').style.display = 'inline';
                     }
                 };
 
             http.open("GET", "../../index.php/transferPayment/convertCurrency?currency=BDT&amount="+valueAmoutBDT+"&country=<?php echo $_POST['TransferToMobile']['country']; ?>",true)
             http.send(null);
+        }else{
+            document.getElementById('amountfielEUR').value = 'Invalid';
+            document.getElementById('secondButton').style.display = 'none';
         }
 
 
@@ -234,10 +268,23 @@ $fieldOption = array('class' => 'input');
 
     function handleChange1(argument,total) {
 
-        for (var i = 0; i < total ; i++) {
+        document.getElementById('secondButton').style.display = 'inline';
+
+        if (document.getElementById('amountfielEUR') ) {
+            document.getElementById('amountfielEUR').value = '';
+        }
+        if (document.getElementById('amountfielBDT')) {
+            document.getElementById('amountfielBDT').value = '';
+        }
+
+
+        for (var i = 0; i < 30 ; i++) {
+            if ( !document.getElementById('productLabel'+i)) {
+                break;
+            }
             document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
         }
-        document.getElementById('productLabel'+argument).style.backgroundColor = 'dd8980';
+         document.getElementById('productLabel'+argument).style.backgroundColor = '#dd8980';
 
         document.getElementById('productinput'+argument).checked = true;
         window.productInputSelected = argument
@@ -245,8 +292,18 @@ $fieldOption = array('class' => 'input');
         document.getElementById('buying_price').style.display = 'inline';
         document.getElementById('buying_price').value = 'R';
 
-         document.getElementById('amountfielEUR').value = '';
-          document.getElementById('amountfielBDT').value = '';
+        idProduct = document.getElementById('productinput'+argument).value;
+        var http = new XMLHttpRequest()
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('aditionalInfo').style.display = 'inline';
+                document.getElementById('aditionalInfoText').innerHTML = this.responseText;
+
+
+            }
+        }
+        http.open("GET", "../../index.php/TransferPayment/getProductTax?id="+idProduct);
+        http.send(null);
     }
 
 </script>

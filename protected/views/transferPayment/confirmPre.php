@@ -46,6 +46,8 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->amountValuesBDT ?></div>
 	<label>Meter:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->meter ?></div>
+		<label>Number:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
 	<label>Meter owner name:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo Yii::app()->session['metric_operator_name'] ?></div>
 </div>
@@ -58,6 +60,7 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 <?php echo $form->hiddenField($modelTransferToMobile, 'type', array('value' => $this->modelTransferToMobile->type)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesBDT', array('value' => $this->modelTransferToMobile->amountValuesBDT)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'meter', array('value' => $this->modelTransferToMobile->meter)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $this->modelTransferToMobile->number)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'confirmed', array('value' => 'ok')); ?>
 
 

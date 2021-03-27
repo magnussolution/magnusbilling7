@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 
 <?php
-
 $form = $this->beginWidget('CActiveForm', array(
     'id'                   => 'contactform',
     'htmlOptions'          => array('class' => 'rounded'),
@@ -28,7 +27,7 @@ $form = $this->beginWidget('CActiveForm', array(
 	<label>Amount BDT:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['amountValuesBDT'] ?></div>
 	<label>Amount to be collected EUR:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['amountValuesEUR'] ?></div>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo number_format( $_POST['TransferToMobile']['amountValuesEUR'],2) ?></div>
 </div>
 
 <?php echo $form->hiddenField($modelTransferToMobile, 'method', array('value' => $_POST['TransferToMobile']['method'])); ?>
@@ -36,6 +35,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $_POST['TransferToMobile']['number'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesBDT', array('value' => $_POST['TransferToMobile']['amountValuesBDT'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesEUR', array('value' => $_POST['TransferToMobile']['amountValuesEUR'])); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'product_id', array('value' => Yii::app()->session['id_product'])); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'confirmed', array('value' => 'ok')); ?>
 
 

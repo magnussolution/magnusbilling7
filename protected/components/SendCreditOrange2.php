@@ -13,23 +13,93 @@ class SendCreditOrange2
     {
         $date = date_create($post['creationdate']);
 
+        switch ($_POST['TransferToMobile']['country']) {
+            case 'Benin':
+                $CC = 'BJ';
+                $id = 1;
+                break;
+            case 'Burkina Faso':
+                $CC = 'BF';
+                $id = 2;
+                break;
+            case 'Ivory Coast':
+                $CC = 'CI';
+                $id = 1;
+                break;
+            case 'Gambia':
+                $CC = 'GM';
+                $id = 1;
+                break;
+            case 'Ghana':
+                $CC = 'GH';
+                $id = 1;
+                break;
+            case 'Guinea':
+                $CC = 'GN';
+                $id = 1;
+                break;
+            case 'Guinea-Bissau':
+                $CC = 'GW';
+                $id = 1;
+                break;
+            case 'Mauritania':
+                $CC = 'MR';
+                $id = 1;
+                break;
+            case 'Morocco':
+                $CC = 'MA';
+                $id = 1;
+                break;
+            case 'Sierra Leone':
+                $CC = 'SL';
+                $id = 1;
+                break;
+            case 'Togo':
+                $CC = 'TG';
+                $id = 1;
+                break;
+            case 'Mali':
+                $CC = 'ML';
+                $id = 1;
+                break;
+            case 'Nigeria':
+                $CC = 'NG';
+                $id = 1;
+                break;
+            case 'Senegal':
+                $CC = 'SN';
+                $id = 1;
+                break;
+            default:
+                $CC = 'SN';
+                $id = 1;
+                return false;
+                break;
+        }
+
         $order = array(
             "beneficiary"   => array(
-                'mobile' => '+221786434468',
-                "name"   => "Ibra",
+                'mobile' => '+' . $post['phone'],
+                "name"   => "ABC",
 
             ),
             "type"          => "bill",
             "billOrderData" => [
                 "billType" => [
-                    "id" => 1,
+                    "id"      => $id,
+                    "country" => [
+                        "id"   => $CC,
+                        "name" => $_POST['TransferToMobile']['country'],
+                    ],
                 ],
-                'data'     => "{\"number\":\"" . $post['number'] . "\",\"date\":\"" . date_format($date, "d/m/Y") . "\"}",
+                'data'     => "{\"number\":\"" . $post['number'] . "\",\"date\":\"" . date_format($date, "d/m/Y") . "\",\"distrubutionCode\":\"" . $_POST['TransferToMobile']['zipcode'] . "\"}",
             ],
             "targetTotal"   => $post['bill_amount'],
 
         );
-
+        //echo '<pre>';
+        //print_r($order);
+        //exit;
         return SendCreditOrange2::sendOrder($order);
 
     }
@@ -37,17 +107,26 @@ class SendCreditOrange2
     public static function sendCredit($number, $modelSendCreditRates, $test)
     {
 
-        $order = array(
-            "type"        => "cashpower",
-            "targetTotal" => $modelSendCreditRates->idProduct->product,
-            "beneficiary" => array(
-                'mobile' => '+' . $number,
-                "name"   => "ABC",
+        if (!isset($_POST['TransferToMobile']['meter'])) {
+            $order = SendCreditOrange2::sendPayment($number, $modelSendCreditRates, $test);
 
-            ),
-            "meterId"     => $_POST['TransferToMobile']['meter'],
-        );
+        } else {
 
+            if (preg_match('/-/', $modelSendCreditRates->idProduct->product)) {
+                $modelSendCreditRates->idProduct->product = $_POST['TransferToMobile']['amountValuesBDT'];
+            }
+
+            $order = array(
+                "type"        => "cashpower",
+                "targetTotal" => $modelSendCreditRates->idProduct->product,
+                "beneficiary" => array(
+                    'mobile' => '+' . $number,
+                    "name"   => "ABC",
+
+                ),
+                "meterId"     => $_POST['TransferToMobile']['meter'],
+            );
+        }
         return SendCreditOrange2::sendOrder($order);
 
     }
@@ -97,22 +176,17 @@ class SendCreditOrange2
         curl_close($ch);
 
         $output = json_decode($output, JSON_UNESCAPED_SLASHES);
-
         if (isset($output['id'])) {
             $output = (object) $output;
         }
 
         if (!isset($output->id) || !is_numeric($output->id)) {
-            echo '<pre>';
-            echo "<br><br>";
-            print_r($data_string);
-            print_r($output);
-            echo "<br>RESPONSE<br><br>";
 
-            return 'error_txt=' . print_r($output, true);
+            return 'error_txt=' . print_r($output['message'], true);
         }
 
         $transaction_id = $output->id;
+
         if ($test == 1) {
             $url = 'https://qa.baluwo.com/rest/v1/external/transaction/pay/' . $transaction_id;
         } else {
@@ -137,7 +211,7 @@ class SendCreditOrange2
         $info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        if ($info == 204) {
+        if (preg_match('/204/', $info)) {
             return 'error_txt=Transaction successful=Orange2=' . $transaction_id;
         } else {
             return 'error_txt=Error' . print_r($output, true);
@@ -161,8 +235,38 @@ class SendCreditOrange2
         }
 
         switch ($_POST['TransferToMobile']['country']) {
+            case 'Benin':
+                $CC = 'BJ';
+                break;
+            case 'Burkina Faso':
+                $CC = 'BF';
+                break;
+            case 'Ivory Coast':
+                $CC = 'CI';
+                break;
             case 'Gambia':
                 $CC = 'GM';
+                break;
+            case 'Ghana':
+                $CC = 'GH';
+                break;
+            case 'Guinea':
+                $CC = 'GN';
+                break;
+            case 'Guinea-Bissau':
+                $CC = 'GW';
+                break;
+            case 'Mauritania':
+                $CC = 'MR';
+                break;
+            case 'Morocco':
+                $CC = 'MA';
+                break;
+            case 'Sierra Leone':
+                $CC = 'SL';
+                break;
+            case 'Togo':
+                $CC = 'TG';
                 break;
             case 'Mali':
                 $CC = 'ML';
@@ -173,7 +277,6 @@ class SendCreditOrange2
             case 'Senegal':
                 $CC = 'SN';
                 break;
-
             default:
                 return false;
                 break;
@@ -190,7 +293,7 @@ class SendCreditOrange2
         curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 7);
         curl_setopt($ch, CURLOPT_HEADER, true);
         $output = curl_exec($ch);
 
@@ -204,24 +307,44 @@ class SendCreditOrange2
 
             return substr($output[1], 0, -2);
         } else {
-            return false;
+            return 'Unknown';
         }
 
     }
 
-    public function sendPayment($data = '')
+    public function sendPayment($number, $modelSendCreditRates, $test)
     {
-        echo '<pre>';
-        print_r($data);
-        exit;
-        $order = array(
-            "type"        => "airtime",
-            "targetTotal" => $modelSendCreditRates->idProduct->product,
-            "beneficiary" => array(
-                'mobile' => '+' . $number,
-                "name"   => "ABC",
 
-            ));
+        $modelSendCreditProducts = SendCreditProducts::model()->findByPk((int) $modelSendCreditRates->id_product);
+
+        if (preg_match('/Bundle/', $modelSendCreditProducts->operator_name)) {
+            $type = 'airdata';
+        } else {
+            $type = 'airtime';
+        }
+
+        if (preg_match('/\-/', $modelSendCreditRates->idProduct->product)) {
+
+            $order = array(
+                "type"        => $type,
+                "targetTotal" => $_POST['TransferToMobile']['amountValuesBDT'],
+                "beneficiary" => array(
+                    'mobile' => '+' . $number,
+                    "name"   => "ABC",
+
+                ));
+        } else {
+            $order = array(
+                "type"        => $type,
+                "targetTotal" => $modelSendCreditRates->idProduct->product,
+                "beneficiary" => array(
+                    'mobile' => '+' . $number,
+                    "name"   => "ABC",
+
+                ));
+        }
+
+        return $order;
 
     }
 

@@ -46,10 +46,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 <div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Number')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Phone Number')) ?>
     <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Number') ?></p>
+    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Phone Number') ?></p>
 </div>
 
 
