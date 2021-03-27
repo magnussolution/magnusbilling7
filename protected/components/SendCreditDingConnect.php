@@ -21,8 +21,11 @@ class SendCreditDingConnect
         return $config['global']['ding_api'];
     }
 
-    public static function sendCredit($number, $send_value, $SkuCode, $test)
+    public static function sendCredit($number, $modelSendCreditRates, $SkuCode, $test)
     {
+
+        $send_value = $modelSendCreditRates->idProduct->send_value;
+        $SkuCode    = $modelSendCreditRates->idProduct->SkuCode;
 
         if ($send_value == 0) {
 
@@ -31,7 +34,7 @@ class SendCreditDingConnect
                 "SendValue"       => 5,
                 "SendCurrencyIso" => "EUR",
                 "ReceiveValue"    => 0,
-                "SkuCode"         => "BD_AX_TopUp",
+                "SkuCode"         => $SkuCode,
                 "BatchItemRef"    => "string",
             ]];
 
@@ -54,21 +57,41 @@ class SendCreditDingConnect
 
             if (isset($result->Items[0]->Price->ReceiveValue)) {
 
-                $send_value = number_format(5 / $result->Items[0]->Price->ReceiveValue * $_POST['TransferToMobile']['amountValuesBDT'], 2);
-                $end_value  = number_format($send_value * 1.01);
+                if (isset($_POST['TransferToMobile']['amountValuesBDT']) && $_POST['TransferToMobile']['amountValuesBDT'] > 0) {
+                    $send_value = ((5 / $result->Items[0]->Price->ReceiveValue) * $_POST['TransferToMobile']['amountValuesBDT']) * 1.01;
+                } else {
+                    $send_value = ((5 / $result->Items[0]->Price->ReceiveValue) * $modelSendCreditRates->idProduct->product) * 1.01;
+                }
+                $send_value_to_api = $send_value;
+                $send_value        = number_format($send_value, 2);
 
             } else {
                 exit('invalid amount receiveValue');
             }
+            /*
+        echo '<pre>';
+        echo '<pre>';
+        print_r($modelSendCreditRates->getAttributes());
+        print_r($modelSendCreditRates->idProduct->getAttributes());
+        print_r($result);
 
+        echo '((5 / ' . $result->Items[0]->Price->ReceiveValue . ') *' . $_POST['TransferToMobile']['amountValuesBDT'] . ') + 1%)<br>';
+        echo 'send_value = ' . $send_value . "<br>";
+
+        exit;
+         */
+
+        } else {
+            $send_value_to_api = $send_value;
         }
+
         //SendCreditDingConnect::getProducts('VOBR');
         if (preg_match('/^00/', $number)) {
             $number = substr($number, 2);
         }
         $post = array(
             "SkuCode"        => $SkuCode,
-            "SendValue"      => $send_value,
+            "SendValue"      => $send_value_to_api,
             "AccountNumber"  => $number,
             "DistributorRef" => $number,
             "ValidateOnly"   => $test,
@@ -95,6 +118,11 @@ class SendCreditDingConnect
             //echo '<pre>';
             print_r($post);
             print_r($result);
+        }
+
+        if ($result->TransferRecord->ProcessingState == 'Failed') {
+            unset($result->TransferRecord->ReceiptParams);
+
         }
 
         return $result->TransferRecord->ProcessingState == 'Complete' ? 'error_txt=Transaction successful' : 'error_txt=' . $result->ErrorCodes[0]->Code . ' ' . $result->ErrorCodes[0]->Context;

@@ -48,7 +48,7 @@ $fieldOption['readonly'] = true;
     <?php
 
 $modelSendCreditProducts = SendCreditProducts::model()->findAll(array(
-    'condition' => 'country = :key AND type = :key1',
+    'condition' => 'country = :key AND type = :key1 AND status = 1',
     'params'    => array(
         ':key'  => $modelTransferToMobile->country,
         ':key1' => 'Mobile Credit',
@@ -88,7 +88,6 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
 
 <?php if (Yii::app()->session['is_interval'] == true): ?>
 
-
 <div id='is_interval'>
 <br>
 
@@ -115,12 +114,12 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
         'style'   => 'color:blue; font-size:20',
     )) ?>
         <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
-
+         <p class="hint"><?php echo $amountDetails ?></p>
     </div>
 
 </div>
 
-<br>
+<br><br>
 <?php endif?>
 
 
@@ -130,7 +129,7 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
         <?php foreach (Yii::app()->session['amounts'] as $key => $value): ?>
             <label for="2" class="company__row" id="productLabel<?php echo $id ?>">
                     <input type="radio"  id="productinput<?php echo $id ?>" name="amountValues" value="<?php echo $key ?>">
-                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo count(Yii::app()->session['amounts']) ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
+                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo $id + 1 ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
                 </label>
                 <?php $id++;?>
         <?php endforeach;?>
@@ -163,17 +162,35 @@ $this->endWidget();?>
 
 <script type="text/javascript">
 
+    function getMaxMin(amount) {
+        var http = new XMLHttpRequest()
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                        //document.getElementById('buying_price').value = this.responseText;
+                        console(this.responseText);
+                    }
+                };
+
+            http.open("GET", "../../index.php/TransferMobileCredit/getMaxMin?valueAmoutBDT="+amount,true)
+            http.send(null);
+    }
 
     function showPriceEUR(sell_price) {
 
         for (var i = 0; i < 20 ; i++) {
+
             if (document.getElementById('productLabel'+i)) {
+                document.getElementById('productinput'+i).checked = false;
                 document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
             }else{
                 break;
             }
         }
         valueAmoutEUR = document.getElementById('amountfielEUR').value;
+
+
+
 
         if (valueAmoutEUR > 0) {
 
@@ -184,7 +201,31 @@ $this->endWidget();?>
             document.getElementById('buying_price').value = 'R';
             document.getElementById('amountfielBDT').value = value.toFixed(0);
 
+            valueAmoutBDT = value.toFixed(0);
+            //verify if inserted amount is allowed
+            min = '<?php echo Yii::app()->session['allowedAmountmin']; ?>';
+            max = '<?php echo Yii::app()->session['allowedAmountmax']; ?>';
+
+
+            if (valueAmoutBDT < min.toFixed(0)) {
+               document.getElementById('amountfielBDT').value = 'Invalid';
+               document.getElementById('secondButton').style.display = 'none';
+            }
+            else if (valueAmoutBDT > max) {
+               document.getElementById('amountfielBDT').value = 'Invalid';
+               document.getElementById('secondButton').style.display = 'none';
+            }else{
+                document.getElementById('secondButton').style.display = 'inline';
+            }
+        }else{
+            document.getElementById('amountfielBDT').value = 'Invalid';
+            document.getElementById('secondButton').style.display = 'none';
         }
+
+
+
+
+
     }
 
     function showPriceBDT(sell_price) {
@@ -192,6 +233,7 @@ $this->endWidget();?>
 
         for (var i = 0; i < 20 ; i++) {
             if (document.getElementById('productLabel'+i)) {
+                document.getElementById('productinput'+i).checked = false;
                 document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
             }else{
                 break;
@@ -200,21 +242,48 @@ $this->endWidget();?>
 
 
         valueAmoutBDT = document.getElementById('amountfielBDT').value;
+        //verify if inserted amount is allowed
+        min = '<?php echo Yii::app()->session['allowedAmountmin']; ?>';
+        max = '<?php echo Yii::app()->session['allowedAmountmax']; ?>';
 
-        if (valueAmoutBDT > 0) {
+
+
+        if (valueAmoutBDT < parseInt(min)) {
+           document.getElementById('amountfielEUR').value = 'Invalid';
+           document.getElementById('secondButton').style.display = 'none';
+        }
+        else if (valueAmoutBDT > parseInt(max)) {
+           document.getElementById('amountfielEUR').value = 'Invalid';
+           document.getElementById('secondButton').style.display = 'none';
+        }
+        else if (valueAmoutBDT > 0) {
 
             value = valueAmoutBDT * sell_price;
             document.getElementById('amountfielEUR').value = value.toFixed(2);
             document.getElementById('buying_price').style.display = 'inline';
             document.getElementById('buying_price').value = 'R';
+            document.getElementById('secondButton').style.display = 'inline';
 
-        }``
+        }else{
+            document.getElementById('amountfielEUR').value = 'Invalid';
+            document.getElementById('secondButton').style.display = 'none';
+        }
     }
 
 
 
     function getBuyingPrice(argument) {
-        var id =  document.getElementById('productinput'+window.productInputSelected).value;
+
+
+        if (document.getElementById('amountfielBDT') && document.getElementById('amountfielBDT').value > 0) {
+             valueAmoutBDT = document.getElementById('amountfielBDT').value;
+            var id = 0;
+        }else{
+            var id =  document.getElementById('productinput'+window.productInputSelected).value;
+            valueAmoutBDT = 0;
+        }
+
+
 
 
         operator = document.getElementById('operatorfield').options[document.getElementById('operatorfield').selectedIndex].text;
@@ -222,18 +291,18 @@ $this->endWidget();?>
             document.getElementById('buying_price').value = 'R';
         }else{
 
-            if (id > 0) {
-                var http = new XMLHttpRequest()
 
-                http.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                            document.getElementById('buying_price').value = this.responseText;
-                        }
-                    };
+            var http = new XMLHttpRequest()
 
-                http.open("GET", "../../index.php/TransferMobileCredit/getBuyingPrice?id="+id+"&method=<?php echo isset($_POST['TransferMobileCredit']['method']) ? $_POST['TransferMobileCredit']['method'] : 0 ?>&operatorname="+operator,true)
-                http.send(null);
-            }
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById('buying_price').value = this.responseText;
+                    }
+                };
+
+            http.open("GET", "../../index.php/TransferMobileCredit/getBuyingPrice?id="+id+"&method=<?php echo isset($_POST['TransferMobileCredit']['method']) ? $_POST['TransferMobileCredit']['method'] : 0 ?>&operatorname="+operator+"&valueAmoutBDT="+valueAmoutBDT,true)
+            http.send(null);
+
         }
     }
 
@@ -291,6 +360,16 @@ $this->endWidget();?>
 
         operator = document.getElementById('operatorfield').options[document.getElementById('operatorfield').selectedIndex].text;
 
+
+        if (operator == 'Select the operator') {
+            document.getElementById("productList").innerHTML = '';
+            document.getElementById('secondButton').style.display = 'none';
+            document.getElementById('is_interval').style.display = 'none';
+
+            return;
+        }else{
+            document.getElementById('secondButton').style.display = 'inline';
+        }
         if (operator == 'SENELEC - Senegal' || operator == 'NAWEC - Gambia' || operator== 'EDM - Mali' || operator == 'EEDC - Nigeria'){
             document.getElementById('metric').style.display = 'inline';
         }else{
@@ -305,12 +384,15 @@ $this->endWidget();?>
 
                if (this.responseText.substr(-12) == '|is_interval'){
                     document.getElementById('is_interval').style.display = 'inline';
+                    document.getElementById("productList").innerHTML = this.responseText.replace('|is_interval','');
                }else{
-                    document.getElementById('is_interval').style.display = 'none';
+
+                    document.getElementById("productList").innerHTML = this.responseText;
+                    if (document.getElementById('is_interval')) {
+                        document.getElementById('is_interval').style.display = 'none';
+                    }
                }
 
-
-                document.getElementById("productList").innerHTML = result[0];
             }
         }
 
@@ -326,13 +408,28 @@ $this->endWidget();?>
     var currentValue = 0;
     function handleChange1(argument,total) {
 
-         document.getElementById('amountfielEUR').value = '';
-                document.getElementById('amountfielBDT').value = '';
 
-        for (var i = 0; i < total ; i++) {
+
+        document.getElementById('secondButton').style.display = 'inline';
+
+        if (document.getElementById('amountfielEUR') ) {
+            document.getElementById('amountfielEUR').value = '';
+        }
+        if (document.getElementById('amountfielBDT')) {
+            document.getElementById('amountfielBDT').value = '';
+        }
+
+
+
+        for (var i = 0; i < 30 ; i++) {
+            if ( !document.getElementById('productLabel'+i)) {
+                break;
+            }
             document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
         }
-        document.getElementById('productLabel'+argument).style.backgroundColor = 'dd8980';
+        document.getElementById('productLabel'+argument).style.backgroundColor = '#dd8980';
+
+         document.getElementById('secondButton').style.display = 'inline';
 
         document.getElementById('productinput'+argument).checked = true;
         window.productInputSelected = argument

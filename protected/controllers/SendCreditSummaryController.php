@@ -22,7 +22,7 @@
 
 class SendCreditSummaryController extends Controller
 {
-    public $attributeOrder = 't.id DESC';
+    public $attributeOrder = 't.date DESC';
 
     public function actionRead($asJson = true, $condition = null)
     {
@@ -40,6 +40,10 @@ class SendCreditSummaryController extends Controller
         ? $_POST['SendCreditSummary']['service']
         : 'All';
 
+        $model->number = isset($_POST['SendCreditSummary']['number'])
+        ? $_POST['SendCreditSummary']['number']
+        : '';
+
         if (Yii::app()->session['isAdmin'] != 1) {
             $_POST['SendCreditSummary']['id'] = Yii::app()->session['id_user'];
         } else {
@@ -48,7 +52,7 @@ class SendCreditSummaryController extends Controller
             : 1;
         }
 
-        $this->filter = 'confirmed = 1 AND earned IS NOT NULL ';
+        $this->filter = 'confirmed IN (0,1) AND earned IS NOT NULL ';
         if (isset($_POST['SendCreditSummary']['id']) && $_POST['SendCreditSummary']['id'] > 1) {
             $this->filter .= ' AND id_user = :id_user';
             $this->paramsFilter['id_user'] = $_POST['SendCreditSummary']['id'];
@@ -59,20 +63,38 @@ class SendCreditSummaryController extends Controller
         $this->paramsFilter['stopdate'] = $model->stopdate . ' 23:59:59';
 
         if ($model->service != 'all') {
+
             $this->filter .= ' AND service LIKE :service';
             $this->paramsFilter['service'] = $model->service;
+
         }
 
-        $this->select = '*, count(*) count, sum(sell) total_sale, sum(cost) total_cost, sum(earned) earned, DATE(date) AS day, date';
-        $this->group  = 'day, service';
+        if (is_numeric($model->number)) {
+            $this->filter .= ' AND number LIKE :number';
+            $this->paramsFilter['number'] = $model->number . '%';
+        }
+        /*
+        $modelSendCreditSummary = SendCreditSummary::model()->findAll();
+        foreach ($modelSendCreditSummary as $key => $value) {
 
+        $modelRefill = Refill::model()->find('invoice_number = :key', [':key' => $value->id]);
+        if (isset($modelRefill->description)) {
+        # code...
+
+        $res                   = explode('-', $modelRefill->description);
+        $res                   = explode(' ', $res[0]);
+        $value->received_amout = $res[2] . ' ' . $res[3];
+
+        $value->save();
+        }
+
+        }
+         */
         $modelSendCreditSummary = SendCreditSummary::model()->findAll(array(
             'select'    => $this->select,
-            'join'      => $this->join,
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
-            'order'     => $this->order,
-            'group'     => $this->group,
+            'order'     => 'date DESC, service',
         ));
 
         $this->render('index', array(

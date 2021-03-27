@@ -21,20 +21,24 @@ class SendCreditReload
          */
         $client_id     = $config['global']['reloadly_client_id'];
         $client_secret = $config['global']['reloadly_client_secret'];
-        $ch            = curl_init();
+
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://auth.reloadly.com/oauth/token");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_POST, true);
 
-        $testing = "https://topups-sandbox.reloadly.com";
-        $live    = "https://topups.reloadly.com";
+        if ($config['global']['reloadly_sandbox'] == 1) {
+            $url = "https://topups-sandbox.reloadly.com";
+        } else {
+            $url = "https://topups.reloadly.com";
+        }
 
         $requestBody = json_encode([
             "client_id"     => $client_id,
             "client_secret" => $client_secret,
             "grant_type"    => "client_credentials",
-            "audience"      => $live,
+            "audience"      => $url,
         ]);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
@@ -55,6 +59,7 @@ class SendCreditReload
 
     public function getCountry($countryCode = '')
     {
+
         $ch       = curl_init();
         $response = curl_exec($ch);
         curl_close($ch);
@@ -91,8 +96,8 @@ class SendCreditReload
 
     public function getOperator($number = '', $access_token)
     {
-        $ch = curl_init();
 
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://topups.reloadly.com/operators/auto-detect/phone/+" . $number . "/countries/BR?&includeBundles=true");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -148,12 +153,21 @@ class SendCreditReload
 
             if (isset($result->fxRate)) {
 
-                $modelSendCreditRates->idProduct->send_value = number_format((1 / $result->fxRate * $_POST['TransferToMobile']['amountValuesBDT']), 2);
-                $modelSendCreditRates->idProduct->send_value = number_format($modelSendCreditRates->idProduct->send_value * 1.01);
+                if (isset($_POST['TransferToMobile']['amountValuesBDT']) && $_POST['TransferToMobile']['amountValuesBDT'] > 0) {
+                    $modelSendCreditRates->idProduct->send_value = ((1 / $result->fxRate) * $_POST['TransferToMobile']['amountValuesBDT']) * 1.01;
+                } else {
+                    $modelSendCreditRates->idProduct->send_value = ((1 / $result->fxRate) * $modelSendCreditRates->idProduct->product) * 1.01;
+                }
+
+                $send_value_to_api                           = $modelSendCreditRates->idProduct->send_value;
+                $modelSendCreditRates->idProduct->send_value = number_format($modelSendCreditRates->idProduct->send_value, 2);
+
             } else {
                 exit('invalid amount receiveValue');
             }
 
+        } else {
+            $send_value_to_api = $modelSendCreditRates->idProduct->send_value;
         }
 
         $ch = curl_init();
@@ -173,8 +187,8 @@ class SendCreditReload
                 'number'      => '+13059547862',
             ],
             'operatorId'       => $operatorId,
-            'amount'           => $modelSendCreditRates->idProduct->send_value,
-            'customIdentifier' => 'Transaction from user ' . Yii::app()->session['username'] . ' ' . time(),
+            'amount'           => $send_value_to_api,
+            //'customIdentifier' => 'Transaction from user ' . Yii::app()->session['username'] . ' ' . time(),
 
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $requestFields);

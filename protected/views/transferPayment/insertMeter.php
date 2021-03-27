@@ -71,7 +71,28 @@ $this->endWidget();?>
     function checknumber() {
          meter = document.getElementById('meter').value;
          country = document.getElementById('country').value;
+         document.getElementById("secondButton").style.display = 'none';
 
+         countries = ['Benin',
+                    'Burkina Faso' ,
+                    'Ivory Coast' ,
+                    'Gambia' ,
+                    'Ghana' ,
+                    'Guinea' ,
+                    'Guinea Bissau',
+                    'Mali' ,
+                    'Mauritania' ,
+                    'Morocco' ,
+                    'Nigeria' ,
+                    'Senegal' ,
+                    'Sierra Leone' ,
+                    'Togo'];
+
+        if ( !countries.includes(country)) {
+             document.getElementById("secondButton").style.display = 'inline';
+
+            return;
+        }
         if (meter > 0) {
              document.getElementById("check_number").style.display = 'none';
             document.getElementById("buttondivWait").innerHTML = "<font color = green>Wait! </font>";
@@ -79,7 +100,7 @@ $this->endWidget();?>
 
             http.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    alert("Meter operator name is: "+this.responseText);
+                    alert("Meter owner is: "+this.responseText);
                        document.getElementById("check_number").style.display = 'inline';
                         document.getElementById("buttondivWait").innerHTML = "";
 

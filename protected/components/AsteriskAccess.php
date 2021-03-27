@@ -274,30 +274,24 @@ class AsteriskAccess
 
                     if ($data['type'] == 'asterisk') {
                         $line = "\n\n[" . preg_replace('/ /', '', strtolower($data['name'])) . "]\n";
-                        $line .= 'host=' . $data['host'] . "\n";
                         $line .= 'context=slave' . "\n";
                     } else if ($data['type'] == 'sipproxy') {
 
-                        $line = "\n\n[sipproxy-" . preg_replace('/ /', '', strtolower($data['name'])) . "]\n";
-                        $line .= 'host=' . $data['host'] . "\n";
-                        $line .= 'fromdomain=' . $data['host'] . "\n";
+                        $line = "\n\n[sipproxy-" . preg_replace('/ /', '', strtolower($data['name'])) . "-" . $data['id'] . "]\n";
                         $line .= 'accountcode=sipproxy' . "\n";
                         $line .= 'context=proxy' . "\n";
-                        $line .= 'directmedia=yes' . "\n";
-                        $line .= 'nat=no' . "\n";
                     } else if ($data['type'] == 'mbilling') {
-
                         $line = "\n\n[mbilling]\n";
-                        $line .= 'host=' . $data['host'] . "\n";
                         $line .= 'context=slave' . "\n";
-                        $line .= 'directmedia=no' . "\n";
-                        $line .= 'nat=force_rport,comedia' . "\n";
                     }
+                    $line .= 'host=' . $data['host'] . "\n";
                     $line .= 'disallow=all' . "\n";
                     $line .= 'allow=g729,alaw,ulaw' . "\n";
                     $line .= 'dtmfmode=RFC2833' . "\n";
                     $line .= 'insecure=invite' . "\n";
-                    $line .= 'nat=no' . "\n";
+
+                    $line .= 'directmedia=no' . "\n";
+                    $line .= 'nat=force_rport,comedia' . "\n";
                     $line .= 'qualify=no' . "\n";
                     $line .= 'type=friend' . "\n";
                     $line .= 'sendrpid=no' . "\n";

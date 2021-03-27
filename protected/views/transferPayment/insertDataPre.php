@@ -1,3 +1,5 @@
+insertdataPre
+
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 
 <?php
@@ -10,56 +12,64 @@ $form = $this->beginWidget('CActiveForm', array(
     'errorMessageCssClass' => 'error',
 ));
 ?>
+<br>
 
-<br/>
+<label>Method</label>
+    <div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $_POST['TransferToMobile']['method'] ?></div>
+
+
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Operator')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
+        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Operator') ?></p>
 </div>
 
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'country') ?>
-</div>
-
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Type')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'type', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'type') ?>
-</div>
-
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Amount')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
-</div>
-
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Meter')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'meter', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'meter') ?>
-</div>
-
-
-<div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Phone Number')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Number')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input', 'readonly' => true)) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Phone Number') ?></p>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
 </div>
+
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Meter')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'metric', array('class' => 'input')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'metric') ?>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Meter') ?></p>
+</div>
+<?php echo $form->hiddenField($modelTransferToMobile, 'method', array('value' => $selectedMethod)); ?>
+
+
+
+<div class="sp-page companies__content" >
+      <div class="company__list" id='productList'>
+        <?php $id = 0;?>
+        <?php foreach (Yii::app()->session['amounts'] as $key => $value): ?>
+            <label for="2" class="company__row" id="productLabel<?php echo $id ?>">
+                    <input type="radio"  id="productinput<?php echo $id ?>" name="amountValues" value="<?php echo $key ?>">
+                    <div  class="company__logo-container" onclick="handleChange1(<?php echo $id ?>,<?php echo count(Yii::app()->session['amounts']) ?>);" id='product<?php echo $id ?>' ><?php echo $value ?></div>
+                </label>
+                <?php $id++;?>
+        <?php endforeach;?>
+
+      </div>
+</div>
+
+
 
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array(
+<?php echo CHtml::submitButton(Yii::t('yii', 'next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));
 ?>
-<input class="button" style="width: 80px;" onclick="window.location='../../index.php/TransferToMobile/read';" value="Cancel">
+<input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
+<input id ='buying_price'  class="button" style="display:none; width: 100px;" onclick="getBuyingPrice()" value="R" readonly>
 </div>
 <div class="controls" id="buttondivWait"></div>
 <?php
@@ -68,12 +78,39 @@ $this->endWidget();?>
 
 
 <script type="text/javascript">
-    function button2(e) {
 
+    function handleChange1(argument,total) {
+
+        for (var i = 0; i < total ; i++) {
+            document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
+        }
+        document.getElementById('productLabel'+argument).style.backgroundColor = 'dd8980';
+
+        document.getElementById('productinput'+argument).checked = true;
+        window.productInputSelected = argument
+
+        document.getElementById('buying_price').style.display = 'inline';
+        document.getElementById('buying_price').value = 'R';
+
+        idProduct = document.getElementById('productinput'+argument).value;
+        var http = new XMLHttpRequest()
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('aditionalInfo').style.display = 'inline';
+                document.getElementById('aditionalInfoText').innerHTML = this.responseText;
+            }
+            }
+
+        http.open("GET", "../../index.php/TransferMobileCredit/getProductTax?id="+idProduct);
+        http.send(null);
+    }
+
+
+    function button2(e) {
         document.getElementById("sendButton").style.display = 'none';
         document.getElementById("buttondivWait").innerHTML = "<font color = green>Wait! </font>";
-
     }
+
 
 </script>
 

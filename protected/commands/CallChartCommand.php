@@ -191,7 +191,7 @@ class CallChartCommand extends ConsoleCommand
 
                             if (!count($modelSip)) {
                                 if ($status == 'Ring') {
-                                    $sip_account =  $originate;
+                                    $sip_account = $originate;
                                 }
                                 if (strlen($sip_account) > 3) {
                                     //echo "check per sip_account $originate\n";
@@ -345,7 +345,11 @@ class CallChartCommand extends ConsoleCommand
                 $sql[] = "(NULL,'" . $uniqueid . "', '$sip_account', $id_user, '$channel', '" . utf8_encode($trunk) . "', '$ndiscado', '" . preg_replace('/\(|\)/', '', $codec) . "', '$status', '$cdr', 'no','no', '" . $call['server'] . "')";
 
                 if (count($callShopIds)) {
-                    if (in_array($modelSip->id_user, $callShopIds)) {
+                    if (in_array($id_user, $callShopIds)) {
+
+                        if (!isset($modelSip->id)) {
+                            $modelSip = Sip::model()->find('name =:key', array(':key' => $sip_account));
+                        }
                         $modelSip->status         = 3;
                         $modelSip->callshopnumber = $ndiscado;
                         $modelSip->callshoptime   = $cdr;

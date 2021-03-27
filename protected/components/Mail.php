@@ -168,6 +168,11 @@ class Mail
                     ':key1' => $modelUser->language,
                     ':key2' => $modelUser->id_user,
                 ));
+
+            if (!isset($modelTemplate->id)) {
+                return;
+            }
+
             $real_credit = $modelUser->typepaid == 1
             ? $modelUser->credit + $modelUser->creditlimit
             : $modelUser->credit;

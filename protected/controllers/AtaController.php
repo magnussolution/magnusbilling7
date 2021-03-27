@@ -33,7 +33,7 @@ class AtaController extends Controller
         $mac    = substr($mac, 0);
 
         $proxy        = $this->config['global']['ip_servers'];
-        $Profile_Rule = "http://" . $proxy . "/mbilling/index.php/ata?mac=\$MAC";
+        $Profile_Rule = "http://" . $proxy . "/mbilling/index.php/ata?mac=$mac";
         $modelo       = explode(" ", $_SERVER["HTTP_USER_AGENT"]);
 
         $modelSipuras = Sipuras::model()->find('macadr = :mac', array(':mac' => $mac));

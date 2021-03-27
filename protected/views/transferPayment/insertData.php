@@ -10,56 +10,70 @@ $form = $this->beginWidget('CActiveForm', array(
     'errorMessageCssClass' => 'error',
 ));
 ?>
-
-<br/>
+<br>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Method')) ?>
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Method')) ?>
         <?php echo $form->textField($modelTransferToMobile, 'method', array('class' => 'input', 'readonly' => true)) ?>
         <?php echo $form->error($modelTransferToMobile, 'method') ?>
+        <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Method') ?></p>
 </div>
 
+<br>
 
 <div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Country')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'country', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'country') ?>
-</div>
-
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Type')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'type', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'type') ?>
-</div>
-
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Amount')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
-</div>
-
-<div class="field">
-        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Meter')) ?>
-        <?php echo $form->textField($modelTransferToMobile, 'meter', array('class' => 'input', 'readonly' => true)) ?>
-        <?php echo $form->error($modelTransferToMobile, 'meter') ?>
-</div>
-
-
-<div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Phone Number')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill No')) ?>
+    <?php echo $form->numberField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Phone Number') ?></p>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'number') ?></p>
 </div>
+
+
+
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill amount')) ?>
+    <?php echo $form->numberField($modelTransferToMobile, 'credit', array('class' => 'input')) ?>
+    <?php echo $form->error($modelTransferToMobile, 'credit') ?>
+    <p class="hint"><?php echo Yii::t('yii', 'Enter your') . ' ' . Yii::t('yii', 'Bill amount') ?></p>
+</div>
+
+
+
+
+<div class="field">
+    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('yii', 'Bill Date:')) ?>
+<?php
+$this->widget(
+    'ext.jui.EJuiDateTimePicker',
+    array(
+        'model'     => $modelTransferToMobile,
+        'attribute' => 'creationdate',
+        'language'  => Yii::app()->language,
+        //'mode'    => 'datetime',//'datetime' or 'time' ('datetime' default)
+
+        'options'   => array(
+            'dateFormat' => 'yy-mm-dd',
+            'timeFormat' => '',
+        ),
+    )
+);
+
+?>
+</div>
+
+<?php echo $form->hiddenField($modelTransferToMobile, 'method', array('value' => $selectedMethod)); ?>
+
 
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array(
+<?php echo CHtml::submitButton(Yii::t('yii', 'next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
     'id'      => 'secondButton'));
 ?>
-<input class="button" style="width: 80px;" onclick="window.location='../../index.php/TransferToMobile/read';" value="Cancel">
+<input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
+<input id ='buying_price'  class="button" style="display:none; width: 100px;" onclick="getBuyingPrice()" value="R" readonly>
 </div>
 <div class="controls" id="buttondivWait"></div>
 <?php
@@ -68,12 +82,14 @@ $this->endWidget();?>
 
 
 <script type="text/javascript">
-    function button2(e) {
 
+
+
+    function button2(e) {
         document.getElementById("sendButton").style.display = 'none';
         document.getElementById("buttondivWait").innerHTML = "<font color = green>Wait! </font>";
-
     }
+
 
 </script>
 

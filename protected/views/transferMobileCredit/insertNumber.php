@@ -23,7 +23,12 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="field">
     <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Number')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+    <?php echo $form->textField($modelTransferToMobile, 'number', 
+        array(
+        'class' => 'input',
+        'id'      => 'number',
+        'onkeyup' => 'showNext(this)',
+        )) ?>
     <?php echo $form->error($modelTransferToMobile, 'number') ?>
     <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Number') ?></p>
 </div>
@@ -33,7 +38,9 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php echo CHtml::submitButton(Yii::t('zii', 'Next'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
-    'id'      => 'secondButton'));
+    'id'      => 'secondButton',
+    'style'   => 'display:none;',
+    ));
 ?>
 <input class="button" style="width: 80px;" onclick="window.location='../../index.php/transferToMobile/read';" value="Cancel">
 </div>
@@ -44,6 +51,18 @@ $this->endWidget();?>
 
 
 <script type="text/javascript">
+
+     function showNext(value) {
+        number = document.getElementById('number').value;
+
+
+        if (number.length >= 7) {
+            document.getElementById("secondButton").style.display = 'inline';
+        }else{
+           document.getElementById("secondButton").style.display = 'none'; 
+        }
+
+     }
     function button2(e) {
 
         document.getElementById("sendButton").style.display = 'none';

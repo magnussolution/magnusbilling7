@@ -33,7 +33,7 @@ $fieldOption = array('class' => 'input');
     <?php
 
 $modelSendCreditProduct = SendCreditProducts::model()->findAll(array(
-    'condition' => ' type = :key1',
+    'condition' => ' type = :key1 AND status = 1',
     'params'    => array(
         ':key1' => 'Payment',
     ),

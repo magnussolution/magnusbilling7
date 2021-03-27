@@ -1,4 +1,4 @@
-
+confirme
 
 <link rel="stylesheet" type="text/css" href="../../resources/css/signup.css" />
 
@@ -16,7 +16,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php
 
 if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobile']['metric'])) {
-    $metric_operator_name = SendCreditOrange2::checkMetric($_POST['TransferToMobile']['metric']);
+    $metric_operator_name = Orange2::checkMetric($_POST['TransferToMobile']['metric']);
 
     if ($metric_operator_name === false) {
         echo '<div align=center id="container">';
@@ -36,43 +36,33 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 
 
 <div class='field' id="aditionalInfo" style="display:inline; border:0">
-	<label>Method:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->method ?></div>
 	<label>Country:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->country ?></div>
-	<label>Type:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->type ?></div>
-	<label>Mobile Number:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->phone ?></div>
-	<label>Contract No:</label>
+	<label>Number:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
-	<label>Distribution code:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->zipcode ?></div>
-	<label>Bill Date:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->creationdate ?></div>
-	<br>
-	<label>Bill amount (<?php echo Yii::app()->session['currency_dest'] ?>):</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->bill_amount ?></div>
-	<label>Paid Amount  (<?php echo Yii::app()->session['currency_orig'] ?>):</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo Yii::app()->session['sell_price'] ?></div>
-
+	<label>Operator:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->type ?></div>
+	<label>Amount:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->amountValuesBDT ?></div>
+	<label>Meter:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->meter ?></div>
+	<label>Meter owner name:</label>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo Yii::app()->session['metric_operator_name'] ?></div>
 </div>
 
 
 
 </div>
 <?php echo $form->hiddenField($modelTransferToMobile, 'country', array('value' => $this->modelTransferToMobile->country)); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'type', array('value' => $this->modelTransferToMobile->type)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'number', array('value' => $this->modelTransferToMobile->number)); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'bill_amount', array('value' => $this->modelTransferToMobile->bill_amount)); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'zipcode', array('value' => $this->modelTransferToMobile->zipcode)); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'creationdate', array('value' => $this->modelTransferToMobile->creationdate)); ?>
-<?php echo $form->hiddenField($modelTransferToMobile, 'phone', array('value' => $this->modelTransferToMobile->phone)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'type', array('value' => $this->modelTransferToMobile->type)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'amountValuesBDT', array('value' => $this->modelTransferToMobile->amountValuesBDT)); ?>
+<?php echo $form->hiddenField($modelTransferToMobile, 'meter', array('value' => $this->modelTransferToMobile->meter)); ?>
 <?php echo $form->hiddenField($modelTransferToMobile, 'confirmed', array('value' => 'ok')); ?>
 
 
 <div class="controls" id="sendButton">
-<?php echo CHtml::submitButton(Yii::t('zii', 'CONFIRM'), array(
+<?php echo CHtml::submitButton(Yii::t('yii', 'CONFIRM'), array(
     'class'   => 'button',
     'onclick' => "return button2(event)",
     'id'      => 'confirmButton'));

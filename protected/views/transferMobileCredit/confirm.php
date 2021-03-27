@@ -49,7 +49,7 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_dest . ' ' . $modelSendCreditRates->idProduct->product ?></div>
 	<?php endif?>
 	<label>Amount to be collected:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . $modelSendCreditRates->sell_price ?></div>
+	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $modelSendCreditRates->idProduct->currency_orig . ' ' . number_format($modelSendCreditRates->sell_price, 2) ?></div>
 
 
 <?php if ($_POST['TransferToMobile']['metric'] != ''): ?>
