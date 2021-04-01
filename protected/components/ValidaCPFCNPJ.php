@@ -117,7 +117,7 @@ class ValidaCPFCNPJ
      * @param  string    $cpf O CPF com ou sem pontos e traço
      * @return bool           True para CPF correto - False para CPF incorreto
      */
-    protected function valida_cpf()
+    public function valida_cpf()
     {
         // Captura os 9 primeiros dígitos do CPF
         // Ex.: 02546288423 = 025462884
@@ -147,7 +147,7 @@ class ValidaCPFCNPJ
      * @param  string     $cnpj
      * @return bool             true para CNPJ correto
      */
-    protected function valida_cnpj()
+    public function valida_cnpj()
     {
         // O valor original
         $cnpj_original = $this->valor;

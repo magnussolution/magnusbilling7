@@ -38,7 +38,7 @@ class BuyCreditController extends Controller
             exit(Yii::t('zii', 'The minimum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
         }
 
-        $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
+        $modelUser = User::model()->findByPk((int) $modelSip->id_user);
 
         if ($modelMethodPay->active == 0 || $modelMethodPay->id_user != Yii::app()->session['id_agent']) {
             exit('invalid option');
