@@ -29,6 +29,10 @@ $agent = $modelUser->id_user > 0 ? '?id_agent=' . $modelUser->id_user : '';
 
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
 
+$modelUser->doc = preg_replace('/-|\.|\//', '', $modelUser->doc);
+
+$cpf_cnpj = new ValidaCPFCNPJ($modelUser->doc);
+
 $params = array(
     "email_loja"          => $modelMethodPay->username,
     "urlRetorno"          => $protocol . $_SERVER['HTTP_HOST'] . '/mbilling/index.php/pagHiper' . $agent,
@@ -41,13 +45,21 @@ $params = array(
     "produto_qtde_1"      => "1",
     "email"               => $modelUser->email,
     "nome"                => $modelUser->firstname . ' ' . $modelUser->lastname,
-    "cpf"                 => $modelUser->doc,
     "telefone"            => $modelUser->phone,
-    "endereco"            => $modelUser->doc,
-    "cidade"              => $modelUser->doc,
+    "endereco"            => $modelUser->address,
+    "cidade"              => $modelUser->city,
     "estado"              => $modelUser->doc,
-    "cep"                 => $modelUser->doc,
+    "cep"                 => $modelUser->zipcode,
     "pagamento"           => "pagamento",
 );
+
+if ($cpf_cnpj->valida_cnpj() == 1) {
+
+    $params['cnpj']         = $modelUser->doc;
+    $params['razao_social'] = $modelUser->company_name;
+
+} else {
+    $params['cpf'] = $modelUser->doc;
+}
 
 echo httpPost("https://www.paghiper.com/checkout/", $params);
