@@ -54,7 +54,7 @@ Ext.define('MBilling.view.userRate.List', {
         }, {
             header: t('Sell price'),
             dataIndex: 'rateinitial',
-            renderer: Helper.Util.formatMoneyDecimal,
+            renderer: Helper.Util.formatMoneyDecimal4,
             flex: 2
         }, {
             header: t('Initial block'),
