@@ -496,6 +496,14 @@ Este menu tem os seguintes campos
 .. include:: servers/servers.rst
 
 
+Erros dos troncos
++++++++++++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: trunksipcodes/trunksipcodes.rst
+
+
 Sip Trace
 +++++++++
 

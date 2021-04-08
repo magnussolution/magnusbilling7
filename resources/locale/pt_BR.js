@@ -14,8 +14,19 @@
  * 2020-08-07
  */
 Locale.load({
-    'Dial Tone' : 'Dial Tone',
-    'Offer balance' :'Saldo do pacote',
+    'Contract is required': 'Contrato é obrigatório',
+    'Contract no': 'Número do contrato',
+    'Distribution code': 'Código de distribuição',
+    'Distribution code required': 'Código de distribuição é obrigatório',
+    'Mobile number': 'Celular',
+    'Percentage': 'Porcentage',
+    'Phone Number': 'Telefone fixo',
+    'Phone is required': 'Telefone fixo é obrigatório',
+    'Reset': 'Reiniciar',
+    'SIP Code': 'Código SIP',
+    'Trunk erros': 'Erros dos troncos',
+    'Dial Tone': 'Dial Tone',
+    'Offer balance': 'Saldo do pacote',
     'Alarm': 'Alarme',
     'Alarms': 'Alarmes',
     'Bigger than': 'Maior que',

@@ -496,6 +496,14 @@ This menu has the following fields
 .. include:: servers/servers.rst
 
 
+Trunk erros
++++++++++++
+
+This menu has the following fields
+
+.. include:: trunksipcodes/trunksipcodes.rst
+
+
 Sip Trace
 +++++++++
 

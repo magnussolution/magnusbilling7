@@ -24,12 +24,14 @@ Welcome to MagnusBilling 7 wiki.
    get_started/quick_install.rst
    get_started/interface.rst
    get_started/backup.rst
+   get_started/update.rst
    
 .. toctree::
    :caption: Technical Information
    :maxdepth: 1
 
    price_calculation.rst
+   find_rate.rst
    tts.rst
    offer.rst
    how_to_use_voucher.rst

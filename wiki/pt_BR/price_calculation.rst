@@ -4,20 +4,20 @@ Cálculo de preço da chamada
 ===========================
 
 
+O valor a ser cobrado do cliente é calculado em base ao preço da tarifa do prefixo que mais se adequa ao número discado do plano da do usuário.
 
-Esse valor foi calculado em base ao preço configurado para o provedor que o tronco que foi utilizado para completar esta chamada pertence.
 
-O valor é calculado usado 4 valores. 
+O valor é calculado usando 4 valores. 
 
 * Duração da chamada;
-* Preço de compra;
+* Preço de venda;
 * Bloco inicial;
 * Incremento.
 
 Exemplo.
 
-O cliente liga para o número 5511988443300 e falou por 45 segundos. 
-E existe uma tarifa no menu Tarifas Provedores para o prefixo 55119, com:
+O cliente liga para o número 5511988443300 e fala por 45 segundos. 
+Existe uma tarifa no menu Tarifas para o prefixo 55119, com os seguint:
 
 * Preço de compra = 0.05
 * Bloco inicial = 30

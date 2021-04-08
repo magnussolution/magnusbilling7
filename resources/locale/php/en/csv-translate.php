@@ -57,6 +57,7 @@
     'description'=> ['Description_or_SMS_Text', 'Descrição_ou_texto_do_SMS' , 'Descripción_o_texto_SMS'],
     'destination'=> ['Destination', 'Destino' , 'Destino'],
     'dial_timeout'=> ['Dial_timeout', 'Tocar_por_quantos_seg.' , 'Dial_timeout'],
+    'Dial_Tone'=> ['Dial_Tone', 'Dial_Tone' , 'Dial_Tone'],
     'did'=> ['DID', 'DID' , 'DID'],
     'direct_extension'=> ['Enable_known_SIP_user', 'Discar_direto_conta_SIP' , 'Habilitar_cuenta_SIP_conocida'],
     'direction'=> ['Direction', 'Direção' , 'Dirección'],

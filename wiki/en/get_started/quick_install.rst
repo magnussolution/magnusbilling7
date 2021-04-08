@@ -2,7 +2,7 @@
 Installation
 *************
 
-In order to install MagnusBilling you'll need a server with CentOS 7 or Debian 8, minimal install. Keep in mind that all testing and development of MagnusBilling occurs in CentOS 7, so we highly recommend using CentOS 7.
+In order to install MagnusBilling you'll need a server with CentOS 7 or Debian 10, minimal install.
 
     
 **1.** Execute the following commands as root to run the script that will install MagnusBilling, Asterisk and all dependencies needed like: IPTables, Fail2ban, Apache, PHP and MySQL.
