@@ -32,7 +32,7 @@ Ext.define('MBilling.view.trunkSipCodes.List', {
         me.allowUpdate = false;
         me.textDelete = t('Reset');
         me.columns = me.columns || [{
-            header: t('Ip'),
+            header: t('IP'),
             dataIndex: 'ip',
             flex: 3
         }, {

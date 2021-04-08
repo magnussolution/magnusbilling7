@@ -785,6 +785,10 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
 
 `,
     'trunkgroup.id_trunk': `Select the trunks that belongs to this group. If selected the type, order, then select the trunks in the desired order.`,
+    //TRUNK ERROS
+    'trunksipcodes.ip': ``,
+    'trunksipcodes.code': ``,
+    'trunksipcodes.total': ``,
     //USERS
     'user.username': `Username used to login into the panel.`,
     'user.password': `Password used to login into the panel.`,

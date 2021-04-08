@@ -35,7 +35,7 @@ master_doc = 'index'
 
 # General information about the project
 project = 'MagnusBilling Wiki'
-copyright = '2005-2020, MagnusSolution'
+copyright = '2005-2021, MagnusSolution'
 author = 'Adilson Magnus and the MagnusBilling community'
 
 # Version info for the project, acts as replacement for |version| and |release|

@@ -6,7 +6,7 @@ Introdução
 
 `MagnusBilling`_  é uma ferramenta de software livre escrita em PHP e JAVASCRIPT, usando os frameworks EXTJS 6 e YII FRAMEWORK, destinada a provedores de telefonia IP MagnusBilling provê um sistema completo, realmente potente, para qualquer pessoa possa iniciar um provedor de telefonia IP em questão de minutos. MagnusBilling usa `Asterisk`_ para conexão entre clientes e provedores. 
 
-* MagnusBilling pode ser instalado em Linux Centos ou Debian. A equipe de desenvolvedores faz todo o desenvolvimento e teste somente em Centos 7, por tanto, recomendamos o uso do mesmo. 
+* MagnusBilling pode ser instalado em Linux Centos 7 ou Debian 10.
 
 * MagnusBilling tem uma interface moderna e robusta que torna muito fácil a administração de todas as funções.
 

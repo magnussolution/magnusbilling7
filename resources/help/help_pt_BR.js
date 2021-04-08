@@ -874,6 +874,10 @@ O MagnusBilling tentará enviar a chamada para o próximo tronco do grupo desde 
 
 .`,
     'trunkgroup.id_trunk': `Selecionar os troncos que pertenceram a este grupo. Se for selecionado o tipo, em ordem, então selecione os troncos na ordem desejada.`,
+    //ERROS DOS TRONCOS
+    'trunksipcodes.ip': ``,
+    'trunksipcodes.code': ``,
+    'trunksipcodes.total': ``,
     //USUáRIOS
     'user.username': `Usuário para logar no painel de cliente.`,
     'user.password': `Senha para logar no painel de cliente.`,
