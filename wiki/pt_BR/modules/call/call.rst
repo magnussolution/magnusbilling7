@@ -1,7 +1,7 @@
 
 .. _call-starttime:
 
-data
+Data
 ----
 
 | Dia e hora do início da chamada.
@@ -65,8 +65,8 @@ Usuário
 
 .. _call-idTrunktrunkcode:
 
-Troncos
--------
+Tronco
+------
 
 | Tronco que foi utilizado para completar a chamada.
 

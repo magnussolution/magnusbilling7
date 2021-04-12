@@ -19,6 +19,12 @@
  */
 /**
  * Add in Linksys, menu Provisioning, option Profile Rule: http://your_magnusbilling_ip/mbilling/index.php/ata?mac=$MAC
+ *
+ *
+ * to force update
+ * http://linksys_ip/admin/resync?http://your_magnusbilling_ip/mbilling/index.php/ata?mac=$MAC
+ *
+ *
  */
 class AtaController extends Controller
 {

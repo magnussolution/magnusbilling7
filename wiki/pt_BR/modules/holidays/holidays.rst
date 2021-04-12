@@ -11,7 +11,7 @@ Nome
 
 .. _holidays-day:
 
-data
+Data
 ----
 
 | Dia do feriado

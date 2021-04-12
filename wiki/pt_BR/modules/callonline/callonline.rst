@@ -66,8 +66,8 @@ CallerID
 
 .. _callOnLine-tronco:
 
-Troncos
--------
+Tronco
+------
 
 | Tronco que foi utilizado para completar a chamada.
 

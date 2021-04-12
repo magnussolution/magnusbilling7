@@ -558,6 +558,8 @@ echo $'[billing]
 exten => _[*0-9].,1,AGI("/var/www/html/mbilling/resources/asterisk/mbilling.php")
   same => n,Hangup()
 
+exten => _+X.,1,Goto(billing,${EXTEN:1},1)
+
 exten => h,1,hangup()
 
 exten => *111,1,VoiceMailMain(${CHANNEL(peername)}@billing)

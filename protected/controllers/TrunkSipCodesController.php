@@ -29,7 +29,7 @@ class TrunkSipCodesController extends Controller
     {
         $this->instanceModel = new TrunkSipCodes;
         $this->abstractModel = TrunkSipCodes::model();
-        $this->titleReport   = Yii::t('zii', 'TrunkSipCodes');
+        $this->titleReport   = Yii::t('zii', 'Trunk erros');
 
         parent::init();
     }

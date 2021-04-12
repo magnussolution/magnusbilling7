@@ -24,7 +24,7 @@ class SmsSend
         if (!count($modelUser)) {
             return array(
                 'success' => false,
-                'errors'  => Yii::t('zii', 'Error : Autentication Error!'),
+                'errors'  => Yii::t('zii', 'Error : Authentication Error!'),
             );
         }
 
@@ -39,7 +39,7 @@ class SmsSend
         if (UserCreditManager::checkGlobalCredit($modelUser->id) === false) {
             return array(
                 'success' => false,
-                'errors'  => Yii::t('zii', 'Error : You do not have enough credit to call you SMS!'),
+                'errors'  => Yii::t('zii', 'Error : You do not have enough credit to send SMS!'),
             );
         }
 

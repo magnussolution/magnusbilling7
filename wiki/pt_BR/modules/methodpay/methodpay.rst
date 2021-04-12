@@ -91,7 +91,7 @@ Taxa de desconto
 
 .. _methodPay-pagseguro-TOKEN:
 
-Token
+TOKEN
 -----
 
 | TOKEN do método de pagamento.

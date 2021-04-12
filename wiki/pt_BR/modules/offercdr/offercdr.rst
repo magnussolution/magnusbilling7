@@ -31,7 +31,7 @@ Duração
 
 .. _offerCdr-date-consumption:
 
-data
+Data
 ----
 
 | Data de hora da chamada.
