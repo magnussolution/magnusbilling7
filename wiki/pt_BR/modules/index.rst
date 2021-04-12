@@ -81,7 +81,7 @@ Este menu tem os seguintes campos
 .. include:: iax/iax.rst
 
 
-Token
+TOKEN
 +++++
 
 Este menu tem os seguintes campos
@@ -167,8 +167,8 @@ Este menu tem os seguintes campos
 .. include:: did/did.rst
 
 
-Destino de DID
-++++++++++++++
+Destino de DIDs
++++++++++++++++
 
 Este menu tem os seguintes campos
 

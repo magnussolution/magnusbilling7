@@ -36,7 +36,7 @@ class SmsCallbackController extends Controller
         $modelCallerid = Callerid::model()->find("cid = :callerid AND activated = 1", array(':callerid' => $callerid));
 
         if (!isset($modelCallerid->id)) {
-            $error_msg = Yii::t('zii', 'Error : Autentication Error!');
+            $error_msg = Yii::t('zii', 'Error : Authentication Error!');
             echo $error_msg;
             exit;
         }

@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2021-04-08
+ * 2021
  */
 Locale.load({
     '': '',
@@ -327,9 +327,9 @@ Locale.load({
     'Entering in system...': '',
     'Equal to': '',
     'Error': '',
-    'Error : Autentication Error!': '',
+    'Error : Authentication Error!': '',
     'Error : User no Found!': '',
-    'Error : You do not have enough credit to call you SMS!': '',
+    'Error : You do not have enough credit to send SMS!': '',
     'Errors': '',
     'Every': '',
     'Example': '',
