@@ -89,6 +89,9 @@ class QueueAgi
                         $DidAgi->modelDestination[0]['id_ivr'] = $modelIrv->id;
                         IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'queue');
                         break;
+                    case 'LOCAL':
+                        $agi->execute("DIAL " . $modelQueue->max_wait_time_action);
+                        break;
                 }
 
                 $MAGNUS->destination = $DidAgi->modelDid->did;

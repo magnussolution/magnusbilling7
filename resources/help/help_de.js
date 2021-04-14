@@ -511,7 +511,7 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'queue.joinempty': `Allow calls when theres no one to answer the call.`,
     'queue.leavewhenempty': `Hang the calls in queue when there's no one to answer.`,
     'queue.max_wait_time': `Maximum wait time on the queue`,
-    'queue.max_wait_time_action': `SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.`,
+    'queue.max_wait_time_action': `SipAccount, IVR, QUEUE or LOCAL channel to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name, IVR/ivr_name OR LOCAL/extension@context.`,
     'queue.ring_or_moh': `Play waiting music or tone when the client is in the queue.`,
     'queue.musiconhold': `Import one waiting music to this queue.`,
     //QUEUES MEMBERS
