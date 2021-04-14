@@ -123,7 +123,7 @@ class SignupController extends Controller
                 unset($_POST['Signup']['password']);
             } else {
                 if ($_POST['Signup']['password'] != $_POST['Signup']['password2']) {
-                    $signup->addError('id_plan', Yii::t('zii', 'Password '));
+                    $signup->addError('id_plan', Yii::t('zii', 'Password'));
                 }
             }
 

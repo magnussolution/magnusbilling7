@@ -24,11 +24,16 @@ Ext.define('Ext.ux.button.Locale', {
     handler: function() {
         this.showMenu()
     },
-    supportLang: ['pt_BR', 'en', 'es', 'fr', 'it', 'ru'],
+    supportLang: ['pt_BR', 'en', 'es', 'fr', 'it', 'ru', 'de'],
     iconCls: 'flag-' + window.lang,
     initComponent: function() {
         var me = this;
         me.menu = [{
+            text: t('German'),
+            iconCls: 'flag-de',
+            scope: me,
+            handler: me.setLocale
+        }, {
             text: t('English'),
             iconCls: 'flag-en',
             scope: me,
