@@ -598,7 +598,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'queue.joinempty': `Permitir novas chamadas quando não tiver agente disponível para atender a chamada.`,
     'queue.leavewhenempty': `Desligar as chamadas em espera quando não tiver mais agente livres.`,
     'queue.max_wait_time': `Tempo máximo de espera para ser atendido.`,
-    'queue.max_wait_time_action': `Conta VoIP, IVR ou Fila de espera, para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceitos: SIP/conta_voip, QUEUE/nome_da_queue ou IRV/nome_da_ivr.`,
+    'queue.max_wait_time_action': `Coloque uma Conta VoIP, IVR, Fila de espera ou um canal LOCAL para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceitos: SIP/conta_voip, QUEUE/nome_da_queue, IRV/nome_da_ivr ou LOCAL/extension@context.`,
     'queue.ring_or_moh': `Tocar a música de espera ou tom de chamando quando o cliente estiver aguardando na fila.`,
     'queue.musiconhold': `Importar uma música de espera para esta fila.`,
     //AGENTES DA FILA

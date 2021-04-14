@@ -80,26 +80,31 @@ class Queue extends Model
     {
         if (strlen($this->max_wait_time_action) > 2) {
             if (preg_match('/\//', $this->max_wait_time_action)) {
-                $data        = explode('/', $this->max_wait_time_action);
-                $type        = strtoupper($data[0]);
-                $destination = $data[1];
 
-                switch ($type) {
-                    case 'SIP':
-                        $model = Sip::model()->find('UPPER(name) = :key', array(':key' => strtoupper($destination)));
-                        break;
-                    case 'QUEUE':
-                        $model = Queue::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
-                        break;
-                    case 'IVR':
-                        $model = Ivr::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
-                        break;
+                if (preg_match('/LOCAL/', strtoupper($this->max_wait_time_action))) {
+                    return;
+                } else {
+                    $data        = explode('/', $this->max_wait_time_action);
+                    $type        = strtoupper($data[0]);
+                    $destination = $data[1];
+
+                    switch ($type) {
+                        case 'SIP':
+                            $model = Sip::model()->find('UPPER(name) = :key', array(':key' => strtoupper($destination)));
+                            break;
+                        case 'QUEUE':
+                            $model = Queue::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
+                            break;
+                        case 'IVR':
+                            $model = Ivr::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
+                            break;
+                    }
                 }
+                if (!isset($model->id)) {
+                    $this->addError($attribute, Yii::t('zii', 'You need add a existent Sip Account, IVR or Queue.'));
+                }
+                $this->max_wait_time_action = $type . '/' . $destination;
             }
-            if (!isset($model->id)) {
-                $this->addError($attribute, Yii::t('zii', 'You need add a existent Sip Account, IVR or Queue.'));
-            }
-            $this->max_wait_time_action = $type . '/' . $destination;
         }
     }
 
