@@ -95,6 +95,7 @@ Locale.load({
     'Before answer': 'Antes de contestar',
     'Bigger than': 'Mayor que',
     'Bill Date:': 'Fecha da facturacion',
+    'Bill no': 'Bill no',
     'Billing': 'Financiero',
     'Billing block': 'Bloque de cobro',
     'Billing type': 'Tipo de cobro',

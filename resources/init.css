@@ -209,6 +209,11 @@
 }
 /* Icons Flags */
 
+.flag-de {
+    background-image: url(images/flags/de.png) !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .flag-pt_BR {
     background-image: url(images/flags/br.png) !important;
     background-repeat: no-repeat;

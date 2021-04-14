@@ -95,6 +95,7 @@ Locale.load({
     'Before answer': '',
     'Bigger than': '',
     'Bill Date:': '',
+    'Bill no': '',
     'Billing': '',
     'Billing block': '',
     'Billing type': '',
