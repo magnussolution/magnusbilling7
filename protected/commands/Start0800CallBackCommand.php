@@ -97,9 +97,9 @@ class Start0800CallBackCommand extends ConsoleCommand
                 $searchTariff = new SearchTariff();
                 $searchTariff = $searchTariff->find($destination, $modelUser->id_plan, $modelUser->id);
 
-                if (!count($searchTariff[1])) {
-                    $phone->status = 0;
-                    $phone->save();
+                if (!count($searchTariff[0])) {
+                    $callback->status = 4;
+                    $callback->save();
                     if ($this->debug >= 1) {
                         echo " NO FOUND RATE TO CALL " . $username . "  DESTINATION $destination \n\n";
                     }
