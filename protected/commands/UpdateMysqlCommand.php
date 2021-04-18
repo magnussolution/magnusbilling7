@@ -1386,6 +1386,28 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2021-03-18
+        if ($version == '7.6.5' || $version == '7.6.7') {
+
+            AsteriskAccess::instance()->generateSipPeers();
+
+            $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse,sip_config';
+            $model  = Trunk::model()->findAll(
+                array(
+                    'select'    => $select,
+                    'condition' => 'providertech = :key AND status = 1',
+                    'params'    => array(':key' => 'sip'),
+                ));
+
+            if (count($model)) {
+                AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
+            }
+
+            $version = '7.6.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

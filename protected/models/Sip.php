@@ -110,6 +110,10 @@ class Sip extends Model
 
     public function checkHost($attribute, $params)
     {
+
+        if ($this->host == 'dynamic' && $this->secret == '') {
+            $this->addError($attribute, Yii::t('zii', 'You host is dynamic, please set a password'));
+        }
         if (strlen($this->techprefix) > 2) {
             if ($this->host == 'dynamic' && preg_match('/invite/', $this->insecure)) {
                 $this->addError($attribute, Yii::t('zii', 'Never use host=dynamic and insecure=invite'));

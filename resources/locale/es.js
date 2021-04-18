@@ -384,6 +384,7 @@ Locale.load({
     'Fromuser': 'Fromuser',
     'GAuthenticator': 'GAuthenticator',
     'General': 'General',
+    'German': 'Aleman',
     'Google authenticator key': 'Contraseña de autenticación de Google',
     'Gray': 'Gris',
     'Green': 'Verde',
@@ -1083,6 +1084,7 @@ Locale.load({
     'You cannot delete the': 'Usted no puede borrar el',
     'You don t have enough credit to call': 'Usted no tiene suficiente crédito para llamar',
     'You have': 'Usted tiene',
+    'You host is dynamic, please set a password': 'El host esta dynamic, por favor colocar una contraseña.',
     'You need accept the terms to signup': 'Usted precisa aceptar los términos de uso para poder registrarse',
     'You need add a existent Sip Account, IVR or Queue.': 'Necesita agregar una Cuenta SIP, IVR o Cola existente. ',
     'You need to commit or cancel your changes': 'Usted precisa confirmar o cancelar sus cambios',
@@ -1108,5 +1110,4 @@ Locale.load({
     'must belong to the IVR owner': 'tiene que pertenecer al mismo usuario de la IRV',
     'to refill': 'para recargar',
     'week': 'semana',
-
 });
