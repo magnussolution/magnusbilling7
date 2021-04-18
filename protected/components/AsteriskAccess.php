@@ -285,6 +285,8 @@ class AsteriskAccess
                         $line .= 'context=slave' . "\n";
                     }
                     $line .= 'host=' . $data['host'] . "\n";
+                    $line .= 'deny=0.0.0.0/0.0.0.0' . "\n";
+                    $line .= 'permit=' . $data['host'] . "/255.255.255.0\n";
                     $line .= 'disallow=all' . "\n";
                     $line .= 'allow=g729,alaw,ulaw' . "\n";
                     $line .= 'dtmfmode=RFC2833' . "\n";
@@ -727,6 +729,19 @@ class AsteriskAccess
                         }
                     }
 
+                    if ($sip->host != 'dynamic') {
+                        $line .= 'deny=0.0.0.0/0.0.0.0' . "\n";
+                        $line .= 'permit=' . $sip->host . "/255.255.255.0\n";
+
+                    } else {
+                        if (strlen($sip->deny) > 1) {
+                            $line .= 'deny=' . $sip->deny . "\n";
+                        }
+                        if (strlen($sip->permit) > 1) {
+                            $line .= 'permit=' . $sip->permit . "\n";
+                        }
+                    }
+
                     $line .= 'host=' . $sip->host . "\n";
                     $line .= 'fromdomain=' . $sip->host . "\n";
                     $line .= 'disallow=' . $sip->disallow . "\n";
@@ -793,16 +808,8 @@ class AsteriskAccess
                         $line .= 'mohsuggest=' . $sip->mohsuggest . "\n";
                     }
 
-                    if (strlen($sip->deny) > 1) {
-                        $line .= 'deny=' . $sip->deny . "\n";
-                    }
-
                     if ($sip->videosupport != 'no') {
                         $line .= 'videosupport=' . $sip->videosupport . "\n";
-                    }
-
-                    if (strlen($sip->permit) > 1) {
-                        $line .= 'permit=' . $sip->permit . "\n";
                     }
 
                     $line .= 'allowtransfer=' . $sip->allowtransfer . "\n";
