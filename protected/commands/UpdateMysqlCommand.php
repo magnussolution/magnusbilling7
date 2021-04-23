@@ -1326,7 +1326,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         //2021-01-21
         if ($version == '7.6.1') {
 
-            $sql = "ALTER TABLE `pkg_phonenumber` ADD `doc` VARCHAR(200) NULL DEFAULT NULL AFTER `name`, ADD `email` INT(200) NULL DEFAULT NULL AFTER `doc`;";
+            $sql = "ALTER TABLE `pkg_phonenumber` ADD `doc` VARCHAR(200) NULL DEFAULT NULL AFTER `name`;";
             $this->executeDB($sql);
 
             $version = '7.6.2';
@@ -1337,7 +1337,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         //2021-01-21
         if ($version == '7.6.2') {
 
-            $sql = "ALTER TABLE `pkg_phonenumber` CHANGE `email` `email` VARCHAR(200) NULL DEFAULT NULL;";
+            $sql = "ALTER TABLE `pkg_phonenumber` ADD `email` VARCHAR(200) NULL DEFAULT NULL AFTER `name`;";
             $this->executeDB($sql);
 
             $version = '7.6.3';

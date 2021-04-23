@@ -88,7 +88,7 @@ class UserCreditManager
     {
 
         //check if already exists refill with code
-        if (strlen($code)) {
+        if (strlen($code) > 0) {
             $modelRefill = Refill::model()->find("description LIKE '%$code%' AND id_user = $id_user");
 
             if (isset($modelRefill->id)) {
