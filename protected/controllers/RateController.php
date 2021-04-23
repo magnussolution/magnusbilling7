@@ -168,22 +168,25 @@ class RateController extends Controller
 
     public function importPrefixs($values)
     {
-        $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
-            " IGNORE INTO TABLE pkg_prefix" .
-            " CHARACTER SET UTF8 " .
-            " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
-            " LINES TERMINATED BY '\\r\\n' (prefix,destination)";
-        try {
-            Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
-            echo json_encode(array(
-                $this->nameSuccess => false,
-                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
-            exit;
 
+        if (Yii::app()->session['isAdmin']) {
+
+            $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
+                " IGNORE INTO TABLE pkg_prefix" .
+                " CHARACTER SET UTF8 " .
+                " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
+                " LINES TERMINATED BY '\\r\\n' (prefix,destination)";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                ));
+                exit;
+
+            }
         }
-
     }
     public function importRates($values)
     {
@@ -218,60 +221,97 @@ class RateController extends Controller
             $modelPrefix = Prefix::model()->find(1);
         }
 
-        $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
-        " IGNORE INTO TABLE pkg_rate" .
-        " CHARACTER SET UTF8 " .
-        " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
-        " LINES TERMINATED BY '\\r\\n' (dialprefix,destination,rateinitial,initblock,billingblock,minimal_time_charge,connectcharge,disconnectcharge,package_offer)" .
-        " SET id_plan = " . $values['id_plan'] . ", id_trunk_group = " . $values['id_trunk_group'] . ", id_prefix = " . $modelPrefix->id . "";
+        if (Yii::app()->session['isAgent']) {
 
-        try {
-            Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
-            echo json_encode(array(
-                $this->nameSuccess => false,
-                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
-            exit;
+            $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
+                " IGNORE INTO TABLE pkg_rate_agent" .
+                " CHARACTER SET UTF8 " .
+                " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
+                " LINES TERMINATED BY '\\r\\n' (@dialprefix,@destination,rateinitial,initblock,billingblock,minimal_time_charge)" .
+                " SET id_plan = " . $values['id_plan'] . ", id_prefix = (SELECT id FROM pkg_prefix WHERE prefix = @dialprefix)";
 
-        }
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                ));
+                exit;
 
-        $sql = "DELETE FROM pkg_prefix WHERE prefix < 1";
-        try {
-            Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
+            }
 
-        }
+        } else if (Yii::app()->session['isAdmin']) {
 
-        $sql = "UPDATE pkg_rate t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0 AND p.prefix > 0";
-        try {
-            Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
-            $sql = "DELETE FROM pkg_rate WHERE dialprefix > 0";
-            Yii::app()->db->createCommand($sql)->execute();
+            $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
+            " IGNORE INTO TABLE pkg_rate" .
+            " CHARACTER SET UTF8 " .
+            " FIELDS TERMINATED BY '" . $values['delimiter'] . "'" .
+            " LINES TERMINATED BY '\\r\\n' (dialprefix,destination,rateinitial,initblock,billingblock,minimal_time_charge,connectcharge,disconnectcharge,package_offer)" .
+            " SET id_plan = " . $values['id_plan'] . ", id_trunk_group = " . $values['id_trunk_group'] . ", id_prefix = " . $modelPrefix->id . "";
 
-            echo json_encode(array(
-                $this->nameSuccess => false,
-                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
-            exit;
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                ));
+                exit;
 
-        }
+            }
 
-        $modelRate = Rate::model()->findAll('dialprefix > 0');
-        if (isset($modelRate[0]->id)) {
-            //check if there are more than 2000 new prefix, if yes, import using LOAD DATA.
-            if (count($modelRate) > 2000) {
-                $this->importPrefixs($values);
-            } else {
-                $prefix = '';
-                foreach ($modelRate as $key => $rate) {
-                    $prefix .= '("' . $rate->dialprefix . '","' . $rate->destination . '"),';
+            $sql = "DELETE FROM pkg_prefix WHERE prefix < 1";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+
+            }
+
+            $sql = "UPDATE pkg_rate t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0 AND p.prefix > 0";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+                $sql = "DELETE FROM pkg_rate WHERE dialprefix > 0";
+                Yii::app()->db->createCommand($sql)->execute();
+
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                ));
+                exit;
+
+            }
+
+            $modelRate = Rate::model()->findAll('dialprefix > 0');
+            if (isset($modelRate[0]->id)) {
+                //check if there are more than 2000 new prefix, if yes, import using LOAD DATA.
+                if (count($modelRate) > 2000) {
+                    $this->importPrefixs($values);
+                } else {
+                    $prefix = '';
+                    foreach ($modelRate as $key => $rate) {
+                        $prefix .= '("' . $rate->dialprefix . '","' . $rate->destination . '"),';
+                    }
+                    $sql = "INSERT IGNORE INTO pkg_prefix (prefix,destination) VALUES " . substr($prefix, 0, -1);
+                    try {
+                        Yii::app()->db->createCommand($sql)->execute();
+                    } catch (Exception $e) {
+                        echo json_encode(array(
+                            $this->nameSuccess => false,
+                            'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
+                        ));
+                        exit;
+
+                    }
                 }
-                $sql = "INSERT IGNORE INTO pkg_prefix (prefix,destination) VALUES " . substr($prefix, 0, -1);
+
+                $sql = "UPDATE pkg_rate t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0";
                 try {
                     Yii::app()->db->createCommand($sql)->execute();
                 } catch (Exception $e) {
+                    $sql = "DELETE FROM pkg_rate WHERE dialprefix > 0";
+                    Yii::app()->db->createCommand($sql)->execute();
                     echo json_encode(array(
                         $this->nameSuccess => false,
                         'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
@@ -281,12 +321,10 @@ class RateController extends Controller
                 }
             }
 
-            $sql = "UPDATE pkg_rate t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0";
+            $sql = "UPDATE pkg_rate SET initblock = 1 WHERE initblock = 0; UPDATE pkg_rate SET billingblock = 1 WHERE billingblock = 0;";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                $sql = "DELETE FROM pkg_rate WHERE dialprefix > 0";
-                Yii::app()->db->createCommand($sql)->execute();
                 echo json_encode(array(
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
@@ -294,17 +332,6 @@ class RateController extends Controller
                 exit;
 
             }
-        }
-
-        $sql = "UPDATE pkg_rate SET initblock = 1 WHERE initblock = 0; UPDATE pkg_rate SET billingblock = 1 WHERE billingblock = 0;";
-        try {
-            Yii::app()->db->createCommand($sql)->execute();
-        } catch (Exception $e) {
-            echo json_encode(array(
-                $this->nameSuccess => false,
-                'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
-            exit;
 
         }
     }
