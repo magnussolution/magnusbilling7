@@ -30,6 +30,7 @@ class Controller extends BaseController
         'configuration',
         'invoices',
         'statusSystem',
+        'firewall',
     );
 
     //Allowed controllers to no admin users use updateall
