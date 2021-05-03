@@ -781,6 +781,9 @@ class CalcAgi
             $sql = "INSERT INTO pkg_cdr ($fields) VALUES ($values) ";
             $agi->exec($sql);
 
+            $sql = "UPDATE pkg_provider SET credit = credit - $this->buycost WHERE id=" . $this->id_provider . " LIMIT 1;";
+            $agi->exec($sql);
+
             if ($returnID == true) {
                 return $agi->lastInsertId();
             }
@@ -789,12 +792,21 @@ class CalcAgi
             if (file_exists(dirname(__FILE__) . '/CallCache.php')) {
                 include 'CallCache.php';
             } else {
+                $keys        = $agi->get_variable("HANGUPCAUSE_KEYS()", true);
+                $tech_string = explode(",", $keys);
+                foreach ($tech_string as $key => $value) {
+                    if (preg_match('/' . $this->trunkcode . '/', $value)) {
+                        $TECHSTRING = $value;
+                        break;
+                    }
+                }
+                $code   = substr($agi->get_variable('HANGUPCAUSE(' . $TECHSTRING . ',tech)', true), 4, 3);
                 $fields = "uniqueid,id_user,calledstation,id_plan,id_trunk,callerid,src,
-                        starttime, terminatecauseid,sipiax,id_prefix";
+                        starttime, terminatecauseid,sipiax,id_prefix,hangupcause";
 
                 $values = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$MAGNUS->destination','$MAGNUS->id_plan',
                         '$MAGNUS->id_trunk','$MAGNUS->CallerID', '$MAGNUS->sip_account',
-                        '$this->starttime', '$this->terminatecauseid','$this->sipiax','$this->id_prefix'";
+                        '$this->starttime', '$this->terminatecauseid','$this->sipiax','$this->id_prefix','$code'";
 
                 $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
                 $agi->exec($sql);
