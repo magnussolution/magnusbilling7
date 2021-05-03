@@ -566,8 +566,17 @@ class BaseController extends CController
                     exit('try edit invalid id');
                 }
 
-            } elseif (!$this->isNewRecord && Yii::app()->session['isClient'] && $model->id_user != Yii::app()->session['id_user']) {
-                exit('try edit invalid id');
+            } elseif (!$this->isNewRecord && Yii::app()->session['isClient']) {
+                if ($module == 'user') {
+                    if ($model->id != Yii::app()->session['id_user']) {
+                        exit('try edit invalid id');
+                    }
+                } else {
+                    if ($model->id_user != Yii::app()->session['id_user']) {
+                        exit('try edit invalid id');
+                    }
+                }
+
             } else if (!$this->isNewRecord && Yii::app()->session['isAgent']) {
                 $this->checkAgentPermission($values, $namePk);
             }
