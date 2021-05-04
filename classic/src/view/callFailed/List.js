@@ -106,10 +106,8 @@ Ext.define('MBilling.view.callFailed.List', {
                 ]
             }
         }, {
-            header: t('Hangup cause'),
+            header: t('SIP code'),
             dataIndex: 'hangupcause',
-            renderer: Helper.Util.formatHangupCause,
-            hidden: !window.dialC,
             flex: 3
         }, {
             header: t('Uniqueid'),
