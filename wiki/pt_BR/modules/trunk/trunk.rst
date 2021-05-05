@@ -310,8 +310,9 @@ Porta
 Link SMS
 --------
 
-| URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuário=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% .
+| URL para enviar SMS. Substituir os valores na da URL com os valores respectivos para sua necessidade. http://ip/mbilling/index.php/sms/send?username=user&password=MD5(pass)&number=55dddn&text=sms-text.
 
+Note que para funcionar, é preciso a encriptação MD5 da sua senha para substituir o campo MD5(pass).
 
 
 
