@@ -27,7 +27,7 @@
     };
 </script>
 <?php
-if (Yii::app()->session['currency'] == 'U$S') {
+if (Yii::app()->session['currency'] == 'U$S' || Yii::app()->session['currency'] == 'U$' || Yii::app()->session['currency'] == '$') {
     $currency = 'USD';
 } else if (Yii::app()->session['currency'] == 'R$') {
     $currency = 'BRL';
