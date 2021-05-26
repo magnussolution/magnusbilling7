@@ -417,7 +417,7 @@ class CalcAgi
 
         $agi->verbose($terminatecauseid . ' ' . $cost . '+' . $MAGNUS->round_precision(abs($MAGNUS->callingcardConnection)) . ' = ' . $cost, 25);
         $costCdr = $cost;
-        if ($sessiontime > 0) {
+        if ($this->real_answeredtime > 0) {
 
             if ($this->usedtrunk > 0) {
                 $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
@@ -436,7 +436,7 @@ class CalcAgi
 
                     $agi->verbose($this->real_answeredtime . ' ' . $buyrate . ' ' . $buyrateinitblock . ' ' . $buyrateincrement);
 
-                    if ($sessiontime > $minimal_time_buy) {
+                    if ($this->real_answeredtime > $minimal_time_buy) {
 
                         if ($buyratecallduration < $buyrateinitblock) {
                             $buyratecallduration = $buyrateinitblock;
