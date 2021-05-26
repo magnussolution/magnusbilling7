@@ -153,6 +153,12 @@ class CallController extends Controller
             $_GET['id'] = $ids[0];
         }
 
+        if (count($ids) == 1) {
+            $_GET['id'] = $ids[0];
+        } else if (count($ids) > 1) {
+            exit('<center><font color=red>To download more than 1 record, please use filters.</font></center>');
+        }
+
         if (isset($_GET['id'])) {
 
             $modelCall = Call::model()->findByPk((int) $_GET['id']);
