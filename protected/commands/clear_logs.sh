@@ -5,7 +5,7 @@ cd /var/log
 rm -rf *202*
 rm -rf asterisk/*202*
 rm -rf httpd/*202*
-
+rm -rf asterisk/messages.*
 rm -rf /var/www/html/mbilling/protected/runtime/*.log.*
 
 echo '' > /var/log/fail2ban.log
