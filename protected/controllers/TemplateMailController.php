@@ -23,7 +23,7 @@
 
 class TemplateMailController extends Controller
 {
-    public $attributeOrder = 't.id';
+    public $attributeOrder = 't.language, t.mailtype';
 
     public function init()
     {
