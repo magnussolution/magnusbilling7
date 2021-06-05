@@ -28,7 +28,7 @@ $data['token']            = $modelMethodPay->pagseguro_TOKEN;
 $data['currency']         = 'BRL';
 $data['itemId1']          = $reference;
 $data['itemDescription1'] = "Credito voip";
-$data['itemAmount1']      = $_GET['amount'];
+$data['itemAmount1']      = number_format($_GET['amount'], 2, '.', '');
 $data['itemQuantity1']    = 1;
 $data['itemWeight1']      = 0;
 $data['reference']        = $reference; //aqui vai o código que será usado para receber os retornos das notificações
@@ -74,7 +74,11 @@ if ($xml == 'Unauthorized') {
 curl_close($curl);
 $xml = simplexml_load_string($xml);
 if (count($xml->error) > 0) {
-    echo "XML ERRO";
+    echo '<center><br>';
+    foreach ($xml->error->message as $key => $value) {
+        echo '<font color=red>' . $value . '</font>';
+    }
+    echo '</center>';
     exit();
 }
 
