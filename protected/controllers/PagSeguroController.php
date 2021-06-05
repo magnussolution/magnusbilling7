@@ -10,7 +10,7 @@ class PagSeguroController extends Controller
     {
         Yii::log(print_r($_POST, true), 'error');
 
-        $filter = "payment_method = 'Pagseguro'";
+        $filter = "payment_method = 'Pagseguro' AND t.active = 1 ";
         $params = array();
 
         if (isset($_GET['agent'])) {
@@ -56,7 +56,7 @@ class PagSeguroController extends Controller
             $referencia  = $response->items->item->id;
             $transacaoID = $response->code;
             $status      = $response->status;
-            $amount      = $response->grossAmount;
+            $amount      = number_format((float) $response->grossAmount, 2, '.', '');
             /*
             Código  Significado
             1   Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.
