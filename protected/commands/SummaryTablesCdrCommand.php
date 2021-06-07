@@ -135,7 +135,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $sql = "SELECT
                 id_trunk,
-                sum(sessiontime) AS sessiontime,
+                sum(real_sessiontime) AS sessiontime,
                 SUM(sessiontime) / COUNT(*) AS aloc_all_calls,
                 count(*) as nbcall,
                 sum(buycost) AS buycost,
