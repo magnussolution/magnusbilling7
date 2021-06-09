@@ -1408,6 +1408,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2021-06-08
+        if ($version == '7.6.8') {
+            $sql = "INSERT INTO pkg_configuration VALUES (NULL, 'Default prefix rule', 'default_prefix_rule', '', 'This rule will be used when you create a new user or on the Sign up  form. More details about prefix rule on the bellow link https://www.magnusbilling.org/local_prefix', 'global', '1');";
+            $this->executeDB($sql);
+
+            $version = '7.6.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
