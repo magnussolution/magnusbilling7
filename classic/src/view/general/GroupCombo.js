@@ -38,7 +38,7 @@ Ext.define('MBilling.view.general.StateCombo', {
     name: 'state',
     fieldLabel: t('State'),
     displayField: 'nome',
-    valueField: 'nome',
+    valueField: 'sigla',
     forceSelection: true,
     editable: false,
     initComponent: function() {
