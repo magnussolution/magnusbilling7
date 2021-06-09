@@ -79,7 +79,7 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     name: 'prefix_local',
                     fieldLabel: t('Prefix rules'),
-                    value: App.user.base_country == 'BRL' ? '0/55/11,0/55/12,*/5511/8,*/5511/9' : App.user.base_country == 'ARG' ? '0/54,*/5411/8,15/54911/10,16/54911/10' : '',
+                    value: window.default_prefix_rule.length < 3 && App.user.language == 'pt_BR' ? '0/55/11,0/55/12,*/5511/8,*/5511/9' : window.default_prefix_rule,
                     allowBlank: true,
                     emptyText: 'match / replace / length',
                     hidden: App.user.isClient
