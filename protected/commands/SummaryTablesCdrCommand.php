@@ -558,7 +558,43 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         }
 
         $sql = "TRUNCATE pkg_cdr_summary_user";
-        Yii::app()->db->createCommand($sql)->execute();
+        try {
+            Yii::app()->db->createCommand($sql)->execute();
+        } catch (Exception $e) {
+            //
+            $sql = "DROP table pkg_cdr_summary_user";
+            try {
+
+                Yii::app()->db->createCommand($sql)->execute();
+
+            } catch (Exception $e) {
+                //
+            }
+        }
+
+        $sql = "DESCRIBE pkg_cdr_summary_user";
+        try {
+            Yii::app()->db->createCommand($sql)->execute();
+        } catch (Exception $e) {
+
+            $sql = "CREATE TABLE `pkg_cdr_summary_user` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `id_user` int(11) NOT NULL,
+                  `sessiontime` bigint(25) NOT NULL,
+                  `aloc_all_calls` int(11) NOT NULL,
+                  `nbcall` int(11) NOT NULL,
+                  `nbcall_fail` int(11) DEFAULT NULL,
+                  `buycost` float NOT NULL DEFAULT '0',
+                  `sessionbill` float NOT NULL DEFAULT '0',
+                  `lucro` float DEFAULT NULL,
+                  `asr` float DEFAULT NULL,
+                  `isAgent` int(11) DEFAULT NULL,
+                  `agent_bill` float NOT NULL DEFAULT '0',
+                  PRIMARY KEY (`id`),
+                  KEY `id_user` (`id_user`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
         $sql = "INSERT INTO pkg_cdr_summary_user (id_user, sessiontime, aloc_all_calls, nbcall, buycost, sessionbill, isAgent, agent_bill,nbcall_fail) VALUES " . substr($line, 0, -1) . ";";
 
