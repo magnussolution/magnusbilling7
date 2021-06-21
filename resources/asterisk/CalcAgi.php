@@ -115,7 +115,14 @@ class CalcAgi
                         $agi->verbose("offer Unlimited calls");
                         $this->freecall[0]     = true;
                         $package_selected      = true;
-                        $this->offerToApply[0] = array("id" => $id_offer, "label" => "Unlimited calls", "type" => $packagetype);
+                        $this->offerToApply[0] = array(
+                            "id"                  => $id_offer,
+                            "label"               => "Unlimited calls",
+                            "type"                => $packagetype,
+                            "billingblock"        => $modelOffer->billingblock,
+                            "initblock"           => $modelOffer->initblock,
+                            "minimal_time_charge" => $modelOffer->minimal_time_charge,
+                        );
                         break;
                     case 1:
 
@@ -126,7 +133,14 @@ class CalcAgi
                             if ($number_calls_used < $freetimetocall) {
                                 $this->freecall[0]     = true;
                                 $package_selected      = true;
-                                $this->offerToApply[0] = array("id" => $id_offer, "label" => "Number of Free calls", "type" => $packagetype);
+                                $this->offerToApply[0] = array(
+                                    "id"                  => $id_offer,
+                                    "label"               => "Number of Free calls",
+                                    "type"                => $packagetype,
+                                    "billingblock"        => $modelOffer->billingblock,
+                                    "initblock"           => $modelOffer->initblock,
+                                    "minimal_time_charge" => $modelOffer->minimal_time_charge,
+                                );
                                 $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
@@ -142,7 +156,14 @@ class CalcAgi
 
                             if ($this->freetimetocall_left[0] > 0) {
                                 $package_selected      = true;
-                                $this->offerToApply[0] = array("id" => $id_offer, "label" => "Free minutes", "type" => $packagetype);
+                                $this->offerToApply[0] = array(
+                                    "id"                  => $id_offer,
+                                    "label"               => "Free minutes",
+                                    "type"                => $packagetype,
+                                    "billingblock"        => $modelOffer->billingblock,
+                                    "initblock"           => $modelOffer->initblock,
+                                    "minimal_time_charge" => $modelOffer->minimal_time_charge,
+                                );
                                 $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
@@ -300,43 +321,46 @@ class CalcAgi
 
                 $this->calculateCost($MAGNUS, $sessiontime, $agi);
 
-                switch ($this->offerToApply[0]["type"]) {
-                    /*Unlimited*/
-                    case 0:
-                        $this->freetimetocall_used = $sessiontime;
-                        break;
-                    /*free calls*/
-                    case 1:
-                        $this->freetimetocall_used = $sessiontime;
-                        break;
-                    /*free minutes*/
-                    case 2:
-                        if ($sessiontime > '60') {
-                            $restominutos   = $sessiontime % 60;
-                            $calculaminutos = ($sessiontime - $restominutos) / 60;
-                            if ($restominutos > '0') {
-                                $calculaminutos++;
+                if ($sessiontime > $this->offerToApply[0]["minimal_time_charge"]) {
+
+                    switch ($this->offerToApply[0]["type"]) {
+                        /*Unlimited*/
+                        case 0:
+                            $this->freetimetocall_used = $sessiontime;
+                            break;
+                        /*free calls*/
+                        case 1:
+                            $this->freetimetocall_used = $sessiontime;
+                            break;
+                        /*free minutes*/
+                        case 2:
+                            if ($sessiontime > $this->offerToApply[0]["initblock"]) {
+                                $restominutos   = $sessiontime % $this->offerToApply[0]["billingblock"];
+                                $calculaminutos = ($sessiontime - $restominutos) / $this->offerToApply[0]["billingblock"];
+                                if ($restominutos > '0') {
+                                    $calculaminutos++;
+                                }
+
+                                $sessiontime = $calculaminutos * $this->offerToApply[0]["billingblock"];
+                            } elseif ($sessiontime < '1') {
+                                $sessiontime = 0;
+                            } else {
+                                $sessiontime = $this->offerToApply[0]["initblock"];
                             }
 
-                            $sessiontime = $calculaminutos * 60;
-                        } elseif ($sessiontime < '1') {
-                            $sessiontime = 0;
-                        } else {
-                            $sessiontime = 60;
-                        }
+                            $this->freetimetocall_used = $sessiontime;
 
-                        $this->freetimetocall_used = $sessiontime;
+                            break;
+                    }
 
-                        break;
+                    /* calculcost could have change the duration of the call*/
+                    $sessiontime = $this->answeredtime;
+                    /* add grace time*/
+                    $fields = "id_user, id_offer, used_secondes";
+                    $values = "$MAGNUS->id_user, $id_offer, '$this->freetimetocall_used'";
+                    $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
+                    $agi->exec($sql);
                 }
-
-                /* calculcost could have change the duration of the call*/
-                $sessiontime = $this->answeredtime;
-                /* add grace time*/
-                $fields = "id_user, id_offer, used_secondes";
-                $values = "$MAGNUS->id_user, $id_offer, '$this->freetimetocall_used'";
-                $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
-                $agi->exec($sql);
             } else {
                 $this->calculateCost($MAGNUS, $sessiontime, $agi);
             }

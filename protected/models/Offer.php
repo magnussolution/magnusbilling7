@@ -53,7 +53,7 @@ class Offer extends Model
     public function rules()
     {
         return array(
-            array('packagetype, billingtype, startday, freetimetocall', 'numerical', 'integerOnly' => true),
+            array('packagetype, billingtype, startday, freetimetocall,initblock, billingblock, minimal_time_charge', 'numerical', 'integerOnly' => true),
             array('label, price', 'length', 'max' => 70),
         );
     }

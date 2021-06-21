@@ -538,6 +538,9 @@ Para o envio de email, é necessário a configuração do SMTP no menu SMTP.
 Para saber como funciona os pacotes gratís veja o link https://wiki.magnusbilling.org/pt_BR/source/offer.html.
 
     .`,
+    'offer.initblock': `Tempo mínimo em segundos para tarifar a venda. Este valor irá subscrever os valores das tarifa do plano do cliente.`,
+    'offer.billingblock': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Este valor irá subscrever os valores das tarifa do plano do cliente.`,
+    'offer.minimal_time_charge': `Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.`,
     //RELATóRIO DE PACOTES
     'offercdr.id_user': `Usuário que realizou a chamada.`,
     'offercdr.id_offer': `Nome do pacote de gratís.`,
