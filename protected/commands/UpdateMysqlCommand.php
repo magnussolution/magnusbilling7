@@ -1418,6 +1418,26 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2021-06-18
+        if ($version == '7.6.9') {
+            $sql = "ALTER TABLE `pkg_offer` ADD `initblock` INT(11) NOT NULL DEFAULT '60' , ADD `billingblock` INT(11) NOT NULL DEFAULT '60' ;";
+            $this->executeDB($sql);
+
+            $version = '7.7.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2021-06-23
+        if ($version == '7.7.0') {
+            $sql = "ALTER TABLE `pkg_offer` ADD `minimal_time_charge` INT(2) NOT NULL DEFAULT '0';";
+            $this->executeDB($sql);
+
+            $version = '7.7.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

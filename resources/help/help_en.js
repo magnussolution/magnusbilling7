@@ -451,6 +451,9 @@ The email can be edited in the menu, Email models , type, plan_unpaid, Expiry of
 To send emails it's necessary the configuration of SMTP in the SMTP menu.
 
 To learn how free packages works: https://wiki.magnusbilling.org/en/source/offer.html.`,
+    'offer.initblock': `Minimum time in seconds to sell. This value will subscribe the tariffs of the client's plan.`,
+    'offer.billingblock': `This defines how the time is incremented after the minimum. This value will subscribe the tariffs of the client's plan.`,
+    'offer.minimal_time_charge': `Minimun time to tariff. If it's set to 3, will only tariff calls when the time is equal or more than 3 seconds.`,
     //OFFER CDR
     'offercdr.id_user': `User of call.`,
     'offercdr.id_offer': `Name of the offer.`,
