@@ -10,7 +10,7 @@ rm -rf /var/www/html/mbilling/protected/runtime/*.log.*
 
 echo '' > /var/log/fail2ban.log
 echo '' > /var/log/messages
-echo '' > /var/log/opensips
+echo '' > /var/log/opensips*
 echo '' > /var/log/secure
 echo '' > /var/log/maillog
 echo '' > /var/log/mysqld.log
