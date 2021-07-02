@@ -170,7 +170,7 @@ class RefillController extends Controller
         $criteria = new CDbCriteria(array(
             'select'    => 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth',
             'join'      => $this->join,
-            'condition' => $this->filter,
+            'condition' => $this->filter == '' ? 1 : $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
             'order'     => $this->order,
@@ -190,7 +190,7 @@ class RefillController extends Controller
         $modelRefill = $this->abstractModel->find(array(
             'select'    => 'SUM(t.credit) AS credit',
             'join'      => $this->join,
-            'condition' => $this->filter,
+            'condition' => $this->filter == '' ? 1 : $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
         ));
@@ -198,7 +198,7 @@ class RefillController extends Controller
         $modelRefillSumm2 = $this->abstractModel->findAll(array(
             'select'    => 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth',
             'join'      => $this->join,
-            'condition' => $this->filter,
+            'condition' => $this->filter == '' ? 1 : $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
             'group'     => 'CreditMonth',
