@@ -838,17 +838,17 @@ class Magnus
         return "closed";
     }
 
-    public static function getNewUsername($MAGNUS, $agi)
+    public function getNewUsername($agi)
     {
         $existsUsername = true;
 
-        $generate_username = $MAGNUS->config['global']['username_generate'];
+        $generate_username = $this->config['global']['username_generate'];
         $agi->verbose('getNewUsername ' . $generate_username);
         if ($generate_username == 1) {
-            $length = $MAGNUS->config['global']['generate_length'] == 0 ? 5 : $MAGNUS->config['global']['generate_length'];
-            $prefix = $MAGNUS->config['global']['generate_prefix'] == '0' ? '' : $MAGNUS->config['global']['generate_prefix'];
+            $length = $this->config['global']['generate_length'] == 0 ? 5 : $this->config['global']['generate_length'];
+            $prefix = $this->config['global']['generate_prefix'] == '0' ? '' : $this->config['global']['generate_prefix'];
             while ($existsUsername) {
-                $randUserName = $prefix . AuthenticateAgi::generatePassword($length, false, false, true, false) . "\n";
+                $randUserName = $prefix . $this->generatePassword($length, false, false, true, false) . "\n";
 
                 $sql            = "SELECT count(*) FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
                 $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -867,7 +867,7 @@ class Magnus
         return trim($randUserName);
     }
 
-    public static function generatePassword($tamanho, $maiuscula, $minuscula, $numeros, $codigos)
+    public function generatePassword($tamanho, $maiuscula, $minuscula, $numeros, $codigos)
     {
         $maius = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
         $minus = "abcdefghijklmnopqrstuwxyz";

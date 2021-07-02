@@ -236,7 +236,7 @@ class AuthenticateAgi
             $sql    = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES ($values)";
             $agi->exec($sql);
 
-            $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE id = $MAGNUS->id_user LIMIT 1";
+            $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = $MAGNUS->id_user LIMIT 1";
             $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser);
