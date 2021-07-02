@@ -35,6 +35,16 @@ class DidAgi
         //check if did call
         $mydnid = $MAGNUS->config['global']['did_ignore_zero_on_did'] == 1 && substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
 
+        if ($MAGNUS->config['global']['apply_local_prefix_did_sip'] == 1) {
+            $sql          = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' AND active = 1 LIMIT 1";
+            $modelDidUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            if (isset($modelDidUser->prefix_local) && strlen($modelDidUser->prefix_local) > 2) {
+                $MAGNUS->prefix_local = $modelDidUser->prefix_local;
+                $MAGNUS->number_translation($agi, $mydnid);
+                $mydnid = $MAGNUS->destination;
+            }
+        }
+
         $agi->verbose('Check If Is Did ' . $mydnid, 10);
         $sql            = "SELECT * FROM pkg_did WHERE did = '$mydnid' AND activated = 1 LIMIT 1";
         $this->modelDid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
