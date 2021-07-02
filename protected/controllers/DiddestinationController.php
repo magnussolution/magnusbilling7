@@ -176,7 +176,6 @@ class DiddestinationController extends Controller
     public function afterSave($model, $values)
     {
         AsteriskAccess::instance()->writeDidContext();
-        AsteriskAccess::instance()->generateSipDid();
 
         if ($this->isNewRecord) {
             $modelDid = Did::model()->findByPk($model->id_did);
@@ -186,6 +185,8 @@ class DiddestinationController extends Controller
                 $modelDid->reserved = 1;
                 $modelDid->id_user  = $model->id_user;
                 $modelDid->save();
+
+                AsteriskAccess::instance()->generateSipDid();
 
                 //discount credit of customer
                 $priceDid = $modelDid->connection_charge + $modelDid->fixrate;
@@ -233,6 +234,7 @@ class DiddestinationController extends Controller
 
             }
         }
+        AsteriskAccess::instance()->generateSipDid();
         return;
     }
 
