@@ -38,6 +38,13 @@ class RefillController extends Controller
         $this->instanceModel = new Refill;
         $this->abstractModel = Refill::model();
         $this->titleReport   = Yii::t('zii', 'Refill');
+
+        if (Yii::app()->session['isAdmin']) {
+            $this->relationFilter['idUser'] = array(
+                'condition' => "idUser.id_user < 2",
+            );
+        }
+
         parent::init();
     }
 
