@@ -181,7 +181,7 @@ class SmsSend
                 $modelSms->prefix    = $id_prefix;
                 $modelSms->telephone = $destination;
                 $modelSms->sms       = $text;
-                $modelSms->result    = $sussess;
+                $modelSms->result    = 1;
                 $modelSms->rate      = $rateInitial;
                 $modelSms->sms_from  = $sms_from;
                 $modelSms->save();
