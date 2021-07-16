@@ -97,7 +97,7 @@ class CalcAgi
 
         if ($id_offer == 1 && $MAGNUS->id_offer > 0) {
             $sql = "SELECT * FROM pkg_offer_use WHERE id_offer = $MAGNUS->id_offer
-                                AND id_user = $MAGNUS->id_user LIMIT 1";
+                                AND id_user = $MAGNUS->id_user AND status = 1 AND releasedate = '0000-00-00 00:00:00' LIMIT 1";
             $modelOfferUse = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelOfferUse->id)) {
