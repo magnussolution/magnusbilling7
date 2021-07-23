@@ -45,7 +45,7 @@ class Start0800CallBackCommand extends ConsoleCommand
 
                 $modelDiddestination = Diddestination::model()->find('id_did = :key', array(':key' => $callback->id_did));
 
-                if (!count($modelDiddestination)) {
+                if (!isset($modelDiddestination->id)) {
                     CallBack::model()->deleteByPk($callback->id);
                     continue;
                 }
@@ -97,7 +97,7 @@ class Start0800CallBackCommand extends ConsoleCommand
                 $searchTariff = new SearchTariff();
                 $searchTariff = $searchTariff->find($destination, $modelUser->id_plan, $modelUser->id);
 
-                if (!count($searchTariff[0])) {
+                if (!isset($searchTariff[0])) {
                     $callback->status = 4;
                     $callback->save();
                     if ($this->debug >= 1) {

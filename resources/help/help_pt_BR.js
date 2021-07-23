@@ -815,7 +815,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'trunk.allow': `Selecione os codecs que o tronco aceita.`,
     'trunk.providertech': `Protocolo do tronco. Alguns protocolos como Dahdi, Dongle, DGV, khomp, precisam ser instalado no Asterisk antes de usar.`,
     'trunk.status': `Se o tronco for inativado, Magnusbilling enviara a chamada para o tronco backup.`,
-    'trunk.allow_error': `Se SIM, a chamadas será enviada para o tronco backup a menos que a chamada seja atendida ou cancelada. Somente use quando seu tronco tiver algum problema de sinalização, por exemplo sinaliza BUSY quando não tiver canal disponível.`,
+    'trunk.allow_error': `Envia a chamada para o próximo tronco  se receber error 404 ou 480.`,
     'trunk.register': `Somente ative se seu tronco for por usuário e senha.`,
     'trunk.register_string': `<usuario>:<senha>@<host>/contact.||usuário é a id de usuário para este servidor SIP (ex 2345).
 senha é a senha do usuário.
