@@ -22,6 +22,7 @@ Ext.define('MBilling.view.didUse.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.diduselist',
     store: 'DidUse',
+    fieldSearch: 'idDid.did',
     initComponent: function() {
         var me = this;
         me.buttonCsv = false;
@@ -38,6 +39,10 @@ Ext.define('MBilling.view.didUse.List', {
         }, {
             header: t('DID'),
             dataIndex: 'idDiddid',
+            filter: {
+                type: 'string',
+                field: 'idDid.did'
+            },
             flex: 5
         }, {
             header: t('Username'),
