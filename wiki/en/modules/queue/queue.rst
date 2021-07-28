@@ -174,7 +174,7 @@ Max wait time
 Max wait time action
 --------------------
 
-| SipAccount, IVR or QUEUE to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name or IVR/ivr_name.
+| SipAccount, IVR, QUEUE or LOCAL channel to send the caller if the maximum wait time is reached. Use: SIP/sip_account, QUEUE/queue_name, IVR/ivr_name OR LOCAL/extension@context.
 
 
 

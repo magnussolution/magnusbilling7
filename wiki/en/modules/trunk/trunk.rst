@@ -104,7 +104,7 @@ Status
 Allow error
 -----------
 
-| If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.
+| Send call to the next trunk if receive error 404 or 480.
 
 
 
@@ -308,9 +308,7 @@ Port
 Link SMS
 --------
 
-| URL to send SMS. Replace the values of the URL with the respective values of your needs. http://ip/mbilling/index.php/sms/send?username=user&password=MD5(pass)&number=55dddn&text=sms-text.
-
-Note that to work, it's necessary to encrypt your password using MD5 to replace the MD5(pass) field.
+| URL to send SMS. Replace the number variable to %number% and text per %text%. EXAMPLE. Your SMS URL is http://trunkWebSite.com/sendsms.php?user=magnus&pass=billing&number=XXXXXX&sms_text=SSSSSSSSSSS. replace XXXXXX per %number and SSSSSSSSSSS per %text% 
 
 
 
@@ -336,6 +334,16 @@ Parameters
 | useragent=my agent
 | 
 | .
+
+
+
+
+.. _trunk-allow-error:
+
+Go to backup 404/480
+--------------------
+
+| Send call to the next trunk if receive error 404 or 480.
 
 
 
