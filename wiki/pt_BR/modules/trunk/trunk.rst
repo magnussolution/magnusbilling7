@@ -101,10 +101,10 @@ Status
 
 .. _trunk-allow-error:
 
-Permitir erro
--------------
+Allow error
+-----------
 
-| Se SIM, a chamadas será enviada para o tronco backup a menos que a chamada seja atendida ou cancelada. Somente use quando seu tronco tiver algum problema de sinalização, por exemplo sinaliza BUSY quando não tiver canal disponível.
+| Envia a chamada para o próximo tronco  se receber error 404 ou 480.
 
 
 
@@ -310,9 +310,8 @@ Porta
 Link SMS
 --------
 
-| URL para enviar SMS. Substituir os valores na da URL com os valores respectivos para sua necessidade. http://ip/mbilling/index.php/sms/send?username=user&password=MD5(pass)&number=55dddn&text=sms-text.
+| URL para enviar SMS. Substituir o número por %number% e o texto por %text%. EX. a URL enviada pelo seu provedor de SMS é http://trunkWebSite.com.br/sendsms.php?usuário=magnus&senha=billing&numero=XXXXXX&texto=SSSSSSSSSSS. altere XXXXXX per %number% e SSSSSSSSSSS por %text% .
 
-Note que para funcionar, é preciso a encriptação MD5 da sua senha para substituir o campo MD5(pass).
 
 
 
@@ -337,6 +336,16 @@ Parâmetros
 | useragent=meu agente
 | 
 | .
+
+
+
+
+.. _trunk-allow-error:
+
+Go to backup 404/480
+--------------------
+
+| Envia a chamada para o próximo tronco  se receber error 404 ou 480.
 
 
 

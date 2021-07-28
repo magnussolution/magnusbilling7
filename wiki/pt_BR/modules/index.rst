@@ -9,20 +9,20 @@ Menu Clientes
 
 Esta é a lista dos campos com sua respectiva descrição do menu Clientes
 
-Usuários
-+++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: user/user.rst
-
-
 Contas SIP
 ++++++++++
 
 Este menu tem os seguintes campos
 
 .. include:: sip/sip.rst
+
+
+Usuários
++++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: user/user.rst
 
 
 Chamadas Online

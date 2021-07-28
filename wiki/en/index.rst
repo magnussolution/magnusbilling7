@@ -25,6 +25,7 @@ Welcome to MagnusBilling 7 wiki.
    get_started/interface.rst
    get_started/backup.rst
    get_started/update.rst
+   get_started/first_call.rst
    
 .. toctree::
    :caption: Technical Information

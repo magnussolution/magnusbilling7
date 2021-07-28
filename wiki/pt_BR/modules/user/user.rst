@@ -84,10 +84,10 @@ Regra prefixo
 | 
 | 0/55,*/5511/8,*/5511/9,*/55/10,*/55/11
 | Regra 1 -> números que iniciam com 0, o zero será substituído por 55, independente de quantos dígitos tiver o número. 
-| Regra 2 -> números que iniciam com qualquer valor e tem 8 dígitos, será adicionado 5511 na frente. 
-| Regra 3 -> números que iniciam com qualquer valor e tem 9 dígitos, será adicionado 5511 na frente
-| Regra 4 -> números que iniciam com qualquer valor e tem 10 dígitos, será adicionado 55 na frente. 
-| Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adicionado 55 na frente
+| Regra 2 -> números que iniciam com qualquer valor e tem 8 dígitos, será adicionado 55 na frente. 
+| Regra 3 -> números que iniciam com qualquer valor e tem 9 dígitos, será adicionado 55 na frente
+| Regra 4 -> números que iniciam com qualquer valor e tem 10 dígitos, será adicionado 5511 na frente. 
+| Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adicionado 5511 na frente
 | .
 
 
@@ -479,6 +479,26 @@ Mostrar preço de venda
 -----------------------
 
 | Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
+
+
+
+
+.. _user-contract-value:
+
+Valor contrato
+--------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _user-dist:
+
+DIST
+----
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
