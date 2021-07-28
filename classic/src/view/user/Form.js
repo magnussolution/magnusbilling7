@@ -234,6 +234,17 @@ Ext.define('MBilling.view.user.Form', {
                     fieldLabel: t('VAT'),
                     hidden: App.user.isClient,
                     allowBlank: true
+                }, {
+                    xtype: 'moneyfield',
+                    name: 'contract_value',
+                    fieldLabel: t('Contract value'),
+                    mask: App.user.currency + ' #9.999.990,00',
+                    readOnly: App.user.isClient
+                }, {
+                    name: 'dist',
+                    fieldLabel: t('DIST'),
+                    hidden: App.user.isClient,
+                    allowBlank: true
                 }]
             }, {
                 title: t('Supplementary info'),

@@ -862,6 +862,7 @@ Digamos que queira adicionar um MACRO no tronco, estão neste campo, adicionar p
 useragent=meu agente
 
 .`,
+    'trunk.allow_error': `Envia a chamada para o próximo tronco  se receber error 404 ou 480.`,
     //GRUPO DE TRONCOS
     'trunkgroup.name': `Nome para o grupo de troncos, recomendável usar nomes amigáveis para facilitar a administração das tarifas.`,
     'trunkgroup.type': `Tipo.||É como o sistema vai ordenar os troncos que pertence ao grupo.
@@ -951,6 +952,8 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.transfer_dbbl_rocket': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_dbbl_rocket_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_show_selling_price': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
+    'user.contract_value': ``,
+    'user.dist': ``,
     //TARIFAS PARA CLIENTES
     'userrate.id_prefix': `Selecione o prefixo que você deseja subscrever.`,
     'userrate.rateinitial': `Novo preço de venda para este prefixo.`,
