@@ -772,6 +772,7 @@ Let's say that you wanted to add an MACRO in the trunk, therefore in this field 
 useragent=my agent
 
 .`,
+    'trunk.allow_error': `Send call to the next trunk if receive error 404 or 480.`,
     //TRUNK GROUPS
     'trunkgroup.name': `Trunk group name.`,
     'trunkgroup.type': `Type.||It's how the system will sort the trunk that belongs to a group.
@@ -839,6 +840,8 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.transfer_dbbl_rocket': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_dbbl_rocket_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_show_selling_price': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
+    'user.contract_value': ``,
+    'user.dist': ``,
     //USER CUSTOM RATES
     'userrate.id_prefix': `Select the prefix that you want to subscribe.`,
     'userrate.rateinitial': `New sell price for this prefix.`,

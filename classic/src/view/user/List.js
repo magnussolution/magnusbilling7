@@ -156,6 +156,12 @@ Ext.define('MBilling.view.user.List', {
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
+            header: t('DOC'),
+            dataIndex: 'doc',
+            hidden: true,
+            hideable: !App.user.isClient && !App.user.isAgent,
+            flex: 1
+        }, {
             header: t('Credit limit'),
             dataIndex: 'creditlimit',
             hidden: true,
