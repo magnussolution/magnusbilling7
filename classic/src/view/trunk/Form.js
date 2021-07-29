@@ -142,7 +142,7 @@ Ext.define('MBilling.view.trunk.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'allow_error',
-                    fieldLabel: t('Go to backup 404/480'),
+                    fieldLabel: t('Go to backup if 404'),
                     hidden: !window.dialC
                 }, {
                     xtype: 'noyescombo',
