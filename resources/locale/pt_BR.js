@@ -388,6 +388,7 @@ Locale.load({
     'GAuthenticator': 'GAuthenticator',
     'General': 'Geral',
     'German': 'Alemão',
+    'Go to backup if 404': 'Enviar para backup se 404',
     'Google authenticator key': 'Google authenticator key',
     'Gray': 'Cinza',
     'Green': 'Verde',

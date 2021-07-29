@@ -104,7 +104,7 @@ Status
 Allow error
 -----------
 
-| Envia a chamada para o próximo tronco  se receber error 404 ou 480.
+| Envia a chamada para o próximo tronco  se receber error 404.
 
 
 
@@ -345,7 +345,17 @@ Parâmetros
 Go to backup 404/480
 --------------------
 
-| Envia a chamada para o próximo tronco  se receber error 404 ou 480.
+| Envia a chamada para o próximo tronco  se receber error 404.
+
+
+
+
+.. _trunk-allow-error:
+
+Enviar para backup se 404
+-------------------------
+
+| Envia a chamada para o próximo tronco  se receber error 404.
 
 
 

@@ -104,7 +104,7 @@ Status
 Allow error
 -----------
 
-| Send call to the next trunk if receive error 404 or 480.
+| Send call to the next trunk if receive error 404.
 
 
 
@@ -343,7 +343,17 @@ Parameters
 Go to backup 404/480
 --------------------
 
-| Send call to the next trunk if receive error 404 or 480.
+| Send call to the next trunk if receive error 404.
+
+
+
+
+.. _trunk-allow-error:
+
+Go to backup if 404
+-------------------
+
+| Send call to the next trunk if receive error 404.
 
 
 

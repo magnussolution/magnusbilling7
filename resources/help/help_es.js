@@ -701,7 +701,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'trunk.allow': `Select the codecs that are allowed in this trunk.`,
     'trunk.providertech': `You need install appropriate drive to use card like dgv extra Dongle.`,
     'trunk.status': `If the trunk is inactive, Magnusbilling will sent the call to the backup trunk.`,
-    'trunk.allow_error': `Send call to the next trunk if receive error 404 or 480.`,
+    'trunk.allow_error': `Send call to the next trunk if receive error 404.`,
     'trunk.register': `Only active this if the trunk is authenticated via username and password.`,
     'trunk.register_string': `<user>:<password>@<host>/contact.||"user" is the user ID for this SIP server (ex 2345).
 "password" is the user password
