@@ -506,7 +506,7 @@ class UserController extends Controller
 
             if ($attributes[$i]['id_offer'] > 0) {
 
-                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1', array(
+                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1 AND status = 1 AND releasedate = "0000-00-00 00:00:00"', array(
                     ':key'  => $attributes[$i]['id_offer'],
                     ':key1' => $attributes[$i]['id'],
                 ));
