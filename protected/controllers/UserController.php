@@ -470,6 +470,18 @@ class UserController extends Controller
             $modelUser->credit          = $values['credit'] > 0 ? $values['credit'] : 0;
             $modelUser->save();
 
+            if ($modelUser->idGroup->idUserType->id == 3) {
+                $modelSip              = new Sip();
+                $modelSip->id_user     = $modelUser->id;
+                $modelSip->name        = $modelUser->username;
+                $modelSip->allow       = $this->config['global']['default_codeds'];
+                $modelSip->host        = 'dynamic';
+                $modelSip->insecure    = 'no';
+                $modelSip->defaultuser = $modelUser->username;
+                $modelSip->secret      = $modelUser->password;
+                $modelSip->save();
+            }
+
             if ($values['credit'] > 0) {
                 $modelRefill              = new Refill();
                 $modelRefill->id_user     = $modelUser->id;
@@ -480,6 +492,8 @@ class UserController extends Controller
             }
 
         }
+
+        AsteriskAccess::instance()->generateSipPeers();
 
         echo json_encode(array(
             $this->nameSuccess => true,
