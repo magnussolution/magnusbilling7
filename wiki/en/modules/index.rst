@@ -504,6 +504,14 @@ This menu has the following fields
 .. include:: trunksipcodes/trunksipcodes.rst
 
 
+Trunk Errors
+++++++++++++
+
+This menu has the following fields
+
+.. include:: trunksipcodes/trunksipcodes.rst
+
+
 Sip Trace
 +++++++++
 

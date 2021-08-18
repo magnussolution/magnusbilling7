@@ -231,8 +231,6 @@ class MassiveCallCommand extends ConsoleCommand
 
                 $destination = $trunkprefix . $destination;
 
-                $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
-
                 if (file_exists(dirname(__FILE__) . '/MassiveCallBeforeDial.php')) {
                     include dirname(__FILE__) . '/MassiveCallBeforeDial.php';
                 }
@@ -242,7 +240,7 @@ class MassiveCallCommand extends ConsoleCommand
                 // gerar os arquivos .call
                 $call = "Action: Originate\n";
                 $call = "Channel: " . $dialstr . "\n";
-                $call .= "Callerid: " . $modelSip->callerid . "\n";
+                $call .= "Callerid: " . $campaign->callerid . "\n";
                 $call .= "Account:  MC!" . $campaign->name . "!" . $phone->id . "\n";
                 //$call .= "MaxRetries: 1\n";
                 //$call .= "RetryTime: 100\n";

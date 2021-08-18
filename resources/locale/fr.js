@@ -1007,6 +1007,7 @@ Locale.load({
     'Transfer': 'Transfert',
     'Transferred': 'Transféré',
     'Trunk': 'Tronc',
+    'Trunk Errors': '',
     'Trunk Groups': 'Groupes de tronc',
     'Trunk chart': 'Graphique',
     'Trunk erros': 'Erreur de coffre',

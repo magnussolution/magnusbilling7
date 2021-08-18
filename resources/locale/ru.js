@@ -1009,6 +1009,7 @@ Locale.load({
     'Transfer': 'Перевод',
     'Transferred': 'Переведен',
     'Trunk': 'Сундук',
+    'Trunk Errors': '',
     'Trunk Groups': 'Группы ствола',
     'Trunk chart': 'Губальная диаграмма',
     'Trunk erros': 'Ошибка багажника',

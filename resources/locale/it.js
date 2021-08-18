@@ -1008,6 +1008,7 @@ Locale.load({
     'Transfer': 'Trasferimento',
     'Transferred': 'Trasferito',
     'Trunk': 'Tronco',
+    'Trunk Errors': '',
     'Trunk Groups': 'Gruppi di tronchi',
     'Trunk chart': 'Grafico del tronco',
     'Trunk erros': 'Errore del tronco',
