@@ -81,7 +81,7 @@ class QueueMemberController extends Controller
             }
 
         } else {
-            if (isset($values['id'])) {
+            if (isset($values['id']) && isset($values['interface'])) {
 
                 $modelQueueMember = QueueMember::model()->findByPk((int) $values['id']);
 
