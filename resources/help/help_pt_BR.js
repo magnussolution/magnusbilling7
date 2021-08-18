@@ -203,6 +203,7 @@ Ola João Matos temos uma promoção para você.....
 Clique neste link para saber mais cobre como configurar TTS no Magnusbilling https://wiki.magnusbilling.org/pt_BR/source/tts.html
 .`,
     'campaign.tts_audio2': `Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.`,
+    'campaign.callerid': ``,
     //MONITOR DE CAMPANHAS
     'campaigndashboard.name': `Nome da campanha.`,
     //CHAMADAS POR MINUTO

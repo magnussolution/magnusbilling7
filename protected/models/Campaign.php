@@ -64,7 +64,7 @@ class Campaign extends Model
         return array(
             array('name, id_user', 'required'),
             array('id_user, digit_authorize, id_plan,restrict_phone, secondusedreal, enable_max_call, nb_callmade, type, monday, tuesday, wednesday, thursday, friday, saturday, sunday, status, frequency, auto_reprocess, max_frequency', 'numerical', 'integerOnly' => true),
-            array('name, audio, audio_2,record_call', 'length', 'max' => 100),
+            array('name, audio, audio_2,record_call, callerid', 'length', 'max' => 100),
             array('startingdate, expirationdate', 'length', 'max' => 50),
             array('daily_start_time, daily_stop_time', 'length', 'max' => 8),
             array('forward_number', 'length', 'max' => 160),

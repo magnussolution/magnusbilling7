@@ -985,6 +985,7 @@ Locale.load({
     'Transfer': '',
     'Transferred': '',
     'Trunk': '',
+    'Trunk Errors': '',
     'Trunk Groups': '',
     'Trunk chart': '',
     'Trunk erros': '',

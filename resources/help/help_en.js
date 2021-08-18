@@ -169,6 +169,7 @@ Help.load({
     Hello %name%`,
     'campaign.tts_audio': `With this setting the system will generate the audio 1 for the campaign via TTS.||In order for this to work, you will need to set the TTS URL under Settings, Configuration, TTS URL.`,
     'campaign.tts_audio2': `Same setting as the previous field but for audio 2. Keep in mind that in between audio 1 and 2, the TTS executes the name imported with the number.`,
+    'campaign.callerid': ``,
     //CAMPAIGNS DASHBOARD
     'campaigndashboard.name': `Name of the campaign.`,
     //CALL PER MINUTES

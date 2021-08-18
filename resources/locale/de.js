@@ -1029,6 +1029,7 @@ Locale.load({
     'Transfer': 'Transfer',
     'Transferred': 'Übertragen',
     'Trunk': 'Trunk',
+    'Trunk Errors': '',
     'Trunk Groups': 'Trunk-Gruppen',
     'Trunk chart': 'Trunk-Chart',
     'Trunk erros': 'Trunk-Fehler',

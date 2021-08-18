@@ -62,6 +62,10 @@ Ext.define('MBilling.view.campaign.Form', {
                     name: 'name',
                     fieldLabel: t('Name')
                 }, {
+                    name: 'callerid',
+                    fieldLabel: t('CallerID'),
+                    allowBlank: true
+                }, {
                     xtype: 'booleancombo',
                     name: 'status',
                     fieldLabel: t('Status')
