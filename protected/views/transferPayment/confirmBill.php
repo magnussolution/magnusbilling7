@@ -44,10 +44,19 @@ if (isset($_POST['TransferToMobile']['metric']) && strlen($_POST['TransferToMobi
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->type ?></div>
 	<label>Mobile Number:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->phone ?></div>
-	<label>Contract No:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
-	<label>Distribution code:</label>
-	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->zipcode ?></div>
+
+	<?php if ($this->modelTransferToMobile->country != 'Senegal'): ?>
+
+		<label>Contract No:</label>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
+		<label>Distribution code:</label>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->zipcode ?></div>
+	<?php else: ?>
+		<label>Bill No:</label>
+		<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->number ?></div>
+	<?php endif?>
+
+
 	<label>Bill Date:</label>
 	<div id="aditionalInfoText" class="input" style="border:0; width:650px" ><?php echo $this->modelTransferToMobile->creationdate ?></div>
 	<br>

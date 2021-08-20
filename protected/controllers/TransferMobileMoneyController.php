@@ -748,35 +748,10 @@ class TransferMobileMoneyController extends Controller
 
             $amountEUR = $_GET['amount'];
 
-            $amountBDT = $amountEUR / ($modelSendCreditProducts[0]->wholesale_price);
+            $amountBDT                        = $amountEUR / ($modelSendCreditProducts[0]->retail_price);
+            Yii::app()->session['id_product'] = (int) $modelSendCreditProducts[0]->id;
 
-            foreach ($modelSendCreditProducts as $key => $value) {
-
-                $product = explode('-', $value->product);
-                if ($amountBDT >= $product[0] && $amountBDT <= $product[1]) {
-                    $product = $value;
-                    break;
-                }
-            }
-
-            if (!isset($product->product)) {
-                exit('invalid');
-            }
-
-            $modelSendCreditRates = SendCreditRates::model()->find(array(
-                'condition' => 'id_user = :key',
-                'params'    => array(
-                    ':key'  => Yii::app()->session['id_user'],
-                    ':key1' => $product->product,
-                ),
-                'with'      => array(
-                    'idProduct' => array(
-                        'condition' => 'product =  :key1 AND operator_id = 0',
-                    ),
-                ),
-            ));
-            Yii::app()->session['id_product'] = (int) $modelSendCreditRates->id_product;
-            echo $amount                      = number_format(($amountEUR - $modelSendCreditRates->sell_price) / $modelSendCreditProducts[0]->wholesale_price, 0, '', '');
+            echo $amount = number_format($amountBDT, 0, '', '');
         } else {
 
             /*
