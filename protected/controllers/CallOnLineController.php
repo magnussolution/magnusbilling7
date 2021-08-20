@@ -188,7 +188,7 @@ class CallOnLineController extends Controller
 
                 $modelCallOnLineUp = CallOnLine::model()->count('server = :key AND status = :key1', array('key' => $server['host'], ':key1' => 'Up'));
                 $totalUP += $modelCallOnLineUp;
-                $array .= '<font color="black">' . strtoupper($server['name']) . '</font> <font color="blue">Total:' . $modelCallOnLine . '</font> <font color="green">Up:' . $modelCallOnLineUp . '</font>&ensp;&ensp;|&ensp;&ensp;';
+                $array .= '<font color="black">' . strtoupper($server['name']) . '</font> <font color="blue">T:' . $modelCallOnLine . '</font> <font color="green">A:' . $modelCallOnLineUp . '</font>&ensp;|&ensp;';
             }
 
             $attributes[0]['serverSum'] = $array;
