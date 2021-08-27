@@ -9,20 +9,20 @@ Menu Clients
 
 This is the list of all fields with their description of the menu  Clients
 
-SIP Users
-+++++++++
-
-This menu has the following fields
-
-.. include:: sip/sip.rst
-
-
 Users
 +++++
 
 This menu has the following fields
 
 .. include:: user/user.rst
+
+
+SIP Users
++++++++++
+
+This menu has the following fields
+
+.. include:: sip/sip.rst
 
 
 Calls Online

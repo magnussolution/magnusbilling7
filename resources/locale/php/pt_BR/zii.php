@@ -651,6 +651,7 @@ return array(
     'Payment' => 'Pagamento',
     'Payment Methods' => 'Métodos de Pagamento',
     'Payment methods' => 'Métodos de Pagamento',
+    'Payment receipt' => 'Comprovante',
     'Peer' => 'Peer',
     'Penalty, Paused, Invalid, Unavailable' => 'Penalty, Paused, Invalid, Unavailable',
     'Pending' => 'Pendente',

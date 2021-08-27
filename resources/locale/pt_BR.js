@@ -610,6 +610,7 @@ Locale.load({
     'On Phone': 'Falando',
     'Online calls on same number': 'Chamadas online para mesmo nº',
     'Only JPEG format': 'Somente JPEG',
+    'Only JPG or PNG Files allowed': 'Somente PNG ou JPEG',
     'Only PNG format': 'Somente PNG',
     'Only SPY': 'Somente espiar',
     'Only can call to restricted numbers': 'Somente pode ligar para números restritos',
@@ -653,6 +654,7 @@ Locale.load({
     'Payment': 'Pagamento',
     'Payment Methods': 'Métodos de Pagamento',
     'Payment methods': 'Métodos de Pagamento',
+    'Payment receipt': 'Comprovante',
     'Peer': 'Peer',
     'Penalty, Paused, Invalid, Unavailable': 'Penalty, Paused, Invalid, Unavailable',
     'Pending': 'Pendente',
@@ -1137,5 +1139,4 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
-
 });
