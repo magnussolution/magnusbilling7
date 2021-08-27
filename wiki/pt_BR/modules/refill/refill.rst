@@ -48,3 +48,13 @@ Fatura número
 
 
 
+
+.. _refill-image:
+
+Comprovante
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

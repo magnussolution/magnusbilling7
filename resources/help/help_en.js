@@ -553,6 +553,7 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'refill.description': `Description to the calendar, only for self control.`,
     'refill.payment': `This setting is only to your control, the credit will be released to the user anyway if set to Payment NO`,
     'refill.invoice_number': `Invoice number.`,
+    'refill.image': ``,
     //REFILL PROVIDERS
     'refillprovider.id_provider': `Providers name.`,
     'refillprovider.credit': `Refill value.`,

@@ -640,6 +640,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'refill.description': `Descrição para a agenda, somente para controle próprio.`,
     'refill.payment': `Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO.`,
     'refill.invoice_number': `Número da fatura.`,
+    'refill.image': ``,
     //RECARGA DE PROVEDORES
     'refillprovider.id_provider': `Nome do provedor.`,
     'refillprovider.credit': `Valor da recarga.`,

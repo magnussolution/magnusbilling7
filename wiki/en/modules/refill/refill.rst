@@ -48,3 +48,13 @@ Invoice number
 
 
 
+
+.. _refill-image:
+
+Payment receipt
+---------------
+
+| We did not write the description to this field.
+
+
+

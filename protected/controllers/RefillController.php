@@ -151,6 +151,21 @@ class RefillController extends Controller
                 $model->save();
             }
         }
+
+        if (isset($_FILES["image"]) && strlen($_FILES["image"]["name"]) > 1) {
+
+            exec('rm -rf resources/images/refill/' . $model->id . '*');
+
+            $ext = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+
+            $uploadfile = 'resources/images/refill/' . $model->id . '.' . $ext;
+
+            Yii::log(print_r($uploadfile, true), 'error');
+            move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile);
+
+            $model->image = $uploadfile;
+            $model->save();
+        }
         return;
     }
 

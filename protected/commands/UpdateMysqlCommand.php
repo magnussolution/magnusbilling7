@@ -1467,6 +1467,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2021-08-27
+        if ($version == '7.7.4') {
+            $sql = "ALTER TABLE `pkg_refill` ADD `image` VARCHAR(100) NOT NULL DEFAULT '' ;";
+            $this->executeDB($sql);
+
+            $version = '7.7.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)

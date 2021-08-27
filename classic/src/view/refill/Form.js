@@ -22,6 +22,7 @@ Ext.define('MBilling.view.refill.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.refillform',
     fieldsHideUpdateLot: ['id_user'],
+    fileUpload: true,
     initComponent: function() {
         var me = this;
         me.items = [{
@@ -51,6 +52,26 @@ Ext.define('MBilling.view.refill.Form', {
             fieldLabel: t('Invoice number'),
             hidden: !window.invoice,
             allowBlank: true
+        }, {
+            xtype: 'filefield',
+            name: 'image',
+            fieldLabel: t('Payment receipt'),
+            emptyText: t('Only JPG or PNG Files allowed'),
+            allowBlank: true,
+            extAllowed: ['png', 'jpeg', 'jpg'],
+            hidden: !App.user.isAdmin,
+            listeners: {
+                afterrender: function(cmp) {
+                    cmp.fileInputEl.set({
+                        accept: 'image/*' // or w/e type
+                    });
+                }
+            }
+        }, {
+            xtype: 'box',
+            id: 'imagePreview',
+            width: '100%',
+            html: ''
         }];
         me.callParent(arguments);
     }

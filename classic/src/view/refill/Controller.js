@@ -22,6 +22,7 @@ Ext.define('MBilling.view.refill.Controller', {
     extend: 'Ext.ux.app.ViewController',
     alias: 'controller.refill',
     aliasChart: 'refillchart',
+    isSubmitForm: true,
     onPrint: function(btn) {
         var me = this;
         if (App.user.isClient) {
@@ -107,5 +108,21 @@ Ext.define('MBilling.view.refill.Controller', {
             return;
         }
         me.lookupReference('tbTextTotal') && me.lookupReference('tbTextTotal').setText('<b>' + t('Refill Total') + ': ' + App.user.currency + ' ' + me.sumData.sumCredit + '</b>');
+    },
+    onEdit: function() {
+        var me = this,
+            record = me.list.getSelectionModel().getSelection()[0];
+        fieldImage = record.get('image');
+        me.callParent(arguments);
+        if (me.ImageExist(fieldImage) == true) {
+            Ext.getCmp('imagePreview').update('<img width="100%" src="' + fieldImage + '">');;
+        } else {
+            Ext.getCmp('imagePreview').update('');
+        }
+    },
+    ImageExist: function(url) {
+        var img = new Image();
+        img.src = url;
+        return img.height != 0;
     }
 });
