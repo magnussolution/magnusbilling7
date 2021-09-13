@@ -349,12 +349,15 @@ class CallChartCommand extends ConsoleCommand
 
                         if (!isset($modelSip->id)) {
                             $modelSip = Sip::model()->find('name =:key', array(':key' => $sip_account));
+
+                            if (isset($modelSip->id)) {
+                                $modelSip->status         = 3;
+                                $modelSip->callshopnumber = $ndiscado;
+                                $modelSip->callshoptime   = $cdr;
+                                $modelSip->save();
+                                $modelSip = null;
+                            }
                         }
-                        $modelSip->status         = 3;
-                        $modelSip->callshopnumber = $ndiscado;
-                        $modelSip->callshoptime   = $cdr;
-                        $modelSip->save();
-                        $modelSip = null;
                     }
                 }
             }
