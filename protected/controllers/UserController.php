@@ -103,7 +103,6 @@ class UserController extends Controller
         AsteriskAccess::instance()->generateSipPeers();
         AsteriskAccess::instance()->generateSipDid();
 
-        $this->siproxyServer($values, 'destroy');
         return;
     }
 
