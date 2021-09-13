@@ -32,17 +32,15 @@ class TemplateMailController extends Controller
         $this->abstractModel = TemplateMail::model();
         $this->titleReport   = Yii::t('zii', 'Emails');
 
-        parent::init();
-
-    }
-
-    public function actionRead($asJson = true, $condition = null)
-    {
         if (Yii::app()->session['isAdmin']) {
-            $this->filter = ' AND id_user = 1';
+            $this->relationFilter['idUser'] = array(
+                'condition' => "idUser.id  = 1",
+            );
+
+            parent::init();
+
         }
 
-        parent::actionRead($asJson = true, $condition = null);
     }
 
     public function extraFilterCustomAgent($filter)
