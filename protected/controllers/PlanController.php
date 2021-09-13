@@ -164,4 +164,23 @@ class PlanController extends Controller
         parent::actionRead($asJson = true, $condition = null);
     }
 
+     public function getAttributesRequest()
+    {
+        $arrPost = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
+
+        /*permite salvar quando tem audio e extrafield*/
+        $id_service = array();
+        foreach ($arrPost as $key => $value) {
+            if ($key == 'id_services_array') {
+                if (isset($_POST['id_services_array']) && strlen($value) > 0) {
+                    $arrPost['id_services'] = explode(",", $_POST['id_services_array']);
+                }
+
+            }
+        };
+
+        return $arrPost;
+    }
+
+
 }

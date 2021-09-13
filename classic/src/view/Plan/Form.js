@@ -95,9 +95,10 @@ Ext.define('MBilling.view.plan.Form', {
             collapsed: false,
             items: [{
                 xtype: 'servicestag',
+                name: 'id_services',
+                fieldLabel: t(''),
+                labelWidth: 10,
                 anchor: '100%',
-                name: 'id_service',
-                fieldLabel: t('Services'),
                 allowBlank: true
             }]
         }];
