@@ -42,6 +42,10 @@ Ext.define('MBilling.view.logUsers.List', {
             header: t('Action'),
             dataIndex: 'idLogActionsname',
             renderer: Helper.Util.translate,
+            filter: {
+                type: 'string',
+                field: 'idLogActions.name'
+            },
             flex: 3
         }, {
             header: t('Description'),
