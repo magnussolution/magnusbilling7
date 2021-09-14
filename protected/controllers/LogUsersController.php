@@ -30,6 +30,12 @@ class LogUsersController extends Controller
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
+        ), 
+        'idLogActionsname' => array(
+            'table'       => 'pkg_log_actions',
+            'pk'          => 'id',
+            'fieldReport' => 'name',
+            'where' => 'id',
         ),
     );
     public function init()

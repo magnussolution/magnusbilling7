@@ -1692,7 +1692,11 @@ class BaseController extends CController
                     //altera as colunas para poder pegar o destino das tarifas
                     $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.id_prefix) AS connectcharge";
                 } else {
-                    $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.$fieldName) AS $fieldName";
+                    if (isset( $fk['where'])) {
+                         $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.".$fk['where'].") AS $fieldName";
+                    }else{
+                       $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.$fieldName) AS $fieldName"; 
+                    }      
                 }
 
                 if ($fieldName === $fieldGroup) {
