@@ -78,7 +78,7 @@ class SmtpsController extends Controller
         if ($this->isNewRecord) {
 
             $modelUser = Smtps::model()->find("id_user = " . Yii::app()->session['id_user']);
-            if (count($modelUser)) {
+            if (isset($modelUser->id)) {
                 echo json_encode(array(
                     'success' => false,
                     'rows'    => array(),
