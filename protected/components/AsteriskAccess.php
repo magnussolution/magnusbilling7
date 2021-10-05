@@ -708,6 +708,14 @@ class AsteriskAccess
                         continue;
                     }
 
+                    if (preg_match('/\:/', $sip->host)) {
+                        $host      = explode(':', $sip->host);
+                        $sip->host = $host[0];
+                        $port      = $host[1];
+                    } else {
+                        $port = 5060;
+                    }
+
                     $sip->name        = trim($sip->name);
                     $sip->defaultuser = trim($sip->defaultuser);
                     $sip->fromuser    = trim($sip->fromuser);
@@ -740,6 +748,10 @@ class AsteriskAccess
                         if (strlen($sip->permit) > 1) {
                             $line .= 'permit=' . $sip->permit . "\n";
                         }
+                    }
+
+                    if (isset($port) && $port != 5060) {
+                        $line .= 'post=' . $port . "\n";
                     }
 
                     $line .= 'host=' . $sip->host . "\n";
