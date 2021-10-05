@@ -427,18 +427,20 @@ tmpdir    = /tmp
 lc-messages-dir = /usr/share/mysql
 skip-external-locking
 max_connections = 500
-key_buffer_size   = 16M
-max_allowed_packet  = 16M
-thread_stack    = 192K
+key_buffer_size   = 64M
+max_allowed_packet  = 64M
+thread_stack    = 1M
 thread_cache_size       = 8
-query_cache_limit = 1M
-query_cache_size        = 16M
+query_cache_limit = 8M
+query_cache_size        = 64M
 log_error = /var/log/mysql/error.log
 expire_logs_days  = 10
-max_binlog_size   = 100M
+max_binlog_size   = 1G
 secure-file-priv = ""
 symbolic-links=0
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+tmp_table_size=128MB
+open_files_limit=500000
 
 [embedded]
 
