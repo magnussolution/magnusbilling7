@@ -23,7 +23,7 @@ class CallArchiveCommand extends ConsoleCommand
     {
         $prior_x_month = $this->config['global']['archive_call_prior_x_month'];
 
-        $condition = "DATE_SUB(NOW(),INTERVAL $prior_x_month MONTH) > starttime";
+        $condition = 'starttime < "' . date("Y-m-d", strtotime(date("Y-m-d") . "-$prior_x_month month")) . ' 00:00:00"';
 
         CallFailed::model()->createDataBaseIfNotExist();
 
@@ -61,5 +61,48 @@ class CallArchiveCommand extends ConsoleCommand
             }
         }
 
+        $this->deleteCalls();
+
+    }
+    public function deleteCalls()
+    {
+        //delete calls archived
+
+        $prior_cdr_archive_month_delete        = $this->config['global']['delete_cdr_archived_prior_x_month'];
+        $prior_cdr_failed_archive_month_delete = $this->config['global']['delete_cdr_failed_archived_prior_x_month'];
+
+        $c      = 0;
+        $tables = array('pkg_cdr_archive', 'pkg_cdr_failed_archive');
+        foreach ($tables as $key => $table) {
+
+            if ($table == 'pkg_cdr_archive') {
+
+                if ($prior_cdr_archive_month_delete == 0) {
+                    continue;
+                }
+                $condition = 'starttime < "' . date("Y-m-d", strtotime(date("Y-m-d") . "-$prior_cdr_archive_month_delete month")) . ' 00:00:00"';
+            } else if ($table == 'pkg_cdr_failed_archive') {
+                if ($prior_cdr_failed_archive_month_delete == 0) {
+                    continue;
+                }
+                $condition = 'starttime < "' . date("Y-m-d", strtotime(date("Y-m-d") . "-$prior_cdr_failed_archive_month_delete month")) . ' 00:00:00"';
+            }
+
+            $sql    = "SELECT count(*) AS count FROM $table WHERE $condition ";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+            $loop = intval($result[0]['count'] / 50000);
+
+            if ($c == 0) {
+                $condition = $condition . " LIMIT 50000";
+                $c++;
+            }
+            for ($i = 0; $i < $loop; $i++) {
+                $sql = "DELETE FROM $table WHERE $condition";
+                echo $sql . "\n";
+                Yii::app()->db->createCommand($sql)->execute();
+                sleep(5);
+            }
+        }
     }
 }
