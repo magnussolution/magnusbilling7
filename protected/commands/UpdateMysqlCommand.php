@@ -1477,6 +1477,15 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2021-08-27
+        if ($version == '7.7.5') {
+            $sql = " INSERT INTO `pkg_configuration` (`id`, `config_title`, `config_key`, `config_value`, `config_description`, `config_group_title`, `status`) VALUES (NULL, 'Delete CDR archived prior X month', 'delete_cdr_archived_prior_x_month', '0', 'Delete CDR archived prior X monthr', 'global', '1'),(NULL, 'Delete CDR failed archived prior X month', 'delete_cdr_failed_archived_prior_x_month', '0', 'Delete CDR failed archived prior X month', 'global', '1');";
+            $this->executeDB($sql);
+            $version = '7.7.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)
