@@ -705,7 +705,7 @@ class CallChartCommand extends ConsoleCommand
     {
         $sql               = "SELECT did, id, id_user FROM pkg_did WHERE reserved = 1";
         $this->dids        = Yii::app()->db->createCommand($sql)->queryAll();
-        $this->didsNumbers = array_column($this->dids, 'did');
+        $this->didsNumbers = isset($this->dids[0]) ? array_column($this->dids, 'did') : [];
 
     }
     private function isSIPCall()
