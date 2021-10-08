@@ -223,8 +223,7 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     name: 'email',
                     fieldLabel: t('Email'),
-                    allowBlank: true,
-                    vtype: 'email'
+                    allowBlank: true
                 }, {
                     name: 'doc',
                     fieldLabel: t('DOC'),
