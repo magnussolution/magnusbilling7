@@ -238,7 +238,8 @@ Ext.define('MBilling.view.user.Form', {
                     name: 'contract_value',
                     fieldLabel: t('Contract value'),
                     mask: App.user.currency + ' #9.999.990,00',
-                    readOnly: App.user.isClient
+                    readOnly: App.user.isClient,
+                    value: 0
                 }, {
                     name: 'dist',
                     fieldLabel: t('DIST'),
