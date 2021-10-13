@@ -648,9 +648,10 @@ class MassiveCall
         $id_prefix = $modelRate->id_prefix;
 
         /*sell rate*/
-        $rateinitial  = $modelRate->rateinitial;
-        $initblock    = $modelRate->initblock;
-        $billingblock = $modelRate->billingblock;
+        $rateinitial         = $modelRate->rateinitial;
+        $initblock           = $modelRate->initblock;
+        $billingblock        = $modelRate->billingblock;
+        $minimal_time_charge = $modelRate->minimal_time_charge;
 
         $duration = $real_sessiontime = time() - $now;
 
@@ -675,8 +676,17 @@ class MassiveCall
         }
 
         /* ####     CALCUL BUYRATE COST     #####*/
-        $buyratecost  = $MAGNUS->calculation_price($buyrate, $real_sessiontime, $buyrateinitblock, $buyrateincrement);
-        $sellratecost = $MAGNUS->calculation_price($rateinitial, $duration, $initblock, $billingblock);
+        if ($real_sessiontime > $minimal_time_buy) {
+            $buyratecost = $MAGNUS->calculation_price($buyrate, $real_sessiontime, $buyrateinitblock, $buyrateincrement);
+        } else {
+            $buyratecost = 0;
+        }
+        if ($real_sessiontime > $minimal_time_charge) {
+            $sellratecost = $MAGNUS->calculation_price($rateinitial, $duration, $initblock, $billingblock);
+        } else {
+            $sellratecost = 0;
+        }
+
         $agi->verbose("[TEMPO DA LIGAÃ‡AO] " . $duration, 8);
 
         $MAGNUS->id_plan = $modelRate->id_plan;
