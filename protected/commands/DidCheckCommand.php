@@ -70,43 +70,45 @@ class DidCheckCommand extends ConsoleCommand
                     $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE TO PAY THE DID " . $didUse->idDid->did . " NOW ") : null;
 
                     if (($didUse->idUser->credit + $didUse->idUser->typepaid * $didUse->idUser->creditlimit) >= $didUse->idDid->fixrate) {
-                        if ($id_agent <= 1) {
-                            $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
+                        if ($this->config['global']['charge_did_before_due_date'] == 1) {
+                            if ($id_agent <= 1) {
+                                $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
-                            $didUse->month_payed++;
-                            $didUse->save();
+                                $didUse->month_payed++;
+                                $didUse->save();
 
-                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
-                            UserCreditManager::releaseUserCredit($didUse->id_user, $didUse->idDid->fixrate, $description, 0);
+                                $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
+                                UserCreditManager::releaseUserCredit($didUse->id_user, $didUse->idDid->fixrate, $description, 0);
 
-                            $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user);
-                            $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
-                            $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
-                            $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
-                            $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
-                        } else {
-                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
+                                $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user);
+                                $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
+                                $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
+                                $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
+                                $mail->send();
+                                $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                            } else {
+                                $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
 
-                            $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " AGENT '" . $modelAgent->username . "' HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
+                                $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " AGENT '" . $modelAgent->username . "' HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
-                            $didUse->month_payed++;
-                            $didUse->save();
+                                $didUse->month_payed++;
+                                $didUse->save();
 
-                            //adiciona a recarga e pagamento
-                            $modelRefill              = new Refill();
-                            $modelRefill->id_user     = $id_agent;
-                            $modelRefill->credit      = $didUse->idDid->fixrate;
-                            $modelRefill->description = $description;
-                            $modelRefill->payment     = 1;
-                            $modelRefill->save();
+                                //adiciona a recarga e pagamento
+                                $modelRefill              = new Refill();
+                                $modelRefill->id_user     = $id_agent;
+                                $modelRefill->credit      = $didUse->idDid->fixrate;
+                                $modelRefill->description = $description;
+                                $modelRefill->payment     = 1;
+                                $modelRefill->save();
 
-                            $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user, $id_agent);
-                            $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
-                            $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
-                            $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
-                            $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                                $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user, $id_agent);
+                                $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
+                                $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
+                                $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
+                                $mail->send();
+                                $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                            }
                         }
                     } else {
                         $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did . " NOTIFY NOW ") : null;

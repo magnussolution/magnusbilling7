@@ -80,7 +80,7 @@ class SipCallAgi
             } else {
                 $terminatecauseid = 0;
             }
-            $cost = 0;
+            $cost        = 0;
             $siptransfer = $agi->get_variable("SIPTRANSFER");
             if ($answeredtime > 0 && $siptransfer['data'] != 'yes' && $terminatecauseid == 1) {
                 if ($MAGNUS->config['global']['charge_sip_call'] > 0) {
@@ -172,7 +172,7 @@ class SipCallAgi
             $sql              = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
             $modelUserForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            $agi->set_variable("CALLERID(nun)", $MAGNUS->CallerID);
+            $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
 
             $MAGNUS->accountcode = $modelUserForward->accountcode;
             $agi->verbose("CALL number $optionValue");

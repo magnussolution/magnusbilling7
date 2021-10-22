@@ -324,7 +324,7 @@ class DidAgi
 
                     $MAGNUS->extension = $MAGNUS->destination = $MAGNUS->dnid = $modelSip->name;
 
-                    $dialResult = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, 'fromDID');
+                    $dialResult = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, $this->did);
 
                     $dialstatus   = $dialResult['dialstatus'];
                     $answeredtime = $dialResult['answeredtime'];

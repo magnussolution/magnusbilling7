@@ -1507,6 +1507,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2021-08-27
+        if ($version == '7.7.7') {
+            $sql = " INSERT INTO `pkg_configuration` VALUES (NULL, 'Charge the DID if client have enough credit before the due date', 'charge_did_before_due_date', '1', 'Charge the DID if client have enough credit before the due date', 'global', '1');";
+            $this->executeDB($sql);
+            $version = '7.7.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
