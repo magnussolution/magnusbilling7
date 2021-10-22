@@ -97,5 +97,5 @@ Ext.define('MBilling.view.plan.Controller', {
             }
         });
         //delete me.params['id_services_array'];
-    },
+    }
 });

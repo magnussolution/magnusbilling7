@@ -502,3 +502,13 @@ DIST
 
 
 
+
+.. _user-credit-notification-daily:
+
+Notificação de crédito diário
+---------------------------------
+
+| Se ativar esta opção o MagnusBilling vai enviar um email diariamente com o saldo do cliente. Você pode editar o email que será enviado no menu Configurações submenu Modelo de Emails.
+
+
+

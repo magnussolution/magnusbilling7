@@ -232,7 +232,6 @@ return array(
     'SIP Call' => 'Appel à sip',
     'SIP Code' => 'Code SIP',
     'SIP To' => 'Gorgoir',
-    'SIP Users' => 'SIP UTILISATEURS',
     'SIP account limit' => 'Limite de compte SIP',
     'SIP group' => 'Groupe SIP',
     'SIP pass' => 'Passe-temps',

@@ -232,6 +232,7 @@ Locale.load({
     'Credit control': '',
     'Credit limit': '',
     'Credit notification': '',
+    'Credit notification daily': '',
     'CreditCard number': '',
     'Currency': '',
     'Currency destination': '',

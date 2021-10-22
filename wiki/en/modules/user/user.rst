@@ -478,3 +478,13 @@ DIST
 
 
 
+
+.. _user-credit-notification-daily:
+
+Credit notification daily
+-------------------------
+
+| Enable this option to customer receive daily balance notification Email. You can customize the email on Configuration menu, submenu Email Templates
+
+
+

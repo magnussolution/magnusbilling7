@@ -237,6 +237,7 @@ Locale.load({
     'Credit control': 'Controle de crédito',
     'Credit limit': 'Limite de crédito',
     'Credit notification': 'Notificação de crédito',
+    'Credit notification daily': 'Notificação de crédito diário',
     'CreditCard number': 'Número do cartão de crédito',
     'Currency': 'Moeda',
     'Currency destination': 'Moeda destino',
@@ -1027,7 +1028,7 @@ Locale.load({
     'Transfer': 'Transferir',
     'Transferred': 'Transferido',
     'Trunk': 'Tronco',
-    'Trunk Errors': '',
+    'Trunk Errors': 'Erros tronco',
     'Trunk Groups': 'Grupo de Troncos',
     'Trunk chart': 'Gráfico de troncos',
     'Trunk erros': 'Erros dos troncos',
@@ -1139,4 +1140,5 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
+
 });

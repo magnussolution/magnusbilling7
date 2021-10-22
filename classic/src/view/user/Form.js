@@ -264,6 +264,10 @@ Ext.define('MBilling.view.user.Form', {
                     allowBlank: true,
                     readOnly: App.user.isClient
                 }, {
+                    xtype: 'noyescombo',
+                    name: 'credit_notification_daily',
+                    fieldLabel: t('Credit notification daily')
+                }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
                     defaults: {

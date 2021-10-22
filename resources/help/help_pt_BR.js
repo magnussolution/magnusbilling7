@@ -576,6 +576,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'plan.play_audio': `Executar áudios para os cliente deste plano ou mandar somente erro? Por exemplo os áudios que acabou o crédito.`,
     'plan.techprefix': `Techprefix é como uma senha para o cliente poder usar mais de uma plano. Por exemplo, digamos que você tem 3 tipos de planos,GSM, TDM e CLI, e quer deixar seu cliente escolher qual plano ele deseja usar. Então coloque techprefix nos planos e solicite ao seu cliente que para usar cada um dos planos e.`,
     'plan.id_service': `Selecione aqui os serviços que estarão disponível para os usuários deste plano.`,
+    'plan.id_services': ``,
     //PREFIXOS
     'prefix.prefix': `Prefixo. Prefixos serão usados para criar as tarifas. EX. 5511.`,
     'prefix.destination': `Nome do destino. EX: Brasil SP.`,
@@ -957,6 +958,7 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.transfer_show_selling_price': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.contract_value': ``,
     'user.dist': ``,
+    'user.credit_notification_daily': `Se ativar esta opção o MagnusBilling vai enviar um email diariamente com o saldo do cliente. Você pode editar o email que será enviado no menu Configurações submenu Modelo de Emails.`,
     //TARIFAS PARA CLIENTES
     'userrate.id_prefix': `Selecione o prefixo que você deseja subscrever.`,
     'userrate.rateinitial': `Novo preço de venda para este prefixo.`,
