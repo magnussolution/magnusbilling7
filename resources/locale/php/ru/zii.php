@@ -31,7 +31,6 @@ return array(
     'Round robin with memory, remember where we left off last ring pass' => 'Round Robin с памятью, помните, где мы остановились на последнем звонке',
     'SIP Call' => 'SIP Call.',
     'SIP Code' => 'SIP код',
-    'SIP Users' => 'SIP пользователей',
     'SIP group' => 'SIP Group',
     'SIP pass' => 'SIP проход',
     'SIP password' => 'SIP пароль',

@@ -489,6 +489,7 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'plan.play_audio': `Execute audios to the client from this plan or just send the error only? For example, the audios that theres no more credit.`,
     'plan.techprefix': `Techprefix is like a password to the client, that allows the use of more plans.`,
     'plan.id_service': `Select here the services that will be avaible to the users of this plan.`,
+    'plan.id_services': ``,
     //PREFIXES
     'prefix.prefix': `Prefix code. Prefix will be used to tariff and bill the calls.`,
     'prefix.destination': `Destination name.`,
@@ -845,6 +846,7 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.transfer_show_selling_price': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.contract_value': ``,
     'user.dist': ``,
+    'user.credit_notification_daily': `Enable this option to customer receive daily balance notification Email. You can customize the email on Configuration menu, submenu Email Templates`,
     //USER CUSTOM RATES
     'userrate.id_prefix': `Select the prefix that you want to subscribe.`,
     'userrate.rateinitial': `New sell price for this prefix.`,

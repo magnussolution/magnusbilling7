@@ -233,7 +233,6 @@ return array(
     'SIP Call' => 'Call SIP',
     'SIP Code' => 'Codice SIP',
     'SIP To' => 'Sorseggiare',
-    'SIP Users' => 'Utenti SIP',
     'SIP account limit' => 'Limite del conto SIP',
     'SIP group' => 'Gruppo SIP',
     'SIP pass' => 'SIP Pass',

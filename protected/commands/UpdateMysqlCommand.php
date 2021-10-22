@@ -1486,6 +1486,27 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2021-10-22
+        if ($version == '7.7.6') {
+            $sql = "INSERT INTO `pkg_templatemail` VALUES (NULL, '1', 'credit', 'noreply@site.com', 'VoIP', 'Crédito atual da sua cuenta VoIP ( \$credit\$ \$currency\$)', '<p>Olá \$firstname\$ \$lastname\$, </p> <br> <p>Seu saldo atual é de R$ \$credit\$.</p> <br> <p>Observação: Você pode desativar o recebimento deste email no seu painel de cliente.</p> <br> <p>Atenciosamente,<br>', 'br', '1');";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO `pkg_templatemail`  VALUES (NULL, '1', 'credit', 'noreply@site.com', 'VoIP', 'Credito actual de su cuenta VoIP ( \$credit\$ \$currency\$)', '<p>Hola \$firstname\$ \$lastname\$, </p> <br> <p>Su credito actual es de \$credit\$.</p> <br> <p>OBS: Puedes desactivar el envio de este email en su panel de cliente.</p> <br> <p>Saludos,<br>', 'es', '1');";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO `pkg_templatemail`  VALUES (NULL, '1', 'credit', 'noreply@site.com', 'VoIP', 'You actual credit is ( \$credit\$ \$currency\$)', '<p>Hello \$firstname\$ \$lastname\$, </p> <br> <p>Your credit is \$credit\$.</p> <br> <p>OBS: You can disable this email on your VoIP panel.</p> <br> <p>Atenciosamente,<br>', 'en', '1');";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_user` ADD `credit_notification_daily` INT(1) NOT NULL DEFAULT '0' AFTER `credit_notification`;";
+            $this->executeDB($sql);
+
+            exec("echo '\n59 23 * * * php /var/www/html/mbilling/cron.php NotifyClientDaily' >> $CRONPATH");
+
+            $version = '7.7.7';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)

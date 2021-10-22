@@ -504,7 +504,7 @@ Este menu tem os seguintes campos
 .. include:: trunksipcodes/trunksipcodes.rst
 
 
-Trunk Errors
+Erros tronco
 ++++++++++++
 
 Este menu tem os seguintes campos

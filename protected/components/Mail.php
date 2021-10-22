@@ -41,6 +41,7 @@ class Mail
     public static $TYPE_PAYMENT                   = 'payment';
     public static $TYPE_REFILL                    = 'refill';
     public static $TYPE_REMINDER                  = 'reminder';
+    public static $TYPE_CREDIT_DAILY              = 'credit';
     public static $TYPE_SIGNUP                    = 'signup';
     public static $TYPE_FORGETPASSWORD            = 'forgetpassword';
     public static $TYPE_SIGNUPCONFIRM             = 'signupconfirmed';
