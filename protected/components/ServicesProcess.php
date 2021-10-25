@@ -31,7 +31,7 @@ class ServicesProcess
                 array(
                     ':key' => (int) $id_service,
                 ));
-            if (!count($modelServicesUse)) {
+            if (!isset($modelServicesUse->id)) {
                 continue;
             }
 
@@ -157,7 +157,7 @@ class ServicesProcess
                 //deleta as contas voip que superam o limite do servico comprado.
                 if ($method != 'activation') {
                     $modelSip         = Sip::model()->findAll('id_user = :key', array(':key' => $modelServicesUse->id_user));
-                    $totalSipAccounts = count($modelSip);
+                    $totalSipAccounts = isset($modelSip->id);
                     $newLimit         = $modelServicesUse->idUser->sipaccountlimit - $modelServicesUse->idServices->sipaccountlimit;
                     $limitToDelete    = $totalSipAccounts - $newLimit - 1;
                     //deleta as contas voip que superam o limite do servico comprado.

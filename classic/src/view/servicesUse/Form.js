@@ -57,6 +57,11 @@ Ext.define('MBilling.view.servicesUse.Form', {
                 allowBlank: true,
                 hidden: true
             }, {
+                xtype: 'numberfield',
+                name: 'month_payed',
+                fieldLabel: t('Month payed'),
+                hidden: !App.user.isAdmin
+            }, {
                 xtype: 'datetimefield',
                 name: 'reservationdate',
                 fieldLabel: t('Reservation date'),

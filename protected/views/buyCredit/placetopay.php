@@ -40,7 +40,7 @@ $modelRefill = Refill::model()->find('id_user = :key AND payment = 0 AND descrip
         ':key'  => Yii::app()->session['id_user'],
         ':key1' => '%Pendiente%',
     ));
-if (count($modelRefill) > 0) {
+if (isset($modelRefill->id) > 0) {
     exit('Usted tiene una recarga ' . $modelRefill->description);
 }
 

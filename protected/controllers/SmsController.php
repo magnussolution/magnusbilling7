@@ -61,7 +61,7 @@ class SmsController extends Controller
 
         $modelSip = AccessManager::checkAccess($_GET['username'], $_GET['password']);
 
-        if (!count($modelSip)) {
+        if (!isset($modelSip->id)) {
             exit('invalid user');
         }
 
