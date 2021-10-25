@@ -17,7 +17,7 @@ class BuyCreditController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!is_object($modelSip) || !count($modelSip)) {
+            if (!isset($modelSip->id)) {
                 echo 'User or password is invalid';
                 exit;
             }
@@ -100,7 +100,7 @@ class BuyCreditController extends Controller
                 $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit;+$modelServicesUse[0]->idUser->creditlimit;
             }
 
-            if (!count($modelServicesUse)) {
+            if (!isset($modelServicesUse[0]->id)) {
                 $this->render('payservicelink', array(
                     'model'   => $model,
                     'message' => 'This service was paid or canceled.',
@@ -128,7 +128,7 @@ class BuyCreditController extends Controller
 
         }
 
-        if (!is_array($modelServicesUse) || !count($modelServicesUse)) {
+        if (!is_array($modelServicesUse) || !isset($modelServicesUse[0]->id)) {
             $this->render('payservicelink', array(
                 'model'   => $model,
                 'message' => 'Your selection not have any service pending.',

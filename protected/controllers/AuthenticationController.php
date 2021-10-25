@@ -49,8 +49,10 @@ class AuthenticationController extends Controller
 
         if (isset($_REQUEST['remote'])) {
             $modelSip = AccessManager::checkAccess($user, $password);
-            $user     = $modelSip->idUser->username;
-            $password = $modelSip->idUser->password;
+            if (!isset($modelSip->id)) {
+                $user     = $modelSip->idUser->username;
+                $password = $modelSip->idUser->password;
+            }
         }
 
         $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND password COLLATE utf8_bin = :pass) OR ";
