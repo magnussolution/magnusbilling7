@@ -18,8 +18,8 @@
  */
 return array(
     /*MENU CONFIGURATION*/
-    'config_title_charge_did_before_due_date'                                                                                                                                          => 'Cobrar o DID se o cliente tiver crédito suficiente antes da data de vencimento',
-    'config_desc_charge_did_before_due_date'                                                                                                                                           => 'Cobrar o DID se o cliente tiver crédito suficiente antes da data de vencimento',
+    'config_title_charge_did_services_before_due_date'                                                                                                                                 => 'Cobrar o DID/serviços se o cliente tiver crédito suficiente antes da data de vencimento',
+    'config_desc_charge_did_services_before_due_date'                                                                                                                                  => 'Cobrar o DID/serviços se o cliente tiver crédito suficiente antes da data de vencimento',
     'config_title_signup_unique_doc'                                                                                                                                                   => 'Permitir usuários se registrar com CPF/CNPJ já em uso',
     'config_title_signup_admin_email'                                                                                                                                                  => 'Avisar admin/email quando alguem se registrar',
     'config_desc_signup_admin_email'                                                                                                                                                   => 'Envia um email para o administrador quando alguem se cadastrar no formulário de registro. \n 0 - Desativa \n 1 - Ativa',

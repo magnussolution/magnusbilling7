@@ -75,14 +75,17 @@ class ServicesCheckCommand extends ConsoleCommand
                         echo " USER " . $service->idUser->username . " HAVE SERVICE TO BE PAID \n";
                     }
 
-                    if ($this->checkIfUserHaveCredit($service) != true) {
-                        //venceu e nao tem credito, avisar por email.
-                        if ($this->debug >= 1) {
-                            echo " USER " . $service->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE SERVICE NOTIFY NOW \n ";
-                        }
+                    if ($this->config['global']['charge_did_services_before_due_date'] == 1) {
+                        if ($this->checkIfUserHaveCredit($service) != true) {
+                            //venceu e nao tem credito, avisar por email.
+                            if ($this->debug >= 1) {
+                                echo " USER " . $service->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE SERVICE NOTIFY NOW \n ";
+                            }
 
-                        $this->notifyUser($service, 2);
+                        }
                     }
+
+                    $this->notifyUser($service, 2);
                 } else {
                     if ($this->debug >= 1) {
                         echo " USER " . $service->idUser->username . "  HAVE EXPIRED SERVICE \n";
