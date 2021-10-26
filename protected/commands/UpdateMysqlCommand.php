@@ -1508,11 +1508,26 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
-        //2021-08-27
+        //2021-10-24
         if ($version == '7.7.7') {
             $sql = " INSERT INTO `pkg_configuration` VALUES (NULL, 'Charge the DID if client have enough credit before the due date', 'charge_did_before_due_date', '1', 'Charge the DID if client have enough credit before the due date', 'global', '1');";
             $this->executeDB($sql);
             $version = '7.7.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2021-10-26
+        if ($version == '7.7.8') {
+            $sql = "UPDATE pkg_configuration SET config_description = 'Charge the DID/Services if client have enough credit before the due date'  WHERE config_key = 'charge_did_before_due_date'";
+            $this->executeDB($sql);
+
+            $sql = "UPDATE pkg_configuration SET config_title = 'Charge the DID/Services if client have enough credit before the due date'  WHERE config_key = 'charge_did_before_due_date'";
+            $this->executeDB($sql);
+
+            $sql = "UPDATE pkg_configuration SET config_key = 'charge_did_services_before_due_date'  WHERE config_key = 'charge_did_before_due_date'";
+            $this->executeDB($sql);
+            $version = '7.7.9';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

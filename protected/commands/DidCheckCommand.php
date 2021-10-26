@@ -70,7 +70,7 @@ class DidCheckCommand extends ConsoleCommand
                     $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE TO PAY THE DID " . $didUse->idDid->did . " NOW ") : null;
 
                     if (($didUse->idUser->credit + $didUse->idUser->typepaid * $didUse->idUser->creditlimit) >= $didUse->idDid->fixrate) {
-                        if ($this->config['global']['charge_did_before_due_date'] == 1) {
+                        if ($this->config['global']['charge_did_services_before_due_date'] == 1) {
                             if ($id_agent <= 1) {
                                 $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
@@ -109,6 +109,19 @@ class DidCheckCommand extends ConsoleCommand
                                 $mail->send();
                                 $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                             }
+                        } else {
+                            //just notify the client about the due date
+                            if ($id_agent > 1) {
+                                $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user, $id_agent);
+                            } else {
+                                $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user);
+                            }
+
+                            $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, date("d", $day_remaining));
+                            $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
+                            $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
+                            $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));
+                            $mail->send();
                         }
                     } else {
                         $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did . " NOTIFY NOW ") : null;

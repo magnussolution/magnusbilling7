@@ -20,8 +20,8 @@
  * Not edit this file.
  * Edit /resources/locale/es.js
  */
-return array('config_title_charge_did_before_due_date'                                                                                        => 'Cobrar el DID si el cliente tiene suficiente crédito antes de la fecha de vencimiento',
-    'config_desc_charge_did_before_due_date'                                                                                                      => 'Cobrar el DID si el cliente tiene suficiente crédito antes de la fecha de vencimiento',
+return array('config_title_charge_did_services_before_due_date'                                                                               => 'Cobrar el DID/Servicios si el cliente tiene suficiente crédito antes de la fecha de vencimiento',
+    'config_desc_charge_did_services_before_due_date'                                                                                             => 'Cobrar el DID/Servicios si el cliente tiene suficiente crédito antes de la fecha de vencimiento',
 
     'ALERT => Do you really active this service?'                                                                                                 => 'ALERTA => Usted realmente desea activar este servicio?',
     'ALERT => Do you really want cancel this service to this user?'                                                                               => 'ALERTA => Usted realmente desea cancelar este servicio para este usuario?',
