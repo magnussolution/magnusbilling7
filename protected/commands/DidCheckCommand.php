@@ -62,14 +62,16 @@ class DidCheckCommand extends ConsoleCommand
             if ($day_remaining >= 0) {
 
                 if ($id_agent > 1) {
-                    $modelAgent             = User::model()->findByPk((int) $id_agent);
-                    $didUse->idUser->credit = $modelAgent->credit;
+                    $modelAgent  = User::model()->findByPk((int) $id_agent);
+                    $user_credit = $modelAgent->typepaid == 1 ? $modelAgent->credit + $modelAgent->creditlimit : $modelAgent->credit;
+                } else {
+                    $user_credit = $didUse->idUser->typepaid == 1 ? $didUse->idUser->credit + $didUse->idUser->creditlimit : $didUse->idUser->credit;
                 }
 
                 if ($day_remaining <= (intval($daytopay) * $oneday)) {
                     $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE TO PAY THE DID " . $didUse->idDid->did . " NOW ") : null;
 
-                    if (($didUse->idUser->credit + $didUse->idUser->typepaid * $didUse->idUser->creditlimit) >= $didUse->idDid->fixrate) {
+                    if ($user_credit >= $didUse->idDid->fixrate) {
                         if ($this->config['global']['charge_did_services_before_due_date'] == 1) {
                             if ($id_agent <= 1) {
                                 $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
@@ -141,7 +143,7 @@ class DidCheckCommand extends ConsoleCommand
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
                 } else {
-                    if (($didUse->idUser->credit + $didUse->idUser->typepaid * $didUse->idUser->creditlimit) >= $didUse->idDid->fixrate) {
+                    if ($user_credit >= $didUse->idDid->fixrate) {
                         $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
                         if ($id_agent <= 1) {
@@ -214,4 +216,7 @@ class DidCheckCommand extends ConsoleCommand
             }
         }
     }
+}
+{
+
 }

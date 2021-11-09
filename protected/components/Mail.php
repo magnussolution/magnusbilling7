@@ -144,6 +144,8 @@ class Mail
     public static $CUSTOMER_FIRSTNAME_KEY              = '$firstname$';
     public static $CUSTOMER_LASTNAME_KEY               = '$lastname$';
     public static $CUSTOMER_CREDIT_BASE_CURRENCY_KEY   = '$credit$';
+    public static $CUSTOMER_ACCOUNT_CREDIT             = '$account_credit$';
+    public static $CUSTOMER_CREDIT_LIMIT               = '$credit_limit$';
     public static $CUSTOMER_CREDIT_IN_OWN_CURRENCY_KEY = '$creditcurrency$';
     public static $CUSTOMER_CURRENCY                   = '$currency$';
     public static $CUSTOMER_CARDNUMBER_KEY             = '$cardnumber$';
@@ -174,7 +176,9 @@ class Mail
                 return;
             }
 
-            $real_credit = $modelUser->typepaid == 1
+            $account_credit = $modelUser->credit;
+            $credit_limit   = $modelUser->creditlimit;
+            $real_credit    = $modelUser->typepaid == 1
             ? $modelUser->credit + $modelUser->creditlimit
             : $modelUser->credit;
 
@@ -241,6 +245,8 @@ class Mail
             $this->replaceInEmail(self::$CUSTOMER_PASSWORD_KEY, $modelUser->password);
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_IN_OWN_CURRENCY_KEY, $credit);
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_BASE_CURRENCY_KEY, $credit);
+            $this->replaceInEmail(self::$CUSTOMER_ACCOUNT_CREDIT, $account_credit);
+            $this->replaceInEmail(self::$CUSTOMER_CREDIT_LIMIT, $credit_limit);
             $this->replaceInEmail(self::$CUSTOMER_CURRENCY, $currency);
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_NOTIFICATION, $modelUser->credit_notification);
             $this->replaceInEmail(self::$CANCEL_CREDIT_NOTIFICATION_URL, 'http://' . $modelConfig->config_value . '/mbilling/index.php/authentication/cancelCreditNotification?id=' . $modelUser->id . '&key=' . sha1($modelUser->id . $modelUser->username . $modelUser->password));
