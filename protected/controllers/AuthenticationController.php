@@ -49,7 +49,7 @@ class AuthenticationController extends Controller
 
         if (isset($_REQUEST['remote'])) {
             $modelSip = AccessManager::checkAccess($user, $password);
-            if (!isset($modelSip->id)) {
+            if (isset($modelSip->id)) {
                 $user     = $modelSip->idUser->username;
                 $password = $modelSip->idUser->password;
             }
