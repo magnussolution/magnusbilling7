@@ -46,7 +46,12 @@ class DidCheckCommand extends ConsoleCommand
             $id_agent = $didUse->idUser->id_user;
 
             $day_remaining = 0;
-            // $mydids
+
+            $next_due_date  = date('Y-m-d', strtotime("+" . $didUse->month_payed . " months", strtotime($didUse->reservationdate)));
+            $date1          = new DateTime($next_due_date);
+            $date2          = new DateTime(date('Y-m-d'));
+            $interval       = $date1->diff($date2);
+            $days_remaining = $interval->days;
 
             $diff_reservation_daytopay = (strtotime($didUse->reservationdate)) - (intval($daytopay) * $oneday);
             $timestamp_datetopay       = mktime(date('H', $diff_reservation_daytopay), date("i", $diff_reservation_daytopay), date("s", $diff_reservation_daytopay),
@@ -119,7 +124,8 @@ class DidCheckCommand extends ConsoleCommand
                                 $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user);
                             }
 
-                            $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, date("d", $day_remaining));
+                            $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, $days_remaining);
+                            $mail->replaceInEmail(Mail::$NEXT_DUE_DATE, $next_due_date);
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                             $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                             $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));
@@ -134,7 +140,8 @@ class DidCheckCommand extends ConsoleCommand
                             $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user);
                         }
 
-                        $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, date("d", $day_remaining));
+                        $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, $days_remaining);
+                        $mail->replaceInEmail(Mail::$NEXT_DUE_DATE, $next_due_date);
                         $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                         $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));

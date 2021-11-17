@@ -21,7 +21,7 @@ class SmsSend
 {
     public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '')
     {
-        if (!count($modelUser)) {
+        if (!isset($modelUser->id)) {
             return array(
                 'success' => false,
                 'errors'  => Yii::t('zii', 'Error : Authentication Error!'),
