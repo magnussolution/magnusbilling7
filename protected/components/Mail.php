@@ -123,7 +123,7 @@ class Mail
     //Used by mail type = did_unpaid  & subscription_unpaid
     public static $DAY_REMAINING_KEY = '$days_remaining$';
     public static $INVOICE_REF_KEY   = '$invoice_ref$';
-
+    public static $NEXT_DUE_DATE     = '$next_due_date$';
     //Used by mail type = epaymentverify
     public static $TIME_KEY           = '$time$';
     public static $PAYMENTGATEWAY_KEY = '$paymentgateway$';
