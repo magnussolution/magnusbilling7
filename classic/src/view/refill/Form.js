@@ -48,6 +48,13 @@ Ext.define('MBilling.view.refill.Form', {
             fieldLabel: t('Add payment'),
             hidden: App.user.isClient
         }, {
+            xtype: 'datetimefield',
+            name: 'date',
+            fieldLabel: t('Date'),
+            format: 'Y-m-d H:i:s',
+            hidden: !App.user.isAdmin,
+            value: new Date()
+        }, {
             name: 'invoice_number',
             fieldLabel: t('Invoice number'),
             hidden: !window.invoice,
