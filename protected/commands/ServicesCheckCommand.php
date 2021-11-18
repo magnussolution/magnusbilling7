@@ -45,7 +45,7 @@ class ServicesCheckCommand extends ConsoleCommand
             $day_remaining = 0;
 
             $this->next_due_date  = date('Y-m-d', strtotime("+" . $service['month_payed'] . " months", strtotime($service['reservationdate'])));
-            $date1                = new DateTime($next_due_date);
+            $date1                = new DateTime($this->next_due_date);
             $date2                = new DateTime(date('Y-m-d'));
             $interval             = $date1->diff($date2);
             $this->days_remaining = $interval->days;
