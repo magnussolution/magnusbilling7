@@ -382,8 +382,8 @@ class AuthenticateAgi
             $channelsData = $asmanager->command("core show channels concise");
             $channelsData = explode("\n", $channelsData["data"]);
             $asmanager->disconnect();
-            $sql         = "SELECT name FROM pkg_sip WHERE accountcode = '$accountcode'";
-            $modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $sql         = "SELECT name FROM pkg_sip WHERE accountcode = '" . $MAGNUS->username . "'";
+            $modelSip    = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
             $sipAccounts = '';
             foreach ($modelSip as $key => $sip) {
                 $sipAccounts .= $sip->name . '|';
