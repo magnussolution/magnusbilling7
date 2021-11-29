@@ -212,7 +212,7 @@ class MassiveCall
             //if have a forward                         if res_dtmf is equal the digit_authorize                OR press any digit and digit_authorize equal -2 (any digit)    OR  digit_authorize equal -3 (every)
             if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || (strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
                 $agi->verbose("have Forward number $forward_number");
-                $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . "' WHERE id = $idPhonenumber LIMIT 1";
+                $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . " at " . date('Y-m-d H:i:s') . "' WHERE id = $idPhonenumber LIMIT 1";
                 $agi->exec($sql);
 
                 $sql = "UPDATE pkg_campaign_report SET status = 7 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
