@@ -76,12 +76,15 @@ class PlanCheckCommand extends ConsoleCommand
             }
 
             if ($day_remaining >= 0) {
+
+                $user_credit = $offerUse->idUser->typepaid == 1 ? $offerUse->idUser->credit + $offerUse->idUser->creditlimit : $offerUse->idUser->credit;
+
                 if ($day_remaining <= (intval($daytopay) * $oneday)) {
                     if ($this->debug >= 1) {
                         echo " USER " . $offerUse->idUser->username . " HAVE TO PAY THE PLAN NOW ";
                     }
 
-                    if (($offerUse->idUser->credit + $offerUse->idUser->typepaid * $offerUse->idUser->creditlimit) >= $offerUse->idOffer->price) {
+                    if ($user_credit >= $offerUse->idOffer->price) {
                         if ($this->debug >= 1) {
                             echo " USER " . $offerUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE PLAN ";
                         }
@@ -119,7 +122,7 @@ class PlanCheckCommand extends ConsoleCommand
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
                 } else {
-                    if (($offerUse->idUser->credit + $offerUse->idUser->typepaid * $offerUse->idUser->creditlimit) >= $offerUse->idOffer->price) {
+                    if ($user_credit >= $offerUse->idOffer->price) {
                         if ($this->debug >= 1) {
                             echo " USER " . $offerUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE PLAN ";
                         }
