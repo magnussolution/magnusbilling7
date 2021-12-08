@@ -125,7 +125,7 @@ class QueueAgi
         if ($siptransfer['data'] != 'yes' && $type == 'queue') {
 
             if (!is_null($DidAgi)) {
-                $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime);
+                $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime, $CalcAgi);
             }
 
             $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('$MAGNUS->destination',1,length(prefix))

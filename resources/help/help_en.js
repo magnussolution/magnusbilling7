@@ -264,6 +264,12 @@ Help.load({
     'did.TimeOfDay_sun': `The same but for Sunday.`,
     'did.workaudio': `Audio that will be executed when a call is received at the time interval.`,
     'did.noworkaudio': `Audio that will be executed when a call is received out of the time interval.`,
+    'did.minimal_time_buy': ``,
+    'did.buyrateinitblock': ``,
+    'did.buyrateincrement': ``,
+    'did.buy_rate_1': ``,
+    'did.buy_rate_2': ``,
+    'did.buy_rate_3': ``,
     //DID DESTINATION
     'diddestination.id_did': `Select the DID that you want create new destination for.`,
     'diddestination.id_user': `User that will be the owner of this DID.`,
@@ -555,6 +561,7 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'refill.payment': `This setting is only to your control, the credit will be released to the user anyway if set to Payment NO`,
     'refill.invoice_number': `Invoice number.`,
     'refill.image': ``,
+    'refill.date': ``,
     //REFILL PROVIDERS
     'refillprovider.id_provider': `Providers name.`,
     'refillprovider.credit': `Refill value.`,
@@ -614,6 +621,7 @@ Let's say there's 1 MagnusBilling server and 3 slave servers, and you want to se
     'servicesuse.price': `Service price.`,
     'servicesuse.method': `Payment method.`,
     'servicesuse.reservationdate': `Day of service activation.`,
+    'servicesuse.month_payed': ``,
     //SIP USERS
     'sip.id_user': `User that this SIP user is associated with.`,
     'sip.defaultuser': `Username used to login in a Softphone or any SIP device.`,
@@ -670,6 +678,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sip.voicemail_email': `Email that will be send the email with the voicemail.`,
     'sip.voicemail_password': `Voicemail password. It's possible to enter in the Voicemail typing *111`,
     'sip.sipshowpeer': `sip show peer`,
+    'sip.sip_config': ``,
     //SIP TRACE
     'siptrace.head': `SIP message body.`,
     //ATA LINKSYS

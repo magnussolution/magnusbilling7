@@ -366,3 +366,63 @@ Out work audio
 
 
 
+
+.. _did-minimal-time-buy:
+
+Minimum time to buy
+-------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buyrateinitblock:
+
+Buy price initblock
+-------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buyrateincrement:
+
+Buy price increment
+-------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buy-rate-1:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buy-rate-2:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buy-rate-3:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
+
+
+

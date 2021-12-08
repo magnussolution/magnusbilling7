@@ -124,7 +124,7 @@ class UpdateMysqlCommand extends ConsoleCommand
               `uptime` varchar(200) DEFAULT NULL,
               PRIMARY KEY (`id`),
               UNIQUE KEY `date` (`date`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0";
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0";
 
             $this->executeDB($sql);
 
@@ -265,9 +265,9 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         if ($version == '7.0.0') {
 
             $sql = "
-            ALTER TABLE `pkg_ivr` CHANGE `monFriStart` `monFriStart` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '09:00-12:00|14:00-18:00';
-            ALTER TABLE `pkg_ivr` CHANGE `satStart` `satStart` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '09:00-12:00';
-            ALTER TABLE `pkg_ivr` CHANGE `sunStart` `sunStart` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '00:00';
+            ALTER TABLE `pkg_ivr` CHANGE `monFriStart` `monFriStart` VARCHAR(200) NOT NULL DEFAULT '09:00-12:00|14:00-18:00';
+            ALTER TABLE `pkg_ivr` CHANGE `satStart` `satStart` VARCHAR(200) NOT NULL DEFAULT '09:00-12:00';
+            ALTER TABLE `pkg_ivr` CHANGE `sunStart` `sunStart` VARCHAR(200) NOT NULL DEFAULT '00:00';
             UPDATE pkg_ivr SET monFriStart = CONCAT(monFriStart,'-',monFriStop);
             UPDATE pkg_ivr SET satStart = CONCAT(satStart,'-',satStop);
             UPDATE pkg_ivr SET sunStart = CONCAT(sunStart,'-',sunStop);
@@ -466,7 +466,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         }
 
         if ($version == '7.1.1') {
-            $sql = " ALTER TABLE  `pkg_sip` CHANGE  `accountcode`  `accountcode` VARCHAR( 30 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;";
+            $sql = " ALTER TABLE  `pkg_sip` CHANGE  `accountcode`  `accountcode` VARCHAR( 30 ) NULL DEFAULT NULL ;";
             $this->executeDB($sql);
 
             $version = '7.1.2';
@@ -633,7 +633,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "UPDATE `pkg_method_pay` SET `showFields` = 'payment_method,show_name,id_user,country,active,min,max,username,pagseguro_TOKEN,P2P_RecipientKeyID' WHERE payment_method = 'molpay';";
             $this->executeDB($sql);
 
-            $sql = "ALTER TABLE `pkg_method_pay` CHANGE `P2P_RecipientKeyID` `P2P_RecipientKeyID` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';";
+            $sql = "ALTER TABLE `pkg_method_pay` CHANGE `P2P_RecipientKeyID` `P2P_RecipientKeyID` VARCHAR(100) NOT NULL DEFAULT '';";
             $this->executeDB($sql);
 
             $version = '7.2.3';
@@ -1306,16 +1306,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         if ($version == '7.6.0') {
 
             $sql = "ALTER TABLE `pkg_campaign_poll`
-        CHANGE `option0` `option0` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option0` `option0` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option2` `option2` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option3` `option3` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option4` `option4` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option5` `option5` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option6` `option6` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option7` `option7` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option8` `option8` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-        CHANGE `option9` `option9` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+        CHANGE `option0` `option0` VARCHAR(300) NOT NULL,
+        CHANGE `option1` `option1` VARCHAR(300) NOT NULL,
+        CHANGE `option2` `option2` VARCHAR(300) NOT NULL,
+        CHANGE `option3` `option3` VARCHAR(300) NOT NULL,
+        CHANGE `option4` `option4` VARCHAR(300) NOT NULL,
+        CHANGE `option5` `option5` VARCHAR(300) NOT NULL,
+        CHANGE `option6` `option6` VARCHAR(300) NOT NULL,
+        CHANGE `option7` `option7` VARCHAR(300) NOT NULL,
+        CHANGE `option8` `option8` VARCHAR(300) NOT NULL,
+        CHANGE `option9` `option9` VARCHAR(300) NOT NULL;";
             $this->executeDB($sql);
 
             $version = '7.6.1';
@@ -1532,6 +1532,29 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2021-12-06
+        if ($version == '7.7.9') {
+            $sql = "ALTER TABLE `pkg_sip` ADD `sip_config` TEXT NOT NULL DEFAULT '' ;";
+            $this->executeDB($sql);
+
+            $sql = "
+            ALTER TABLE `pkg_did` ADD `buy_rate_1` decimal(15,5)   NOT NULL DEFAULT '0.00000' AFTER `selling_rate_1`;
+            ALTER TABLE `pkg_did` ADD `buy_rate_2` decimal(15,5)   NOT NULL DEFAULT '0.00000' AFTER `selling_rate_2`;
+            ALTER TABLE `pkg_did` ADD `buy_rate_3` decimal(15,5)   NOT NULL DEFAULT '0.00000' AFTER `selling_rate_3`;
+
+
+
+            ALTER TABLE `pkg_did` ADD `buyrateinitblock` int(11)   NOT NULL DEFAULT '1' AFTER `initblock`;
+            ALTER TABLE `pkg_did` ADD `buyrateincrement` int(11)   NOT NULL DEFAULT '1' AFTER `increment`;
+            ALTER TABLE `pkg_did` ADD `minimal_time_buy` int(11)   NOT NULL DEFAULT '1' AFTER `minimal_time_charge`;
+
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.8.0.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)
@@ -1539,7 +1562,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-
+            //print_r($e);
         }
     }
 

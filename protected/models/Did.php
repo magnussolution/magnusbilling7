@@ -57,14 +57,14 @@ class Did extends Model
     {
         return array(
             array('did', 'required'),
-            array('minimal_time_charge,calllimit, charge_of, block_expression_1, block_expression_2,block_expression_3, initblock, increment, id_user, cbr_em, activated, reserved, secondusedreal, billingtype,
+            array('minimal_time_charge,calllimit, charge_of, block_expression_1, block_expression_2,block_expression_3, buyrateinitblock, buyrateincrement, minimal_time_buy, initblock, increment, id_user, cbr_em, activated, reserved, secondusedreal, billingtype,
                 send_to_callback_1,send_to_callback_3,send_to_callback_3,cbr,cbr_ua,
                 cbr_total_try,cbr_time_try, record_call', 'numerical', 'integerOnly' => true),
             array('fixrate', 'numerical'),
             array('did,callerid', 'length', 'max' => 50),
             array('description', 'length', 'max' => 150),
             array('expression_1, expression_2,expression_2,expression_3,TimeOfDay_monFri,TimeOfDay_sat,TimeOfDay_sun,workaudio,noworkaudio', 'length', 'max' => 150),
-            array('connection_charge, selling_rate_1, selling_rate_2,selling_rate_3, connection_sell', 'length', 'max' => 15),
+            array('connection_charge, selling_rate_1, selling_rate_2,selling_rate_3,buy_rate_1,buy_rate_2,buy_rate_3, connection_sell', 'length', 'max' => 15),
         );
     }
 
@@ -92,6 +92,9 @@ class Did extends Model
         $this->selling_rate_1 = $this->selling_rate_1 == '' ? '0.0000' : $this->selling_rate_1;
         $this->selling_rate_2 = $this->selling_rate_2 == '' ? '0.0000' : $this->selling_rate_2;
         $this->selling_rate_3 = $this->selling_rate_3 == '' ? '0.0000' : $this->selling_rate_3;
+        $this->buy_rate_1     = $this->buy_rate_1 == '' ? '0.0000' : $this->buy_rate_1;
+        $this->buy_rate_2     = $this->buy_rate_2 == '' ? '0.0000' : $this->buy_rate_2;
+        $this->buy_rate_3     = $this->buy_rate_3 == '' ? '0.0000' : $this->buy_rate_3;
         return parent::beforeSave();
     }
 }
