@@ -335,6 +335,12 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.TimeOfDay_sun': `Mesma regra só que para domingos.`,
     'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento.`,
+    'did.minimal_time_buy': `Tempo mínimo para tarifar o custo do DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.`,
+    'did.buyrateinitblock': `Tempo mínimo em segundos para tarifar o custo do DID. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
+    'did.buyrateincrement': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo de custo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
+    'did.buy_rate_1': ``,
+    'did.buy_rate_2': ``,
+    'did.buy_rate_3': ``,
     //DESTINO DE DIDS
     'diddestination.id_did': `Selecione o DID para criar o novo destino.`,
     'diddestination.id_user': `Usuário que será o dono deste DID.`,
@@ -642,6 +648,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'refill.payment': `Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO.`,
     'refill.invoice_number': `Número da fatura.`,
     'refill.image': ``,
+    'refill.date': ``,
     //RECARGA DE PROVEDORES
     'refillprovider.id_provider': `Nome do provedor.`,
     'refillprovider.credit': `Valor da recarga.`,
@@ -701,6 +708,7 @@ Digamos que tenha 1 servidor MagnusBilling 3 servidores slaves, e você deseja e
     'servicesuse.price': `Valor do serviço.`,
     'servicesuse.method': `Forma de pagamento.`,
     'servicesuse.reservationdate': `Dia que o serviço foi ativado.`,
+    'servicesuse.month_payed': ``,
     //CONTAS SIP
     'sip.id_user': `Usuário ao qual esta conta SIP está vinculada.`,
     'sip.defaultuser': `Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.`,
@@ -758,6 +766,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sip.voicemail_email': `Email que será enviado o email com a gravação.`,
     'sip.voicemail_password': `Senha do VOICEMAIL. É possível entrar no VOICEMAIL digitando *111.`,
     'sip.sipshowpeer': `sip show peer.`,
+    'sip.sip_config': ``,
     //SIP TRACE
     'siptrace.head': `Corpo da mensagem SIP.`,
     //ATA LINKSYS

@@ -376,3 +376,63 @@ Não trabalhando
 
 
 
+
+.. _did-minimal-time-buy:
+
+Tempo mínimo para compra
+-------------------------
+
+| Tempo mínimo para tarifar o custo do DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.
+
+
+
+
+.. _did-buyrateinitblock:
+
+Bloco inicial
+-------------
+
+| Tempo mínimo em segundos para tarifar o custo do DID. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
+
+
+
+
+.. _did-buyrateincrement:
+
+Incremento
+----------
+
+| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo de custo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
+
+
+
+
+.. _did-buy-rate-1:
+
+Buy price per min
+-----------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _did-buy-rate-2:
+
+Buy price per min
+-----------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _did-buy-rate-3:
+
+Buy price per min
+-----------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

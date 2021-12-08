@@ -103,7 +103,7 @@ Locale.load({
     'Billing type': 'Tipo de tarifação',
     'Black': 'Preto',
     'Block call regex': 'REGEX para bloqueio de chamadas',
-    'Block calls from this expression': 'Bloquear chamadas a partir desta expressão',
+    'Block calls from this expression': 'Bloquear chamadas desta expressão',
     'Blocked': 'Bloqueado',
     'Blue': 'Azul',
     'Booth': 'Cabine',
@@ -120,6 +120,7 @@ Locale.load({
     'Buy price': 'Preço de compra',
     'Buy price increment': 'Incremento',
     'Buy price initblock': 'Bloco inicial',
+    'Buy price per min': 'Preço de compra por min',
     'CDR': 'Extrato de Chamadas',
     'CDR Failed': 'Chamadas Rejeitadas',
     'CID Callback': 'CID Callback',
@@ -251,6 +252,8 @@ Locale.load({
     'DID billing per minute rate': 'Valor da tarifa por minuto',
     'DID destination': 'Destino de DID',
     'DID increment': 'DID increment',
+    'DID increment Buy': 'Cadência de compra',
+    'DID increment Sell': 'Cadência de venda',
     'DID owner': 'Dono do DID',
     'DID voip': 'DID voip',
     'DIDs': 'DIDs',
@@ -1140,5 +1143,4 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
-
 });

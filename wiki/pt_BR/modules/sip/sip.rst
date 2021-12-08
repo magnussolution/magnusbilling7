@@ -408,3 +408,13 @@ Peer
 
 
 
+
+.. _sip-sip-config:
+
+Parâmetros
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

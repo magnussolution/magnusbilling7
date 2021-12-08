@@ -23,6 +23,7 @@ class DidAgi
     public $voip_call;
     public $did;
     public $sell_price;
+    public $buy_price;
     public $modelDestination;
     public $modelDid;
     public $startCall;
@@ -111,9 +112,9 @@ class DidAgi
     public function checkDidDestinationType(&$agi, &$MAGNUS, &$CalcAgi)
     {
 
-        $MAGNUS->id_user     = $MAGNUS->modelUser->id;
-        $MAGNUS->restriction = $MAGNUS->modelUser->restriction;
-
+        $MAGNUS->id_user            = $MAGNUS->modelUser->id;
+        $MAGNUS->restriction        = $MAGNUS->modelUser->restriction;
+        $MAGNUS->mix_monitor_format = $MAGNUS->modelUser->mix_monitor_format;
         $MAGNUS->checkRestrictPhoneNumber($agi, 'did');
 
         $this->didCallCost($agi, $MAGNUS);
@@ -132,6 +133,7 @@ class DidAgi
                 $CalcAgi->did_charge_of_answer_time = time();
                 $CalcAgi->didAgi                    = $this->modelDid;
                 $this->modelDid->selling_rate_1     = $this->sell_price;
+                $this->modelDid->buy_rate_1         = $this->buy_price;
 
             } else {
                 $agi->verbose('NOT found callerid, = ' . $MAGNUS->CallerID . ' to did ' . $this->did . ' and was selected charge_of to callerID');
@@ -630,14 +632,18 @@ class DidAgi
         if (strlen($this->modelDid->expression_1) > 0 && preg_match('/' . $this->modelDid->expression_1 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDid->selling_rate_1;
+            $buy_rate     = $this->modelDid->buy_rate_1;
         } elseif (strlen($this->modelDid->expression_2) > 0 && preg_match('/' . $this->modelDid->expression_2 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 2 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDid->selling_rate_2;
+            $buy_rate     = $this->modelDid->buy_rate_2;
         } elseif (strlen($this->modelDid->expression_3) > 0 && preg_match('/' . $this->modelDid->expression_3 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 3 " . $MAGNUS->CallerID, 10);
             $selling_rate = $this->modelDid->selling_rate_3;
+            $buy_rate     = $this->modelDid->buy_rate_3;
         } else {
             $selling_rate = 0;
+            $buy_rate     = 0;
         }
 
         if ($this->modelDid->connection_sell == 0 && $selling_rate == 0) {
@@ -645,6 +651,8 @@ class DidAgi
         } else {
             $this->sell_price = $selling_rate;
         }
+
+        $this->buy_price = $buy_rate;
 
         $credit = $MAGNUS->modelUser->typepaid == 1
         ? $MAGNUS->modelUser->credit + $MAGNUS->modelUser->creditlimit
@@ -659,7 +667,7 @@ class DidAgi
         }
     }
 
-    public function billDidCall(&$agi, &$MAGNUS, $answeredtime)
+    public function billDidCall(&$agi, &$MAGNUS, $answeredtime, &$CalcAgi)
     {
         $agi->verbose('billDidCall, sell_price=' . $this->sell_price, 10);
 
@@ -671,7 +679,11 @@ class DidAgi
             $this->sell_price = 0;
         }
 
-        $agi->verbose(' answeredtime = ' . $answeredtime . ' sell_price = ' . $this->sell_price . ' connection_sell = ' . $this->modelDid->connection_sell, 10);
+        $this->buy_price = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->buy_price, $this->modelDid->buyrateinitblock, $this->modelDid->buyrateincrement);
+
+        if ($CalcAgi->real_sessiontime < $this->modelDid->minimal_time_buy) {
+            $this->buy_price = 0;
+        }
     }
 
     public function call_did_billing(&$agi, &$MAGNUS, &$CalcAgi, $answeredtime, $dialstatus)
@@ -683,6 +695,7 @@ class DidAgi
         } else {
             $terminatecauseid = 0;
         }
+        $CalcAgi->real_sessiontime = intval($answeredtime);
 
         /*recondeo call*/
         if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $this->sell_price > 0) {
@@ -706,17 +719,17 @@ class DidAgi
 
         }
 
-        $this->billDidCall($agi, $MAGNUS, $answeredtime);
+        $this->billDidCall($agi, $MAGNUS, $answeredtime, $CalcAgi);
 
-        $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $answeredtime);
-        $CalcAgi->sessiontime      = $answeredtime;
-        $CalcAgi->real_sessiontime = intval($answeredtime);
+        $CalcAgi->starttime   = date("Y-m-d H:i:s", time() - $answeredtime);
+        $CalcAgi->sessiontime = $answeredtime;
+
         $MAGNUS->destination       = $this->did;
         $CalcAgi->terminatecauseid = $terminatecauseid;
         $CalcAgi->sessionbill      = $this->sell_price;
         $MAGNUS->id_trunk          = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
         $CalcAgi->sipiax           = 3;
-        $CalcAgi->buycost          = 0;
+        $CalcAgi->buycost          = $this->buy_price;
         $CalcAgi->saveCDR($agi, $MAGNUS);
 
         $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $answeredtime
