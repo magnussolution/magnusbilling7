@@ -255,6 +255,8 @@ return array(
     'DID billing per minute rate' => 'Valor da tarifa por minuto',
     'DID destination' => 'Destino de DID',
     'DID increment' => 'DID increment',
+    'DID increment Buy' => 'Cadência de compra',
+    'DID increment Sell' => 'Cadência de venda',
     'DID owner' => 'Dono do DID',
     'DID voip' => 'DID voip',
     'DIDs' => 'DIDs',

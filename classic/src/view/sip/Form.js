@@ -397,6 +397,20 @@ Ext.define('MBilling.view.sip.Form', {
                     value: ''
                 }]
             }, {
+                title: t('Asterisk extra config'),
+                items: [{
+                    xtype: 'textarea',
+                    labelAlign: 'right',
+                    plugins: 'markallowblank',
+                    labelWidth: 90,
+                    name: 'sip_config',
+                    fieldLabel: t('Parameters'),
+                    allowBlank: true,
+                    height: 400,
+                    anchor: '100%',
+                    hidden: !App.user.isAdmin
+                }]
+            }, {
                 title: t('SipShowPeer'),
                 itemId: 'sipshowpeer',
                 bodyPadding: 10,

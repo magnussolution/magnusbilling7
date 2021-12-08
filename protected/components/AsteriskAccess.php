@@ -839,6 +839,10 @@ class AsteriskAccess
                         $line .= "rtcp_mux=yes\n";
                     }
 
+                    if ($sip->sip_config != '') {
+                        $line .= $sip->sip_config . "\n";
+                    }
+
                     if (strlen($sip->sip_group) > 0) {
                         $line .= 'namedcallgroup=' . $sip->sip_group . "\n";
                         $line .= 'namedpickupgroup=' . $sip->sip_group . "\n";

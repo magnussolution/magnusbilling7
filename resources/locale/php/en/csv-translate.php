@@ -51,6 +51,7 @@
     'creditlimit'=> ['Credit_limit', 'Limite_de_crédito' , 'Limite_de_credito'],
     'daily_start_time'=> ['Daily_start_time', 'Horário_de_início_diário' , 'Hora_inicio'],
     'daily_stop_time'=> ['Daily_stop_time', 'Horário_de_finalização_diário' , 'Hora_parar'],
+    'date'=> ['Date', 'Data' , 'Fecha'],
     'date_consumption'=> ['Date', 'Data' , 'Fecha'],
     'day'=> ['Date', 'Data' , 'Fecha'],
     'defaultuser'=> ['SIP_user', 'Conta_SIP' , 'Usuario_SIP'],
