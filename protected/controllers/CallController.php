@@ -355,16 +355,16 @@ class CallController extends Controller
         $this->filter = $this->extraFilter($filter);
 
         $modelCall = $this->abstractModel->find(array(
-            'select'    => 'SUM(t.buycost) AS sumbuycost, SUM(t.sessionbill) AS sumsessionbill ',
-            'join'      => $this->join,
+            'select'    => 'SUM(t.buycost) AS buycost, SUM(t.sessionbill) AS sessionbill ',
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
         ));
 
-        $modelCall->sumbuycost     = number_format($modelCall->sumbuycost, 4);
-        $modelCall->sumsessionbill = number_format($modelCall->sumsessionbill, 4);
-        $modelCall->totalCall      = number_format($modelCall->sumsessionbill - $modelCall->sumbuycost, 4);
+        $modelCall->sumbuycost     = number_format($modelCall->buycost, 4);
+        $modelCall->sumsessionbill = number_format($modelCall->sessionbill, 4);
+        $modelCall->totalCall      = number_format($modelCall->sessionbill - $modelCall->buycost, 4);
+
         echo json_encode($modelCall);
     }
 
