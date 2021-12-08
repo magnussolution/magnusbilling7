@@ -87,6 +87,7 @@ class Sip extends Model
             array('techprefix', 'length', 'max' => 6),
             array('techprefix', 'checktechprefix'),
             array('host', 'checkHost'),
+            array('sip_config', 'length', 'max' => 500),
             array('defaultuser', 'uniquePeerName'),
 
         );
