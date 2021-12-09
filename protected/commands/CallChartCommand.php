@@ -208,9 +208,14 @@ class CallChartCommand extends ConsoleCommand
                                 }
 
                                 if (!count($modelSip)) {
-                                    //check if is via IP from proxy
-                                    $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                                    $modelSip  = Sip::model()->find('host = :key', array(':key' => $callProxy['X-AUTH-IP']));
+
+                                    if (preg_match('/^IAX/', strtoupper($channel))) {
+                                        $modelSip = Iax::model()->find('name = :key', array(':key' => $originate));
+                                    } else {
+                                        //check if is via IP from proxy
+                                        $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
+                                        $modelSip  = Sip::model()->find('host = :key', array(':key' => $callProxy['X-AUTH-IP']));
+                                    }
                                 }
                             }
 
@@ -328,12 +333,12 @@ class CallChartCommand extends ConsoleCommand
 
                 if (!is_numeric($id_user)) {
 
-                    echo "continue becausse not found id_user\n";
+                    echo "continue because not found id_user\n";
                     continue;
                 }
 
                 if (!is_numeric($id_user) || !is_numeric($cdr)) {
-                    echo "continue becausse not foun id_user or cdr\n";
+                    echo "continue because not foun id_user or cdr\n";
                     continue;
                 }
 
