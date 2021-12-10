@@ -22,20 +22,31 @@ class StatusSystemCommand extends ConsoleCommand
     public function run($args)
     {
 
-        if (fmod(date('i'), 5) == 0) {
+        $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-5 minute')) . "'";
+        $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
 
-            $sql    = "SELECT starttime AS time, count(*) Total_failed, (SELECT count(*) FROM pkg_cdr WHERE starttime = time) Total_answered FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' GROUP BY starttime";
-            $result = Yii::app()->db->createCommand($sql)->queryAll();
-            foreach ($result as $key => $minute) {
-                $sql = "UPDATE pkg_status_system SET cps = " . ($minute['Total_failed'] + $minute['Total_answered']) . "  WHERE date = '" . $minute['time'] . "' ";
+        $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-5 minute')) . "'";
+        $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+
+        $result = array_merge($resultFailed, $resultAnswered);
+
+        $byGroup = $this->group_by("uniqueid", $result);
+        $old_CPS = [];
+        foreach ($byGroup as $time => $group) {
+            $cps         = count($group);
+            $hour_minute = date('Y-m-d H:i', $time) . ':00';
+            if (!isset($old_CPS[$hour_minute])) {
+                $old_CPS[$hour_minute] = 0;
+            }
+            if ($cps > $old_CPS[$hour_minute]) {
+                $old_CPS[$hour_minute] = $cps;
+                $sql                   = "UPDATE pkg_status_system SET cps = " . $cps . "  WHERE date = '" . $hour_minute . "' ";
                 try {
                     Yii::app()->db->createCommand($sql)->execute();
                 } catch (Exception $e) {
 
                 }
-
             }
-
         }
 
         $sysinfo = new sysinfo;
@@ -85,6 +96,20 @@ class StatusSystemCommand extends ConsoleCommand
             $result = Yii::app()->db->createCommand($sql)->queryAll();
         }
 
+    }
+    public function group_by($key, $data)
+    {
+        $result = array();
+
+        foreach ($data as $val) {
+            if (array_key_exists($key, $val)) {
+                $result[$val[$key]][] = $val;
+            } else {
+                $result[""][] = $val;
+            }
+        }
+
+        return $result;
     }
 }
 

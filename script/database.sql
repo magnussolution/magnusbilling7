@@ -2691,7 +2691,7 @@ CREATE TABLE `pkg_sip` (
   `trace` tinyint(1) NOT NULL DEFAULT '0',
   `addparameter` varchar(50) NOT NULL DEFAULT '',
   `amd` int(11) NOT NULL DEFAULT '0',
-  `sip_config` text NOT NULL,
+  `sip_config` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `techprefix` (`techprefix`),
   KEY `host` (`host`),
