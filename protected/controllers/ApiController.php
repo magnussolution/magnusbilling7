@@ -45,7 +45,7 @@ class ApiController extends Controller
     {
         $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
-            $attributes[$i]['api_secret'] = substr($attributes[$i]['api_key'], 0, -10) . '**********';
+            $attributes[$i]['api_secret'] = substr($attributes[$i]['api_secret'], 0, 6) . '*********************';
         }
         return $attributes;
     }
