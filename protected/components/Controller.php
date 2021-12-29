@@ -44,6 +44,7 @@ class Controller extends BaseController
         $allow = array(
             'site',
             'authentication',
+            'overrides/authenticationOR',
             'asteriskDialplan',
             'asteriskFiles',
             'signup',
