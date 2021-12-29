@@ -186,6 +186,9 @@ Ext.define('MBilling.model.User', {
     }, {
         name: 'cpslimit',
         type: 'int'
+    }, {
+        name: 'dist',
+        type: 'string'
     }, 'idUserusername', 'idGroupname', 'idGroupid_user_type', 'idPlanname'],
     proxy: {
         type: 'uxproxy',
