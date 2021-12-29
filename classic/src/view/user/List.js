@@ -173,6 +173,12 @@ Ext.define('MBilling.view.user.List', {
             hidden: true,
             hideable: window.dialC && App.user.isAdmin,
             flex: 2
+        }, {
+            header: t('DIST'),
+            dataIndex: 'dist',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 2
         }];
         me.callParent(arguments);
     }
