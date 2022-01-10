@@ -21,14 +21,7 @@ class PlanCheckCommand extends ConsoleCommand
 {
     public function run($args)
     {
-        $sql = "SELECT reservationdate, month_payed, pkg_user.id, credit, email, label, typepaid, creditlimit, username,
-        pkg_user.id_offer, price, pkg_user.id
-        FROM pkg_user
-        INNER JOIN pkg_offer_use ON pkg_offer_use.id_user = pkg_user.id
-        INNER JOIN pkg_offer ON pkg_offer.id  = pkg_user.id_offer
-        WHERE releasedate IS NULL OR releasedate < '1984-01-01 00:00:00'
-        AND pkg_user.active= 1
-        ORDER BY pkg_user.id ASC";
+        $this->debug = 10;
 
         $modelOfferUse = OfferUse::model()->findAll(array(
             'condition' => '(releasedate IS NULL OR releasedate < :key) AND status = 1',
@@ -37,11 +30,6 @@ class PlanCheckCommand extends ConsoleCommand
             ),
         )
         );
-
-        $planResult = Yii::app()->db->createCommand($sql)->queryAll();
-        if ($this->debug >= 1) {
-            echo $sql;
-        }
 
         if (!count($modelOfferUse)) {
             if ($this->debug >= 1) {
@@ -81,12 +69,12 @@ class PlanCheckCommand extends ConsoleCommand
 
                 if ($day_remaining <= (intval($daytopay) * $oneday)) {
                     if ($this->debug >= 1) {
-                        echo " USER " . $offerUse->idUser->username . " HAVE TO PAY THE PLAN NOW ";
+                        echo " USER " . $offerUse->idUser->username . " HAVE TO PAY THE PLAN NOW \n";
                     }
 
                     if ($user_credit >= $offerUse->idOffer->price) {
                         if ($this->debug >= 1) {
-                            echo " USER " . $offerUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE PLAN ";
+                            echo " USER " . $offerUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE PLAN \n";
                         }
 
                         $offerUse->month_payed++;
@@ -100,6 +88,12 @@ class PlanCheckCommand extends ConsoleCommand
                         $refill->payment     = 1;
                         $refill->save();
 
+                        User::model()->updateByPk($offerUse->idUser->id,
+                            array(
+                                'credit' => new CDbExpression('credit - ' . $offerUse->idOffer->price),
+                            )
+                        );
+
                         $mail = new Mail(Mail::$TYPE_PLAN_PAID, $offerUse->idUser->id);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $offerUse->idUser->credit - $offerUse->idOffer->price);
                         $mail->replaceInEmail(Mail::$PLAN_LABEL, $offerUse->idOffer->label);
@@ -108,7 +102,7 @@ class PlanCheckCommand extends ConsoleCommand
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     } else {
                         if ($this->debug >= 1) {
-                            echo " USER " . $offerUse->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE PLAN NOTIFY NOW ";
+                            echo " USER " . $offerUse->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE PLAN NOTIFY NOW \n";
                         }
 
                         $mail = new Mail(Mail::$TYPE_PLAN_UNPAID, $offerUse->idUser->id);
@@ -124,7 +118,7 @@ class PlanCheckCommand extends ConsoleCommand
                 } else {
                     if ($user_credit >= $offerUse->idOffer->price) {
                         if ($this->debug >= 1) {
-                            echo " USER " . $offerUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE PLAN ";
+                            echo " USER " . $offerUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE PLAN \n";
                         }
 
                         $offerUse->month_payed++;
@@ -137,6 +131,12 @@ class PlanCheckCommand extends ConsoleCommand
                         $refill->description = Yii::t('zii', 'Monthly payment Plan') . ' ' . $offerUse->idOffer->label;
                         $refill->payment     = 1;
                         $refill->save();
+
+                        User::model()->updateByPk($offerUse->idUser->id,
+                            array(
+                                'credit' => new CDbExpression('credit - ' . $offerUse->idOffer->price),
+                            )
+                        );
 
                         $mail = new Mail(Mail::$TYPE_PLAN_PAID, $offerUse->idUser->id);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $offerUse->idUser->credit - $offerUse->idOffer->price);
