@@ -59,7 +59,8 @@ class Report extends FPDF
     public $renderer;
     public $columnsDetails = [];
     public $recordsDetails = [];
-
+    public $listColor;
+    public $listHeaderColor;
     public function generate($type = 'link')
     {
         $this->AliasNbPages();
@@ -105,7 +106,7 @@ class Report extends FPDF
             $user = isset($_SESSION[$this->idxUserSession]) ? utf8_decode($this->strUser) . $_SESSION[$this->idxUserSession] : isset($this->user) ? $this->user : null;
 
             if (strlen($this->logo) > 10) {
-                $this->Image($this->logo, 10, 8);
+                $this->Image($this->logo, 10, 8, 50);
             }
 
             $this->SetFont($this->fontFamily, 'B', $this->fontSize + 3);
@@ -268,7 +269,13 @@ class Report extends FPDF
             }
             $widthHeader = $this->GetStringWidth($header);
 
-            $this->SetFillColor(156, 156, 156);
+            if (strlen($this->listHeaderColor) > 0) {
+                $colorsheader = explode(',', preg_replace('/ /', '', $this->listHeaderColor));
+                $this->SetFillColor($colorsheader[0], $colorsheader[1], $colorsheader[2]);
+            } else {
+                $this->SetFillColor(156, 156, 156);
+            }
+
             $this->Cell($widthFill, 5, $header, 0, 0, 'C', true);
             $this->Cell(0.6, 5);
         }
@@ -280,8 +287,14 @@ class Report extends FPDF
         $this->clearRecords();
 
         foreach ($this->records as $row) {
-            $rowColor = ($rowNumber % 2) === 0 ? 250 : 190;
-            $this->SetFillColor($rowColor, $rowColor, $rowColor);
+            $rowColor = ($rowNumber % 2) === 0 ? 255 : 190;
+
+            if (($rowNumber % 2) === 1 && strlen($this->listColor) > 0) {
+                $colors = explode(',', preg_replace('/ /', '', $this->listColor));
+                $this->SetFillColor($colors[0], $colors[1], $colors[2]);
+            } else {
+                $this->SetFillColor($rowColor, $rowColor, $rowColor);
+            }
 
             $columnsTable = $this->convertColumns($this->columnsTable);
 
