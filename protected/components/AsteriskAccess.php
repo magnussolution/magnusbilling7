@@ -839,7 +839,7 @@ class AsteriskAccess
                         $line .= "rtcp_mux=yes\n";
                     }
 
-                    if ($sip->sip_config != '') {
+                    if (isset($sip->sip_config) && $sip->sip_config != '') {
                         $line .= $sip->sip_config . "\n";
                     }
 

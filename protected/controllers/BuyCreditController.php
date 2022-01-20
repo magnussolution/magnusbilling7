@@ -27,6 +27,7 @@ class BuyCreditController extends Controller
                 $methodPay         = Methodpay::model()->find('payment_method = :key', array(':key' => 'Paypal'));
                 $_GET['id_method'] = $methodPay->id;
             }
+            Yii::app()->session['id_user'] = $modelSip->id_user;
 
         }
 
