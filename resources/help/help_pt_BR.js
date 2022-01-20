@@ -277,7 +277,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'configuration.config_value': `Valor. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     'configuration.config_description': `Descrição. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     //DIDS
-    'did.did': `O número exatamente como chega no Asterisk.`,
+    'did.did': `O número exatamente como chega no Asterisk. Você também pode usar intervalos. Examplo: 551140040001-551140040009. Neste exemplo criar os DIDS 551140040001 ao 551140040009.`,
     'did.record_call': `Gravar chamadas deste DID. Será gravado independente do destino da chamada.`,
     'did.activated': `Somente os números ativos podem receber chamadas.`,
     'did.callerid': `Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.`,

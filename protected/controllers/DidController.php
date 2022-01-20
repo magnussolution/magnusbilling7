@@ -207,6 +207,32 @@ class DidController extends Controller
             $uploadfile = $this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.' . $typefile[1];
             move_uploaded_file($_FILES["noworkaudio"]["tmp_name"], $uploadfile);
         }
+
+        if ($this->isNewRecord && preg_match('/\-/', $model->did)) {
+            $interval = preg_split('/\-/', $model->did);
+            if (strlen($interval[0]) == strlen($interval[1]) && $interval[1] > $interval[0]) {
+                for ($i = $interval[0]; $i <= $interval[1]; $i++) {
+                    if ($i == $interval[0]) {
+                        $model->did = $interval[0];
+                        try {
+                            $model->save();
+                        } catch (Exception $e) {
+                            Did::model()->deleteByPk((int) $model->id);
+                        }
+                    } else {
+                        $modelDid             = new Did;
+                        $modelDid->attributes = $values;
+                        $modelDid->did        = $i;
+                        try {
+                            $modelDid->save();
+                        } catch (Exception $e) {
+                            //
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     public function actionLiberar()
