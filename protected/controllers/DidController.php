@@ -237,29 +237,34 @@ class DidController extends Controller
 
     public function actionLiberar()
     {
-        if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+        if (isset($_POST['ids'])) {
 
-            $id = json_decode($_POST['id']);
+            $ids = json_decode($_POST['ids']);
 
-            Did::model()->updateByPk(
-                $id,
-                array(
-                    'reserved' => 0,
-                    'id_user'  => null,
-                ));
+            foreach ($ids as $key => $id) {
+                $modelDid = Did::model()->findByPk((int) $id);
+                if ($modelDid->reserved == 1 && $modelDid->id_user > 0) {
+                    Did::model()->updateByPk(
+                        $id,
+                        array(
+                            'reserved' => 0,
+                            'id_user'  => null,
+                        ));
 
-            Diddestination::model()->deleteAll("id_did = :key", array(':key' => $id));
+                    Diddestination::model()->deleteAll("id_did = :key", array(':key' => $id));
 
-            DidUse::model()->updateAll(
-                array(
-                    'releasedate' => date('Y-m-d H:i:s'),
-                    'status'      => 0,
-                ),
-                'id_did = :key AND releasedate = :key1 AND status = 1',
-                array(
-                    ':key'  => $id,
-                    ':key1' => '0000-00-00 00:00:00',
-                ));
+                    DidUse::model()->updateAll(
+                        array(
+                            'releasedate' => date('Y-m-d H:i:s'),
+                            'status'      => 0,
+                        ),
+                        'id_did = :key AND releasedate = :key1 AND status = 1',
+                        array(
+                            ':key'  => $id,
+                            ':key1' => '0000-00-00 00:00:00',
+                        ));
+                }
+            }
 
             echo json_encode(array(
                 $this->nameSuccess => true,
