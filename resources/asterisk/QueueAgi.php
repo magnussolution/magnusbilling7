@@ -112,7 +112,7 @@ class QueueAgi
         if ($linha[4] == 'ABANDON') {
             $MAGNUS->sip_account = $linha[4];
         } else {
-            $MAGNUS->sip_account = substr($linha[3], 4);
+            $MAGNUS->sip_account = substr($linha[3], 4) . '_WT ' . $agi->get_variable("QEHOLDTIME", true);
         }
 
         $CalcAgi->terminatecauseid = 1;
