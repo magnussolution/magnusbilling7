@@ -212,7 +212,7 @@ Help.load({
     'configuration.config_value': `Value. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html.`,
     'configuration.config_description': `Description. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html`,
     //DIDS
-    'did.did': `The exact number coming from the context in Asterisk. We recommend you to always use the E164 format.`,
+    'did.did': `The exact number coming from the context in Asterisk. We recommend you to always use the E164 format. Also you can create intervals. Example 13605040001-13605040009. In this example will be created the DIDs 13605040001 until  13605040009.`,
     'did.record_call': `Record calls for this DID. Recorded regardless of destination.`,
     'did.activated': `Only active numbers can receive calls.`,
     'did.callerid': `Use this field to set a CallerID name or leave it blank to use the received CallerID from the DID provider.`,
