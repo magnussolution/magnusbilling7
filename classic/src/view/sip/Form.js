@@ -193,6 +193,12 @@ Ext.define('MBilling.view.sip.Form', {
                     hidden: !App.user.isAdmin,
                     allowBlank: true,
                     maxLength: 6
+                }, {
+                    xtype: 'textareafield',
+                    allowBlank: true,
+                    name: 'description',
+                    fieldLabel: t('Description'),
+                    hidden: !App.user.isAdmin
                 }]
             }, {
                 title: t('NAT'),

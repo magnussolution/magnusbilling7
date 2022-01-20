@@ -217,6 +217,9 @@ Ext.define('MBilling.model.Sip', {
         name: 'permit',
         type: 'string'
     }, {
+        name: 'description',
+        type: 'string'
+    }, {
         name: 'addparameter',
         type: 'string'
     }, {

@@ -140,6 +140,12 @@ Ext.define('MBilling.view.sip.List', {
             hideable: !App.user.isClient,
             flex: 1
         }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            hidden: true,
+            hideable: !App.user.isClient,
+            flex: 4
+        }, {
             header: t('AMD'),
             dataIndex: 'amd',
             hidden: true,
