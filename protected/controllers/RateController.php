@@ -133,6 +133,14 @@ class RateController extends Controller
         parent::actionCsv();
     }
 
+    public function afterSave($model, $values)
+    {
+        if (Yii::app()->session['isAgent'] || Yii::app()->session['id_agent'] > 1) {
+            $info = 'Module: rateagent  ' . json_encode($values);
+            LogUsers::model()->updateByPk(Yii::app()->db->getLastInsertID(), array('description' => $info));
+        }
+    }
+
     public function replaceToExport()
     {
 
@@ -186,6 +194,8 @@ class RateController extends Controller
                 exit;
 
             }
+            $info = 'Module: prefix  {}';
+            MagnusLog::insertLOG(5, $info);
         }
     }
     public function importRates($values)
@@ -241,6 +251,9 @@ class RateController extends Controller
 
             }
 
+            $info = 'Module: rateagent  {}';
+            MagnusLog::insertLOG(5, $info);
+
         } else if (Yii::app()->session['isAdmin']) {
 
             $sql = "LOAD DATA LOCAL INFILE '" . $_FILES['file']['tmp_name'] . "'" .
@@ -260,6 +273,9 @@ class RateController extends Controller
                 exit;
 
             }
+
+            $info = 'Module: rate  {}';
+            MagnusLog::insertLOG(5, $info);
 
             $sql = "DELETE FROM pkg_prefix WHERE prefix < 1";
             try {
