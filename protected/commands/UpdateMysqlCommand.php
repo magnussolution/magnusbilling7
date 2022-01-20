@@ -1391,7 +1391,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             AsteriskAccess::instance()->generateSipPeers();
 
-            $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse,sip_config';
+            $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse';
             $model  = Trunk::model()->findAll(
                 array(
                     'select'    => $select,
@@ -1563,6 +1563,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+        //2022-01-19
+        if ($version == '7.8.0.1') {
+            $sql = "ALTER TABLE `pkg_sip` ADD `description` VARCHAR(150) NULL DEFAULT NULL ;";
+            $this->executeDB($sql);
+
+            $this->executeDB($sql);
+
+            $version = '7.8.0.2';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
