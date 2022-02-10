@@ -218,7 +218,7 @@ Locale.load({
     'Connection charge': 'Costo de conexión',
     'Consecutive number': 'Numeros consecutivos',
     'Contact': 'Contacto',
-    'Contains': 'Contenido',
+    'Contains': 'Contiene',
     'Context': 'Contexto',
     'Continue': 'Continuar',
     'Contract is required': 'Contracto es obligatorio',
@@ -1120,5 +1120,4 @@ Locale.load({
     'must belong to the IVR owner': 'tiene que pertenecer al mismo usuario de la IRV',
     'to refill': 'para recargar',
     'week': 'semana',
-
 });

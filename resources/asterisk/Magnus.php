@@ -42,6 +42,7 @@ class Magnus
     public $typepaid          = 0;
     public $removeinterprefix = 1;
     public $restriction       = 1;
+    public $restriction_use   = 1;
     public $redial;
     public $enableexpire;
     public $expirationdate;
@@ -676,9 +677,19 @@ class Magnus
     public function checkRestrictPhoneNumber($agi, $type = 'outbound')
     {
 
-        $destination = $type == 'outbound' ? $this->destination : $this->CallerID;
+        if ($type == 'outbound') {
+            if ($this->restriction_use == 1) {
+                $destination = $this->destination;
+            } elseif ($this->restriction_use == 2) {
+                $destination = $this->CallerID;
+            }
+        } else {
+            $destination = $this->CallerID;
+        }
+
         $destination = preg_replace('/\+|\#|\*|\-|\.|\(|\)/', '', $destination);
-        $direction   = $type == 'outbound' ? 1 : 2;
+
+        $direction = $type == 'outbound' ? 1 : 2;
 
         if ($type == 'outbound' && $this->modelSip->block_call_reg != '') {
 
@@ -695,8 +706,13 @@ class Magnus
         }
         if ($this->restriction == 1 || $this->restriction == 2) {
             /*Check if Account have restriction*/
-            $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user
-                        AND number = SUBSTRING('" . $destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+
+            if ($this->restriction == 1 && $this->restriction_use == 3 && $type == 'outbound') {
+                $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user AND (number = SUBSTRING('" . $this->destination . "',1,length(number))  OR number = SUBSTRING('" . $this->CallerID . "',1,length(number))  ) ORDER BY LENGTH(number) DESC";
+            } else {
+                $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user AND number = SUBSTRING('" . $destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+            }
+
             $modelRestrictedPhonenumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $agi->verbose("RESTRICTED NUMBERS ", 15);
