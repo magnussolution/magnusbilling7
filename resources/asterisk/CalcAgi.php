@@ -360,6 +360,8 @@ class CalcAgi
                     $values = "$MAGNUS->id_user, $id_offer, '$this->freetimetocall_used'";
                     $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
                     $agi->exec($sql);
+                } else {
+                    $sessiontime = 0;
                 }
             } else {
                 $this->calculateCost($MAGNUS, $sessiontime, $agi);
@@ -610,12 +612,13 @@ class CalcAgi
             $allow_error       = $modelTrunk->allow_error;
             $status            = $modelTrunk->status;
             $this->id_provider = $modelTrunk->id_provider;
+            $provider_credit   = $modelTrunk->credit;
 
             if ($typecall == 1) {
                 $timeout = 3600;
             }
 
-            if ($this->tariffObj[0]['credit_control'] == 1 && $this->tariffObj[0]['credit'] <= 0) {
+            if ($modelTrunk->credit_control == 1 && $provider_credit <= 0) {
                 $agi->verbose("Provider not have credit", 3);
                 continue;
             }
