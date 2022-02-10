@@ -30,7 +30,7 @@ class PagHiperController extends Controller
 
         if (isset($_GET['id_agent'])) {
             $filter .= " AND id_user = :key1";
-            $params = array(':key1' => int($_GET['id_agent']));
+            $params = array(':key1' => (int) $_GET['id_agent']);
         } else {
             $filter .= " AND id = 1";
         }
@@ -82,19 +82,21 @@ class PagHiperController extends Controller
 
             $confirmado = (strcmp($resposta, "VERIFICADO") == 0);
 
+            Yii::log('confirmado=' . $confirmado, 'error');
+
             //FIM - NAO ALTERAR//
 
             if ($confirmado) {
-
-                $idPlataforma    = $_POST['idPlataforma'];
-                $usuario         = explode("-", $idPlataforma);
-                $usuario         = addslashes(strip_tags(trim($usuario[1])));
-                $id_user         = addslashes(strip_tags(trim($usuario[2])));
-                $StatusTransacao = $_POST['status'];
-                $monto           = str_replace(",", ".", $_POST['valorTotal']);
+                $idPlataforma     = $_POST['idPlataforma'];
+                $dataFromPagHiper = explode("-", $idPlataforma);
+                $usuario          = trim($dataFromPagHiper[1]);
+                $id_user          = trim($dataFromPagHiper[2]);
+                $StatusTransacao  = $_POST['status'];
+                $monto            = str_replace(",", ".", $_POST['valorTotal']);
 
                 $description = "Pagamento confirmado, PAGHIPER:" . $transacaoID;
-
+                Yii::log('description=' . $description, 'error');
+                Yii::log('status=' . $status, 'error');
                 if ($status == 'Aprovado') {
                     $modelUser = User::model()->find(
                         "username = :usuario AND id = :key",
@@ -104,6 +106,7 @@ class PagHiperController extends Controller
                     );
 
                     if (count($modelUser) && Refill::model()->countRefill($transacaoID, $modelUser->id) == 0) {
+                        Yii::log('teste liberar credito=' . $modelUser->id, 'error');
                         UserCreditManager::releaseUserCredit($modelUser->id, $monto, $description, 1, $transacaoID);
                     }
                 }
