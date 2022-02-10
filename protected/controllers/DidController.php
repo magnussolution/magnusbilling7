@@ -292,12 +292,14 @@ class DidController extends Controller
                 $modelDid = Did::model()->findByPK($value['id']);
                 if ($modelDid->reserved == 0) {
                     CallSummaryMonthDid::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
+                    DidUse::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
                 }
             }
         } else {
             $modelDid = Did::model()->findByPK($values['id']);
             if ($modelDid->reserved == 0) {
                 CallSummaryMonthDid::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
+                DidUse::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
             }
 
         }
