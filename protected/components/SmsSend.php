@@ -157,7 +157,14 @@ class SmsSend
 
             }
 
-            if (!$res = @file_get_contents($linkSms, false)) {
+            $arrContextOptions = array(
+                "ssl" => array(
+                    "verify_peer"      => false,
+                    "verify_peer_name" => false,
+                ),
+            );
+
+            if (!$res = @file_get_contents($linkSms, false, stream_context_create($arrContextOptions))) {
                 return array(
                     'success' => false,
                     'errors'  => Yii::t('zii', 'ERROR, contact us'),
