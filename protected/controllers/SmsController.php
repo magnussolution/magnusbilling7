@@ -67,7 +67,7 @@ class SmsController extends Controller
 
         $result = SmsSend::send($modelSip->idUser, $_GET['number'], $_GET['text']);
 
-        echo $result['success'] ? 'Sent' : 'Error' . ' ' . $result['msg'];
+        echo $result['success'] ? 'Sent' : 'Error' . ' ' . $result['errors'];
 
     }
 
