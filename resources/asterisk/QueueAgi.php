@@ -145,6 +145,12 @@ class QueueAgi
             $CalcAgi->id_prefix        = $modelPrefix->id;
             $CalcAgi->saveCDR($agi, $MAGNUS);
 
+            if (isset($DidAgi->modelDid->id)) {
+                $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $CalcAgi->sessiontime
+                                WHERE id = " . $DidAgi->modelDid->id . " LIMIT 1";
+                $agi->exec($sql);
+            }
+
         }
         if ($type == 'queue') {
             exit;
