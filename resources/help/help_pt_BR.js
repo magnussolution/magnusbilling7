@@ -959,6 +959,7 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.sipaccountlimit': `Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes no grupo para criar Contas VoIP.`,
     'user.callingcard_pin': `Usado para autenticação do calling card.`,
     'user.restriction': `Esta opção permite restringir o usuário para somente discar para alguns números, ou proibir discar para alguns números, conforme for selecionado. Os números deverão ser adicionado no menu Números Bloqueados.`,
+    'user.restriction_use': `Qual número será usado para verificar a Restrição. Esta opção é somente válida para chamas de saida.`,
     'user.transfer_international_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_flexiload_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_bkash_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,

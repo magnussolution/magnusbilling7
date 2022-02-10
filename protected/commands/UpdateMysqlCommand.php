@@ -1560,8 +1560,6 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "ALTER TABLE `pkg_sip` ADD `sip_config` TEXT NULL DEFAULT NULL ;";
             $this->executeDB($sql);
 
-            $this->executeDB($sql);
-
             $version = '7.8.0.1';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
@@ -1571,9 +1569,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "ALTER TABLE `pkg_sip` ADD `description` VARCHAR(150) NULL DEFAULT NULL ;";
             $this->executeDB($sql);
 
+            $version = '7.8.0.2';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2022-01-19
+        if ($version == '7.8.0.2') {
+            $sql = "ALTER TABLE `pkg_user` ADD `restriction_use` int(11)  NOT NULL DEFAULT '1'";
             $this->executeDB($sql);
 
-            $version = '7.8.0.2';
+            $version = '7.8.0.3';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }

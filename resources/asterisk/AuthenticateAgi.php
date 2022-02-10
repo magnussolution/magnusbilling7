@@ -462,6 +462,7 @@ class AuthenticateAgi
         $MAGNUS->id_user             = $model->id;
         $MAGNUS->id_agent            = $model->id_user;
         $MAGNUS->restriction         = $model->restriction;
+        $MAGNUS->restriction_use     = $model->restriction_use;
         $MAGNUS->callshop            = $model->callshop;
         $MAGNUS->id_offer            = $model->id_offer;
         $MAGNUS->prefix_local        = $model->prefix_local;

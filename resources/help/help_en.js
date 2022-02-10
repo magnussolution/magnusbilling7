@@ -847,6 +847,7 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.sipaccountlimit': `The amount of VoIP accounts allowed by this user. Will be necessary give permission to the group to create VoIP accounts.`,
     'user.callingcard_pin': `Used to authenticate the CallingCard.`,
     'user.restriction': `Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers.`,
+    'user.restriction_use': `Which number will be used to check the restriction. This option is valid only to outbound calls.`,
     'user.transfer_international_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_flexiload_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_bkash_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
