@@ -1583,6 +1583,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2022-02-14
+        if ($version == '7.8.0.3') {
+            $sql = "ALTER TABLE `pkg_sms` CHANGE `result` `status` INT(11) NOT NULL DEFAULT '0';
+            ALTER TABLE `pkg_sms` ADD `result` VARCHAR(500) NULL DEFAULT NULL ;";
+            $this->executeDB($sql);
+
+            $version = '7.8.0.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)
