@@ -145,8 +145,8 @@ class CallController extends Controller
     public function actionDownloadRecord()
     {
 
-        $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : null;
-        $ids    = isset($_GET['ids']) ? json_decode($_GET['ids']) : null;
+        $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : [];
+        $ids    = isset($_GET['ids']) ? json_decode($_GET['ids']) : [];
 
         //if try download only one audio  via button Download RED.
         if (count($filter) == 0 && count($ids) == 1) {

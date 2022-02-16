@@ -201,6 +201,7 @@ class SmsSend
                 $sessionTime      = 0;
                 $msg              = Yii::t('zii', 'Your SMS is not send!');
                 $success          = false;
+
             }
 
             $uniqueid = "$destination-" . date('His');
@@ -226,9 +227,17 @@ class SmsSend
                 $msg = $modelError;
             }
 
-            return array(
-                'success' => $success,
-                'msg'     => $msg);
+            if ($sussess == false) {
+                return array(
+                    'success' => false,
+                    'errors'  => $msg,
+                );
+            } else {
+                return array(
+                    'success' => $success,
+                    'msg'     => $msg);
+            }
+
         }
     }
 }

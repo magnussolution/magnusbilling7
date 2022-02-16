@@ -179,6 +179,12 @@ Ext.define('MBilling.view.user.List', {
             hidden: true,
             hideable: App.user.isAdmin,
             flex: 2
+        }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 4
         }];
         me.callParent(arguments);
     }
