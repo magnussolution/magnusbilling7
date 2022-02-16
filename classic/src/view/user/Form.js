@@ -109,6 +109,12 @@ Ext.define('MBilling.view.user.Form', {
                     maxValue: 50,
                     hidden: !window.dialC || !App.user.isAdmin,
                     allowBlank: true
+                }, {
+                    xtype: 'textareafield',
+                    name: 'description',
+                    fieldLabel: t('Description'),
+                    hidden: !App.user.isAdmin,
+                    allowBlank: true
                 }]
             }, {
                 defaults: {

@@ -32,7 +32,7 @@ Ext.define('MBilling.view.sms.Form', {
             name: 'telephone',
             fieldLabel: t('Number'),
             emptyText: 'DDI DDD Nº',
-            maxLength: 16,
+            maxLength: 16
         }, {
             xtype: 'textareafield',
             name: 'sms',
