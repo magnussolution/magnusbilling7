@@ -58,9 +58,9 @@ class SearchTariff
 
         //change custom rate to user
         if (isset($modelUserRate->id)) {
-            $result[$i]['rateinitial']  = $modelUserRate->rateinitial;
-            $result[$i]['initblock']    = $modelUserRate->initblock;
-            $result[$i]['billingblock'] = $modelUserRate->billingblock;
+            $result[0]['rateinitial']  = $modelUserRate->rateinitial;
+            $result[0]['initblock']    = $modelUserRate->initblock;
+            $result[0]['billingblock'] = $modelUserRate->billingblock;
         }
 
         if (file_exists(dirname(__FILE__) . '/AfterSearchTariff.php')) {
