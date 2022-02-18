@@ -1604,6 +1604,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+
+        //2022-02-17
+        if ($version == '7.8.0.5') {
+            $sql = "ALTER TABLE `pkg_sip` ADD `id_trunk_group` INT(11) NULL DEFAULT NULL ;";
+            Yii::app()->db->createCommand($sql)->execute();
+
+            $version = '7.8.0.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

@@ -616,6 +616,7 @@ If you activate "qualify", the Asterisk will sent the command "OPTION" to SIP pe
 If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.
     
 This status can be verified with the funcion "sip show peer XXXX", this funcion will only provide informations of status for the SIP peer that possess "qualify = yes.`,
+    'sip.id_trunk_group': `:::::::WARNING::::::. By selecting a trunk group here, the trunk group will be ignored from tariffs and this trunk group will always be used. Only select a trunk group here if you really want all calls from this SIP account to be sent to this trunk group`,
     'sip.context': `This is the context that the call will be processed, "billing" is the standard option. Only change configuration if you have knowledge of Asterisk.`,
     'sip.dtmfmode': `DTMF type. Click here for more informations|https://www.voip-info.org/asterisk-sip-dtmfmode/.`,
     'sip.insecure': `This option need to be "NO" if the host is dynamic, so the IP authentication changes to port,invite.`,

@@ -231,7 +231,14 @@ Ext.define('MBilling.view.sip.Form', {
                     enableKeyEvents: true,
                     labelWidth: 170
                 },
-                items: [{
+                items: [, {
+                    xtype: 'trunkgrouplookup',
+                    ownerForm: me,
+                    name: 'id_trunk_group',
+                    fieldLabel: t('Trunk groups'),
+                    hidden: !App.user.isAdmin,
+                    allowBlank: true,
+                }, {
                     name: 'context',
                     fieldLabel: t('Context'),
                     value: 'billing',

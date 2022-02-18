@@ -146,6 +146,15 @@ Ext.define('MBilling.view.sip.List', {
             hideable: !App.user.isClient,
             flex: 4
         }, {
+            xtype: 'templatecolumn',
+            tpl: '{idTrunkGroupname}',
+            header: t('Trunk groups'),
+            dataIndex: 'id_trunk_group',
+            comboFilter: 'trunkgroupcombo',
+            flex: 3,
+            hidden: true,
+            hideable: App.user.isAdmin
+        }, {
             header: t('AMD'),
             dataIndex: 'amd',
             hidden: true,

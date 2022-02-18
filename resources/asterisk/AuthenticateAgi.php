@@ -480,6 +480,8 @@ class AuthenticateAgi
             $MAGNUS->modelSip = $modelSip;
         }
 
+        $MAGNUS->sip_id_trunk_group = $MAGNUS->modelSip->id_trunk_group;
+
         if ($MAGNUS->voicemail != 1) {
             $MAGNUS->voicemail = isset($MAGNUS->modelSip->id) ? $MAGNUS->modelSip->voicemail : false;
         }
