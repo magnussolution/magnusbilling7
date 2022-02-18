@@ -406,6 +406,7 @@ Com o token do APP Google Aunthenticator somente será possível logar no painel
     'groupuser.name': `Nome para o grupo de usuários.`,
     'groupuser.id_user_type': `Tipo de usuário. É importante selecionar o tipo corremtanete. Não adianta chamar o grupo de Admin e selecionar o tipo Cliente.`,
     'groupuser.hidden_prices': `Ocular os valores de compra, venda e lucro para este grupo?`,
+    'groupuser.hidden_batch_update': `Ocular o botão atualizar em lote em todos os menus para usuários deste grupo`,
     //GRUPOS ADMINISTRADORES
     'groupusergroup.name': `Nome do Grupo.`,
     'groupusergroup.user_prefix': `Preenchendo este campo, todos os usuários criados por um administrador que usa este grupo será iniciado com este prefixo.`,

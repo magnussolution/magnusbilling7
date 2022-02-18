@@ -237,7 +237,7 @@ Ext.define('MBilling.view.sip.Form', {
                     name: 'id_trunk_group',
                     fieldLabel: t('Trunk groups'),
                     hidden: !App.user.isAdmin,
-                    allowBlank: true,
+                    allowBlank: true
                 }, {
                     name: 'context',
                     fieldLabel: t('Context'),

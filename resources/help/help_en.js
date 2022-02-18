@@ -332,7 +332,8 @@ With the token of Google Aunthentitor will be only possible to login into the pa
     //GROUP USERS
     'groupuser.name': `Name of the user group`,
     'groupuser.id_user_type': `Group type.`,
-    'groupuser.hidden_prices': `Hidden all prices like, buy, sell and profit, to users that use this group.`,
+    'groupuser.hidden_prices': `Hide all prices like, buy, sell and profit, to users that use this group.`,
+    'groupuser.hidden_batch_update': `Hide the bath update button in all menus to users that use this group.`,
     //GROUP TO ADMINS
     'groupusergroup.name': `Group name`,
     'groupusergroup.user_prefix': `Filling this field, all users created by an administrator that uses this group will be initialized with this prefix.`,

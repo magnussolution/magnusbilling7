@@ -14,26 +14,34 @@ Ext.define('MBilling.view.groupUser.Controller', {
         var me = this,
             fields = me.formPanel.getForm().getFields(),
             fieldHiddenPrices = me.formPanel.getForm().findField('hidden_prices'),
+            fieldHiddenBath = me.formPanel.getForm().findField('hidden_batch_update'),
             typeUser = me.formPanel.getForm().findField('id_user_type').getValue(),
             form = me.formPanel.getForm();
         if (typeUser == 1) {
             fieldHiddenPrices['show']();
+            fieldHiddenBath['show']();
         } else {
             fieldHiddenPrices['hide']();
+            fieldHiddenBath['hide']();
         }
     },
     onNew: function() {
         var me = this,
-            fieldHiddenPrices = me.formPanel.getForm().findField('hidden_prices');
-        fieldHiddenPrices['hide']();
+            fieldHiddenPrices = me.formPanel.getForm().findField('hidden_prices'),
+            fieldHiddenBath = me.formPanel.getForm().findField('hidden_batch_update');
+        fieldHiddenPrices['show']();
+        fieldHiddenBath['show']();
+        me.callParent(arguments);
     },
     onEdit: function() {
         var me = this,
             record = me.list.getSelectionModel().getSelection()[0];
         if (record.get('id_user_type') == 1) {
             me.formPanel.getForm().findField('hidden_prices')['show']();
+            me.formPanel.getForm().findField('hidden_batch_update')['show']();
         } else {
             me.formPanel.getForm().findField('hidden_prices')['hide']();
+            me.formPanel.getForm().findField('hidden_batch_update')['hide']();
         }
         me.lookupReference('generalTab').show();
         me.callParent(arguments);

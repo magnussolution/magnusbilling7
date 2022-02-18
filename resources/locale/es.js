@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2021
+ * 2022
  */
 Locale.load({
     '': '',
@@ -108,6 +108,7 @@ Locale.load({
     'Booths Report': 'Informe de Cabinas',
     'Booths Tariffs': 'Cabinas Tarifas',
     'Both': 'Ambos',
+    'Bouth': '',
     'Bulk user': 'Usuario por lotes',
     'Busy': 'Ocupado',
     'Buy Credit': 'Compra Crédito',
@@ -212,6 +213,7 @@ Locale.load({
     'Confirm delete all': 'Confirmar borrar todo',
     'Confirm delete all log file?': '¿Confirmar eliminar todos los archivos de LOG?',
     'Confirm release DID': 'Confirmar aanzar DID',
+    'Confirm release DIDs': '',
     'Confirm your password': 'Confirma su contraseña',
     'Confirmation': 'Confirmación',
     'Congestion': 'Congestion',
@@ -279,13 +281,13 @@ Locale.load({
     'Destination out of order': 'Destino fuera de servicio',
     'Details': 'Detalles',
     'Developed by': 'Creado por',
+    'Dial Number': '',
     'Dial Tone': 'Dial Tone',
     'Dial parameter': 'Parámetro Dial',
     'Dial plan': 'Dial plan',
     'Dial timeout': 'Dial timeout',
     'Dialed today': 'Llamadas hoy',
     'Did': 'Did',
-    'Did is not in use': 'DID no está en uso',
     'Direct extension': 'Cuenta SIP conocida',
     'Direction': 'Dirección',
     'Directmedia': 'Directmedia',
@@ -406,7 +408,8 @@ Locale.load({
     'Head': 'Head',
     'Height': 'Altura',
     'Help': 'Ayuda',
-    'Hidden prices': 'Ocultar pricios',
+    'Hide batch update button': 'Ocultar boton actualizar en lote',
+    'Hide prices': 'Ocultar precios',
     'History': 'Historial',
     'Holidays': 'Feriados',
     'Home': 'Inicio',
@@ -415,7 +418,6 @@ Locale.load({
     'How many users?': '¿Cuántos usuarios?',
     'I accept the terms': 'Acepto los términos',
     'IAX': 'IAX',
-    'IAX Users': 'Cuentas IAX',
     'IAX pass': 'Contraseña IAX',
     'IAX password': 'Contraseña IAX',
     'IAX user': 'Usuario IAX',
@@ -423,6 +425,7 @@ Locale.load({
     'IP': 'IP',
     'IVR': 'IVR',
     'IVRs': 'IVRs',
+    'Iax': '',
     'IconCls': 'IconCls',
     'Import': 'Importar',
     'Import CSV': 'Importar CSV',
@@ -679,7 +682,6 @@ Locale.load({
     'Please select one or more queue': 'Seleccione una o más colas',
     'Please select one or more records': 'Seleccione uno o más registros',
     'Please select only a record': 'Seleccione solo un registro',
-    'Please select only one DID to release': 'Seleccione solo un DID para liberar',
     'Please select only one campaign': 'Seleccione solo una campaña',
     'Please wait while loading...': 'Espere mientras se carga ...',
     'Please, first delete all related records in the module': 'Por favor, primero elimine todos los registros relacionados en el módulo',
@@ -871,7 +873,6 @@ Locale.load({
     'Send Credit Products': 'Send Credit Products',
     'Send Credit Summary': 'Send Credit Summary',
     'Send credit': 'Send credit',
-    'Send credit rates': 'Send credit rates',
     'Send the call to callback': 'Enviar la llamada para el callback',
     'Send value': 'Enviar valor',
     'Sendrpid': 'Sendrpid',
@@ -900,7 +901,6 @@ Locale.load({
     'Sign into your account': 'Iniciar sesión en su cuenta',
     'Signup': 'Regístrate',
     'Simultaneous calls': 'Llamadas simultáneas',
-    'Sip Trace': 'Sip Trace',
     'Sip user': 'Usuario SIP',
     'Sip user limit': 'Límite de contas SIP',
     'SipProxy': 'SipProxy',
@@ -990,7 +990,6 @@ Locale.load({
     'Today': 'Hoy',
     'Today peak': 'Pico de hoy',
     'Toggle max completed calls': 'Toggle max completed calls',
-    'Token': 'Token',
     'Torture': 'Torture',
     'Total': 'Total',
     'Total AMD': 'Total AMD',
@@ -1034,6 +1033,7 @@ Locale.load({
     'Unlimited calls': 'Llamadas ilimitadas',
     'Update': 'Actualizar',
     'Uptime': 'Tiempo',
+    'Use': '',
     'Use audio': 'Usar audio',
     'Use date': 'Usar fecha',
     'Use filters': 'Usar filtros',
@@ -1120,4 +1120,5 @@ Locale.load({
     'must belong to the IVR owner': 'tiene que pertenecer al mismo usuario de la IRV',
     'to refill': 'para recargar',
     'week': 'semana',
+
 });
