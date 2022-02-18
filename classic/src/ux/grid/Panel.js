@@ -158,36 +158,38 @@ Ext.define('Ext.ux.grid.Panel', {
                 }]
             });
         }
-        if ((me.allowUpdate && me.buttonUpdateLot && !App.user.isClient && !window.isTablet) || me.buttonUpdateLotCallShopRate) {
-            me.tbar.push({
-                xtype: 'splitbutton',
-                iconCls: me.iconButtonUpdateLot,
-                text: me.textButtonUpdateLot,
-                enableToggle: true,
-                width: window.isTablet ? 85 : App.user.language == 'en' ? 140 : 170,
-                reference: 'updateLot',
-                listeners: {
-                    toggle: 'onToggleUpdateLot'
-                },
-                menu: [{
-                    text: me.labelAll,
-                    checked: true,
-                    group: groupUpdateLot,
-                    value: 'all',
+        if (App.user.hidden_batch_update == 0) {
+            if ((me.allowUpdate && me.buttonUpdateLot && !App.user.isClient && !window.isTablet) || me.buttonUpdateLotCallShopRate) {
+                me.tbar.push({
+                    xtype: 'splitbutton',
+                    iconCls: me.iconButtonUpdateLot,
+                    text: me.textButtonUpdateLot,
+                    enableToggle: true,
+                    width: window.isTablet ? 85 : App.user.language == 'en' ? 140 : 170,
+                    reference: 'updateLot',
                     listeners: {
-                        checkchange: 'onCheckChangeUpdateLot'
-                    }
-                }, {
-                    text: me.labelSelected,
-                    checked: false,
-                    group: groupUpdateLot,
-                    value: 'selected',
-                    disabled: true,
-                    listeners: {
-                        checkchange: 'onCheckChangeUpdateLot'
-                    }
-                }]
-            });
+                        toggle: 'onToggleUpdateLot'
+                    },
+                    menu: [{
+                        text: me.labelAll,
+                        checked: true,
+                        group: groupUpdateLot,
+                        value: 'all',
+                        listeners: {
+                            checkchange: 'onCheckChangeUpdateLot'
+                        }
+                    }, {
+                        text: me.labelSelected,
+                        checked: false,
+                        group: groupUpdateLot,
+                        value: 'selected',
+                        disabled: true,
+                        listeners: {
+                            checkchange: 'onCheckChangeUpdateLot'
+                        }
+                    }]
+                });
+            }
         }
         if (me.buttonCsv && !window.isTablet) {
             me.tbar.push({

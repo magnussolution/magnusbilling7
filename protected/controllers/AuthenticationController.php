@@ -106,23 +106,24 @@ class AuthenticationController extends Controller
 
         $idUserType = $modelUser->idGroup->idUserType->id;
 
-        Yii::app()->session['isAdmin']       = $idUserType == 1 ? true : false;
-        Yii::app()->session['isAgent']       = $idUserType == 2 ? true : false;
-        Yii::app()->session['isClient']      = $idUserType == 3 ? true : false;
-        Yii::app()->session['isClientAgent'] = isset($modelUser->id_user) && $modelUser->id_user > 1 ? true : false;
-        Yii::app()->session['id_plan']       = $modelUser->id_plan;
-        Yii::app()->session['credit']        = isset($modelUser->credit) ? $modelUser->credit : 0;
-        Yii::app()->session['username']      = $modelUser->username;
-        Yii::app()->session['logged']        = true;
-        Yii::app()->session['id_user']       = $modelUser->id;
-        Yii::app()->session['id_agent']      = is_null($modelUser->id_user) ? 1 : $modelUser->id_user;
-        Yii::app()->session['name_user']     = $modelUser->firstname . ' ' . $modelUser->lastname;
-        Yii::app()->session['id_group']      = $modelUser->id_group;
-        Yii::app()->session['user_type']     = $idUserType;
-        Yii::app()->session['systemName']    = $_SERVER['SCRIPT_FILENAME'];
-        Yii::app()->session['session_start'] = time();
-        Yii::app()->session['userCount']     = User::model()->count("credit != 0");
-        Yii::app()->session['hidden_prices'] = $modelUser->idGroup->hidden_prices;
+        Yii::app()->session['isAdmin']             = $idUserType == 1 ? true : false;
+        Yii::app()->session['isAgent']             = $idUserType == 2 ? true : false;
+        Yii::app()->session['isClient']            = $idUserType == 3 ? true : false;
+        Yii::app()->session['isClientAgent']       = isset($modelUser->id_user) && $modelUser->id_user > 1 ? true : false;
+        Yii::app()->session['id_plan']             = $modelUser->id_plan;
+        Yii::app()->session['credit']              = isset($modelUser->credit) ? $modelUser->credit : 0;
+        Yii::app()->session['username']            = $modelUser->username;
+        Yii::app()->session['logged']              = true;
+        Yii::app()->session['id_user']             = $modelUser->id;
+        Yii::app()->session['id_agent']            = is_null($modelUser->id_user) ? 1 : $modelUser->id_user;
+        Yii::app()->session['name_user']           = $modelUser->firstname . ' ' . $modelUser->lastname;
+        Yii::app()->session['id_group']            = $modelUser->id_group;
+        Yii::app()->session['user_type']           = $idUserType;
+        Yii::app()->session['systemName']          = $_SERVER['SCRIPT_FILENAME'];
+        Yii::app()->session['session_start']       = time();
+        Yii::app()->session['userCount']           = User::model()->count("credit != 0");
+        Yii::app()->session['hidden_prices']       = $modelUser->idGroup->hidden_prices;
+        Yii::app()->session['hidden_batch_update'] = $modelUser->idGroup->hidden_batch_update;
 
         if ($modelUser->googleAuthenticator_enable > 0) {
 
@@ -194,31 +195,32 @@ class AuthenticationController extends Controller
 
     public function actionLogoff()
     {
-        Yii::app()->session['logged']        = false;
-        Yii::app()->session['id_user']       = false;
-        Yii::app()->session['id_agent']      = false;
-        Yii::app()->session['name_user']     = false;
-        Yii::app()->session['menu']          = array();
-        Yii::app()->session['action']        = array();
-        Yii::app()->session['currency']      = false;
-        Yii::app()->session['language']      = false;
-        Yii::app()->session['isAdmin']       = true;
-        Yii::app()->session['isClient']      = false;
-        Yii::app()->session['isAgent']       = false;
-        Yii::app()->session['isClientAgent'] = false;
-        Yii::app()->session['id_plan']       = false;
-        Yii::app()->session['credit']        = false;
-        Yii::app()->session['username']      = false;
-        Yii::app()->session['id_group']      = false;
-        Yii::app()->session['user_type']     = false;
-        Yii::app()->session['decimal']       = false;
-        Yii::app()->session['licence']       = false;
-        Yii::app()->session['email']         = false;
-        Yii::app()->session['userCount']     = false;
-        Yii::app()->session['systemName']    = false;
-        Yii::app()->session['base_country']  = false;
-        Yii::app()->session['version']       = false;
-        Yii::app()->session['hidden_prices'] = false;
+        Yii::app()->session['logged']              = false;
+        Yii::app()->session['id_user']             = false;
+        Yii::app()->session['id_agent']            = false;
+        Yii::app()->session['name_user']           = false;
+        Yii::app()->session['menu']                = array();
+        Yii::app()->session['action']              = array();
+        Yii::app()->session['currency']            = false;
+        Yii::app()->session['language']            = false;
+        Yii::app()->session['isAdmin']             = true;
+        Yii::app()->session['isClient']            = false;
+        Yii::app()->session['isAgent']             = false;
+        Yii::app()->session['isClientAgent']       = false;
+        Yii::app()->session['id_plan']             = false;
+        Yii::app()->session['credit']              = false;
+        Yii::app()->session['username']            = false;
+        Yii::app()->session['id_group']            = false;
+        Yii::app()->session['user_type']           = false;
+        Yii::app()->session['decimal']             = false;
+        Yii::app()->session['licence']             = false;
+        Yii::app()->session['email']               = false;
+        Yii::app()->session['userCount']           = false;
+        Yii::app()->session['systemName']          = false;
+        Yii::app()->session['base_country']        = false;
+        Yii::app()->session['version']             = false;
+        Yii::app()->session['hidden_prices']       = false;
+        Yii::app()->session['hidden_batch_update'] = false;
         Yii::app()->session->clear();
         Yii::app()->session->destroy();
 
@@ -278,6 +280,7 @@ class AuthenticationController extends Controller
             $newGoogleAuthenticator   = Yii::app()->session['newGoogleAuthenticator'];
             $showGoogleCode           = Yii::app()->session['showGoogleCode'];
             $hidden_prices            = Yii::app()->session['hidden_prices']            = $modelGroupUser->hidden_prices;
+            $hidden_batch_update      = Yii::app()->session['hidden_batch_update']      = $modelGroupUser->hidden_batch_update;
         } else {
             $id_user                  = false;
             $id_agent                 = false;
@@ -308,6 +311,7 @@ class AuthenticationController extends Controller
             $social_media_network     = false;
             $show_playicon_cdr        = false;
             $hidden_prices            = false;
+            $hidden_batch_update      = false;
         }
         $language = isset(Yii::app()->session['language']) ? Yii::app()->session['language'] : Yii::app()->sourceLanguage;
         $theme    = isset(Yii::app()->session['theme']) ? Yii::app()->session['theme'] : 'blue-neptune';
@@ -360,6 +364,7 @@ class AuthenticationController extends Controller
             'campaign_user_limit'      => $this->config['global']['campaign_user_limit'],
             'showMCDashBoard'          => $this->config['global']['showMCDashBoard'],
             'hidden_prices'            => $hidden_prices,
+            'hidden_batch_update'      => $hidden_batch_update,
         ));
     }
 

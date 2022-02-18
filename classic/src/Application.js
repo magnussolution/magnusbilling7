@@ -61,6 +61,7 @@ Ext.define('MBilling.Application', {
                     App.user.campaign_user_limit = response.campaign_user_limit;
                     App.user.showMCDashBoard = response.showMCDashBoard;
                     App.user.hidden_prices = response.hidden_prices;
+                    App.user.hidden_batch_update = response.hidden_batch_update;
                     me.onload();
                     App.user.mmagnus = 3;
                     if (response.checkGoogleAuthenticator == false || App.user.loggedGoogle === true) {
