@@ -63,7 +63,8 @@ class Sip extends Model
     {
         return array(
             array('id_user', 'required'),
-            array('id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd, voicemail_password', 'numerical', 'integerOnly' => true),
+            array('id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd, voicemail_password,
+                id_trunk_group', 'numerical', 'integerOnly' => true),
             array('name, callerid, context, fromuser, fromdomain, md5secret, secret, fullcontact', 'length', 'max' => 80),
             array('regexten, insecure, regserver, vmexten, callingpres, mohsuggest, allowtransfer', 'length', 'max' => 20),
             array('amaflags, dtmfmode, qualify', 'length', 'max' => 7),
@@ -174,7 +175,8 @@ class Sip extends Model
     public function relations()
     {
         return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
+            'idUser'       => array(self::BELONGS_TO, 'User', 'id_user'),
+            'idTrunkGroup' => array(self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'),
         );
     }
 }

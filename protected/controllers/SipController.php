@@ -18,16 +18,32 @@
 class SipController extends Controller
 {
     public $attributeOrder = 't.id ASC';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = array(
+        'idUser'       => 'username',
+        'idTrunkGroup' => 'name',
+    );
 
     private $sipShowPeers = array();
 
     public $fieldsFkReport = array(
-        'id_user' => array(
+        'id_user'        => array(
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
         ),
+        'id_trunk_group' => array(
+            'table'       => 'pkg_trunk_group',
+            'pk'          => 'id',
+            'fieldReport' => 'name',
+        ),
+    );
+
+    public $fieldsInvisibleClient = array(
+        'id_trunk_group',
+    );
+
+    public $fieldsInvisibleAgent = array(
+        'id_trunk_group',
     );
 
     public function init()

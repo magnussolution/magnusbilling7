@@ -63,6 +63,11 @@ class SearchTariff
             $result[0]['billingblock'] = $modelUserRate->billingblock;
         }
 
+        if ($MAGNUS->sip_id_trunk_group > 0) {
+            $agi->verbose('SIP USER have ' . $MAGNUS->sip_account . ' trunk group ' . $MAGNUS->sip_id_trunk_group, 5);
+            $result[0]['id_trunk_group'] = $MAGNUS->sip_id_trunk_group;
+        }
+
         if (file_exists(dirname(__FILE__) . '/AfterSearchTariff.php')) {
             include dirname(__FILE__) . '/AfterSearchTariff.php';
         }

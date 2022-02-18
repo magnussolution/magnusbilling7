@@ -75,7 +75,8 @@ class Magnus
     public $magnusFilesDirectory = '/usr/local/src/magnus/';
     public $tariff_limit         = 1;
     public $prefixclause;
-    public $is_callingcard = false;
+    public $is_callingcard     = false;
+    public $sip_id_trunk_group = 0;
 
     public function __construct()
     {
