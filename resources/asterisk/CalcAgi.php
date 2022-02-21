@@ -768,7 +768,7 @@ class CalcAgi
         $CalcAgi->saveCDR($agi, $MAGNUS);
          */
 
-        if ($this->sipiax == 3) {
+        if ($this->sipiax == 3 && !preg_match('/\_WT/', $MAGNUS->sip_account)) {
             //if call is a DID, check is sipaccount is valid, else, set the callerid
             $sql             = "SELECT name FROM pkg_sip WHERE name  = '" . $MAGNUS->sip_account . "' LIMIT 1";
             $modelSipaccount = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
