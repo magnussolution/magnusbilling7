@@ -177,7 +177,9 @@ class CallChartCommand extends ConsoleCommand
 
                             //try get user
                             if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
-
+                                if (!strlen($sip_account)) {
+                                    $sip_account = $call[1] = $call[3];
+                                }
                                 if (false !== $key = array_search($sip_account, $this->sipNames)) {
                                     $modelSip = $this->sips[$key];
                                 } else {
