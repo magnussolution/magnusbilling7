@@ -532,6 +532,16 @@ class DidAgi
         if ($answeredtime > 0) {
             $this->call_did_billing($agi, $MAGNUS, $CalcAgi, $answeredtime, $dialstatus);
             return 1;
+        } else {
+            $fields = "uniqueid,id_user,calledstation,id_plan,id_trunk,callerid,src,
+                        starttime, terminatecauseid,sipiax,id_prefix,hangupcause";
+            $id_trunk = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
+            $values   = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$this->did','$MAGNUS->id_plan',
+                        '$id_trunk','$MAGNUS->CallerID', NULL,
+                        '" . date('Y-m-d H:i:s') . "', '0','3','$CalcAgi->id_prefix',''";
+            $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
+            $agi->exec($sql);
+            return 1;
         }
     }
     public function checkBlockCallerID(&$agi, &$MAGNUS)
