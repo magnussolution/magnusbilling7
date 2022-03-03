@@ -86,7 +86,7 @@ class DidAgi
                     $agi->verbose('Check DID channels');
                     $calls = AsteriskAccess::getCallsPerDid($this->modelDid->did);
                     $agi->verbose('Did ' . $this->modelDid->did . ' have ' . $calls . ' Calls');
-                    if ($calls > $this->modelDid->calllimit) {
+                    if ($calls >= $this->modelDid->calllimit) {
 
                         if ($MAGNUS->modelUser->calllimit_error == 403) {
                             $agi->execute((busy), busy);
@@ -533,12 +533,13 @@ class DidAgi
             $this->call_did_billing($agi, $MAGNUS, $CalcAgi, $answeredtime, $dialstatus);
             return 1;
         } else {
+
             $fields = "uniqueid,id_user,calledstation,id_plan,id_trunk,callerid,src,
                         starttime, terminatecauseid,sipiax,id_prefix,hangupcause";
             $id_trunk = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
             $values   = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$this->did','$MAGNUS->id_plan',
-                        '$id_trunk','$MAGNUS->CallerID', NULL,
-                        '" . date('Y-m-d H:i:s') . "', '0','3','$CalcAgi->id_prefix',''";
+                        '$id_trunk','$MAGNUS->CallerID', 'DID Call',
+                        '" . date('Y-m-d H:i:s') . "', '0','3','$CalcAgi->id_prefix','0'";
             $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
             $agi->exec($sql);
             return 1;
