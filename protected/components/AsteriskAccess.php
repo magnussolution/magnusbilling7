@@ -350,7 +350,7 @@ class AsteriskAccess
 
         $calls = 0;
         foreach ($channelsData as $key => $line) {
-            if (preg_match("/$did/", $line)) {
+            if (preg_match("/$did\!.*\!Dial\!/", $line)) {
                 $calls++;
             }
         }
