@@ -31,7 +31,7 @@ Ext.define('MBilling.model.RestrictedPhonenumber', {
         type: 'int'
     }, {
         name: 'number',
-        type: 'number'
+        type: 'string'
     }, 'idUserusername'],
     proxy: {
         type: 'uxproxy',
