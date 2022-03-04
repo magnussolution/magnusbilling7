@@ -23,6 +23,7 @@ Ext.define('MBilling.view.restrictedPhonenumber.List', {
     alias: 'widget.restrictedphonenumberlist',
     store: 'RestrictedPhonenumber',
     buttonImportCsv: true,
+    fieldSearch: 'number',
     initComponent: function() {
         var me = this;
         me.columns = [{
