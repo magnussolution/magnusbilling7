@@ -415,7 +415,7 @@ class SipTraceController extends Controller
 
         $modelTrace = SipTrace::model()->find();
 
-        if (count($modelTrace)) {
+        if (isset($modelTrace->id)) {
             echo json_encode(array(
                 $this->nameSuccess => false,
                 $this->nameMsg     => Yii::t('zii', 'Exist a filter active or in use. Wait or click in Stop Capture button.'),
