@@ -19,8 +19,9 @@
  */
 class SmsSend
 {
-    public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '')
+    public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '', $providerResult = '')
     {
+
         if (!isset($modelUser->id)) {
             return array(
                 'success' => false,
@@ -176,6 +177,27 @@ class SmsSend
 
             $sussess = !$smsRes == '' && !preg_match("/$smsRes/", $res) ? false : true;
 
+            if ($providerResult == true && preg_match('/^http/', $modelUser->description)) {
+
+                $data = json_decode($res);
+
+                $options = array(
+                    'http' => array(
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                        'method'  => 'POST',
+                        'content' => http_build_query($data),
+                    ),
+                    "ssl"  => array(
+                        "verify_peer"        => false,
+                        "verif  y_peer_name" => false,
+                    ),
+                );
+
+                $context            = stream_context_create($options);
+                $resultFromProvider = file_get_contents($modelUser->description, false, $context);
+
+            }
+
             if ($sussess) {
                 $terminateCauseid = 1;
                 $sessionTime      = 60;
@@ -227,15 +249,20 @@ class SmsSend
                 $msg = $modelError;
             }
 
-            if ($sussess == false) {
-                return array(
-                    'success' => false,
-                    'errors'  => $msg,
-                );
+            if (isset($resultFromProvider)) {
+                echo $res;
+                exit;
             } else {
-                return array(
-                    'success' => $success,
-                    'msg'     => $msg);
+                if ($sussess == false) {
+                    return array(
+                        'success' => false,
+                        'errors'  => $msg,
+                    );
+                } else {
+                    return array(
+                        'success' => $success,
+                        'msg'     => $msg);
+                }
             }
 
         }
