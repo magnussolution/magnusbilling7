@@ -679,7 +679,7 @@ class Magnus
     {
 
         if ($type == 'outbound') {
-            if ($this->restriction_use == 1) {
+            if ($this->restriction_use == 1 || $this->restriction == 2) {
                 $destination = $this->destination;
             } elseif ($this->restriction_use == 2) {
                 $destination = $this->CallerID;
