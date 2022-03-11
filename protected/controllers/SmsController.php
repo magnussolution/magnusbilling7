@@ -65,7 +65,7 @@ class SmsController extends Controller
             exit('invalid user');
         }
 
-        $result = SmsSend::send($modelSip->idUser, $_GET['number'], $_GET['text']);
+        $result = SmsSend::send($modelSip->idUser, $_GET['number'], $_GET['text'], 0, '', true);
 
         echo $result['success'] ? 'Sent' : 'Error' . ' ' . $result['errors'];
 

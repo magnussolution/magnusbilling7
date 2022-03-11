@@ -57,7 +57,7 @@ class Sms extends Model
             array('id_user, prefix, status', 'numerical', 'integerOnly' => true),
             array('telephone', 'numerical'),
             array('sms', 'length', 'max' => 200),
-            array('result', 'length', 'max' => 200),
+            array('result', 'length', 'max' => 500),
             array('rate', 'length', 'max' => 10),
             array('sms_from', 'length', 'max' => 16),
 
