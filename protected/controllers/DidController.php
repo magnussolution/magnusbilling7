@@ -61,6 +61,12 @@ class DidController extends Controller
 
     }
 
+    public function extraFilterCustomAgent($filter)
+    {
+        $filter .= ' AND reserved = 0';
+        return $filter;
+    }
+
     public function actionReadBuy()
     {
         $_GET['buy'] = 1;
