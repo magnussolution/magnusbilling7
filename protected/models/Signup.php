@@ -46,10 +46,10 @@ class Signup extends Model
 
         return array(
             array('username,password,lastname, firstname, email, city, state, phone, id_plan, id_user', 'required'),
-            array('phone, zipcode, vat, mobile,calllimit', 'numerical'),
+            array('phone, vat, mobile,calllimit', 'numerical'),
             array('password, password2', 'length', 'min' => 6),
-            array('lastname,firstname, city, country', 'length', 'min' => 4),
-            array('state', 'length', 'min' => 2),
+            array('lastname,firstname, city, state', 'length', 'min' => 2),
+            array('country', 'length', 'min' => 1),
             array('zipcode', 'length', 'min' => 5),
             array('doc', 'length', 'min' => 11),
             array('username', 'length', 'min' => 5),
