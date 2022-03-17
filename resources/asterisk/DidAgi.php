@@ -469,6 +469,10 @@ class DidAgi
                 } elseif ($inst_listdestination['voip_call'] == 10) {
                     $agi->verbose("DID destination type DIALPLAN ", 6);
                     $MAGNUS->run_dial($agi, "LOCAL/" . $this->did . "@did-" . $this->did);
+                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
+                    $answeredtime = $answeredtime['data'];
+                    $dialstatus   = $agi->get_variable("DIALSTATUS");
+                    $dialstatus   = $dialstatus['data'];
                 } else {
 
                     $agi->verbose("DID destination type PSTN NUMBER ", 6);
