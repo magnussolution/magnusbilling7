@@ -36,6 +36,7 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
             $local_command = '';
         }
 
+        exec('mkdir -p /var/log/asterisk/cdr-csv/');
         $archive = false;
 
         $configFile = '/etc/odbc.ini';
