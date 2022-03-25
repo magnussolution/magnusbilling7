@@ -249,4 +249,16 @@ class RefillController extends Controller
         $modelRefill->save();
 
     }
+
+    public function subscribeColunms($columns = '')
+    {
+        for ($i = 0; $i < count($columns); $i++) {
+
+            if ($columns[$i]['dataIndex'] == 'credit') {
+                $columns[$i]['dataIndex'] = 't.credit';
+            }
+
+        }
+        return $columns;
+    }
 }

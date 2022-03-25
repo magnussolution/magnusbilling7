@@ -864,6 +864,8 @@ class BaseController extends CController
 
         $columns = $this->removeColumns($columns);
 
+        $columns = $this->subscribeColunms($columns);
+
         $this->setLimit($_GET);
 
         $this->setStart($_GET);
@@ -1692,11 +1694,11 @@ class BaseController extends CController
                     //altera as colunas para poder pegar o destino das tarifas
                     $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.id_prefix) AS connectcharge";
                 } else {
-                    if (isset( $fk['where'])) {
-                         $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.".$fk['where'].") AS $fieldName";
-                    }else{
-                       $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.$fieldName) AS $fieldName"; 
-                    }      
+                    if (isset($fk['where'])) {
+                        $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t." . $fk['where'] . ") AS $fieldName";
+                    } else {
+                        $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.$fieldName) AS $fieldName";
+                    }
                 }
 
                 if ($fieldName === $fieldGroup) {
