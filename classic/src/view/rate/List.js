@@ -109,6 +109,13 @@ Ext.define('MBilling.view.rate.List', {
                         [0, t('Inactive')]
                     ]
                 }
+            }, {
+                header: t('Connection charge'),
+                dataIndex: 'connectcharge',
+                renderer: Helper.Util.formatMoneyDecimal4,
+                flex: 2,
+                hideable: App.user.isAdmin,
+                hidden: true
             }]
         me.callParent(arguments);
     }

@@ -257,7 +257,7 @@ Ext.define('MBilling.view.general.CountryISOCombo', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.countryisocombo',
     forceSelection: true,
-    editable: false,
+    editable: true,
     listeners: {
         focus: function(combo) {
             combo.expand();
