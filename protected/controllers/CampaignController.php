@@ -100,13 +100,13 @@ class CampaignController extends Controller
         }
 
         if (isset($_FILES["audio"]) && strlen($_FILES["audio"]["name"]) > 1) {
-            $typefile        = explode('.', $_FILES["audio"]["name"]);
-            $values['audio'] = "idCampaign_" . $values['id'] . '.' . $typefile[1];
+            $typefile        = array_pop(explode('.', $_FILES["audio"]["name"]));
+            $values['audio'] = "idCampaign_" . $values['id'] . '.' . $typefile;
         }
 
         if (isset($_FILES["audio_2"]) && strlen($_FILES["audio_2"]["name"]) > 1) {
-            $typefile          = explode('.', $_FILES["audio_2"]["name"]);
-            $values['audio_2'] = "idCampaign_" . $values['id'] . '_2.' . $typefile[1];
+            $typefile          = array_pop(explode('.', $_FILES["audio_2"]["name"]));
+            $values['audio_2'] = "idCampaign_" . $values['id'] . '_2.' . $typefile;
         }
 
         return $values;
@@ -118,16 +118,16 @@ class CampaignController extends Controller
             if (file_exists($this->uploaddir . 'idCampaign_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idCampaign_' . $model->id . '.wav');
             }
-            $typefile   = explode('.', $_FILES["audio"]["name"]);
-            $uploadfile = $this->uploaddir . 'idCampaign_' . $model->id . '.' . $typefile[1];
+            $typefile   = array_pop(explode('.', $_FILES["audio"]["name"]));
+            $uploadfile = $this->uploaddir . 'idCampaign_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["audio"]["tmp_name"], $uploadfile);
         }
         if (isset($_FILES["audio_2"]) && strlen($_FILES["audio_2"]["name"]) > 1) {
             if (file_exists($this->uploaddir . 'idCampaign_' . $model->id . '_2.wav')) {
                 unlink($this->uploaddir . 'idCampaign_' . $model->id . '_2.wav');
             }
-            $typefile   = explode('.', $_FILES["audio_2"]["name"]);
-            $uploadfile = $this->uploaddir . 'idCampaign_' . $model->id . '_2.' . $typefile[1];
+            $typefile   = array_pop(explode('.', $_FILES["audio_2"]["name"]));
+            $uploadfile = $this->uploaddir . 'idCampaign_' . $model->id . '_2.' . $typefile;
             move_uploaded_file($_FILES["audio_2"]["tmp_name"], $uploadfile);
         }
 
@@ -266,8 +266,8 @@ class CampaignController extends Controller
                 unlink($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav');
             }
 
-            $typefile   = explode('.', $_FILES["audio_path"]["name"]);
-            $uploadfile = $this->uploaddir . 'idCampaign_' . $id_campaign . '.' . $typefile[1];
+            $typefile   = array_pop(explode('.', $_FILES["audio_path"]["name"]));
+            $uploadfile = $this->uploaddir . 'idCampaign_' . $id_campaign . '.' . $typefile;
             move_uploaded_file($_FILES["audio_path"]["tmp_name"], $uploadfile);
         }
 
