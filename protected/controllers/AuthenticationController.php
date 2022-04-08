@@ -440,7 +440,7 @@ class AuthenticationController extends Controller
         if (isset($_FILES['logo']['tmp_name']) && strlen($_FILES['logo']['tmp_name']) > 3) {
 
             $uploaddir = "resources/images/";
-            $typefile  = explode('.', $_FILES["logo"]["name"]);
+            $typefile  = array_pop(explode('.', $_FILES["logo"]["name"]));
 
             if (Yii::app()->session['isAgent']) {
                 $uploadfile = $uploaddir . 'logo_custom_' . Yii::app()->session['id_user'] . '.png';
@@ -462,7 +462,7 @@ class AuthenticationController extends Controller
         if (isset($_FILES['wallpaper']['tmp_name']) && strlen($_FILES['wallpaper']['tmp_name']) > 3) {
 
             $uploaddir  = "resources/images/wallpapers/";
-            $typefile   = explode('.', $_FILES["wallpaper"]["name"]);
+            $typefile   = array_pop(explode('.', $_FILES["wallpaper"]["name"]));
             $uploadfile = $uploaddir . 'Customization.jpg';
             move_uploaded_file($_FILES["wallpaper"]["tmp_name"], $uploadfile);
         }

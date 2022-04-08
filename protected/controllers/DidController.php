@@ -180,13 +180,13 @@ class DidController extends Controller
     public function beforeSave($values)
     {
         if (isset($_FILES["workaudio"]) && strlen($_FILES["workaudio"]["name"]) > 1) {
-            $typefile            = explode('.', $_FILES["workaudio"]["name"]);
-            $values['workaudio'] = "idDidAudioProWork_" . $values['id'] . '.' . $typefile[1];
+            $typefile            = array_pop(explode('.', $_FILES["workaudio"]["name"]));
+            $values['workaudio'] = "idDidAudioProWork_" . $values['id'] . '.' . $typefile;
         }
 
         if (isset($_FILES["noworkaudio"]) && strlen($_FILES["noworkaudio"]["name"]) > 1) {
-            $typefile              = explode('.', $_FILES["noworkaudio"]["name"]);
-            $values['noworkaudio'] = "idDidAudioProNoWork_" . $values['id'] . '.' . $typefile[1];
+            $typefile              = array_pop(explode('.', $_FILES["noworkaudio"]["name"]));
+            $values['noworkaudio'] = "idDidAudioProNoWork_" . $values['id'] . '.' . $typefile;
         }
 
         return $values;
@@ -201,16 +201,16 @@ class DidController extends Controller
             if (file_exists($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav');
             }
-            $typefile   = explode('.', $_FILES["workaudio"]["name"]);
-            $uploadfile = $this->uploaddir . 'idDidAudioProWork_' . $model->id . '.' . $typefile[1];
+            $typefile   = array_pop(explode('.', $_FILES["workaudio"]["name"]));
+            $uploadfile = $this->uploaddir . 'idDidAudioProWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["workaudio"]["tmp_name"], $uploadfile);
         }
         if (isset($_FILES["noworkaudio"]) && strlen($_FILES["noworkaudio"]["name"]) > 1) {
             if (file_exists($this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.wav');
             }
-            $typefile   = explode('.', $_FILES["noworkaudio"]["name"]);
-            $uploadfile = $this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.' . $typefile[1];
+            $typefile   = array_pop(explode('.', $_FILES["noworkaudio"]["name"]));
+            $uploadfile = $this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["noworkaudio"]["tmp_name"], $uploadfile);
         }
 
