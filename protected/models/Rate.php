@@ -55,8 +55,8 @@ class Rate extends Model
 
         return array(
             array('id_plan', 'required'),
-            array('id_plan, id_prefix, id_trunk_group,initblock, billingblock, package_offer, minimal_time_charge', 'numerical', 'integerOnly' => true),
-            array('rateinitial, additional_grace,status', 'length', 'max' => 15),
+            array('id_plan, id_prefix, id_trunk_group,initblock, billingblock, package_offer, minimal_time_charge ', 'numerical', 'integerOnly' => true),
+            array('rateinitial,connectcharge,disconnectcharge, additional_grace,status', 'length', 'max' => 15),
         );
 
     }
