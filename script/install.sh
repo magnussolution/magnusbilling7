@@ -3,26 +3,39 @@ clear
 echo
 echo
 echo
-echo "===================BY WWW.MAGNUSSOLUTION.COM=========================";
-echo "_      _                               ______ _ _ _ _                ";
-echo "|\    /|                               | ___ (_) | (_)               ";
-echo "| \  / | ___  ____  _ __  _   _  _____ | |_/ /_| | |_ _ __   ____    ";
-echo "|  \/  |/   \/  _ \| '_ \| | | \| ___| | ___ \ | | | | '_ \ /  _ \   ";
-echo "| |\/| |  | |  (_| | | | | |_| ||____  | |_/ / | | | | | | |  (_| |  ";
-echo "|_|  |_|\___|\___  |_| | |_____|_____|  \___/|_|_|_|_|_| |_|\___  |  ";
-echo "                _/ |                                           _/ |  ";
-echo "               |__/                                           |__/   ";
-echo "                                                                     ";
-echo "======================= VOIP SYSTEM FOR LINUX =======================";
+echo -e "\e[1;42m===================== BY WWW.MAGNUSSOLUTION.COM =====================\e[m";
+echo -e "\e[5m _      _                               ______ _ _ _ _               \e[m";
+echo -e "\e[5m |\    /|                               | ___ (_) | (_)              \e[m";
+echo -e "\e[5m | \  / | ___  ____  _ __  _   _  _____ | |_/ /_| | |_ _ __   ____   \e[m";
+echo -e "\e[5m |  \/  |/   \/  _ \| '_ \| | | \| ___| | ___ \ | | | | '_ \ /  _ \  \e[m";
+echo -e "\e[5m | |\/| |  | |  (_| | | | | |_| ||____  | |_/ / | | | | | | |  (_| | \e[m";
+echo -e "\e[5m |_|  |_|\___|\___  |_| | |_____|_____|  \___/|_|_|_|_|_| |_|\___  | \e[m";
+echo -e "\e[5m                 _/ |                                           _/ | \e[m";
+echo -e "\e[5m                |__/                                           |__/  \e[m";
+echo -e "\e[5m                                                                     \e[m";
+echo -e "\e[1;42m======================= VOIP SYSTEM FOR LINUX =======================\e[m";
 echo
+
 
 sleep 3
 
 
 if [[ -f /var/www/html/mbilling/index.php ]]; then
-  echo "this server alread have MagnusBilling installed";
+  echo "this server already has MagnusBilling installed";
   exit;
 fi
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -1- Getting Linux Distribution and Setting Directories";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 # Linux Distribution CentOS or Debian
 get_linux_distribution ()
 { 
@@ -47,8 +60,21 @@ get_linux_distribution ()
 
 get_linux_distribution
 
+    sleep 2
+    echo
+    echo -e "\e[32;42m======================================================================\e[m";
+    echo -e "\e[32;42m======================================================================\e[m";
+    echo "";
+    echo " -2- Restart MySql, Apache, Asterisk and Setting Time-Zone";
+    echo "";
+    echo -e "\e[32;42m======================================================================\e[m";
+    echo -e "\e[32;42m======================================================================\e[m";
+    echo
+
 startup_services() 
 {
+
+
     # Startup Services
     if [ ${DIST} = "DEBIAN" ]; then
         systemctl restart mysql
@@ -61,10 +87,8 @@ startup_services()
     fi
 }
 
-
 set_timezone ()
 { 
-  #yum -y install ntp
   directory=/usr/share/zoneinfo
   for (( l = 0; l < 5; l++ )); do
 
@@ -134,6 +158,17 @@ set_timezone ()
 
 set_timezone
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -3- Generating Mysql Password";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 genpasswd() 
 {
     length=$1
@@ -148,7 +183,30 @@ then
 fi
 
 touch /root/passwordMysql.log
-echo "$password" > /root/passwordMysql.log 
+echo "$password" > /root/passwordMysql.log
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -4- Generated new Mysql password and stored in /root/passwordMysql.log";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -5- Disabling Selinux, Setting Mariadb Repo";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 if  [ ${DIST} = "CENTOS" ]; then
     sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > borra && mv -f borra /etc/selinux/config
@@ -156,10 +214,23 @@ fi
 if [ ${DIST} = "CENTOS" ]; then
 echo '[mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+baseurl = http://yum.mariadb.org/10.2/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1' > /etc/yum.repos.d/MariaDB.repo 
 fi
+
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -6- Install Magnus Billing Dependencies";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 
 if [ ${DIST} = "DEBIAN" ]; then
     apt-get update --allow-releaseinfo-change
@@ -176,25 +247,42 @@ elif  [ ${DIST} = "CENTOS" ]; then
     yum -y install yum-utils gcc.`uname -m` gcc-c++.`uname -m` make.`uname -m` git.`uname -m` wget.`uname -m` bison.`uname -m` openssl-devel.`uname -m` ncurses-devel.`uname -m` doxygen.`uname -m` newt-devel.`uname -m` mlocate.`uname -m` lynx.`uname -m` tar.`uname -m` wget.`uname -m` nmap.`uname -m` bzip2.`uname -m` mod_ssl.`uname -m` speex.`uname -m` speex-devel.`uname -m` unixODBC.`uname -m` unixODBC-devel.`uname -m` libtool-ltdl.`uname -m` sox libtool-ltdl-devel.`uname -m` flex.`uname -m` screen.`uname -m` autoconf automake libxml2.`uname -m` libxml2-devel.`uname -m` sqlite* subversion
     yum-config-manager --enable remi-php71
     yum -y install php.`uname -m` php-cli.`uname -m` php-devel.`uname -m` php-gd.`uname -m` php-mbstring.`uname -m` php-pdo.`uname -m` php-xml.`uname -m` php-xmlrpc.`uname -m` php-process.`uname -m` php-posix libuuid uuid uuid-devel libuuid-devel.`uname -m`
-    yum -y install jansson.`uname -m` jansson-devel.`uname -m` unzip.`uname -m` ntpd
+    yum -y install jansson.`uname -m` jansson-devel.`uname -m` unzip.`uname -m` ntpd ntp
     yum -y install mysql mariadb-server  mariadb-devel mariadb php-mysql mysql-connector-odbc
     yum -y install xmlstarlet libsrtp libsrtp-devel dmidecode gtk2-devel binutils-devel svn libtermcap-devel libtiff-devel audiofile-devel cronie cronie-anacron
     yum -y install perl perl-libwww-perl perl-LWP-Protocol-https perl-JSON cpan flac libcurl-devel nss
     yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp htop
 fi
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -7- Downloading MagnusBilling from Source and Extracting";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 mkdir -p /var/www/html/mbilling
 cd /var/www/html/mbilling
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
+wget  --no-check-certificate https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
 tar xzf MagnusBilling-current.tar.gz
 
+sleep 2
 echo
-echo '----------- Install PJPROJECT ----------'
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -8- Installing Jansson 2.7 for Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
 echo
-sleep 1
+
 cd /usr/src
-wget http://www.digip.org/jansson/releases/jansson-2.7.tar.gz
+wget --no-check-certificate http://www.digip.org/jansson/releases/jansson-2.7.tar.gz
 tar -zxvf jansson-2.7.tar.gz
 cd jansson-2.7
 ./configure
@@ -202,16 +290,22 @@ make clean
 make && make install
 ldconfig
 
+sleep 2
 echo
-echo '----------- Install Asterisk 13 ----------'
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -9- Installing Asterisk 13.35 from Magnus Source";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
 echo
-sleep 1
+
 cd /usr/src
 rm -rf asterisk*
 clear
 mv /var/www/html/mbilling/script/asterisk-13.35.0.tar.gz /usr/src/
-#wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13-current.tar.gz
-tar xzvf asterisk-13.35.0.tar.gz
+tar -xzvf asterisk-13.35.0.tar.gz
 rm -rf asterisk-13.35.0.tar.gz
 cd asterisk-*
 useradd -c 'Asterisk PBX' -d /var/lib/asterisk asterisk
@@ -220,6 +314,7 @@ mkdir /var/log/asterisk
 chown -R asterisk:asterisk /var/run/asterisk
 chown -R asterisk:asterisk /var/log/asterisk
 make clean
+contrib/scripts/install_prereq install
 ./configure
 make menuselect.makeopts
 menuselect/menuselect --enable res_config_mysql  menuselect.makeopts
@@ -237,10 +332,17 @@ ldconfig
 
 clear
 
+sleep 2
 echo
-echo '----------- Install SNGRP ----------'
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -10- Installing SNGrep";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
 echo
-sleep 1
+
 
 if [ ${DIST} = "DEBIAN" ]; then
   apt-get -y install sngrep
@@ -257,12 +359,39 @@ make && make install
 clear
 fi
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -11- Changed tmp folder Permission to 777";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 chmod -R 777 /tmp
- 
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -12- Downloading and Extracting mpg123-12.20.1 ----IMPORTANT----";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -13- Updating deflate.conf and expire.conf in httpd directory";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 if [ ${DIST} = "CENTOS" ]; then
     cd /usr/src
-    wget http://magnussolution.com/download/mpg123-1.20.1.tar.bz2
+    wget --no-check-certificate http://magnussolution.com/download/mpg123-1.20.1.tar.bz2
     tar -xjvf mpg123-1.20.1.tar.bz2
     cd mpg123-1.20.1
     ./configure && make && make install
@@ -292,8 +421,8 @@ if [ ${DIST} = "CENTOS" ]; then
       LogFormat '\"%r\" %{outstream}n/%{instream}n (%{ratio}n%%)' deflate
     </IfModule>
     " >> /etc/httpd/conf.d/deflate.conf
-
-    echo "
+	
+	  echo "
     <IfModule mod_expires.c>
      ExpiresActive On
      ExpiresByType image/jpg \"access plus 60 days\"
@@ -316,6 +445,18 @@ if [ ${DIST} = "CENTOS" ]; then
     </IfModule>
     " >> /etc/httpd/conf.d/expire.conf
 fi
+
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -14- Setting HTTP access permissions";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo '
 <IfModule mime_module>
@@ -352,6 +493,16 @@ AddType application/octet-stream .csv
 </Files>
 ' >> ${HTTP_CONFIG}
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -15- Updating PHP.ini file";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 rm -rf ${PHP_INI}_old
 cp -rf ${PHP_INI} ${PHP_INI}_old
@@ -362,7 +513,6 @@ sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 3M /" ${PHP_INI}
 sed -i "s/post_max_size = 8M/post_max_size = 20M/" ${PHP_INI}
 sed -i "s/max_execution_time = 30/max_execution_time = 90/" ${PHP_INI}
 sed -i "s/max_input_time = 60/max_input_time = 120/" ${PHP_INI}
-sed -i "s/\;date.timezone =/date.timezone = America\/Sao_Paulo/" ${PHP_INI}
 if [ ${DIST} = "CENTOS" ]; then
     sed -i "s/User apache/User asterisk/" ${HTTP_CONFIG}
     sed -i "s/Group apache/Group asterisk/" ${HTTP_CONFIG}
@@ -373,28 +523,63 @@ elif [ ${DIST} = "DEBIAN" ]; then
     sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' ${HTTP_CONFIG}
 fi; 
 
+sleep 2
 echo
-echo "----------- Create mysql password: Your mysql root password is $password ----------"
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo "--15.1-- Created mysql password: Your mysql root password is $password ----";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -16- Enabling and Restarting HTTPD and Mariadb";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
 echo
 
 
 if [ ${DIST} = "DEBIAN" ]; then
-    systemctl start mariadb
-    systemctl enable apache2 
-    systemctl enable mariadb
-    chkconfig ntp on
+    systemctl enable apache2    
 else [ -f /etc/redhat-release ]
     systemctl enable httpd
-    systemctl enable mariadb
-    systemctl start mariadb
-    chkconfig ntpd on
 fi
 
+systemctl enable mariadb
+systemctl start mariadb
+systemctl enable ntpd
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -17- Setting Mysql root password to $password";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
+mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
 
 
-  mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
-
-
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -18- Updating Mysql Config in my.cnf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 if [ ${DIST} = "CENTOS" ]; then
 echo "
@@ -453,19 +638,35 @@ fi;
 
 startup_services
 
-clear
-echo
-echo '----------- Installing the Web Interface ----------'
-echo
+
 sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -19- Installing Web Interface";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 if [ ${DIST} = "DEBIAN" ]; then
     rm -rf /var/www/html/index.html
 fi;
 
 cd  /var/www/html/mbilling/resources/images/
 rm -rf lock-screen-background.jpg
-wget http://magnusbilling.org/downloadlock-screen-background.jpg
+wget --no-check-certificate https://magnusbilling.org/download/lock-screen-background.jpg
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -20- Updating Permissions for MagnusBilling User = Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 cd /var/www/html/mbilling/
 rm -rf /var/www/html/mbilling/tmp && mkdir /var/www/html/mbilling/tmp
@@ -483,6 +684,17 @@ touch /etc/asterisk/iax_magnus_user.conf
 touch /etc/asterisk/musiconhold_magnus.conf
 touch /etc/asterisk/queues_magnus.conf
 
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -21- Asterisk Language Selection";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 selectLanguage() {
    echo "SELECT THE MAIN LANGUAGE"  
@@ -502,6 +714,17 @@ selectLanguage() {
       *) "Invalid option." ; echo ; selectLanguage ;;
    esac
 }
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -22- Copying MagnusBilling Sound Files to Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 cp -rf /var/www/html/mbilling/resources/sounds/br /var/lib/asterisk/sounds
 cp -rf /var/www/html/mbilling/resources/sounds/es /var/lib/asterisk/sounds
@@ -554,6 +777,18 @@ else
   selectLanguage
 fi
 
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -23- Updating MagnusBilling DialPlan";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 cd /var/www/html/mbilling
 
 echo $'[billing]
@@ -573,6 +808,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=${EPOCH})
 
 ' > /etc/asterisk/extensions_magnus.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -24- Updating Asterisk Manager Config";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 echo "
 [general]
 enabled = yes
@@ -589,14 +835,46 @@ read = system,call,log,verbose,agent,user,config,dtmf,reporting,cdr,dialplan
 write = system,call,agent,user,config,command,reporting,originate
 " > /etc/asterisk/manager.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -25- Including MagnusBilling Extensions and MOH Config in Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo "#include extensions_magnus.conf" >> /etc/asterisk/extensions.conf
 echo '#include extensions_magnus_did.conf' >> /etc/asterisk/extensions.conf
 echo "#include musiconhold_magnus.conf" >> /etc/asterisk/musiconhold.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -26- Setting Voicemail Config";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 echo "[settings]
 voicemail => mysql,general,pkg_voicemail_users
 " > /etc/asterisk/extconfig.conf
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -27- Including Modules in Asterisk Modules.conf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo "
 noload => res_config_sqlite3.so
@@ -616,6 +894,17 @@ noload => cel_odbc.so
 noload => cel_sqlite3_custom.so
 noload => res_format_attr_celt.so
 " >> /etc/asterisk/modules.conf
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -28- Including Log Retain files in Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo "
 /var/log/asterisk/*log {
@@ -656,12 +945,18 @@ echo "
 " > /etc/logrotate.d/asterisk
 
 
-MBillingMysqlPass=$(genpasswd)
-
-echo
-echo "----------- Installing the new Database ----------"
-echo
 sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -29- Installing MagnusBilling Mysql Database from Script";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
+MBillingMysqlPass=$(genpasswd)
 
 mysql -uroot -p${password} -e "create database mbilling;"
 mysql -uroot -p${password} -e "CREATE USER 'mbillingUser'@'localhost' IDENTIFIED BY '${MBillingMysqlPass}';"
@@ -673,12 +968,34 @@ fi;
 mysql mbilling -u root -p${password}  < /var/www/html/mbilling/script/database.sql
 rm -rf /var/www/html/mbilling/script
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -30- Updating Mysql Config Files";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 echo "[general]
 dbhost = 127.0.0.1
 dbname = mbilling
 dbuser = mbillingUser
 dbpass = $MBillingMysqlPass
 " > /etc/asterisk/res_config_mysql.conf
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -31- Updating Data Directories in asterisk.conf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo '[directories](!)
 astetcdir => /etc/asterisk
@@ -696,6 +1013,18 @@ astlogdir => /var/log/asterisk
 documentation_language = en_US  
 ' > /etc/asterisk/asterisk.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -32- Adding Asterisk options verbose=5, debug=0 and maxfiles=500000";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
+
 echo "
 [options]
 verbose = 5
@@ -708,8 +1037,30 @@ res_agi=1.6
 app_set=1.6" >> /etc/asterisk/asterisk.conf
 
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -33- Updating Max File Limits in Proc and sysctl.conf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 echo 500000 > /proc/sys/fs/file-max
 echo "fs.file-max=500000">>/etc/sysctl.conf
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -34- Setting Security and File Limits in limits.conf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo '
 * soft nofile 500000
@@ -730,6 +1081,18 @@ echo '
 * hard locks unlimited
 * soft sigpending unlimited
 * hard sigpending unlimited' >> /etc/security/limits.conf
+
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -35- Adding new CronJobs for MagnusBilling";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 
 if [ ${DIST} = "DEBIAN" ]; then
@@ -757,6 +1120,16 @@ echo "
 chmod 600 $CRONPATH
 crontab $CRONPATH
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -36- Updating sip.conf file in Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo "
 [general]
@@ -789,6 +1162,18 @@ ignoreregexpire=yes
 #include sip_magnus.conf
 " > /etc/asterisk/sip.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -37- Updating iax.conf file in Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
+
 echo "
 [general]
 bandwidth=low
@@ -801,9 +1186,32 @@ autokill=yes
 #include iax_magnus.conf
 " > /etc/asterisk/iax.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -38- Updating queues.conf per Mbilling";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 echo "
 #include queues_magnus.conf
 " >> /etc/asterisk/queues.conf
+
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -39- Creating index.php and robots.txt in /var/www/html/ for Mbilling";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 
 echo "<?php 
@@ -815,6 +1223,17 @@ echo "
 User-agent: *
 Disallow: /mbilling/
 " > /var/www/html/robots.txt
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -40- Installing Fail2Ban and IP-Tables";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 systemctl daemon-reload
 
@@ -854,6 +1273,16 @@ echo
 
 install_fail2ban
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -41- Updating IP-Tables Rules";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 iptables -F
 iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
@@ -887,11 +1316,30 @@ elif [ ${DIST} = "CENTOS" ]; then
 fi
 
 
-
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -42- Updating permissions for /mbilling/protected/runtime Directory";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 touch /var/www/html/mbilling/protected/runtime/application.log
 chmod 655 /var/www/html/mbilling/protected/runtime/application.log
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -43- Configuring Fail2Ban for Overall Security";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo
 echo "Fail2ban configuration!"
@@ -940,6 +1388,16 @@ failregex = .* Username or password is wrong - User .* from IP - <HOST>
 ignoreregex =
 ' > /etc/fail2ban/filter.d/mbilling_login.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -44- Updating jail.local";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 echo "
 [DEFAULT]
@@ -1036,6 +1494,16 @@ bantime = 3600
 fi
 
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -45- Updating Security Rules in ip-blacklist.conf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 rm -rf /var/www/html/mbilling/resources/ip.blacklist
 touch /var/www/html/mbilling/resources/ip.blacklist
@@ -1047,6 +1515,17 @@ failregex = ^<HOST> \[.*\]$
 ignoreregex =
 " > /etc/fail2ban/filter.d/ip-blacklist.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -46- Updating Log Rules in /etc/asterisk/logger.conf";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 echo "
 [general]
 dateformat=%F %T
@@ -1057,9 +1536,31 @@ messages => notice,warning,error
 magnus => debug
 " > /etc/asterisk/logger.conf
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -47- Copying fail2ban.service to /usr/lib/systemd/system";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 if [ ${DIST} = "CENTOS" ]; then  
   cp -rf /tmp/fail2ban/build/fail2ban.service /usr/lib/systemd/system/fail2ban.service
 fi
+
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -48- Creating and enabling Fail2Ban Service";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 mkdir /var/run/fail2ban/
 asterisk -rx "module reload logger"
@@ -1069,6 +1570,16 @@ iptables -L -v
 
 php /var/www/html/mbilling/cron.php updatemysql
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -49- Setting Permission for Directories required by Mbilling";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 chown -R asterisk:asterisk /var/lib/php/session*
 chown -R asterisk:asterisk /var/spool/asterisk/outgoing/
@@ -1103,6 +1614,17 @@ echo
 echo ===============================================================
 echo 
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -50- Downloading and Installing Codecs Based on CPUInfo";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 p4_proc()
 {
     set $(grep "model name" /proc/cpuinfo);
@@ -1134,7 +1656,7 @@ p4_x64_proc()
 p3_proc()
 {       
     set $(grep "model name" /proc/cpuinfo);
-    if [ "$4" == "Intel(R)" &&  "$5" == "Pentium(R)" && "$6"== "III" ];then
+    if [ "$4" == "Intel(R)" &&  "$5" == "Pentium(R)" && "$6-e "\e[32;42m== "III" ];then
         wget http://asterisk.hosting.lv/bin/codec_g723-ast130-gcc4-glibc-pentium.so   
         wget http://asterisk.hosting.lv/bin/codec_g729-ast130-gcc4-glibc-pentium.so
         mv /usr/src/codec_g723-ast130-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g723.so
@@ -1196,11 +1718,32 @@ processor_type;
         echo "you can find codecs installation scripts in http://asterisk.hosting.lv";
     fi;
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo " -51- Enabling Codecs G729 and G723 in Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
+
 asterisk -rx 'module load codec_g729.so'
 asterisk -rx 'module load codec_g723.so'
 sleep 4
 asterisk -rx 'core show translation'
 
+sleep 2
+echo
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo "";
+echo "Note: if codecs are not loaded successfully, Troubleshoot Asterisk";
+echo "";
+echo -e "\e[32;42m======================================================================\e[m";
+echo -e "\e[32;42m======================================================================\e[m";
+echo
 
 whiptail --title "MagnusBilling Instalation Result" --msgbox "Congratulations! You have installed MagnusBilling in your Server.\n\nAccess your MagnusBilling in http://your_ip/ \n  Username = root \n  Password = magnus \n\nYour mysql root password is $password\n\n\nPRESS ANY KEY TO REBOOT YOUR SERVER" --fb 20 70
 
