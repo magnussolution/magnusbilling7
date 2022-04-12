@@ -52,8 +52,8 @@ class QueueController extends Controller
 
             $uploaddir = '/var/lib/asterisk/moh/' . $model->name;
             shell_exec('mkdir -p ' . $uploaddir);
-
-            $typefile   = array_pop(explode('.', $_FILES["musiconhold"]["name"]));
+            $data       = explode('.', $_FILES["musiconhold"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $uploaddir . '/queue-' . time() . '.' . $typefile;
             move_uploaded_file($_FILES["musiconhold"]["tmp_name"], $uploadfile);
 
@@ -63,9 +63,9 @@ class QueueController extends Controller
 
         if (isset($_FILES["periodic-announce"]) && strlen($_FILES["periodic-announce"]["name"]) > 1) {
 
-            $uploaddir = '/var/lib/asterisk/sounds/';
-
-            $typefile   = array_pop(explode('.', $_FILES["periodic-announce"]["name"]));
+            $uploaddir  = '/var/lib/asterisk/sounds/';
+            $data       = explode('.', $_FILES["periodic-announce"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $uploaddir . 'queue-periodic-announce-' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["periodic-announce"]["tmp_name"], $uploadfile);
             $model->{'periodic-announce'} = 'queue-periodic-announce-' . $model->id;

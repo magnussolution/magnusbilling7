@@ -201,7 +201,8 @@ class DidController extends Controller
             if (file_exists($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav');
             }
-            $typefile   = array_pop(explode('.', $_FILES["workaudio"]["name"]));
+            $data       = explode('.', $_FILES["workaudio"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $this->uploaddir . 'idDidAudioProWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["workaudio"]["tmp_name"], $uploadfile);
         }
@@ -209,7 +210,8 @@ class DidController extends Controller
             if (file_exists($this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.wav');
             }
-            $typefile   = array_pop(explode('.', $_FILES["noworkaudio"]["name"]));
+            $data       = explode('.', $_FILES["noworkaudio"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["noworkaudio"]["tmp_name"], $uploadfile);
         }
