@@ -272,7 +272,7 @@ class MassiveCall
                         $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
                         $MAGNUS->CallerID = $destination;
 
-                        IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'torpedo');
+                        IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'torpedo_' . $modelPhoneNumber->id);
                     } elseif ($forwardOptionType == 'group') {
 
                         $agi->verbose("Call group " . $forwardOption[1], 25);

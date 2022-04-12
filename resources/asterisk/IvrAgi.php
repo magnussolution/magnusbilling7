@@ -156,6 +156,14 @@ class IvrAgi
             $optionValue = $dtmf[1];
             $agi->verbose("CUSTOMER PRESS $optionType -> $optionValue", 10);
 
+            if (preg_match('/torpedo/', $type)) {
+                $data          = explode('_', $type);
+                $idPhonenumber = $data[1];
+                $sql           = "UPDATE pkg_phonenumber SET info = CONCAT(info,'|IVR " . $modelIvr->name . " DTMF " . $option . " at " . date('Y-m-d H:i:s') . "') WHERE id = $idPhonenumber LIMIT 1";
+                $agi->verbose($sql, 1);
+                $agi->exec($sql);
+            }
+
             $chanStatus = $agi->channel_status($MAGNUS->channel);
 
             if ($chanStatus['result'] == 6) {
