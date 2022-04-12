@@ -462,7 +462,8 @@ class AuthenticationController extends Controller
         if (isset($_FILES['wallpaper']['tmp_name']) && strlen($_FILES['wallpaper']['tmp_name']) > 3) {
 
             $uploaddir  = "resources/images/wallpapers/";
-            $typefile   = array_pop(explode('.', $_FILES["wallpaper"]["name"]));
+            $data       = explode('.', $_FILES["wallpaper"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $uploaddir . 'Customization.jpg';
             move_uploaded_file($_FILES["wallpaper"]["tmp_name"], $uploadfile);
         }

@@ -65,7 +65,8 @@ class CampaignPollController extends Controller
             if (file_exists($this->uploaddir . 'idPoll_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idPoll_' . $model->id . '.wav');
             }
-            $typefile   = array_pop(explode('.', $_FILES["arq_audio"]["name"]));
+            $data       = explode('.', $_FILES["arq_audio"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $this->uploaddir . 'idPoll_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["arq_audio"]["tmp_name"], $uploadfile);
         }
