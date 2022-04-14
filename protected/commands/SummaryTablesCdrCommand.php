@@ -85,9 +85,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_user']) || $value['id_user'] < 1 || !is_numeric($value['sessiontime'])) {
                 continue;
             }
-
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
 
         }
@@ -100,7 +100,6 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
             echo $sql . "\n";
-            print_r($e->getMessage());
         }
 
         echo "perDayUser " . date('H:i:s') . "\n";
@@ -154,9 +153,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_trunk']) || $value['id_trunk'] < 1) {
                 continue;
             }
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_trunk'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
         }
 
@@ -167,7 +167,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         echo "perDayTrunk " . date('H:i:s') . "\n";
@@ -219,9 +219,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
                 continue;
             }
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "'),";
         }
 
@@ -232,7 +233,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         echo "perDayAgent " . date('H:i:s') . "\n";
@@ -280,9 +281,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $this->day . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
         }
 
@@ -293,7 +295,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         echo "perDay " . date('H:i:s') . "\n";
@@ -341,9 +343,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
         }
 
@@ -355,7 +358,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         echo "perMonth " . date('H:i:s') . "\n";
@@ -397,9 +400,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
                 continue;
             }
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "','" . $value['id_user'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['agent_bill'] . "','" . $value['nbcall_fail'] . "'),";
         }
 
@@ -407,11 +411,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         Yii::app()->db->createCommand($sql)->execute();
 
         $sql = "INSERT INTO pkg_cdr_summary_month_user (month, id_user, sessiontime, aloc_all_calls, nbcall, buycost, sessionbill,agent_bill,nbcall_fail) VALUES " . substr($line, 0, -1) . ";";
-
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         echo "perMonthUser " . date('H:i:s') . "\n";
@@ -470,7 +473,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                //
+                echo $sql . "\n";
             }
 
         }
@@ -504,9 +507,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_trunk']) || $value['id_trunk'] < 1) {
                 continue;
             }
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $month . "','" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
         }
 
@@ -517,7 +521,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         echo "perMonthTrunk " . date('H:i:s') . "\n";
@@ -553,10 +557,11 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
-            $value['isAgent']     = $value['isAgent'] == null || $value['isAgent'] == '' ? 0 : $value['isAgent'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['isAgent']        = $value['isAgent'] == null || $value['isAgent'] == '' ? 0 : $value['isAgent'];
             $line .= "('" . $value['id_user'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['isAgent'] . "','" . $value['agent_bill'] . "', '" . $value['nbcall_fail'] . "'),";
         }
 
@@ -567,11 +572,9 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             //
             $sql = "DROP table pkg_cdr_summary_user";
             try {
-
                 Yii::app()->db->createCommand($sql)->execute();
-
             } catch (Exception $e) {
-                //
+                echo $sql . "\n";
             }
         }
 
@@ -604,8 +607,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
-            print_r($e);
+            echo $sql . "\n";
             return;
         }
 
@@ -647,9 +649,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['sessiontime'] = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
-            $value['buycost']     = $value['buycost'] == null ? 0 : $value['buycost'];
-            $value['sessionbill'] = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
+            $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
+            $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
             $line .= "('" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "','" . $value['nbcall_fail'] . "'),";
         }
 
@@ -660,7 +663,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            //
+            echo $sql . "\n";
         }
 
         $sql = "UPDATE  pkg_cdr_summary_trunk SET asr = (nbcall / ( nbcall_fail + nbcall) ) * 100 ";
