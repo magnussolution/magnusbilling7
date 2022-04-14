@@ -68,6 +68,13 @@ Ext.define('MBilling.view.servicesUse.Form', {
                 format: 'Y-m-d H:i:s',
                 value: new Date(),
                 hidden: !App.user.isAdmin
+            }, {
+                xtype: 'datetimefield',
+                name: 'contract_period',
+                fieldLabel: t('End of minimum contract period'),
+                format: 'Y-m-d H:i:s',
+                allowBlank: true,
+                hidden: !App.user.isAdmin
             }];
         me.callParent(arguments);
     }

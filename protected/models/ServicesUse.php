@@ -54,7 +54,7 @@ class ServicesUse extends Model
     {
         return array(
             array('id_user, id_services, status, month_payed, reminded', 'numerical', 'integerOnly' => true),
-            array('reservationdate, releasedate', 'safe'),
+            array('reservationdate, releasedate, contract_period', 'safe'),
         );
     }
 
