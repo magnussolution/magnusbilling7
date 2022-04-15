@@ -173,13 +173,13 @@ Ext.define('MBilling.view.did.Form', {
                 }]
             }, {
                 title: t('Billing'),
+                hidden: !App.user.isAdmin,
                 items: [{
                     xtype: 'fieldset',
                     style: 'margin-top:5px; overflow: visible;',
                     title: t('DID billing per minute rate') + ' 1',
                     collapsible: false,
                     collapsed: false,
-                    hidden: !App.user.isAdmin,
                     defaults: {
                         labelWidth: 250,
                         anchor: '100%',
@@ -205,6 +205,13 @@ Ext.define('MBilling.view.did.Form', {
                         fieldLabel: t('Sell price per min'),
                         value: '0',
                         hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'agent_client_rate_1',
+                        fieldLabel: t('Agent\'s client price per min'),
+                        value: '0',
+                        hidden: App.user.isClient
                     }, {
                         xtype: 'noyescombo',
                         name: 'block_expression_1',
@@ -249,6 +256,13 @@ Ext.define('MBilling.view.did.Form', {
                         value: '0',
                         hidden: !App.user.isAdmin
                     }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'agent_client_rate_2',
+                        fieldLabel: t('Agent\'s client price per min'),
+                        value: '0',
+                        hidden: App.user.isClient
+                    }, {
                         xtype: 'noyescombo',
                         name: 'block_expression_2',
                         fieldLabel: t('Block calls from this expression'),
@@ -292,6 +306,13 @@ Ext.define('MBilling.view.did.Form', {
                         value: '0',
                         hidden: !App.user.isAdmin
                     }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'agent_client_rate_3',
+                        fieldLabel: t('Agent\'s client price per min'),
+                        value: '0',
+                        hidden: App.user.isClient
+                    }, {
                         xtype: 'noyescombo',
                         name: 'block_expression_3',
                         fieldLabel: t('Block calls from this expression'),
@@ -305,7 +326,7 @@ Ext.define('MBilling.view.did.Form', {
                 }]
             }, {
                 title: t('CallBack pro'),
-                hidden: !window.cbr,
+                hidden: !window.cbr || !App.user.isAdmin,
                 items: [{
                     xtype: 'booleancombo',
                     name: 'cbr',

@@ -22,6 +22,7 @@ Ext.define('MBilling.view.queue.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.queuelist',
     store: 'Queue',
+    fieldSearch: 'name',
     initComponent: function() {
         var me = this;
         me.buttonCsv = false;

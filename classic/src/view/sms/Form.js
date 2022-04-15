@@ -45,7 +45,7 @@ Ext.define('MBilling.view.sms.Form', {
         }, {
             xtype: 'textareafield',
             name: 'result',
-            fieldLabel: t('Provider') + ' ' + t('Result'),
+            fieldLabel: t('Provider result'),
             allowBlank: true
         }];
         me.callParent(arguments);

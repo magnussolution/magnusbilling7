@@ -64,7 +64,8 @@ class Did extends Model
             array('did,callerid', 'length', 'max' => 50),
             array('description', 'length', 'max' => 150),
             array('expression_1, expression_2,expression_2,expression_3,TimeOfDay_monFri,TimeOfDay_sat,TimeOfDay_sun,workaudio,noworkaudio', 'length', 'max' => 150),
-            array('connection_charge, selling_rate_1, selling_rate_2,selling_rate_3,buy_rate_1,buy_rate_2,buy_rate_3, connection_sell', 'length', 'max' => 15),
+            array('connection_charge, selling_rate_1, selling_rate_2,selling_rate_3,buy_rate_1,buy_rate_2,buy_rate_3, connection_sell,
+                agent_client_rate_1,agent_client_rate_2,agent_client_rate_3 ', 'length', 'max' => 15),
         );
     }
 
@@ -85,16 +86,19 @@ class Did extends Model
 
     public function beforeSave()
     {
-        $this->id_user        = $this->getIsNewRecord() && $this->id_user < 1 ? null : $this->id_user;
-        $this->startingdate   = date('Y-m-d H:i:s');
-        $this->expirationdate = '2030-08-21 00:00:00';
-        $this->creationdate   = date('Y-m-d H:i:s');
-        $this->selling_rate_1 = $this->selling_rate_1 == '' ? '0.0000' : $this->selling_rate_1;
-        $this->selling_rate_2 = $this->selling_rate_2 == '' ? '0.0000' : $this->selling_rate_2;
-        $this->selling_rate_3 = $this->selling_rate_3 == '' ? '0.0000' : $this->selling_rate_3;
-        $this->buy_rate_1     = $this->buy_rate_1 == '' ? '0.0000' : $this->buy_rate_1;
-        $this->buy_rate_2     = $this->buy_rate_2 == '' ? '0.0000' : $this->buy_rate_2;
-        $this->buy_rate_3     = $this->buy_rate_3 == '' ? '0.0000' : $this->buy_rate_3;
+        $this->id_user             = $this->getIsNewRecord() && $this->id_user < 1 ? null : $this->id_user;
+        $this->startingdate        = date('Y-m-d H:i:s');
+        $this->expirationdate      = '2030-08-21 00:00:00';
+        $this->creationdate        = date('Y-m-d H:i:s');
+        $this->selling_rate_1      = $this->selling_rate_1 == '' ? '0.0000' : $this->selling_rate_1;
+        $this->selling_rate_2      = $this->selling_rate_2 == '' ? '0.0000' : $this->selling_rate_2;
+        $this->selling_rate_3      = $this->selling_rate_3 == '' ? '0.0000' : $this->selling_rate_3;
+        $this->buy_rate_1          = $this->buy_rate_1 == '' ? '0.0000' : $this->buy_rate_1;
+        $this->buy_rate_2          = $this->buy_rate_2 == '' ? '0.0000' : $this->buy_rate_2;
+        $this->buy_rate_3          = $this->buy_rate_3 == '' ? '0.0000' : $this->buy_rate_3;
+        $this->agent_client_rate_1 = $this->agent_client_rate_1 == '' ? '0.0000' : $this->agent_client_rate_1;
+        $this->agent_client_rate_2 = $this->agent_client_rate_2 == '' ? '0.0000' : $this->agent_client_rate_2;
+        $this->agent_client_rate_3 = $this->agent_client_rate_3 == '' ? '0.0000' : $this->agent_client_rate_3;
         return parent::beforeSave();
     }
 }
