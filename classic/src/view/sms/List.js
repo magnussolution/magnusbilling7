@@ -76,7 +76,7 @@ Ext.define('MBilling.view.sms.List', {
             dataIndex: 'sms_from',
             flex: 2
         }, {
-            header: t('Provider') + ' ' + t('Result'),
+            header: t('Provider result'),
             dataIndex: 'result',
             hidden: true,
             hideable: App.user.isAdmin,

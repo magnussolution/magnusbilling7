@@ -24,6 +24,7 @@ class DidAgi
     public $did;
     public $sell_price;
     public $buy_price;
+    public $agent_client_rate;
     public $modelDestination;
     public $modelDid;
     public $startCall;
@@ -646,19 +647,24 @@ class DidAgi
         $agi->verbose(print_r($this->modelDestination[0], true), 25);
         if (strlen($this->modelDid->expression_1) > 0 && preg_match('/' . $this->modelDid->expression_1 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
-            $selling_rate = $this->modelDid->selling_rate_1;
-            $buy_rate     = $this->modelDid->buy_rate_1;
+            $selling_rate      = $this->modelDid->selling_rate_1;
+            $buy_rate          = $this->modelDid->buy_rate_1;
+            $agent_client_rate = $this->modelDid->agent_client_rate_1;
         } elseif (strlen($this->modelDid->expression_2) > 0 && preg_match('/' . $this->modelDid->expression_2 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 2 " . $MAGNUS->CallerID, 10);
-            $selling_rate = $this->modelDid->selling_rate_2;
-            $buy_rate     = $this->modelDid->buy_rate_2;
+            $selling_rate      = $this->modelDid->selling_rate_2;
+            $buy_rate          = $this->modelDid->buy_rate_2;
+            $agent_client_rate = $this->modelDid->agent_client_rate_2;
         } elseif (strlen($this->modelDid->expression_3) > 0 && preg_match('/' . $this->modelDid->expression_3 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 3 " . $MAGNUS->CallerID, 10);
-            $selling_rate = $this->modelDid->selling_rate_3;
-            $buy_rate     = $this->modelDid->buy_rate_3;
+            $selling_rate      = $this->modelDid->selling_rate_3;
+            $buy_rate          = $this->modelDid->buy_rate_3;
+            $agent_client_rate = $this->modelDid->agent_client_rate_3;
         } else {
-            $selling_rate = 0;
-            $buy_rate     = 0;
+            $selling_rate      = 0;
+            $buy_rate          = 0;
+            $agent_client_rate = 0;
+
         }
 
         if ($this->modelDid->connection_sell == 0 && $selling_rate == 0) {
@@ -668,6 +674,8 @@ class DidAgi
         }
 
         $this->buy_price = $buy_rate;
+
+        $this->agent_client_rate = $agent_client_rate;
 
         $credit = $MAGNUS->modelUser->typepaid == 1
         ? $MAGNUS->modelUser->credit + $MAGNUS->modelUser->creditlimit
@@ -690,8 +698,15 @@ class DidAgi
 
         $this->sell_price = $this->sell_price + $this->modelDid->connection_sell;
 
+        if ($MAGNUS->modelUser->id_user > 1) {
+
+            $this->agent_client_rate = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->agent_client_rate, $this->modelDid->initblock, $this->modelDid->increment);
+            $agi->verbose('The DID user is a Agent user. agent_client_rate = ' . $this->agent_client_rate, 5);
+        }
+
         if ($answeredtime < $this->modelDid->minimal_time_charge) {
-            $this->sell_price = 0;
+            $this->sell_price        = 0;
+            $this->agent_client_rate = 0;
         }
 
         $this->buy_price = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->buy_price, $this->modelDid->buyrateinitblock, $this->modelDid->buyrateincrement);
@@ -745,6 +760,10 @@ class DidAgi
         $MAGNUS->id_trunk          = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
         $CalcAgi->sipiax           = 3;
         $CalcAgi->buycost          = $this->buy_price;
+
+        if ($MAGNUS->modelUser->id_user > 1) {
+            $CalcAgi->agent_bill = $this->agent_client_rate;
+        }
         $CalcAgi->saveCDR($agi, $MAGNUS);
 
         $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $answeredtime

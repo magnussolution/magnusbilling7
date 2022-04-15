@@ -1637,6 +1637,23 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-04-15
+        if ($version == '7.8.0.7') {
+            $sql = "ALTER TABLE `pkg_sip` ADD `sip_config` TEXT NULL DEFAULT NULL ;";
+            $this->executeDB($sql);
+
+            $sql = "
+            ALTER TABLE `pkg_did` ADD `agent_client_rate_1` decimal(15,5)   NOT NULL DEFAULT '0.00000' AFTER `selling_rate_1`;
+            ALTER TABLE `pkg_did` ADD `agent_client_rate_2` decimal(15,5)   NOT NULL DEFAULT '0.00000' AFTER `selling_rate_2`;
+            ALTER TABLE `pkg_did` ADD `agent_client_rate_3` decimal(15,5)   NOT NULL DEFAULT '0.00000' AFTER `selling_rate_3`;
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.8.0.8';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

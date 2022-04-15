@@ -50,6 +50,7 @@ Locale.load({
     'After answer': 'Después de contestar',
     'Agent': 'Agente',
     'Agent monitor': 'Agente de monitoreo',
+    'Agent\'s client price per min': 'Precio de venta cliente del agente',
     'Alarm': 'Alarme',
     'Alarms': 'Alarmes',
     'Alias': 'Alias',
@@ -328,6 +329,7 @@ Locale.load({
     'Enable voicemail': 'Habilitar correo de voz',
     'Enable_Web_Server': 'Enable_Web_Server',
     'Encryption': 'Encryption',
+    'End of minimum contract period': 'Final del contracto minimo',
     'Ends with': 'Termina con',
     'English': 'Inglés',
     'Enter in your account': 'Entre en su cuenta',
@@ -717,6 +719,7 @@ Locale.load({
     'Provider Rates': 'Tarifas de Proveedor',
     'Provider name': 'Nombre del Proveedor',
     'Provider rate': 'Tarifas proveedores',
+    'Provider result': 'Respuesta del provedor',
     'Provider tech': 'Tipo de señalización',
     'Providers': 'Proveedores',
     'Proxy': 'Proxy',
@@ -1119,4 +1122,5 @@ Locale.load({
     'must belong to the IVR owner': 'tiene que pertenecer al mismo usuario de la IRV',
     'to refill': 'para recargar',
     'week': 'semana',
+
 });

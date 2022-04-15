@@ -22,6 +22,7 @@ Ext.define('MBilling.view.ivr.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.ivrlist',
     store: 'Ivr',
+    fieldSearch: 'name',
     initComponent: function() {
         var me = this;
         me.allowPrint = false;

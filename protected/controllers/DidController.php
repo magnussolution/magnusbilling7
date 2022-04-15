@@ -35,6 +35,11 @@ class DidController extends Controller
             'fieldReport' => 'username',
         ),
     );
+    public $fieldsInvisibleAgent = array(
+        'buy_rate_1',
+        'buy_rate_2',
+        'buy_rate_3',
+    );
 
     public $fieldsInvisibleClient = array(
         'id_user',
@@ -46,6 +51,12 @@ class DidController extends Controller
         'description',
         'billingtype',
         'selling_rate',
+        'buy_rate_1',
+        'buy_rate_2',
+        'buy_rate_3',
+        'agent_client_rate_1',
+        'agent_client_rate_2',
+        'agent_client_rate_3',
     );
 
     public function init()
@@ -55,15 +66,13 @@ class DidController extends Controller
         $this->abstractModel = Did::model();
         $this->titleReport   = Yii::t('zii', 'DID');
         parent::init();
-
-        //for agents add filter for show only numbers free
-        $this->filter = Yii::app()->session['isAgent'] ? ' AND reserved = 0 ' : false;
-
     }
 
     public function extraFilterCustomAgent($filter)
     {
-        $filter .= ' AND reserved = 0';
+
+        //for agents add filter for show only numbers free
+        $filter .= ' AND (reserved = 0  OR id_user IN (SELECT id FROM pkg_user WHERE id_user = ' . Yii::app()->session['id_user'] . '))';
         return $filter;
     }
 
