@@ -235,25 +235,29 @@ echo
 echo "Installing Fail2ban & Iptables"
 echo
 
-apt install firewalld -y
-systemctl start firewalld
-systemctl enable firewalld
 
-firewall-cmd --zone=public --add-port=22/tcp --permanent
-firewall-cmd --zone=public --add-port=80/tcp --permanent
-firewall-cmd --zone=public --add-port=19639/tcp --permanent
-firewall-cmd --zone=public --add-rich-rule="
-  rule family=\"ipv4\"
-  source address=\"$ipMbilling/32\"
-  port protocol=\"tcp\" port=\"3306\" accept" --permanent
-firewall-cmd --zone=public --add-port=5060/udp --permanent
-firewall-cmd --zone=public --add-port=35000-65535/udp --permanent
+iptables -F
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 10000:40000 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 19639 -j ACCEPT
+iptables -I INPUT -p tcp -s $ipMbilling --dport 3306 -j ACCEPT
 
 
-firewall-cmd --reload
-firewall-cmd --zone=public --list-all
+echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
+apt-get install -y iptables-persistent
 
-
+sudo iptables-save > /etc/iptables/rules.v4
 
 apt-get -y install fail2ban
 systemctl enable fail2ban

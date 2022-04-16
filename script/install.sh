@@ -878,7 +878,8 @@ iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "VaxSIPUserAgen
 if [ ${DIST} = "DEBIAN" ]; then
     echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
     echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
-    apt-get install -y --force-yes  iptables-persistent
+    apt-get install -y iptables-persistent
+    sudo iptables-save > /etc/iptables/rules.v4
 elif [ ${DIST} = "CENTOS" ]; then
     service iptables save
     systemctl restart iptables
