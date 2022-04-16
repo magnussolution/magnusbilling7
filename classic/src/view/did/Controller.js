@@ -63,8 +63,6 @@ Ext.define('MBilling.view.did.Controller', {
         form.findField('noworkaudio').setVisible(false);
         form.findField('cbr_total_try').setVisible(false);
         form.findField('cbr_time_try').setVisible(false);
-        me.lookupReference('billingTab').show();
-        me.lookupReference('generalTab').show();
         me.callParent(arguments);
     },
     onEdit: function() {

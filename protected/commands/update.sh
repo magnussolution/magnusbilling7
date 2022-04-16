@@ -62,7 +62,7 @@ chmod -R 700 /var/www/html/mbilling/assets
 chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
-chmod -R 100 /var/www/html/mbilling/resources/asterisk/
+chmod -R 555 /var/www/html/mbilling/resources/asterisk/
 
 
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
