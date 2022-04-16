@@ -42,6 +42,7 @@ Ext.define('MBilling.view.did.Form', {
             },
             items: [{
                 title: t('General'),
+                reference: 'generalTab',
                 items: [{
                     name: 'did',
                     fieldLabel: t('DID'),
@@ -173,6 +174,7 @@ Ext.define('MBilling.view.did.Form', {
                 }]
             }, {
                 title: t('Billing'),
+                reference: 'billingTab',
                 hidden: !App.user.isAdmin,
                 items: [{
                     xtype: 'fieldset',
