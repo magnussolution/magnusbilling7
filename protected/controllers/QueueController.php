@@ -63,7 +63,7 @@ class QueueController extends Controller
 
         if (isset($_FILES["periodic-announce"]) && strlen($_FILES["periodic-announce"]["name"]) > 1) {
 
-            $uploaddir  = '/var/lib/asterisk/sounds/';
+            $uploaddir  = '/var/lib/asterisk/moh/';
             $typefile   = explode('.', $_FILES["periodic-announce"]["name"]);
             $uploadfile = $uploaddir . 'queue-periodic-announce-' . $model->id . '.' . $typefile[1];
             move_uploaded_file($_FILES["periodic-announce"]["tmp_name"], $uploadfile);
@@ -71,7 +71,7 @@ class QueueController extends Controller
             $model->save();
         }
 
-        $files = glob('/var/lib/asterisk/sounds/queue-periodic-announce-' . $model->id . '*');
+        $files = glob('/var/lib/asterisk/moh/queue-periodic-announce-' . $model->id . '*');
 
         if (!isset($files[0])) {
             $model->{'periodic-announce'} = 'queue-periodic-announce';
