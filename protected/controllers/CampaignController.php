@@ -100,12 +100,14 @@ class CampaignController extends Controller
         }
 
         if (isset($_FILES["audio"]) && strlen($_FILES["audio"]["name"]) > 1) {
-            $typefile        = array_pop(explode('.', $_FILES["audio"]["name"]));
+            $data            = explode('.', $_FILES["audio"]["name"]);
+            $typefile        = array_pop($data);
             $values['audio'] = "idCampaign_" . $values['id'] . '.' . $typefile;
         }
 
         if (isset($_FILES["audio_2"]) && strlen($_FILES["audio_2"]["name"]) > 1) {
-            $typefile          = array_pop(explode('.', $_FILES["audio_2"]["name"]));
+            $data              = explode('.', $_FILES["audio_2"]["name"]);
+            $typefile          = array_pop($data);
             $values['audio_2'] = "idCampaign_" . $values['id'] . '_2.' . $typefile;
         }
 

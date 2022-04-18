@@ -440,7 +440,6 @@ class AuthenticationController extends Controller
         if (isset($_FILES['logo']['tmp_name']) && strlen($_FILES['logo']['tmp_name']) > 3) {
 
             $uploaddir = "resources/images/";
-            $typefile  = array_pop(explode('.', $_FILES["logo"]["name"]));
 
             if (Yii::app()->session['isAgent']) {
                 $uploadfile = $uploaddir . 'logo_custom_' . Yii::app()->session['id_user'] . '.png';

@@ -189,12 +189,14 @@ class DidController extends Controller
     public function beforeSave($values)
     {
         if (isset($_FILES["workaudio"]) && strlen($_FILES["workaudio"]["name"]) > 1) {
-            $typefile            = array_pop(explode('.', $_FILES["workaudio"]["name"]));
+            $data                = explode('.', $_FILES["workaudio"]["name"]);
+            $typefile            = array_pop($data);
             $values['workaudio'] = "idDidAudioProWork_" . $values['id'] . '.' . $typefile;
         }
 
         if (isset($_FILES["noworkaudio"]) && strlen($_FILES["noworkaudio"]["name"]) > 1) {
-            $typefile              = array_pop(explode('.', $_FILES["noworkaudio"]["name"]));
+            $data                  = explode('.', $_FILES["noworkaudio"]["name"]);
+            $typefile              = array_pop($data);
             $values['noworkaudio'] = "idDidAudioProNoWork_" . $values['id'] . '.' . $typefile;
         }
 

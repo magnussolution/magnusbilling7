@@ -51,7 +51,8 @@ class CampaignPollController extends Controller
         }
 
         if (isset($_FILES["arq_audio"]) && strlen($_FILES["arq_audio"]["name"]) > 1) {
-            $typefile            = array_pop(explode('.', $_FILES["arq_audio"]["name"]));
+            $data                = explode('.', $_FILES["arq_audio"]["name"]);
+            $typefile            = array_pop($data);
             $values['arq_audio'] = "idPoll_" . $values['id'] . '.' . $typefile;
         }
         return $values;
