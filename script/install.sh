@@ -1108,8 +1108,8 @@ p4_proc()
 
     if [ "$4" == "Celeron" ]; then
 
-        wget http://asterisk.hosting.lv/bin/codec_g723-ast14-gcc4-glibc-pentium.so   
-        wget http://asterisk.hosting.lv/bin/codec_g729-ast14-gcc4-glibc-pentium.so
+        wget http://www.kolmisoft.com/packets/ast14_codecs/codec_g723-ast14-gcc4-glibc-pentium.so  
+        wget http://www.kolmisoft.com/packets/ast14_codecs/codec_g729-ast14-gcc4-glibc-pentium.so
         cp /usr/src/codec_g723-ast14-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g723.so
         cp /usr/src/codec_g729-ast14-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g729.so
          
