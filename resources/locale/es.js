@@ -960,6 +960,7 @@ Locale.load({
     'Tech prefix': 'Tech prefix',
     'Technical information: ': 'Información técnica',
     'Temporary failure': 'Temporary failure',
+    'Termination date': 'Fecha para cancelar',
     'Terms': 'Términos',
     'Test SMTP': 'Probar SMTP',
     'Text': 'Texto',
@@ -1122,5 +1123,4 @@ Locale.load({
     'must belong to the IVR owner': 'tiene que pertenecer al mismo usuario de la IRV',
     'to refill': 'para recargar',
     'week': 'semana',
-
 });
