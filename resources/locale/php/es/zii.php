@@ -949,6 +949,7 @@ return array(
     'Tech prefix' => 'Tech prefix',
     'Technical information => ' => 'Información técnica',
     'Temporary failure' => 'Temporary failure',
+    'Termination date' => 'Fecha para cancelar',
     'Terms' => 'Términos',
     'Test SMTP' => 'Probar SMTP',
     'Text' => 'Texto',

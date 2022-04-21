@@ -230,6 +230,7 @@
     'sunday'=> ['Sunday', 'Domingo' , 'Sábado'],
     'sunStart'=> ['Sunday_intervals', 'Intervalos_Domingo' , 'Domingo_intervalos'],
     'techprefix'=> ['Tech_prefix', 'Tech_prefix' , 'Tech_prefix'],
+    'termination_date'=> ['Termination_date', 'Data_para_cancelar' , 'Fecha_para_cancelar'],
     'text'=> ['Text', 'Text' , 'Texto'],
     'thursday'=> ['Thursday', 'Quinta_feira' , 'Jueves'],
     'TimeOfDay_monFri'=> ['Mon-Fri', 'Seg-Sex' , 'Lunes-Viernes'],
