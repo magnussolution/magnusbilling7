@@ -70,9 +70,16 @@ Ext.define('MBilling.view.servicesUse.Form', {
                 hidden: !App.user.isAdmin
             }, {
                 xtype: 'datetimefield',
+                name: 'termination_date',
+                fieldLabel: t('Termination date'),
+                format: 'Y-m-d',
+                allowBlank: true,
+                hidden: !App.user.isAdmin
+            }, {
+                xtype: 'datetimefield',
                 name: 'contract_period',
                 fieldLabel: t('End of minimum contract period'),
-                format: 'Y-m-d H:i:s',
+                format: 'Y-m-d',
                 allowBlank: true,
                 hidden: !App.user.isAdmin
             }];

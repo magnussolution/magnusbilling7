@@ -939,6 +939,7 @@ Locale.load({
     'Tech prefix': '',
     'Technical information: ': '',
     'Temporary failure': '',
+    'Termination date': '',
     'Terms': '',
     'Test SMTP': '',
     'Text': '',

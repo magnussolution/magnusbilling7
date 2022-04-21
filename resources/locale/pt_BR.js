@@ -979,6 +979,7 @@ Locale.load({
     'Tech prefix': 'Tech prefix',
     'Technical information: ': 'Informação técnica',
     'Temporary failure': 'Temporary failure',
+    'Termination date': 'Data para cancelar',
     'Terms': 'Termos',
     'Test SMTP': 'Testar SMTP',
     'Text': 'Text',
@@ -1146,5 +1147,4 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
-
 });

@@ -964,6 +964,7 @@ Locale.load({
     'Technical information:': 'Техническая информация:',
     'Technical information: ': '',
     'Temporary failure': 'Временный отказ',
+    'Termination date': '',
     'Terms': 'Условия',
     'Test SMTP': 'Тест SMTP.',
     'Text': 'Текст',

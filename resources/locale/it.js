@@ -962,6 +962,7 @@ Locale.load({
     'Technical information:': 'Informazioni tecniche:',
     'Technical information: ': '',
     'Temporary failure': 'Fallimento temporaneo',
+    'Termination date': '',
     'Terms': 'Termini',
     'Test SMTP': 'Test SMTP',
     'Text': 'Testo',
