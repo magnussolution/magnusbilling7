@@ -4,7 +4,7 @@
 DID
 ---
 
-| The exact number coming from the context in Asterisk. We recommend you to always use the E164 format.
+| The exact number coming from the context in Asterisk. We recommend you to always use the E164 format. Also you can create intervals. Example 13605040001-13605040009. In this example will be created the DIDs 13605040001 until  13605040009.
 
 
 
@@ -65,6 +65,36 @@ Connection charge
 -----------------
 
 | This is the value that will be charged for each call. Simply by picking up the call, this value will be deducted.
+
+
+
+
+.. _did-minimal-time-buy:
+
+Minimum time to charge
+----------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buyrateinitblock:
+
+Buy price initblock
+-------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buyrateincrement:
+
+Buy price increment
+-------------------
+
+| We did not write the description to this field.
 
 
 
@@ -157,6 +187,16 @@ Regular expression
 
 
 
+.. _did-buy-rate-1:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
+
+
+
+
 .. _did-selling-rate-1:
 
 Sell price per min
@@ -197,6 +237,16 @@ Regular expression
 
 
 
+.. _did-buy-rate-2:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
+
+
+
+
 .. _did-selling-rate-2:
 
 Sell price per min
@@ -233,6 +283,16 @@ Regular expression
 ------------------
 
 | Same as the first expression. You can see more details at the link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
+
+
+
+
+.. _did-buy-rate-3:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
 
 
 
@@ -363,66 +423,6 @@ Out work audio
 --------------
 
 | Audio that will be executed when a call is received out of the time interval.
-
-
-
-
-.. _did-minimal-time-buy:
-
-Minimum time to buy
--------------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _did-buyrateinitblock:
-
-Buy price initblock
--------------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _did-buyrateincrement:
-
-Buy price increment
--------------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _did-buy-rate-1:
-
-Buy price per min
------------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _did-buy-rate-2:
-
-Buy price per min
------------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _did-buy-rate-3:
-
-Buy price per min
------------------
-
-| We did not write the description to this field.
 
 
 

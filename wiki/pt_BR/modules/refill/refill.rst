@@ -39,6 +39,16 @@ Adicionar pagamento
 
 
 
+.. _refill-date:
+
+Data
+----
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _refill-invoice-number:
 
 Fatura número
@@ -53,16 +63,6 @@ Fatura número
 
 Comprovante
 -----------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _refill-date:
-
-Data
-----
 
 | Nós ainda não escrevemos a descrição deste campo.
 

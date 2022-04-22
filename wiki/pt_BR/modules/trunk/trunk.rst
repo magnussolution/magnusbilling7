@@ -101,8 +101,8 @@ Status
 
 .. _trunk-allow-error:
 
-Allow error
------------
+Enviar para backup se 404
+-------------------------
 
 | Envia a chamada para o próximo tronco  se receber error 404.
 
@@ -336,26 +336,6 @@ Parâmetros
 | useragent=meu agente
 | 
 | .
-
-
-
-
-.. _trunk-allow-error:
-
-Go to backup 404/480
---------------------
-
-| Envia a chamada para o próximo tronco  se receber error 404.
-
-
-
-
-.. _trunk-allow-error:
-
-Enviar para backup se 404
--------------------------
-
-| Envia a chamada para o próximo tronco  se receber error 404.
 
 
 

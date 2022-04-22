@@ -29,6 +29,16 @@ Nome
 
 
 
+.. _campaign-callerid:
+
+CallerID
+--------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _campaign-status:
 
 Status
@@ -387,16 +397,6 @@ Audio 2 TTS
 -----------
 
 | Mesma função do campo campo anterior, mas para o áudio 2. Lembra que entre o áudio 1 e 2, o TTS executa o nome importado nos números.
-
-
-
-
-.. _campaign-callerid:
-
-CallerID
---------
-
-| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -38,3 +38,13 @@ De
 
 
 
+
+.. _sms-result:
+
+Resposta do provedor
+--------------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

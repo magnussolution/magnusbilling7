@@ -133,6 +133,16 @@ Limite de CPS
 
 
 
+.. _user-description:
+
+Descrição
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _user-company-website:
 
 Site da empresa
@@ -293,12 +303,42 @@ Imposto
 
 
 
+.. _user-contract-value:
+
+Valor contrato
+--------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _user-dist:
+
+DIST
+----
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _user-typepaid:
 
 Tipo pago
 ---------
 
 | Cliente pós-pago poderá ficar com saldo negativo até o limite de crédito informado no campo abaixo.
+
+
+
+
+.. _user-credit-notification-daily:
+
+Notificação de crédito diário
+---------------------------------
+
+| Se ativar esta opção o MagnusBilling vai enviar um email diariamente com o saldo do cliente. Você pode editar o email que será enviado no menu Configurações submenu Modelo de Emails.
 
 
 
@@ -423,6 +463,16 @@ Restrição
 
 
 
+.. _user-restriction-use:
+
+Usar
+----
+
+| Qual número será usado para verificar a Restrição. Esta opção é somente válida para chamas de saida.
+
+
+
+
 .. _user-transfer-international-profit:
 
 Lucro
@@ -479,36 +529,6 @@ Mostrar preço de venda
 -----------------------
 
 | Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
-
-
-
-
-.. _user-contract-value:
-
-Valor contrato
---------------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _user-dist:
-
-DIST
-----
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _user-credit-notification-daily:
-
-Notificação de crédito diário
----------------------------------
-
-| Se ativar esta opção o MagnusBilling vai enviar um email diariamente com o saldo do cliente. Você pode editar o email que será enviado no menu Configurações submenu Modelo de Emails.
 
 
 

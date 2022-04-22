@@ -4,7 +4,7 @@
 DID
 ---
 
-| O número exatamente como chega no Asterisk.
+| O número exatamente como chega no Asterisk. Você também pode usar intervalos. Examplo: 551140040001-551140040009. Neste exemplo criar os DIDS 551140040001 ao 551140040009.
 
 
 
@@ -65,6 +65,36 @@ Taxa de conexão
 ----------------
 
 | Este é o valor que será cobrado em cada chamada, simplesmente por atender a chamada.
+
+
+
+
+.. _did-minimal-time-buy:
+
+Tempo mínimo para tarifar
+--------------------------
+
+| Tempo mínimo para tarifar o custo do DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.
+
+
+
+
+.. _did-buyrateinitblock:
+
+Bloco inicial
+-------------
+
+| Tempo mínimo em segundos para tarifar o custo do DID. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
+
+
+
+
+.. _did-buyrateincrement:
+
+Incremento
+----------
+
+| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo de custo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
 
 
 
@@ -161,6 +191,16 @@ Expressão regular
 
 
 
+.. _did-buy-rate-1:
+
+Preço de compra por min
+------------------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _did-selling-rate-1:
 
 Preço de venda por min
@@ -173,8 +213,8 @@ Preço de venda por min
 
 .. _did-block-expression-1:
 
-Bloquear chamadas a partir desta expressão
--------------------------------------------
+Bloquear chamadas desta expressão
+----------------------------------
 
 | Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.
 
@@ -203,6 +243,16 @@ Expressão regular
 
 
 
+.. _did-buy-rate-2:
+
+Preço de compra por min
+------------------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _did-selling-rate-2:
 
 Preço de venda por min
@@ -215,8 +265,8 @@ Preço de venda por min
 
 .. _did-block-expression-2:
 
-Bloquear chamadas a partir desta expressão
--------------------------------------------
+Bloquear chamadas desta expressão
+----------------------------------
 
 | Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.
 
@@ -245,6 +295,16 @@ Expressão regular
 
 
 
+.. _did-buy-rate-3:
+
+Preço de compra por min
+------------------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _did-selling-rate-3:
 
 Preço de venda por min
@@ -257,8 +317,8 @@ Preço de venda por min
 
 .. _did-block-expression-3:
 
-Bloquear chamadas a partir desta expressão
--------------------------------------------
+Bloquear chamadas desta expressão
+----------------------------------
 
 | Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.
 
@@ -373,66 +433,6 @@ Não trabalhando
 ----------------
 
 | Áudio que será executado quando ligar fora do horário de atendimento.
-
-
-
-
-.. _did-minimal-time-buy:
-
-Tempo mínimo para compra
--------------------------
-
-| Tempo mínimo para tarifar o custo do DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.
-
-
-
-
-.. _did-buyrateinitblock:
-
-Bloco inicial
--------------
-
-| Tempo mínimo em segundos para tarifar o custo do DID. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.
-
-
-
-
-.. _did-buyrateincrement:
-
-Incremento
-----------
-
-| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo de custo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.
-
-
-
-
-.. _did-buy-rate-1:
-
-Buy price per min
------------------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _did-buy-rate-2:
-
-Buy price per min
------------------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _did-buy-rate-3:
-
-Buy price per min
------------------
-
-| Nós ainda não escrevemos a descrição deste campo.
 
 
 

@@ -21,10 +21,20 @@ User type
 
 .. _groupUser-hidden-prices:
 
-Hidden prices
--------------
+Hide prices
+-----------
 
-| Hidden all prices like, buy, sell and profit, to users that use this group.
+| Hide all prices like, buy, sell and profit, to users that use this group.
+
+
+
+
+.. _groupUser-hidden-batch-update:
+
+Hide batch update button
+------------------------
+
+| Hide the bath update button in all menus to users that use this group.
 
 
 

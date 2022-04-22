@@ -39,6 +39,16 @@ Métodos de Pagamento
 
 
 
+.. _servicesUse-month-payed:
+
+Messes pago
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _servicesUse-reservationdate:
 
 Data de reserva
@@ -49,10 +59,20 @@ Data de reserva
 
 
 
-.. _servicesUse-month-payed:
+.. _servicesUse-contract-period:
 
-Messes pago
------------
+Final do contrato mínimo
+-------------------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
+.. _servicesUse-termination-date:
+
+Data para cancelar
+------------------
 
 | Nós ainda não escrevemos a descrição deste campo.
 

@@ -29,12 +29,32 @@ Nome
 
 
 
+.. _phoneNumber-doc:
+
+CPF/CNPJ
+--------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _phoneNumber-city:
 
 Cidade
 ------
 
 | Cidade do cliente, campo não obrigatório.
+
+
+
+
+.. _phoneNumber-email:
+
+Email
+-----
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 
@@ -61,26 +81,6 @@ Descrição
 
 | Descrição para a agenda, somente para controle próprio.
 | Quando for usado enquete, será salvo aqui o número que o cliente digitou.
-
-
-
-
-.. _phoneNumber-doc:
-
-CPF/CNPJ
---------
-
-| Nós ainda não escrevemos a descrição deste campo.
-
-
-
-
-.. _phoneNumber-email:
-
-Email
------
-
-| Nós ainda não escrevemos a descrição deste campo.
 
 
 

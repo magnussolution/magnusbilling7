@@ -109,6 +109,16 @@ CPS Limit
 
 
 
+.. _user-description:
+
+Description
+-----------
+
+| We did not write the description to this field.
+
+
+
+
 .. _user-company-website:
 
 Company website
@@ -269,12 +279,42 @@ VAT
 
 
 
+.. _user-contract-value:
+
+Contract value
+--------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _user-dist:
+
+DIST
+----
+
+| We did not write the description to this field.
+
+
+
+
 .. _user-typepaid:
 
 Type paid
 ---------
 
 | Pos-paid clients can stay with negative balance until the credit limit informed in the field below.
+
+
+
+
+.. _user-credit-notification-daily:
+
+Credit notification daily
+-------------------------
+
+| Enable this option to customer receive daily balance notification Email. You can customize the email on Configuration menu, submenu Email Templates
 
 
 
@@ -399,6 +439,16 @@ Restriction
 
 
 
+.. _user-restriction-use:
+
+Use
+---
+
+| Which number will be used to check the restriction. This option is valid only to outbound calls.
+
+
+
+
 .. _user-transfer-international-profit:
 
 Profit
@@ -455,36 +505,6 @@ Show selling price
 ------------------
 
 | This function is not avaible in Brazil. It's only used to mobile refills in some countries.
-
-
-
-
-.. _user-contract-value:
-
-Contract value
---------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _user-dist:
-
-DIST
-----
-
-| We did not write the description to this field.
-
-
-
-
-.. _user-credit-notification-daily:
-
-Credit notification daily
--------------------------
-
-| Enable this option to customer receive daily balance notification Email. You can customize the email on Configuration menu, submenu Email Templates
 
 
 
