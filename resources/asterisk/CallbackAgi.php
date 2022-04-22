@@ -65,7 +65,7 @@ class CallbackAgi
                         $removeprefix = $CalcAgi->tariffObj[0]['rc_removeprefix'];
                         $prefix       = $CalcAgi->tariffObj[0]['rc_trunkprefix'];
 
-                        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+                        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                             $destination = substr($destination, strlen($removeprefix));
                         }
 
@@ -128,7 +128,7 @@ class CallbackAgi
         $destination = $MAGNUS->CallerID;
 
         $removeprefix = $MAGNUS->config['global']['callback_remove_prefix'];
-        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
             $destination = substr($destination, strlen($removeprefix));
         }
 

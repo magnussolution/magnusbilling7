@@ -225,7 +225,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $extension = $destination;
 
                 //retiro e adiciono os prefixos do tronco
-                if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+                if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                     $destination = substr($destination, strlen($removeprefix));
                 }
 

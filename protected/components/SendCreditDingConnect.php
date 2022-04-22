@@ -181,7 +181,7 @@ class SendCreditDingConnect
     public function getProviderCode($number)
     {
         $removeprefix = '00';
-        if (strncmp($number, $removeprefix, strlen($removeprefix)) == 0) {
+        if (strncmp($number, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
             $number = substr($number, strlen($removeprefix));
         }
         $ch = curl_init();

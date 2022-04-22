@@ -239,7 +239,7 @@ class Call0800WebController extends Controller
 
                 $yournumber = $yournumber;
 
-                if (strncmp($yournumber, $removeprefix, strlen($removeprefix)) == 0) {
+                if (strncmp($yournumber, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                     $yournumber = substr($yournumber, strlen($removeprefix));
                 }
 

@@ -409,7 +409,7 @@ class DidAgi
                         $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                         //retiro e adiciono os prefixos do tronco
-                        if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0) {
+                        if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0 || substr(strtoupper($modelTrunk->removeprefix), 0, 1) == 'X') {
                             $destination = substr($destination, strlen($modelTrunk->removeprefix));
                         }
                         $destination = $modelTrunk->trunkprefix . $destination;
