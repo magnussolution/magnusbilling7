@@ -39,6 +39,16 @@ Add payment
 
 
 
+.. _refill-date:
+
+Date
+----
+
+| We did not write the description to this field.
+
+
+
+
 .. _refill-invoice-number:
 
 Invoice number
@@ -53,16 +63,6 @@ Invoice number
 
 Payment receipt
 ---------------
-
-| We did not write the description to this field.
-
-
-
-
-.. _refill-date:
-
-Date
-----
 
 | We did not write the description to this field.
 

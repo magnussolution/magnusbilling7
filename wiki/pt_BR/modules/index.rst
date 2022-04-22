@@ -73,20 +73,12 @@ Este menu tem os seguintes campos
 .. include:: buycredit/buycredit.rst
 
 
-Contas IAX
-++++++++++
+IAX
++++
 
 Este menu tem os seguintes campos
 
 .. include:: iax/iax.rst
-
-
-TOKEN
-+++++
-
-Este menu tem os seguintes campos
-
-.. include:: gauthenticator/gauthenticator.rst
 
 
 Enviar crédito
@@ -95,14 +87,6 @@ Enviar crédito
 Este menu tem os seguintes campos
 
 .. include:: transfertomobile/transfertomobile.rst
-
-
-Send Credit Products
-++++++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: sendcreditproducts/sendcreditproducts.rst
 
 
 
@@ -239,14 +223,6 @@ Este menu tem os seguintes campos
 .. include:: holidays/holidays.rst
 
 
-Feriados
-++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: holidays/holidays.rst
-
-
 
 
 
@@ -312,14 +288,6 @@ Uso de Pacotes
 Este menu tem os seguintes campos
 
 .. include:: offeruse/offeruse.rst
-
-
-Send credit rates
-+++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: sendcreditrates/sendcreditrates.rst
 
 
 
@@ -429,20 +397,20 @@ Este menu tem os seguintes campos
 .. include:: callarchive/callarchive.rst
 
 
-Resumo por Mês/DID
-+++++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: callsummarymonthdid/callsummarymonthdid.rst
-
-
 Send Credit Summary
 +++++++++++++++++++
 
 Este menu tem os seguintes campos
 
 .. include:: sendcreditsummary/sendcreditsummary.rst
+
+
+Resumo por Mês/DID
++++++++++++++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: callsummarymonthdid/callsummarymonthdid.rst
 
 
 
@@ -496,28 +464,12 @@ Este menu tem os seguintes campos
 .. include:: servers/servers.rst
 
 
-Erros dos troncos
-+++++++++++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: trunksipcodes/trunksipcodes.rst
-
-
 Erros tronco
 ++++++++++++
 
 Este menu tem os seguintes campos
 
 .. include:: trunksipcodes/trunksipcodes.rst
-
-
-Sip Trace
-+++++++++
-
-Este menu tem os seguintes campos
-
-.. include:: siptrace/siptrace.rst
 
 
 
@@ -641,14 +593,6 @@ Backup
 Este menu tem os seguintes campos
 
 .. include:: backup/backup.rst
-
-
-Alarmes
-+++++++
-
-Este menu tem os seguintes campos
-
-.. include:: alarm/alarm.rst
 
 
 Alarmes

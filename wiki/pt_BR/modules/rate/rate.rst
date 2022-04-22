@@ -79,6 +79,16 @@ Tempo adicional
 
 
 
+.. _rate-connectcharge:
+
+Taxa de conexão
+----------------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _rate-package-offer:
 
 Incluir nos pacotes grátis

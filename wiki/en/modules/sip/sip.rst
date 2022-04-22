@@ -44,7 +44,7 @@ CallerID
 Alias
 -----
 
-| Alias to dial between SIP users from the same AccountCode (company).
+| Alias to dial between sip accounts from the same AccountCode (company).
 
 
 
@@ -133,6 +133,16 @@ Tech prefix
 
 
 
+.. _sip-description:
+
+Description
+-----------
+
+| We did not write the description to this field.
+
+
+
+
 .. _sip-nat:
 
 NAT
@@ -169,6 +179,16 @@ Qualify
 | If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.
 |     
 | This status can be verified with the funcion "sip show peer XXXX", this funcion will only provide informations of status for the SIP peer that possess "qualify = yes.
+
+
+
+
+.. _sip-id-trunk-group:
+
+Trunk groups
+------------
+
+| :::::::WARNING::::::. By selecting a trunk group here, the trunk group will be ignored from tariffs and this trunk group will always be used. Only select a trunk group here if you really want all calls from this SIP user to be sent to this trunk group
 
 
 
@@ -398,22 +418,22 @@ Password
 
 
 
-.. _sip-sipshowpeer:
-
-Peer
-----
-
-| sip show peer
-
-
-
-
 .. _sip-sip-config:
 
 Parameters
 ----------
 
 | We did not write the description to this field.
+
+
+
+
+.. _sip-sipshowpeer:
+
+Peer
+----
+
+| sip show peer
 
 
 

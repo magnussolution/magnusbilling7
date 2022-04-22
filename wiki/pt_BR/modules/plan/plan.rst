@@ -49,16 +49,6 @@ Tech prefix
 
 
 
-.. _Plan-id-service:
-
-Serviços
----------
-
-| Selecione aqui os serviços que estarão disponível para os usuários deste plano.
-
-
-
-
 .. _Plan-id-services:
 
 

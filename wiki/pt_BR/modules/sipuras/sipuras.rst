@@ -59,6 +59,16 @@ Ativar acesso WEB
 
 
 
+.. _sipuras-Dial-Tone:
+
+Dial Tone
+---------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _sipuras-Proxy-1:
 
 Proxy
@@ -275,16 +285,6 @@ STUN Server
 -----------
 
 | Dominio do servidor STUN.
-
-
-
-
-.. _sipuras-Dial-Tone:
-
-Dial Tone
----------
-
-| Nós ainda não escrevemos a descrição deste campo.
 
 
 

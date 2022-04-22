@@ -49,22 +49,12 @@ Tech prefix
 
 
 
-.. _Plan-id-service:
-
-Services
---------
-
-| Select here the services that will be avaible to the users of this plan.
-
-
-
-
 .. _Plan-id-services:
 
 
 
 
-| We did not write the description to this field.
+| Select here the services that will be avaible to the users of this plan.
 
 
 

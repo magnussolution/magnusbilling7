@@ -39,6 +39,16 @@ Payment methods
 
 
 
+.. _servicesUse-month-payed:
+
+Month payed
+-----------
+
+| We did not write the description to this field.
+
+
+
+
 .. _servicesUse-reservationdate:
 
 Reservation date
@@ -49,10 +59,20 @@ Reservation date
 
 
 
-.. _servicesUse-month-payed:
+.. _servicesUse-contract-period:
 
-Month payed
------------
+End of minimum contract period
+------------------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _servicesUse-termination-date:
+
+Termination date
+----------------
 
 | We did not write the description to this field.
 

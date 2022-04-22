@@ -38,3 +38,13 @@ From
 
 
 
+
+.. _sms-result:
+
+Provider result
+---------------
+
+| We did not write the description to this field.
+
+
+
