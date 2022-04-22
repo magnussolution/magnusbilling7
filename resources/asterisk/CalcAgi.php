@@ -670,7 +670,7 @@ class CalcAgi
     public function sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $ipaddress, $removeprefix, $timeout
         , $addparameter, $inuse, $maxuse, $allow_error) {
 
-        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
             $destination = substr($destination, strlen($removeprefix));
         }
 

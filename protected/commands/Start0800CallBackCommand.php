@@ -136,7 +136,7 @@ class Start0800CallBackCommand extends ConsoleCommand
                     $removeprefix = $modelTrunk->removeprefix;
                     $prefix       = $modelTrunk->trunkprefix;
 
-                    if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+                    if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                         $destination = substr($destination, strlen($removeprefix));
                     }
 

@@ -133,7 +133,7 @@ class SmsSend
             $buyRate = isset($modelRateProvider[0]['buyrate']) ? $modelRateProvider[0]['buyrate'] : null;
 
             //retiro e adiciono os prefixos do tronco
-            if (strncmp($destination, $removePrefix, strlen($removePrefix)) == 0) {
+            if (strncmp($destination, $removePrefix, strlen($removePrefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                 $destination = substr($destination, strlen($removePrefix));
             }
 
