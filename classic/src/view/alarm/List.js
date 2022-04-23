@@ -53,6 +53,9 @@ Ext.define('MBilling.view.alarm.List', {
                     case 5:
                         value = t('Online calls on same number');
                         break;
+                    case 6:
+                        value = t('Same number and CallerID');
+                        break;
                 }
                 return value
             },

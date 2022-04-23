@@ -46,6 +46,10 @@ class AlarmCommand extends ConsoleCommand
                     # ONLINE CALLS ON THE SAME NUMBER
                     $this->onlineCallsSameNumber($alarm);
                     break;
+                case 6:
+                    # ONLINE CALLS ON THE SAME NUMBER
+                    $this->numberEqualCaller($alarm);
+                    break;
             }
         }
     }
@@ -71,12 +75,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'ASR ' . $asr . "\n";
         if ($alarm->condition == 1) {
             if ($asr > $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ASR is bigger than your alarm configuration";
+                $message = "MagnusBilling ALARM. The ASR is bigger than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($asr < $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ASR is less than your alarm configuration";
+                $message = "MagnusBilling ALARM. The ASR is less than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }
@@ -98,12 +102,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'ALOC ' . $aloc . "\n";
         if ($alarm->condition == 1) {
             if ($aloc > $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ALOC is bigger than your alarm configuration";
+                $message = "MagnusBilling ALARM. The ALOC is bigger than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($aloc < $alarm->amount) {
-                $message = "MagnusBilling ALERT. The ALOC is less than your alarm configuration";
+                $message = "MagnusBilling ALARM. The ALOC is less than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }
@@ -128,12 +132,12 @@ class AlarmCommand extends ConsoleCommand
         echo 'CALLS PER MINUTE ' . $callPerMin . "\n";
         if ($alarm->condition == 1) {
             if ($callPerMin > $alarm->amount) {
-                $message = "MagnusBilling ALERT. You had more calls per minute than your alarm configuration";
+                $message = "MagnusBilling ALARM. You had more calls per minute than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($callPerMin < $alarm->amount) {
-                $message = "MagnusBilling ALERT. You had less calls per minute than your alarm configuration";
+                $message = "MagnusBilling ALARM. You had less calls per minute than your alarm configuration";
                 $this->notification($message, $alarm);
             }
         }
@@ -156,12 +160,12 @@ class AlarmCommand extends ConsoleCommand
 
             if ($alarm->condition == 1) {
                 if ($totalConsecutiveCalls > $alarm->amount) {
-                    $message = "MagnusBilling ALERT. User " . $cdr->idUser->username . " dial more than $totalConsecutiveCalls to numeber $cdr->calledstation";
+                    $message = "MagnusBilling ALARM. User " . $cdr->idUser->username . " dial more than $totalConsecutiveCalls to numeber $cdr->calledstation";
                     $this->notification($message, $alarm);
                 }
             } else if ($alarm->condition == 2) {
                 if ($totalConsecutiveCalls < $alarm->amount) {
-                    $message = "MagnusBilling ALERT. User $cdr->id_user dial less than $totalConsecutiveCalls to numeber $cdr->calledstation";
+                    $message = "MagnusBilling ALARM. User $cdr->id_user dial less than $totalConsecutiveCalls to numeber $cdr->calledstation";
                     $this->notification($message, $alarm);
 
                 }
@@ -182,9 +186,26 @@ class AlarmCommand extends ConsoleCommand
         foreach ($modelCallOnLine as $key => $call) {
 
             if (($call->canal) >= ($alarm->amount)) {
-                $message = "MagnusBilling ALERT. Multiple online calls to the same number(" . $call->ndiscado . ") detected! ";
+                $message = "MagnusBilling ALARM. Multiple online calls to the same number(" . $call->ndiscado . ") detected! ";
                 $this->notification($message, $alarm);
             }
+        }
+
+    }
+    public function numberEqualCaller($alarm)
+    {
+        $period = time() - $alarm->period;
+
+        $period = date("Y-m-d H:i:s", $period);
+
+        $filter = "starttime  > '$period'";
+
+        $sql     = "SELECT COUNT(*) id, calledstation FROM pkg_cdr WHERE " . $filter . " AND (calledstation = callerid  OR SUBSTRING(calledstation,2) = callerid)";
+        $modeCdr = Call::model()->findBySql($sql);
+
+        if (($modeCdr->id) >= ($alarm->amount)) {
+            $message = "MagnusBilling ALARM. Multiple calls to the Dialled Number (" . $modeCdr->calledstation . ") with the salve CallerID detected! ";
+            $this->notification($message, $alarm);
         }
 
     }
@@ -222,14 +243,15 @@ class AlarmCommand extends ConsoleCommand
         $mail->Username   = $smtp_username;
         $mail->Password   = $smtp_password;
         $mail->Port       = $smtp_port;
-        $mail->SetFrom($alarm->email, $alarm->email);
+        $mail->SetFrom($modelSmtps->username, "MagnusBilling ALARM");
         $mail->SetLanguage($this->config['global']['base_language'] == 'pt_BR' ? 'br' : $this->config['global']['base_language']);
 
-        $mail->Subject = mb_encode_mimeheader('MagnusBilling ALERT');
+        $mail->Subject = mb_encode_mimeheader('MagnusBilling ALARM');
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
         $mail->MsgHTML($message);
         $mail->AddAddress($alarm->email);
-        $mail->CharSet = 'utf-8';
+        $mail->CharSet   = 'utf-8';
+        $mail->SMTPDebug = 1;
         try {
             $mail->Send();
         } catch (Exception $e) {

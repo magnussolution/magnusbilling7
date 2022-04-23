@@ -35,7 +35,8 @@ Ext.define('MBilling.view.alarm.Form', {
                 ['2', t('ASR')],
                 ['3', t('Calls per minute')],
                 ['4', t('Consecutive number')],
-                ['5', t('Online calls on same number')]
+                ['5', t('Online calls on same number')],
+                ['6', t('Same number and CallerID')]
             ]
         }, {
             xtype: 'combobox',
