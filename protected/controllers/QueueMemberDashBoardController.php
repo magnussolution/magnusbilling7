@@ -23,7 +23,7 @@
 class QueueMemberDashBoardController extends Controller
 {
 
-    public $attributeOrder = 'id';
+    public $attributeOrder = 't.id';
     public $extraValues    = array('idQueue' => 'name');
 
     public function init()

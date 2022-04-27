@@ -64,7 +64,7 @@ class ServicesCheckCommand extends ConsoleCommand
 
             echo "DAYS  REMAINING  " . date('d', $day_remaining) . ' :  ' . $day_remaining . "\n";
 
-            if ($service->termination_date == date('Y-m-d')) {
+            if ($service->termination_date <= date('Y-m-d')) {
                 ServicesProcess::releaseService($service);
                 continue;
             }

@@ -120,8 +120,6 @@ class SipCallAgi
             $sql              = "SELECT name, callerid,id_user,dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            $agi->set_variable("CALLERID(all)", $modelSip->callerid);
-
             $MAGNUS->dnid = $MAGNUS->destination = $MAGNUS->sip_account = $MAGNUS->modelSip->name;
             sipCallAgi::processCall($MAGNUS, $agi, $CalcAgi);
 
@@ -145,14 +143,14 @@ class SipCallAgi
             $dialstr = substr($group, 0, -1) . $dialparams;
 
             $MAGNUS->startRecordCall($agi);
-            $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+
             $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
             $dialstatus = $agi->get_variable("DIALSTATUS");
             $dialstatus = $dialstatus['data'];
         } else if (preg_match("/custom/", $optionType)) // CUSTOM
         {
             $MAGNUS->startRecordCall($agi);
-            $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+
             $MAGNUS->run_dial($agi, $optionValue);
             $dialstatus = $agi->get_variable("DIALSTATUS");
             $dialstatus = $dialstatus['data'];
@@ -171,8 +169,6 @@ class SipCallAgi
         {
             $sql              = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
             $modelUserForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-
-            $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
 
             $MAGNUS->accountcode = $modelUserForward->accountcode;
             $agi->verbose("CALL number $optionValue");
