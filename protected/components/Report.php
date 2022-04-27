@@ -61,6 +61,8 @@ class Report extends FPDF
     public $recordsDetails = [];
     public $listColor;
     public $listHeaderColor;
+    public $firstListTitle;
+    public $secondListTitle;
     public function generate($type = 'link')
     {
         $this->AliasNbPages();
@@ -176,6 +178,12 @@ class Report extends FPDF
         if (!$this->recordsDetails) {
             return;
         }
+        if (isset($this->firstListTitle)) {
+            $this->Ln(15);
+            $this->SetFont($this->fontFamily, 'B', $this->fontSize);
+            $this->Cell(0, 5, utf8_decode($this->firstListTitle), 0, 0, 'C');
+            $this->Ln(10);
+        }
 
         $this->SetFont($this->fontFamily, 'B', $this->fontSize);
         $this->SetTextColor(255, 255, 255);
@@ -253,6 +261,13 @@ class Report extends FPDF
     {
         if (!$this->records) {
             return;
+        }
+
+        if (isset($this->firstListTitle)) {
+            $this->Ln(15);
+            $this->SetFont($this->fontFamily, 'B', $this->fontSize);
+            $this->Cell(0, 5, utf8_decode($this->firstListTitle), 0, 0, 'C');
+            $this->Ln(10);
         }
 
         $this->SetFont($this->fontFamily, 'B', $this->fontSize);

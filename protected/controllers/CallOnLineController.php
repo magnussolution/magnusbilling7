@@ -25,7 +25,6 @@ class CallOnLineController extends Controller
     );
 
     public $fieldsInvisibleAgent = array(
-        'canal',
         'tronco',
     );
 

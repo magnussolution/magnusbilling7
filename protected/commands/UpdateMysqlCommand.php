@@ -1626,17 +1626,6 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
-        //2022-04-14
-        if ($version == '7.8.0.8') {
-
-            $sql = "ALTER TABLE `pkg_services_use` ADD `contract_period` DATETIME NULL DEFAULT NULL AFTER `releasedate`;";
-            $this->executeDB($sql);
-
-            $version = '7.8.0.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
-        }
-
         //2022-04-15
         if ($version == '7.8.0.7') {
             $sql = "ALTER TABLE `pkg_sip` ADD `sip_config` TEXT NULL DEFAULT NULL ;";
@@ -1664,6 +1653,28 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2022-04-27
+        if ($version == '7.8.0.9') {
+
+            $sql = "ALTER TABLE `pkg_restrict_phone` CHANGE `number` `number` VARCHAR(20) NOT NULL;";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2022-05-05
+        if ($version == '7.8.1.0') {
+
+            $sql = "ALTER TABLE `pkg_services_use` ADD `contract_period` DATETIME NULL DEFAULT NULL AFTER `releasedate`;";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.1';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
