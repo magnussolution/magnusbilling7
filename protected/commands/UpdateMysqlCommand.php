@@ -1668,6 +1668,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-04-27
+        if ($version == '7.8.0.9') {
+
+            $sql = "ALTER TABLE `pkg_restrict_phone` CHANGE `number` `number` VARCHAR(20) NOT NULL;";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
