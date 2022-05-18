@@ -272,14 +272,6 @@ backend = auto
 usedns = warn
 
 
-[ssh-iptables]
-enabled  = true
-filter   = sshd
-action   = iptables-allports[name=SSH, port=all, protocol=all]
-logpath  = /var/log/secure
-maxretry = 3
-bantime = 600
-
 [opensips-iptables]
 enabled  = true
 filter   = opensips

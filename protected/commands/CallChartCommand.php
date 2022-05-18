@@ -33,7 +33,7 @@ class CallChartCommand extends ConsoleCommand
         $this->isDid();
         $this->isSIPCall();
         for (;;) {
-            if (date('s') > 58) {
+            if (date('i') == 59) {
                 break;
             }
             try {
