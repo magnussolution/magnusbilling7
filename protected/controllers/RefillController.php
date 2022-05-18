@@ -252,12 +252,14 @@ class RefillController extends Controller
 
     public function subscribeColunms($columns = '')
     {
-        for ($i = 0; $i < count($columns); $i++) {
+        if ($this->config['global']['base_country'] != 'BRL') {
+            for ($i = 0; $i < count($columns); $i++) {
 
-            if ($columns[$i]['dataIndex'] == 'credit') {
-                $columns[$i]['dataIndex'] = 't.credit';
+                if ($columns[$i]['dataIndex'] == 'credit') {
+                    $columns[$i]['dataIndex'] = 't.credit';
+                }
+
             }
-
         }
         return $columns;
     }
