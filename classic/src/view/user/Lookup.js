@@ -25,6 +25,12 @@ Ext.define('MBilling.view.user.Lookup', {
         }, {
             header: t('Last name'),
             dataIndex: 'lastname',
+            hidden: window.isTablet,
+            flex: 2
+        }, {
+            header: t('First name'),
+            dataIndex: 'firstname',
+            hidden: window.isTablet,
             flex: 2
         }, {
             header: t('Credit'),

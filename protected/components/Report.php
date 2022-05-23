@@ -178,13 +178,12 @@ class Report extends FPDF
         if (!$this->recordsDetails) {
             return;
         }
-        if (isset($this->firstListTitle)) {
+        if (isset($this->secondListTitle)) {
             $this->Ln(15);
             $this->SetFont($this->fontFamily, 'B', $this->fontSize);
-            $this->Cell(0, 5, utf8_decode($this->firstListTitle), 0, 0, 'C');
+            $this->Cell(0, 5, utf8_decode($this->secondListTitle), 0, 0, 'C');
             $this->Ln(10);
         }
-
         $this->SetFont($this->fontFamily, 'B', $this->fontSize);
         $this->SetTextColor(255, 255, 255);
         $widthContent = $this->orientation === 'P' ? 189 : 276;

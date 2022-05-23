@@ -1689,6 +1689,45 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-05-23
+        if ($version == '7.8.1.2') {
+            $sql = " CREATE TABLE IF NOT EXISTS `pkg_provider_cnl` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `id_provider` int(11) NOT NULL,
+            `cnl` int(11) NOT NULL,
+            `zone` VARCHAR(11) NOT NULL,
+            PRIMARY KEY (`id`),
+            KEY `id_provider` (`id_provider`),
+            KEY `cnl` (`cnl`),
+            CONSTRAINT `fk_pkg_provider_pkg_provider_cnl` FOREIGN KEY (`id_provider`) REFERENCES `pkg_provider` (`id`) ON DELETE CASCADE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_sip` ADD `cnl` VARCHAR(11) NOT NULL DEFAULT '' ;";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2022-05-25
+        if ($version == '7.8.1.3') {
+            $sql    = "SELECT * FROM pkg_module WHERE module = 'providercnl'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            if (!isset($result[0]['id'])) {
+                $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Provider CNL'')', 'providercnl', 'x-fa fa-desktop', 10,7)";
+                $this->executeDB($sql);
+            }
+
+            $sql = "ALTER TABLE `pkg_trunk` ADD `cnl` INT(11) NOT NULL DEFAULT '0' ;";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.4';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

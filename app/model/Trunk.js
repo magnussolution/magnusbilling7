@@ -135,6 +135,9 @@ Ext.define('MBilling.model.Trunk', {
     }, {
         name: 'sendrpid',
         type: 'string'
+    }, {
+        name: 'cnl',
+        type: 'int'
     }],
     proxy: {
         type: 'uxproxy',

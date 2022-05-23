@@ -226,6 +226,9 @@ Ext.define('MBilling.model.Sip', {
         name: 'amd',
         type: 'int'
     }, {
+        name: 'cnl',
+        type: 'string'
+    }, {
         name: 'id_trunk_group',
         type: 'int'
     }],

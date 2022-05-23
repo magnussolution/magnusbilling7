@@ -155,6 +155,18 @@ Ext.define('MBilling.view.sip.List', {
             hidden: true,
             hideable: App.user.isAdmin
         }, {
+            header: t('Alias'),
+            dataIndex: 'alias',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 2
+        }, {
+            header: t('CNL zone'),
+            dataIndex: 'cnl',
+            hidden: true,
+            hideable: App.user.isAdmin && App.user.language == 'pt_BR',
+            flex: 2
+        }, {
             header: t('AMD'),
             dataIndex: 'amd',
             hidden: true,
