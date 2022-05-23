@@ -204,9 +204,14 @@ class ServicesProcess
         $description = Yii::t('zii', $method) . ' ' . Yii::t('zii', 'Service') . ' ' . $modelServicesUse->idServices->name;
 
         if ($method == 'activation') {
-            $modelRefill              = new Refill();
-            $modelRefill->id_user     = $modelServicesUse->id_user;
-            $modelRefill->credit      = $credit;
+            $modelRefill          = new Refill();
+            $modelRefill->id_user = $modelServicesUse->id_user;
+            if (preg_match('/\-\-/', $credit)) {
+                $modelRefill->credit = $modelServicesUse->idServices->price * -1;
+            } else {
+                $modelRefill->credit = $credit;
+            }
+
             $modelRefill->description = $description;
             $modelRefill->payment     = 1;
             $modelRefill->save();
@@ -214,8 +219,14 @@ class ServicesProcess
 
         if ($updateUserCredit == true) {
             //add or remove user credit
-            $modelUser         = User::model()->findByPk($modelServicesUse->id_user);
-            $modelUser->credit = $credit > 0 ? $modelUser->credit + $credit : $modelUser->credit - ($credit * -1);
+            $modelUser = User::model()->findByPk($modelServicesUse->id_user);
+
+            if (preg_match('/\-\-/', $credit)) {
+                $modelUser->credit = $modelUser->credit + ($modelServicesUse->idServices->price * -1);
+            } else {
+                $modelUser->credit = $credit > 0 ? $modelUser->credit + $credit : $modelUser->credit - ($credit * -1);
+            }
+
             $modelUser->saveAttributes(array('credit' => $modelUser->credit));
         }
 

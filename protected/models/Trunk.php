@@ -56,7 +56,7 @@ class Trunk extends Model
         // will receive user inputs.
         return array(
             array('trunkcode, id_provider, allow, providertech, host', 'required'),
-            array('allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use', 'numerical', 'integerOnly' => true),
+            array('allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use, cnl', 'numerical', 'integerOnly' => true),
             array('secret', 'length', 'max' => 50),
             array('nat, trunkcode, sms_res', 'length', 'max' => 50),
             array('trunkprefix, providertech, removeprefix, context, insecure, disallow', 'length', 'max' => 20),

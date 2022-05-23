@@ -153,6 +153,11 @@ Ext.define('MBilling.view.trunk.Form', {
                     fieldLabel: t('Register string'),
                     allowBlank: true,
                     hidden: true
+                }, {
+                    xtype: 'noyescombo',
+                    name: 'cnl',
+                    fieldLabel: t('Enable CNL'),
+                    hidden: App.user.language != 'pt_BR'
                 }]
             }, {
                 title: t('Supplementary info'),

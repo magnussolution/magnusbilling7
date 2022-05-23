@@ -614,6 +614,23 @@ class CalcAgi
             $this->id_provider = $modelTrunk->id_provider;
             $provider_credit   = $modelTrunk->credit;
 
+            if ($modelTrunk->cnl == 1) {
+                if (substr($destination, 4, 1) == 9) {
+                    if (substr($destination, 2, 2) == substr($MAGNUS->CallerID, 0, 2)) {
+                        $removeprefix = "XXXX";
+                        $prefix       = "";
+                    }
+                } else if (strlen($MAGNUS->modelSip->cnl) > 1) {
+                    $sql      = "SELECT zone FROM pkg_cadup a JOIN pkg_provider_cnl b ON a.cnl = b.cnl WHERE prefix = '" . substr($destination, 0, 8) . "' AND id_provider = " . $modelTrunk->id_provider . " LIMIT 1";
+                    $modelCNL = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+                    if (isset($modelCNL->zone) && $modelCNL->zone == $MAGNUS->modelSip->cnl) {
+                        $removeprefix = "XXXX";
+                        $prefix       = "";
+                    }
+                }
+            }
+
             if ($typecall == 1) {
                 $timeout = 3600;
             }
@@ -670,7 +687,7 @@ class CalcAgi
     public function sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $ipaddress, $removeprefix, $timeout
         , $addparameter, $inuse, $maxuse, $allow_error) {
 
-        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
+        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == "X") {
             $destination = substr($destination, strlen($removeprefix));
         }
 

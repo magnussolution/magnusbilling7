@@ -85,7 +85,7 @@ class Sip extends Model
             array('defaultuser', 'checkusername'),
             array('secret', 'checksecret'),
             array('defaultuser', 'unique', 'caseSensitive' => 'false'),
-            array('techprefix', 'length', 'max' => 6),
+            array('techprefix, cnl', 'length', 'max' => 6),
             array('techprefix', 'checktechprefix'),
             array('host', 'checkHost'),
             array('sip_config', 'length', 'max' => 500),
@@ -125,6 +125,8 @@ class Sip extends Model
 
     public function beforeSave()
     {
+
+        $this->cnl = strtoupper($this->cnl);
         if ($this->techprefix == 0) {
             $this->techprefix = null;
         }

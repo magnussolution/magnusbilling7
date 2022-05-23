@@ -194,6 +194,11 @@ Ext.define('MBilling.view.sip.Form', {
                     allowBlank: true,
                     maxLength: 6
                 }, {
+                    name: 'cnl',
+                    fieldLabel: t('CNL zone'),
+                    allowBlank: true,
+                    hidden: !App.user.isAdmin || App.user.language != 'pt_BR'
+                }, {
                     xtype: 'textareafield',
                     allowBlank: true,
                     name: 'description',
