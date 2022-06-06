@@ -46,7 +46,7 @@ class QueueMemberController extends Controller
         $this->checkRelation($values);
 
         if (isset($values['interface'])) {
-            $modelSip = Sip::model()->find("id = :id OR name = :id",
+            $modelSip = Sip::model()->find("id = :id",
                 array('id' => $values['interface'])
             );
 
