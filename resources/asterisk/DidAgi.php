@@ -34,6 +34,11 @@ class DidAgi
     {
         $this->startCall = time();
 
+        if ($MAGNUS->active > 2) {
+            $agi->verbose("User cant receive call. User status is " . $MAGNUS->active, 5);
+            return;
+        }
+
         //check if did call
         $mydnid = $MAGNUS->config['global']['did_ignore_zero_on_did'] == 1 && substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
 

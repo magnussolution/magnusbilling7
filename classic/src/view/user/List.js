@@ -88,7 +88,9 @@ Ext.define('MBilling.view.user.List', {
                 options: [
                     [1, t('Active')],
                     [2, t('Pending')],
-                    [0, t('Inactivated')]
+                    [0, t('Inactivated')],
+                    [3, t('Blocked In')],
+                    [4, t('Blocked In Out')]
                 ]
             },
             hidden: App.user.isClient || window.isTablet,

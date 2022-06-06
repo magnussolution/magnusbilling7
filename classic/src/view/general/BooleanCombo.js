@@ -121,7 +121,9 @@ Ext.define('MBilling.view.general.StatusUserCombo', {
     store: [
         [1, t('Active')],
         [0, t('Inactivated')],
-        [2, t('Pending')]
+        [2, t('Pending')],
+        [3, t('Blocked In')],
+        [4, t('Blocked In Out')]
     ]
 });
 Ext.define('MBilling.view.general.CallbackCombo', {
