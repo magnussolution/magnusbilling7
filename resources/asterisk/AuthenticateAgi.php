@@ -42,7 +42,7 @@ class AuthenticateAgi
 
         $authentication = AuthenticateAgi::checkIfCallShopCall($MAGNUS, $agi, $authentication);
 
-        if ($authentication == false || $MAGNUS->active != 1) {
+        if ($authentication == false || $MAGNUS->active == 0 || $MAGNUS->active == 2) {
             $prompt = "prepaid-auth-fail";
             //force the audio to play
             $MAGNUS->play_audio = true;

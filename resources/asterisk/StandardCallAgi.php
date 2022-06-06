@@ -19,6 +19,12 @@ class StandardCallAgi
                 }
                 $MAGNUS->extension = $MAGNUS->dnid;
 
+                if ($MAGNUS->active == 4) {
+                    $agi->verbose("User cant make call. User status is " . $MAGNUS->active, 5);
+                    $MAGNUS->hangup($agi, 1);
+                    exit;
+                }
+
                 if ($MAGNUS->agiconfig['use_dnid'] == 1 && strlen($MAGNUS->dnid) > 2 && $i == 0) {
                     $MAGNUS->destination = $MAGNUS->dnid;
                 }
