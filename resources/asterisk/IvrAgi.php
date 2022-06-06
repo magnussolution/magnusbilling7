@@ -79,6 +79,12 @@ class IvrAgi
                     $digit_timeout       = strlen($modelSipDirect->name);
                     $wait_time           = 6000;
                     $is_direct_extention = true;
+                } else {
+                    $sql                 = "SELECT alias FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " ORDER BY LENGTH(alias) DESC LIMIT 1";
+                    $modelSipDirect      = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $digit_timeout       = strlen($modelSipDirect->alias);
+                    $wait_time           = 6000;
+                    $is_direct_extention = true;
                 }
             }
             if (file_exists($audio . ".gsm") || file_exists($audio . ".wav")) {
