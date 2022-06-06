@@ -218,6 +218,10 @@ class MassiveCallCommand extends ConsoleCommand
                     break;
                 }
 
+                if (!isset($idTrunk) || $idTrunk < 1) {
+                    continue;
+                }
+
                 if (substr($destination, 0, 4) == '1111') {
                     $destination = str_replace(substr($destination, 0, 7), '', $destination);
                 }
