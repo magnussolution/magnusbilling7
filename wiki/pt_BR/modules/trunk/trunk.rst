@@ -339,3 +339,13 @@ Parâmetros
 
 
 
+
+.. _trunk-cnl:
+
+Ativar CNL
+----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

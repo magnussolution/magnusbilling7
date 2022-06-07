@@ -196,7 +196,7 @@ Expressão regular
 Preço de compra por min
 ------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço por minuto de compra se validar a Expressão regular acima.
 
 
 
@@ -248,7 +248,7 @@ Expressão regular
 Preço de compra por min
 ------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço por minuto de compra se validar a Expressão regular acima.
 
 
 
@@ -300,7 +300,7 @@ Expressão regular
 Preço de compra por min
 ------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Preço por minuto de compra se validar a Expressão regular acima.
 
 
 

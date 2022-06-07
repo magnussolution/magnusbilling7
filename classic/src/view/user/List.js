@@ -81,7 +81,7 @@ Ext.define('MBilling.view.user.List', {
         }, {
             header: t('Status'),
             dataIndex: 'active',
-            renderer: Helper.Util.formatBooleanActive,
+            renderer: Helper.Util.formatUserStatus,
             flex: 2,
             filter: {
                 type: 'list',

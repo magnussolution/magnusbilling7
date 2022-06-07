@@ -504,6 +504,10 @@ You can use the button "process" to reactivate the numbers with pending status.`
     'provider.credit': `The amount of credit you have in your provider's account. This field is optional.`,
     'provider.credit_control': `If you set to YES and your provider credit is < 0, all trunks from this provider will be deactivated.`,
     'provider.description': `Description to the calendar, only for self control.`,
+    //PROVIDER CNL
+    'providercnl.id_provider': ``,
+    'providercnl.cnl': ``,
+    'providercnl.zone': ``,
     //QUEUES
     'queue.id_user': `User that owns the queue. `,
     'queue.name': `Queue name.`,
@@ -684,6 +688,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'sip.voicemail_password': `Voicemail password. It's possible to enter in the Voicemail typing *111`,
     'sip.sip_config': ``,
     'sip.sipshowpeer': `sip show peer`,
+    'sip.cnl': ``,
     //SIPTRACE
     'siptrace.head': `SIP message body.`,
     //ATA LINKSYS
@@ -790,6 +795,7 @@ Let's say that you wanted to add an MACRO in the trunk, therefore in this field 
 useragent=my agent
 
 .`,
+    'trunk.cnl': ``,
     //TRUNK GROUPS
     'trunkgroup.name': `Trunk group name.`,
     'trunkgroup.type': `Type.||It's how the system will sort the trunk that belongs to a group.
