@@ -37,7 +37,7 @@ class ProviderCNLController extends Controller
     {
         $this->instanceModel = new ProviderCNL;
         $this->abstractModel = ProviderCNL::model();
-        $this->titleReport   = Yii::t('zii', 'ProviderCNL');
+        $this->titleReport   = Yii::t('zii', 'Provider CNL');
         parent::init();
     }
 

@@ -84,7 +84,7 @@ Tempo adicional
 Taxa de conexão
 ----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor cobrado ao conectar a chamada. Será somado ao valor cobrado por minuto.
 
 
 

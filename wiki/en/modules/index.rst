@@ -472,6 +472,14 @@ This menu has the following fields
 .. include:: trunksipcodes/trunksipcodes.rst
 
 
+Provider CNL
+++++++++++++
+
+This menu has the following fields
+
+.. include:: providercnl/providercnl.rst
+
+
 
 
 

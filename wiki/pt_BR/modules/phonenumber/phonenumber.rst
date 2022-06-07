@@ -34,7 +34,7 @@ Nome
 CPF/CNPJ
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Documento, campo não obrigatório.
 
 
 
@@ -54,7 +54,7 @@ Cidade
 Email
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Email, campo não obrigatório.
 
 
 

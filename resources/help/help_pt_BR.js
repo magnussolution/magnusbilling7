@@ -591,6 +591,10 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'provider.credit': `A quantidade de crédito que você possuí com seu provedor. Este campo é opcional.`,
     'provider.credit_control': `Se esta opção for ativada os troncos deste provedor serão desativados quando o crédito do provedor ficar em zero.`,
     'provider.description': `Descrição para a agenda, somente para controle próprio.`,
+    //PROVEDOR CNL
+    'providercnl.id_provider': ``,
+    'providercnl.cnl': ``,
+    'providercnl.zone': ``,
     //FILAS DE ESPERA
     'queue.id_user': `Usuário dono da fila.`,
     'queue.name': `Nome para a fila.`,
@@ -772,6 +776,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sip.voicemail_password': `Senha do VOICEMAIL. É possível entrar no VOICEMAIL digitando *111.`,
     'sip.sip_config': ``,
     'sip.sipshowpeer': `sip show peer.`,
+    'sip.cnl': ``,
     //SIPTRACE
     'siptrace.head': `Corpo da mensagem SIP.`,
     //ATA LINKSYS
@@ -880,6 +885,7 @@ Digamos que queira adicionar um MACRO no tronco, estão neste campo, adicionar p
 useragent=meu agente
 
 .`,
+    'trunk.cnl': ``,
     //GRUPO DE TRONCOS
     'trunkgroup.name': `Nome para o grupo de troncos, recomendável usar nomes amigáveis para facilitar a administração das tarifas.`,
     'trunkgroup.type': `Tipo.||É como o sistema vai ordenar os troncos que pertence ao grupo.

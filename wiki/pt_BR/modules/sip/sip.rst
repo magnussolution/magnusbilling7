@@ -438,3 +438,13 @@ Peer
 
 
 
+
+.. _sip-cnl:
+
+Zona CNL
+--------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

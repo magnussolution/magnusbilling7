@@ -84,9 +84,20 @@ Ext.define('MBilling.view.user.Form', {
                     emptyText: 'match / replace / length',
                     hidden: App.user.isClient
                 }, {
-                    xtype: 'statususercombo',
+                    xtype: 'combo',
                     name: 'active',
                     fieldLabel: t('Active'),
+                    fieldLabel: t('Status'),
+                    forceSelection: true,
+                    editable: false,
+                    value: 1,
+                    store: [
+                        [1, t('Active')],
+                        [0, t('Inactivated')],
+                        [2, t('Pending')],
+                        [3, t('Blocked In')],
+                        [4, t('Blocked In Out')]
+                    ],
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
