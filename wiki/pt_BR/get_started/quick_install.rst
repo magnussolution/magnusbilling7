@@ -7,12 +7,22 @@ Para instalar MagnusBilling, você precisa apenas de um servidor com CentOS 7 ou
     
 **1.** Execute os comandos abaixo como root. O script vai instalar Magnusbilling, Asterisk e todas as dependências necessárias, como: IPTables, Fail2ban, Apache, PHP e mysql.
 
-Instale o Linux **minimal**.
+Instale o Linux **minimal**, comandos para o **CentOS**.
 
 ::
      
   cd /usr/src/
   yum -y install wget
+  wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
+  chmod +x install.sh
+  ./install.sh     
+
+Instale o Linux **minimal**, comandos para o **Debian**.
+
+::
+     
+  cd /usr/src/
+  apt -y install wget
   wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
   chmod +x install.sh
   ./install.sh     
