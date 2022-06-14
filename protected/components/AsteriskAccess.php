@@ -704,7 +704,7 @@ class AsteriskAccess
             if ($fd) {
                 foreach ($modelSip as $key => $sip) {
 
-                    if ($sip->idUser->active != 1) {
+                    if ($sip->idUser->active == 0) {
                         continue;
                     }
 
@@ -884,7 +884,7 @@ class AsteriskAccess
             if ($fd) {
                 foreach ($modelIax as $key => $iax) {
 
-                    if ($iax->idUser->active != 1) {
+                    if ($iax->idUser->active == 0) {
                         continue;
                     }
 
