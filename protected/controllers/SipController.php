@@ -305,7 +305,7 @@ class SipController extends Controller
     {
         $modelSip = Sip::model()->find('name = :key', array(':key' => $_POST['name']));
 
-        if ($modelSip->idUser->active != 1) {
+        if ($modelSip->idUser->active == 0) {
             $sipShowPeer = 'The username is inactive';
         } else {
             $sipShowPeer = AsteriskAccess::instance()->sipShowPeer($modelSip->name);
