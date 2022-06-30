@@ -709,7 +709,7 @@ class DidAgi
             $agi->verbose('The DID user is a Agent user. agent_client_rate = ' . $this->agent_client_rate, 5);
         }
 
-        if ($answeredtime < $this->modelDid->minimal_time_charge) {
+        if ($CalcAgi->real_sessiontime < $this->modelDid->minimal_time_charge) {
             $this->sell_price        = 0;
             $this->agent_client_rate = 0;
         }
@@ -733,7 +733,7 @@ class DidAgi
         $CalcAgi->real_sessiontime = intval($answeredtime);
 
         /*recondeo call*/
-        if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $this->sell_price > 0) {
+        if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $this->sell_price > 0 && $CalcAgi->real_sessiontime >= $this->modelDid->minimal_time_charge) {
             $initblock    = $this->modelDid->initblock > 0 ? $this->modelDid->initblock : 1;
             $billingblock = $this->modelDid->increment > 0 ? $this->modelDid->increment : 1;
 
