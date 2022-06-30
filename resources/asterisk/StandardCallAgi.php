@@ -21,7 +21,7 @@ class StandardCallAgi
 
                 if ($MAGNUS->active == 4) {
                     $agi->verbose("User cant make call. User status is " . $MAGNUS->active, 5);
-                    $MAGNUS->hangup($agi, 1);
+                    $MAGNUS->hangup($agi, 21);
                     exit;
                 }
 

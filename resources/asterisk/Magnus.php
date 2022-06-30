@@ -156,7 +156,7 @@ class Magnus
 
     }
     //hangup($agi);
-    public function hangup(&$agi, $code = 34)
+    public function hangup(&$agi, $code = '')
     {
         /*
         1 =  SIP/2.0 404 Not Found.
@@ -176,6 +176,10 @@ class Magnus
         127 = SIP/2.0 500 Network error.
          */
         $agi->verbose('Hangup Call ' . $this->destination . ' Username ' . $this->username, 6);
+
+        if ($code == '') {
+            $code = $agi->get_variable("HANGUPCAUSE", true);
+        }
         $agi->execute("HANGUP $code");
 
         exit;
