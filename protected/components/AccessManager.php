@@ -96,4 +96,20 @@ class AccessManager
             ));
         return $modelSip;
     }
+
+    public function checkAccessLogin($user, $pass)
+    {
+        $filterUser = '((s.username COLLATE utf8_bin = :key OR s.email COLLATE utf8_bin LIKE :key) AND UPPER(SHA1(s.password)) = :key1)';
+        $filterSip  = '(t.name COLLATE utf8_bin = :key AND UPPER(SHA1(t.secret)) = :key1 )';
+        $modelSip   = Sip::model()->find(
+            array(
+                'condition' => $filterUser . ' OR ' . $filterSip,
+                'join'      => 'LEFT JOIN pkg_user s ON t.id_user = s.id',
+                'params'    => array(
+                    ':key'  => trim($user),
+                    ':key1' => trim(strtoupper($pass)),
+                ),
+            ));
+        return $modelSip;
+    }
 }

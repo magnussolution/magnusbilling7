@@ -41,7 +41,7 @@ class BuyCreditController extends Controller
 
         $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
 
-        if ($modelMethodPay->active == 0 || $modelMethodPay->id_user != Yii::app()->session['id_agent']) {
+        if ($modelMethodPay->active == 0 || (isset(Yii::app()->session['id_agent']) && $modelMethodPay->id_user != Yii::app()->session['id_agent'])) {
             exit('invalid option');
         }
 
