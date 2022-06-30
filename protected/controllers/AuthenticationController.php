@@ -21,7 +21,7 @@
 /*
 <?php
 if (isset($_GET['user']) && isset($_GET['password']))
-header('Location: http://186.225.143.142/mbilling/index.php/authentication/login?remote=1&user='.$_GET['user'].'&password='.strtoupper(MD5($_GET['password'])));
+header('Location: http://186.225.143.142/mbilling/index.php/authentication/login?remote=1&user=user&password=9f4ca770b638615ac5c3e0d2da16b77c80c2f2c6
 ?>
 
 <form action="" method="GET">
@@ -42,21 +42,22 @@ class AuthenticationController extends Controller
 
         $this->verifyLogin();
 
-        $modelUser = User::model()->find("username = :user", array(':user' => $user));
-        if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id == 1) {
-            $password = sha1($password);
-        }
-
         if (isset($_REQUEST['remote'])) {
-            $modelSip = AccessManager::checkAccess($user, $password);
+            $modelSip = AccessManager::checkAccessLogin($user, $password);
             if (isset($modelSip->id)) {
                 $user     = $modelSip->idUser->username;
                 $password = $modelSip->idUser->password;
             }
         }
 
-        $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND password COLLATE utf8_bin = :pass) OR ";
-        $condition .= " (id = (SELECT id_user FROM pkg_sip WHERE name COLLATE utf8_bin = :user AND secret COLLATE utf8_bin = :pass) )";
+        $modelUser = User::model()->find("username = :user", array(':user' => $user));
+
+        if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id == 1) {
+            $condition = "username COLLATE utf8_bin = :user AND UPPER(password) COLLATE utf8_bin = :pass ";
+        } else {
+            $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND (password COLLATE utf8_bin = :pass OR UPPER(SHA1(password)) COLLATE utf8_bin = :pass)) OR ";
+            $condition .= " (id = (SELECT id_user FROM pkg_sip WHERE name COLLATE utf8_bin = :user AND UPPER(SHA1(secret)) COLLATE utf8_bin = :pass) )";
+        }
 
         $modelUser = User::model()->find(
             array(
