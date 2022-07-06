@@ -980,6 +980,10 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.transfer_dbbl_rocket': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_dbbl_rocket_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_show_selling_price': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
+    //HISTóRICO CLIENTES
+    'userhistory.id_user': ``,
+    'userhistory.date': ``,
+    'userhistory.description': ``,
     //TARIFAS PARA CLIENTES
     'userrate.id_prefix': `Selecione o prefixo que você deseja subscrever.`,
     'userrate.rateinitial': `Novo preço de venda para este prefixo.`,

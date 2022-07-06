@@ -67,6 +67,15 @@ class ServicesProcess
                     //have days yet.
                     $modelUser                           = User::model()->findByPk((int) $modelServicesUse->id_user);
                     $modelServicesUse->idServices->price = $priceToreturn;
+
+                    $description              = Yii::t('zii', 'Return credit after cancellation') . '. ' . Yii::t('zii', 'Service') . ' ' . Yii::t('zii', 'name') . ' ' . $modelServicesUse->idServices->name;
+                    $modelRefill              = new Refill();
+                    $modelRefill->id_user     = $modelServicesUse->id_user;
+                    $modelRefill->credit      = $priceToreturn;
+                    $modelRefill->description = $description;
+                    $modelRefill->payment     = 1;
+                    $modelRefill->save();
+
                     ServicesProcess::updateUser('release', $modelServicesUse);
                 }
             }

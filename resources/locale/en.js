@@ -784,6 +784,7 @@ Locale.load({
     'Result': '',
     'Retail price': '',
     'Return credit': '',
+    'Return credit after cancellation': '',
     'Ring': '',
     'Ring all available channels until one answers': '',
     'Ring false': '',
@@ -1031,6 +1032,7 @@ Locale.load({
     'Use_Pref_Codec': '',
     'User': '',
     'User Custom Rates': '',
+    'User History': '',
     'User busy': '',
     'User not have a Email': '',
     'User password': '',
@@ -1107,6 +1109,7 @@ Locale.load({
     'is': '',
     'is optional': '',
     'must belong to the IVR owner': '',
+    'name': '',
     'to refill': '',
     'week': '',
 

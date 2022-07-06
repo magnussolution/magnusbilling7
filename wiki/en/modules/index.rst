@@ -89,6 +89,14 @@ This menu has the following fields
 .. include:: transfertomobile/transfertomobile.rst
 
 
+User History
+++++++++++++
+
+This menu has the following fields
+
+.. include:: userhistory/userhistory.rst
+
+
 
 
 

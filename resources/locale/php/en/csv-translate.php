@@ -36,6 +36,7 @@
     'city'=> ['City', 'Cidade' , 'Ciudad'],
     'client_id'=> ['Client_id', 'ID_do_cliente' , 'ID_de_cliente'],
     'client_secret'=> ['Client_secret', 'Secret_do_cliente' , 'Contraseña_de_cliente'],
+    'cnl'=> ['CNL_zone', 'Zona_CNL' , 'Zona_CNL'],
     'code'=> ['Code', 'Código' , 'Código'],
     'commercial_name'=> ['Commercial_name', 'Nome_fantasia' , 'Nombre_comercial'],
     'company_name'=> ['Company_name', 'Nome_da_empresa' , 'Nombre_de_empresa'],
@@ -263,4 +264,5 @@
     'workaudio'=> ['Work_audio', 'Áudio_Trabalhando' , 'Audio_en_hora_de_trabajo'],
     'wrapuptime'=> ['Time_for_another_call', 'Tempo_para_próxima_chamada' , 'Tiempo_para_otra_llamada'],
     'zipcode'=> ['Zip_code', 'CEP' , 'Código_postal'],
+    'zone'=> ['Zone', 'Zona' , 'Zona'],
 ]?>

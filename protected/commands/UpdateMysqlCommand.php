@@ -1728,6 +1728,43 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-05-25
+        if ($version == '7.8.1.4') {
+
+            $sql    = "SELECT priority FROM pkg_module WHERE id_module = 1 ORDER BY priority DESC";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            if (isset($result[0]['priority'])) {
+                $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''User History'')', 'userhistory', 'x-fa fa-desktop', 1," . ($result[0]['priority'] + 1) . ")";
+                $this->executeDB($sql);
+                $idServiceModule = Yii::app()->db->lastInsertID;
+
+                $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+                $this->executeDB($sql);
+            }
+
+            $version = '7.8.1.5';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
+        //2022-05-25
+        if ($version == '7.8.1.5') {
+            $sql = "CREATE TABLE `pkg_user_history` (
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
+                    `id_user` int(11) NOT NULL,
+                    `description` mediumtext,
+                    `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (`id`),
+                    KEY `fk_pkg_user_pkg_user_history` (`id_user`),
+                    CONSTRAINT `fk_pkg_user_pkg_user_history` FOREIGN KEY (`id_user`) REFERENCES `pkg_user` (`id`) ON DELETE CASCADE
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
     }
 
     public function executeDB($sql)

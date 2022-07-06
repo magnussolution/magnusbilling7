@@ -89,6 +89,14 @@ Este menu tem os seguintes campos
 .. include:: transfertomobile/transfertomobile.rst
 
 
+Histórico clientes
++++++++++++++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: userhistory/userhistory.rst
+
+
 
 
 
