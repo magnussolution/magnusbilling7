@@ -121,6 +121,8 @@ class User extends Model
             $this->creationdate = date('Y-m-d H:i:s');
         }
 
+        $this->contract_value = $this->contract_value == '' ? 0 : $this->contract_value;
+
         return parent::beforeSave();
     }
 
