@@ -30,7 +30,7 @@ get_linux_distribution ()
         DIST="DEBIAN"
         HTTP_DIR="/etc/apache2/"
         HTTP_CONFIG=${HTTP_DIR}"apache2.conf"
-        PHP_INI="/etc/php/7.0/cli/php.ini"
+        PHP_INI="/etc/php/7.3/cli/php.ini"
         MYSQL_CONFIG="/etc/mysql/mariadb.conf.d/50-server.cnf"
     elif [ -f /etc/redhat-release ]; then
         DIST="CENTOS"
@@ -714,7 +714,7 @@ ulimit -c unlimited # The maximum size of core files created.
 ulimit -d unlimited # The maximum size of a process's data segment.
 ulimit -f unlimited # The maximum size of files created by the shell (default option)
 ulimit -i unlimited # The maximum number of pending signals
-ulimit -n 999999    # The maximum number of open file descriptors.
+ulimit -n 99999    # The maximum number of open file descriptors.
 ulimit -q unlimited # The maximum POSIX message queue size
 ulimit -u unlimited # The maximum number of processes available to a single user.
 ulimit -v unlimited # The maximum amount of virtual memory available to the process.
@@ -878,7 +878,7 @@ iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 10000:40000 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 10000:50000 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "friendly-scanner" --algo bm
@@ -896,7 +896,6 @@ if [ ${DIST} = "DEBIAN" ]; then
     apt-get install -y iptables-persistent
     sudo iptables-save > /etc/iptables/rules.v4
 elif [ ${DIST} = "CENTOS" ]; then
-    iptables -A INPUT -p udp -m udp --dport 10000:50000 -j ACCEPT
     service iptables save
     systemctl restart iptables
 fi

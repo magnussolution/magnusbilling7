@@ -455,7 +455,7 @@ ulimit -c unlimited # The maximum size of core files created.
 ulimit -d unlimited # The maximum size of a process's data segment.
 ulimit -f unlimited # The maximum size of files created by the shell (default option)
 ulimit -i unlimited # The maximum number of pending signals
-ulimit -n 999999    # The maximum number of open file descriptors.
+ulimit -n 99999    # The maximum number of open file descriptors.
 ulimit -q unlimited # The maximum POSIX message queue size
 ulimit -u unlimited # The maximum number of processes available to a single user.
 ulimit -v unlimited # The maximum amount of virtual memory available to the process.
