@@ -25,6 +25,13 @@ Ext.define('MBilling.view.sip.List', {
     fieldSearch: 'name',
     initComponent: function() {
         var me = this;
+        me.extraButtons = [{
+            text: t('Bulk SIP'),
+            handler: 'onBulk',
+            width: App.user.language == 'en' ? 80 : 110,
+            disabled: false,
+            hidden: App.user.isClient || !me.allowCreate || window.isTablet
+        }];
         me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',

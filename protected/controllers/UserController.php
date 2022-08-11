@@ -433,7 +433,9 @@ class UserController extends Controller
     {
         $values = $this->getAttributesRequest();
 
-        if (Yii::app()->session['user_type'] == 2) {
+        if (Yii::app()->session['user_type'] == 3) {
+            exit;
+        } else if (Yii::app()->session['user_type'] == 2) {
             $id_user = Yii::app()->getSession()->get('id_user');
 
             $sql     = "SELECT id_group_agent FROM pkg_user WHERE id = :id";
