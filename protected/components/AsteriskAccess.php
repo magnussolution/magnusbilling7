@@ -799,12 +799,12 @@ class AsteriskAccess
                         $line .= 'amaflags=' . $sip->amaflags . "\n";
                     }
 
-                    if (strlen($sip->cid_number) > 1) {
+                    if (strlen($sip->callerid) > 1) {
 
-                        if (preg_match('/\<.*\>/', $sip->cid_number)) {
-                            $line .= 'callerid=' . $sip->cid_number . "\n";
+                        if (preg_match('/\<.*\>/', $sip->callerid)) {
+                            $line .= 'callerid=' . $sip->callerid . "\n";
                         } else {
-                            $line .= 'callerid=<' . $sip->cid_number . ">\n";
+                            $line .= 'callerid=<' . $sip->callerid . ">\n";
                         }
                     }
 

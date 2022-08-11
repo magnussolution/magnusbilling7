@@ -181,6 +181,10 @@ class CallController extends Controller
 
             if (isset($output[0])) {
 
+                if (isset($output[1]) && filesize($output[1]) > filesize($output[0])) {
+                    $output[0] = $output[1];
+                }
+
                 $file_name = explode("/", $output[0]);
 
                 header("Cache-Control: public");

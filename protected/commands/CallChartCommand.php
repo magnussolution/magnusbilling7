@@ -323,6 +323,9 @@ class CallChartCommand extends ConsoleCommand
                                 if (isset($callQueue['UniqueID'])) {
                                     $cdr = time() - intval($callQueue['UniqueID']);
                                 }
+                                if (isset($callQueue['MEMBERNAME'])) {
+                                    $sip_account = substr($callQueue['MEMBERNAME'], 4);
+                                }
                             }
                         } else {
                             $id_user = 'NULL';

@@ -699,6 +699,7 @@ echo "
 verbose = 5
 debug = 0
 maxfiles = 500000
+hideconnect = 1
 
 [compat]
 pbx_realtime=1.6
