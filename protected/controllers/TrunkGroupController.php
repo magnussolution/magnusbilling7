@@ -74,4 +74,19 @@ class TrunkGroupController extends Controller
 
     }
 
+    public function beforeSave($values)
+    {
+
+        if (count($values['id_trunk']) > 17) {
+            echo json_encode(array(
+                'success' => false,
+                'rows'    => array(),
+                'errors'  => 'Maximum trunks is 17',
+            ));
+            exit;
+        }
+
+        return $values;
+    }
+
 }
