@@ -324,7 +324,9 @@ class SipController extends Controller
             exit;
         }
 
-        if (strlen($_POST['secret']) > 0 && strlen($_POST['secret']) < 6 && strlen($_POST['secret']) < 25) {
+        $secret = $_POST['secret'] == "Leave blank to auto generate" ? '' : $_POST['secret'];
+
+        if (strlen($secret) > 0 && strlen($secret) < 6 && strlen($secret) < 25) {
             echo json_encode(array(
                 'success'      => false,
                 $this->nameMsg => 'Password lenght need be > 5 or blank.',
@@ -332,7 +334,7 @@ class SipController extends Controller
             exit;
         }
 
-        if (preg_match('/ /', $_POST['secret'])) {
+        if (preg_match('/ /', $secret)) {
             echo json_encode(array(
                 'success'      => false,
                 $this->nameMsg => 'No space allow in password',
@@ -340,7 +342,7 @@ class SipController extends Controller
             exit;
         }
 
-        if ($_POST['secret'] == '123456' || $_POST['secret'] == '12345678' || $_POST['secret'] == '012345') {
+        if ($secret == '123456' || $secret == '12345678' || $secret == '012345') {
             echo json_encode(array(
                 'success'      => false,
                 $this->nameMsg => 'No use sequence in the password',
@@ -356,10 +358,9 @@ class SipController extends Controller
 
         for ($i = 0; $i < $values['totalToCreate']; $i++) {
 
-            if (strlen($_POST['secret']) > 5) {
-                $pass = $_POST['secret'];
-            } else {
-                $pass = Util::generatePassword(8, true, true, true, false);
+            if (strlen($secret) < 5) {
+
+                $secret = Util::generatePassword(8, true, true, true, false);
             }
 
             $user                  = Util::getNewSip();
@@ -370,7 +371,7 @@ class SipController extends Controller
             $modelSip->host        = 'dynamic';
             $modelSip->insecure    = 'no';
             $modelSip->defaultuser = $user;
-            $modelSip->secret      =
+            $modelSip->secret      = $secret;
             $modelSip->save();
         }
 
