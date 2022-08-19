@@ -78,20 +78,8 @@ class DidController extends Controller
 
     public function actionReadBuy()
     {
-        $_GET['buy'] = 1;
-        parent::actionRead($asJson = true, $condition = null);
-
-    }
-
-    public function extraFilterCustom($filter)
-    {
-        if (isset($_GET['buy'])) {
-            //return to combo buy credit
-            $filter = 'reserved = 0';
-            return $filter;
-        }
-
-        return parent::extraFilterCustom($filter);
+        $condition = 'reserved = 0 AND activated = 1';
+        parent::actionRead($asJson = true, $condition);
     }
 
     public function actionBuy()
