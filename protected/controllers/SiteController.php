@@ -73,6 +73,7 @@ class SiteController extends Controller
         echo 'window.default_codes = "' . $this->config['global']['default_codeds'] . '";';
         echo 'window.global_record_calls = "' . $this->config['global']['global_record_calls'] . '";';
         echo 'window.default_prefix_rule = "' . $this->config['global']['default_prefix_rule'] . '";';
+        echo 'window.logged = ' . json_encode(Yii::app()->session['logged']) . ';';
 
     }
 }
