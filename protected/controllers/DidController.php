@@ -65,6 +65,10 @@ class DidController extends Controller
         $this->instanceModel = new Did;
         $this->abstractModel = Did::model();
         $this->titleReport   = Yii::t('zii', 'DID');
+
+        if (Yii::app()->session['isClient']) {
+            $this->attributeOrder = 't.id_user DESC';
+        }
         parent::init();
     }
 
@@ -76,12 +80,129 @@ class DidController extends Controller
         return $filter;
     }
 
+    public function extraFilterCustomClient($filter)
+    {
+
+        //for agents add filter for show only numbers free
+        $filter .= ' AND (reserved = 0  OR id_user = ' . Yii::app()->session['id_user'] . ')';
+        return $filter;
+    }
+
     public function actionReadBuy()
     {
         $condition = 'reserved = 0 AND activated = 1';
         parent::actionRead($asJson = true, $condition);
     }
 
+    public function actionBuyBulk()
+    {
+        $ids = isset($_POST['ids']) ? json_decode($_POST['ids']) : null;
+
+        $modelUser = User::model()->findByPK(Yii::app()->session['id_user']);
+
+        if ($modelUser->id_user > 1) {
+            echo json_encode(array(
+                $this->nameSuccess => false,
+                $this->nameMsg     => 'Not allowed',
+            ));
+            exit;
+        }
+        if ($modelUser->typepaid == 1) {
+            $modelUser->credit = $modelUser->credit + $modelUser->creditlimit;
+        }
+        $priceDidTotal = 0;
+        foreach ($ids as $key => $id) {
+            $modelDid = Did::model()->findByPk($id);
+
+            if ($modelDid->reserved == 1) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    $this->nameMsg     => 'You select one or more DID that is reserved',
+                ));
+                exit;
+            }
+            if ($modelDid->activated == 0) {
+                echo json_encode(array(
+                    $this->nameSuccess => false,
+                    $this->nameMsg     => 'You select one or more DID that is not activated',
+                ));
+                exit;
+            }
+            $priceDidTotal += $modelDid->connection_charge + $modelDid->fixrate;
+        }
+
+        if ($priceDidTotal > $modelUser->credit) {
+            echo json_encode(array(
+                $this->nameSuccess => false,
+                $this->nameMsg     => 'You not have enough credit to buy the DID',
+            ));
+            exit;
+        }
+
+        $id_user = $modelUser->id;
+
+        foreach ($ids as $key => $id) {
+            $modelDid  = Did::model()->findByPk($id);
+            $id_did    = $modelDid->id;
+            $modelUser = $modelDid->idUser;
+            $totalDid  = $modelDid->fixrate + $modelDid->connection_charge;
+
+            $modelDid->id_user  = $id_user;
+            $modelDid->reserved = 1;
+            $modelDid->save();
+
+            //discount credit of customer
+            $priceDid = $modelDid->connection_charge + $modelDid->fixrate;
+
+            $modelDidUse              = new DidUse();
+            $modelDidUse->id_user     = $id_user;
+            $modelDidUse->id_did      = $id_did;
+            $modelDidUse->status      = 1;
+            $modelDidUse->month_payed = 1;
+            $modelDidUse->save();
+
+            $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
+
+            $modelDiddestination              = new Diddestination();
+            $modelDiddestination->id_user     = $id_user;
+            $modelDiddestination->id_did      = $id_did;
+            $modelDiddestination->id_sip      = $modelSip->id;
+            $modelDiddestination->destination = '';
+            $modelDiddestination->priority    = 1;
+            $modelDiddestination->voip_call   = 1;
+            $modelDiddestination->save();
+
+            if ($priceDid > 0) // se tiver custo
+            {
+                //adiciona a recarga e pagamento do 1º mes
+                $credit      = $modelDid->fixrate;
+                $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $modelDid->did;
+
+                UserCreditManager::releaseUserCredit($id_user, $credit, $description, 0);
+
+                //adiciona a recarga e pagamento do custo de ativaçao
+                if ($modelDid->connection_charge > 0) {
+                    $credit      = $modelDid->connection_charge;
+                    $description = Yii::t('zii', 'Activation DID') . ' ' . $modelDid->did;
+                    UserCreditManager::releaseUserCredit($id_user, $credit, $description, 0);
+                }
+
+                $mail = new Mail(Mail::$TYPE_DID_CONFIRMATION, $id_user);
+                $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $modelUser->credit);
+                $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $modelDid->did);
+                $mail->replaceInEmail(Mail::$DID_COST_KEY, '-' . $modelDid->fixrate);
+                $mail->send();
+            }
+
+        }
+        $success          = true;
+        $this->msgSuccess = Yii::t('zii', 'The DID has been activated for you.');
+
+        echo json_encode(array(
+            $this->nameSuccess => $success,
+            $this->nameMsg     => $this->msgSuccess,
+        ));
+    }
     public function actionBuy()
     {
         $success = false;

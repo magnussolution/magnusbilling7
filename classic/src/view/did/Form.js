@@ -48,6 +48,11 @@ Ext.define('MBilling.view.did.Form', {
                     fieldLabel: t('DID'),
                     readOnly: App.user.isClient || App.user.isAgent
                 }, {
+                    name: 'country',
+                    fieldLabel: t('Country'),
+                    value: '',
+                    allowBlank: true
+                }, {
                     xtype: 'noyescombo',
                     name: 'record_call',
                     fieldLabel: t('Record call'),

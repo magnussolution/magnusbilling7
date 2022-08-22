@@ -128,6 +128,9 @@ Ext.define('MBilling.model.Did', {
     }, {
         name: 'record_call',
         type: 'int'
+    }, {
+        name: 'country',
+        type: 'string'
     }],
     proxy: {
         type: 'uxproxy',

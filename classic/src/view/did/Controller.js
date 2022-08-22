@@ -136,10 +136,50 @@ Ext.define('MBilling.view.did.Controller', {
                                 response = Ext.decode(response.responseText);
                                 if (response[me.nameSuccessRequest]) {
                                     var msg = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
-                                    Ext.ux.Alert.alert(me.titleSuccess, msg, 'success');
+                                    Ext.ux.Alert.alert(me.titleSuccess, t(msg), 'success');
                                 } else {
                                     var errors = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
-                                    Ext.ux.Alert.alert(me.titleError, errors, 'notification');
+                                    Ext.ux.Alert.alert(me.titleError, t(errors), 'error');
+                                }
+                            }
+                        });
+                        me.store.load();
+                    }
+                }, me);
+        } else {
+            Ext.ux.Alert.alert(me.titleError, t('Please select one or more records'), 'notification');
+        }
+    },
+    onBuy: function(btn, pressed) {
+        var me = this,
+            records,
+            record = me.list.getSelectionModel().getSelection()[0],
+            idRecord = []
+        if (record) {
+            dids = "";
+            Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
+                dids = dids + ', ' + record.get('did');
+            });
+            msgConfirmation = t('Confirm buy DIDs') + dids,
+                Ext.Msg.confirm(me.titleConfirmation, msgConfirmation, function(btn) {
+                    if (btn === 'yes') {
+                        Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
+                            idRecord.push(record.get('id'));
+                        });
+                        Ext.Ajax.request({
+                            url: 'index.php/did/buyBulk',
+                            params: {
+                                ids: Ext.encode(idRecord)
+                            },
+                            scope: me,
+                            success: function(response) {
+                                response = Ext.decode(response.responseText);
+                                if (response[me.nameSuccessRequest]) {
+                                    var msg = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
+                                    Ext.ux.Alert.alert(me.titleSuccess, t(msg), 'success');
+                                } else {
+                                    var errors = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
+                                    Ext.ux.Alert.alert(me.titleError, t(errors), 'error');
                                 }
                             }
                         });
