@@ -8,7 +8,9 @@ Ext.define('MBilling.view.did.Module', {
     extend: 'Ext.ux.panel.Module',
     alias: 'widget.didmodule',
     controller: 'did',
-    cfgEast: {
-        flex: 3
+    initComponent: function() {
+        var me = this;
+        me.flexForm = App.user.isClient ? 1 : 3;
+        me.callParent(arguments);
     }
 });
