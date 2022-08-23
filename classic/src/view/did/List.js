@@ -102,6 +102,7 @@ Ext.define('MBilling.view.did.List', {
             header: t('Time used'),
             renderer: Helper.Util.formatsecondsToTime,
             dataIndex: 'secondusedreal',
+            hidden: !App.user.isAdmin,
             flex: 3
         }, {
             header: t('Country'),
