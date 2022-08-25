@@ -57,7 +57,8 @@ Locale.load({
     'All': 'Todos',
     'Allowtransfer': 'Permitir transferência',
     'Amount': 'Quantidade',
-    'And': 'e',
+    'And': 'E',
+    'and': 'e',
     'Announce frequency': 'Frequência de anúncio',
     'Announce holdtime': 'Announce holdtime',
     'Announce position': 'Announce position',
@@ -1158,5 +1159,4 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
-
 });

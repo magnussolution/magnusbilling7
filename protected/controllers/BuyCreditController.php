@@ -31,15 +31,56 @@ class BuyCreditController extends Controller
 
         }
 
-        $modelMethodPay = Methodpay::model()->findByPK((int) $_GET['id_method']);
+        $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
+        $modelPlan = Plan::model()->findByPk(Yii::app()->session['id_plan']);
 
-        if ($modelMethodPay->max > 0 && $_GET['amount'] > $modelMethodPay->max) {
-            exit(Yii::t('zii', 'The maximum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max);
-        } elseif ($modelMethodPay->min > 0 && $_GET['amount'] < $modelMethodPay->min) {
-            exit(Yii::t('zii', 'The minimum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
+        if (isset($_GET['mobile'])) {
+
+            if (isset($_POST['pay_amount2']) && $_POST['pay_amount2'] > 0) {
+                $_POST['pay_amount'] = $_POST['pay_amount2'];
+            }
+
+            if (isset($_POST['pay_amount']) && $_POST['pay_amount'] > 0 && isset($_POST['payment_method']) && $_POST['payment_method'] > 0) {
+                $_GET['amount']    = $_POST['pay_amount'];
+                $_GET['id_method'] = $_POST['payment_method'];
+                //continue to the payment method
+            } else {
+
+                if (isset($_POST['id_method']) && $_POST['id_method'] > 0) {
+                    $modelMethodPay = Methodpay::model()->findByPK((int) $_POST['id_method']);
+
+                } else {
+                    $modelMethodPay = Methodpay::model()->findAll('active = 1');
+                }
+
+                $this->render('mobile', array(
+                    'modelMethodPay' => $modelMethodPay,
+                    'modelUser'      => $modelUser,
+                    'reference'      => date('YmdHis') . '-' . $modelUser->username . '-' . $modelUser->id,
+                ));
+                exit;
+            }
+
         }
 
-        $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
+        $modelMethodPay = Methodpay::model()->findByPK((int) $_GET['id_method']);
+
+        $plan_parts = explode(' ', $modelPlan->name);
+        if (is_numeric(end($plan_parts))) {
+            $modelMethodPay->min = end($plan_parts);
+        }
+
+        if ($modelMethodPay->max > 0 && $_GET['amount'] > $modelMethodPay->max || $modelMethodPay->min > 0 && $_GET['amount'] < $modelMethodPay->min) {
+            $error = Yii::t('zii', 'The minimum amount is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min;
+            $error .= ' ' . Yii::t('zii', 'and') . ' ' . Yii::t('zii', 'The maximum amount is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max;
+        }
+
+        if (isset($error)) {
+            echo '<center><br><br>';
+            echo '<font color=red>' . $error . '</font>';
+            echo '</center><br><br>';
+            exit;
+        }
 
         if ($modelMethodPay->active == 0 || (isset(Yii::app()->session['id_agent']) && $modelMethodPay->id_user != Yii::app()->session['id_agent'])) {
             exit('invalid option');

@@ -13,6 +13,9 @@ Ext.define('MBilling.view.buycredit.Module', {
     header: false,
     initComponent: function() {
         var me = this;
+        if (window.isTablet == true) {
+            window.open('index.php/buyCredit/method/?mobile=true', "_self");
+        }
         me.items = [{
             xtype: 'form',
             reference: 'buycreditPanel',
