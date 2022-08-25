@@ -72,9 +72,8 @@ class RateAgent extends Model
     public function createAgentRates($model, $id_plan)
     {
         $sql = 'INSERT INTO pkg_rate_agent (id_plan , id_prefix,  rateinitial , initblock , billingblock)
-                            SELECT ' . $model->id . ', id_prefix, rateinitial, initblock, billingblock FROM pkg_rate WHERE id_plan = :id_plan';
+                            SELECT ' . $model->id . ', id_prefix, rateinitial, initblock, billingblock FROM pkg_rate WHERE id_plan = ' . $id_plan . '';
         $command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(":id_plan", $id_plan, PDO::PARAM_INT);
         $command->execute();
     }
 }

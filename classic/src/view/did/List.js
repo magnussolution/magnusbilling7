@@ -103,6 +103,7 @@ Ext.define('MBilling.view.did.List', {
             renderer: Helper.Util.formatsecondsToTime,
             dataIndex: 'secondusedreal',
             hidden: !App.user.isAdmin,
+            hideable: App.user.isAdmin,
             flex: 3
         }, {
             header: t('Country'),
