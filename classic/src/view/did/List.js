@@ -28,12 +28,6 @@ Ext.define('MBilling.view.did.List', {
         var me = this;
         me.buttonUpdateLot = false;
         me.extraButtons = [{
-            text: t('Buy DID'),
-            iconCls: 'x-fa fa-shopping-cart',
-            handler: 'onBuy',
-            hidden: !App.user.isClient,
-            disabled: false
-        }, {
             text: t('Release DID'),
             iconCls: 'icon-delete',
             handler: 'onRelease',
