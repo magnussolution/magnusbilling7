@@ -24,7 +24,7 @@ Ext.define('MBilling.view.didbuy.Module', {
             defaultType: 'textfield',
             defaults: {
                 labelAlign: 'right',
-                labelWidth: 250,
+                labelWidth: 100,
                 width: 280,
                 allowBlank: false,
                 msgTarget: 'side',
@@ -38,10 +38,10 @@ Ext.define('MBilling.view.didbuy.Module', {
                 fieldLabel: t('Select a DID')
             }],
             bbar: [{
-                text: t('Next'),
-                tooltip: t('Next'),
+                text: t('Buy'),
+                tooltip: t('Bext'),
                 width: 100,
-                glyph: icons.disk,
+                iconCls: 'x-fa fa-shopping-cart',
                 handler: 'onBuyDid'
             }]
         }];

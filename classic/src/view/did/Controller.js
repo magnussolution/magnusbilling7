@@ -201,20 +201,24 @@ Ext.define('MBilling.view.did.Controller', {
             Ext.Msg.confirm(t('Confirmation'), msgConfirmation + ' <br>' + valueDid, function(btn) {
                 if (btn === 'yes') {
                     Ext.Ajax.request({
-                        url: 'index.php/did/buy',
+                        url: 'index.php/did/buyBulk',
                         params: {
-                            id: fieldDid
+                            ids: Ext.encode(fieldDid)
                         },
                         success: function(response) {
                             response = Ext.decode(response.responseText);
                             if (response['success']) {
                                 Ext.ux.Alert.alert(me.titleSuccess, t(response['msg']), 'success', true, true, 5000);
+                                getForm.getForm().findField('did').getStore().load();
+                                getForm.getForm().findField('did').rawValue = '';
+                                getForm.getForm().findField('did').setValue();
                             } else {
                                 var errors = Helper.Util.convertErrorsJsonToString(response['msg']);
                                 Ext.ux.Alert.alert(me.titleError, t(errors), 'error', true, true, 5000);
                             }
                         }
                     });
+                    me.store.load();
                 }
             }, me);
         }
