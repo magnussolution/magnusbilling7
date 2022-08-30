@@ -1786,6 +1786,19 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-08-29
+        if ($version == '7.8.1.8') {
+            $sql = "ALTER TABLE `pkg_offer` ADD `id_user` INT(11) NULL DEFAULT NULL AFTER `id`;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_offer` ADD  CONSTRAINT `fk_pkg_user_pkg_offer` FOREIGN KEY (`id_user`) REFERENCES `pkg_user` (`id`) ON DELETE CASCADE";
+            $this->executeDB($sql);
+
+            $version = '7.8.1.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
