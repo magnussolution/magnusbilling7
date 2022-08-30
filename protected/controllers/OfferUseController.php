@@ -43,6 +43,12 @@ class OfferUseController extends Controller
         $this->instanceModel = new OfferUse;
         $this->abstractModel = OfferUse::model();
         $this->titleReport   = Yii::t('zii', 'Offer Use');
+
+        if (Yii::app()->session['isAdmin']) {
+            $this->relationFilter['idUser'] = array(
+                'condition' => "idUser.id_user < 2",
+            );
+        }
         parent::init();
     }
 
