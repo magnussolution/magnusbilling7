@@ -92,7 +92,7 @@ class AuthenticationController extends Controller
 
         $this->checkCaptcha();
 
-        if ($modelUser->active != 1) {
+        if ($modelUser->active == 0) {
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
                 'success' => false,
