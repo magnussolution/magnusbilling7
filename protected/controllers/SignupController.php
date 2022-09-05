@@ -98,7 +98,7 @@ class SignupController extends Controller
             $result = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
 
             $signup->id_group = $result[0]['id'];
-            $signup->active   = 2;
+            $signup->active   = isset($_POST['Signup']['active']) ? $_POST['Signup']['active'] : 2;
 
             if ($this->config['global']['base_language'] == 'pt_BR') {
                 $phone = $_POST['Signup']['phone'];

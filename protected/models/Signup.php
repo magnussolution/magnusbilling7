@@ -61,7 +61,7 @@ class Signup extends Model
             array('address, company_name', 'length', 'max' => 100),
             array('mobile, phone', 'length', 'min' => 10),
             array('email', 'checkemail'),
-            array('email', 'unique'),
+            array('email,username', 'unique'),
             array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || $this->captcha == false),
             array('accept_terms', 'required', 'requiredValue' => 1, 'message' => 'You must accept the Terms and Conditons in order to register.'),
         );
