@@ -48,7 +48,10 @@ class BuyCreditController extends Controller
 
                 if (isset($_POST['id_method']) && $_POST['id_method'] > 0) {
                     $modelMethodPay = Methodpay::model()->findByPK((int) $_POST['id_method']);
-
+                    $plan_parts     = explode(' ', $modelPlan->name);
+                    if (is_numeric(end($plan_parts))) {
+                        $modelMethodPay->min = end($plan_parts);
+                    }
                 } else {
                     $modelMethodPay = Methodpay::model()->findAll('active = 1');
                 }
@@ -76,9 +79,8 @@ class BuyCreditController extends Controller
         }
 
         if (isset($error)) {
-            echo '<center><br><br>';
-            echo '<font color=red>' . $error . '</font>';
-            echo '</center><br><br>';
+            echo "<script>alert('$error')</script>
+            <script>window.close();</script>";
             exit;
         }
 
