@@ -1,55 +1,24 @@
 
 
+
+
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" name="viewport"/>
 
 <div id="component-buy-options" width="100%">
-        <form method="POST" action="" class="form-style-9">
+        <form method="POST" action="" class="form-style-9" >
 
         <div class="col1">
 
             <?php if (isset($_POST['id_method']) && $_POST['id_method'] > 0): ?>
 
-                <h4>Select credit amount</h4>
-                <div id="amount-selection">
-                    <div class="default-amounts">
 
-                        <?php $div = 0;for ($i = $modelMethodPay->min; $i < $modelMethodPay->max; $i += intval($modelMethodPay->max / 10)): ?>
-
-<?php
-
-if ($i < 30) {
-    $i = ceil($i / 2) * 2;
-} elseif ($i <= 50) {
-    $i = ceil($i / 5) * 5;
-} elseif ($i <= 100) {
-    $i = ceil($i / 10) * 10;
-} elseif ($i <= 200) {
-    $i = ceil($i / 50) * 50;
-} elseif ($i <= 500) {
-    $i = ceil($i / 100) * 100;
-} else {
-    $i = ceil($i / 250) * 250;
-}
-
-$div++;
-?>
-                            <div class="payment-amount-item item-block ">
-                                <input value="<?php echo $i ?>" onchange="hiddenPayAmount2()"  id="selectd_<?php echo $div ?>" type="radio" class="checkbox" name="pay_amount" />
-                                <div class="box">
-                                    <span  class="small"><?php echo Yii::app()->session['currency'] ?> <?php echo $i ?></span>
-                                </div>
-                            </div>
-                        <?php endfor;?>
-
-                         <div class="clear"></div>
-                    </div>
-
-                </div>
+                <div id="payment-selection">
                 <input type="hidden" name="payment_method" value=<?php echo $modelMethodPay->id ?>>
-                <h4>Or insert a amount:</h4>
-                <input type="number" max="10" max="30" name="pay_amount2" id="pay_amount2" oninput="hiddendiv(event,<?php echo $modelMethodPay->min ?>,<?php echo $modelMethodPay->max ?>)">
-                <br>
+                <h4>Insert credit amount</h4>
+                <input style="width: 100%;" type="number" min="<?php echo $modelMethodPay->min ?>" max="<?php echo $modelMethodPay->max ?>" name="pay_amount2" id="pay_amount2" oninput="hiddendiv(event,<?php echo $modelMethodPay->min ?>,<?php echo $modelMethodPay->max ?>)">
+                <br><br>
                 <h5 style="display:none" id="error"></h5>
+            </div>
             <?php else: ?>
 
                 <h4>Select payment method</h4>
@@ -58,17 +27,17 @@ $div++;
                         <select name="id_method" style="width: 100%;">
                             <option value="">SELECT</option>
                             <?php foreach ($modelMethodPay as $value): ?>
-                                <option value="<?php echo $value['id'] ?>"><?php echo $value['payment_method'] ?></option>
+                                <option value="<?php echo $value['id'] ?>"><?php echo $value['show_name'] ?></option>
                             <?php endforeach?>
                         </select>
                     </div>
-
+                    <br><br>
                 </div>
             <?php endif;?>
             <br>
             <div id="payment-details-action">
 
-                <button onclick="window.location='../../index.php/buyCredit/method/?mobile=true';"  id="button-next" class="btn btn-primary" type="submit">Cancel &raquo;</button>
+                <button onclick="window.location='../../index.php/buyCredit/method/?mobile=true';"  id="button-next" class="btn btn-primary">Cancel &raquo;</button>
                 <button id="button-next" class="btn btn-primary" type="submit" value="Next &raquo;">Next &raquo;</button>
                 </div>
         </div>
@@ -80,6 +49,7 @@ $div++;
 
 
 <script type="text/javascript">
+
 
     function hiddenPayAmount2(){
         document.getElementById("pay_amount2").value = "";

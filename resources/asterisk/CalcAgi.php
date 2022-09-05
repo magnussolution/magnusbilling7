@@ -793,6 +793,8 @@ class CalcAgi
                 $MAGNUS->sip_account = $MAGNUS->CallerID;
             }
         }
+        $sql = "DELETE FROM pkg_queue_status WHERE callId = " . $MAGNUS->uniqueid;
+        $agi->exec($sql);
 
         if ($this->terminatecauseid == 1) {
 
