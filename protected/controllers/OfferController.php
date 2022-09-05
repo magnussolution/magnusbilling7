@@ -50,5 +50,12 @@ class OfferController extends Controller
 
         return $filter;
     }
+    public function beforeSave($values)
+    {
+        if (Yii::app()->session['isAgent']) {
+            $values['id_user'] = Yii::app()->session['id_user'];
+        }
+        return $values;
+    }
 
 }
