@@ -53,7 +53,7 @@ class PaypalController extends Controller
             Yii::log('EPAYMENT PAYPAL: verification successful', 'info');
 
             $modelMethodpay = Methodpay::model()->find("payment_method LIKE 'Paypal'");
-            if (!count($modelMethodpay)) {
+            if (!isset($modelMethodpay->id)) {
                 exit;
             }
 
@@ -82,7 +82,7 @@ class PaypalController extends Controller
                 Yii::log('PAYMENT VERIFIED', 'info');
                 $modelUser = User::model()->findByPk((int) $id_user);
 
-                if (count($modelUser) && Refill::model()->countRefill($txn_id, $modelUser->id) == 0) {
+                if (isset($modelUser->id) && Refill::model()->countRefill($txn_id, $modelUser->id) == 0) {
 
                     //checa se o usaurio ja fez pagamentos
                     if ($this->config['global']['paypal_new_user'] == 0) {
