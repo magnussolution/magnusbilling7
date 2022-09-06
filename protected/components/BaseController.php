@@ -1962,11 +1962,13 @@ class BaseController extends CController
         } else if (preg_match('/pkg_plan/', $this->abstractModel->tableName())) {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idUser->id;
-
         } else if (preg_match('/pkg_rate_agent/', $this->abstractModel->tableName())) {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idPlan->idUser->id;
 
+        } else if (preg_match('/pkg_offer/', $this->abstractModel->tableName())) {
+            $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
+            $id_user    = $modelCheck->idUser->id;
         } else {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idUser->id_user;
