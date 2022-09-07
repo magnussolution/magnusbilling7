@@ -1799,6 +1799,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-09-07
+        if ($version == '7.8.1.9') {
+            $sql = "ALTER TABLE `pkg_rate_agent` ADD `package_offer` TINYINT(1) NOT NULL DEFAULT '0' AFTER `minimal_time_charge`;";
+            $this->executeDB($sql);
+
+            $version = '7.8.2.0';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

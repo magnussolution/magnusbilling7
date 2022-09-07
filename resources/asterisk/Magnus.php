@@ -77,6 +77,7 @@ class Magnus
     public $prefixclause;
     public $is_callingcard     = false;
     public $sip_id_trunk_group = 0;
+    public $modelRateAgent;
 
     public function __construct()
     {
