@@ -52,6 +52,20 @@ class SearchTariff
             return 0;
         }
 
+        $agi->verbose('id_agent=' . $MAGNUS->id_agent, 5);
+
+        if ($MAGNUS->id_agent > 1) {
+            $sql = "SELECT rateinitial, initblock, billingblock, minimal_time_charge, package_offer " .
+                "FROM pkg_plan " .
+                "LEFT JOIN pkg_rate_agent ON pkg_rate_agent.id_plan=pkg_plan.id " .
+                "LEFT JOIN pkg_prefix ON pkg_rate_agent.id_prefix=pkg_prefix.id " .
+                "WHERE $MAGNUS->prefixclause AND " .
+                "pkg_plan.id= $MAGNUS->id_plan_agent ORDER BY LENGTH(prefix) DESC LIMIT 3";
+            $MAGNUS->modelRateAgent = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+            $result[0]['package_offer'] = $MAGNUS->modelRateAgent[0]['package_offer'];
+        }
+
         //Select custom rate to user
         $sql           = "SELECT * FROM pkg_user_rate WHERE id_user = $MAGNUS->id_user AND id_prefix = '" . $result[0]['id_prefix'] . "' LIMIT 1";
         $modelUserRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);

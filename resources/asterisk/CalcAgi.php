@@ -88,14 +88,14 @@ class CalcAgi
         $initblock                    = $this->tariffObj[0]['initblock'];
         $billingblock                 = $this->tariffObj[0]['billingblock'];
         $connectcharge                = $MAGNUS->round_precision(abs($this->tariffObj[0]['connectcharge']));
-        $id_offer                     = $package_offer                     = $this->tariffObj[0]['package_offer'];
+        $package_offer                = $this->tariffObj[0]['package_offer'];
         $id_rate                      = $this->tariffObj[0]['id_rate'];
         $initial_credit               = $credit               = $MAGNUS->credit;
         $this->freetimetocall_left[0] = 0;
         $this->freecall[0]            = false;
         $this->offerToApply[0]        = null;
 
-        if ($id_offer == 1 && $MAGNUS->id_offer > 0) {
+        if ($package_offer == 1 && $MAGNUS->id_offer > 0) {
             $sql = "SELECT * FROM pkg_offer_use WHERE id_offer = $MAGNUS->id_offer
                                 AND id_user = $MAGNUS->id_user AND status = 1 AND releasedate = '0000-00-00 00:00:00' LIMIT 1";
             $modelOfferUse = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -259,7 +259,7 @@ class CalcAgi
                 $callduration += ($billingblock - $mod_sec);
             }
         }
-        if ($this->freetimetocall_left[0] >= $callduration) {
+        if ($this->freetimetocall_left[0] >= $callduration && $MAGNUS->id_agent < 2) {
             $this->freetimetocall_used = $callduration;
             $callduration              = 0;
         }
@@ -488,6 +488,7 @@ class CalcAgi
             if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . ' - ' .
                     $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
+
                 $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
             }
 
@@ -550,26 +551,23 @@ class CalcAgi
 
     public function updateSystemAgent($agi, $MAGNUS, $calledstation, $cost, $sessiontime)
     {
-        $sql = "SELECT rateinitial, initblock, billingblock, minimal_time_charge " .
-            "FROM pkg_plan " .
-            "LEFT JOIN pkg_rate_agent ON pkg_rate_agent.id_plan=pkg_plan.id " .
-            "LEFT JOIN pkg_prefix ON pkg_rate_agent.id_prefix=pkg_prefix.id " .
-            "WHERE prefix = SUBSTRING($calledstation,1,length(prefix)) and " .
-            "pkg_plan.id= $MAGNUS->id_plan_agent ORDER BY LENGTH(prefix) DESC LIMIT 3";
-        $modelRateAgent = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!isset($modelRateAgent[0]['rateinitial'])) {
+        if (!isset($MAGNUS->modelRateAgent[0]['rateinitial'])) {
             $agi->verbose('NOT FOUND AGENT TARRIF, USE AGENT COST PRICE');
             $cost_customer = $cost;
         } else {
-            $agi->verbose('Found agent sell price ' . print_r($modelRateAgent[0], true) . '-  ' . $sessiontime, 25);
-            $cost_customer = $MAGNUS->roudRatePrice($sessiontime, $modelRateAgent[0]['rateinitial'],
-                $modelRateAgent[0]['initblock'], $modelRateAgent[0]['billingblock']);
+            $agi->verbose('Found agent sell price ' . print_r($MAGNUS->modelRateAgent[0], true) . '-  ' . $sessiontime, 25);
+            $cost_customer = $MAGNUS->roudRatePrice($sessiontime, $MAGNUS->modelRateAgent[0]['rateinitial'],
+                $MAGNUS->modelRateAgent[0]['initblock'], $MAGNUS->modelRateAgent[0]['billingblock']);
             $agi->verbose('$cost_customer=' . $cost_customer);
         }
 
-        if ($sessiontime < $modelRateAgent[0]['minimal_time_charge']) {
+        if ($sessiontime < $MAGNUS->modelRateAgent[0]['minimal_time_charge']) {
             $agi->verbose("Tempo meno que o tempo minimo para", 15);
+            $cost_customer = 0;
+        }
+
+        if ($this->freetimetocall_left[0] >= $sessiontime) {
             $cost_customer = 0;
         }
 
