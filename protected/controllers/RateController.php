@@ -68,7 +68,6 @@ class RateController extends Controller
         'idTrunktrunkcode',
         'connectcharge',
         'disconnectcharge',
-        'package_offer',
     );
 
     public $FilterByUser;

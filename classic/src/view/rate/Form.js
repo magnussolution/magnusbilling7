@@ -98,7 +98,7 @@ Ext.define('MBilling.view.rate.Form', {
             xtype: 'noyescombo',
             name: 'package_offer',
             fieldLabel: t('Include in offer'),
-            hidden: !App.user.isAdmin,
+            hidden: App.user.isClient,
             allowBlank: true
         }, {
             xtype: 'booleancombo',

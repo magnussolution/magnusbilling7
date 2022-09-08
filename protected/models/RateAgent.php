@@ -54,7 +54,7 @@ class RateAgent extends Model
     {
         return array(
             array('id_plan', 'required'),
-            array('id_plan, id_prefix, initblock, billingblock, minimal_time_charge', 'numerical', 'integerOnly' => true),
+            array('id_plan, id_prefix, initblock, billingblock, minimal_time_charge, package_offer', 'numerical', 'integerOnly' => true),
             array('rateinitial', 'length', 'max' => 15),
         );
     }
