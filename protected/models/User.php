@@ -72,11 +72,12 @@ class User extends Model
                     restriction_use,credit_notification_daily
                         ', 'numerical', 'integerOnly' => true),
             array('language,mix_monitor_format,calllimit_error', 'length', 'max' => 5),
-            array('username, zipcode, phone, mobile, vat', 'length', 'max' => 20),
+            array('zipcode, phone, mobile, vat', 'length', 'max' => 20),
             array('city, state, country, loginkey', 'length', 'max' => 40),
             array('lastname, firstname, redial, prefix_local,neighborhood', 'length', 'max' => 50),
             array('company_website, dist', 'length', 'max' => 100),
             array('address, email, doc', 'length', 'max' => 100),
+            array('username', 'length', 'max' => 15),
             array('description', 'length', 'max' => 500),
             array('credit, contract_value', 'type', 'type' => 'double'),
             array('expirationdate, password, lastuse,company_name, commercial_name', 'length', 'max' => 100),
