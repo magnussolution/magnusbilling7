@@ -299,6 +299,7 @@ class CalcAgi
 
         $id_offer              = $MAGNUS->id_offer;
         $additional_grace_time = $this->tariffObj[0]['additional_grace'];
+        $package_offer         = $this->tariffObj[0]['package_offer'];
         $sessiontime           = $this->answeredtime;
         $dialstatus            = $this->dialstatus;
 
@@ -316,64 +317,42 @@ class CalcAgi
                 }
             }
 
-            if (($id_offer != -1) && ($this->offerToApply[0] != null)) {
+            $this->calculateCost($MAGNUS, $sessiontime, $agi);
+
+            if ($package_offer == 1 && $MAGNUS->id_offer > 0 && $sessiontime > $this->offerToApply[0]["minimal_time_charge"] && $this->freetimetocall_left[0] > 0) {
                 $id_offer = $this->offerToApply[0]["id"];
 
-                $this->calculateCost($MAGNUS, $sessiontime, $agi);
-
-                if ($sessiontime > $this->offerToApply[0]["minimal_time_charge"]) {
-
-                    switch ($this->offerToApply[0]["type"]) {
-                        /*Unlimited*/
-                        case 0:
-                            $this->freetimetocall_used = $sessiontime;
-                            break;
-                        /*free calls*/
-                        case 1:
-                            $this->freetimetocall_used = $sessiontime;
-                            break;
-                        /*free minutes*/
-                        case 2:
-                            if ($sessiontime > $this->offerToApply[0]["initblock"]) {
-                                $restominutos   = $sessiontime % $this->offerToApply[0]["billingblock"];
-                                $calculaminutos = ($sessiontime - $restominutos) / $this->offerToApply[0]["billingblock"];
-                                if ($restominutos > '0') {
-                                    $calculaminutos++;
-                                }
-
-                                $sessiontime = $calculaminutos * $this->offerToApply[0]["billingblock"];
-                            } elseif ($sessiontime < '1') {
-                                $sessiontime = 0;
-                            } else {
-                                $sessiontime = $this->offerToApply[0]["initblock"];
-                            }
-
-                            $this->freetimetocall_used = $sessiontime;
-
-                            break;
-                    }
-
-                    /* calculcost could have change the duration of the call*/
-                    $sessiontime = $this->answeredtime;
-                    /* add grace time*/
-                    $fields = "id_user, id_offer, used_secondes";
-                    $values = "$MAGNUS->id_user, $id_offer, '$this->freetimetocall_used'";
-                    $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
-                    $agi->exec($sql);
-                } else {
-                    $sessiontime = 0;
+                if ($MAGNUS->id_agent < 2) {
+                    $this->sessionbill = 0;
                 }
-            } else {
-                $this->calculateCost($MAGNUS, $sessiontime, $agi);
+
+                if ($this->offerToApply[0]["type"] = 2) {
+                    if ($sessiontime > $this->offerToApply[0]["initblock"]) {
+                        $restominutos   = $sessiontime % $this->offerToApply[0]["billingblock"];
+                        $calculaminutos = ($sessiontime - $restominutos) / $this->offerToApply[0]["billingblock"];
+                        if ($restominutos > '0') {
+                            $calculaminutos++;
+                        }
+
+                        $sessiontime = $calculaminutos * $this->offerToApply[0]["billingblock"];
+                    } elseif ($sessiontime < '1') {
+                        $sessiontime = 0;
+                    } else {
+                        $sessiontime = $this->offerToApply[0]["initblock"];
+                    }
+                }
+
+                /* add grace time*/
+                $fields = "id_user, id_offer, used_secondes";
+                $values = "$MAGNUS->id_user, $id_offer, '$sessiontime'";
+                $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
+                $agi->exec($sql);
+
             }
         } else {
             $sessiontime = 0;
         }
-        $agi->verbose('Sessiontime' . $sessiontime, 10);
-
-        if (($id_offer != -1) && ($this->offerToApply[0] != null) && $sessiontime > 0) {
-            $sessiontime = $this->freetimetocall_used;
-        }
+        $agi->verbose('Sessiontime ' . $sessiontime, 10);
 
         $id_prefix = $this->tariffObj[0]['id_prefix'];
         $id_plan   = $this->tariffObj[0]['id_plan'];
@@ -489,7 +468,15 @@ class CalcAgi
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . ' - ' .
                     $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
 
-                $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
+                $agi->verbose("$package_offer $MAGNUS->id_offer $sessiontime" . $this->offerToApply[0]["minimal_time_charge"] . ' ' . $this->freetimetocall_left[0], 5);
+
+                //1 2 600 5155
+                if ($package_offer == 1 && $MAGNUS->id_offer > 0 && $sessiontime > $this->offerToApply[0]["minimal_time_charge"] && $this->freetimetocall_left[0] > 0) {
+                    $this->agent_bill = 0.000001;
+                } else {
+                    $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
+                }
+
             }
 
         }
