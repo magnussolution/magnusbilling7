@@ -69,16 +69,16 @@ class UserCreditManager
         //add the refill
         if ($paymount_type != 2) {
             $res = UserCreditManager::insertRefill($id_user, $credit, $description, $code, $actualCredit, $signal);
+            if ($res == true) {
+                $modelUser->save();
+            }
         } else {
+            $modelUser->save();
             $mail = new Mail(Mail::$TYPE_REFILL, $id_user);
             $mail->replaceInEmail(Mail::$ITEM_ID_KEY, $id_user);
             $mail->replaceInEmail(Mail::$ITEM_AMOUNT_KEY, $credit);
             $mail->replaceInEmail(Mail::$DESCRIPTION, $description);
             $mail->send();
-            $res = true;
-        }
-        if ($res == true) {
-            $modelUser->save();
         }
 
         ServicesProcess::checkIfServiceToPayAfterRefill($id_user);
