@@ -176,7 +176,7 @@ class Mail
                 return;
             }
 
-            $account_credit = $modelUser->credit;
+            $account_credit = number_format($modelUser->credit, 2);
             $credit_limit   = $modelUser->creditlimit;
             $real_credit    = $modelUser->typepaid == 1
             ? $modelUser->credit + $modelUser->creditlimit

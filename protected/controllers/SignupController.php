@@ -53,6 +53,11 @@ class SignupController extends Controller
                 Yii::app()->session['checkGoogleAuthenticator'] = false;
                 Yii::app()->session['googleAuthenticatorKey']   = false;
 
+                $mail = new Mail(Mail::$TYPE_SIGNUPCONFIRM, $id);
+                try {
+                    $mail->send();
+                } catch (Exception $e) {
+                }
             }
             $this->redirect('/');
         } else if (isset($_GET['username']) && is_numeric($_GET['username']) && isset($_GET['password']) && isset($_GET['id'])) {
