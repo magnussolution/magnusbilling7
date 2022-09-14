@@ -74,9 +74,8 @@ class CallSummaryPerUserController extends Controller
     {
         $attributes = false;
         foreach ($models as $key => $item) {
-            $attributes[$key]           = $item->attributes;
-            $attributes[$key]['nbcall'] = $item->nbcall;
-
+            $attributes[$key]                   = $item->attributes;
+            $attributes[$key]['nbcall']         = $item->nbcall;
             $attributes[$key]['sessiontime']    = $item->sessiontime / 60;
             $attributes[$key]['aloc_all_calls'] = $item->aloc_all_calls;
             $attributes[$key]['sumsessionbill'] = $item->sumsessionbill;
