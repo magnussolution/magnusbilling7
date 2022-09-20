@@ -60,7 +60,7 @@ class SignupController extends Controller
                 }
             }
             $this->redirect('/');
-        } else if (isset($_GET['username']) && is_numeric($_GET['username']) && isset($_GET['password']) && isset($_GET['id'])) {
+        } else if (isset($_GET['username']) && strlen($_GET['username']) > 3 && isset($_GET['password']) && isset($_GET['id'])) {
 
             $signup = Signup::model()->find('username = :key AND password = :key1 AND id = :key2', array(
                 ':key'  => $_GET['username'],

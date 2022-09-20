@@ -1382,37 +1382,63 @@ class BaseController extends CController
 
                     switch ($comparison) {
                         case 'st':
-                            if (preg_match("/^id[A-Z].*\./", $field)) {
-                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
-                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->findAll('username LIKE :key', [':key' => $value . '%']);
+                                $in        = '';
+                                foreach ($modelUser as $key => $user) {
+                                    $in .= $user->id . ',';
+                                }
+                                $condition .= " AND t.id_user IN (:$paramName)";
+                                $value                          = substr($in, 0, -1);
+                                $filterDirect                   = true;
+                                $this->paramsFilter[$paramName] = "$value";
+                            }
+                            if (!isset($filterDirect)) {
+                                if (preg_match("/^id[A-Z].*\./", $field)) {
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field LIKE :$paramName",
+                                        );
+                                    }
+
                                 } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
-                                        'condition' => "$field LIKE :$paramName",
-                                    );
+                                    $condition .= " AND $field LIKE :$paramName";
                                 }
 
-                            } else {
-                                $condition .= " AND $field LIKE :$paramName";
+                                $this->paramsFilter[$paramName] = "$value%";
                             }
-
-                            $this->paramsFilter[$paramName] = "$value%";
 
                             break;
                         case 'ed':
-
-                            if (preg_match("/^id[A-Z].*\./", $field)) {
-                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
-                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
-                                } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
-                                        'condition' => "$field LIKE :$paramName",
-                                    );
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->findAll('username LIKE :key', [':key' => '%' . $value]);
+                                $in        = '';
+                                foreach ($modelUser as $key => $user) {
+                                    $in .= $user->id . ',';
                                 }
-                            } else {
-                                $condition .= " AND $field LIKE :$paramName";
+                                $condition .= " AND t.id_user IN (:$paramName)";
+                                $value                          = substr($in, 0, -1);
+                                $filterDirect                   = true;
+                                $this->paramsFilter[$paramName] = "$value";
                             }
+                            if (!isset($filterDirect)) {
+                                if (preg_match("/^id[A-Z].*\./", $field)) {
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field LIKE :$paramName",
+                                        );
+                                    }
+                                } else {
+                                    $condition .= " AND $field LIKE :$paramName";
+                                }
 
-                            $this->paramsFilter[$paramName] = "%$value";
+                                $this->paramsFilter[$paramName] = "%$value";
+                            }
 
                             break;
                         case 'ct':
@@ -1449,12 +1475,25 @@ class BaseController extends CController
                         case 'eq':
 
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
-                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
-                                } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
-                                        'condition' => "$field = :$paramName",
-                                    );
+                                $filterDirect = false;
+                                if ($field == 'idUser.username') {
+                                    $modelUser = User::model()->find('username = :key', [':key' => $value]);
+                                    if (isset($modelUser->id)) {
+                                        $condition .= " AND t.id_user = :$paramName";
+                                        $value        = $modelUser->id;
+                                        $filterDirect = true;
+                                    }
+                                }
+
+                                if (!isset($filterDirect)) {
+
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field = :$paramName",
+                                        );
+                                    }
                                 }
                             } else {
                                 $condition .= " AND $field = :$paramName";

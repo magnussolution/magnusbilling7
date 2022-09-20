@@ -46,7 +46,7 @@ class OfferCdrController extends Controller
 
         if (Yii::app()->session['isAdmin']) {
             $this->relationFilter['idOffer'] = array(
-                'condition' => "idOffer.id_user < 2",
+                'condition' => "(idOffer.id_user < 2 OR idOffer.id_user IS NULL)",
             );
         }
 
