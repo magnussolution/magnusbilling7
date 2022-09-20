@@ -689,13 +689,11 @@ astagidir => /var/lib/asterisk/agi-bin
 astspooldir => /var/spool/asterisk
 astrundir => /var/run/asterisk
 astlogdir => /var/log/asterisk
-
-[options]
-documentation_language = en_US  
 ' > /etc/asterisk/asterisk.conf
 
 echo "
 [options]
+documentation_language = en_US 
 verbose = 5
 debug = 0
 maxfiles = 500000
