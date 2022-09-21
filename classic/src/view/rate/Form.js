@@ -53,7 +53,6 @@ Ext.define('MBilling.view.rate.Form', {
             name: 'rateinitial',
             fieldLabel: t('Sell price'),
             mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
-            value: 0,
             minValue: 0,
             readOnly: App.user.isClient,
             hidden: App.user.hidden_prices == 1
@@ -91,7 +90,6 @@ Ext.define('MBilling.view.rate.Form', {
             fieldLabel: t('Connection charge'),
             mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
             readOnly: App.user.isClient,
-            value: 0,
             minValue: 0,
             hidden: App.user.hidden_prices == 1
         }, {
