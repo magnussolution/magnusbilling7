@@ -372,6 +372,7 @@ class SipController extends Controller
             $modelSip->insecure    = 'no';
             $modelSip->defaultuser = $user;
             $modelSip->secret      = $secret;
+            $modelSip->sip_group   = $_POST['sip_group'];
             $modelSip->save();
         }
 

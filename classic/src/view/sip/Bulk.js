@@ -22,7 +22,7 @@ Ext.define('MBilling.view.sip.Bulk', {
     iconCls: 'icon-import-csv',
     title: t('Bulk SIP'),
     width: 400,
-    height: window.isThemeNeptune || window.isThemeCrisp ? 200 : window.isThemeTriton ? 220 : 230,
+    height: window.isThemeNeptune || window.isThemeCrisp ? 210 : window.isThemeTriton ? 230 : 240,
     labelWidthFields: 180,
     htmlTipInfo: '',
     fieldsImport: [],
@@ -56,6 +56,11 @@ Ext.define('MBilling.view.sip.Bulk', {
                 emptyText: t('Leave blank to auto generate'),
                 allowBlank: true,
                 value: ''
+            }, {
+                xtype: 'textfield',
+                name: 'sip_group',
+                fieldLabel: t('Group'),
+                allowBlank: true
             }]
         }];
         me.title = me.title + (me.titleModule ? ' - ' + me.titleModule : '');
