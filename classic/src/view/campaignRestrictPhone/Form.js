@@ -26,6 +26,11 @@ Ext.define('MBilling.view.campaignRestrictPhone.Form', {
         me.items = [{
             name: 'number',
             fieldLabel: t('Number')
+        }, {
+            xtype: 'textareafield',
+            name: 'description',
+            fieldLabel: t('Description'),
+            allowBlank: true
         }];
         me.callParent(arguments);
     }
