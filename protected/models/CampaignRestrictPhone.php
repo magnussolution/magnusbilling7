@@ -55,6 +55,7 @@ class CampaignRestrictPhone extends Model
         return array(
             array('number', 'required'),
             array('number', 'numerical', 'integerOnly' => true),
+            array('description', 'length', 'max' => 100),
         );
     }
 
