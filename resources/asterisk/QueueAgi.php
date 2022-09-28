@@ -141,7 +141,7 @@ class QueueAgi
             $CalcAgi->terminatecauseid = $CalcAgi->terminatecauseid;
             $CalcAgi->sessionbill      = $DidAgi->sell_price;
             $CalcAgi->sipiax           = 8;
-            $CalcAgi->buycost          = 0;
+            $CalcAgi->buycost          = $DidAgi->buy_price;
             $CalcAgi->id_prefix        = $modelPrefix->id;
             $CalcAgi->saveCDR($agi, $MAGNUS);
 
