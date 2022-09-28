@@ -42,6 +42,11 @@ Ext.define('MBilling.view.campaignRestrictPhone.List', {
             header: t('Number'),
             dataIndex: 'number',
             flex: 4
+        }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            flex: 4,
+            hidden: !App.user.isAdmin
         }]
         me.callParent(arguments);
     }

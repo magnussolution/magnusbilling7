@@ -25,9 +25,13 @@ class SipCallAgi
         }
         $dialparams = implode(',', $dialparams);
 
-        $sql               = "SELECT * FROM pkg_user WHERE id = " . $MAGNUS->modelSip->id_user . " LIMIT 1";
-        $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $MAGNUS->modelUser);
+
+        $account             = explode("/", $MAGNUS->channel);
+        $MAGNUS->sip_account = substr($account[1], 0, strrpos($account[1], '-'));
+        $sql                 = "SELECT * FROM pkg_user WHERE name = " . $MAGNUS->sip_account . " LIMIT 1";
+        $modelUserRec        = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        $MAGNUS->record_call = $modelUserRec->record_call;
 
         $MAGNUS->startRecordCall($agi);
 

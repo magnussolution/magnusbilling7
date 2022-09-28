@@ -26,6 +26,9 @@ Ext.define('MBilling.model.CampaignRestrictPhone', {
     }, {
         name: 'number',
         type: 'string'
+    }, {
+        name: 'description',
+        type: 'string'
     }],
     proxy: {
         type: 'uxproxy',
