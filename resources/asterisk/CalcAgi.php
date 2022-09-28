@@ -303,19 +303,19 @@ class CalcAgi
         $sessiontime           = $this->answeredtime;
         $dialstatus            = $this->dialstatus;
 
+        //adiciona o tempo adicional
+        if (substr($additional_grace_time, -1) == "%") {
+            $additional_grace_time = str_replace("%", "", $additional_grace_time);
+            $additional_grace_time = $additional_grace_time / 100;
+            $additional_grace_time = str_replace("0.", "1.", $additional_grace_time);
+            $sessiontime           = $sessiontime * $additional_grace_time;
+        } else {
+            $sessiontime = $sessiontime + $additional_grace_time;
+        }
+
         if ($sessiontime > 0) {
             $this->freetimetocall_used = 0;
             //adiciona o tempo adicional
-            if (substr($additional_grace_time, -1) == "%") {
-                $additional_grace_time = str_replace("%", "", $additional_grace_time);
-                $additional_grace_time = $additional_grace_time / 100;
-                $additional_grace_time = str_replace("0.", "1.", $additional_grace_time);
-                $sessiontime           = $sessiontime * $additional_grace_time;
-            } else {
-                if ($sessiontime > 0) {
-                    $sessiontime = $sessiontime + $additional_grace_time;
-                }
-            }
 
             $this->calculateCost($MAGNUS, $sessiontime, $agi);
 
