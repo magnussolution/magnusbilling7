@@ -140,7 +140,7 @@ class BuyCreditController extends Controller
                 }
             }
 
-            if ($modelServicesUse[0]->idUser->typepaid == 1) {
+            if (isset($modelServicesUse[0]->id) && $modelServicesUse[0]->idUser->typepaid == 1) {
                 $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit + $modelServicesUse[0]->idUser->creditlimit;
             }
 
