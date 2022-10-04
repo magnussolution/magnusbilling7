@@ -39,7 +39,7 @@ Ext.define('MBilling.view.didbuy.Module', {
             }],
             bbar: [{
                 text: t('Buy'),
-                tooltip: t('Bext'),
+                tooltip: t('Next'),
                 width: 100,
                 iconCls: 'x-fa fa-shopping-cart',
                 handler: 'onBuyDid'

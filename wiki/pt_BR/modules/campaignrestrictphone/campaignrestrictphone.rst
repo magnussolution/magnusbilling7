@@ -8,3 +8,13 @@ Número
 
 
 
+
+.. _campaignRestrictPhone-description:
+
+Descrição
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+

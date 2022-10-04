@@ -964,8 +964,6 @@ return array(
     'The DID has already been activated for another user.' => 'El DID ya se ha activado para otro usuario.',
     'The DID has been activated for you.' => 'El DID está activado para usted.',
     'The call limit need be less than' => 'El límite de llamada precisa ser menor que',
-    'The maximum amount to' => 'El importe máximo es',
-    'The minimum amount to' => 'El importe mínimo es',
     'The new layout will be applied the next time the system is loaded' => 'El nuevo diseño se aplicará la próxima vez que se cargue el sistema',
     'The new theme will be applied the next time the system is loaded' => 'El nuevo tema se aplicará la próxima vez que se cargue el sistema.',
     'Theme' => 'Tema',
