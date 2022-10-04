@@ -130,7 +130,7 @@ class ApiAccess
                 if (isset($_POST['getFields'])) {
                     if (!AccessManager::getInstance($_POST['module'])->canRead()) {
                         header('HTTP/1.0 401 Unauthorized');
-                        die("Access denied to $action in module:" . $_POST['module']);
+                        die("Access denied in module:" . $_POST['module']);
                     }
                     $module = $_POST['module'];
                     $rules  = $module::model()->rules();
@@ -143,7 +143,7 @@ class ApiAccess
                     $modules          = [];
                     foreach ($modelGroupModule as $values) {
                         if ($values->idModule->module != "") {
-                            $modules[] = $values->idModule->module;
+                            $modules[] = ['Menu name' => substr($values->idModule->text, 3, -2), 'Module name' => $values->idModule->module];
                         }
                     }
                     exit(json_encode($modules));
