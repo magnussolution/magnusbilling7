@@ -57,6 +57,7 @@ class TrunkGroup extends Model
             array('name', 'required'),
             array('type', 'numerical', 'integerOnly' => true),
             array('description', 'length', 'max' => 500),
+            array('weight', 'match', 'pattern' => '/^[0-9\,]*$|^$/', 'message' => 'Allowed format int,int,int. Ex: 1,2,1,5,3'),
         );
     }
 
