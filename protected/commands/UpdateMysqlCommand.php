@@ -1819,6 +1819,19 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-09-26
+        if ($version == '7.8.2.1') {
+            $sql = "ALTER TABLE `pkg_trunk_group_trunk` ADD `weight` INT(11) NULL DEFAULT NULL ;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_trunk_group` ADD `weight` VARCHAR(100) NULL DEFAULT NULL ;";
+            $this->executeDB($sql);
+
+            $version = '7.8.2.2';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

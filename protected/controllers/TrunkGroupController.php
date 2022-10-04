@@ -36,6 +36,20 @@ class TrunkGroupController extends Controller
 
         parent::init();
     }
+
+    public function afterSave($model, $values)
+    {
+
+        $weight = explode(',', $model->weight);
+
+        $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->findAll('id_trunk_group = :key', [':key' => $model->id]);
+
+        for ($i = 0; $i < count($modelTrunkGroupTrunk); $i++) {
+
+            $modelTrunkGroupTrunk[$i]->weight = isset($weight[$i]) && $weight[$i] > 0 ? intval($weight[$i]) : '1';
+            $modelTrunkGroupTrunk[$i]->save();
+        }
+    }
     public function saveUpdateAll($ids, $values, $module, $namePk, $subRecords)
     {
         if (Yii::app()->session['isClient']) {
