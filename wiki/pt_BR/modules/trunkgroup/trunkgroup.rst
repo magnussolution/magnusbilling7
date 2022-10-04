@@ -40,3 +40,16 @@ Troncos
 
 
 
+
+.. _trunkGroup-weight:
+
+Peso
+----
+
+| Esta opção é para balancear as chamadas por peso.
+| Exemplo. 
+| 
+| Digamos que tenha selecionado 3 troncos, e você deseja enviar 1 chamada para primeiro tronco, 2 para o segundo e 1 para o terceiro, então, neste exemplo, coloque neste campo 1,2,1.
+
+
+

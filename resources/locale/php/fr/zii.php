@@ -370,8 +370,6 @@ return array(
     'The DID has already been activated for another user.' => 'Le DID a déjà été activé pour un autre utilisateur.',
     'The DID has been activated for you.' => 'Le fait a été activé pour vous.',
     'The call limit need be less than' => 'appel doit être inférieure à',
-    'The maximum amount to' => 'Le montant maximum à',
-    'The minimum amount to' => 'Le montant minimum à',
     'The new layout will be applied the next time the system is loaded' => 'La nouvelle mise en page sera appliquée la prochaine fois que le système est chargé.',
     'The new theme will be applied the next time the system is loaded' => 'Le nouveau thème sera appliqué la prochaine fois que le système est chargé.',
     'The system will reload in 3 seconds' => 'Le système se rechargera en 3 secondes',

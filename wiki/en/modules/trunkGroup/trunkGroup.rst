@@ -41,3 +41,16 @@ Trunks
 
 
 
+
+.. _trunkGroup-weight:
+
+Weight
+------
+
+| This option is to balance calls by weight.
+| Example.
+| 
+| Let's say you selected 3 trunks, and you want to send 1 call to the first trunk, 2 to the second and 1 to the third, so in this example, put 1,2,1 in this field.
+
+
+

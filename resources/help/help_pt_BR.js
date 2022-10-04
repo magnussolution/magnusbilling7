@@ -273,6 +273,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'campaignpollinfo.resposta': `Opção votada.`,
     //NúMEROS RESTRITOS
     'campaignrestrictphone.number': `Número a ser bloqueado. É necessário ativar a opção números bloqueados na campanha.`,
+    'campaignrestrictphone.description': ``,
     //AJUSTES
     'configuration.config_value': `Valor. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     'configuration.config_description': `Descrição. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
@@ -341,6 +342,7 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.TimeOfDay_sun': `Mesma regra só que para domingos.`,
     'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento.`,
+    'did.country': ``,
     //DESTINO DE DIDS
     'diddestination.id_did': `Selecione o DID para criar o novo destino.`,
     'diddestination.id_user': `Usuário que será o dono deste DID.`,
@@ -901,6 +903,9 @@ O MagnusBilling tentará enviar a chamada para o próximo tronco do grupo desde 
 
 .`,
     'trunkgroup.id_trunk': `Selecionar os troncos que pertenceram a este grupo. Se for selecionado o tipo, em ordem, então selecione os troncos na ordem desejada.`,
+    'trunkgroup.weight': `Esta opção é para balancear as chamadas por peso.||Exemplo. 
+
+Digamos que tenha selecionado 3 troncos, e você deseja enviar 1 chamada para primeiro tronco, 2 para o segundo e 1 para o terceiro, então, neste exemplo, coloque neste campo 1,2,1.`,
     //ERROS TRONCO
     'trunksipcodes.ip': ``,
     'trunksipcodes.code': ``,

@@ -208,6 +208,7 @@ Help.load({
     'campaignpollinfo.resposta': `Option chosen.`,
     //RESTRICT PHONE
     'campaignrestrictphone.number': `Number that should be blocked. Its necessary to activate the blocked numbers option in the campaign.`,
+    'campaignrestrictphone.description': ``,
     //CONFIGURATION
     'configuration.config_value': `Value. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html.`,
     'configuration.config_description': `Description. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html`,
@@ -270,6 +271,7 @@ Help.load({
     'did.TimeOfDay_sun': `The same but for Sunday.`,
     'did.workaudio': `Audio that will be executed when a call is received at the time interval.`,
     'did.noworkaudio': `Audio that will be executed when a call is received out of the time interval.`,
+    'did.country': ``,
     //DID DESTINATION
     'diddestination.id_did': `Select the DID that you want create new destination for.`,
     'diddestination.id_user': `User that will be the owner of this DID.`,
@@ -812,6 +814,9 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
 
 `,
     'trunkgroup.id_trunk': `Select the trunks that belongs to this group. If selected the type, order, then select the trunks in the desired order.`,
+    'trunkgroup.weight': `This option is to balance calls by weight.||Example.
+
+Let's say you selected 3 trunks, and you want to send 1 call to the first trunk, 2 to the second and 1 to the third, so in this example, put 1,2,1 in this field.`,
     //TRUNK ERRORS
     'trunksipcodes.ip': ``,
     'trunksipcodes.code': ``,
