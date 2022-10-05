@@ -391,7 +391,7 @@ fi
 
 
 
-  mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
+mysql -uroot -e "SET PASSWORD FOR 'root'@localhost = PASSWORD('${password}'); FLUSH PRIVILEGES;"
 
 
 
@@ -768,7 +768,7 @@ echo "
 * * * * * php /var/www/html/mbilling/cron.php didwww
 " > $CRONPATH
 chmod 600 $CRONPATH
-crontab $CRONPATH
+
 
 
 echo "
