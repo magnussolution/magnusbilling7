@@ -55,7 +55,7 @@ class TrunkSipCodes extends Model
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        return array(
+        $rules = array(
             array('ip, code, total,', 'required'),
             array('total, code', 'numerical', 'integerOnly' => true),
             array('ip', 'length', 'max' => 100),
@@ -63,6 +63,7 @@ class TrunkSipCodes extends Model
             array('total', 'length', 'max' => 11),
 
         );
+        return $this->getExtraField($rules);
     }
 
 }

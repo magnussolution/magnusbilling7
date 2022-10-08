@@ -52,10 +52,11 @@ class ServicesPlan extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_services, id_plan', 'required'),
             array('id_services, id_plan', 'numerical', 'integerOnly' => true),
         );
+        return $this->getExtraField($rules);
     }
 
     public function beforeSave()

@@ -61,7 +61,7 @@ class Sip extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd, voicemail_password,
                 id_trunk_group', 'numerical', 'integerOnly' => true),
@@ -92,6 +92,7 @@ class Sip extends Model
             array('defaultuser', 'uniquePeerName'),
 
         );
+        return $this->getExtraField($rules);
     }
 
     public function checktechprefix($attribute, $params)

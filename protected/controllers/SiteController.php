@@ -12,7 +12,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        $modelUser = User::model()->find('company_website LIKE :key', array(':key' => $_SERVER['HTTP_HOST']));
+        $startSession = strlen(session_id()) < 1 ? session_start() : null;
+        $modelUser    = User::model()->find('company_website LIKE :key', array(':key' => $_SERVER['HTTP_HOST']));
 
         if (isset($modelUser->id)) {
             echo 'window.agentTitle = ' . json_encode($modelUser->company_name) . ';';
@@ -74,6 +75,27 @@ class SiteController extends Controller
         echo 'window.global_record_calls = "' . $this->config['global']['global_record_calls'] . '";';
         echo 'window.default_prefix_rule = "' . $this->config['global']['default_prefix_rule'] . '";';
         echo 'window.logged = ' . json_encode(Yii::app()->session['logged']) . ';';
+        $sql          = "SELECT * FROM pkg_module_extra t JOIN pkg_module a ON t.id_module = a.id";
+        $modele_extra = Yii::app()->db->createCommand($sql)->queryAll();
+        foreach ($modele_extra as $key => $value) {
+            if ($value['type'] == 'form') {
+
+                $module = $value['module'];
+
+                preg_match_all('/"name":"(\D*)",/', $value['description'], $output_array);
+
+                $i = 0;
+                foreach ($output_array[1] as $key => $value2) {
+
+                    $_SESSION['module_extra'][$module][$i] = $value2;
+
+                    $i++;
+
+                }
+
+                echo 'window.module_extra_form_' . $value['module'] . ' =\'' . $value['description'] . '\';';
+            }
+        }
 
     }
 }

@@ -52,11 +52,12 @@ class RestrictedPhonenumber extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user, direction', 'numerical', 'integerOnly' => true),
             array('number', 'length', 'max' => 20),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

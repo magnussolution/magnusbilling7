@@ -53,10 +53,11 @@ class SendCreditRates extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_product', 'numerical', 'integerOnly' => true),
             array('sell_price', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

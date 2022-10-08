@@ -61,12 +61,13 @@ class CallArchive extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_plan, calledstation', 'required'),
             array('id_user, id_plan, id_trunk, sessiontime, real_sessiontime, sipiax', 'numerical', 'integerOnly' => true),
             array('uniqueid, starttime, src, calledstation,
                 terminatecauseid, buycost, sessionbill,  agent_bill, callerid', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
     public function relations()

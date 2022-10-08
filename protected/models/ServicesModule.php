@@ -75,11 +75,12 @@ class ServicesModule extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_services, id_module', 'required'),
             array('id_services, id_module, show_menu', 'numerical', 'integerOnly' => true),
             array('action', 'length', 'max' => 5),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

@@ -54,10 +54,11 @@ class QueueMemberDashBoard extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_queue id_user', 'numerical', 'integerOnly' => true),
             array('agentStatus, callId', 'length', 'max' => 25),
         );
+        return $this->getExtraField($rules);
     }
 
     /*

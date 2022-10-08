@@ -52,12 +52,13 @@ class Provider extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('provider_name', 'required'),
             array('description, credit_control', 'length', 'max' => 100),
             array('credit', 'type', 'type' => 'double'),
             array('provider_name', 'unique'),
         );
+        return $this->getExtraField($rules);
     }
 
 }

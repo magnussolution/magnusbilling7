@@ -52,8 +52,10 @@ class LogActions extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name', 'length', 'max' => 20),
         );
+        return $this->getExtraField($rules);
     }
+
 }

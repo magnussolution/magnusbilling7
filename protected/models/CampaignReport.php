@@ -60,9 +60,10 @@ class CampaignReport extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_campaign, id_phonenumber, id_user, id_trunk, unix_timestamp,status', 'numerical', 'integerOnly' => true),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

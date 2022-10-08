@@ -52,10 +52,11 @@ class CampaignPhonebook extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_campaign, id_phonebook', 'required'),
             array('id_campaign, id_phonebook', 'numerical', 'integerOnly' => true),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

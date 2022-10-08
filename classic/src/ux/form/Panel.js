@@ -35,6 +35,73 @@ Ext.define('Ext.ux.form.Panel', {
     initComponent: function() {
         var me = this;
         var formName = me.xtype.slice(0, -4);
+        eval('var ' + "modulename" + '= ' + 'window.module_extra_form_' + formName + ';');
+        if (modulename) {
+            var theobj = JSON.parse(modulename);
+            if (me.items[0].xtype == 'tabpanel') {
+                if (theobj.items[0].hidden) {
+                    switch (theobj.items[0].hidden) {
+                        case 'App.user.isClient':
+                            value = App.user.isClient;
+                            break;
+                        case 'App.user.isAdmin':
+                            value = App.user.isAdmin;
+                            break;
+                        case 'App.user.isAgent':
+                            value = App.user.isAgent;
+                            break;
+                        case 'App.user.isClientAgent':
+                            value = App.user.isClientAgent;
+                            break;
+                        case '!App.user.isClient':
+                            value = !App.user.isClient;
+                            break;
+                        case '!App.user.isAdmin':
+                            value = !App.user.isAdmin;
+                            break;
+                        case '!App.user.isAgent':
+                            value = !App.user.isAgent;
+                            break;
+                        case '!App.user.isClientAgent':
+                            value = !App.user.isClientAgent;
+                            break;
+                    }
+                    theobj.items[0].hidden = value;
+                }
+                me.items[0].items.push(theobj);
+            } else {
+                if (theobj.hidden) {
+                    switch (theobj.hidden) {
+                        case 'App.user.isClient':
+                            value = App.user.isClient;
+                            break;
+                        case 'App.user.isAdmin':
+                            value = App.user.isAdmin;
+                            break;
+                        case 'App.user.isAgent':
+                            value = App.user.isAgent;
+                            break;
+                        case 'App.user.isClientAgent':
+                            value = App.user.isClientAgent;
+                            break;
+                        case '!App.user.isClient':
+                            value = !App.user.isClient;
+                            break;
+                        case '!App.user.isAdmin':
+                            value = !App.user.isAdmin;
+                            break;
+                        case '!App.user.isAgent':
+                            value = !App.user.isAgent;
+                            break;
+                        case '!App.user.isClientAgent':
+                            value = !App.user.isClientAgent;
+                            break;
+                    }
+                    theobj.hidden = value;
+                }
+                me.items.push(theobj);
+            }
+        }
         if (me.items && App.user.isAdmin && App.user.show_filed_help == true) {
             if (me.items[0].xtype == 'tabpanel') {
                 me.items[0].items.forEach(function(tab) {

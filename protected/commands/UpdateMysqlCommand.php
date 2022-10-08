@@ -1832,6 +1832,27 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-10-07
+        if ($version == '7.8.2.2') {
+            $sql = "
+            CREATE TABLE IF NOT EXISTS `pkg_module_extra` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `id_module` int(11) NOT NULL,
+            `type` varchar(10) DEFAULT NULL,
+            `description` text NOT NULL,
+            PRIMARY KEY (`id`),
+            KEY `pkg_module_extra_id_module` (`id_module`),
+            KEY `type` (`type`),
+            CONSTRAINT `fk_pkg_module_pkg_module_extra` FOREIGN KEY (`id_module`) REFERENCES `pkg_module` (`id`) ON DELETE CASCADE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            ";
+            $this->executeDB($sql);
+
+            $version = '7.8.2.3';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)

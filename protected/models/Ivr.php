@@ -52,7 +52,7 @@ class Ivr extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, use_holidays,direct_extension', 'numerical', 'integerOnly' => true),
             array('monFriStart,  satStart,  sunStart', 'length', 'max' => 200),
             array('name, option_0, option_1, option_2, option_3, option_4, option_5, option_6, option_7, option_8, option_9, option_10', 'length', 'max' => 50),
@@ -60,6 +60,7 @@ class Ivr extends Model
             array('monFriStart,  satStart,  sunStart', 'checkInterval'),
 
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkInterval($attribute, $params)

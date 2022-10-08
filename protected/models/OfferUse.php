@@ -52,10 +52,11 @@ class OfferUse extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_offer, status, month_payed, reminded', 'numerical', 'integerOnly' => true),
             array('reservationdate, releasedate', 'length', 'max' => 70),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

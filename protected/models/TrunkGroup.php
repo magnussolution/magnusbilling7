@@ -53,12 +53,13 @@ class TrunkGroup extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name', 'required'),
             array('type', 'numerical', 'integerOnly' => true),
             array('description', 'length', 'max' => 500),
             array('weight', 'match', 'pattern' => '/^[0-9\,]*$|^$/', 'message' => Yii::t('zii', 'Allowed format int,int,int. Ex: 1,2,1,5,3')),
         );
+        return $this->getExtraField($rules);
     }
 
 }

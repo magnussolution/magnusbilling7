@@ -104,6 +104,32 @@ class DidAgi
                         exit;
                     }
                 }
+
+                if (isset($MAGNUS->modelUser->inbound_call_limit) && $MAGNUS->modelUser->inbound_call_limit > 0) {
+
+                    $sql         = "SELECT * FROM pkg_did WHERE id_user = " . $MAGNUS->modelUser->id;
+                    $modelDIDAll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+
+                    $calls = 0;
+                    foreach ($modelDIDAll as $key => $value) {
+
+                        $agi->verbose("find calls from DID $value->did", 5);
+                        $calls += AsteriskAccess::getCallsPerDid($value->did);
+                        $agi->verbose("found $calls", 5);
+                    }
+
+                    if ($calls >= $MAGNUS->modelUser->inbound_call_limit) {
+                        if ($MAGNUS->modelUser->calllimit_error == 403) {
+                            $agi->execute((busy), busy);
+                        } else {
+                            $agi->execute((congestion), Congestion);
+                        }
+
+                        $MAGNUS->hangup($agi);
+                        exit;
+                    }
+
+                }
                 $this->checkDidDestinationType($agi, $MAGNUS, $CalcAgi);
             } else {
                 $agi->verbose("Is a DID call But not have destination Hangup Call");

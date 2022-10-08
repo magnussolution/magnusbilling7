@@ -55,7 +55,7 @@ class Did extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('did', 'required'),
             array('minimal_time_charge,calllimit, charge_of, block_expression_1, block_expression_2,block_expression_3, buyrateinitblock, buyrateincrement, minimal_time_buy, initblock, increment, id_user, cbr_em, activated, reserved, secondusedreal, billingtype,
                 send_to_callback_1,send_to_callback_3,send_to_callback_3,cbr,cbr_ua,
@@ -67,6 +67,7 @@ class Did extends Model
             array('connection_charge, selling_rate_1, selling_rate_2,selling_rate_3,buy_rate_1,buy_rate_2,buy_rate_3, connection_sell,
                 agent_client_rate_1,agent_client_rate_2,agent_client_rate_3', 'length', 'max' => 15),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

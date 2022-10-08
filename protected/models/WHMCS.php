@@ -54,10 +54,11 @@ class WHMCS extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, pkg_user_whmcs', 'required'),
 
         );
+        return $this->getExtraField($rules);
     }
 
     public function relations()
