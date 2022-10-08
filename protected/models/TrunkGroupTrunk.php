@@ -52,10 +52,11 @@ class TrunkGroupTrunk extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_trunk_group, id_trunk', 'required'),
             array('id_trunk_group, id_trunk', 'numerical', 'integerOnly' => true),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

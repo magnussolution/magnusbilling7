@@ -54,7 +54,7 @@ class Servers extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('host', 'required'),
             array('status, weight', 'numerical', 'integerOnly' => true),
             array('host,name', 'length', 'max' => 100),
@@ -64,6 +64,7 @@ class Servers extends Model
             array('public_ip', 'length', 'max' => 80),
             array('password', 'checkpassword'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkpassword($attribute)

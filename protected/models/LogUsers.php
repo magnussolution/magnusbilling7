@@ -52,12 +52,13 @@ class LogUsers extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_log_actions', 'numerical', 'integerOnly' => true),
             array('date', 'length', 'max' => 100),
             array('ip', 'length', 'max' => 16),
             array('description', 'safe'),
         );
+        return $this->getExtraField($rules);
     }
     /**
      * @return array regras de relacionamento.

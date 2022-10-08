@@ -52,7 +52,7 @@ class Api extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('api_key, api_secret', 'required'),
             array('api_key, api_secret', 'unique'),
             array('id_user, status', 'numerical', 'integerOnly' => true),
@@ -61,6 +61,7 @@ class Api extends Model
             array('action', 'length', 'max' => 7),
             array('api_key', 'checksecret'),
         );
+        return $this->getExtraField($rules);
     }
     public function checksecret($attribute, $params)
     {

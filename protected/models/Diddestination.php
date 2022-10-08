@@ -53,12 +53,13 @@ class Diddestination extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user, id_queue, id_sip, id_ivr, id_did, priority, activated, secondusedreal, voip_call', 'numerical', 'integerOnly' => true),
             array('destination', 'length', 'max' => 120),
             array('context', 'safe'),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

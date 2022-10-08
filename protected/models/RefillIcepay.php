@@ -52,10 +52,11 @@ class RefillIcepay extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('description, credit,date', 'length', 'max' => 500),
         );
+        return $this->getExtraField($rules);
     }
     /*
      * @return array regras de relacionamento.

@@ -26,6 +26,17 @@ class Model extends CActiveRecord
         return $this->_module;
     }
 
+    public function getExtraField($rules)
+    {
+        if (isset($_SESSION['module_extra'][$this->getModule()])) {
+
+            foreach ($_SESSION['module_extra'][$this->getModule()] as $key => $value) {
+                $rules[] = [$value, 'length', 'max' => 500];
+            }
+        }
+        return $rules;
+    }
+
     public function uniquePeerName($attribute, $params)
     {
 

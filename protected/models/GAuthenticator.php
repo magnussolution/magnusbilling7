@@ -59,9 +59,10 @@ class GAuthenticator extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('googleAuthenticator_enable', 'numerical', 'integerOnly' => true),
             array('google_authenticator_key', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 }

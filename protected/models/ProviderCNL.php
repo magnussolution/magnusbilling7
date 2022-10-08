@@ -52,10 +52,11 @@ class ProviderCNL extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_provider, cnl,zone', 'required'),
             array('zone, cnl', 'length', 'max' => 11),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

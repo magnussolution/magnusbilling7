@@ -61,9 +61,10 @@ class CallSummaryMonthTrunk extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('sessiontime,day, id_trunk, sessionbill, nbcall, buycost, lucro, aloc_all_calls, sumaloc_all_calls, nbcall_fail, asr', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

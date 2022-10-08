@@ -52,11 +52,12 @@ class Firewall extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('ip, action', 'required'),
             array('action', 'numerical', 'integerOnly' => true),
             array('description,jail', 'length', 'max' => 200),
 
         );
+        return $this->getExtraField($rules);
     }
 }

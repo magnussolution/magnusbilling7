@@ -52,12 +52,13 @@ class PhoneBook extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 30),
             array('description', 'length', 'max' => 100),
             array('status', 'length', 'max' => 1),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

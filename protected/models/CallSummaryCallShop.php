@@ -65,10 +65,11 @@ class CallSummaryCallShop extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'integerOnly' => true),
             array('sessiontime, price, buycost, sumbuycost, lucro, aloc_success_call, aloc_all_calls, sumaloc_all_calls', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
     /**
      * @return array regras de relacionamento.

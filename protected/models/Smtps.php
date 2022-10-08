@@ -52,12 +52,13 @@ class Smtps extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'numerical', 'integerOnly' => true),
             array('host, username, ', 'length', 'max' => 100),
             array('password', 'length', 'max' => 50),
             array('encryption, port', 'length', 'max' => 10),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

@@ -54,7 +54,7 @@ class Trunk extends Model
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        return array(
+        $rules = array(
             array('trunkcode, id_provider, allow, providertech, host', 'required'),
             array('allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use, cnl', 'numerical', 'integerOnly' => true),
             array('secret', 'length', 'max' => 50),
@@ -73,6 +73,7 @@ class Trunk extends Model
             array('trunkcode', 'checkTrunkCode'),
             array('trunkcode', 'uniquePeerName'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkTrunkCode($attribute, $params)

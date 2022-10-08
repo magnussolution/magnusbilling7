@@ -52,12 +52,13 @@ class RateCallshop extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             //array('dialprefix', 'required'),
             array('id_user, minimo, block, minimal_time_charge', 'numerical', 'integerOnly' => true),
             array('dialprefix, destination', 'length', 'max' => 30),
             array('buyrate', 'length', 'max' => 15),
         );
+        return $this->getExtraField($rules);
     }
 
     public function createCallShopRates($model)

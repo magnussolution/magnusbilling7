@@ -54,7 +54,7 @@ class CallShop extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user, calllimit', 'numerical', 'integerOnly' => true),
             array('name, callerid, context, fromuser, fromdomain, md5secret, secret, fullcontact', 'length', 'max' => 80),
@@ -73,8 +73,11 @@ class CallShop extends Model
             array('lastms', 'length', 'max' => 11),
             array('defaultuser, cid_number, outboundproxy', 'length', 'max' => 40),
         );
-    }
 
+        $rules = $this->getExtraField($rules);
+
+        return $rules;
+    }
     /**
      * @return array relational rules.
      */

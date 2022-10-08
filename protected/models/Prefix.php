@@ -52,10 +52,11 @@ class Prefix extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('destination, prefix', 'required'),
             array('prefix', 'unique'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function afterSave()

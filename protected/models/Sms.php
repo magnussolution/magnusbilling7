@@ -52,7 +52,7 @@ class Sms extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user, prefix, status', 'numerical', 'integerOnly' => true),
             array('telephone', 'numerical'),
@@ -62,6 +62,7 @@ class Sms extends Model
             array('sms_from', 'length', 'max' => 16),
 
         );
+        return $this->getExtraField($rules);
     }
 
     /**

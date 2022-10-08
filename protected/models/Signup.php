@@ -44,7 +44,7 @@ class Signup extends Model
     public function rules()
     {
 
-        return array(
+        $rules = array(
             array('username,password,lastname, firstname, email, city, state, phone, id_plan, id_user', 'required'),
             array('phone, vat, mobile,calllimit', 'numerical'),
             array('password, password2', 'length', 'min' => 6),
@@ -65,6 +65,7 @@ class Signup extends Model
             array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || $this->captcha == false),
             array('accept_terms', 'required', 'requiredValue' => 1, 'message' => 'You must accept the Terms and Conditons in order to register.'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkemail($attribute, $params)

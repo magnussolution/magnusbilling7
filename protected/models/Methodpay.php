@@ -59,7 +59,7 @@ class Methodpay extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id, payment_method, country', 'required'),
             array('active, id_user, fee, SLIdProduto,min,max', 'numerical', 'integerOnly' => true),
             array('obs, client_id, client_secret', 'length', 'max' => 500),
@@ -68,6 +68,7 @@ class Methodpay extends Model
             array('pagseguro_TOKEN,url, show_name, SLvalidationtoken', 'length', 'max' => 100),
             array('SLAppToken,SLAccessToken,SLSecret', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

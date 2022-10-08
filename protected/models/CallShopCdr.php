@@ -53,7 +53,7 @@ class CallShopCdr extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user, status, sessiontime', 'numerical', 'integerOnly' => true),
             array('price, buycost, markup,price_min', 'length', 'max' => 20),
@@ -61,5 +61,7 @@ class CallShopCdr extends Model
             array('calledstation, sessionid', 'length', 'max' => 50),
             array('destination, sessionid', 'length', 'max' => 100),
         );
+        return $this->getExtraField($rules);
+
     }
 }

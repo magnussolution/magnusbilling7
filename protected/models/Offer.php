@@ -52,10 +52,11 @@ class Offer extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('packagetype, id_user, billingtype, startday, freetimetocall,initblock, billingblock, minimal_time_charge', 'numerical', 'integerOnly' => true),
             array('label, price', 'length', 'max' => 70),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

@@ -55,12 +55,13 @@ class UserHistory extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('date', 'length', 'max' => 20),
             array('description', 'length', 'max' => 1000),
 
         );
+        return $this->getExtraField($rules);
     }
     /*
      * @return array regras de relacionamento.

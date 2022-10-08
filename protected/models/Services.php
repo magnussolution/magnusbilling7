@@ -52,12 +52,13 @@ class Services extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name, price', 'required'),
             array('status,disk_space,sipaccountlimit,calllimit,return_credit', 'numerical', 'integerOnly' => true),
             array('description', 'length', 'min' => 1),
             array('type', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
     /**
      * @return array roles of relationship.
