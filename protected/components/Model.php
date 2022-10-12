@@ -54,4 +54,62 @@ class Model extends CActiveRecord
         }
 
     }
+
+    public function generateRules($rules = [])
+    {
+        $table = array($this->getTableSchema($this->tableName()));
+
+        $required  = array();
+        $integers  = array();
+        $numerical = array();
+        $length    = array();
+        $safe      = array();
+
+        foreach ($table[0]->columns as $column) {
+
+            if ($column->autoIncrement) {
+                continue;
+            }
+
+            $r = !$column->allowNull && $column->defaultValue === null;
+            if ($r) {
+                $required[] = $column->name;
+            }
+
+            if ($column->type === 'integer') {
+                $integers[] = $column->name;
+            } elseif ($column->type === 'double') {
+                $numerical[] = $column->name;
+            } elseif ($column->type === 'string' && $column->size > 0) {
+                $length[$column->size][] = $column->name;
+            } elseif (!$column->isPrimaryKey && !$r) {
+                $safe[] = $column->name;
+            }
+
+        }
+        if ($required !== array()) {
+
+            $rules[] = [implode(', ', $required), 'required'];
+        }
+
+        if ($integers !== array()) {
+            $rules[] = [implode(', ', $integers), 'numerical', 'integerOnly' => true];
+        }
+
+        if ($numerical !== array()) {
+            $rules[] = [implode(', ', $numerical), 'numerical'];
+        }
+
+        if ($length !== array()) {
+            foreach ($length as $len => $cols) {
+                $rules[] = [implode(', ', $cols), 'length', 'max' => $len];
+            }
+
+        }
+        if ($safe !== array()) {
+            $rules[] = [implode(', ', $safe), 'safe'];
+        }
+
+        return $this->getExtraField($rules);
+    }
 }
