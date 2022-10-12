@@ -9,7 +9,7 @@ Ext.define('MBilling.view.user.Form', {
     alias: 'widget.userform',
     autoHeight: 300,
     bodyPadding: 0,
-    fieldsHideUpdateLot: ['username', 'password', 'id_group_agent', 'id_offer', 'callingcard_pin'],
+    fieldsHideUpdateLot: ['username', 'password', 'id_group_agent', 'id_offer', 'callingcard_pin', 'contract_value'],
     initComponent: function() {
         var me = this;
         haveServiceMenu = false;
