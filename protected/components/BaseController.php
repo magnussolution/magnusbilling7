@@ -106,7 +106,7 @@ class BaseController extends CController
             $model = ucfirst(isset($model[1]) ? $model[1] : $model[0] . 'OR');
             Yii::import('application.models.overrides.' . $model);
             $this->instanceModel = new $model;
-            $this->abstractModel = $model->model($model);
+            $this->abstractModel = $model::model();
         }
 
         if ($this->getOverride()) {
