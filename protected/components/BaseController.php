@@ -77,6 +77,7 @@ class BaseController extends CController
     public $relationFilter           = array();
     public $fieldsInvisibleClient    = array();
     public $config;
+    public $addInCondition = [];
     public function init()
     {
         Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/resources/init.css');
@@ -340,20 +341,23 @@ class BaseController extends CController
             exit;
         }
 
-        $criteria = array(
-            'select'    => $this->select,
-            'join'      => $this->join,
-            'condition' => $this->filter,
-            'params'    => $this->paramsFilter,
-            'with'      => $this->relationFilter,
-            'order'     => $this->order,
-            'limit'     => $this->limit,
-            'offset'    => $this->start,
+        $criteria = new CDbCriteria();
+        $criteria->addCondition($this->filter);
 
-        );
+        $criteria->select = $this->select;
+        $criteria->join   = $this->join;
+        $criteria->params = $this->paramsFilter;
+        $criteria->with   = $this->relationFilter;
+        $criteria->order  = $this->order;
+        $criteria->limit  = $this->limit;
+        $criteria->offset = $this->start;
+
+        if (count($this->addInCondition)) {
+            $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+        }
 
         if ($this->group != 1) {
-            $criteria['group'] = $this->group;
+            $criteria->group = $this->group;
         }
 
         return $criteria;
@@ -367,13 +371,18 @@ class BaseController extends CController
             $result = Yii::app()->db->createCommand($sql)->queryAll();
             return $result[0]['Rows'];
         } else {
-            $recordCont = $this->abstractModel->find(array(
-                'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
-                'join'      => $this->join,
-                'condition' => $this->filter,
-                'with'      => $this->relationFilter,
-                'params'    => $this->paramsFilter,
-            ));
+            $criteria = new CDbCriteria();
+            $criteria->addCondition($this->filter);
+            $criteria->select = "COUNT('*') AS " . $this->abstractModel->primaryKey();
+            $criteria->join   = $this->join;
+            $criteria->params = $this->paramsFilter;
+            $criteria->with   = $this->relationFilter;
+
+            if (count($this->addInCondition)) {
+                $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+            }
+
+            $recordCont = $this->abstractModel->find($criteria);
 
             return $recordCont[$this->abstractModel->primaryKey()];
         }
@@ -1385,14 +1394,12 @@ class BaseController extends CController
 
                             if ($field == 'idUser.username') {
                                 $modelUser = User::model()->findAll('username LIKE :key', [':key' => $value . '%']);
-                                $in        = '';
+                                $in        = [];
                                 foreach ($modelUser as $key => $user) {
-                                    $in .= $user->id . ',';
+                                    $in[] = $user->id;
                                 }
-                                $condition .= " AND t.id_user IN (:$paramName)";
-                                $value                          = substr($in, 0, -1);
-                                $filterDirect                   = true;
-                                $this->paramsFilter[$paramName] = "$value";
+                                $this->addInCondition = ['t.id_user', $in];
+                                $filterDirect         = true;
                             }
                             if (!isset($filterDirect)) {
                                 if (preg_match("/^id[A-Z].*\./", $field)) {
@@ -1415,14 +1422,12 @@ class BaseController extends CController
                         case 'ed':
                             if ($field == 'idUser.username') {
                                 $modelUser = User::model()->findAll('username LIKE :key', [':key' => '%' . $value]);
-                                $in        = '';
+                                $in        = [];
                                 foreach ($modelUser as $key => $user) {
-                                    $in .= $user->id . ',';
+                                    $in[] = $user->id;
                                 }
-                                $condition .= " AND t.id_user IN (:$paramName)";
-                                $value                          = substr($in, 0, -1);
-                                $filterDirect                   = true;
-                                $this->paramsFilter[$paramName] = "$value";
+                                $this->addInCondition = ['t.id_user', $in];
+                                $filterDirect         = true;
                             }
                             if (!isset($filterDirect)) {
                                 if (preg_match("/^id[A-Z].*\./", $field)) {
