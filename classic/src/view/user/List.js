@@ -55,6 +55,11 @@ Ext.define('MBilling.view.user.List', {
             hidden: window.isTablet,
             flex: 3
         }, {
+            header: t('Sip Users'),
+            dataIndex: 'sip_count',
+            flex: 2,
+            hidden: !App.user.isAdmin
+        }, {
             header: t('Offer balance'),
             dataIndex: 'offer',
             hidden: !App.user.isClient || window.isTablet,

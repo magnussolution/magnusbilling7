@@ -567,7 +567,10 @@ class UserController extends Controller
                 }
 
             } else {
-                $attributes[$i]['offer'] = 0;
+
+                $modelSip                    = Sip::model()->count('id_user = :key', array(':key' => $attributes[$i]['id']));
+                $attributes[$i]['sip_count'] = $modelSip;
+                $attributes[$i]['offer']     = 0;
             }
 
         }
