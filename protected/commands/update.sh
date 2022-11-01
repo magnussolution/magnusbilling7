@@ -57,7 +57,7 @@ chmod -R 777 /var/www/tmpmagnus
 chmod 774 /var/www/html/mbilling/resources/ip.blacklist
 mkdir -p /var/www/html/mbilling/tmp
 chown -R asterisk:asterisk /var/www/html/mbilling/tmp
-chmod -R 700 /var/www/html/mbilling/tmp
+chmod -R 755 /var/www/html/mbilling/tmp
 chmod -R 700 /var/www/html/mbilling/assets
 chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
