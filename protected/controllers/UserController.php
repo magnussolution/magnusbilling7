@@ -640,4 +640,16 @@ class UserController extends Controller
 
         return $CLAUSE_DATE;
     }
+
+    public function removeColumns($columns)
+    {
+
+        foreach ($columns as $key => $column) {
+            if ($column['dataIndex'] == 'sip_count') {
+                unset($columns[$key]);
+            }
+        }
+
+        return $columns;
+    }
 }
