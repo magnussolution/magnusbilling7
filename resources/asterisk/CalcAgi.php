@@ -580,7 +580,11 @@ class CalcAgi
         }
         $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
+        $original_calleid = $MAGNUS->CallerID;
+
         foreach ($modelTrunks as $key => $trunk) {
+
+            $MAGNUS->CallerID = $original_calleid;
 
             $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
             $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -629,6 +633,18 @@ class CalcAgi
                 $agi->verbose("Trunk is inactive", 3);
                 continue;
             }
+
+            if (strncmp($MAGNUS->CallerID, $modelTrunk->cid_remove, strlen($modelTrunk->cid_remove)) == 0) {
+                $MAGNUS->CallerID = substr($MAGNUS->CallerID, strlen($modelTrunk->cid_remove));
+            }
+
+            if (strlen($modelTrunk->cid_add)) {
+                $MAGNUS->CallerID = $modelTrunk->cid_add . $MAGNUS->CallerID;
+            }
+
+            $agi->verbose($MAGNUS->CallerID, 5);
+
+            $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
 
             $this->sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $trunkcode, $removeprefix, $timeout
                 , $addparameter, $inuse, $maxuse, $allow_error);
