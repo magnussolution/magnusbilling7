@@ -178,9 +178,15 @@ Ext.define('MBilling.view.trunk.Form', {
                     fieldLabel: t('Fromdomain'),
                     allowBlank: true
                 }, {
-                    name: 'language',
-                    fieldLabel: t('Language'),
-                    allowBlank: true
+                    name: 'cid_add',
+                    fieldLabel: t('CID') + ' ' + t('Add prefix'),
+                    allowBlank: true,
+                    value: ''
+                }, {
+                    name: 'cid_remove',
+                    fieldLabel: t('CID') + ' ' + t('Remove prefix'),
+                    allowBlank: true,
+                    value: ''
                 }, {
                     name: 'context',
                     fieldLabel: t('Context'),
@@ -226,6 +232,7 @@ Ext.define('MBilling.view.trunk.Form', {
                 }, {
                     name: 'disallow',
                     fieldLabel: t('Disallow'),
+                    hidden: true,
                     allowBlank: true,
                     value: 'all'
                 }, {
@@ -252,7 +259,7 @@ Ext.define('MBilling.view.trunk.Form', {
                     fieldLabel: t('Link SMS'),
                     allowBlank: true,
                     emptyText: t('Replace %number% and %text% on the provider URL- Ex: http://website.com/sms.php?username=USER&pass=PASS&number=%number%&msg=%text%'),
-                    height: 100,
+                    height: 60,
                     anchor: '100%'
                 }, {
                     name: 'sms_res',

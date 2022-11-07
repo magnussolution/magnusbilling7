@@ -65,6 +65,7 @@ class Trunk extends Model
             array('link_sms', 'length', 'max' => 250),
             array('dtmfmode, qualify', 'length', 'max' => 7),
             array('directmedia,sendrpid', 'length', 'max' => 10),
+            array('cid_add,cid_remove', 'length', 'max' => 11),
             array('type, language', 'length', 'max' => 6),
             array('transport,encryption', 'length', 'max' => 3),
             array('port', 'length', 'max' => 5),

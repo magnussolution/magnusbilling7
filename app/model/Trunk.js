@@ -138,6 +138,12 @@ Ext.define('MBilling.model.Trunk', {
     }, {
         name: 'cnl',
         type: 'int'
+    }, {
+        name: 'cid_add',
+        type: 'string'
+    }, {
+        name: 'cid_remove',
+        type: 'string'
     }],
     proxy: {
         type: 'uxproxy',
