@@ -641,6 +641,9 @@ Ext.define('Helper.Util', {
             case 9:
                 value = t('Invalidargs');
                 break;
+            case 10:
+                value = t('Machine');
+                break;
         }
         return value;
     },

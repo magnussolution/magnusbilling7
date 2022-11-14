@@ -102,7 +102,8 @@ Ext.define('MBilling.view.callFailed.List', {
                     [6, t('Chanunavail')],
                     [7, t('Dontcall')],
                     [8, t('Torture')],
-                    [9, t('Invalidargs')]
+                    [9, t('Invalidargs')],
+                    [10, t('Machine')]
                 ]
             }
         }, {
