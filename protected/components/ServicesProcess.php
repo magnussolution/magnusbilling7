@@ -263,8 +263,11 @@ class ServicesProcess
         $modelServicesUse->save();
 
         $description = Yii::t('zii', 'Monthly payment Service') . ' ' . $modelServicesUse->idServices->name;
-        UserCreditManager::releaseUserCredit($modelServicesUse->id_user, '-' . $modelServicesUse->idServices->price, $description);
-
+        if ($modelServicesUse->idServices->price > 0) {
+            UserCreditManager::releaseUserCredit($modelServicesUse->id_user, '-' . $modelServicesUse->idServices->price, $description);
+        } else {
+            UserCreditManager::releaseUserCredit($modelServicesUse->id_user, $modelServicesUse->idServices->price, $description);
+        }
         $mail = new Mail(Mail::$TYPE_SERVICES_PAID, $modelServicesUse->id_user);
         $mail->replaceInEmail(Mail::$SERVICE_NAME, $modelServicesUse->idServices->name);
         $mail->replaceInEmail(Mail::$SERVICE_PRICE, $modelServicesUse->idServices->price);
