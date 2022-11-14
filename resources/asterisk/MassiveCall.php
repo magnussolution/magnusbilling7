@@ -276,8 +276,8 @@ class MassiveCall
                     } elseif ($forwardOptionType == 'group') {
 
                         $agi->verbose("Call group " . $forwardOption[1], 25);
-                        $sql      = "SELECT name FROM pkg_sip WHERE `group` = $forwardOption[1] LIMIT 1";
-                        $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                        $sql      = "SELECT name FROM pkg_sip WHERE `sip_group` = '" . $forwardOption[1] . "'";
+                        $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                         if (isset($modelSip[0]) == 0) {
                             $agi->verbose('GROUP NOT FOUND');
