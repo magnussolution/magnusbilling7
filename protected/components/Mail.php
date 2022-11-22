@@ -335,22 +335,23 @@ class Mail
 
         $result = json_decode($this->message);
         if (json_last_error() === JSON_ERROR_NONE) {
+            if (isset($result->url)) {
+                $this->message = preg_replace('/\$to_email\$/', $this->to_email, $this->message);
+                $this->message = preg_replace('/\$subject\$/', $this->title, $this->message);
 
-            $this->message = preg_replace('/\$to_email\$/', $this->to_email, $this->message);
-            $this->message = preg_replace('/\$subject\$/', $this->title, $this->message);
-
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                "Content-Type: application/json",
-            ));
-            curl_setopt($curl, CURLOPT_URL,
-                "$result->url"
-            );
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $this->message);
-            $result = curl_exec($curl);
-            return true;
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                    "Content-Type: application/json",
+                ));
+                curl_setopt($curl, CURLOPT_URL,
+                    "$result->url"
+                );
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $this->message);
+                $result = curl_exec($curl);
+                return true;
+            }
         }
 
         $modelSmtps = Smtps::model()->find('id_user = :key', array(':key' => $this->id_agent));

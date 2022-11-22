@@ -20,6 +20,7 @@
  */
 class Signup extends Model
 {
+    protected $_module = 'signup';
     public $verifyCode;
     public $password2;
     public $accept_terms;
