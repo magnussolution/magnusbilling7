@@ -1873,6 +1873,38 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2022-11-28
+        if ($version == '7.8.2.5') {
+
+            $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''DID History'')', 'didhistory', 'x-fa fa-desktop', 5,12)";
+            $this->executeDB($sql);
+            $idServiceModule = Yii::app()->db->lastInsertID;
+
+            $sql = "INSERT INTO pkg_group_module VALUES ((SELECT id FROM pkg_group_user WHERE id_user_type = 1 LIMIT 1), '" . $idServiceModule . "', 'crud', '1', '1', '1');";
+            $this->executeDB($sql);
+
+            $sql = "CREATE TABLE `pkg_did_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `did` varchar(50) DEFAULT NULL,
+  `reservationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `releasedate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `month_payed` int(11) DEFAULT '0',
+    `description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`),
+  KEY `did` (`did`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            $this->executeDB($sql);
+
+            $sql = " INSERT INTO pkg_did_history(username, did, reservationdate, releasedate, month_payed, description ) SELECT username, did, reservationdate, releasedate, month_payed, c.description FROM pkg_did_use a JOIN pkg_user b ON a.id_user = b.id JOIN pkg_did c ON a.id_did = c.id WHERE releasedate > '2000-01-01'";
+            $this->executeDB($sql);
+
+            $version = '7.8.2.6';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
