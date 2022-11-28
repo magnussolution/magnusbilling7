@@ -381,6 +381,27 @@ class DidController extends Controller
 
                     Diddestination::model()->deleteAll("id_did = :key", array(':key' => $id));
 
+                    $didUse = DidUse::model()->findByPk('id_did = :key AND releasedate = :key1 AND status = 1', [
+                        'key'   => $id,
+                        ':key1' => '0000-00-00 00:00:00',
+                    ]);
+
+                    if (isset($didUse->id)) {
+
+                        $modelDidHistory                  = new DidHistory();
+                        $modelDidHistory->username        = $didUse->idUser->username;
+                        $modelDidHistory->did             = $modelDid->did;
+                        $modelDidHistory->releasedate     = $didUse->releasedate;
+                        $modelDidHistory->reservationdate = $didUse->reservationdate;
+                        $modelDidHistory->month_payed     = $didUse->month_payed;
+                        $modelDidHistory->description     = $didUse->idDid->description;
+                        try {
+                            $modelDidHistory->save();
+                        } catch (Exception $e) {
+
+                        }
+                    }
+
                     DidUse::model()->updateAll(
                         array(
                             'releasedate' => date('Y-m-d H:i:s'),
@@ -391,6 +412,7 @@ class DidController extends Controller
                             ':key'  => $id,
                             ':key1' => '0000-00-00 00:00:00',
                         ));
+
                 }
             }
 

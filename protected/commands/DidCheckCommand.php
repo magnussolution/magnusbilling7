@@ -204,6 +204,19 @@ class DidCheckCommand extends ConsoleCommand
 
                         Diddestination::model()->deleteAll('id_did = :key', array(':key' => $didUse->id_did));
 
+                        $modelDidHistory                  = new DidHistory();
+                        $modelDidHistory->username        = $didUse->idUser->username;
+                        $modelDidHistory->did             = $didUse->idDid->did;
+                        $modelDidHistory->releasedate     = $didUse->releasedate;
+                        $modelDidHistory->reservationdate = $didUse->reservationdate;
+                        $modelDidHistory->month_payed     = $didUse->month_payed;
+                        $modelDidHistory->description     = $didUse->idDid->description;
+                        try {
+                            $modelDidHistory->save();
+                        } catch (Exception $e) {
+
+                        }
+
                         if ($id_agent > 1) {
                             $mail = new Mail(Mail::$TYPE_DID_RELEASED, $didUse->id_user, $id_agent);
                         } else {
