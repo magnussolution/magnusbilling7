@@ -67,7 +67,9 @@ Ext.define('MBilling.view.diddestination.List', {
                     [6, t('0800 Callback')],
                     [7, t('Queue')],
                     [8, t('SIP group')],
-                    [9, t('Custom')]
+                    [9, t('Custom')],
+                    [10, t('Context')],
+                    [11, t('Multiples IPs')]
                 ]
             }
         }, {

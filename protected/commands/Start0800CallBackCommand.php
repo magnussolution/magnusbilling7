@@ -140,16 +140,19 @@ class Start0800CallBackCommand extends ConsoleCommand
                         $destination = substr($destination, strlen($removeprefix));
                     }
 
-                    $dialstr = "$providertech/$ipaddress/$prefix$destination";
+                    $modelSip = Sip::model()->find('id_user = :key', [':key' => $modelDid->idUser->id]);
+
+                    $callerid = isset($modelSip->callerid) ? $modelSip->callerid : $destination;
+                    $dialstr  = "$providertech/$ipaddress/$prefix$destination";
 
                     // gerar os arquivos .call
                     $call = "Channel: " . $dialstr . "\n";
-                    $call .= "Callerid: " . $callback['exten'] . "\n";
+                    $call .= "Callerid: " . $callerid . "\n";
                     $call .= "Context: billing\n";
                     $call .= "Extension: " . $modelDiddestination->idDid->did . "\n";
                     $call .= "Priority: 1\n";
                     $call .= "Priority: 1\n";
-                    $call .= "Set:CALLED=" . $destination . "\n";
+                    $call .= "Set:CALLED=" . $callerid . "\n";
                     $call .= "Set:TARRIFID=" . $searchTariff[0]['id_rate'] . "\n";
                     $call .= "Set:SELLCOST=" . $searchTariff[0]['rateinitial'] . "\n";
                     $call .= "Set:SELLINITBLOCK=" . $searchTariff[0]['initblock'] . "\n";
