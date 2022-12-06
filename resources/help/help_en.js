@@ -228,7 +228,7 @@ Help.load({
     'did.increment': `This defines the block in which the call billing time will be incremented, in seconds. If set to 6 and call duration is 32, the call will be billed as 36.`,
     'did.charge_of': `The user that will be charged for the DID cost.`,
     'did.calllimit': `Maximum simultaneous calls for this DID.`,
-    'did.description': `You may take notes here!`,
+    'did.description': `Set here the destination!`,
     'did.expression_1': `This is a regular expression to tariff the DID depending on who is calling it.||Lets analyze a real example:
     Suppose we want to charge 0.10 when we receive a call from a landline and 0.20 if its a mobile phone and block any other format.
     In this example we will create rules to identify the CallerID in the format 0 + area code + number, area code + number, or 55 + area code + number.
@@ -278,7 +278,7 @@ Help.load({
     'diddestination.activated': `Only active destinations will be used.`,
     'diddestination.priority': `You can create up to 5 destinations for your DID. If a try is made and a error is received, MagnusBilling will try to send the call to the next destination priority available. Only works with the "SIP call" type.`,
     'diddestination.voip_call': `Type of destination.`,
-    'diddestination.destination': `Use this to take notes!`,
+    'diddestination.destination': `Set here the destination!`,
     'diddestination.id_ivr': `Select a IVR to send the call to. The IVR needs to belong to the owner of the DID aswell.`,
     'diddestination.id_queue': `Select a Queue  to send the call to. The Queue needs to belong to the owner of the DID aswell.`,
     'diddestination.id_sip': `Select a SIP user to send the call to. The SIP user needs to belong to the owner of the DID aswell.`,

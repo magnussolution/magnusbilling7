@@ -78,7 +78,7 @@ class User extends Model
             array('lastname, firstname, redial, prefix_local,neighborhood', 'length', 'max' => 50),
             array('company_website, dist', 'length', 'max' => 100),
             array('address, email, doc', 'length', 'max' => 100),
-            array('username', 'length', 'max' => 15),
+            array('username', 'length', 'max' => 20),
             array('description', 'length', 'max' => 500),
             array('credit, contract_value', 'type', 'type' => 'double'),
             array('expirationdate, password, lastuse,company_name, commercial_name', 'length', 'max' => 100),

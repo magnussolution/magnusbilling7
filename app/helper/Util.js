@@ -292,6 +292,9 @@ Ext.define('Helper.Util', {
             case 10:
                 value = t('Context');
                 break;
+            case 11:
+                value = t('Multiples IPs');
+                break;
         }
         return value;
     },

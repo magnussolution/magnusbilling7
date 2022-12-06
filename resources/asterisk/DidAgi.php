@@ -505,6 +505,22 @@ class DidAgi
                     $answeredtime = $answeredtime['data'];
                     $dialstatus   = $agi->get_variable("DIALSTATUS");
                     $dialstatus   = $dialstatus['data'];
+                } elseif ($inst_listdestination['voip_call'] == 11) {
+                    $agi->verbose("DID destination type MULTIPLES IPs ", 6);
+
+                    $ips       = explode(',', $inst_listdestination['destination']);
+                    $dialToIPs = '';
+                    foreach ($ips as $key => $ip) {
+                        if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                            $dialToIPs .= 'SIP/' . $ip . '&';
+                        }
+                    }
+                    $dialToIPs = substr($dialToIPs, 0, -1);
+                    $MAGNUS->run_dial($agi, $dialToIPs);
+                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
+                    $answeredtime = $answeredtime['data'];
+                    $dialstatus   = $agi->get_variable("DIALSTATUS");
+                    $dialstatus   = $dialstatus['data'];
                 } else {
 
                     $agi->verbose("DID destination type PSTN NUMBER ", 6);
