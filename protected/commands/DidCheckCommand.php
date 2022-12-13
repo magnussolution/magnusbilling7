@@ -207,7 +207,7 @@ class DidCheckCommand extends ConsoleCommand
                         $modelDidHistory                  = new DidHistory();
                         $modelDidHistory->username        = $didUse->idUser->username;
                         $modelDidHistory->did             = $didUse->idDid->did;
-                        $modelDidHistory->releasedate     = $didUse->releasedate;
+                        $modelDidHistory->releasedate     = date('Y-m-d H:i:s');
                         $modelDidHistory->reservationdate = $didUse->reservationdate;
                         $modelDidHistory->month_payed     = $didUse->month_payed;
                         $modelDidHistory->description     = $didUse->idDid->description;

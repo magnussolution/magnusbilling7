@@ -107,6 +107,15 @@ Ext.define('MBilling.view.did.List', {
             hidden: true,
             hideable: App.user.isAdmin,
             flex: 5
+        }, {
+            xtype: 'templatecolumn',
+            tpl: '{idServername}',
+            header: t('Server'),
+            dataIndex: 'id_server',
+            comboFilter: 'serverscombo',
+            flex: 3,
+            hidden: true,
+            hideable: App.user.isAdmin
         }]
         me.callParent(arguments);
     }

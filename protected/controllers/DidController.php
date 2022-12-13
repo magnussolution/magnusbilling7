@@ -23,7 +23,7 @@
 class DidController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = array('idUser' => 'username', 'idServer' => 'name');
     public $config;
 
     private $uploaddir;
@@ -391,7 +391,7 @@ class DidController extends Controller
                         $modelDidHistory                  = new DidHistory();
                         $modelDidHistory->username        = $didUse->idUser->username;
                         $modelDidHistory->did             = $modelDid->did;
-                        $modelDidHistory->releasedate     = $didUse->releasedate;
+                        $modelDidHistory->releasedate     = date('Y-m-d H:i:s');
                         $modelDidHistory->reservationdate = $didUse->reservationdate;
                         $modelDidHistory->month_payed     = $didUse->month_payed;
                         $modelDidHistory->description     = $didUse->idDid->description;

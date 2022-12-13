@@ -57,7 +57,7 @@ class Did extends Model
     {
         $rules = array(
             array('did', 'required'),
-            array('minimal_time_charge,calllimit, charge_of, block_expression_1, block_expression_2,block_expression_3, buyrateinitblock, buyrateincrement, minimal_time_buy, initblock, increment, id_user, cbr_em, activated, reserved, secondusedreal, billingtype,
+            array('minimal_time_charge,calllimit, charge_of, block_expression_1, block_expression_2,block_expression_3, buyrateinitblock, buyrateincrement, minimal_time_buy, initblock, increment, id_user, cbr_em, activated, reserved, secondusedreal, billingtype,id_server,
                 send_to_callback_1,send_to_callback_3,send_to_callback_3,cbr,cbr_ua,
                 cbr_total_try,cbr_time_try, record_call', 'numerical', 'integerOnly' => true),
             array('fixrate', 'numerical'),
@@ -76,7 +76,8 @@ class Did extends Model
     public function relations()
     {
         return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
+            'idUser'   => array(self::BELONGS_TO, 'User', 'id_user'),
+            'idServer' => array(self::BELONGS_TO, 'Servers', 'id_server'),
         );
     }
 

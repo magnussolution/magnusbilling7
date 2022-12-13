@@ -171,6 +171,11 @@ Ext.define('MBilling.view.did.Form', {
                     minValue: '-1',
                     hidden: !window.didChannelLimit || !App.user.isAdmin
                 }, {
+                    xtype: 'serverscombo',
+                    name: 'id_server',
+                    fieldLabel: t('Server'),
+                    allowBlank: true
+                }, {
                     xtype: 'textareafield',
                     allowBlank: true,
                     name: 'description',
