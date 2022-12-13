@@ -86,7 +86,7 @@ Ext.define('MBilling.model.Did', {
     }, {
         name: 'connection_sell',
         type: 'number'
-    }, 'secondusedreal', 'idUserusername', {
+    }, 'secondusedreal', 'idUserusername', 'idServername', {
         name: 'minimal_time_charge',
         type: 'int'
     }, {
@@ -131,6 +131,9 @@ Ext.define('MBilling.model.Did', {
     }, {
         name: 'country',
         type: 'string'
+    }, {
+        name: 'id_server',
+        type: 'int'
     }],
     proxy: {
         type: 'uxproxy',
