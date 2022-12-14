@@ -32,6 +32,7 @@ Ext.define('Ext.ux.form.Panel', {
     labelWidthFields: 100,
     labelAlignFields: 'right',
     header: window.isTablet || window.isTablets ? false : '',
+    fieldsHideUpdateLot: [],
     initComponent: function() {
         var me = this;
         var formName = me.xtype.slice(0, -4);
