@@ -30,13 +30,11 @@ get_linux_distribution ()
         DIST="DEBIAN"
         HTTP_DIR="/etc/apache2/"
         HTTP_CONFIG=${HTTP_DIR}"apache2.conf"
-        PHP_INI="/etc/php/7.3/cli/php.ini"
         MYSQL_CONFIG="/etc/mysql/mariadb.conf.d/50-server.cnf"
     elif [ -f /etc/redhat-release ]; then
         DIST="CENTOS"
         HTTP_DIR="/etc/httpd/"
         HTTP_CONFIG=${HTTP_DIR}"conf/httpd.conf"
-        PHP_INI="/etc/php.ini"
         MYSQL_CONFIG="/etc/my.cnf"
     else
         DIST="OTHER"
@@ -44,6 +42,8 @@ get_linux_distribution ()
         exit 1
     fi
 }
+
+PHP_INI=$(php -i | grep /.+/php.ini -oE)
 
 get_linux_distribution
 
@@ -163,12 +163,16 @@ fi
 
 if [ ${DIST} = "DEBIAN" ]; then
     apt-get update --allow-releaseinfo-change
-    export LC_ALL="en_US.UTF-8"
+    echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf
+    locale-gen en_US.UTF-8
+
     apt-get -o Acquire::Check-Valid-Until=false update 
-    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet unixodbc-bin apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev
+    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet  apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 
     apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
     apt-get -y install mariadb-server php-mysql
-    apt-get install -y  unzip git libcurl4-openssl-dev htop
+    apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep
 elif  [ ${DIST} = "CENTOS" ]; then
     yum clean all
     yum -y install kernel-devel.`uname -m` epel-release
@@ -194,9 +198,9 @@ echo '----------- Install PJPROJECT ----------'
 echo
 sleep 1
 cd /usr/src
-wget --no-check-certificate http://www.digip.org/jansson/releases/jansson-2.7.tar.gz
-tar -zxvf jansson-2.7.tar.gz
-cd jansson-2.7
+git clone https://github.com/akheron/jansson.git
+cd jansson
+autoreconf -i
 ./configure
 make clean
 make && make install
@@ -235,15 +239,6 @@ make config
 ldconfig
 
 clear
-
-echo
-echo '----------- Install SNGRP ----------'
-echo
-sleep 1
-
-if [ ${DIST} = "DEBIAN" ]; then
-  apt-get -y install sngrep
-fi
 
 
 if [ ${DIST} = "CENTOS" ]; then
