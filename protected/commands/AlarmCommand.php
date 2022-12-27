@@ -19,11 +19,20 @@
  */
 class AlarmCommand extends ConsoleCommand
 {
+
+    private $filter;
     public function run($args)
     {
         $modelAlarm = Alarm::model()->findAll('status = 1');
 
         foreach ($modelAlarm as $key => $alarm) {
+
+            if ($alarm->period > 30) {
+                $this->filter = "starttime  > '" . date("Y-m-d", time() - $alarm->period) . "'";
+            } else {
+                $this->filter = "starttime  > '" . date('Y-m-d', strtotime('-' . $alarm->period . ' day', time())) . "'";
+
+            }
 
             switch ($alarm->type) {
                 case 1:
@@ -50,6 +59,10 @@ class AlarmCommand extends ConsoleCommand
                     # ONLINE CALLS ON THE SAME NUMBER
                     $this->numberEqualCaller($alarm);
                     break;
+                case 7:
+                    # TOTAL CALLS PER USER
+                    $this->totalCallsPerUser($alarm);
+                    break;
             }
         }
     }
@@ -60,13 +73,13 @@ class AlarmCommand extends ConsoleCommand
 
         $period = date("Y-m-d H:i:s", $period);
 
-        $filter = "starttime  > '$period'";
+        $this->filter = "starttime  > '$period'";
 
-        $sql           = "SELECT count(*) AS sessiontime FROM pkg_cdr WHERE " . $filter;
+        $sql           = "SELECT count(*) AS sessiontime FROM pkg_cdr WHERE " . $this->filter;
         $modeCdr       = Call::model()->findBySql($sql);
         $totalAnswered = $modeCdr->sessiontime;
 
-        $sql         = "SELECT count(*) AS sessiontime FROM pkg_cdr_failed WHERE " . $filter;
+        $sql         = "SELECT count(*) AS sessiontime FROM pkg_cdr_failed WHERE " . $this->filter;
         $modeCdr     = Call::model()->findBySql($sql);
         $totalFailed = $modeCdr->sessiontime;
 
@@ -89,13 +102,8 @@ class AlarmCommand extends ConsoleCommand
 
     public function aloc($alarm)
     {
-        $period = time() - $alarm->period;
 
-        $period = date("Y-m-d H:i:s", $period);
-
-        $filter = "starttime  > '$period'";
-
-        $sql     = "SELECT SUM(sessiontime) / COUNT(*) AS sessiontime FROM pkg_cdr WHERE " . $filter;
+        $sql     = "SELECT SUM(sessiontime) / COUNT(*) AS sessiontime FROM pkg_cdr WHERE " . $this->filter;
         $modeCdr = Call::model()->findBySql($sql);
         $aloc    = $modeCdr->sessiontime;
 
@@ -115,13 +123,8 @@ class AlarmCommand extends ConsoleCommand
 
     public function callPerMin($alarm)
     {
-        $period = time() - $alarm->period;
 
-        $period = date("Y-m-d H:i:s", $period);
-
-        $filter = "starttime  > '$period'";
-
-        $sql        = "SELECT  COUNT(*) AS sessiontime FROM pkg_cdr WHERE " . $filter;
+        $sql        = "SELECT  COUNT(*) AS sessiontime FROM pkg_cdr WHERE " . $this->filter;
         $modeCdr    = Call::model()->findBySql($sql);
         $totalCalls = $modeCdr->sessiontime;
 
@@ -145,13 +148,8 @@ class AlarmCommand extends ConsoleCommand
 
     public function consecutiveCalls($alarm)
     {
-        $period = time() - $alarm->period;
 
-        $period = date("Y-m-d H:i:s", $period);
-
-        $filter = "starttime  > '$period'";
-
-        $sql     = "SELECT  *, COUNT(*) AS sessiontime FROM pkg_cdr WHERE " . $filter . " AND sipiax = 0 GROUP BY calledstation, id_user ORDER BY sessiontime DESC";
+        $sql     = "SELECT  *, COUNT(*) AS sessiontime FROM pkg_cdr WHERE " . $this->filter . " AND sipiax = 0 GROUP BY calledstation, id_user ORDER BY sessiontime DESC";
         $modeCdr = Call::model()->findAllBySql($sql);
 
         foreach ($modeCdr as $key => $cdr) {
@@ -194,13 +192,8 @@ class AlarmCommand extends ConsoleCommand
     }
     public function numberEqualCaller($alarm)
     {
-        $period = time() - $alarm->period;
 
-        $period = date("Y-m-d H:i:s", $period);
-
-        $filter = "starttime  > '$period'";
-
-        $sql     = "SELECT COUNT(*) id, calledstation FROM pkg_cdr WHERE " . $filter . " AND (calledstation = callerid  OR SUBSTRING(calledstation,2) = callerid)";
+        $sql     = "SELECT COUNT(*) id, calledstation FROM pkg_cdr WHERE " . $this->filter . " AND (calledstation = callerid  OR SUBSTRING(calledstation,2) = callerid)";
         $modeCdr = Call::model()->findBySql($sql);
 
         if (($modeCdr->id) >= ($alarm->amount)) {
@@ -210,10 +203,57 @@ class AlarmCommand extends ConsoleCommand
 
     }
 
+    public function totalCallsPerUser($alarm)
+    {
+
+        if ($alarm->period < 1000 && $alarm->last_notification > date('Y-m-d')) {
+            //interval more than 1 days, only send notification email 1 time per day
+            return;
+        }
+
+        $modelUser = User::model()->findAll('id > 1 AND active = 1 AND id_user < 2');
+
+        $users = '';
+        foreach ($modelUser as $key => $user) {
+
+            if ($alarm->period > 1000) {
+                $sql     = "SELECT count(id) AS id FROM pkg_cdr WHERE id_user = " . $user->id . " AND " . $this->filter;
+                $modeCdr = Call::model()->findBySql($sql);
+            } else {
+                $sql     = "SELECT sum(nbcall) AS id FROM pkg_cdr_summary_day_user WHERE id_user = " . $user->id . " AND " . preg_replace('/starttime/', 'day', $this->filter);
+                $modeCdr = CallSummaryDayUser::model()->findBySql($sql);
+
+            }
+
+            $calls = is_numeric($modeCdr->id) ? $modeCdr->id : 0;
+            if ($alarm->condition == 1) {
+                if ($modeCdr->id > $alarm->amount) {
+                    $users .= 'Username ' . $user->username . ', name ' . $user->lastname . ' ' . $user->firstname . ', credit ' . $user->credit . " have made " . $mcalls . " calls, its more calls than alarme configuration<br>";
+                }
+            } else if ($alarm->condition == 2) {
+                if ($modeCdr->id < $alarm->amount) {
+                    $users .= 'Username ' . $user->username . ', name ' . $user->lastname . ' ' . $user->firstname . ', credit ' . $user->credit . " have made " . $calls . " calls, its less calls than alarme configuration<br>";
+                }
+            }
+
+        }
+
+        if (strlen($users) > 3) {
+
+            $message = "MagnusBilling ALARM. These users have no calls.  <br><br>$users";
+
+            $this->notification($message, $alarm);
+
+        }
+    }
+
     public function notification($message, $alarm)
     {
 
-        echo $message . "\n";
+        $alarm->last_notification = date('Y-m-d H:i:s');
+        $alarm->save();
+
+        echo preg_replace("/<br>/", "\n", $message) . "\n\n";
 
         $modelSmtps = Smtps::model()->find('id_user = 1');
 
