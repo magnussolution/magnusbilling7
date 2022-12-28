@@ -76,7 +76,7 @@ class DidController extends Controller
     {
 
         //for agents add filter for show only numbers free
-        $filter .= ' AND (reserved = 0  OR id_user IN (SELECT id FROM pkg_user WHERE id_user = ' . Yii::app()->session['id_user'] . '))';
+        $filter .= ' AND activated = 1 AND (reserved = 0  OR id_user IN (SELECT id FROM pkg_user WHERE id_user = ' . Yii::app()->session['id_user'] . '))';
         return $filter;
     }
 
