@@ -16,6 +16,7 @@
 Locale.load({
     ',': ',',
     '.': '.',
+    'Next due date': 'Próximo vencimento',
     '0800 Callback': '0800 Callback',
     'ALERT: Do you really active this service?': 'ALERTA: Você realmente quer ativar este serviço?',
     'ALERT: Do you really want cancel this service to this user?': 'ALERTA: Você realmente quer cancelar este serviço para este usuário?',
@@ -1164,5 +1165,4 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
-
 });

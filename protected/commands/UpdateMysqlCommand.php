@@ -1924,6 +1924,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
         }
+        //2022-12-28
+        if ($version == '7.8.2.8') {
+            $sql = "ALTER TABLE `pkg_did_use` ADD `next_due_date` VARCHAR(30) NULL DEFAULT '' AFTER `reminded`;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_services_use` ADD `next_due_date` VARCHAR(30) NULL DEFAULT ''";
+            $this->executeDB($sql);
+
+            $version = '7.8.2.9';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
     }
 

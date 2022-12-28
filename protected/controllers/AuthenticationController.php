@@ -18,19 +18,6 @@
  *
  */
 
-/*
-<?php
-if (isset($_GET['user']) && isset($_GET['password']))
-header('Location: http://186.225.143.142/mbilling/index.php/authentication/login?remote=1&user=user&password=9f4ca770b638615ac5c3e0d2da16b77c80c2f2c6
-?>
-
-<form action="" method="GET">
-<input type="text" name="user" size="18" placeholder="Username">
-<input type="password" name="password" size="18" placeholder="Password">
-<button type="submit">Login</button>
-</form>
- */
-
 class AuthenticationController extends Controller
 {
     private $menu = array();

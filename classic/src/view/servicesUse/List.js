@@ -99,6 +99,11 @@ Ext.define('MBilling.view.servicesUse.List', {
             renderer: Helper.Util.formatDateTime,
             dataIndex: 'releasedate',
             flex: 5
+        }, {
+            header: t('Next due date'),
+            renderer: Helper.Util.formatDateTime,
+            dataIndex: 'next_due_date',
+            flex: 5
         }]
         me.callParent(arguments);
     }
