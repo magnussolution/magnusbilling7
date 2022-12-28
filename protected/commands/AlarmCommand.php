@@ -28,9 +28,9 @@ class AlarmCommand extends ConsoleCommand
         foreach ($modelAlarm as $key => $alarm) {
 
             if ($alarm->period > 30) {
-                $this->filter = "starttime  > '" . date("Y-m-d", time() - $alarm->period) . "'";
+                $this->filter = "starttime  >= '" . date("Y-m-d", time() - $alarm->period) . "'";
             } else {
-                $this->filter = "starttime  > '" . date('Y-m-d', strtotime('-' . $alarm->period . ' day', time())) . "'";
+                $this->filter = "starttime  >= '" . date('Y-m-d', strtotime('-' . $alarm->period . ' day', time())) . "'";
 
             }
 
@@ -205,15 +205,13 @@ class AlarmCommand extends ConsoleCommand
 
     public function totalCallsPerUser($alarm)
     {
-
         if ($alarm->period < 1000 && $alarm->last_notification > date('Y-m-d')) {
             //interval more than 1 days, only send notification email 1 time per day
             return;
         }
-
         $modelUser = User::model()->findAll('id > 1 AND active = 1 AND id_user < 2');
 
-        $users = '';
+        $users = "username,name,credit,calls,lastuse,info<br>";
         foreach ($modelUser as $key => $user) {
 
             if ($alarm->period > 1000) {
@@ -228,11 +226,23 @@ class AlarmCommand extends ConsoleCommand
             $calls = is_numeric($modeCdr->id) ? $modeCdr->id : 0;
             if ($alarm->condition == 1) {
                 if ($modeCdr->id > $alarm->amount) {
-                    $users .= 'Username ' . $user->username . ', name ' . $user->lastname . ' ' . $user->firstname . ', credit ' . $user->credit . " have made " . $mcalls . " calls, its more calls than alarme configuration<br>";
+                    $modeCdr2 = Call::model()->find([
+                        'condition' => 'id_user = :key',
+                        'params'    => [':key' => $user->id],
+                        'order'     => 'id DESC',
+                    ]);
+                    $lastcall = isset($modeCdr2->starttime) ? $modeCdr2->starttime : 0;
+                    $users .= $user->username . ',' . $user->lastname . ' ' . $user->firstname . ',' . $user->credit . "," . $calls . "," . $lastcall . ",bigger than alarme configuration<br>";
                 }
             } else if ($alarm->condition == 2) {
                 if ($modeCdr->id < $alarm->amount) {
-                    $users .= 'Username ' . $user->username . ', name ' . $user->lastname . ' ' . $user->firstname . ', credit ' . $user->credit . " have made " . $calls . " calls, its less calls than alarme configuration<br>";
+                    $modeCdr2 = Call::model()->find([
+                        'condition' => 'id_user = :key',
+                        'params'    => [':key' => $user->id],
+                        'order'     => 'id DESC',
+                    ]);
+                    $lastcall = isset($modeCdr2->starttime) ? $modeCdr2->starttime : 0;
+                    $users .= $user->username . ',' . $user->lastname . ' ' . $user->firstname . ',' . $user->credit . "," . $calls . "," . $lastcall . ",less than alarme configuration<br>";
                 }
             }
 
@@ -274,6 +284,12 @@ class AlarmCommand extends ConsoleCommand
             return;
         }
 
+        $modelTemplate = TemplateMail::model()->find('fromemail != :key ',
+            array(
+                ':key' => 'noreply@site.com',
+            ));
+        $from_email = isset($modelTemplate->fromemail) ? $modelTemplate->fromemail : $smtp_username;
+
         Yii::import('application.extensions.phpmailer.JPhpMailer');
         $mail = new JPhpMailer;
         $mail->IsSMTP();
@@ -283,7 +299,7 @@ class AlarmCommand extends ConsoleCommand
         $mail->Username   = $smtp_username;
         $mail->Password   = $smtp_password;
         $mail->Port       = $smtp_port;
-        $mail->SetFrom($modelSmtps->username, "MagnusBilling ALARM");
+        $mail->SetFrom($from_email, "MagnusBilling ALARM");
         $mail->SetLanguage($this->config['global']['base_language'] == 'pt_BR' ? 'br' : $this->config['global']['base_language']);
 
         $mail->Subject = mb_encode_mimeheader('MagnusBilling ALARM');
@@ -299,5 +315,4 @@ class AlarmCommand extends ConsoleCommand
         }
 
     }
-
 }
