@@ -14,7 +14,7 @@ Nome
 Tipo de usuário
 ----------------
 
-| Tipo de usuário. É importante selecionar o tipo corremtanete. Não adianta chamar o grupo de Admin e selecionar o tipo Cliente.
+| Tipo de usuário. É importante selecionar o tipo corretamente. Não adianta chamar o grupo de Admin e selecionar o tipo Cliente.
 
 
 
