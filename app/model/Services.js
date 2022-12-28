@@ -47,6 +47,10 @@ Ext.define('MBilling.model.Services', {
     }, {
         name: 'return_credit',
         type: 'int'
+    }, {
+        name: 'next_due_date',
+        type: 'date',
+        dateFormat: 'Y-m-d H:i:s'
     }],
     proxy: {
         type: 'uxproxy',

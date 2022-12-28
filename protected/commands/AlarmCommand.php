@@ -20,7 +20,7 @@
 class AlarmCommand extends ConsoleCommand
 {
 
-    private $filter;
+    public $filter;
     public function run($args)
     {
         $modelAlarm = Alarm::model()->findAll('status = 1');

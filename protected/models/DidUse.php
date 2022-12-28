@@ -54,7 +54,7 @@ class DidUse extends Model
     {
         $rules = array(
             array('id_user, id_did, status, month_payed, reminded', 'numerical', 'integerOnly' => true),
-            array('reservationdate, releasedate', 'safe'),
+            array('reservationdate, releasedate,next_due_date', 'safe'),
         );
         return $this->getExtraField($rules);
     }
