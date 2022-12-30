@@ -43,6 +43,10 @@ Ext.define('MBilling.model.ServicesUse', {
         type: 'date',
         dateFormat: 'Y-m-d H:i:s'
     }, {
+        name: 'releasedate',
+        type: 'date',
+        dateFormat: 'Y-m-d H:i:s'
+    }, {
         name: 'next_due_date',
         type: 'date',
         dateFormat: 'Y-m-d H:i:s'
