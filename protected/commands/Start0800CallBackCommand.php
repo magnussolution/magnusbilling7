@@ -129,6 +129,9 @@ class Start0800CallBackCommand extends ConsoleCommand
 
                 if ($credit > 0) {
 
+                    $modelSip = Sip::model()->find('id_user = :key', [':key' => $modelDiddestination->idDid->id_user]);
+                    $callerid = isset($modelSip->id) ? $modelSip->callerid : $callback['exten'];
+
                     $modelTrunk   = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
                     $idTrunk      = $modelTrunk->id;
                     $providertech = $modelTrunk->providertech;
@@ -136,14 +139,28 @@ class Start0800CallBackCommand extends ConsoleCommand
                     $removeprefix = $modelTrunk->removeprefix;
                     $prefix       = $modelTrunk->trunkprefix;
 
+                    if ($modelTrunk->cnl == 1) {
+                        if (substr($destination, 4, 1) == 9) {
+                            if (substr($destination, 2, 2) == substr($callerid, 0, 2)) {
+                                $removeprefix = "XXXX";
+                                $prefix       = "";
+                            }
+                        } else if (strlen($modelSip->cnl) > 1) {
+                            $sql      = "SELECT zone FROM pkg_cadup a JOIN pkg_provider_cnl b ON a.cnl = b.cnl WHERE prefix = '" . substr($destination, 0, 8) . "' AND id_provider = " . $modelTrunk->id_provider . " LIMIT 1";
+                            $modelCNL = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+                            if (isset($modelCNL->zone) && $modelCNL->zone == $modelSip->cnl) {
+                                $removeprefix = "XXXX";
+                                $prefix       = "";
+                            }
+                        }
+                    }
+
                     if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                         $destination = substr($destination, strlen($removeprefix));
                     }
 
-                    $modelSip = Sip::model()->find('id_user = :key', [':key' => $modelDid->idUser->id]);
-
-                    $callerid = isset($modelSip->callerid) ? $modelSip->callerid : $destination;
-                    $dialstr  = "$providertech/$ipaddress/$prefix$destination";
+                    $dialstr = "$providertech/$ipaddress/$prefix$destination";
 
                     // gerar os arquivos .call
                     $call = "Channel: " . $dialstr . "\n";
@@ -152,7 +169,7 @@ class Start0800CallBackCommand extends ConsoleCommand
                     $call .= "Extension: " . $modelDiddestination->idDid->did . "\n";
                     $call .= "Priority: 1\n";
                     $call .= "Priority: 1\n";
-                    $call .= "Set:CALLED=" . $callerid . "\n";
+                    $call .= "Set:CALLED=" . $destination . "\n";
                     $call .= "Set:TARRIFID=" . $searchTariff[0]['id_rate'] . "\n";
                     $call .= "Set:SELLCOST=" . $searchTariff[0]['rateinitial'] . "\n";
                     $call .= "Set:SELLINITBLOCK=" . $searchTariff[0]['initblock'] . "\n";
