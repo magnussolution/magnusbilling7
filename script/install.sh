@@ -43,7 +43,7 @@ get_linux_distribution ()
     fi
 }
 
-PHP_INI=$(php -i | grep /.+/php.ini -oE)
+
 
 get_linux_distribution
 
@@ -187,6 +187,7 @@ elif  [ ${DIST} = "CENTOS" ]; then
     yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp htop
 fi
 
+PHP_INI=$(php -i | grep /.+/php.ini -oE)
 
 mkdir -p /var/www/html/mbilling
 cd /var/www/html/mbilling
