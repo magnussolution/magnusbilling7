@@ -21,6 +21,7 @@
 
 class Cryptocurrency extends Model
 {
+    protected $_module = 'cryptocurrency';
 
     public static function model($className = __CLASS__)
     {
