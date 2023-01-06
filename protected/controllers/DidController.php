@@ -371,6 +371,27 @@ class DidController extends Controller
 
             foreach ($ids as $key => $id) {
                 $modelDid = Did::model()->findByPk((int) $id);
+
+                if (isset($modelDid->id) && isset($modelDid->idUser->did_days) && $modelDid->idUser->did_days > 0) {
+                    $didUse = DidUse::model()->find('id_did = :key AND releasedate = :key1 AND status = 1', [
+                        'key'   => $id,
+                        ':key1' => '0000-00-00 00:00:00',
+                    ]);
+
+                    $date = date('Y-m-d', strtotime($didUse->reservationdate . " + " . $modelDid->idUser->did_days . " day"));
+
+                    if ($date > date('Y-m-d')) {
+                        echo json_encode(array(
+                            $this->nameSuccess => false,
+                            $this->nameMsg     => 'DID ' . $modelDid->did . '. Clients are requested to hold the DID for at least ' . $modelDid->idUser->did_days . ' days before deleting the DID as per carrier policy to avoid spamming fresh DIDs. Thank you',
+                        ));
+                        exit;
+                    }
+                }
+            }
+
+            foreach ($ids as $key => $id) {
+                $modelDid = Did::model()->findByPk((int) $id);
                 if ($modelDid->reserved == 1 && $modelDid->id_user > 0) {
                     Did::model()->updateByPk(
                         $id,
@@ -381,7 +402,7 @@ class DidController extends Controller
 
                     Diddestination::model()->deleteAll("id_did = :key", array(':key' => $id));
 
-                    $didUse = DidUse::model()->findByPk('id_did = :key AND releasedate = :key1 AND status = 1', [
+                    $didUse = DidUse::model()->find('id_did = :key AND releasedate = :key1 AND status = 1', [
                         'key'   => $id,
                         ':key1' => '0000-00-00 00:00:00',
                     ]);
