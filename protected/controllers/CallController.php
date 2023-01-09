@@ -161,11 +161,21 @@ class CallController extends Controller
 
         if (isset($_GET['id'])) {
 
-            $modelCall = Call::model()->findByPk((int) $_GET['id']);
-            $day       = $modelCall->starttime;
-            $uniqueid  = $modelCall->uniqueid;
-            $day       = explode(' ', $day);
-            $day       = explode('-', $day[0]);
+            if (Yii::app()->session['isClient']) {
+                $modelCall = Call::model()->find('id = :key AND id_user = :key1', [':key' => $_GET['id'], ':key1' => Yii::app()->session['id_user']]);
+            } else {
+                $modelCall = Call::model()->findByPk((int) $_GET['id']);
+            }
+
+            if (!isset($modelCall->id)) {
+                echo yii::t('zii', 'Audio no found');
+                exit;
+            }
+
+            $day      = $modelCall->starttime;
+            $uniqueid = $modelCall->uniqueid;
+            $day      = explode(' ', $day);
+            $day      = explode('-', $day[0]);
 
             $day = $day[2] . $day[1] . $day[0];
 
