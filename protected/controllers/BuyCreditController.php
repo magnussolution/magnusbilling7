@@ -88,7 +88,13 @@ class BuyCreditController extends Controller
             exit('invalid option');
         }
 
-        if ($modelMethodPay->payment_method == 'SuperLogica') {
+        if ($modelMethodPay->payment_method == 'Custom') {
+            $url = preg_replace("/\%amount\%/", $_GET['amount'], $modelMethodPay->url);
+            foreach ($modelUser as $key => $user) {
+                $modelMethodPay->url = preg_replace("/\%$key\%/", $modelUser->$key, $modelMethodPay->url);
+            }
+            header('Location: ' . $modelMethodPay->url);
+        } elseif ($modelMethodPay->payment_method == 'SuperLogica') {
             SLUserSave::criarBoleto($modelMethodPay, $modelUser);
         } else {
             $this->render(strtolower($modelMethodPay->payment_method), array(
