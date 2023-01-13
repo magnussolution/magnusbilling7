@@ -28,7 +28,7 @@ class QueueAgi
         $startTime           = $startTime > 0 ? $startTime : time();
         $MAGNUS->destination = $DidAgi->modelDid->did;
 
-        $sql = "SELECT  *, pkg_queue.id AS id, pkg_queue.id_user AS id_user  FROM pkg_queue
+        $sql = "SELECT  *, pkg_queue.id AS id, pkg_queue.id_user AS id_user , pkg_user.id_user AS id_agent FROM pkg_queue
                             LEFT JOIN pkg_user ON pkg_queue.id_user = pkg_user.id
                             WHERE pkg_queue.id = " . $DidAgi->modelDestination[0]['id_queue'] . " LIMIT 1 ";
         $modelQueue = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -143,6 +143,11 @@ class QueueAgi
             $CalcAgi->sipiax           = 8;
             $CalcAgi->buycost          = $DidAgi->buy_price;
             $CalcAgi->id_prefix        = $modelPrefix->id;
+
+            if ($modelQueue->id_agent > 1) {
+                $CalcAgi->agent_bill = $DidAgi->agent_client_rate;
+            }
+
             $CalcAgi->saveCDR($agi, $MAGNUS);
 
             if (isset($DidAgi->modelDid->id)) {

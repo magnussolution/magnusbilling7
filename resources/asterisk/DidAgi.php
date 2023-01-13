@@ -29,9 +29,17 @@ class DidAgi
     public $modelDid;
     public $startCall;
     public $id_prefix = 0;
+    public $did_voip_model;
+    public $did_voip_model_sip_account;
 
     public function checkIfIsDidCall(&$agi, &$MAGNUS, &$CalcAgi)
     {
+
+        if (strlen($MAGNUS->accountcode) > 3) {
+            $sql                              = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' LIMIT 1";
+            $this->did_voip_model             = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $this->did_voip_model_sip_account = $MAGNUS->sip_account;
+        }
         $this->startCall = time();
 
         if ($MAGNUS->active > 2) {
@@ -60,6 +68,9 @@ class DidAgi
             $sql                    = "SELECT * FROM pkg_did_destination WHERE activated = 1 AND id_did = '" . $this->modelDid->id . "' ORDER BY priority";
             $this->modelDestination = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+            if (isset($this->did_voip_model->record_call) && $this->did_voip_model->record_call == 1) {
+                $this->modelDid->record_call = 1;
+            }
             if (count($this->modelDestination)) {
                 $agi->verbose("Did have destination", 15);
 
@@ -805,7 +816,7 @@ class DidAgi
         $CalcAgi->terminatecauseid = $terminatecauseid;
         $CalcAgi->sessionbill      = $this->sell_price;
         $MAGNUS->id_trunk          = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
-        $CalcAgi->sipiax           = 3;
+        $CalcAgi->sipiax           = 2;
         $CalcAgi->buycost          = $this->buy_price;
 
         if ($MAGNUS->modelUser->id_user > 1) {
@@ -819,6 +830,19 @@ class DidAgi
                     WHERE  id = " . $this->modelDid->id . " LIMIT 1";
         $agi->exec($sql);
 
+        if (isset($this->did_voip_model->id)) {
+
+            if ($MAGNUS->record_call == 1) {
+                system('cp -rf /var/spool/asterisk/monitor/' . $this->accountcode . '/*' . $this->uniqueid . ' /var/spool/asterisk/monitor/' . $this->did_voip_model->username . '/');
+            }
+            $MAGNUS->id_user      = $this->did_voip_model->id;
+            $MAGNUS->sip_account  = $this->did_voip_model_sip_account;
+            $CalcAgi->buycost     = 0;
+            $CalcAgi->sessionbill = 0;
+            $CalcAgi->sipiax      = 3;
+            $CalcAgi->saveCDR($agi, $MAGNUS);
+
+        }
         return;
     }
 }

@@ -63,6 +63,7 @@ class Report extends FPDF
     public $listHeaderColor;
     public $firstListTitle;
     public $secondListTitle;
+    public $decimal = 2;
     public function generate($type = 'link')
     {
         $this->AliasNbPages();
@@ -564,7 +565,7 @@ class Report extends FPDF
         } else {
             $this->SetTextColor(0, 128, 0);
         }
-        return Yii::app()->session['currency'] . ' ' . number_format((int) $value, 2, ',', '.');
+        return Yii::app()->session['currency'] . ' ' . number_format((int) $value, $this->decimal, ',', '.');
     }
 
     public function formatPercentage($value)
