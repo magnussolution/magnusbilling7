@@ -192,6 +192,13 @@ Ext.define('MBilling.view.user.List', {
             hidden: true,
             hideable: App.user.isAdmin,
             flex: 4
+        }, {
+            header: t('Expiration date'),
+            renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+            dataIndex: 'expirationdate',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 4
         }];
         me.callParent(arguments);
     }

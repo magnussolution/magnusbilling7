@@ -76,12 +76,24 @@ Ext.define('MBilling.view.alarm.Form', {
             name: 'amount',
             fieldLabel: t('Amount')
         }, {
-            name: 'email',
-            fieldLabel: t('Email')
-        }, {
             xtype: 'booleancombo',
             name: 'status',
             fieldLabel: t('Status')
+        }, {
+            name: 'email',
+            fieldLabel: t('Email')
+        }, {
+            name: 'subject',
+            fieldLabel: t('Subject')
+        }, {
+            xtype: 'textareafield',
+            name: 'message',
+            fieldLabel: t('Message'),
+            hideLabel: true,
+            height: 400,
+            grow: true,
+            enableKeyEvents: false,
+            anchor: '100%'
         }];
         me.callParent(arguments);
     }

@@ -55,7 +55,8 @@ class Alarm extends Model
         $rules = array(
             array('type, amount, condition, status', 'required'),
             array('type, amount, condition, status, id_plan, period', 'numerical', 'integerOnly' => true),
-            array('email, last_notification', 'length', 'max' => 100),
+            array('subject', 'length', 'max' => 200),
+            array('message', 'length', 'max' => 1000),
 
         );
         return $this->getExtraField($rules);

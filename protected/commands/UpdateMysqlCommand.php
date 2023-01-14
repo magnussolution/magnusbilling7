@@ -1948,6 +1948,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //2023-01-14
+        if ($version == '7.8.3.0') {
+            $sql = "ALTER TABLE `pkg_alarm` ADD `subject` VARCHAR(200) NOT NULL DEFAULT 'MagnusBilling ALARM' AFTER `last_notification`, ADD `message` VARCHAR(1000) NOT NULL DEFAULT 'MagnusBilling ALARM email body, customize' AFTER `subject`;";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.1';
+            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+
     }
 
     public function executeDB($sql)
