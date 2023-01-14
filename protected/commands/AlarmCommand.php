@@ -33,7 +33,7 @@ class AlarmCommand extends ConsoleCommand
                 $this->filter = "starttime  >= '" . date('Y-m-d', strtotime('-' . $alarm->period . ' day', time())) . "'";
 
             }
-
+            echo $alarm->type . "\n";
             switch ($alarm->type) {
                 case 1:
                     # ALOC
@@ -85,16 +85,18 @@ class AlarmCommand extends ConsoleCommand
 
         $asr = ($totalAnswered / ($totalFailed + $totalAnswered)) * 100;
 
+        $alarm->message = preg_replace('/%totalAnswered%/', $totalAnswered, $alarm->message);
+        $alarm->message = preg_replace('/%totalFailed%/', $totalFailed, $alarm->message);
+        $alarm->message = preg_replace('/%asr%/', $asr, $alarm->message);
+
         echo 'ASR ' . $asr . "\n";
         if ($alarm->condition == 1) {
             if ($asr > $alarm->amount) {
-                $message = "MagnusBilling ALARM. The ASR is bigger than your alarm configuration";
-                $this->notification($message, $alarm);
+                $this->notification($alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($asr < $alarm->amount) {
-                $message = "MagnusBilling ALARM. The ASR is less than your alarm configuration";
-                $this->notification($message, $alarm);
+                $this->notification($alarm);
             }
         }
 
@@ -107,16 +109,16 @@ class AlarmCommand extends ConsoleCommand
         $modeCdr = Call::model()->findBySql($sql);
         $aloc    = $modeCdr->sessiontime;
 
+        $alarm->message = preg_replace('/%aloc%/', $aloc, $alarm->message);
+
         echo 'ALOC ' . $aloc . "\n";
         if ($alarm->condition == 1) {
             if ($aloc > $alarm->amount) {
-                $message = "MagnusBilling ALARM. The ALOC is bigger than your alarm configuration";
-                $this->notification($message, $alarm);
+                $this->notification($alarm->message);
             }
         } else if ($alarm->condition == 2) {
             if ($aloc < $alarm->amount) {
-                $message = "MagnusBilling ALARM. The ALOC is less than your alarm configuration";
-                $this->notification($message, $alarm);
+                $this->notification($alarm->message);
             }
         }
     }
@@ -132,16 +134,17 @@ class AlarmCommand extends ConsoleCommand
 
         $callPerMin = $totalCalls / $minutes;
 
+        $alarm->message = preg_replace('/%callPerMin%/', $callPerMin, $alarm->message);
+        $alarm->message = preg_replace('/%totalCalls%/', $totalCalls, $alarm->message);
+
         echo 'CALLS PER MINUTE ' . $callPerMin . "\n";
         if ($alarm->condition == 1) {
             if ($callPerMin > $alarm->amount) {
-                $message = "MagnusBilling ALARM. You had more calls per minute than your alarm configuration";
-                $this->notification($message, $alarm);
+                $this->notification($alarm);
             }
         } else if ($alarm->condition == 2) {
             if ($callPerMin < $alarm->amount) {
-                $message = "MagnusBilling ALARM. You had less calls per minute than your alarm configuration";
-                $this->notification($message, $alarm);
+                $this->notification($alarm);
             }
         }
     }
@@ -156,15 +159,19 @@ class AlarmCommand extends ConsoleCommand
 
             $totalConsecutiveCalls = $cdr->sessiontime;
 
+            $alarm->message = preg_replace('/%totalConsecutiveCalls%/', $totalConsecutiveCalls, $alarm->message);
+
+            foreach ($cdr->idUser as $key => $value) {
+                $alarm->message = preg_replace('/%' . $key . '%/', $cdr->idUser->$key, $alarm->message);
+            }
+
             if ($alarm->condition == 1) {
                 if ($totalConsecutiveCalls > $alarm->amount) {
-                    $message = "MagnusBilling ALARM. User " . $cdr->idUser->username . " dial more than $totalConsecutiveCalls to numeber $cdr->calledstation";
-                    $this->notification($message, $alarm);
+                    $this->notification($alarm);
                 }
             } else if ($alarm->condition == 2) {
                 if ($totalConsecutiveCalls < $alarm->amount) {
-                    $message = "MagnusBilling ALARM. User $cdr->id_user dial less than $totalConsecutiveCalls to numeber $cdr->calledstation";
-                    $this->notification($message, $alarm);
+                    $this->notification($alarm);
 
                 }
             }
@@ -177,15 +184,23 @@ class AlarmCommand extends ConsoleCommand
     {
 
         $modelCallOnLine = CallOnLine::model()->findAll([
-            'select' => 'ndiscado, COUNT(*) AS canal',
+            'select' => '*, ndiscado, COUNT(*) AS canal',
             'group'  => 'ndiscado HAVING canal >= ' . $alarm->amount,
             'order'  => 'canal DESC',
         ]);
         foreach ($modelCallOnLine as $key => $call) {
 
             if (($call->canal) >= ($alarm->amount)) {
-                $message = "MagnusBilling ALARM. Multiple online calls to the same number(" . $call->ndiscado . ") detected! ";
-                $this->notification($message, $alarm);
+
+                print_r($call->getAttributes());
+                $alarm->message = preg_replace('/%onlineCalls%/', $call->canal, $alarm->message);
+                $alarm->message = preg_replace('/%number%/', $call->ndiscado, $alarm->message);
+
+                echo $alarm->message . "\n\n";
+                foreach ($call->idUser as $key => $value) {
+                    $alarm->message = preg_replace('/%' . $key . '%/', $call->idUser->$key, $alarm->message);
+                }
+                $this->notification($alarm);
             }
         }
 
@@ -193,12 +208,14 @@ class AlarmCommand extends ConsoleCommand
     public function numberEqualCaller($alarm)
     {
 
-        $sql     = "SELECT COUNT(*) id, calledstation FROM pkg_cdr WHERE " . $this->filter . " AND (calledstation = callerid  OR SUBSTRING(calledstation,2) = callerid)";
+        $sql     = "SELECT *, COUNT(*) id, calledstation FROM pkg_cdr WHERE " . $this->filter . " AND (calledstation = callerid  OR SUBSTRING(calledstation,2) = callerid)";
         $modeCdr = Call::model()->findBySql($sql);
 
         if (($modeCdr->id) >= ($alarm->amount)) {
-            $message = "MagnusBilling ALARM. Multiple calls to the Dialled Number (" . $modeCdr->calledstation . ") with the salve CallerID detected! ";
-            $this->notification($message, $alarm);
+            $alarm->message = preg_replace('/%number%/', $modeCdr->calledstation, $alarm->message);
+            $alarm->message = preg_replace('/%totalCalls%/', $modeCdr->id, $alarm->message);
+
+            $this->notification($alarm);
         }
 
     }
@@ -224,6 +241,7 @@ class AlarmCommand extends ConsoleCommand
             }
 
             $calls = is_numeric($modeCdr->id) ? $modeCdr->id : 0;
+
             if ($alarm->condition == 1) {
                 if ($modeCdr->id > $alarm->amount) {
                     $modeCdr2 = Call::model()->find([
@@ -249,21 +267,70 @@ class AlarmCommand extends ConsoleCommand
         }
 
         if (strlen($users) > 3) {
-
-            $message = "MagnusBilling ALARM. These users have no calls.  <br><br>$users";
-
-            $this->notification($message, $alarm);
-
+            $alarm->message = preg_replace('/%userList%/', $users, $alarm->message);
+            $this->notification($alarm);
         }
     }
 
-    public function notification($message, $alarm)
+    public function notification($alarm)
     {
+
+        $condition = [
+            1 => 'Bigger than',
+            2 => 'Less than',
+        ];
+
+        $type = [
+            1 => 'ALOC',
+            2 => 'ASR',
+            3 => 'Calls per minute',
+            4 => 'Consecutive number',
+            5 => 'Online calls on same number',
+            6 => 'Same number and CallerID',
+            7 => 'Total calls per user',
+        ];
+
+        $type = [
+            1 => 'ALOC',
+            2 => 'ASR',
+            3 => 'Calls per minute',
+            4 => 'Consecutive number',
+            5 => 'Online calls on same number',
+            6 => 'Same number and CallerID',
+            7 => 'Total calls per user',
+        ];
+        $period = [
+            '3600'  => '1 Hour',
+            '7200'  => '2 Hours',
+            '43200' => '12 Hours',
+            '1'     => '1 day',
+            '2'     => '2 days',
+            '3'     => '3 days',
+            '4'     => '4 days',
+            '5'     => '5 days',
+            '6'     => '6 days',
+            '7'     => '1 week',
+            '14'    => '2 weeks',
+            '21'    => '3 weeks',
+            '30'    => '1 month',
+        ];
 
         $alarm->last_notification = date('Y-m-d H:i:s');
         $alarm->save();
 
-        echo preg_replace("/<br>/", "\n", $message) . "\n\n";
+        foreach ($alarm as $key => $value) {
+            if ($key == 'type') {
+                $alarm->message = preg_replace('/%' . $key . '%/', $type[$alarm->$key], $alarm->message);
+            } else if ($key == 'condition') {
+                $alarm->message = preg_replace('/%' . $key . '%/', $condition[$alarm->$key], $alarm->message);
+            } else if ($key == 'period') {
+                $alarm->message = preg_replace('/%' . $key . '%/', $period[$alarm->$key], $alarm->message);
+            } else {
+                $alarm->message = preg_replace('/%' . $key . '%/', $alarm->$key, $alarm->message);
+            }
+        }
+
+        echo $alarm->message . "\n";
 
         $modelSmtps = Smtps::model()->find('id_user = 1');
 
@@ -299,12 +366,12 @@ class AlarmCommand extends ConsoleCommand
         $mail->Username   = $smtp_username;
         $mail->Password   = $smtp_password;
         $mail->Port       = $smtp_port;
-        $mail->SetFrom($from_email, "MagnusBilling ALARM");
+        $mail->SetFrom($from_email, $alarm->subject);
         $mail->SetLanguage($this->config['global']['base_language'] == 'pt_BR' ? 'br' : $this->config['global']['base_language']);
 
-        $mail->Subject = mb_encode_mimeheader('MagnusBilling ALARM');
+        $mail->Subject = $alarm->subject;
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
-        $mail->MsgHTML($message);
+        $mail->MsgHTML($alarm->message);
         $mail->AddAddress($alarm->email);
         $mail->CharSet   = 'utf-8';
         $mail->SMTPDebug = 1;
