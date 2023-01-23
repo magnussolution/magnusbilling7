@@ -249,7 +249,7 @@ class Magnus
         }
 
         $this->destination = preg_replace('/\#|\*|\-|\.|\(|\)/', '', $this->destination);
-        $this->dnid        = preg_replace('/\-|\.|\(|\)/', '', $this->dnid);
+        $this->dnid        = preg_replace('/\#|\*|\-|\.|\(|\)/', '', $this->dnid);
 
         if ($this->destination <= 0) {
             $prompt = "prepaid-invalid-digits";

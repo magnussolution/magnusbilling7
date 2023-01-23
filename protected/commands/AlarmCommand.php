@@ -315,8 +315,8 @@ class AlarmCommand extends ConsoleCommand
             '30'    => '1 month',
         ];
 
-        $alarm->last_notification = date('Y-m-d H:i:s');
-        $alarm->save();
+        $sql = "UPDATE pkg_alarm SET last_notification = '" . date('Y-m-d H:i:s') . "' WHERE id = " . $alarm->id;
+        Yii::app()->db->createCommand($sql)->execute();
 
         foreach ($alarm as $key => $value) {
             if ($key == 'type') {
@@ -366,7 +366,7 @@ class AlarmCommand extends ConsoleCommand
         $mail->Username   = $smtp_username;
         $mail->Password   = $smtp_password;
         $mail->Port       = $smtp_port;
-        $mail->SetFrom($from_email, $alarm->subject);
+        $mail->SetFrom($from_email, 'Billing Alert');
         $mail->SetLanguage($this->config['global']['base_language'] == 'pt_BR' ? 'br' : $this->config['global']['base_language']);
 
         $mail->Subject = $alarm->subject;
