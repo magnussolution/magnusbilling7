@@ -195,7 +195,7 @@ class ApiAccess
 
         $modelUser = User::model()->find('email = :key', array(':key' => $values['email']));
 
-        if (count($modelUser)) {
+        if (isset($modelUser->id)) {
 
             echo json_encode([
                 'success' => false,
@@ -227,7 +227,7 @@ class ApiAccess
             $values['id_plan'] = $values['id_plan'];
         } else {
             $modelPlan = Plan::model()->find('signup = 1');
-            if (count($modelPlan)) {
+            if (isset($modelPlan->id)) {
                 $values['id_plan'] = $modelPlan->id;
             } else {
                 if (isset($modelUser->id)) {
@@ -248,7 +248,7 @@ class ApiAccess
             $values['id_group'] = $values['id_group'];
         } else {
             $modelGroupUser = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
-            if (count($modelGroupUser)) {
+            if (isset($modelGroupUser->id)) {
                 $values['id_group'] = $modelGroupUser[0]['id'];
             } else {
                 echo json_encode([

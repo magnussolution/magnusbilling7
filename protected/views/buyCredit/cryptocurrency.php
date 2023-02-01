@@ -19,7 +19,7 @@
  * 04/01/2018
  */
 
-if (Yii::app()->session['currency'] == 'U$S') {
+if (Yii::app()->session['currency'] == 'U$S' || Yii::app()->session['currency'] == '$') {
     $currency = 'USD';
 } else if (Yii::app()->session['currency'] == 'R$') {
     $currency = 'BRL';
@@ -85,12 +85,10 @@ $modelCryptocurrency->save();
 						If you send different amount or after 30 min the refill not be automatic.
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2"><p style="text-align: center;"><b><img width="250px" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=<?php echo $modelMethodPay->username ?>"></b></p></td>
-				</tr>
 
-				<td style="text-align: center;" colspan="2" class="banco" style="font:bold 13px Arial, Helvetica, sans-serif; color:#333;">
-					HOW BUY BITCOIN <br> https://www.bitcoin.com/buy-bitcoin <br> https://localbitcoins.com
+
+				<td style="text-align: center;" colspan="2" class="banco" style="top: 100px;font:bold 13px Arial, Helvetica, sans-serif; color:#333;">
+					HOW BUY BITCOIN <br> https://www.bitcoin.com/buy-bitcoin <br> https://localbitcoins.com<br> https://binance.com
 				</td>
 
 			</table>
