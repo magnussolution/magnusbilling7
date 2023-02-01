@@ -123,10 +123,7 @@ class DidAgi
 
                     $calls = 0;
                     foreach ($modelDIDAll as $key => $value) {
-
-                        $agi->verbose("find calls from DID $value->did", 5);
                         $calls += AsteriskAccess::getCallsPerDid($value->did);
-                        $agi->verbose("found $calls", 5);
                     }
 
                     if ($calls >= $MAGNUS->modelUser->inbound_call_limit) {
