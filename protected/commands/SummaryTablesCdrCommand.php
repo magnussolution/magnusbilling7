@@ -281,7 +281,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['sessiontime'] / $value['nbcall'];
             $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
             $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
@@ -343,7 +343,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['sessiontime'] / $value['nbcall'];
             $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
             $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
@@ -400,7 +400,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_user']) || $value['id_user'] < 1) {
                 continue;
             }
-            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['sessiontime'] / $value['nbcall'];
             $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
             $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
@@ -507,7 +507,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
             if (!is_numeric($value['id_trunk']) || $value['id_trunk'] < 1) {
                 continue;
             }
-            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['sessiontime'] / $value['nbcall'];
             $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
             $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
@@ -557,7 +557,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['sessiontime'] / $value['nbcall'];
             $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
             $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];
@@ -649,7 +649,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
         $line = '';
         foreach ($result as $key => $value) {
-            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['aloc_all_calls'];
+            $value['aloc_all_calls'] = $value['aloc_all_calls'] == null ? 0 : $value['sessiontime'] / $value['nbcall'];
             $value['sessiontime']    = $value['sessiontime'] == null ? 0 : $value['sessiontime'];
             $value['buycost']        = $value['buycost'] == null ? 0 : $value['buycost'];
             $value['sessionbill']    = $value['sessionbill'] == null ? 0 : $value['sessionbill'];

@@ -51,10 +51,8 @@ chmod -R 774 /var/www/html/mbilling/protected/runtime/
 chmod -R 700 /var/www/html/mbilling/lib
 mkdir -p /usr/local/src/magnus
 chmod -R 755 /usr/local/src/magnus
-mkdir -p /var/www/tmpmagnus
-chown -R asterisk:asterisk /var/www/tmpmagnus
-chmod -R 777 /var/www/tmpmagnus
 chmod 774 /var/www/html/mbilling/resources/ip.blacklist
+rm -rf /var/www/html/mbilling/tmp
 mkdir -p /var/www/html/mbilling/tmp
 chown -R asterisk:asterisk /var/www/html/mbilling/tmp
 chmod -R 755 /var/www/html/mbilling/tmp
