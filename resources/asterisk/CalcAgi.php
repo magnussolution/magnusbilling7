@@ -805,6 +805,9 @@ class CalcAgi
         $sql = "DELETE FROM pkg_queue_status WHERE callId = " . $MAGNUS->uniqueid;
         $agi->exec($sql);
 
+        $sql          = "SELECT id FROM pkg_servers WHERE host = '" . $agi->get_variable("SIPDOMAIN", true) . "'";
+        $modelServers = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
         if ($this->terminatecauseid == 1) {
 
             $fields = "uniqueid,id_user,calledstation,id_plan,callerid,src,
@@ -817,6 +820,10 @@ class CalcAgi
                         '$this->real_sessiontime', '$this->terminatecauseid', '$this->sessionbill',
                         '$this->sipiax','$this->buycost'";
 
+            if (isset($modelServers->id)) {
+                $fields .= ', id_server';
+                $values .= ", $modelServers->id";
+            }
             if (is_numeric($MAGNUS->id_trunk)) {
                 $fields .= ', id_trunk';
                 $values .= ", $MAGNUS->id_trunk";
@@ -862,6 +869,11 @@ class CalcAgi
                 $values = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$MAGNUS->destination','$MAGNUS->id_plan',
                         '$MAGNUS->id_trunk','$MAGNUS->CallerID', '$MAGNUS->sip_account',
                         '$this->starttime', '$this->terminatecauseid','$this->sipiax','$this->id_prefix','$code'";
+
+                if (isset($modelServers->id)) {
+                    $fields .= ', id_server';
+                    $values .= ", $modelServers->id";
+                }
 
                 $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
                 $agi->exec($sql);
