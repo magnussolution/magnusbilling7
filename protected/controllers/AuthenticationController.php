@@ -42,8 +42,10 @@ class AuthenticationController extends Controller
         if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id == 1) {
             $condition = "username COLLATE utf8_bin = :user AND UPPER(password) COLLATE utf8_bin = :pass ";
         } else {
-            $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND (password COLLATE utf8_bin = :pass OR UPPER(SHA1(password)) COLLATE utf8_bin = :pass)) OR ";
-            $condition .= " (id = (SELECT id_user FROM pkg_sip WHERE name COLLATE utf8_bin = :user AND UPPER(SHA1(secret)) COLLATE utf8_bin = :pass) )";
+            $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND (password COLLATE utf8_bin = :pass OR UPPER(SHA1(password)) COLLATE utf8_bin = :pass))  ";
+            if ($this->config['global']['sipuser_login'] == 1) {
+                $condition .= " OR (id = (SELECT id_user FROM pkg_sip WHERE name COLLATE utf8_bin = :user AND UPPER(SHA1(secret)) COLLATE utf8_bin = :pass) )";
+            }
         }
 
         $modelUser = User::model()->find(
