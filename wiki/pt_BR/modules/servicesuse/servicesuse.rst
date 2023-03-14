@@ -44,7 +44,7 @@ Métodos de Pagamento
 Messes pago
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Meses pagos
 
 
 
@@ -64,7 +64,7 @@ Data de reserva
 Final do contrato mínimo
 -------------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Tempo de contrato
 
 
 
@@ -74,7 +74,7 @@ Final do contrato mínimo
 Data para cancelar
 ------------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Termino do contrato
 
 
 

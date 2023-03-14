@@ -508,3 +508,33 @@ Show selling price
 
 
 
+
+.. _user-email2:
+
+Email
+-----
+
+| We did not write the description to this field.
+
+
+
+
+.. _user-email-services:
+
+Services email notification
+---------------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _user-email-did:
+
+DID email notification
+----------------------
+
+| We did not write the description to this field.
+
+
+

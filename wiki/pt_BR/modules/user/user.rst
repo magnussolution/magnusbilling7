@@ -308,7 +308,7 @@ Imposto
 Valor contrato
 --------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Valor do contrato
 
 
 
@@ -529,6 +529,36 @@ Mostrar preço de venda
 -----------------------
 
 | Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.
+
+
+
+
+.. _user-email2:
+
+Email
+-----
+
+| Email 2
+
+
+
+
+.. _user-email-services:
+
+Enviar email de Serviços
+-------------------------
+
+| Ativa ou não as notificaçōes por email dos serviços
+
+
+
+
+.. _user-email-did:
+
+Enviar email de DID
+-------------------
+
+| Ativa ou não as notificaçōes por email dos DIDs
 
 
 

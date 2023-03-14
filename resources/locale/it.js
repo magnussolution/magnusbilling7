@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2022
+ * 2023
  */
 Locale.load({
     ',': ',',
@@ -125,6 +125,7 @@ Locale.load({
     'Buy price per min': '',
     'CDR': '',
     'CDR Failed': '',
+    'CID': '',
     'CID Callback': '',
     'CNL': '',
     'CNL zone': '',
@@ -252,8 +253,10 @@ Locale.load({
     'Customization': '',
     'DID': '',
     'DID Destination': '',
+    'DID History': '',
     'DID billing per minute rate': '',
     'DID destination': '',
+    'DID email notification': '',
     'DID increment': '',
     'DID increment Buy': '',
     'DID increment Sell': '',
@@ -498,6 +501,7 @@ Locale.load({
     'MAC': '',
     'MOH': '',
     'MYSQL message.': '',
+    'Machine': '',
     'MagnusBilling': '',
     'Main menu': '',
     'Mandatory information element is missing': '',
@@ -518,6 +522,7 @@ Locale.load({
     'Menu': '',
     'Menu title': '',
     'Menus': '',
+    'Message': '',
     'Meter': '',
     'Meter number': '',
     'Method': '',
@@ -546,6 +551,7 @@ Locale.load({
     'Monthly payment Service': '',
     'Monthly price': '',
     'Mountain': '',
+    'Multiples IPs': '',
     'NAT': '',
     'NAT Mapping': '',
     'NAT details': '',
@@ -561,6 +567,7 @@ Locale.load({
     'New': '',
     'New password': '',
     'Next': '',
+    'Next due date': '',
     'Night': '',
     'No': '',
     'No answer': '',
@@ -900,6 +907,7 @@ Locale.load({
     'Service': 'Servizio',
     'Services': 'Servizi',
     'Services Use': 'Servizi uso',
+    'Services email notification': '',
     'Set the basic configuration': 'Imposta la configurazione di base',
     'Sets the destination of the call when a specific digit is pressed.': 'Imposta la destinazione della chiamata quando viene premuto una cifra specifica',
     'Settings': 'impostazioni',
@@ -916,6 +924,7 @@ Locale.load({
     'Sign into your account': 'Accedi al tuo account',
     'Signup': 'Iscriviti',
     'Simultaneous calls': 'Chiamate simultanee',
+    'Sip Users': '',
     'Sip user': 'SIP User',
     'Sip user limit': 'SIP User Limit',
     'SipProxy': 'Sipproxy',
@@ -1017,6 +1026,7 @@ Locale.load({
     'Total answered': 'Risposta totale',
     'Total buy price': 'Totale prezzo di acquisto',
     'Total calls': 'Chiamate totali',
+    'Total calls per user': '',
     'Total cost': 'Costo totale',
     'Total dialed': 'Totale selezionato',
     'Total failed': 'Totale non riuscito',

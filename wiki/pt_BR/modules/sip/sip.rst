@@ -138,7 +138,7 @@ Tech prefix
 Descrição
 -----------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Descrição
 
 
 

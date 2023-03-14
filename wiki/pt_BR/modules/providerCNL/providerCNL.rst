@@ -4,7 +4,7 @@
 Provedor
 --------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Provedor
 
 
 
@@ -14,7 +14,7 @@ Provedor
 CNL
 ---
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Código CNL
 
 
 
@@ -24,7 +24,7 @@ CNL
 Zona
 ----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Zona
 
 
 

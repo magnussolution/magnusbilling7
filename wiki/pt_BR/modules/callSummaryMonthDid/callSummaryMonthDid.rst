@@ -4,7 +4,7 @@
 Preço de venda
 ---------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório do preço de venda
 
 
 
@@ -14,7 +14,7 @@ Preço de venda
 Duração
 ---------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Somatório de minutos
 
 
 
@@ -24,7 +24,7 @@ Duração
 Total de chamadas
 -----------------
 
-| Nós ainda não escrevemos a descrição deste campo.
+| Total de chamadas
 
 
 

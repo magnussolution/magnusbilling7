@@ -11,12 +11,11 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2022
+ * 2023
  */
 Locale.load({
     ',': ',',
     '.': '.',
-    'Next due date': 'Próximo vencimento',
     '0800 Callback': '0800 Callback',
     'ALERT: Do you really active this service?': 'ALERTA: Você realmente quer ativar este serviço?',
     'ALERT: Do you really want cancel this service to this user?': 'ALERTA: Você realmente quer cancelar este serviço para este usuário?',
@@ -130,6 +129,7 @@ Locale.load({
     'Buy price per min': 'Preço de compra por min',
     'CDR': 'Extrato de Chamadas',
     'CDR Failed': 'Chamadas Rejeitadas',
+    'CID': 'CID',
     'CID Callback': 'CID Callback',
     'CNL': 'CNL',
     'CNL zone': 'Zona CNL',
@@ -260,8 +260,10 @@ Locale.load({
     'Customization': 'Personalização',
     'DID': 'DID',
     'DID Destination': 'Destino de DIDs',
+    'DID History': 'Histórico dos DID',
     'DID billing per minute rate': 'Valor da tarifa por minuto',
     'DID destination': 'Destino de DID',
+    'DID email notification': 'Enviar email de DID',
     'DID increment': 'DID increment',
     'DID increment Buy': 'Cadência de compra',
     'DID increment Sell': 'Cadência de venda',
@@ -513,6 +515,7 @@ Locale.load({
     'MAC': 'MAC',
     'MOH': 'MOH',
     'MYSQL message.': 'Mensagem MYSQL.',
+    'Machine': 'Maquina',
     'MagnusBilling': 'MagnusBilling',
     'Main menu': 'Menu principal',
     'Mandatory information element is missing': 'Mandatory information element is missing',
@@ -534,6 +537,7 @@ Locale.load({
     'Menu': 'Menu',
     'Menu title': 'Título do menu',
     'Menus': 'Menus',
+    'Message': 'Mensagem',
     'Meter': 'Medidor',
     'Meter number': 'Número do medidor',
     'Method': 'Método',
@@ -563,6 +567,7 @@ Locale.load({
     'Monthly payment Service': 'Pagamento mensal do serviço',
     'Monthly price': 'Preço mensal',
     'Mountain': 'Montanha',
+    'Multiples IPs': 'Multiplos IPs',
     'NAT': 'NAT',
     'NAT Mapping': 'NAT Mapping',
     'NAT details': 'Detalhes de NAT',
@@ -578,6 +583,7 @@ Locale.load({
     'New': 'Novo',
     'New password': 'Nova senha',
     'Next': 'Próximo',
+    'Next due date': 'Próximo vencimento',
     'Night': 'Noite',
     'No': 'Não',
     'No answer': 'Sem atendimento',
@@ -919,6 +925,7 @@ Locale.load({
     'Service': 'Serviço',
     'Services': 'Serviços',
     'Services Use': 'Uso de Serviços',
+    'Services email notification': 'Enviar email de Serviços',
     'Set the basic configuration': 'Configurações básicas',
     'Sets the destination of the call when a specific digit is pressed.': 'Define o destino da chamada quando um dígito específico é pressionado.',
     'Settings': 'Configurações',
@@ -935,6 +942,7 @@ Locale.load({
     'Sign into your account': 'Entre em sua conta',
     'Signup': 'Registro',
     'Simultaneous calls': 'Chamadas simultâneas',
+    'Sip Users': 'Contas SIP',
     'Sip user': 'Conta SIP',
     'Sip user limit': 'Limite de contas SIP',
     'SipProxy': 'SIP proxy',
@@ -1035,6 +1043,7 @@ Locale.load({
     'Total answered': 'Total atendida',
     'Total buy price': 'Total preço de compra',
     'Total calls': 'Total de chamadas',
+    'Total calls per user': 'Total de chamadas por usuário',
     'Total cost': 'Custo total',
     'Total dialed': 'Total discado',
     'Total failed': 'Total de falhas',
@@ -1165,4 +1174,5 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
+
 });

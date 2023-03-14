@@ -231,6 +231,14 @@ Este menu tem os seguintes campos
 .. include:: holidays/holidays.rst
 
 
+Histórico dos DID
+++++++++++++++++++
+
+Este menu tem os seguintes campos
+
+.. include:: didhistory/didhistory.rst
+
+
 
 
 
