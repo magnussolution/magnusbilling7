@@ -6,6 +6,8 @@ Help.load({
     'alarm.amount': ``,
     'alarm.email': ``,
     'alarm.status': ``,
+    'alarm.subject': ``,
+    'alarm.message': ``,
     //API
     'api.id_user': `Usuário que poderá usar está API.||Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
     
@@ -100,9 +102,9 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'callsummarydayuser.sumlucro': `Somatório do lucro.`,
     'callsummarydayuser.sumnbcall': `Total de chamadas.`,
     //RESUMO POR MêS/DID
-    'callsummarymonthdid.sumsessionbill': ``,
-    'callsummarymonthdid.sumsessiontime': ``,
-    'callsummarymonthdid.sumnbcall': ``,
+    'callsummarymonthdid.sumsessionbill': `Somatório do preço de venda`,
+    'callsummarymonthdid.sumsessiontime': `Somatório de minutos`,
+    'callsummarymonthdid.sumnbcall': `Total de chamadas`,
     //RESUMO POR MêS/TRONCO
     'callsummarymonthtrunk.sumsessiontime': `Somatorio de minutos chamadas.||É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, ou de um tronco específico, neste caso. Este somatório mostrará somente os dados do filtro executado.`,
     'callsummarymonthtrunk.sumsessionbill': `Somatório do preço de venda.`,
@@ -142,7 +144,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaign.id_user': `Usuário dono da campanha.`,
     'campaign.id_plan': `Que plano será usado para tarifar as chamadas desta campanha, pode ser um plano diferente do plano cadastrado na conta do cliente.`,
     'campaign.name': `Nome para a campanha.`,
-    'campaign.callerid': ``,
+    'campaign.callerid': `Caller ID`,
     'campaign.status': `Status da campanha.`,
     'campaign.startingdate': `Data que a campanha será considerada ativa.`,
     'campaign.expirationdate': `Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos.`,
@@ -273,7 +275,7 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'campaignpollinfo.resposta': `Opção votada.`,
     //NúMEROS RESTRITOS
     'campaignrestrictphone.number': `Número a ser bloqueado. É necessário ativar a opção números bloqueados na campanha.`,
-    'campaignrestrictphone.description': ``,
+    'campaignrestrictphone.description': `Descrição`,
     //AJUSTES
     'configuration.config_value': `Valor. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     'configuration.config_description': `Descrição. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
@@ -342,7 +344,8 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.TimeOfDay_sun': `Mesma regra só que para domingos.`,
     'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento.`,
-    'did.country': ``,
+    'did.country': `País`,
+    'did.id_server': `Servidor. Somente usado quando você usa SIP PROXY.`,
     //DESTINO DE DIDS
     'diddestination.id_did': `Selecione o DID para criar o novo destino.`,
     'diddestination.id_user': `Usuário que será o dono deste DID.`,
@@ -373,6 +376,12 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
 
 
     .`,
+    //HISTóRICO DOS DID
+    'didhistory.did': `DID`,
+    'didhistory.username': `Usuário`,
+    'didhistory.month_payed': `Meses pagos`,
+    'didhistory.reservationdate': `Data reservado`,
+    'didhistory.description': `Descrição`,
     //USO DE DIDS
     'diduse.id_did': `Número DID.`,
     'diduse.month_payed': `Total de meses pagos.`,
@@ -594,9 +603,9 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'provider.credit_control': `Se esta opção for ativada os troncos deste provedor serão desativados quando o crédito do provedor ficar em zero.`,
     'provider.description': `Descrição para a agenda, somente para controle próprio.`,
     //PROVEDOR CNL
-    'providercnl.id_provider': ``,
-    'providercnl.cnl': ``,
-    'providercnl.zone': ``,
+    'providercnl.id_provider': `Provedor`,
+    'providercnl.cnl': `Código CNL`,
+    'providercnl.zone': `Zona`,
     //FILAS DE ESPERA
     'queue.id_user': `Usuário dono da fila.`,
     'queue.name': `Nome para a fila.`,
@@ -714,10 +723,10 @@ Digamos que tenha 1 servidor MagnusBilling 3 servidores slaves, e você deseja e
     'servicesuse.id_services': `Serviço.`,
     'servicesuse.price': `Valor do serviço.`,
     'servicesuse.method': `Forma de pagamento.`,
-    'servicesuse.month_payed': ``,
+    'servicesuse.month_payed': `Meses pagos`,
     'servicesuse.reservationdate': `Dia que o serviço foi ativado.`,
-    'servicesuse.contract_period': ``,
-    'servicesuse.termination_date': ``,
+    'servicesuse.contract_period': `Tempo de contrato`,
+    'servicesuse.termination_date': `Termino do contrato`,
     //CONTAS SIP
     'sip.id_user': `Usuário ao qual esta conta SIP está vinculada.`,
     'sip.defaultuser': `Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.`,
@@ -735,7 +744,7 @@ Também usado para capturar chamada com *8, deve ser configurada a opção picku
     'sip.block_call_reg': `Bloquear chamadas usando REGEX. Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com.`,
     'sip.record_call': `Grava as chamadas saintes desta conta SIP.`,
     'sip.techprefix': `Opção útil para quando for necessário autenticar mais de um cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.`,
-    'sip.description': ``,
+    'sip.description': `Descrição`,
     'sip.nat': `O cliente está atrás de NAT? Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/.`,
     'sip.directmedia': `Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/.`,
     'sip.qualify': `Enviar pacote OPTION para verificar se o usuário está online.||Sintaxe:
@@ -962,7 +971,7 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.email': `Email, é necessário para o envio de notificaçōes do sistema.`,
     'user.doc': `Documento do cliente.`,
     'user.vat': `Usado em alguns métodos de pagamento.`,
-    'user.contract_value': ``,
+    'user.contract_value': `Valor do contrato`,
     'user.dist': ``,
     'user.typepaid': `Cliente pós-pago poderá ficar com saldo negativo até o limite de crédito informado no campo abaixo.`,
     'user.credit_notification_daily': `Se ativar esta opção o MagnusBilling vai enviar um email diariamente com o saldo do cliente. Você pode editar o email que será enviado no menu Configurações submenu Modelo de Emails.`,
@@ -985,6 +994,9 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.transfer_dbbl_rocket': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_dbbl_rocket_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_show_selling_price': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
+    'user.email2': `Email 2`,
+    'user.email_services': `Ativa ou não as notificaçōes por email dos serviços`,
+    'user.email_did': `Ativa ou não as notificaçōes por email dos DIDs`,
     //HISTóRICO CLIENTES
     'userhistory.id_user': ``,
     'userhistory.date': ``,

@@ -28,7 +28,7 @@ class DidHistoryController extends Controller
     {
         $this->instanceModel = new DidHistory;
         $this->abstractModel = DidHistory::model();
-        $this->titleReport   = Yii::t('zii', 'DidHistory');
+        $this->titleReport   = Yii::t('zii', 'DID History');
         parent::init();
     }
 }

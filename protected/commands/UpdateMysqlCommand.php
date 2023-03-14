@@ -292,8 +292,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2019-11-23
@@ -304,8 +303,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2019-12-04
@@ -322,8 +320,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.0.4') {
@@ -331,8 +328,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2020-01-17
         if ($version == '7.0.5') {
@@ -340,8 +336,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-01-20
@@ -396,8 +391,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-01-23
@@ -430,8 +424,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
 
             $sql = "ALTER TABLE `pkg_cdr` DROP `stoptime`;";
             $this->executeDB($sql);
@@ -443,8 +436,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.0.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.0.9') {
@@ -452,8 +444,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.0') {
@@ -461,8 +452,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.1') {
@@ -470,8 +460,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.2') {
@@ -479,8 +468,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.3') {
@@ -493,8 +481,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
 
             exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php didwww' >> $CRONPATH");
         }
@@ -507,8 +494,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.5') {
@@ -517,8 +503,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.6') {
@@ -537,8 +522,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.7') {
@@ -560,8 +544,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.8') {
@@ -571,8 +554,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.1.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.1.9') {
@@ -595,8 +577,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.2.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.2.0') {
@@ -614,8 +595,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.2.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.2.1') {
@@ -624,8 +604,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.2.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.2.2') {
@@ -637,8 +616,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.2.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         if ($version == '7.2.3') {
@@ -647,8 +625,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.2.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2020-06-08
         if ($version == '7.2.4') {
@@ -657,8 +634,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.2.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-06-15
@@ -748,8 +724,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-06-15
@@ -758,8 +733,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-11
@@ -771,8 +745,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-20
@@ -789,8 +762,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             exec("echo '#include extensions_magnus_did.conf' >> /etc/asterisk/extensions.conf");
 
             $version = '7.3.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-27
@@ -800,8 +772,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-11
@@ -817,16 +788,14 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-28
         if ($version == '7.3.5') {
 
             $version = '7.3.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-28
@@ -880,8 +849,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             }
 
             $version = '7.3.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-07-28
@@ -972,8 +940,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-08-14
@@ -983,8 +950,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.3.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-08-17
@@ -994,8 +960,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-08-18
@@ -1007,8 +972,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-08-18
@@ -1018,8 +982,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2020-08-19
         if ($version == '7.4.2') {
@@ -1029,8 +992,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2020-08-19
         if ($version == '7.4.3') {
@@ -1039,8 +1001,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2020-08-25
         if ($version == '7.4.4') {
@@ -1061,8 +1022,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-08-26
@@ -1075,8 +1035,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-08-26
@@ -1088,8 +1047,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.4.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-09-10
@@ -1114,8 +1072,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-09-21
@@ -1132,8 +1089,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-10-05
@@ -1143,8 +1099,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-10-08
@@ -1155,8 +1110,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-10-08
@@ -1167,8 +1121,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-12-01
@@ -1181,8 +1134,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-12-22
@@ -1210,8 +1162,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2020-12-26
@@ -1221,8 +1172,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-01-02
@@ -1232,8 +1182,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.5.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-01-03
@@ -1265,8 +1214,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             exec("echo '\n*/5 * * * * php /var/www/html/mbilling/cron.php alarm' >> $CRONPATH");
 
             $version = '7.5.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-01-03
@@ -1299,8 +1247,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2021-01-21
         if ($version == '7.6.0') {
@@ -1319,8 +1266,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-01-21
@@ -1330,8 +1276,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-01-21
@@ -1341,8 +1286,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-03-05
@@ -1353,8 +1297,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-03-18
@@ -1382,8 +1325,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             exec("echo '\n* * * * * php /var/www/html/mbilling/cron.php TrunkSIPCodes' >> $CRONPATH");
 
             $version = '7.6.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-03-18
@@ -1404,8 +1346,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             }
 
             $version = '7.6.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-06-08
@@ -1414,8 +1355,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.6.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-06-18
@@ -1424,8 +1364,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.7.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-06-23
@@ -1434,8 +1373,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.7.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-07-28
@@ -1444,8 +1382,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.7.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-07-28
@@ -1454,8 +1391,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.7.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-07-28
@@ -1464,8 +1400,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.7.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-08-27
@@ -1474,8 +1409,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.7.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-08-27
@@ -1483,8 +1417,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = " INSERT INTO `pkg_configuration` (`id`, `config_title`, `config_key`, `config_value`, `config_description`, `config_group_title`, `status`) VALUES (NULL, 'Delete CDR archived prior X month', 'delete_cdr_archived_prior_x_month', '0', 'Delete CDR archived prior X monthr', 'global', '1'),(NULL, 'Delete CDR failed archived prior X month', 'delete_cdr_failed_archived_prior_x_month', '0', 'Delete CDR failed archived prior X month', 'global', '1');";
             $this->executeDB($sql);
             $version = '7.7.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-10-22
@@ -1504,8 +1437,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             exec("echo '\n59 23 * * * php /var/www/html/mbilling/cron.php NotifyClientDaily' >> $CRONPATH");
 
             $version = '7.7.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-10-24
@@ -1513,8 +1445,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = " INSERT INTO `pkg_configuration` VALUES (NULL, 'Charge the DID if client have enough credit before the due date', 'charge_did_before_due_date', '1', 'Charge the DID if client have enough credit before the due date', 'global', '1');";
             $this->executeDB($sql);
             $version = '7.7.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-10-26
@@ -1528,8 +1459,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $sql = "UPDATE pkg_configuration SET config_key = 'charge_did_services_before_due_date'  WHERE config_key = 'charge_did_before_due_date'";
             $this->executeDB($sql);
             $version = '7.7.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2021-12-06
@@ -1552,8 +1482,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2021-12-00
         if ($version == '7.8.0.0') {
@@ -1561,8 +1490,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2022-01-19
         if ($version == '7.8.0.1') {
@@ -1570,8 +1498,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-01-19
@@ -1580,8 +1507,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-02-14
@@ -1591,8 +1517,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-02-14
@@ -1601,8 +1526,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-02-17
@@ -1611,8 +1535,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             Yii::app()->db->createCommand($sql)->execute();
 
             $version = '7.8.0.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-02-18
@@ -1622,8 +1545,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-04-15
@@ -1639,8 +1561,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-04-21
@@ -1653,8 +1574,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.0.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-04-27
@@ -1664,8 +1584,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-05-05
@@ -1675,8 +1594,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-05-13
@@ -1685,8 +1603,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-05-23
@@ -1707,8 +1624,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-05-25
@@ -1724,8 +1640,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-05-25
@@ -1743,8 +1658,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             }
 
             $version = '7.8.1.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-05-25
@@ -1762,8 +1676,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-07-15
@@ -1772,8 +1685,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-08-22
@@ -1782,8 +1694,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-08-29
@@ -1795,8 +1706,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.1.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-09-07
@@ -1805,8 +1715,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-09-26
@@ -1815,8 +1724,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-09-26
@@ -1828,8 +1736,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-10-07
@@ -1849,8 +1756,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.3';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-10-12
@@ -1859,8 +1765,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.4';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-11-05
@@ -1869,8 +1774,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.5';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-11-28
@@ -1901,8 +1805,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.6';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-12-13
@@ -1911,8 +1814,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.7';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2022-12-27
@@ -1921,8 +1823,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.8';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
         //2022-12-28
         if ($version == '7.8.2.8') {
@@ -1933,8 +1834,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.2.9';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2023-01-10
@@ -1944,8 +1844,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.3.0';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2023-01-14
@@ -1954,8 +1853,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.3.1';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
         }
 
         //2023-02-21
@@ -1964,8 +1862,34 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.3.2';
-            $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
-            Yii::app()->db->createCommand($sql)->execute();
+            $this->update($version);
+        }
+
+        //2023-03-14
+        if ($version == '7.8.3.2') {
+            $sql = "ALTER TABLE `pkg_user` ADD `email2` VARCHAR(100) NOT NULL DEFAULT '' AFTER `email`; ";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_user` CHANGE `email` `email` VARCHAR(100) NOT NULL DEFAULT '';";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.3';
+            $this->update($version);
+        }
+
+        //2023-03-14
+        if ($version == '7.8.3.3') {
+            $sql = "ALTER TABLE `pkg_user` ADD `email_services` INT(11) NOT NULL DEFAULT '1' , ADD `email_did` INT(11) NOT NULL DEFAULT '1' AFTER `email_services`;";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.4';
+            $this->update($version);
+        }
+
+        //2023-03-14
+        if ($version == '7.8.3.4') {
+            $version = '7.8.3.5';
+            $this->update($version);
         }
     }
 
@@ -1976,6 +1900,12 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         } catch (Exception $e) {
             //print_r($e);
         }
+    }
+
+    public function update($version = '')
+    {
+        $sql = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
+        $this->executeDB($sql);
     }
 
 }

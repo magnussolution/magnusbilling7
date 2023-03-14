@@ -238,18 +238,42 @@ Ext.define('MBilling.view.user.Form', {
                         minLength: 8
                     }]
                 }, {
-                    name: 'email',
-                    fieldLabel: t('Email'),
-                    allowBlank: true
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        flex: 1
+                    },
+                    items: [{
+                        name: 'email',
+                        fieldLabel: t('Email'),
+                        allowBlank: true,
+                        labelWidth: 145
+                    }, {
+                        name: 'email2',
+                        fieldLabel: t('Email') + ' 2',
+                        allowBlank: true
+                    }]
                 }, {
-                    name: 'doc',
-                    fieldLabel: t('DOC'),
-                    allowBlank: true
-                }, {
-                    name: 'vat',
-                    fieldLabel: t('VAT'),
-                    hidden: App.user.isClient,
-                    allowBlank: true
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        flex: 1
+                    },
+                    items: [{
+                        name: 'doc',
+                        fieldLabel: t('DOC'),
+                        allowBlank: true,
+                        labelWidth: 145
+                    }, {
+                        name: 'vat',
+                        fieldLabel: t('VAT'),
+                        hidden: App.user.isClient,
+                        allowBlank: true
+                    }]
                 }, {
                     xtype: 'moneyfield',
                     name: 'contract_value',
@@ -309,6 +333,27 @@ Ext.define('MBilling.view.user.Form', {
                         value: '-1',
                         minValue: -1,
                         allowBlank: true,
+                        flex: 3
+                    }]
+                }, {
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        labelWidth: 145,
+                        flex: 1
+                    },
+                    items: [{
+                        xtype: 'yesnocombo',
+                        name: 'email_services',
+                        fieldLabel: t('Services email notification'),
+                        flex: 2
+                    }, {
+                        xtype: 'yesnocombo',
+                        nname: 'email_did',
+                        fieldLabel: t('DID email notification'),
+                        labelWidth: 170,
                         flex: 3
                     }]
                 }, {

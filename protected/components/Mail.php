@@ -32,8 +32,10 @@ class Mail
     private $from_email = '';
     private $from_name  = '';
     private $to_email   = '';
+    private $to_email2  = '';
     private $language   = '';
     public $output;
+    public $type;
 
     public static $DESCRIPTION = '$description$';
 
@@ -161,7 +163,7 @@ class Mail
     {
 
         if (!empty($type)) {
-
+            $this->type  = $type;
             $modelUser   = User::model()->findByPk((int) $id_user);
             $modelConfig = Configuration::model()->find('config_key = "ip_servers"');
 
@@ -233,7 +235,8 @@ class Mail
             $modelUser->password            = isset($modelUser->password) ? $modelUser->password : null;
             $modelUser->credit_notification = isset($modelUser->credit_notification) ? $modelUser->credit_notification : null;
 
-            $this->to_email = isset($modelUser->email) ? $modelUser->email : null;
+            $this->to_email  = isset($modelUser->email) ? $modelUser->email : null;
+            $this->to_email2 = isset($modelUser->email2) ? $modelUser->email2 : null;
             $this->replaceInEmail(self::$CUSTOMER_ID, $modelUser->id);
             $this->replaceInEmail(self::$USER_ID, $modelUser->id);
             $this->replaceInEmail(self::$CUSTOMER_CARDNUMBER_KEY, $modelUser->username);
@@ -389,9 +392,12 @@ class Mail
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
         $mail->MsgHTML($this->message);
         $mail->AddAddress($this->to_email);
+        $mail->AddAddress($this->to_email2);
         $mail->CharSet = 'utf-8';
         ob_start();
         @$mail->Send();
+
+        Yii::log('Email sent to ' . $this->to_email . ' ' . $this->to_email2 . '. Subject -> ' . $mail->Subject . '. Email type: ' . $this->type, 'error');
         $this->output = ob_get_contents();
         ob_end_clean();
         return true;

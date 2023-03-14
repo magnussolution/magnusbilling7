@@ -76,6 +76,8 @@ class BaseController extends CController
     public $controllerAllowUpdateAll = array();
     public $relationFilter           = array();
     public $fieldsInvisibleClient    = array();
+    public $fieldsNotUpdateClient    = array();
+    public $fieldsNotUpdateAgent     = array();
     public $config;
     public $addInCondition = [];
     public function init()
@@ -1259,6 +1261,18 @@ class BaseController extends CController
     public function getAttributesRequest()
     {
         $arrPost = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
+        if (isset(Yii::app()->session['isClient']) && Yii::app()->session['isClient']) {
+            $fields = array_merge($this->fieldsInvisibleClient, $this->fieldsNotUpdateClient);
+            foreach ($fields as $field) {
+                unset($arrPost[$field]);
+            }
+        }
+        if (isset(Yii::app()->session['isAgent']) && Yii::app()->session['isAgent']) {
+            $fields = array_merge($this->fieldsInvisibleAgent, $this->fieldsNotUpdateAgent);
+            foreach ($fields as $field) {
+                unset($arrPost[$field]);
+            }
+        }
         return $arrPost;
     }
 

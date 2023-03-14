@@ -80,15 +80,6 @@ class DidController extends Controller
         return $filter;
     }
 
-    public function applyFilterToLimitedAdmin()
-    {
-
-        parent::applyFilterToLimitedAdmin();
-        //allow admins with group limit see nonreserved DIDs.
-        $this->filter .= ' OR (activated = 1 AND reserved = 0)';
-
-    }
-
     public function extraFilterCustomClient($filter)
     {
 

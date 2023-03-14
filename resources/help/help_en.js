@@ -6,6 +6,8 @@ Help.load({
     'alarm.amount': ``,
     'alarm.email': ``,
     'alarm.status': ``,
+    'alarm.subject': ``,
+    'alarm.message': ``,
     //API
     'api.id_user': `You need use the MagnusBilling API from https://github.com/magnussolution/magnusbilling-api-php. The username owner this API`,
     'api.api_key': `This apy key will be necessary to execute the API`,
@@ -272,6 +274,7 @@ Help.load({
     'did.workaudio': `Audio that will be executed when a call is received at the time interval.`,
     'did.noworkaudio': `Audio that will be executed when a call is received out of the time interval.`,
     'did.country': ``,
+    'did.id_server': ``,
     //DID DESTINATION
     'diddestination.id_did': `Select the DID that you want create new destination for.`,
     'diddestination.id_user': `User that will be the owner of this DID.`,
@@ -301,6 +304,12 @@ You should NOT set a name for the context because the name will be set automatic
 You may take a look at the context at /etc/asterisk/extensions_magnus_did.conf
     
     `,
+    //DID HISTORY
+    'didhistory.did': ``,
+    'didhistory.username': ``,
+    'didhistory.month_payed': ``,
+    'didhistory.reservationdate': ``,
+    'didhistory.description': ``,
     //DIDS USE
     'diduse.id_did': `DID Number`,
     'diduse.month_payed': `The total month paid to this DID.`,
@@ -873,6 +882,9 @@ Let's say you selected 3 trunks, and you want to send 1 call to the first trunk,
     'user.transfer_dbbl_rocket': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_dbbl_rocket_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_show_selling_price': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
+    'user.email2': ``,
+    'user.email_services': ``,
+    'user.email_did': ``,
     //USER HISTORY
     'userhistory.id_user': ``,
     'userhistory.date': ``,

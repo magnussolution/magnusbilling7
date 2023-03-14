@@ -91,7 +91,9 @@ class DidCheckCommand extends ConsoleCommand
                                 $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
                                 $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                                 $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                                $mail->send();
+                                if ($didUse->idUser->email_did == 1) {
+                                    $mail->send();
+                                }
                                 $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                             } else {
                                 $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
@@ -113,7 +115,9 @@ class DidCheckCommand extends ConsoleCommand
                                 $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
                                 $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                                 $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                                $mail->send();
+                                if ($didUse->idUser->email_did == 1) {
+                                    $mail->send();
+                                }
                                 $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                             }
                         } else {
@@ -129,7 +133,9 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                             $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                             $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));
-                            $mail->send();
+                            if ($didUse->idUser->email_did == 1) {
+                                $mail->send();
+                            }
                         }
                     } else {
                         $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did . " NOTIFY NOW ") : null;
@@ -145,7 +151,9 @@ class DidCheckCommand extends ConsoleCommand
                         $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                         $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));
-                        $mail->send();
+                        if ($didUse->idUser->email_did == 1) {
+                            $mail->send();
+                        }
 
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
@@ -166,7 +174,9 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                             $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
+                            if ($didUse->idUser->email_did == 1) {
+                                $mail->send();
+                            }
                             $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                         } else {
                             $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
@@ -188,7 +198,9 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                             $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
+                            if ($didUse->idUser->email_did == 1) {
+                                $mail->send();
+                            }
                             $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                         }
                     } else {
@@ -226,7 +238,9 @@ class DidCheckCommand extends ConsoleCommand
                         $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                         $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit);
-                        $mail->send();
+                        if ($didUse->idUser->email_did == 1) {
+                            $mail->send();
+                        }
                         $mail->send($this->config['global']['admin_email']);
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
