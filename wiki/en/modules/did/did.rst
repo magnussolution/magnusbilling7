@@ -154,7 +154,7 @@ Channel limit
 Description
 -----------
 
-| You may take notes here!
+| Set here the destination!
 
 
 
@@ -431,6 +431,16 @@ Out work audio
 
 Country
 -------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-id-server:
+
+Server
+------
 
 | We did not write the description to this field.
 

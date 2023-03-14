@@ -442,7 +442,17 @@ Não trabalhando
 País
 -----
 
-| Nós ainda não escrevemos a descrição deste campo.
+| País
+
+
+
+
+.. _did-id-server:
+
+Servidor
+--------
+
+| Servidor. Somente usado quando você usa SIP PROXY.
 
 
 

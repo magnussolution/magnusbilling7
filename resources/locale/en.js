@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2022
+ * 2023
  */
 Locale.load({
     '': '',
@@ -126,6 +126,7 @@ Locale.load({
     'Buy price per min': '',
     'CDR': '',
     'CDR Failed': '',
+    'CID': '',
     'CID Callback': '',
     'CNL': '',
     'CNL zone': '',
@@ -253,8 +254,10 @@ Locale.load({
     'Customization': '',
     'DID': '',
     'DID Destination': '',
+    'DID History': '',
     'DID billing per minute rate': '',
     'DID destination': '',
+    'DID email notification': '',
     'DID increment Buy': '',
     'DID increment Sell': '',
     'DID owner': '',
@@ -498,6 +501,7 @@ Locale.load({
     'MAC': '',
     'MOH': '',
     'MYSQL message.': '',
+    'Machine': '',
     'MagnusBilling': '',
     'Main menu': '',
     'Mandatory information element is missing': '',
@@ -518,6 +522,7 @@ Locale.load({
     'Menu': '',
     'Menu title': '',
     'Menus': '',
+    'Message': '',
     'Meter': '',
     'Meter number': '',
     'Method': '',
@@ -546,6 +551,7 @@ Locale.load({
     'Monthly payment Service': '',
     'Monthly price': '',
     'Mountain': '',
+    'Multiples IPs': '',
     'NAT': '',
     'NAT Mapping': '',
     'NAT details': '',
@@ -561,6 +567,7 @@ Locale.load({
     'New': '',
     'New password': '',
     'Next': '',
+    'Next due date': '',
     'Night': '',
     'No': '',
     'No answer': '',
@@ -879,6 +886,7 @@ Locale.load({
     'Service': '',
     'Services': '',
     'Services Use': '',
+    'Services email notification': '',
     'Set the basic configuration': '',
     'Sets the destination of the call when a specific digit is pressed.': '',
     'Settings': '',
@@ -895,6 +903,7 @@ Locale.load({
     'Sign into your account': '',
     'Signup': '',
     'Simultaneous calls': '',
+    'Sip Users': '',
     'Sip user': '',
     'Sip user limit': '',
     'SipProxy': '',
@@ -992,6 +1001,7 @@ Locale.load({
     'Total answered': '',
     'Total buy price': '',
     'Total calls': '',
+    'Total calls per user': '',
     'Total cost': '',
     'Total dialed': '',
     'Total failed': '',

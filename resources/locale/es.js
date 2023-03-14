@@ -11,13 +11,12 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2022
+ * 2023
  */
 Locale.load({
     '': '',
     ',': ',',
     '.': '.',
-    'Next due date': 'Próximo vencimiento',
     'ALERT: Do you really active this service?': 'ALERTA: Usted realmente desea activar este servicio?',
     'ALERT: Do you really want cancel this service to this user?': 'ALERTA: Usted realmente desea cancelar este servicio para este usuario?',
     'ALERT: This action was to return the balance, referring to the days not used. Do you confirm?': 'ALERTA: Esta opción va devolver el crédito referente a los dias no usado. Confirmar esto?',
@@ -127,6 +126,7 @@ Locale.load({
     'Buy price per min': 'Precio de compra minuto',
     'CDR': 'CDR',
     'CDR Failed': 'CDR fallidas',
+    'CID': 'CID',
     'CID Callback': 'CID Callback',
     'CNL': 'CNL',
     'CNL zone': 'Zona CNL',
@@ -258,8 +258,10 @@ Locale.load({
     'Customization': 'Personalización',
     'DID': 'DID',
     'DID Destination': 'Destino de DIDs',
+    'DID History': 'Historico de DIDs',
     'DID billing per minute rate': 'Tarifa de DID por minuto',
     'DID destination': 'Destino de DID',
+    'DID email notification': 'Enviar email de DID',
     'DID increment': 'DID incremento',
     'DID increment Buy': 'DID incremento compra',
     'DID increment Sell': 'DID incremento venta',
@@ -505,6 +507,7 @@ Locale.load({
     'MAC': 'MAC',
     'MOH': 'MOH',
     'MYSQL message.': 'Mensaje MYSQL. ',
+    'Machine': 'Machine',
     'MagnusBilling': 'MagnusBilling',
     'Main menu': 'Menú principal',
     'Mandatory information element is missing': 'Mandatory information element is missing',
@@ -526,6 +529,7 @@ Locale.load({
     'Menu': 'Menú',
     'Menu title': 'Título del menú',
     'Menus': 'Menú',
+    'Message': 'Mensaje',
     'Meter': 'Medidor',
     'Meter number': 'Número de medidor',
     'Method': 'Método',
@@ -554,6 +558,7 @@ Locale.load({
     'Monthly payment Service': 'Pago mensual de Servicio',
     'Monthly price': 'Precio mensual',
     'Mountain': 'Montaña',
+    'Multiples IPs': 'Multiples IPs',
     'NAT': 'NAT',
     'NAT Mapping': 'NAT Mapping',
     'NAT details': 'Detalles de NAT',
@@ -569,6 +574,7 @@ Locale.load({
     'New': 'Nuevo',
     'New password': 'Nueva contraseña',
     'Next': 'Próximo',
+    'Next due date': 'Próximo vencimiento',
     'Night': 'Noche',
     'No': 'No',
     'No answer': 'Sin respuesta',
@@ -901,6 +907,7 @@ Locale.load({
     'Service': 'Servicio',
     'Services': 'Servicios',
     'Services Use': 'Uso de servicios',
+    'Services email notification': 'Enviar email de servicios',
     'Set the basic configuration': 'Establecer la configuración básica',
     'Sets the destination of the call when a specific digit is pressed.': 'Establece el destino de la llamada cuando se presiona un dígito específico.',
     'Settings': 'Configuraciones',
@@ -917,6 +924,7 @@ Locale.load({
     'Sign into your account': 'Iniciar sesión en su cuenta',
     'Signup': 'Regístrate',
     'Simultaneous calls': 'Llamadas simultáneas',
+    'Sip Users': 'Cuentas SIP',
     'Sip user': 'Usuario SIP',
     'Sip user limit': 'Límite de contas SIP',
     'SipProxy': 'SipProxy',
@@ -1014,6 +1022,7 @@ Locale.load({
     'Total answered': 'Total contestado',
     'Total buy price': 'Total precio de compra',
     'Total calls': 'Total de llamadas',
+    'Total calls per user': 'Total de llamadas por usuario',
     'Total cost': 'Costo total',
     'Total dialed': 'Total llamado',
     'Total failed': 'Total rechazado',
@@ -1141,4 +1150,5 @@ Locale.load({
     'name': 'nombre',
     'to refill': 'para recargar',
     'week': 'semana',
+
 });

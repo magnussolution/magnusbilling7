@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2022
+ * 2023
  */
 Locale.load({
     ',': ',',
@@ -130,6 +130,7 @@ Locale.load({
     'Buy price per min': '',
     'CDR': 'CDR',
     'CDR Failed': 'CDR Failed',
+    'CID': '',
     'CID Callback': 'CID-Rückruf',
     'CNL': '',
     'CNL zone': '',
@@ -262,8 +263,10 @@ Locale.load({
     'Customization': 'Personifizieren',
     'DID': 'DID',
     'DID Destination': 'DID Ziel',
+    'DID History': '',
     'DID billing per minute rate': 'DID Preis pro Minute',
     'DID destination': 'DID Ziel',
+    'DID email notification': '',
     'DID increment': 'DID increment',
     'DID increment Buy': '',
     'DID increment Sell': '',
@@ -515,6 +518,7 @@ Locale.load({
     'MAC': 'MAC',
     'MOH': 'MOH',
     'MYSQL message.': 'MySQL-Nachricht',
+    'Machine': '',
     'MagnusBilling': 'Magnusbilling',
     'Main menu': 'Hauptmenü',
     'Mandatory information element is missing': 'Obligatorisches Informationselement fehlt',
@@ -536,6 +540,7 @@ Locale.load({
     'Menu': 'Menü',
     'Menu title': 'Menu-Titel',
     'Menus': 'Menüs',
+    'Message': '',
     'Meter': 'MEter',
     'Meter number': 'Meter Nummer',
     'Method': 'Methode',
@@ -565,6 +570,7 @@ Locale.load({
     'Monthly payment Service': 'Monatliche Servicezahlung',
     'Monthly price': 'Monatlicher Preis',
     'Mountain': 'Berg',
+    'Multiples IPs': '',
     'NAT': 'NAT',
     'NAT Mapping': 'NAT Mapping',
     'NAT details': 'NAT Detail',
@@ -580,6 +586,7 @@ Locale.load({
     'New': 'Neu',
     'New password': 'Neues Passwort',
     'Next': 'Nächster',
+    'Next due date': '',
     'Night': 'Nacht',
     'No': 'Nein',
     'No answer': 'Keine Antwort',
@@ -923,6 +930,7 @@ Locale.load({
     'Service': 'Service',
     'Services': 'Services',
     'Services Use': 'Services Nutzung',
+    'Services email notification': '',
     'Set the basic configuration': 'Legen Sie die Grundkonfiguration fest',
     'Sets the destination of the call when a specific digit is pressed.': 'Legt das Ziel des Anrufs fest, wenn eine bestimmte Ziffer gedrückt wird.',
     'Settings': 'Einstellungen',
@@ -939,6 +947,7 @@ Locale.load({
     'Sign into your account': 'Melden Sie sich bei Ihrem Konto an',
     'Signup': 'Anmelden',
     'Simultaneous calls': 'Simultane Anrufe',
+    'Sip Users': '',
     'Sip user': 'SIP-Benutzer',
     'Sip user limit': 'SIP-Benutzerlimit.',
     'SipProxy': 'SIP-Proxy.',
@@ -1039,6 +1048,7 @@ Locale.load({
     'Total answered': 'Insgesamt beantwortet',
     'Total buy price': 'Gesamtkaufpreis',
     'Total calls': 'Gesamtzahl der Anrufe',
+    'Total calls per user': '',
     'Total cost': 'Gesamtkosten',
     'Total dialed': 'Gesamt angerufen',
     'Total failed': 'Insgesamt fehlgeschlagen',

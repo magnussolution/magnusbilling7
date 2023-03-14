@@ -231,6 +231,14 @@ This menu has the following fields
 .. include:: holidays/holidays.rst
 
 
+DID History
++++++++++++
+
+This menu has the following fields
+
+.. include:: didhistory/didhistory.rst
+
+
 
 
 
