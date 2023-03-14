@@ -162,7 +162,10 @@ class ServicesCheckCommand extends ConsoleCommand
             $mail->replaceInEmail(Mail::$SERVICE_PRICE, $service->idServices->price);
             $mail->replaceInEmail(Mail::$SERVICE_PENDING_URL, $link);
             try {
-                @$mail->send();
+                if ($service->idUser->email_services == 1) {
+                    @$mail->send();
+                }
+
             } catch (Exception $e) {
                 //error SMTP
             }

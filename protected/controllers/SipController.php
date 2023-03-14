@@ -46,6 +46,14 @@ class SipController extends Controller
         'id_trunk_group',
     );
 
+    public $fieldsNotUpdateClient = array(
+        'context',
+    );
+
+    public $fieldsNotUpdateAgent = array(
+        'context',
+    );
+
     public function init()
     {
         $this->instanceModel = new Sip;

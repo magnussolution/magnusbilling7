@@ -163,6 +163,10 @@ class Sip extends Model
             $this->addError($attribute, Yii::t('zii', 'No space allow in password'));
         }
 
+        if (preg_match('/\'|\"/', $this->secret)) {
+            $this->addError($attribute, Yii::t('zii', 'Not use \' or \" in password'));
+        }
+
         if ($this->secret == '123456' || $this->secret == '12345678' || $this->secret == '012345') {
             $this->addError($attribute, Yii::t('zii', 'No use sequence in the password'));
         }

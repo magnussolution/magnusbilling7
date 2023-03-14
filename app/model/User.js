@@ -132,6 +132,9 @@ Ext.define('MBilling.model.User', {
         name: 'email',
         type: 'string'
     }, {
+        name: 'email2',
+        type: 'string'
+    }, {
         name: 'doc',
         type: 'string'
     }, {

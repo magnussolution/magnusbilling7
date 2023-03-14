@@ -60,12 +60,37 @@ class UserController extends Controller
         'idGroupid_user_type',
         'idPlanname',
     );
+
     public $fieldsInvisibleAgent = array(
         'id_group',
         'idGroupname',
         'enableexpire',
         'expirationdate',
         'loginkey',
+    );
+
+    public $fieldsNotUpdateClient = array(
+        'credit',
+        'id_plan',
+        'id_user',
+        'id_group_agent',
+        'id_offer',
+        'typepaid',
+        'creditlimit',
+        'calllimit',
+        'restriction',
+        'restriction_use',
+    );
+
+    public $fieldsNotUpdateAgent = array(
+        'credit',
+        'id_user',
+        'id_group_agent',
+        'typepaid',
+        'creditlimit',
+        'calllimit',
+        'restriction',
+        'restriction_use',
     );
 
     public function init()
@@ -581,20 +606,19 @@ class UserController extends Controller
     {
 
         $CLAUSE_DATE   = $this->checkDaysPackage($startday, $billingtype);
-        $sql           = "SELECT  COUNT(*) AS status FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
-        $modelOfferCdr = Yii::app()->db->createCommand($sql)->queryAll();
+        $sql           = "SELECT  COUNT(*) AS id FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
+        $modelOfferCdr = OfferCdr::model()->findBySql($sql);
 
-        return isset($modelOfferCdr[0]['status']) ? $modelOfferCdr[0]['status'] : 0;
+        return isset($modelOfferCdr->id) ? $modelOfferCdr->id : 0;
     }
 
     public function packageUsedSeconds($id_user, $id_offer, $billingtype, $startday)
     {
-        $CLAUSE_DATE = $this->checkDaysPackage($startday, $billingtype);
-        $sql         = "SELECT sum(used_secondes) AS used_secondes FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' ";
+        $CLAUSE_DATE   = $this->checkDaysPackage($startday, $billingtype);
+        $sql           = "SELECT sum(used_secondes) AS used_secondes FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' ";
+        $modelOfferCdr = OfferCdr::model()->findBySql($sql);
 
-        $modelOfferCdr = Yii::app()->db->createCommand($sql)->queryAll();
-
-        return isset($modelOfferCdr[0]['used_secondes']) ? $modelOfferCdr[0]['used_secondes'] : 0;
+        return isset($modelOfferCdr->used_secondes) ? $modelOfferCdr->used_secondes : 0;
 
     }
 

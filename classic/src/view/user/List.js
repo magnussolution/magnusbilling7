@@ -42,6 +42,12 @@ Ext.define('MBilling.view.user.List', {
             flex: 4,
             hidden: window.isTablet
         }, {
+            header: t('Email') + ' 2',
+            dataIndex: 'email2',
+            flex: 4,
+            hidden: true,
+            hideable: !App.user.isClient && !App.user.isAgent
+        }, {
             header: t('Credit'),
             dataIndex: 'credit',
             renderer: Helper.Util.formatMoneyDecimal,

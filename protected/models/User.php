@@ -70,14 +70,14 @@ class User extends Model
                     transfer_bkash_profit,transfer_flexiload_profit,transfer_international_profit,
                     transfer_dbbl_rocket,transfer_bkash,transfer_flexiload,transfer_international,
                     transfer_bdservice_rate,transfer_show_selling_price,cpslimit,
-                    restriction_use,credit_notification_daily
+                    restriction_use,credit_notification_daily,email_services,email_did
                         ', 'numerical', 'integerOnly' => true),
             array('language,mix_monitor_format,calllimit_error', 'length', 'max' => 5),
             array('zipcode, phone, mobile, vat', 'length', 'max' => 20),
             array('city, state, country, loginkey', 'length', 'max' => 40),
             array('lastname, firstname, redial, prefix_local,neighborhood', 'length', 'max' => 50),
             array('company_website, dist', 'length', 'max' => 100),
-            array('address, email, doc', 'length', 'max' => 100),
+            array('address, email,email2, doc', 'length', 'max' => 100),
             array('username', 'length', 'max' => 20),
             array('description', 'length', 'max' => 500),
             array('credit, contract_value', 'type', 'type' => 'double'),
