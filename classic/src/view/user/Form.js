@@ -39,6 +39,8 @@ Ext.define('MBilling.view.user.Form', {
             },
             items: [{
                 title: t('General'),
+                itemId: 'mainData',
+                reference: 'mainData',
                 items: [{
                     name: 'username',
                     fieldLabel: t('Username'),
@@ -138,6 +140,7 @@ Ext.define('MBilling.view.user.Form', {
                 },
                 title: t('Personal data'),
                 itemId: 'personalData',
+                reference: 'personalData',
                 items: [{
                     name: 'company_website',
                     fieldLabel: t('Company website'),
@@ -279,8 +282,8 @@ Ext.define('MBilling.view.user.Form', {
                     name: 'contract_value',
                     fieldLabel: t('Contract value'),
                     mask: App.user.currency + ' #9.999.990,00',
-                    readOnly: App.user.isClient,
                     value: 0,
+                    readOnly: App.user.isClient,
                     allowBlank: true
                 }, {
                     name: 'dist',
