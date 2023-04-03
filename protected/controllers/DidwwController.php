@@ -219,8 +219,7 @@ class DidwwController extends Controller
                 ];
             }
 
-            if (count($did_groups->data) >= 000) {
-                echo 'break';
+            if (count($did_groups->data) >= 1000) {
                 break;
             }
 
