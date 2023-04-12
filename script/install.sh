@@ -763,6 +763,9 @@ echo "
 */3 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess
 * * * * * php /var/www/html/mbilling/cron.php statussystem
 * * * * * php /var/www/html/mbilling/cron.php didwww
+*/5 * * * * php /var/www/html/mbilling/cron.php alarm
+* * * * * php /var/www/html/mbilling/cron.php TrunkSIPCodes
+59 23 * * * php /var/www/html/mbilling/cron.php NotifyClientDaily
 " > $CRONPATH
 chmod 600 $CRONPATH
 
