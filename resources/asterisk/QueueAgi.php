@@ -124,6 +124,7 @@ class QueueAgi
         $agi->verbose('$siptransfer => ' . $siptransfer['data'], 5);
         if ($siptransfer['data'] != 'yes' && $type == 'queue') {
 
+            $CalcAgi->real_sessiontime = intval($CalcAgi->sessiontime);
             if (!is_null($DidAgi)) {
                 $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime, $CalcAgi);
             }
@@ -137,7 +138,6 @@ class QueueAgi
             $MAGNUS->id_trunk          = null;
             $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $CalcAgi->sessiontime);
             $CalcAgi->sessiontime      = $CalcAgi->sessiontime;
-            $CalcAgi->real_sessiontime = intval($CalcAgi->sessiontime);
             $CalcAgi->terminatecauseid = $CalcAgi->terminatecauseid;
             $CalcAgi->sessionbill      = $DidAgi->sell_price;
             $CalcAgi->sipiax           = 8;

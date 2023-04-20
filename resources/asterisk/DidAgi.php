@@ -829,9 +829,6 @@ class DidAgi
 
         if (isset($this->did_voip_model->id)) {
 
-            if ($MAGNUS->record_call == 1) {
-                system('cp -rf /var/spool/asterisk/monitor/' . $this->accountcode . '/*' . $this->uniqueid . ' /var/spool/asterisk/monitor/' . $this->did_voip_model->username . '/');
-            }
             $MAGNUS->id_user      = $this->did_voip_model->id;
             $MAGNUS->sip_account  = $this->did_voip_model_sip_account;
             $CalcAgi->buycost     = 0;
