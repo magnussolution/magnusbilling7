@@ -48,6 +48,11 @@ Ext.define('MBilling.view.servers.Controller', {
             }
         });
     },
+    onNew: function() {
+        var me = this;
+        fieldPid_server = me.lookupReference('id_server')['hide']();
+        me.callParent(arguments);
+    },
     onEdit: function() {
         var me = this,
             fieldWeight = me.formPanel.getForm().findField('weight'),
@@ -57,6 +62,11 @@ Ext.define('MBilling.view.servers.Controller', {
             fieldWeight['show']();
         } else {
             fieldWeight['hide']();
+        }
+        if (fieldType.value == 'sipproxy') {
+            fieldPid_server = me.lookupReference('id_server')['show']();
+        } else {
+            fieldPid_server = me.lookupReference('id_server')['hide']();
         }
     },
     onDelete: function(btn) {
