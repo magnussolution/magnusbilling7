@@ -11,6 +11,7 @@ class AsteriskAccess
 
     private $asmanager;
     private static $instance;
+    private static $config;
 
     public static function instance($host = 'localhost', $user = 'magnus', $pass = 'magnussolution')
     {
@@ -24,6 +25,7 @@ class AsteriskAccess
     private function __construct()
     {
         $this->asmanager = new AGI_AsteriskManager;
+        $this->config    = LoadConfig::getConfig();
     }
 
     private function connectAsterisk($host, $user, $pass)
@@ -288,7 +290,7 @@ class AsteriskAccess
                     $line .= 'deny=0.0.0.0/0.0.0.0' . "\n";
                     $line .= 'permit=' . $data['host'] . "/255.255.255.0\n";
                     $line .= 'disallow=all' . "\n";
-                    $line .= 'allow=g729,alaw,ulaw' . "\n";
+                    $line .= 'allow=' . $this->config['global']['default_codeds'] . "\n";
                     $line .= 'dtmfmode=RFC2833' . "\n";
                     $line .= 'insecure=invite' . "\n";
 

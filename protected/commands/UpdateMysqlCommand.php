@@ -1891,6 +1891,23 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.3.5';
             $this->update($version);
         }
+
+        //2023-04-21
+        if ($version == '7.8.3.5') {
+            $sql = "
+                CREATE TABLE `pkg_servers_servers` (
+                  `id_proxy` int(11) NOT NULL,
+                  `id_server` int(11) NOT NULL,
+                  PRIMARY KEY (`id_server`,`id_proxy`),
+                  KEY `fk_pkg_servers` (`id_server`),
+                  KEY `fk_pkg_proxy` (`id_proxy`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.6';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

@@ -24,11 +24,16 @@ class ServersController extends Controller
 {
     public $attributeOrder = 't.id';
 
+    public $nameModelRelated   = 'ServersServers';
+    public $nameFkRelated      = 'id_proxy';
+    public $nameOtherFkRelated = 'id_server';
+
     public function init()
     {
-        $this->instanceModel = new Servers;
-        $this->abstractModel = Servers::model();
-        $this->titleReport   = Yii::t('zii', 'CallerID');
+        $this->instanceModel        = new Servers;
+        $this->abstractModel        = Servers::model();
+        $this->titleReport          = Yii::t('zii', 'CallerID');
+        $this->abstractModelRelated = ServersServers::model();
         parent::init();
     }
 
@@ -36,14 +41,14 @@ class ServersController extends Controller
     {
 
         $modelServer = Servers::model()->findAll("type = 'sipproxy' AND status = 1");
-        foreach ($modelServer as $key => $server) {
+        foreach ($modelServer as $key => $proxy) {
 
-            $hostname = $server->host;
+            $hostname = $proxy->host;
             $dbname   = 'opensips';
             $table    = 'dispatcher';
-            $user     = $server->username;
-            $password = $server->password;
-            $port     = $server->port;
+            $user     = $proxy->username;
+            $password = $proxy->password;
+            $port     = $proxy->port;
 
             $dsn = 'mysql:host=' . $hostname . ';dbname=' . $dbname;
 
@@ -58,23 +63,49 @@ class ServersController extends Controller
             $sql = "TRUNCATE $dbname.$table";
             $con->createCommand($sql)->execute();
 
-            $modelServerAS = Servers::model()->findAll("(type = 'asterisk' OR type = 'mbilling')
+            $modelServerAS = ServersServers::model()->findAll("id_proxy = :key", [':key' => $proxy->id]);
+
+            if (isset($modelServerAS[0]->id_server)) {
+                foreach ($modelServerAS as $key => $server) {
+
+                    $modelServer = Servers::model()->find("id = :key AND (type = 'asterisk' OR type = 'mbilling')
+                        AND status = 1 AND weight > 0", [':key' => $server->id_server]);
+
+                    if (isset($modelServer->id)) {
+                        if ($this->ip_is_private($hostname)) {
+                            $sql = "INSERT INTO $dbname.$table (setid,destination,weight,description) VALUES ('1','sip:" . $modelServer->host . ":" . $modelServer->sip_port . "','" . $modelServer->weight . "','" . $modelServer->description . "')";
+                        } else {
+                            $sql = "INSERT INTO $dbname.$table (setid,destination,weight,description) VALUES ('1','sip:" . $modelServer->public_ip . ":" . $modelServer->sip_port . "','" . $modelServer->weight . "','" . $modelServer->description . "')";
+                        }
+
+                        try {
+                            $con->createCommand($sql)->execute();
+                        } catch (Exception $e) {
+                            return;
+                        }
+                    }
+
+                }
+
+            } else {
+
+                $modelServerAS = Servers::model()->find("(type = 'asterisk' OR type = 'mbilling')
                         AND status = 1 AND weight > 0");
+                foreach ($modelServerAS as $key => $server) {
 
-            foreach ($modelServerAS as $key => $server) {
+                    if ($this->ip_is_private($hostname)) {
+                        $sql = "INSERT INTO $dbname.$table (setid,destination,weight,description) VALUES ('1','sip:" . $server->host . ":" . $server->sip_port . "','" . $server->weight . "','" . $server->description . "')";
+                    } else {
+                        $sql = "INSERT INTO $dbname.$table (setid,destination,weight,description) VALUES ('1','sip:" . $server->public_ip . ":" . $server->sip_port . "','" . $server->weight . "','" . $server->description . "')";
+                    }
 
-                if ($this->ip_is_private($hostname)) {
-                    $sql = "INSERT INTO $dbname.$table (setid,destination,weight,description) VALUES ('1','sip:" . $server->host . ":" . $server->sip_port . "','" . $server->weight . "','" . $server->description . "')";
-                } else {
-                    $sql = "INSERT INTO $dbname.$table (setid,destination,weight,description) VALUES ('1','sip:" . $server->public_ip . ":" . $server->sip_port . "','" . $server->weight . "','" . $server->description . "')";
+                    try {
+                        $con->createCommand($sql)->execute();
+                    } catch (Exception $e) {
+                        return;
+                    }
+
                 }
-
-                try {
-                    $con->createCommand($sql)->execute();
-                } catch (Exception $e) {
-                    return;
-                }
-
             }
 
         }
