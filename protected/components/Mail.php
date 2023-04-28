@@ -392,7 +392,9 @@ class Mail
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
         $mail->MsgHTML($this->message);
         $mail->AddAddress($this->to_email);
-        $mail->AddAddress($this->to_email2);
+        if (strlen($this->to_email2)) {
+            $mail->AddAddress($this->to_email2);
+        }
         $mail->CharSet = 'utf-8';
         ob_start();
         @$mail->Send();
