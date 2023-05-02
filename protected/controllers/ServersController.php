@@ -89,7 +89,7 @@ class ServersController extends Controller
 
             } else {
 
-                $modelServerAS = Servers::model()->find("(type = 'asterisk' OR type = 'mbilling')
+                $modelServerAS = Servers::model()->findAll("(type = 'asterisk' OR type = 'mbilling')
                         AND status = 1 AND weight > 0");
                 foreach ($modelServerAS as $key => $server) {
 
