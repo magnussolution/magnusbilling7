@@ -64,9 +64,10 @@ class Methodpay extends Model
             array('active, id_user, fee, SLIdProduto,min,max', 'numerical', 'integerOnly' => true),
             array('obs, client_id, client_secret', 'length', 'max' => 500),
             array('P2P_tax_amount', 'length', 'max' => 10),
-            array('P2P_CustomerSiteID, P2P_KeyID, P2P_Passphrase, P2P_RecipientKeyID, username', 'length', 'max' => 100),
+            array('P2P_CustomerSiteID, P2P_KeyID, P2P_Passphrase, P2P_RecipientKeyID', 'length', 'max' => 100),
             array('pagseguro_TOKEN,url, show_name, SLvalidationtoken', 'length', 'max' => 100),
             array('SLAppToken,SLAccessToken,SLSecret', 'length', 'max' => 50),
+            array('username', 'length', 'max' => 1000),
         );
         return $this->getExtraField($rules);
     }

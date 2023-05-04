@@ -1,3 +1,5 @@
+<?php header('Content-type: text/html; charset=utf-8');?>
+<link rel="stylesheet" type="text/css" href="../../../resources/css/signup.css" />
 <?php
 /**
  * Modelo para a tabela "Balance".
@@ -19,76 +21,126 @@
  * 04/01/2018
  */
 
-if (Yii::app()->session['currency'] == 'U$S' || Yii::app()->session['currency'] == '$') {
-    $currency = 'USD';
-} else if (Yii::app()->session['currency'] == 'R$') {
-    $currency = 'BRL';
-} elseif (Yii::app()->session['currency'] == '€') {
-    $currency = 'EUR';
-} elseif (Yii::app()->session['currency'] == 'AUD$') {
-    $currency = 'AUD';
+$wallets = explode('|', $modelMethodPay->username);
+
+if (!isset($_GET['network']) || !strlen($_GET['network'])) {
+
+    ?>
+
+<br>
+<form id="contactform" align="center" method="get">
+<table  width="100%" border="0" align="center">
+	<tr>
+		<td class="banco">
+			<table width="100%" border="0">
+			<select style="width: 100%" name="network" id="network">
+				<option value="">SELECT THE CURRENCY AND NETWORK</option>
+				<?php foreach ($wallets as $key => $wallet): ?>
+	    			<option value="<?php echo $key ?>"><?php echo $wallet ?></option>
+				<?php endforeach;?>
+			</select>
+			<input type='hidden' name='amount' value='<?php echo $_GET['amount'] ?>' />
+			<input type='hidden' name='id_method' value='<?php echo $_GET['id_method'] ?>' />
+			<br>	<br>
+			 <input type="submit" value="Confirm">
+			</table>
+		</td>
+	</tr>
+	</tr>
+</table>
+</form>
+<?php
+
 } else {
-    $currency = Yii::app()->session['currency'];
-}
 
-$bitcoinPrice = file_get_contents('https://blockchain.info/tobtc?currency=' . $currency . '&value=' . $_GET['amount']);
+    $data    = explode('=>', $wallets[$_GET['network']]);
+    $address = $data[1];
+    $crypto  = strtoupper(strtok($data[0], '('));
+    $network = '(' . strtok('');
 
-$amountCrypto = number_format($bitcoinPrice, 6) . rand(11, 99);
-
-//avoid some amount in the same day
-for (;;) {
-    $modelCryptocurrency = Cryptocurrency::model()->find('amountCrypto = :key AND date > :key1',
-        array(':key' => $amountCrypto, ':key1' => date('Y-m-d')));
-    if (isset($modelCryptocurrency->id)) {
-        $amountCrypto = number_format($bitcoinPrice, 6) . rand(11, 99);
-
+    if (Yii::app()->session['currency'] == 'U$S' || Yii::app()->session['currency'] == '$') {
+        $MB_currency = 'USD';
+    } else if (Yii::app()->session['currency'] == 'R$') {
+        $MB_currency = 'BRL';
+    } elseif (Yii::app()->session['currency'] == '€') {
+        $MB_currency = 'EUR';
+    } elseif (Yii::app()->session['currency'] == 'AUD$') {
+        $MB_currency = 'AUD';
     } else {
-        break;
+        $MB_currency = Yii::app()->session['currency'];
     }
-}
-$modelCryptocurrency               = new Cryptocurrency();
-$modelCryptocurrency->id_user      = Yii::app()->session['id_user'];
-$modelCryptocurrency->currency     = 'BTC';
-$modelCryptocurrency->amountCrypto = $amountCrypto;
-$modelCryptocurrency->amount       = $_GET['amount'];
-$modelCryptocurrency->status       = 0;
-$modelCryptocurrency->save();
 
-?>
-<?php header('Content-type: text/html; charset=utf-8');?>
+    $mb_credit = $_GET['amount'] + (rand(0, 10) / 10);
 
-<link rel="stylesheet" type="text/css" href="../../../resources/css/signup.css" />
+    $url = 'https://api.coinconvert.net/convert/' . $MB_currency . '/' . $crypto . '?amount=' . $_GET['amount'];
+
+    $amountCrypto = file_get_contents($url);
+    $amountCrypto = json_decode($amountCrypto);
+
+    $amountCrypto = $amountCrypto->$crypto;
+
+    $amountCrypto = number_format($amountCrypto, 6) . rand(11, 99);
+
+    //avoid some amount in the same day
+    for (;;) {
+        $modelCryptocurrency = Cryptocurrency::model()->find('amountCrypto = :key AND date > :key1',
+            array(':key' => $amountCrypto, ':key1' => date('Y-m-d')));
+        if (isset($modelCryptocurrency->id)) {
+            $amountCrypto = number_format($bitcoinPrice, 6) . rand(11, 99);
+
+        } else {
+            break;
+        }
+    }
+    $modelCryptocurrency               = new Cryptocurrency();
+    $modelCryptocurrency->id_user      = Yii::app()->session['id_user'];
+    $modelCryptocurrency->currency     = $crypto;
+    $modelCryptocurrency->amountCrypto = $amountCrypto;
+    $modelCryptocurrency->amount       = $_GET['amount'];
+    $modelCryptocurrency->status       = 0;
+    $modelCryptocurrency->save();
+
+    ?>
+
+
 <form id="contactform" align="center">
 <table  width="100%" border="0" align="center">
 	<tr>
 		<td class="banco">
 			<table width="100%" border="0">
+				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td width="350"><p style="text-align: right;"><b>Account:&nbsp;</b></p></td>
-					<td><p style="text-align: left;"><?php echo $modelMethodPay->username; ?></p></td>
+					<td width="350"><p style="text-align: right;"><b>Address:&nbsp;</b></p></td>
+					<td><p style="text-align: left;"><?php echo $address; ?></p></td>
 				</tr>
 				<tr>
-					<td width="350"><p style="text-align: right;"><b><?php echo $currency ?> Amount: &nbsp;</b></p></td>
-					<td width="400"><p style="text-align: left;"><?php echo $currency ?> <?php echo number_format($_GET['amount'], 2) ?></p></td>
+					<td width="350"><p style="text-align: right;"><b><?php echo strtoupper($MB_currency) ?> Credit: &nbsp;</b></p></td>
+					<td width="400"><p style="text-align: left;"><?php echo $MB_currency ?> <?php echo number_format($_GET['amount'], 2) ?></p></td>
 				</tr>
 				<tr>
-					<td width="350"><p style="text-align: right;"><b>BitCoin amount: &nbsp;</b></p></td>
-					<td width="400"><p style="text-align: left;">BTC <?php echo $amountCrypto ?></p></td>
+					<td width="350"><p style="text-align: right;"><b>Crypto amount: &nbsp;</b></p></td>
+					<td width="400"><p style="text-align: left;"><?php echo $crypto ?> <?php echo $amountCrypto ?></p></td>
 				</tr>
+					<tr>
+					<td width="350"><p style="text-align: right;"><b>Crypto Network: &nbsp;</b></p></td>
+					<td width="400"><p style="text-align: left;"><?php echo $network ?> </p></td>
+				</tr>
+				<tr><td>&nbsp;</td></tr>
 				<tr>
 					<td  width="350" colspan="2" style="text-align: center; font:bold 13px Arial, Helvetica, sans-serif; color:#0e119b;">
 						Send the exact amount above in the next 30 min.
 					</td>
 				</tr>
+
 				<tr>
 					<td  width="350" colspan="2" style="text-align: center; font:bold 13px Arial, Helvetica, sans-serif; color:#fc0404;">
-						If you send different amount or after 30 min the refill not be automatic.
+						If you send different amount or after 30 min the refill not be released.
 					</td>
 				</tr>
-
+				<tr><td>&nbsp;</td></tr>
 
 				<td style="text-align: center;" colspan="2" class="banco" style="top: 100px;font:bold 13px Arial, Helvetica, sans-serif; color:#333;">
-					HOW BUY BITCOIN <br> https://www.bitcoin.com/buy-bitcoin <br> https://localbitcoins.com<br> https://binance.com
+					HOW BUY BITCOIN <br> https://www.bitcoin.com/buy-bitcoin <br> https://localbitcoins.com<br> https://poloniex.com<br> https://binance.com
 				</td>
 
 			</table>
@@ -97,3 +149,5 @@ $modelCryptocurrency->save();
 	</tr>
 </table>
 </form>
+
+<?php }?>

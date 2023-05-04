@@ -101,8 +101,21 @@ class DidAgi
 
                 if ($this->modelDid->calllimit > 0) {
                     $agi->verbose('Check DID channels');
-                    $calls = AsteriskAccess::getCallsPerDid($this->modelDid->did);
-                    $agi->verbose('Did ' . $this->modelDid->did . ' have ' . $calls . ' Calls');
+                    $asmanager = new AGI_AsteriskManager();
+                    $asmanager->connect('localhost', 'magnus', 'magnussolution');
+                    $channelsData = $asmanager->command('core show channels concise');
+
+                    $channelsData = explode("\n", $channelsData["data"]);
+
+                    $calls = 0;
+                    foreach ($channelsData as $key => $line) {
+                        if (preg_match("/AppDial.*$this->did/", $line)) {
+                            $calls++;
+                        }
+                    }
+                    $asmanager->disconnect();
+
+                    $agi->verbose('Did ' . $this->did . ' have ' . $calls . ' Calls');
                     if ($calls >= $this->modelDid->calllimit) {
 
                         if ($MAGNUS->modelUser->calllimit_error == 403) {
@@ -120,12 +133,15 @@ class DidAgi
 
                     $sql         = "SELECT * FROM pkg_did WHERE id_user = " . $MAGNUS->modelUser->id;
                     $modelDIDAll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
-
+                    $asmanager   = new AGI_AsteriskManager();
+                    $asmanager->connect('localhost', 'magnus', 'magnussolution');
+                    $channelsData = $asmanager->command('core show channels concise');
+                    $channelsData = explode("\n", $channelsData["data"]);
+                    $asmanager->disconnect();
                     $calls = 0;
                     foreach ($modelDIDAll as $key => $value) {
-                        $calls += AsteriskAccess::getCallsPerDid($value->did);
+                        $calls += $this->getCallsPerDid($value->did, $agi, $channelsData);
                     }
-
                     if ($calls >= $MAGNUS->modelUser->inbound_call_limit) {
                         if ($MAGNUS->modelUser->calllimit_error == 403) {
                             $agi->execute((busy), busy);
@@ -149,6 +165,18 @@ class DidAgi
         }
 
     }
+
+    public function getCallsPerDid($did, $agi = null, $channelsData)
+    {
+        $calls = 0;
+        foreach ($channelsData as $key => $line) {
+            if (preg_match("/$did\!.*\!Dial\!/", $line)) {
+                $calls++;
+            }
+        }
+        return $calls;
+    }
+
     public function checkDidDestinationType(&$agi, &$MAGNUS, &$CalcAgi)
     {
 
