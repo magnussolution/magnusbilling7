@@ -1908,6 +1908,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.3.6';
             $this->update($version);
         }
+
+        //2023-05-03
+        if ($version == '7.8.3.6') {
+            $sql = "ALTER TABLE `pkg_method_pay` CHANGE `username` `username` VARCHAR(1000) NOT NULL";
+            $this->executeDB($sql);
+
+            $sql = "UPDATE pkg_method_pay SET username = CONCAT('BTC(BTC)=>',username) WHERE payment_method = 'cryptocurrency';";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.7';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

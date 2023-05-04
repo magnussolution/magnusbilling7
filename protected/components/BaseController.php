@@ -816,6 +816,8 @@ class BaseController extends CController
 
         $this->setfilter($_GET);
 
+        $this->applyFilterToLimitedAdmin();
+
         $fieldGroup = json_decode($_GET['group']);
         $sort       = json_decode($_GET['sort']);
 
