@@ -496,13 +496,13 @@ table.blueTable tfoot .links a{
 $model = CallFailed::model()->findByPk((int) $_GET['id']);
 
         if (!isset($model->idServer->id) || $model->idServer->type == 'mbilling') {
-
-            $lines = shell_exec('grep ' . $model->calledstation . ' /var/log/asterisk/magnus');
+			
+            $lines = shell_exec('grep ' . $model->src . ' /var/log/asterisk/magnus');
 
             $lines = htmlentities($lines);
-
+			
             $ora_books = preg_split('/\n/', $lines);
-
+			
             echo '<br>';
             echo '<table class="blueTable" width=100%><tr>';
             echo '<tr>';
@@ -514,14 +514,14 @@ $model = CallFailed::model()->findByPk((int) $_GET['id']);
             echo '<th>Sip Code</th>';
             echo '<th>Reason</th>';
             foreach ($ora_books as $key => $value) {
-                $line = explode('|', $value);
+                $line = explode(' ', $value);
                 if (!isset($line[1])) {
                     continue;
                 }
-                $data = explode('] ', $line[0]);
+                //$data = explode('] ', $line[0]);
                 echo '<tr>';
-                echo '<td>' . substr($data[0], 1) . '</td>';
-                echo '<td>' . $line[1] . '</td>';
+                echo '<td>' . $line[0] ." ". $line[1] .'</td>';
+                echo '<td>' . $line[9] . '</td>';
                 echo '<td>' . $line[2] . '</td>';
                 echo '<td>' . $line[3] . '</td>';
                 echo '</tr>';
