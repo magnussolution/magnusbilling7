@@ -31,6 +31,8 @@ class Controller extends BaseController
         'invoices',
         'statusSystem',
         'firewall',
+        'trunkGroup',
+        'callSummaryPerDay',
     );
 
     //Allowed controllers to no admin users use updateall

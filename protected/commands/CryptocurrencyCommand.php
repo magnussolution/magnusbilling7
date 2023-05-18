@@ -21,33 +21,48 @@ class CryptocurrencyCommand extends CConsoleCommand
 {
     public function run($args)
     {
+
         $modelMethodPay = Methodpay::model()->find('payment_method = :key', array(':key' => 'cryptocurrency'));
         if (!isset($modelMethodPay->id)) {
+            echo 'No method found';
             exit;
         }
-        $poloniex = new Poloniex($modelMethodPay->client_id, $modelMethodPay->client_secret);
-        //'1314121820'
-        $ticker = $poloniex->get_deposits_and_withdrawals(time() - 18000, time());
-        foreach ($ticker as $type => $payment) {
-            if ($type == 'deposits') {
-                foreach ($payment as $key => $value) {
-                    $modelCryptocurrency = Cryptocurrency::model()->find('amountCrypto = :key AND date > :key1',
-                        array(':key' => $value['amount'], ':key1' => date('Y-m-d')));
-                    if (isset($modelCryptocurrency->id_user)) {
-                        if (Refill::model()->countRefill($value['txid'], $modelCryptocurrency->id_user) == 0) {
-                            $description = 'CriptoCurrency ' . $value['currency'] . ', txid: ' . $value['txid'];
-                            echo ($modelCryptocurrency->id_user . ' ' . $modelCryptocurrency->amount . ' ' . $description . ' ' . $value['txid']);
-                            Yii::log($modelCryptocurrency->id_user . ' ' . $modelCryptocurrency->amount . ' ' . $description . ' ' . $value['txid'], 'error');
-                            UserCreditManager::releaseUserCredit($modelCryptocurrency->id_user, $modelCryptocurrency->amount, $description, 1, $value['txid']);
+
+        $last_30_minutes     = time() - 38000;
+        $modelCryptocurrency = Cryptocurrency::model()->findAll('date > :key1 AND status = 1',
+            array(':key1' => date('Y-m-d')));
+
+        foreach ($modelCryptocurrency as $key => $payment) {
+
+            $result = '';
+
+            echo "try get payments\n";
+            exec('python3.9 /var/www/html/mbilling/protected/commands/crypto.py ' . $modelMethodPay->client_id . ' ' . $modelMethodPay->client_secret . ' ' . $payment->currency . ' ' . $last_30_minutes, $result);
+            $result = implode("\n", $result);
+            $result = json_decode($result);
+
+            foreach ($result as $key => $value) {
+
+                if ($value->amount == $payment->amountCrypto) {
+
+                    if (isset($payment->id_user)) {
+
+                        if (Refill::model()->countRefill($value->txId, $payment->id_user) == 0) {
+                            Cryptocurrency::model()->updateByPk($payment->id, array('status' => 0));
+                            $description = 'CriptoCurrency ' . $value->coin . ', txid: ' . $value->txId;
+
+                            echo ($payment->id_user . ' ' . $payment->amount . ' ' . $description . ' ' . $value->txId);
+                            Yii::log($payment->id_user . ' ' . $payment->amount . ' ' . $description . ' ' . $value->txId, 'error');
+
+                            UserCreditManager::releaseUserCredit($payment->id_user, $payment->amount, $description, 1, $value->txId);
                         } else {
                             echo "Paymente already released\n";
                         }
                     } else {
                         echo "Receive new deposit in your wallet but not found any refill in your MagnusBilling\n";
                     }
+
                 }
-            } else {
-                echo "Not found deposit in your wallet\n";
             }
 
         }

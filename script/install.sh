@@ -759,7 +759,6 @@ echo "
 0 2 * * * php /var/www/html/mbilling/cron.php Backup
 0 4 * * * /var/www/html/mbilling/protected/commands/clear_memory
 */2 * * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr
-* * * * * php /var/www/html/mbilling/cron.php cryptocurrency
 */3 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess
 * * * * * php /var/www/html/mbilling/cron.php statussystem
 * * * * * php /var/www/html/mbilling/cron.php didwww
@@ -769,6 +768,9 @@ echo "
 " > $CRONPATH
 chmod 600 $CRONPATH
 
+echo "
+* * * * * root php /var/www/html/mbilling/cron.php cryptocurrency 
+">> /etc/crontab
 
 
 echo "
