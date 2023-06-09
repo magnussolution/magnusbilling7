@@ -2,7 +2,7 @@
 MagnusBilling 7 
 ###############
 
-Do you like this software? Star the project and become a [stargazer](https://github.com/magnussolution/magnusbilling7/stargazers).
+Do you like this software? Star the project and become a [stargazer](https://github.com/fabriciosprj/magnusbilling7/stargazers).
 
 
 # MagnusBilling 7
