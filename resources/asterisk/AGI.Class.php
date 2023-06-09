@@ -1,895 +1,1993 @@
 <?php
+
 /**
- * =======================================
- * ###################################
- * MagnusBilling
+ * phpagi.php : PHP AGI Functions for Asterisk
+ * Website: http://phpagi.sourceforge.net/
  *
- * @package MagnusBilling
- * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
- * ###################################
+ * $Id: phpagi.php,v 2.14 2005/05/25 20:30:46 pinhole Exp $
+ *
+ * Copyright (c) 2003, 2004, 2005 Matthew Asham <matthewa@bcwireless.net>, David Eder <david@eder.us>
+ * All Rights Reserved.
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
  * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
  *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
- * =======================================
- * Magnusbilling.com <info@magnusbilling.com>
+ * We would be happy to list your phpagi based application on the phpagi
+ * website.  Drop me an Email if you'd like us to list your program.
  *
+ *
+ * Written for PHP 4.3.4, should work with older PHP 4.x versions.
+ *
+ * Please submit bug reports, patches, etc to http://sourceforge.net/projects/phpagi/
+ * Gracias. :)
+ *
+ *
+ * @package phpAGI
+ * @version 2.0
  */
 
-class DidAgi
+/**
+ */
+
+/*if(!class_exists('AGI_AsteriskManager'))
 {
-    public $voip_call;
-    public $did;
-    public $sell_price;
-    public $buy_price;
-    public $agent_client_rate;
-    public $modelDestination;
-    public $modelDid;
-    public $startCall;
-    public $id_prefix = 0;
-    public $did_voip_model;
-    public $did_voip_model_sip_account;
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'phpagi-asmanager.php');
+}*/
 
-    public function checkIfIsDidCall(&$agi, &$MAGNUS, &$CalcAgi)
+define('AST_CONFIG_DIR', '/etc/asterisk/');
+define('AST_SPOOL_DIR', '/var/spool/asterisk/');
+define('AST_TMP_DIR', AST_SPOOL_DIR . '/tmp/');
+define('DEFAULT_PHPAGI_CONFIG', AST_CONFIG_DIR . '/phpagi.conf');
+
+define('AST_DIGIT_ANY', '0123456789#*');
+
+define('AGIRES_OK', 200);
+
+define('AST_STATE_DOWN', 0);
+define('AST_STATE_RESERVED', 1);
+define('AST_STATE_OFFHOOK', 2);
+define('AST_STATE_DIALING', 3);
+define('AST_STATE_RING', 4);
+define('AST_STATE_RINGING', 5);
+define('AST_STATE_UP', 6);
+define('AST_STATE_BUSY', 7);
+define('AST_STATE_DIALING_OFFHOOK', 8);
+define('AST_STATE_PRERING', 9);
+
+define('AUDIO_FILENO', 3); // STDERR_FILENO + 1
+
+/**
+ * AGI class
+ *
+ * @package phpAGI
+ * @link http://www.voip-info.org/wiki-Asterisk+agi
+ * @example examples/dtmf.php Get DTMF tones from the user and say the digits
+ * @example examples/input.php Get text input from the user and say it back
+ * @example examples/ping.php Ping an IP address
+ */
+class AGI extends PDO
+{
+    /**
+     * Request variables read in on initialization.
+     *
+     * Often contains any/all of the following:
+     *   agi_request - name of agi script
+     *   agi_channel - current channel
+     *   agi_language - current language
+     *   agi_type - channel type (SIP, ZAP, IAX, ...)
+     *   agi_uniqueid - unique id based on unix time
+     *   agi_callerid - callerID string
+     *   agi_dnid - dialed number id
+     *   agi_rdnis - referring DNIS number
+     *   agi_context - current context
+     *   agi_extension - extension dialed
+     *   agi_priority - current priority
+     *   agi_enhanced - value is 1.0 if started as an EAGI script
+     *   agi_accountcode - set by SetAccount in the dialplan
+     *   agi_network - value is yes if this is a fastagi
+     *   agi_network_script - name of the script to execute
+     *
+     * NOTE: program arguments are still in $_SERVER['argv'].
+     *
+     * @var array
+     * @access public
+     */
+    public $request;
+
+    /**
+     * Config variables
+     *
+     * @var integer
+     * @access public
+     */
+    public $nlinetoread = 5;
+
+    /**
+     * Config variables
+     *
+     * @var array
+     * @access public
+     */
+    public $config;
+
+    /**
+     * Asterisk Manager
+     *
+     * @var AGI_AsteriskManager
+     * @access public
+     */
+    public $asmanager;
+
+    /**
+     * Input Stream
+     *
+     * @access private
+     */
+    public $in = null;
+
+    /**
+     * Output Stream
+     *
+     * @access private
+     */
+    public $out = null;
+
+    /**
+     * Audio Stream
+     *
+     * @access public
+     */
+    public $audio = null;
+
+    public $engine;
+    private $host;
+    private $database;
+    private $user;
+    private $pass;
+    public $verboseLevel;
+
+    /**
+     * Constructor
+     *
+     * @param string $config is the name of the config file to parse
+     * @param array $optconfig is an array of configuration vars and vals, stuffed into $this->config['phpagi']
+     */
+    public function AGI($config = null, $optconfig = array())
     {
 
-        if (strlen($MAGNUS->accountcode) > 3) {
-            $sql                              = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' LIMIT 1";
-            $this->did_voip_model             = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            $this->did_voip_model_sip_account = $MAGNUS->sip_account;
-        }
-        $this->startCall = time();
+        $configFile = '/etc/asterisk/res_config_mysql.conf';
+        $array      = parse_ini_file($configFile);
 
-        if ($MAGNUS->active > 2) {
-            $agi->verbose("User cant receive call. User status is " . $MAGNUS->active, 5);
-            return;
-        }
+        $this->engine   = 'mysql';
+        $this->host     = $array['dbhost'];
+        $this->database = $array['dbname'];
+        $this->user     = $array['dbuser'];
+        $this->pass     = $array['dbpass'];
+        $dns            = $this->engine . ':dbname=' . $this->database . ";host=" . $this->host;
 
-        //check if did call
-        $mydnid = $MAGNUS->config['global']['did_ignore_zero_on_did'] == 1 && substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
+        // load config
+        if (!is_null($config) && file_exists($config)) {
+            $this->config = parse_ini_file($config, true);
+        } elseif (file_exists(DEFAULT_PHPAGI_CONFIG))
+        //--$this->config = parse_ini_file(DEFAULT_PHPAGI_CONFIG, true);
+        //-- DONT WANT HIM TO OPEN A FILE EACH TIME
 
-        if ($MAGNUS->config['global']['apply_local_prefix_did_sip'] == 1) {
-            $sql          = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' AND active = 1 LIMIT 1";
-            $modelDidUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            if (isset($modelDidUser->prefix_local) && strlen($modelDidUser->prefix_local) > 2) {
-                $MAGNUS->prefix_local = $modelDidUser->prefix_local;
-                $MAGNUS->number_translation($agi, $mydnid);
-                $mydnid = $MAGNUS->destination;
+        // If optconfig is specified, stuff vals and vars into 'phpagi' config array.
+        {
+            foreach ($optconfig as $var => $val) {
+                $this->config['phpagi'][$var] = $val;
             }
         }
 
-        $agi->verbose('Check If Is Did ' . $mydnid, 10);
-        $sql            = "SELECT * FROM pkg_did WHERE did = '$mydnid' AND activated = 1 LIMIT 1";
-        $this->modelDid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-        if (isset($this->modelDid->id)) {
-            $agi->verbose("Is a DID call", 5);
-            $sql                    = "SELECT * FROM pkg_did_destination WHERE activated = 1 AND id_did = '" . $this->modelDid->id . "' ORDER BY priority";
-            $this->modelDestination = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        // add default values to config for uninitialized values
+        if (!isset($this->config['phpagi']['error_handler'])) {
+            $this->config['phpagi']['error_handler'] = true;
+        }
 
-            if (isset($this->did_voip_model->record_call) && $this->did_voip_model->record_call == 1) {
-                $this->modelDid->record_call = 1;
-            }
-            if (count($this->modelDestination)) {
-                $agi->verbose("Did have destination", 15);
+        if (!isset($this->config['phpagi']['debug'])) {
+            $this->config['phpagi']['debug'] = false;
+        }
 
-                $this->did           = $this->modelDid->did;
-                $MAGNUS->record_call = $this->modelDid->record_call;
-                $agi->set_variable("RECORD_CALL_DID", $MAGNUS->record_call);
-                $agi->set_variable('DID_NUMBER', $this->did);
+        if (!isset($this->config['phpagi']['admin'])) {
+            $this->config['phpagi']['admin'] = null;
+        }
 
-                $sql               = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
-                $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        if (!isset($this->config['phpagi']['tempdir'])) {
+            $this->config['phpagi']['tempdir'] = AST_TMP_DIR;
+        }
 
-                if ($this->id_prefix == 0) {
+        // festival TTS config
+        if (!isset($this->config['festival']['text2wave'])) {
+            $this->config['festival']['text2wave'] = $this->which('text2wave');
+        }
 
-                    $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('" . $this->did . "',1,length(prefix))
-                                    ORDER BY LENGTH(prefix) DESC";
-                    $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                    if (!isset($modelPrefix->id)) {
-                        $agi->verbose('Not found prefix to DID ' . $this->did);
-                    }
-                    $CalcAgi->id_prefix = $modelPrefix->id;
+        // swift TTS config
+        if (!isset($this->config['cepstral']['swift'])) {
+            $this->config['cepstral']['swift'] = $this->which('swift');
+        }
 
-                    $sql              = "SELECT * FROM pkg_trunk WHERE trunkcode = '" . $MAGNUS->sip_account . "' LIMIT 1";
-                    $modelTrunk       = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                    $MAGNUS->id_trunk = isset($modelTrunk->id) ? $modelTrunk->id : null;
-                } else {
-                    $CalcAgi->id_prefix = $this->id_prefix;
-                }
+        ob_implicit_flush(true);
 
-                if ($this->modelDid->calllimit > 0) {
-                    $agi->verbose('Check DID channels');
-                    $asmanager = new AGI_AsteriskManager();
-                    $asmanager->connect('localhost', 'magnus', 'magnussolution');
-                    $channelsData = $asmanager->command('core show channels concise');
+        // open stdin & stdout
+        $this->in  = defined('STDIN') ? STDIN : fopen('php://stdin', 'r');
+        $this->out = defined('STDOUT') ? STDOUT : fopen('php://stdout', 'w');
 
-                    $channelsData = explode("\n", $channelsData["data"]);
+        // initialize error handler
+        if ($this->config['phpagi']['error_handler'] == true) {
+            set_error_handler('phpagi_error_handler');
+            global $phpagi_error_handler_email;
+            $phpagi_error_handler_email = $this->config['phpagi']['admin'];
+            error_reporting(E_ALL);
+        }
 
-                    $calls = 0;
-                    foreach ($channelsData as $key => $line) {
-                        if (preg_match("/AppDial.*$this->did/", $line)) {
-                            $calls++;
-                        }
-                    }
-                    $asmanager->disconnect();
+        // make sure temp folder exists
+        $this->make_folder($this->config['phpagi']['tempdir']);
 
-                    $agi->verbose('Did ' . $this->did . ' have ' . $calls . ' Calls');
-                    if ($calls >= $this->modelDid->calllimit) {
+        // read the request
+        $str = fgets($this->in);
+        while ($str != "\n") {
+            $this->request[substr($str, 0, strpos($str, ':'))] = trim(substr($str, strpos($str, ':') + 1));
+            $str                                               = fgets($this->in);
+        }
 
-                        if ($MAGNUS->modelUser->calllimit_error == 403) {
-                            $agi->execute((busy), busy);
-                        } else {
-                            $agi->execute((congestion), Congestion);
-                        }
-
-                        $MAGNUS->hangup($agi);
-                        exit;
-                    }
-                }
-
-                if (isset($MAGNUS->modelUser->inbound_call_limit) && $MAGNUS->modelUser->inbound_call_limit > 0) {
-
-                    $sql         = "SELECT * FROM pkg_did WHERE id_user = " . $MAGNUS->modelUser->id;
-                    $modelDIDAll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
-                    $asmanager   = new AGI_AsteriskManager();
-                    $asmanager->connect('localhost', 'magnus', 'magnussolution');
-                    $channelsData = $asmanager->command('core show channels concise');
-                    $channelsData = explode("\n", $channelsData["data"]);
-                    $asmanager->disconnect();
-                    $calls = 0;
-                    foreach ($modelDIDAll as $key => $value) {
-                        $calls += $this->getCallsPerDid($value->did, $agi, $channelsData);
-                    }
-                    if ($calls >= $MAGNUS->modelUser->inbound_call_limit) {
-                        if ($MAGNUS->modelUser->calllimit_error == 403) {
-                            $agi->execute((busy), busy);
-                        } else {
-                            $agi->execute((congestion), Congestion);
-                        }
-
-                        $MAGNUS->hangup($agi);
-                        exit;
-                    }
-
-                }
-                $this->checkDidDestinationType($agi, $MAGNUS, $CalcAgi);
+        // open audio if eagi detected
+        if ($this->request['agi_enhanced'] == '1.0') {
+            if (file_exists('/proc/' . getmypid() . '/fd/3')) {
+                $this->audio = fopen('/proc/' . getmypid() . '/fd/3', 'r');
+            } elseif (file_exists('/dev/fd/3')) {
+                // may need to mount fdescfs
+                $this->audio = fopen('/dev/fd/3', 'r');
             } else {
-                $agi->verbose("Is a DID call But not have destination Hangup Call");
-                $MAGNUS->hangup($agi);
+                $this->conlog('Unable to open audio stream');
             }
-            if ($this->voip_call != 3) {
-                exit;
+
+            if ($this->audio) {
+                stream_set_blocking($this->audio, 0);
             }
+
         }
 
+        $this->conlog('AGI Request:');
+        $this->conlog(print_r($this->request, true));
+        // DONT WANT TO READ THE INTERNAL CONFIG
+        /* $this->conlog('PHPAGI internal configuration:');
+        $this->conlog(print_r($this->config, true));*/
+        parent::__construct($dns, $this->user, $this->pass);
     }
 
-    public function getCallsPerDid($did, $agi = null, $channelsData)
+    public function query($query)
     {
-        $calls = 0;
-        foreach ($channelsData as $key => $line) {
-            if (preg_match("/$did\!.*\!Dial\!/", $line)) {
-                $calls++;
-            }
-        }
-        return $calls;
+        $this->verbose($query, 25);
+        return parent::query($query);
     }
 
-    public function checkDidDestinationType(&$agi, &$MAGNUS, &$CalcAgi)
+    public function exec($query)
     {
+        $this->verbose($query, 25);
+        return parent::exec($query);
+    }
 
-        $MAGNUS->id_user            = $MAGNUS->modelUser->id;
-        $MAGNUS->restriction        = $MAGNUS->modelUser->restriction;
-        $MAGNUS->mix_monitor_format = $MAGNUS->modelUser->mix_monitor_format;
-        $MAGNUS->checkRestrictPhoneNumber($agi, 'did');
+    // *********************************************************************************************************
+    // **                       COMMANDS                                                                      **
+    // *********************************************************************************************************
 
-        $this->didCallCost($agi, $MAGNUS);
+    /**
+     * Answer channel if not already in answer state.
+     *
+     * @link http://www.voip-info.org/wiki-answer
+     * @example examples/dtmf.php Get DTMF tones from the user and say the digits
+     * @example examples/input.php Get text input from the user and say it back
+     * @example examples/ping.php Ping an IP address
+     *
+     * @return array, see evaluate for return information.  ['result'] is 0 on success, -1 on failure.
+     */
+    public function answer()
+    {
+        return $this->evaluate('ANSWER');
+    }
 
-        $this->did = $this->modelDid->did;
-        $agi->verbose('DID ' . $this->did, 5);
-
-        //if DID option charge of was = 0 only allow call from existent callerid
-        if ($this->modelDid->charge_of == 0) {
-
-            $sql           = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID'  AND activated = 1 LIMIT 1";
-            $modelCallerId = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            if (isset($modelCallerId->id)) {
-                $agi->verbose('found callerid, new user = ' . $MAGNUS->modelUser->username . ' ' . $this->sell_price);
-                $CalcAgi->did_charge_of_id_user     = $modelCallerId->id_user;
-                $CalcAgi->did_charge_of_answer_time = time();
-                $CalcAgi->didAgi                    = $this->modelDid;
-                $this->modelDid->selling_rate_1     = $this->sell_price;
-                $this->modelDid->buy_rate_1         = $this->buy_price;
-
-            } else {
-                $agi->verbose('NOT found callerid, = ' . $MAGNUS->CallerID . ' to did ' . $this->did . ' and was selected charge_of to callerID');
-                $MAGNUS->hangup($agi);
-            }
-        }
-
-        if (strlen($this->modelDid->callerid)) {
-            $agi->execute("SET", "CALLERID(name)=" . $this->modelDid->callerid . "");
-        }
-
-        $MAGNUS->accountcode = $MAGNUS->username = $MAGNUS->modelUser->username;
-
-        $this->voip_call = $this->modelDestination[0]['voip_call'];
-        $this->checkBlockCallerID($agi, $MAGNUS);
-
-        $agi->verbose('voip_call ' . $this->voip_call, 5);
-
-        if ($this->modelDid->cbr == 1 && !$agi->get_variable("ISFROMCALLBACKPRO", true)) {
-            if (!$agi->get_variable("SECCALL", true)) {
-                $agi->verbose('RECEIVED 0800 CALLBACPRO', 5);
-                CallbackAgi::advanced0800CallBack($agi, $MAGNUS, $this, $CalcAgi);
-                return;
-            }
-        } else if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
-            $sql              = "SELECT * FROM pkg_callback WHERE id = '" . $agi->get_variable("IDCALLBACK", true) . "' LIMIT 1";
-            $modelCallback    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            $MAGNUS->CallerID = $modelCallback->exten;
-            $agi->set_callerid($MAGNUS->CallerID);
-        }
-
-        switch ($this->voip_call) {
-            case 2:
-                $MAGNUS->mode = 'ivr';
-                IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $this);
+    /**
+     * Get the status of the specified channel. If no channel name is specified, return the status of the current channel.
+     *
+     * @link http://www.voip-info.org/wiki-channel+status
+     * @param string $channel
+     * @return array, see evaluate for return information. ['data'] contains description.
+     */
+    public function channel_status($channel = '')
+    {
+        $ret = $this->evaluate("CHANNEL STATUS $channel");
+        switch ($ret['result']) {
+            case -1:$ret['data'] = trim("There is no channel that matches $channel");
                 break;
-            case 3:
-                //callingcard
-                $MAGNUS->mode = 'standard';
-                $agi->answer();
-                sleep(1);
-                $MAGNUS->callingcardConnection = $this->modelDid->connection_sell;
-
-                $MAGNUS->agiconfig['use_dnid']        = 0;
-                $MAGNUS->agiconfig['answer']          = $MAGNUS->agiconfig['callingcard_answer'];
-                $MAGNUS->agiconfig['cid_enable']      = $MAGNUS->agiconfig['callingcard_cid_enable'];
-                $MAGNUS->agiconfig['number_try']      = $MAGNUS->agiconfig['callingcard_number_try'];
-                $MAGNUS->agiconfig['say_rateinitial'] = $MAGNUS->agiconfig['callingcard_say_rateinitial'];
-                $MAGNUS->agiconfig['say_timetocall']  = $MAGNUS->agiconfig['callingcard_say_timetocall'];
-                $MAGNUS->accountcode                  = null;
-                $MAGNUS->CallerID                     = is_numeric($MAGNUS->CallerID) ? $MAGNUS->CallerID : $agi->request['agi_calleridname'];
-                $agi->verbose('CallerID ' . $MAGNUS->CallerID);
+            case AST_STATE_DOWN:$ret['data'] = 'Channel is down and available';
                 break;
-            case 4:
-                $MAGNUS->mode = 'portalDeVoz';
-                $agi->verbose('PortalDeVozAgi');
-                PortalDeVozAgi::send($agi, $MAGNUS, $CalcAgi, $this);
+            case AST_STATE_RESERVED:$ret['data'] = 'Channel is down, but reserved';
                 break;
-            case 5:
-                $agi->verbose('RECEIVED ANY CALLBACK', 5);
-                CallbackAgi::callbackCID($agi, $MAGNUS, $CalcAgi, $this);
+            case AST_STATE_OFFHOOK:$ret['data'] = 'Channel is off hook';
                 break;
-            case 6:
-                if (!$agi->get_variable("SECCALL", true)) {
-                    $agi->verbose('RECEIVED 0800 CALLBACK', 5);
-                    CallbackAgi::callback0800($agi, $MAGNUS, $CalcAgi, $this);
-                }
+            case AST_STATE_DIALING:$ret['data'] = 'Digits (or equivalent) have been dialed';
                 break;
-            case 7:
-                $MAGNUS->mode = 'queue';
-                QueueAgi::callQueue($agi, $MAGNUS, $CalcAgi, $this);
+            case AST_STATE_RING:$ret['data'] = 'Line is ringing';
                 break;
-            default:
-                $agi->verbose('Mode = did', 5);
-                $MAGNUS->mode = 'did';
-                $this->call_did($agi, $MAGNUS, $CalcAgi);
+            case AST_STATE_RINGING:$ret['data'] = 'Remote end is ringing';
+                break;
+            case AST_STATE_UP:$ret['data'] = 'Line is up';
+                break;
+            case AST_STATE_BUSY:$ret['data'] = 'Line is busy';
+                break;
+            case AST_STATE_DIALING_OFFHOOK:$ret['data'] = 'Digits (or equivalent) have been dialed while offhook';
+                break;
+            case AST_STATE_PRERING:$ret['data'] = 'Channel has detected an incoming call and is waiting for ring';
+                break;
+            default:$ret['data'] = "Unknown ({$ret['result']})";
                 break;
         }
+        return $ret;
+    }
 
-        if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
-            $MAGNUS->id_trunk = $agi->get_variable("IDTRUNK", true);
+    /**
+     * Deletes an entry in the Asterisk database for a given family and key.
+     *
+     * @link http://www.voip-info.org/wiki-database+del
+     * @param string $family
+     * @param string $key
+     * @return array, see evaluate for return information. ['result'] is 1 on sucess, 0 otherwise.
+     */
 
-            $max_len_prefix = strlen($MAGNUS->CallerID);
-            $prefixclause   = '(';
-            while ($max_len_prefix >= 1) {
-                $prefixclause .= "prefix='" . substr($MAGNUS->CallerID, 0, $max_len_prefix) . "' OR ";
-                $max_len_prefix--;
-            }
+    public function database_del($family, $key)
+    {
+        return $this->evaluate("DATABASE DEL \"$family\" \"$key\"");
+    }
 
-            $prefixclause = substr($prefixclause, 0, -3) . ")";
+    /**
+     * Deletes a family or specific keytree within a family in the Asterisk database.
+     *
+     * @link http://www.voip-info.org/wiki-database+deltree
+     * @param string $family
+     * @param string $keytree
+     * @return array, see evaluate for return information. ['result'] is 1 on sucess, 0 otherwise.
+     */
+    public function database_deltree($family, $keytree = '')
+    {
+        $cmd = "DATABASE DELTREE \"$family\"";
+        if ($keytree != '') {
+            $cmd .= " \"$keytree\"";
+        }
 
-            $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
-            "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $MAGNUS->id_trunk . ") AND " . $prefixclause .
-                "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
-            $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        return $this->evaluate($cmd);
+    }
 
-            $sessiontime         = time() - $this->startCall;
-            $sell                = $agi->get_variable("SELLCOST", true);
-            $sellinitblock       = $agi->get_variable("SELLINITBLOCK", true);
-            $sellincrement       = $agi->get_variable("SELLINCREMENT", true);
-            $buy                 = $modelRateProvider[0]->buyrate;
-            $buyinitblock        = $modelRateProvider[0]->buyrateinitblock;
-            $buyincrement        = $modelRateProvider[0]->buyrateincrement;
-            $MAGNUS->id_user     = $agi->get_variable("IDUSER", true);
-            $MAGNUS->id_plan     = $agi->get_variable("IDPLAN", true);
-            $MAGNUS->sip_account = $MAGNUS->destination;
-            $MAGNUS->destination = $MAGNUS->CallerID;
+    /**
+     * Retrieves an entry in the Asterisk database for a given family and key.
+     *
+     * @link http://www.voip-info.org/wiki-database+get
+     * @param string $family
+     * @param string $key
+     * @return array, see evaluate for return information. ['result'] is 1 on sucess, 0 failure. ['data'] holds the value
+     */
+    public function database_get($family, $key)
+    {
+        return $this->evaluate("DATABASE GET \"$family\ \"$key\"");
+    }
 
-            $sell_price = $MAGNUS->roudRatePrice($sessiontime, $sell, $sellinitblock, $sellincrement);
-            $buy_price  = $MAGNUS->roudRatePrice($sessiontime, $buy, $buyinitblock, $buyincrement);
+    /**
+     * Adds or updates an entry in the Asterisk database for a given family, key, and value.
+     *
+     * @param string $family
+     * @param string $key
+     * @param string $value
+     * @return array, see evaluate for return information. ['result'] is 1 on sucess, 0 otherwise
+     */
+    public function database_put($family, $key, $value)
+    {
+        $value = str_replace("\n", '\n', addslashes($value));
+        return $this->evaluate("DATABASE PUT \"$family\" \"$key\" \"$value\"");
+    }
 
-            $CalcAgi->starttime        = date("Y-m-d H:i:s", $this->startCall);
-            $CalcAgi->sessiontime      = $sessiontime;
-            $CalcAgi->terminatecauseid = 1;
-            $CalcAgi->sessionbill      = $sell_price;
-            $CalcAgi->sipiax           = 4;
-            $CalcAgi->buycost          = $buy_price;
-            $CalcAgi->id_prefix        = $agi->get_variable("IDPREFIX", true);
-            $CalcAgi->saveCDR($agi, $MAGNUS);
+    /**
+     * Executes the specified Asterisk application with given options.
+     *
+     * @link http://www.voip-info.org/wiki-exec
+     * @link http://www.voip-info.org/wiki-Asterisk+-+documentation+of+application+commands
+     * @param string $application
+     * @param mixed $options
+     * @return array, see evaluate for return information. ['result'] is whatever the application returns, or -2 on failure to find application
+     */
+    public function execute($application, $options = '')
+    {
+        if (is_array($options)) {
+            $options = join('|', $options);
+        }
 
-            $sql = "UPDATE pkg_callback SET status = 3, last_attempt_time = '" . date('Y-m-d H:i:s') . "', sessiontime = $sessiontime
-                        WHERE id = " . $agi->get_variable("IDCALLBACK", true);
-            $agi->exec($sql);
+        return $this->evaluate("EXEC $application $options");
+    }
 
-            $MAGNUS->hangup($agi);
+    /**
+     * Plays the given file and receives DTMF data.
+     *
+     * This is similar to STREAM FILE, but this command can accept and return many DTMF digits,
+     * while STREAM FILE returns immediately after the first DTMF digit is detected.
+     *
+     * Asterisk looks for the file to play in /var/lib/asterisk/sounds by default.
+     *
+     * If the user doesn't press any keys when the message plays, there is $timeout milliseconds
+     * of silence then the command ends.
+     *
+     * The user has the opportunity to press a key at any time during the message or the
+     * post-message silence. If the user presses a key while the message is playing, the
+     * message stops playing. When the first key is pressed a timer starts counting for
+     * $timeout milliseconds. Every time the user presses another key the timer is restarted.
+     * The command ends when the counter goes to zero or the maximum number of digits is entered,
+     * whichever happens first.
+     *
+     * If you don't specify a time out then a default timeout of 2000 is used following a pressed
+     * digit. If no digits are pressed then 6 seconds of silence follow the message.
+     *
+     * If you don't specify $max_digits then the user can enter as many digits as they want.
+     *
+     * Pressing the # key has the same effect as the timer running out: the command ends and
+     * any previously keyed digits are returned. A side effect of this is that there is no
+     * way to read a # key using this command.
+     *
+     * @example examples/ping.php Ping an IP address
+     *
+     * @link http://www.voip-info.org/wiki-get+data
+     * @param string $filename file to play. Do not include file extension.
+     * @param integer $timeout milliseconds
+     * @param integer $max_digits
+     * @param char $escape_character
+     * @return array, see evaluate for return information. ['result'] holds the digits and ['data'] holds the timeout if present.
+     *
+     * This differs from other commands with return DTMF as numbers representing ASCII characters.
+     */
+    public function get_data($filename, $timeout = null, $max_digits = null, $escape_character = null)
+    {
+        return $this->evaluate(rtrim("GET DATA $filename $timeout $max_digits $escape_character"));
+    }
+
+    /**
+     * Fetch the value of a variable.
+     *
+     * Does not work with global variables. Does not work with some variables that are generated by modules.
+     *
+     * @link http://www.voip-info.org/wiki-get+variable
+     * @link http://www.voip-info.org/wiki-Asterisk+variables
+     * @param string $variable name
+     * @param boolean $get_value
+     * @return array if $get_value is not set or set to false.
+     * If $get_value is set to true, the value of the variable is returned.
+     * See evaluate for return information. ['result'] is 0 if variable hasn't been set, 1 if it has. ['data'] holds the value.
+     */
+    public function get_variable($variable, $get_value = false)
+    {
+        $var = $this->evaluate("GET VARIABLE $variable");
+        if (isset($get_value) && $get_value) {
+            return $var['data'];
+        } else {
+            return $var;
         }
     }
 
-    public function call_did(&$agi, &$MAGNUS, &$CalcAgi, $destinationIvr = false)
+    /**
+     * Hangup the specified channel. If no channel name is given, hang up the current channel.
+     *
+     * With power comes responsibility. Hanging up channels other than your own isn't something
+     * that is done routinely. If you are not sure why you are doing so, then don't.
+     *
+     * @link http://www.voip-info.org/wiki-hangup
+     * @example examples/dtmf.php Get DTMF tones from the user and say the digits
+     * @example examples/input.php Get text input from the user and say it back
+     * @example examples/ping.php Ping an IP address
+     *
+     * @param string $channel
+     * @return array, see evaluate for return information. ['result'] is 1 on success, -1 on failure.
+     */
+    public function hangup($channel = '')
     {
+        return $this->evaluate("HANGUP $channel");
+    }
 
-        //sip call, group, custom or PSTN destination
-        if ($MAGNUS->agiconfig['answer_call'] == 1) {
-            $agi->verbose("ANSWER CALL", 6);
-            $agi->answer();
+    /**
+     * Does nothing.
+     *
+     * @link http://www.voip-info.org/wiki-noop
+     * @return array, see evaluate for return information.
+     */
+    public function noop()
+    {
+        return $this->evaluate('NOOP');
+    }
+
+    /**
+     * Receive a character of text from a connected channel. Waits up to $timeout milliseconds for
+     * a character to arrive, or infinitely if $timeout is zero.
+     *
+     * @link http://www.voip-info.org/wiki-receive+char
+     * @param integer $timeout milliseconds
+     * @return array, see evaluate for return information. ['result'] is 0 on timeout or not supported, -1 on failure. Otherwise
+     * it is the decimal value of the DTMF tone. Use chr() to convert to ASCII.
+     */
+    public function receive_char($timeout = -1)
+    {
+        return $this->evaluate("RECEIVE CHAR $timeout");
+    }
+
+    /**
+     * Record sound to a file until an acceptable DTMF digit is received or a specified amount of
+     * time has passed. Optionally the file BEEP is played before recording begins.
+     *
+     * @link http://www.voip-info.org/wiki-record+file
+     * @param string $file to record, without extension, often created in /var/lib/asterisk/sounds
+     * @param string $format of the file. GSM and WAV are commonly used formats. MP3 is read-only and thus cannot be used.
+     * @param string $escape_digits
+     * @param integer $timeout is the maximum record time in milliseconds, or -1 for no timeout.
+     * @param integer $offset to seek to without exceeding the end of the file.
+     * @param boolean $beep
+     * @param integer $silence number of seconds of silence allowed before the function returns despite the
+     * lack of dtmf digits or reaching timeout.
+     * @return array, see evaluate for return information. ['result'] is -1 on error, 0 on hangup, otherwise a decimal value of the
+     * DTMF tone. Use chr() to convert to ASCII.
+     */
+    public function record_file($file, $format, $escape_digits = '', $timeout = -1, $offset = null, $beep = false, $silence = null)
+    {
+        $cmd = trim("RECORD FILE $file $format \"$escape_digits\" $timeout $offset");
+        if ($beep) {
+            $cmd .= ' BEEP';
         }
 
-        $CalcAgi->init();
-        $MAGNUS->init();
+        if (!is_null($silence)) {
+            $cmd .= " s=$silence";
+        }
 
-        $agi->verbose("DID CALL - CallerID=" . $MAGNUS->CallerID . " -> DID=" . $this->did, 6);
+        return $this->evaluate($cmd);
+    }
 
-        $res = 0;
+    /**
+     * Say the given digit string, returning early if any of the given DTMF escape digits are received on the channel.
+     *
+     * @link http://www.voip-info.org/wiki-say+digits
+     * @param integer $digits
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function say_digits($digits, $escape_digits = '')
+    {
+        if (PLAY_AUDIO) {
+            return $this->evaluate("SAY DIGITS $digits \"$escape_digits\"");
+        }
+    }
 
-        $MAGNUS->agiconfig['say_timetocall'] = 0;
+    /**
+     * Say the given number, returning early if any of the given DTMF escape digits are received on the channel.
+     *
+     * @link http://www.voip-info.org/wiki-say+number
+     * @param integer $number
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function say_number($number, $escape_digits = '')
+    {
+        if (PLAY_AUDIO) {
+            return $this->evaluate("SAY NUMBER $number \"$escape_digits\"");
+        }
+    }
 
-        //altera o destino do did caso ele venha de uma IVR
-        $this->modelDestination[0]['destination'] = $destinationIvr ? $destinationIvr : $this->modelDestination[0]['destination'];
+    /**
+     * Say the given character string, returning early if any of the given DTMF escape digits are received on the channel.
+     *
+     * @link http://www.voip-info.org/wiki-say+phonetic
+     * @param string $text
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function say_phonetic($text, $escape_digits = '')
+    {
+        if (PLAY_AUDIO) {
+            return $this->evaluate("SAY PHONETIC $text \"$escape_digits\"");
+        }
+    }
 
-        $callcount = 0;
+    /**
+     * Say a given time, returning early if any of the given DTMF escape digits are received on the channel.
+     *
+     * @link http://www.voip-info.org/wiki-say+time
+     * @param integer $time number of seconds elapsed since 00:00:00 on January 1, 1970, Coordinated Universal Time (UTC).
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function say_time($time = null, $escape_digits = '')
+    {
+        if (PLAY_AUDIO) {
+            if (is_null($time)) {
+                $time = time();
+            }
 
-        foreach ($this->modelDestination as $inst_listdestination) {
+            return $this->evaluate("SAY TIME $time \"$escape_digits\"");
+        }
+    }
 
-            $agi->verbose(print_r($inst_listdestination, true), 10);
+    /**
+     * Send the specified image on a channel.
+     *
+     * Most channels do not support the transmission of images.
+     *
+     * @link http://www.voip-info.org/wiki-send+image
+     * @param string $image without extension, often in /var/lib/asterisk/images
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if the image is sent or
+     * channel does not support image transmission.
+     */
+    public function send_image($image)
+    {
+        return $this->evaluate("SEND IMAGE $image");
+    }
 
-            $callcount++;
+    /**
+     * Send the given text to the connected channel.
+     *
+     * Most channels do not support transmission of text.
+     *
+     * @link http://www.voip-info.org/wiki-send+text
+     * @param $text
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if the text is sent or
+     * channel does not support text transmission.
+     */
+    public function send_text($text)
+    {
+        return $this->evaluate("SEND TEXT \"$text\"");
+    }
 
-            $MAGNUS->agiconfig['cid_enable'] = 0;
-            $MAGNUS->accountcode             = $MAGNUS->username             = $MAGNUS->modelUser->username;
-            $MAGNUS->id_plan                 = $MAGNUS->modelUser->id_plan;
+    /**
+     * Cause the channel to automatically hangup at $time seconds in the future.
+     * If $time is 0 then the autohangup feature is disabled on this channel.
+     *
+     * If the channel is hungup prior to $time seconds, this setting has no effect.
+     *
+     * @link http://www.voip-info.org/wiki-set+autohangup
+     * @param integer $time until automatic hangup
+     * @return array, see evaluate for return information.
+     */
+    public function set_autohangup($time = 0)
+    {
+        return $this->evaluate("SET AUTOHANGUP $time");
+    }
 
-            $msg = "[Magnus] DID call friend: FOLLOWME=$callcount (username:" . $MAGNUS->username . "
-                    | destination type:" . $this->voip_call . "| id_plan:" . $MAGNUS->id_plan . ")";
-            $agi->verbose($msg, 10);
+    /**
+     * Changes the caller ID of the current channel.
+     *
+     * @link http://www.voip-info.org/wiki-set+callerid
+     * @param string $cid example: "John Smith"<1234567>
+     * This command will let you take liberties with the <caller ID specification> but the format shown in the example above works
+     * well: the name enclosed in double quotes followed immediately by the number inside angle brackets. If there is no name then
+     * you can omit it. If the name contains no spaces you can omit the double quotes around it. The number must follow the name
+     * immediately; don't put a space between them. The angle brackets around the number are necessary; if you omit them the
+     * number will be considered to be part of the name.
+     * @return array, see evaluate for return information.
+     */
+    public function set_callerid($cid)
+    {
+        return $this->evaluate("SET CALLERID $cid");
+    }
 
-            if (AuthenticateAgi::authenticateUser($agi, $MAGNUS) != 1) {
-                $msg = "DID AUTHENTICATION ERROR";
+    /**
+     * Sets the context for continuation upon exiting the application.
+     *
+     * Setting the context does NOT automatically reset the extension and the priority; if you want to start at the top of the new
+     * context you should set extension and priority yourself.
+     *
+     * If you specify a non-existent context you receive no error indication (['result'] is still 0) but you do get a
+     * warning message on the Asterisk console.
+     *
+     * @link http://www.voip-info.org/wiki-set+context
+     * @param string $context
+     * @return array, see evaluate for return information.
+     */
+    public function set_context($context)
+    {
+        return $this->evaluate("SET CONTEXT $context");
+    }
+
+    /**
+     * Set the extension to be used for continuation upon exiting the application.
+     *
+     * Setting the extension does NOT automatically reset the priority. If you want to start with the first priority of the
+     * extension you should set the priority yourself.
+     *
+     * If you specify a non-existent extension you receive no error indication (['result'] is still 0) but you do
+     * get a warning message on the Asterisk console.
+     *
+     * @link http://www.voip-info.org/wiki-set+extension
+     * @param string $extension
+     * @return array, see evaluate for return information.
+     */
+    public function set_extension($extension)
+    {
+        return $this->evaluate("SET EXTENSION $extension");
+    }
+
+    /**
+     * Enable/Disable Music on hold generator.
+     *
+     * @link http://www.voip-info.org/wiki-set+music
+     * @param boolean $enabled
+     * @param string $class
+     * @return array, see evaluate for return information.
+     */
+    public function set_music($enabled = true, $class = '')
+    {
+        $enabled = ($enabled) ? 'ON' : 'OFF';
+        return $this->evaluate("SET MUSIC $enabled $class");
+    }
+
+    /**
+     * Set the priority to be used for continuation upon exiting the application.
+     *
+     * If you specify a non-existent priority you receive no error indication (['result'] is still 0)
+     * and no warning is issued on the Asterisk console.
+     *
+     * @link http://www.voip-info.org/wiki-set+priority
+     * @param integer $priority
+     * @return array, see evaluate for return information.
+     */
+    public function set_priority($priority)
+    {
+        return $this->evaluate("SET PRIORITY $priority");
+    }
+
+    /**
+     * Sets a variable to the specified value. The variables so created can later be used by later using ${<variablename>}
+     * in the dialplan.
+     *
+     * These variables live in the channel Asterisk creates when you pickup a phone and as such they are both local and temporary.
+     * Variables created in one channel can not be accessed by another channel. When you hang up the phone, the channel is deleted
+     * and any variables in that channel are deleted as well.
+     *
+     * @link http://www.voip-info.org/wiki-set+variable
+     * @param string $variable is case sensitive
+     * @param string $value
+     * @return array, see evaluate for return information.
+     */
+    public function set_variable($variable, $value)
+    {
+        $value = str_replace("\n", '\n', addslashes($value));
+        return $this->evaluate("SET VARIABLE $variable \"$value\"");
+    }
+
+    /**
+     * Play the given audio file, allowing playback to be interrupted by a DTMF digit. This command is similar to the GET DATA
+     * command but this command returns after the first DTMF digit has been pressed while GET DATA can accumulated any number of
+     * digits before returning.
+     *
+     * @example examples/ping.php Ping an IP address
+     *
+     * @link http://www.voip-info.org/wiki-stream+file
+     * @param string $filename without extension, often in /var/lib/asterisk/sounds
+     * @param string $escape_digits
+     * @param integer $offset
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function stream_file($filename, $escape_digits = '', $offset = 0)
+    {
+        $this->evaluate('ANSWER');
+        if (PLAY_AUDIO) {
+            return $this->evaluate("STREAM FILE $filename \"$escape_digits\" $offset");
+        }
+    }
+
+    /**
+     * Enable or disable TDD transmission/reception on the current channel.
+     *
+     * @link http://www.voip-info.org/wiki-tdd+mode
+     * @param string $setting can be on, off or mate
+     * @return array, see evaluate for return information. ['result'] is 1 on sucess, 0 if the channel is not TDD capable.
+     */
+    public function tdd_mode($setting)
+    {
+        return $this->evaluate("TDD MODE $setting");
+    }
+
+    /**
+     * Sends $message to the Asterisk console via the 'verbose' message system.
+     *
+     * If the Asterisk verbosity level is $level or greater, send $message to the console.
+     *
+     * The Asterisk verbosity system works as follows. The Asterisk user gets to set the desired verbosity at startup time or later
+     * using the console 'set verbose' command. Messages are displayed on the console if their verbose level is less than or equal
+     * to desired verbosity set by the user. More important messages should have a low verbose level; less important messages
+     * should have a high verbose level.
+     *
+     * @link http://www.voip-info.org/wiki-verbose
+     * @param string $message
+     * @param integer $level from 1 to 4
+     * @return array, see evaluate for return information.
+     */
+    public function verbose($message, $level = 1)
+    {
+        //$level = 1;
+        if ($this->verboseLevel > 0) {
+            $level = 1;
+        }
+
+        foreach (explode("\n", str_replace("\r\n", "\n", print_r($message, true))) as $msg) {
+            //@syslog(LOG_WARNING, $msg);
+            $ret = $this->evaluate("VERBOSE \"$msg\" $level");
+        }
+        return $ret;
+    }
+
+    /**
+     * Waits up to $timeout milliseconds for channel to receive a DTMF digit.
+     *
+     * @link http://www.voip-info.org/wiki-wait+for+digit
+     * @param integer $timeout in millisecons. Use -1 for the timeout value if you want the call to wait indefinitely.
+     * @return array, see evaluate for return information. ['result'] is 0 if wait completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function wait_for_digit($timeout = -1)
+    {
+        return $this->evaluate("WAIT FOR DIGIT $timeout");
+    }
+
+    // *********************************************************************************************************
+    // **                       APPLICATIONS                                                                  **
+    // *********************************************************************************************************
+
+    /**
+     * Set absolute maximum time of call.
+     *
+     * Note that the timeout is set from the current time forward, not counting the number of seconds the call has already been up.
+     * Each time you call AbsoluteTimeout(), all previous absolute timeouts are cancelled.
+     * Will return the call to the T extension so that you can playback an explanatory note to the calling party (the called party
+     * will not hear that)
+     *
+     * @link http://www.voip-info.org/wiki-Asterisk+-+documentation+of+application+commands
+     * @link http://www.dynx.net/ASTERISK/AGI/ccard/agi-ccard.agi
+     * @param $seconds allowed, 0 disables timeout
+     * @return array, see evaluate for return information.
+     */
+    public function exec_absolutetimeout($seconds = 0)
+    {
+        return $this->execute('AbsoluteTimeout', $seconds);
+    }
+
+    /**
+     * Executes an AGI compliant application.
+     *
+     * @param string $command
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or if application requested hangup, or 0 on non-hangup exit.
+     * @param string $args
+     */
+    public function exec_agi($command, $args)
+    {
+        return $this->execute("AGI $command", $args);
+    }
+
+    /**
+     * Set Language.
+     *
+     * @param string $language code
+     * @return array, see evaluate for return information.
+     * !! Depreciate on asterisk 1.2 & 1.4
+     */
+    public function exec_setlanguage($language = 'en')
+    {
+        return $this->execute('SetLanguage', $language);
+    }
+
+    /**
+     * Set Account Code
+     *  Set the channel account code for billing purposes.
+     *
+     * @param string $accountcode
+     * @return array, see evaluate for return information.
+     */
+    public function exec_setaccountcode($accountcode)
+    {
+        return $this->execute('SetAccount', $accountcode);
+    }
+
+    /**
+     * Do ENUM Lookup.
+     *
+     * Note: to retrieve the result, use
+     *   get_variable('ENUM');
+     *
+     * @param $exten
+     * @return array, see evaluate for return information.
+     */
+    public function exec_enumlookup($exten)
+    {
+        return $this->execute('EnumLookup', $exten);
+    }
+
+    /**
+     * Dial.
+     *
+     * Dial takes input from ${VXML_URL} to send XML Url to Cisco 7960
+     * Dial takes input from ${ALERT_INFO} to set ring cadence for Cisco phones
+     * Dial returns ${CAUSECODE}: If the dial failed, this is the errormessage.
+     * Dial returns ${DIALSTATUS}: Text code returning status of last dial attempt.
+     *
+     * @link http://www.voip-info.org/wiki-Asterisk+cmd+Dial
+     * @param string $type
+     * @param string $identifier
+     * @param integer $timeout
+     * @param string $options
+     * @param string $url
+     * @return array, see evaluate for return information.
+     */
+    public function exec_dial($type, $identifier, $timeout = null, $options = null, $url = null)
+    {
+        return $this->execute('Dial', trim("$type/$identifier|$timeout|$options|$url", '|'));
+    }
+
+    /**
+     * Goto.
+     *
+     * This function takes three arguments: context,extension, and priority, but the leading arguments
+     * are optional, not the trailing arguments.  Thuse goto($z) sets the priority to $z.
+     *
+     * @param string $a
+     * @param string $b;
+     * @param string $c;
+     * @return array, see evaluate for return information.
+     */
+    public function exec_goto($a, $b = null, $c = null)
+    {
+        return $this->execute('Goto', trim("$a,$b,$c", ','));
+    }
+
+    // *********************************************************************************************************
+    // **                       FAST PASSING                                                                  **
+    // *********************************************************************************************************
+
+    /**
+     * Say the given digit string, returning early if any of the given DTMF escape digits are received on the channel.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.voip-info.org/wiki-say+digits
+     * @param string $buffer
+     * @param integer $digits
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function fastpass_say_digits(&$buffer, $digits, $escape_digits = '')
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->say_digits($digits, $escape_digits);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}));
+    }
+
+    /**
+     * Say the given number, returning early if any of the given DTMF escape digits are received on the channel.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.voip-info.org/wiki-say+number
+     * @param string $buffer
+     * @param integer $number
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function fastpass_say_number(&$buffer, $number, $escape_digits = '')
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->say_number($number, $escape_digits);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}));
+    }
+
+    /**
+     * Say the given character string, returning early if any of the given DTMF escape digits are received on the channel.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.voip-info.org/wiki-say+phonetic
+     * @param string $buffer
+     * @param string $text
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function fastpass_say_phonetic(&$buffer, $text, $escape_digits = '')
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->say_phonetic($text, $escape_digits);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}));
+    }
+
+    /**
+     * Say a given time, returning early if any of the given DTMF escape digits are received on the channel.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.voip-info.org/wiki-say+time
+     * @param string $buffer
+     * @param integer $time number of seconds elapsed since 00:00:00 on January 1, 1970, Coordinated Universal Time (UTC).
+     * @param string $escape_digits
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function fastpass_say_time(&$buffer, $time = null, $escape_digits = '')
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->say_time($time, $escape_digits);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}));
+    }
+
+    /**
+     * Play the given audio file, allowing playback to be interrupted by a DTMF digit. This command is similar to the GET DATA
+     * command but this command returns after the first DTMF digit has been pressed while GET DATA can accumulated any number of
+     * digits before returning.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.voip-info.org/wiki-stream+file
+     * @param string $buffer
+     * @param string $filename without extension, often in /var/lib/asterisk/sounds
+     * @param string $escape_digits
+     * @param integer $offset
+     * @return array, see evaluate for return information. ['result'] is -1 on hangup or error, 0 if playback completes with no
+     * digit received, otherwise a decimal value of the DTMF tone.  Use chr() to convert to ASCII.
+     */
+    public function fastpass_stream_file(&$buffer, $filename, $escape_digits = '', $offset = 0)
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->stream_file($filename, $escape_digits, $offset);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}), 'endpos' => 0);
+    }
+
+    /**
+     * Use festival to read text.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.cstr.ed.ac.uk/projects/festival/
+     * @param string $buffer
+     * @param string $text
+     * @param string $escape_digits
+     * @param integer $frequency
+     * @return array, see evaluate for return information.
+     */
+    public function fastpass_text2wav(&$buffer, $text, $escape_digits = '', $frequency = 8000)
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->text2wav($text, $escape_digits, $frequency);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}), 'endpos' => 0);
+    }
+
+    /**
+     * Use Cepstral Swift to read text.
+     * Return early if $buffer is adequate for request.
+     *
+     * @link http://www.cepstral.com/
+     * @param string $buffer
+     * @param string $text
+     * @param string $escape_digits
+     * @param integer $frequency
+     * @return array, see evaluate for return information.
+     */
+    public function fastpass_swift(&$buffer, $text, $escape_digits = '', $frequency = 8000, $voice = null)
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->swift($text, $escape_digits, $frequency, $voice);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}), 'endpos' => 0);
+    }
+
+    /**
+     * Say Puncutation in a string.
+     * Return early if $buffer is adequate for request.
+     *
+     * @param string $buffer
+     * @param string $text
+     * @param string $escape_digits
+     * @param integer $frequency
+     * @return array, see evaluate for return information.
+     */
+    public function fastpass_say_punctuation(&$buffer, $text, $escape_digits = '', $frequency = 8000)
+    {
+        $proceed = false;
+        if ($escape_digits != '' && $buffer != '') {
+            if (!strpos(chr(255) . $escape_digits, $buffer{strlen($buffer) - 1})) {
+                $proceed = true;
+            }
+
+        }
+        if ($buffer == '' || $proceed) {
+            $res = $this->say_punctuation($text, $escape_digits, $frequency);
+            if ($res['code'] == AGIRES_OK && $res['result'] > 0) {
+                $buffer .= chr($res['result']);
+            }
+
+            return $res;
+        }
+        return array('code' => AGIRES_OK, 'result' => ord($buffer{strlen($buffer) - 1}));
+    }
+
+    /**
+     * Plays the given file and receives DTMF data.
+     * Return early if $buffer is adequate for request.
+     *
+     * This is similar to STREAM FILE, but this command can accept and return many DTMF digits,
+     * while STREAM FILE returns immediately after the first DTMF digit is detected.
+     *
+     * Asterisk looks for the file to play in /var/lib/asterisk/sounds by default.
+     *
+     * If the user doesn't press any keys when the message plays, there is $timeout milliseconds
+     * of silence then the command ends.
+     *
+     * The user has the opportunity to press a key at any time during the message or the
+     * post-message silence. If the user presses a key while the message is playing, the
+     * message stops playing. When the first key is pressed a timer starts counting for
+     * $timeout milliseconds. Every time the user presses another key the timer is restarted.
+     * The command ends when the counter goes to zero or the maximum number of digits is entered,
+     * whichever happens first.
+     *
+     * If you don't specify a time out then a default timeout of 2000 is used following a pressed
+     * digit. If no digits are pressed then 6 seconds of silence follow the message.
+     *
+     * If you don't specify $max_digits then the user can enter as many digits as they want.
+     *
+     * Pressing the # key has the same effect as the timer running out: the command ends and
+     * any previously keyed digits are returned. A side effect of this is that there is no
+     * way to read a # key using this command.
+     *
+     * @link http://www.voip-info.org/wiki-get+data
+     * @param string $buffer
+     * @param string $filename file to play. Do not include file extension.
+     * @param integer $timeout milliseconds
+     * @param integer $max_digits
+     * @return array, see evaluate for return information. ['result'] holds the digits and ['data'] holds the timeout if present.
+     *
+     * This differs from other commands with return DTMF as numbers representing ASCII characters.
+     */
+    public function fastpass_get_data(&$buffer, $filename, $timeout = null, $max_digits = null)
+    {
+        if (is_null($max_digits) || strlen($buffer) < $max_digits) {
+            if ($buffer == '') {
+                $res = $this->get_data($filename, $timeout, $max_digits);
+                if ($res['code'] == AGIRES_OK) {
+                    $buffer .= $res['result'];
+                }
+
+                return $res;
             } else {
-                $agi->set_variable("DIDACCOUNTCODE", $MAGNUS->username);
-
-                $agi->verbose("DID call friend: IS LOCAL !!!", 1);
-
-                $MAGNUS->record_call = $this->modelDid->record_call;
-
-                /* IF SIP CALL*/
-                if ($inst_listdestination['voip_call'] == 1) {
-                    $agi->verbose("DID destination type SIP user ", 6);
-                    $sql              = "SELECT * FROM pkg_sip WHERE id = " . $inst_listdestination['id_sip'] . " LIMIT 1";
-                    $MAGNUS->modelSip = $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-
-                    if (isset($modelSip->id)) {
-                        $MAGNUS->voicemail   = isset($modelSip->voicemail) ? $modelSip->voicemail : false;
-                        $MAGNUS->destination = $modelSip->name;
-                    } else {
-                        $agi->stream_file('prepaid-dest-unreachable', '#');
-                        continue;
-                    }
-                    $MAGNUS->sip_account = $MAGNUS->modelSip->name;
-                    $agi->verbose('Call to user ' . $modelSip->name, 1);
-
-                    $MAGNUS->extension = $MAGNUS->destination = $MAGNUS->dnid = $modelSip->name;
-
-                    $dialResult = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, $this->did);
-
-                    $dialstatus   = $dialResult['dialstatus'];
-                    $answeredtime = $dialResult['answeredtime'];
-
-                    $agi->verbose($inst_listdestination['destination'] . " Friend -> followme=$callcount : ANSWEREDTIME=" . $answeredtime . "-DIALSTATUS=" . $dialstatus, 1);
-
-                    if ($this->parseDialStatus($agi, $dialstatus, $answeredtime) != true) {
-                        $answeredtime = 0;
-                        continue;
-                    }
-                }
-                /* Call to group*/
-                else if ($inst_listdestination['voip_call'] == 8) {
-                    $agi->verbose("DID destination type SIP group ", 6);
-                    $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '" . $inst_listdestination['destination'] . "'";
-                    $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
-                    $agi->verbose("Call group $group ", 6);
-                    if (!isset($modelSip[0]->id)) {
-                        $answeredtime = 0;
-                        continue;
+                while (is_null($max_digits) || strlen($buffer) < $max_digits) {
+                    $res = $this->wait_for_digit();
+                    if ($res['code'] != AGIRES_OK) {
+                        return $res;
                     }
 
-                    $group = '';
-
-                    foreach ($modelSip as $key => $value) {
-
-                        $group .= "SIP/" . $value->name . "&";
-                    }
-
-                    $dialstr = substr($group, 0, -1) . $dialparams;
-
-                    $MAGNUS->startRecordCall($agi, $this->did, true);
-
-                    $agi->verbose("DIAL $dialstr", 6);
-                    $myres = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
-
-                    $sipaccount          = $agi->get_variable("DIALEDPEERNUMBER");
-                    $MAGNUS->sip_account = $sipaccount['data'];
-                    $answeredtime        = $agi->get_variable("ANSWEREDTIME");
-                    $answeredtime        = $answeredtime['data'];
-                    $dialstatus          = $agi->get_variable("DIALSTATUS");
-                    $dialstatus          = $dialstatus['data'];
-
-                    $MAGNUS->stopRecordCall($agi);
-
-                    if ($this->parseDialStatus($agi, $dialstatus, $answeredtime) != true) {
-                        $answeredtime = 0;
-                        continue;
-                    }
-
-                }
-                /* Call to custom dial*/
-                else if ($inst_listdestination['voip_call'] == 9) {
-                    $agi->verbose("DID destination type CUSTOM ", 6);
-                    //SMS@O numero %callerid% acabou de  ligar.
-                    if (strtoupper(substr($inst_listdestination['destination'], 0, 3)) == 'SMS') {
-                        //url format ->  SMS|Text|trunkname
-                        $sms = explode('|', $inst_listdestination['destination']);
-
-                        $destination = $MAGNUS->modelUser->mobile;
-                        $trunk       = $sms[2];
-                        $text        = $sms[1];
-                        $text        = preg_replace("/\%callerid\%/", $MAGNUS->CallerID, $text);
-
-                        if (file_exists('/var/lib/asterisk/sounds/' . $this->did . '.gsm')) {
-                            $agi->verbose('execute earlymedia');
-                            $agi->verbose('earl ok');
-                            $agi->execute('Ringing');
-                            $agi->execute("Progress");
-                            $agi->execute('Wait', '1');
-                            $agi->execute('Playback', $this->did . ",noanswer");
-                        }
-
-                        $text = addslashes((string) $text);
-                        //CODIFICA O TESTO DO SMS
-                        $text = urlencode($text);
-
-                        $sql        = "SELECT link_sms, removeprefix, trunkprefix FROM pkg_trunk WHERE trunkcode = '$trunk' LIMIT 1";
-                        $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-
-                        //retiro e adiciono os prefixos do tronco
-                        if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0 || substr(strtoupper($modelTrunk->removeprefix), 0, 1) == 'X') {
-                            $destination = substr($destination, strlen($modelTrunk->removeprefix));
-                        }
-                        $destination = $modelTrunk->trunkprefix . $destination;
-                        $agi->verbose($destination);
-                        $url = $modelTrunk->link_sms;
-                        $url = preg_replace("/\%number\%/", $destination, $url);
-                        $url = preg_replace("/\%text\%/", $text, $url);
-
-                        $agi->verbose($url);
-                        file_get_contents($url);
-
-                        $answeredtime = 60;
-                        $dialstatus   = 'ANSWER';
-                        $agi->execute('Congestion', '5');
+                    if ($res['result'] == ord('#')) {
                         break;
-                    } else {
-                        $dialstr = $inst_listdestination['destination'];
-
-                        $MAGNUS->startRecordCall($agi, $this->did, true);
-
-                        if (preg_match('/PUSH/', $dialstr)) {
-
-                            if (file_exists(dirname(__FILE__) . '/push/Push.php')) {
-                                include dirname(__FILE__) . '/push/Push.php';
-
-                                $tmp = explode('PUSH/', $dialstr);
-                                foreach ($tmp as $key => $value) {
-
-                                    $agi->verbose($value);
-                                    if (preg_match('/^SIP|LOCAL|AGI/', strtoupper($value))) {
-                                        continue;
-                                    }
-
-                                    $dialString = preg_split('/\,|\&/', $value);
-                                    $agi->verbose("there are PUSH on DID custom dial " . $dialString[0]);
-                                    Push::send($agi, $dialString[0], $MAGNUS->CallerID, 0);
-                                }
-                                sleep(5);
-                            }
-                            $dialstr = preg_replace('/PUSH/', 'SIP', $dialstr);
-                        }
-
-                        $agi->verbose("DIAL $dialstr", 6);
-                        $myres = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
-                        $MAGNUS->stopRecordCall($agi);
-
-                        $answeredtime = $agi->get_variable("ANSWEREDTIME");
-                        $answeredtime = $answeredtime['data'];
-                        $dialstatus   = $agi->get_variable("DIALSTATUS");
-                        $dialstatus   = $dialstatus['data'];
-
-                        if ($this->parseDialStatus($agi, $dialstatus, $answeredtime) != true) {
-                            $answeredtime = 0;
-                            continue;
-                        }
                     }
 
-                } elseif ($inst_listdestination['voip_call'] == 10) {
-                    $agi->verbose("DID destination type DIALPLAN ", 6);
-                    $MAGNUS->run_dial($agi, "LOCAL/" . $this->did . "@did-" . $this->did);
-                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
-                    $answeredtime = $answeredtime['data'];
-                    $dialstatus   = $agi->get_variable("DIALSTATUS");
-                    $dialstatus   = $dialstatus['data'];
-                } elseif ($inst_listdestination['voip_call'] == 11) {
-                    $agi->verbose("DID destination type MULTIPLES IPs ", 6);
+                    $buffer .= chr($res['result']);
+                }
+            }
+        }
+        return array('code' => AGIRES_OK, 'result' => $buffer);
+    }
 
-                    $ips       = explode(',', $inst_listdestination['destination']);
-                    $dialToIPs = '';
-                    foreach ($ips as $key => $ip) {
-                        if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                            $dialToIPs .= 'SIP/' . $ip . '&';
-                        }
-                    }
-                    $dialToIPs = substr($dialToIPs, 0, -1);
-                    $MAGNUS->run_dial($agi, $dialToIPs);
-                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
-                    $answeredtime = $answeredtime['data'];
-                    $dialstatus   = $agi->get_variable("DIALSTATUS");
-                    $dialstatus   = $dialstatus['data'];
+    // *********************************************************************************************************
+    // **                       DERIVED                                                                       **
+    // *********************************************************************************************************
+
+    /**
+     * Menu.
+     *
+     * This function presents the user with a menu and reads the response
+     *
+     * @param array $choices has the following structure:
+     *   array('1'=>'*Press 1 for this', // festival reads if prompt starts with *
+     *         '2'=>'some-gsm-without-extension',
+     *         '*'=>'*Press star for help');
+     * @return mixed key pressed on sucess, -1 on failure
+     */
+    public function menu($choices, $timeout = 2000)
+    {
+        $keys   = join('', array_keys($choices));
+        $choice = null;
+        while (is_null($choice)) {
+            foreach ($choices as $prompt) {
+                if ($prompt{0} == '*') {
+                    $ret = $this->text2wav(substr($prompt, 1), $keys);
                 } else {
+                    $ret = $this->stream_file($prompt, $keys);
+                }
 
-                    $agi->verbose("DID destination type PSTN NUMBER ", 6);
-                    /* CHECK IF DESTINATION IS SET*/
-                    if (strlen($inst_listdestination['destination']) == 0) {
-                        continue;
-                    }
+                if ($ret['code'] != AGIRES_OK || $ret['result'] == -1) {
+                    $choice = -1;
+                    break;
+                }
 
-                    $MAGNUS->agiconfig['use_dnid']       = 1;
-                    $MAGNUS->agiconfig['say_timetocall'] = 0;
+                if ($ret['result'] != 0) {
+                    $choice = chr($ret['result']);
+                    break;
+                }
+            }
 
-                    //if is a PSTN call can destination format is number@callerID, set the CallID.
-                    if (preg_match("/@/", $inst_listdestination['destination'])) {
-                        $destinationCallerID                 = explode('@', $inst_listdestination['destination']);
-                        $inst_listdestination['destination'] = $destinationCallerID[0];
-                        $agi->set_callerid($destinationCallerID[1]);
-                    }
+            if (is_null($choice)) {
+                $ret = $this->get_data('beep', $timeout, 1);
+                if ($ret['code'] != AGIRES_OK || $ret['result'] == -1) {
+                    $choice = -1;
+                } elseif ($ret['result'] != '' && strpos(' ' . $keys, $ret['result'])) {
+                    $choice = $ret['result'];
+                }
 
-                    $MAGNUS->extension = $MAGNUS->dnid = $MAGNUS->destination = $inst_listdestination['destination'];
+            }
+        }
+        return $choice;
+    }
 
-                    if ($MAGNUS->checkNumber($agi, $CalcAgi, 0) == true) {
+    /**
+     * Goto - Set context, extension and priority.
+     *
+     * @param string $context
+     * @param string $extension
+     * @param string $priority
+     */
+    // Commented : error on PHP 5.3
+    /*
+    function goto($context, $extension='s', $priority=1)
+    {
+    $this->set_context($context);
+    $this->set_extension($extension);
+    $this->set_priority($priority);
+    }
+     */
 
-                        /* PERFORM THE CALL*/
-                        $result_callperf = $CalcAgi->sendCall($agi, $MAGNUS->destination, $MAGNUS);
-                        if (!$result_callperf) {
-                            $prompt = "prepaid-callfollowme";
-                            $agi->verbose($prompt, 10);
-                            $agi->stream_file($prompt, '#');
-                            continue;
-                        }
+    /**
+     * Parse caller id.
+     *
+     * @example examples/dtmf.php Get DTMF tones from the user and say the digits
+     * @example examples/input.php Get text input from the user and say it back
+     *
+     * "name" <proto:user@server:port>
+     *
+     * @param string $callerid
+     * @return array('Name'=>$name, 'Number'=>$number)
+     */
+    public function parse_callerid($callerid = null)
+    {
+        if (is_null($callerid)) {
+            $callerid = $this->request['agi_callerid'];
+        }
 
-                        $dialstatus   = $CalcAgi->dialstatus;
-                        $answeredtime = $CalcAgi->answeredtime;
+        $ret      = array('name' => '', 'protocol' => '', 'username' => '', 'host' => '', 'port' => '');
+        $callerid = trim($callerid);
 
-                        if (($CalcAgi->dialstatus == "NOANSWER") || ($CalcAgi->dialstatus == "BUSY") || ($CalcAgi->dialstatus == "CHANUNAVAIL") || ($CalcAgi->dialstatus == "CONGESTION")) {
-                            continue;
-                        }
+        if ($callerid{0} == '"' || $callerid{0} == "'") {
+            $d           = $callerid{0};
+            $callerid    = explode($d, substr($callerid, 1));
+            $ret['name'] = array_shift($callerid);
+            $callerid    = join($d, $callerid);
+        }
 
-                        if ($CalcAgi->dialstatus == "CANCEL") {
-                            break;
-                        }
+        $callerid = explode('@', trim($callerid, '<> '));
+        $username = explode(':', array_shift($callerid));
+        if (count($username) == 1) {
+            $ret['username'] = $username[0];
+        } else {
+            $ret['protocol'] = array_shift($username);
+            $ret['username'] = join(':', $username);
+        }
 
-                        /* INSERT CDR  & UPDATE SYSTEM*/
-                        $CalcAgi->updateSystem($MAGNUS, $agi, 1, 1);
+        $callerid = join('@', $callerid);
+        $host     = explode(':', $callerid);
+        if (count($host) == 1) {
+            $ret['host'] = $host[0];
+        } else {
+            $ret['host'] = array_shift($host);
+            $ret['port'] = join(':', $host);
+        }
 
-                        $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $CalcAgi->answeredtime
-                                WHERE id = " . $this->modelDestination[0]['id'] . " LIMIT 1";
-                        $agi->exec($sql);
+        return $ret;
+    }
 
-                        /* THEN STATUS IS ANSWER*/
+    /**
+     * Use festival to read text.
+     *
+     * @example examples/dtmf.php Get DTMF tones from the user and say the digits
+     * @example examples/input.php Get text input from the user and say it back
+     * @example examples/ping.php Ping an IP address
+     *
+     * @link http://www.cstr.ed.ac.uk/projects/festival/
+     * @param string $text
+     * @param string $escape_digits
+     * @param integer $frequency
+     * @return array, see evaluate for return information.
+     */
+    public function text2wav($text, $escape_digits = '', $frequency = 8000)
+    {
+        $text = trim($text);
+        if ($text == '') {
+            return true;
+        }
+
+        $hash  = md5($text);
+        $fname = $this->config['phpagi']['tempdir'] . DIRECTORY_SEPARATOR;
+        $fname .= 'text2wav_' . $hash;
+
+        // create wave file
+        if (!file_exists("$fname.wav")) {
+            // write text file
+            if (!file_exists("$fname.txt")) {
+                $fp = fopen("$fname.txt", 'w');
+                fputs($fp, $text);
+                fclose($fp);
+            }
+
+            shell_exec("{$this->config['festival']['text2wave']} -F $frequency -o $fname.wav $fname.txt");
+        } else {
+            touch("$fname.txt");
+            touch("$fname.wav");
+        }
+
+        // stream it
+        $ret = $this->stream_file($fname, $escape_digits);
+
+        // clean up old files
+        $delete = time() - 2592000; // 1 month
+        foreach (glob($this->config['phpagi']['tempdir'] . DIRECTORY_SEPARATOR . 'text2wav_*') as $file) {
+            if (filemtime($file) < $delete) {
+                unlink($file);
+            }
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Use Cepstral Swift to read text.
+     *
+     * @link http://www.cepstral.com/
+     * @param string $text
+     * @param string $escape_digits
+     * @param integer $frequency
+     * @return array, see evaluate for return information.
+     */
+    public function swift($text, $escape_digits = '', $frequency = 8000, $voice = null)
+    {
+        if (!is_null($voice)) {
+            $voice = "-n $voice";
+        } elseif (isset($this->config['cepstral']['voice'])) {
+            $voice = "-n {$this->config['cepstral']['voice']}";
+        }
+
+        $text = trim($text);
+        if ($text == '') {
+            return true;
+        }
+
+        $hash  = md5($text);
+        $fname = $this->config['phpagi']['tempdir'] . DIRECTORY_SEPARATOR;
+        $fname .= 'swift_' . $hash;
+
+        // create wave file
+        if (!file_exists("$fname.wav")) {
+            // write text file
+            if (!file_exists("$fname.txt")) {
+                $fp = fopen("$fname.txt", 'w');
+                fputs($fp, $text);
+                fclose($fp);
+            }
+            echo "{$this->config['cepstral']['swift']} -p audio/channels=1,audio/sampling-rate=$frequency $voice -o $fname.wav -f $fname.txt \n\n";
+            shell_exec("{$this->config['cepstral']['swift']} -p audio/channels=1,audio/sampling-rate=$frequency $voice -o $fname.wav -f $fname.txt");
+        }
+
+        // stream it
+        $ret = $this->stream_file($fname, $escape_digits);
+
+        // clean up old files
+        $delete = time() - 2592000; // 1 month
+        foreach (glob($this->config['phpagi']['tempdir'] . DIRECTORY_SEPARATOR . 'swift_*') as $file) {
+            if (filemtime($file) < $delete) {
+                unlink($file);
+            }
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Text Input.
+     *
+     * Based on ideas found at http://www.voip-info.org/wiki-Asterisk+cmd+DTMFToText
+     *
+     * Example:
+     *              UC   H     LC   i      ,     SP   h     o      w    SP   a    r      e     SP   y      o      u     ?
+     *   $string = '*8'.'44*'.'*5'.'444*'.'00*'.'0*'.'44*'.'666*'.'9*'.'0*'.'2*'.'777*'.'33*'.'0*'.'999*'.'666*'.'88*'.'0000*';
+     *
+     * @link http://www.voip-info.org/wiki-Asterisk+cmd+DTMFToText
+     * @example examples/input.php Get text input from the user and say it back
+     *
+     * @return string
+     */
+    public function text_input($mode = 'NUMERIC')
+    {
+        $alpha = array('k0' => ' ', 'k00' => ',', 'k000' => '.', 'k0000' => '?', 'k00000' => '0',
+            'k1'                => '!', 'k11' => ':', 'k111' => ';', 'k1111' => '#', 'k11111' => '1',
+            'k2'                => 'A', 'k22' => 'B', 'k222' => 'C', 'k2222' => '2',
+            'k3'                => 'D', 'k33' => 'E', 'k333' => 'F', 'k3333' => '3',
+            'k4'                => 'G', 'k44' => 'H', 'k444' => 'I', 'k4444' => '4',
+            'k5'                => 'J', 'k55' => 'K', 'k555' => 'L', 'k5555' => '5',
+            'k6'                => 'M', 'k66' => 'N', 'k666' => 'O', 'k6666' => '6',
+            'k7'                => 'P', 'k77' => 'Q', 'k777' => 'R', 'k7777' => 'S', 'k77777' => '7',
+            'k8'                => 'T', 'k88' => 'U', 'k888' => 'V', 'k8888' => '8',
+            'k9'                => 'W', 'k99' => 'X', 'k999' => 'Y', 'k9999' => 'Z', 'k99999' => '9');
+        $symbol = array('k0' => '=',
+            'k1'                 => '<', 'k11'  => '(', 'k111' => '[', 'k1111' => '{', 'k11111' => '1',
+            'k2'                 => '@', 'k22'  => '$', 'k222' => '&', 'k2222' => '%', 'k22222' => '2',
+            'k3'                 => '>', 'k33'  => ')', 'k333' => ']', 'k3333' => '}', 'k33333' => '3',
+            'k4'                 => '+', 'k44'  => '-', 'k444' => '*', 'k4444' => '/', 'k44444' => '4',
+            'k5'                 => "'", 'k55'  => '`', 'k555' => '5',
+            'k6'                 => '"', 'k66'  => '6',
+            'k7'                 => '^', 'k77'  => '7',
+            'k8'                 => "\\", 'k88' => '|', 'k888' => '8',
+            'k9'                 => '_', 'k99'  => '~', 'k999' => '9');
+        $text = '';
+        do {
+            $command = false;
+            $result  = $this->get_data('beep');
+            foreach (explode('*', $result['result']) as $code) {
+                if ($command) {
+                    switch ($code{0}) {
+                    case '2':$text = substr($text, 0, strlen($text) - 1);
+                        break; // backspace
+                    case '5':$mode = 'LOWERCASE';
                         break;
+                    case '6':$mode = 'NUMERIC';
+                        break;
+                    case '7':$mode = 'SYMBOL';
+                        break;
+                    case '8':$mode = 'UPPERCASE';
+                        break;
+                    case '9':$text = explode(' ', $text);unset($text[count($text) - 1]);
+                        $text          = join(' ', $text);
+                        break; // backspace a word
                     }
+                    $code    = substr($code, 1);
+                    $command = false;
                 }
-            }
-            /* END IF AUTHENTICATE*/
-        }
-
-        $answeredtime = $MAGNUS->executeVoiceMail($agi, $dialstatus, $answeredtime);
-
-        $agi->verbose('DID answeredtime =' . $answeredtime, 25);
-        if ($answeredtime > 0) {
-            $this->call_did_billing($agi, $MAGNUS, $CalcAgi, $answeredtime, $dialstatus);
-            return 1;
-        } else {
-
-            $fields = "
-				uniqueid,
-				id_user,
-				calledstation,
-				id_plan,
-				id_trunk,
-				callerid,
-				src,
-				starttime, 
-				terminatecauseid,
-				sipiax,
-				id_prefix,
-				hangupcause,
-				id_server";
-						
-            $id_trunk = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
-			
-            $values   = "
-				'$MAGNUS->uniqueid',
-				'$MAGNUS->id_user',
-				'$this->did',
-				'$MAGNUS->id_plan',
-				'$id_trunk',
-				'$MAGNUS->CallerID', 
-				'DID Call',
-				'" . date('Y-m-d H:i:s') . "', 
-				'0',
-				'3',
-				'$CalcAgi->id_prefix',
-				'0',
-				'$MAGNUS->id_server'";
-            $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
-            $agi->exec($sql);
-            return 1;
-        }
-    }
-    public function checkBlockCallerID(&$agi, &$MAGNUS)
-    {
-        $agi->verbose("try blocked", 5);
-        $block_expression_1 = $this->modelDid->block_expression_1;
-        $block_expression_2 = $this->modelDid->block_expression_2;
-        $block_expression_3 = $this->modelDid->block_expression_3;
-
-        $send_to_callback_1 = $this->modelDid->send_to_callback_1;
-        $send_to_callback_2 = $this->modelDid->send_to_callback_2;
-        $send_to_callback_3 = $this->modelDid->send_to_callback_3;
-
-        $expression_1 = $this->modelDid->expression_1;
-        $expression_2 = $this->modelDid->expression_2;
-        $expression_3 = $this->modelDid->expression_3;
-
-        $agi->verbose("try blocked number match with expression 1, " . $MAGNUS->CallerID . ' ' . $expression_1, 10);
-        if (strlen($expression_1) && preg_match('/' . $expression_1 . '/', $MAGNUS->CallerID)) {
-
-            if ($block_expression_1 == 1) {
-                $agi->verbose("Call blocked becouse this number match with expression 1, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
-                $MAGNUS->hangup($agi);
-            } elseif ($send_to_callback_1 == 1) {
-                $agi->verbose('Send to Callback expression 1', 10);
-                $this->voip_call = 6;
-            }
-            return;
-        }
-
-        if (strlen($expression_2) && preg_match('/' . $expression_2 . '/', $MAGNUS->CallerID)) {
-
-            if ($block_expression_2 == 1) {
-                $agi->verbose("Call blocked becouse this number match with expression 2, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
-                $MAGNUS->hangup($agi);
-            } elseif ($send_to_callback_2 == 1) {
-                $agi->verbose('Send to Callback expression 2', 10);
-                $this->voip_call = 6;
-            }
-            return;
-        }
-
-        if (strlen($expression_3) && preg_match('/' . $expression_3 . '/', $MAGNUS->CallerID)) {
-
-            if ($block_expression_2 == 1) {
-                $agi->verbose("Call blocked becouse this number match with expression 3, " . $MAGNUS->CallerID . ' FROM did ' . $this->did, 10);
-                $MAGNUS->hangup($agi);
-            } elseif ($send_to_callback_3 == 1) {
-                $agi->verbose('Send to Callback expression 3', 10);
-                $this->voip_call = 6;
-            }
-            return;
-        }
-
-    }
-
-    public function parseDialStatus(&$agi, $dialstatus, $answeredtime)
-    {
-        $agi->verbose('parseDialStatus', 25);
-        if ($dialstatus == "BUSY") {
-            if ($this->play_audio == 1) {
-                $agi->stream_file('prepaid-isbusy', '#');
-            } else {
-                $agi->execute((busy), busy);
-            }
-            return false;
-        } elseif ($dialstatus == "NOANSWER") {
-            if ($this->play_audio == 1) {
-                $agi->stream_file('prepaid-callfollowme', '#');
-            }
-            return false;
-        } elseif ($dialstatus == "CANCEL") {
-            return true;
-        } elseif ($dialstatus == "ANSWER") {
-            $agi->verbose("[Magnus] DID call friend: dialstatus : $dialstatus, answered time is " . $answeredtime . " ", 10);
-            return true;
-        } elseif (($dialstatus == "CHANUNAVAIL") || ($dialstatus == "CONGESTION")) {
-            return false;
-        } else {
-            if ($this->play_audio == 1) {
-                $agi->stream_file('prepaid-callfollowme', '#');
-            }
-            return false;
-        }
-    }
-
-    public function didCallCost(&$agi, &$MAGNUS)
-    {
-        $agi->verbose('didCallCost', 10);
-        if (file_exists(dirname(__FILE__) . '/didCallCost.php')) {
-            include dirname(__FILE__) . '/didCallCost.php';
-            return;
-        }
-
-        //brazil mobile - ^[4,5,6][1-9][7-9].{7}$|^[1,2,3,7,8,9][1-9]9.{8}$
-        //brazil fixed - ^[1-9][0-9][1-5].
-        $agi->verbose(print_r($this->modelDestination[0], true), 25);
-        if (strlen($this->modelDid->expression_1) > 0 && preg_match('/' . $this->modelDid->expression_1 . '/', $MAGNUS->CallerID)) {
-            $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
-            $selling_rate      = $this->modelDid->selling_rate_1;
-            $buy_rate          = $this->modelDid->buy_rate_1;
-            $agent_client_rate = $this->modelDid->agent_client_rate_1;
-        } elseif (strlen($this->modelDid->expression_2) > 0 && preg_match('/' . $this->modelDid->expression_2 . '/', $MAGNUS->CallerID)) {
-            $agi->verbose("CallerID Match regular expression 2 " . $MAGNUS->CallerID, 10);
-            $selling_rate      = $this->modelDid->selling_rate_2;
-            $buy_rate          = $this->modelDid->buy_rate_2;
-            $agent_client_rate = $this->modelDid->agent_client_rate_2;
-        } elseif (strlen($this->modelDid->expression_3) > 0 && preg_match('/' . $this->modelDid->expression_3 . '/', $MAGNUS->CallerID)) {
-            $agi->verbose("CallerID Match regular expression 3 " . $MAGNUS->CallerID, 10);
-            $selling_rate      = $this->modelDid->selling_rate_3;
-            $buy_rate          = $this->modelDid->buy_rate_3;
-            $agent_client_rate = $this->modelDid->agent_client_rate_3;
-        } else {
-            $selling_rate      = 0;
-            $buy_rate          = 0;
-            $agent_client_rate = 0;
-
-        }
-
-        if ($this->modelDid->connection_sell == 0 && $selling_rate == 0) {
-            $this->sell_price = 0;
-        } else {
-            $this->sell_price = $selling_rate;
-        }
-
-        $this->buy_price = $buy_rate;
-
-        $this->agent_client_rate = $agent_client_rate;
-
-        $credit = $MAGNUS->modelUser->typepaid == 1
-        ? $MAGNUS->modelUser->credit + $MAGNUS->modelUser->creditlimit
-        : $MAGNUS->modelUser->credit;
-
-        if ($MAGNUS->modelUser->active != 1) {
-            $agi->verbose("HANGUP BECAUSE USER IS NOT ACTIVE " . $username, 10);
-            $MAGNUS->hangup($agi);
-        } else if ($this->sell_price > 0 && $credit <= 0) {
-            $agi->verbose(" USER NO CREDIT FOR CALL " . $username, 10);
-            $MAGNUS->hangup($agi);
-        }
-    }
-
-    public function billDidCall(&$agi, &$MAGNUS, $answeredtime, &$CalcAgi)
-    {
-        $agi->verbose('billDidCall, sell_price=' . $this->sell_price, 10);
-
-        $this->sell_price = $MAGNUS->roudRatePrice($answeredtime, $this->sell_price, $this->modelDid->initblock, $this->modelDid->increment);
-
-        $this->sell_price = $this->sell_price + $this->modelDid->connection_sell;
-
-        if ($MAGNUS->modelUser->id_user > 1) {
-
-            $this->agent_client_rate = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->agent_client_rate, $this->modelDid->initblock, $this->modelDid->increment);
-            $agi->verbose('The DID user is a Agent user. agent_client_rate = ' . $this->agent_client_rate, 5);
-        }
-
-        if ($CalcAgi->real_sessiontime < $this->modelDid->minimal_time_charge) {
-            $this->sell_price        = 0;
-            $this->agent_client_rate = 0;
-        }
-
-        $this->buy_price = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->buy_price, $this->modelDid->buyrateinitblock, $this->modelDid->buyrateincrement);
-
-        if ($CalcAgi->real_sessiontime < $this->modelDid->minimal_time_buy) {
-            $this->buy_price = 0;
-        }
-    }
-
-    public function call_did_billing(&$agi, &$MAGNUS, &$CalcAgi, $answeredtime, $dialstatus)
-    {
-        if ($answeredtime > 0) {
-            $terminatecauseid = 1;
-        } else if (strlen($MAGNUS->dialstatus_rev_list[$dialstatus]) > 0) {
-            $terminatecauseid = $MAGNUS->dialstatus_rev_list[$dialstatus];
-        } else {
-            $terminatecauseid = 0;
-        }
-        $CalcAgi->real_sessiontime = intval($answeredtime);
-
-        /*recondeo call*/
-        if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $this->sell_price > 0 && $CalcAgi->real_sessiontime >= $this->modelDid->minimal_time_charge) {
-            $initblock    = $this->modelDid->initblock > 0 ? $this->modelDid->initblock : 1;
-            $billingblock = $this->modelDid->increment > 0 ? $this->modelDid->increment : 1;
-
-            if ($answeredtime > $initblock) {
-                $restominutos   = $answeredtime % $billingblock;
-                $calculaminutos = ($answeredtime - $restominutos) / $billingblock;
-                if ($restominutos > '0') {
-                    $calculaminutos++;
+                if ($code == '') {
+                    $command = true;
+                } elseif ($mode == 'NUMERIC') {
+                    $text .= $code;
+                } elseif ($mode == 'UPPERCASE' && isset($alpha['k' . $code])) {
+                    $text .= $alpha['k' . $code];
+                } elseif ($mode == 'LOWERCASE' && isset($alpha['k' . $code])) {
+                    $text .= strtolower($alpha['k' . $code]);
+                } elseif ($mode == 'SYMBOL' && isset($symbol['k' . $code])) {
+                    $text .= $symbol['k' . $code];
                 }
 
-                $answeredtime = $calculaminutos * $billingblock;
+            }
+            $this->say_punctuation($text);
+        } while (substr($result['result'], -2) == '**');
+        return $text;
+    }
 
-            } elseif ($answeredtime < '1') {
-                $sessiontime = 0;
-            } else {
-                $answeredtime = $initblock;
+    /**
+     * Say Puncutation in a string.
+     *
+     * @param string $text
+     * @param string $escape_digits
+     * @param integer $frequency
+     * @return array, see evaluate for return information.
+     */
+    public function say_punctuation($text, $escape_digits = '', $frequency = 8000)
+    {
+        for ($i = 0; $i < strlen($text); $i++) {
+            switch ($text{$i}) {
+            case ' ':$ret .= 'SPACE ';
+            case ',':$ret .= 'COMMA ';
+                break;
+            case '.':$ret .= 'PERIOD ';
+                break;
+            case '?':$ret .= 'QUESTION MARK ';
+                break;
+            case '!':$ret .= 'EXPLANATION POINT ';
+                break;
+            case ':':$ret .= 'COLON ';
+                break;
+            case ';':$ret .= 'SEMICOLON ';
+                break;
+            case '#':$ret .= 'POUND ';
+                break;
+            case '=':$ret .= 'EQUALS ';
+                break;
+            case '<':$ret .= 'LESS THAN ';
+                break;
+            case '(':$ret .= 'LEFT PARENTHESIS ';
+                break;
+            case '[':$ret .= 'LEFT BRACKET ';
+                break;
+            case '{':$ret .= 'LEFT BRACE ';
+                break;
+            case '@':$ret .= 'AT ';
+                break;
+            case '$':$ret .= 'DOLLAR SIGN ';
+                break;
+            case '&':$ret .= 'AMPERSAND ';
+                break;
+            case '%':$ret .= 'PERCENT ';
+                break;
+            case '>':$ret .= 'GREATER THAN ';
+                break;
+            case ')':$ret .= 'RIGHT PARENTHESIS ';
+                break;
+            case ']':$ret .= 'RIGHT BRACKET ';
+                break;
+            case '}':$ret .= 'RIGHT BRACE ';
+                break;
+            case '+':$ret .= 'PLUS ';
+                break;
+            case '-':$ret .= 'MINUS ';
+                break;
+            case '*':$ret .= 'ASTERISK ';
+                break;
+            case '/':$ret .= 'SLASH ';
+                break;
+            case "'":$ret .= 'SINGLE QUOTE ';
+                break;
+            case '`':$ret .= 'BACK TICK ';
+                break;
+            case '"':$ret .= 'QUOTE ';
+                break;
+            case '^':$ret .= 'CAROT ';
+                break;
+            case "\\":$ret .= 'BACK SLASH ';
+                break;
+            case '|':$ret .= 'BAR ';
+                break;
+            case '_':$ret .= 'UNDERSCORE ';
+                break;
+            case '~':$ret .= 'TILDE ';
+                break;
+            default:$ret .= $text{$i} . ' ';
+                break;
+            }
+        }
+        return $this->text2wav($ret, $escape_digits, $frequency);
+    }
+
+    /**
+     * Create a new AGI_AsteriskManager.
+     */
+    public function &new_AsteriskManager()
+    {
+        $this->asm       = new AGI_AsteriskManager(null, $this->config);
+        $this->asm->pagi = &$this;
+        $this->config    = &$this->asm->config;
+        return $this->asm;
+    }
+
+    // *********************************************************************************************************
+    // **                       PRIVATE                                                                       **
+    // *********************************************************************************************************
+
+    /**
+     * Evaluate an AGI command.
+     *
+     * @access private
+     * @param string $command
+     * @return array ('code'=>$code, 'result'=>$result, 'data'=>$data)
+     */
+    public function evaluate($command)
+    {
+        $broken = array('code' => 500, 'result' => -1, 'data' => '');
+
+        // write command
+        if (!@fwrite($this->out, trim($command) . "\n")) {
+            return $broken;
+        }
+
+        fflush($this->out);
+
+        // Read result.  Occasionally, a command return a string followed by an extra new line.
+        // When this happens, our script will ignore the new line, but it will still be in the
+        // buffer.  So, if we get a blank line, it is probably the result of a previous
+        // command.  We read until we get a valid result or asterisk hangs up.  One offending
+        // command is SEND TEXT.
+        $count = 0;
+        do {
+            $str = trim(fgets($this->in, 4096));
+        } while ($str == '' && $count++ < $this->nlinetoread);
+
+        if ($count >= 5) {
+//        $this->conlog("evaluate error on read for $command");
+            return $broken;
+        }
+
+        // parse result
+        $ret['code'] = substr($str, 0, 3);
+        $str         = trim(substr($str, 3));
+
+        if ($str{0} == '-') // we have a multiline response!
+        {
+            $count = 0;
+            $str   = substr($str, 1) . "\n";
+            $line  = fgets($this->in, 4096);
+            while (substr($line, 0, 3) != $ret['code'] && $count < 5) {
+                $str .= $line;
+                $line  = fgets($this->in, 4096);
+                $count = (trim($line) == '') ? $count + 1 : 0;
+            }
+            if ($count >= 5) {
+//          $this->conlog("evaluate error on multiline read for $command");
+                return $broken;
+            }
+        }
+
+        $ret['result'] = null;
+        $ret['data']   = '';
+        if ($ret['code'] != AGIRES_OK) // some sort of error
+        {
+            $ret['data'] = $str;
+            $this->conlog(print_r($ret, true));
+        } else // normal AGIRES_OK response
+        {
+            $parse    = explode(' ', trim($str));
+            $in_token = false;
+            foreach ($parse as $token) {
+                if ($in_token) // we previously hit a token starting with ')' but not ending in ')'
+                {
+                    $ret['data'] .= ' ' . trim($token, '() ');
+                    if ($token{strlen($token) - 1} == ')') {
+                        $in_token = false;
+                    }
+
+                } elseif ($token{0} == '(') {
+                    if ($token{strlen($token) - 1} != ')') {
+                        $in_token = true;
+                    }
+
+                    $ret['data'] .= ' ' . trim($token, '() ');
+                } elseif (strpos($token, '=')) {
+                    $token          = explode('=', $token);
+                    $ret[$token[0]] = $token[1];
+                } elseif ($token != '') {
+                    $ret['data'] .= ' ' . $token;
+                }
+
+            }
+            $ret['data'] = trim($ret['data']);
+        }
+
+        // log some errors
+        if ($ret['result'] < 0) {
+            $this->conlog("$command returned {$ret['result']}");
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Log to console if debug mode.
+     *
+     * @example examples/ping.php Ping an IP address
+     *
+     * @param string $str
+     * @param integer $vbl verbose level
+     */
+    public function conlog($str, $vbl = 1)
+    {
+        static $busy = false;
+
+        if ($this->config['phpagi']['debug'] != false) {
+            if (!$busy) // no conlogs inside conlog!!!
+            {
+                $busy = true;
+                $this->verbose($str, $vbl);
+                $busy = false;
+            }
+        }
+    }
+
+    /**
+     * Find an execuable in the path.
+     *
+     * @access private
+     * @param string $cmd command to find
+     * @param string $checkpath path to check
+     * @return string the path to the command
+     */
+    public function which($cmd, $checkpath = null)
+    {
+        global $_ENV;
+        $chpath = is_null($checkpath) ? $_ENV['PATH'] : $checkpath;
+
+        foreach (explode(':', $chpath) as $path) {
+            if (is_executable("$path/$cmd")) {
+                return "$path/$cmd";
+            }
+        }
+
+        if (is_null($checkpath)) {
+            return $this->which($cmd, '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:' .
+                '/usr/X11R6/bin:/usr/local/apache/bin:/usr/local/mysql/bin');
+        }
+
+        return false;
+    }
+
+    /**
+     * Make a folder recursively.
+     *
+     * @access private
+     * @param string $folder
+     * @param integer $perms
+     */
+    public function make_folder($folder, $perms = 0755)
+    {
+        $f    = explode(DIRECTORY_SEPARATOR, $folder);
+        $base = '';
+        for ($i = 0; $i < count($f); $i++) {
+            $base .= $f[$i];
+            if ($f[$i] != '' && !file_exists($base)) {
+                mkdir($base, $perms);
             }
 
+            $base .= DIRECTORY_SEPARATOR;
         }
+    }
+}
 
-        $this->billDidCall($agi, $MAGNUS, $answeredtime, $CalcAgi);
-
-        $CalcAgi->starttime   = date("Y-m-d H:i:s", time() - $answeredtime);
-        $CalcAgi->sessiontime = $answeredtime;
-
-        $MAGNUS->destination       = $this->did;
-        $CalcAgi->terminatecauseid = $terminatecauseid;
-        $CalcAgi->sessionbill      = $this->sell_price;
-        $MAGNUS->id_trunk          = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
-        $CalcAgi->sipiax           = 2;
-        $CalcAgi->buycost          = $this->buy_price;
-
-        if ($MAGNUS->modelUser->id_user > 1) {
-            $CalcAgi->agent_bill = $this->agent_client_rate;
-        }
-        $CalcAgi->saveCDR($agi, $MAGNUS);
-
-        $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $answeredtime
-                    WHERE  id = " . $this->modelDestination[0]['id'] . " LIMIT 1;
-                UPDATE pkg_did SET secondusedreal = secondusedreal + $answeredtime
-                    WHERE  id = " . $this->modelDid->id . " LIMIT 1";
-        $agi->exec($sql);
-
-        if (isset($this->did_voip_model->id)) {
-
-            $MAGNUS->id_user      = $this->did_voip_model->id;
-            $MAGNUS->sip_account  = $this->did_voip_model_sip_account;
-            $CalcAgi->buycost     = 0;
-            $CalcAgi->sessionbill = 0;
-            $CalcAgi->sipiax      = 3;
-            $CalcAgi->saveCDR($agi, $MAGNUS);
-
-        }
+/**
+ * error handler for phpagi.
+ *
+ * @param integer $level PHP error level
+ * @param string $message error message
+ * @param string $file path to file
+ * @param integer $line line number of error
+ * @param array $context variables in the current scope
+ */
+function phpagi_error_handler($level, $message, $file, $line, $context)
+{
+    if (ini_get('error_reporting') == 0) {
         return;
+    }
+    // this happens with an @
+
+    //@syslog(LOG_WARNING, $file . '[' . $line . ']: ' . $message);
+
+    global $phpagi_error_handler_email;
+    if (function_exists('mail') && !is_null($phpagi_error_handler_email)) // generate email debugging information
+    {
+        // decode error level
+        switch ($level) {
+            case E_WARNING:
+            case E_USER_WARNING:
+                $level = "Warning";
+                break;
+            case E_NOTICE:
+            case E_USER_NOTICE:
+                $level = "Notice";
+                break;
+            case E_USER_ERROR:
+                $level = "Error";
+                break;
+        }
+
+        // build message
+        $basefile = basename($file);
+        $subject  = "$basefile/$line/$level: $message";
+        $message  = "$level: $message in $file on line $line\n\n";
+
+        if (function_exists('mysql_errno') && strpos(' ' . strtolower($message), 'mysql')) {
+            $message .= 'MySQL error ' . mysql_errno() . ": " . mysql_error() . "\n\n";
+        }
+
+        // figure out who we are
+        if (function_exists('socket_create')) {
+            $addr   = null;
+            $port   = 80;
+            $socket = @socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+            @socket_connect($socket, '64.0.0.0', $port);
+            @socket_getsockname($socket, $addr, $port);
+            @socket_close($socket);
+            $message .= "\n\nIP Address: $addr\n";
+        }
+
+        // include variables
+        $message .= "\n\nContext:\n" . print_r($context, true);
+        $message .= "\n\nGLOBALS:\n" . print_r($GLOBALS, true);
+        $message .= "\n\nBacktrace:\n" . print_r(debug_backtrace(), true);
+
+        // include code fragment
+        if (file_exists($file)) {
+            $message .= "\n\n$file:\n";
+            $code = @file($file);
+            for ($i = max(0, $line - 10); $i < min($line + 10, count($code)); $i++) {
+                $message .= ($i + 1) . "\t$code[$i]";
+            }
+
+        }
+
+        // make sure message is fully readable (convert unprintable chars to hex representation)
+        $ret = '';
+        for ($i = 0; $i < strlen($message); $i++) {
+            $c = ord($message{$i});
+            if ($c == 10 || $c == 13 || $c == 9) {
+                $ret .= $message{$i};
+            } elseif ($c < 16) {
+                $ret .= '\x0' . dechex($c);
+            } elseif ($c < 32 || $c > 127) {
+                $ret .= '\x' . dechex($c);
+            } else {
+                $ret .= $message{$i};
+            }
+
+        }
+        $message = $ret;
+
+        // send the mail if less than 5 errors
+        static $mailcount = 0;
+        if ($mailcount < 5) {
+            @mail($phpagi_error_handler_email, $subject, $message);
+        }
+
+        $mailcount++;
+    }
+}
+$phpagi_error_handler_email = null;
+
+/*
+ *   Write data into the log file
+ *   $writetype = 1  - write to buffer
+ *   $writetype = 0  - write to file
+ */
+function write_log2($output, $writetype = 1)
+{
+    //
+    global $DNID;
+    global $CallerID;
+    global $log_file;
+    global $BUFFER;
+
+    //verbose("BUFFER: $BUFFER");
+    $string_log = "[" . date("d/m/Y H:i:s") . "]:[CallerID:$CallerID]:[DNID:$DNID]:$output";
+    if ($writetype) {
+        // write to buffer
+        $BUFFER = $BUFFER . $string_log . "\n";
+    } else {
+        // write to file
+        error_log($BUFFER . $string_log . "\n", 3, $log_file);
+        $BUFFER = '';
+    }
+    //verbose("BUFFER: $BUFFER");
+}
+
+/*
+ *   Write data into the Trans file
+ */
+function write_stat($output)
+{
+    global $stat_file;
+
+    $string_log = "[" . date("d/m/Y H:i:s") . "]:$output";
+    error_log($string_log . "\n", 3, $stat_file);
+}
+
+/*
+ *   Write data into the Error file
+ */
+function write_error($output)
+{
+    global $error_file;
+    $string_log = "[" . date("d/m/Y H:i:s") . "]:$output";
+    error_log($string_log . "\n", 3, $error_file);
+}
+
+/*
+ *   Detect the Hangup and call the callback function
+ */
+function hangup_check($agi)
+{
+    if ($agi->response['code'] == false) {
+        //my_callback();
+    }
+}
+
+function iferrorexec($result, $callback)
+{
+    /*if ($agi->response['code']==false){
+    $callback();
+    } */
+    if ($result['result'] == '-1') {
+        //$result['code']=='500' &&
+        $callback();
     }
 }

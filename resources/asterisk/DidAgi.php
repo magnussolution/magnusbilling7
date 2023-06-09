@@ -622,12 +622,37 @@ class DidAgi
             return 1;
         } else {
 
-            $fields = "uniqueid,id_user,calledstation,id_plan,id_trunk,callerid,src,
-                        starttime, terminatecauseid,sipiax,id_prefix,hangupcause";
+            $fields = "
+				uniqueid,
+				id_user,
+				calledstation,
+				id_plan,
+				id_trunk,
+				callerid,
+				src,
+				starttime, 
+				terminatecauseid,
+				sipiax,
+				id_prefix,
+				hangupcause,
+				id_server";
+						
             $id_trunk = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
-            $values   = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$this->did','$MAGNUS->id_plan',
-                        '$id_trunk','$MAGNUS->CallerID', 'DID Call',
-                        '" . date('Y-m-d H:i:s') . "', '0','3','$CalcAgi->id_prefix','0'";
+			
+            $values   = "
+				'$MAGNUS->uniqueid',
+				'$MAGNUS->id_user',
+				'$this->did',
+				'$MAGNUS->id_plan',
+				'$id_trunk',
+				'$MAGNUS->CallerID', 
+				'DID Call',
+				'" . date('Y-m-d H:i:s') . "', 
+				'0',
+				'3',
+				'$CalcAgi->id_prefix',
+				'0',
+				'$MAGNUS->id_server'";
             $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
             $agi->exec($sql);
             return 1;
