@@ -86,8 +86,6 @@ class UserController extends Controller
         'credit',
         'id_user',
         'id_group_agent',
-        'typepaid',
-        'creditlimit',
         'calllimit',
         'restriction',
         'restriction_use',

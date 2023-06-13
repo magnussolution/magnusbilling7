@@ -39,8 +39,9 @@ class Controller extends BaseController
         'sendCreditRates',
     );
 
-    public function authorizedNoSession()
+    public function authorizedNoSession($value = false)
     {
+
         $allow = array(
             'site',
             'authentication',
@@ -66,6 +67,11 @@ class Controller extends BaseController
             'molPay',
             'sms',
         );
+
+        if ($value) {
+
+            $allow[] = $value;
+        }
         return in_array($this->controllerName, $allow);
     }
 

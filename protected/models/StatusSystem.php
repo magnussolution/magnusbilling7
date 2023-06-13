@@ -53,7 +53,7 @@ class StatusSystem extends Model
     public function rules()
     {
         $rules = array(
-            array('cpuMediaUso,cpuPercent,memUsed,networkin,networkout', 'numerical'),
+            array('cpuMediaUso,cpuPercent,memUsed,networkin,networkout,disk_free,disk_perc', 'numerical'),
             array('date', 'length', 'max' => 30),
 
         );

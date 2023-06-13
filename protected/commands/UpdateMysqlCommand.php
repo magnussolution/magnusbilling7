@@ -1920,6 +1920,24 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.3.7';
             $this->update($version);
         }
+
+        //2023-05-18
+        if ($version == '7.8.3.7') {
+            $sql = "ALTER TABLE `pkg_user` CHANGE `prefix_local` `prefix_local` VARCHAR(500) NOT NULL DEFAULT '';";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.8';
+            $this->update($version);
+        }
+
+        //2023-05-25
+        if ($version == '7.8.3.8') {
+            $sql = "ALTER TABLE `pkg_status_system` ADD `disk_free` INT(11) NULL DEFAULT NULL AFTER `cps`, ADD `disk_perc` INT(11) NULL DEFAULT NULL AFTER `disk_free`;";
+            $this->executeDB($sql);
+
+            $version = '7.8.3.9';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)
