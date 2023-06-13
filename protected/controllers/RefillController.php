@@ -188,9 +188,6 @@ class RefillController extends Controller
             'condition' => $this->filter == '' ? 1 : $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
-            'order'     => $this->order,
-            'limit'     => $this->limit,
-            'offset'    => $this->start,
             'group'     => 'CreditMonth',
         ));
 
@@ -202,22 +199,29 @@ class RefillController extends Controller
     public function setAttributesModels($attributes, $models)
     {
 
-        $modelRefill = $this->abstractModel->find(array(
-            'select'    => 'SUM(t.credit) AS credit',
-            'join'      => $this->join,
-            'condition' => $this->filter == '' ? 1 : $this->filter,
-            'params'    => $this->paramsFilter,
-            'with'      => $this->relationFilter,
-        ));
+        $criteria = new CDbCriteria();
+        if (strlen($this->filter)) {
+            $criteria->addCondition($this->filter);
+        }
+        $criteria->select = 'SUM(t.credit) AS credit';
+        $criteria->join   = $this->join;
+        $criteria->params = $this->paramsFilter;
+        $criteria->with   = $this->relationFilter;
 
-        $modelRefillSumm2 = $this->abstractModel->findAll(array(
-            'select'    => 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth',
-            'join'      => $this->join,
-            'condition' => $this->filter == '' ? 1 : $this->filter,
-            'params'    => $this->paramsFilter,
-            'with'      => $this->relationFilter,
-            'group'     => 'CreditMonth',
-        ));
+        if (count($this->addInCondition)) {
+            $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+        }
+
+        $modelRefill = $this->abstractModel->find($criteria);
+
+        $criteria->select = 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth';
+
+        $criteria->group = 'CreditMonth';
+
+        if (count($this->addInCondition)) {
+            $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+        }
+        $modelRefillSumm2 = $this->abstractModel->findAll($criteria);
 
         $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
