@@ -506,7 +506,7 @@ $model = CallFailed::model()->findByPk((int) $_GET['id']);
             echo '<br>';
             echo '<table class="blueTable" width=100%><tr>';
             echo '<tr>';
-            echo '<th  colspan=4>Below data is the last SIP sinalization from trunk to the number ' . $model->calledstation . ' ' . $model->starttime . '</th>';
+            echo '<th  colspan=4>Below data is the last SIP sinalization from trunk to the number ' . $model->src . ' ' . $model->starttime . '</th>';
 
             echo '</tr>';
             echo '<th>Date</th>';
