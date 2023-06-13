@@ -80,7 +80,9 @@ class SipProxyAccountsCommand extends ConsoleCommand
                 //
             }
             foreach ($modelSip as $key => $sip) {
-
+                if ($sip->idUser->active == 0) {
+                    continue;
+                }
                 if ($sip->host == 'dynamic') {
                     $sqlproxy .= " ('" . $sip->defaultuser . "', '$remoteProxyIP','" . $sip->secret . "','" . md5($sip->defaultuser . ':' . $remoteProxyIP . ':' . $sip->secret) . "', '" . $sip->idUser->username . "', '" . $sip->trace . "','" . $sip->idUser->cpslimit . "'),";
                 } else {

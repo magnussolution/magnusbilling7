@@ -38,6 +38,7 @@ class BaseController extends CController
     public $extraFieldsRelated = array();
     public $titleReport;
     public $subTitleReport;
+    public $addAuthorizedNoSession;
     public $attributes     = array();
     public $extraValues    = array();
     public $mapErrorsMySql = array(
@@ -95,7 +96,7 @@ class BaseController extends CController
         }
 
         if (!Yii::app()->session['id_user']) {
-            if (!$this->authorizedNoSession()) {
+            if (!$this->authorizedNoSession($this->addAuthorizedNoSession)) {
                 exit("Access denied to All action in All modules");
             }
         }
@@ -221,14 +222,6 @@ class BaseController extends CController
         return $actions;
     }
 
-    public function authorizedNoSession()
-    {
-        $allow = array(
-            'site',
-            'authentication',
-        );
-        return in_array($this->controllerName, $allow);
-    }
     private function getOverride()
     {
         if (!file_exists('protected/config/overrides.php')) {
