@@ -810,20 +810,43 @@ class CalcAgi
 
         if ($this->terminatecauseid == 1) {
 
-            $fields = "uniqueid,id_user,calledstation,id_plan,callerid,src,
-                        starttime,sessiontime,real_sessiontime, terminatecauseid,sessionbill,
-                        sipiax,buycost";
+            $fields = "
+				uniqueid,
+				id_user,
+				calledstation,
+				id_plan,
+				callerid,
+				src,
+                starttime,
+				sessiontime,
+				real_sessiontime, 
+				terminatecauseid,
+				sessionbill,
+                sipiax,
+				buycost";
 
-            $values = "'$MAGNUS->uniqueid', $MAGNUS->id_user, '$MAGNUS->destination', $MAGNUS->id_plan, '$MAGNUS->CallerID',
-                        '$MAGNUS->sip_account',
-                        '$this->starttime', '$this->sessiontime',
-                        '$this->real_sessiontime', '$this->terminatecauseid', '$this->sessionbill',
-                        '$this->sipiax','$this->buycost'";
+            $values = "
+				'$MAGNUS->uniqueid',
+				$MAGNUS->id_user, 
+				'$MAGNUS->destination', 
+				$MAGNUS->id_plan, 
+				'$MAGNUS->CallerID',
+                '$MAGNUS->sip_account',
+                '$this->starttime', 
+				'$this->sessiontime',
+                '$this->real_sessiontime', 
+				'$this->terminatecauseid', 
+				'$this->sessionbill',
+                '$this->sipiax',
+				'$this->buycost'";
 
             if (isset($modelServers->id)) {
                 $fields .= ', id_server';
                 $values .= ", $modelServers->id";
-            }
+            }else{
+				$fields .= ', id_server';
+				$values .= ', 1';
+			}
             if (is_numeric($MAGNUS->id_trunk)) {
                 $fields .= ', id_trunk';
                 $values .= ", $MAGNUS->id_trunk";
@@ -873,7 +896,10 @@ class CalcAgi
                 if (isset($modelServers->id)) {
                     $fields .= ', id_server';
                     $values .= ", $modelServers->id";
-                }
+                }else{
+				    $fields .= ', id_server';
+				    $values .= ', 1';
+			    }
 
                 $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
                 $agi->exec($sql);
