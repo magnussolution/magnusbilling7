@@ -85,9 +85,18 @@ class StatusSystemCommand extends ConsoleCommand
         $memUsed  = $memTotal - $memFree;
 
         $uptime = $sysinfo->formtSecundsDay($sysinfo->uptime());
-        $sql    = "INSERT INTO pkg_status_system (date, cpuMediaUso, cpuPercent,memTotal, memUsed, networkin, networkout,cpuModel,uptime) VALUES
+
+        $disk_free = $disk_perc = 0;
+        exec("df -hT | grep /$ | awk '{print $5 \"|\"$6}'", $res);
+        if (isset($res[0]) && preg_match('/\|/', $res[0])) {
+            $res       = explode('|', $res[0]);
+            $disk_free = intval($res[0]);
+            $disk_perc = intval($res[1]);
+        }
+
+        $sql = "INSERT INTO pkg_status_system (date, cpuMediaUso, cpuPercent,memTotal, memUsed, networkin, networkout,cpuModel,uptime, disk_free,disk_perc) VALUES
                     ('" . date('Y-m-d H:i:') . '00' . "','" . $loadavg['avg'][0] . "','" . number_format($loadavg['cpupercent'], 2) . "',
-                    '" . $memTotal . "','" . $memUsed . "', '" . $networkin . "','" . $networkout . "','" . $cpu_info['model'] . "','" . $uptime . "')";
+                    '" . $memTotal . "','" . $memUsed . "', '" . $networkin . "','" . $networkout . "','" . $cpu_info['model'] . "','" . $uptime . "','" . $disk_free . "','" . $disk_perc . "')";
         try {
             Yii::app()->db->createCommand($sql)->execute();
 
