@@ -62,7 +62,8 @@ Ext.define('MBilling.view.servers.List', {
                 options: [
                     [1, t('Active')],
                     [0, t('Inactive')],
-                    [2, t('OffLine')]
+                    [2, t('OffLine')],
+                    [4, t('Alert')]
                 ]
             }
         }]

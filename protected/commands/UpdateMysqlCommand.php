@@ -1938,6 +1938,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.3.9';
             $this->update($version);
         }
+
+        //2023-06-26
+        if ($version == '7.8.3.9') {
+            $sql = "ALTER TABLE `pkg_servers` ADD `last_call` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE `pkg_servers` ADD `last_call_id` INT(11) NULL DEFAULT NULL;";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.0';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

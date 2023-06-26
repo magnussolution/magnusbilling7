@@ -164,7 +164,7 @@ class CallOnLineController extends Controller
 
         if (isset($attributes[0])) {
             $modelSip     = Sip::model()->findAll();
-            $modelServers = Servers::model()->findAll('type != :key1 AND status = 1 AND host != :key', [':key' => 'localhost', ':key1' => 'sipproxy']);
+            $modelServers = Servers::model()->findAll('type != :key1 AND status IN (1,4) AND host != :key', [':key' => 'localhost', ':key1' => 'sipproxy']);
 
             if (!isset($modelServers[0])) {
                 array_push($modelServers, array(

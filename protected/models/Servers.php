@@ -56,10 +56,10 @@ class Servers extends Model
     {
         $rules = array(
             array('host', 'required'),
-            array('status, weight', 'numerical', 'integerOnly' => true),
+            array('status, weight, last_call_id', 'numerical', 'integerOnly' => true),
             array('host,name', 'length', 'max' => 100),
             array('description', 'length', 'max' => 500),
-            array('password, username', 'length', 'max' => 50),
+            array('password, username, last_call', 'length', 'max' => 50),
             array('type, port, sip_port', 'length', 'max' => 20),
             array('public_ip', 'length', 'max' => 80),
             array('password', 'checkpassword'),
