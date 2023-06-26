@@ -37,6 +37,27 @@ class ServersController extends Controller
         parent::init();
     }
 
+    public function setAttributesModels($attributes, $models)
+    {
+        $modelServer = Servers::model()->find([
+            'condition' => 'type = "asterisk" AND status = 1 AND weight > 0',
+            'order'     => 'last_call DESC',
+        ]);
+        $last_call = date("Y-m-d H:i:s", strtotime("-5 minutes", strtotime($modelServer->last_call)));
+
+        $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
+        for ($i = 0; $i < count($pkCount); $i++) {
+
+            if ($attributes[$i]['status'] == 4) {
+                Servers::model()->updateByPk($attributes[$i]['id'], array('status' => 1));
+            }
+            if ($attributes[$i]['type'] == 'asterisk' && $attributes[$i]['status'] > 0 && $attributes[$i]['weight'] > '0' && $attributes[$i]['last_call'] < $last_call) {
+                Servers::model()->updateByPk($attributes[$i]['id'], array('status' => 4));
+            }
+        }
+        return $attributes;
+    }
+
     public function afterSave($model, $values)
     {
 
@@ -69,7 +90,7 @@ class ServersController extends Controller
                 foreach ($modelServerAS as $key => $server) {
 
                     $modelServer = Servers::model()->find("id = :key AND (type = 'asterisk' OR type = 'mbilling')
-                        AND status = 1 AND weight > 0", [':key' => $server->id_server]);
+                        AND status IN( 1,4) AND weight > 0", [':key' => $server->id_server]);
 
                     if (isset($modelServer->id)) {
                         if ($this->ip_is_private($hostname)) {
@@ -90,7 +111,7 @@ class ServersController extends Controller
             } else {
 
                 $modelServerAS = Servers::model()->findAll("(type = 'asterisk' OR type = 'mbilling')
-                        AND status = 1 AND weight > 0");
+                        AND status IN( 1,4) AND weight > 0");
                 foreach ($modelServerAS as $key => $server) {
 
                     if ($this->ip_is_private($hostname)) {

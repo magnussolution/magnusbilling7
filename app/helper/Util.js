@@ -587,7 +587,7 @@ Ext.define('Helper.Util', {
     formatBooleanServers: function(value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? '#FFCC00' : '#FFCC00',
-            value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('OffLine') : t('Pending');
+            value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('OffLine') : value == 3 ? t('Error') : value == 4 ? t('Alert') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatLanguageImage: function(value) {

@@ -23,6 +23,26 @@ class SipProxyAccountsCommand extends ConsoleCommand
     public function run($args)
     {
 
+        $modelServers = Servers::model()->findAll('type = "asterisk" AND status IN (1,3,4) AND weight > 0');
+        foreach ($modelServers as $key => $server) {
+            if ($server->last_call_id > 0) {
+                $modelCall = Call::model()->findBySql('SELECT id,starttime FROM pkg_cdr WHERE id > :key1 AND id_server = :key ORDER BY id DESC LIMIT 1', array(
+                    'key'   => $server->id,
+                    ':key1' => $server->last_call_id,
+                ));
+            } else {
+                $modelCall = Call::model()->findBySql('SELECT id,starttime  FROM pkg_cdr WHERE starttime > :key1 AND id_server = :key LIMIT 1', array(
+                    'key'   => $server->id,
+                    ':key1' => date('Y-m-d'),
+                ));
+            }
+            if (isset($modelCall->id)) {
+                $server->last_call    = $modelCall->starttime;
+                $server->last_call_id = $modelCall->id;
+                $server->save();
+            }
+        }
+
         $modelSip     = Sip::model()->findAll();
         $modelTrunk   = Trunk::model()->findAll();
         $modelDid     = Did::model()->findAll('activated = 1 AND reserved > 0 AND id_server > 0');
@@ -80,9 +100,7 @@ class SipProxyAccountsCommand extends ConsoleCommand
                 //
             }
             foreach ($modelSip as $key => $sip) {
-                if ($sip->idUser->active == 0) {
-                    continue;
-                }
+
                 if ($sip->host == 'dynamic') {
                     $sqlproxy .= " ('" . $sip->defaultuser . "', '$remoteProxyIP','" . $sip->secret . "','" . md5($sip->defaultuser . ':' . $remoteProxyIP . ':' . $sip->secret) . "', '" . $sip->idUser->username . "', '" . $sip->trace . "','" . $sip->idUser->cpslimit . "'),";
                 } else {
