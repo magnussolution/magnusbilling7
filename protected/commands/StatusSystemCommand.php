@@ -22,10 +22,16 @@ class StatusSystemCommand extends ConsoleCommand
     public function run($args)
     {
 
-        $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "'";
+        $sql          = "SELECT id FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
         $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
 
-        $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "'";
+        $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `id` > " . $resultFailed[0]['id'];
+        $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
+
+        $sql            = "SELECT id FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+        $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+
+        $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `id` > " . $resultAnswered[0]['id'];
         $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
 
         $result = array_merge($resultFailed, $resultAnswered);

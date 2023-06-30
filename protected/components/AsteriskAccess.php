@@ -269,7 +269,7 @@ class AsteriskAccess
             }
 
             if ($head_field == 'trunkcode') {
-                $sql          = "SELECT * FROM pkg_servers WHERE type != 'mbilling' AND status = 1 AND host != 'localhost'";
+                $sql          = "SELECT * FROM pkg_servers WHERE type != 'mbilling' AND status IN (1,4) AND host != 'localhost'";
                 $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
                 foreach ($modelServers as $key => $data) {
@@ -422,7 +422,7 @@ class AsteriskAccess
 
     public static function getSipShowPeers()
     {
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -466,7 +466,7 @@ class AsteriskAccess
     public static function getCoreShowCdrChannels()
     {
 
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -513,7 +513,7 @@ class AsteriskAccess
     public static function getCoreShowChannels()
     {
 
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -555,7 +555,7 @@ class AsteriskAccess
     public static function getCoreShowChannelsVerbose()
     {
 
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -601,7 +601,7 @@ class AsteriskAccess
     {
 
         if ($server == null) {
-            $sql = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+            $sql = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND  status IN (1,4) AND host != 'localhost'";
             if (isset($agi->engine)) {
                 $modelServers = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             } else {

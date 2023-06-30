@@ -43,16 +43,18 @@ class ServersController extends Controller
             'condition' => 'type = "asterisk" AND status = 1 AND weight > 0',
             'order'     => 'last_call DESC',
         ]);
-        $last_call = date("Y-m-d H:i:s", strtotime("-5 minutes", strtotime($modelServer->last_call)));
+        if (isset($modelServer->id)) {
+            $last_call = date("Y-m-d H:i:s", strtotime("-5 minutes", strtotime($modelServer->last_call)));
 
-        $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
-        for ($i = 0; $i < count($pkCount); $i++) {
+            $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
+            for ($i = 0; $i < count($pkCount); $i++) {
 
-            if ($attributes[$i]['status'] == 4) {
-                Servers::model()->updateByPk($attributes[$i]['id'], array('status' => 1));
-            }
-            if ($attributes[$i]['type'] == 'asterisk' && $attributes[$i]['status'] > 0 && $attributes[$i]['weight'] > '0' && $attributes[$i]['last_call'] < $last_call) {
-                Servers::model()->updateByPk($attributes[$i]['id'], array('status' => 4));
+                if ($attributes[$i]['status'] == 4) {
+                    Servers::model()->updateByPk($attributes[$i]['id'], array('status' => 1));
+                }
+                if ($attributes[$i]['type'] == 'asterisk' && $attributes[$i]['status'] > 0 && $attributes[$i]['weight'] > '0' && $attributes[$i]['last_call'] < $last_call) {
+                    Servers::model()->updateByPk($attributes[$i]['id'], array('status' => 4));
+                }
             }
         }
         return $attributes;

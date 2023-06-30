@@ -836,7 +836,7 @@ Locale.load({
     'Return credit after cancellation': 'Devolução de crédito ápos cancelamento',
     'Ring': 'Chamando',
     'Ring all available channels until one answers': 'Tocar todos as contas SIP disponíveis até que um responda',
-    'Ring false': 'Ring falso',
+    'Fake Ring': 'Ring falso',
     'Ring for': 'Chamado por',
     'Ring interface which was least recently called by this queue': 'Conta SIP que recebeu menos chamadas nesta fila',
     'Ring or playing MOH': 'Chamar ou executar MOH',
@@ -1174,5 +1174,4 @@ Locale.load({
     'success': 'sucesso',
     'to refill': 'para recarregar',
     'week': 'semana',
-
 });

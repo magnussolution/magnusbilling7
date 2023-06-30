@@ -818,7 +818,7 @@ Locale.load({
     'Return credit after cancellation': '',
     'Ring': 'Squillare',
     'Ring all available channels until one answers': 'Suonare tutti i canali disponibili fino a quando non risponde',
-    'Ring false': 'Anello falso',
+    'Fake Ring': 'Anello falso',
     'Ring for': 'Anello per',
     'Ring interface which was least recently called by this queue': 'Interfaccia ad anello che è stata recentemente recentemente chiamata di recente da questa coda',
     'Ring or playing MOH': 'Anello o giocare a moh',
@@ -1158,5 +1158,4 @@ Locale.load({
     'success': 'successo',
     'to refill': 'per ricaricare',
     'week': 'settimana',
-
 });
