@@ -799,7 +799,7 @@ Locale.load({
     'Return credit after cancellation': '',
     'Ring': '',
     'Ring all available channels until one answers': '',
-    'Ring false': '',
+    'Fake Ring': '',
     'Ring for': '',
     'Ring interface which was least recently called by this queue': '',
     'Ring or playing MOH': '',
@@ -1127,5 +1127,4 @@ Locale.load({
     'name': '',
     'to refill': '',
     'week': '',
-
 });

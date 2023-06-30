@@ -817,7 +817,7 @@ Locale.load({
     'Return credit after cancellation': '',
     'Ring': 'Bague',
     'Ring all available channels until one answers': 'à ce que des réponses',
-    'Ring false': 'Sonner faux',
+    'Fake Ring': 'Sonner faux',
     'Ring for': 'Sonnerie pour',
     'Ring interface which was least recently called by this queue': 'attente',
     'Ring or playing MOH': 'Anneau ou jouer du moh',
@@ -1158,5 +1158,4 @@ Locale.load({
     'success': 'Succès',
     'to refill': 'recharger',
     'week': 'semaine',
-
 });

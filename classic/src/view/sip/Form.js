@@ -283,7 +283,7 @@ Ext.define('MBilling.view.sip.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'ringfalse',
-                    fieldLabel: t('Ring false'),
+                    fieldLabel: t('Fake Ring'),
                     value: '0',
                     allowBlank: !App.user.isAdmin
                 }, {

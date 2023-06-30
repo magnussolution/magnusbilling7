@@ -819,7 +819,7 @@ Locale.load({
     'Return credit after cancellation': 'Devolucion de crédito después de la baja',
     'Ring': 'Sonar',
     'Ring all available channels until one answers': 'Hacer sonar todas las cuentas SIP hasta que una conteste',
-    'Ring false': 'Ring falso',
+    'Fake Ring': 'Ring falso',
     'Ring for': 'Sonar por',
     'Ring interface which was least recently called by this queue': 'Sonar la cuenta SIP que llamó menos',
     'Ring or playing MOH': 'Sonar o executar MOH',
@@ -1150,5 +1150,4 @@ Locale.load({
     'name': 'nombre',
     'to refill': 'para recargar',
     'week': 'semana',
-
 });
