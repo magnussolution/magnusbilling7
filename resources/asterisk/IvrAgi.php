@@ -26,7 +26,8 @@ class IvrAgi
         $agi->verbose("Ivr module", 5);
         $agi->verbose("DID IVR - CallerID=" . $MAGNUS->CallerID . " -> DID=" . $DidAgi->modelDid->did, 6);
         $agi->answer();
-        $startTime = time();
+        $MAGNUS->sip_account = '';
+        $startTime           = time();
 
         $MAGNUS->destination = $DidAgi->modelDid->did;
 

@@ -25,14 +25,25 @@ class StatusSystemCommand extends ConsoleCommand
         $sql          = "SELECT id FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
         $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
 
-        $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `id` > " . $resultFailed[0]['id'];
-        $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
+        if (isset($resultFailed[0]['id'])) {
+            $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `id` > " . $resultFailed[0]['id'];
+            $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
+        } else {
+            $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+            $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
+        }
 
         $sql            = "SELECT id FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
         $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
 
-        $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `id` > " . $resultAnswered[0]['id'];
-        $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+        if (isset($resultAnswered[0]['id'])) {
+
+            $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `id` > " . $resultAnswered[0]['id'];
+            $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+        } else {
+            $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+            $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+        }
 
         $result = array_merge($resultFailed, $resultAnswered);
 
