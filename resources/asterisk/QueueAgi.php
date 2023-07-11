@@ -23,7 +23,7 @@ class QueueAgi
     public function callQueue(&$agi, &$MAGNUS, &$CalcAgi, $DidAgi = null, $type = 'queue', $startTime = 0)
     {
         $agi->verbose("Queue module", 5);
-
+        $MAGNUS->sip_account = '';
         $agi->answer();
         $startTime           = $startTime > 0 ? $startTime : time();
         $MAGNUS->destination = $DidAgi->modelDid->did;

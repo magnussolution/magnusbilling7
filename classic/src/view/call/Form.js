@@ -88,6 +88,14 @@ Ext.define('MBilling.view.call.Form', {
         }, {
             name: 'uniqueid',
             fieldLabel: t('Uniqueid')
+        }, {
+            xtype: 'displayfield',
+            name: 'terminatecauseid',
+            fieldLabel: t('Hangup Source'),
+            renderer: function(value) {
+                return value == 1 ? t('Sip user') : t('Other');
+            },
+            hidden: !window.dialC
         }];
         me.callParent(arguments);
     }

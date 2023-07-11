@@ -53,7 +53,7 @@ Ext.define('MBilling.model.Call', {
         type: 'int'
     }, {
         name: 'terminatecauseid',
-        type: 'int'
+        type: 'string'
     }, {
         name: 'buycost',
         type: 'number'

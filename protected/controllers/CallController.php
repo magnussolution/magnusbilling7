@@ -182,8 +182,15 @@ class CallController extends Controller
             if ($modelCall->id_server > 0 && $modelCall->idServer->type == 'asterisk') {
 
                 $host = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
-
-                header('Location: http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username);
+                $url  = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
+                exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . '.gsm ' . $url, $output);
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=" . $uniqueid);
+                header("Content-Type: audio/x-gsm");
+                header("Content-Transfer-Encoding: binary");
+                readfile('/var/www/html/mbilling/tmp/' . $uniqueid . '.gsm');
+                unlink('/var/www/html/mbilling/tmp/' . $uniqueid . '.gsm');
                 exit;
             }
 
