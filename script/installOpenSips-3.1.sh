@@ -466,10 +466,8 @@ ulimit -l unlimited # The maximum size that may be locked into memory.
 ulimit -a           # All current limits are reported.
 
 
-sed -i -e 's/$S_MEMORY/2048/g' /lib/systemd/system/opensips.service
-sed -i -e 's/$P_MEMORY/2048/g' /lib/systemd/system/opensips.service
-sed -i -e 's/User=opensips/User=root/g' /lib/systemd/system/opensips.service
-sed -i -e 's/Group=opensips/Group=root/g' /lib/systemd/system/opensips.service
+sed -i -e 's/S_MEMORY=64/S_MEMORY=2048/g' /etc/default/opensips
+sed -i -e 's/P_MEMORY=4/P_MEMORY=128/g' /etc/default/opensips
 echo 'SystemMaxUse=10M' >> /etc/systemd/journald.conf
 systemctl daemon-reload
 systemctl restart systemd-journald
