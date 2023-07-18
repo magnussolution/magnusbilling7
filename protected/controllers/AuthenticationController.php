@@ -171,7 +171,6 @@ class AuthenticationController extends Controller
         echo json_encode(array(
             'success' => Yii::app()->session['username'],
             'msg'     => Yii::app()->session['name_user'],
-            'cookie'  => $_COOKIE['PHPSESSID'],
         ));
 
     }
