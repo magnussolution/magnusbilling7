@@ -518,7 +518,7 @@ class DidAgi
                             }
                             $dialstr = preg_replace('/PUSH/', 'SIP', $dialstr);
                         }
-
+                        $this->did_voip_model_sip_account = $MAGNUS->sip_account = "";
                         $agi->verbose("DIAL $dialstr", 6);
                         $myres = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
                         $MAGNUS->stopRecordCall($agi);
