@@ -5,6 +5,7 @@ cd /var/log
 rm -rf *202*
 rm -rf asterisk/*202*
 rm -rf httpd/*202*
+rm -rf apache2/*202*
 rm -rf asterisk/messages.*
 rm -rf /var/www/html/mbilling/protected/runtime/*.log.*
 
@@ -25,3 +26,9 @@ echo '' > /var/log/httpd/deflate_log
 echo '' > /var/log/httpd/ssl_access_log
 echo '' > /var/log/httpd/ssl_error_log
 echo '' > /var/log/httpd/ssl_request_log
+echo '' > /var/log/apache2/access_log
+echo '' > /var/log/apache2/error_log
+echo '' > /var/log/apache2/deflate_log
+echo '' > /var/log/apache2/ssl_access_log
+echo '' > /var/log/apache2/ssl_error_log
+echo '' > /var/log/apache2/ssl_request_log

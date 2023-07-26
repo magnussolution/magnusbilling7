@@ -1950,6 +1950,15 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.4.0';
             $this->update($version);
         }
+
+        //2023-07-26
+        if ($version == '7.8.4.0') {
+            $sql = "ALTER TABLE pkg_trunk ADD block_cid VARCHAR(120) NOT NULL DEFAULT '' ;";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.1';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

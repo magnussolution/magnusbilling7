@@ -61,7 +61,7 @@ class Trunk extends Model
             array('nat, trunkcode, sms_res', 'length', 'max' => 50),
             array('trunkprefix, providertech, removeprefix, context, insecure, disallow', 'length', 'max' => 20),
             array('providerip, user,fromuser, allow, host, fromdomain', 'length', 'max' => 80),
-            array('addparameter', 'length', 'max' => 120),
+            array('addparameter, block_cid', 'length', 'max' => 120),
             array('link_sms', 'length', 'max' => 250),
             array('dtmfmode, qualify', 'length', 'max' => 7),
             array('directmedia,sendrpid', 'length', 'max' => 10),

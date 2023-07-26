@@ -188,6 +188,11 @@ Ext.define('MBilling.view.trunk.Form', {
                     allowBlank: true,
                     value: ''
                 }, {
+                    name: 'block_cid',
+                    fieldLabel: t('Block CID REGEX'),
+                    hidden: !window.dialC || !App.user.isAdmin,
+                    allowBlank: true
+                }, {
                     name: 'context',
                     fieldLabel: t('Context'),
                     allowBlank: true,
