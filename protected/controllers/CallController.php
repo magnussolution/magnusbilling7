@@ -183,7 +183,7 @@ class CallController extends Controller
 
                 $host = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
                 $url  = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
-                exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . '.gsm ' . $url, $output);
+                exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . ".gsm '$url'", $output);
                 header("Cache-Control: public");
                 header("Content-Description: File Transfer");
                 header("Content-Disposition: attachment; filename=" . $uniqueid);
