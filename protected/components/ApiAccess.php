@@ -172,6 +172,8 @@ class ApiAccess
             $action = 'd';
         } else if ($_POST['action'] == 'buy') {
             $action = 'r';
+        } else if ($_POST['action'] == 'liberar') {
+            $action = 'u';
         } else if ($_POST['action'] == 'getNewUsername') {
             $action = 'r';
         } else if ($_POST['action'] == 'getNewPassword') {

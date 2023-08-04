@@ -372,7 +372,7 @@ Ext.define('Helper.Util', {
         return value;
     },
     formatDirection: function(value) {
-        value = value == 1 ? t('Outbound') : t('Inbound');
+        value = value == 1 ? t('Outbound') : value == 2 ? t('Inbound') : t('Outbound & CallerID');
         return value;
     },
     formatHangupCause: function(value) {
