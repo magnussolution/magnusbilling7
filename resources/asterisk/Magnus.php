@@ -770,7 +770,7 @@ class Magnus
 
     public function stopRecordCall(&$agi)
     {
-        if ($this->record_call == 1) {
+        if ($this->record_call == 1 || $this->config['global']['global_record_calls'] == 1) {
             $agi->verbose("EXEC StopMixMonitor (" . $this->uniqueid . ")", 6);
             $agi->execute("StopMixMonitor");
         }
