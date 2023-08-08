@@ -354,7 +354,7 @@ Ext.define('MBilling.view.user.Form', {
                         flex: 2
                     }, {
                         xtype: 'yesnocombo',
-                        nname: 'email_did',
+                        name: 'email_did',
                         fieldLabel: t('DID email notification'),
                         labelWidth: 170,
                         flex: 3
