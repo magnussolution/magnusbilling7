@@ -121,6 +121,7 @@ base_country = ' . $this->config['global']['base_country'] . '
 cpstotal = ' . $cpstotal . '
 ip_tech_length = ' . $this->config['global']['ip_tech_length'] . '
 bloc_time_call = ' . $this->config['global']['bloc_time_call'] . '
+global_monitor = ' . $this->config['global']['global_record_calls'] . '
 ';
 
         if (isset($this->config['global']['total_analysis_time']) && strlen($this->config['global']['total_analysis_time'])) {
