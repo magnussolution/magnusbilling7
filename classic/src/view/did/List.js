@@ -32,6 +32,11 @@ Ext.define('MBilling.view.did.List', {
             iconCls: 'icon-delete',
             handler: 'onRelease',
             disabled: false
+        }, {
+            text: t('Bulk DID'),
+            iconCls: 'icon-delete',
+            handler: 'onBulk',
+            hidden: !App.user.isAdmin || window.isTablet
         }];
         if (App.user.isClient) {
             me.buttonImportCsv = false;
