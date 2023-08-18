@@ -20,6 +20,7 @@
  */
 Ext.define('MBilling.view.did.Controller', {
     extend: 'Ext.ux.app.ViewController',
+    requires: ['MBilling.view.did.Bulk'],
     alias: 'controller.did',
     isSubmitForm: true,
     init: function() {
