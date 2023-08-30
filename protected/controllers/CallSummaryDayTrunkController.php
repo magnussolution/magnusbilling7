@@ -97,16 +97,19 @@ class CallSummaryDayTrunkController extends Controller
             foreach ($itemsExtras as $relation => $fields) {
                 $arrFields = explode(',', $fields);
                 foreach ($arrFields as $field) {
-                    $attributes[$key][$relation . $field] = $item->$relation->$field;
-                    if (Yii::app()->session['idClient']) {
-                        foreach ($this->fieldsInvisibleClient as $field) {
-                            unset($attributes[$key][$field]);
+                    if (isset($item->$relation->$field)) {
+                   
+                        $attributes[$key][$relation . $field] = $item->$relation->$field;
+                        if (Yii::app()->session['idClient']) {
+                            foreach ($this->fieldsInvisibleClient as $field) {
+                                unset($attributes[$key][$field]);
+                            }
                         }
-                    }
 
-                    if (Yii::app()->session['idAgent']) {
-                        foreach ($this->fieldsInvisibleAgent as $field) {
-                            unset($attributes[$key][$field]);
+                        if (Yii::app()->session['idAgent']) {
+                            foreach ($this->fieldsInvisibleAgent as $field) {
+                                unset($attributes[$key][$field]);
+                            }
                         }
                     }
                 }
