@@ -580,6 +580,11 @@ class CalcAgi
         }
         $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
+        if (!isset($modelTrunks[0]->id)) {
+            $MAGNUS->hangup($agi, 34);
+            return;
+        }
+
         $original_calleid = $MAGNUS->CallerID;
 
         foreach ($modelTrunks as $key => $trunk) {
