@@ -199,13 +199,14 @@ echo '----------- Install PJPROJECT ----------'
 echo
 sleep 1
 cd /usr/src
-git clone https://github.com/akheron/jansson.git
-cd jansson
-autoreconf -i
+wget http://www.digip.org/jansson/releases/jansson-2.7.tar.gz
+tar -zxvf jansson-2.7.tar.gz
+cd jansson-2.7
 ./configure
 make clean
 make && make install
 ldconfig
+
 
 echo
 echo '----------- Install Asterisk 13 ----------'
@@ -223,6 +224,7 @@ mkdir /var/run/asterisk
 mkdir /var/log/asterisk
 chown -R asterisk:asterisk /var/run/asterisk
 chown -R asterisk:asterisk /var/log/asterisk
+contrib/scripts/install_prereq install
 make clean
 ./configure
 make menuselect.makeopts
