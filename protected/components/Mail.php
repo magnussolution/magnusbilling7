@@ -385,9 +385,14 @@ class Mail
         $mail->Username   = $smtp_username;
         $mail->Password   = $smtp_password;
         $mail->Port       = $smtp_port;
-        $mail->SetFrom($this->from_email, $this->from_name);
-        $mail->SetLanguage($this->language == 'pt_BR' ? 'br' : $this->language);
 
+        if ($smtp_host == 'smtp.office365.com') {
+            $mail->SetFrom($smtp_username, $this->from_name);
+        } else {
+            $mail->SetFrom($this->from_email, $this->from_name);
+        }
+
+        $mail->SetLanguage($this->language == 'pt_BR' ? 'br' : $this->language);
         $mail->Subject = mb_encode_mimeheader($this->title);
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
         $mail->MsgHTML($this->message);
