@@ -22,7 +22,7 @@
 
 class QueueMemberController extends Controller
 {
-    public $attributeOrder = 'id';
+    public $attributeOrder = 't.id';
     public $extraValues    = array('idUser' => 'username');
 
     public $fieldsFkReport = array(
@@ -46,7 +46,7 @@ class QueueMemberController extends Controller
         $this->checkRelation($values);
 
         if (isset($values['interface'])) {
-            $modelSip = Sip::model()->find("id = :id OR name = :id",
+            $modelSip = Sip::model()->find("id = :id",
                 array('id' => $values['interface'])
             );
 
@@ -81,7 +81,7 @@ class QueueMemberController extends Controller
             }
 
         } else {
-            if (isset($values['id'])) {
+            if (isset($values['id']) && isset($values['interface'])) {
 
                 $modelQueueMember = QueueMember::model()->findByPk((int) $values['id']);
 

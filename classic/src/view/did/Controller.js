@@ -20,6 +20,7 @@
  */
 Ext.define('MBilling.view.did.Controller', {
     extend: 'Ext.ux.app.ViewController',
+    requires: ['MBilling.view.did.Bulk'],
     alias: 'controller.did',
     isSubmitForm: true,
     init: function() {
@@ -91,6 +92,8 @@ Ext.define('MBilling.view.did.Controller', {
                 me.formPanel.getForm().findField('cbr_time_try').setVisible(true);
             }
         }
+        me.lookupReference('billingTab').show();
+        me.lookupReference('generalTab').show();
         me.callParent(arguments);
     },
     onDelete: function(btn) {
@@ -110,35 +113,82 @@ Ext.define('MBilling.view.did.Controller', {
     },
     onRelease: function(btn, pressed) {
         var me = this,
-            selected = me.list.getSelectionModel().getSelection()[0],
-            msgConfirmation = t('Confirm release DID') + ' ' + selected.get('DID'),
-            store = me.list.getStore();
-        if (me.list.getSelectionModel().getSelection().length > 1) {
-            Ext.ux.Alert.alert(me.titleError, t('Please select only one DID to release'), 'error');
-        } else if (selected.get('reserved') === 0) {
-            Ext.ux.Alert.alert(me.titleError, t('Did is not in use'), 'error');
-            store.load();
-        } else {
-            Ext.Msg.confirm(me.titleConfirmation, msgConfirmation, function(btn) {
-                if (btn === 'yes') {
-                    Ext.Ajax.request({
-                        url: 'index.php/did/liberar',
-                        params: {
-                            id: selected.get('id')
-                        },
-                        success: function(response) {
-                            response = Ext.decode(response.responseText);
-                            if (response[me.nameSuccessRequest]) {
-                                Ext.ux.Alert.alert(me.titleSuccess, response[me.nameMsgRequest], 'success');
-                                store.load();
-                            } else {
-                                var errors = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
-                                store.load();
+            records,
+            record = me.list.getSelectionModel().getSelection()[0],
+            idRecord = []
+        if (record) {
+            dids = "";
+            Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
+                dids = dids + ', ' + record.get('did');
+            });
+            msgConfirmation = t('Confirm release DIDs') + dids,
+                Ext.Msg.confirm(me.titleConfirmation, msgConfirmation, function(btn) {
+                    if (btn === 'yes') {
+                        Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
+                            idRecord.push(record.get('id'));
+                        });
+                        Ext.Ajax.request({
+                            url: 'index.php/did/liberar',
+                            params: {
+                                ids: Ext.encode(idRecord)
+                            },
+                            scope: me,
+                            success: function(response) {
+                                response = Ext.decode(response.responseText);
+                                if (response[me.nameSuccessRequest]) {
+                                    var msg = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
+                                    Ext.ux.Alert.alert(me.titleSuccess, t(msg), 'success');
+                                } else {
+                                    var errors = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
+                                    Ext.ux.Alert.alert(me.titleError, t(errors), 'error');
+                                }
                             }
-                        }
-                    });
-                }
-            }, me);
+                        });
+                        me.store.load();
+                    }
+                }, me);
+        } else {
+            Ext.ux.Alert.alert(me.titleError, t('Please select one or more records'), 'notification');
+        }
+    },
+    onBuy: function(btn, pressed) {
+        var me = this,
+            records,
+            record = me.list.getSelectionModel().getSelection()[0],
+            idRecord = []
+        if (record) {
+            dids = "";
+            Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
+                dids = dids + ', ' + record.get('did');
+            });
+            msgConfirmation = t('Confirm buy DIDs') + dids,
+                Ext.Msg.confirm(me.titleConfirmation, msgConfirmation, function(btn) {
+                    if (btn === 'yes') {
+                        Ext.each(me.list.getSelectionModel().getSelection(), function(record) {
+                            idRecord.push(record.get('id'));
+                        });
+                        Ext.Ajax.request({
+                            url: 'index.php/did/buyBulk',
+                            params: {
+                                ids: Ext.encode(idRecord)
+                            },
+                            scope: me,
+                            success: function(response) {
+                                response = Ext.decode(response.responseText);
+                                if (response[me.nameSuccessRequest]) {
+                                    var msg = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
+                                    Ext.ux.Alert.alert(me.titleSuccess, t(msg), 'success');
+                                } else {
+                                    var errors = Helper.Util.convertErrorsJsonToString(response[me.nameMsgRequest]);
+                                    Ext.ux.Alert.alert(me.titleError, t(errors), 'error');
+                                }
+                            }
+                        });
+                        me.store.load();
+                    }
+                }, me);
+        } else {
+            Ext.ux.Alert.alert(me.titleError, t('Please select one or more records'), 'notification');
         }
     },
     onBuyDid: function() {
@@ -152,20 +202,24 @@ Ext.define('MBilling.view.did.Controller', {
             Ext.Msg.confirm(t('Confirmation'), msgConfirmation + ' <br>' + valueDid, function(btn) {
                 if (btn === 'yes') {
                     Ext.Ajax.request({
-                        url: 'index.php/did/buy',
+                        url: 'index.php/did/buyBulk',
                         params: {
-                            id: fieldDid
+                            ids: Ext.encode(fieldDid)
                         },
                         success: function(response) {
                             response = Ext.decode(response.responseText);
                             if (response['success']) {
                                 Ext.ux.Alert.alert(me.titleSuccess, t(response['msg']), 'success', true, true, 5000);
+                                getForm.getForm().findField('did').getStore().load();
+                                getForm.getForm().findField('did').rawValue = '';
+                                getForm.getForm().findField('did').setValue();
                             } else {
                                 var errors = Helper.Util.convertErrorsJsonToString(response['msg']);
                                 Ext.ux.Alert.alert(me.titleError, t(errors), 'error', true, true, 5000);
                             }
                         }
                     });
+                    me.store.load();
                 }
             }, me);
         }

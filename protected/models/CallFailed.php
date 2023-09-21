@@ -52,11 +52,12 @@ class CallFailed extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, calledstation', 'required'),
             array('id_user, id_plan, id_trunk, id_server, sipiax, terminatecauseid,hangupcause', 'numerical', 'integerOnly' => true),
             array('uniqueid, starttime, callerid, src, calledstation', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
     public function relations()

@@ -9,7 +9,7 @@ Ext.define('MBilling.view.user.Form', {
     alias: 'widget.userform',
     autoHeight: 300,
     bodyPadding: 0,
-    fieldsHideUpdateLot: ['username', 'password', 'id_group_agent', 'id_offer', 'callingcard_pin'],
+    fieldsHideUpdateLot: ['username', 'password', 'id_group_agent', 'id_offer', 'callingcard_pin', 'contract_value'],
     initComponent: function() {
         var me = this;
         haveServiceMenu = false;
@@ -39,6 +39,8 @@ Ext.define('MBilling.view.user.Form', {
             },
             items: [{
                 title: t('General'),
+                itemId: 'mainData',
+                reference: 'mainData',
                 items: [{
                     name: 'username',
                     fieldLabel: t('Username'),
@@ -79,14 +81,25 @@ Ext.define('MBilling.view.user.Form', {
                 }, {
                     name: 'prefix_local',
                     fieldLabel: t('Prefix rules'),
-                    value: App.user.base_country == 'BRL' ? '0/55/11,0/55/12,*/5511/8,*/5511/9' : App.user.base_country == 'ARG' ? '0/54,*/5411/8,15/54911/10,16/54911/10' : '',
+                    value: window.default_prefix_rule.length < 3 && App.user.language == 'pt_BR' ? '0/55/11,0/55/12,*/5511/8,*/5511/9' : window.default_prefix_rule,
                     allowBlank: true,
                     emptyText: 'match / replace / length',
                     hidden: App.user.isClient
                 }, {
-                    xtype: 'statususercombo',
+                    xtype: 'combo',
                     name: 'active',
                     fieldLabel: t('Active'),
+                    fieldLabel: t('Status'),
+                    forceSelection: true,
+                    editable: false,
+                    value: 1,
+                    store: [
+                        [1, t('Active')],
+                        [0, t('Inactivated')],
+                        [2, t('Pending')],
+                        [3, t('Blocked In')],
+                        [4, t('Blocked In Out')]
+                    ],
                     hidden: App.user.isClient,
                     allowBlank: App.user.isClient
                 }, {
@@ -109,6 +122,12 @@ Ext.define('MBilling.view.user.Form', {
                     maxValue: 50,
                     hidden: !window.dialC || !App.user.isAdmin,
                     allowBlank: true
+                }, {
+                    xtype: 'textareafield',
+                    name: 'description',
+                    fieldLabel: t('Description'),
+                    hidden: !App.user.isAdmin,
+                    allowBlank: true
                 }]
             }, {
                 defaults: {
@@ -121,6 +140,7 @@ Ext.define('MBilling.view.user.Form', {
                 },
                 title: t('Personal data'),
                 itemId: 'personalData',
+                reference: 'personalData',
                 items: [{
                     name: 'company_website',
                     fieldLabel: t('Company website'),
@@ -221,17 +241,53 @@ Ext.define('MBilling.view.user.Form', {
                         minLength: 8
                     }]
                 }, {
-                    name: 'email',
-                    fieldLabel: t('Email'),
-                    allowBlank: true,
-                    vtype: 'email'
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        flex: 1
+                    },
+                    items: [{
+                        name: 'email',
+                        fieldLabel: t('Email'),
+                        allowBlank: true,
+                        labelWidth: 145
+                    }, {
+                        name: 'email2',
+                        fieldLabel: t('Email') + ' 2',
+                        allowBlank: true
+                    }]
                 }, {
-                    name: 'doc',
-                    fieldLabel: t('DOC'),
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        flex: 1
+                    },
+                    items: [{
+                        name: 'doc',
+                        fieldLabel: t('DOC'),
+                        allowBlank: true,
+                        labelWidth: 145
+                    }, {
+                        name: 'vat',
+                        fieldLabel: t('VAT'),
+                        hidden: App.user.isClient,
+                        allowBlank: true
+                    }]
+                }, {
+                    xtype: 'moneyfield',
+                    name: 'contract_value',
+                    fieldLabel: t('Contract value'),
+                    mask: App.user.currency + ' #9.999.990,00',
+                    value: 0,
+                    readOnly: App.user.isClient,
                     allowBlank: true
                 }, {
-                    name: 'vat',
-                    fieldLabel: t('VAT'),
+                    name: 'dist',
+                    fieldLabel: t('DIST'),
                     hidden: App.user.isClient,
                     allowBlank: true
                 }]
@@ -252,6 +308,10 @@ Ext.define('MBilling.view.user.Form', {
                     fieldLabel: t('Type paid'),
                     allowBlank: true,
                     readOnly: App.user.isClient
+                }, {
+                    xtype: 'noyescombo',
+                    name: 'credit_notification_daily',
+                    fieldLabel: t('Credit notification daily')
                 }, {
                     xtype: 'fieldcontainer',
                     layout: 'hbox',
@@ -276,6 +336,27 @@ Ext.define('MBilling.view.user.Form', {
                         value: '-1',
                         minValue: -1,
                         allowBlank: true,
+                        flex: 3
+                    }]
+                }, {
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        labelWidth: 145,
+                        flex: 1
+                    },
+                    items: [{
+                        xtype: 'yesnocombo',
+                        name: 'email_services',
+                        fieldLabel: t('Services email notification'),
+                        flex: 2
+                    }, {
+                        xtype: 'yesnocombo',
+                        name: 'email_did',
+                        fieldLabel: t('DID email notification'),
+                        labelWidth: 170,
                         flex: 3
                     }]
                 }, {
@@ -382,11 +463,37 @@ Ext.define('MBilling.view.user.Form', {
                     maxLength: 6,
                     minLength: 6
                 }, {
-                    xtype: 'restrictioncombo',
-                    name: 'restriction',
-                    fieldLabel: t('Restriction'),
-                    allowBlank: true,
-                    hidden: App.user.isClient
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    hidden: App.user.isClient,
+                    defaults: {
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        labelWidth: 145,
+                        flex: 1
+                    },
+                    items: [{
+                        xtype: 'restrictioncombo',
+                        name: 'restriction',
+                        fieldLabel: t('Restriction'),
+                        allowBlank: true,
+                        flex: 2
+                    }, {
+                        xtype: 'combobox',
+                        name: 'restriction_use',
+                        fieldLabel: t('Use'),
+                        forceSelection: true,
+                        editable: false,
+                        hidden: true,
+                        value: '1',
+                        store: [
+                            [1, t('Dial Number')],
+                            [2, t('CallerID')],
+                            [3, t('Bouth')]
+                        ],
+                        labelWidth: 80,
+                        flex: 2
+                    }]
                 }]
             }, {
                 title: window.showservices ? t('Services') : t('Send credit'),

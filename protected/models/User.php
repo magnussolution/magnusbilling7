@@ -60,7 +60,8 @@ class User extends Model
      */
     public function rules()
     {
-        return array(
+
+        $rules = array(
             array('username, password', 'required'),
             array('id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
                     typepaid, creditlimit, credit_notification,sipaccountlimit, restriction,
@@ -68,21 +69,26 @@ class User extends Model
                     boleto_day, calllimit, disk_space,id_group_agent,transfer_dbbl_rocket_profit,
                     transfer_bkash_profit,transfer_flexiload_profit,transfer_international_profit,
                     transfer_dbbl_rocket,transfer_bkash,transfer_flexiload,transfer_international,
-                    transfer_bdservice_rate,transfer_show_selling_price,cpslimit
+                    transfer_bdservice_rate,transfer_show_selling_price,cpslimit,
+                    restriction_use,credit_notification_daily,email_services,email_did
                         ', 'numerical', 'integerOnly' => true),
             array('language,mix_monitor_format,calllimit_error', 'length', 'max' => 5),
-            array('username, zipcode, phone, mobile, vat', 'length', 'max' => 20),
+            array('zipcode, phone, mobile, vat', 'length', 'max' => 20),
             array('city, state, country, loginkey', 'length', 'max' => 40),
-            array('lastname, firstname, company_name, commercial_name, redial, prefix_local,neighborhood', 'length', 'max' => 50),
-            array('company_website', 'length', 'max' => 100),
-            array('address, email, description, doc', 'length', 'max' => 100),
-            array('credit', 'type', 'type' => 'double'),
-            array('expirationdate, password, lastuse', 'length', 'max' => 100),
+            array('lastname, firstname, redial,neighborhood', 'length', 'max' => 50),
+            array('company_website, dist', 'length', 'max' => 100),
+            array('address, email,email2, doc', 'length', 'max' => 100),
+            array('username', 'length', 'max' => 20),
+            array('description, prefix_local', 'length', 'max' => 500),
+            array('credit, contract_value', 'type', 'type' => 'double'),
+            array('expirationdate, password, lastuse,company_name, commercial_name', 'length', 'max' => 100),
             array('username', 'checkusername'),
             array('password', 'checksecret'),
             array('username', 'unique', 'caseSensitive' => 'false'),
-
         );
+
+        return $this->getExtraField($rules);
+
     }
 
     public function checkusername($attribute, $params)
@@ -118,6 +124,8 @@ class User extends Model
         if ($this->getIsNewRecord()) {
             $this->creationdate = date('Y-m-d H:i:s');
         }
+
+        $this->contract_value = $this->contract_value == '' ? 0 : $this->contract_value;
 
         return parent::beforeSave();
     }

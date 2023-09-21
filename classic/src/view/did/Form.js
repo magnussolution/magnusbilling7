@@ -42,10 +42,16 @@ Ext.define('MBilling.view.did.Form', {
             },
             items: [{
                 title: t('General'),
+                reference: 'generalTab',
                 items: [{
                     name: 'did',
                     fieldLabel: t('DID'),
                     readOnly: App.user.isClient || App.user.isAgent
+                }, {
+                    name: 'country',
+                    fieldLabel: t('Country'),
+                    value: '',
+                    allowBlank: true
                 }, {
                     xtype: 'noyescombo',
                     name: 'record_call',
@@ -77,9 +83,16 @@ Ext.define('MBilling.view.did.Form', {
                     value: '0',
                     hidden: App.user.isClient || App.user.isAgent
                 }, {
+                    xtype: 'moneyfield',
+                    name: 'connection_sell',
+                    fieldLabel: t('Connection charge'),
+                    mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                    value: '0',
+                    hidden: !App.user.isAdmin
+                }, {
                     xtype: 'fieldset',
+                    title: t('DID increment Buy'),
                     style: 'margin-top:5px; overflow: visible;',
-                    title: t('DID increment'),
                     collapsible: false,
                     collapsed: false,
                     hidden: !App.user.isAdmin,
@@ -89,13 +102,37 @@ Ext.define('MBilling.view.did.Form', {
                         labelAlign: me.labelAlignFields
                     },
                     items: [{
-                        xtype: 'moneyfield',
-                        name: 'connection_sell',
-                        fieldLabel: t('Connection charge'),
-                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
-                        value: '0',
+                        xtype: 'numberfield',
+                        name: 'minimal_time_buy',
+                        fieldLabel: t('Minimum time to charge'),
+                        value: '1',
                         hidden: !App.user.isAdmin
                     }, {
+                        xtype: 'numberfield',
+                        name: 'buyrateinitblock',
+                        fieldLabel: t('Buy price initblock'),
+                        value: '1',
+                        hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'numberfield',
+                        name: 'buyrateincrement',
+                        fieldLabel: t('Buy price increment'),
+                        value: '1',
+                        hidden: !App.user.isAdmin
+                    }]
+                }, {
+                    xtype: 'fieldset',
+                    title: t('DID increment Sell'),
+                    style: 'margin-top:5px; overflow: visible;',
+                    collapsible: false,
+                    collapsed: false,
+                    hidden: !App.user.isAdmin,
+                    defaults: {
+                        labelWidth: 170,
+                        anchor: '100%',
+                        labelAlign: me.labelAlignFields
+                    },
+                    items: [{
                         xtype: 'numberfield',
                         name: 'minimal_time_charge',
                         fieldLabel: t('Minimum time to charge'),
@@ -134,6 +171,11 @@ Ext.define('MBilling.view.did.Form', {
                     minValue: '-1',
                     hidden: !window.didChannelLimit || !App.user.isAdmin
                 }, {
+                    xtype: 'serverscombo',
+                    name: 'id_server',
+                    fieldLabel: t('Server'),
+                    allowBlank: true
+                }, {
                     xtype: 'textareafield',
                     allowBlank: true,
                     name: 'description',
@@ -142,23 +184,20 @@ Ext.define('MBilling.view.did.Form', {
                 }]
             }, {
                 title: t('Billing'),
+                reference: 'billingTab',
+                hidden: !App.user.isAdmin,
                 items: [{
                     xtype: 'fieldset',
                     style: 'margin-top:5px; overflow: visible;',
                     title: t('DID billing per minute rate') + ' 1',
                     collapsible: false,
                     collapsed: false,
-                    hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 220,
+                        labelWidth: 250,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
                     items: [{
-                        // mobile
-                        //^55[1-9]{2}9[0-9]{8}|^55[1-9]{2}7[0-9]{7}
-                        //fixed
-                        // ^55[1-9][1-9][2-5].$|^[1-9][1-9][2-5].$
                         xtype: 'textfield',
                         name: 'expression_1',
                         fieldLabel: t('Regular expression'),
@@ -167,10 +206,24 @@ Ext.define('MBilling.view.did.Form', {
                     }, {
                         xtype: 'moneyfield',
                         mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'buy_rate_1',
+                        fieldLabel: t('Buy price per min'),
+                        value: '0',
+                        hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'selling_rate_1',
                         fieldLabel: t('Sell price per min'),
                         value: '0',
                         hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'agent_client_rate_1',
+                        fieldLabel: t('Agent\'s client price per min'),
+                        value: '0',
+                        hidden: App.user.isClient
                     }, {
                         xtype: 'noyescombo',
                         name: 'block_expression_1',
@@ -190,7 +243,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 220,
+                        labelWidth: 250,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -202,11 +255,25 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'buy_rate_2',
+                        fieldLabel: t('Buy price per min'),
+                        value: '0',
+                        hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
                         name: 'selling_rate_2',
                         fieldLabel: t('Sell price per min'),
                         mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         value: '0',
                         hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'agent_client_rate_2',
+                        fieldLabel: t('Agent\'s client price per min'),
+                        value: '0',
+                        hidden: App.user.isClient
                     }, {
                         xtype: 'noyescombo',
                         name: 'block_expression_2',
@@ -226,7 +293,7 @@ Ext.define('MBilling.view.did.Form', {
                     collapsed: false,
                     hidden: !App.user.isAdmin,
                     defaults: {
-                        labelWidth: 220,
+                        labelWidth: 250,
                         anchor: '100%',
                         labelAlign: me.labelAlignFields
                     },
@@ -238,11 +305,25 @@ Ext.define('MBilling.view.did.Form', {
                         hidden: !App.user.isAdmin
                     }, {
                         xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'buy_rate_3',
+                        fieldLabel: t('Buy price per min'),
+                        value: '0',
+                        hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
                         name: 'selling_rate_3',
                         fieldLabel: t('Sell price per min'),
                         mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         value: '0',
                         hidden: !App.user.isAdmin
+                    }, {
+                        xtype: 'moneyfield',
+                        mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
+                        name: 'agent_client_rate_3',
+                        fieldLabel: t('Agent\'s client price per min'),
+                        value: '0',
+                        hidden: App.user.isClient
                     }, {
                         xtype: 'noyescombo',
                         name: 'block_expression_3',
@@ -257,7 +338,7 @@ Ext.define('MBilling.view.did.Form', {
                 }]
             }, {
                 title: t('CallBack pro'),
-                hidden: !window.cbr,
+                hidden: !window.cbr || !App.user.isAdmin,
                 items: [{
                     xtype: 'booleancombo',
                     name: 'cbr',

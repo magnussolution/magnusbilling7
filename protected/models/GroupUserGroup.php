@@ -53,10 +53,11 @@ class GroupUserGroup extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_group_user, id_group', 'required'),
             array('id_group_user, id_group, ', 'numerical', 'integerOnly' => true),
 
         );
+        return $this->getExtraField($rules);
     }
 }

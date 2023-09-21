@@ -70,15 +70,11 @@ class CallSummaryDayTrunkController extends Controller
     {
         $attributes = false;
         foreach ($models as $key => $item) {
-            $attributes[$key]                   = $item->attributes;
-            $attributes[$key]['nbcall']         = $item->nbcall;
-            $attributes[$key]['day']            = $item->day;
-            $attributes[$key]['aloc_all_calls'] = $item->aloc_all_calls;
-            $attributes[$key]['sessiontime']    = $item->sessiontime / 60;
-            $attributes[$key]['aloc_all_calls'] = $item->nbcall > 0
-            ? $item->sessiontime / $item->nbcall
-            : 0;
-
+            $attributes[$key]                      = $item->attributes;
+            $attributes[$key]['nbcall']            = $item->nbcall;
+            $attributes[$key]['day']               = $item->day;
+            $attributes[$key]['aloc_all_calls']    = $item->aloc_all_calls;
+            $attributes[$key]['sessiontime']       = $item->sessiontime / 60;
             $attributes[$key]['sumsessiontime']    = $item->sumsessiontime;
             $attributes[$key]['sumsessionbill']    = $item->sumsessionbill;
             $attributes[$key]['sumbuycost']        = $item->sumbuycost;
@@ -101,16 +97,19 @@ class CallSummaryDayTrunkController extends Controller
             foreach ($itemsExtras as $relation => $fields) {
                 $arrFields = explode(',', $fields);
                 foreach ($arrFields as $field) {
-                    $attributes[$key][$relation . $field] = $item->$relation->$field;
-                    if (Yii::app()->session['idClient']) {
-                        foreach ($this->fieldsInvisibleClient as $field) {
-                            unset($attributes[$key][$field]);
+                    if (isset($item->$relation->$field)) {
+                   
+                        $attributes[$key][$relation . $field] = $item->$relation->$field;
+                        if (Yii::app()->session['idClient']) {
+                            foreach ($this->fieldsInvisibleClient as $field) {
+                                unset($attributes[$key][$field]);
+                            }
                         }
-                    }
 
-                    if (Yii::app()->session['idAgent']) {
-                        foreach ($this->fieldsInvisibleAgent as $field) {
-                            unset($attributes[$key][$field]);
+                        if (Yii::app()->session['idAgent']) {
+                            foreach ($this->fieldsInvisibleAgent as $field) {
+                                unset($attributes[$key][$field]);
+                            }
                         }
                     }
                 }

@@ -84,7 +84,7 @@
 </div>
 <div class="field">
 	<?php echo $form->labelEx($signup, Yii::t('zii', 'Zip code')) ?>
-	<?php echo $form->numberField($signup, 'zipcode', array('class' => 'input')) ?>
+	<?php echo $form->textField($signup, 'zipcode', array('class' => 'input')) ?>
 	<?php echo $form->error($signup, 'zipcode') ?>
 	<p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Zip code') ?></p>
 </div>

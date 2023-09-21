@@ -88,16 +88,16 @@ class CalcAgi
         $initblock                    = $this->tariffObj[0]['initblock'];
         $billingblock                 = $this->tariffObj[0]['billingblock'];
         $connectcharge                = $MAGNUS->round_precision(abs($this->tariffObj[0]['connectcharge']));
-        $id_offer                     = $package_offer                     = $this->tariffObj[0]['package_offer'];
+        $package_offer                = $this->tariffObj[0]['package_offer'];
         $id_rate                      = $this->tariffObj[0]['id_rate'];
         $initial_credit               = $credit               = $MAGNUS->credit;
         $this->freetimetocall_left[0] = 0;
         $this->freecall[0]            = false;
         $this->offerToApply[0]        = null;
 
-        if ($id_offer == 1 && $MAGNUS->id_offer > 0) {
+        if ($package_offer == 1 && $MAGNUS->id_offer > 0) {
             $sql = "SELECT * FROM pkg_offer_use WHERE id_offer = $MAGNUS->id_offer
-                                AND id_user = $MAGNUS->id_user LIMIT 1";
+                                AND id_user = $MAGNUS->id_user AND status = 1 AND releasedate = '0000-00-00 00:00:00' LIMIT 1";
             $modelOfferUse = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelOfferUse->id)) {
@@ -115,7 +115,14 @@ class CalcAgi
                         $agi->verbose("offer Unlimited calls");
                         $this->freecall[0]     = true;
                         $package_selected      = true;
-                        $this->offerToApply[0] = array("id" => $id_offer, "label" => "Unlimited calls", "type" => $packagetype);
+                        $this->offerToApply[0] = array(
+                            "id"                  => $id_offer,
+                            "label"               => "Unlimited calls",
+                            "type"                => $packagetype,
+                            "billingblock"        => $modelOffer->billingblock,
+                            "initblock"           => $modelOffer->initblock,
+                            "minimal_time_charge" => $modelOffer->minimal_time_charge,
+                        );
                         break;
                     case 1:
 
@@ -126,7 +133,14 @@ class CalcAgi
                             if ($number_calls_used < $freetimetocall) {
                                 $this->freecall[0]     = true;
                                 $package_selected      = true;
-                                $this->offerToApply[0] = array("id" => $id_offer, "label" => "Number of Free calls", "type" => $packagetype);
+                                $this->offerToApply[0] = array(
+                                    "id"                  => $id_offer,
+                                    "label"               => "Number of Free calls",
+                                    "type"                => $packagetype,
+                                    "billingblock"        => $modelOffer->billingblock,
+                                    "initblock"           => $modelOffer->initblock,
+                                    "minimal_time_charge" => $modelOffer->minimal_time_charge,
+                                );
                                 $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
@@ -142,7 +156,14 @@ class CalcAgi
 
                             if ($this->freetimetocall_left[0] > 0) {
                                 $package_selected      = true;
-                                $this->offerToApply[0] = array("id" => $id_offer, "label" => "Free minutes", "type" => $packagetype);
+                                $this->offerToApply[0] = array(
+                                    "id"                  => $id_offer,
+                                    "label"               => "Free minutes",
+                                    "type"                => $packagetype,
+                                    "billingblock"        => $modelOffer->billingblock,
+                                    "initblock"           => $modelOffer->initblock,
+                                    "minimal_time_charge" => $modelOffer->minimal_time_charge,
+                                );
                                 $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
@@ -238,7 +259,7 @@ class CalcAgi
                 $callduration += ($billingblock - $mod_sec);
             }
         }
-        if ($this->freetimetocall_left[0] >= $callduration) {
+        if ($this->freetimetocall_left[0] >= $callduration && $MAGNUS->id_agent < 2) {
             $this->freetimetocall_used = $callduration;
             $callduration              = 0;
         }
@@ -278,76 +299,60 @@ class CalcAgi
 
         $id_offer              = $MAGNUS->id_offer;
         $additional_grace_time = $this->tariffObj[0]['additional_grace'];
+        $package_offer         = $this->tariffObj[0]['package_offer'];
         $sessiontime           = $this->answeredtime;
         $dialstatus            = $this->dialstatus;
+
+        //adiciona o tempo adicional
+        if (substr($additional_grace_time, -1) == "%") {
+            $additional_grace_time = str_replace("%", "", $additional_grace_time);
+            $additional_grace_time = $additional_grace_time / 100;
+            $additional_grace_time = str_replace("0.", "1.", $additional_grace_time);
+            $sessiontime           = $sessiontime * $additional_grace_time;
+        } else {
+            $sessiontime = $sessiontime + $additional_grace_time;
+        }
 
         if ($sessiontime > 0) {
             $this->freetimetocall_used = 0;
             //adiciona o tempo adicional
-            if (substr($additional_grace_time, -1) == "%") {
-                $additional_grace_time = str_replace("%", "", $additional_grace_time);
-                $additional_grace_time = $additional_grace_time / 100;
-                $additional_grace_time = str_replace("0.", "1.", $additional_grace_time);
-                $sessiontime           = $sessiontime * $additional_grace_time;
-            } else {
-                if ($sessiontime > 0) {
-                    $sessiontime = $sessiontime + $additional_grace_time;
-                }
-            }
 
-            if (($id_offer != -1) && ($this->offerToApply[0] != null)) {
+            $this->calculateCost($MAGNUS, $sessiontime, $agi);
+
+            if ($package_offer == 1 && $MAGNUS->id_offer > 0 && $sessiontime > $this->offerToApply[0]["minimal_time_charge"] && $this->freetimetocall_left[0] > 0) {
                 $id_offer = $this->offerToApply[0]["id"];
 
-                $this->calculateCost($MAGNUS, $sessiontime, $agi);
-
-                switch ($this->offerToApply[0]["type"]) {
-                    /*Unlimited*/
-                    case 0:
-                        $this->freetimetocall_used = $sessiontime;
-                        break;
-                    /*free calls*/
-                    case 1:
-                        $this->freetimetocall_used = $sessiontime;
-                        break;
-                    /*free minutes*/
-                    case 2:
-                        if ($sessiontime > '60') {
-                            $restominutos   = $sessiontime % 60;
-                            $calculaminutos = ($sessiontime - $restominutos) / 60;
-                            if ($restominutos > '0') {
-                                $calculaminutos++;
-                            }
-
-                            $sessiontime = $calculaminutos * 60;
-                        } elseif ($sessiontime < '1') {
-                            $sessiontime = 0;
-                        } else {
-                            $sessiontime = 60;
-                        }
-
-                        $this->freetimetocall_used = $sessiontime;
-
-                        break;
+                if ($MAGNUS->id_agent < 2) {
+                    $this->sessionbill = 0;
                 }
 
-                /* calculcost could have change the duration of the call*/
-                $sessiontime = $this->answeredtime;
+                if ($this->offerToApply[0]["type"] = 2) {
+                    if ($sessiontime > $this->offerToApply[0]["initblock"]) {
+                        $restominutos   = $sessiontime % $this->offerToApply[0]["billingblock"];
+                        $calculaminutos = ($sessiontime - $restominutos) / $this->offerToApply[0]["billingblock"];
+                        if ($restominutos > '0') {
+                            $calculaminutos++;
+                        }
+
+                        $sessiontime = $calculaminutos * $this->offerToApply[0]["billingblock"];
+                    } elseif ($sessiontime < '1') {
+                        $sessiontime = 0;
+                    } else {
+                        $sessiontime = $this->offerToApply[0]["initblock"];
+                    }
+                }
+
                 /* add grace time*/
                 $fields = "id_user, id_offer, used_secondes";
-                $values = "$MAGNUS->id_user, $id_offer, '$this->freetimetocall_used'";
+                $values = "$MAGNUS->id_user, $id_offer, '$sessiontime'";
                 $sql    = "INSERT INTO pkg_offer_cdr ($fields) VALUES ($values)";
                 $agi->exec($sql);
-            } else {
-                $this->calculateCost($MAGNUS, $sessiontime, $agi);
+
             }
         } else {
             $sessiontime = 0;
         }
-        $agi->verbose('Sessiontime' . $sessiontime, 10);
-
-        if (($id_offer != -1) && ($this->offerToApply[0] != null) && $sessiontime > 0) {
-            $sessiontime = $this->freetimetocall_used;
-        }
+        $agi->verbose('Sessiontime ' . $sessiontime, 10);
 
         $id_prefix = $this->tariffObj[0]['id_prefix'];
         $id_plan   = $this->tariffObj[0]['id_plan'];
@@ -417,7 +422,7 @@ class CalcAgi
 
         $agi->verbose($terminatecauseid . ' ' . $cost . '+' . $MAGNUS->round_precision(abs($MAGNUS->callingcardConnection)) . ' = ' . $cost, 25);
         $costCdr = $cost;
-        if ($sessiontime > 0) {
+        if ($this->real_answeredtime > 0) {
 
             if ($this->usedtrunk > 0) {
                 $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
@@ -436,7 +441,7 @@ class CalcAgi
 
                     $agi->verbose($this->real_answeredtime . ' ' . $buyrate . ' ' . $buyrateinitblock . ' ' . $buyrateincrement);
 
-                    if ($sessiontime > $minimal_time_buy) {
+                    if ($this->real_answeredtime > $minimal_time_buy) {
 
                         if ($buyratecallduration < $buyrateinitblock) {
                             $buyratecallduration = $buyrateinitblock;
@@ -462,7 +467,16 @@ class CalcAgi
             if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . ' - ' .
                     $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
-                $cost = $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
+
+                $agi->verbose("$package_offer $MAGNUS->id_offer $sessiontime" . $this->offerToApply[0]["minimal_time_charge"] . ' ' . $this->freetimetocall_left[0], 5);
+
+                //1 2 600 5155
+                if ($package_offer == 1 && $MAGNUS->id_offer > 0 && $sessiontime > $this->offerToApply[0]["minimal_time_charge"] && $this->freetimetocall_left[0] > 0) {
+                    $this->agent_bill = 0.000001;
+                } else {
+                    $this->agent_bill = $this->updateSystemAgent($agi, $MAGNUS, $calldestinationPortabilidade, $MAGNUS->round_precision(abs($cost)), $sessiontime);
+                }
+
             }
 
         }
@@ -524,26 +538,23 @@ class CalcAgi
 
     public function updateSystemAgent($agi, $MAGNUS, $calledstation, $cost, $sessiontime)
     {
-        $sql = "SELECT rateinitial, initblock, billingblock, minimal_time_charge " .
-            "FROM pkg_plan " .
-            "LEFT JOIN pkg_rate_agent ON pkg_rate_agent.id_plan=pkg_plan.id " .
-            "LEFT JOIN pkg_prefix ON pkg_rate_agent.id_prefix=pkg_prefix.id " .
-            "WHERE prefix = SUBSTRING($calledstation,1,length(prefix)) and " .
-            "pkg_plan.id= $MAGNUS->id_plan_agent ORDER BY LENGTH(prefix) DESC LIMIT 3";
-        $modelRateAgent = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!isset($modelRateAgent[0]['rateinitial'])) {
+        if (!isset($MAGNUS->modelRateAgent[0]['rateinitial'])) {
             $agi->verbose('NOT FOUND AGENT TARRIF, USE AGENT COST PRICE');
             $cost_customer = $cost;
         } else {
-            $agi->verbose('Found agent sell price ' . print_r($modelRateAgent[0], true) . '-  ' . $sessiontime, 25);
-            $cost_customer = $MAGNUS->roudRatePrice($sessiontime, $modelRateAgent[0]['rateinitial'],
-                $modelRateAgent[0]['initblock'], $modelRateAgent[0]['billingblock']);
+            $agi->verbose('Found agent sell price ' . print_r($MAGNUS->modelRateAgent[0], true) . '-  ' . $sessiontime, 25);
+            $cost_customer = $MAGNUS->roudRatePrice($sessiontime, $MAGNUS->modelRateAgent[0]['rateinitial'],
+                $MAGNUS->modelRateAgent[0]['initblock'], $MAGNUS->modelRateAgent[0]['billingblock']);
             $agi->verbose('$cost_customer=' . $cost_customer);
         }
 
-        if ($sessiontime < $modelRateAgent[0]['minimal_time_charge']) {
+        if ($sessiontime < $MAGNUS->modelRateAgent[0]['minimal_time_charge']) {
             $agi->verbose("Tempo meno que o tempo minimo para", 15);
+            $cost_customer = 0;
+        }
+
+        if ($this->freetimetocall_left[0] >= $sessiontime) {
             $cost_customer = 0;
         }
 
@@ -569,7 +580,16 @@ class CalcAgi
         }
         $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
+        if (!isset($modelTrunks[0]->id)) {
+            $MAGNUS->hangup($agi, 34);
+            return;
+        }
+
+        $original_calleid = $MAGNUS->CallerID;
+
         foreach ($modelTrunks as $key => $trunk) {
+
+            $MAGNUS->CallerID = $original_calleid;
 
             $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
             $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -586,12 +606,38 @@ class CalcAgi
             $allow_error       = $modelTrunk->allow_error;
             $status            = $modelTrunk->status;
             $this->id_provider = $modelTrunk->id_provider;
+            $provider_credit   = $modelTrunk->credit;
 
+            if ($modelTrunk->cnl == 1) {
+                if (substr($destination, 4, 1) == 9) {
+                    if (substr($destination, 2, 2) == substr($MAGNUS->CallerID, 0, 2)) {
+                        $removeprefix = "XXXX";
+                        $prefix       = "";
+                    }
+                } else if (strlen($MAGNUS->modelSip->cnl) > 1) {
+                    $sql      = "SELECT zone FROM pkg_cadup a JOIN pkg_provider_cnl b ON a.cnl = b.cnl WHERE prefix = '" . substr($destination, 0, 8) . "' AND id_provider = " . $modelTrunk->id_provider . " LIMIT 1";
+                    $modelCNL = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    if ($MAGNUS->modelSip->cnl == 'DYN') {
+                        $sql              = "SELECT zone FROM pkg_cadup a JOIN pkg_provider_cnl b ON a.cnl = b.cnl WHERE prefix = '55" . substr($MAGNUS->CallerID, 0, 6) . "' AND id_provider = " . $modelTrunk->id_provider . " LIMIT 1";
+                        $modelCNLCALLERID = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                        if (isset($modelCNL->zone) && isset($modelCNLCALLERID->zone) && $modelCNL->zone == $modelCNLCALLERID->zone) {
+                            $removeprefix = "XXXX";
+                            $prefix       = "";
+                        }
+                    } else {
+
+                        if (isset($modelCNL->zone) && $modelCNL->zone == $MAGNUS->modelSip->cnl) {
+                            $removeprefix = "XXXX";
+                            $prefix       = "";
+                        }
+                    }
+                }
+            }
             if ($typecall == 1) {
                 $timeout = 3600;
             }
 
-            if ($this->tariffObj[0]['credit_control'] == 1 && $this->tariffObj[0]['credit'] <= 0) {
+            if ($modelTrunk->credit_control == 1 && $provider_credit <= 0) {
                 $agi->verbose("Provider not have credit", 3);
                 continue;
             }
@@ -600,6 +646,18 @@ class CalcAgi
                 $agi->verbose("Trunk is inactive", 3);
                 continue;
             }
+
+            if (strncmp($MAGNUS->CallerID, $modelTrunk->cid_remove, strlen($modelTrunk->cid_remove)) == 0) {
+                $MAGNUS->CallerID = substr($MAGNUS->CallerID, strlen($modelTrunk->cid_remove));
+            }
+
+            if (strlen($modelTrunk->cid_add)) {
+                $MAGNUS->CallerID = $modelTrunk->cid_add . $MAGNUS->CallerID;
+            }
+
+            $agi->verbose($MAGNUS->CallerID, 5);
+
+            $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
 
             $this->sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $trunkcode, $removeprefix, $timeout
                 , $addparameter, $inuse, $maxuse, $allow_error);
@@ -643,7 +701,7 @@ class CalcAgi
     public function sendCalltoTrunk($MAGNUS, $agi, $destination, $prefix, $tech, $ipaddress, $removeprefix, $timeout
         , $addparameter, $inuse, $maxuse, $allow_error) {
 
-        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+        if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == "X") {
             $destination = substr($destination, strlen($removeprefix));
         }
 
@@ -741,7 +799,7 @@ class CalcAgi
         $CalcAgi->saveCDR($agi, $MAGNUS);
          */
 
-        if ($this->sipiax == 3) {
+        if ($this->sipiax == 3 && !preg_match('/\_WT/', $MAGNUS->sip_account)) {
             //if call is a DID, check is sipaccount is valid, else, set the callerid
             $sql             = "SELECT name FROM pkg_sip WHERE name  = '" . $MAGNUS->sip_account . "' LIMIT 1";
             $modelSipaccount = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -749,6 +807,11 @@ class CalcAgi
                 $MAGNUS->sip_account = $MAGNUS->CallerID;
             }
         }
+        $sql = "DELETE FROM pkg_queue_status WHERE callId = " . $MAGNUS->uniqueid;
+        $agi->exec($sql);
+
+        $sql          = "SELECT id FROM pkg_servers WHERE host = '" . $agi->get_variable("SIPDOMAIN", true) . "'";
+        $modelServers = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if ($this->terminatecauseid == 1) {
 
@@ -762,6 +825,10 @@ class CalcAgi
                         '$this->real_sessiontime', '$this->terminatecauseid', '$this->sessionbill',
                         '$this->sipiax','$this->buycost'";
 
+            if (isset($modelServers->id)) {
+                $fields .= ', id_server';
+                $values .= ", $modelServers->id";
+            }
             if (is_numeric($MAGNUS->id_trunk)) {
                 $fields .= ', id_trunk';
                 $values .= ", $MAGNUS->id_trunk";
@@ -781,6 +848,9 @@ class CalcAgi
             $sql = "INSERT INTO pkg_cdr ($fields) VALUES ($values) ";
             $agi->exec($sql);
 
+            $sql = "UPDATE pkg_provider SET credit = credit - $this->buycost WHERE id=" . $this->id_provider . " LIMIT 1;";
+            $agi->exec($sql);
+
             if ($returnID == true) {
                 return $agi->lastInsertId();
             }
@@ -789,12 +859,26 @@ class CalcAgi
             if (file_exists(dirname(__FILE__) . '/CallCache.php')) {
                 include 'CallCache.php';
             } else {
+                $keys        = $agi->get_variable("HANGUPCAUSE_KEYS()", true);
+                $tech_string = explode(",", $keys);
+                foreach ($tech_string as $key => $value) {
+                    if (preg_match('/' . $this->trunkcode . '/', $value)) {
+                        $TECHSTRING = $value;
+                        break;
+                    }
+                }
+                $code   = substr($agi->get_variable('HANGUPCAUSE(' . $TECHSTRING . ',tech)', true), 4, 3);
                 $fields = "uniqueid,id_user,calledstation,id_plan,id_trunk,callerid,src,
-                        starttime, terminatecauseid,sipiax,id_prefix";
+                        starttime, terminatecauseid,sipiax,id_prefix,hangupcause";
 
                 $values = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$MAGNUS->destination','$MAGNUS->id_plan',
                         '$MAGNUS->id_trunk','$MAGNUS->CallerID', '$MAGNUS->sip_account',
-                        '$this->starttime', '$this->terminatecauseid','$this->sipiax','$this->id_prefix'";
+                        '$this->starttime', '$this->terminatecauseid','$this->sipiax','$this->id_prefix','$code'";
+
+                if (isset($modelServers->id)) {
+                    $fields .= ', id_server';
+                    $values .= ", $modelServers->id";
+                }
 
                 $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
                 $agi->exec($sql);

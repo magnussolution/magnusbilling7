@@ -60,12 +60,35 @@ class UserController extends Controller
         'idGroupid_user_type',
         'idPlanname',
     );
+
     public $fieldsInvisibleAgent = array(
         'id_group',
         'idGroupname',
         'enableexpire',
         'expirationdate',
         'loginkey',
+    );
+
+    public $fieldsNotUpdateClient = array(
+        'credit',
+        'id_plan',
+        'id_user',
+        'id_group_agent',
+        'id_offer',
+        'typepaid',
+        'creditlimit',
+        'calllimit',
+        'restriction',
+        'restriction_use',
+    );
+
+    public $fieldsNotUpdateAgent = array(
+        'credit',
+        'id_user',
+        'id_group_agent',
+        'calllimit',
+        'restriction',
+        'restriction_use',
     );
 
     public function init()
@@ -103,7 +126,6 @@ class UserController extends Controller
         AsteriskAccess::instance()->generateSipPeers();
         AsteriskAccess::instance()->generateSipDid();
 
-        $this->siproxyServer($values, 'destroy');
         return;
     }
 
@@ -434,7 +456,9 @@ class UserController extends Controller
     {
         $values = $this->getAttributesRequest();
 
-        if (Yii::app()->session['user_type'] == 2) {
+        if (Yii::app()->session['user_type'] == 3) {
+            exit;
+        } else if (Yii::app()->session['user_type'] == 2) {
             $id_user = Yii::app()->getSession()->get('id_user');
 
             $sql     = "SELECT id_group_agent FROM pkg_user WHERE id = :id";
@@ -470,6 +494,18 @@ class UserController extends Controller
             $modelUser->credit          = $values['credit'] > 0 ? $values['credit'] : 0;
             $modelUser->save();
 
+            if ($modelUser->idGroup->idUserType->id == 3) {
+                $modelSip              = new Sip();
+                $modelSip->id_user     = $modelUser->id;
+                $modelSip->name        = $modelUser->username;
+                $modelSip->allow       = $this->config['global']['default_codeds'];
+                $modelSip->host        = 'dynamic';
+                $modelSip->insecure    = 'no';
+                $modelSip->defaultuser = $modelUser->username;
+                $modelSip->secret      = $modelUser->password;
+                $modelSip->save();
+            }
+
             if ($values['credit'] > 0) {
                 $modelRefill              = new Refill();
                 $modelRefill->id_user     = $modelUser->id;
@@ -480,6 +516,8 @@ class UserController extends Controller
             }
 
         }
+
+        AsteriskAccess::instance()->generateSipPeers();
 
         echo json_encode(array(
             $this->nameSuccess => true,
@@ -506,7 +544,7 @@ class UserController extends Controller
 
             if ($attributes[$i]['id_offer'] > 0) {
 
-                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1', array(
+                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1 AND status = 1 AND releasedate = "0000-00-00 00:00:00"', array(
                     ':key'  => $attributes[$i]['id_offer'],
                     ':key1' => $attributes[$i]['id'],
                 ));
@@ -552,7 +590,10 @@ class UserController extends Controller
                 }
 
             } else {
-                $attributes[$i]['offer'] = 0;
+
+                $modelSip                    = Sip::model()->count('id_user = :key', array(':key' => $attributes[$i]['id']));
+                $attributes[$i]['sip_count'] = $modelSip;
+                $attributes[$i]['offer']     = 0;
             }
 
         }
@@ -563,20 +604,19 @@ class UserController extends Controller
     {
 
         $CLAUSE_DATE   = $this->checkDaysPackage($startday, $billingtype);
-        $sql           = "SELECT  COUNT(*) AS status FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
-        $modelOfferCdr = Yii::app()->db->createCommand($sql)->queryAll();
+        $sql           = "SELECT  COUNT(*) AS id FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
+        $modelOfferCdr = OfferCdr::model()->findBySql($sql);
 
-        return isset($modelOfferCdr[0]['status']) ? $modelOfferCdr[0]['status'] : 0;
+        return isset($modelOfferCdr->id) ? $modelOfferCdr->id : 0;
     }
 
     public function packageUsedSeconds($id_user, $id_offer, $billingtype, $startday)
     {
-        $CLAUSE_DATE = $this->checkDaysPackage($startday, $billingtype);
-        $sql         = "SELECT sum(used_secondes) AS used_secondes FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' ";
+        $CLAUSE_DATE   = $this->checkDaysPackage($startday, $billingtype);
+        $sql           = "SELECT sum(used_secondes) AS used_secondes FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' ";
+        $modelOfferCdr = OfferCdr::model()->findBySql($sql);
 
-        $modelOfferCdr = Yii::app()->db->createCommand($sql)->queryAll();
-
-        return isset($modelOfferCdr[0]['used_secondes']) ? $modelOfferCdr[0]['used_secondes'] : 0;
+        return isset($modelOfferCdr->used_secondes) ? $modelOfferCdr->used_secondes : 0;
 
     }
 
@@ -621,5 +661,17 @@ class UserController extends Controller
         }
 
         return $CLAUSE_DATE;
+    }
+
+    public function removeColumns($columns)
+    {
+
+        foreach ($columns as $key => $column) {
+            if ($column['dataIndex'] == 'sip_count') {
+                unset($columns[$key]);
+            }
+        }
+
+        return $columns;
     }
 }

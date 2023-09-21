@@ -83,14 +83,97 @@ class PhoneNumberController extends Controller
         return $filter;
     }
 
-    public function actionCsv($value = '')
+    public function actionCsv()
     {
         $_GET['columns'] = preg_replace('/status/', 't.status', $_GET['columns']);
         $_GET['columns'] = preg_replace('/name/', 't.name', $_GET['columns']);
 
-        parent::actionCsv();
-    }
+        if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+            header('HTTP/1.0 401 Unauthorized');
+            die("Access denied to read in module:" . $this->instanceModel->getModule());
+        }
 
+        if (!isset(Yii::app()->session['id_user'])) {
+            $info = 'User try export CSV without login';
+            MagnusLog::insertLOG(7, $info);
+            exit;
+        } else {
+            $info = 'User try export CSV ' . $this->abstractModel->tableName();
+            MagnusLog::insertLOG(7, $info);
+        }
+
+        $columns = json_decode($_GET['columns'], true);
+
+        $columns = $this->repaceColumns($columns);
+
+        $columns = $this->removeColumns($columns);
+
+        $columns = $this->subscribeColunms($columns);
+
+        $this->setLimit($_GET);
+
+        $this->setStart($_GET);
+
+        $this->setSort();
+
+        $this->order = 't.id ASC';
+
+        $this->setfilter($_GET);
+
+        $this->applyFilterToLimitedAdmin();
+
+        $nameFileCsv = $this->nameFileReport . time();
+        $this->convertRelationFilter();
+        $header = '';
+        foreach ($columns as $key => $value) {
+            $header .= '"' . ($value['header']) . '",';
+        }
+
+        $sql = "SELECT " . substr($header, 0, -1) . " UNION ALL SELECT " . $this->getColumnsFromReport($columns) . " FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
+
+        $command = Yii::app()->db->createCommand($sql);
+        if ((is_array($this->paramsFilter) || is_object($this->paramsFilter)) && count($this->paramsFilter)) {
+            foreach ($this->paramsFilter as $key => $value) {
+                $command->bindValue($key, $value, PDO::PARAM_STR);
+            }
+
+        }
+
+        //create a file pointer
+        $f = fopen('php://memory', 'w');
+
+        foreach ($command->queryAll() as $key => $fields) {
+            $fieldsCsv = array();
+
+            foreach ($fields as $key => $value) {
+
+                if ($key == 'Description' && preg_match('/DTMF/', $value)) {
+                    preg_match_all('/.* at (.*)/', $value, $date);
+                    $date = isset($date[1][0]) ? $date[1][0] : '';
+                    array_push($fieldsCsv, $date);
+
+                    $data = explode('|', $value);
+                    foreach ($data as $key => $line) {
+                        $line    = preg_replace('/DTMF/', 'press', $line);
+                        $details = explode('at', $line);
+                        array_push($fieldsCsv, $details[0]);
+                    }
+
+                } else {
+                    array_push($fieldsCsv, $value);
+                }
+
+            }
+            fputcsv($f, $fieldsCsv, ';');
+        }
+
+        fseek($f, 0);
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $this->modelName . '_' . date('Y-m-d') . '.csv"');
+
+        fpassthru($f);
+    }
     public function actionReport($value = '')
     {
         $_POST['columns'] = preg_replace('/status/', 't.status', $_POST['columns']);

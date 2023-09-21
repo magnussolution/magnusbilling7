@@ -54,17 +54,18 @@ class Trunk extends Model
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        return array(
+        $rules = array(
             array('trunkcode, id_provider, allow, providertech, host', 'required'),
-            array('allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use', 'numerical', 'integerOnly' => true),
+            array('allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use, cnl', 'numerical', 'integerOnly' => true),
             array('secret', 'length', 'max' => 50),
             array('nat, trunkcode, sms_res', 'length', 'max' => 50),
             array('trunkprefix, providertech, removeprefix, context, insecure, disallow', 'length', 'max' => 20),
             array('providerip, user,fromuser, allow, host, fromdomain', 'length', 'max' => 80),
-            array('addparameter', 'length', 'max' => 120),
+            array('addparameter, block_cid', 'length', 'max' => 120),
             array('link_sms', 'length', 'max' => 250),
             array('dtmfmode, qualify', 'length', 'max' => 7),
             array('directmedia,sendrpid', 'length', 'max' => 10),
+            array('cid_add,cid_remove', 'length', 'max' => 11),
             array('type, language', 'length', 'max' => 6),
             array('transport,encryption', 'length', 'max' => 3),
             array('port', 'length', 'max' => 5),
@@ -73,6 +74,7 @@ class Trunk extends Model
             array('trunkcode', 'checkTrunkCode'),
             array('trunkcode', 'uniquePeerName'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkTrunkCode($attribute, $params)

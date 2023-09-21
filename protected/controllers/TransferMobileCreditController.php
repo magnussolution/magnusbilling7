@@ -79,7 +79,13 @@ class TransferMobileCreditController extends Controller
         }
 
         if (isset($_POST['amountValues'])) {
-            $_POST['TransferToMobile']['amountValues'] = $_POST['amountValues'];
+
+            if ($_POST['amountValues'] == 0) {
+                unset($_POST['amountValues']);
+            } else {
+                $_POST['TransferToMobile']['amountValues'] = $_POST['amountValues'];
+            }
+
         }
 
         //if we already request the number info, check if select a valid amount
@@ -408,11 +414,8 @@ class TransferMobileCreditController extends Controller
         echo $modelSendCreditRates->idProduct->provider . "<br>";
         exit;
          */
-        if ($modelSendCreditRates->idProduct->provider == 'TanaSend') {
-            $this->addInDataBase(0);
-        } else {
-            $this->addInDataBase(1);
-        }
+
+        $this->addInDataBase(1);
 
         if ($this->test == true) {
             echo "REMOVE " . $this->user_cost . " from user " . $this->modelTransferToMobile->username . "<br>";
@@ -801,35 +804,33 @@ class TransferMobileCreditController extends Controller
         $i      = 0;
 
         ?>
-            <?php foreach ($modelSendCreditProducts as $key => $product):
-            // echo '<pre>';
-            //print_r($product->getAttributes());?>
+            <?php foreach ($modelSendCreditProducts as $key => $product): ?>
 
-                                                                                                                                                                    <?php if (is_numeric($product->product)): ?>
+                <?php if (is_numeric($product->product)): ?>
 
-                                                                                                                                                                        <?php Yii::app()->session['is_interval'] = false;?>
-                                                                                                                                                                    <label for="2" class="company__row" id="productLabel<?php echo $i ?>">
-                                                                                                                                                                            <input type="radio"  id="productinput<?php echo $i ?>" name="amountValues" value="<?php echo $product->id ?>">
-                                                                                                                                                                            <div  class="company__logo-container" onclick="handleChange1(<?php echo $i ?>,<?php echo $i + 1 ?>);" id='product<?php echo $i ?>' >
-                                                                                                                                                                                <?php echo '<font size=1px>' . $product->currency_dest . ' </font>' . $product->product . ' = <font size=1px>' . $product->currency_orig . ' </font>' . number_format($modelSendCreditRates[$i]->sell_price, 2) ?>
+                    <?php Yii::app()->session['is_interval'] = false;?>
+                    <label for="2" class="company__row" id="productLabel<?php echo $i ?>">
+                            <input type="radio"  id="productinput<?php echo $i ?>" name="amountValues" value="<?php echo $product->id ?>">
+                            <div  class="company__logo-container" onclick="handleChange1(<?php echo $i ?>,<?php echo $i + 1 ?>);" id='product<?php echo $i ?>' >
+                                <?php echo '<font size=1px>' . $product->currency_dest . ' </font>' . $product->product . ' = <font size=1px>' . $product->currency_orig . ' </font>' . number_format($modelSendCreditRates[$i]->sell_price, 2) ?>
 
-                                                                                                                                                                                </div>
-                                                                                                                                                                        </label>
-                                                                                                                                                                        <?php $i++;?>
-                                                                                                                                                                    <?php else: ?>
+                                </div>
+                    </label>
+                        <?php $i++;?>
+                <?php else: ?>
 
-                        <?php Yii::app()->session['is_interval']                 = true;?>
-                        <?php Yii::app()->session['interval_currency']           = $product->currency_dest;?>
-                        <?php Yii::app()->session['interval_product_id']         = $product->id;?>
-                        <?php Yii::app()->session['interval_product_interval']   = $product->product;?>
-                        <?php Yii::app()->session['interval_product_sell_price'] = trim($modelSendCreditRates[$i]->sell_price);?>
-                        <?php Yii::app()->session['allowedAmount']               = explode('-', $product->product)?>
+                        <?php Yii::app()->session['is_interval']                   = true;?>
+                        <?php Yii::app()->session['interval_currency']             = $product->currency_dest;?>
+                        <?php Yii::app()->session['interval_product_id']           = $product->id;?>
+                        <?php Yii::app()->session['interval_product_interval']     = $product->product;?>
+                        <?php Yii::app()->session['interval_product_sell_price']   = trim($modelSendCreditRates[$i]->sell_price);?>
+                        <?php Yii::app()->session['interval_product_retail_price'] = trim($product->retail_price);?>
+                        <?php Yii::app()->session['allowedAmount']                 = explode('-', $product->product)?>
                 <?php endif?>
             <?php endforeach;?>
 
         <?php
-
-        if (Yii::app()->session['is_interval'] == true) {
+if (Yii::app()->session['is_interval'] == true) {
             echo '|is_interval';
         }
         Yii::app()->session['amounts']    = $values;
@@ -843,4 +844,28 @@ class TransferMobileCreditController extends Controller
         $modelSendCreditProducts = SendCreditProducts::model()->findByPk((int) $_GET['id']);
         echo $modelSendCreditProducts->info;
     }
+
+    public function actionConvertCurrency()
+    {
+
+        $modelSendCreditProducts = SendCreditProducts::model()->findByPk(Yii::app()->session['interval_product_id']);
+
+        if ($_GET['currency'] == 'EUR') {
+
+            $modelSendCreditRates = SendCreditRates::model()->find('id_user = :key AND id_product = :key1', [
+                ':key'  => Yii::app()->session['id_user'],
+                ':key1' => $modelSendCreditProducts->id,
+            ]);
+
+            $amountBDT = $_GET['amount'] / $modelSendCreditRates->sell_price;
+
+            echo $amount = number_format($amountBDT, 0, '', '');
+        } else {
+            $amountBDT = $_GET['amount'] * $modelSendCreditProducts->retail_price;
+
+            echo $amount = number_format($amountBDT, 2);
+
+        }
+    }
+
 }

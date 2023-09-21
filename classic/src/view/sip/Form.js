@@ -193,6 +193,17 @@ Ext.define('MBilling.view.sip.Form', {
                     hidden: !App.user.isAdmin,
                     allowBlank: true,
                     maxLength: 6
+                }, {
+                    name: 'cnl',
+                    fieldLabel: t('CNL zone'),
+                    allowBlank: true,
+                    hidden: !App.user.isAdmin || (App.user.language != 'pt_BR' && !window.cnl)
+                }, {
+                    xtype: 'textareafield',
+                    allowBlank: true,
+                    name: 'description',
+                    fieldLabel: t('Description'),
+                    hidden: !App.user.isAdmin
                 }]
             }, {
                 title: t('NAT'),
@@ -225,7 +236,14 @@ Ext.define('MBilling.view.sip.Form', {
                     enableKeyEvents: true,
                     labelWidth: 170
                 },
-                items: [{
+                items: [, {
+                    xtype: 'trunkgrouplookup',
+                    ownerForm: me,
+                    name: 'id_trunk_group',
+                    fieldLabel: t('Trunk groups'),
+                    hidden: !App.user.isAdmin,
+                    allowBlank: true
+                }, {
                     name: 'context',
                     fieldLabel: t('Context'),
                     value: 'billing',
@@ -265,7 +283,7 @@ Ext.define('MBilling.view.sip.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'ringfalse',
-                    fieldLabel: t('Ring false'),
+                    fieldLabel: t('Fake Ring'),
                     value: '0',
                     allowBlank: !App.user.isAdmin
                 }, {
@@ -395,6 +413,20 @@ Ext.define('MBilling.view.sip.Form', {
                     name: 'voicemail_password',
                     fieldLabel: t('Password'),
                     value: ''
+                }]
+            }, {
+                title: t('Asterisk extra config'),
+                items: [{
+                    xtype: 'textarea',
+                    labelAlign: 'right',
+                    plugins: 'markallowblank',
+                    labelWidth: 90,
+                    name: 'sip_config',
+                    fieldLabel: t('Parameters'),
+                    allowBlank: true,
+                    height: 400,
+                    anchor: '100%',
+                    hidden: !App.user.isAdmin
                 }]
             }, {
                 title: t('SipShowPeer'),

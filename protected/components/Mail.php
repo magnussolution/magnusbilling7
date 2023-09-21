@@ -32,8 +32,10 @@ class Mail
     private $from_email = '';
     private $from_name  = '';
     private $to_email   = '';
+    private $to_email2  = '';
     private $language   = '';
     public $output;
+    public $type;
 
     public static $DESCRIPTION = '$description$';
 
@@ -41,6 +43,7 @@ class Mail
     public static $TYPE_PAYMENT                   = 'payment';
     public static $TYPE_REFILL                    = 'refill';
     public static $TYPE_REMINDER                  = 'reminder';
+    public static $TYPE_CREDIT_DAILY              = 'credit';
     public static $TYPE_SIGNUP                    = 'signup';
     public static $TYPE_FORGETPASSWORD            = 'forgetpassword';
     public static $TYPE_SIGNUPCONFIRM             = 'signupconfirmed';
@@ -122,7 +125,7 @@ class Mail
     //Used by mail type = did_unpaid  & subscription_unpaid
     public static $DAY_REMAINING_KEY = '$days_remaining$';
     public static $INVOICE_REF_KEY   = '$invoice_ref$';
-
+    public static $NEXT_DUE_DATE     = '$next_due_date$';
     //Used by mail type = epaymentverify
     public static $TIME_KEY           = '$time$';
     public static $PAYMENTGATEWAY_KEY = '$paymentgateway$';
@@ -143,6 +146,8 @@ class Mail
     public static $CUSTOMER_FIRSTNAME_KEY              = '$firstname$';
     public static $CUSTOMER_LASTNAME_KEY               = '$lastname$';
     public static $CUSTOMER_CREDIT_BASE_CURRENCY_KEY   = '$credit$';
+    public static $CUSTOMER_ACCOUNT_CREDIT             = '$account_credit$';
+    public static $CUSTOMER_CREDIT_LIMIT               = '$credit_limit$';
     public static $CUSTOMER_CREDIT_IN_OWN_CURRENCY_KEY = '$creditcurrency$';
     public static $CUSTOMER_CURRENCY                   = '$currency$';
     public static $CUSTOMER_CARDNUMBER_KEY             = '$cardnumber$';
@@ -158,7 +163,7 @@ class Mail
     {
 
         if (!empty($type)) {
-
+            $this->type  = $type;
             $modelUser   = User::model()->findByPk((int) $id_user);
             $modelConfig = Configuration::model()->find('config_key = "ip_servers"');
 
@@ -173,7 +178,9 @@ class Mail
                 return;
             }
 
-            $real_credit = $modelUser->typepaid == 1
+            $account_credit = number_format($modelUser->credit, 2);
+            $credit_limit   = $modelUser->creditlimit;
+            $real_credit    = $modelUser->typepaid == 1
             ? $modelUser->credit + $modelUser->creditlimit
             : $modelUser->credit;
 
@@ -228,7 +235,8 @@ class Mail
             $modelUser->password            = isset($modelUser->password) ? $modelUser->password : null;
             $modelUser->credit_notification = isset($modelUser->credit_notification) ? $modelUser->credit_notification : null;
 
-            $this->to_email = isset($modelUser->email) ? $modelUser->email : null;
+            $this->to_email  = isset($modelUser->email) ? $modelUser->email : null;
+            $this->to_email2 = isset($modelUser->email2) ? $modelUser->email2 : null;
             $this->replaceInEmail(self::$CUSTOMER_ID, $modelUser->id);
             $this->replaceInEmail(self::$USER_ID, $modelUser->id);
             $this->replaceInEmail(self::$CUSTOMER_CARDNUMBER_KEY, $modelUser->username);
@@ -240,6 +248,8 @@ class Mail
             $this->replaceInEmail(self::$CUSTOMER_PASSWORD_KEY, $modelUser->password);
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_IN_OWN_CURRENCY_KEY, $credit);
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_BASE_CURRENCY_KEY, $credit);
+            $this->replaceInEmail(self::$CUSTOMER_ACCOUNT_CREDIT, $account_credit);
+            $this->replaceInEmail(self::$CUSTOMER_CREDIT_LIMIT, $credit_limit);
             $this->replaceInEmail(self::$CUSTOMER_CURRENCY, $currency);
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_NOTIFICATION, $modelUser->credit_notification);
             $this->replaceInEmail(self::$CANCEL_CREDIT_NOTIFICATION_URL, 'http://' . $modelConfig->config_value . '/mbilling/index.php/authentication/cancelCreditNotification?id=' . $modelUser->id . '&key=' . sha1($modelUser->id . $modelUser->username . $modelUser->password));
@@ -326,6 +336,27 @@ class Mail
             return;
         }
 
+        $result = json_decode($this->message);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            if (isset($result->url)) {
+                $this->message = preg_replace('/\$to_email\$/', $this->to_email, $this->message);
+                $this->message = preg_replace('/\$subject\$/', $this->title, $this->message);
+
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                    "Content-Type: application/json",
+                ));
+                curl_setopt($curl, CURLOPT_URL,
+                    "$result->url"
+                );
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $this->message);
+                $result = curl_exec($curl);
+                return true;
+            }
+        }
+
         $modelSmtps = Smtps::model()->find('id_user = :key', array(':key' => $this->id_agent));
 
         if (!isset($modelSmtps->id)) {
@@ -354,16 +385,26 @@ class Mail
         $mail->Username   = $smtp_username;
         $mail->Password   = $smtp_password;
         $mail->Port       = $smtp_port;
-        $mail->SetFrom($this->from_email, $this->from_name);
-        $mail->SetLanguage($this->language == 'pt_BR' ? 'br' : $this->language);
 
+        if ($smtp_host == 'smtp.office365.com') {
+            $mail->SetFrom($smtp_username, $this->from_name);
+        } else {
+            $mail->SetFrom($this->from_email, $this->from_name);
+        }
+
+        $mail->SetLanguage($this->language == 'pt_BR' ? 'br' : $this->language);
         $mail->Subject = mb_encode_mimeheader($this->title);
         $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
         $mail->MsgHTML($this->message);
         $mail->AddAddress($this->to_email);
+        if (strlen($this->to_email2)) {
+            $mail->AddAddress($this->to_email2);
+        }
         $mail->CharSet = 'utf-8';
         ob_start();
         @$mail->Send();
+
+        Yii::log('Email sent to ' . $this->to_email . ' ' . $this->to_email2 . '. Subject -> ' . $mail->Subject . '. Email type: ' . $this->type, 'error');
         $this->output = ob_get_contents();
         ob_end_clean();
         return true;

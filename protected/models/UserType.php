@@ -52,9 +52,10 @@ class UserType extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name', 'required'),
             array('name', 'length', 'max' => 100),
         );
+        return $this->getExtraField($rules);
     }
 }

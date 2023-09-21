@@ -292,6 +292,9 @@ Ext.define('Helper.Util', {
             case 10:
                 value = t('Context');
                 break;
+            case 11:
+                value = t('Multiples IPs');
+                break;
         }
         return value;
     },
@@ -369,7 +372,7 @@ Ext.define('Helper.Util', {
         return value;
     },
     formatDirection: function(value) {
-        value = value == 1 ? t('Outbound') : t('Inbound');
+        value = value == 1 ? t('Outbound') : value == 2 ? t('Inbound') : t('Outbound & CallerID');
         return value;
     },
     formatHangupCause: function(value) {
@@ -549,6 +552,32 @@ Ext.define('Helper.Util', {
         value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 3 ? t('Sent') : value == 4 ? t('Blocked') : value == 5 ? t('AMD') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
+    formatUserStatus: function(value) {
+        var me = Helper.Util;
+        switch (value) {
+            case 0:
+                color = 'red';
+                value = t('Inactive');
+                break;
+            case 1:
+                color = 'green';
+                value = t('Active');
+                break;
+            case 2:
+                color = 'blue';
+                value = t('Pending');
+                break;
+            case 3:
+                color = '#FFCC00';
+                value = t('Blocked In');
+                break;
+            case 4:
+                color = 'pink';
+                value = t('Blocked In Out');
+                break;
+        }
+        return '<span style="color:' + color + '">' + value + '</span>';
+    },
     formatBooleanSms: function(value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : '#FFCC00',
@@ -558,7 +587,7 @@ Ext.define('Helper.Util', {
     formatBooleanServers: function(value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? '#FFCC00' : '#FFCC00',
-            value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('OffLine') : t('Pending');
+            value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('OffLine') : value == 3 ? t('Error') : value == 4 ? t('Alert') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
     formatLanguageImage: function(value) {
@@ -614,6 +643,9 @@ Ext.define('Helper.Util', {
                 break;
             case 9:
                 value = t('Invalidargs');
+                break;
+            case 10:
+                value = t('Machine');
                 break;
         }
         return value;

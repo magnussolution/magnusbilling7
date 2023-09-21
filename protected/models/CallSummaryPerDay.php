@@ -62,9 +62,10 @@ class CallSummaryPerDay extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('day,id_user,sessiontime,aloc_all_calls,nbcall,buycost,sessionbill,lucro', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
 }

@@ -52,10 +52,14 @@ class CallOnlineChart extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('total', 'numerical', 'integerOnly' => true),
             array('date, answer', 'length', 'max' => 100),
         );
+
+        $rules = $this->getExtraField($rules);
+
+        return $rules;
     }
 
     public function updateCall()

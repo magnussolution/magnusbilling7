@@ -31,7 +31,7 @@ class ServicesProcess
                 array(
                     ':key' => (int) $id_service,
                 ));
-            if (!count($modelServicesUse)) {
+            if (!isset($modelServicesUse->id)) {
                 continue;
             }
 
@@ -67,6 +67,15 @@ class ServicesProcess
                     //have days yet.
                     $modelUser                           = User::model()->findByPk((int) $modelServicesUse->id_user);
                     $modelServicesUse->idServices->price = $priceToreturn;
+
+                    $description              = Yii::t('zii', 'Return credit after cancellation') . '. ' . Yii::t('zii', 'Service') . ' ' . Yii::t('zii', 'name') . ' ' . $modelServicesUse->idServices->name;
+                    $modelRefill              = new Refill();
+                    $modelRefill->id_user     = $modelServicesUse->id_user;
+                    $modelRefill->credit      = $priceToreturn;
+                    $modelRefill->description = $description;
+                    $modelRefill->payment     = 1;
+                    $modelRefill->save();
+
                     ServicesProcess::updateUser('release', $modelServicesUse);
                 }
             }
@@ -157,7 +166,7 @@ class ServicesProcess
                 //deleta as contas voip que superam o limite do servico comprado.
                 if ($method != 'activation') {
                     $modelSip         = Sip::model()->findAll('id_user = :key', array(':key' => $modelServicesUse->id_user));
-                    $totalSipAccounts = count($modelSip);
+                    $totalSipAccounts = isset($modelSip->id);
                     $newLimit         = $modelServicesUse->idUser->sipaccountlimit - $modelServicesUse->idServices->sipaccountlimit;
                     $limitToDelete    = $totalSipAccounts - $newLimit - 1;
                     //deleta as contas voip que superam o limite do servico comprado.
@@ -204,9 +213,14 @@ class ServicesProcess
         $description = Yii::t('zii', $method) . ' ' . Yii::t('zii', 'Service') . ' ' . $modelServicesUse->idServices->name;
 
         if ($method == 'activation') {
-            $modelRefill              = new Refill();
-            $modelRefill->id_user     = $modelServicesUse->id_user;
-            $modelRefill->credit      = $credit;
+            $modelRefill          = new Refill();
+            $modelRefill->id_user = $modelServicesUse->id_user;
+            if (preg_match('/\-\-/', $credit)) {
+                $modelRefill->credit = $modelServicesUse->idServices->price * -1;
+            } else {
+                $modelRefill->credit = $credit;
+            }
+
             $modelRefill->description = $description;
             $modelRefill->payment     = 1;
             $modelRefill->save();
@@ -214,8 +228,14 @@ class ServicesProcess
 
         if ($updateUserCredit == true) {
             //add or remove user credit
-            $modelUser         = User::model()->findByPk($modelServicesUse->id_user);
-            $modelUser->credit = $credit > 0 ? $modelUser->credit + $credit : $modelUser->credit - ($credit * -1);
+            $modelUser = User::model()->findByPk($modelServicesUse->id_user);
+
+            if (preg_match('/\-\-/', $credit)) {
+                $modelUser->credit = $modelUser->credit + ($modelServicesUse->idServices->price * -1);
+            } else {
+                $modelUser->credit = $credit > 0 ? $modelUser->credit + $credit : $modelUser->credit - ($credit * -1);
+            }
+
             $modelUser->saveAttributes(array('credit' => $modelUser->credit));
         }
 
@@ -243,8 +263,11 @@ class ServicesProcess
         $modelServicesUse->save();
 
         $description = Yii::t('zii', 'Monthly payment Service') . ' ' . $modelServicesUse->idServices->name;
-        UserCreditManager::releaseUserCredit($modelServicesUse->id_user, '-' . $modelServicesUse->idServices->price, $description);
-
+        if ($modelServicesUse->idServices->price > 0) {
+            UserCreditManager::releaseUserCredit($modelServicesUse->id_user, '-' . $modelServicesUse->idServices->price, $description);
+        } else {
+            UserCreditManager::releaseUserCredit($modelServicesUse->id_user, $modelServicesUse->idServices->price, $description);
+        }
         $mail = new Mail(Mail::$TYPE_SERVICES_PAID, $modelServicesUse->id_user);
         $mail->replaceInEmail(Mail::$SERVICE_NAME, $modelServicesUse->idServices->name);
         $mail->replaceInEmail(Mail::$SERVICE_PRICE, $modelServicesUse->idServices->price);

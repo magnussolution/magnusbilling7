@@ -17,7 +17,7 @@ class BuyCreditController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!is_object($modelSip) || !count($modelSip)) {
+            if (!isset($modelSip->id)) {
                 echo 'User or password is invalid';
                 exit;
             }
@@ -27,24 +27,75 @@ class BuyCreditController extends Controller
                 $methodPay         = Methodpay::model()->find('payment_method = :key', array(':key' => 'Paypal'));
                 $_GET['id_method'] = $methodPay->id;
             }
+            Yii::app()->session['id_user'] = $modelSip->id_user;
+            Yii::app()->session['id_plan'] = $modelSip->idUser->id_plan;
+
+        }
+
+        $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
+        $modelPlan = Plan::model()->findByPk(Yii::app()->session['id_plan']);
+
+        if (isset($_GET['mobile'])) {
+
+            if (isset($_POST['pay_amount2']) && $_POST['pay_amount2'] > 0) {
+                $_POST['pay_amount'] = $_POST['pay_amount2'];
+            }
+
+            if (isset($_POST['pay_amount']) && $_POST['pay_amount'] > 0 && isset($_POST['payment_method']) && $_POST['payment_method'] > 0) {
+                $_GET['amount']    = $_POST['pay_amount'];
+                $_GET['id_method'] = $_POST['payment_method'];
+                //continue to the payment method
+            } else {
+
+                if (isset($_POST['id_method']) && $_POST['id_method'] > 0) {
+                    $modelMethodPay = Methodpay::model()->findByPK((int) $_POST['id_method']);
+                    $plan_parts     = explode(' ', $modelPlan->name);
+                    if (is_numeric(end($plan_parts))) {
+                        $modelMethodPay->min = end($plan_parts);
+                    }
+                } else {
+                    $modelMethodPay = Methodpay::model()->findAll('active = 1');
+                }
+
+                $this->render('mobile', array(
+                    'modelMethodPay' => $modelMethodPay,
+                    'modelUser'      => $modelUser,
+                    'reference'      => date('YmdHis') . '-' . $modelUser->username . '-' . $modelUser->id,
+                ));
+                exit;
+            }
 
         }
 
         $modelMethodPay = Methodpay::model()->findByPK((int) $_GET['id_method']);
 
-        if ($modelMethodPay->max > 0 && $_GET['amount'] > $modelMethodPay->max) {
-            exit(Yii::t('zii', 'The maximum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max);
-        } elseif ($modelMethodPay->min > 0 && $_GET['amount'] < $modelMethodPay->min) {
-            exit(Yii::t('zii', 'The minimum amount to') . ' ' . $modelMethodPay->show_name . ' ' . Yii::t('zii', 'is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min);
+        $plan_parts = explode(' ', $modelPlan->name);
+        if (is_numeric(end($plan_parts))) {
+            $modelMethodPay->min = end($plan_parts);
         }
 
-        $modelUser = User::model()->findByPk((int) $modelSip->id_user);
+        if ($modelMethodPay->max > 0 && $_GET['amount'] > $modelMethodPay->max || $modelMethodPay->min > 0 && $_GET['amount'] < $modelMethodPay->min) {
+            $error = Yii::t('zii', 'The minimum amount is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->min;
+            $error .= ' ' . Yii::t('zii', 'and') . ' ' . Yii::t('zii', 'The maximum amount is') . ' ' . Yii::app()->session['currency'] . ' ' . $modelMethodPay->max;
+        }
 
-        if ($modelMethodPay->active == 0 || $modelMethodPay->id_user != Yii::app()->session['id_agent']) {
+        if (isset($error)) {
+            echo "<script>alert('$error')</script>
+            <script>window.close();</script>";
+            exit;
+        }
+
+        if ($modelMethodPay->active == 0 || (isset(Yii::app()->session['id_agent']) && $modelMethodPay->id_user != Yii::app()->session['id_agent'])) {
             exit('invalid option');
         }
 
-        if ($modelMethodPay->payment_method == 'SuperLogica') {
+        if ($modelMethodPay->payment_method == 'Custom') {
+            $url = preg_replace("/\%amount\%/", $_GET['amount'], $modelMethodPay->url);
+            foreach ($modelUser as $key => $user) {
+                $modelMethodPay->url = preg_replace("/\%$key\%/", $modelUser->$key, $modelMethodPay->url);
+            }
+            header('Location: ' . $modelMethodPay->url);
+        } elseif ($modelMethodPay->payment_method == 'SuperLogica') {
             SLUserSave::criarBoleto($modelMethodPay, $modelUser);
         } else {
             $this->render(strtolower($modelMethodPay->payment_method), array(
@@ -96,11 +147,11 @@ class BuyCreditController extends Controller
                 }
             }
 
-            if ($modelServicesUse[0]->idUser->typepaid == 1) {
-                $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit;+$modelServicesUse[0]->idUser->creditlimit;
+            if (isset($modelServicesUse[0]->id) && $modelServicesUse[0]->idUser->typepaid == 1) {
+                $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit + $modelServicesUse[0]->idUser->creditlimit;
             }
 
-            if (!count($modelServicesUse)) {
+            if (!isset($modelServicesUse[0]->id)) {
                 $this->render('payservicelink', array(
                     'model'   => $model,
                     'message' => 'This service was paid or canceled.',
@@ -128,7 +179,7 @@ class BuyCreditController extends Controller
 
         }
 
-        if (!is_array($modelServicesUse) || !count($modelServicesUse)) {
+        if (!is_array($modelServicesUse) || !isset($modelServicesUse[0]->id)) {
             $this->render('payservicelink', array(
                 'model'   => $model,
                 'message' => 'Your selection not have any service pending.',

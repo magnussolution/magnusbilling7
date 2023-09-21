@@ -53,12 +53,13 @@ class UserRate extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_prefix', 'required'),
             array('id_user, id_prefix, initblock, billingblock', 'numerical', 'integerOnly' => true),
             array('rateinitial', 'length', 'max' => 10),
 
         );
+        return $this->getExtraField($rules);
     }
 
     /**

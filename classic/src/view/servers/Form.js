@@ -79,8 +79,25 @@ Ext.define('MBilling.view.servers.Form', {
             store: [
                 [1, t('Active')],
                 [0, t('Inactive')],
-                [2, t('OffLine')]
+                [2, t('OffLine')],
+                [4, t('Alert')]
             ]
+        }, {
+            xtype: 'fieldset',
+            style: 'margin-top:10px; overflow: visible;',
+            title: t('Select one or more slave.'),
+            collapsible: true,
+            reference: 'id_server',
+            height: 100,
+            collapsed: false,
+            items: [{
+                xtype: 'serverstag',
+                name: 'id_server',
+                fieldLabel: t(''),
+                labelWidth: 10,
+                anchor: '100%',
+                allowBlank: true
+            }]
         }, {
             xtype: 'textareafield',
             name: 'description',

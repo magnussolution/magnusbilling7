@@ -30,8 +30,11 @@ Ext.define('MBilling.model.Sms', {
         name: 'prefix',
         type: 'int'
     }, {
-        name: 'result',
+        name: 'status',
         type: 'int'
+    }, {
+        name: 'result',
+        type: 'string'
     }, {
         name: 'telephone',
         type: 'number'

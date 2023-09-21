@@ -18,16 +18,14 @@ Video:
 
 ### Prerequisites
 
-Linux Centos 7 or Debian 8 or newer. Recomended Centos 7
+Linux Debian 11 or Centos 7. Recomended DEBIAN 11
 
 
 ### Installing
 ```
-cd /usr/src/
-yum -y install wget
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
-chmod +x install.sh
-./install.sh
+
+curl -O https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/install.sh
+bash install.sh
 
 ```
 

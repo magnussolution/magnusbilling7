@@ -51,8 +51,9 @@ class CampaignPollController extends Controller
         }
 
         if (isset($_FILES["arq_audio"]) && strlen($_FILES["arq_audio"]["name"]) > 1) {
-            $typefile            = explode('.', $_FILES["arq_audio"]["name"]);
-            $values['arq_audio'] = "idPoll_" . $values['id'] . '.' . $typefile[1];
+            $data                = explode('.', $_FILES["arq_audio"]["name"]);
+            $typefile            = array_pop($data);
+            $values['arq_audio'] = "idPoll_" . $values['id'] . '.' . $typefile;
         }
         return $values;
     }
@@ -65,8 +66,9 @@ class CampaignPollController extends Controller
             if (file_exists($this->uploaddir . 'idPoll_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idPoll_' . $model->id . '.wav');
             }
-            $typefile   = explode('.', $_FILES["arq_audio"]["name"]);
-            $uploadfile = $this->uploaddir . 'idPoll_' . $model->id . '.' . $typefile[1];
+            $data       = explode('.', $_FILES["arq_audio"]["name"]);
+            $typefile   = array_pop($data);
+            $uploadfile = $this->uploaddir . 'idPoll_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["arq_audio"]["tmp_name"], $uploadfile);
         }
 

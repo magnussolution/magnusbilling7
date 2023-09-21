@@ -173,10 +173,107 @@ class DiddestinationController extends Controller
 
     }
 
+    public function actionbulkdestinatintion()
+    {
+        $this->isNewRecord = true;
+        $values            = $this->getAttributesRequest();
+
+       
+
+        $_GET['filter'] = $values['filters'];
+
+        $id_user = $values['id_user'];
+
+        $this->setfilter($_GET);
+
+        $modelDid = Did::model()->findAll($this->filter, $this->paramsFilter);
+
+        foreach ($modelDid as $key => $did) {
+
+            $values['id_did'] = $did->id;
+
+            if ($did->id_user == null && $did->reserved == 0) {
+
+                //isnewDID
+
+                $modelDiddestination            = new Diddestination();
+                $modelDiddestination->id_did    = $did->id;
+                $modelDiddestination->id_user   = $id_user;
+                $modelDiddestination->voip_call = $values['voip_call'];
+                $modelDiddestination->priority  = 1;
+                if (strlen($values['destination']) && $values['destination'] != 'undefined') {
+                    $modelDiddestination->destination = $values['destination'];
+                }
+                if (strlen($values['id_ivr']) && $values['id_ivr'] != 'undefined') {
+                    $modelDiddestination->id_ivr = $values['id_ivr'];
+                }
+
+                if (strlen($values['id_queue']) && $values['id_queue'] != 'undefined') {
+                    $modelDiddestination->id_queue = $values['id_queue'];
+                }
+
+                if (strlen($values['id_sip']) && $values['id_sip'] != 'undefined') {
+                    $modelDiddestination->id_sip = $values['id_sip'];
+                }
+
+                if (strlen($values['context']) && $values['context'] != 'undefined') {
+                    $modelDiddestination->context = $values['context'];
+                }
+
+                $values = $this->beforeSave($values);
+
+                $modelDiddestination->save();
+
+                $this->afterSave($modelDiddestination, $values);
+
+            } else {
+                //update destination
+
+                $modelDiddestination = Diddestination::model()->find('id_did = :key', [':key' => $did->id]);
+
+                if (isset($modelDiddestination)) {
+                    if ($modelDiddestination->id_user == $id_user) {
+                        //update destination
+                        $modelDiddestination->voip_call = $values['voip_call'];
+                        if (strlen($values['destination']) && $values['destination'] != 'undefined') {
+                            $modelDiddestination->destination = $values['destination'];
+                        }
+                        if (strlen($values['id_ivr']) && $values['id_ivr'] != 'undefined') {
+                            $modelDiddestination->id_ivr = $values['id_ivr'];
+                        }
+
+                        if (strlen($values['id_queue']) && $values['id_queue'] != 'undefined') {
+                            $modelDiddestination->id_queue = $values['id_queue'];
+                        }
+
+                        if (strlen($values['id_sip']) && $values['id_sip'] != 'undefined') {
+                            $modelDiddestination->id_sip = $values['id_sip'];
+                        }
+
+                        if (strlen($values['context']) && $values['context'] != 'undefined') {
+                            $modelDiddestination->context = $values['context'];
+                        }
+                         $values = $this->beforeSave($values);
+                        $modelDiddestination->save();
+
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        AsteriskAccess::instance()->generateSipDid();
+        echo json_encode(array(
+            $this->nameSuccess => $this->success,
+            $this->nameMsg     => $this->msg,
+        ));
+
+    }
+
     public function afterSave($model, $values)
     {
         AsteriskAccess::instance()->writeDidContext();
-        AsteriskAccess::instance()->generateSipDid();
 
         if ($this->isNewRecord) {
             $modelDid = Did::model()->findByPk($model->id_did);
@@ -186,6 +283,8 @@ class DiddestinationController extends Controller
                 $modelDid->reserved = 1;
                 $modelDid->id_user  = $model->id_user;
                 $modelDid->save();
+
+                AsteriskAccess::instance()->generateSipDid();
 
                 //discount credit of customer
                 $priceDid = $modelDid->connection_charge + $modelDid->fixrate;
@@ -233,6 +332,7 @@ class DiddestinationController extends Controller
 
             }
         }
+        AsteriskAccess::instance()->generateSipDid();
         return;
     }
 

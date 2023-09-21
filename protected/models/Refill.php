@@ -55,12 +55,14 @@ class Refill extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('payment', 'numerical', 'integerOnly' => true),
             array('credit', 'numerical', 'integerOnly' => false),
-            array('description, invoice_number', 'length', 'max' => 500),
+            array('description, invoice_number, image, date', 'length', 'max' => 500),
+
         );
+        return $this->getExtraField($rules);
     }
     /*
      * @return array regras de relacionamento.

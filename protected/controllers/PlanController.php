@@ -56,26 +56,28 @@ class PlanController extends Controller
 
     public function afterSave($model, $values)
     {
+
         if ($this->isNewRecord && Yii::app()->session['isAgent']) {
             //Create rates of Reseller
             RateAgent::model()->createAgentRates($model, Yii::app()->session['id_plan']);
         }
+        if (isset($model->id)) {
 
-        if ($model->portabilidadeMobile == 1) {
+            if ($model->portabilidadeMobile == 1) {
 
-            $this->importPortabilidade($model, 'mobile');
-        }
-        if ($model->portabilidadeFixed == 1) {
+                $this->importPortabilidade($model->id, 'mobile');
+            }
+            if ($model->portabilidadeFixed == 1) {
 
-            $this->importPortabilidade($model, 'fixed');
+                $this->importPortabilidade($model->id, 'fixed');
+            }
         }
 
         return;
     }
 
-    public function importPortabilidade($model, $type)
+    public function importPortabilidade($idPlan, $type)
     {
-
         if ($type == 'mobile') {
             $filter_name  = 'Celular';
             $filterPrefix = '11113';
@@ -83,11 +85,11 @@ class PlanController extends Controller
             $filter_name  = 'Fixo';
             $filterPrefix = '11111';
         }
-        $filter = "id_plan = $model->id AND t.status = 1 AND
-                    id_prefix IN (SELECT id FROM pkg_prefix WHERE prefix LIKE '" . $filterPrefix . "%')";
+        $filter = "id_plan = $idPlan AND t.status = 1 AND id_prefix IN (SELECT id FROM pkg_prefix WHERE prefix LIKE '" . $filterPrefix . "%')";
+
         $modelRate = Rate::model()->findAll($filter);
 
-        if (count($modelRate) == 0) {
+        if (!isset($modelRate[0]->id)) {
             $url = "https://www.magnusbilling.com/download/cod_operadora.csv";
             if (!$file = @file_get_contents($url, false)) {
                 return;
@@ -102,25 +104,28 @@ class PlanController extends Controller
             $rates = array();
 
             $price            = '0.1000';
-            $buyprice         = '0.0500';
             $initblock        = 30;
             $billingblock     = 6;
             $buyrateinitblock = 30;
             $buyrateincrement = 6;
-            $idPlan           = $model->id;
-            $modelTrunk       = Trunk::model()->find("id > 0");
+
+            $modelTrunkGroup = TrunkGroup::model()->find("id > 0");
 
             foreach ($file as $key => $value) {
 
-                $collum      = explode(',', $value);
+                $collum = explode(',', $value);
+
                 $prefix      = '1111' . substr($collum[0], 2);
                 $destination = trim($collum[1]);
 
+                if (!strlen($destination)) {
+                    continue;
+                }
                 if (preg_match("/$filter_name/", $destination)) {
 
                     $modelPrefix = Prefix::model()->find("prefix = '" . $prefix . "'");
 
-                    if (count($modelPrefix) > 0) {
+                    if (isset($modelPrefix->id)) {
                         if ($modelPrefix->destination != $destination) {
                             $modelPrefix->destination = $destination;
                             $modelPrefix->save();
@@ -139,8 +144,8 @@ class PlanController extends Controller
                 $destination = trim($collum[1]);
                 if (preg_match("/$filter_name/", $destination)) {
 
-                    $rates[] = "((SELECT id FROM pkg_prefix WHERE prefix = '$prefix' LIMIT 1), $idPlan, $price, $buyprice, " . $modelTrunk->id . ",
-                                $initblock, $billingblock, $buyrateinitblock, $buyrateincrement, 1)";
+                    $rates[] = "((SELECT id FROM pkg_prefix WHERE prefix = '$prefix' LIMIT 1), $idPlan, $price, " . $modelTrunkGroup->id . ",
+                                $initblock, $billingblock, 1)";
                 }
             }
             Rate::model()->insertPortabilidadeRates($rates);
@@ -162,6 +167,24 @@ class PlanController extends Controller
         }
 
         parent::actionRead($asJson = true, $condition = null);
+    }
+
+    public function getAttributesRequest()
+    {
+        $arrPost = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
+
+        /*permite salvar quando tem audio e extrafield*/
+        $id_service = array();
+        foreach ($arrPost as $key => $value) {
+            if ($key == 'id_services_array') {
+                if (isset($_POST['id_services_array']) && strlen($value) > 0) {
+                    $arrPost['id_services'] = explode(",", $_POST['id_services_array']);
+                }
+
+            }
+        };
+
+        return $arrPost;
     }
 
 }

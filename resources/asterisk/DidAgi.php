@@ -23,17 +23,42 @@ class DidAgi
     public $voip_call;
     public $did;
     public $sell_price;
+    public $buy_price;
+    public $agent_client_rate;
     public $modelDestination;
     public $modelDid;
     public $startCall;
     public $id_prefix = 0;
+    public $did_voip_model;
+    public $did_voip_model_sip_account;
 
     public function checkIfIsDidCall(&$agi, &$MAGNUS, &$CalcAgi)
     {
+
+        if (strlen($MAGNUS->accountcode) > 3) {
+            $sql                              = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' LIMIT 1";
+            $this->did_voip_model             = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $this->did_voip_model_sip_account = $MAGNUS->sip_account;
+        }
         $this->startCall = time();
+
+        if ($MAGNUS->active > 2) {
+            $agi->verbose("User cant receive call. User status is " . $MAGNUS->active, 5);
+            return;
+        }
 
         //check if did call
         $mydnid = $MAGNUS->config['global']['did_ignore_zero_on_did'] == 1 && substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
+
+        if ($MAGNUS->config['global']['apply_local_prefix_did_sip'] == 1) {
+            $sql          = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' AND active = 1 LIMIT 1";
+            $modelDidUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            if (isset($modelDidUser->prefix_local) && strlen($modelDidUser->prefix_local) > 2) {
+                $MAGNUS->prefix_local = $modelDidUser->prefix_local;
+                $MAGNUS->number_translation($agi, $mydnid);
+                $mydnid = $MAGNUS->destination;
+            }
+        }
 
         $agi->verbose('Check If Is Did ' . $mydnid, 10);
         $sql            = "SELECT * FROM pkg_did WHERE did = '$mydnid' AND activated = 1 LIMIT 1";
@@ -43,6 +68,9 @@ class DidAgi
             $sql                    = "SELECT * FROM pkg_did_destination WHERE activated = 1 AND id_did = '" . $this->modelDid->id . "' ORDER BY priority";
             $this->modelDestination = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+            if (isset($this->did_voip_model->record_call) && $this->did_voip_model->record_call == 1) {
+                $this->modelDid->record_call = 1;
+            }
             if (count($this->modelDestination)) {
                 $agi->verbose("Did have destination", 15);
 
@@ -73,9 +101,22 @@ class DidAgi
 
                 if ($this->modelDid->calllimit > 0) {
                     $agi->verbose('Check DID channels');
-                    $calls = AsteriskAccess::getCallsPerDid($this->modelDid->did);
-                    $agi->verbose('Did ' . $this->modelDid->did . ' have ' . $calls . ' Calls');
-                    if ($calls > $this->modelDid->calllimit) {
+                    $asmanager = new AGI_AsteriskManager();
+                    $asmanager->connect('localhost', 'magnus', 'magnussolution');
+                    $channelsData = $asmanager->command('core show channels concise');
+
+                    $channelsData = explode("\n", $channelsData["data"]);
+
+                    $calls = 0;
+                    foreach ($channelsData as $key => $line) {
+                        if (preg_match("/AppDial.*$this->did/", $line)) {
+                            $calls++;
+                        }
+                    }
+                    $asmanager->disconnect();
+
+                    $agi->verbose('Did ' . $this->did . ' have ' . $calls . ' Calls');
+                    if ($calls >= $this->modelDid->calllimit) {
 
                         if ($MAGNUS->modelUser->calllimit_error == 403) {
                             $agi->execute((busy), busy);
@@ -86,6 +127,32 @@ class DidAgi
                         $MAGNUS->hangup($agi);
                         exit;
                     }
+                }
+
+                if (isset($MAGNUS->modelUser->inbound_call_limit) && $MAGNUS->modelUser->inbound_call_limit > 0) {
+
+                    $sql         = "SELECT * FROM pkg_did WHERE id_user = " . $MAGNUS->modelUser->id;
+                    $modelDIDAll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+                    $asmanager   = new AGI_AsteriskManager();
+                    $asmanager->connect('localhost', 'magnus', 'magnussolution');
+                    $channelsData = $asmanager->command('core show channels concise');
+                    $channelsData = explode("\n", $channelsData["data"]);
+                    $asmanager->disconnect();
+                    $calls = 0;
+                    foreach ($modelDIDAll as $key => $value) {
+                        $calls += $this->getCallsPerDid($value->did, $agi, $channelsData);
+                    }
+                    if ($calls >= $MAGNUS->modelUser->inbound_call_limit) {
+                        if ($MAGNUS->modelUser->calllimit_error == 403) {
+                            $agi->execute((busy), busy);
+                        } else {
+                            $agi->execute((congestion), Congestion);
+                        }
+
+                        $MAGNUS->hangup($agi);
+                        exit;
+                    }
+
                 }
                 $this->checkDidDestinationType($agi, $MAGNUS, $CalcAgi);
             } else {
@@ -98,12 +165,24 @@ class DidAgi
         }
 
     }
+
+    public function getCallsPerDid($did, $agi = null, $channelsData)
+    {
+        $calls = 0;
+        foreach ($channelsData as $key => $line) {
+            if (preg_match("/$did\!.*\!Dial\!/", $line)) {
+                $calls++;
+            }
+        }
+        return $calls;
+    }
+
     public function checkDidDestinationType(&$agi, &$MAGNUS, &$CalcAgi)
     {
 
-        $MAGNUS->id_user     = $MAGNUS->modelUser->id;
-        $MAGNUS->restriction = $MAGNUS->modelUser->restriction;
-
+        $MAGNUS->id_user            = $MAGNUS->modelUser->id;
+        $MAGNUS->restriction        = $MAGNUS->modelUser->restriction;
+        $MAGNUS->mix_monitor_format = $MAGNUS->modelUser->mix_monitor_format;
         $MAGNUS->checkRestrictPhoneNumber($agi, 'did');
 
         $this->didCallCost($agi, $MAGNUS);
@@ -122,6 +201,7 @@ class DidAgi
                 $CalcAgi->did_charge_of_answer_time = time();
                 $CalcAgi->didAgi                    = $this->modelDid;
                 $this->modelDid->selling_rate_1     = $this->sell_price;
+                $this->modelDid->buy_rate_1         = $this->buy_price;
 
             } else {
                 $agi->verbose('NOT found callerid, = ' . $MAGNUS->CallerID . ' to did ' . $this->did . ' and was selected charge_of to callerID');
@@ -314,7 +394,7 @@ class DidAgi
 
                     $MAGNUS->extension = $MAGNUS->destination = $MAGNUS->dnid = $modelSip->name;
 
-                    $dialResult = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, 'fromDID');
+                    $dialResult = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, $this->did);
 
                     $dialstatus   = $dialResult['dialstatus'];
                     $answeredtime = $dialResult['answeredtime'];
@@ -396,7 +476,7 @@ class DidAgi
                         $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                         //retiro e adiciono os prefixos do tronco
-                        if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0) {
+                        if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0 || substr(strtoupper($modelTrunk->removeprefix), 0, 1) == 'X') {
                             $destination = substr($destination, strlen($modelTrunk->removeprefix));
                         }
                         $destination = $modelTrunk->trunkprefix . $destination;
@@ -438,7 +518,7 @@ class DidAgi
                             }
                             $dialstr = preg_replace('/PUSH/', 'SIP', $dialstr);
                         }
-
+                        $this->did_voip_model_sip_account = $MAGNUS->sip_account = "";
                         $agi->verbose("DIAL $dialstr", 6);
                         $myres = $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
                         $MAGNUS->stopRecordCall($agi);
@@ -457,6 +537,26 @@ class DidAgi
                 } elseif ($inst_listdestination['voip_call'] == 10) {
                     $agi->verbose("DID destination type DIALPLAN ", 6);
                     $MAGNUS->run_dial($agi, "LOCAL/" . $this->did . "@did-" . $this->did);
+                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
+                    $answeredtime = $answeredtime['data'];
+                    $dialstatus   = $agi->get_variable("DIALSTATUS");
+                    $dialstatus   = $dialstatus['data'];
+                } elseif ($inst_listdestination['voip_call'] == 11) {
+                    $agi->verbose("DID destination type MULTIPLES IPs ", 6);
+
+                    $ips       = explode(',', $inst_listdestination['destination']);
+                    $dialToIPs = '';
+                    foreach ($ips as $key => $ip) {
+                        if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                            $dialToIPs .= 'SIP/' . $ip . '&';
+                        }
+                    }
+                    $dialToIPs = substr($dialToIPs, 0, -1);
+                    $MAGNUS->run_dial($agi, $dialToIPs);
+                    $answeredtime = $agi->get_variable("ANSWEREDTIME");
+                    $answeredtime = $answeredtime['data'];
+                    $dialstatus   = $agi->get_variable("DIALSTATUS");
+                    $dialstatus   = $dialstatus['data'];
                 } else {
 
                     $agi->verbose("DID destination type PSTN NUMBER ", 6);
@@ -519,6 +619,17 @@ class DidAgi
         $agi->verbose('DID answeredtime =' . $answeredtime, 25);
         if ($answeredtime > 0) {
             $this->call_did_billing($agi, $MAGNUS, $CalcAgi, $answeredtime, $dialstatus);
+            return 1;
+        } else {
+
+            $fields = "uniqueid,id_user,calledstation,id_plan,id_trunk,callerid,src,
+                        starttime, terminatecauseid,sipiax,id_prefix,hangupcause";
+            $id_trunk = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
+            $values   = "'$MAGNUS->uniqueid', '$MAGNUS->id_user','$this->did','$MAGNUS->id_plan',
+                        '$id_trunk','$MAGNUS->CallerID', 'DID Call',
+                        '" . date('Y-m-d H:i:s') . "', '0','3','$CalcAgi->id_prefix','0'";
+            $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
+            $agi->exec($sql);
             return 1;
         }
     }
@@ -619,15 +730,24 @@ class DidAgi
         $agi->verbose(print_r($this->modelDestination[0], true), 25);
         if (strlen($this->modelDid->expression_1) > 0 && preg_match('/' . $this->modelDid->expression_1 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 1 " . $MAGNUS->CallerID, 10);
-            $selling_rate = $this->modelDid->selling_rate_1;
+            $selling_rate      = $this->modelDid->selling_rate_1;
+            $buy_rate          = $this->modelDid->buy_rate_1;
+            $agent_client_rate = $this->modelDid->agent_client_rate_1;
         } elseif (strlen($this->modelDid->expression_2) > 0 && preg_match('/' . $this->modelDid->expression_2 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 2 " . $MAGNUS->CallerID, 10);
-            $selling_rate = $this->modelDid->selling_rate_2;
+            $selling_rate      = $this->modelDid->selling_rate_2;
+            $buy_rate          = $this->modelDid->buy_rate_2;
+            $agent_client_rate = $this->modelDid->agent_client_rate_2;
         } elseif (strlen($this->modelDid->expression_3) > 0 && preg_match('/' . $this->modelDid->expression_3 . '/', $MAGNUS->CallerID)) {
             $agi->verbose("CallerID Match regular expression 3 " . $MAGNUS->CallerID, 10);
-            $selling_rate = $this->modelDid->selling_rate_3;
+            $selling_rate      = $this->modelDid->selling_rate_3;
+            $buy_rate          = $this->modelDid->buy_rate_3;
+            $agent_client_rate = $this->modelDid->agent_client_rate_3;
         } else {
-            $selling_rate = 0;
+            $selling_rate      = 0;
+            $buy_rate          = 0;
+            $agent_client_rate = 0;
+
         }
 
         if ($this->modelDid->connection_sell == 0 && $selling_rate == 0) {
@@ -635,6 +755,10 @@ class DidAgi
         } else {
             $this->sell_price = $selling_rate;
         }
+
+        $this->buy_price = $buy_rate;
+
+        $this->agent_client_rate = $agent_client_rate;
 
         $credit = $MAGNUS->modelUser->typepaid == 1
         ? $MAGNUS->modelUser->credit + $MAGNUS->modelUser->creditlimit
@@ -649,7 +773,7 @@ class DidAgi
         }
     }
 
-    public function billDidCall(&$agi, &$MAGNUS, $answeredtime)
+    public function billDidCall(&$agi, &$MAGNUS, $answeredtime, &$CalcAgi)
     {
         $agi->verbose('billDidCall, sell_price=' . $this->sell_price, 10);
 
@@ -657,11 +781,22 @@ class DidAgi
 
         $this->sell_price = $this->sell_price + $this->modelDid->connection_sell;
 
-        if ($answeredtime < $this->modelDid->minimal_time_charge) {
-            $this->sell_price = 0;
+        if ($MAGNUS->modelUser->id_user > 1) {
+
+            $this->agent_client_rate = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->agent_client_rate, $this->modelDid->initblock, $this->modelDid->increment);
+            $agi->verbose('The DID user is a Agent user. agent_client_rate = ' . $this->agent_client_rate, 5);
         }
 
-        $agi->verbose(' answeredtime = ' . $answeredtime . ' sell_price = ' . $this->sell_price . ' connection_sell = ' . $this->modelDid->connection_sell, 10);
+        if ($CalcAgi->real_sessiontime < $this->modelDid->minimal_time_charge) {
+            $this->sell_price        = 0;
+            $this->agent_client_rate = 0;
+        }
+
+        $this->buy_price = $MAGNUS->roudRatePrice($CalcAgi->real_sessiontime, $this->buy_price, $this->modelDid->buyrateinitblock, $this->modelDid->buyrateincrement);
+
+        if ($CalcAgi->real_sessiontime < $this->modelDid->minimal_time_buy) {
+            $this->buy_price = 0;
+        }
     }
 
     public function call_did_billing(&$agi, &$MAGNUS, &$CalcAgi, $answeredtime, $dialstatus)
@@ -673,9 +808,10 @@ class DidAgi
         } else {
             $terminatecauseid = 0;
         }
+        $CalcAgi->real_sessiontime = intval($answeredtime);
 
         /*recondeo call*/
-        if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $this->sell_price > 0) {
+        if ($MAGNUS->config["global"]['bloc_time_call'] == 1 && $this->sell_price > 0 && $CalcAgi->real_sessiontime >= $this->modelDid->minimal_time_charge) {
             $initblock    = $this->modelDid->initblock > 0 ? $this->modelDid->initblock : 1;
             $billingblock = $this->modelDid->increment > 0 ? $this->modelDid->increment : 1;
 
@@ -696,17 +832,21 @@ class DidAgi
 
         }
 
-        $this->billDidCall($agi, $MAGNUS, $answeredtime);
+        $this->billDidCall($agi, $MAGNUS, $answeredtime, $CalcAgi);
 
-        $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $answeredtime);
-        $CalcAgi->sessiontime      = $answeredtime;
-        $CalcAgi->real_sessiontime = intval($answeredtime);
+        $CalcAgi->starttime   = date("Y-m-d H:i:s", time() - $answeredtime);
+        $CalcAgi->sessiontime = $answeredtime;
+
         $MAGNUS->destination       = $this->did;
         $CalcAgi->terminatecauseid = $terminatecauseid;
         $CalcAgi->sessionbill      = $this->sell_price;
         $MAGNUS->id_trunk          = $MAGNUS->id_trunk > 0 ? $MAGNUS->id_trunk : null;
-        $CalcAgi->sipiax           = 3;
-        $CalcAgi->buycost          = 0;
+        $CalcAgi->sipiax           = 2;
+        $CalcAgi->buycost          = $this->buy_price;
+
+        if ($MAGNUS->modelUser->id_user > 1) {
+            $CalcAgi->agent_bill = $this->agent_client_rate;
+        }
         $CalcAgi->saveCDR($agi, $MAGNUS);
 
         $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $answeredtime
@@ -715,6 +855,16 @@ class DidAgi
                     WHERE  id = " . $this->modelDid->id . " LIMIT 1";
         $agi->exec($sql);
 
+        if (isset($this->did_voip_model->id)) {
+
+            $MAGNUS->id_user      = $this->did_voip_model->id;
+            $MAGNUS->sip_account  = $this->did_voip_model_sip_account;
+            $CalcAgi->buycost     = 0;
+            $CalcAgi->sessionbill = 0;
+            $CalcAgi->sipiax      = 3;
+            $CalcAgi->saveCDR($agi, $MAGNUS);
+
+        }
         return;
     }
 }

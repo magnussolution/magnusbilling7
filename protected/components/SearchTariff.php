@@ -46,7 +46,7 @@ class SearchTariff
         ));
 
         //change custom rate to user
-        if (count($modelUserRate)) {
+        if (isset($modelUserRate->id)) {
             $result[0]['rateinitial']  = $modelUserRate->rateinitial;
             $result[0]['initblock']    = $modelUserRate->initblock;
             $result[0]['billingblock'] = $modelUserRate->billingblock;

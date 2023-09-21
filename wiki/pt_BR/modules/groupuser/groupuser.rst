@@ -28,3 +28,13 @@ Ocultar preços
 
 
 
+
+.. _groupUser-hidden-batch-update:
+
+Ocultar botão atualizar em lote
+--------------------------------
+
+| Ocular o botão atualizar em lote em todos os menus para usuários deste grupo
+
+
+

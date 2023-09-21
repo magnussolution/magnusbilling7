@@ -139,7 +139,7 @@ class GerencianetController extends Controller
                         echo "Cobrança cancelada pelo vendedor ou pelo pagador.";
 
                         $description = "Boleto gerado, Status:Cobrança cancelada pelo vendedor ou pelo pagador, ID:" . $token;
-                        $sql         = "UPDATE pkg_refill SET description= '" . $description . "' WHERE id =" . $resultRefill[0]['id'];
+                        $sql         = "UPDATE pkg_refill SET description= :description WHERE id =" . $id;
                         Yii::log(print_r($sql, true), 'error');
                         $command = Yii::app()->db->createCommand($sql);
                         $command->bindValue(':id', $resultRefill[0]['id'], PDO::PARAM_INT);

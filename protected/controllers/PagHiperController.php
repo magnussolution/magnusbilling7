@@ -25,12 +25,17 @@ class PagHiperController extends Controller
     public function actionIndex()
     {
         Yii::log(print_r($_POST, true), 'error');
-        $filter = "payment_method = 'paghiper'";
+
+        if (isset($_POST['transaction_id'])) {
+            $filter = "payment_method = 'paghiperpix'";
+        } else {
+            $filter = "payment_method = 'paghiper'";
+        }
         $params = array();
 
         if (isset($_GET['id_agent'])) {
             $filter .= " AND id_user = :key1";
-            $params = array(':key1' => int($_GET['id_agent']));
+            $params = array(':key1' => (int) $_GET['id_agent']);
         } else {
             $filter .= " AND id = 1";
         }
@@ -48,10 +53,58 @@ class PagHiperController extends Controller
         $idUser = $modelMethodpay->idUser->id_user;
         $token  = $modelMethodpay->pagseguro_TOKEN;
 
+        $apiKey = $modelMethodpay->client_id;
+
         if (count($_POST) > 0) {
             // POST recebido, indica que é a requisição do NPI.
 
-            $transacaoID   = isset($_POST['idTransacao']) ? $_POST['idTransacao'] : '';
+            if (isset($_POST['transaction_id'])) {
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://pix.paghiper.com/invoice/notification/");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HEADER, false);
+                curl_setopt($ch, CURLOPT_POST, true);
+
+                $requestBody = json_encode([
+                    "apiKey"          => $apiKey,
+                    "transaction_id"  => $_POST['transaction_id'],
+                    "notification_id" => $_POST['notification_id'],
+                    "token"           => $token,
+                ]);
+
+                Yii::log(print_r($requestBody, true), 'error');
+
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                    "Content-Type: application/json",
+                    "Accept: application/json",
+                ]);
+
+                $result = curl_exec($ch);
+
+                $result = json_decode($result);
+                Yii::log(print_r($result, true), 'error');
+                if (isset($result->status_request->status) && $result->status_request->status == 'paid') {
+                    // code...
+
+                    $modelRefill = Refill::model()->find('description LIKE :key AND payment = 0', [':key' => '%' . $_POST['transaction_id'] . '%']);
+                    if (isset($modelRefill->id)) {
+                        $modelRefill->payment     = 1;
+                        $modelRefill->description = preg_replace('/pendente/', 'confirmado', $modelRefill->description);
+                        $modelRefill->save();
+
+                        UserCreditManager::releaseUserCredit($modelRefill->id_user, $modelRefill->credit, 'PIX', 2, $_POST['transaction_id']);
+                        header("HTTP/1.1 200 OK");
+                        exit;
+                    }
+                } else {
+                    exit;
+                }
+            }
+
+            $transacaoID = isset($_POST['idTransacao']) ? $_POST['idTransacao'] : '';
+
             $status        = $_POST['status'];
             $codRetorno    = $_POST['codRetorno'];
             $valorOriginal = $_POST['valorOriginal'];
@@ -82,19 +135,21 @@ class PagHiperController extends Controller
 
             $confirmado = (strcmp($resposta, "VERIFICADO") == 0);
 
+            Yii::log('confirmado=' . $confirmado, 'error');
+
             //FIM - NAO ALTERAR//
 
             if ($confirmado) {
-
-                $idPlataforma    = $_POST['idPlataforma'];
-                $usuario         = explode("-", $idPlataforma);
-                $usuario         = addslashes(strip_tags(trim($usuario[1])));
-                $id_user         = addslashes(strip_tags(trim($usuario[2])));
-                $StatusTransacao = $_POST['status'];
-                $monto           = str_replace(",", ".", $_POST['valorTotal']);
+                $idPlataforma     = $_POST['idPlataforma'];
+                $dataFromPagHiper = explode("-", $idPlataforma);
+                $usuario          = trim($dataFromPagHiper[1]);
+                $id_user          = trim($dataFromPagHiper[2]);
+                $StatusTransacao  = $_POST['status'];
+                $monto            = str_replace(",", ".", $_POST['valorTotal']);
 
                 $description = "Pagamento confirmado, PAGHIPER:" . $transacaoID;
-
+                Yii::log('description=' . $description, 'error');
+                Yii::log('status=' . $status, 'error');
                 if ($status == 'Aprovado') {
                     $modelUser = User::model()->find(
                         "username = :usuario AND id = :key",
@@ -104,14 +159,17 @@ class PagHiperController extends Controller
                     );
 
                     if (count($modelUser) && Refill::model()->countRefill($transacaoID, $modelUser->id) == 0) {
+                        Yii::log('teste liberar credito=' . $modelUser->id, 'error');
                         UserCreditManager::releaseUserCredit($modelUser->id, $monto, $description, 1, $transacaoID);
                     }
                 }
+                header("HTTP/1.1 200 OK");
             } else {
                 echo 'error';
             }
         } else {
             echo '<h3>Obrigado por efetuar a compra.</h3>';
+            header("HTTP/1.1 200 OK");
         }
     }
 }

@@ -72,17 +72,11 @@ class CallSummaryMonthUserController extends Controller
     {
         $attributes = false;
         foreach ($models as $key => $item) {
-            $attributes[$key]                   = $item->attributes;
-            $attributes[$key]['nbcall']         = $item->nbcall;
-            $attributes[$key]['aloc_all_calls'] = $item->aloc_all_calls;
-
-            $attributes[$key]['month']       = substr($item->month, 0, 4) . '-' . substr($item->month, 4);
-            $attributes[$key]['sessiontime'] = $item->sessiontime / 60;
-
-            $attributes[$key]['aloc_all_calls'] = $item->nbcall > 0
-            ? $item->sessiontime / $item->nbcall
-            : 0;
-
+            $attributes[$key]                      = $item->attributes;
+            $attributes[$key]['nbcall']            = $item->nbcall;
+            $attributes[$key]['aloc_all_calls']    = $item->aloc_all_calls;
+            $attributes[$key]['month']             = substr($item->month, 0, 4) . '-' . substr($item->month, 4);
+            $attributes[$key]['sessiontime']       = $item->sessiontime / 60;
             $attributes[$key]['sumsessiontime']    = $item->sumsessiontime;
             $attributes[$key]['sumsessionbill']    = $item->sumsessionbill;
             $attributes[$key]['sumagent_bill']     = $item->sumagent_bill;

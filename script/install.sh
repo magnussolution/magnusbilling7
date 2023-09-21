@@ -20,7 +20,7 @@ sleep 3
 
 
 if [[ -f /var/www/html/mbilling/index.php ]]; then
-  echo "this server alread have MagnusBilling installed";
+  echo "This server already has MagnusBilling installed";
   exit;
 fi
 # Linux Distribution CentOS or Debian
@@ -30,13 +30,11 @@ get_linux_distribution ()
         DIST="DEBIAN"
         HTTP_DIR="/etc/apache2/"
         HTTP_CONFIG=${HTTP_DIR}"apache2.conf"
-        PHP_INI="/etc/php/7.0/cli/php.ini"
         MYSQL_CONFIG="/etc/mysql/mariadb.conf.d/50-server.cnf"
     elif [ -f /etc/redhat-release ]; then
         DIST="CENTOS"
         HTTP_DIR="/etc/httpd/"
         HTTP_CONFIG=${HTTP_DIR}"conf/httpd.conf"
-        PHP_INI="/etc/php.ini"
         MYSQL_CONFIG="/etc/my.cnf"
     else
         DIST="OTHER"
@@ -44,6 +42,8 @@ get_linux_distribution ()
         exit 1
     fi
 }
+
+
 
 get_linux_distribution
 
@@ -126,7 +126,6 @@ set_timezone ()
     ln -s $directory /etc/localtime
     phptimezone="${directory//\/usr\/share\/zoneinfo\//}"
     phptimezone="${phptimezone////\/}"
-    sed -i '/date.timezone/s/= .*/= '$phptimezone'/' /etc/php.ini
     systemctl reload httpd
   fi
 
@@ -156,19 +155,24 @@ fi
 if [ ${DIST} = "CENTOS" ]; then
 echo '[mariadb]
 name = MariaDB
-baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+baseurl = https://yum.mariadb.org/10.9/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1' > /etc/yum.repos.d/MariaDB.repo 
+gpgcheck=1
+sslverify=0' > /etc/yum.repos.d/MariaDB.repo 
 fi
 
 if [ ${DIST} = "DEBIAN" ]; then
     apt-get update --allow-releaseinfo-change
-    export LC_ALL="en_US.UTF-8"
+    echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf
+    locale-gen en_US.UTF-8
+
     apt-get -o Acquire::Check-Valid-Until=false update 
-    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet unixodbc-bin apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev
+    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet  apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 
     apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
     apt-get -y install mariadb-server php-mysql
-    apt-get install -y  unzip git libcurl4-openssl-dev htop
+    apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep
 elif  [ ${DIST} = "CENTOS" ]; then
     yum clean all
     yum -y install kernel-devel.`uname -m` epel-release
@@ -176,17 +180,18 @@ elif  [ ${DIST} = "CENTOS" ]; then
     yum -y install yum-utils gcc.`uname -m` gcc-c++.`uname -m` make.`uname -m` git.`uname -m` wget.`uname -m` bison.`uname -m` openssl-devel.`uname -m` ncurses-devel.`uname -m` doxygen.`uname -m` newt-devel.`uname -m` mlocate.`uname -m` lynx.`uname -m` tar.`uname -m` wget.`uname -m` nmap.`uname -m` bzip2.`uname -m` mod_ssl.`uname -m` speex.`uname -m` speex-devel.`uname -m` unixODBC.`uname -m` unixODBC-devel.`uname -m` libtool-ltdl.`uname -m` sox libtool-ltdl-devel.`uname -m` flex.`uname -m` screen.`uname -m` autoconf automake libxml2.`uname -m` libxml2-devel.`uname -m` sqlite* subversion
     yum-config-manager --enable remi-php71
     yum -y install php.`uname -m` php-cli.`uname -m` php-devel.`uname -m` php-gd.`uname -m` php-mbstring.`uname -m` php-pdo.`uname -m` php-xml.`uname -m` php-xmlrpc.`uname -m` php-process.`uname -m` php-posix libuuid uuid uuid-devel libuuid-devel.`uname -m`
-    yum -y install jansson.`uname -m` jansson-devel.`uname -m` unzip.`uname -m` ntpd
+    yum -y install jansson.`uname -m` jansson-devel.`uname -m` unzip.`uname -m` ntp
     yum -y install mysql mariadb-server  mariadb-devel mariadb php-mysql mysql-connector-odbc
     yum -y install xmlstarlet libsrtp libsrtp-devel dmidecode gtk2-devel binutils-devel svn libtermcap-devel libtiff-devel audiofile-devel cronie cronie-anacron
     yum -y install perl perl-libwww-perl perl-LWP-Protocol-https perl-JSON cpan flac libcurl-devel nss
     yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp htop
 fi
 
+PHP_INI=$(php -i | grep /.+/php.ini -oE)
 
 mkdir -p /var/www/html/mbilling
 cd /var/www/html/mbilling
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
+wget --no-check-certificate https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
 tar xzf MagnusBilling-current.tar.gz
 
 echo
@@ -202,6 +207,7 @@ make clean
 make && make install
 ldconfig
 
+
 echo
 echo '----------- Install Asterisk 13 ----------'
 echo
@@ -210,7 +216,6 @@ cd /usr/src
 rm -rf asterisk*
 clear
 mv /var/www/html/mbilling/script/asterisk-13.35.0.tar.gz /usr/src/
-#wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13-current.tar.gz
 tar xzvf asterisk-13.35.0.tar.gz
 rm -rf asterisk-13.35.0.tar.gz
 cd asterisk-*
@@ -219,6 +224,7 @@ mkdir /var/run/asterisk
 mkdir /var/log/asterisk
 chown -R asterisk:asterisk /var/run/asterisk
 chown -R asterisk:asterisk /var/log/asterisk
+contrib/scripts/install_prereq install
 make clean
 ./configure
 make menuselect.makeopts
@@ -237,15 +243,6 @@ ldconfig
 
 clear
 
-echo
-echo '----------- Install SNGRP ----------'
-echo
-sleep 1
-
-if [ ${DIST} = "DEBIAN" ]; then
-  apt-get -y install sngrep
-fi
-
 
 if [ ${DIST} = "CENTOS" ]; then
 cd /usr/src
@@ -262,7 +259,7 @@ chmod -R 777 /tmp
  
 if [ ${DIST} = "CENTOS" ]; then
     cd /usr/src
-    wget http://magnussolution.com/download/mpg123-1.20.1.tar.bz2
+    wget --no-check-certificate http://magnussolution.com/download/mpg123-1.20.1.tar.bz2
     tar -xjvf mpg123-1.20.1.tar.bz2
     cd mpg123-1.20.1
     ./configure && make && make install
@@ -362,7 +359,8 @@ sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 3M /" ${PHP_INI}
 sed -i "s/post_max_size = 8M/post_max_size = 20M/" ${PHP_INI}
 sed -i "s/max_execution_time = 30/max_execution_time = 90/" ${PHP_INI}
 sed -i "s/max_input_time = 60/max_input_time = 120/" ${PHP_INI}
-sed -i "s/\;date.timezone =/date.timezone = America\/Sao_Paulo/" ${PHP_INI}
+sed -i '/date.timezone/s/= .*/= '$phptimezone'/' ${PHP_INI}
+sed -i "s/session.cookie_secure = 1/" ${PHP_INI}
 if [ ${DIST} = "CENTOS" ]; then
     sed -i "s/User apache/User asterisk/" ${HTTP_CONFIG}
     sed -i "s/Group apache/Group asterisk/" ${HTTP_CONFIG}
@@ -392,7 +390,7 @@ fi
 
 
 
-  mysql -uroot -e "UPDATE mysql.user SET password=PASSWORD('${password}') WHERE user='root'; FLUSH PRIVILEGES;"
+mysql -uroot -e "SET PASSWORD FOR 'root'@localhost = PASSWORD('${password}'); FLUSH PRIVILEGES;"
 
 
 
@@ -427,18 +425,20 @@ tmpdir    = /tmp
 lc-messages-dir = /usr/share/mysql
 skip-external-locking
 max_connections = 500
-key_buffer_size   = 16M
-max_allowed_packet  = 16M
-thread_stack    = 192K
+key_buffer_size   = 64M
+max_allowed_packet  = 64M
+thread_stack    = 1M
 thread_cache_size       = 8
-query_cache_limit = 1M
-query_cache_size        = 16M
+query_cache_limit = 8M
+query_cache_size        = 64M
 log_error = /var/log/mysql/error.log
 expire_logs_days  = 10
-max_binlog_size   = 100M
+max_binlog_size   = 1G
 secure-file-priv = ""
 symbolic-links=0
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+tmp_table_size=128MB
+open_files_limit=500000
 
 [embedded]
 
@@ -462,7 +462,7 @@ fi;
 
 cd  /var/www/html/mbilling/resources/images/
 rm -rf lock-screen-background.jpg
-wget http://magnusbilling.org/downloadlock-screen-background.jpg
+wget --no-check-certificate https://magnusbilling.org/download/lock-screen-background.jpg
 
 
 cd /var/www/html/mbilling/
@@ -509,7 +509,7 @@ installBr() {
    clear
    language='br'
    cd /var/lib/asterisk
-   wget https://sourceforge.net/projects/disc-os/files/Disc-OS%20Sounds/1.0-RELEASE/Disc-OS-Sounds-1.0-pt_BR.tar.gz
+   wget --no-check-certificate https://ufpr.dl.sourceforge.net/project/disc-os/Disc-OS%20Sounds/1.0-RELEASE/Disc-OS-Sounds-1.0-pt_BR.tar.gz
    tar xzf Disc-OS-Sounds-1.0-pt_BR.tar.gz
    rm -rf Disc-OS-Sounds-1.0-pt_BR.tar.gz
 
@@ -693,9 +693,11 @@ astlogdir => /var/log/asterisk
 
 echo "
 [options]
+documentation_language = en_US 
 verbose = 5
 debug = 0
 maxfiles = 500000
+hideconnect = 1
 
 [compat]
 pbx_realtime=1.6
@@ -705,6 +707,21 @@ app_set=1.6" >> /etc/asterisk/asterisk.conf
 
 echo 500000 > /proc/sys/fs/file-max
 echo "fs.file-max=500000">>/etc/sysctl.conf
+
+
+ulimit -c unlimited # The maximum size of core files created.
+ulimit -d unlimited # The maximum size of a process's data segment.
+ulimit -f unlimited # The maximum size of files created by the shell (default option)
+ulimit -i unlimited # The maximum number of pending signals
+ulimit -n 99999    # The maximum number of open file descriptors.
+ulimit -q unlimited # The maximum POSIX message queue size
+ulimit -u unlimited # The maximum number of processes available to a single user.
+ulimit -v unlimited # The maximum amount of virtual memory available to the process.
+ulimit -x unlimited # ???
+ulimit -s 240         # The maximum stack size
+ulimit -l unlimited # The maximum size that may be locked into memory.
+ulimit -a           # All current limits are reported.
+
 
 echo '
 * soft nofile 500000
@@ -744,13 +761,18 @@ echo "
 0 2 * * * php /var/www/html/mbilling/cron.php Backup
 0 4 * * * /var/www/html/mbilling/protected/commands/clear_memory
 */2 * * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr
-* * * * * php /var/www/html/mbilling/cron.php cryptocurrency
 */3 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess
 * * * * * php /var/www/html/mbilling/cron.php statussystem
 * * * * * php /var/www/html/mbilling/cron.php didwww
+*/5 * * * * php /var/www/html/mbilling/cron.php alarm
+* * * * * php /var/www/html/mbilling/cron.php TrunkSIPCodes
+59 23 * * * php /var/www/html/mbilling/cron.php NotifyClientDaily
 " > $CRONPATH
 chmod 600 $CRONPATH
-crontab $CRONPATH
+
+echo "
+* * * * * root php /var/www/html/mbilling/cron.php cryptocurrency 
+">> /etc/crontab
 
 
 echo "
@@ -846,9 +868,9 @@ echo
 echo "Installing Fail2ban & Iptables"
 echo
 
+ssh_port=$(cat /etc/ssh/sshd_config | grep Port |  awk 'NR==1{print $2}')
 
 install_fail2ban
-
 
 iptables -F
 iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
@@ -856,11 +878,12 @@ iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport $ssh_port -j ACCEPT
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 10000:50000 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "friendly-scanner" --algo bm
@@ -875,7 +898,8 @@ iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "VaxSIPUserAgen
 if [ ${DIST} = "DEBIAN" ]; then
     echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
     echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
-    apt-get install -y --force-yes  iptables-persistent
+    apt-get install -y iptables-persistent
+    sudo iptables-save > /etc/iptables/rules.v4
 elif [ ${DIST} = "CENTOS" ]; then
     service iptables save
     systemctl restart iptables
@@ -1104,8 +1128,8 @@ p4_proc()
 
     if [ "$4" == "Celeron" ]; then
 
-        wget http://asterisk.hosting.lv/bin/codec_g723-ast14-gcc4-glibc-pentium.so   
-        wget http://asterisk.hosting.lv/bin/codec_g729-ast14-gcc4-glibc-pentium.so
+        wget https://raw.githubusercontent.com/Khaled-IamZ/codec/main/codec_g723-ast14-gcc4-glibc-pentium.so
+        wget https://raw.githubusercontent.com/Khaled-IamZ/codec/main/codec_g729-ast14-gcc4-glibc-pentium.so
         cp /usr/src/codec_g723-ast14-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g723.so
         cp /usr/src/codec_g729-ast14-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g729.so
          

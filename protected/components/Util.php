@@ -96,6 +96,19 @@ class Util
         return $randUserName;
     }
 
+    public static function getNewSip()
+    {
+        $existsUsername = true;
+
+        while ($existsUsername) {
+            $randUserName  = mt_rand(10000, 99999);
+            $countUsername = Sip::model()->count('name LIKE :key', array(':key' => $randUserName));
+
+            $existsUsername = ($countUsername > 0);
+        }
+        return $randUserName;
+    }
+
     public static function generatePinCallingcard()
     {
         $existsVoucher = true;

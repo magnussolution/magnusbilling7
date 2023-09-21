@@ -46,6 +46,10 @@ Ext.define('MBilling.model.ServicesUse', {
         name: 'releasedate',
         type: 'date',
         dateFormat: 'Y-m-d H:i:s'
+    }, {
+        name: 'next_due_date',
+        type: 'date',
+        dateFormat: 'Y-m-d H:i:s'
     }, 'idServicesname', 'idServicesprice', 'idUserusername'],
     proxy: {
         type: 'uxproxy',

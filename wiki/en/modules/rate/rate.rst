@@ -79,6 +79,16 @@ Additional time
 
 
 
+.. _rate-connectcharge:
+
+Connection charge
+-----------------
+
+| We did not write the description to this field.
+
+
+
+
 .. _rate-package-offer:
 
 Include in offer

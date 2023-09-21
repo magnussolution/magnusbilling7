@@ -54,7 +54,7 @@ Type
 Destination
 -----------
 
-| Use this to take notes!
+| Set here the destination!
 
 
 

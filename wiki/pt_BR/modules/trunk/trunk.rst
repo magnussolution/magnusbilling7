@@ -101,10 +101,10 @@ Status
 
 .. _trunk-allow-error:
 
-Permitir erro
--------------
+Enviar para backup se 404
+-------------------------
 
-| Se SIM, a chamadas será enviada para o tronco backup a menos que a chamada seja atendida ou cancelada. Somente use quando seu tronco tiver algum problema de sinalização, por exemplo sinaliza BUSY quando não tiver canal disponível.
+| Envia a chamada para o próximo tronco  se receber error 404.
 
 
 
@@ -336,6 +336,16 @@ Parâmetros
 | useragent=meu agente
 | 
 | .
+
+
+
+
+.. _trunk-cnl:
+
+Ativar CNL
+----------
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

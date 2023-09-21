@@ -52,9 +52,20 @@ class Offer extends Model
      */
     public function rules()
     {
-        return array(
-            array('packagetype, billingtype, startday, freetimetocall', 'numerical', 'integerOnly' => true),
+        $rules = array(
+            array('packagetype, id_user, billingtype, startday, freetimetocall,initblock, billingblock, minimal_time_charge', 'numerical', 'integerOnly' => true),
             array('label, price', 'length', 'max' => 70),
+        );
+        return $this->getExtraField($rules);
+    }
+
+    /**
+     * @return array regras de relacionamento.
+     */
+    public function relations()
+    {
+        return array(
+            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
         );
     }
 }

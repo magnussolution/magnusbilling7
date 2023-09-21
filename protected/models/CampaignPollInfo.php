@@ -57,11 +57,12 @@ class CampaignPollInfo extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_campaign_poll', 'numerical', 'integerOnly' => true),
             array('number', 'length', 'max' => 18),
             array('obs, resposta', 'length', 'max' => 200),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

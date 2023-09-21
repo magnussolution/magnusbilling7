@@ -16,18 +16,18 @@ if (Yii::app()->session['isAdmin'] == 1):
 
     $modelUser = User::model()->findAll();
     $users     = CHtml::listData($modelUser, 'id', 'username');?>
-                                                                                                                                                                                                                                                                                                                                <div class="field">
-                                                                                                                                                                                                                                                                                                                                <?php echo $form->labelEx($model, Yii::t('zii', 'Select a user')) ?>
-                                                                                                                                                                                                                                                                                                                                <div class="styled-select">
-                                                                                                                                                                                                                                                                                                                                <?php echo $form->dropDownList($model,
+                                                                                                                                                                                                                                                                                                                            <div class="field">
+                                                                                                                                                                                                                                                                                                                            <?php echo $form->labelEx($model, Yii::t('zii', 'Select a user')) ?>
+                                                                                                                                                                                                                                                                                                                            <div class="styled-select">
+                                                                                                                                                                                                                                                                                                                            <?php echo $form->dropDownList($model,
         'id',
         $users,
         array('options' => array($_POST['SendCreditSummary']['id'] => array('selected' => true)))
     ); ?>
-                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                            </div>
 
-                                                                                                                                                                                                                                                                                                                                <?php endif;?>
+                                                                                                                                                                                                                                                                                                                            <?php endif;?>
 
 
 <div class="field">
@@ -87,7 +87,7 @@ echo $form->dropDownList($model, 'service', array(
     'Mobile Credit' => 'Mobile Credit',
     'Mobile Money'  => 'Mobile Money',
     'Payment'       => 'Payment',
-));
+), array('class' => 'input'));
 
 ?>
 </div>

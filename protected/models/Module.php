@@ -71,11 +71,12 @@ class Module extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('text', 'required'),
             array('id_module,priority', 'numerical', 'integerOnly' => true),
             array('text, icon_cls', 'length', 'max' => 100),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

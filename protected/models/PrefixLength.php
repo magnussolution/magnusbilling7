@@ -52,8 +52,9 @@ class PrefixLength extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('length,code', 'length', 'max' => 5),
         );
+        return $this->getExtraField($rules);
     }
 }

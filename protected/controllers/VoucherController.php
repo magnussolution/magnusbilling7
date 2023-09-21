@@ -137,9 +137,9 @@ class VoucherController extends Controller
 
         if (Yii::app()->session['user_type'] == 3) {
             $filter .= ' AND t.id_user = :dfby';
-        }
 
-        $this->paramsFilter[':dfby'] = Yii::app()->session['id_user'];
+            $this->paramsFilter[':dfby'] = Yii::app()->session['id_user'];
+        }
 
         return $filter;
     }

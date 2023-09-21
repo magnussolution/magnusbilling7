@@ -26,7 +26,8 @@ class IvrAgi
         $agi->verbose("Ivr module", 5);
         $agi->verbose("DID IVR - CallerID=" . $MAGNUS->CallerID . " -> DID=" . $DidAgi->modelDid->did, 6);
         $agi->answer();
-        $startTime = time();
+        $MAGNUS->sip_account = '';
+        $startTime           = time();
 
         $MAGNUS->destination = $DidAgi->modelDid->did;
 
@@ -77,6 +78,12 @@ class IvrAgi
                 $modelSipDirect = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (isset($modelSipDirect->name)) {
                     $digit_timeout       = strlen($modelSipDirect->name);
+                    $wait_time           = 6000;
+                    $is_direct_extention = true;
+                } else {
+                    $sql                 = "SELECT alias FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " ORDER BY LENGTH(alias) DESC LIMIT 1";
+                    $modelSipDirect      = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $digit_timeout       = strlen($modelSipDirect->alias);
                     $wait_time           = 6000;
                     $is_direct_extention = true;
                 }
@@ -155,6 +162,14 @@ class IvrAgi
             $optionType  = $dtmf[0];
             $optionValue = $dtmf[1];
             $agi->verbose("CUSTOMER PRESS $optionType -> $optionValue", 10);
+
+            if (preg_match('/torpedo/', $type)) {
+                $data          = explode('_', $type);
+                $idPhonenumber = $data[1];
+                $sql           = "UPDATE pkg_phonenumber SET info = CONCAT(info,'|IVR " . $modelIvr->name . " DTMF " . $option . " at " . date('Y-m-d H:i:s') . "') WHERE id = $idPhonenumber LIMIT 1";
+                $agi->verbose($sql, 1);
+                $agi->exec($sql);
+            }
 
             $chanStatus = $agi->channel_status($MAGNUS->channel);
 

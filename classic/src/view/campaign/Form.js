@@ -22,10 +22,12 @@ Ext.define('MBilling.view.campaign.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.campaignform',
     bodyPadding: 0,
-    fieldsHideUpdateLot: ['id_user', 'name', 'audio', 'audio_2', 'id_phonebook'],
     fileUpload: true,
     initComponent: function() {
         var me = this;
+        if (App.user.isAdmin) {
+            me.fieldsHideUpdateLot = ['id_user', 'name', 'audio', 'audio_2', 'id_phonebook'];
+        }
         me.items = [{
             xtype: 'tabpanel',
             defaults: {
@@ -48,6 +50,7 @@ Ext.define('MBilling.view.campaign.Form', {
                     name: 'id_user',
                     fieldLabel: t('Username'),
                     ownerForm: me,
+                    allowBlank: App.user.isClient,
                     hidden: App.user.isClient
                 }, {
                     xtype: 'plancombo',
@@ -58,6 +61,10 @@ Ext.define('MBilling.view.campaign.Form', {
                 }, {
                     name: 'name',
                     fieldLabel: t('Name')
+                }, {
+                    name: 'callerid',
+                    fieldLabel: t('CallerID'),
+                    allowBlank: true
                 }, {
                     xtype: 'booleancombo',
                     name: 'status',

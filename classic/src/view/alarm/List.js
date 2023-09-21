@@ -53,6 +53,12 @@ Ext.define('MBilling.view.alarm.List', {
                     case 5:
                         value = t('Online calls on same number');
                         break;
+                    case 6:
+                        value = t('Same number and CallerID');
+                        break;
+                    case 7:
+                        value = t('Total calls per user');
+                        break;
                 }
                 return value
             },
@@ -64,7 +70,9 @@ Ext.define('MBilling.view.alarm.List', {
                     ['2', t('ASR')],
                     ['3', t('Calls per minute')],
                     ['4', t('Consecutive number')],
-                    ['5', t('Online calls on same number')]
+                    ['5', t('Online calls on same number')],
+                    ['6', t('Same number and CallerID')],
+                    ['7', t('Total calls per user')]
                 ]
             }
         }, {
@@ -81,8 +89,35 @@ Ext.define('MBilling.view.alarm.List', {
                     case 43200:
                         value = t('12 Hour');
                         break;
-                    case 86400:
-                        value = t('24 Hour');
+                    case 1:
+                        value = t('1 day');
+                        break;
+                    case 2:
+                        value = t('2 days');
+                        break;
+                    case 3:
+                        value = t('3 days');
+                        break;
+                    case 4:
+                        value = t('4 days');
+                        break;
+                    case 5:
+                        value = t('5 days');
+                        break;
+                    case 6:
+                        value = t('6 days');
+                        break;
+                    case 7:
+                        value = t('1 week');
+                        break;
+                    case 14:
+                        value = t('2 weeks');
+                        break;
+                    case 21:
+                        value = t('3 weeks');
+                        break;
+                    case 30:
+                        value = t('1 month');
                         break;
                 }
                 return value
@@ -94,7 +129,16 @@ Ext.define('MBilling.view.alarm.List', {
                     ['3600', t('1 Hour')],
                     ['7200', t('2 Hours')],
                     ['43200', t('12 Hours')],
-                    ['86400', t('24 Hours')]
+                    ['1', t('1 day')],
+                    ['2', t('2 days')],
+                    ['3', t('3 days')],
+                    ['4', t('4 days')],
+                    ['5', t('5 days')],
+                    ['6', t('6 days')],
+                    ['7', t('1 week')],
+                    ['14', t('2 weeks')],
+                    ['21', t('3 weeks')],
+                    ['30', t('1 month')]
                 ]
             }
         }, {

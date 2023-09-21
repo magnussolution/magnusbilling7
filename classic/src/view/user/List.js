@@ -42,6 +42,12 @@ Ext.define('MBilling.view.user.List', {
             flex: 4,
             hidden: window.isTablet
         }, {
+            header: t('Email') + ' 2',
+            dataIndex: 'email2',
+            flex: 4,
+            hidden: true,
+            hideable: !App.user.isClient && !App.user.isAgent
+        }, {
             header: t('Credit'),
             dataIndex: 'credit',
             renderer: Helper.Util.formatMoneyDecimal,
@@ -54,6 +60,11 @@ Ext.define('MBilling.view.user.List', {
             comboFilter: 'plancombo',
             hidden: window.isTablet,
             flex: 3
+        }, {
+            header: t('Sip Users'),
+            dataIndex: 'sip_count',
+            flex: 2,
+            hidden: !App.user.isAdmin
         }, {
             header: t('Offer balance'),
             dataIndex: 'offer',
@@ -81,14 +92,16 @@ Ext.define('MBilling.view.user.List', {
         }, {
             header: t('Status'),
             dataIndex: 'active',
-            renderer: Helper.Util.formatBooleanActive,
+            renderer: Helper.Util.formatUserStatus,
             flex: 2,
             filter: {
                 type: 'list',
                 options: [
                     [1, t('Active')],
                     [2, t('Pending')],
-                    [0, t('Inactivated')]
+                    [0, t('Inactivated')],
+                    [3, t('Blocked In')],
+                    [4, t('Blocked In Out')]
                 ]
             },
             hidden: App.user.isClient || window.isTablet,
@@ -156,6 +169,12 @@ Ext.define('MBilling.view.user.List', {
             hideable: !App.user.isClient && !App.user.isAgent,
             flex: 1
         }, {
+            header: t('DOC'),
+            dataIndex: 'doc',
+            hidden: true,
+            hideable: !App.user.isClient && !App.user.isAgent,
+            flex: 1
+        }, {
             header: t('Credit limit'),
             dataIndex: 'creditlimit',
             hidden: true,
@@ -167,6 +186,25 @@ Ext.define('MBilling.view.user.List', {
             hidden: true,
             hideable: window.dialC && App.user.isAdmin,
             flex: 2
+        }, {
+            header: t('DIST'),
+            dataIndex: 'dist',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 2
+        }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 4
+        }, {
+            header: t('Expiration date'),
+            renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
+            dataIndex: 'expirationdate',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 4
         }];
         me.callParent(arguments);
     }

@@ -79,6 +79,16 @@ Tempo adicional
 
 
 
+.. _rate-connectcharge:
+
+Taxa de conexão
+----------------
+
+| Valor cobrado ao conectar a chamada. Será somado ao valor cobrado por minuto.
+
+
+
+
 .. _rate-package-offer:
 
 Incluir nos pacotes grátis

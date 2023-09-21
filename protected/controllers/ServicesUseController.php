@@ -35,6 +35,12 @@ class ServicesUseController extends Controller
         $this->instanceModel = new ServicesUse;
         $this->abstractModel = ServicesUse::model();
         $this->titleReport   = Yii::t('zii', 'Services Use');
+
+        $sql = "UPDATE pkg_services_use SET next_due_date = date_add(`reservationdate`, interval`month_payed`month)";
+        Yii::app()->db->createCommand($sql)->execute();
+        $sql = "UPDATE pkg_services_use SET next_due_date = '' WHERE status = 0";
+        Yii::app()->db->createCommand($sql)->execute();
+
         parent::init();
     }
 

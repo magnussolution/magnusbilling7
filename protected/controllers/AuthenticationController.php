@@ -18,19 +18,6 @@
  *
  */
 
-/*
-<?php
-if (isset($_GET['user']) && isset($_GET['password']))
-header('Location: http://186.225.143.142/mbilling/index.php/authentication/login?remote=1&user='.$_GET['user'].'&password='.strtoupper(MD5($_GET['password'])));
-?>
-
-<form action="" method="GET">
-<input type="text" name="user" size="18" placeholder="Username">
-<input type="password" name="password" size="18" placeholder="Password">
-<button type="submit">Login</button>
-</form>
- */
-
 class AuthenticationController extends Controller
 {
     private $menu = array();
@@ -42,19 +29,24 @@ class AuthenticationController extends Controller
 
         $this->verifyLogin();
 
-        $modelUser = User::model()->find("username = :user", array(':user' => $user));
-        if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id == 1) {
-            $password = sha1($password);
-        }
-
         if (isset($_REQUEST['remote'])) {
-            $modelSip = AccessManager::checkAccess($user, $password);
-            $user     = $modelSip->idUser->username;
-            $password = $modelSip->idUser->password;
+            $modelSip = AccessManager::checkAccessLogin($user, $password);
+            if (isset($modelSip->id)) {
+                $user     = $modelSip->idUser->username;
+                $password = $modelSip->idUser->password;
+            }
         }
 
-        $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND password COLLATE utf8_bin = :pass) OR ";
-        $condition .= " (id = (SELECT id_user FROM pkg_sip WHERE name COLLATE utf8_bin = :user AND secret COLLATE utf8_bin = :pass) )";
+        $modelUser = User::model()->find("username = :user", array(':user' => $user));
+
+        if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id == 1) {
+            $condition = "username COLLATE utf8_bin = :user AND UPPER(password) COLLATE utf8_bin = :pass ";
+        } else {
+            $condition = "((username COLLATE utf8_bin = :user OR email LIKE :user) AND (password COLLATE utf8_bin = :pass OR UPPER(SHA1(password)) COLLATE utf8_bin = :pass))  ";
+            if ($this->config['global']['sipuser_login'] == 1) {
+                $condition .= " OR (id = (SELECT id_user FROM pkg_sip WHERE name COLLATE utf8_bin = :user AND UPPER(SHA1(secret)) COLLATE utf8_bin = :pass) )";
+            }
+        }
 
         $modelUser = User::model()->find(
             array(
@@ -89,7 +81,7 @@ class AuthenticationController extends Controller
 
         $this->checkCaptcha();
 
-        if ($modelUser->active != 1) {
+        if ($modelUser->active == 0) {
             Yii::app()->session['logged'] = false;
             echo json_encode(array(
                 'success' => false,
@@ -104,30 +96,46 @@ class AuthenticationController extends Controller
 
         $idUserType = $modelUser->idGroup->idUserType->id;
 
-        Yii::app()->session['isAdmin']       = $idUserType == 1 ? true : false;
-        Yii::app()->session['isAgent']       = $idUserType == 2 ? true : false;
-        Yii::app()->session['isClient']      = $idUserType == 3 ? true : false;
-        Yii::app()->session['isClientAgent'] = isset($modelUser->id_user) && $modelUser->id_user > 1 ? true : false;
-        Yii::app()->session['id_plan']       = $modelUser->id_plan;
-        Yii::app()->session['credit']        = isset($modelUser->credit) ? $modelUser->credit : 0;
-        Yii::app()->session['username']      = $modelUser->username;
-        Yii::app()->session['logged']        = true;
-        Yii::app()->session['id_user']       = $modelUser->id;
-        Yii::app()->session['id_agent']      = is_null($modelUser->id_user) ? 1 : $modelUser->id_user;
-        Yii::app()->session['name_user']     = $modelUser->firstname . ' ' . $modelUser->lastname;
-        Yii::app()->session['id_group']      = $modelUser->id_group;
-        Yii::app()->session['user_type']     = $idUserType;
-        Yii::app()->session['systemName']    = $_SERVER['SCRIPT_FILENAME'];
-        Yii::app()->session['session_start'] = time();
-        Yii::app()->session['userCount']     = User::model()->count("credit != 0");
-        Yii::app()->session['hidden_prices'] = $modelUser->idGroup->hidden_prices;
+        Yii::app()->session['isAdmin']             = $idUserType == 1 ? true : false;
+        Yii::app()->session['isAgent']             = $idUserType == 2 ? true : false;
+        Yii::app()->session['isClient']            = $idUserType == 3 ? true : false;
+        Yii::app()->session['isClientAgent']       = isset($modelUser->id_user) && $modelUser->id_user > 1 ? true : false;
+        Yii::app()->session['id_plan']             = $modelUser->id_plan;
+        Yii::app()->session['credit']              = isset($modelUser->credit) ? $modelUser->credit : 0;
+        Yii::app()->session['username']            = $modelUser->username;
+        Yii::app()->session['logged']              = true;
+        Yii::app()->session['id_user']             = $modelUser->id;
+        Yii::app()->session['id_agent']            = is_null($modelUser->id_user) ? 1 : $modelUser->id_user;
+        Yii::app()->session['name_user']           = $modelUser->firstname . ' ' . $modelUser->lastname;
+        Yii::app()->session['id_group']            = $modelUser->id_group;
+        Yii::app()->session['user_type']           = $idUserType;
+        Yii::app()->session['systemName']          = $_SERVER['SCRIPT_FILENAME'];
+        Yii::app()->session['session_start']       = time();
+        Yii::app()->session['userCount']           = User::model()->count("credit != 0");
+        Yii::app()->session['hidden_prices']       = $modelUser->idGroup->hidden_prices;
+        Yii::app()->session['hidden_batch_update'] = $modelUser->idGroup->hidden_batch_update;
 
         if ($modelUser->googleAuthenticator_enable > 0) {
 
             require_once 'lib/GoogleAuthenticator/GoogleAuthenticator.php';
             $ga = new PHPGangsta_GoogleAuthenticator();
 
-            if ($modelUser->google_authenticator_key != '') {
+            if (strlen($modelUser->google_authenticator_key) < 5 || $modelUser->googleAuthenticator_enable == 3) {
+
+                if ($modelUser->googleAuthenticator_enable == 3) {
+                    $secret = $modelUser->google_authenticator_key;
+                } else {
+                    $secret = $ga->createSecret();
+                }
+
+                $modelUser->google_authenticator_key   = $secret;
+                $modelUser->googleAuthenticator_enable = 3;
+                $modelUser->save();
+                Yii::app()->session['newGoogleAuthenticator']   = true;
+                Yii::app()->session['googleAuthenticatorKey']   = $ga->getQRCodeGoogleUrl('VoIP-' . $modelUser->username . '-' . $modelUser->id, $secret);
+                Yii::app()->session['checkGoogleAuthenticator'] = true;
+                Yii::app()->session['showGoogleCode']           = true;
+            } else {
                 $secret                                       = $modelUser->google_authenticator_key;
                 Yii::app()->session['newGoogleAuthenticator'] = false;
                 if ($modelUser->googleAuthenticator_enable == 2) {
@@ -135,26 +143,19 @@ class AuthenticationController extends Controller
                 } else {
                     Yii::app()->session['showGoogleCode'] = false;
                 }
-            } else {
-                $secret                              = $ga->createSecret();
-                $modelUser->google_authenticator_key = $secret;
-                $modelUser->save();
-                Yii::app()->session['newGoogleAuthenticator'] = true;
+                Yii::app()->session['googleAuthenticatorKey'] = $ga->getQRCodeGoogleUrl('VoIP-' . $modelUser->username . '-' . $modelUser->id, $secret);
 
-            }
-
-            Yii::app()->session['googleAuthenticatorKey'] = $ga->getQRCodeGoogleUrl('VoIP-' . $modelUser->username . '-' . $modelUser->id, $secret);
-
-            $modelLogUsers = LogUsers::model()->count('id_user = :key AND ip = :key1 AND description = :key2',
-                array(
-                    ':key'  => $modelUser->id,
-                    ':key1' => $_SERVER['REMOTE_ADDR'],
-                    ':key2' => 'Username Login on the panel - User ' . $modelUser->username,
-                ));
-            if ($modelLogUsers > 0) {
-                Yii::app()->session['checkGoogleAuthenticator'] = false;
-            } else {
-                Yii::app()->session['checkGoogleAuthenticator'] = true;
+                $modelLogUsers = LogUsers::model()->count('id_user = :key AND ip = :key1 AND description = :key2',
+                    array(
+                        ':key'  => $modelUser->id,
+                        ':key1' => $_SERVER['REMOTE_ADDR'],
+                        ':key2' => 'Username Login on the panel - User ' . $modelUser->username,
+                    ));
+                if ($modelLogUsers > 0) {
+                    Yii::app()->session['checkGoogleAuthenticator'] = false;
+                } else {
+                    Yii::app()->session['checkGoogleAuthenticator'] = true;
+                }
             }
 
         } else {
@@ -184,31 +185,32 @@ class AuthenticationController extends Controller
 
     public function actionLogoff()
     {
-        Yii::app()->session['logged']        = false;
-        Yii::app()->session['id_user']       = false;
-        Yii::app()->session['id_agent']      = false;
-        Yii::app()->session['name_user']     = false;
-        Yii::app()->session['menu']          = array();
-        Yii::app()->session['action']        = array();
-        Yii::app()->session['currency']      = false;
-        Yii::app()->session['language']      = false;
-        Yii::app()->session['isAdmin']       = true;
-        Yii::app()->session['isClient']      = false;
-        Yii::app()->session['isAgent']       = false;
-        Yii::app()->session['isClientAgent'] = false;
-        Yii::app()->session['id_plan']       = false;
-        Yii::app()->session['credit']        = false;
-        Yii::app()->session['username']      = false;
-        Yii::app()->session['id_group']      = false;
-        Yii::app()->session['user_type']     = false;
-        Yii::app()->session['decimal']       = false;
-        Yii::app()->session['licence']       = false;
-        Yii::app()->session['email']         = false;
-        Yii::app()->session['userCount']     = false;
-        Yii::app()->session['systemName']    = false;
-        Yii::app()->session['base_country']  = false;
-        Yii::app()->session['version']       = false;
-        Yii::app()->session['hidden_prices'] = false;
+        Yii::app()->session['logged']              = false;
+        Yii::app()->session['id_user']             = false;
+        Yii::app()->session['id_agent']            = false;
+        Yii::app()->session['name_user']           = false;
+        Yii::app()->session['menu']                = array();
+        Yii::app()->session['action']              = array();
+        Yii::app()->session['currency']            = false;
+        Yii::app()->session['language']            = false;
+        Yii::app()->session['isAdmin']             = true;
+        Yii::app()->session['isClient']            = false;
+        Yii::app()->session['isAgent']             = false;
+        Yii::app()->session['isClientAgent']       = false;
+        Yii::app()->session['id_plan']             = false;
+        Yii::app()->session['credit']              = false;
+        Yii::app()->session['username']            = false;
+        Yii::app()->session['id_group']            = false;
+        Yii::app()->session['user_type']           = false;
+        Yii::app()->session['decimal']             = false;
+        Yii::app()->session['licence']             = false;
+        Yii::app()->session['email']               = false;
+        Yii::app()->session['userCount']           = false;
+        Yii::app()->session['systemName']          = false;
+        Yii::app()->session['base_country']        = false;
+        Yii::app()->session['version']             = false;
+        Yii::app()->session['hidden_prices']       = false;
+        Yii::app()->session['hidden_batch_update'] = false;
         Yii::app()->session->clear();
         Yii::app()->session->destroy();
 
@@ -268,6 +270,7 @@ class AuthenticationController extends Controller
             $newGoogleAuthenticator   = Yii::app()->session['newGoogleAuthenticator'];
             $showGoogleCode           = Yii::app()->session['showGoogleCode'];
             $hidden_prices            = Yii::app()->session['hidden_prices']            = $modelGroupUser->hidden_prices;
+            $hidden_batch_update      = Yii::app()->session['hidden_batch_update']      = $modelGroupUser->hidden_batch_update;
         } else {
             $id_user                  = false;
             $id_agent                 = false;
@@ -298,6 +301,7 @@ class AuthenticationController extends Controller
             $social_media_network     = false;
             $show_playicon_cdr        = false;
             $hidden_prices            = false;
+            $hidden_batch_update      = false;
         }
         $language = isset(Yii::app()->session['language']) ? Yii::app()->session['language'] : Yii::app()->sourceLanguage;
         $theme    = isset(Yii::app()->session['theme']) ? Yii::app()->session['theme'] : 'blue-neptune';
@@ -350,6 +354,7 @@ class AuthenticationController extends Controller
             'campaign_user_limit'      => $this->config['global']['campaign_user_limit'],
             'showMCDashBoard'          => $this->config['global']['showMCDashBoard'],
             'hidden_prices'            => $hidden_prices,
+            'hidden_batch_update'      => $hidden_batch_update,
         ));
     }
 
@@ -425,7 +430,6 @@ class AuthenticationController extends Controller
         if (isset($_FILES['logo']['tmp_name']) && strlen($_FILES['logo']['tmp_name']) > 3) {
 
             $uploaddir = "resources/images/";
-            $typefile  = explode('.', $_FILES["logo"]["name"]);
 
             if (Yii::app()->session['isAgent']) {
                 $uploadfile = $uploaddir . 'logo_custom_' . Yii::app()->session['id_user'] . '.png';
@@ -447,7 +451,8 @@ class AuthenticationController extends Controller
         if (isset($_FILES['wallpaper']['tmp_name']) && strlen($_FILES['wallpaper']['tmp_name']) > 3) {
 
             $uploaddir  = "resources/images/wallpapers/";
-            $typefile   = explode('.', $_FILES["wallpaper"]["name"]);
+            $data       = explode('.', $_FILES["wallpaper"]["name"]);
+            $typefile   = array_pop($data);
             $uploadfile = $uploaddir . 'Customization.jpg';
             move_uploaded_file($_FILES["wallpaper"]["tmp_name"], $uploadfile);
         }

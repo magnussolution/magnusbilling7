@@ -132,6 +132,9 @@ Ext.define('MBilling.model.User', {
         name: 'email',
         type: 'string'
     }, {
+        name: 'email2',
+        type: 'string'
+    }, {
         name: 'doc',
         type: 'string'
     }, {
@@ -186,6 +189,12 @@ Ext.define('MBilling.model.User', {
     }, {
         name: 'cpslimit',
         type: 'int'
+    }, {
+        name: 'sip_count',
+        type: 'int'
+    }, {
+        name: 'dist',
+        type: 'string'
     }, 'idUserusername', 'idGroupname', 'idGroupid_user_type', 'idPlanname'],
     proxy: {
         type: 'uxproxy',

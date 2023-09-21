@@ -49,12 +49,12 @@ Tech prefix
 
 
 
-.. _Plan-id-service:
+.. _Plan-id-services:
 
-Serviços
----------
 
-| Selecione aqui os serviços que estarão disponível para os usuários deste plano.
+
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

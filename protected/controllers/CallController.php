@@ -145,35 +145,62 @@ class CallController extends Controller
     public function actionDownloadRecord()
     {
 
-        $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : null;
-        $ids    = isset($_GET['ids']) ? json_decode($_GET['ids']) : null;
+        $filter = isset($_GET['filter']) ? json_decode($_GET['filter']) : [];
+        $ids    = isset($_GET['ids']) ? json_decode($_GET['ids']) : [];
 
         //if try download only one audio  via button Download RED.
         if (count($filter) == 0 && count($ids) == 1) {
             $_GET['id'] = $ids[0];
         }
 
+        if (count($ids) == 1) {
+            $_GET['id'] = $ids[0];
+        } else if (count($ids) > 1) {
+            exit('<center><font color=red>To download more than 1 record, please use filters.</font></center>');
+        }
+
         if (isset($_GET['id'])) {
 
-            $modelCall = Call::model()->findByPk((int) $_GET['id']);
-            $day       = $modelCall->starttime;
-            $uniqueid  = $modelCall->uniqueid;
-            $day       = explode(' ', $day);
-            $day       = explode('-', $day[0]);
+            if (Yii::app()->session['isClient']) {
+                $modelCall = Call::model()->find('id = :key AND id_user = :key1', [':key' => $_GET['id'], ':key1' => Yii::app()->session['id_user']]);
+            } else {
+                $modelCall = Call::model()->findByPk((int) $_GET['id']);
+            }
+
+            if (!isset($modelCall->id)) {
+                echo yii::t('zii', 'Audio no found');
+                exit;
+            }
+
+            $day      = $modelCall->starttime;
+            $uniqueid = $modelCall->uniqueid;
+            $day      = explode(' ', $day);
+            $day      = explode('-', $day[0]);
 
             $day = $day[2] . $day[1] . $day[0];
 
             if ($modelCall->id_server > 0 && $modelCall->idServer->type == 'asterisk') {
 
                 $host = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
-
-                header('Location: http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username);
+                $url  = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
+                exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . ".gsm '$url'", $output);
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=" . $uniqueid);
+                header("Content-Type: audio/x-gsm");
+                header("Content-Transfer-Encoding: binary");
+                readfile('/var/www/html/mbilling/tmp/' . $uniqueid . '.gsm');
+                unlink('/var/www/html/mbilling/tmp/' . $uniqueid . '.gsm');
                 exit;
             }
 
             exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ', $output);
 
             if (isset($output[0])) {
+
+                if (isset($output[1]) && filesize($output[1]) > filesize($output[0])) {
+                    $output[0] = $output[1];
+                }
 
                 $file_name = explode("/", $output[0]);
 
@@ -349,16 +376,16 @@ class CallController extends Controller
         $this->filter = $this->extraFilter($filter);
 
         $modelCall = $this->abstractModel->find(array(
-            'select'    => 'SUM(t.buycost) AS sumbuycost, SUM(t.sessionbill) AS sumsessionbill ',
-            'join'      => $this->join,
+            'select'    => 'SUM(t.buycost) AS buycost, SUM(t.sessionbill) AS sessionbill ',
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
         ));
 
-        $modelCall->sumbuycost     = number_format($modelCall->sumbuycost, 4);
-        $modelCall->sumsessionbill = number_format($modelCall->sumsessionbill, 4);
-        $modelCall->totalCall      = number_format($modelCall->sumsessionbill - $modelCall->sumbuycost, 4);
+        $modelCall->sumbuycost     = number_format($modelCall->buycost, 4);
+        $modelCall->sumsessionbill = number_format($modelCall->sessionbill, 4);
+        $modelCall->totalCall      = number_format($modelCall->sessionbill - $modelCall->buycost, 4);
+
         echo json_encode($modelCall);
     }
 

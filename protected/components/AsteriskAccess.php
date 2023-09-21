@@ -11,6 +11,7 @@ class AsteriskAccess
 
     private $asmanager;
     private static $instance;
+    private static $config;
 
     public static function instance($host = 'localhost', $user = 'magnus', $pass = 'magnussolution')
     {
@@ -24,6 +25,7 @@ class AsteriskAccess
     private function __construct()
     {
         $this->asmanager = new AGI_AsteriskManager;
+        $this->config    = LoadConfig::getConfig();
     }
 
     private function connectAsterisk($host, $user, $pass)
@@ -267,7 +269,7 @@ class AsteriskAccess
             }
 
             if ($head_field == 'trunkcode') {
-                $sql          = "SELECT * FROM pkg_servers WHERE type != 'mbilling' AND status = 1 AND host != 'localhost'";
+                $sql          = "SELECT * FROM pkg_servers WHERE type != 'mbilling' AND status IN (1,4) AND host != 'localhost'";
                 $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
                 foreach ($modelServers as $key => $data) {
@@ -285,8 +287,10 @@ class AsteriskAccess
                         $line .= 'context=slave' . "\n";
                     }
                     $line .= 'host=' . $data['host'] . "\n";
+                    $line .= 'deny=0.0.0.0/0.0.0.0' . "\n";
+                    $line .= 'permit=' . $data['host'] . "/255.255.255.0\n";
                     $line .= 'disallow=all' . "\n";
-                    $line .= 'allow=g729,alaw,ulaw' . "\n";
+                    $line .= 'allow=' . $this->config['global']['default_codeds'] . "\n";
                     $line .= 'dtmfmode=RFC2833' . "\n";
                     $line .= 'insecure=invite' . "\n";
 
@@ -348,7 +352,7 @@ class AsteriskAccess
 
         $calls = 0;
         foreach ($channelsData as $key => $line) {
-            if (preg_match("/$did/", $line)) {
+            if (preg_match("/$did\!.*\!Dial\!/", $line)) {
                 $calls++;
             }
         }
@@ -418,7 +422,7 @@ class AsteriskAccess
 
     public static function getSipShowPeers()
     {
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -462,7 +466,7 @@ class AsteriskAccess
     public static function getCoreShowCdrChannels()
     {
 
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -509,7 +513,7 @@ class AsteriskAccess
     public static function getCoreShowChannels()
     {
 
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -551,7 +555,7 @@ class AsteriskAccess
     public static function getCoreShowChannelsVerbose()
     {
 
-        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+        $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
         array_push($modelServers, array(
@@ -597,7 +601,7 @@ class AsteriskAccess
     {
 
         if ($server == null) {
-            $sql = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status = 1 AND host != 'localhost'";
+            $sql = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND  status IN (1,4) AND host != 'localhost'";
             if (isset($agi->engine)) {
                 $modelServers = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             } else {
@@ -702,8 +706,16 @@ class AsteriskAccess
             if ($fd) {
                 foreach ($modelSip as $key => $sip) {
 
-                    if ($sip->idUser->active != 1) {
+                    if ($sip->idUser->active == 0) {
                         continue;
+                    }
+
+                    if (preg_match('/\:/', $sip->host)) {
+                        $host      = explode(':', $sip->host);
+                        $sip->host = $host[0];
+                        $port      = $host[1];
+                    } else {
+                        $port = 5060;
                     }
 
                     $sip->name        = trim($sip->name);
@@ -725,6 +737,23 @@ class AsteriskAccess
                         if (strlen($sip->secret) > 1) {
                             $line .= 'secret=' . $sip->secret . "\n";
                         }
+                    }
+
+                    if ($sip->host != 'dynamic') {
+                        $line .= 'deny=0.0.0.0/0.0.0.0' . "\n";
+                        $line .= 'permit=' . $sip->host . "/255.255.255.0\n";
+
+                    } else {
+                        if (strlen($sip->deny) > 1) {
+                            $line .= 'deny=' . $sip->deny . "\n";
+                        }
+                        if (strlen($sip->permit) > 1) {
+                            $line .= 'permit=' . $sip->permit . "\n";
+                        }
+                    }
+
+                    if (isset($port) && $port != 5060) {
+                        $line .= 'post=' . $port . "\n";
                     }
 
                     $line .= 'host=' . $sip->host . "\n";
@@ -772,12 +801,12 @@ class AsteriskAccess
                         $line .= 'amaflags=' . $sip->amaflags . "\n";
                     }
 
-                    if (strlen($sip->cid_number) > 1) {
+                    if (strlen($sip->callerid) > 1) {
 
-                        if (preg_match('/\<.*\>/', $sip->cid_number)) {
-                            $line .= 'callerid=' . $sip->cid_number . "\n";
+                        if (preg_match('/\<.*\>/', $sip->callerid)) {
+                            $line .= 'callerid=' . $sip->callerid . "\n";
                         } else {
-                            $line .= 'callerid=<' . $sip->cid_number . ">\n";
+                            $line .= 'callerid=<' . $sip->callerid . ">\n";
                         }
                     }
 
@@ -793,16 +822,8 @@ class AsteriskAccess
                         $line .= 'mohsuggest=' . $sip->mohsuggest . "\n";
                     }
 
-                    if (strlen($sip->deny) > 1) {
-                        $line .= 'deny=' . $sip->deny . "\n";
-                    }
-
                     if ($sip->videosupport != 'no') {
                         $line .= 'videosupport=' . $sip->videosupport . "\n";
-                    }
-
-                    if (strlen($sip->permit) > 1) {
-                        $line .= 'permit=' . $sip->permit . "\n";
                     }
 
                     $line .= 'allowtransfer=' . $sip->allowtransfer . "\n";
@@ -818,6 +839,10 @@ class AsteriskAccess
                         $line .= "dtlscafile=/etc/asterisk/certificate/ca.crt\n";
                         $line .= "dtlssetup=actpass\n";
                         $line .= "rtcp_mux=yes\n";
+                    }
+
+                    if (isset($sip->sip_config) && $sip->sip_config != '') {
+                        $line .= $sip->sip_config . "\n";
                     }
 
                     if (strlen($sip->sip_group) > 0) {
@@ -861,7 +886,7 @@ class AsteriskAccess
             if ($fd) {
                 foreach ($modelIax as $key => $iax) {
 
-                    if ($iax->idUser->active != 1) {
+                    if ($iax->idUser->active == 0) {
                         continue;
                     }
 

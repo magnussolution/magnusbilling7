@@ -29,12 +29,32 @@ Name
 
 
 
+.. _phoneNumber-doc:
+
+DOC
+---
+
+| We did not write the description to this field.
+
+
+
+
 .. _phoneNumber-city:
 
 City
 ----
 
 | Client city, not required field.
+
+
+
+
+.. _phoneNumber-email:
+
+Email
+-----
+
+| We did not write the description to this field.
 
 
 
@@ -61,26 +81,6 @@ Description
 
 | Phonebook description, personal control only
 | When used for survey, will be saved here what the number that the client typed.
-
-
-
-
-.. _phoneNumber-doc:
-
-DOC
----
-
-| We did not write the description to this field.
-
-
-
-
-.. _phoneNumber-email:
-
-Email
------
-
-| We did not write the description to this field.
 
 
 

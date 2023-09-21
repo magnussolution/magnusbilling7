@@ -73,20 +73,12 @@ This menu has the following fields
 .. include:: buycredit/buycredit.rst
 
 
-IAX Users
-+++++++++
+Iax
++++
 
 This menu has the following fields
 
 .. include:: iax/iax.rst
-
-
-Token
-+++++
-
-This menu has the following fields
-
-.. include:: gauthenticator/gauthenticator.rst
 
 
 Send Credit
@@ -97,12 +89,12 @@ This menu has the following fields
 .. include:: transfertomobile/transfertomobile.rst
 
 
-Send Credit Products
-++++++++++++++++++++
+User History
+++++++++++++
 
 This menu has the following fields
 
-.. include:: sendcreditproducts/sendcreditproducts.rst
+.. include:: userhistory/userhistory.rst
 
 
 
@@ -239,12 +231,12 @@ This menu has the following fields
 .. include:: holidays/holidays.rst
 
 
-Holidays
-++++++++
+DID History
++++++++++++
 
 This menu has the following fields
 
-.. include:: holidays/holidays.rst
+.. include:: didhistory/didhistory.rst
 
 
 
@@ -312,14 +304,6 @@ Offer Use
 This menu has the following fields
 
 .. include:: offeruse/offeruse.rst
-
-
-Send credit rates
-+++++++++++++++++
-
-This menu has the following fields
-
-.. include:: sendcreditrates/sendcreditrates.rst
 
 
 
@@ -429,20 +413,20 @@ This menu has the following fields
 .. include:: callarchive/callarchive.rst
 
 
-Summary Month DID
-+++++++++++++++++
-
-This menu has the following fields
-
-.. include:: callsummarymonthdid/callsummarymonthdid.rst
-
-
 Send Credit Summary
 +++++++++++++++++++
 
 This menu has the following fields
 
 .. include:: sendcreditsummary/sendcreditsummary.rst
+
+
+Summary Month DID
++++++++++++++++++
+
+This menu has the following fields
+
+.. include:: callsummarymonthdid/callsummarymonthdid.rst
 
 
 
@@ -496,20 +480,20 @@ This menu has the following fields
 .. include:: servers/servers.rst
 
 
-Trunk erros
-+++++++++++
+Trunk Errors
+++++++++++++
 
 This menu has the following fields
 
 .. include:: trunksipcodes/trunksipcodes.rst
 
 
-Sip Trace
-+++++++++
+Provider CNL
+++++++++++++
 
 This menu has the following fields
 
-.. include:: siptrace/siptrace.rst
+.. include:: providercnl/providercnl.rst
 
 
 
@@ -633,14 +617,6 @@ Backup
 This menu has the following fields
 
 .. include:: backup/backup.rst
-
-
-Alarms
-++++++
-
-This menu has the following fields
-
-.. include:: alarm/alarm.rst
 
 
 Alarms

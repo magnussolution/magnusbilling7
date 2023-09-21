@@ -58,9 +58,10 @@ class CallSummaryMonthDid extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('month, sessiontime, aloc_all_calls, nbcall, sessionbill, id_did', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

@@ -35,18 +35,28 @@ Ext.define('MBilling.view.trunkGroup.Form', {
             forceSelection: true,
             editable: false,
             value: 1,
-            store: [
+            store: window.dialC == true ? [
+                [1, t('Order')],
+                [2, t('Random')],
+                [3, t('LCR')],
+                [4, t('Weight')]
+            ] : [
                 [1, t('Order')],
                 [2, t('Random')],
                 [3, t('LCR')]
             ]
+        }, {
+            name: 'weight',
+            fieldLabel: t('Weight'),
+            allowBlank: true,
+            hidden: true
         }, {
             xtype: 'fieldset',
             style: 'margin-top:10px; overflow: visible;',
             title: t('Select one or more trunks'),
             collapsible: false,
             collapsed: false,
-            height: 120,
+            height: 300,
             items: [{
                 xtype: 'trunktag',
                 name: 'id_trunk',

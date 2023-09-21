@@ -74,7 +74,7 @@ class TransferToMobile extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('username, password', 'required'),
             array('id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
                     typepaid, creditlimit, credit_notification,sipaccountlimit, restriction,
@@ -94,6 +94,7 @@ class TransferToMobile extends Model
             array('username', 'unique', 'caseSensitive' => 'false'),
 
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkmethod($attribute, $params)

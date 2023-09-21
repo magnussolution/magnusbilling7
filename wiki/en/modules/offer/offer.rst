@@ -64,3 +64,33 @@ Price
 
 
 
+
+.. _offer-initblock:
+
+Initial block
+-------------
+
+| Minimum time in seconds to sell. This value will subscribe the tariffs of the client's plan.
+
+
+
+
+.. _offer-billingblock:
+
+Billing block
+-------------
+
+| This defines how the time is incremented after the minimum. This value will subscribe the tariffs of the client's plan.
+
+
+
+
+.. _offer-minimal-time-charge:
+
+Minimum time to charge
+----------------------
+
+| Minimun time to tariff. If it's set to 3, will only tariff calls when the time is equal or more than 3 seconds.
+
+
+

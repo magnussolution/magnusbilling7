@@ -23,6 +23,7 @@ Bem vindo à documentação do MagnusBilling 7 em português.
    get_started/interface.rst
    get_started/backup.rst
    get_started/update.rst
+   get_started/reset_root_password.rst
    
 .. toctree::
    :caption: Informações técnicas

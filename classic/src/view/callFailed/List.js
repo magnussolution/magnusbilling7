@@ -102,14 +102,13 @@ Ext.define('MBilling.view.callFailed.List', {
                     [6, t('Chanunavail')],
                     [7, t('Dontcall')],
                     [8, t('Torture')],
-                    [9, t('Invalidargs')]
+                    [9, t('Invalidargs')],
+                    [10, t('Machine')]
                 ]
             }
         }, {
-            header: t('Hangup cause'),
+            header: t('SIP code'),
             dataIndex: 'hangupcause',
-            renderer: Helper.Util.formatHangupCause,
-            hidden: !window.dialC,
             flex: 3
         }, {
             header: t('Uniqueid'),

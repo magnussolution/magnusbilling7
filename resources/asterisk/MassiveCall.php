@@ -212,7 +212,7 @@ class MassiveCall
             //if have a forward                         if res_dtmf is equal the digit_authorize                OR press any digit and digit_authorize equal -2 (any digit)    OR  digit_authorize equal -3 (every)
             if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || (strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
                 $agi->verbose("have Forward number $forward_number");
-                $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . "' WHERE id = $idPhonenumber LIMIT 1";
+                $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . " at " . date('Y-m-d H:i:s') . "' WHERE id = $idPhonenumber LIMIT 1";
                 $agi->exec($sql);
 
                 $sql = "UPDATE pkg_campaign_report SET status = 7 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
@@ -272,12 +272,12 @@ class MassiveCall
                         $agi->set_variable("CALLERID(name)", $modelPhoneNumber->name);
                         $MAGNUS->CallerID = $destination;
 
-                        IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'torpedo');
+                        IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'torpedo_' . $modelPhoneNumber->id);
                     } elseif ($forwardOptionType == 'group') {
 
                         $agi->verbose("Call group " . $forwardOption[1], 25);
-                        $sql      = "SELECT name FROM pkg_sip WHERE `group` = $forwardOption[1] LIMIT 1";
-                        $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                        $sql      = "SELECT name FROM pkg_sip WHERE `sip_group` = '" . $forwardOption[1] . "'";
+                        $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                         if (isset($modelSip[0]) == 0) {
                             $agi->verbose('GROUP NOT FOUND');
@@ -368,7 +368,7 @@ class MassiveCall
                             }
 
                             //retiro e adiciono os prefixos do tronco
-                            if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0) {
+                            if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0 || substr(strtoupper($modelTrunk->removeprefix), 0, 1) == 'X') {
                                 $destination = substr($destination, strlen($modelTrunk->removeprefix));
                             }
                             $destination = $modelTrunk->trunkprefix . $destination;
@@ -648,11 +648,10 @@ class MassiveCall
         $id_prefix = $modelRate->id_prefix;
 
         /*sell rate*/
-        $rateinitial  = $modelRate->rateinitial;
-        $initblock    = $modelRate->initblock;
-        $billingblock = $modelRate->billingblock;
-
-        $id_trunk = $modelRate->id_trunk;
+        $rateinitial         = $modelRate->rateinitial;
+        $initblock           = $modelRate->initblock;
+        $billingblock        = $modelRate->billingblock;
+        $minimal_time_charge = $modelRate->minimal_time_charge;
 
         $duration = $real_sessiontime = time() - $now;
 
@@ -677,8 +676,17 @@ class MassiveCall
         }
 
         /* ####     CALCUL BUYRATE COST     #####*/
-        $buyratecost  = $MAGNUS->calculation_price($buyrate, $duration, $buyrateinitblock, $buyrateincrement);
-        $sellratecost = $MAGNUS->calculation_price($rateinitial, $duration, $initblock, $billingblock);
+        if ($real_sessiontime > $minimal_time_buy) {
+            $buyratecost = $MAGNUS->calculation_price($buyrate, $real_sessiontime, $buyrateinitblock, $buyrateincrement);
+        } else {
+            $buyratecost = 0;
+        }
+        if ($real_sessiontime > $minimal_time_charge) {
+            $sellratecost = $MAGNUS->calculation_price($rateinitial, $duration, $initblock, $billingblock);
+        } else {
+            $sellratecost = 0;
+        }
+
         $agi->verbose("[TEMPO DA LIGAÃ‡AO] " . $duration, 8);
 
         $MAGNUS->id_plan = $modelRate->id_plan;

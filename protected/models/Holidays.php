@@ -52,9 +52,10 @@ class Holidays extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name, day', 'required'),
             array('name', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
 }

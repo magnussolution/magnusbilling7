@@ -42,7 +42,7 @@ class AuthenticateAgi
 
         $authentication = AuthenticateAgi::checkIfCallShopCall($MAGNUS, $agi, $authentication);
 
-        if ($authentication == false || $MAGNUS->active != 1) {
+        if ($authentication == false || $MAGNUS->active == 0 || $MAGNUS->active == 2) {
             $prompt = "prepaid-auth-fail";
             //force the audio to play
             $MAGNUS->play_audio = true;
@@ -236,7 +236,7 @@ class AuthenticateAgi
             $sql    = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES ($values)";
             $agi->exec($sql);
 
-            $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE id = $MAGNUS->id_user LIMIT 1";
+            $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = $MAGNUS->id_user LIMIT 1";
             $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser);
@@ -382,8 +382,8 @@ class AuthenticateAgi
             $channelsData = $asmanager->command("core show channels concise");
             $channelsData = explode("\n", $channelsData["data"]);
             $asmanager->disconnect();
-            $sql         = "SELECT name FROM pkg_sip WHERE accountcode = '$accountcode'";
-            $modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $sql         = "SELECT name FROM pkg_sip WHERE accountcode = '" . $MAGNUS->username . "'";
+            $modelSip    = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
             $sipAccounts = '';
             foreach ($modelSip as $key => $sip) {
                 $sipAccounts .= $sip->name . '|';
@@ -392,7 +392,7 @@ class AuthenticateAgi
             $sipAccounts = substr($sipAccounts, 0, -1);
             $calls       = 0;
             foreach ($channelsData as $key => $line) {
-                if (preg_match("/^SIP\/($sipAccounts)-/", $line)) {
+                if (preg_match("/^SIP\/($sipAccounts)-.*(Ring|Up)/", $line) && !preg_match("/Outgoing Line/", $line)) {
                     $calls++;
                 }
             }
@@ -462,6 +462,7 @@ class AuthenticateAgi
         $MAGNUS->id_user             = $model->id;
         $MAGNUS->id_agent            = $model->id_user;
         $MAGNUS->restriction         = $model->restriction;
+        $MAGNUS->restriction_use     = $model->restriction_use;
         $MAGNUS->callshop            = $model->callshop;
         $MAGNUS->id_offer            = $model->id_offer;
         $MAGNUS->prefix_local        = $model->prefix_local;
@@ -478,6 +479,8 @@ class AuthenticateAgi
         } else {
             $MAGNUS->modelSip = $modelSip;
         }
+
+        $MAGNUS->sip_id_trunk_group = $MAGNUS->modelSip->id_trunk_group;
 
         if ($MAGNUS->voicemail != 1) {
             $MAGNUS->voicemail = isset($MAGNUS->modelSip->id) ? $MAGNUS->modelSip->voicemail : false;

@@ -52,11 +52,12 @@ class StatusSystem extends Model
      */
     public function rules()
     {
-        return array(
-            array('cpuMediaUso,cpuPercent,memUsed,networkin,networkout', 'numerical'),
+        $rules = array(
+            array('cpuMediaUso,cpuPercent,memUsed,networkin,networkout,disk_free,disk_perc', 'numerical'),
             array('date', 'length', 'max' => 30),
 
         );
+        return $this->getExtraField($rules);
     }
 
 }

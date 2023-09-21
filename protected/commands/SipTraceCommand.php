@@ -45,8 +45,8 @@ class SipTraceCommand extends CConsoleCommand
                 continue;
             }
 
-            exec('pkill ngrep');
-            echo $command = "/usr/sbin/ngrep -p  -W byline " . $modelTrace->filter . " -t port " . $modelTrace->port . $device . " >> " . $this->file_name;
+            exec('pkill -f ngrep');
+            echo $command = "ngrep -p  -W byline " . $modelTrace->filter . " -t port " . $modelTrace->port . $device . " >> " . $this->file_name;
 
             $output = $this->PsExecute($command, $modelTrace->timeout, $modelTrace->filter);
         }

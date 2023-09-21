@@ -53,12 +53,13 @@ class Portability extends Model
 
     public function rules()
     {
-        return array(
+        $rules = array(
             array('number', 'numerical', 'integerOnly' => true),
             array('number', 'length', 'max' => 15),
             array('company', 'length', 'max' => 5),
             array('date', 'length', 'max' => 30),
         );
+        return $this->getExtraField($rules);
     }
 
     public function findPrefix($prefix)

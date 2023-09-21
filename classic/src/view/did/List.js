@@ -24,15 +24,20 @@ Ext.define('MBilling.view.did.List', {
     store: 'Did',
     fieldSearch: 'did',
     buttonImportCsv: true,
-    extraButtons: [{
-        text: t('Release DID'),
-        iconCls: 'icon-delete',
-        handler: 'onRelease',
-        disabled: false
-    }],
     initComponent: function() {
         var me = this;
         me.buttonUpdateLot = false;
+        me.extraButtons = [{
+            text: t('Release DID'),
+            iconCls: 'icon-delete',
+            handler: 'onRelease',
+            disabled: false
+        }, {
+            text: t('Bulk DID'),
+            iconCls: 'icon-delete',
+            handler: 'onBulk',
+            hidden: !App.user.isAdmin || window.isTablet
+        }];
         if (App.user.isClient) {
             me.buttonImportCsv = false;
         }
@@ -57,9 +62,7 @@ Ext.define('MBilling.view.did.List', {
                     [1, t('Yes')],
                     [0, t('No')]
                 ]
-            },
-            hidden: App.user.isClient,
-            hideable: !App.user.isClient
+            }
         }, {
             header: t('Username'),
             dataIndex: 'idUserusername',
@@ -67,6 +70,8 @@ Ext.define('MBilling.view.did.List', {
                 type: 'string',
                 field: 'idUser.username'
             },
+            hidden: App.user.isClient,
+            hideable: !App.user.isClient,
             flex: 3
         }, {
             header: t('Status'),
@@ -98,11 +103,24 @@ Ext.define('MBilling.view.did.List', {
             dataIndex: 'secondusedreal',
             flex: 3
         }, {
+            header: t('Country'),
+            dataIndex: 'country',
+            flex: 2
+        }, {
             header: t('Description'),
             dataIndex: 'description',
             hidden: true,
             hideable: App.user.isAdmin,
             flex: 5
+        }, {
+            xtype: 'templatecolumn',
+            tpl: '{idServername}',
+            header: t('Server'),
+            dataIndex: 'id_server',
+            comboFilter: 'serverscombo',
+            flex: 3,
+            hidden: true,
+            hideable: App.user.isAdmin
         }]
         me.callParent(arguments);
     }

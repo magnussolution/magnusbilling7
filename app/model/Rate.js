@@ -43,10 +43,10 @@ Ext.define('MBilling.model.Rate', {
         type: 'int'
     }, {
         name: 'connectcharge',
-        type: 'int'
+        type: 'number'
     }, {
         name: 'disconnectcharge',
-        type: 'int'
+        type: 'number'
     }, {
         name: 'additional_grace',
         type: 'string'

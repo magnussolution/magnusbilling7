@@ -17,6 +17,8 @@ Ext.define('MBilling.view.sms.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.smsform',
     fieldsHide: ['id_user'],
+    fieldsHideCreate: ['result'],
+    fieldSearch: 'telephone',
     initComponent: function() {
         var me = this;
         me.items = [{
@@ -27,12 +29,10 @@ Ext.define('MBilling.view.sms.Form', {
             hidden: App.user.isClient,
             allowBlank: App.user.isClient
         }, {
-            xtype: 'numberfield',
             name: 'telephone',
             fieldLabel: t('Number'),
             emptyText: 'DDI DDD Nº',
-            maxLength: 16,
-            minLength: 11
+            maxLength: 16
         }, {
             xtype: 'textareafield',
             name: 'sms',
@@ -41,6 +41,11 @@ Ext.define('MBilling.view.sms.Form', {
         }, {
             name: 'sms_from',
             fieldLabel: t('From'),
+            allowBlank: true
+        }, {
+            xtype: 'textareafield',
+            name: 'result',
+            fieldLabel: t('Provider result'),
             allowBlank: true
         }];
         me.callParent(arguments);

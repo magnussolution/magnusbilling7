@@ -33,7 +33,7 @@ class CallChartCommand extends ConsoleCommand
         $this->isDid();
         $this->isSIPCall();
         for (;;) {
-            if (date('s') > 58) {
+            if (date('i') == 59) {
                 break;
             }
             try {
@@ -177,7 +177,9 @@ class CallChartCommand extends ConsoleCommand
 
                             //try get user
                             if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
-
+                                if (!strlen($sip_account)) {
+                                    $sip_account = $call[1] = $call[3];
+                                }
                                 if (false !== $key = array_search($sip_account, $this->sipNames)) {
                                     $modelSip = $this->sips[$key];
                                 } else {
@@ -208,9 +210,14 @@ class CallChartCommand extends ConsoleCommand
                                 }
 
                                 if (!count($modelSip)) {
-                                    //check if is via IP from proxy
-                                    $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                                    $modelSip  = Sip::model()->find('host = :key', array(':key' => $callProxy['X-AUTH-IP']));
+
+                                    if (preg_match('/^IAX/', strtoupper($channel))) {
+                                        $modelSip = Iax::model()->find('name = :key', array(':key' => $originate));
+                                    } else {
+                                        //check if is via IP from proxy
+                                        $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
+                                        $modelSip  = Sip::model()->find('host = :key', array(':key' => $callProxy['X-AUTH-IP']));
+                                    }
                                 }
                             }
 
@@ -316,6 +323,9 @@ class CallChartCommand extends ConsoleCommand
                                 if (isset($callQueue['UniqueID'])) {
                                     $cdr = time() - intval($callQueue['UniqueID']);
                                 }
+                                if (isset($callQueue['MEMBERNAME'])) {
+                                    $sip_account = substr($callQueue['MEMBERNAME'], 4);
+                                }
                             }
                         } else {
                             $id_user = 'NULL';
@@ -328,12 +338,12 @@ class CallChartCommand extends ConsoleCommand
 
                 if (!is_numeric($id_user)) {
 
-                    echo "continue becausse not found id_user\n";
+                    echo "continue because not found id_user\n";
                     continue;
                 }
 
                 if (!is_numeric($id_user) || !is_numeric($cdr)) {
-                    echo "continue becausse not foun id_user or cdr\n";
+                    echo "continue because not foun id_user or cdr\n";
                     continue;
                 }
 
@@ -349,12 +359,15 @@ class CallChartCommand extends ConsoleCommand
 
                         if (!isset($modelSip->id)) {
                             $modelSip = Sip::model()->find('name =:key', array(':key' => $sip_account));
+
+                            if (isset($modelSip->id)) {
+                                $modelSip->status         = 3;
+                                $modelSip->callshopnumber = $ndiscado;
+                                $modelSip->callshoptime   = $cdr;
+                                $modelSip->save();
+                                $modelSip = null;
+                            }
                         }
-                        $modelSip->status         = 3;
-                        $modelSip->callshopnumber = $ndiscado;
-                        $modelSip->callshoptime   = $cdr;
-                        $modelSip->save();
-                        $modelSip = null;
                     }
                 }
             }
@@ -702,7 +715,7 @@ class CallChartCommand extends ConsoleCommand
     {
         $sql               = "SELECT did, id, id_user FROM pkg_did WHERE reserved = 1";
         $this->dids        = Yii::app()->db->createCommand($sql)->queryAll();
-        $this->didsNumbers = array_column($this->dids, 'did');
+        $this->didsNumbers = isset($this->dids[0]) ? array_column($this->dids, 'did') : [];
 
     }
     private function isSIPCall()

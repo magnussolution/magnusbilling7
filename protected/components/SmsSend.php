@@ -19,9 +19,10 @@
  */
 class SmsSend
 {
-    public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '')
+    public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '', $providerResult = '')
     {
-        if (!count($modelUser)) {
+
+        if (!isset($modelUser->id)) {
             return array(
                 'success' => false,
                 'errors'  => Yii::t('zii', 'Error : Authentication Error!'),
@@ -132,7 +133,7 @@ class SmsSend
             $buyRate = isset($modelRateProvider[0]['buyrate']) ? $modelRateProvider[0]['buyrate'] : null;
 
             //retiro e adiciono os prefixos do tronco
-            if (strncmp($destination, $removePrefix, strlen($removePrefix)) == 0) {
+            if (strncmp($destination, $removePrefix, strlen($removePrefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                 $destination = substr($destination, strlen($removePrefix));
             }
 
@@ -157,7 +158,14 @@ class SmsSend
 
             }
 
-            if (!$res = @file_get_contents($linkSms, false)) {
+            $arrContextOptions = array(
+                "ssl" => array(
+                    "verify_peer"      => false,
+                    "verify_peer_name" => false,
+                ),
+            );
+
+            if (!$res = @file_get_contents($linkSms, false, stream_context_create($arrContextOptions))) {
                 return array(
                     'success' => false,
                     'errors'  => Yii::t('zii', 'ERROR, contact us'),
@@ -168,6 +176,27 @@ class SmsSend
             $text = urldecode($text);
 
             $sussess = !$smsRes == '' && !preg_match("/$smsRes/", $res) ? false : true;
+
+            if ($providerResult == true && preg_match('/^http/', $modelUser->description)) {
+
+                $data = json_decode($res);
+
+                $options = array(
+                    'http' => array(
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                        'method'  => 'POST',
+                        'content' => http_build_query($data),
+                    ),
+                    "ssl"  => array(
+                        "verify_peer"        => false,
+                        "verif  y_peer_name" => false,
+                    ),
+                );
+
+                $context            = stream_context_create($options);
+                $resultFromProvider = file_get_contents($modelUser->description, false, $context);
+
+            }
 
             if ($sussess) {
                 $terminateCauseid = 1;
@@ -181,7 +210,8 @@ class SmsSend
                 $modelSms->prefix    = $id_prefix;
                 $modelSms->telephone = $destination;
                 $modelSms->sms       = $text;
-                $modelSms->result    = $sussess;
+                $modelSms->status    = 1;
+                $modelSms->result    = print_r($res, true);
                 $modelSms->rate      = $rateInitial;
                 $modelSms->sms_from  = $sms_from;
                 $modelSms->save();
@@ -193,6 +223,7 @@ class SmsSend
                 $sessionTime      = 0;
                 $msg              = Yii::t('zii', 'Your SMS is not send!');
                 $success          = false;
+
             }
 
             $uniqueid = "$destination-" . date('His');
@@ -218,9 +249,22 @@ class SmsSend
                 $msg = $modelError;
             }
 
-            return array(
-                'success' => $success,
-                'msg'     => $msg);
+            if (isset($resultFromProvider)) {
+                echo $res;
+                exit;
+            } else {
+                if ($sussess == false) {
+                    return array(
+                        'success' => false,
+                        'errors'  => $msg,
+                    );
+                } else {
+                    return array(
+                        'success' => $success,
+                        'msg'     => $msg);
+                }
+            }
+
         }
     }
 }

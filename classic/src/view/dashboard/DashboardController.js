@@ -70,7 +70,12 @@ Ext.define('MBilling.view.dashboard.DashboardController', {
         //cpu
         me.lookupReference('cpuMediaUso').update('<span class="x-fa fa-hdd-o "> &nbsp;' + t('CPU actual usage') + ': ' + record[0].data.cpuPercent + '% </span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="x-fa fa-hdd-o" style="text-align: right;"> ' + t('Load Average') + ': ' + record[0].data.cpuMediaUso + '%</span>');
         me.lookupReference('cpuPercent').setValue(record[0].data.cpuPercent / 100);
-        me.lookupReference('cpuModel').update('<span class="x-fa fa-server"> ' + record[0].data.cpuModel + '</span>');
+        if (record[0].data.disk_perc > 90) {
+            me.lookupReference('diskFree').update('<span class="x-fa fa-server"><font color=red>&nbsp; <b>Disk Avail ' + record[0].data.disk_free + 'G. ' + record[0].data.disk_perc + '% USED</b></font></span>');
+        } else {
+            me.lookupReference('diskFree').update('<span class="x-fa fa-server">&nbsp; Disk Avail ' + record[0].data.disk_free + 'G</span>');
+        }
+        me.lookupReference('diskPerc').setValue(record[0].data.disk_perc / 100);
         //memory
         me.lookupReference('memTotal').update(record[0].data.memTotal + '&nbsp;GB ');
         me.lookupReference('memUsed').update(record[0].data.memUsed + '&nbsp;GB ');

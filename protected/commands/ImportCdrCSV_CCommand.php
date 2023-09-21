@@ -36,6 +36,7 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
             $local_command = '';
         }
 
+        exec('mkdir -p /var/log/asterisk/cdr-csv/');
         $archive = false;
 
         $configFile = '/etc/odbc.ini';
@@ -86,7 +87,7 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
                 if (preg_match('/^MBilling_/', $file) && file_exists('/var/log/asterisk/cdr-csv/' . $file)) {
 
                     if (preg_match('/^MBilling_Success/', $file)) {
-                        $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/" . $file . "' IGNORE INTO TABLE pkg_cdr FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,buycost,sessionbill,sessiontime,real_sessiontime,agent_bill,sipiax,id_campaign)  $server_set ";
+                        $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/" . $file . "' IGNORE INTO TABLE pkg_cdr FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,buycost,sessionbill,sessiontime,real_sessiontime,agent_bill,sipiax,id_campaign,terminatecauseid)  $server_set ";
 
                     } else if (preg_match('/^MBilling_Failed/', $file)) {
                         $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/" . $file . "' IGNORE INTO TABLE pkg_cdr_failed FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,terminatecauseid,hangupcause)  $server_set ";
@@ -105,7 +106,7 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
         if (file_exists('/var/log/asterisk/cdr-csv/MBilling_Success.csv')) {
 
             exec('mv /var/log/asterisk/cdr-csv/MBilling_Success.csv /var/log/asterisk/cdr-csv/MBilling_Success_' . $time . '.csv');
-            $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Success_" . $time . ".csv' IGNORE INTO TABLE pkg_cdr FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,buycost,sessionbill,sessiontime,real_sessiontime,agent_bill,sipiax,id_campaign)  $server_set ";
+            $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Success_" . $time . ".csv' IGNORE INTO TABLE pkg_cdr FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (uniqueid,callerid,starttime,id_user,id_plan,src,id_prefix,id_trunk,calledstation,buycost,sessionbill,sessiontime,real_sessiontime,agent_bill,sipiax,id_campaign,terminatecauseid)  $server_set ";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
 

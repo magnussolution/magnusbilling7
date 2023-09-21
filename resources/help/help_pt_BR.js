@@ -6,6 +6,8 @@ Help.load({
     'alarm.amount': ``,
     'alarm.email': ``,
     'alarm.status': ``,
+    'alarm.subject': ``,
+    'alarm.message': ``,
     //API
     'api.id_user': `Usuário que poderá usar está API.||Para usar a API é necessário o uso do projeto MagnusBilling API PHP publicado no GITHUB.
     
@@ -100,9 +102,9 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'callsummarydayuser.sumlucro': `Somatório do lucro.`,
     'callsummarydayuser.sumnbcall': `Total de chamadas.`,
     //RESUMO POR MêS/DID
-    'callsummarymonthdid.sumsessionbill': ``,
-    'callsummarymonthdid.sumsessiontime': ``,
-    'callsummarymonthdid.sumnbcall': ``,
+    'callsummarymonthdid.sumsessionbill': `Somatório do preço de venda`,
+    'callsummarymonthdid.sumsessiontime': `Somatório de minutos`,
+    'callsummarymonthdid.sumnbcall': `Total de chamadas`,
     //RESUMO POR MêS/TRONCO
     'callsummarymonthtrunk.sumsessiontime': `Somatorio de minutos chamadas.||É possível realizar filtros, por exemplo, filtrar os últimos 3 meses, ou de um tronco específico, neste caso. Este somatório mostrará somente os dados do filtro executado.`,
     'callsummarymonthtrunk.sumsessionbill': `Somatório do preço de venda.`,
@@ -142,6 +144,7 @@ Para funcionar é necessário deixar o campo Fromuser no tronco em branco.`,
     'campaign.id_user': `Usuário dono da campanha.`,
     'campaign.id_plan': `Que plano será usado para tarifar as chamadas desta campanha, pode ser um plano diferente do plano cadastrado na conta do cliente.`,
     'campaign.name': `Nome para a campanha.`,
+    'campaign.callerid': `Caller ID`,
     'campaign.status': `Status da campanha.`,
     'campaign.startingdate': `Data que a campanha será considerada ativa.`,
     'campaign.expirationdate': `Data que a campanha não será mais considerada ativa, mesmo ser tiver números ativos.`,
@@ -272,17 +275,21 @@ Estas opções será útil para ver os relatórios no menu Relatório de Enquete
     'campaignpollinfo.resposta': `Opção votada.`,
     //NúMEROS RESTRITOS
     'campaignrestrictphone.number': `Número a ser bloqueado. É necessário ativar a opção números bloqueados na campanha.`,
+    'campaignrestrictphone.description': `Descrição`,
     //AJUSTES
     'configuration.config_value': `Valor. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     'configuration.config_description': `Descrição. Clique para ler sobre as opções deste menu.|https://wiki.magnusbilling.org/pt_BR/source/config.html.`,
     //DIDS
-    'did.did': `O número exatamente como chega no Asterisk.`,
+    'did.did': `O número exatamente como chega no Asterisk. Você também pode usar intervalos. Examplo: 551140040001-551140040009. Neste exemplo criar os DIDS 551140040001 ao 551140040009.`,
     'did.record_call': `Gravar chamadas deste DID. Será gravado independente do destino da chamada.`,
     'did.activated': `Somente os números ativos podem receber chamadas.`,
     'did.callerid': `Coloque aqui CallerID name, deixe em branco para usar o que vem do provedor do DID.`,
     'did.connection_charge': `Custo de ativaçao. Este custo será descontado do cliente somente no momento que o DID é vinculado ao usuário.`,
     'did.fixrate': `Custo mensal. Este valor será descontado automaticamente todos os meses do saldo do cliente. Se o cliente não tiver crédito o DID é cancelado automaticamente.`,
     'did.connection_sell': `Este é o valor que será cobrado em cada chamada, simplesmente por atender a chamada.`,
+    'did.minimal_time_buy': `Tempo mínimo para tarifar o custo do DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.`,
+    'did.buyrateinitblock': `Tempo mínimo em segundos para tarifar o custo do DID. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
+    'did.buyrateincrement': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo de custo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
     'did.minimal_time_charge': `Tempo mínimo para tarifar o DID. Ex. Se colocar 3, qualquer chamada com tempo menor que 3 não será tarifado.`,
     'did.initblock': `Tempo mínimo em segundos para tarifar. Ex, se colocar 30, qualquer chamada que durar menos de 30 segundos, será cobrado 30 segundos.`,
     'did.increment': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
@@ -310,16 +317,19 @@ Expressão regular para fixo
 
 
 .`,
+    'did.buy_rate_1': `Preço por minuto de compra se validar a Expressão regular acima.`,
     'did.selling_rate_1': `Preço por minuto a ser cobrado se validar a Expressão regular acima.`,
     'did.block_expression_1': `Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.`,
     'did.send_to_callback_1': `Envia a chamada para CallBack se o número for validado com a Expressão regular acima||Como a chamada será enviada para um CallBack, então a chamada será desligada imediatamente. 
 E se todas as configurações estiverem corretas, o CallBack este executado e o telefone do cliente tocará.`,
     'did.expression_2': `Igual a opção 1. Clique para mais informaçōes.|https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1.`,
+    'did.buy_rate_2': `Preço por minuto de compra se validar a Expressão regular acima.`,
     'did.selling_rate_2': `Preço por minuto a ser cobrado se validar a Expressão regular acima.`,
     'did.block_expression_2': `Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.`,
     'did.send_to_callback_2': `Envia a chamada para CallBack se o número for validado com a Expressão regular acima||Como a chamada será enviada para um CallBack, então a chamada será desligada imediatamente. 
 E se todas as configurações estiverem corretas, o CallBack este executado e o telefone do cliente tocará.`,
     'did.expression_3': `Igual a opção 1. Clique para mais informaçōes.|https://wiki.magnusbilling.org/pt_BR/source/modules/did/did.html#did-expression-1.`,
+    'did.buy_rate_3': `Preço por minuto de compra se validar a Expressão regular acima.`,
     'did.selling_rate_3': `Preço por minuto a ser cobrado se validar a Expressão regular acima.`,
     'did.block_expression_3': `Se colocar como SIM, e o número de quem ligou for validado com a Expressão regular acima, a chamada será desligada imediatamente.`,
     'did.send_to_callback_3': `Envia a chamada para CallBack se o número for validado com a Expressão regular acima||Como a chamada será enviada para um CallBack, então a chamada será desligada imediatamente. 
@@ -334,6 +344,8 @@ E se todas as configurações estiverem corretas, o CallBack este executado e o 
     'did.TimeOfDay_sun': `Mesma regra só que para domingos.`,
     'did.workaudio': `Áudio que será executado quando alguém ligar dentro do horário de atendimento.`,
     'did.noworkaudio': `Áudio que será executado quando ligar fora do horário de atendimento.`,
+    'did.country': `País`,
+    'did.id_server': `Servidor. Somente usado quando você usa SIP PROXY.`,
     //DESTINO DE DIDS
     'diddestination.id_did': `Selecione o DID para criar o novo destino.`,
     'diddestination.id_user': `Usuário que será o dono deste DID.`,
@@ -364,6 +376,12 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
 
 
     .`,
+    //HISTóRICO DOS DID
+    'didhistory.did': `DID`,
+    'didhistory.username': `Usuário`,
+    'didhistory.month_payed': `Meses pagos`,
+    'didhistory.reservationdate': `Data reservado`,
+    'didhistory.description': `Descrição`,
     //USO DE DIDS
     'diduse.id_did': `Número DID.`,
     'diduse.month_payed': `Total de meses pagos.`,
@@ -377,7 +395,7 @@ Você pode verificar o contexto no arquivo /etc/asterisk/extensions_magnus_did.c
 
 
 tail -f /var/log/fail2ban.log.`,
-    //TOKEN
+    //GAUTHENTICATOR
     'gauthenticator.username': `Usuário que deseja ativar TOKEN.`,
     'gauthenticator.googleAuthenticator_enable': `Após ativar o TOKEN para o usuário, somente será possível logar usando o TOKEN gerado pelo APP do Google Aunthenticator.||Após ativar o TOKEN, no próximo login do usuário será solicitado que escaneie o QR CODE conforme a imagem abaixo
 
@@ -399,6 +417,7 @@ Com o token do APP Google Aunthenticator somente será possível logar no painel
     'groupuser.name': `Nome para o grupo de usuários.`,
     'groupuser.id_user_type': `Tipo de usuário. É importante selecionar o tipo corremtanete. Não adianta chamar o grupo de Admin e selecionar o tipo Cliente.`,
     'groupuser.hidden_prices': `Ocular os valores de compra, venda e lucro para este grupo?`,
+    'groupuser.hidden_batch_update': `Ocular o botão atualizar em lote em todos os menus para usuários deste grupo`,
     //GRUPOS ADMINISTRADORES
     'groupusergroup.name': `Nome do Grupo.`,
     'groupusergroup.user_prefix': `Preenchendo este campo, todos os usuários criados por um administrador que usa este grupo será iniciado com este prefixo.`,
@@ -406,7 +425,7 @@ Com o token do APP Google Aunthenticator somente será possível logar no painel
     //FERIADOS
     'holidays.name': `Nome para o feriado`,
     'holidays.day': `Dia do feriado`,
-    //CONTAS IAX
+    //IAX
     'iax.id_user': `Usuário ao qual está conta IAX vai pertencer.`,
     'iax.username': `Usuário que será usado para autenticar no softphone.`,
     'iax.secret': `Senha que será usado para autenticar no softphone.`,
@@ -538,6 +557,9 @@ Para o envio de email, é necessário a configuração do SMTP no menu SMTP.
 Para saber como funciona os pacotes gratís veja o link https://wiki.magnusbilling.org/pt_BR/source/offer.html.
 
     .`,
+    'offer.initblock': `Tempo mínimo em segundos para tarifar a venda. Este valor irá subscrever os valores das tarifa do plano do cliente.`,
+    'offer.billingblock': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Este valor irá subscrever os valores das tarifa do plano do cliente.`,
+    'offer.minimal_time_charge': `Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.`,
     //RELATóRIO DE PACOTES
     'offercdr.id_user': `Usuário que realizou a chamada.`,
     'offercdr.id_offer': `Nome do pacote de gratís.`,
@@ -556,22 +578,22 @@ Para saber como funciona os pacotes gratís veja o link https://wiki.magnusbilli
     'phonenumber.id_phonebook': `Agenda que esse número pertence.`,
     'phonenumber.number': `Nümero para enviar o torpedo/sms. Deve ser usado sempre no formato 55 DDD número.`,
     'phonenumber.name': `Nome do dono do número, usado para TTS ou SMS.`,
+    'phonenumber.doc': `Documento, campo não obrigatório.`,
     'phonenumber.city': `Cidade do cliente, campo não obrigatório.`,
+    'phonenumber.email': `Email, campo não obrigatório.`,
     'phonenumber.status': `MagnusBilling somente tenta enviar quando o status está ativo.||Quando a chamada é enviada para seu provedor, o número fica com status pendente. 
 Se a chamada é completada, o status muda para enviado.
 Caso contrário ficará como pendente, isso quer dizer que seu tronco rejeitou e completou a chamada por algum motivo.
 Se for ativado na campanha a opção números bloqueados, e o número estiver cadastrado no menu torpedo de voz & SMS, submenu números Restritos, o status bloqueado.
 Você pode usar o botão processar para reativar os números que estão com status pendente.`,
     'phonenumber.info': `Descrição para a agenda, somente para controle próprio.||Quando for usado enquete, será salvo aqui o número que o cliente digitou.`,
-    'phonenumber.doc': ``,
-    'phonenumber.email': ``,
     //PLANOS
     'plan.name': `Nome do plano.`,
     'plan.signup': `Disponibilizar este plano no formulário de registro. Se tiver somente 1 plano os clientes que se registrarem vão usar este plano, se tiver mais de 1, aí o cliente poderá escolher. É necessário ter pelo menos 1 plano com está opção ativada para funcionar o registro.`,
     'plan.ini_credit': `Quanto de crédito você quer dar para clientes que se registram através do formulário de registro.`,
     'plan.play_audio': `Executar áudios para os cliente deste plano ou mandar somente erro? Por exemplo os áudios que acabou o crédito.`,
     'plan.techprefix': `Techprefix é como uma senha para o cliente poder usar mais de uma plano. Por exemplo, digamos que você tem 3 tipos de planos,GSM, TDM e CLI, e quer deixar seu cliente escolher qual plano ele deseja usar. Então coloque techprefix nos planos e solicite ao seu cliente que para usar cada um dos planos e.`,
-    'plan.id_service': `Selecione aqui os serviços que estarão disponível para os usuários deste plano.`,
+    'plan.id_services': ``,
     //PREFIXOS
     'prefix.prefix': `Prefixo. Prefixos serão usados para criar as tarifas. EX. 5511.`,
     'prefix.destination': `Nome do destino. EX: Brasil SP.`,
@@ -580,6 +602,10 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'provider.credit': `A quantidade de crédito que você possuí com seu provedor. Este campo é opcional.`,
     'provider.credit_control': `Se esta opção for ativada os troncos deste provedor serão desativados quando o crédito do provedor ficar em zero.`,
     'provider.description': `Descrição para a agenda, somente para controle próprio.`,
+    //PROVEDOR CNL
+    'providercnl.id_provider': `Provedor`,
+    'providercnl.cnl': `Código CNL`,
+    'providercnl.zone': `Zona`,
     //FILAS DE ESPERA
     'queue.id_user': `Usuário dono da fila.`,
     'queue.name': `Nome para a fila.`,
@@ -614,6 +640,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'rate.billingblock': `Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Ex: se colocar 6, quer dizer que sempre vai arredondar de 6 em 6 segundos, ou seja, uma chamada durou 32s, vai cobrar 36s.`,
     'rate.minimal_time_charge': `Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.`,
     'rate.additional_grace': `Tempo para adicionar na duração da chamada. Se colocar 10, será adicionar 10 segundos no tempo de todas as chamadas, isso afeta a tarifação.`,
+    'rate.connectcharge': `Valor cobrado ao conectar a chamada. Será somado ao valor cobrado por minuto.`,
     'rate.package_offer': `Ative esta opção se você quer que esta tarifa seja usada nos pacotes grátis.`,
     'rate.status': `Desativando a tarifa, o MagnusBilling vai desconsiderar completamente está tarifa. Ou seja, deletar ou desativar terá o mesmo efeito.`,
     //TARIFAS
@@ -635,7 +662,9 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'refill.credit': `Valor da recarga. Pode ser valor positivo ou negativo, caso o valor for negativo, vai retirar o valor da recarga do crédito do cliente.`,
     'refill.description': `Descrição para a agenda, somente para controle próprio.`,
     'refill.payment': `Esta opção é somente para seu controle. O crédito será liberado para o cliente mesmo colocando como NÃO.`,
+    'refill.date': ``,
     'refill.invoice_number': `Número da fatura.`,
+    'refill.image': ``,
     //RECARGA DE PROVEDORES
     'refillprovider.id_provider': `Nome do provedor.`,
     'refillprovider.credit': `Valor da recarga.`,
@@ -645,7 +674,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'restrictedphonenumber.id_user': `Usuário que deseja cadastrar o número.`,
     'restrictedphonenumber.number': `Número.`,
     'restrictedphonenumber.direction': `Será analisado em ligaçōes conforme selecionado.`,
-    //SEND CREDIT PRODUCTS
+    //SENDCREDITPRODUCTS
     'sendcreditproducts.country': `País.`,
     'sendcreditproducts.operator_name': `Nome da operadora.`,
     'sendcreditproducts.operator_id': `Id da operadora.`,
@@ -658,7 +687,7 @@ Você pode usar o botão processar para reativar os números que estão com stat
     'sendcreditproducts.info': `Usado para seu controle interno.`,
     'sendcreditproducts.retail_price': ``,
     'sendcreditproducts.method': ``,
-    //SEND CREDIT RATES
+    //SENDCREDITRATES
     'sendcreditrates.idProductcountry': `País.`,
     'sendcreditrates.idProductoperator_name': `Nome da operadora.`,
     'sendcreditrates.sell_price': `Preço de venda.`,
@@ -694,7 +723,10 @@ Digamos que tenha 1 servidor MagnusBilling 3 servidores slaves, e você deseja e
     'servicesuse.id_services': `Serviço.`,
     'servicesuse.price': `Valor do serviço.`,
     'servicesuse.method': `Forma de pagamento.`,
+    'servicesuse.month_payed': `Meses pagos`,
     'servicesuse.reservationdate': `Dia que o serviço foi ativado.`,
+    'servicesuse.contract_period': `Tempo de contrato`,
+    'servicesuse.termination_date': `Termino do contrato`,
     //CONTAS SIP
     'sip.id_user': `Usuário ao qual esta conta SIP está vinculada.`,
     'sip.defaultuser': `Usuário que será usado para logar nos softphones ou qualquer dispositivo SIP.`,
@@ -712,6 +744,7 @@ Também usado para capturar chamada com *8, deve ser configurada a opção picku
     'sip.block_call_reg': `Bloquear chamadas usando REGEX. Para bloquear chamadas para celular é so colocar ^55\\d\\d9. Click para ir ao site que testa REGEX.|https://regex101.com.`,
     'sip.record_call': `Grava as chamadas saintes desta conta SIP.`,
     'sip.techprefix': `Opção útil para quando for necessário autenticar mais de um cliente via IP que usa o mesmo IP. Comum em BBX multi tenant.`,
+    'sip.description': `Descrição`,
     'sip.nat': `O cliente está atrás de NAT? Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-nat/.`,
     'sip.directmedia': `Se ativado, Asterisk vai tentar enviar a mídia RTP direto entre seu cliente e seu provedor. Precisa ativar no tronco também. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-canreinvite/.`,
     'sip.qualify': `Enviar pacote OPTION para verificar se o usuário está online.||Sintaxe:
@@ -724,6 +757,7 @@ Se você ativar o qualify, o Asterisk enviará um comando OPTION o SIP peer regu
 Se o dispositivo não responder o OPTION dentro do período configurado (ou padrão) (em ms), o Asterisk considera o dispositivo off-line para chamadas futuras.
 
 Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.`,
+    'sip.id_trunk_group': `::::::ATENÇÃO::::::. Selecionando um grupo de tronco aqui, será ignorado o grupo de tronco das tarifas e sempre será usado este grupo de tronco. Somente selecione um grupo de troncos aqui se você realmente desaja que todas as chamadas desta conta SIP sejam enviadas para este grupo de troncos`,
     'sip.context': `Este é o contexto que a chamada será processada, por padrão é billing. Somente alterar se tiver conhecimento sobre Asterisk.`,
     'sip.dtmfmode': `Tipo de DTMF. Clique para mais informaçōes|https://www.voip-info.org/asterisk-sip-dtmfmode/.`,
     'sip.insecure': `Se o host estiver dynamic está opção precisa estar como NO, para o IP authentication alterar para port,invite.`,
@@ -751,8 +785,10 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sip.voicemail': `Ativar voicemail. É necessário a configuração do SMTP no Linux para receber o email com a mensagem. Clique aqui para saber como configurar o SMTP de forma simples.|https://www.magnusbilling.org/br/blog-br/9-novidades/25-configurar-ssmtp-para-enviar-voicemail-no-asterisk.html.`,
     'sip.voicemail_email': `Email que será enviado o email com a gravação.`,
     'sip.voicemail_password': `Senha do VOICEMAIL. É possível entrar no VOICEMAIL digitando *111.`,
+    'sip.sip_config': ``,
     'sip.sipshowpeer': `sip show peer.`,
-    //SIP TRACE
+    'sip.cnl': ``,
+    //SIPTRACE
     'siptrace.head': `Corpo da mensagem SIP.`,
     //ATA LINKSYS
     'sipuras.nserie': `Linksys serial number.`,
@@ -761,6 +797,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sipuras.senha_admin': `Senha para entrar na configuração do LinkSys.`,
     'sipuras.antireset': `Tenha cuidado. Esta opção desativa o reinicio com o comando *73738#.`,
     'sipuras.Enable_Web_Server': `Tenha cuidado! Se desativado, não será mais possível entrar nas configuraçōes do Linksys.`,
+    'sipuras.Dial_Tone': ``,
     'sipuras.Proxy_1': `IP do proxy 1`,
     'sipuras.User_ID_1': `Conta SIP que vai será usado na linha 1 do ATA.`,
     'sipuras.Password_1': `Senha da Conta VoIP.`,
@@ -783,12 +820,12 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'sipuras.STUN_Test_Enable': `Validar o servidor STUN periodicamente.`,
     'sipuras.Substitute_VIA_Addr': `Substituir o IP publico no VIA.`,
     'sipuras.STUN_Server': `Dominio do servidor STUN.`,
-    'sipuras.Dial_Tone': ``,
     //SMS
     'sms.id_user': `Usuário que enviou/recebeu o SMS.`,
     'sms.telephone': `Número no formato E 164.`,
     'sms.sms': `Texto no SMS.`,
     'sms.sms_from': `Se seu provedor de SMS aceita o envio do FROM, coloque aqui. Este valor será subistituido pela variável %from% na URL do tronco.`,
+    'sms.result': ``,
     //SMTP
     'smtps.host': `Domínio só SMST||Você precisa verificar se o datacenter onde seu servidor está hospedado não bloqueia as portas usada pelo SMTP.`,
     'smtps.username': `Usuário para autenticar no servidor SMTP.`,
@@ -812,7 +849,7 @@ Este status pode ser verificado pela função sip show peer XXXX, esta função 
     'trunk.allow': `Selecione os codecs que o tronco aceita.`,
     'trunk.providertech': `Protocolo do tronco. Alguns protocolos como Dahdi, Dongle, DGV, khomp, precisam ser instalado no Asterisk antes de usar.`,
     'trunk.status': `Se o tronco for inativado, Magnusbilling enviara a chamada para o tronco backup.`,
-    'trunk.allow_error': `Se SIM, a chamadas será enviada para o tronco backup a menos que a chamada seja atendida ou cancelada. Somente use quando seu tronco tiver algum problema de sinalização, por exemplo sinaliza BUSY quando não tiver canal disponível.`,
+    'trunk.allow_error': `Envia a chamada para o próximo tronco  se receber error 404.`,
     'trunk.register': `Somente ative se seu tronco for por usuário e senha.`,
     'trunk.register_string': `<usuario>:<senha>@<host>/contact.||usuário é a id de usuário para este servidor SIP (ex 2345).
 senha é a senha do usuário.
@@ -859,6 +896,7 @@ Digamos que queira adicionar um MACRO no tronco, estão neste campo, adicionar p
 useragent=meu agente
 
 .`,
+    'trunk.cnl': ``,
     //GRUPO DE TRONCOS
     'trunkgroup.name': `Nome para o grupo de troncos, recomendável usar nomes amigáveis para facilitar a administração das tarifas.`,
     'trunkgroup.type': `Tipo.||É como o sistema vai ordenar os troncos que pertence ao grupo.
@@ -874,7 +912,10 @@ O MagnusBilling tentará enviar a chamada para o próximo tronco do grupo desde 
 
 .`,
     'trunkgroup.id_trunk': `Selecionar os troncos que pertenceram a este grupo. Se for selecionado o tipo, em ordem, então selecione os troncos na ordem desejada.`,
-    //ERROS DOS TRONCOS
+    'trunkgroup.weight': `Esta opção é para balancear as chamadas por peso.||Exemplo. 
+
+Digamos que tenha selecionado 3 troncos, e você deseja enviar 1 chamada para primeiro tronco, 2 para o segundo e 1 para o terceiro, então, neste exemplo, coloque neste campo 1,2,1.`,
+    //ERROS TRONCO
     'trunksipcodes.ip': ``,
     'trunksipcodes.code': ``,
     'trunksipcodes.total': ``,
@@ -913,6 +954,7 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.country': `Usado para CID Callback. O DDI do país será adicionado antes do CallerID to converter o CallerID para o formato DDI DDD nº.`,
     'user.id_offer': `Usado para ativar um pacote grátis. É necessário informar as tarifas que vão pertencer aos pacotes gratís.`,
     'user.cpslimit': `Limite de CPS(chamadas por segundo) para este cliente. As chamadas que superar este limite será enviado CONGESTION.`,
+    'user.description': ``,
     'user.company_website': `Site da empresa|Tambem usado para customizar o painel de login para um revendedor. Neste caso, o dominio ou subdominio deve ser colocado sem http ou www`,
     'user.company_name': `Nome da empresa.|Tambem usado para customizar o painel de login para um revendedor`,
     'user.commercial_name': `Nome fantasia.`,
@@ -929,7 +971,10 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.email': `Email, é necessário para o envio de notificaçōes do sistema.`,
     'user.doc': `Documento do cliente.`,
     'user.vat': `Usado em alguns métodos de pagamento.`,
+    'user.contract_value': `Valor do contrato`,
+    'user.dist': ``,
     'user.typepaid': `Cliente pós-pago poderá ficar com saldo negativo até o limite de crédito informado no campo abaixo.`,
+    'user.credit_notification_daily': `Se ativar esta opção o MagnusBilling vai enviar um email diariamente com o saldo do cliente. Você pode editar o email que será enviado no menu Configurações submenu Modelo de Emails.`,
     'user.creditlimit': `Somente usado para Pos-Pago. O cliente poderá ligar até chegar a este limite negativo.`,
     'user.credit_notification': `Se o crédito do cliente ficar menor que está campo, MagnusBilling vai enviar um email para o cliente informando que está com pouco crédito. NECESSÁRIO TER CADASTRADO UM SERVIDOR SMTP NO MENU CONFIGURAÇŌES.`,
     'user.enableexpire': `Ativar expiração. Necessário informar a data da expiração no campo Data de expiração.`,
@@ -942,12 +987,20 @@ Regra 5 -> números que iniciam com qualquer valor e tem 11 dígitos, será adic
     'user.sipaccountlimit': `Quantas Contas VoIP este usuário poderá ter. Será necessário dar permissōes no grupo para criar Contas VoIP.`,
     'user.callingcard_pin': `Usado para autenticação do calling card.`,
     'user.restriction': `Esta opção permite restringir o usuário para somente discar para alguns números, ou proibir discar para alguns números, conforme for selecionado. Os números deverão ser adicionado no menu Números Bloqueados.`,
+    'user.restriction_use': `Qual número será usado para verificar a Restrição. Esta opção é somente válida para chamas de saida.`,
     'user.transfer_international_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_flexiload_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_bkash_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_dbbl_rocket': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_dbbl_rocket_profit': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
     'user.transfer_show_selling_price': `Esta função não está disponível no Brasil. Somente usado para recarga de celulares em alguns países.`,
+    'user.email2': `Email 2`,
+    'user.email_services': `Ativa ou não as notificaçōes por email dos serviços`,
+    'user.email_did': `Ativa ou não as notificaçōes por email dos DIDs`,
+    //HISTóRICO CLIENTES
+    'userhistory.id_user': ``,
+    'userhistory.date': ``,
+    'userhistory.description': ``,
     //TARIFAS PARA CLIENTES
     'userrate.id_prefix': `Selecione o prefixo que você deseja subscrever.`,
     'userrate.rateinitial': `Novo preço de venda para este prefixo.`,

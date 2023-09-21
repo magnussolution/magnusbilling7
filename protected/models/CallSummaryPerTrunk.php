@@ -62,10 +62,11 @@ class CallSummaryPerTrunk extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_trunk', 'numerical', 'integerOnly' => true),
             array('sessiontime, sessionbill, nbcall, buycost, lucro, aloc_all_calls, sumaloc_all_calls', 'length', 'max' => 50),
         );
+        return $this->getExtraField($rules);
     }
     public function relations()
     {

@@ -133,6 +133,16 @@ Tech prefix
 
 
 
+.. _sip-description:
+
+Descrição
+-----------
+
+| Descrição
+
+
+
+
 .. _sip-nat:
 
 NAT
@@ -169,6 +179,16 @@ Qualify
 | Se o dispositivo não responder o OPTION dentro do período configurado (ou padrão) (em ms), o Asterisk considera o dispositivo off-line para chamadas futuras.
 | 
 | Este status pode ser verificado pela função sip show peer XXXX, esta função somente fornecerá informações de status para SIP peer que possuem qualify = yes.
+
+
+
+
+.. _sip-id-trunk-group:
+
+Grupo de Troncos
+----------------
+
+| ::::::ATENÇÃO::::::. Selecionando um grupo de tronco aqui, será ignorado o grupo de tronco das tarifas e sempre será usado este grupo de tronco. Somente selecione um grupo de troncos aqui se você realmente desaja que todas as chamadas desta conta SIP sejam enviadas para este grupo de troncos
 
 
 
@@ -399,12 +419,32 @@ Senha
 
 
 
+.. _sip-sip-config:
+
+Parâmetros
+-----------
+
+| Nós ainda não escrevemos a descrição deste campo.
+
+
+
+
 .. _sip-sipshowpeer:
 
 Peer
 ----
 
 | sip show peer.
+
+
+
+
+.. _sip-cnl:
+
+Zona CNL
+--------
+
+| Nós ainda não escrevemos a descrição deste campo.
 
 
 

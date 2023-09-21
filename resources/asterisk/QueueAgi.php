@@ -23,12 +23,12 @@ class QueueAgi
     public function callQueue(&$agi, &$MAGNUS, &$CalcAgi, $DidAgi = null, $type = 'queue', $startTime = 0)
     {
         $agi->verbose("Queue module", 5);
-
+        $MAGNUS->sip_account = '';
         $agi->answer();
         $startTime           = $startTime > 0 ? $startTime : time();
         $MAGNUS->destination = $DidAgi->modelDid->did;
 
-        $sql = "SELECT  *, pkg_queue.id AS id, pkg_queue.id_user AS id_user  FROM pkg_queue
+        $sql = "SELECT  *, pkg_queue.id AS id, pkg_queue.id_user AS id_user , pkg_user.id_user AS id_agent FROM pkg_queue
                             LEFT JOIN pkg_user ON pkg_queue.id_user = pkg_user.id
                             WHERE pkg_queue.id = " . $DidAgi->modelDestination[0]['id_queue'] . " LIMIT 1 ";
         $modelQueue = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -112,7 +112,7 @@ class QueueAgi
         if ($linha[4] == 'ABANDON') {
             $MAGNUS->sip_account = $linha[4];
         } else {
-            $MAGNUS->sip_account = substr($linha[3], 4);
+            $MAGNUS->sip_account = substr($linha[3], 4) . '_WT ' . $agi->get_variable("QEHOLDTIME", true);
         }
 
         $CalcAgi->terminatecauseid = 1;
@@ -124,8 +124,9 @@ class QueueAgi
         $agi->verbose('$siptransfer => ' . $siptransfer['data'], 5);
         if ($siptransfer['data'] != 'yes' && $type == 'queue') {
 
+            $CalcAgi->real_sessiontime = intval($CalcAgi->sessiontime);
             if (!is_null($DidAgi)) {
-                $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime);
+                $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime, $CalcAgi);
             }
 
             $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('$MAGNUS->destination',1,length(prefix))
@@ -137,13 +138,23 @@ class QueueAgi
             $MAGNUS->id_trunk          = null;
             $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $CalcAgi->sessiontime);
             $CalcAgi->sessiontime      = $CalcAgi->sessiontime;
-            $CalcAgi->real_sessiontime = intval($CalcAgi->sessiontime);
             $CalcAgi->terminatecauseid = $CalcAgi->terminatecauseid;
             $CalcAgi->sessionbill      = $DidAgi->sell_price;
             $CalcAgi->sipiax           = 8;
-            $CalcAgi->buycost          = 0;
+            $CalcAgi->buycost          = $DidAgi->buy_price;
             $CalcAgi->id_prefix        = $modelPrefix->id;
+
+            if ($modelQueue->id_agent > 1) {
+                $CalcAgi->agent_bill = $DidAgi->agent_client_rate;
+            }
+
             $CalcAgi->saveCDR($agi, $MAGNUS);
+
+            if (isset($DidAgi->modelDid->id)) {
+                $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $CalcAgi->sessiontime
+                                WHERE id = " . $DidAgi->modelDid->id . " LIMIT 1";
+                $agi->exec($sql);
+            }
 
         }
         if ($type == 'queue') {

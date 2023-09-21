@@ -22,7 +22,8 @@ Ext.define('MBilling.view.groupUser.Form', {
                     plugins: 'markallowblank',
                     allowBlank: false,
                     anchor: '100%',
-                    enableKeyEvents: true
+                    enableKeyEvents: true,
+                    labelWidth: 180
                 }
             },
             items: [{
@@ -39,7 +40,12 @@ Ext.define('MBilling.view.groupUser.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'hidden_prices',
-                    fieldLabel: t('Hidden prices'),
+                    fieldLabel: t('Hide prices'),
+                    hidden: true
+                }, {
+                    xtype: 'noyescombo',
+                    name: 'hidden_batch_update',
+                    fieldLabel: t('Hide batch update button'),
                     hidden: true
                 }]
             }, {

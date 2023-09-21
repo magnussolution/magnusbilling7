@@ -59,6 +59,16 @@ Enable_Web_Server
 
 
 
+.. _sipuras-Dial-Tone:
+
+Dial Tone
+---------
+
+| We did not write the description to this field.
+
+
+
+
 .. _sipuras-Proxy-1:
 
 Proxy
@@ -275,16 +285,6 @@ STUN Server
 -----------
 
 | STUN server domain.
-
-
-
-
-.. _sipuras-Dial-Tone:
-
-Dial Tone
----------
-
-| We did not write the description to this field.
 
 
 
