@@ -52,7 +52,7 @@ class SendCreditProducts extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('country_code,status', 'numerical', 'integerOnly' => true),
             array('country,operator_name,info', 'length', 'max' => 100),
             array('product,send_value,wholesale_price,provider', 'length', 'max' => 50),
@@ -62,5 +62,6 @@ class SendCreditProducts extends Model
             array('type,retail_price', 'length', 'max' => 50),
 
         );
+        return $this->getExtraField($rules);
     }
 }

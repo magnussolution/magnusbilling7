@@ -53,10 +53,11 @@ class TablesChanges extends Model
 
     public function rules()
     {
-        return array(
+        $rules = array(
             array('module', 'required'),
             array('last_time', 'numerical', 'integerOnly' => true),
         );
+        return $this->getExtraField($rules);
     }
     public function lastTime($table)
     {

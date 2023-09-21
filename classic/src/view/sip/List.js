@@ -25,6 +25,13 @@ Ext.define('MBilling.view.sip.List', {
     fieldSearch: 'name',
     initComponent: function() {
         var me = this;
+        me.extraButtons = [{
+            text: t('Bulk SIP'),
+            handler: 'onBulk',
+            width: App.user.language == 'en' ? 80 : 110,
+            disabled: false,
+            hidden: App.user.isClient || !me.allowCreate || window.isTablet
+        }];
         me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',
@@ -139,6 +146,33 @@ Ext.define('MBilling.view.sip.List', {
             hidden: true,
             hideable: !App.user.isClient,
             flex: 1
+        }, {
+            header: t('Description'),
+            dataIndex: 'description',
+            hidden: true,
+            hideable: !App.user.isClient,
+            flex: 4
+        }, {
+            xtype: 'templatecolumn',
+            tpl: '{idTrunkGroupname}',
+            header: t('Trunk groups'),
+            dataIndex: 'id_trunk_group',
+            comboFilter: 'trunkgroupcombo',
+            flex: 3,
+            hidden: true,
+            hideable: App.user.isAdmin
+        }, {
+            header: t('Alias'),
+            dataIndex: 'alias',
+            hidden: true,
+            hideable: App.user.isAdmin,
+            flex: 2
+        }, {
+            header: t('CNL zone'),
+            dataIndex: 'cnl',
+            hidden: true,
+            hideable: App.user.isAdmin && App.user.language == 'pt_BR',
+            flex: 2
         }, {
             header: t('AMD'),
             dataIndex: 'amd',

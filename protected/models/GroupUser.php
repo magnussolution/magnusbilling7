@@ -76,12 +76,13 @@ class GroupUser extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name', 'required'),
-            array('id_user_type, hidden_prices', 'numerical', 'integerOnly' => true),
+            array('id_user_type, hidden_prices, hidden_batch_update', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 100),
             array('user_prefix', 'length', 'max' => 6),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

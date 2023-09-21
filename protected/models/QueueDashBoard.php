@@ -53,13 +53,14 @@ class QueueDashBoard extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_queue, id_agent, priority', 'numerical', 'integerOnly' => true),
             array('keyPressed, holdtime, originalPosition, position', 'length', 'max' => 11),
             array('queue, timestamp, queue_name', 'length', 'max' => 25),
             array('status', 'length', 'max' => 30),
             array('callerId,callId', 'length', 'max' => 40),
         );
+        return $this->getExtraField($rules);
     }
 
     public function relations()

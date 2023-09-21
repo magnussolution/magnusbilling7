@@ -52,10 +52,12 @@ class CampaignRestrictPhone extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('number', 'required'),
             array('number', 'numerical', 'integerOnly' => true),
+            array('description', 'length', 'max' => 100),
         );
+        return $this->getExtraField($rules);
     }
 
     public function deleteDuplicatedrows()

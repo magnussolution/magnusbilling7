@@ -52,10 +52,11 @@ class OfferCdr extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_offer, used_secondes', 'numerical', 'integerOnly' => true),
             array('date_consumption', 'length', 'max' => 70),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

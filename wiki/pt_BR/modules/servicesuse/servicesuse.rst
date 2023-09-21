@@ -39,12 +39,42 @@ Métodos de Pagamento
 
 
 
+.. _servicesUse-month-payed:
+
+Messes pago
+-----------
+
+| Meses pagos
+
+
+
+
 .. _servicesUse-reservationdate:
 
 Data de reserva
 ---------------
 
 | Dia que o serviço foi ativado.
+
+
+
+
+.. _servicesUse-contract-period:
+
+Final do contrato mínimo
+-------------------------
+
+| Tempo de contrato
+
+
+
+
+.. _servicesUse-termination-date:
+
+Data para cancelar
+------------------
+
+| Termino do contrato
 
 
 

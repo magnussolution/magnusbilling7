@@ -52,6 +52,7 @@ class SipTraceController extends Controller
         $modelServers = Servers::model()->findAll('status = 1');
 
         $result = explode("U " . date('Y') . "", $result);
+
         $packet = [];
         $id     = 1;
         $mils   = 0;
@@ -76,6 +77,11 @@ class SipTraceController extends Controller
             foreach ($lines as $key => $line) {
                 if (preg_match('/Call-ID:/', $line)) {
                     $callid = trim(substr($line, 8));
+                } else if (preg_match('/MagnusBilling/', $line)) {
+                    $agent = explode(' ', $line);
+                    if (isset($agent[2])) {
+                        $callids[] = $callid;
+                    }
                 } else if (preg_match('/To:/', $line)) {
                     $sipto = trim(substr($line, 3));
                 }
@@ -106,8 +112,9 @@ class SipTraceController extends Controller
 
             $date = $fromTo[0] . ' ' . $fromTo[1];
 
-            $fromIp = strtok($fromTo[2], ':');
-            $toIp   = strtok($fromTo[4], ':');
+            preg_match_all('/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\:.* \-.* (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/', $value, $output_array);
+            $fromIp = $output_array[1][0];
+            $toIp   = $output_array[2][0];
 
             $server_id_from = array_search($fromIp, array_column($modelServers, 'host'));
             $server_id_to   = array_search($toIp, array_column($modelServers, 'host'));
@@ -130,6 +137,8 @@ class SipTraceController extends Controller
                 'method' => $method,
                 'fromip' => $server_id_from !== false ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
                 'toip'   => $server_id_to !== false ? $modelServers[$server_id_to]->name . ' (' . $toIp . ')' : $toIp,
+                'from'   => $fromIp,
+                'to'     => $toIp,
                 'sipto'  => $sipto,
                 'callid' => $callid,
                 'head'   => date('Y') . preg_replace('/\#/', '', $value),
@@ -139,7 +148,6 @@ class SipTraceController extends Controller
             $id++;
 
         }
-
         $this->render('index', array('packet' => $packet));
     }
 
@@ -415,7 +423,7 @@ class SipTraceController extends Controller
 
         $modelTrace = SipTrace::model()->find();
 
-        if (count($modelTrace)) {
+        if (isset($modelTrace->id)) {
             echo json_encode(array(
                 $this->nameSuccess => false,
                 $this->nameMsg     => Yii::t('zii', 'Exist a filter active or in use. Wait or click in Stop Capture button.'),

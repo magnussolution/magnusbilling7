@@ -59,7 +59,7 @@ class Iax extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user', 'required'),
             array('id_user,calllimit ', 'numerical', 'integerOnly' => true),
             array('name, callerid, context, fromuser, fromdomain, md5secret, secret', 'length', 'max' => 80),
@@ -78,6 +78,7 @@ class Iax extends Model
             array('username', 'checkusername'),
             array('username', 'unique', 'caseSensitive' => 'false'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkusername($attribute, $params)

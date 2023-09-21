@@ -85,7 +85,7 @@ Ext.define('MBilling.view.rate.List', {
                 header: t('Include in offer'),
                 dataIndex: 'package_offer',
                 hidden: true,
-                hideable: App.user.isAdmin,
+                hideable: !App.user.isClient,
                 flex: 1,
                 renderer: Helper.Util.formattyyesno,
                 filter: {
@@ -109,6 +109,13 @@ Ext.define('MBilling.view.rate.List', {
                         [0, t('Inactive')]
                     ]
                 }
+            }, {
+                header: t('Connection charge'),
+                dataIndex: 'connectcharge',
+                renderer: Helper.Util.formatMoneyDecimal4,
+                flex: 2,
+                hideable: App.user.isAdmin,
+                hidden: true
             }]
         me.callParent(arguments);
     }

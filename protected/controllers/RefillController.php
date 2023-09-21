@@ -38,6 +38,13 @@ class RefillController extends Controller
         $this->instanceModel = new Refill;
         $this->abstractModel = Refill::model();
         $this->titleReport   = Yii::t('zii', 'Refill');
+
+        if (Yii::app()->session['isAdmin']) {
+            $this->relationFilter['idUser'] = array(
+                'condition' => "idUser.id_user < 2",
+            );
+        }
+
         parent::init();
     }
 
@@ -144,6 +151,21 @@ class RefillController extends Controller
                 $model->save();
             }
         }
+
+        if (isset($_FILES["image"]) && strlen($_FILES["image"]["name"]) > 1) {
+
+            exec('rm -rf resources/images/refill/' . $model->id . '*');
+
+            $ext = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+
+            $uploadfile = 'resources/images/refill/' . $model->id . '.' . $ext;
+
+            Yii::log(print_r($uploadfile, true), 'error');
+            move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile);
+
+            $model->image = $uploadfile;
+            $model->save();
+        }
         return;
     }
 
@@ -163,12 +185,9 @@ class RefillController extends Controller
         $criteria = new CDbCriteria(array(
             'select'    => 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth',
             'join'      => $this->join,
-            'condition' => $this->filter,
+            'condition' => $this->filter == '' ? 1 : $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
-            'order'     => $this->order,
-            'limit'     => $this->limit,
-            'offset'    => $this->start,
             'group'     => 'CreditMonth',
         ));
 
@@ -180,22 +199,29 @@ class RefillController extends Controller
     public function setAttributesModels($attributes, $models)
     {
 
-        $modelRefill = $this->abstractModel->find(array(
-            'select'    => 'SUM(t.credit) AS credit',
-            'join'      => $this->join,
-            'condition' => $this->filter,
-            'params'    => $this->paramsFilter,
-            'with'      => $this->relationFilter,
-        ));
+        $criteria = new CDbCriteria();
+        if (strlen($this->filter)) {
+            $criteria->addCondition($this->filter);
+        }
+        $criteria->select = 'SUM(t.credit) AS credit';
+        $criteria->join   = $this->join;
+        $criteria->params = $this->paramsFilter;
+        $criteria->with   = $this->relationFilter;
 
-        $modelRefillSumm2 = $this->abstractModel->findAll(array(
-            'select'    => 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth',
-            'join'      => $this->join,
-            'condition' => $this->filter,
-            'params'    => $this->paramsFilter,
-            'with'      => $this->relationFilter,
-            'group'     => 'CreditMonth',
-        ));
+        if (count($this->addInCondition)) {
+            $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+        }
+
+        $modelRefill = $this->abstractModel->find($criteria);
+
+        $criteria->select = 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth';
+
+        $criteria->group = 'CreditMonth';
+
+        if (count($this->addInCondition)) {
+            $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+        }
+        $modelRefillSumm2 = $this->abstractModel->findAll($criteria);
 
         $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
@@ -226,5 +252,19 @@ class RefillController extends Controller
         $modelRefill->description = preg_replace('/PENDING\: /', '', $modelRefill->description);
         $modelRefill->save();
 
+    }
+
+    public function subscribeColunms($columns = '')
+    {
+        if ($this->config['global']['base_country'] != 'BRL') {
+            for ($i = 0; $i < count($columns); $i++) {
+
+                if ($columns[$i]['dataIndex'] == 'credit') {
+                    $columns[$i]['dataIndex'] = 't.credit';
+                }
+
+            }
+        }
+        return $columns;
     }
 }

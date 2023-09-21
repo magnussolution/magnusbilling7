@@ -103,6 +103,15 @@ class PortabilidadeAgi
                 }
                 $agi->verbose("CONSULTA DA PORTABILIDADE ->" . $number, 25);
             }
+        } else if ($MAGNUS->portabilidadeMobile == true) {
+            $sql = "SELECT prefix FROM pkg_nmp  WHERE number = '" . $number . "' LIMIT 1";
+            $agi->verbose($sql, 25);
+            $modelNMP = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            if (isset($modelNMP->prefix)) {
+                $number      = "1111" . $modelNMP->prefix . $number;
+                $MAGNUS->NPM = 1;
+                $agi->verbose('MAGNUS->NP -> ' . $MAGNUS->NPM, 5);
+            }
         }
         return $number;
     }

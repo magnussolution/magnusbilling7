@@ -4,7 +4,7 @@
 DID
 ---
 
-| The exact number coming from the context in Asterisk. We recommend you to always use the E164 format.
+| The exact number coming from the context in Asterisk. We recommend you to always use the E164 format. Also you can create intervals. Example 13605040001-13605040009. In this example will be created the DIDs 13605040001 until  13605040009.
 
 
 
@@ -69,6 +69,36 @@ Connection charge
 
 
 
+.. _did-minimal-time-buy:
+
+Minimum time to charge
+----------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buyrateinitblock:
+
+Buy price initblock
+-------------------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-buyrateincrement:
+
+Buy price increment
+-------------------
+
+| We did not write the description to this field.
+
+
+
+
 .. _did-minimal-time-charge:
 
 Minimum time to charge
@@ -124,7 +154,7 @@ Channel limit
 Description
 -----------
 
-| You may take notes here!
+| Set here the destination!
 
 
 
@@ -153,6 +183,16 @@ Regular expression
 | 
 | 
 |     
+
+
+
+
+.. _did-buy-rate-1:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
 
 
 
@@ -197,6 +237,16 @@ Regular expression
 
 
 
+.. _did-buy-rate-2:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
+
+
+
+
 .. _did-selling-rate-2:
 
 Sell price per min
@@ -233,6 +283,16 @@ Regular expression
 ------------------
 
 | Same as the first expression. You can see more details at the link `https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.  <https://wiki.magnusbilling.org/en/source/modules/did/did.html#did-expression-1.>`_.
+
+
+
+
+.. _did-buy-rate-3:
+
+Buy price per min
+-----------------
+
+| We did not write the description to this field.
 
 
 
@@ -363,6 +423,26 @@ Out work audio
 --------------
 
 | Audio that will be executed when a call is received out of the time interval.
+
+
+
+
+.. _did-country:
+
+Country
+-------
+
+| We did not write the description to this field.
+
+
+
+
+.. _did-id-server:
+
+Server
+------
+
+| We did not write the description to this field.
 
 
 

@@ -42,6 +42,7 @@ class Magnus
     public $typepaid          = 0;
     public $removeinterprefix = 1;
     public $restriction       = 1;
+    public $restriction_use   = 1;
     public $redial;
     public $enableexpire;
     public $expirationdate;
@@ -74,7 +75,9 @@ class Magnus
     public $magnusFilesDirectory = '/usr/local/src/magnus/';
     public $tariff_limit         = 1;
     public $prefixclause;
-    public $is_callingcard = false;
+    public $is_callingcard     = false;
+    public $sip_id_trunk_group = 0;
+    public $modelRateAgent;
 
     public function __construct()
     {
@@ -154,7 +157,7 @@ class Magnus
 
     }
     //hangup($agi);
-    public function hangup(&$agi, $code = 34)
+    public function hangup(&$agi, $code = '')
     {
         /*
         1 =  SIP/2.0 404 Not Found.
@@ -174,6 +177,10 @@ class Magnus
         127 = SIP/2.0 500 Network error.
          */
         $agi->verbose('Hangup Call ' . $this->destination . ' Username ' . $this->username, 6);
+
+        if ($code == '') {
+            $code = $agi->get_variable("HANGUPCAUSE", true);
+        }
         $agi->execute("HANGUP $code");
 
         exit;
@@ -242,7 +249,7 @@ class Magnus
         }
 
         $this->destination = preg_replace('/\#|\*|\-|\.|\(|\)/', '', $this->destination);
-        $this->dnid        = preg_replace('/\-|\.|\(|\)/', '', $this->dnid);
+        $this->dnid        = preg_replace('/\#|\*|\-|\.|\(|\)/', '', $this->dnid);
 
         if ($this->destination <= 0) {
             $prompt = "prepaid-invalid-digits";
@@ -676,9 +683,19 @@ class Magnus
     public function checkRestrictPhoneNumber($agi, $type = 'outbound')
     {
 
-        $destination = $type == 'outbound' ? $this->destination : $this->CallerID;
+        if ($type == 'outbound') {
+            if ($this->restriction_use == 1 || $this->restriction == 2) {
+                $destination = $this->destination;
+            } elseif ($this->restriction_use == 2) {
+                $destination = $this->CallerID;
+            }
+        } else {
+            $destination = $this->CallerID;
+        }
+
         $destination = preg_replace('/\+|\#|\*|\-|\.|\(|\)/', '', $destination);
-        $direction   = $type == 'outbound' ? 1 : 2;
+
+        $direction = $type == 'outbound' ? 1 : 2;
 
         if ($type == 'outbound' && $this->modelSip->block_call_reg != '') {
 
@@ -695,8 +712,13 @@ class Magnus
         }
         if ($this->restriction == 1 || $this->restriction == 2) {
             /*Check if Account have restriction*/
-            $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user
-                        AND number = SUBSTRING('" . $destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+
+            if ($this->restriction == 1 && $this->restriction_use == 3 && $type == 'outbound') {
+                $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user AND (number = SUBSTRING('" . $this->destination . "',1,length(number))  OR number = SUBSTRING('" . $this->CallerID . "',1,length(number))  ) ORDER BY LENGTH(number) DESC";
+            } else {
+                $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user AND number = SUBSTRING('" . $destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+            }
+
             $modelRestrictedPhonenumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $agi->verbose("RESTRICTED NUMBERS ", 15);
@@ -748,7 +770,7 @@ class Magnus
 
     public function stopRecordCall(&$agi)
     {
-        if ($this->record_call == 1) {
+        if ($this->record_call == 1 || $this->config['global']['global_record_calls'] == 1) {
             $agi->verbose("EXEC StopMixMonitor (" . $this->uniqueid . ")", 6);
             $agi->execute("StopMixMonitor");
         }
@@ -838,17 +860,17 @@ class Magnus
         return "closed";
     }
 
-    public static function getNewUsername($MAGNUS, $agi)
+    public function getNewUsername($agi)
     {
         $existsUsername = true;
 
-        $generate_username = $MAGNUS->config['global']['username_generate'];
+        $generate_username = $this->config['global']['username_generate'];
         $agi->verbose('getNewUsername ' . $generate_username);
         if ($generate_username == 1) {
-            $length = $MAGNUS->config['global']['generate_length'] == 0 ? 5 : $MAGNUS->config['global']['generate_length'];
-            $prefix = $MAGNUS->config['global']['generate_prefix'] == '0' ? '' : $MAGNUS->config['global']['generate_prefix'];
+            $length = $this->config['global']['generate_length'] == 0 ? 5 : $this->config['global']['generate_length'];
+            $prefix = $this->config['global']['generate_prefix'] == '0' ? '' : $this->config['global']['generate_prefix'];
             while ($existsUsername) {
-                $randUserName = $prefix . AuthenticateAgi::generatePassword($length, false, false, true, false) . "\n";
+                $randUserName = $prefix . $this->generatePassword($length, false, false, true, false) . "\n";
 
                 $sql            = "SELECT count(*) FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
                 $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -867,7 +889,7 @@ class Magnus
         return trim($randUserName);
     }
 
-    public static function generatePassword($tamanho, $maiuscula, $minuscula, $numeros, $codigos)
+    public function generatePassword($tamanho, $maiuscula, $minuscula, $numeros, $codigos)
     {
         $maius = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
         $minus = "abcdefghijklmnopqrstuwxyz";

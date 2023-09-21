@@ -67,7 +67,9 @@ Ext.define('MBilling.view.diddestination.List', {
                     [6, t('0800 Callback')],
                     [7, t('Queue')],
                     [8, t('SIP group')],
-                    [9, t('Custom')]
+                    [9, t('Custom')],
+                    [10, t('Context')],
+                    [11, t('Multiples IPs')]
                 ]
             }
         }, {
@@ -75,6 +77,10 @@ Ext.define('MBilling.view.diddestination.List', {
             renderer: Helper.Util.formatsecondsToTime,
             dataIndex: 'secondusedreal',
             flex: 3
+        }, {
+            header: t('priority'),
+            dataIndex: 'priority',
+            flex: 1
         }, {
             header: t('Creation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),

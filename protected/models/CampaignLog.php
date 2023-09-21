@@ -51,12 +51,13 @@ class CampaignLog extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('total', 'required'),
             array('loops', 'numerical', 'integerOnly' => true),
             array('trunks, campaigns', 'length', 'max' => 100),
             array('date', 'length', 'max' => 50),
 
         );
+        return $this->getExtraField($rules);
     }
 }

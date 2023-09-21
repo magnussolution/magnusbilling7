@@ -89,12 +89,42 @@ class BDServiceCommand extends CConsoleCommand
 
                     $modelUser         = User::model()->findByPk($sendCredit->id_user);
                     $modelUser->credit = $modelUser->credit + ($modelRefill->credit * -1);
-
                     try {
                         $modelUser->save();
                     } catch (Exception $e) {
 
                     }
+
+                    if ($modelUser->id_user > 1) {
+                        echo "is agent \n";
+                        $id_agent         = $modelUser->id_user;
+                        $modelRefillAgent = Refill::model()->find('invoice_number = :key AND id_user = :key1',
+                            array(
+                                ':key'  => $sendCredit->id,
+                                ':key1' => $id_agent,
+                            ));
+
+                        if (isset($modelRefillAgent->id)) {
+                            $modelRefillAgent->description = $modelRefillAgent->description . '. Status: ' . $result[0] . '. Ref:' . $result[1];
+                            $modelRefillAgent->payment     = 0;
+                            try {
+                                $modelRefillAgent->save();
+                            } catch (Exception $e) {
+
+                            }
+
+                            $modelUser         = User::model()->findByPk($id_agent);
+                            $modelUser->credit = $modelUser->credit + ($modelRefillAgent->credit * -1);
+                            try {
+                                $modelUser->save();
+                            } catch (Exception $e) {
+
+                            }
+
+                        }
+
+                    }
+
                 }
 
             } else if (preg_match("/SUCCESS|COMPLETED|ERROR/", $result)) {
@@ -111,6 +141,25 @@ class BDServiceCommand extends CConsoleCommand
                     try {
                         $modelRefill->save();
                     } catch (Exception $e) {
+
+                    }
+                    $modelUser = User::model()->findByPk($sendCredit->id_user);
+                    if ($modelUser->id_user > 1) {
+                        echo "is agent \n";
+                        $id_agent         = $modelUser->id_user;
+                        $modelRefillAgent = Refill::model()->find('invoice_number = :key AND id_user = :key1',
+                            array(
+                                ':key'  => $sendCredit->id,
+                                ':key1' => $id_agent,
+                            ));
+
+                        $modelRefillAgent->description = @$modelRefillAgent->description . '. Status: ' . $result[0] . '. Ref:' . $result[1];
+                        $modelRefillAgent->payment     = 1;
+                        try {
+                            $modelRefillAgent->save();
+                        } catch (Exception $e) {
+
+                        }
 
                     }
                 }

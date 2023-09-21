@@ -70,6 +70,10 @@ class BackupController extends Controller
         }
 
         $file = $_GET['file'];
+
+        if (!preg_match("/backup_voip_Magnus/", $file)) {
+            exit;
+        }
         $path = $this->diretory . $file;
 
         header('Content-type: application/csv');

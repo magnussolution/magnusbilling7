@@ -22,20 +22,48 @@ class StatusSystemCommand extends ConsoleCommand
     public function run($args)
     {
 
-        if (fmod(date('i'), 5) == 0) {
+        $sql          = "SELECT id FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+        $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
 
-            $sql    = "SELECT starttime AS time, count(*) Total_failed, (SELECT count(*) FROM pkg_cdr WHERE starttime = time) Total_answered FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' GROUP BY starttime";
-            $result = Yii::app()->db->createCommand($sql)->queryAll();
-            foreach ($result as $key => $minute) {
-                $sql = "UPDATE pkg_status_system SET cps = " . ($minute['Total_failed'] + $minute['Total_answered']) . "  WHERE date = '" . $minute['time'] . "' ";
+        if (isset($resultFailed[0]['id'])) {
+            $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `id` > " . $resultFailed[0]['id'];
+            $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
+        } else {
+            $sql          = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr_failed` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+            $resultFailed = Yii::app()->db->createCommand($sql)->queryAll();
+        }
+
+        $sql            = "SELECT id FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+        $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+
+        if (isset($resultAnswered[0]['id'])) {
+
+            $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `id` > " . $resultAnswered[0]['id'];
+            $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+        } else {
+            $sql            = "SELECT SUBSTRING(uniqueid,1,10) as uniqueid, starttime FROM  `pkg_cdr` WHERE  `starttime` > '" . date('Y-m-d H:i:s', strtotime('-1 hour')) . "' LIMIT 1";
+            $resultAnswered = Yii::app()->db->createCommand($sql)->queryAll();
+        }
+
+        $result = array_merge($resultFailed, $resultAnswered);
+
+        $byGroup = $this->group_by("uniqueid", $result);
+        $old_CPS = [];
+        foreach ($byGroup as $time => $group) {
+            $cps         = count($group);
+            $hour_minute = date('Y-m-d H:i', $time) . ':00';
+            if (!isset($old_CPS[$hour_minute])) {
+                $old_CPS[$hour_minute] = 0;
+            }
+            if ($cps > $old_CPS[$hour_minute]) {
+                $old_CPS[$hour_minute] = $cps;
+                $sql                   = "UPDATE pkg_status_system SET cps = " . $cps . "  WHERE date = '" . $hour_minute . "' ";
                 try {
                     Yii::app()->db->createCommand($sql)->execute();
                 } catch (Exception $e) {
 
                 }
-
             }
-
         }
 
         $sysinfo = new sysinfo;
@@ -74,9 +102,18 @@ class StatusSystemCommand extends ConsoleCommand
         $memUsed  = $memTotal - $memFree;
 
         $uptime = $sysinfo->formtSecundsDay($sysinfo->uptime());
-        $sql    = "INSERT INTO pkg_status_system (date, cpuMediaUso, cpuPercent,memTotal, memUsed, networkin, networkout,cpuModel,uptime) VALUES
+
+        $disk_free = $disk_perc = 0;
+        exec("df -hT | grep /$ | awk '{print $5 \"|\"$6}'", $res);
+        if (isset($res[0]) && preg_match('/\|/', $res[0])) {
+            $res       = explode('|', $res[0]);
+            $disk_free = intval($res[0]);
+            $disk_perc = intval($res[1]);
+        }
+
+        $sql = "INSERT INTO pkg_status_system (date, cpuMediaUso, cpuPercent,memTotal, memUsed, networkin, networkout,cpuModel,uptime, disk_free,disk_perc) VALUES
                     ('" . date('Y-m-d H:i:') . '00' . "','" . $loadavg['avg'][0] . "','" . number_format($loadavg['cpupercent'], 2) . "',
-                    '" . $memTotal . "','" . $memUsed . "', '" . $networkin . "','" . $networkout . "','" . $cpu_info['model'] . "','" . $uptime . "')";
+                    '" . $memTotal . "','" . $memUsed . "', '" . $networkin . "','" . $networkout . "','" . $cpu_info['model'] . "','" . $uptime . "','" . $disk_free . "','" . $disk_perc . "')";
         try {
             Yii::app()->db->createCommand($sql)->execute();
 
@@ -85,6 +122,20 @@ class StatusSystemCommand extends ConsoleCommand
             $result = Yii::app()->db->createCommand($sql)->queryAll();
         }
 
+    }
+    public function group_by($key, $data)
+    {
+        $result = array();
+
+        foreach ($data as $val) {
+            if (array_key_exists($key, $val)) {
+                $result[$val[$key]][] = $val;
+            } else {
+                $result[""][] = $val;
+            }
+        }
+
+        return $result;
     }
 }
 

@@ -104,7 +104,7 @@ if ($MAGNUS->dnid == '*120') {
             $sql = "UPDATE pkg_voucher SET id_user = $modelUser->id, usedate = NOW(), used = 1 WHERE voucher = '$modelVoucher->voucher' LIMIT 1";
             $agi->exec($sql);
 
-            $sql = "UPDATE pkg_user SET credit = credit + " . $modelVoucher->credit . " WHERE username = '$voucher' LIMIT 1";
+            $sql = "UPDATE pkg_user SET credit = credit + " . $modelVoucher->credit . " WHERE username = '" . $modelUser->username . "' LIMIT 1";
             $agi->exec($sql);
 
             $values = "" . $modelUser->id . ",'" . $modelVoucher->credit . "','Voucher " . $modelVoucher->voucher . ". Old credit " . $modelUser->credit . "',1";

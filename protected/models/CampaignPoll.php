@@ -52,7 +52,7 @@ class CampaignPoll extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name, id_campaign', 'required'),
             array('id_user,ordem_exibicao, repeat, id_campaign, digit_authorize, request_authorize',
                 'numerical', 'integerOnly' => true),
@@ -62,6 +62,7 @@ class CampaignPoll extends Model
             array('description', 'length', 'max' => 300),
 
         );
+        return $this->getExtraField($rules);
     }
 
     /**

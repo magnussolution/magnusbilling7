@@ -130,7 +130,7 @@ class ApiAccess
                 if (isset($_POST['getFields'])) {
                     if (!AccessManager::getInstance($_POST['module'])->canRead()) {
                         header('HTTP/1.0 401 Unauthorized');
-                        die("Access denied to $action in module:" . $_POST['module']);
+                        die("Access denied in module:" . $_POST['module']);
                     }
                     $module = $_POST['module'];
                     $rules  = $module::model()->rules();
@@ -143,7 +143,7 @@ class ApiAccess
                     $modules          = [];
                     foreach ($modelGroupModule as $values) {
                         if ($values->idModule->module != "") {
-                            $modules[] = $values->idModule->module;
+                            $modules[] = ['Menu name' => substr($values->idModule->text, 3, -2), 'Module name' => $values->idModule->module];
                         }
                     }
                     exit(json_encode($modules));
@@ -172,6 +172,8 @@ class ApiAccess
             $action = 'd';
         } else if ($_POST['action'] == 'buy') {
             $action = 'r';
+        } else if ($_POST['action'] == 'liberar') {
+            $action = 'u';
         } else if ($_POST['action'] == 'getNewUsername') {
             $action = 'r';
         } else if ($_POST['action'] == 'getNewPassword') {
@@ -195,7 +197,7 @@ class ApiAccess
 
         $modelUser = User::model()->find('email = :key', array(':key' => $values['email']));
 
-        if (count($modelUser)) {
+        if (isset($modelUser->id)) {
 
             echo json_encode([
                 'success' => false,
@@ -227,7 +229,7 @@ class ApiAccess
             $values['id_plan'] = $values['id_plan'];
         } else {
             $modelPlan = Plan::model()->find('signup = 1');
-            if (count($modelPlan)) {
+            if (isset($modelPlan->id)) {
                 $values['id_plan'] = $modelPlan->id;
             } else {
                 if (isset($modelUser->id)) {
@@ -248,7 +250,7 @@ class ApiAccess
             $values['id_group'] = $values['id_group'];
         } else {
             $modelGroupUser = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
-            if (count($modelGroupUser)) {
+            if (isset($modelGroupUser->id)) {
                 $values['id_group'] = $modelGroupUser[0]['id'];
             } else {
                 echo json_encode([

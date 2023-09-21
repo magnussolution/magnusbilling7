@@ -31,12 +31,14 @@ Ext.define('MBilling.view.didUse.Form', {
         }, {
             xtype: 'numberfield',
             name: 'month_payed',
-            fieldLabel: t('Month payed')
+            fieldLabel: t('Month payed'),
+            hidden: !App.user.isAdmin
         }, {
             xtype: 'datefield',
             name: 'reservationdate',
             fieldLabel: t('Reservation date'),
-            format: 'Y-m-d H:i:s'
+            format: 'Y-m-d H:i:s',
+            hidden: !App.user.isAdmin
         }];
         me.callParent(arguments);
     }

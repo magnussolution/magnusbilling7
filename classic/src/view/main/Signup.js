@@ -120,14 +120,34 @@ Ext.define('MBilling.view.main.Signup', {
                     allowBlank: true
                 }]
             }, {
+                layout: 'hbox',
+                margin: '3 0 0 0',
+                height: 45,
+                defaults: {
+                    xtype: 'textfield',
+                    height: 35,
+                    cls: 'auth-textbox',
+                    hideLabel: true,
+                    allowBlank: false,
+                    margin: '5 0 0 0',
+                    flex: 2
+                },
+                items: [{
+                    xtype: 'countrycombo',
+                    name: 'country',
+                    fieldLabel: t('Country'),
+                    value: window.lang == 'pt_BR' ? '55' : '1',
+                    allowBlank: true
+                }, {
+                    xtype: window.lang == 'pt_BR' ? 'statecombo' : 'textfield',
+                    emptyText: t('State'),
+                    name: 'state',
+                    allowBlank: true
+                }]
+            }, , {
                 xtype: 'textfield',
                 emptyText: t('City'),
                 name: 'city',
-                allowBlank: true
-            }, {
-                xtype: window.lang == 'pt_BR' ? 'statecombo' : 'textfield',
-                emptyText: t('State'),
-                name: 'state',
                 allowBlank: true
             }, {
                 xtype: 'textfield',

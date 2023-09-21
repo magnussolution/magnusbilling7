@@ -12,7 +12,7 @@ Ext.define('MBilling.view.diddestination.Combo', {
         data: [{
             id: '0',
             name: t('Call to PSTN'),
-            showFields: ['voip_call', 'destination', 'id_did', 'id_user', 'activated']
+            showFields: ['voip_call', 'destination', 'id_did', 'id_user', 'activated', 'priority']
         }, {
             id: '1',
             name: t('SIP'),
@@ -53,6 +53,10 @@ Ext.define('MBilling.view.diddestination.Combo', {
             id: '10',
             name: t('Context'),
             showFields: ['voip_call', 'context', 'id_did', 'id_user', 'activated']
+        }, {
+            id: '11',
+            name: t('Multiples IPs'),
+            showFields: ['voip_call', 'destination', 'id_did', 'id_user', 'activated']
         }]
     }
 });

@@ -101,10 +101,10 @@ Status
 
 .. _trunk-allow-error:
 
-Allow error
------------
+Go to backup if 404
+-------------------
 
-| If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.
+| Send call to the next trunk if receive error 404.
 
 
 
@@ -334,6 +334,16 @@ Parameters
 | useragent=my agent
 | 
 | .
+
+
+
+
+.. _trunk-cnl:
+
+Enable CNL
+----------
+
+| We did not write the description to this field.
 
 
 

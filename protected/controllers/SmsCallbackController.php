@@ -76,7 +76,7 @@ class SmsCallbackController extends Controller
             $removeprefix = $modelTrunk->removeprefix;
             $prefix       = $modelTrunk->trunkprefix;
 
-            if (strncmp($callerid, $removeprefix, strlen($removeprefix)) == 0) {
+            if (strncmp($callerid, $removeprefix, strlen($removeprefix)) == 0 ||  || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                 $callerid = substr($callerid, strlen($removeprefix));
             }
 

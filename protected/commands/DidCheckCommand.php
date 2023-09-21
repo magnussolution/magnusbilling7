@@ -46,7 +46,12 @@ class DidCheckCommand extends ConsoleCommand
             $id_agent = $didUse->idUser->id_user;
 
             $day_remaining = 0;
-            // $mydids
+
+            $next_due_date  = date('Y-m-d', strtotime("+" . $didUse->month_payed . " months", strtotime($didUse->reservationdate)));
+            $date1          = new DateTime($next_due_date);
+            $date2          = new DateTime(date('Y-m-d'));
+            $interval       = $date1->diff($date2);
+            $days_remaining = $interval->days;
 
             $diff_reservation_daytopay = (strtotime($didUse->reservationdate)) - (intval($daytopay) * $oneday);
             $timestamp_datetopay       = mktime(date('H', $diff_reservation_daytopay), date("i", $diff_reservation_daytopay), date("s", $diff_reservation_daytopay),
@@ -62,51 +67,75 @@ class DidCheckCommand extends ConsoleCommand
             if ($day_remaining >= 0) {
 
                 if ($id_agent > 1) {
-                    $modelAgent             = User::model()->findByPk((int) $id_agent);
-                    $didUse->idUser->credit = $modelAgent->credit;
+                    $modelAgent  = User::model()->findByPk((int) $id_agent);
+                    $user_credit = $modelAgent->typepaid == 1 ? $modelAgent->credit + $modelAgent->creditlimit : $modelAgent->credit;
+                } else {
+                    $user_credit = $didUse->idUser->typepaid == 1 ? $didUse->idUser->credit + $didUse->idUser->creditlimit : $didUse->idUser->credit;
                 }
 
                 if ($day_remaining <= (intval($daytopay) * $oneday)) {
                     $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE TO PAY THE DID " . $didUse->idDid->did . " NOW ") : null;
 
-                    if (($didUse->idUser->credit + $didUse->idUser->typepaid * $didUse->idUser->creditlimit) >= $didUse->idDid->fixrate) {
-                        if ($id_agent <= 1) {
-                            $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
+                    if ($user_credit >= $didUse->idDid->fixrate) {
+                        if ($this->config['global']['charge_did_services_before_due_date'] == 1) {
+                            if ($id_agent <= 1) {
+                                $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
-                            $didUse->month_payed++;
-                            $didUse->save();
+                                $didUse->month_payed++;
+                                $didUse->save();
 
-                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
-                            UserCreditManager::releaseUserCredit($didUse->id_user, $didUse->idDid->fixrate, $description, 0);
+                                $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
+                                UserCreditManager::releaseUserCredit($didUse->id_user, $didUse->idDid->fixrate, $description, 0);
 
-                            $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user);
-                            $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
-                            $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
-                            $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
-                            $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                                $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user);
+                                $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
+                                $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
+                                $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
+                                if ($didUse->idUser->email_did == 1) {
+                                    $mail->send();
+                                }
+                                $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                            } else {
+                                $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
+
+                                $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " AGENT '" . $modelAgent->username . "' HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
+
+                                $didUse->month_payed++;
+                                $didUse->save();
+
+                                //adiciona a recarga e pagamento
+                                $modelRefill              = new Refill();
+                                $modelRefill->id_user     = $id_agent;
+                                $modelRefill->credit      = $didUse->idDid->fixrate;
+                                $modelRefill->description = $description;
+                                $modelRefill->payment     = 1;
+                                $modelRefill->save();
+
+                                $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user, $id_agent);
+                                $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
+                                $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
+                                $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
+                                if ($didUse->idUser->email_did == 1) {
+                                    $mail->send();
+                                }
+                                $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                            }
                         } else {
-                            $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
+                            //just notify the client about the due date
+                            if ($id_agent > 1) {
+                                $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user, $id_agent);
+                            } else {
+                                $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user);
+                            }
 
-                            $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " AGENT '" . $modelAgent->username . "' HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
-
-                            $didUse->month_payed++;
-                            $didUse->save();
-
-                            //adiciona a recarga e pagamento
-                            $modelRefill              = new Refill();
-                            $modelRefill->id_user     = $id_agent;
-                            $modelRefill->credit      = $didUse->idDid->fixrate;
-                            $modelRefill->description = $description;
-                            $modelRefill->payment     = 1;
-                            $modelRefill->save();
-
-                            $mail = new Mail(Mail::$TYPE_DID_PAID, $didUse->id_user, $id_agent);
-                            $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
+                            $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, $days_remaining);
+                            $mail->replaceInEmail(Mail::$NEXT_DUE_DATE, $next_due_date);
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
-                            $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
-                            $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
+                            $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
+                            $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));
+                            if ($didUse->idUser->email_did == 1) {
+                                $mail->send();
+                            }
                         }
                     } else {
                         $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did . " NOTIFY NOW ") : null;
@@ -117,16 +146,19 @@ class DidCheckCommand extends ConsoleCommand
                             $mail = new Mail(Mail::$TYPE_DID_UNPAID, $didUse->id_user);
                         }
 
-                        $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, date("d", $day_remaining));
+                        $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, $days_remaining);
+                        $mail->replaceInEmail(Mail::$NEXT_DUE_DATE, $next_due_date);
                         $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                         $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, number_format($didUse->idUser->credit, 2));
-                        $mail->send();
+                        if ($didUse->idUser->email_did == 1) {
+                            $mail->send();
+                        }
 
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
                 } else {
-                    if (($didUse->idUser->credit + $didUse->idUser->typepaid * $didUse->idUser->creditlimit) >= $didUse->idDid->fixrate) {
+                    if ($user_credit >= $didUse->idDid->fixrate) {
                         $log = $this->debug >= 1 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " USER " . $didUse->idUser->username . " HAVE ENOUGH CREDIT TO PAY FOR THE DID " . $didUse->idDid->did) : null;
 
                         if ($id_agent <= 1) {
@@ -142,7 +174,9 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                             $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
+                            if ($didUse->idUser->email_did == 1) {
+                                $mail->send();
+                            }
                             $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                         } else {
                             $description = Yii::t('zii', 'Monthly payment DID') . ' ' . $didUse->idDid->did;
@@ -164,7 +198,9 @@ class DidCheckCommand extends ConsoleCommand
                             $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit - $didUse->idDid->fixrate);
                             $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                             $mail->replaceInEmail(Mail::$DID_COST_KEY, -$didUse->idDid->fixrate);
-                            $mail->send();
+                            if ($didUse->idUser->email_did == 1) {
+                                $mail->send();
+                            }
                             $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                         }
                     } else {
@@ -180,6 +216,19 @@ class DidCheckCommand extends ConsoleCommand
 
                         Diddestination::model()->deleteAll('id_did = :key', array(':key' => $didUse->id_did));
 
+                        $modelDidHistory                  = new DidHistory();
+                        $modelDidHistory->username        = $didUse->idUser->username;
+                        $modelDidHistory->did             = $didUse->idDid->did;
+                        $modelDidHistory->releasedate     = date('Y-m-d H:i:s');
+                        $modelDidHistory->reservationdate = $didUse->reservationdate;
+                        $modelDidHistory->month_payed     = $didUse->month_payed;
+                        $modelDidHistory->description     = $didUse->idDid->description;
+                        try {
+                            $modelDidHistory->save();
+                        } catch (Exception $e) {
+
+                        }
+
                         if ($id_agent > 1) {
                             $mail = new Mail(Mail::$TYPE_DID_RELEASED, $didUse->id_user, $id_agent);
                         } else {
@@ -189,7 +238,9 @@ class DidCheckCommand extends ConsoleCommand
                         $mail->replaceInEmail(Mail::$DID_NUMBER_KEY, $didUse->idDid->did);
                         $mail->replaceInEmail(Mail::$DID_COST_KEY, $didUse->idDid->fixrate);
                         $mail->replaceInEmail(Mail::$BALANCE_REMAINING_KEY, $didUse->idUser->credit);
-                        $mail->send();
+                        if ($didUse->idUser->email_did == 1) {
+                            $mail->send();
+                        }
                         $mail->send($this->config['global']['admin_email']);
                         $sendAdmin = $this->config['global']['admin_received_email'] == 1 ? $mail->send($this->config['global']['admin_email']) : null;
                     }
@@ -199,4 +250,7 @@ class DidCheckCommand extends ConsoleCommand
             }
         }
     }
+}
+{
+
 }

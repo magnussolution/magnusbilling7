@@ -174,7 +174,7 @@ Tempo máximo de espera
 Ação quando superar a espera
 ------------------------------
 
-| Conta VoIP, IVR ou Fila de espera, para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceitos: SIP/conta_voip, QUEUE/nome_da_queue ou IRV/nome_da_ivr.
+| Coloque uma Conta VoIP, IVR, Fila de espera ou um canal LOCAL para enviar o cliente caso o tempo máximo de espera for superado. Formatos aceitos: SIP/conta_voip, QUEUE/nome_da_queue, IRV/nome_da_ivr ou LOCAL/extension@context.
 
 
 

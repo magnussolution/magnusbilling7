@@ -40,10 +40,11 @@ class BuyCredit extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('username', 'required'),
 
         );
+        return $this->getExtraField($rules);
     }
     /**
      *

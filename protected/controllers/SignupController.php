@@ -20,7 +20,9 @@ class SignupController extends Controller
         if (isset($_GET['loginkey']) && strlen($_GET['loginkey']) > 5 and strlen($_GET['loginkey']) < 30) {
             $modelUser = User::model()->find('active = 2 AND loginkey = :key AND id = :key1', array(':key' => $_GET['loginkey'], ':key1' => $_GET['id']));
             if (!isset($modelUser->id)) {
-                $this->redirect(array('add'));
+                if (!isset($modelUser->id)) {
+                    $this->redirect('/');
+                }
             }
 
             if (isset($_GET['loginkey']) && $_GET['loginkey'] == $modelUser->loginkey) {
@@ -51,9 +53,14 @@ class SignupController extends Controller
                 Yii::app()->session['checkGoogleAuthenticator'] = false;
                 Yii::app()->session['googleAuthenticatorKey']   = false;
 
+                $mail = new Mail(Mail::$TYPE_SIGNUPCONFIRM, $id);
+                try {
+                    $mail->send();
+                } catch (Exception $e) {
+                }
             }
             $this->redirect('/');
-        } else if (isset($_GET['username']) && is_numeric($_GET['username']) && isset($_GET['password']) && isset($_GET['id'])) {
+        } else if (isset($_GET['username']) && strlen($_GET['username']) > 3 && isset($_GET['password']) && isset($_GET['id'])) {
 
             $signup = Signup::model()->find('username = :key AND password = :key1 AND id = :key2', array(
                 ':key'  => $_GET['username'],
@@ -96,7 +103,7 @@ class SignupController extends Controller
             $result = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
 
             $signup->id_group = $result[0]['id'];
-            $signup->active   = 2;
+            $signup->active   = isset($_POST['Signup']['active']) ? $_POST['Signup']['active'] : 2;
 
             if ($this->config['global']['base_language'] == 'pt_BR') {
                 $phone = $_POST['Signup']['phone'];
@@ -110,8 +117,11 @@ class SignupController extends Controller
                     $ddd = 11;
                 }
                 $signup->prefix_local = '0/55/11,0/55/12,*/55' . $ddd . '/8,*/55' . $ddd . '/9';
+            }
+            if (strlen($this->config['global']['default_prefix_rule']) < 3 && $this->config['global']['base_language'] == 'pt_BR') {
+                $signup->prefix_local = '0/55/11,0/55/12,*/5511/8,*/5511/9';
             } else {
-                $signup->prefix_local = '';
+                $signup->prefix_local = $this->config['global']['default_prefix_rule'];
             }
 
             if (!isset($_POST['Signup']['username']) || strlen($_POST['Signup']['username']) == 0) {

@@ -25,7 +25,7 @@ fi
 
 cd /var/www/html/mbilling
 rm -rf MagnusBilling-current.tar.gz
-wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
+wget --no-check-certificate https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
 tar xzf MagnusBilling-current.tar.gz
 
 
@@ -51,18 +51,16 @@ chmod -R 774 /var/www/html/mbilling/protected/runtime/
 chmod -R 700 /var/www/html/mbilling/lib
 mkdir -p /usr/local/src/magnus
 chmod -R 755 /usr/local/src/magnus
-mkdir -p /var/www/tmpmagnus
-chown -R asterisk:asterisk /var/www/tmpmagnus
-chmod -R 777 /var/www/tmpmagnus
 chmod 774 /var/www/html/mbilling/resources/ip.blacklist
+rm -rf /var/www/html/mbilling/tmp
 mkdir -p /var/www/html/mbilling/tmp
 chown -R asterisk:asterisk /var/www/html/mbilling/tmp
-chmod -R 700 /var/www/html/mbilling/tmp
+chmod -R 755 /var/www/html/mbilling/tmp
 chmod -R 700 /var/www/html/mbilling/assets
 chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
-chmod -R 100 /var/www/html/mbilling/resources/asterisk/
+chmod -R 555 /var/www/html/mbilling/resources/asterisk/
 
 
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then

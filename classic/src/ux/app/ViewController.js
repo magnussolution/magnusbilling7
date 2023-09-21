@@ -187,7 +187,7 @@ Ext.define('Ext.ux.app.ViewController', {
         me.formPanel.setLoading(me.msgWait);
         if (me.formPanel.isUpdateLot) {
             Ext.Object.each(values, function(key, value) {
-                if (!Ext.isEmpty(value)) {
+                if (!Ext.isEmpty(value) && me.formPanel.fieldsHideUpdateLot.indexOf(key) === -1) {
                     panelMoneyLot = me.formPanel.down('#moneyFieldLot' + key);
                     if (panelMoneyLot && (panelMoneyLot.down('#add').pressed || panelMoneyLot.down('#remove').pressed || panelMoneyLot.down('#percent').pressed)) {
                         fieldMoneyLot = panelMoneyLot.down('field');
@@ -521,7 +521,7 @@ Ext.define('Ext.ux.app.ViewController', {
             //active UPDATEALL METHOD
             me.onAfterDestroy();
             fields.each(function(field) {
-                if (field.xtype === 'moneyfield' && field.isVisible()) {
+                if (field.xtype === 'moneyfield' && field.isVisible() && me.formPanel.fieldsHideUpdateLot.indexOf(field.name) === -1) {
                     indexField = me.formPanel.items.indexOf(field);
                     field.setValue();
                     if (field.allowBlank === false) {

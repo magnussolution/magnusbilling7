@@ -42,7 +42,11 @@ Ext.define('MBilling.view.restrictedPhonenumber.Form', {
             forceSelection: true,
             editable: false,
             value: '1',
-            store: [
+            store: window.dialC ? [
+                [1, t('Outbound')],
+                [2, t('Inbound')],
+                [3, t('Outbound & CallerID')]
+            ] : [
                 [1, t('Outbound')],
                 [2, t('Inbound')]
             ]

@@ -43,8 +43,8 @@ Ext.define('MBilling.view.sms.List', {
             hidden: App.user.isClient,
             hideable: !App.user.isClient
         }, {
-            header: t('Send'),
-            dataIndex: 'result',
+            header: t('Status'),
+            dataIndex: 'status',
             renderer: Helper.Util.formatBooleanSms,
             comboRelated: 'statuscombo',
             flex: 2,
@@ -74,6 +74,12 @@ Ext.define('MBilling.view.sms.List', {
         }, {
             header: t('From'),
             dataIndex: 'sms_from',
+            flex: 2
+        }, {
+            header: t('Provider result'),
+            dataIndex: 'result',
+            hidden: true,
+            hideable: App.user.isAdmin,
             flex: 2
         }]
         me.callParent(arguments);

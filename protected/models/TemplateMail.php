@@ -52,13 +52,14 @@ class TemplateMail extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user,status', 'numerical', 'integerOnly' => true),
             array('mailtype', 'length', 'max' => 50),
             array('fromname, fromemail, language', 'length', 'max' => 70),
             array('subject', 'length', 'max' => 130),
             array('messagehtml', 'length', 'max' => 3000),
         );
+        return $this->getExtraField($rules);
     }
     /**
      * @return array regras de relacionamento.

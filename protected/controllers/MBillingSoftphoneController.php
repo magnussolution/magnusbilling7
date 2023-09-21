@@ -37,7 +37,7 @@ class MBillingSoftphoneController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!count($modelSip)) {
+            if (!isset($modelSip->id)) {
                 echo 'false';
                 exit;
             }
@@ -104,7 +104,7 @@ class MBillingSoftphoneController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!count($modelSip)) {
+            if (!isset($modelSip->id)) {
                 echo 'false';
                 exit;
             }

@@ -21,6 +21,7 @@
 
 class Cryptocurrency extends Model
 {
+    protected $_module = 'cryptocurrency';
 
     public static function model($className = __CLASS__)
     {
@@ -40,13 +41,14 @@ class Cryptocurrency extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user,status', 'numerical', 'integerOnly' => true),
             array('amountCrypto,amount', 'numerical', 'integerOnly' => false),
             array('amountCrypto,amount', 'length', 'max' => 10),
             array('date, expirationdate', 'safe'),
 
         );
+        return $this->getExtraField($rules);
     }
 
     /**

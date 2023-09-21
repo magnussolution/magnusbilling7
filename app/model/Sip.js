@@ -217,10 +217,19 @@ Ext.define('MBilling.model.Sip', {
         name: 'permit',
         type: 'string'
     }, {
+        name: 'description',
+        type: 'string'
+    }, {
         name: 'addparameter',
         type: 'string'
     }, {
         name: 'amd',
+        type: 'int'
+    }, {
+        name: 'cnl',
+        type: 'string'
+    }, {
+        name: 'id_trunk_group',
         type: 'int'
     }],
     proxy: {

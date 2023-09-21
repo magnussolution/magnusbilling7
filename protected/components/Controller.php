@@ -30,6 +30,7 @@ class Controller extends BaseController
         'configuration',
         'invoices',
         'statusSystem',
+        'firewall',
     );
 
     //Allowed controllers to no admin users use updateall
@@ -38,11 +39,13 @@ class Controller extends BaseController
         'sendCreditRates',
     );
 
-    public function authorizedNoSession()
+    public function authorizedNoSession($value = false)
     {
+
         $allow = array(
             'site',
             'authentication',
+            'overrides/authenticationOR',
             'asteriskDialplan',
             'asteriskFiles',
             'signup',
@@ -64,6 +67,11 @@ class Controller extends BaseController
             'molPay',
             'sms',
         );
+
+        if ($value) {
+
+            $allow[] = $value;
+        }
         return in_array($this->controllerName, $allow);
     }
 

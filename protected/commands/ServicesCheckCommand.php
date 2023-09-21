@@ -20,6 +20,8 @@
 class ServicesCheckCommand extends ConsoleCommand
 {
     private $userNotify = array();
+    private $next_due_date;
+    private $days_remaining;
 
     public function run($args)
     {
@@ -42,6 +44,12 @@ class ServicesCheckCommand extends ConsoleCommand
             echo "\n\n";
             $day_remaining = 0;
 
+            $this->next_due_date  = date('Y-m-d', strtotime("+" . $service['month_payed'] . " months", strtotime($service['reservationdate'])));
+            $date1                = new DateTime($this->next_due_date);
+            $date2                = new DateTime(date('Y-m-d'));
+            $interval             = $date1->diff($date2);
+            $this->days_remaining = $interval->days;
+
             //5 days before activation
             $diff_reservation_daytopay = (strtotime($service['reservationdate'])) - (intval($daytopay) * $oneday);
 
@@ -56,6 +64,10 @@ class ServicesCheckCommand extends ConsoleCommand
 
             echo "DAYS  REMAINING  " . date('d', $day_remaining) . ' :  ' . $day_remaining . "\n";
 
+            if ($service->termination_date > '2000-01-01' && $service->termination_date <= date('Y-m-d')) {
+                ServicesProcess::releaseService($service);
+                continue;
+            }
             //pega o
 
             /*
@@ -75,14 +87,17 @@ class ServicesCheckCommand extends ConsoleCommand
                         echo " USER " . $service->idUser->username . " HAVE SERVICE TO BE PAID \n";
                     }
 
-                    if ($this->checkIfUserHaveCredit($service) != true) {
-                        //venceu e nao tem credito, avisar por email.
-                        if ($this->debug >= 1) {
-                            echo " USER " . $service->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE SERVICE NOTIFY NOW \n ";
-                        }
+                    if ($this->config['global']['charge_did_services_before_due_date'] == 1) {
+                        if ($this->checkIfUserHaveCredit($service) != true) {
+                            //venceu e nao tem credito, avisar por email.
+                            if ($this->debug >= 1) {
+                                echo " USER " . $service->idUser->username . " DONT HAVE ENOUGH CREDIT TO PAY FOR THE SERVICE NOTIFY NOW \n ";
+                            }
 
-                        $this->notifyUser($service, 2);
+                        }
                     }
+
+                    $this->notifyUser($service, 2);
                 } else {
                     if ($this->debug >= 1) {
                         echo " USER " . $service->idUser->username . "  HAVE EXPIRED SERVICE \n";
@@ -141,11 +156,16 @@ class ServicesCheckCommand extends ConsoleCommand
             $link = $this->config['global']['ip_servers'] . "/mbilling/index.php/buyCredit/payServiceLink?id_user=" . $service->id_user;
             echo $link;
             $mail = new Mail(Mail::$TYPE_SERVICES_UNPAID, $service->id_user);
+            $mail->replaceInEmail(Mail::$DAY_REMAINING_KEY, $this->days_remaining);
+            $mail->replaceInEmail(Mail::$NEXT_DUE_DATE, $this->next_due_date);
             $mail->replaceInEmail(Mail::$SERVICE_NAME, $service->idServices->name);
             $mail->replaceInEmail(Mail::$SERVICE_PRICE, $service->idServices->price);
             $mail->replaceInEmail(Mail::$SERVICE_PENDING_URL, $link);
             try {
-                @$mail->send();
+                if ($service->idUser->email_services == 1) {
+                    @$mail->send();
+                }
+
             } catch (Exception $e) {
                 //error SMTP
             }

@@ -142,8 +142,8 @@ Ext.define('MBilling.view.trunk.Form', {
                 }, {
                     xtype: 'noyescombo',
                     name: 'allow_error',
-                    fieldLabel: t('Allow error'),
-                    hidden: true
+                    fieldLabel: t('Go to backup if 404'),
+                    hidden: !window.dialC
                 }, {
                     xtype: 'noyescombo',
                     name: 'register',
@@ -153,6 +153,11 @@ Ext.define('MBilling.view.trunk.Form', {
                     fieldLabel: t('Register string'),
                     allowBlank: true,
                     hidden: true
+                }, {
+                    xtype: 'noyescombo',
+                    name: 'cnl',
+                    fieldLabel: t('Enable CNL'),
+                    hidden: App.user.language != 'pt_BR'
                 }]
             }, {
                 title: t('Supplementary info'),
@@ -173,8 +178,19 @@ Ext.define('MBilling.view.trunk.Form', {
                     fieldLabel: t('Fromdomain'),
                     allowBlank: true
                 }, {
-                    name: 'language',
-                    fieldLabel: t('Language'),
+                    name: 'cid_add',
+                    fieldLabel: t('CID') + ' ' + t('Add prefix'),
+                    allowBlank: true,
+                    value: ''
+                }, {
+                    name: 'cid_remove',
+                    fieldLabel: t('CID') + ' ' + t('Remove prefix'),
+                    allowBlank: true,
+                    value: ''
+                }, {
+                    name: 'block_cid',
+                    fieldLabel: t('Block CID REGEX'),
+                    hidden: !window.dialC || !App.user.isAdmin,
                     allowBlank: true
                 }, {
                     name: 'context',
@@ -221,6 +237,7 @@ Ext.define('MBilling.view.trunk.Form', {
                 }, {
                     name: 'disallow',
                     fieldLabel: t('Disallow'),
+                    hidden: true,
                     allowBlank: true,
                     value: 'all'
                 }, {
@@ -247,7 +264,7 @@ Ext.define('MBilling.view.trunk.Form', {
                     fieldLabel: t('Link SMS'),
                     allowBlank: true,
                     emptyText: t('Replace %number% and %text% on the provider URL- Ex: http://website.com/sms.php?username=USER&pass=PASS&number=%number%&msg=%text%'),
-                    height: 100,
+                    height: 60,
                     anchor: '100%'
                 }, {
                     name: 'sms_res',

@@ -75,3 +75,33 @@ Preço
 
 
 
+
+.. _offer-initblock:
+
+Bloco mínimo
+-------------
+
+| Tempo mínimo em segundos para tarifar a venda. Este valor irá subscrever os valores das tarifa do plano do cliente.
+
+
+
+
+.. _offer-billingblock:
+
+Bloco de tarifação
+--------------------
+
+| Bloco de quantos em quantos segundos irá cobrar após o tempo mínimo. Este valor irá subscrever os valores das tarifa do plano do cliente.
+
+
+
+
+.. _offer-minimal-time-charge:
+
+Tempo mínimo para tarifar
+--------------------------
+
+| Tempo mínimo para tarifar. Se colocar 3, só vai tarifar chamadas que o tempo for maior ou igual que 3 segundos.
+
+
+

@@ -52,10 +52,11 @@ class ServicesUse extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_user, id_services, status, month_payed, reminded', 'numerical', 'integerOnly' => true),
-            array('reservationdate, releasedate', 'safe'),
+            array('reservationdate, releasedate, contract_period, termination_date, next_due_date', 'safe'),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

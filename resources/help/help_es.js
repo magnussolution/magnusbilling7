@@ -199,7 +199,7 @@ Help.load({
     'configuration.config_value': `Value. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html.`,
     'configuration.config_description': `Description. Click here to read more about the options of this menu.|https://wiki.magnusbilling.org/en/source/config.html`,
     //DIDS
-    'did.did': `The exact number coming from the context in Asterisk. We recommend you to always use the E164 format.`,
+    'did.did': `The exact number coming from the context in Asterisk. We recommend you to always use the E164 format. Also you can create intervals. Example 13605040001-13605040009. In this example will be created the DIDs 13605040001 until  13605040009.`,
     'did.activated': `Only active numbers can receive calls.`,
     'did.callerid': `Use this field to set a CallerID name or leave it blank to use the received CallerID from the DID provider.`,
     'did.connection_charge': `Activation cost. This value will be deducted from the client the moment that the DID is associated with the user.`,
@@ -210,7 +210,7 @@ Help.load({
     'did.increment': `This defines the block in which the call billing time will be incremented, in seconds. If set to 6 and call duration is 32, the call will be billed as 36.`,
     'did.charge_of': `The user that will be charged for the DID cost.`,
     'did.calllimit': `Maximum simultaneous calls for this DID.`,
-    'did.description': `You may take notes here!`,
+    'did.description': `Set here the destination!`,
     'did.expression_1': `This is a regular expression to tariff the DID depending on who is calling it.||Lets analyze a real example:
     Suppose we want to charge 0.10 when we receive a call from a landline and 0.20 if its a mobile phone and block any other format.
     In this example we will create rules to identify the CallerID in the format 0 + area code + number, area code + number, or 55 + area code + number.
@@ -257,7 +257,7 @@ Help.load({
     'diddestination.activated': `Only active destinations will be used.`,
     'diddestination.priority': `You can create up to 5 destinations for your DID. If a try is made and a error is received, MagnusBilling will try to send the call to the next destination priority available. Only works with the "SIP call" type.`,
     'diddestination.voip_call': `Type of destination.`,
-    'diddestination.destination': `Use this to take notes!`,
+    'diddestination.destination': `Set here the destination!`,
     'diddestination.id_ivr': `Select a IVR to send the call to. The IVR needs to belong to the owner of the DID aswell.`,
     'diddestination.id_queue': `Select a Queue  to send the call to. The Queue needs to belong to the owner of the DID aswell.`,
     'diddestination.id_sip': `Select a SIP Account to send the call to. The SIP Account needs to belong to the owner of the DID aswell.`,
@@ -616,6 +616,7 @@ If you activate "qualify", the Asterisk will sent the command "OPTION" to SIP pe
 If the device don't answer the "OPTION" in the set period of time, Asterisk will consider the device offline for future calls.
     
 This status can be verified with the funcion "sip show peer XXXX", this funcion will only provide informations of status for the SIP peer that possess "qualify = yes.`,
+    'sip.id_trunk_group': `:::::::WARNING::::::. By selecting a trunk group here, the trunk group will be ignored from tariffs and this trunk group will always be used. Only select a trunk group here if you really want all calls from this SIP account to be sent to this trunk group`,
     'sip.context': `This is the context that the call will be processed, "billing" is the standard option. Only change configuration if you have knowledge of Asterisk.`,
     'sip.dtmfmode': `DTMF type. Click here for more informations|https://www.voip-info.org/asterisk-sip-dtmfmode/.`,
     'sip.insecure': `This option need to be "NO" if the host is dynamic, so the IP authentication changes to port,invite.`,
@@ -701,7 +702,7 @@ This status can be verified with the funcion "sip show peer XXXX", this funcion 
     'trunk.allow': `Select the codecs that are allowed in this trunk.`,
     'trunk.providertech': `You need install appropriate drive to use card like dgv extra Dongle.`,
     'trunk.status': `If the trunk is inactive, Magnusbilling will sent the call to the backup trunk.`,
-    'trunk.allow_error': `If YES all calls but ANSWERED and CANCEL will be sent to a backup trunk.`,
+    'trunk.allow_error': `Send call to the next trunk if receive error 404.`,
     'trunk.register': `Only active this if the trunk is authenticated via username and password.`,
     'trunk.register_string': `<user>:<password>@<host>/contact.||"user" is the user ID for this SIP server (ex 2345).
 "password" is the user password
@@ -802,6 +803,7 @@ MagnusBilling will try to send the calls to the next trunk of the group as long 
     'user.sipaccountlimit': `The amount of VoIP accounts allowed by this user. Will be necessary give permission to the group to create VoIP accounts.`,
     'user.callingcard_pin': `Used to authenticate the CallingCard.`,
     'user.restriction': `Used to restrict dialing. Add the numbers in the menu: Users->Restricted numbers.`,
+    'user.restriction_use': `Which number will be used to check the restriction. This option is valid only to outbound calls.`,
     'user.transfer_international_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_flexiload_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,
     'user.transfer_bkash_profit': `This function is not avaible in Brazil. It's only used to mobile refills in some countries.`,

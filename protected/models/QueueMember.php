@@ -52,12 +52,13 @@ class QueueMember extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id,interface, id_user', 'required'),
             array('id_user, paused', 'numerical', 'integerOnly' => true),
             array('membername', 'length', 'max' => 40),
             array('queue_name, interface', 'length', 'max' => 128),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

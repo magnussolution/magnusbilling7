@@ -61,13 +61,13 @@ class SmsController extends Controller
 
         $modelSip = AccessManager::checkAccess($_GET['username'], $_GET['password']);
 
-        if (!count($modelSip)) {
+        if (!isset($modelSip->id)) {
             exit('invalid user');
         }
 
-        $result = SmsSend::send($modelSip->idUser, $_GET['number'], $_GET['text']);
+        $result = SmsSend::send($modelSip->idUser, $_GET['number'], $_GET['text'], 0, '', true);
 
-        echo $result['success'] ? 'Sent' : 'Error' . ' ' . $result['msg'];
+        echo $result['success'] ? 'Sent' : 'Error' . ' ' . $result['errors'];
 
     }
 

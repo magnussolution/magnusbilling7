@@ -52,42 +52,26 @@ Ext.define('MBilling.view.dashboard.Network', {
                     align: 'stretch'
                 },
                 items: [{
-                    flex: 1,
-                    padding: '10 0 10 0',
-                    layout: {
-                        type: 'hbox',
-                        align: 'stretch'
-                    },
-                    items: [{
-                        xtype: 'component',
-                        flex: 1,
-                        cls: 'top-info-container',
-                        reference: 'cpuMediaUso',
-                        html: '',
-                        padding: '15 10 10 0'
-                    }]
+                    xtype: 'component',
+                    cls: 'top-info-container',
+                    reference: 'cpuMediaUso',
+                    html: ''
                 }, {
                     xtype: 'progressbar',
-                    flex: 1,
                     cls: 'left-top-text progressbar-no-text',
-                    height: 3,
                     reference: 'cpuPercent',
-                    hideMode: 'offsets',
-                    margin: '0 15 0 0',
-                    maxHeight: 5,
-                    minHeight: 3,
-                    value: 0
+                    hideMode: 'offsets'
                 }, {
                     xtype: 'component',
-                    flex: 1,
                     cls: 'left-top-text',
-                    reference: 'cpuModel',
+                    reference: 'diskFree',
                     html: '',
-                    padding: '15 5 5 0',
-                    layout: {
-                        type: 'hbox',
-                        align: 'stretch'
-                    }
+                    padding: '10 0 0 0'
+                }, {
+                    xtype: 'progressbar',
+                    cls: 'left-top-text progressbar-no-text',
+                    reference: 'diskPerc',
+                    hideMode: 'offsets'
                 }]
             }, {
                 flex: 1,

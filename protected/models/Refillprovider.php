@@ -52,12 +52,13 @@ class Refillprovider extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('credit, id_provider', 'required'),
             array('id_provider, payment', 'numerical', 'integerOnly' => true),
             array('description', 'length', 'max' => 500),
 
         );
+        return $this->getExtraField($rules);
     }
     /**
      * @return array regras de relacionamento.

@@ -52,7 +52,7 @@ class Configuration extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('config_key', 'required'),
             array('status', 'numerical', 'integerOnly' => true),
             array('config_title, config_key', 'length', 'max' => 100),
@@ -61,6 +61,7 @@ class Configuration extends Model
             array('config_group_title', 'length', 'max' => 64),
             array('config_value', 'checkConfg'),
         );
+        return $this->getExtraField($rules);
     }
 
     public function checkConfg($attribute, $params)

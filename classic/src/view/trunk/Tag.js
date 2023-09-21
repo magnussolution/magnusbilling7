@@ -12,6 +12,7 @@ Ext.define('MBilling.view.trunk.Tag', {
     displayField: 'trunkcode',
     valueField: 'id',
     filterPickList: true,
+    plugins: 'dragdroptag',
     initComponent: function() {
         var me = this;
         me.store = Ext.create('MBilling.store.Trunk', {

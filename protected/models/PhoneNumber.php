@@ -52,12 +52,13 @@ class PhoneNumber extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_phonebook, status, try', 'numerical', 'integerOnly' => true),
             array('name, city', 'length', 'max' => 40),
             array('number', 'length', 'max' => 30),
             array('info, doc, email', 'length', 'max' => 200),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

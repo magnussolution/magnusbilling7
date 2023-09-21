@@ -91,26 +91,26 @@ $operators = CHtml::listData($modelSendCreditProducts, 'operator_name', 'operato
 <div id='is_interval'>
 <br>
 
-<div class="field">
+<div class="field" >
         <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesEUR', array('label' => 'Paid Amount (EUR)')); ?>
         <?php echo $form->textField($modelTransferToMobile, 'amountValuesEUR',
     array(
         'class'   => 'input',
         'id'      => 'amountfielEUR',
-        'onkeyup' => 'showPriceEUR(' . Yii::app()->session['interval_product_sell_price'] . ')',
+        'onkeyup' => 'showPriceEUR(' . Yii::app()->session['interval_product_retail_price'] . ')',
         'style'   => 'color:blue; font-size:20',
     )) ?>
         <?php echo $form->error($modelTransferToMobile, 'amountValuesEUR') ?>
 
     </div>
 
-    <div class="field">
+    <div class="field" >
         <?php echo $form->labelEx($modelTransferToMobile, 'amountValuesBDT', array('label' => 'Receive Amount (' . Yii::app()->session['interval_currency'] . ')')); ?>
         <?php echo $form->textField($modelTransferToMobile, 'amountValuesBDT',
     array(
         'class'   => 'input',
         'id'      => 'amountfielBDT',
-        'onkeyup' => 'showPriceBDT(' . Yii::app()->session['interval_product_sell_price'] . ')',
+        'onkeyup' => 'showPriceBDT(' . Yii::app()->session['interval_product_retail_price'] . ')',
         'style'   => 'color:blue; font-size:20',
     )) ?>
         <?php echo $form->error($modelTransferToMobile, 'amountValuesBDT') ?>
@@ -162,6 +162,14 @@ $this->endWidget();?>
 
 <script type="text/javascript">
 
+
+    operator = document.getElementById('operatorfield').options[document.getElementById('operatorfield').selectedIndex].text;
+
+    if (operator == 'Select the operator') {
+        document.getElementById('secondButton').style.display = 'none';
+        document.getElementById('is_interval').style.display = 'none';
+
+    }
     function getMaxMin(amount) {
         var http = new XMLHttpRequest()
 
@@ -176,77 +184,69 @@ $this->endWidget();?>
             http.send(null);
     }
 
-    function showPriceEUR(sell_price) {
+    function showPriceEUR() {
 
-        for (var i = 0; i < 20 ; i++) {
-
-            if (document.getElementById('productLabel'+i)) {
-                document.getElementById('productinput'+i).checked = false;
+        operator = document.getElementById('operatorfield').options[document.getElementById('operatorfield').selectedIndex].text;
+        for (var i = 0; i < 50 ; i++) {
+            if ( document.getElementById('productLabel'+i)) {
                 document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
+                 document.getElementById('productinput'+i).value = 0;
             }else{
                 break;
             }
         }
+
+
         valueAmoutEUR = document.getElementById('amountfielEUR').value;
 
-
-
-
         if (valueAmoutEUR > 0) {
+            var http = new XMLHttpRequest()
 
-            value = valueAmoutEUR / sell_price;
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
 
-            document.getElementById('secondButton').style.display = 'inline';
-            document.getElementById('buying_price').style.display = 'inline';
-            document.getElementById('buying_price').value = 'R';
-            document.getElementById('amountfielBDT').value = value.toFixed(0);
+                    if (this.responseText =='invalid') {
+                        document.getElementById('secondButton').style.display = 'none';
+                    }else{
+                        document.getElementById('secondButton').style.display = 'inline';
+                    }
 
-            valueAmoutBDT = value.toFixed(0);
-            //verify if inserted amount is allowed
-            min = '<?php echo Yii::app()->session['allowedAmountmin']; ?>';
-            max = '<?php echo Yii::app()->session['allowedAmountmax']; ?>';
+                    document.getElementById('buying_price').style.display = 'inline';
+                    document.getElementById('buying_price').value = 'R';
+                    document.getElementById('amountfielBDT').value = this.responseText;
+                    }
+                };
 
-
-            if (valueAmoutBDT < min.toFixed(0)) {
-               document.getElementById('amountfielBDT').value = 'Invalid';
-               document.getElementById('secondButton').style.display = 'none';
-            }
-            else if (valueAmoutBDT > max) {
-               document.getElementById('amountfielBDT').value = 'Invalid';
-               document.getElementById('secondButton').style.display = 'none';
-            }else{
-                document.getElementById('secondButton').style.display = 'inline';
-            }
+            http.open("GET", "../../index.php/transferMobileCredit/convertCurrency?currency=EUR&amount="+valueAmoutEUR+"&operator="+operator,true)
+            http.send(null);
         }else{
             document.getElementById('amountfielBDT').value = 'Invalid';
             document.getElementById('secondButton').style.display = 'none';
         }
 
 
-
-
-
     }
 
-    function showPriceBDT(sell_price) {
+    function showPriceBDT() {
 
 
-        for (var i = 0; i < 20 ; i++) {
-            if (document.getElementById('productLabel'+i)) {
-                document.getElementById('productinput'+i).checked = false;
+         for (var i = 0; i < 50 ; i++) {
+            if ( document.getElementById('productLabel'+i)) {
                 document.getElementById('productLabel'+i).style.backgroundColor = '#fff';
+                document.getElementById('productinput'+i).value = 0;
             }else{
                 break;
             }
         }
 
 
-        valueAmoutBDT = document.getElementById('amountfielBDT').value;
-        //verify if inserted amount is allowed
+
+        operator = document.getElementById('operatorfield').options[document.getElementById('operatorfield').selectedIndex].text;
+         //verify if inserted amount is allowed
         min = '<?php echo Yii::app()->session['allowedAmountmin']; ?>';
         max = '<?php echo Yii::app()->session['allowedAmountmax']; ?>';
 
-
+         valueAmoutBDT = document.getElementById('amountfielBDT').value;
 
         if (valueAmoutBDT < parseInt(min)) {
            document.getElementById('amountfielEUR').value = 'Invalid';
@@ -258,17 +258,30 @@ $this->endWidget();?>
         }
         else if (valueAmoutBDT > 0) {
 
-            value = valueAmoutBDT * sell_price;
-            document.getElementById('amountfielEUR').value = value.toFixed(2);
-            document.getElementById('buying_price').style.display = 'inline';
-            document.getElementById('buying_price').value = 'R';
-            document.getElementById('secondButton').style.display = 'inline';
+            var http = new XMLHttpRequest()
 
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+
+                        document.getElementById('amountfielEUR').value = this.responseText;
+                        document.getElementById('buying_price').style.display = 'inline';
+                        document.getElementById('buying_price').value = 'R';
+                        document.getElementById('secondButton').style.display = 'inline';
+
+                    }
+                };
+
+            http.open("GET", "../../index.php/transferMobileCredit/convertCurrency?currency=BDT&amount="+valueAmoutBDT+"&operator="+operator,true)
+            http.send(null);
         }else{
             document.getElementById('amountfielEUR').value = 'Invalid';
             document.getElementById('secondButton').style.display = 'none';
         }
+
+
     }
+
 
 
 
@@ -359,6 +372,13 @@ $this->endWidget();?>
     function showProducts(argument) {
 
         operator = document.getElementById('operatorfield').options[document.getElementById('operatorfield').selectedIndex].text;
+
+        if (document.getElementById('amountfielEUR')) {
+            document.getElementById('amountfielEUR').value = '';
+        }
+        if (document.getElementById('amountfielBDT')) {
+            document.getElementById('amountfielBDT').value = '';
+        }
 
 
         if (operator == 'Select the operator') {

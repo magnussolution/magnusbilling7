@@ -39,19 +39,35 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 
 
-<div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Contract no')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
-    <?php echo $form->error($modelTransferToMobile, 'number') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Contract no') ?></p>
-</div>
 
-<div class="field">
-    <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Distribution code')) ?>
-    <?php echo $form->textField($modelTransferToMobile, 'zipcode', array('class' => 'input')) ?>
-    <?php echo $form->error($modelTransferToMobile, 'zipcode') ?>
-    <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Distribution code') ?></p>
-</div>
+
+
+
+
+<?php if ($modelTransferToMobile->country == 'Senegal'): ?>
+    <?php echo $form->hiddenField($modelTransferToMobile, 'zipcode', array('value' => '')); ?>
+    <div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Bill no')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+        <?php echo $form->error($modelTransferToMobile, 'number') ?>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Contract no') ?></p>
+    </div>
+<?php else: ?>
+
+    <div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Contract no')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'number', array('class' => 'input')) ?>
+        <?php echo $form->error($modelTransferToMobile, 'number') ?>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Contract no') ?></p>
+    </div>
+
+    <div class="field">
+        <?php echo $form->labelEx($modelTransferToMobile, Yii::t('zii', 'Distribution code')) ?>
+        <?php echo $form->textField($modelTransferToMobile, 'zipcode', array('class' => 'input')) ?>
+        <?php echo $form->error($modelTransferToMobile, 'zipcode') ?>
+        <p class="hint"><?php echo Yii::t('zii', 'Enter your') . ' ' . Yii::t('zii', 'Distribution code') ?></p>
+    </div>
+<?php endif?>
 
 
 

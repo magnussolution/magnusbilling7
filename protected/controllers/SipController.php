@@ -18,16 +18,40 @@
 class SipController extends Controller
 {
     public $attributeOrder = 't.id ASC';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = array(
+        'idUser'       => 'username',
+        'idTrunkGroup' => 'name',
+    );
 
     private $sipShowPeers = array();
 
     public $fieldsFkReport = array(
-        'id_user' => array(
+        'id_user'        => array(
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
         ),
+        'id_trunk_group' => array(
+            'table'       => 'pkg_trunk_group',
+            'pk'          => 'id',
+            'fieldReport' => 'name',
+        ),
+    );
+
+    public $fieldsInvisibleClient = array(
+        'id_trunk_group',
+    );
+
+    public $fieldsInvisibleAgent = array(
+        'id_trunk_group',
+    );
+
+    public $fieldsNotUpdateClient = array(
+        'context',
+    );
+
+    public $fieldsNotUpdateAgent = array(
+        'context',
     );
 
     public function init()
@@ -146,7 +170,7 @@ class SipController extends Controller
             $values['cid_number'] = $values['callerid'];
         }
 
-        if (isset($value['allow'])) {
+        if (isset($values['allow'])) {
             $values['allow'] = preg_replace("/,0/", "", $values['allow']);
             $values['allow'] = preg_replace("/0,/", "", $values['allow']);
         }
@@ -289,7 +313,7 @@ class SipController extends Controller
     {
         $modelSip = Sip::model()->find('name = :key', array(':key' => $_POST['name']));
 
-        if ($modelSip->idUser->active != 1) {
+        if ($modelSip->idUser->active == 0) {
             $sipShowPeer = 'The username is inactive';
         } else {
             $sipShowPeer = AsteriskAccess::instance()->sipShowPeer($modelSip->name);
@@ -300,4 +324,72 @@ class SipController extends Controller
             'sipshowpeer' => Yii::app()->session['isAdmin'] ? print_r($sipShowPeer, true) : '',
         ));
     }
+
+    public function actionBulk()
+    {
+        $values = $this->getAttributesRequest();
+        if (Yii::app()->session['user_type'] == 3) {
+            exit;
+        }
+
+        $secret = $_POST['secret'] == "Leave blank to auto generate" ? '' : $_POST['secret'];
+
+        if (strlen($secret) > 0 && strlen($secret) < 6 && strlen($secret) < 25) {
+            echo json_encode(array(
+                'success'      => false,
+                $this->nameMsg => 'Password lenght need be > 5 or blank.',
+            ));
+            exit;
+        }
+
+        if (preg_match('/ /', $secret)) {
+            echo json_encode(array(
+                'success'      => false,
+                $this->nameMsg => 'No space allow in password',
+            ));
+            exit;
+        }
+
+        if ($secret == '123456' || $secret == '12345678' || $secret == '012345') {
+            echo json_encode(array(
+                'success'      => false,
+                $this->nameMsg => 'No use sequence in the password',
+            ));
+            exit;
+        }
+
+        $modelUser = User::model()->findByPk((int) $_POST['id_user']);
+
+        if ($modelUser->idGroup->idUserType->id != 3) {
+            return;
+        }
+
+        for ($i = 0; $i < $values['totalToCreate']; $i++) {
+
+            if (strlen($secret) < 5) {
+
+                $secret = Util::generatePassword(8, true, true, true, false);
+            }
+
+            $user                  = Util::getNewSip();
+            $modelSip              = new Sip();
+            $modelSip->id_user     = $modelUser->id;
+            $modelSip->name        = $user;
+            $modelSip->allow       = $this->config['global']['default_codeds'];
+            $modelSip->host        = 'dynamic';
+            $modelSip->insecure    = 'no';
+            $modelSip->defaultuser = $user;
+            $modelSip->secret      = $secret;
+            $modelSip->sip_group   = $_POST['sip_group'];
+            $modelSip->save();
+        }
+
+        AsteriskAccess::instance()->generateSipPeers();
+
+        echo json_encode(array(
+            $this->nameSuccess => true,
+            $this->nameMsg     => $this->msgSuccess,
+        ));
+    }
+
 }

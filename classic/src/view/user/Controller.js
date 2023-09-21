@@ -8,9 +8,22 @@ Ext.define('MBilling.view.user.Controller', {
         me.control({
             'groupusercombo': {
                 select: me.onSelectType
+            },
+            'restrictioncombo[name=restriction]': {
+                select: me.onSelectTypeRestriction
             }
         });
         me.callParent(arguments);
+    },
+    onSelectTypeRestriction: function(combo, records) {
+        var me = this,
+            fieldUse = me.formPanel.getForm().findField('restriction_use'),
+            fieldRestriction = me.formPanel.getForm().findField('restriction');
+        if (window.restrictionuser && fieldRestriction.getValue() == 1) {
+            fieldUse.setVisible(true);
+        } else {
+            fieldUse.setVisible(false);
+        }
     },
     onSelectType: function(combo, records) {
         this.showFieldsRelated(records.getData().showFields);
@@ -64,6 +77,7 @@ Ext.define('MBilling.view.user.Controller', {
             fieldCallingcard_pin = me.formPanel.getForm().findField('callingcard_pin'),
             fieldGroupAgent = me.formPanel.getForm().findField('id_group_agent'),
             fieldUsername = me.formPanel.getForm().findField('username');
+        me.formPanel.getForm().findField('contract_value').setValue(0);
         me.callParent(arguments);
         fieldGroupAgent['hide']();
         fieldPasswordGen.setVisible(true);
@@ -113,6 +127,13 @@ Ext.define('MBilling.view.user.Controller', {
             fieldCallingcard_pin = record.get('callingcard_pin'),
             fieldGroupAgent = me.formPanel.getForm().findField('id_group_agent'),
             fieldGroup = me.formPanel.getForm().findField('id_group');
+        me.lookupReference('personalData').show();
+        me.lookupReference('mainData').show();
+        if (window.restrictionuser && record.get('restriction') == 1) {
+            me.formPanel.getForm().findField('restriction_use')['show']();
+        } else {
+            me.formPanel.getForm().findField('restriction_use')['hide']();
+        }
         if (App.user.isAdmin) {
             if (record.get('id_user') > 1) {
                 me.formPanel.getForm().findField('id_plan')['hide']();

@@ -52,13 +52,14 @@ class Voucher extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('voucher', 'required'),
             array('used, id_user, id_plan', 'numerical', 'integerOnly' => true),
             array('credit', 'numerical'),
             array('voucher, tag, language, prefix_local', 'length', 'max' => 50),
             array('usedate, expirationdate', 'safe'),
         );
+        return $this->getExtraField($rules);
     }
     /*
      * @return array regras de relacionamento.

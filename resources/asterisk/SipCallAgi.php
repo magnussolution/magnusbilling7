@@ -27,7 +27,15 @@ class SipCallAgi
 
         $sql               = "SELECT * FROM pkg_user WHERE id = " . $MAGNUS->modelSip->id_user . " LIMIT 1";
         $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        if ($MAGNUS->modelSip->record_call == 1) {
+            $record_call = 1;
+        }
+
         AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $MAGNUS->modelUser);
+
+        if ($MAGNUS->modelSip->record_call == 1 || $record_call == 1) {
+            $MAGNUS->record_call = 1;
+        }
 
         $MAGNUS->startRecordCall($agi);
 
@@ -80,14 +88,12 @@ class SipCallAgi
             } else {
                 $terminatecauseid = 0;
             }
-
+            $cost        = 0;
             $siptransfer = $agi->get_variable("SIPTRANSFER");
             if ($answeredtime > 0 && $siptransfer['data'] != 'yes' && $terminatecauseid == 1) {
                 if ($MAGNUS->config['global']['charge_sip_call'] > 0) {
                     $cost = ($MAGNUS->config['global']['charge_sip_call'] / 60) * $answeredtime;
                     $agi->verbose("Update credit username after transfer $MAGNUS->username, " . $cost, 15);
-                } else {
-                    $cost = 0;
                 }
             }
 
@@ -122,8 +128,6 @@ class SipCallAgi
             $sql              = "SELECT name, callerid,id_user,dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            $agi->set_variable("CALLERID(all)", $modelSip->callerid);
-
             $MAGNUS->dnid = $MAGNUS->destination = $MAGNUS->sip_account = $MAGNUS->modelSip->name;
             sipCallAgi::processCall($MAGNUS, $agi, $CalcAgi);
 
@@ -147,17 +151,22 @@ class SipCallAgi
             $dialstr = substr($group, 0, -1) . $dialparams;
 
             $MAGNUS->startRecordCall($agi);
-            $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
+
             $MAGNUS->run_dial($agi, $dialstr, $MAGNUS->agiconfig['dialcommand_param_call_2did']);
             $dialstatus = $agi->get_variable("DIALSTATUS");
             $dialstatus = $dialstatus['data'];
         } else if (preg_match("/custom/", $optionType)) // CUSTOM
         {
-            $MAGNUS->startRecordCall($agi);
-            $agi->set_variable("CALLERID(all)", $MAGNUS->CallerID);
-            $MAGNUS->run_dial($agi, $optionValue);
-            $dialstatus = $agi->get_variable("DIALSTATUS");
-            $dialstatus = $dialstatus['data'];
+            if (preg_match('/^SMS/', $optionValue)) // QUEUE
+            {
+                SipCallAgi::smsForward($MAGNUS, $agi, $CalcAgi, $optionValue);
+            } else {
+                $MAGNUS->startRecordCall($agi);
+
+                $MAGNUS->run_dial($agi, $optionValue);
+                $dialstatus = $agi->get_variable("DIALSTATUS");
+                $dialstatus = $dialstatus['data'];
+            }
         } else if ($optionType == 'ivr') // QUEUE
         {
             $didAgi                                = new DidAgi();
@@ -171,15 +180,106 @@ class SipCallAgi
             $dialstatus = $CalcAgi->sessiontime > 0 ? 'ANSWER' : 'DONTCALL';
         } else if (preg_match("/^number/", $optionType)) //envia para um fixo ou celular
         {
-            $sql              = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
-            $modelUserForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-
-            $agi->set_variable("CALLERID(nun)", $MAGNUS->CallerID);
-
+            $sql                 = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
+            $modelUserForward    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $MAGNUS->CallerID    = $modelSipForward->callerid;
             $MAGNUS->accountcode = $modelUserForward->accountcode;
+            $agi->set_callerid($MAGNUS->CallerID);
             $agi->verbose("CALL number $optionValue");
             $didAgi = new DidAgi();
             $didAgi->call_did($agi, $MAGNUS, $CalcAgi, $optionValue);
+        } else if (strtoupper($optionType) == 'SMS') // QUEUE
+        {
+            $this->sendSMS($MAGNUS, $agi, $CalcAgi, $optionValue);
         }
+
+    }
+
+    public function smsForward($MAGNUS, $agi, $CalcAgi, $optionValue)
+    {
+        $agi->verbose("try send SMS", 5);
+
+        //SMS/menssagem+sms@55DDDnumero
+        $data = explode("@", substr($optionValue, 4));
+
+        $text        = $data[0];
+        $destination = $data[1];
+        $text        = addslashes((string) $text);
+        //CODIFICA O TESTO DO SMS
+        $text = urlencode($text);
+
+        $sql = "SELECT pkg_rate.id AS idRate, rateinitial, pkg_prefix.id AS id_prefix, id_trunk_group, id_trunk_group, pkg_trunk_group.type AS trunk_group_type
+                            FROM pkg_rate
+                            LEFT JOIN pkg_plan ON pkg_rate.id_plan=pkg_plan.id
+                            LEFT JOIN pkg_prefix ON pkg_rate.id_prefix=pkg_prefix.id
+                            LEFT JOIN pkg_trunk_group ON pkg_trunk_group.id = pkg_rate.id_trunk_group
+                            WHERE prefix = SUBSTRING(999$destination,1,length(prefix)) and pkg_plan.id= " . $MAGNUS->modelUser->id_plan . "
+                            ORDER BY LENGTH(prefix) DESC";
+
+        $modelRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+        $agi->verbose($sql, 1);
+
+        if ($modelRate->trunk_group_type == 1) {
+            $sql = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $modelRate->id_trunk_group . " ORDER BY id ASC";
+        } else if ($modelRate->trunk_group_type == 2) {
+            $sql = "SELECT * FROM pkg_trunk_group_trunk WHERE id_trunk_group = " . $modelRate->id_trunk_group . " ORDER BY RAND() ";
+
+        } else if ($modelRate[0]['trunk_group_type'] == 3) {
+            $sql = "SELECT *, (SELECT buyrate FROM pkg_rate_provider WHERE id_provider = tr.id_provider AND id_prefix = " . $modelRate->id_prefix . " LIMIT 1) AS buyrate  FROM pkg_trunk_group_trunk t  JOIN pkg_trunk tr ON t.id_trunk = tr.id WHERE id_trunk_group = " . $modelRate->id_trunk_group . " ORDER BY buyrate IS NULL , buyrate ";
+        }
+        $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        $agi->verbose($sql, 1);
+
+        foreach ($modelTrunks as $key => $trunk) {
+            $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
+            $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+            if ($modelTrunk->credit_control == 1 && $modelTrunk->credit <= 0) {
+                $agi->verbose("Provider not have credit", 1);
+                continue;
+            }
+
+            if ($modelTrunk->status == 0) {
+                $agi->verbose("Trunk is inactive", 1);
+                continue;
+            }
+
+            if (strlen($modelTrunk->link_sms) == 0) {
+                $agi->verbose("Trunk not have sms link", 1);
+                continue;
+            }
+            break;
+        }
+
+        //retiro e adiciono os prefixos do tronco
+        if (strncmp($destination, $modelTrunk->removeprefix, strlen($modelTrunk->removeprefix)) == 0 || substr(strtoupper($modelTrunk->removeprefix), 0, 1) == 'X') {
+            $destination = substr($destination, strlen($modelTrunk->removeprefix));
+        }
+        $destination = $modelTrunk->trunkprefix . $destination;
+
+        $url = $modelTrunk->link_sms;
+        $url = preg_replace("/\%number\%/", $destination, $url);
+        $url = preg_replace("/\%text\%/", $text, $url);
+
+        $agi->verbose($url);
+
+        if (!$res = @file_get_contents($url, false)) {
+            $agi->verbose("ERRO SMS -> " . $url);
+        }
+
+        $MAGNUS->uniqueid    = "$destination-" . date('His');
+        $MAGNUS->destination = $destination;
+        $MAGNUS->id_plan     = $MAGNUS->modelUser->id_plan;
+
+        $CalcAgi->starttime        = date("Y-m-d H:i:s");
+        $CalcAgi->sessiontime      = $CalcAgi->real_sessiontime      = 60;
+        $CalcAgi->terminatecauseid = 1;
+        $CalcAgi->sessionbill      = $modelRate->rateinitial;
+        $CalcAgi->sipiax           = 6;
+        $CalcAgi->buycost          = 0;
+        $CalcAgi->id_prefix        = $modelRate->id_prefix;
+        $CalcAgi->saveCDR($agi, $MAGNUS);
+        $MAGNUS->hangup($agi, 34);
+        exit;
     }
 }

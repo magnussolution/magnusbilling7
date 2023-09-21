@@ -22,6 +22,7 @@ Ext.define('MBilling.view.didUse.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.diduselist',
     store: 'DidUse',
+    fieldSearch: 'idDid.did',
     initComponent: function() {
         var me = this;
         me.buttonCsv = false;
@@ -38,6 +39,10 @@ Ext.define('MBilling.view.didUse.List', {
         }, {
             header: t('DID'),
             dataIndex: 'idDiddid',
+            filter: {
+                type: 'string',
+                field: 'idDid.did'
+            },
             flex: 5
         }, {
             header: t('Username'),
@@ -62,6 +67,11 @@ Ext.define('MBilling.view.didUse.List', {
             header: t('Release date'),
             renderer: Helper.Util.formatDateTime,
             dataIndex: 'releasedate',
+            flex: 5
+        }, {
+            header: t('Next due date'),
+            renderer: Helper.Util.formatDateTime,
+            dataIndex: 'next_due_date',
             flex: 5
         }]
         me.callParent(arguments);

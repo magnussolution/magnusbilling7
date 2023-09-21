@@ -35,7 +35,9 @@ Ext.define('MBilling.view.alarm.Form', {
                 ['2', t('ASR')],
                 ['3', t('Calls per minute')],
                 ['4', t('Consecutive number')],
-                ['5', t('Online calls on same number')]
+                ['5', t('Online calls on same number')],
+                ['6', t('Same number and CallerID')],
+                ['7', t('Total calls per user')]
             ]
         }, {
             xtype: 'combobox',
@@ -48,7 +50,16 @@ Ext.define('MBilling.view.alarm.Form', {
                 ['3600', t('1 Hour')],
                 ['7200', t('2 Hours')],
                 ['43200', t('12 Hours')],
-                ['86400', t('24 Hours')]
+                ['1', t('1 day')],
+                ['2', t('2 days')],
+                ['3', t('3 days')],
+                ['4', t('4 days')],
+                ['5', t('5 days')],
+                ['6', t('6 days')],
+                ['7', t('1 week')],
+                ['14', t('2 weeks')],
+                ['21', t('3 weeks')],
+                ['30', t('1 month')]
             ]
         }, {
             xtype: 'combobox',
@@ -65,12 +76,24 @@ Ext.define('MBilling.view.alarm.Form', {
             name: 'amount',
             fieldLabel: t('Amount')
         }, {
-            name: 'email',
-            fieldLabel: t('Email')
-        }, {
             xtype: 'booleancombo',
             name: 'status',
             fieldLabel: t('Status')
+        }, {
+            name: 'email',
+            fieldLabel: t('Email')
+        }, {
+            name: 'subject',
+            fieldLabel: t('Subject')
+        }, {
+            xtype: 'textareafield',
+            name: 'message',
+            fieldLabel: t('Message'),
+            hideLabel: true,
+            height: 400,
+            grow: true,
+            enableKeyEvents: false,
+            anchor: '100%'
         }];
         me.callParent(arguments);
     }

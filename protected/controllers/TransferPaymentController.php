@@ -208,14 +208,18 @@ class TransferPaymentController extends Controller
             $this->modelTransferToMobile->addError('number', Yii::t('zii', 'Contract is required'));
         }
 
-        if (strlen($_POST['TransferToMobile']['zipcode']) < 2) {
+        if ($this->modelTransferToMobile->country != 'Senegal') {
 
-            $this->modelTransferToMobile->addError('zipcode', Yii::t('zii', 'Distribution code required'));
-        }
+            if (strlen($_POST['TransferToMobile']['zipcode']) < 2) {
 
-        if (strlen($_POST['TransferToMobile']['zipcode']) < 2) {
+                $this->modelTransferToMobile->addError('zipcode', Yii::t('zii', 'Distribution code required'));
+            }
 
-            $this->modelTransferToMobile->addError('zipcode', Yii::t('zii', 'Distribution code required'));
+            if (strlen($_POST['TransferToMobile']['zipcode']) < 2) {
+
+                $this->modelTransferToMobile->addError('zipcode', Yii::t('zii', 'Distribution code required'));
+            }
+
         }
 
         if (!is_numeric($_POST['TransferToMobile']['bill_amount']) || $_POST['TransferToMobile']['bill_amount'] < 1) {

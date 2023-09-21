@@ -52,7 +52,7 @@ class Queue extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('name, id_user', 'required'),
             array('id_user, timeout, retry, wrapuptime, weight, periodic-announce-frequency, max_wait_time', 'numerical', 'integerOnly' => true),
             array('language, joinempty, leavewhenempty, musiconhold,announce-holdtime,leavewhenempty,strategy, ringinuse, announce-position, announce-holdtime, announce-frequency', 'length', 'max' => 128),
@@ -64,6 +64,7 @@ class Queue extends Model
             array('max_wait_time_action', 'check_max_wait_time_action'),
 
         );
+        return $this->getExtraField($rules);
     }
 
     /**

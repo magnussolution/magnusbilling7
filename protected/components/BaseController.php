@@ -38,6 +38,7 @@ class BaseController extends CController
     public $extraFieldsRelated = array();
     public $titleReport;
     public $subTitleReport;
+    public $addAuthorizedNoSession;
     public $attributes     = array();
     public $extraValues    = array();
     public $mapErrorsMySql = array(
@@ -76,7 +77,10 @@ class BaseController extends CController
     public $controllerAllowUpdateAll = array();
     public $relationFilter           = array();
     public $fieldsInvisibleClient    = array();
+    public $fieldsNotUpdateClient    = array();
+    public $fieldsNotUpdateAgent     = array();
     public $config;
+    public $addInCondition = [];
     public function init()
     {
         Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/resources/init.css');
@@ -92,7 +96,7 @@ class BaseController extends CController
         }
 
         if (!Yii::app()->session['id_user']) {
-            if (!$this->authorizedNoSession()) {
+            if (!$this->authorizedNoSession($this->addAuthorizedNoSession)) {
                 exit("Access denied to All action in All modules");
             }
         }
@@ -106,7 +110,7 @@ class BaseController extends CController
             $model = ucfirst(isset($model[1]) ? $model[1] : $model[0] . 'OR');
             Yii::import('application.models.overrides.' . $model);
             $this->instanceModel = new $model;
-            $this->abstractModel = $model->model($model);
+            $this->abstractModel = $model::model();
         }
 
         if ($this->getOverride()) {
@@ -218,14 +222,6 @@ class BaseController extends CController
         return $actions;
     }
 
-    public function authorizedNoSession()
-    {
-        $allow = array(
-            'site',
-            'authentication',
-        );
-        return in_array($this->controllerName, $allow);
-    }
     private function getOverride()
     {
         if (!file_exists('protected/config/overrides.php')) {
@@ -340,20 +336,23 @@ class BaseController extends CController
             exit;
         }
 
-        $criteria = array(
-            'select'    => $this->select,
-            'join'      => $this->join,
-            'condition' => $this->filter,
-            'params'    => $this->paramsFilter,
-            'with'      => $this->relationFilter,
-            'order'     => $this->order,
-            'limit'     => $this->limit,
-            'offset'    => $this->start,
+        $criteria = new CDbCriteria();
+        $criteria->addCondition($this->filter);
 
-        );
+        $criteria->select = $this->select;
+        $criteria->join   = $this->join;
+        $criteria->params = $this->paramsFilter;
+        $criteria->with   = $this->relationFilter;
+        $criteria->order  = $this->order;
+        $criteria->limit  = $this->limit;
+        $criteria->offset = $this->start;
+
+        if (count($this->addInCondition)) {
+            $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+        }
 
         if ($this->group != 1) {
-            $criteria['group'] = $this->group;
+            $criteria->group = $this->group;
         }
 
         return $criteria;
@@ -367,13 +366,18 @@ class BaseController extends CController
             $result = Yii::app()->db->createCommand($sql)->queryAll();
             return $result[0]['Rows'];
         } else {
-            $recordCont = $this->abstractModel->find(array(
-                'select'    => "COUNT('*') AS " . $this->abstractModel->primaryKey(),
-                'join'      => $this->join,
-                'condition' => $this->filter,
-                'with'      => $this->relationFilter,
-                'params'    => $this->paramsFilter,
-            ));
+            $criteria = new CDbCriteria();
+            $criteria->addCondition($this->filter);
+            $criteria->select = "COUNT('*') AS " . $this->abstractModel->primaryKey();
+            $criteria->join   = $this->join;
+            $criteria->params = $this->paramsFilter;
+            $criteria->with   = $this->relationFilter;
+
+            if (count($this->addInCondition)) {
+                $criteria->addInCondition($this->addInCondition[0], $this->addInCondition[1]);
+            }
+
+            $recordCont = $this->abstractModel->find($criteria);
 
             return $recordCont[$this->abstractModel->primaryKey()];
         }
@@ -566,8 +570,17 @@ class BaseController extends CController
                     exit('try edit invalid id');
                 }
 
-            } elseif (!$this->isNewRecord && Yii::app()->session['isClient'] && $model->id_user != Yii::app()->session['id_user']) {
-                exit('try edit invalid id');
+            } elseif (!$this->isNewRecord && Yii::app()->session['isClient']) {
+                if ($module == 'user') {
+                    if ($model->id != Yii::app()->session['id_user']) {
+                        exit('try edit invalid id');
+                    }
+                } else {
+                    if ($model->id_user != Yii::app()->session['id_user']) {
+                        exit('try edit invalid id');
+                    }
+                }
+
             } else if (!$this->isNewRecord && Yii::app()->session['isAgent']) {
                 $this->checkAgentPermission($values, $namePk);
             }
@@ -796,6 +809,8 @@ class BaseController extends CController
 
         $this->setfilter($_GET);
 
+        $this->applyFilterToLimitedAdmin();
+
         $fieldGroup = json_decode($_GET['group']);
         $sort       = json_decode($_GET['sort']);
 
@@ -854,6 +869,8 @@ class BaseController extends CController
         $columns = $this->repaceColumns($columns);
 
         $columns = $this->removeColumns($columns);
+
+        $columns = $this->subscribeColunms($columns);
 
         $this->setLimit($_GET);
 
@@ -1239,6 +1256,18 @@ class BaseController extends CController
     public function getAttributesRequest()
     {
         $arrPost = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
+        if (isset(Yii::app()->session['isClient']) && Yii::app()->session['isClient']) {
+            $fields = array_merge($this->fieldsInvisibleClient, $this->fieldsNotUpdateClient);
+            foreach ($fields as $field) {
+                unset($arrPost[$field]);
+            }
+        }
+        if (isset(Yii::app()->session['isAgent']) && Yii::app()->session['isAgent']) {
+            $fields = array_merge($this->fieldsInvisibleAgent, $this->fieldsNotUpdateAgent);
+            foreach ($fields as $field) {
+                unset($arrPost[$field]);
+            }
+        }
         return $arrPost;
     }
 
@@ -1371,37 +1400,59 @@ class BaseController extends CController
 
                     switch ($comparison) {
                         case 'st':
-                            if (preg_match("/^id[A-Z].*\./", $field)) {
-                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
-                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->findAll('username LIKE :key', [':key' => $value . '%']);
+                                $in        = [];
+                                foreach ($modelUser as $key => $user) {
+                                    $in[] = $user->id;
+                                }
+                                $this->addInCondition = ['t.id_user', $in];
+                                $filterDirect         = true;
+                            }
+                            if (!isset($filterDirect)) {
+                                if (preg_match("/^id[A-Z].*\./", $field)) {
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field LIKE :$paramName",
+                                        );
+                                    }
+
                                 } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
-                                        'condition' => "$field LIKE :$paramName",
-                                    );
+                                    $condition .= " AND $field LIKE :$paramName";
                                 }
 
-                            } else {
-                                $condition .= " AND $field LIKE :$paramName";
+                                $this->paramsFilter[$paramName] = "$value%";
                             }
-
-                            $this->paramsFilter[$paramName] = "$value%";
 
                             break;
                         case 'ed':
-
-                            if (preg_match("/^id[A-Z].*\./", $field)) {
-                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
-                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
-                                } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
-                                        'condition' => "$field LIKE :$paramName",
-                                    );
+                            if ($field == 'idUser.username') {
+                                $modelUser = User::model()->findAll('username LIKE :key', [':key' => '%' . $value]);
+                                $in        = [];
+                                foreach ($modelUser as $key => $user) {
+                                    $in[] = $user->id;
                                 }
-                            } else {
-                                $condition .= " AND $field LIKE :$paramName";
+                                $this->addInCondition = ['t.id_user', $in];
+                                $filterDirect         = true;
                             }
+                            if (!isset($filterDirect)) {
+                                if (preg_match("/^id[A-Z].*\./", $field)) {
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field LIKE :$paramName",
+                                        );
+                                    }
+                                } else {
+                                    $condition .= " AND $field LIKE :$paramName";
+                                }
 
-                            $this->paramsFilter[$paramName] = "%$value";
+                                $this->paramsFilter[$paramName] = "%$value";
+                            }
 
                             break;
                         case 'ct':
@@ -1438,12 +1489,25 @@ class BaseController extends CController
                         case 'eq':
 
                             if (preg_match("/^id[A-Z].*\./", $field)) {
-                                if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
-                                    $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
-                                } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
-                                        'condition' => "$field = :$paramName",
-                                    );
+                                $filterDirect = false;
+                                if ($field == 'idUser.username') {
+                                    $modelUser = User::model()->find('username = :key', [':key' => $value]);
+                                    if (isset($modelUser->id)) {
+                                        $condition .= " AND t.id_user = :$paramName";
+                                        $value        = $modelUser->id;
+                                        $filterDirect = true;
+                                    }
+                                }
+
+                                if (!isset($filterDirect)) {
+
+                                    if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
+                                        $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
+                                    } else {
+                                        $this->relationFilter[strtok($field, '.')] = array(
+                                            'condition' => "$field = :$paramName",
+                                        );
+                                    }
                                 }
                             } else {
                                 $condition .= " AND $field = :$paramName";
@@ -1683,7 +1747,11 @@ class BaseController extends CController
                     //altera as colunas para poder pegar o destino das tarifas
                     $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.id_prefix) AS connectcharge";
                 } else {
-                    $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.$fieldName) AS $fieldName";
+                    if (isset($fk['where'])) {
+                        $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t." . $fk['where'] . ") AS $fieldName";
+                    } else {
+                        $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.$fieldName) AS $fieldName";
+                    }
                 }
 
                 if ($fieldName === $fieldGroup) {
@@ -1947,11 +2015,13 @@ class BaseController extends CController
         } else if (preg_match('/pkg_plan/', $this->abstractModel->tableName())) {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idUser->id;
-
         } else if (preg_match('/pkg_rate_agent/', $this->abstractModel->tableName())) {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idPlan->idUser->id;
 
+        } else if (preg_match('/pkg_offer/', $this->abstractModel->tableName())) {
+            $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
+            $id_user    = $modelCheck->idUser->id;
         } else {
             $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
             $id_user    = $modelCheck->idUser->id_user;

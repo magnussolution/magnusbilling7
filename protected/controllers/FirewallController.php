@@ -33,7 +33,11 @@ class FirewallController extends Controller
 
         $this->getLinesCommand('asterisk-iptables', 0);
         $this->getLinesCommand('ip-blacklist', 1);
-        $this->getLinesCommand('ssh-iptables', 0);
+        if ($this->getLinesCommand('ssh-iptables', 0) == false) {
+            $this->getLinesCommand('sshd', 0);
+
+        }
+
         $this->getLinesCommand('mbilling_login', 0);
 
     }
@@ -41,6 +45,9 @@ class FirewallController extends Controller
     public function getLinesCommand($command, $action = 0)
     {
         exec("sudo fail2ban-client status $command", $status);
+        if (!isset($status[1])) {
+            return false;
+        }
 
         foreach ($status as $value) {
 

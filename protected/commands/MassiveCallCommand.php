@@ -203,10 +203,10 @@ class MassiveCallCommand extends ConsoleCommand
                 } else if ($searchTariff[0]['trunk_group_type'] == 3) {
                     $sql = "SELECT *, (SELECT buyrate FROM pkg_rate_provider WHERE id_provider = tr.id_provider AND id_prefix = " . $searchTariff[0]['id_prefix'] . " LIMIT 1) AS buyrate  FROM pkg_trunk_group_trunk t  JOIN pkg_trunk tr ON t.id_trunk = tr.id WHERE id_trunk_group = " . $searchTariff[0]['id_trunk_group'] . " ORDER BY buyrate IS NULL , buyrate ";
                 }
-                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->findBySql($sql);
+                $modelTrunkGroupTrunk = TrunkGroupTrunk::model()->findAllBySql($sql);
 
                 foreach ($modelTrunkGroupTrunk as $key => $trunk) {
-                    $modelTrunk = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
+                    $modelTrunk = Trunk::model()->findByPk((int) $trunk->id_trunk);
                     if ($modelTrunk->status == 0 || $phone->try > 0) {
                         continue;
                     }
@@ -218,6 +218,10 @@ class MassiveCallCommand extends ConsoleCommand
                     break;
                 }
 
+                if (!isset($idTrunk) || $idTrunk < 1) {
+                    continue;
+                }
+
                 if (substr($destination, 0, 4) == '1111') {
                     $destination = str_replace(substr($destination, 0, 7), '', $destination);
                 }
@@ -225,13 +229,11 @@ class MassiveCallCommand extends ConsoleCommand
                 $extension = $destination;
 
                 //retiro e adiciono os prefixos do tronco
-                if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+                if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                     $destination = substr($destination, strlen($removeprefix));
                 }
 
                 $destination = $trunkprefix . $destination;
-
-                $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
 
                 if (file_exists(dirname(__FILE__) . '/MassiveCallBeforeDial.php')) {
                     include dirname(__FILE__) . '/MassiveCallBeforeDial.php';
@@ -242,7 +244,7 @@ class MassiveCallCommand extends ConsoleCommand
                 // gerar os arquivos .call
                 $call = "Action: Originate\n";
                 $call = "Channel: " . $dialstr . "\n";
-                $call .= "Callerid: " . $modelSip->callerid . "\n";
+                $call .= "Callerid: " . $campaign->callerid . "\n";
                 $call .= "Account:  MC!" . $campaign->name . "!" . $phone->id . "\n";
                 //$call .= "MaxRetries: 1\n";
                 //$call .= "RetryTime: 100\n";

@@ -40,9 +40,10 @@ class Balance extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('last_use,id_prefix', 'numerical', 'integerOnly' => true),
 
         );
+        return $this->getExtraField($rules);
     }
 }

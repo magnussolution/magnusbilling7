@@ -52,11 +52,12 @@ class RateProvider extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('id_prefix, id_provider', 'required'),
             array('id_prefix, id_provider, buyrateinitblock, buyrateincrement, minimal_time_buy', 'numerical', 'integerOnly' => true),
             array('buyrate', 'length', 'max' => 15),
         );
+        return $this->getExtraField($rules);
     }
 
     /**

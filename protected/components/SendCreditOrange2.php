@@ -86,20 +86,15 @@ class SendCreditOrange2
             "type"          => "bill",
             "billOrderData" => [
                 "billType" => [
-                    "id"      => $id,
-                    "country" => [
-                        "id"   => $CC,
-                        "name" => $_POST['TransferToMobile']['country'],
-                    ],
+                    "id" => $id,
+
                 ],
                 'data'     => "{\"number\":\"" . $post['number'] . "\",\"date\":\"" . date_format($date, "d/m/Y") . "\",\"distrubutionCode\":\"" . $_POST['TransferToMobile']['zipcode'] . "\"}",
             ],
             "targetTotal"   => $post['bill_amount'],
 
         );
-        //echo '<pre>';
-        //print_r($order);
-        //exit;
+
         return SendCreditOrange2::sendOrder($order);
 
     }

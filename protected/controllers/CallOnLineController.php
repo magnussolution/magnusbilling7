@@ -25,7 +25,6 @@ class CallOnLineController extends Controller
     );
 
     public $fieldsInvisibleAgent = array(
-        'canal',
         'tronco',
     );
 
@@ -165,7 +164,7 @@ class CallOnLineController extends Controller
 
         if (isset($attributes[0])) {
             $modelSip     = Sip::model()->findAll();
-            $modelServers = Servers::model()->findAll('type != :key1 AND status = 1 AND host != :key', [':key' => 'localhost', ':key1' => 'sipproxy']);
+            $modelServers = Servers::model()->findAll('type != :key1 AND status IN (1,4) AND host != :key', [':key' => 'localhost', ':key1' => 'sipproxy']);
 
             if (!isset($modelServers[0])) {
                 array_push($modelServers, array(
@@ -188,7 +187,7 @@ class CallOnLineController extends Controller
 
                 $modelCallOnLineUp = CallOnLine::model()->count('server = :key AND status = :key1', array('key' => $server['host'], ':key1' => 'Up'));
                 $totalUP += $modelCallOnLineUp;
-                $array .= '<font color="black">' . strtoupper($server['name']) . '</font> <font color="blue">Total:' . $modelCallOnLine . '</font> <font color="green">Up:' . $modelCallOnLineUp . '</font>&ensp;&ensp;|&ensp;&ensp;';
+                $array .= '<font color="black">' . strtoupper($server['name']) . '</font> <font color="blue">T:' . $modelCallOnLine . '</font> <font color="green">A:' . $modelCallOnLineUp . '</font>&ensp;|&ensp;';
             }
 
             $attributes[0]['serverSum'] = $array;

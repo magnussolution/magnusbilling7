@@ -190,7 +190,7 @@ class CallFailedController extends Controller
                                 if (isset($modelUser->id)) {
                                     $condition .= ' AND id_user = :id_user_username';
                                     $this->paramsFilter['id_user_username'] = $modelUser->id;
-                                    continue;
+                                    break;
                                 }
                             }
 
@@ -217,7 +217,7 @@ class CallFailedController extends Controller
                                 if (isset($modelUser->id)) {
                                     $condition .= ' AND id_user = :id_user_username';
                                     $this->paramsFilter['id_user_username'] = $modelUser->id;
-                                    continue;
+                                    break;
                                 }
                             }
 
@@ -243,7 +243,7 @@ class CallFailedController extends Controller
                                 if (isset($modelUser->id)) {
                                     $condition .= ' AND id_user = :id_user_username';
                                     $this->paramsFilter['id_user_username'] = $modelUser->id;
-                                    continue;
+                                    break;
                                 }
                             }
 
@@ -284,7 +284,7 @@ class CallFailedController extends Controller
                                 if (isset($modelUser->id)) {
                                     $condition .= ' AND id_user = :id_user_username';
                                     $this->paramsFilter['id_user_username'] = $modelUser->id;
-                                    continue;
+                                    break;
                                 }
                             }
 

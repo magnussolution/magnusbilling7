@@ -174,8 +174,9 @@ class IvrController extends Controller
             if (file_exists($this->uploaddir . 'idIvrDidWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idIvrDidWork_' . $model->id . '.wav');
             }
-            $typefile   = explode('.', $_FILES["workaudio"]["name"]);
-            $uploadfile = $this->uploaddir . 'idIvrDidWork_' . $model->id . '.' . $typefile[1];
+            $data       = explode('.', $_FILES["workaudio"]["name"]);
+            $typefile   = array_pop($data);
+            $uploadfile = $this->uploaddir . 'idIvrDidWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["workaudio"]["tmp_name"], $uploadfile);
         }
 
@@ -183,8 +184,9 @@ class IvrController extends Controller
             if (file_exists($this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.wav');
             }
-            $typefile   = explode('.', $_FILES["noworkaudio"]["name"]);
-            $uploadfile = $this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.' . $typefile[1];
+            $data       = explode('.', $_FILES["noworkaudio"]["name"]);
+            $typefile   = array_pop($data);
+            $uploadfile = $this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["noworkaudio"]["tmp_name"], $uploadfile);
         }
 

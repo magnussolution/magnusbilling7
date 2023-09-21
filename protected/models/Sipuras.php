@@ -52,7 +52,7 @@ class Sipuras extends Model
      */
     public function rules()
     {
-        return array(
+        $rules = array(
             array('macadr, id_user', 'required'),
             array('macadr', 'length', 'max' => 12),
             array('senha_admin, senha_user, Use_Pref_Codec_Only_1, Use_Pref_Codec_Only_2, Preferred_Codec_1, Preferred_Codec_2', 'length', 'max' => 8),
@@ -70,6 +70,7 @@ class Sipuras extends Model
             array('STUN_Server,Dial_Tone', 'length', 'max' => 80),
             array('Dial_Plan_1, Dial_Plan_2', 'length', 'max' => 180),
         );
+        return $this->getExtraField($rules);
     }
 
     /**
