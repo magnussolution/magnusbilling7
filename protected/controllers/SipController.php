@@ -170,7 +170,7 @@ class SipController extends Controller
             $values['cid_number'] = $values['callerid'];
         }
 
-        if (isset($value['allow'])) {
+        if (isset($values['allow'])) {
             $values['allow'] = preg_replace("/,0/", "", $values['allow']);
             $values['allow'] = preg_replace("/0,/", "", $values['allow']);
         }
