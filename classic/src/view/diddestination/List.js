@@ -78,6 +78,10 @@ Ext.define('MBilling.view.diddestination.List', {
             dataIndex: 'secondusedreal',
             flex: 3
         }, {
+            header: t('priority'),
+            dataIndex: 'priority',
+            flex: 1
+        }, {
             header: t('Creation date'),
             renderer: Ext.util.Format.dateRenderer('Y-m-d H:i:s'),
             dataIndex: 'creationdate',
