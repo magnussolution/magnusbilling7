@@ -22,15 +22,15 @@ class CryptocurrencyCommand extends CConsoleCommand
     public function run($args)
     {
 
-        $modelMethodPay = Methodpay::model()->find('payment_method = :key', array(':key' => 'cryptocurrency'));
-        if (!isset($modelMethodPay->id)) {
+        $modelMethodPay = Methodpay::model()->find('payment_method = :key', [':key' => 'cryptocurrency']);
+        if ( ! isset($modelMethodPay->id)) {
             echo 'No method found';
             exit;
         }
 
         $last_30_minutes     = time() - 1800;
         $modelCryptocurrency = Cryptocurrency::model()->findAll('date > :key1 AND status = 1',
-            array(':key1' => date('Y-m-d')));
+            [':key1' => date('Y-m-d')]);
 
         foreach ($modelCryptocurrency as $key => $payment) {
             $result = '';
@@ -54,7 +54,7 @@ class CryptocurrencyCommand extends CConsoleCommand
 
                             Yii::log('encontrou liberar credit', 'error');
 
-                            Cryptocurrency::model()->updateByPk($payment->id, array('status' => 0));
+                            Cryptocurrency::model()->updateByPk($payment->id, ['status' => 0]);
                             $description = 'CriptoCurrency ' . $value->coin . ', txid: ' . $value->txId;
                             Yii::log($description, 'error');
                             echo ($payment->id_user . ' ' . $payment->amount . ' ' . $description . ' ' . $value->txId);
