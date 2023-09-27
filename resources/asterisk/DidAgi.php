@@ -87,7 +87,7 @@ class DidAgi
                     $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('" . $this->did . "',1,length(prefix))
                                     ORDER BY LENGTH(prefix) DESC";
                     $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                    if (!isset($modelPrefix->id)) {
+                    if ( ! isset($modelPrefix->id)) {
                         $agi->verbose('Not found prefix to DID ' . $this->did);
                     }
                     $CalcAgi->id_prefix = $modelPrefix->id;
@@ -220,8 +220,8 @@ class DidAgi
 
         $agi->verbose('voip_call ' . $this->voip_call, 5);
 
-        if ($this->modelDid->cbr == 1 && !$agi->get_variable("ISFROMCALLBACKPRO", true)) {
-            if (!$agi->get_variable("SECCALL", true)) {
+        if ($this->modelDid->cbr == 1 && ! $agi->get_variable("ISFROMCALLBACKPRO", true)) {
+            if ( ! $agi->get_variable("SECCALL", true)) {
                 $agi->verbose('RECEIVED 0800 CALLBACPRO', 5);
                 CallbackAgi::advanced0800CallBack($agi, $MAGNUS, $this, $CalcAgi);
                 return;
@@ -265,7 +265,7 @@ class DidAgi
                 CallbackAgi::callbackCID($agi, $MAGNUS, $CalcAgi, $this);
                 break;
             case 6:
-                if (!$agi->get_variable("SECCALL", true)) {
+                if ( ! $agi->get_variable("SECCALL", true)) {
                     $agi->verbose('RECEIVED 0800 CALLBACK', 5);
                     CallbackAgi::callback0800($agi, $MAGNUS, $CalcAgi, $this);
                 }
@@ -412,7 +412,7 @@ class DidAgi
                     $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '" . $inst_listdestination['destination'] . "'";
                     $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
                     $agi->verbose("Call group $group ", 6);
-                    if (!isset($modelSip[0]->id)) {
+                    if ( ! isset($modelSip[0]->id)) {
                         $answeredtime = 0;
                         continue;
                     }
@@ -424,7 +424,7 @@ class DidAgi
                         $group .= "SIP/" . $value->name . "&";
                     }
 
-                    $dialstr = substr($group, 0, -1) . $dialparams;
+                    $dialstr = substr($group, 0, -1);
 
                     $MAGNUS->startRecordCall($agi, $this->did, true);
 
@@ -581,7 +581,7 @@ class DidAgi
 
                         /* PERFORM THE CALL*/
                         $result_callperf = $CalcAgi->sendCall($agi, $MAGNUS->destination, $MAGNUS);
-                        if (!$result_callperf) {
+                        if ( ! $result_callperf) {
                             $prompt = "prepaid-callfollowme";
                             $agi->verbose($prompt, 10);
                             $agi->stream_file($prompt, '#');

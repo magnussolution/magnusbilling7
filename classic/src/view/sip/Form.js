@@ -58,7 +58,7 @@ Ext.define('MBilling.view.sip.Form', {
                 }, {
                     name: 'defaultuser',
                     fieldLabel: t('SIP user'),
-                    minLength: 4,
+                    minLength: window.sip_user_min ? window.sip_user_min : 4,
                     allowBlank: true,
                     readOnly: App.user.isClient
                 }, {

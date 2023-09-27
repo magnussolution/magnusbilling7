@@ -7,6 +7,19 @@ sudo apt install python3
 sudo apt install python3.9-pip
 python3.9 -m pip install python-binance
 
+
+DEBIAN 10
+sudo apt install wget build-essential libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev  
+cd /tmp
+wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz
+tar -xf Python-3.9.1.tgz
+cd Python-3.9.1
+make -j 2
+sudo make altinstall
+
+sudo python3.9 -m pip install --upgrade pip
+sudo python3.9 -m pip install python-binance
+
 CENTOS 7
 yum install libffi-devel -y
 
