@@ -23,7 +23,7 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
     {
 
         if (isset($args[0])) {
-            $modelServers = Servers::model()->find('host = :key', array(':key' => $args[0]));
+            $modelServers = Servers::model()->find('host = :key', [':key' => $args[0]]);
             if (isset($modelServers->id)) {
                 $server_set = ' SET id_server = ' . $modelServers->id;
             }
@@ -69,7 +69,7 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
         }
 
         if (file_exists('/var/log/asterisk/cdr-csv/MBilling_CallShop.csv')) {
-            exec('mv /var/log/asterisk/cdr-csv/MBilling_Success.csv /var/log/asterisk/cdr-csv/MBilling_Success_CallShop_' . $time . '.csv');
+            exec('mv /var/log/asterisk/cdr-csv/MBilling_CallShop.csv /var/log/asterisk/cdr-csv/MBilling_Success_CallShop_' . $time . '.csv');
             $sql = "LOAD DATA " . $local_command . " INFILE '/var/log/asterisk/cdr-csv/MBilling_Success_CallShop_" . $time . ".csv' INTO TABLE pkg_callshop FIELDS TERMINATED BY ','  LINES TERMINATED BY '\n'  (sessionid, id_user, status, price, buycost, calledstation, destination,price_min, cabina, sessiontime)";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
@@ -145,14 +145,14 @@ class ImportCdrCSV_CCommand extends CConsoleCommand
     public function scan_dir($dir)
     {
 
-        $ignored = array('.', '..', '.svn', '.htaccess', 'MBilling_Failed.csv', 'MBilling_Success.csv');
+        $ignored = ['.', '..', '.svn', '.htaccess', 'MBilling_Failed.csv', 'MBilling_Success.csv'];
 
-        $files = array();
+        $files = [];
         foreach (scandir($dir) as $file) {
             if (in_array($file, $ignored)) {
                 continue;
             }
-            if (!preg_match('/^MBilling_/', $file)) {
+            if ( ! preg_match('/^MBilling_/', $file)) {
                 if ($file != 'Master.csv' && $file != 'error.csv') {
                     exec('rm -rf /var/log/asterisk/cdr-csv/' . $file);
                 }
