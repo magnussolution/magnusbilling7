@@ -24,11 +24,11 @@ class ApiAccess
 
         $config = $baseController->config;
 
-        $modelApi = Api::model()->find('api_key = :key AND status = 1', array(
+        $modelApi = Api::model()->find('api_key = :key AND status = 1', [
             ':key' => $_SERVER['HTTP_KEY'],
-        ));
+        ]);
 
-        if (!isset($modelApi->id)) {
+        if ( ! isset($modelApi->id)) {
             exit('invalid API access');
         }
         $api_key         = $modelApi->api_key;
@@ -112,7 +112,7 @@ class ApiAccess
 
                 if (isset($_POST['getMenu']) && isset($_POST['username'])) {
 
-                    $modelUser = User::model()->find('username = :key', array(':key' => $_POST['username']));
+                    $modelUser = User::model()->find('username = :key', [':key' => $_POST['username']]);
 
                     if (isset($modelUser->id)) {
 
@@ -128,7 +128,7 @@ class ApiAccess
                 }
 
                 if (isset($_POST['getFields'])) {
-                    if (!AccessManager::getInstance($_POST['module'])->canRead()) {
+                    if ( ! AccessManager::getInstance($_POST['module'])->canRead()) {
                         header('HTTP/1.0 401 Unauthorized');
                         die("Access denied in module:" . $_POST['module']);
                     }
@@ -139,11 +139,22 @@ class ApiAccess
                     exit;
 
                 } else if (isset($_POST['getModules'])) {
-                    $modelGroupModule = GroupModule::model()->findAll('id_group = :key', array(':key' => Yii::app()->session['id_group']));
+
+                    $dir         = '/var/www/html/mbilling/protected/controllers/';
+                    $controllers = [];
+                    foreach (scandir($dir) as $file) {
+                        $controllers[strtolower(preg_replace('/Controller\.php/', '', $file))] = lcfirst(preg_replace('/Controller\.php/', '', $file));
+                    }
+
+                    $modelGroupModule = GroupModule::model()->findAll('id_group = :key', [':key' => Yii::app()->session['id_group']]);
                     $modules          = [];
                     foreach ($modelGroupModule as $values) {
                         if ($values->idModule->module != "") {
-                            $modules[] = ['Menu name' => substr($values->idModule->text, 3, -2), 'Module name' => $values->idModule->module];
+
+                            if (isset($controllers[$values->idModule->module])) {
+                                $modules[] = ['Menu name' => substr($values->idModule->text, 3, -2), 'Module name' => $controllers[$values->idModule->module]];
+                            }
+
                         }
                     }
                     exit(json_encode($modules));
@@ -184,7 +195,7 @@ class ApiAccess
             $action = 'r';
         }
 
-        if (!preg_match('/' . $action . '/', $modelApi->action)) {
+        if ( ! preg_match('/' . $action . '/', $modelApi->action)) {
             exit('invalid API action');
         }
 
@@ -195,7 +206,7 @@ class ApiAccess
 
         $values = $_POST;
 
-        $modelUser = User::model()->find('email = :key', array(':key' => $values['email']));
+        $modelUser = User::model()->find('email = :key', [':key' => $values['email']]);
 
         if (isset($modelUser->id)) {
 
@@ -209,7 +220,7 @@ class ApiAccess
         }
 
         if (isset($values['username'])) {
-            $modelUser = User::model()->find('username = :key', array(':key' => $values['username']));
+            $modelUser = User::model()->find('username = :key', [':key' => $values['username']]);
 
             if (isset($modelUser->id)) {
                 echo json_encode([
@@ -242,14 +253,14 @@ class ApiAccess
             }
         }
 
-        if (!isset($values['credit'])) {
+        if ( ! isset($values['credit'])) {
             $values['credit'] = isset($modelPlan->ini_credit) ? $modelPlan->ini_credit : 0;
         }
 
         if (isset($values['id_group'])) {
             $values['id_group'] = $values['id_group'];
         } else {
-            $modelGroupUser = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
+            $modelGroupUser = GroupUser::model()->findAllByAttributes(["id_user_type" => 3]);
             if (isset($modelGroupUser->id)) {
                 $values['id_group'] = $modelGroupUser[0]['id'];
             } else {
@@ -286,7 +297,7 @@ class ApiAccess
             $attributes = false;
             foreach ($modelUser as $key => $item) {
 
-                if (!strlen($item)) {
+                if ( ! strlen($item)) {
                     continue;
                 }
                 $attributes[$key] = $item;

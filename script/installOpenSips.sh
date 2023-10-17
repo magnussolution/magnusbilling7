@@ -127,6 +127,7 @@ mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER T
 mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber ADD trace TINYINT(1) NOT NULL DEFAULT '0'"
 mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber ADD  cpslimit INT( 11 ) NOT NULL DEFAULT  '-1'"
 mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE address CHANGE context_info  context_info CHAR( 70 ) NULL DEFAULT NULL ;"
+mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber CHANGE password  password CHAR( 70 )  NOT NULL DEFAULT '';"
 
 echo "
 * * * * * /usr/sbin/opensipsctl fifo ds_reload
