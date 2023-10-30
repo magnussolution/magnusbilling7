@@ -26,15 +26,15 @@ class SipProxyAccountsCommand extends ConsoleCommand
         $modelServers = Servers::model()->findAll('type = "asterisk" AND status IN (1,3,4) AND weight > 0');
         foreach ($modelServers as $key => $server) {
             if ($server->last_call_id > 0) {
-                $modelCall = Call::model()->findBySql('SELECT id,starttime FROM pkg_cdr WHERE id > :key1 AND id_server = :key ORDER BY id DESC LIMIT 1', array(
+                $modelCall = Call::model()->findBySql('SELECT id,starttime FROM pkg_cdr WHERE id > :key1 AND id_server = :key ORDER BY id DESC LIMIT 1', [
                     'key'   => $server->id,
                     ':key1' => $server->last_call_id,
-                ));
+                ]);
             } else {
-                $modelCall = Call::model()->findBySql('SELECT id,starttime  FROM pkg_cdr WHERE starttime > :key1 AND id_server = :key LIMIT 1', array(
+                $modelCall = Call::model()->findBySql('SELECT id,starttime  FROM pkg_cdr WHERE starttime > :key1 AND id_server = :key LIMIT 1', [
                     'key'   => $server->id,
                     ':key1' => date('Y-m-d'),
-                ));
+                ]);
             }
             if (isset($modelCall->id)) {
                 $server->last_call    = $modelCall->starttime;
@@ -63,7 +63,7 @@ class SipProxyAccountsCommand extends ConsoleCommand
             } else if (preg_match("/\|/", $server->description)) {
                 $remoteProxyIP = explode("|", $server->description);
                 $remoteProxyIP = end($remoteProxyIP);
-                if (!filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
+                if ( ! filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
                     $remoteProxyIP = $hostname;
                 }
             } else {
@@ -99,6 +99,10 @@ class SipProxyAccountsCommand extends ConsoleCommand
             } catch (Exception $e) {
                 //
             }
+
+            foreach ($modelTrunk as $key => $trunk) {
+                $sqlproxyadd .= "('0', '$trunk->host','0', '" . $trunk->trunkcode . '|' . $trunk->trunkcode . '|500|0|' . $techprefix_length . "'),";
+            }
             foreach ($modelSip as $key => $sip) {
 
                 if ($sip->host == 'dynamic') {
@@ -106,9 +110,6 @@ class SipProxyAccountsCommand extends ConsoleCommand
                 } else {
                     $sqlproxyadd .= "('0', '$sip->host','0', '" . $sip->idUser->username . '|' . $sip->name . '|' . $sip->idUser->cpslimit . '|' . $sip->techprefix . '|' . $techprefix_length . "'),";
                 }
-            }
-            foreach ($modelTrunk as $key => $trunk) {
-                $sqlproxyadd .= "('0', '$trunk->host','0', '" . $trunk->trunkcode . '|' . $trunk->trunkcode . '|500|0|' . $techprefix_length . "'),";
             }
 
             foreach ($modelDid as $key => $did) {
