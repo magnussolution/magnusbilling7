@@ -65,7 +65,7 @@ class DidAgi
         $this->modelDid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($this->modelDid->id)) {
             $agi->verbose("Is a DID call", 5);
-            $sql                    = "SELECT * FROM pkg_did_destination WHERE activated = 1 AND id_did = '" . $this->modelDid->id . "' ORDER BY priority";
+            $sql                    = "SELECT * FROM pkg_did_destination WHERE id_did = '" . $this->modelDid->id . "' ORDER BY priority";
             $this->modelDestination = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
             if (isset($this->did_voip_model->record_call) && $this->did_voip_model->record_call == 1) {
