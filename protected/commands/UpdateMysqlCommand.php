@@ -693,7 +693,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                     $sql = "INSERT INTO pkg_trunk_group_trunk (id_trunk_group, id_trunk) VALUES ( $id_trunk_group, " . $modelTrunk[0]['id'] . " )";
                     Yii::app()->db->createCommand($sql)->execute();
 
-                    if (!is_numeric($modelTrunk[0]['failover_trunk'])) {
+                    if ( ! is_numeric($modelTrunk[0]['failover_trunk'])) {
                         break;
                     }
                     $sql        = "SELECT * FROM pkg_trunk WHERE id = " . $modelTrunk[0]['failover_trunk'];
@@ -806,7 +806,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql    = "SELECT * FROM pkg_module WHERE module = 'backup'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if (!isset($result[0])) {
+            if ( ! isset($result[0])) {
 
                 $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Backup'')', 'backup', 'x-fa fa-desktop', 12,15)";
                 $this->executeDB($sql);
@@ -839,7 +839,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql    = "SELECT * FROM pkg_module WHERE module = 'campaignreport'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if (!isset($result[0])) {
+            if ( ! isset($result[0])) {
                 $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Campaign Report'')', 'campaignreport', 'x-fa fa-desktop', 13,12)";
                 $this->executeDB($sql);
                 $idServiceModule = Yii::app()->db->lastInsertID;
@@ -1335,11 +1335,11 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse';
             $model  = Trunk::model()->findAll(
-                array(
+                [
                     'select'    => $select,
                     'condition' => 'providertech = :key AND status = 1',
-                    'params'    => array(':key' => 'sip'),
-                ));
+                    'params'    => [':key' => 'sip'],
+                ]);
 
             if (count($model)) {
                 AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
@@ -1631,7 +1631,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         if ($version == '7.8.1.3') {
             $sql    = "SELECT * FROM pkg_module WHERE module = 'providercnl'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if (!isset($result[0]['id'])) {
+            if ( ! isset($result[0]['id'])) {
                 $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Provider CNL'')', 'providercnl', 'x-fa fa-desktop', 10,7)";
                 $this->executeDB($sql);
             }
@@ -1959,6 +1959,18 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.4.1';
             $this->update($version);
         }
+
+        //2023-11-08
+        if ($version == '7.8.4.1') {
+            $sql = "INSERT INTO pkg_configuration VALUES
+                (NULL, 'Disable CDR count', 'remove_count_cdr', '0', 'It will make the CDR more efficiency, particularly when utilizing filters', 'global', '1');
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.2';
+            $this->update($version);
+        }
+
     }
 
     public function executeDB($sql)

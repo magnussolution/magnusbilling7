@@ -35,17 +35,17 @@ class BaseController extends CController
     public $nameModelRelated;
     public $nameFkRelated;
     public $nameOtherFkRelated;
-    public $extraFieldsRelated = array();
+    public $extraFieldsRelated = [];
     public $titleReport;
     public $subTitleReport;
     public $addAuthorizedNoSession;
-    public $attributes     = array();
-    public $extraValues    = array();
-    public $mapErrorsMySql = array(
+    public $attributes     = [];
+    public $extraValues    = [];
+    public $mapErrorsMySql = [
         1451 => 'Record to be deleted is related to another. Technical information: ',
         1452 => 'Record to be related not found: <br>Technical Information:',
         0    => 'Technical Information: ',
-    );
+    ];
     public $isNewRecord;
     public $isUpdateAll;
     public $filter;
@@ -56,10 +56,10 @@ class BaseController extends CController
     public $defaultFilterByUser = 'id_user';
     public $is_ratecard_view;
     public $fieldCard;
-    public $fieldsInvisibleOperator = array();
-    public $fieldsInvisibleAgent    = array();
+    public $fieldsInvisibleOperator = [];
+    public $fieldsInvisibleAgent    = [];
     public $nameSum                 = 'sum';
-    public $recordsSum              = array();
+    public $recordsSum              = [];
     public $saveAttributes          = false;
     public $magnusFilesDirectory    = '/usr/local/src/magnus/';
     public $nameFileReport          = 'export';
@@ -73,12 +73,12 @@ class BaseController extends CController
     public $defaultSortDir = null;
     public $fixedWhere     = null;
     public $paramsFilter;
-    public $nofilterPerAdminGroup    = array();
-    public $controllerAllowUpdateAll = array();
-    public $relationFilter           = array();
-    public $fieldsInvisibleClient    = array();
-    public $fieldsNotUpdateClient    = array();
-    public $fieldsNotUpdateAgent     = array();
+    public $nofilterPerAdminGroup    = [];
+    public $controllerAllowUpdateAll = [];
+    public $relationFilter           = [];
+    public $fieldsInvisibleClient    = [];
+    public $fieldsNotUpdateClient    = [];
+    public $fieldsNotUpdateAgent     = [];
     public $config;
     public $addInCondition = [];
     public function init()
@@ -95,8 +95,8 @@ class BaseController extends CController
             $api->checkAuthentication($this);
         }
 
-        if (!Yii::app()->session['id_user']) {
-            if (!$this->authorizedNoSession($this->addAuthorizedNoSession)) {
+        if ( ! Yii::app()->session['id_user']) {
+            if ( ! $this->authorizedNoSession($this->addAuthorizedNoSession)) {
                 exit("Access denied to All action in All modules");
             }
         }
@@ -115,7 +115,7 @@ class BaseController extends CController
 
         if ($this->getOverride()) {
             $this->paramsToSession();
-            $this->redirect(array('overrides/' . $this->controllerName . 'OR/' . $this->actionName));
+            $this->redirect(['overrides/' . $this->controllerName . 'OR/' . $this->actionName]);
         }
 
         $this->getSessionParams();
@@ -126,11 +126,11 @@ class BaseController extends CController
         $this->msgRecordNotFound      = Yii::t('zii', 'Record not found.');
         $this->msgRecordAlreadyExists = Yii::t('zii', 'Record already exists.');
         $this->msgError               = Yii::t('zii', 'Disallowed action');
-        $this->mapErrorsMySql         = array(
+        $this->mapErrorsMySql         = [
             1451 => Yii::t('zii', 'Record to be deleted is related to another. Technical information: '),
             1452 => Yii::t('zii', 'Record to be listed there. Technical information: '),
             0    => Yii::t('zii', 'Technical information: '),
-        );
+        ];
         $startSession = strlen(session_id()) < 1 ? session_start() : null;
 
         Yii::app()->language = Yii::app()->sourceLanguage = $this->config['global']['base_language'];
@@ -153,21 +153,21 @@ class BaseController extends CController
 
     public function getMenu($modules)
     {
-        $menu = array();
+        $menu = [];
 
         foreach ($modules as $value) {
             if ($value['module'] != 'buycredit') {
-                if (!$value['show_menu']) {
+                if ( ! $value['show_menu']) {
                     continue;
                 }
             }
 
             if (empty($value['id_module'])) {
-                array_push($menu, array(
+                array_push($menu, [
                     'text'    => preg_replace("/ Module/", "", $value['text']),
                     'iconCls' => $value['icon_cls'],
                     'rows'    => $this->getSubMenu($modules, $value['id']),
-                ));
+                ]);
             }
         }
 
@@ -177,18 +177,18 @@ class BaseController extends CController
     public function getSubMenu($modules, $idOwner)
     {
         $subModulesOwner = Util::arrayFindByProperty($modules, 'id_module', $idOwner);
-        $subMenu         = array();
+        $subMenu         = [];
 
         foreach ($subModulesOwner as $value) {
 
             if ($value['module'] != 'buycredit') {
-                if (!$value['show_menu']) {
+                if ( ! $value['show_menu']) {
                     continue;
                 }
             }
 
-            if (!empty($value['module'])) {
-                array_push($subMenu, array(
+            if ( ! empty($value['module'])) {
+                array_push($subMenu, [
                     'text'             => $value['text'],
                     'iconCls'          => $value['icon_cls'],
                     'module'           => $value['module'],
@@ -196,13 +196,13 @@ class BaseController extends CController
                     'leaf'             => true,
                     'createShortCut'   => $value['createShortCut'],
                     'createQuickStart' => $value['createQuickStart'],
-                ));
+                ]);
             } else {
-                array_push($subMenu, array(
+                array_push($subMenu, [
                     'text'    => $value['text'],
                     'iconCls' => $value['icon_cls'],
                     'rows'    => $this->getSubMenu($modules, $value['id']),
-                ));
+                ]);
             }
         }
 
@@ -211,10 +211,10 @@ class BaseController extends CController
 
     public function getActions($modules)
     {
-        $actions = array();
+        $actions = [];
 
         foreach ($modules as $key => $value) {
-            if (!empty($value['action'])) {
+            if ( ! empty($value['action'])) {
                 $actions[$value['module']] = $value['action'];
             }
         }
@@ -224,7 +224,7 @@ class BaseController extends CController
 
     private function getOverride()
     {
-        if (!file_exists('protected/config/overrides.php')) {
+        if ( ! file_exists('protected/config/overrides.php')) {
             return false;
         }
 
@@ -235,7 +235,7 @@ class BaseController extends CController
 
     private function getOverrideModel()
     {
-        if (!file_exists('protected/config/overrides.php')) {
+        if ( ! file_exists('protected/config/overrides.php')) {
             return false;
         }
 
@@ -292,7 +292,7 @@ class BaseController extends CController
     public function setOrder()
     {
         $dir         = isset($_GET[$this->nameParamDir]) ? ' ' . $_GET[$this->nameParamDir] : null;
-        $this->order = !$dir || (strstr($this->sort, ',') !== false)
+        $this->order =  ! $dir || (strstr($this->sort, ',') !== false)
         ? $this->sort
         : ($this->sort ? $this->sort . ' ' . $dir : null);
 
@@ -361,7 +361,11 @@ class BaseController extends CController
     public function readCountRecord()
     {
 
-        if ((!isset($_GET['filter']) || strlen($_GET['filter']) < 3) && preg_match('/^Call$|^CallFailed$|^CallArchive$/', $this->modelName) && Yii::app()->session['isAdmin'] == true) {
+        if (preg_match('/pkg_cdr/', $this->abstractModel->tableName()) && $this->config['global']['remove_count_cdr'] == 1) {
+            $sql    = "SHOW TABLE STATUS LIKE  '" . $this->abstractModel->tableName() . "'";
+            $result = Yii::app()->db->createCommand($sql)->queryAll();
+            return $result[0]['Rows'];
+        } else if (( ! isset($_GET['filter']) || strlen($_GET['filter']) < 3) && preg_match('/^Call$|^CallFailed$|^CallArchive$/', $this->modelName) && Yii::app()->session['isAdmin'] == true) {
             $sql    = "SHOW TABLE STATUS LIKE  '" . $this->abstractModel->tableName() . "'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
             return $result[0]['Rows'];
@@ -387,7 +391,7 @@ class BaseController extends CController
      */
     public function actionRead($asJson = true, $condition = null)
     {
-        $this->checkActionAccess(array(), $this->instanceModel->getModule(), 'canRead');
+        $this->checkActionAccess([], $this->instanceModel->getModule(), 'canRead');
 
         $this->beforeRead($_GET);
 
@@ -399,7 +403,7 @@ class BaseController extends CController
 
         $this->setOrder();
 
-        if (!$condition) {
+        if ( ! $condition) {
             $this->setfilter($_GET);
         } else {
             $this->filter = $condition;
@@ -419,18 +423,18 @@ class BaseController extends CController
         $return[$this->nameRoot]  = $records;
         $return[$this->nameCount] = $countRecords;
 
-        if (!$asJson) {
-            $return                   = array();
+        if ( ! $asJson) {
+            $return                   = [];
             $return[$this->nameRoot]  = $this->getAttributesModels($records, $this->extraValues);
             $return[$this->nameCount] = $countRecords;
             $return[$this->nameSum]   = $this->getAttributesModels($recordsSum);
             return $return;
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameRoot  => $this->getAttributesModels($records, $this->extraValues),
                 $this->nameCount => $countRecords,
                 $this->nameSum   => $this->getAttributesModels($recordsSum),
-            ));
+            ]);
         }
     }
 
@@ -480,12 +484,12 @@ class BaseController extends CController
     public function checkActionAccess($values = '', $module, $action)
     {
         if ($action == 'canUpdate' || $action == 'canCreate') {
-            if (isset($values['id']) && !AccessManager::getInstance($module)->$action()) {
+            if (isset($values['id']) && ! AccessManager::getInstance($module)->$action()) {
                 header('HTTP/1.0 401 Unauthorized');
                 die("Access denied to $action in module: $module");
             }
         } elseif ($action == 'canRead') {
-            if (!AccessManager::getInstance($module)->canRead()) {
+            if ( ! AccessManager::getInstance($module)->canRead()) {
                 header('HTTP/1.0 401 Unauthorized');
                 die("Access denied to $action in module:" . $module);
             }
@@ -494,7 +498,7 @@ class BaseController extends CController
 
     public function applyFilterToLimitedAdmin()
     {
-        if (!in_array($this->controllerName, $this->nofilterPerAdminGroup)
+        if ( ! in_array($this->controllerName, $this->nofilterPerAdminGroup)
             && Yii::app()->session['user_type'] == 1 && Yii::app()->session['adminLimitUsers'] == true) {
 
             $this->filter .= " AND t.id_user IN ( SELECT id FROM pkg_user WHERE id_group IN ( SELECT gug.id_group FROM pkg_group_user_group gug WHERE gug.id_group_user = :idgA0 ) )";
@@ -515,16 +519,16 @@ class BaseController extends CController
 
         $module = $this->instanceModel->getModule();
 
-        $this->isNewRecord = !isset($values[$namePk]) || (is_array($values[$namePk]) || $values[$namePk] > 0)
+        $this->isNewRecord =  ! isset($values[$namePk]) || (is_array($values[$namePk]) || $values[$namePk] > 0)
         ? false : true;
 
-        $this->isUpdateAll = !$this->isNewRecord
+        $this->isUpdateAll =  ! $this->isNewRecord
         && isset($values[$namePk])
         && is_array($values[$namePk])
         || (isset($_POST['filter']) && strlen($_POST['filter']) > 0)
         ? true : false;
 
-        if (!$this->isUpdateAll) {
+        if ( ! $this->isUpdateAll) {
             $values = $this->beforeSave($values);
         }
 
@@ -542,10 +546,10 @@ class BaseController extends CController
 
         //updateAll
         if (isset($values[$namePk]) && is_array($values[$namePk])) {
-            $ids = array();
+            $ids = [];
             $ids = $values[$namePk];
         } elseif (isset($_POST['filter']) && strlen($_POST['filter']) > 0) {
-            $ids             = array();
+            $ids             = [];
             $ids             = $this->updateGetIdsFromFilter($namePk, $_POST['filter']);
             $values[$namePk] = $ids;
         }
@@ -563,14 +567,14 @@ class BaseController extends CController
             $this->success = false;
             $this->nameMsg = $this->msgRecordNotFound;
         } else {
-            if (!$this->isNewRecord && Yii::app()->session['isClient'] && preg_match('/pkg_phonenumber/', $this->abstractModel->tableName())) {
+            if ( ! $this->isNewRecord && Yii::app()->session['isClient'] && preg_match('/pkg_phonenumber/', $this->abstractModel->tableName())) {
                 $modelCheck = $this->abstractModel->findByPk($values[$namePk]);
 
                 if ($modelCheck->idPhonebook->idUser->id != Yii::app()->session['id_user']) {
                     exit('try edit invalid id');
                 }
 
-            } elseif (!$this->isNewRecord && Yii::app()->session['isClient']) {
+            } elseif ( ! $this->isNewRecord && Yii::app()->session['isClient']) {
                 if ($module == 'user') {
                     if ($model->id != Yii::app()->session['id_user']) {
                         exit('try edit invalid id');
@@ -581,7 +585,7 @@ class BaseController extends CController
                     }
                 }
 
-            } else if (!$this->isNewRecord && Yii::app()->session['isAgent']) {
+            } else if ( ! $this->isNewRecord && Yii::app()->session['isAgent']) {
                 $this->checkAgentPermission($values, $namePk);
             }
 
@@ -590,7 +594,7 @@ class BaseController extends CController
                 $this->success = $model->save();
                 $errors        = $model->getErrors();
 
-                if (!count($errors)) {
+                if ( ! count($errors)) {
                     $id = $id ? $id : $model->$namePk;
                     if ($subRecords !== false) {
                         $this->saveRelated($id, $subRecords);
@@ -612,17 +616,17 @@ class BaseController extends CController
 
             $this->msg = $this->success ? $this->msgSuccess : $errors;
 
-            if (!$this->isUpdateAll) {
+            if ( ! $this->isUpdateAll) {
                 $this->afterSave($model, $values);
             }
         }
 
         # retorna o resultado da execucao
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameRoot    => $this->attributes,
             $this->nameMsg     => $this->msg,
-        ));
+        ]);
     }
 
     public function beforeSave($values)
@@ -651,13 +655,13 @@ class BaseController extends CController
     public function saveUpdateAll($ids, $values, $module, $namePk, $subRecords)
     {
 
-        if (Yii::app()->session['isClient'] && !in_array($this->controllerName, $this->controllerAllowUpdateAll)) {
+        if (Yii::app()->session['isClient'] && ! in_array($this->controllerName, $this->controllerAllowUpdateAll)) {
             $info = 'No admin user trying UPDATEALL';
             MagnusLog::insertLOG(6, $info);
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => $info,
-            ));
+            ]);
             exit;
         }
         $values = $this->beforeUpdateAll($values, $ids);
@@ -665,7 +669,7 @@ class BaseController extends CController
         try {
             unset($values[$namePk]);
             unset($values['password']);
-            $setters = array();
+            $setters = [];
             foreach ($values as $fieldName => $value) {
                 if (isset($value['isPercent']) && is_bool($value['isPercent'])) {
                     $v            = $value['value'];
@@ -716,10 +720,10 @@ class BaseController extends CController
         }
 
         # retorna o resultado da execucao
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameMsg     => $this->msg,
-        ));
+        ]);
 
         if (array_key_exists('subRecords', $values)) {
             $this->saveRelated($values);
@@ -728,7 +732,7 @@ class BaseController extends CController
 
     public function updateGetIdsFromFilter($namePk, $filter)
     {
-        $ids    = array();
+        $ids    = [];
         $filter = $this->createCondition(json_decode($_POST['filter']));
 
         $this->filter = $filter = $this->extraFilter($filter);
@@ -741,12 +745,12 @@ class BaseController extends CController
             $this->filter .= ' AND ' . $defaultFilter;
         }
 
-        $records = $this->abstractModel->findAll(array(
+        $records = $this->abstractModel->findAll([
             'join'      => $this->join,
             'condition' => $this->filter,
             'with'      => $this->relationFilter,
             'params'    => $this->paramsFilter,
-        ));
+        ]);
 
         foreach ($records as $record) {
             array_push($ids, $record[$namePk]);
@@ -757,12 +761,12 @@ class BaseController extends CController
 
     public function saveGetNewRecord($namePk, $id, $filter = '')
     {
-        $newRecord = $this->abstractModel->findAll(array(
+        $newRecord = $this->abstractModel->findAll([
             'select'    => $this->select,
             'join'      => $this->join,
             'condition' => "t.$namePk = $id $filter",
             'with'      => $this->relationFilter,
-        ));
+        ]);
         $this->attributes = $this->getAttributesModels($newRecord, $this->extraValues);
     }
 
@@ -773,7 +777,7 @@ class BaseController extends CController
 
     public function reportModel()
     {
-        return new CDbCriteria(array(
+        return new CDbCriteria([
             'select'    => $this->select,
             'join'      => $this->join,
             'condition' => $this->filter,
@@ -781,7 +785,7 @@ class BaseController extends CController
             'params'    => $this->paramsFilter,
             'order'     => $this->order,
             'limit'     => $this->limit == 1 ? $this->limit : -1,
-        ));
+        ]);
     }
 
     public function beforeReport($columns)
@@ -792,7 +796,7 @@ class BaseController extends CController
     public function actionReport()
     {
 
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
@@ -850,12 +854,12 @@ class BaseController extends CController
     public function actionCsv()
     {
 
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
 
-        if (!isset(Yii::app()->session['id_user'])) {
+        if ( ! isset(Yii::app()->session['id_user'])) {
             $info = 'User try export CSV without login';
             MagnusLog::insertLOG(7, $info);
             exit;
@@ -906,7 +910,7 @@ class BaseController extends CController
         $f = fopen('php://memory', 'w');
 
         foreach ($command->queryAll() as $key => $fields) {
-            $fieldsCsv = array();
+            $fieldsCsv = [];
             foreach ($fields as $key => $value) {
                 array_push($fieldsCsv, $value);
             }
@@ -937,7 +941,7 @@ class BaseController extends CController
      */
     public function actionDestroy()
     {
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canDelete()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canDelete()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to delete in module:" . $this->instanceModel->getModule());
         }
@@ -946,16 +950,16 @@ class BaseController extends CController
         $values       = $this->getAttributesRequest();
         $namePk       = $this->abstractModel->primaryKey();
         $arrayPkAlias = explode('.', $this->abstractModel->primaryKey());
-        $ids          = array();
+        $ids          = [];
         $values       = $this->beforeDestroy($values);
 
         if ((isset($_POST['filter']) && strlen($_POST['filter']) > 0)) {
 
-            if (!Yii::app()->session['isAdmin']) {
-                echo json_encode(array(
+            if ( ! Yii::app()->session['isAdmin']) {
+                echo json_encode([
                     $this->nameSuccess   => false,
                     $this->nameMsgErrors => 'You only can delete one data per time',
-                ));
+                ]);
                 exit();
             }
             $filter = isset($_POST['filter']) ? $_POST['filter'] : null;
@@ -987,10 +991,10 @@ class BaseController extends CController
                 }
 
             } else {
-                $criteria = new CDbCriteria(array(
+                $criteria = new CDbCriteria([
                     'condition' => $this->filter,
                     'params'    => $this->paramsFilter,
-                ));
+                ]);
 
                 # retorna o resultado da execucao
                 try {
@@ -1017,20 +1021,20 @@ class BaseController extends CController
             $this->afterDestroy($values);
 
             # retorna o resultado da execucao
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => $this->success,
                 $nameMsg           => $this->msg,
-            ));
+            ]);
             exit;
         } else {
             # Se existe a chave 0, indica que existe um array interno (mais de 1 registro selecionado)
             if (array_key_exists(0, $values)) {
 
-                if (!Yii::app()->session['isAdmin']) {
-                    echo json_encode(array(
+                if ( ! Yii::app()->session['isAdmin']) {
+                    echo json_encode([
                         $this->nameSuccess   => false,
                         $this->nameMsgErrors => 'You only can delete one data per time',
-                    ));
+                    ]);
                     exit();
                 }
 
@@ -1040,7 +1044,7 @@ class BaseController extends CController
                 }
             } else {
 
-                if (!Yii::app()->session['isAdmin']) {
+                if ( ! Yii::app()->session['isAdmin']) {
 
                     if (Yii::app()->session['isClient']) {
 
@@ -1049,10 +1053,10 @@ class BaseController extends CController
                         if (isset($modelCheck->id_user)) {
                             $modelUser = User::model()->findByPk($modelCheck->id_user);
                             if (isset($modelUser->id) && $modelUser->id != Yii::app()->session['id_user']) {
-                                echo json_encode(array(
+                                echo json_encode([
                                     $this->nameSuccess   => false,
                                     $this->nameMsgErrors => 'try destroy invalid id',
-                                ));
+                                ]);
                                 exit();
                             }
                         }
@@ -1080,12 +1084,12 @@ class BaseController extends CController
             $this->destroyRelated($values);
         }
 
-        if (!$this->success) {
+        if ( ! $this->success) {
             # retorna o resultado da execucao da ação anterior
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess   => $this->success,
                 $this->nameMsgErrors => $this->msg,
-            ));
+            ]);
 
             return;
         }
@@ -1114,10 +1118,10 @@ class BaseController extends CController
         $this->afterDestroy($values);
 
         # retorna o resultado da execucao
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $nameMsg           => $this->msg,
-        ));
+        ]);
     }
 
     public function beforeDestroy($values)
@@ -1145,9 +1149,9 @@ class BaseController extends CController
             }
 
             $condition   = substr($condition, 0, -5);
-            $resultModel = $model->findAll(array(
+            $resultModel = $model->findAll([
                 'condition' => $condition,
-            ));
+            ]);
 
             $resultModel = array_key_exists(0, $resultModel) ? $resultModel[0] : null;
         } else {
@@ -1174,7 +1178,7 @@ class BaseController extends CController
         return $attributes;
     }
 
-    public function getAttributesModels($models, $itemsExtras = array())
+    public function getAttributesModels($models, $itemsExtras = [])
     {
         $attributes = false;
         $namePk     = $this->abstractModel->primaryKey();
@@ -1193,17 +1197,17 @@ class BaseController extends CController
                 }
             }
 
-            if (!is_array($namePk) && $this->nameOtherFkRelated && get_class($this->abstractModel) === get_class($item)) {
+            if ( ! is_array($namePk) && $this->nameOtherFkRelated && get_class($this->abstractModel) === get_class($item)) {
                 if (count($this->extraFieldsRelated)) {
-                    $resultSubRecords = $this->abstractModelRelated->findAll(array(
+                    $resultSubRecords = $this->abstractModelRelated->findAll([
                         'select'    => implode(',', $this->extraFieldsRelated),
                         'condition' => $this->nameFkRelated . ' = ' . $attributes[$key][$namePk],
-                    ));
+                    ]);
 
-                    $subRecords = array();
+                    $subRecords = [];
 
                     if (count($this->extraValuesOtherRelated)) {
-                        $attributesSubRecords = array();
+                        $attributesSubRecords = [];
 
                         foreach ($resultSubRecords as $itemModelSubRecords) {
                             $attributesSubRecords = $itemModelSubRecords->attributes;
@@ -1223,12 +1227,12 @@ class BaseController extends CController
                         }
                     }
                 } else {
-                    $resultSubRecords = $this->abstractModelRelated->findAll(array(
+                    $resultSubRecords = $this->abstractModelRelated->findAll([
                         'select'    => $this->nameOtherFkRelated,
                         'condition' => $this->nameFkRelated . ' = ' . $attributes[$key][$namePk],
-                    ));
+                    ]);
 
-                    $subRecords = array();
+                    $subRecords = [];
                     foreach ($resultSubRecords as $keyModelSubRecords => $modelSubRecords) {
                         array_push($subRecords, (int) $modelSubRecords->attributes[$this->nameOtherFkRelated]);
                     }
@@ -1343,21 +1347,21 @@ class BaseController extends CController
     {
         $condition = '1';
 
-        if (!is_array($filter)) {
+        if ( ! is_array($filter)) {
             return $condition;
         }
 
         foreach ($filter as $key => $f) {
             $isSubSelect = false;
 
-            if (!isset($f->type)) {
+            if ( ! isset($f->type)) {
                 continue;
             }
 
             $type  = $f->type;
             $field = $f->field;
 
-            if ($this->actionName != 'destroy' && !preg_match("/^id[A-Z]/", $field)) {
+            if ($this->actionName != 'destroy' && ! preg_match("/^id[A-Z]/", $field)) {
 
                 if (is_array($field)) {
                     foreach ($field as $key => $fieldOr) {
@@ -1396,7 +1400,7 @@ class BaseController extends CController
                     }
                     break;
                 case 'string':
-                    $field = isset($f->caseSensitive) && $f->caseSensitive && !is_array($field) ? "BINARY $field" : $field;
+                    $field = isset($f->caseSensitive) && $f->caseSensitive && ! is_array($field) ? "BINARY $field" : $field;
 
                     switch ($comparison) {
                         case 'st':
@@ -1410,14 +1414,14 @@ class BaseController extends CController
                                 $this->addInCondition = ['t.id_user', $in];
                                 $filterDirect         = true;
                             }
-                            if (!isset($filterDirect)) {
+                            if ( ! isset($filterDirect)) {
                                 if (preg_match("/^id[A-Z].*\./", $field)) {
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field LIKE :$paramName",
-                                        );
+                                        ];
                                     }
 
                                 } else {
@@ -1438,14 +1442,14 @@ class BaseController extends CController
                                 $this->addInCondition = ['t.id_user', $in];
                                 $filterDirect         = true;
                             }
-                            if (!isset($filterDirect)) {
+                            if ( ! isset($filterDirect)) {
                                 if (preg_match("/^id[A-Z].*\./", $field)) {
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field LIKE :$paramName",
-                                        );
+                                        ];
                                     }
                                 } else {
                                     $condition .= " AND $field LIKE :$paramName";
@@ -1457,7 +1461,7 @@ class BaseController extends CController
                             break;
                         case 'ct':
                             if (is_array($field)) {
-                                $conditionsOr = array();
+                                $conditionsOr = [];
 
                                 foreach ($field as $keyOr => $fieldOr) {
                                     $this->paramsFilter["pOr$keyOr"] = "%$value%";
@@ -1474,9 +1478,9 @@ class BaseController extends CController
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE :$paramName";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field LIKE :$paramName",
-                                        );
+                                        ];
                                     }
                                     $this->paramsFilter[$paramName] = "%" . $value . "%";
                                 } else {
@@ -1499,14 +1503,14 @@ class BaseController extends CController
                                     }
                                 }
 
-                                if (!isset($filterDirect)) {
+                                if ( ! isset($filterDirect)) {
 
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field = :$paramName",
-                                        );
+                                        ];
                                     }
                                 }
                             } else {
@@ -1521,9 +1525,9 @@ class BaseController extends CController
                                 if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                     $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field != :$paramName";
                                 } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
+                                    $this->relationFilter[strtok($field, '.')] = [
                                         'condition' => "$field != :$paramName",
-                                    );
+                                    ];
                                 }
                             } else {
                                 $condition .= " AND $field != :$paramName";
@@ -1545,9 +1549,9 @@ class BaseController extends CController
                                 if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                     $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = :$paramName";
                                 } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
+                                    $this->relationFilter[strtok($field, '.')] = [
                                         'condition' => "$field = :$paramName",
-                                    );
+                                    ];
                                 }
                             } else {
                                 $condition .= " AND $field = :$paramName";
@@ -1559,9 +1563,9 @@ class BaseController extends CController
                                 if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                     $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field < :$paramName";
                                 } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
+                                    $this->relationFilter[strtok($field, '.')] = [
                                         'condition' => "$field < :$paramName",
-                                    );
+                                    ];
                                 }
                             } else {
                                 $condition .= " AND $field < :$paramName";
@@ -1573,9 +1577,9 @@ class BaseController extends CController
                                 if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                     $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field > :$paramName";
                                 } else {
-                                    $this->relationFilter[strtok($field, '.')] = array(
+                                    $this->relationFilter[strtok($field, '.')] = [
                                         'condition' => "$field > :$paramName",
-                                    );
+                                    ];
                                 }
                             } else {
                                 $condition .= " AND $field > :$paramName";
@@ -1585,10 +1589,10 @@ class BaseController extends CController
                     }
                     break;
                 case 'list':
-                    $value = is_array($value) ? $value : array($value);
+                    $value = is_array($value) ? $value : [$value];
 
-                    if (!isset($f->tableRelated)) {
-                        $paramsIn = array();
+                    if ( ! isset($f->tableRelated)) {
+                        $paramsIn = [];
 
                         foreach ($value as $keyIn => $v) {
                             $this->paramsFilter["pIn$key$keyIn"] = $v;
@@ -1605,10 +1609,10 @@ class BaseController extends CController
                     }
                     break;
                 case 'notlist':
-                    $value = is_array($value) ? $value : array($value);
+                    $value = is_array($value) ? $value : [$value];
 
-                    if (!isset($f->tableRelated)) {
-                        $paramsNotIn = array();
+                    if ( ! isset($f->tableRelated)) {
+                        $paramsNotIn = [];
 
                         if (count($value)) {
                             foreach ($value as $keyNotIn => $v) {
@@ -1635,11 +1639,11 @@ class BaseController extends CController
 
     public function saveRelated($id, $subRecords)
     {
-        if (!$this->isNewRecord) {
+        if ( ! $this->isNewRecord) {
             try {
-                $this->abstractModelRelated->deleteAllByAttributes(array(
+                $this->abstractModelRelated->deleteAllByAttributes([
                     $this->nameFkRelated => $id,
-                ));
+                ]);
             } catch (Exception $e) {
                 $this->success = false;
                 $this->msg     = $this->getErrorMySql($e);
@@ -1673,17 +1677,17 @@ class BaseController extends CController
                     $this->msg     = $this->getErrorMySql($e);
                 }
 
-                if (!$this->success) {
+                if ( ! $this->success) {
                     break;
                 }
             }
         }
 
-        if (!$this->success) {
-            echo json_encode(array(
+        if ( ! $this->success) {
+            echo json_encode([
                 $this->nameSuccess   => $this->success,
                 $this->nameMsgErrors => $this->msg,
-            ));
+            ]);
 
             exit;
         }
@@ -1697,15 +1701,15 @@ class BaseController extends CController
                 $id = $value[$namePk];
 
                 try {
-                    $this->abstractModelRelated->deleteAllByAttributes(array(
+                    $this->abstractModelRelated->deleteAllByAttributes([
                         $this->nameFkRelated => $id,
-                    ));
+                    ]);
                 } catch (Exception $e) {
                     $this->success = false;
                     $this->msg     = $this->getErrorMySql($e);
                 }
 
-                if (!$this->success) {
+                if ( ! $this->success) {
                     break;
                 }
             }
@@ -1713,9 +1717,9 @@ class BaseController extends CController
             $id = $values[$namePk];
 
             try {
-                $this->abstractModelRelated->deleteAllByAttributes(array(
+                $this->abstractModelRelated->deleteAllByAttributes([
                     $this->nameFkRelated => $id,
-                ));
+                ]);
             } catch (Exception $e) {
                 $this->success = false;
                 $this->msg     = $this->getErrorMySql($e);
@@ -1731,7 +1735,7 @@ class BaseController extends CController
 
     public function getColumnsFromReport($columns, $fieldGroup = null, $type = 'csv')
     {
-        $arrayColumns = array();
+        $arrayColumns = [];
 
         foreach ($columns as $column) {
             $fieldName = $column['dataIndex'];
@@ -1790,20 +1794,20 @@ class BaseController extends CController
 
     public function columnsReplace($arrayColumns)
     {
-        $patterns = array(
+        $patterns = [
             '/,credit/',
             '/description/',
             '/,id_user/',
             '/^id_user/',
             '/^name/',
-        );
-        $arrayReplace = array(
+        ];
+        $arrayReplace = [
             't.credit',
             't.description',
             ',t.id_user',
             't.id_user',
             't.name',
-        );
+        ];
 
         $arrayColumns = preg_replace($patterns, $arrayReplace, $arrayColumns);
         return $arrayColumns;
@@ -1812,7 +1816,7 @@ class BaseController extends CController
     public function replaceOrder()
     {
         if (preg_match('/idPrefixdestination/', $this->order)) {
-            if (!preg_match("/JOIN pkg_prefix/", $this->join)) {
+            if ( ! preg_match("/JOIN pkg_prefix/", $this->join)) {
                 $this->join .= ' LEFT JOIN pkg_prefix b ON t.id_prefix = b.id';
             }
 
@@ -1869,9 +1873,9 @@ class BaseController extends CController
         if (array_key_exists('idUser', $this->relationFilter)) {
             $this->relationFilter['idUser']['condition'] .= " AND idUser.id_user = :agfby";
         } else {
-            $this->relationFilter['idUser'] = array(
+            $this->relationFilter['idUser'] = [
                 'condition' => "idUser.id_user = :agfby",
-            );
+            ];
         }
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
 
@@ -1880,7 +1884,7 @@ class BaseController extends CController
 
     public function recordsExtraSum($records)
     {
-        return array();
+        return [];
     }
 
     public function repaceColumns($columns)
@@ -1917,20 +1921,20 @@ class BaseController extends CController
 
     public function importCsvSetAdditionalParams()
     {
-        return array();
+        return [];
     }
 
     public function actionImportFromCsv()
     {
         $module = $this->instanceModel->getModule();
 
-        if (!AccessManager::getInstance($module)->canCreate()) {
+        if ( ! AccessManager::getInstance($module)->canCreate()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to save in module: $module");
             exit;
         }
 
-        if (!Yii::app()->session['id_user']) {
+        if ( ! Yii::app()->session['id_user']) {
             exit();
         }
 
@@ -1940,7 +1944,7 @@ class BaseController extends CController
         $array       = $interpreter->toArray();
 
         $additionalParams = $this->importCsvSetAdditionalParams();
-        $errors           = array();
+        $errors           = [];
         if ($array) {
             $recorder = new CSVActiveRecorder($array, $this->instanceModel, $additionalParams);
             if ($recorder->save());
@@ -1951,16 +1955,16 @@ class BaseController extends CController
         }
 
         $this->nameMsg = count($errors) > 0 ? 'errors' : $this->nameMsg;
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => count($errors) > 0 ? false : true,
             $this->nameMsg     => count($errors) > 0 ? implode(',', $errors) : $this->msgSuccess,
-        ));
+        ]);
 
     }
 
     public function upload($fieldName, $folder, $fileName = null)
     {
-        if (!file_exists($folder)) {
+        if ( ! file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
 
@@ -1978,14 +1982,14 @@ class BaseController extends CController
         $filterUser = '((s.username COLLATE utf8_bin = :key OR s.email COLLATE utf8_bin LIKE :key) AND UPPER(MD5(s.password)) = :key1)';
         $filterSip  = '(t.name COLLATE utf8_bin = :key AND UPPER(MD5(t.secret)) = :key1 )';
         $modelSip   = Sip::model()->find(
-            array(
+            [
                 'condition' => $filterUser . ' OR ' . $filterSip,
                 'join'      => 'LEFT JOIN pkg_user s ON t.id_user = s.id',
-                'params'    => array(
+                'params'    => [
                     ':key'  => $username,
                     ':key1' => strtoupper($password),
-                ),
-            ));
+                ],
+            ]);
         if (count($modelSip)) {
 
             $idUserType                          = $modelSip->idUser->idGroup->idUserType->id;

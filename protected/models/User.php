@@ -61,9 +61,9 @@ class User extends Model
     public function rules()
     {
 
-        $rules = array(
-            array('username, password', 'required'),
-            array('id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
+        $rules = [
+            ['username, password', 'required'],
+            ['id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
                     typepaid, creditlimit, credit_notification,sipaccountlimit, restriction,
                     callingcard_pin, callshop, plan_day, active_paypal, boleto,
                     boleto_day, calllimit, disk_space,id_group_agent,transfer_dbbl_rocket_profit,
@@ -71,21 +71,21 @@ class User extends Model
                     transfer_dbbl_rocket,transfer_bkash,transfer_flexiload,transfer_international,
                     transfer_bdservice_rate,transfer_show_selling_price,cpslimit,
                     restriction_use,credit_notification_daily,email_services,email_did
-                        ', 'numerical', 'integerOnly' => true),
-            array('language,mix_monitor_format,calllimit_error', 'length', 'max' => 5),
-            array('zipcode, phone, mobile, vat', 'length', 'max' => 20),
-            array('city, state, country, loginkey', 'length', 'max' => 40),
-            array('lastname, firstname, redial,neighborhood', 'length', 'max' => 50),
-            array('company_website, dist', 'length', 'max' => 100),
-            array('address, email,email2, doc', 'length', 'max' => 100),
-            array('username', 'length', 'max' => 20),
-            array('description, prefix_local', 'length', 'max' => 500),
-            array('credit, contract_value', 'type', 'type' => 'double'),
-            array('expirationdate, password, lastuse,company_name, commercial_name', 'length', 'max' => 100),
-            array('username', 'checkusername'),
-            array('password', 'checksecret'),
-            array('username', 'unique', 'caseSensitive' => 'false'),
-        );
+                        ', 'numerical', 'integerOnly' => true],
+            ['language,mix_monitor_format,calllimit_error', 'length', 'max' => 5],
+            ['zipcode, phone, mobile, vat', 'length', 'max' => 20],
+            ['city, state, country, loginkey', 'length', 'max' => 40],
+            ['lastname, firstname, redial,neighborhood', 'length', 'max' => 50],
+            ['company_website, dist', 'length', 'max' => 100],
+            ['address, email,email2, doc', 'length', 'max' => 100],
+            ['username', 'length', 'min' => 4, 'max' => 20],
+            ['description, prefix_local', 'length', 'max' => 500],
+            ['credit, contract_value', 'type', 'type' => 'double'],
+            ['expirationdate, password, lastuse,company_name, commercial_name', 'length', 'max' => 100],
+            ['username', 'checkusername'],
+            ['password', 'checksecret'],
+            ['username', 'unique', 'caseSensitive' => 'false'],
+        ];
 
         return $this->getExtraField($rules);
 
@@ -97,7 +97,7 @@ class User extends Model
             $this->addError($attribute, Yii::t('zii', 'No space allow in username'));
         }
 
-        if (!preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->username)) {
+        if ( ! preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->username)) {
             $this->addError($attribute, Yii::t('zii', 'Username need start with numbers or letters'));
         }
 
@@ -132,10 +132,10 @@ class User extends Model
 
     public function relations()
     {
-        return array(
-            'idGroup' => array(self::BELONGS_TO, 'GroupUser', 'id_group'),
-            'idPlan'  => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-            'idUser'  => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idGroup' => [self::BELONGS_TO, 'GroupUser', 'id_group'],
+            'idPlan'  => [self::BELONGS_TO, 'Plan', 'id_plan'],
+            'idUser'  => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }
