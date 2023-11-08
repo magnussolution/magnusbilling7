@@ -61,37 +61,38 @@ class Sip extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd, voicemail_password,
-                id_trunk_group', 'numerical', 'integerOnly' => true),
-            array('name, callerid, context, fromuser, fromdomain, md5secret, secret, fullcontact', 'length', 'max' => 80),
-            array('regexten, insecure, regserver, vmexten, callingpres, mohsuggest, allowtransfer', 'length', 'max' => 20),
-            array('amaflags, dtmfmode, qualify', 'length', 'max' => 7),
-            array('callgroup, pickupgroup, auth, subscribemwi, usereqphone, autoframing', 'length', 'max' => 10),
-            array('DEFAULTip, ipaddr, maxcallbitrate, rtpkeepalive', 'length', 'max' => 15),
-            array('nat, host', 'length', 'max' => 31),
-            array('language', 'length', 'max' => 2),
-            array('mailbox,forward,addparameter', 'length', 'max' => 50),
-            array('sip_group', 'length', 'max' => 20),
-            array('rtptimeout, rtpholdtimeout,videosupport', 'length', 'max' => 3),
-            array('deny, permit', 'length', 'max' => 95),
-            array('type', 'length', 'max' => 6),
-            array('url_events, description', 'length', 'max' => 150),
-            array('disallow, allow, setvar, useragent,block_call_reg, voicemail_email', 'length', 'max' => 100),
-            array('lastms', 'length', 'max' => 11),
-            array('directmedia,alias', 'length', 'max' => 10),
-            array('defaultuser, cid_number, outboundproxy, sippasswd', 'length', 'max' => 40),
-            array('defaultuser', 'checkusername'),
-            array('secret', 'checksecret'),
-            array('defaultuser', 'unique', 'caseSensitive' => 'false'),
-            array('techprefix, cnl', 'length', 'max' => 6),
-            array('techprefix', 'checktechprefix'),
-            array('host', 'checkHost'),
-            array('sip_config', 'length', 'max' => 500),
-            array('defaultuser', 'uniquePeerName'),
+        $rules = [
+            ['id_user', 'required'],
+            ['id_user, calllimit, ringfalse, record_call, voicemail,dial_timeout,trace,amd, voicemail_password,
+                id_trunk_group', 'numerical', 'integerOnly' => true],
+            ['name, callerid, context, fromuser, fromdomain, md5secret, secret, fullcontact', 'length', 'max' => 80],
+            ['regexten, insecure, regserver, vmexten, callingpres, mohsuggest, allowtransfer', 'length', 'max' => 20],
+            ['amaflags, dtmfmode, qualify', 'length', 'max' => 7],
+            ['callgroup, pickupgroup, auth, subscribemwi, usereqphone, autoframing', 'length', 'max' => 10],
+            ['DEFAULTip, ipaddr, maxcallbitrate, rtpkeepalive', 'length', 'max' => 15],
+            ['nat, host', 'length', 'max' => 31],
+            ['language', 'length', 'max' => 2],
+            ['mailbox,forward,addparameter', 'length', 'max' => 50],
+            ['sip_group', 'length', 'max' => 20],
+            ['rtptimeout, rtpholdtimeout,videosupport', 'length', 'max' => 3],
+            ['deny, permit', 'length', 'max' => 95],
+            ['type', 'length', 'max' => 6],
+            ['url_events, description', 'length', 'max' => 150],
+            ['disallow, allow, setvar, useragent,block_call_reg, voicemail_email', 'length', 'max' => 100],
+            ['lastms', 'length', 'max' => 11],
+            ['directmedia,alias', 'length', 'max' => 10],
+            ['defaultuser, cid_number, outboundproxy, sippasswd', 'length', 'max' => 40],
+            ['defaultuser', 'checkusername'],
+            ['secret', 'checksecret'],
+            ['secret', 'length', 'min' => 4, 'max' => 20],
+            ['defaultuser', 'unique', 'caseSensitive' => 'false'],
+            ['techprefix, cnl', 'length', 'max' => 6],
+            ['techprefix', 'checktechprefix'],
+            ['host', 'checkHost'],
+            ['sip_config', 'length', 'max' => 500],
+            ['defaultuser', 'uniquePeerName'],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -181,9 +182,9 @@ class Sip extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser'       => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idTrunkGroup' => array(self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'),
-        );
+        return [
+            'idUser'       => [self::BELONGS_TO, 'User', 'id_user'],
+            'idTrunkGroup' => [self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'],
+        ];
     }
 }
