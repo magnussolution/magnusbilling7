@@ -114,7 +114,7 @@ class SipProxyAccountsCommand extends ConsoleCommand
 
             foreach ($modelDid as $key => $did) {
                 if (isset($did->idServer->name)) {
-                    $sqlDid .= "('$did->did','" . $did->idServer->host . "' ),";
+                    $sqlDid .= "('$did->did','" . $did->idServer->host . ":" . $did->idServer->sip_port . "' ),";
                 }
             }
 
