@@ -1971,6 +1971,15 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->update($version);
         }
 
+        //2023-11-09
+        if ($version == '7.8.4.2') {
+            $sql = "ALTER TABLE `pkg_rate_provider` CHANGE `dialprefix` `dialprefix` VARCHAR(20) NULL DEFAULT NULL;";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.3';
+            $this->update($version);
+        }
+
     }
 
     public function executeDB($sql)
