@@ -23,41 +23,41 @@
 class DiddestinationController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array(
+    public $extraValues    = [
         'idUser'  => 'username',
         'idDid'   => 'did',
         'idIvr'   => 'name',
         'idQueue' => 'name',
         'idSip'   => 'name',
-    );
+    ];
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-        'id_ivr'  => array(
+        ],
+        'id_ivr'  => [
             'table'       => 'pkg_ivr',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ), 'id_queue' => array(
+        ], 'id_queue' => [
             'table'       => 'pkg_queue',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-        'id_sip'  => array(
+        ],
+        'id_sip'  => [
             'table'       => 'pkg_sip',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
+        ],
 
-    );
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_user',
         'idUserusername',
-    );
+    ];
 
     public function init()
     {
@@ -80,11 +80,11 @@ class DiddestinationController extends Controller
             $modelUser = User::model()->findByPk($values['id_user']);
 
             if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id != 3) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
                     'rows'    => '[]',
                     'errors'  => Yii::t('zii', 'You only can set DID to CLIENTS'),
-                ));
+                ]);
                 exit;
             }
 
@@ -93,11 +93,11 @@ class DiddestinationController extends Controller
 
                 $modelUser->credit = $modelUser->credit + $modelUser->creditlimit;
                 if ($modelUser->credit < $priceDid) {
-                    echo json_encode(array(
+                    echo json_encode([
                         'success' => false,
                         'rows'    => '[]',
                         'errors'  => Yii::t('zii', 'Customer not have credit for buy DID') . ' - ' . $did->did,
-                    ));
+                    ]);
                     exit;
                 }
             }
@@ -126,11 +126,11 @@ class DiddestinationController extends Controller
             }
 
             if (isset($name) && $values['id_user'] != $model->id_user) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => ['voip_call' => ['The ' . $name . ' must belong to the DID owner']],
-                ));
+                ]);
                 exit;
             }
 
@@ -161,11 +161,11 @@ class DiddestinationController extends Controller
             }
 
             if (isset($name) && isset($model->id_user) && $id_user != $model->id_user) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => ['voip_call' => ['The ' . $name . ' must belong to the DID owner']],
-                ));
+                ]);
                 exit;
             }
 
@@ -178,8 +178,6 @@ class DiddestinationController extends Controller
         $this->isNewRecord = true;
         $values            = $this->getAttributesRequest();
 
-       
-
         $_GET['filter'] = $values['filters'];
 
         $id_user = $values['id_user'];
@@ -191,6 +189,7 @@ class DiddestinationController extends Controller
         foreach ($modelDid as $key => $did) {
 
             $values['id_did'] = $did->id;
+            $destination      = preg_replace('/\{DID\}/', $did->did, $values['destination']);
 
             if ($did->id_user == null && $did->reserved == 0) {
 
@@ -202,7 +201,7 @@ class DiddestinationController extends Controller
                 $modelDiddestination->voip_call = $values['voip_call'];
                 $modelDiddestination->priority  = 1;
                 if (strlen($values['destination']) && $values['destination'] != 'undefined') {
-                    $modelDiddestination->destination = $values['destination'];
+                    $modelDiddestination->destination = $destination;
                 }
                 if (strlen($values['id_ivr']) && $values['id_ivr'] != 'undefined') {
                     $modelDiddestination->id_ivr = $values['id_ivr'];
@@ -236,7 +235,7 @@ class DiddestinationController extends Controller
                         //update destination
                         $modelDiddestination->voip_call = $values['voip_call'];
                         if (strlen($values['destination']) && $values['destination'] != 'undefined') {
-                            $modelDiddestination->destination = $values['destination'];
+                            $modelDiddestination->destination = $destination;
                         }
                         if (strlen($values['id_ivr']) && $values['id_ivr'] != 'undefined') {
                             $modelDiddestination->id_ivr = $values['id_ivr'];
@@ -253,7 +252,7 @@ class DiddestinationController extends Controller
                         if (strlen($values['context']) && $values['context'] != 'undefined') {
                             $modelDiddestination->context = $values['context'];
                         }
-                         $values = $this->beforeSave($values);
+                        $values = $this->beforeSave($values);
                         $modelDiddestination->save();
 
                     } else {
@@ -264,10 +263,10 @@ class DiddestinationController extends Controller
         }
 
         AsteriskAccess::instance()->generateSipDid();
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameMsg     => $this->msg,
-        ));
+        ]);
 
     }
 
