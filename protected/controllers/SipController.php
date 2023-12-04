@@ -18,41 +18,41 @@
 class SipController extends Controller
 {
     public $attributeOrder = 't.id ASC';
-    public $extraValues    = array(
+    public $extraValues    = [
         'idUser'       => 'username',
         'idTrunkGroup' => 'name',
-    );
+    ];
 
-    private $sipShowPeers = array();
+    private $sipShowPeers = [];
 
-    public $fieldsFkReport = array(
-        'id_user'        => array(
+    public $fieldsFkReport = [
+        'id_user'        => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-        'id_trunk_group' => array(
+        ],
+        'id_trunk_group' => [
             'table'       => 'pkg_trunk_group',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_trunk_group',
-    );
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'id_trunk_group',
-    );
+    ];
 
-    public $fieldsNotUpdateClient = array(
+    public $fieldsNotUpdateClient = [
         'context',
-    );
+    ];
 
-    public $fieldsNotUpdateAgent = array(
+    public $fieldsNotUpdateAgent = [
         'context',
-    );
+    ];
 
     public function init()
     {
@@ -91,13 +91,13 @@ class SipController extends Controller
     {
 
         if (isset($values['alias']) && strlen($values['alias'])) {
-            $modelSip = Sip::model()->find('alias = :key AND id_user = (SELECT id_user FROM pkg_sip WHERE id = :key1)', array(':key' => $values['alias'], ':key1' => $values['id']));
+            $modelSip = Sip::model()->find('alias = :key AND id_user = (SELECT id_user FROM pkg_sip WHERE id = :key1)', [':key' => $values['alias'], ':key1' => $values['id']]);
             if (isset($modelSip->id)) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => 'Alias alread in use',
-                ));
+                ]);
                 exit;
             }
         }
@@ -113,7 +113,7 @@ class SipController extends Controller
                 $values['forward'] = $values['type_forward'] . '|' . $values['id_' . $values['type_forward']];
 
             }
-        } else if ((isset($values['id_sip']) || isset($values['id_ivr']) || isset($values['id_queue'])) & !$this->isNewRecord) {
+        } else if ((isset($values['id_sip']) || isset($values['id_ivr']) || isset($values['id_queue'])) &  ! $this->isNewRecord) {
 
             $modelSip = Sip::model()->findByPk($values['id']);
 
@@ -133,30 +133,30 @@ class SipController extends Controller
 
             $modelUser = User::model()->findByPk((int) $values['id_user']);
 
-            $modelSipCount = Sip::model()->count("id_user = :id_user", array(':id_user' => (int) $values['id_user']));
+            $modelSipCount = Sip::model()->count("id_user = :id_user", [':id_user' => (int) $values['id_user']]);
 
             if ($modelUser->idGroup->id_user_type != 3) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => 'You only can create SipAccount to clients',
-                ));
+                ]);
                 exit;
             }
 
-            if (!Yii::app()->session['isAdmin'] && $modelUser->sipaccountlimit > 0
+            if ( ! Yii::app()->session['isAdmin'] && $modelUser->sipaccountlimit > 0
                 && $modelSipCount >= $modelUser->sipaccountlimit) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => 'Limit sip acount exceeded',
-                ));
+                ]);
                 exit;
             }
             $values['regseconds'] = 1;
             $values['context']    = 'billing';
             $values['regexten']   = $values['name'];
-            if (!$values['callerid']) {
+            if ( ! $values['callerid']) {
                 $values['callerid'] = $values['name'];
             }
 
@@ -230,7 +230,7 @@ class SipController extends Controller
 
             $remoteProxyIP = trim(end(explode("|", $server->description)));
 
-            if (!filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
+            if ( ! filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
                 $remoteProxyIP = $hostname;
             }
 
@@ -264,7 +264,9 @@ class SipController extends Controller
             $attributes[$i]['lineStatus'] = 'unregistered';
             foreach ($this->sipShowPeers as $value) {
 
-                if (strtok($value['Name/username'], '/') == $attributes[$i]['name']) {
+                $name = strlen($attributes[$i]['techprefix']) ? $attributes[$i]['host'] : $attributes[$i]['name'];
+
+                if (strtok($value['Name/username'], '/') == $name) {
 
                     $attributes[$i]['lineStatus'] = $value['Status'];
 
@@ -282,7 +284,7 @@ class SipController extends Controller
                         $itemOption = explode("|", $value);
                         $itemKey    = explode("_", $key);
 
-                        if (!isset($attributes[$i]['type_forward'])) {
+                        if ( ! isset($attributes[$i]['type_forward'])) {
                             $attributes[$i]['type_forward'] = $itemOption[0];
                         }
 
@@ -311,18 +313,19 @@ class SipController extends Controller
 
     public function actionGetSipShowPeer()
     {
-        $modelSip = Sip::model()->find('name = :key', array(':key' => $_POST['name']));
+        $modelSip = Sip::model()->find('name = :key', [':key' => $_POST['name']]);
 
         if ($modelSip->idUser->active == 0) {
             $sipShowPeer = 'The username is inactive';
         } else {
-            $sipShowPeer = AsteriskAccess::instance()->sipShowPeer($modelSip->name);
+
+            $sipShowPeer = AsteriskAccess::instance()->sipShowPeer(strlen($modelSip->techprefix) ? $modelSip->host : $modelSip->name);
         }
 
-        echo json_encode(array(
+        echo json_encode([
             'success'     => true,
             'sipshowpeer' => Yii::app()->session['isAdmin'] ? print_r($sipShowPeer, true) : '',
-        ));
+        ]);
     }
 
     public function actionBulk()
@@ -335,26 +338,26 @@ class SipController extends Controller
         $secret = $_POST['secret'] == "Leave blank to auto generate" ? '' : $_POST['secret'];
 
         if (strlen($secret) > 0 && strlen($secret) < 6 && strlen($secret) < 25) {
-            echo json_encode(array(
+            echo json_encode([
                 'success'      => false,
                 $this->nameMsg => 'Password lenght need be > 5 or blank.',
-            ));
+            ]);
             exit;
         }
 
         if (preg_match('/ /', $secret)) {
-            echo json_encode(array(
+            echo json_encode([
                 'success'      => false,
                 $this->nameMsg => 'No space allow in password',
-            ));
+            ]);
             exit;
         }
 
         if ($secret == '123456' || $secret == '12345678' || $secret == '012345') {
-            echo json_encode(array(
+            echo json_encode([
                 'success'      => false,
                 $this->nameMsg => 'No use sequence in the password',
-            ));
+            ]);
             exit;
         }
 
@@ -386,10 +389,10 @@ class SipController extends Controller
 
         AsteriskAccess::instance()->generateSipPeers();
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
     }
 
 }

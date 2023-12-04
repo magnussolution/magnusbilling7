@@ -325,106 +325,96 @@ clear
 
 
 cd /usr/src
-wget https://www.kamailio.org/pub/mirrors/rtpproxy/rtpproxy-1.2.1.tar.gz
-tar xzvf rtpproxy-1.2.1.tar.gz
-cd rtpproxy-1.2.1
+git clone -b master https://github.com/sippy/rtpproxy.git
+git -C rtpproxy submodule update --init --recursive
+cd rtpproxy
 ./configure
 make
 make install
 
-groupadd rtpproxy
-useradd -d /var/run/rtpproxy -s /bin/true -g rtpproxy rtpproxy
-mkdir /var/log/rtpproxy
-chown -R rtpproxy.rtpproxy /var/log/rtpproxy
-chown -R rtpproxy.rtpproxy /var/run/rtpproxy
+groupadd --system rtpproxy
+useradd -s /sbin/nologin --system -g rtpproxy rtpproxy
 
 echo $'#!/bin/bash
-#
-# Startup script for rtpproxy
-#
-# chkconfig: 345 85 15
-# description: A symmetric RTP proxy
-#
-# processname: rtpproxy
-# pidfile: /var/run/rtpproxy.pid
-
-# Source function library.
-. /etc/rc.d/init.d/functions
 
 
-prog=rtpproxy
-rtpproxy=/usr/local/bin/$prog
-user=rtpproxy
-USELOG=0
-lockfile=/var/lock/subsys/$prog
-pidfile=/var/run/$prog.pid
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NAME=rtpproxy
+DESC="RTP relay"
+DAEMON=/usr/bin/$NAME
+USER=$NAME
+GROUP=$USER
+PIDFILE="/var/run/$NAME/$NAME.pid"
+PIDFILE_DIR=`dirname $PIDFILE`
+CONTROL_SOCK="unix:$PIDFILE_DIR/$NAME.sock"
 
-RETVAL=0
-OPTIONS=" -l 192.168.0.166 -s udp:127.0.0.1:7890 -u $user"
+test -x $DAEMON || exit 0
+umask 002
 
-start() {
-        echo -n $"Starting $prog: "
-        if [ "${USELOG}" = "0" ]; then
-          daemon $rtpproxy $OPTIONS
-        else
-          daemon $rtpproxy $OPTIONS -F -f -d DBUG 2&> /dev/null
-        fi
+. /lib/lsb/init-functions
 
-        RETVAL=$?
-        echo
-        [ $RETVAL = 0 ] && touch /var/lock/subsys/rtpproxy
-        return $RETVAL
-}
+if [ -f /etc/default/$NAME ] ; then
+  . /etc/default/$NAME
+fi
 
-stop() {
-  echo -n $"Stopping $prog: "
-  killproc $rtpproxy
-  RETVAL=$?
-  echo
-  [ $RETVAL = 0 ] && rm -f /var/lock/subsys/rtpproxy /var/run/rtpproxy.pid
-}
+DAEMON_OPTS="-s $CONTROL_SOCK -u $USER:$GROUP -p $PIDFILE $EXTRA_OPTS"
 
-reload() {
-  echo -n $"Reloading $prog: "
-  killproc $rtpproxy -HUP
-  RETVAL=$?
-  echo
-}
+if [ ! -d "$PIDFILE_DIR" ];then
+  mkdir "$PIDFILE_DIR"
+    chown $USER:$GROUP "$PIDFILE_DIR"
+fi
 
-# See how we were called.
+set -e
+
 case "$1" in
   start)
-  start
+  echo -n "Starting $DESC: "
+  start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
+  echo "$NAME."
   ;;
   stop)
-  stop
+  echo -n "Stopping $DESC: "
+  start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE --exec $DAEMON
+  echo "$NAME."
   ;;
   status)
-        status $rtpproxy
-  RETVAL=$?
-  ;;
-  restart)
-  stop
-  start
-  ;;
-  condrestart)
-  if [ -f /var/run/rtpproxy.pid ] ; then
-    stop
-    start
+  echo -n "Status $DESC: "
+  PID=$(cat $PIDFILE)
+  kill -0 $PID
+  rc=$?
+  # Check exit code
+  if [ "$rc" -ne 0 ]
+  then
+    echo "$NAME is NOT running."
+    exit 7
+  else
+    echo "$NAME is running with PID: $PID"
   fi
   ;;
+  restart|force-reload)
+  echo -n "Restarting $DESC: "
+  start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE --exec $DAEMON
+  sleep 1
+  start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
+  echo "$NAME."
+  ;;
   *)
-  echo $"Usage: $prog {start|stop|restart|condrestart|status|help}"
+  N=/etc/init.d/$NAME
+  echo "Usage: $N {start|stop|status|restart|force-reload}" >&2
   exit 1
+  ;;
 esac
 
-exit $RETVAL
-' > /etc/rc.d/init.d/rtpproxy
+exit 0
+' > /etc/init.d/rtpproxy
 
-chmod +x /etc/rc.d/init.d/rtpproxy
+chmod +x /etc/init.d/rtpproxy
+mkdir -p /var/run/rtpproxy
+chown -R rtpproxy:rtpproxy -R /var/run/rtpproxy/
 systemctl daemon-reload
-systemctl start rtpproxy
-chkconfig rtpproxy on
+systemctl start rtpproxy.service
+systemctl enable rtpproxy.service
+
 
 chmod -R 7777 /tmp
 
