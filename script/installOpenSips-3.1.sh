@@ -247,11 +247,15 @@ iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 10000:40000 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 10000:50000 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 19639 -j ACCEPT
 iptables -I INPUT -p tcp -s $ipMbilling --dport 3306 -j ACCEPT
+
+if [[ ${ipMbilling} != ${localIP} ]]; then
+  iptables -I INPUT -p tcp -s $localIP --dport 3306 -j ACCEPT
+fi
 
 
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
