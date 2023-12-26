@@ -83,6 +83,9 @@ Ext.define('MBilling.view.diddestination.Controller', {
             case 10:
                 method = t('Context');
                 break;
+            case 11:
+                method = t('Multiples IPs');
+                break;
         }
         showFields = me.formPanel.down('didtypecombo').store.findRecord('name', method).getData().showFields;
         me.showFieldsRelated(showFields);

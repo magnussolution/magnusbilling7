@@ -23,15 +23,15 @@
 class IvrController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
     private $uploaddir;
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -84,11 +84,11 @@ class IvrController extends Controller
 
             $key = $i == 10 ? substr($key, -2) : substr($key, -1);
             $msg = $model_id_user == 0 ? [$name . ' ' . Yii::t('zii', 'cannot be blank')] : [$name . ' ' . Yii::t('zii', 'must belong to the IVR owner')];
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => ['type_' . $type . $key => $msg],
-            ));
+            ]);
             exit;
         }
     }
@@ -103,7 +103,7 @@ class IvrController extends Controller
 
                 if ($type == 'sip') {
                     $id_sip = $values['id_sip_' . $i];
-                    if (!is_numeric($id_sip)) {
+                    if ( ! is_numeric($id_sip)) {
                         $this->showError(0, $values, 'SIP ACCOUNT', 'id_sip' . $i, $i);
                     } else {
                         $model = Sip::model()->findByPk((int) $id_sip);
@@ -112,7 +112,7 @@ class IvrController extends Controller
 
                 } else if ($type == 'ivr') {
                     $id_ivr = $values['id_ivr_' . $i];
-                    if (!is_numeric($id_ivr)) {
+                    if ( ! is_numeric($id_ivr)) {
                         $this->showError(0, $values, 'IRV', 'id_ivr' . $i, $i);
                     } else {
                         $model = Ivr::model()->findByPk((int) $id_ivr);
@@ -121,7 +121,7 @@ class IvrController extends Controller
 
                 } else if ($type == 'queue') {
                     $id_queue = $values['id_queue_' . $i];
-                    if (!is_numeric($id_queue)) {
+                    if ( ! is_numeric($id_queue)) {
                         $this->showError(0, $values, 'QUEUE', 'id_queue' . $i, $i);
                     } else {
                         $model = Queue::model()->findByPk((int) $id_queue);
@@ -138,7 +138,7 @@ class IvrController extends Controller
 
                 if ($type == 'sip') {
                     $id_sip = $values['id_sip_out_' . $i];
-                    if (!is_numeric($id_sip)) {
+                    if ( ! is_numeric($id_sip)) {
                         $this->showError(0, $values, 'SIP ACCOUNT', 'id_sip_out' . $i, $i, 'out_');
                     } else {
                         $model = Sip::model()->findByPk((int) $id_sip);
@@ -147,7 +147,7 @@ class IvrController extends Controller
 
                 } else if ($type == 'ivr') {
                     $id_ivr = $values['id_ivr_out_' . $i];
-                    if (!is_numeric($id_ivr)) {
+                    if ( ! is_numeric($id_ivr)) {
                         $this->showError(0, $values, 'IRV', 'id_ivr_out' . $i, $i, 'out_');
                     } else {
                         $model = Ivr::model()->findByPk((int) $id_ivr);
@@ -156,7 +156,7 @@ class IvrController extends Controller
 
                 } else if ($type == 'queue') {
                     $id_queue = $values['id_queue_out_' . $i];
-                    if (!is_numeric($id_queue)) {
+                    if ( ! is_numeric($id_queue)) {
                         $this->showError(0, $values, 'QUEUE', 'id_queue_out' . $i, $i, 'out_');
                     } else {
                         $model = Queue::model()->findByPk((int) $id_queue);
@@ -203,7 +203,7 @@ class IvrController extends Controller
 
                     $itemOption = explode("|", $value);
                     $itemKey    = explode("_", $key);
-                    if (!isset($attributes[$i]['type_out_' . end($itemKey)])) {
+                    if ( ! isset($attributes[$i]['type_out_' . end($itemKey)])) {
                         $attributes[$i]['type_out_' . end($itemKey)] = $itemOption[0];
                     }
 
@@ -225,7 +225,7 @@ class IvrController extends Controller
 
                     $itemOption = explode("|", $value);
                     $itemKey    = explode("_", $key);
-                    if (!isset($attributes[$i]['type_' . end($itemKey)])) {
+                    if ( ! isset($attributes[$i]['type_' . end($itemKey)])) {
                         $attributes[$i]['type_' . end($itemKey)] = $itemOption[0];
                     }
 
@@ -252,12 +252,16 @@ class IvrController extends Controller
     public function actionDeleteAudio()
     {
 
-        shell_exec('rm -rf ' . $this->uploaddir . 'idIvrDidWork_' . $_POST['id_ivr'] . '*');
-        shell_exec('rm -rf ' . $this->uploaddir . 'idIvrDidNoWork_' . $_POST['id_ivr'] . '*');
-        echo json_encode(array(
+        if (is_numeric($_POST['id_ivr'])) {
+            return;
+        }
+
+        LinuxAccess::exec('rm -rf ' . $this->uploaddir . 'idIvrDidWork_' . $_POST['id_ivr'] . '*');
+        LinuxAccess::exec('rm -rf ' . $this->uploaddir . 'idIvrDidNoWork_' . $_POST['id_ivr'] . '*');
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
 
     }
 }

@@ -25,7 +25,7 @@ class TrunkSIPCodesCommand extends ConsoleCommand
         $time = time();
 
         $cache_path = '/tmp/cache_mbilling_codes.sqlite';
-        exec('rm -rf ' . $cache_path);
+        LinuxAccess::exec('rm -rf ' . $cache_path);
         $fields = "data,ip,code,msg";
         try {
             $db = new SQLite3($cache_path);
@@ -34,16 +34,16 @@ class TrunkSIPCodesCommand extends ConsoleCommand
 
         }
 
-        if (!file_exists('/var/log/asterisk/magnus_processed ')) {
-            exec('touch /var/log/asterisk/magnus_processed ');
+        if ( ! file_exists('/var/log/asterisk/magnus_processed ')) {
+            LinuxAccess::exec('touch /var/log/asterisk/magnus_processed ');
         }
 
-        exec('cp -rf /var/log/asterisk/magnus /var/log/asterisk/magnus_new');
+        LinuxAccess::exec('cp -rf /var/log/asterisk/magnus /var/log/asterisk/magnus_new');
 
-        exec('diff -u /var/log/asterisk/magnus_processed /var/log/asterisk/magnus_new ', $lines);
+        LinuxAccess::exec('diff -u /var/log/asterisk/magnus_processed /var/log/asterisk/magnus_new ', $lines);
 
-        exec('rm -rf /var/log/asterisk/magnus_processed');
-        exec('mv /var/log/asterisk/magnus_new /var/log/asterisk/magnus_processed');
+        LinuxAccess::exec('rm -rf /var/log/asterisk/magnus_processed');
+        LinuxAccess::exec('mv /var/log/asterisk/magnus_new /var/log/asterisk/magnus_processed');
 
         $values = '';
 
@@ -52,7 +52,7 @@ class TrunkSIPCodesCommand extends ConsoleCommand
 
             preg_match_all('/\[(.*)\] DEBUG.*\<sip\:.*@(.*)\>.*\|(.*)\|(.*)/', $line, $output_array);
 
-            if (count($output_array) < 4 || !isset($output_array[1][0])) {
+            if (count($output_array) < 4 || ! isset($output_array[1][0])) {
 
                 continue;
             }

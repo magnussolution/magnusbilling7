@@ -18,20 +18,20 @@
 class RefillController extends Controller
 {
     public $attributeOrder = 'date DESC';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
-    public $fieldsInvisibleClient = array(
+        ],
+    ];
+    public $fieldsInvisibleClient = [
         'id_user',
         'idUserusername',
         'refill_type',
-    );
+    ];
 
     public function init()
     {
@@ -40,9 +40,9 @@ class RefillController extends Controller
         $this->titleReport   = Yii::t('zii', 'Refill');
 
         if (Yii::app()->session['isAdmin']) {
-            $this->relationFilter['idUser'] = array(
+            $this->relationFilter['idUser'] = [
                 'condition' => "idUser.id_user < 2",
-            );
+            ];
         }
 
         parent::init();
@@ -53,9 +53,9 @@ class RefillController extends Controller
         if (array_key_exists('idUser', $this->relationFilter)) {
             $this->relationFilter['idUser']['condition'] .= " AND idUser.id_user LIKE :agfby";
         } else {
-            $this->relationFilter['idUser'] = array(
+            $this->relationFilter['idUser'] = [
                 'condition' => "t.id_user = :idagent5334 OR  idUser.id_user LIKE :agfby",
-            );
+            ];
             $this->paramsFilter[':idagent5334'] = Yii::app()->session['id_user'];
         }
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
@@ -66,7 +66,7 @@ class RefillController extends Controller
     public function beforeSave($values)
     {
         $modelRefill = Refill::model()->findByPk($values['id']);
-        if (!$this->isNewRecord) {
+        if ( ! $this->isNewRecord) {
 
             if (isset($values['payment']) && (preg_match('/^PENDING\:/', $modelRefill->description) && $values['payment'] == 1 && $modelRefill->payment == 0)) {
                 $this->releaseSendCreditBDService($values, $modelRefill);
@@ -77,19 +77,19 @@ class RefillController extends Controller
             $id_user = isset($values['id_user']) ? $values['id_user'] : $modelRefill->id_user;
 
             if (Yii::app()->session['id_user'] == $id_user) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => Yii::t('zii', 'You cannot add credit to yourself'),
-                ));
+                ]);
                 exit;
             }
             //get the total credit betewen agent users
-            $modelUser = User::model()->find(array(
+            $modelUser = User::model()->find([
                 'select'    => 'SUM(credit) AS credit',
                 'condition' => 'id_user = :key',
-                'params'    => array(':key' => Yii::app()->session['id_user']),
-            )
+                'params'    => [':key' => Yii::app()->session['id_user']],
+            ]
             );
 
             if (isset($values['credit'])) {
@@ -103,11 +103,11 @@ class RefillController extends Controller
                 //Yii::log("$totalRefill > $maximunCredit", 'info');
                 if ($totalRefill > $maximunCredit) {
                     $limite = $maximunCredit - $totalRefill;
-                    echo json_encode(array(
+                    echo json_encode([
                         'success' => false,
-                        'rows'    => array(),
+                        'rows'    => [],
                         'errors'  => Yii::t('zii', 'Limit refill exceeded, your limit is') . ' ' . $maximunCredit . '. ' . Yii::t('zii', 'You have') . ' ' . $limite . ' ' . Yii::t('zii', 'to refill'),
-                    ));
+                    ]);
                     exit;
                 }
             }
@@ -154,7 +154,7 @@ class RefillController extends Controller
 
         if (isset($_FILES["image"]) && strlen($_FILES["image"]["name"]) > 1) {
 
-            exec('rm -rf resources/images/refill/' . $model->id . '*');
+            LinuxAccess::exec('rm -rf resources/images/refill/' . $model->id . '*');
 
             $ext = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
 
@@ -182,14 +182,14 @@ class RefillController extends Controller
 
     public function recordsExtraSum($records)
     {
-        $criteria = new CDbCriteria(array(
+        $criteria = new CDbCriteria([
             'select'    => 'EXTRACT(YEAR_MONTH FROM date) AS CreditMonth , SUM(t.credit) AS sumCreditMonth',
             'join'      => $this->join,
             'condition' => $this->filter == '' ? 1 : $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
             'group'     => 'CreditMonth',
-        ));
+        ]);
 
         $this->nameSum = 'sum';
 
@@ -235,18 +235,18 @@ class RefillController extends Controller
     public function cancelSendCreditBDService($values, $modelRefill)
     {
         User::model()->updateByPk($modelRefill->id_user,
-            array(
+            [
                 'credit' => new CDbExpression('credit + ' . $modelRefill->credit * -1),
-            )
+            ]
         );
     }
     public function releaseSendCreditBDService($values, $modelRefill)
     {
 
         User::model()->updateByPk($modelRefill->id_user,
-            array(
+            [
                 'credit' => new CDbExpression('credit - ' . $modelRefill->credit * -1),
-            )
+            ]
         );
 
         $modelRefill->description = preg_replace('/PENDING\: /', '', $modelRefill->description);

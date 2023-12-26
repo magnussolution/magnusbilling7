@@ -23,15 +23,15 @@
 class PhoneNumberController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idPhonebook' => 'name');
+    public $extraValues    = ['idPhonebook' => 'name'];
 
-    public $fieldsFkReport = array(
-        'id_phonebook' => array(
+    public $fieldsFkReport = [
+        'id_phonebook' => [
             'table'       => 'pkg_phonebook',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -58,9 +58,9 @@ class PhoneNumberController extends Controller
         if (array_key_exists('idPhonebook', $this->relationFilter)) {
             $this->relationFilter['idPhonebook']['condition'] .= " AND idPhonebook.id_user IN (SELECT id FROM pkg_user WHERE id_user = :agfby )";
         } else {
-            $this->relationFilter['idPhonebook'] = array(
+            $this->relationFilter['idPhonebook'] = [
                 'condition' => "idPhonebook.id_user IN (SELECT id FROM pkg_user WHERE id_user = :agfby )",
-            );
+            ];
         }
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
 
@@ -73,9 +73,9 @@ class PhoneNumberController extends Controller
         if (array_key_exists('idPhonebook', $this->relationFilter)) {
             $this->relationFilter['idPhonebook']['condition'] .= " AND idPhonebook.id_user LIKE :agfby";
         } else {
-            $this->relationFilter['idPhonebook'] = array(
+            $this->relationFilter['idPhonebook'] = [
                 'condition' => "idPhonebook.id_user LIKE :agfby",
-            );
+            ];
         }
 
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
@@ -88,12 +88,12 @@ class PhoneNumberController extends Controller
         $_GET['columns'] = preg_replace('/status/', 't.status', $_GET['columns']);
         $_GET['columns'] = preg_replace('/name/', 't.name', $_GET['columns']);
 
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
 
-        if (!isset(Yii::app()->session['id_user'])) {
+        if ( ! isset(Yii::app()->session['id_user'])) {
             $info = 'User try export CSV without login';
             MagnusLog::insertLOG(7, $info);
             exit;
@@ -103,6 +103,10 @@ class PhoneNumberController extends Controller
         }
 
         $columns = json_decode($_GET['columns'], true);
+
+        if (json_last_error() !== 0) {
+            exit;
+        }
 
         $columns = $this->repaceColumns($columns);
 
@@ -143,7 +147,7 @@ class PhoneNumberController extends Controller
         $f = fopen('php://memory', 'w');
 
         foreach ($command->queryAll() as $key => $fields) {
-            $fieldsCsv = array();
+            $fieldsCsv = [];
 
             foreach ($fields as $key => $value) {
 
@@ -206,7 +210,7 @@ class PhoneNumberController extends Controller
     {
         $module = $this->instanceModel->getModule();
 
-        if (!AccessManager::getInstance($module)->canUpdate()) {
+        if ( ! AccessManager::getInstance($module)->canUpdate()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to save in module: $module");
         }
@@ -215,28 +219,28 @@ class PhoneNumberController extends Controller
         if (isset($_POST['filter']) && strlen($_POST['filter']) > 5) {
             $filter = $_POST['filter'];
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Por favor realizar um filtro para reprocesar',
-            ));
+            ]);
             exit;
         }
         $filter = $filter ? $this->createCondition(json_decode($filter)) : '';
 
-        if (!isset($this->relationFilter['idPhonebook'])) {
-            echo json_encode(array(
+        if ( ! isset($this->relationFilter['idPhonebook'])) {
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Por favor filtre uma agenda para reprocesar',
-            ));
+            ]);
             exit;
         }
 
         $this->abstractModel->reprocess($this->relationFilter, $this->paramsFilter);
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => 'Números atualizados com successo',
-        ));
+        ]);
 
     }
 }

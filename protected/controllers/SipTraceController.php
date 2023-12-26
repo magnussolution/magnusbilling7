@@ -38,11 +38,11 @@ class SipTraceController extends Controller
         try {
             $data = @file_get_contents($this->log_name)
             or die(
-                json_encode(array(
+                json_encode([
                     'rows'  => [],
                     'count' => 0,
                     'sum'   => [],
-                )));
+                ]));
         } catch (Exception $e) {
             exit;
         }
@@ -87,7 +87,7 @@ class SipTraceController extends Controller
                 }
             }
 
-            if (!in_array($callid, $callids)) {
+            if ( ! in_array($callid, $callids)) {
                 continue;
             }
             if ($id > 50) {
@@ -132,7 +132,7 @@ class SipTraceController extends Controller
                 $mils        = $time[1];
             }
 
-            array_push($packet, array(
+            array_push($packet, [
                 'id'     => $id,
                 'method' => $method,
                 'fromip' => $server_id_from !== false ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
@@ -143,12 +143,12 @@ class SipTraceController extends Controller
                 'callid' => $callid,
                 'head'   => date('Y') . preg_replace('/\#/', '', $value),
                 'date'   => $id == 1 ? $date : $date . ' + ' . number_format($mils, 3) . 's',
-            ));
+            ]);
 
             $id++;
 
         }
-        $this->render('index', array('packet' => $packet));
+        $this->render('index', ['packet' => $packet]);
     }
 
     public function actionRead($asJson = true, $condition = null)
@@ -188,11 +188,11 @@ class SipTraceController extends Controller
         try {
             $data = @file_get_contents($this->log_name)
             or die(
-                json_encode(array(
+                json_encode([
                     'rows'  => [],
                     'count' => 0,
                     'sum'   => [],
-                )));
+                ]));
         } catch (Exception $e) {
             exit;
         }
@@ -223,12 +223,12 @@ class SipTraceController extends Controller
             }
 
             $fromTo = explode(' ', $lines[0]);
-            if (!isset($fromTo[2])) {
+            if ( ! isset($fromTo[2])) {
                 continue;
             }
             $fromIp = strtok($fromTo[2], ':');
 
-            if (!isset($fromTo[4])) {
+            if ( ! isset($fromTo[4])) {
                 continue;
             }
 
@@ -242,24 +242,24 @@ class SipTraceController extends Controller
                 }
             }
 
-            if (!isset($sipto)) {
+            if ( ! isset($sipto)) {
                 continue;
             }
 
             if (isset($filterMethod)) {
                 //filter method
                 if ($filterMethodComparation == 'st') {
-                    if (!preg_match('/^' . $filterMethod . '/', $method)) {
+                    if ( ! preg_match('/^' . $filterMethod . '/', $method)) {
                         continue;
                     }
                 }
                 if ($filterMethodComparation == 'ed') {
-                    if (!preg_match('/' . $filterMethod . '$/', $method)) {
+                    if ( ! preg_match('/' . $filterMethod . '$/', $method)) {
                         continue;
                     }
                 }
                 if ($filterMethodComparation == 'ct') {
-                    if (!preg_match('/' . $filterMethod . '/', $method)) {
+                    if ( ! preg_match('/' . $filterMethod . '/', $method)) {
                         continue;
                     }
                 }
@@ -274,17 +274,17 @@ class SipTraceController extends Controller
             if (isset($filterFromIp)) {
                 //filter callerid
                 if ($filterFromIpComparation == 'st') {
-                    if (!preg_match('/^' . $filterFromIp . '/', $fromIp)) {
+                    if ( ! preg_match('/^' . $filterFromIp . '/', $fromIp)) {
                         continue;
                     }
                 }
                 if ($filterFromIpComparation == 'ed') {
-                    if (!preg_match('/' . $filterFromIp . '$/', $fromIp)) {
+                    if ( ! preg_match('/' . $filterFromIp . '$/', $fromIp)) {
                         continue;
                     }
                 }
                 if ($filterFromIpComparation == 'ct') {
-                    if (!preg_match('/' . $filterFromIp . '/', $fromIp)) {
+                    if ( ! preg_match('/' . $filterFromIp . '/', $fromIp)) {
                         continue;
                     }
                 }
@@ -298,17 +298,17 @@ class SipTraceController extends Controller
             if (isset($filterToIp)) {
                 //filter callerid
                 if ($filterToIpComparation == 'st') {
-                    if (!preg_match('/^' . $filterToIp . '/', $toIp)) {
+                    if ( ! preg_match('/^' . $filterToIp . '/', $toIp)) {
                         continue;
                     }
                 }
                 if ($filterToIpComparation == 'ed') {
-                    if (!preg_match('/' . $filterToIp . '$/', $toIp)) {
+                    if ( ! preg_match('/' . $filterToIp . '$/', $toIp)) {
                         continue;
                     }
                 }
                 if ($filterToIpComparation == 'ct') {
-                    if (!preg_match('/' . $filterToIp . '/', $toIp)) {
+                    if ( ! preg_match('/' . $filterToIp . '/', $toIp)) {
                         continue;
                     }
                 }
@@ -322,17 +322,17 @@ class SipTraceController extends Controller
             if (isset($filterCallid)) {
                 //filter callerid
                 if ($filterCallidComparation == 'st') {
-                    if (!preg_match('/^' . $filterCallid . '/', $callid)) {
+                    if ( ! preg_match('/^' . $filterCallid . '/', $callid)) {
                         continue;
                     }
                 }
                 if ($filterCallidComparation == 'ed') {
-                    if (!preg_match('/' . $filterCallid . '$/', $callid)) {
+                    if ( ! preg_match('/' . $filterCallid . '$/', $callid)) {
                         continue;
                     }
                 }
                 if ($filterCallidComparation == 'ct') {
-                    if (!preg_match('/' . $filterCallid . '/', $callid)) {
+                    if ( ! preg_match('/' . $filterCallid . '/', $callid)) {
                         continue;
                     }
                 }
@@ -346,17 +346,17 @@ class SipTraceController extends Controller
             if (isset($filterSipTo)) {
                 //filter callerid
                 if ($filterSipToComparation == 'st') {
-                    if (!preg_match('/^' . $filterSipTo . '/', $sipto)) {
+                    if ( ! preg_match('/^' . $filterSipTo . '/', $sipto)) {
                         continue;
                     }
                 }
                 if ($filterSipToComparation == 'ed') {
-                    if (!preg_match('/' . $filterSipTo . '$/', $sipto)) {
+                    if ( ! preg_match('/' . $filterSipTo . '$/', $sipto)) {
                         continue;
                     }
                 }
                 if ($filterSipToComparation == 'ct') {
-                    if (!preg_match('/' . $filterSipTo . '/', $sipto)) {
+                    if ( ! preg_match('/' . $filterSipTo . '/', $sipto)) {
                         continue;
                     }
                 }
@@ -378,7 +378,7 @@ class SipTraceController extends Controller
             $server_id_from = array_search($fromIp, array_column($modelServers, 'host'));
             $server_id_to   = array_search($toIp, array_column($modelServers, 'host'));
 
-            array_push($packet, array(
+            array_push($packet, [
                 'id'     => $id,
                 'method' => $method,
                 'fromip' => $server_id_from !== false ? $modelServers[$server_id_from]->name . ' (' . $fromIp . ')' : $fromIp,
@@ -386,23 +386,23 @@ class SipTraceController extends Controller
                 'sipto'  => $sipto,
                 'callid' => $callid,
                 'head'   => date('Y') . html_entity_decode($value),
-            ));
+            ]);
 
             $id++;
 
         }
 
-        echo json_encode(array(
+        echo json_encode([
             'rows'  => $packet,
             'count' => count($packet) < 25 ? count($packet) : count($result),
             'sum'   => [],
-        ), JSON_UNESCAPED_SLASHES);
+        ], JSON_UNESCAPED_SLASHES);
     }
 
     public function actionDestroy()
     {
         SipTrace::model()->deleteAll();
-        exec("rm -rf " . $this->log_name);
+        LinuxAccess::exec("rm -rf " . $this->log_name);
     }
 
     public function actionExport()
@@ -424,10 +424,10 @@ class SipTraceController extends Controller
         $modelTrace = SipTrace::model()->find();
 
         if (isset($modelTrace->id)) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => Yii::t('zii', 'Exist a filter active or in use. Wait or click in Stop Capture button.'),
-            ));
+            ]);
             exit;
         }
         $modelTrace          = new SipTrace();
@@ -438,10 +438,10 @@ class SipTraceController extends Controller
         $modelTrace->in_use  = 0;
         $modelTrace->save();
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => Yii::t('zii', 'Reload this module to see the packets'),
-        ));
+        ]);
     }
 
     public function actionClearAll()

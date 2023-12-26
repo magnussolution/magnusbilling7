@@ -23,16 +23,16 @@
 class CallController extends Controller
 {
     public $attributeOrder = 't.id DESC';
-    public $extraValues    = array(
+    public $extraValues    = [
         'idUser'     => 'username',
         'idPlan'     => 'name',
         'idTrunk'    => 'trunkcode',
         'idPrefix'   => 'destination',
         'idCampaign' => 'name',
         'idServer'   => 'name',
-    );
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'username',
         'trunk',
         'buycost',
@@ -42,9 +42,9 @@ class CallController extends Controller
         'id_user',
         'provider_name',
         'id_server',
-    );
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'trunk',
         'buycost',
         'agent',
@@ -52,41 +52,41 @@ class CallController extends Controller
         'id_user',
         'id_user',
         'provider_name',
-    );
+    ];
 
-    public $fieldsFkReport = array(
-        'id_user'     => array(
+    public $fieldsFkReport = [
+        'id_user'     => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => "username ",
-        ),
-        'id_trunk'    => array(
+        ],
+        'id_trunk'    => [
             'table'       => 'pkg_trunk',
             'pk'          => 'id',
             'fieldReport' => 'trunkcode',
-        ),
-        'id_prefix'   => array(
+        ],
+        'id_prefix'   => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        ),
-        'id'          => array(
+        ],
+        'id'          => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        )
+        ]
         ,
-        'id_campaign' => array(
+        'id_campaign' => [
             'table'       => 'pkg_campaign',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-        'id_server'   => array(
+        ],
+        'id_server'   => [
             'table'       => 'pkg_servers',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -96,12 +96,12 @@ class CallController extends Controller
 
         parent::init();
 
-        if (!Yii::app()->session['isAdmin']) {
-            $this->extraValues = array(
+        if ( ! Yii::app()->session['isAdmin']) {
+            $this->extraValues = [
                 'idUser'   => 'username',
                 'idPlan'   => 'name',
                 'idPrefix' => 'destination',
-            );
+            ];
         }
     }
 
@@ -112,12 +112,12 @@ class CallController extends Controller
     {
         $values = $this->getAttributesRequest();
 
-        if (isset($values['id']) && !$values['id']) {
-            echo json_encode(array(
+        if (isset($values['id']) && ! $values['id']) {
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameRoot    => 'error',
                 $this->nameMsg     => 'Operation no allow',
-            ));
+            ]);
             exit;
         }
         parent::actionSave();
@@ -167,7 +167,7 @@ class CallController extends Controller
                 $modelCall = Call::model()->findByPk((int) $_GET['id']);
             }
 
-            if (!isset($modelCall->id)) {
+            if ( ! isset($modelCall->id)) {
                 echo yii::t('zii', 'Audio no found');
                 exit;
             }
@@ -181,9 +181,9 @@ class CallController extends Controller
 
             if ($modelCall->id_server > 0 && $modelCall->idServer->type == 'asterisk') {
 
-                $host = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
-                $url  = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
-                exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . ".gsm '$url'", $output);
+                $host   = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
+                $url    = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
+                $output = LinuxAccess::exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . ".gsm '$url'");
                 header("Cache-Control: public");
                 header("Content-Description: File Transfer");
                 header("Content-Disposition: attachment; filename=" . $uniqueid);
@@ -194,7 +194,7 @@ class CallController extends Controller
                 exit;
             }
 
-            exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ', $output);
+            $output = LinuxAccess::exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ');
 
             if (isset($output[0])) {
 
@@ -233,11 +233,11 @@ class CallController extends Controller
 
             $this->filter = $this->extraFilter($filter);
 
-            $criteria = new CDbCriteria(array(
+            $criteria = new CDbCriteria([
                 'condition' => $this->filter,
                 'params'    => $this->paramsFilter,
                 'with'      => $this->relationFilter,
-            ));
+            ]);
             if (count($ids)) {
                 $criteria->addInCondition('t.id', $ids);
             }
@@ -245,7 +245,7 @@ class CallController extends Controller
 
             $folder = $this->magnusFilesDirectory . 'monitor';
 
-            if (!file_exists($folder)) {
+            if ( ! file_exists($folder)) {
                 mkdir($folder, 0777, true);
             }
             array_map('unlink', glob("$folder/*"));
@@ -258,19 +258,19 @@ class CallController extends Controller
                     $username = $records->idUser->username;
 
                     $mix_monitor_format = $this->config['global']['MixMonitor_format'];
-                    exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . $uniqueid . '* ' . $folder . '/');
+                    LinuxAccess::exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . $uniqueid . '* ' . $folder . '/');
                 }
 
-                exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
+                LinuxAccess::exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
 
                 $file_name = 'records_' . Yii::app()->session['username'] . '.tar.gz';
                 $path      = $folder . '/' . $file_name;
                 header('Content-type: application/tar+gzip');
 
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => true,
                     $this->nameMsg     => 'success',
-                ));
+                ]);
 
                 header('Content-Description: File Transfer');
                 header("Content-Type: application/x-tar");
@@ -283,12 +283,12 @@ class CallController extends Controller
                 if (readfile($path)) {
                     unlink($path);
                 }
-                exec("rm -rf $folder/*");
+                LinuxAccess::exec("rm -rf $folder/*");
             } else {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Audio no found',
-                ));
+                ]);
                 exit;
             }
         }
@@ -302,15 +302,15 @@ class CallController extends Controller
             $filterCampaign = json_decode($_GET['filter']);
 
             foreach ($filterCampaign as $f) {
-                if (!isset($f->type) || $f->field != 'id_campaign') {
+                if ( ! isset($f->type) || $f->field != 'id_campaign') {
                     continue;
                 }
                 if (count($f->value) > 1) {
-                    echo json_encode(array(
+                    echo json_encode([
                         $this->nameSuccess => false,
                         $this->nameRoot    => 'error',
                         $this->nameMsg     => 'Please select one campaign',
-                    ));
+                    ]);
                     exit;
                 }
 
@@ -323,14 +323,14 @@ class CallController extends Controller
 
             if ($timeCampaign > 0) {
 
-                $columns = array(
-                    array('header' => "100%", 'dataIndex' => 'real_sessiontime'),
-                    array('header' => "80% a 99% ", 'dataIndex' => 'uniqueid'),
-                    array('header' => "60% a 79%", 'dataIndex' => 'id_plan'),
-                    array('header' => "40% a 59% ", 'dataIndex' => 'id_did'),
-                    array('header' => "20% a 39% ", 'dataIndex' => 'id_prefix'),
-                    array('header' => "Menos que 20% ", 'dataIndex' => 'id_offer'),
-                );
+                $columns = [
+                    ['header' => "100%", 'dataIndex' => 'real_sessiontime'],
+                    ['header' => "80% a 99% ", 'dataIndex' => 'uniqueid'],
+                    ['header' => "60% a 79%", 'dataIndex' => 'id_plan'],
+                    ['header' => "40% a 59% ", 'dataIndex' => 'id_did'],
+                    ['header' => "20% a 39% ", 'dataIndex' => 'id_prefix'],
+                    ['header' => "Menos que 20% ", 'dataIndex' => 'id_offer'],
+                ];
 
                 $timeCampaign80 = $timeCampaign * 0.8;
                 $timeCampaign60 = $timeCampaign * 0.6;
@@ -345,11 +345,11 @@ class CallController extends Controller
                 ( SELECT COUNT(sessiontime) FROM pkg_cdr t $this->join WHERE $this->filter AND sessiontime >= $timeCampaign20 AND sessiontime < $timeCampaign40 ) AS id_prefix,
                 ( SELECT COUNT(sessiontime) FROM pkg_cdr t $this->join WHERE $this->filter AND sessiontime <= $timeCampaign20   ) AS id_offer
                 ";
-                $count = $this->abstractModel->count(array(
+                $count = $this->abstractModel->count([
                     'join'      => $this->join,
                     'condition' => $this->filter,
                     'params'    => $this->paramsFilter,
-                ));
+                ]);
                 $this->limit          = 1;
                 $this->titleReport    = "Estatistica da campanha $nameCampaign";
                 $this->subTitleReport = "Total de chamadas $count";
@@ -375,12 +375,12 @@ class CallController extends Controller
         $this->filter = $this->fixedWhere ? $filter . ' ' . $this->fixedWhere : $filter;
         $this->filter = $this->extraFilter($filter);
 
-        $modelCall = $this->abstractModel->find(array(
+        $modelCall = $this->abstractModel->find([
             'select'    => 'SUM(t.buycost) AS buycost, SUM(t.sessionbill) AS sessionbill ',
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
-        ));
+        ]);
 
         $modelCall->sumbuycost     = number_format($modelCall->buycost, 4);
         $modelCall->sumsessionbill = number_format($modelCall->sessionbill, 4);
@@ -392,12 +392,12 @@ class CallController extends Controller
     public function actionCsv()
     {
 
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
 
-        if (!isset(Yii::app()->session['id_user'])) {
+        if ( ! isset(Yii::app()->session['id_user'])) {
             $info = 'User try export CSV without login';
             MagnusLog::insertLOG(7, $info);
             exit;
@@ -406,6 +406,11 @@ class CallController extends Controller
             MagnusLog::insertLOG(7, $info);
         }
         $columns = json_decode($_GET['columns'], true);
+
+        if (json_last_error() !== 0) {
+            exit;
+        }
+
         $columns = $this->repaceColumns($columns);
         $columns = $this->removeColumns($columns);
         $this->setLimit($_GET);
@@ -422,7 +427,7 @@ class CallController extends Controller
         }
 
         $fileName = 'cdr_' . time();
-        exec("echo '" . substr($header, 0, -1) . "' >  /var/www/html/mbilling/tmp/" . $fileName . ".csv ");
+        LinuxAccess::exec("echo '" . substr($header, 0, -1) . "' >  /var/www/html/mbilling/tmp/" . $fileName . ".csv ");
 
         $this->filter = preg_replace('/:clfby|:agfby/', Yii::app()->session['id_user'], $this->filter);
         $sql          = "SELECT " . $this->getColumnsFromReport($columns) . " FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
@@ -430,9 +435,9 @@ class CallController extends Controller
         $array        = parse_ini_file($configFile);
 
         if (Yii::app()->session['language'] == 'pt_BR') {
-            @exec('mysql -u' . $array['dbuser'] . ' -p' . $array['dbpass'] . ' -h' . $array['dbhost'] . '  ' . $array['dbname'] . ' -e "' . $sql . '"  | sed "s/\'/\'/;s/\t/;/g;s/^//;s/$//;s/\n//g" > /var/www/html/mbilling/tmp/' . $fileName . '.csv ');
+            @LinuxAccess::exec('mysql -u' . $array['dbuser'] . ' -p' . $array['dbpass'] . ' -h' . $array['dbhost'] . '  ' . $array['dbname'] . ' -e "' . $sql . '"  | sed "s/\'/\'/;s/\t/;/g;s/^//;s/$//;s/\n//g" > /var/www/html/mbilling/tmp/' . $fileName . '.csv ');
         } else {
-            @exec('mysql -u' . $array['dbuser'] . ' -p' . $array['dbpass'] . ' -h' . $array['dbhost'] . '  ' . $array['dbname'] . ' -e "' . $sql . '"  | sed "s/\'/\'/;s/\t/,/g;s/^//;s/$//;s/\n//g" > /var/www/html/mbilling/tmp/' . $fileName . '.csv ');
+            @LinuxAccess::exec('mysql -u' . $array['dbuser'] . ' -p' . $array['dbpass'] . ' -h' . $array['dbhost'] . '  ' . $array['dbname'] . ' -e "' . $sql . '"  | sed "s/\'/\'/;s/\t/,/g;s/^//;s/$//;s/\n//g" > /var/www/html/mbilling/tmp/' . $fileName . '.csv ');
         }
 
         header('Content-Type: text/csv');
@@ -453,21 +458,21 @@ class CallController extends Controller
 
             $condition = '1';
 
-            if (!is_array($filter)) {
+            if ( ! is_array($filter)) {
                 return $condition;
             }
 
             foreach ($filter as $key => $f) {
                 $isSubSelect = false;
 
-                if (!isset($f->type)) {
+                if ( ! isset($f->type)) {
                     continue;
                 }
 
                 $type  = $f->type;
                 $field = $f->field;
 
-                if ($this->actionName != 'destroy' && !preg_match("/^id[A-Z]/", $field)) {
+                if ($this->actionName != 'destroy' && ! preg_match("/^id[A-Z]/", $field)) {
 
                     if (is_array($field)) {
                         foreach ($field as $key => $fieldOr) {
@@ -516,7 +521,7 @@ class CallController extends Controller
                             exit;
                         }
 
-                        $field = isset($f->caseSensitive) && $f->caseSensitive && !is_array($field) ? "BINARY $field" : $field;
+                        $field = isset($f->caseSensitive) && $f->caseSensitive && ! is_array($field) ? "BINARY $field" : $field;
 
                         switch ($comparison) {
                             case 'st':
@@ -524,9 +529,9 @@ class CallController extends Controller
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE '" . $value . "%'";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field LIKE '" . $value . "%'",
-                                        );
+                                        ];
                                     }
 
                                 } else {
@@ -540,9 +545,9 @@ class CallController extends Controller
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE '%" . $value . "'";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field LIKE '%" . $value . "'",
-                                        );
+                                        ];
                                     }
                                 } else {
                                     $condition .= " AND $field LIKE '%" . $value . "'";
@@ -551,7 +556,7 @@ class CallController extends Controller
                                 break;
                             case 'ct':
                                 if (is_array($field)) {
-                                    $conditionsOr = array();
+                                    $conditionsOr = [];
 
                                     foreach ($field as $keyOr => $fieldOr) {
                                         $fieldOr = isset($f->caseSensitive) && $f->caseSensitive ? "BINARY $fieldOr" : $fieldOr;
@@ -567,9 +572,9 @@ class CallController extends Controller
                                         if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                             $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field LIKE '%" . $value . "%'";
                                         } else {
-                                            $this->relationFilter[strtok($field, '.')] = array(
+                                            $this->relationFilter[strtok($field, '.')] = [
                                                 'condition' => "$field LIKE '%" . $value . "%'",
-                                            );
+                                            ];
                                         }
                                     } else {
                                         $condition .= " AND LOWER($field) LIKE %" . strtolower($value) . "%";
@@ -583,9 +588,9 @@ class CallController extends Controller
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = '" . $value . "'";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field = '" . $value . "'",
-                                        );
+                                        ];
                                     }
                                 } else {
                                     $condition .= " AND $field = '" . $value . "'";
@@ -596,14 +601,14 @@ class CallController extends Controller
 
                         break;
                     case 'boolean':
-                        if (!is_numeric($value)) {
+                        if ( ! is_numeric($value)) {
                             echo 'Invalid Filter';
                             exit;
                         }
                         $condition .= " AND $field = " . (int) $value . " ";
                         break;
                     case 'numeric':
-                        if (!is_numeric($value)) {
+                        if ( ! is_numeric($value)) {
                             echo 'Invalid Filter';
                             exit;
                         }
@@ -613,9 +618,9 @@ class CallController extends Controller
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field = " . $value . "";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field = " . $value . "",
-                                        );
+                                        ];
                                     }
                                 } else {
                                     $condition .= " AND $field = " . $value . "";
@@ -627,9 +632,9 @@ class CallController extends Controller
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field < " . $value . "";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field < " . $value . "",
-                                        );
+                                        ];
                                     }
                                 } else {
                                     $condition .= " AND $field < " . $value . "";
@@ -641,9 +646,9 @@ class CallController extends Controller
                                     if (array_key_exists(strtok($field, '.'), $this->relationFilter)) {
                                         $this->relationFilter[strtok($field, '.')]['condition'] .= " AND $field >" . $value . "";
                                     } else {
-                                        $this->relationFilter[strtok($field, '.')] = array(
+                                        $this->relationFilter[strtok($field, '.')] = [
                                             'condition' => "$field > " . $value . "",
-                                        );
+                                        ];
                                     }
                                 } else {
                                     $condition .= " AND $field > " . $value . "";
@@ -653,13 +658,13 @@ class CallController extends Controller
                         }
                         break;
                     case 'list':
-                        $value = is_array($value) ? $value : array($value);
+                        $value = is_array($value) ? $value : [$value];
 
-                        $paramsIn = array();
+                        $paramsIn = [];
 
                         foreach ($value as $keyIn => $v) {
 
-                            if (!is_numeric($v)) {
+                            if ( ! is_numeric($v)) {
                                 echo 'Invalid Filter';
                                 exit;
                             }

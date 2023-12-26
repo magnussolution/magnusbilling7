@@ -23,19 +23,19 @@
 class QueueController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
     private $host     = 'localhost';
     private $user     = 'magnus';
     private $password = 'magnussolution';
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -51,7 +51,7 @@ class QueueController extends Controller
         if (isset($_FILES["musiconhold"]) && strlen($_FILES["musiconhold"]["name"]) > 1) {
 
             $uploaddir = '/var/lib/asterisk/moh/' . $model->name;
-            shell_exec('mkdir -p ' . $uploaddir);
+            LinuxAccess::exec('mkdir -p ' . $uploaddir);
             $data       = explode('.', $_FILES["musiconhold"]["name"]);
             $typefile   = array_pop($data);
             $uploadfile = $uploaddir . '/queue-' . time() . '.' . $typefile;
@@ -74,15 +74,15 @@ class QueueController extends Controller
 
         $files = glob('/var/lib/asterisk/moh/queue-periodic-announce-' . $model->id . '*');
 
-        if (!isset($files[0])) {
+        if ( ! isset($files[0])) {
             $model->{'periodic-announce'} = 'queue-periodic-announce';
             $model->save();
         }
 
-        $modelQueue = Queue::model()->findAll(array(
+        $modelQueue = Queue::model()->findAll([
             'condition' => 'musiconhold != "default"',
             'group'     => 'musiconhold',
-        ));
+        ]);
 
         $file = '/etc/asterisk/musiconhold_magnus.conf';
         $line = '';
@@ -108,16 +108,16 @@ class QueueController extends Controller
     {
         $modelQueue = Queue::model()->findByPk((int) $_POST['id_queue']);
         if (count($modelQueue)) {
-            shell_exec('rm -rf /var/lib/asterisk/moh/' . $modelQueue->name . '/*');
-            echo json_encode(array(
+            LinuxAccess::exec('rm -rf /var/lib/asterisk/moh/' . $modelQueue->name . '/*');
+            echo json_encode([
                 $this->nameSuccess => true,
                 $this->nameMsg     => 'All musiconhold deleted from queue',
-            ));
+            ]);
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Queue not found',
-            ));
+            ]);
         }
     }
 
@@ -145,10 +145,10 @@ class QueueController extends Controller
                 $this->msgSuccess = $e->getMessage();
             }
         }
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $sussess,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
 
     }
 
