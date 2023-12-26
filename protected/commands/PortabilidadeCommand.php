@@ -21,12 +21,18 @@ class PortabilidadeCommand extends CConsoleCommand
 {
     public function run($args)
     {
+
+        if ($args[2] == 'did') {
+            $this->checkDID($args);
+            exit;
+        }
+
         shell_exec('mkdir -p /usr/src/ChipCerto');
         shell_exec('rm -rf /usr/src/ChipCerto/*');
         shell_exec('cd /usr/src/ChipCerto && wget ftp://' . $_SERVER['argv']['2'] . ':' . $_SERVER['argv']['3'] . '@ftp.portabilidadecelular.com:2157/portabilidade.tar.bz2 && tar -jxvf portabilidade.tar.bz2');
         shell_exec('cd /usr/src/ChipCerto && wget ftp://' . $_SERVER['argv']['2'] . ':' . $_SERVER['argv']['3'] . '@ftp.portabilidadecelular.com:2157/prefix_anatel.csv');
 
-        if (!file_exists("/usr/src/ChipCerto/prefix_anatel.csv")) {
+        if ( ! file_exists("/usr/src/ChipCerto/prefix_anatel.csv")) {
             exit;
         }
 
@@ -50,7 +56,7 @@ class PortabilidadeCommand extends CConsoleCommand
         $sql = "LOAD DATA LOCAL INFILE '/usr/src/ChipCerto/prefix_anatel.csv' INTO TABLE pkg_portabilidade_prefix FIELDS TERMINATED BY ';'  LINES TERMINATED BY '\n'  (number, company);";
         Yii::app()->db->createCommand($sql)->execute();
 
-        if (!file_exists("/usr/src/ChipCerto/exporta.csv")) {
+        if ( ! file_exists("/usr/src/ChipCerto/exporta.csv")) {
             exit;
         }
 
@@ -74,5 +80,41 @@ class PortabilidadeCommand extends CConsoleCommand
 
         $sql = "LOAD DATA LOCAL INFILE '/usr/src/ChipCerto/exporta.csv' INTO TABLE pkg_portabilidade FIELDS TERMINATED BY ';'  LINES TERMINATED BY '\n'  (id, number, company, date);";
         Yii::app()->db->createCommand($sql)->execute();
+    }
+
+    public function checkDID($args)
+    {
+
+        $modelDid = Did::model()->findAll();
+
+        foreach ($modelDid as $key => $did) {
+
+            $url = "https://consultas.portabilidadecelular.com/painel/consulta_numero.php?user=" . $args[0] . "&pass=" . $args[1] . "&seache_number=" . $did->did . "&completo";
+            if ( ! $result = @file_get_contents($url, false)) {
+                $did->country = 'Operadora não identificada';
+            } else {
+                $res = preg_split('/\|/', $result);
+            }
+
+            if ($res == 55998) {
+                $did->country = 'Sem crédito';
+            } else {
+
+                if ( ! isset($res[1])) {
+                    print_r($result);
+                    continue;
+                }
+                if ($res[1]) {
+                    $did->country = $res[3] . ' ' . $res[2];
+                } else {
+                    $did->country = $res[3];
+                }
+            }
+            $did->country = utf8_encode($did->country);
+            echo $did->did . ' ' . $did->country . "\n";
+
+            $did->save();
+
+        }
     }
 }

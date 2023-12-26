@@ -83,9 +83,9 @@ class AsteriskAccess
 
         $select = '`name`, `language`, `musiconhold`, `announce`, `context`, `timeout`, `announce-frequency`, `announce-round-seconds`, `announce-holdtime`, `announce-position`, `retry`, `wrapuptime`, `maxlen`, `servicelevel`, `strategy`, `joinempty`, `leavewhenempty`, `eventmemberstatus`, `eventwhencalled`, `reportholdtime`, `memberdelay`, `weight`, `timeoutrestart`, `periodic-announce`, `periodic-announce-frequency`, `ringinuse`, `setinterfacevar`, `setqueuevar`, `setqueueentryvar`';
         $model  = Queue::model()->findAll(
-            array(
+            [
                 'select' => $select,
-            ));
+            ]);
 
         if (count($model)) {
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/queues_magnus.conf', 'name');
@@ -206,7 +206,7 @@ class AsteriskAccess
             $fr = fopen($registerFile, "w");
         }
 
-        if (!$fd) {
+        if ( ! $fd) {
             echo "</br><center><b><font color=red>" . gettext("Could not open buddy file") . $file . "</font></b></center>";
         } else {
             foreach ($rows as $key => $data) {
@@ -244,7 +244,7 @@ class AsteriskAccess
                         $line .= "\n";
                         $modelMember = QueueMember::model()->findAll([
                             'condition' => 'queue_name = :key AND paused = 0',
-                            'params'    => array(':key' => $data['name']),
+                            'params'    => [':key' => $data['name']],
                             'order'     => 'id ASC',
                         ]);
                         foreach ($modelMember as $member) {
@@ -292,7 +292,7 @@ class AsteriskAccess
                     $line .= 'disallow=all' . "\n";
                     $line .= 'allow=' . $this->config['global']['default_codeds'] . "\n";
                     $line .= 'dtmfmode=RFC2833' . "\n";
-                    $line .= 'insecure=invite' . "\n";
+                    $line .= 'insecure=port,invite' . "\n";
 
                     $line .= 'directmedia=no' . "\n";
                     $line .= 'nat=force_rport,comedia' . "\n";
@@ -364,7 +364,7 @@ class AsteriskAccess
     {
         $channelsData = AsteriskAccess::instance()->coreShowChannelsConcise();
         $channelsData = explode("\n", $channelsData["data"]);
-        $modelSip     = Sip::model()->findAll('id_user = ( SELECT id FROM pkg_user WHERE username = :key)', array(':key' => $accountcode));
+        $modelSip     = Sip::model()->findAll('id_user = ( SELECT id FROM pkg_user WHERE username = :key)', [':key' => $accountcode]);
         $sipAccounts  = '';
         foreach ($modelSip as $key => $sip) {
             $sipAccounts .= $sip->name . '|';
@@ -425,16 +425,16 @@ class AsteriskAccess
         $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
-        array_push($modelServers, array(
+        array_push($modelServers, [
             'host'     => 'localhost',
             'username' => 'magnus',
             'password' => 'magnussolution',
-        ));
-        $result = array();
+        ]);
+        $result = [];
         foreach ($modelServers as $key => $server) {
             $data = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->sipShowPeers();
 
-            if (!isset($data['data']) || strlen($data['data']) < 10) {
+            if ( ! isset($data['data']) || strlen($data['data']) < 10) {
                 continue;
             }
 
@@ -443,14 +443,14 @@ class AsteriskAccess
             $column  = 'Name/username             Host                                    Dyn Forcerport Comedia    ACL Port     Status      Description';
             $columns = preg_split("/\s+/", $column);
 
-            $index = array();
+            $index = [];
 
             for ($i = 0; $i < 10; $i++) {
                 $index[] = @strpos($column, $columns[$i]);
             }
 
             foreach ($linesSipResult as $key => $line) {
-                $element = array();
+                $element = [];
                 foreach ($index as $key => $value) {
                     $startIndex               = $value;
                     $lenght                   = @$index[$key + 1] - $value;
@@ -469,23 +469,23 @@ class AsteriskAccess
         $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
-        array_push($modelServers, array(
+        array_push($modelServers, [
             'host'     => 'localhost',
             'username' => 'magnus',
             'password' => 'magnussolution',
-        ));
+        ]);
 
-        $channels = array();
+        $channels = [];
         foreach ($modelServers as $key => $server) {
 
             $data = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->cdrShowActive();
 
-            if (!isset($data) || !isset($data['data'])) {
-                Servers::model()->updateByPk($server['id'], array('status' => 2));
+            if ( ! isset($data) || ! isset($data['data'])) {
+                Servers::model()->updateByPk($server['id'], ['status' => 2]);
                 continue;
             }
 
-            if (!isset($data) || !isset($data['data'])) {
+            if ( ! isset($data) || ! isset($data['data'])) {
                 continue;
             }
 
@@ -516,19 +516,19 @@ class AsteriskAccess
         $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
-        array_push($modelServers, array(
+        array_push($modelServers, [
             'host'     => 'localhost',
             'username' => 'magnus',
             'password' => 'magnussolution',
-        ));
+        ]);
 
-        $channels = array();
+        $channels = [];
         foreach ($modelServers as $key => $server) {
 
-            $columns = array('Channel', 'Context', 'Exten', 'Priority', 'Stats', 'Application', 'Data', 'CallerID', 'Accountcode', 'Amaflags', 'Duration', 'Bridged');
+            $columns = ['Channel', 'Context', 'Exten', 'Priority', 'Stats', 'Application', 'Data', 'CallerID', 'Accountcode', 'Amaflags', 'Duration', 'Bridged'];
             $data    = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->coreShowChannelsConcise();
 
-            if (!isset($data) || !isset($data['data'])) {
+            if ( ! isset($data) || ! isset($data['data'])) {
                 return;
             }
 
@@ -540,7 +540,7 @@ class AsteriskAccess
 
             for ($i = 0; $i < count($linesCallsResult); $i++) {
                 $call = explode("!", $linesCallsResult[$i]);
-                if (!preg_match("/\//", $call[0])) {
+                if ( ! preg_match("/\//", $call[0])) {
                     continue;
                 }
                 $call['server'] = $server['host'];
@@ -558,18 +558,18 @@ class AsteriskAccess
         $sql          = "SELECT * FROM pkg_servers WHERE type = 'asterisk' AND status IN (1,4) AND host != 'localhost'";
         $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
 
-        array_push($modelServers, array(
+        array_push($modelServers, [
             'host'     => 'localhost',
             'username' => 'magnus',
             'password' => 'magnussolution',
-        ));
+        ]);
 
-        $channels = array();
+        $channels = [];
         foreach ($modelServers as $key => $server) {
-            $columns = array('Channel', 'Context', 'Extension', 'Prio', 'State', 'Application', 'Data', 'CallerID', 'Duration', 'Accountcode', 'PeerAccount', 'BridgedTo');
+            $columns = ['Channel', 'Context', 'Extension', 'Prio', 'State', 'Application', 'Data', 'CallerID', 'Duration', 'Accountcode', 'PeerAccount', 'BridgedTo'];
             $data    = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->coreShowChannelsVerbose();
 
-            if (!isset($data) || !isset($data['data'])) {
+            if ( ! isset($data) || ! isset($data['data'])) {
                 return;
             }
 
@@ -585,7 +585,7 @@ class AsteriskAccess
                     continue;
                 }
                 $call = preg_split("/\s+/", $linesCallsResult[$i]);
-                if (!preg_match("/\//", $call[0])) {
+                if ( ! preg_match("/\//", $call[0])) {
                     continue;
                 }
                 $call['server'] = $server['host'];
@@ -608,32 +608,32 @@ class AsteriskAccess
                 $modelServers = Yii::app()->db->createCommand($sql)->queryAll();
             }
 
-            array_push($modelServers, array(
+            array_push($modelServers, [
                 'host'     => 'localhost',
                 'username' => 'magnus',
                 'password' => 'magnussolution',
-            ));
+            ]);
         } else {
-            $modelServers = array();
-            array_push($modelServers, array(
+            $modelServers = [];
+            array_push($modelServers, [
                 'host'     => $server,
                 'username' => 'magnus',
                 'password' => 'magnussolution',
-            ));
+            ]);
 
         }
 
-        $channels = array();
+        $channels = [];
         foreach ($modelServers as $key => $server) {
             $data = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->coreShowChannel($channel);
-            if (!isset($data['data']) || strlen($data['data']) < 10 || preg_match("/is not a known channe/", $data['data'])) {
+            if ( ! isset($data['data']) || strlen($data['data']) < 10 || preg_match("/is not a known channe/", $data['data'])) {
                 continue;
             }
             $linesCallResult = explode("\n", $data['data']);
             if (count($linesCallResult) < 1) {
                 continue;
             }
-            $result = array();
+            $result = [];
             for ($i = 2; $i < count($linesCallResult); $i++) {
                 if (preg_match("/level 1: /", $linesCallResult[$i])) {
                     $data = explode("=", substr($linesCallResult[$i], 9));

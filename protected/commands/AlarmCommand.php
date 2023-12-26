@@ -63,6 +63,10 @@ class AlarmCommand extends ConsoleCommand
                     # TOTAL CALLS PER USER
                     $this->totalCallsPerUser($alarm);
                     break;
+                case 8:
+                    # TOTAL CALLS TRUNK FAIL
+                    $this->totalCallsTrunkFail($alarm);
+                    break;
             }
         }
     }
@@ -272,9 +276,48 @@ class AlarmCommand extends ConsoleCommand
         }
     }
 
+    public function totalCallsTrunkFail($alarm)
+    {
+        if ($alarm->period < 1000 && $alarm->last_notification > date('Y-m-d')) {
+            //interval more than 1 days, only send notification email 1 time per day
+            return;
+        }
+
+        $period = time() - $alarm->period;
+
+        $period = date("Y-m-d H:i:s", $period);
+
+        $this->filter = "starttime  > '$period'";
+
+        $modelTrunk = Trunk::model()->findAll('status = 1');
+
+        foreach ($modelTrunk as $key => $trunk) {
+
+            $sql     = "SELECT count(id) AS id FROM pkg_cdr_failed WHERE id_trunk = " . $trunk->id . " AND " . $this->filter;
+            $modeCdr = Call::model()->findBySql($sql);
+
+            $calls = is_numeric($modeCdr->id) ? $modeCdr->id : 0;
+
+            echo $calls;
+
+            if ($alarm->condition == 1) {
+                if ($modeCdr->id > $alarm->amount) {
+                    $alarm->message = preg_replace('/%trunk%/', $trunk->trunkcode, $alarm->message);
+                    $alarm->message = preg_replace('/%totalCalls%/', $modeCdr->id, $alarm->message);
+                    $this->notification($alarm);
+                }
+            } else if ($alarm->condition == 2) {
+                if ($modeCdr->id < $alarm->amount) {
+                    $this->notification($alarm);
+                }
+            }
+
+        }
+
+    }
+
     public function notification($alarm)
     {
-
         $condition = [
             1 => 'Bigger than',
             2 => 'Less than',
@@ -288,17 +331,9 @@ class AlarmCommand extends ConsoleCommand
             5 => 'Online calls on same number',
             6 => 'Same number and CallerID',
             7 => 'Total calls per user',
+            8 => 'Failed calls per trunk',
         ];
 
-        $type = [
-            1 => 'ALOC',
-            2 => 'ASR',
-            3 => 'Calls per minute',
-            4 => 'Consecutive number',
-            5 => 'Online calls on same number',
-            6 => 'Same number and CallerID',
-            7 => 'Total calls per user',
-        ];
         $period = [
             '3600'  => '1 Hour',
             '7200'  => '2 Hours',
@@ -334,7 +369,7 @@ class AlarmCommand extends ConsoleCommand
 
         $modelSmtps = Smtps::model()->find('id_user = 1');
 
-        if (!isset($modelSmtps->id)) {
+        if ( ! isset($modelSmtps->id)) {
             return;
         }
         $smtp_host       = $modelSmtps->host;
@@ -352,9 +387,9 @@ class AlarmCommand extends ConsoleCommand
         }
 
         $modelTemplate = TemplateMail::model()->find('fromemail != :key ',
-            array(
+            [
                 ':key' => 'noreply@site.com',
-            ));
+            ]);
         $from_email = isset($modelTemplate->fromemail) ? $modelTemplate->fromemail : $smtp_username;
 
         Yii::import('application.extensions.phpmailer.JPhpMailer');

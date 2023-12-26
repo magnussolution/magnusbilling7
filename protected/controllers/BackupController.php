@@ -25,17 +25,17 @@ class BackupController extends Controller
     private $diretory = "/usr/local/src/magnus/backup/";
     public function actionRead($asJson = true, $condition = null)
     {
-        if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
+        if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
             exit;
         }
 
         $result = $this->scan_dir($this->diretory, 1);
 
-        $values = array();
+        $values = [];
         $start  = $_GET['start'];
         $limit  = $_GET['limit'];
 
-        if (!is_array($result)) {
+        if ( ! is_array($result)) {
             return;
         }
 
@@ -45,33 +45,33 @@ class BackupController extends Controller
                 continue;
             }
 
-            if (!preg_match("/backup_voip_Magnus/", $result[$i])) {
+            if ( ! preg_match("/backup_voip_softswitch/", $result[$i])) {
                 continue;
             }
             $size     = filesize($this->diretory . $result[$i]) / 1000000;
-            $values[] = array(
+            $values[] = [
                 'id'   => $i,
                 'name' => $result[$i],
-                'size' => number_format($size, 2) . ' MB');
+                'size' => number_format($size, 2) . ' MB'];
         }
 
         //
         # envia o json requisitado
-        echo json_encode(array(
+        echo json_encode([
             $this->nameRoot  => $values,
             $this->nameCount => $i,
-            $this->nameSum   => array(),
-        ));
+            $this->nameSum   => [],
+        ]);
     }
     public function actionDownload()
     {
-        if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
+        if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
             exit;
         }
 
         $file = $_GET['file'];
 
-        if (!preg_match("/backup_voip_Magnus/", $file)) {
+        if ( ! preg_match("/backup_voip_softswitch/", $file)) {
             exit;
         }
         $path = $this->diretory . $file;
@@ -87,13 +87,13 @@ class BackupController extends Controller
     }
     public function scan_dir($dir)
     {
-        if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
+        if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
             exit;
         }
 
-        $ignored = array('.', '..', '.svn', '.htaccess');
+        $ignored = ['.', '..', '.svn', '.htaccess'];
 
-        $files = array();
+        $files = [];
         foreach (scandir($dir) as $file) {
             if (in_array($file, $ignored)) {
                 continue;
@@ -110,7 +110,7 @@ class BackupController extends Controller
 
     public function actionDestroy()
     {
-        if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
+        if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
             exit;
         }
 
@@ -120,15 +120,15 @@ class BackupController extends Controller
         }
 
         # retorna o resultado da execucao
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameMsg     => $this->success,
-        ));
+        ]);
     }
 
     public function actionSave()
     {
-        if (Yii::app()->session['isAdmin'] != true || !Yii::app()->session['id_user']) {
+        if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
             exit;
         }
         $dbString = explode('dbname=', Yii::app()->db->connectionString);
@@ -139,14 +139,14 @@ class BackupController extends Controller
         $data     = date("d-m-Y");
         $comando  = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed > /tmp/base.sql";
         LinuxAccess::exec($comando);
-        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_Magnus.$data.tgz /tmp/base.sql /etc/asterisk");
+        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch.$data.tgz /tmp/base.sql /etc/asterisk");
         LinuxAccess::exec("rm -f /tmp/base.sql");
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameRoot    => $this->attributes,
             $this->nameMsg     => $this->msg . ' Backup in process, this task can spend many time to finish.',
-        ));
+        ]);
 
     }
 }

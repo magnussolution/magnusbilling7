@@ -33,7 +33,7 @@ class BackupCommand extends ConsoleCommand
         $comando = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --no-data pkg_cdr_failed --no-data pkg_cdr_archive --no-data pkg_cdr_failed_archive --no-data pkg_call_chart --no-data pkg_status_system  >> /tmp/base.sql";
         LinuxAccess::exec($comando);
 
-        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_Magnus.$data.tgz /tmp/base.sql /etc/asterisk");
+        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch.$data.tgz /tmp/base.sql /etc/asterisk");
         LinuxAccess::exec("rm -f /tmp/base.sql");
     }
 }

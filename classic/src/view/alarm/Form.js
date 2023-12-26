@@ -37,7 +37,8 @@ Ext.define('MBilling.view.alarm.Form', {
                 ['4', t('Consecutive number')],
                 ['5', t('Online calls on same number')],
                 ['6', t('Same number and CallerID')],
-                ['7', t('Total calls per user')]
+                ['7', t('Total calls per user')],
+                ['8', t('Failed calls per trunk')]
             ]
         }, {
             xtype: 'combobox',
