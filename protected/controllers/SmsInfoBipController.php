@@ -48,7 +48,7 @@ class SmsInfoBipController extends CController
 
         $authorization = base64_encode("$user:$pass");
 
-        $result = exec("
+        $result = LinuxAccess::exec("
         curl -X POST \
  -H 'Content-Type: application/json' \
  -H 'Accept: application/json' \

@@ -21,7 +21,7 @@ class SipTraceCommand extends CConsoleCommand
             define('DEBUG', 0);
         }
 
-        if (!defined('PID')) {
+        if ( ! defined('PID')) {
             define("PID", "/var/run/magnus/SipTracepid.php");
         }
 
@@ -45,7 +45,7 @@ class SipTraceCommand extends CConsoleCommand
                 continue;
             }
 
-            exec('pkill -f ngrep');
+            LinuxAccess::exec('pkill -f ngrep');
             echo $command = "ngrep -p  -W byline " . $modelTrace->filter . " -t port " . $modelTrace->port . $device . " >> " . $this->file_name;
 
             $output = $this->PsExecute($command, $modelTrace->timeout, $modelTrace->filter);
@@ -72,7 +72,7 @@ class SipTraceCommand extends CConsoleCommand
 
             if ($cur % 5 == 0) {
                 $modelTrace = SipTrace::model()->find();
-                if (!isset($modelTrace)) {
+                if ( ! isset($modelTrace)) {
                     SipTrace::model()->deleteAll();
                     $this->PsKill($pid);
                     break;
@@ -91,7 +91,7 @@ class SipTraceCommand extends CConsoleCommand
 
         $command = $commandJob . ' 2>&1 & echo $!';
 
-        exec($command, $op);
+        $op = LinuxAccess::exec($command);
 
         $pid = (int) $op[0];
 
@@ -105,7 +105,7 @@ class SipTraceCommand extends CConsoleCommand
     public function PsExists($pid)
     {
 
-        exec("ps ax | grep $pid|wc -l 2>&1", $output);
+        $output = LinuxAccess::exec("ps ax | grep $pid|wc -l 2>&1");
 
         if ($output[0] > 0) {
             return true;
@@ -117,7 +117,7 @@ class SipTraceCommand extends CConsoleCommand
     public function PsKill($pid)
     {
         echo "End process $pid";
-        exec('pkill ngrep');
+        LinuxAccess::exec('pkill ngrep');
         try {
             posix_kill($pid, 2);
         } catch (Exception $e) {

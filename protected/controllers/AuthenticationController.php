@@ -20,7 +20,7 @@
 
 class AuthenticationController extends Controller
 {
-    private $menu = array();
+    private $menu = [];
 
     public function actionLogin()
     {
@@ -37,7 +37,7 @@ class AuthenticationController extends Controller
             }
         }
 
-        $modelUser = User::model()->find("username = :user", array(':user' => $user));
+        $modelUser = User::model()->find("username = :user", [':user' => $user]);
 
         if (isset($modelUser->idGroup->idUserType->id) && $modelUser->idGroup->idUserType->id == 1) {
             $condition = "username COLLATE utf8_bin = :user AND UPPER(password) COLLATE utf8_bin = :pass ";
@@ -49,10 +49,10 @@ class AuthenticationController extends Controller
         }
 
         $modelUser = User::model()->find(
-            array(
+            [
                 'condition' => $condition,
-                'params'    => array(':user' => $user, ':pass' => $password),
-            ));
+                'params'    => [':user' => $user, ':pass' => $password],
+            ]);
 
         $loginkey = isset($_POST['loginkey']) ? $_POST['loginkey'] : false;
 
@@ -65,12 +65,12 @@ class AuthenticationController extends Controller
             $mail->send();
         }
 
-        if (!isset($modelUser->id)) {
+        if ( ! isset($modelUser->id)) {
             Yii::app()->session['logged'] = false;
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
                 'msg'     => 'Username and password combination is invalid',
-            ));
+            ]);
             $nameMsg = $this->nameMsg;
             $info    = 'Username and password combination is invalid - User: ' . $user . ' IP: ' . $_SERVER['REMOTE_ADDR'];
             Yii::log($info, 'error');
@@ -83,10 +83,10 @@ class AuthenticationController extends Controller
 
         if ($modelUser->active == 0) {
             Yii::app()->session['logged'] = false;
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
                 'msg'     => 'Username is disabled',
-            ));
+            ]);
 
             $info = 'Username ' . $user . ' is disabled';
             MagnusLog::insertLOG(1, $info);
@@ -146,11 +146,11 @@ class AuthenticationController extends Controller
                 Yii::app()->session['googleAuthenticatorKey'] = $ga->getQRCodeGoogleUrl('VoIP-' . $modelUser->username . '-' . $modelUser->id, $secret);
 
                 $modelLogUsers = LogUsers::model()->count('id_user = :key AND ip = :key1 AND description = :key2',
-                    array(
+                    [
                         ':key'  => $modelUser->id,
                         ':key1' => $_SERVER['REMOTE_ADDR'],
                         ':key2' => 'Username Login on the panel - User ' . $modelUser->username,
-                    ));
+                    ]);
                 if ($modelLogUsers > 0) {
                     Yii::app()->session['checkGoogleAuthenticator'] = false;
                 } else {
@@ -168,10 +168,10 @@ class AuthenticationController extends Controller
         if (isset($_REQUEST['remote'])) {
             header("Location: ../..");
         }
-        echo json_encode(array(
+        echo json_encode([
             'success' => Yii::app()->session['username'],
             'msg'     => Yii::app()->session['name_user'],
-        ));
+        ]);
 
     }
 
@@ -189,8 +189,8 @@ class AuthenticationController extends Controller
         Yii::app()->session['id_user']             = false;
         Yii::app()->session['id_agent']            = false;
         Yii::app()->session['name_user']           = false;
-        Yii::app()->session['menu']                = array();
-        Yii::app()->session['action']              = array();
+        Yii::app()->session['menu']                = [];
+        Yii::app()->session['action']              = [];
         Yii::app()->session['currency']            = false;
         Yii::app()->session['language']            = false;
         Yii::app()->session['isAdmin']             = true;
@@ -214,9 +214,9 @@ class AuthenticationController extends Controller
         Yii::app()->session->clear();
         Yii::app()->session->destroy();
 
-        echo json_encode(array(
+        echo json_encode([
             'success' => true,
-        ));
+        ]);
     }
 
     public function actionCheck()
@@ -225,7 +225,7 @@ class AuthenticationController extends Controller
 
             $this->mountMenu();
             $modelGroupUserGroup = GroupUserGroup::model()->count('id_group_user = :key',
-                array(':key' => Yii::app()->session['id_group']));
+                [':key' => Yii::app()->session['id_group']]);
 
             $modelGroupUser = GroupUser::model()->findByPk(Yii::app()->session['id_group']);
 
@@ -276,7 +276,7 @@ class AuthenticationController extends Controller
             $id_agent                 = false;
             $nameUser                 = false;
             $logged                   = false;
-            $menu                     = array();
+            $menu                     = [];
             $currency                 = false;
             $language                 = false;
             $isAdmin                  = false;
@@ -317,7 +317,7 @@ class AuthenticationController extends Controller
         } else {
             $logo = file_exists('resources/images/logo_custom.png') ? 'resources/images/logo_custom.png' : 'resources/images/logo.png';
         }
-        echo json_encode(array(
+        echo json_encode([
             'id'                       => $id_user,
             'id_agent'                 => $id_agent,
             'name'                     => $nameUser,
@@ -355,7 +355,7 @@ class AuthenticationController extends Controller
             'showMCDashBoard'          => $this->config['global']['showMCDashBoard'],
             'hidden_prices'            => $hidden_prices,
             'hidden_batch_update'      => $hidden_batch_update,
-        ));
+        ]);
     }
 
     public function actionGoogleAuthenticator()
@@ -382,10 +382,10 @@ class AuthenticationController extends Controller
             $sussess = false;
         }
         //$sussess = true;
-        echo json_encode(array(
+        echo json_encode([
             'success' => $sussess,
             'msg'     => Yii::app()->session['name_user'],
-        ));
+        ]);
 
     }
 
@@ -399,10 +399,10 @@ class AuthenticationController extends Controller
         $errors          = '';
 
         $modelUser = User::model()->find("id LIKE :id_user AND password LIKE :currentPassword",
-            array(
+            [
                 ":id_user"         => $id_user,
                 ":currentPassword" => $currentPassword,
-            ));
+            ]);
 
         if (isset($modelUser->id)) {
             try
@@ -419,10 +419,10 @@ class AuthenticationController extends Controller
             $msg = yii::t('yii', 'Current Password incorrect.');
         }
 
-        echo json_encode(array(
+        echo json_encode([
             'success' => $passwordChanged,
             'msg'     => $msg,
-        ));
+        ]);
     }
 
     public function actionImportLogo()
@@ -440,10 +440,10 @@ class AuthenticationController extends Controller
             move_uploaded_file($_FILES["logo"]["tmp_name"], $uploadfile);
         }
 
-        echo json_encode(array(
+        echo json_encode([
             'success' => true,
             'msg'     => 'Refresh the system to see the new logo',
-        ));
+        ]);
     }
 
     public function actionImportWallpapers()
@@ -466,10 +466,10 @@ class AuthenticationController extends Controller
             $success = false;
             $msg     = $this->getErrorMySql($e);
         }
-        echo json_encode(array(
+        echo json_encode([
             'success' => $success,
             'msg'     => $msg,
-        ));
+        ]);
 
     }
 
@@ -494,21 +494,21 @@ class AuthenticationController extends Controller
         foreach ($colors as $key => $color) {
             $types = ['crisp', 'neptune', 'triton'];
             foreach ($types as $key => $type) {
-                exec("yes | cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/");
+                LinuxAccess::exec("yes | cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/");
             }
         }
 
-        echo json_encode(array(
+        echo json_encode([
             'success' => $success,
             'msg'     => $msg,
-        ));
+        ]);
     }
 
     public function actionForgetPassword()
     {
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
-            $modelUser = User::model()->findAll('email =:key', array(':key' => $_POST['email']));
+            $modelUser = User::model()->findAll('email =:key', [':key' => $_POST['email']]);
             if (is_array($modelUser) && count($modelUser) > 1) {
                 $success = false;
                 $msg     = "Email in use more than 1 account, contact administrator";
@@ -538,10 +538,10 @@ class AuthenticationController extends Controller
             $msg     = "Email not found";
         }
 
-        echo json_encode(array(
+        echo json_encode([
             'success' => $success,
             'msg'     => $msg,
-        ));
+        ]);
 
     }
 
@@ -565,14 +565,14 @@ class AuthenticationController extends Controller
 
     public function verifyLogin()
     {
-        $modelLogUsers = LogUsers::model()->findAll(array(
+        $modelLogUsers = LogUsers::model()->findAll([
             'condition' => 'ip = :key AND date > date_sub(now(), interval 5 minute)',
-            'params'    => array(
+            'params'    => [
                 ':key' => $_SERVER['REMOTE_ADDR'],
-            ),
+            ],
             'order'     => 'id DESC',
             'limit'     => 3,
-        ));
+        ]);
 
         if (is_array($modelLogUsers) && count($modelLogUsers) < 3) {
             return;
@@ -580,11 +580,11 @@ class AuthenticationController extends Controller
 
         if (preg_match('/IP blocked after 3 failing attempts. IP: /', $modelLogUsers[0]->description)) {
             Yii::app()->session['logged'] = false;
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
                 'msg'     => "IP blocked after 3 failing attempts. Wait 5 minutes and try again.",
                 'ip'      => $_SERVER['REMOTE_ADDR'],
-            ));
+            ]);
             exit;
         }
 
@@ -597,10 +597,10 @@ class AuthenticationController extends Controller
 
         if ($invalid >= 3) {
             Yii::app()->session['logged'] = false;
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
                 'msg'     => Yii::t('zii', "IP blocked after 3 failing attempts.") . "<br><b>" . Yii::t('zii', "Wait 5 minutes and try again.") . "</b>" . "<br> IP: " . $_SERVER['REMOTE_ADDR'],
-            ));
+            ]);
             $nameMsg = $this->nameMsg;
 
             $info = 'IP blocked after 3 failing attempts. IP: ' . $_SERVER['REMOTE_ADDR'];
@@ -615,35 +615,35 @@ class AuthenticationController extends Controller
     {
         if (strlen($this->config['global']['reCaptchaSecret']) > 10 && strlen($this->config['global']['reCaptchaKey']) > 10) {
             $post_data = http_build_query(
-                array(
+                [
                     'secret'   => $this->config['global']['reCaptchaSecret'],
                     'response' => $_POST['key'],
-                )
+                ]
             );
 
-            $opts = array('http' => array(
+            $opts = ['http' => [
                 'method'  => 'POST',
                 'header'  => 'Content-type: application/x-www-form-urlencoded',
                 'content' => $post_data,
-            ),
-            );
+            ],
+            ];
 
             $context  = stream_context_create($opts);
             $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
             try {
                 $response = json_decode($response);
             } catch (Exception $e) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
                     'msg'     => 'Invalid captcha json' . print_r($response, true),
-                ));
+                ]);
                 exi;
             }
             if ($response->success != true || $response->hostname != $_SERVER['HTTP_HOST']) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
                     'msg'     => 'Invalid captcha. Refresh the page to generate new code',
-                ));
+                ]);
                 exit;
             }
         }

@@ -35,8 +35,8 @@ class ConvertAudiotoGSMCommand extends ConsoleCommand
             foreach ($audios as $key => $audio) {
 
                 echo 'Convert ' . $audio . " to GSM\n";
-                exec('sox ' . $this->diretory . $audio . ' ' . $this->diretory . substr($audio, 0, -4) . '.gsm');
-                exec('rm -rf ' . $this->diretory . $audio);
+                LinuxAccess::exec('sox ' . $this->diretory . $audio . ' ' . $this->diretory . substr($audio, 0, -4) . '.gsm');
+                LinuxAccess::exec('rm -rf ' . $this->diretory . $audio);
             }
         }
 
@@ -45,7 +45,7 @@ class ConvertAudiotoGSMCommand extends ConsoleCommand
     public function scan_dir($dir)
     {
 
-        $files = array();
+        $files = [];
         foreach (scandir($dir) as $file) {
             if (substr($file, -4) != '.wav') {
                 continue;

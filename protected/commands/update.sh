@@ -36,6 +36,7 @@ php /var/www/html/mbilling/cron.php UpdateMysql
 ## remove unnecessary directories
 rm -rf /var/www/html/mbilling/doc
 rm -rf /var/www/html/mbilling/script
+rm -rf /var/www/html/mbilling/assets/*
 ## set default permissions 
 touch /etc/asterisk/extensions_magnus_did.conf
 chown -R asterisk:asterisk /var/lib/php/session*

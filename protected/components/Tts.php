@@ -33,7 +33,7 @@ class Tts
 
         $file = 'tts_audio_' . MD5($string);
 
-        if (!file_exists('/tmp/' . $file . '.wav')) {
+        if ( ! file_exists('/tmp/' . $file . '.wav')) {
 
             $tts_url = preg_replace('/\$name/', $name, $config['global']['tts_url']);
 
@@ -52,7 +52,7 @@ class Tts
                 $fp = fopen('/tmp/' . $file . '.wav', 'w');
                 fwrite($fp, file_get_contents($objJson->url));
                 fclose($fp);
-                exec('sox /tmp/' . $file . '.wav -c 1 -r 8000 /tmp/' . $file . '.sln && rm -rf /tmp/' . $file . '.wav');
+                LinuxAccess::exec('sox /tmp/' . $file . '.wav -c 1 -r 8000 /tmp/' . $file . '.sln && rm -rf /tmp/' . $file . '.wav');
 
             } else {
                 if (preg_match("/google/", $tts_url)) {

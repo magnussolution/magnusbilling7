@@ -870,6 +870,10 @@ class BaseController extends CController
 
         $columns = json_decode($_GET['columns'], true);
 
+        if (json_last_error() !== 0) {
+            exit;
+        }
+
         $columns = $this->repaceColumns($columns);
 
         $columns = $this->removeColumns($columns);

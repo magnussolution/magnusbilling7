@@ -19,16 +19,16 @@ class CallSummaryPerTrunkController extends Controller
 {
     public $config;
     public $attributeOrder = 't.id_trunk DESC';
-    public $extraValues    = array('idTrunk' => 'trunkcode');
+    public $extraValues    = ['idTrunk' => 'trunkcode'];
     public $join           = 'JOIN pkg_trunk c ON t.id_trunk = c.id';
 
-    public $fieldsFkReport = array(
-        'id_trunk' => array(
+    public $fieldsFkReport = [
+        'id_trunk' => [
             'table'       => 'pkg_trunk',
             'pk'          => 'id',
             'fieldReport' => 'trunkcode',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -42,18 +42,18 @@ class CallSummaryPerTrunkController extends Controller
 
     public function actionRead($asJson = true, $condition = null)
     {
-        if (!Yii::app()->session['isAdmin']) {
-            echo json_encode(array(
+        if ( ! Yii::app()->session['isAdmin']) {
+            echo json_encode([
                 $this->nameRoot  => [],
                 $this->nameCount => 0,
                 $this->nameSum   => [],
-            ));
+            ]);
             exit;
         }
         parent::actionRead();
     }
 
-    public function recordsExtraSum($records = array())
+    public function recordsExtraSum($records = [])
     {
         foreach ($records as $key => $value) {
             $records[0]->sumsessiontime += $value['sessiontime'] / 60;
@@ -69,7 +69,7 @@ class CallSummaryPerTrunkController extends Controller
         return $records;
     }
 
-    public function getAttributesModels($models, $itemsExtras = array())
+    public function getAttributesModels($models, $itemsExtras = [])
     {
         $attributes = false;
         foreach ($models as $key => $item) {
@@ -121,12 +121,12 @@ class CallSummaryPerTrunkController extends Controller
     public function actionCsv()
     {
 
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
 
-        if (!isset(Yii::app()->session['id_user'])) {
+        if ( ! isset(Yii::app()->session['id_user'])) {
             $info = 'User try export CSV without login';
             MagnusLog::insertLOG(7, $info);
             exit;
@@ -136,6 +136,10 @@ class CallSummaryPerTrunkController extends Controller
         }
 
         $columns = json_decode($_GET['columns'], true);
+
+        if (json_last_error() !== 0) {
+            exit;
+        }
 
         $columns = $this->repaceColumns($columns);
 
@@ -173,7 +177,7 @@ class CallSummaryPerTrunkController extends Controller
         $f = fopen('php://memory', 'w');
 
         foreach ($command->queryAll() as $key => $fields) {
-            $fieldsCsv = array();
+            $fieldsCsv = [];
             foreach ($fields as $key => $value) {
                 array_push($fieldsCsv, $value);
             }
@@ -191,7 +195,7 @@ class CallSummaryPerTrunkController extends Controller
     public function actionExportCsvCalls()
     {
 
-        if (!Yii::app()->session['isAdmin']) {
+        if ( ! Yii::app()->session['isAdmin']) {
             exit;
         }
 
@@ -225,7 +229,7 @@ class CallSummaryPerTrunkController extends Controller
         $f = fopen('php://memory', 'w');
 
         foreach ($command->queryAll() as $key => $fields) {
-            $fieldsCsv = array();
+            $fieldsCsv = [];
             foreach ($fields as $key => $value) {
                 array_push($fieldsCsv, $value);
             }
@@ -247,27 +251,27 @@ class CallSummaryPerTrunkController extends Controller
         if (isset($_POST['filter']) && strlen($_POST['filter']) > 5) {
             $filter = $_POST['filter'];
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Por favor realizar um filtro para reprocesar',
-            ));
+            ]);
             exit;
         }
         $filter = $filter ? $this->createCondition(json_decode($filter)) : '';
 
         $filter = preg_replace("/t\./", '', $filter);
 
-        Trunk::model()->updateAll(array(
+        Trunk::model()->updateAll([
             'call_answered'  => 0,
             'call_total'     => 0,
             'secondusedreal' => 0,
 
-        ), $filter, $this->paramsFilter);
+        ], $filter, $this->paramsFilter);
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
 
     }
 

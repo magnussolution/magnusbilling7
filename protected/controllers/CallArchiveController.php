@@ -23,14 +23,14 @@
 class CallArchiveController extends Controller
 {
     public $attributeOrder = 't.id DESC';
-    public $extraValues    = array(
+    public $extraValues    = [
         'idUser'   => 'username',
         'idPlan'   => 'name',
         'idTrunk'  => 'trunkcode',
         'idPrefix' => 'destination',
-    );
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'username',
         'trunk',
         'buycost',
@@ -39,9 +39,9 @@ class CallArchiveController extends Controller
         'id_user',
         'id_user',
         'provider_name',
-    );
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'trunk',
         'buycost',
         'agent',
@@ -49,31 +49,31 @@ class CallArchiveController extends Controller
         'id_user',
         'id_user',
         'provider_name',
-    );
+    ];
 
-    public $fieldsFkReport = array(
-        'id_user'   => array(
+    public $fieldsFkReport = [
+        'id_user'   => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => "username ",
-        ),
-        'id_trunk'  => array(
+        ],
+        'id_trunk'  => [
             'table'       => 'pkg_trunk',
             'pk'          => 'id',
             'fieldReport' => 'trunkcode',
-        ),
-        'id_prefix' => array(
+        ],
+        'id_prefix' => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        ),
-        'id'        => array(
+        ],
+        'id'        => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        ),
+        ],
 
-    );
+    ];
 
     public function init()
     {
@@ -83,12 +83,12 @@ class CallArchiveController extends Controller
 
         parent::init();
 
-        if (!Yii::app()->session['isAdmin']) {
-            $this->extraValues = array(
+        if ( ! Yii::app()->session['isAdmin']) {
+            $this->extraValues = [
                 'idUser'   => 'username',
                 'idPlan'   => 'name',
                 'idPrefix' => 'destination',
-            );
+            ];
         }
     }
 
@@ -99,12 +99,12 @@ class CallArchiveController extends Controller
     {
         $values = $this->getAttributesRequest();
 
-        if (isset($values['id']) && !$values['id']) {
-            echo json_encode(array(
+        if (isset($values['id']) && ! $values['id']) {
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameRoot    => 'error',
                 $this->nameMsg     => 'Operation no allow',
-            ));
+            ]);
             exit;
         }
         parent::actionSave();
@@ -150,7 +150,7 @@ class CallArchiveController extends Controller
 
             $day = $day[2] . $day[1] . $day[0];
 
-            exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ', $output);
+            $output = LinuxAccess::exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ');
 
             if (isset($output[0])) {
 
@@ -163,8 +163,8 @@ class CallArchiveController extends Controller
                     header("Content-Transfer-Encoding: binary");
                     readfile($output[0]);
                 } else {
-                    exec('rm -rf /var/www/html/mbilling/tmp/*');
-                    exec('cp -rf ' . $output[0] . ' /var/www/html/mbilling/tmp/');
+                    LinuxAccess::exec('rm -rf /var/www/html/mbilling/tmp/*');
+                    LinuxAccess::exec('cp -rf ' . $output[0] . ' /var/www/html/mbilling/tmp/');
                     echo '<body style="margin:0px;padding:0px;overflow:hidden">
                             <iframe src="../../tmp/' . end($file_name) . '" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
                         </body>';
@@ -191,11 +191,11 @@ class CallArchiveController extends Controller
 
             $this->filter = $this->extraFilter($filter);
 
-            $criteria = new CDbCriteria(array(
+            $criteria = new CDbCriteria([
                 'condition' => $this->filter,
                 'params'    => $this->paramsFilter,
                 'with'      => $this->relationFilter,
-            ));
+            ]);
             if (count($ids)) {
                 $criteria->addInCondition('t.id', $ids);
             }
@@ -203,7 +203,7 @@ class CallArchiveController extends Controller
 
             $folder = $this->magnusFilesDirectory . 'monitor';
 
-            if (!file_exists($folder)) {
+            if ( ! file_exists($folder)) {
                 mkdir($folder, 0777, true);
             }
             array_map('unlink', glob("$folder/*"));
@@ -216,19 +216,19 @@ class CallArchiveController extends Controller
                     $username = $records->idUser->username;
 
                     $mix_monitor_format = $this->config['global']['MixMonitor_format'];
-                    exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . $uniqueid . '* ' . $folder . '/');
+                    LinuxAccess::exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . $uniqueid . '* ' . $folder . '/');
                 }
 
-                exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
+                LinuxAccess::exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
 
                 $file_name = 'records_' . Yii::app()->session['username'] . '.tar.gz';
                 $path      = $folder . '/' . $file_name;
                 header('Content-type: application/tar+gzip');
 
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => true,
                     $this->nameMsg     => 'success',
-                ));
+                ]);
 
                 header('Content-Description: File Transfer');
                 header("Content-Type: application/x-tar");
@@ -241,12 +241,12 @@ class CallArchiveController extends Controller
                 if (readfile($path)) {
                     unlink($path);
                 }
-                exec("rm -rf $folder/*");
+                LinuxAccess::exec("rm -rf $folder/*");
             } else {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Audio no found',
-                ));
+                ]);
                 exit;
             }
         }
@@ -267,13 +267,13 @@ class CallArchiveController extends Controller
         $this->filter = $this->fixedWhere ? $filter . ' ' . $this->fixedWhere : $filter;
         $this->filter = $this->extraFilter($filter);
 
-        $modelCall = $this->abstractModel->find(array(
+        $modelCall = $this->abstractModel->find([
             'select'    => 'SUM(t.buycost) AS sumbuycost, SUM(t.sessionbill) AS sumsessionbill ',
             'join'      => $this->join,
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
             'with'      => $this->relationFilter,
-        ));
+        ]);
 
         $modelCall->sumbuycost     = number_format($modelCall->sumbuycost, 4);
         $modelCall->sumsessionbill = number_format($modelCall->sumsessionbill, 4);

@@ -45,40 +45,40 @@ class DidwwController extends Controller
 
         if (isset($_POST['Did']['confirmation'])) {
 
-            $this->render('order', array(
+            $this->render('order', [
                 'did'    => $did,
                 'status' => $this->orderDid(),
 
-            ));
+            ]);
 
         } else if (isset($_POST['Did']['did'])) {
 
-            $this->render('confirmation', array(
+            $this->render('confirmation', [
                 'did'    => $did,
                 'dids'   => $this->confirmeDid($_POST['Did']['did']),
                 'profit' => $this->profit,
 
-            ));
+            ]);
 
         } elseif (isset($_POST['Did']['city'])) {
-            $this->render('did', array(
+            $this->render('did', [
                 'did'  => $did,
                 'dids' => $this->getDids($_POST['Did']['city']),
 
-            ));
+            ]);
 
         } else if (isset($_POST['Did']['country'])) {
 
-            $this->render('city', array(
+            $this->render('city', [
                 'did'    => $did,
                 'cities' => $this->getCities($_POST['Did']['country']),
-            ));
+            ]);
 
         } else {
-            $this->render('country', array(
+            $this->render('country', [
                 'did'       => $did,
                 'countries' => $this->getCountries(),
-            ));
+            ]);
         }
 
     }
@@ -86,7 +86,7 @@ class DidwwController extends Controller
     public function confirmeDid($id_did)
     {
 
-        $result = exec("
+        $result = LinuxAccess::exec("
         curl -H 'Accept: application/vnd.api+json' \
         -H  'Api-Key: " . $this->api_key . "' \
         '" . $this->url . "/available_dids/" . $id_did . "?include=did_group.stock_keeping_units'");
@@ -137,7 +137,7 @@ class DidwwController extends Controller
         $attributes = json_encode($attributes);
 
         //order reservation
-        $result = exec("
+        $result = LinuxAccess::exec("
         curl -H 'Content-Type: application/vnd.api+json' \
         -H 'Accept: application/vnd.api+json' \
         -H  'Api-Key: " . $this->api_key . "' \
@@ -170,14 +170,14 @@ class DidwwController extends Controller
     public function getDids($id_city)
     {
 
-        $result = exec("
+        $result = LinuxAccess::exec("
         curl -H 'Accept: application/vnd.api+json' \
         -H  'Api-Key: " . $this->api_key . "' \
         '" . $this->url . "/available_dids?filter\[city.id\]=" . $id_city . "'");
 
         $dids = json_decode($result);
 
-        if (!isset($dids->data[0]->id)) {
+        if ( ! isset($dids->data[0]->id)) {
 
             echo 'We not have DID to this city. <a href="' . $_SERVER['REQUEST_URI'] . '"> Click here to restart<a/>';
             exit;
@@ -204,7 +204,7 @@ class DidwwController extends Controller
 
             $url = $this->url . "/cities?filter\[country.id\]=" . $country_id . '&page\[number\]=' . $i;
 
-            $result_url = exec("
+            $result_url = LinuxAccess::exec("
             curl -H 'Accept: application/vnd.api+json' \
                  -H  'Api-Key: " . $this->api_key . "' \
                  '$url'");
@@ -225,7 +225,7 @@ class DidwwController extends Controller
 
         }
 
-        if (!isset($result[0])) {
+        if ( ! isset($result[0])) {
 
             echo 'We not have DID to this city. <a href="' . $_SERVER['REQUEST_URI'] . '"> Click here to restart<a/>';
             exit;
@@ -238,7 +238,7 @@ class DidwwController extends Controller
     public function getCountries()
     {
 
-        $result = exec("
+        $result = LinuxAccess::exec("
         curl -H 'Accept: application/vnd.api+json' \
              -H  'Api-Key: " . $this->api_key . "' \
              '" . $this->url . "/countries'");

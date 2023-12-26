@@ -11,12 +11,8 @@ class LinuxAccess
 
     public static function exec($command)
     {
-        return exec($command);
-    }
-
-    public static function system($command)
-    {
-        return exec($command);
+        Yii::log($command, 'error');
+        return exec($command, $output);
     }
 
     public static function getDirectoryDiskSpaceUsed($filter = '*', $directory = '/var/spool/asterisk/monitor/')

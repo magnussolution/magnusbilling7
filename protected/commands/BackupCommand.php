@@ -21,6 +21,8 @@ class BackupCommand extends ConsoleCommand
 {
     public function run($args)
     {
+
+        LinuxAccess::exec("rm -f /var/wwww/html/mbilling/assets/*");
         $dbString = explode('dbname=', Yii::app()->db->connectionString);
         $dataBase = end($dbString);
 

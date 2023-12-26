@@ -31,11 +31,11 @@ class DidwwwCommand extends ConsoleCommand
         foreach ($modelDid as $key => $did) {
 
             $order_id = explode('=', $did->description);
-            if (!isset($order_id[1])) {
+            if ( ! isset($order_id[1])) {
                 continue;
             }
 
-            $result = exec("
+            $result = LinuxAccess::exec("
                 curl -H 'Content-Type: application/vnd.api+json' \
                 -H 'Accept: application/vnd.api+json' \
                 -H  'Api-Key: " . $api_key . "' \
@@ -49,7 +49,7 @@ class DidwwwCommand extends ConsoleCommand
                 //discount credit of customer
                 $priceDid = $did->connection_charge + $did->fixrate;
 
-                $modelSip = Sip::model()->find('id_user = :key', array(':key' => $did->id_user));
+                $modelSip = Sip::model()->find('id_user = :key', [':key' => $did->id_user]);
 
                 $modelDiddestination              = new Diddestination;
                 $modelDiddestination->id_user     = $did->id_user;
