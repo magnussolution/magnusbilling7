@@ -59,6 +59,9 @@ Ext.define('MBilling.view.alarm.List', {
                     case 7:
                         value = t('Total calls per user');
                         break;
+                    case 8:
+                        value = t('Failed calls per trunk');
+                        break;
                 }
                 return value
             },

@@ -548,7 +548,7 @@ class DidAgi
                     $dialToIPs = '';
                     foreach ($ips as $key => $ip) {
                         if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                            $dialToIPs .= 'SIP/' . $ip . '&';
+                            $dialToIPs .= 'SIP/' . $this->did . '@' . $ip . '&';
                         }
                     }
                     $dialToIPs = substr($dialToIPs, 0, -1);
