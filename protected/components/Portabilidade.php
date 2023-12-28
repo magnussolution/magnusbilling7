@@ -41,7 +41,7 @@ class Portabilidade
                     $user = $config['global']['portabilidadeUsername'];
                     $pass = $config['global']['portabilidadePassword'];
                     $url  = "http://portabilidadecelular.com/painel/consulta_numero.php?user=" . $user . "&pass=" . $pass . "&seache_number=" . $destination . "";
-                    if (!$operadora = @file_get_contents($url, false)) {
+                    if ( ! $operadora = @file_get_contents($url, false)) {
                         $operadora = '55999';
                     }
 
@@ -55,10 +55,10 @@ class Portabilidade
                         $command->bindValue(":key", substr($ddd, 0, 6), PDO::PARAM_STR);
                         $result = $command->queryAll();
 
-                        $radiosRn1 = array('55377,55390,55391');
+                        $radiosRn1 = ['55377,55390,55391'];
 
                         //se nao for radio, adiciono o 9º digito
-                        if (!count($result) || !in_array($row[0]['company'], $radiosRn1)) {
+                        if ( ! count($result) || ! in_array($row[0]['company'], $radiosRn1)) {
                             $ddd = substr($ddd, 0, 2) . 9 . substr($ddd, 2);
                         }
 

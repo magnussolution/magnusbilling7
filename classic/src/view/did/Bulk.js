@@ -141,6 +141,7 @@ Ext.define('MBilling.view.did.Bulk', {
         if (!me.down('form').isValid()) {
             return;
         }
+        me.down('form').setLoading(true);
         Ext.Ajax.setTimeout(1000000);
         me.down('form').submit({
             url: 'index.php/diddestination/bulkdestinatintion',
@@ -156,13 +157,14 @@ Ext.define('MBilling.view.did.Bulk', {
                     Ext.ux.Alert.alert(t('Error'), obj.errors, 'error');
                 }
                 btn.enable();
-                me.list.setLoading(false);
+                me.down('form').setLoading(false);
                 store.load();
                 me.close();
             },
             failure: function(form, action) {
                 var obj = Ext.decode(action.response.responseText),
                     errors = Helper.Util.convertErrorsJsonToString(obj.errors);
+                me.down('form').setLoading(false);
                 if (!Ext.isObject(obj.errors)) {
                     Ext.ux.Alert.alert(me.titleError, t(errors), 'error');
                 } else {

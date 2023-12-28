@@ -45,7 +45,7 @@ class AccessManager
 
     private function getResult($canDoIt)
     {
-        if (in_array($this->module, self::$config['only_admin']) && !Yii::app()->session['isAdmin']) {
+        if (in_array($this->module, self::$config['only_admin']) && ! Yii::app()->session['isAdmin']) {
             return false;
         }
 
@@ -86,14 +86,14 @@ class AccessManager
         $filterUser = '((s.username COLLATE utf8_bin = :key OR s.email COLLATE utf8_bin LIKE :key) AND UPPER(MD5(s.password)) = :key1)';
         $filterSip  = '(t.name COLLATE utf8_bin = :key AND UPPER(MD5(t.secret)) = :key1 )';
         $modelSip   = Sip::model()->find(
-            array(
+            [
                 'condition' => $filterUser . ' OR ' . $filterSip,
                 'join'      => 'LEFT JOIN pkg_user s ON t.id_user = s.id',
-                'params'    => array(
+                'params'    => [
                     ':key'  => trim($user),
                     ':key1' => trim(strtoupper($pass)),
-                ),
-            ));
+                ],
+            ]);
         return $modelSip;
     }
 
@@ -102,14 +102,14 @@ class AccessManager
         $filterUser = '((s.username COLLATE utf8_bin = :key OR s.email COLLATE utf8_bin LIKE :key) AND UPPER(SHA1(s.password)) = :key1)';
         $filterSip  = '(t.name COLLATE utf8_bin = :key AND UPPER(SHA1(t.secret)) = :key1 )';
         $modelSip   = Sip::model()->find(
-            array(
+            [
                 'condition' => $filterUser . ' OR ' . $filterSip,
                 'join'      => 'LEFT JOIN pkg_user s ON t.id_user = s.id',
-                'params'    => array(
+                'params'    => [
                     ':key'  => trim($user),
                     ':key1' => trim(strtoupper($pass)),
-                ),
-            ));
+                ],
+            ]);
         return $modelSip;
     }
 }

@@ -102,10 +102,10 @@ class SendCreditReload
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Accept: application/com.reloadly.topups-v1+json",
             "Authorization: Bearer " . $access_token,
-        ));
+        ]);
 
         $response = curl_exec($ch);
         curl_close($ch);
@@ -141,11 +141,11 @@ class SendCreditReload
             ]);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestFields);
 
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 "Content-Type: application/json",
                 "Accept: application/com.reloadly.topups-v1+json",
                 "Authorization: Bearer " . $access_token,
-            ));
+            ]);
 
             $response = curl_exec($ch);
             curl_close($ch);
@@ -179,25 +179,25 @@ class SendCreditReload
         curl_setopt($ch, CURLOPT_POST, true);
 
         $requestFields = json_encode([
-            'recipientPhone'   => [
+            'recipientPhone' => [
                 'countryCode' => $countryCode,
                 'number'      => '+' . $number],
-            'senderPhone'      => [
+            'senderPhone'    => [
                 'countryCode' => 'US',
                 'number'      => '+13059547862',
             ],
-            'operatorId'       => $operatorId,
-            'amount'           => $send_value_to_api,
+            'operatorId'     => $operatorId,
+            'amount'         => $send_value_to_api,
             //'customIdentifier' => 'Transaction from user ' . Yii::app()->session['username'] . ' ' . time(),
 
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $requestFields);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Content-Type: application/json",
             "Accept: application/com.reloadly.topups-v1+json",
             "Authorization: Bearer " . $access_token,
-        ));
+        ]);
 
         $response = curl_exec($ch);
         curl_close($ch);

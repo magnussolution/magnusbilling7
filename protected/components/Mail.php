@@ -162,19 +162,19 @@ class Mail
     public function __construct($type, $id_user = null, $id_agent = null, $msg = null, $title = null)
     {
 
-        if (!empty($type)) {
+        if ( ! empty($type)) {
             $this->type  = $type;
             $modelUser   = User::model()->findByPk((int) $id_user);
             $modelConfig = Configuration::model()->find('config_key = "ip_servers"');
 
             $modelTemplate = TemplateMail::model()->find('mailtype = :key AND language = :key1 AND id_user = :key2',
-                array(
+                [
                     ':key'  => $type,
                     ':key1' => $modelUser->language,
                     ':key2' => $modelUser->id_user,
-                ));
+                ]);
 
-            if (!isset($modelTemplate->id)) {
+            if ( ! isset($modelTemplate->id)) {
                 return;
             }
 
@@ -202,7 +202,7 @@ class Mail
                 return true;
             }
 
-        } elseif (!empty($msg) || !empty($title)) {
+        } elseif ( ! empty($msg) || ! empty($title)) {
             $this->message = $msg;
             $this->title   = $title;
         } else {
@@ -222,7 +222,7 @@ class Mail
             $modelUser->credit_notification = '';
             $modelUser->language            = $modelAgent->language;
         }
-        if (!empty($this->message) || !empty($this->title)) {
+        if ( ! empty($this->message) || ! empty($this->title)) {
             $credit   = round($real_credit, 3);
             $currency = isset($modelUser->currency) ? $modelUser->currency : null;
 
@@ -254,7 +254,7 @@ class Mail
             $this->replaceInEmail(self::$CUSTOMER_CREDIT_NOTIFICATION, $modelUser->credit_notification);
             $this->replaceInEmail(self::$CANCEL_CREDIT_NOTIFICATION_URL, 'http://' . $modelConfig->config_value . '/mbilling/index.php/authentication/cancelCreditNotification?id=' . $modelUser->id . '&key=' . sha1($modelUser->id . $modelUser->username . $modelUser->password));
             $this->replaceInEmail(self::$TIME_KEY, date('Y-m-d H:i:s'));
-            $OBS = !isset($OBS) ? $this->replaceInEmail(self::$OBS, '') : $OBS;
+            $OBS =  ! isset($OBS) ? $this->replaceInEmail(self::$OBS, '') : $OBS;
 
             $this->replaceInEmail(self::$SYSTEM_CURRENCY, $currency);
         }
@@ -329,8 +329,8 @@ class Mail
     public function send($to_email = null)
     {
 
-        $this->from_email = !empty($this->from_email) ? $this->from_email : $to_email;
-        $this->to_email   = !empty($to_email) ? $to_email : $this->to_email;
+        $this->from_email =  ! empty($this->from_email) ? $this->from_email : $to_email;
+        $this->to_email   =  ! empty($to_email) ? $to_email : $this->to_email;
 
         if (strlen($this->to_email) < 5) {
             return;
@@ -345,9 +345,9 @@ class Mail
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                curl_setopt($curl, CURLOPT_HTTPHEADER, [
                     "Content-Type: application/json",
-                ));
+                ]);
                 curl_setopt($curl, CURLOPT_URL,
                     "$result->url"
                 );
@@ -357,9 +357,9 @@ class Mail
             }
         }
 
-        $modelSmtps = Smtps::model()->find('id_user = :key', array(':key' => $this->id_agent));
+        $modelSmtps = Smtps::model()->find('id_user = :key', [':key' => $this->id_agent]);
 
-        if (!isset($modelSmtps->id)) {
+        if ( ! isset($modelSmtps->id)) {
             return;
         }
         $smtp_host       = $modelSmtps->host;

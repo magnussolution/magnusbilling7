@@ -22,26 +22,26 @@ class SmsSend
     public static function send($modelUser, $destination, $text, $id_phonenumber = 0, $sms_from = '', $providerResult = '')
     {
 
-        if (!isset($modelUser->id)) {
-            return array(
+        if ( ! isset($modelUser->id)) {
+            return [
                 'success' => false,
                 'errors'  => Yii::t('zii', 'Error : Authentication Error!'),
-            );
+            ];
         }
 
-        if (!$destination || !$text) {
-            return array(
+        if ( ! $destination || ! $text) {
+            return [
                 'success' => false,
                 'errors'  => Yii::t('zii', 'Disallowed action'),
-            );
+            ];
         }
 
         //VERIFICA SE O CLIENTE TEM CREDITO
         if (UserCreditManager::checkGlobalCredit($modelUser->id) === false) {
-            return array(
+            return [
                 'success' => false,
                 'errors'  => Yii::t('zii', 'Error : You do not have enough credit to send SMS!'),
-            );
+            ];
         }
 
         /*protabilidade*/
@@ -56,11 +56,11 @@ class SmsSend
 
             $modelRate = Rate::model()->searchAgentRate($destination, $modelUser->id_plan);
 
-            if (!count($modelRate)) {
-                return array(
+            if ( ! count($modelRate)) {
+                return [
                     'success' => false,
                     'errors'  => Yii::t('zii', 'Prefix not found in Agent') . ' ' . $destination,
-                );
+                ];
             }
 
             $rateInitialClientAgent = $modelRate[0]['rateinitial'];
@@ -76,10 +76,10 @@ class SmsSend
         $callTrunk    = $searchTariff->find($destination, $modelUser->id_plan, $modelUser->id);
 
         if ($callTrunk == 0) {
-            return array(
+            return [
                 'success' => false,
                 'errors'  => Yii::t('zii', 'Prefix not found') . ' ' . $destination,
-            );
+            ];
         } else {
 
             $max_len_prefix = strlen($destination);
@@ -110,11 +110,11 @@ class SmsSend
                 $destination = substr($destination, 3);
             }
 
-            if (!isset($modelTrunk->link_sms)) {
-                return array(
+            if ( ! isset($modelTrunk->link_sms)) {
+                return [
                     'success' => false,
                     'errors'  => Yii::t('zii', 'No sms link'),
-                );
+                ];
             }
 
             $linkSms      = $modelTrunk->link_sms;
@@ -151,47 +151,47 @@ class SmsSend
                 $linkSms = preg_replace("/\%id\%/", $id_phonenumber, $linkSms);
             }
             if (strlen($linkSms) < 10) {
-                return array(
+                return [
                     'success' => false,
                     'errors'  => Yii::t('zii', 'Your SMS is not send!') . ' ' . Yii::t('zii', 'Not have link in trunk'),
-                );
+                ];
 
             }
 
-            $arrContextOptions = array(
-                "ssl" => array(
+            $arrContextOptions = [
+                "ssl" => [
                     "verify_peer"      => false,
                     "verify_peer_name" => false,
-                ),
-            );
+                ],
+            ];
 
-            if (!$res = @file_get_contents($linkSms, false, stream_context_create($arrContextOptions))) {
-                return array(
+            if ( ! $res = @file_get_contents($linkSms, false, stream_context_create($arrContextOptions))) {
+                return [
                     'success' => false,
                     'errors'  => Yii::t('zii', 'ERROR, contact us'),
-                );
+                ];
             }
 
             //DESCODIFICA O TESTO DO SMS PARA GRAVAR NO BANCO DE DADOS
             $text = urldecode($text);
 
-            $sussess = !$smsRes == '' && !preg_match("/$smsRes/", $res) ? false : true;
+            $sussess =  ! $smsRes == '' && ! preg_match("/$smsRes/", $res) ? false : true;
 
             if ($providerResult == true && preg_match('/^http/', $modelUser->description)) {
 
                 $data = json_decode($res);
 
-                $options = array(
-                    'http' => array(
+                $options = [
+                    'http' => [
                         'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                         'method'  => 'POST',
                         'content' => http_build_query($data),
-                    ),
-                    "ssl"  => array(
+                    ],
+                    "ssl"  => [
                         "verify_peer"        => false,
                         "verif  y_peer_name" => false,
-                    ),
-                );
+                    ],
+                ];
 
                 $context            = stream_context_create($options);
                 $resultFromProvider = file_get_contents($modelUser->description, false, $context);
@@ -254,14 +254,14 @@ class SmsSend
                 exit;
             } else {
                 if ($sussess == false) {
-                    return array(
+                    return [
                         'success' => false,
                         'errors'  => $msg,
-                    );
+                    ];
                 } else {
-                    return array(
+                    return [
                         'success' => $success,
-                        'msg'     => $msg);
+                        'msg'     => $msg];
                 }
             }
 

@@ -22,7 +22,7 @@ class sqlInject
 
     public static function sanitize($src)
     {
-        $codes = array(
+        $codes = [
             'UPDATE ',
             'SELECT ',
             ' SET ',
@@ -36,7 +36,7 @@ class sqlInject
             'foreign_key',
             'TRUNCATE ',
             'CREATE ',
-        );
+        ];
 
         foreach ($src as $key => $value) {
             foreach ($codes as $code) {
@@ -48,12 +48,12 @@ class sqlInject
                             $info    = 'Trying SQL inject, code: ' . $value . '. Controller => ' . Yii::app()->controller->id;
                             $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
                             MagnusLog::insertLOG(2, $info);
-                            echo json_encode(array(
-                                'rows'  => array(),
+                            echo json_encode([
+                                'rows'  => [],
                                 'count' => 0,
-                                'sum'   => array(),
+                                'sum'   => [],
                                 'msg'   => 'SQL INJECT FOUND',
-                            ));
+                            ]);
                             exit;
                         }
                     }
@@ -63,12 +63,12 @@ class sqlInject
                         $info    = 'Trying SQL inject, code: ' . $value . '. Controller => ' . Yii::app()->controller->id;
                         $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
                         MagnusLog::insertLOG('EDIT', $id_user, $_SERVER['REMOTE_ADDR'], $info);
-                        echo json_encode(array(
-                            'rows'  => array(),
+                        echo json_encode([
+                            'rows'  => [],
                             'count' => 0,
-                            'sum'   => array(),
+                            'sum'   => [],
                             'msg'   => 'SQL INJECT FOUND',
-                        ));
+                        ]);
                         exit;
                     }
                 }

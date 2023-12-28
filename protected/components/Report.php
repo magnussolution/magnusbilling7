@@ -176,7 +176,7 @@ class Report extends FPDF
 
     public function bodyExtra()
     {
-        if (!$this->recordsDetails) {
+        if ( ! $this->recordsDetails) {
             return;
         }
         if (isset($this->secondListTitle)) {
@@ -259,7 +259,7 @@ class Report extends FPDF
 
     public function body()
     {
-        if (!$this->records) {
+        if ( ! $this->records) {
             return;
         }
 
@@ -366,7 +366,7 @@ class Report extends FPDF
                     }
                 }
                 if ($columnRecord != 'connectcharge') {
-                    if (!$columnExists && $columnRecord != 'status') {
+                    if ( ! $columnExists && $columnRecord != 'status') {
                         unset($this->records[$i][$columnRecord]);
                     }
                 }
@@ -379,7 +379,7 @@ class Report extends FPDF
 
     public function writeLine($typeValue, $widthFill, $value, $fieldName)
     {
-        $mapTypes = array(
+        $mapTypes = [
             'integer'          => 'int',
             'smallint'         => 'int',
             'mediumint'        => 'int',
@@ -397,7 +397,7 @@ class Report extends FPDF
             'timestamp'        => 'datetime',
             'boolean'          => 'boolean',
             'tinyint'          => 'boolean',
-        );
+        ];
 
         if ($value == 'blank') {
             return;
@@ -406,7 +406,7 @@ class Report extends FPDF
         $type = strpos($typeValue, '(') ? substr($typeValue, 0, strpos($typeValue, '(')) : $typeValue;
         $type = array_key_exists($type, $mapTypes) ? $mapTypes[$type] : $type;
 
-        if ($fieldName == 'activated' || $fieldName == 'active' || ($fieldName == 'status' && !$type == 'boolean')) {
+        if ($fieldName == 'activated' || $fieldName == 'active' || ($fieldName == 'status' && ! $type == 'boolean')) {
 
             $this->Cell($widthFill, 5, $this->formatActive($value), 0, 0, 'C', true);
             $this->SetTextColor(0, 0, 0);
@@ -488,7 +488,7 @@ class Report extends FPDF
 
     public function writeHeaderGroup($typeValue, $value, $fieldName, $headerGroup)
     {
-        $mapTypes = array(
+        $mapTypes = [
             'integer'          => 'int',
             'smallint'         => 'int',
             'mediumint'        => 'int',
@@ -506,7 +506,7 @@ class Report extends FPDF
             'timestamp'        => 'datetime',
             'boolean'          => 'boolean',
             'tinyint'          => 'boolean',
-        );
+        ];
 
         $type = strpos($typeValue, '(') ? substr($typeValue, 0, strpos($typeValue, '(')) : $typeValue;
         $type = array_key_exists($type, $mapTypes) ? $mapTypes[$type] : $type;

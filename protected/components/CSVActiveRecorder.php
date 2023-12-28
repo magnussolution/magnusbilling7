@@ -8,10 +8,10 @@ class CSVActiveRecorder
     private $translations;
     private $data;
     private $model;
-    private $errors = array();
+    private $errors = [];
     private $aditionalParams;
 
-    public function __construct(array $data, $model, $additionalParams = array())
+    public function __construct(array $data, $model, $additionalParams = [])
     {
 
         $this->model = $model;
@@ -101,7 +101,7 @@ class CSVActiveRecorder
                     $foundTranslation          = true;
                 }
             }
-            if (!$foundTranslation) {
+            if ( ! $foundTranslation) {
                 $resultColumns[$csvColumn] = $csvColumn;
             }
 

@@ -43,11 +43,11 @@ class SendCreditDingConnect
             curl_setopt($ch, CURLOPT_URL, "https://api.dingconnect.com/api/V1/EstimatePrices");
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 'Content-Type: application/json',
                 'Accept: application/json',
                 'api_key: ' . SendCreditDingConnect::getKey(),
-            ));
+            ]);
 
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec($ch);
@@ -89,24 +89,24 @@ class SendCreditDingConnect
         if (preg_match('/^00/', $number)) {
             $number = substr($number, 2);
         }
-        $post = array(
+        $post = [
             "SkuCode"        => $SkuCode,
             "SendValue"      => $send_value_to_api,
             "AccountNumber"  => $number,
             "DistributorRef" => $number,
             "ValidateOnly"   => $test,
-        );
+        ];
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://api.dingconnect.com/api/V1/SendTransfer");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
             'Accept: application/json',
             'api_key: ' . SendCreditDingConnect::getKey(),
-        ));
+        ]);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec($ch);
@@ -135,10 +135,10 @@ class SendCreditDingConnect
 
         curl_setopt($ch, CURLOPT_URL, "https://api.dingconnect.com/api/V1/GetBalance");
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
             'api_key: ' . SendCreditDingConnect::getKey(),
-        ));
+        ]);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -157,10 +157,10 @@ class SendCreditDingConnect
 
         curl_setopt($ch, CURLOPT_URL, "https://api.dingconnect.com/api/V1/GetProducts?providerCodes=$provider_name");
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
             'api_key: ' . SendCreditDingConnect::getKey(),
-        ));
+        ]);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -188,10 +188,10 @@ class SendCreditDingConnect
 
         curl_setopt($ch, CURLOPT_URL, "https://api.dingconnect.com/api/V1/GetProviders?accountNumber=$number");
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
             'api_key: ' . SendCreditDingConnect::getKey(),
-        ));
+        ]);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 

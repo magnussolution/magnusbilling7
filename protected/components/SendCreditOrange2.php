@@ -77,12 +77,12 @@ class SendCreditOrange2
                 break;
         }
 
-        $order = array(
-            "beneficiary"   => array(
+        $order = [
+            "beneficiary"   => [
                 'mobile' => '+' . $post['phone'],
                 "name"   => "ABC",
 
-            ),
+            ],
             "type"          => "bill",
             "billOrderData" => [
                 "billType" => [
@@ -93,7 +93,7 @@ class SendCreditOrange2
             ],
             "targetTotal"   => $post['bill_amount'],
 
-        );
+        ];
 
         return SendCreditOrange2::sendOrder($order);
 
@@ -102,7 +102,7 @@ class SendCreditOrange2
     public static function sendCredit($number, $modelSendCreditRates, $test)
     {
 
-        if (!isset($_POST['TransferToMobile']['meter'])) {
+        if ( ! isset($_POST['TransferToMobile']['meter'])) {
             $order = SendCreditOrange2::sendPayment($number, $modelSendCreditRates, $test);
 
         } else {
@@ -111,16 +111,16 @@ class SendCreditOrange2
                 $modelSendCreditRates->idProduct->product = $_POST['TransferToMobile']['amountValuesBDT'];
             }
 
-            $order = array(
+            $order = [
                 "type"        => "cashpower",
                 "targetTotal" => $modelSendCreditRates->idProduct->product,
-                "beneficiary" => array(
+                "beneficiary" => [
                     'mobile' => '+' . $number,
                     "name"   => "ABC",
 
-                ),
+                ],
                 "meterId"     => $_POST['TransferToMobile']['meter'],
-            );
+            ];
         }
         return SendCreditOrange2::sendOrder($order);
 
@@ -141,15 +141,15 @@ class SendCreditOrange2
             $url = 'https://app.baluwo.com/rest/v1/external/transaction';
         }
 
-        $data = array(
-            "buyer"    => array(
+        $data = [
+            "buyer"    => [
                 "mobile" => "+39370000000",
                 "name"   => "INVIONET",
-            ),
+            ],
             "clientId" => 12,
-            "orders"   => array($order),
+            "orders"   => [$order],
 
-        );
+        ];
 
         $data_string = json_encode($data);
 
@@ -162,10 +162,10 @@ class SendCreditOrange2
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
-        ));
+        ]);
         $output = curl_exec($ch);
         $info   = curl_getinfo($ch);
         curl_close($ch);
@@ -175,7 +175,7 @@ class SendCreditOrange2
             $output = (object) $output;
         }
 
-        if (!isset($output->id) || !is_numeric($output->id)) {
+        if ( ! isset($output->id) || ! is_numeric($output->id)) {
 
             return 'error_txt=' . print_r($output['message'], true);
         }
@@ -197,10 +197,10 @@ class SendCreditOrange2
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
             'Content-Length: 0',
-        ));
+        ]);
         $output = curl_exec($ch);
 
         $info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -320,23 +320,23 @@ class SendCreditOrange2
 
         if (preg_match('/\-/', $modelSendCreditRates->idProduct->product)) {
 
-            $order = array(
+            $order = [
                 "type"        => $type,
                 "targetTotal" => $_POST['TransferToMobile']['amountValuesBDT'],
-                "beneficiary" => array(
+                "beneficiary" => [
                     'mobile' => '+' . $number,
                     "name"   => "ABC",
 
-                ));
+                ]];
         } else {
-            $order = array(
+            $order = [
                 "type"        => $type,
                 "targetTotal" => $modelSendCreditRates->idProduct->product,
-                "beneficiary" => array(
+                "beneficiary" => [
                     'mobile' => '+' . $number,
                     "name"   => "ABC",
 
-                ));
+                ]];
         }
 
         return $order;
