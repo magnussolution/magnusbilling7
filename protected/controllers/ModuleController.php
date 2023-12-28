@@ -25,14 +25,14 @@ class ModuleController extends Controller
     public $defaultSort    = null;
     public $defaultSortDir = null;
     public $fixedWhere     = null;
-    public $extraValues    = array('idModule' => 'text');
+    public $extraValues    = ['idModule' => 'text'];
 
     public $attributeOrder = 't.id_module ASC, priority ASC';
     public $titleReport    = 'Module';
     public $subTitleReport = 'Module';
-    public $rendererReport = array(
+    public $rendererReport = [
         'id_module' => 'idModuletext',
-    );
+    ];
 
     public function init()
     {
@@ -53,14 +53,14 @@ class ModuleController extends Controller
 
     private function getModuleTree($modules)
     {
-        $result = array();
+        $result = [];
 
         foreach ($modules as $model) {
 
             if (empty($model['id_module'])) {
                 $childs = $this->getSubModuleTree($modules, $model['id']);
 
-                array_push($result, array(
+                array_push($result, [
                     'id'        => $model['id'],
                     'text'      => $model['text'],
                     'iconCls'   => $model['icon_cls'],
@@ -68,8 +68,8 @@ class ModuleController extends Controller
                     'rows'      => $childs,
                     'checked'   => false,
                     'expanded'  => $model['id'] == 1 ? true : false,
-                    'leaf'      => !count($childs),
-                ));
+                    'leaf'      =>  ! count($childs),
+                ]);
             }
         }
 
@@ -79,11 +79,11 @@ class ModuleController extends Controller
     private function getSubModuleTree($modules, $idOwner)
     {
         $subModulesOwner = Util::arrayFindByProperty($modules, 'id_module', $idOwner);
-        $result          = array();
+        $result          = [];
 
         foreach ($subModulesOwner as $model) {
-            if (!empty($model['id_module'])) {
-                array_push($result, array(
+            if ( ! empty($model['id_module'])) {
+                array_push($result, [
                     'id'        => $model['id'],
                     'text'      => $model['text'],
                     'iconCls'   => $model['icon_cls'],
@@ -91,9 +91,9 @@ class ModuleController extends Controller
                     'module'    => $model['module'],
                     'checked'   => false,
                     'leaf'      => true,
-                ));
+                ]);
             } else {
-                array_push($result, array(
+                array_push($result, [
                     'id'        => $model['id'],
                     'text'      => $model['text'],
                     'iconCls'   => $model['icon_cls'],
@@ -101,7 +101,7 @@ class ModuleController extends Controller
                     'rows'      => $this->getSubModuleTree($modules, $model['id']),
                     'checked'   => false,
                     'expanded'  => true,
-                ));
+                ]);
             }
         }
 
