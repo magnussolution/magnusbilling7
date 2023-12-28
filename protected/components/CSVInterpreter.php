@@ -6,7 +6,7 @@
 class CSVInterpreter
 {
     private $filename;
-    private $errors = array();
+    private $errors = [];
     private $delimiter;
     private $enclosure;
     private $escape;

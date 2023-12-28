@@ -34,7 +34,7 @@ Ext.define('MBilling.view.did.List', {
             disabled: false
         }, {
             text: t('Bulk DID'),
-            iconCls: 'icon-delete',
+            iconCls: '',
             handler: 'onBulk',
             hidden: !App.user.isAdmin || window.isTablet
         }];

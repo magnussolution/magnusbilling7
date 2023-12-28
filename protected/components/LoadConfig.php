@@ -23,7 +23,7 @@ class Loadconfig
     {
         $modelConfiguration = Configuration::model()->findAll();
 
-        $config = array();
+        $config = [];
         foreach ($modelConfiguration as $conf) {
             $config[$conf->config_group_title][$conf->config_key] = $conf->config_value;
         }

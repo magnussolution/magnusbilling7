@@ -30,7 +30,7 @@ class ConsoleCommand extends CConsoleCommand
 
         define('LOGFILE', 'protected/runtime/' . $this->getName() . '.log');
 
-        if (!defined('PID')) {
+        if ( ! defined('PID')) {
             define("PID", '/var/run/magnus/' . $this->getName() . 'Pid.php');
         }
 

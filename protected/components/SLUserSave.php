@@ -23,7 +23,7 @@ class SLUserSave
     public static function saveUserSLCurl($modelUser, $SLAppToken, $SLAccessToken, $showError = true)
     {
         $url    = "http://api.superlogica.net:80/v2/financeiro/clientes";
-        $params = array("ST_NOME_SAC" => $modelUser->firstname . ' ' . $modelUser->lastname,
+        $params = ["ST_NOME_SAC" => $modelUser->firstname . ' ' . $modelUser->lastname,
             "ST_NOMEREF_SAC"              => $modelUser->username,
             "ST_DIAVENCIMENTO_SAC"        => date('d'),
             "ST_CGC_SAC "                 => $modelUser->doc,
@@ -36,7 +36,7 @@ class SLUserSave
             "SENHA_CONFIRMACAO"           => $modelUser->password,
             "ST_TELEFONE_SAC"             => $modelUser->phone,
             "ST_ENDERECOENTREGA_SAC"      => $modelUser->address,
-        );
+        ];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -46,12 +46,12 @@ class SLUserSave
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $modelUser->getIsNewRecord() ? "POST" : "PUT");
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded",
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded",
             "app_token: " . $SLAppToken,
             "access_token:" . $SLAccessToken,
-        ));
+        ]);
 
-        if (!$modelUser->getIsNewRecord()) {
+        if ( ! $modelUser->getIsNewRecord()) {
             $params['ID_SACADO_SAC'] = $modelUser->id_sacado_sac;
         }
 
@@ -63,11 +63,11 @@ class SLUserSave
 
         if ($response[0]->status != 200 && $showError == true) {
 
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => Yii::t('zii', $response[0]->msg),
-            ));
+            ]);
             exit();
         }
 
@@ -84,22 +84,22 @@ class SLUserSave
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded",
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded",
             "app_token: " . $methodPay->SLAppToken,
             "access_token:" . $methodPay->SLAccessToken,
-        ));
+        ]);
 
-        $SLparams = array("ID_SACADO_SAC" => $modelUser->id_sacado_sac,
+        $SLparams = ["ID_SACADO_SAC" => $modelUser->id_sacado_sac,
             "ST_NOMEREF_SAC"                  => $modelUser->username,
-            "COMPO_RECEBIMENTO"               => array(array(
+            "COMPO_RECEBIMENTO"               => [[
                 'ID_PRODUTO_PRD'     => $methodPay->SLIdProduto,
                 "VL_UNITARIO_PRD"    => $_GET['amount'],
                 "NM_QUANTIDADE_COMP" => 1,
-            )),
+            ]],
             "VL_EMITIDO_RECB"                 => $_GET['amount'],
             "DT_VENCIMENTO_RECB"              => date("m/d/Y", mktime(0, 0, 0, date("m"), date("d") + 7, date("Y"))),
 
-        );
+        ];
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($SLparams));
         $response = (array) json_decode(curl_exec($ch));

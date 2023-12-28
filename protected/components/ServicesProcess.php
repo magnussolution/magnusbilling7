@@ -28,10 +28,10 @@ class ServicesProcess
         foreach ($values['id_services'] as $key => $id_service) {
 
             $modelServicesUse = ServicesUse::model()->find('id = :key AND status = 2',
-                array(
+                [
                     ':key' => (int) $id_service,
-                ));
-            if (!isset($modelServicesUse->id)) {
+                ]);
+            if ( ! isset($modelServicesUse->id)) {
                 continue;
             }
 
@@ -47,10 +47,10 @@ class ServicesProcess
             $success = true;
             $msg     = 'Service was activated';
         }
-        return json_encode(array(
+        return json_encode([
             'success' => $success,
             'msg'     => $msg,
-        ));
+        ]);
 
     }
 
@@ -86,10 +86,10 @@ class ServicesProcess
         } elseif ($modelServicesUse->status == 2) {
             ServicesUse::model()->deleteByPk((int) $id_services);
         }
-        echo json_encode(array(
+        echo json_encode([
             'success' => true,
             'msg'     => 'Service was canceled',
-        ));
+        ]);
     }
 
     public static function buyService($values)
@@ -101,9 +101,9 @@ class ServicesProcess
 
         $modelServices = Services::model()->findByPk((int) $values['id_services']);
 
-        return array(
+        return [
             'amount' => $modelServices->price,
-        );
+        ];
     }
 
     public static function checkStatus($modelServicesUse)
@@ -146,7 +146,7 @@ class ServicesProcess
                 if ($method != 'activation' &&
                     ($modelServicesUse->idUser->disk_space - $modelServicesUse->idServices->disk_space < 1)) {
                     $modelSip = Sip::model()->find('id_user = :key',
-                        array(':key' => $modelServicesUse->id_user)
+                        [':key' => $modelServicesUse->id_user]
                     );
                     $modelSip->record_call = 0;
                     $modelSip->save();
@@ -165,7 +165,7 @@ class ServicesProcess
                 }
                 //deleta as contas voip que superam o limite do servico comprado.
                 if ($method != 'activation') {
-                    $modelSip         = Sip::model()->findAll('id_user = :key', array(':key' => $modelServicesUse->id_user));
+                    $modelSip         = Sip::model()->findAll('id_user = :key', [':key' => $modelServicesUse->id_user]);
                     $totalSipAccounts = isset($modelSip->id);
                     $newLimit         = $modelServicesUse->idUser->sipaccountlimit - $modelServicesUse->idServices->sipaccountlimit;
                     $limitToDelete    = $totalSipAccounts - $newLimit - 1;
@@ -236,7 +236,7 @@ class ServicesProcess
                 $modelUser->credit = $credit > 0 ? $modelUser->credit + $credit : $modelUser->credit - ($credit * -1);
             }
 
-            $modelUser->saveAttributes(array('credit' => $modelUser->credit));
+            $modelUser->saveAttributes(['credit' => $modelUser->credit]);
         }
 
         if ($method == 'activation') {

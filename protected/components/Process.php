@@ -47,7 +47,7 @@ class Process
         } else {
             $fp = fopen($pidfile, "w+");
             if ($fp) {
-                if (!fwrite($fp, "<" . "?php\n\$pid = " . getmypid() . ";\n?" . ">")) {
+                if ( ! fwrite($fp, "<" . "?php\n\$pid = " . getmypid() . ";\n?" . ">")) {
                     die("Can not create pid file!\n");
                 }
 

@@ -218,6 +218,9 @@ class DiddestinationController extends Controller
                 if (strlen($values['context']) && $values['context'] != 'undefined') {
                     $modelDiddestination->context = $values['context'];
                 }
+                if ( ! strlen($values['destination'])) {
+                    $modelDiddestination->destination = '';
+                }
 
                 $values = $this->beforeSave($values);
 
@@ -252,6 +255,11 @@ class DiddestinationController extends Controller
                         if (strlen($values['context']) && $values['context'] != 'undefined') {
                             $modelDiddestination->context = $values['context'];
                         }
+
+                        if ( ! strlen($values['destination'])) {
+                            $modelDiddestination->destination = '';
+                        }
+
                         $values = $this->beforeSave($values);
                         $modelDiddestination->save();
 

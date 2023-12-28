@@ -7,7 +7,7 @@
  */
 class Controller extends BaseController
 {
-    public $nofilterPerAdminGroup = array(
+    public $nofilterPerAdminGroup = [
         'offer',
         'module',
         'methodpay',
@@ -31,18 +31,18 @@ class Controller extends BaseController
         'invoices',
         'statusSystem',
         'firewall',
-    );
+    ];
 
     //Allowed controllers to no admin users use updateall
-    public $controllerAllowUpdateAll = array(
+    public $controllerAllowUpdateAll = [
         'rateCallshop',
         'sendCreditRates',
-    );
+    ];
 
     public function authorizedNoSession($value = false)
     {
 
-        $allow = array(
+        $allow = [
             'site',
             'authentication',
             'overrides/authenticationOR',
@@ -66,7 +66,7 @@ class Controller extends BaseController
             'mercadoPago',
             'molPay',
             'sms',
-        );
+        ];
 
         if ($value) {
 

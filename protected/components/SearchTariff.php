@@ -35,15 +35,15 @@ class SearchTariff
         $agi->verbose($result[0], 25);
         $result = $result[1];
 
-        if (!is_array($result) || count($result) == 0) {
+        if ( ! is_array($result) || count($result) == 0) {
             return 0;
         }
 
         //Select custom rate to user
-        $modelUserRate = UserRate::model()->find('id_prefix = :key AND id_user = :key1', array(
+        $modelUserRate = UserRate::model()->find('id_prefix = :key AND id_user = :key1', [
             ':key'  => $result[0]['id_prefix'],
             ':key1' => $id_user,
-        ));
+        ]);
 
         //change custom rate to user
         if (isset($modelUserRate->id)) {

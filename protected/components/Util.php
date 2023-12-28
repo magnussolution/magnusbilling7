@@ -23,7 +23,7 @@ class Util
 
     public static function arrayFindByProperty($array, $key, $value)
     {
-        $results = array();
+        $results = [];
 
         if (is_array($array)) {
             if (isset($array[$key]) && $array[$key] == $value) {
@@ -60,7 +60,7 @@ class Util
 
             if (isset($_SESSION['id_group']) && Yii::app()->session['id_group'] > 0) {
                 $modeGroupUser = GroupUser::model()->find('id = :key',
-                    array(':key' => Yii::app()->session['id_group']));
+                    [':key' => Yii::app()->session['id_group']]);
             }
 
             if (isset($modeGroupUser->id) && strlen($modeGroupUser->user_prefix) > 0) {
@@ -71,7 +71,7 @@ class Util
 
             while ($existsUsername) {
                 $randUserName   = $prefix . Util::generatePassword($length, false, false, true, false) . "\n";
-                $countUsername  = User::model()->count('username LIKE :key', array(':key' => $randUserName));
+                $countUsername  = User::model()->count('username LIKE :key', [':key' => $randUserName]);
                 $existsUsername = ($countUsername > 0);
             }
         } elseif ($required == false) {
@@ -89,7 +89,7 @@ class Util
 
         while ($existsUsername) {
             $randUserName  = mt_rand(10000, 99999);
-            $countUsername = User::model()->count('username LIKE :key', array(':key' => $randUserName));
+            $countUsername = User::model()->count('username LIKE :key', [':key' => $randUserName]);
 
             $existsUsername = ($countUsername > 0);
         }
@@ -102,7 +102,7 @@ class Util
 
         while ($existsUsername) {
             $randUserName  = mt_rand(10000, 99999);
-            $countUsername = Sip::model()->count('name LIKE :key', array(':key' => $randUserName));
+            $countUsername = Sip::model()->count('name LIKE :key', [':key' => $randUserName]);
 
             $existsUsername = ($countUsername > 0);
         }
@@ -178,9 +178,9 @@ class Util
 
         while ($existsLock_pin) {
             $randLock_Pin  = mt_rand(100000, 999999);
-            $countLock_pin = Signup::model()->count(array(
+            $countLock_pin = Signup::model()->count([
                 'condition' => "callingcard_pin LIKE '$randLock_Pin'",
-            ));
+            ]);
 
             $existsLock_pin = ($countLock_pin > 0);
         }
@@ -189,12 +189,12 @@ class Util
 
     public static function unique_multidim_array($array, $key)
     {
-        $temp_array = array();
+        $temp_array = [];
         $i          = 0;
-        $key_array  = array();
+        $key_array  = [];
 
         foreach ($array as $val) {
-            if (!in_array($val[$key], $key_array)) {
+            if ( ! in_array($val[$key], $key_array)) {
                 $key_array[$i]  = $val[$key];
                 $temp_array[$i] = $val;
             }
@@ -205,12 +205,12 @@ class Util
 
     public static function unique_multidim_obj($obj, $key)
     {
-        $temp_array = array();
+        $temp_array = [];
         $i          = 0;
-        $key_array  = array();
+        $key_array  = [];
 
         foreach ($obj as $val) {
-            if (!in_array($val->$key, $key_array)) {
+            if ( ! in_array($val->$key, $key_array)) {
                 $key_array[$i]  = $val->$key;
                 $temp_array[$i] = $val;
             }
@@ -225,11 +225,11 @@ class Util
         if (count($code) != 3) {
             return false;
         } else {
-            return array(
+            return [
                 'date'     => $code[0],
                 'username' => $code[1],
                 'id_user'  => $code[2],
-            );
+            ];
         }
     }
 

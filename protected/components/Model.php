@@ -41,13 +41,13 @@ class Model extends CActiveRecord
     {
 
         if (isset($this->name)) {
-            $modelTrunk = Trunk::model()->find('trunkcode = :key', array(':key' => $this->name));
+            $modelTrunk = Trunk::model()->find('trunkcode = :key', [':key' => $this->name]);
             if (isset($modelTrunk->id)) {
                 $this->addError($attribute, Yii::t('zii', 'This username is in use by a trunk'));
             }
         } else if (isset($this->trunkcode)) {
 
-            $modelSip = Sip::model()->find('name = :key', array(':key' => $this->trunkcode));
+            $modelSip = Sip::model()->find('name = :key', [':key' => $this->trunkcode]);
             if (isset($modelSip->id)) {
                 $this->addError($attribute, Yii::t('zii', 'This trunk name is in use by a SIP user'));
             }
@@ -57,13 +57,13 @@ class Model extends CActiveRecord
 
     public function generateRules($rules = [])
     {
-        $table = array($this->getTableSchema($this->tableName()));
+        $table = [$this->getTableSchema($this->tableName())];
 
-        $required  = array();
-        $integers  = array();
-        $numerical = array();
-        $length    = array();
-        $safe      = array();
+        $required  = [];
+        $integers  = [];
+        $numerical = [];
+        $length    = [];
+        $safe      = [];
 
         foreach ($table[0]->columns as $column) {
 
@@ -71,7 +71,7 @@ class Model extends CActiveRecord
                 continue;
             }
 
-            $r = !$column->allowNull && $column->defaultValue === null;
+            $r =  ! $column->allowNull && $column->defaultValue === null;
             if ($r) {
                 $required[] = $column->name;
             }
@@ -82,31 +82,31 @@ class Model extends CActiveRecord
                 $numerical[] = $column->name;
             } elseif ($column->type === 'string' && $column->size > 0) {
                 $length[$column->size][] = $column->name;
-            } elseif (!$column->isPrimaryKey && !$r) {
+            } elseif ( ! $column->isPrimaryKey && ! $r) {
                 $safe[] = $column->name;
             }
 
         }
-        if ($required !== array()) {
+        if ($required !== []) {
 
             $rules[] = [implode(', ', $required), 'required'];
         }
 
-        if ($integers !== array()) {
+        if ($integers !== []) {
             $rules[] = [implode(', ', $integers), 'numerical', 'integerOnly' => true];
         }
 
-        if ($numerical !== array()) {
+        if ($numerical !== []) {
             $rules[] = [implode(', ', $numerical), 'numerical'];
         }
 
-        if ($length !== array()) {
+        if ($length !== []) {
             foreach ($length as $len => $cols) {
                 $rules[] = [implode(', ', $cols), 'length', 'max' => $len];
             }
 
         }
-        if ($safe !== array()) {
+        if ($safe !== []) {
             $rules[] = [implode(', ', $safe), 'safe'];
         }
 
