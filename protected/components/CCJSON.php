@@ -59,12 +59,12 @@ class CCJSON extends CJSON
                         case $ord_var_c == 0x2F:
                         case $ord_var_c == 0x5C:
                             // double quote, slash, slosh
-                            $ascii .= '\\' . $var{$c}
+                            $ascii .= '\\' . $var{$c};
                             break;
 
                         case (($ord_var_c >= 0x20) && ($ord_var_c <= 0x7F)):
                             // characters U-00000000 - U-0000007F (same as ASCII)
-                            $ascii .= $var{$c}
+                            $ascii .= $var{$c};
                             break;
 
                         case (($ord_var_c & 0xE0) == 0xC0):
@@ -152,19 +152,19 @@ class CCJSON extends CJSON
                 // treat as a JSON object
                 if (is_array($var) && count($var) && (array_keys($var) !== range(0, sizeof($var) - 1))) {
                     return '{' .
-                    join(',', array_map(['CJSON', 'nameValue'],
+                    join(',', array_map(array('CJSON', 'nameValue'),
                         array_keys($var),
                         array_values($var)))
                         . '}';
                 }
 
                 // treat it like a regular array
-                return '[' . join(',', array_map(['CJSON', 'encode'], $var)) . ']';
+                return '[' . join(',', array_map(array('CJSON', 'encode'), $var)) . ']';
 
             case 'object':
                 if ($var instanceof Traversable) {
                     $var  = get_parent_class($var) === 'Model' ? $var->getAttributes() : $var;
-                    $vars = [];
+                    $vars = array();
                     foreach ($var as $k => $v) {
                         $vars[$k] = $v;
                     }
@@ -174,7 +174,7 @@ class CCJSON extends CJSON
                 }
 
                 return '{' .
-                join(',', array_map(['CJSON', 'nameValue'],
+                join(',', array_map(array('CJSON', 'nameValue'),
                     array_keys($vars),
                     array_values($vars)))
                     . '}';

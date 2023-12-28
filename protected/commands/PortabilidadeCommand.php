@@ -85,25 +85,35 @@ class PortabilidadeCommand extends CConsoleCommand
     public function checkDID($args)
     {
 
+        $arrContextOptions = [
+            "ssl" => [
+                "verify_peer"      => false,
+                "verify_peer_name" => false,
+            ],
+        ];
+
         $modelDid = Did::model()->findAll();
 
         foreach ($modelDid as $key => $did) {
 
             $url = "https://consultas.portabilidadecelular.com/painel/consulta_numero.php?user=" . $args[0] . "&pass=" . $args[1] . "&seache_number=" . $did->did . "&completo";
-            if ( ! $result = @file_get_contents($url, false)) {
+
+            if ( ! $result = @file_get_contents($url, false, stream_context_create($arrContextOptions))) {
+
                 $did->country = 'Operadora não identificada';
             } else {
                 $res = preg_split('/\|/', $result);
+            }
+
+            if ( ! isset($res[1])) {
+                print_r($result);
+                continue;
             }
 
             if ($res == 55998) {
                 $did->country = 'Sem crédito';
             } else {
 
-                if ( ! isset($res[1])) {
-                    print_r($result);
-                    continue;
-                }
                 if ($res[1]) {
                     $did->country = $res[3] . ' ' . $res[2];
                 } else {
