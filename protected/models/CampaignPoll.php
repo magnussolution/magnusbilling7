@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,16 +52,16 @@ class CampaignPoll extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('name, id_campaign', 'required'),
-            array('id_user,ordem_exibicao, repeat, id_campaign, digit_authorize, request_authorize',
-                'numerical', 'integerOnly' => true),
-            array('name, arq_audio', 'length', 'max' => 100),
-            array('option0, option1, option2, option3, option4, option5, option6, option7, option8, option9',
-                'length', 'max' => 300),
-            array('description', 'length', 'max' => 300),
+        $rules = [
+            ['name, id_campaign', 'required'],
+            ['id_user,ordem_exibicao, repeat, id_campaign, digit_authorize, request_authorize',
+                'numerical', 'integerOnly' => true],
+            ['name, arq_audio', 'length', 'max' => 100],
+            ['option0, option1, option2, option3, option4, option5, option6, option7, option8, option9',
+                'length', 'max' => 300],
+            ['description', 'length', 'max' => 300],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -70,9 +70,9 @@ class CampaignPoll extends Model
      */
     public function relations()
     {
-        return array(
-            'idCampaign' => array(self::BELONGS_TO, 'Campaign', 'id_campaign'),
-            'idUser'     => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idCampaign' => [self::BELONGS_TO, 'Campaign', 'id_campaign'],
+            'idUser'     => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

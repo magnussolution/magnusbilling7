@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,12 +53,12 @@ class Diddestination extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('id_user, id_queue, id_sip, id_ivr, id_did, priority, activated, secondusedreal, voip_call', 'numerical', 'integerOnly' => true),
-            array('destination', 'length', 'max' => 120),
-            array('context', 'safe'),
-        );
+        $rules = [
+            ['id_user', 'required'],
+            ['id_user, id_queue, id_sip, id_ivr, id_did, priority, activated, secondusedreal, voip_call', 'numerical', 'integerOnly' => true],
+            ['destination', 'length', 'max' => 120],
+            ['context', 'safe'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -67,13 +67,13 @@ class Diddestination extends Model
      */
     public function relations()
     {
-        return array(
-            'idDid'   => array(self::BELONGS_TO, 'Did', 'id_did'),
-            'idUser'  => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idIvr'   => array(self::BELONGS_TO, 'Ivr', 'id_ivr'),
-            'idQueue' => array(self::BELONGS_TO, 'Queue', 'id_queue'),
-            'idSip'   => array(self::BELONGS_TO, 'Sip', 'id_sip'),
-        );
+        return [
+            'idDid'   => [self::BELONGS_TO, 'Did', 'id_did'],
+            'idUser'  => [self::BELONGS_TO, 'User', 'id_user'],
+            'idIvr'   => [self::BELONGS_TO, 'Ivr', 'id_ivr'],
+            'idQueue' => [self::BELONGS_TO, 'Queue', 'id_queue'],
+            'idSip'   => [self::BELONGS_TO, 'Sip', 'id_sip'],
+        ];
     }
 
     public function beforeSave()

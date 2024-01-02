@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -33,9 +33,9 @@ class TemplateMailController extends Controller
         $this->titleReport   = Yii::t('zii', 'Emails');
 
         if (Yii::app()->session['isAdmin']) {
-            $this->relationFilter['idUser'] = array(
+            $this->relationFilter['idUser'] = [
                 'condition' => "idUser.id  = 1",
-            );
+            ];
 
             parent::init();
 
@@ -47,9 +47,9 @@ class TemplateMailController extends Controller
     {
         //se é agente filtrar pelo user.id_user
 
-        $this->relationFilter['idUser'] = array(
+        $this->relationFilter['idUser'] = [
             'condition' => "idUser.id LIKE :agfby",
-        );
+        ];
 
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
 

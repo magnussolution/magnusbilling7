@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,11 +52,11 @@ class SipTrace extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('status,timeout,in_use', 'numerical', 'integerOnly' => true),
-            array('filter', 'length', 'max' => 50),
-            array('port', 'length', 'max' => 7),
-        );
+        $rules = [
+            ['status,timeout,in_use', 'numerical', 'integerOnly' => true],
+            ['filter', 'length', 'max' => 50],
+            ['port', 'length', 'max' => 7],
+        ];
         return $this->getExtraField($rules);
     }
 }

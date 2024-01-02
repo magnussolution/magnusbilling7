@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -62,24 +62,24 @@ class Call extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user, id_plan, calledstation', 'required'),
-            array('id_user, id_plan, id_campaign, id_server, id_trunk, sessiontime, real_sessiontime, sipiax', 'numerical', 'integerOnly' => true),
-            array('uniqueid, starttime, src, calledstation,
-                terminatecauseid, buycost, sessionbill,  agent_bill, callerid', 'length', 'max' => 50),
-        );
+        $rules = [
+            ['id_user, id_plan, calledstation', 'required'],
+            ['id_user, id_plan, id_campaign, id_server, id_trunk, sessiontime, real_sessiontime, sipiax', 'numerical', 'integerOnly' => true],
+            ['uniqueid, starttime, src, calledstation,
+                terminatecauseid, buycost, sessionbill,  agent_bill, callerid', 'length', 'max' => 50],
+        ];
         return $this->getExtraField($rules);
     }
 
     public function relations()
     {
-        return array(
-            'idPrefix'   => array(self::BELONGS_TO, 'Prefix', 'id_prefix'),
-            'idPlan'     => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-            'idTrunk'    => array(self::BELONGS_TO, 'Trunk', 'id_trunk'),
-            'idUser'     => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idCampaign' => array(self::BELONGS_TO, 'Campaign', 'id_campaign'),
-            'idServer'   => array(self::BELONGS_TO, 'Servers', 'id_server'),
-        );
+        return [
+            'idPrefix'   => [self::BELONGS_TO, 'Prefix', 'id_prefix'],
+            'idPlan'     => [self::BELONGS_TO, 'Plan', 'id_plan'],
+            'idTrunk'    => [self::BELONGS_TO, 'Trunk', 'id_trunk'],
+            'idUser'     => [self::BELONGS_TO, 'User', 'id_user'],
+            'idCampaign' => [self::BELONGS_TO, 'Campaign', 'id_campaign'],
+            'idServer'   => [self::BELONGS_TO, 'Servers', 'id_server'],
+        ];
     }
 }

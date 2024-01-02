@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,22 +23,22 @@
 class PhoneBookController extends Controller
 {
     public $attributeOrder      = 't.name ASC';
-    public $extraValues         = array('idUser' => 'username');
+    public $extraValues         = ['idUser' => 'username'];
     public $filterByUser        = true;
     public $defaultFilterByUser = 'b.id_user';
     public $join                = 'JOIN pkg_user b ON t.id_user = b.id';
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
-    public $fieldsInvisibleClient = array(
+        ],
+    ];
+    public $fieldsInvisibleClient = [
         'id_user',
         'idCardusername',
-    );
+    ];
 
     public function init()
     {
@@ -63,7 +63,7 @@ class PhoneBookController extends Controller
     {
         $filter       = isset($_REQUEST['filter']) ? $_REQUEST['filter'] : null;
         $filter       = $this->createCondition(json_decode($filter));
-        $this->filter = !preg_match("/status/", $filter) ? ' AND status = 1' : '';
+        $this->filter =  ! preg_match("/status/", $filter) ? ' AND status = 1' : '';
         parent::actionRead($asJson = true, $condition = null);
     }
 

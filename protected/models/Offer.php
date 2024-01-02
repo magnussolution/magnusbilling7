@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,10 +52,10 @@ class Offer extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('packagetype, id_user, billingtype, startday, freetimetocall,initblock, billingblock, minimal_time_charge', 'numerical', 'integerOnly' => true),
-            array('label, price', 'length', 'max' => 70),
-        );
+        $rules = [
+            ['packagetype, id_user, billingtype, startday, freetimetocall,initblock, billingblock, minimal_time_charge', 'numerical', 'integerOnly' => true],
+            ['label, price', 'length', 'max' => 70],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -64,8 +64,8 @@ class Offer extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

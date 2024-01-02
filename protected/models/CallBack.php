@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,13 +52,13 @@ class CallBack extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user,num_attempt, id_server_group,id_did,sessiontime', 'numerical', 'integerOnly' => true),
-            array('uniqueid, server_ip', 'length', 'max' => 40),
-            array('status, callerid', 'length', 'max' => 10),
-            array('channel, exten, account, context, timeout, priority', 'length', 'max' => 60),
-            array('variable', 'length', 'max' => 300),
-        );
+        $rules = [
+            ['id_user,num_attempt, id_server_group,id_did,sessiontime', 'numerical', 'integerOnly' => true],
+            ['uniqueid, server_ip', 'length', 'max' => 40],
+            ['status, callerid', 'length', 'max' => 10],
+            ['channel, exten, account, context, timeout, priority', 'length', 'max' => 60],
+            ['variable', 'length', 'max' => 300],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -67,10 +67,10 @@ class CallBack extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idDid'  => array(self::BELONGS_TO, 'Did', 'id_did'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+            'idDid'  => [self::BELONGS_TO, 'Did', 'id_did'],
+        ];
     }
 
     public function beforeSave()

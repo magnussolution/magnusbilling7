@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -90,17 +90,17 @@ class SendCreditSummaryController extends Controller
 
         }
          */
-        $modelSendCreditSummary = SendCreditSummary::model()->findAll(array(
+        $modelSendCreditSummary = SendCreditSummary::model()->findAll([
             'select'    => $this->select,
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
             'order'     => 'date DESC, service',
-        ));
+        ]);
 
-        $this->render('index', array(
+        $this->render('index', [
             'model'                  => $model,
             'modelSendCreditSummary' => $modelSendCreditSummary,
-        ));
+        ]);
         exit;
 
         parent::actionRead();

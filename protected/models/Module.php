@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -71,11 +71,11 @@ class Module extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('text', 'required'),
-            array('id_module,priority', 'numerical', 'integerOnly' => true),
-            array('text, icon_cls', 'length', 'max' => 100),
-        );
+        $rules = [
+            ['text', 'required'],
+            ['id_module,priority', 'numerical', 'integerOnly' => true],
+            ['text, icon_cls', 'length', 'max' => 100],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -84,12 +84,12 @@ class Module extends Model
      */
     public function relations()
     {
-        return array(
-            'groupUsers'   => array(self::MANY_MANY, 'GroupUser', 'group_module(id_module, id_group)'),
-            'groupModules' => array(self::HAS_MANY, 'GroupModule', 'id_module'),
-            'idModule'     => array(self::BELONGS_TO, 'Module', 'id_module'),
-            'modules'      => array(self::HAS_MANY, 'Module', 'id_module'),
-            'idUserType'   => array(self::BELONGS_TO, 'UserType', 'id_user_type'),
-        );
+        return [
+            'groupUsers'   => [self::MANY_MANY, 'GroupUser', 'group_module(id_module, id_group)'],
+            'groupModules' => [self::HAS_MANY, 'GroupModule', 'id_module'],
+            'idModule'     => [self::BELONGS_TO, 'Module', 'id_module'],
+            'modules'      => [self::HAS_MANY, 'Module', 'id_module'],
+            'idUserType'   => [self::BELONGS_TO, 'UserType', 'id_user_type'],
+        ];
     }
 }

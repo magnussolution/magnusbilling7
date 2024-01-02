@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -19,13 +19,13 @@
  */
 $configFile = '/etc/asterisk/res_config_mysql.conf';
 $array      = parse_ini_file($configFile);
-return array(
+return [
     'basePath'       => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name'           => 'cron',
-    'preload'        => array('log'),
+    'preload'        => ['log'],
     'language'       => 'en',
     'sourceLanguage' => 'en',
-    'import'         => array(
+    'import'         => [
         'application.models.*',
         'application.components.*',
         'application.components.AGI.*',
@@ -33,48 +33,48 @@ return array(
         'ext.phpAGI.AGI',
         'ext.phpAGI.AGI_AsteriskManager',
         'ext.fpdf.FPDF',
-    ),
-    'components'     => array(
-        'mail'         => array(
+    ],
+    'components'     => [
+        'mail'         => [
             'class'            => 'ext.yii-mail.YiiMail',
             'transportType'    => 'smtp',
-            'transportOptions' => array(
+            'transportOptions' => [
                 'host'       => '',
                 'encryption' => '',
                 'username'   => '',
                 'password'   => '',
                 'port'       => '',
                 'encryption' => '',
-            ),
+            ],
             'viewPath'         => 'application.views.mails',
             'logging'          => true,
             'dryRun'           => false,
-        ),
-        'db'           => array(
+        ],
+        'db'           => [
             'connectionString' => 'mysql:host=' . $array['dbhost'] . ';dbname=' . $array['dbname'] . '',
             'emulatePrepare'   => true,
             'username'         => $array['dbuser'],
             'password'         => $array['dbpass'],
             'charset'          => 'utf8',
-            'attributes'       => array(
+            'attributes'       => [
                 PDO::MYSQL_ATTR_LOCAL_INFILE => true,
-            ),
-        ),
-        'coreMessages' => array(
+            ],
+        ],
+        'coreMessages' => [
             'basePath' => 'locale/php',
-        ),
-        'log'          => array(
+        ],
+        'log'          => [
             'class'  => 'CLogRouter',
-            'routes' => array(
-                array(
+            'routes' => [
+                [
                     'class'   => 'CFileLogRoute',
                     'logFile' => 'cron.log',
                     'levels'  => 'error, fatal',
-                ),
-            ),
-        ),
-        'cache'        => array(
+                ],
+            ],
+        ],
+        'cache'        => [
             'class' => 'system.caching.CDbCache',
-        ),
-    ),
-);
+        ],
+    ],
+];

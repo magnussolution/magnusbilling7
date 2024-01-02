@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -22,21 +22,21 @@
 
 class TrunkController extends Controller
 {
-    public $extraValues    = array('idProvider' => 'provider_name', 'failoverTrunk' => 'trunkcode');
+    public $extraValues    = ['idProvider' => 'provider_name', 'failoverTrunk' => 'trunkcode'];
     public $nameFkRelated  = 'failover_trunk';
     public $attributeOrder = 'id';
-    public $fieldsFkReport = array(
-        'id_provider'    => array(
+    public $fieldsFkReport = [
+        'id_provider'    => [
             'table'       => 'pkg_provider',
             'pk'          => 'id',
             'fieldReport' => 'provider_name',
-        ),
-        'failover_trunk' => array(
+        ],
+        'failover_trunk' => [
             'table'       => 'pkg_trunk',
             'pk'          => 'id',
             'fieldReport' => 'trunkcode',
-        ),
-    );
+        ],
+    ];
     public function init()
     {
         $this->instanceModel = new Trunk;
@@ -57,15 +57,15 @@ class TrunkController extends Controller
         }
 
         if ((isset($values['register']) && $values['register'] == 1 && isset($values['register_string']))
-            && !preg_match("/^.{3}.*:.{3}.*@.{5}.*\/.{3}.*/", $values['register_string'])) {
-            echo json_encode(array(
+            && ! preg_match("/^.{3}.*:.{3}.*@.{5}.*\/.{3}.*/", $values['register_string'])) {
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => [
                     'register'        => Yii::t('zii', 'Invalid register string. Only use register option to Trunk authentication via user and password.'),
                     'register_string' => Yii::t('zii', 'Invalid register string'),
                 ],
-            ));
+            ]);
             exit();
         }
 
@@ -136,11 +136,11 @@ class TrunkController extends Controller
         }
         $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, fromdomain,fromuser, register_string,port,transport,encryption,sendrpid,maxuse,sip_config';
         $model  = Trunk::model()->findAll(
-            array(
+            [
                 'select'    => $select,
                 'condition' => 'providertech = :key AND status = 1',
-                'params'    => array(':key' => 'sip'),
-            ));
+                'params'    => [':key' => 'sip'],
+            ]);
 
         if (count($model)) {
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
@@ -148,11 +148,11 @@ class TrunkController extends Controller
 
         $select = 'trunkcode, user, secret, disallow, allow, directmedia, context, dtmfmode, insecure, nat, qualify, type, host, register_string,sip_config';
         $model  = Trunk::model()->findAll(
-            array(
+            [
                 'select'    => $select,
                 'condition' => 'providertech = :key AND status = 1',
-                'params'    => array(':key' => 'iax2'),
-            ));
+                'params'    => [':key' => 'iax2'],
+            ]);
 
         if (count($model)) {
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/iax_magnus.conf', 'trunkcode');

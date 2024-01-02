@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -24,18 +24,18 @@ class SLUserSave
     {
         $url    = "http://api.superlogica.net:80/v2/financeiro/clientes";
         $params = ["ST_NOME_SAC" => $modelUser->firstname . ' ' . $modelUser->lastname,
-            "ST_NOMEREF_SAC"              => $modelUser->username,
-            "ST_DIAVENCIMENTO_SAC"        => date('d'),
-            "ST_CGC_SAC "                 => $modelUser->doc,
-            "ST_CEP_SAC"                  => $modelUser->zipcode,
-            "ST_ENDERECO_SAC"             => $modelUser->address,
-            "ST_CIDADE_SAC"               => $modelUser->city,
-            "ST_ESTADO_SAC"               => $modelUser->state,
-            "ST_EMAIL_SAC"                => $modelUser->email,
-            "SENHA"                       => $modelUser->password,
-            "SENHA_CONFIRMACAO"           => $modelUser->password,
-            "ST_TELEFONE_SAC"             => $modelUser->phone,
-            "ST_ENDERECOENTREGA_SAC"      => $modelUser->address,
+            "ST_NOMEREF_SAC"         => $modelUser->username,
+            "ST_DIAVENCIMENTO_SAC"   => date('d'),
+            "ST_CGC_SAC "            => $modelUser->doc,
+            "ST_CEP_SAC"             => $modelUser->zipcode,
+            "ST_ENDERECO_SAC"        => $modelUser->address,
+            "ST_CIDADE_SAC"          => $modelUser->city,
+            "ST_ESTADO_SAC"          => $modelUser->state,
+            "ST_EMAIL_SAC"           => $modelUser->email,
+            "SENHA"                  => $modelUser->password,
+            "SENHA_CONFIRMACAO"      => $modelUser->password,
+            "ST_TELEFONE_SAC"        => $modelUser->phone,
+            "ST_ENDERECOENTREGA_SAC" => $modelUser->address,
         ];
 
         $ch = curl_init();
@@ -90,14 +90,14 @@ class SLUserSave
         ]);
 
         $SLparams = ["ID_SACADO_SAC" => $modelUser->id_sacado_sac,
-            "ST_NOMEREF_SAC"                  => $modelUser->username,
-            "COMPO_RECEBIMENTO"               => [[
+            "ST_NOMEREF_SAC"             => $modelUser->username,
+            "COMPO_RECEBIMENTO"          => [[
                 'ID_PRODUTO_PRD'     => $methodPay->SLIdProduto,
                 "VL_UNITARIO_PRD"    => $_GET['amount'],
                 "NM_QUANTIDADE_COMP" => 1,
             ]],
-            "VL_EMITIDO_RECB"                 => $_GET['amount'],
-            "DT_VENCIMENTO_RECB"              => date("m/d/Y", mktime(0, 0, 0, date("m"), date("d") + 7, date("Y"))),
+            "VL_EMITIDO_RECB"            => $_GET['amount'],
+            "DT_VENCIMENTO_RECB"         => date("m/d/Y", mktime(0, 0, 0, date("m"), date("d") + 7, date("Y"))),
 
         ];
 

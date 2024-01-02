@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class LogUsers extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user, id_log_actions', 'numerical', 'integerOnly' => true),
-            array('date', 'length', 'max' => 100),
-            array('ip', 'length', 'max' => 16),
-            array('description', 'safe'),
-        );
+        $rules = [
+            ['id_user, id_log_actions', 'numerical', 'integerOnly' => true],
+            ['date', 'length', 'max' => 100],
+            ['ip', 'length', 'max' => 16],
+            ['description', 'safe'],
+        ];
         return $this->getExtraField($rules);
     }
     /**
@@ -65,9 +65,9 @@ class LogUsers extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser'       => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idLogActions' => array(self::BELONGS_TO, 'LogActions', 'id_log_actions'),
-        );
+        return [
+            'idUser'       => [self::BELONGS_TO, 'User', 'id_user'],
+            'idLogActions' => [self::BELONGS_TO, 'LogActions', 'id_log_actions'],
+        ];
     }
 }

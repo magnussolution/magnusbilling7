@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -26,16 +26,16 @@ class SmsCallbackController extends Controller
     public function actionRead($asJson = true, $condition = null)
     {
 
-        if (!isset($_GET['number']) || !isset($_GET['callerid'])) {
+        if ( ! isset($_GET['number']) || ! isset($_GET['callerid'])) {
             exit;
         }
         $destination = isset($_GET['number']) ? $_GET['number'] : '';
         $callerid    = isset($_GET['callerid']) ? $_GET['callerid'] : '';
         $date        = date('Y-m-d H:i:s');
 
-        $modelCallerid = Callerid::model()->find("cid = :callerid AND activated = 1", array(':callerid' => $callerid));
+        $modelCallerid = Callerid::model()->find("cid = :callerid AND activated = 1", [':callerid' => $callerid]);
 
-        if (!isset($modelCallerid->id)) {
+        if ( ! isset($modelCallerid->id)) {
             $error_msg = Yii::t('zii', 'Error : Authentication Error!');
             echo $error_msg;
             exit;

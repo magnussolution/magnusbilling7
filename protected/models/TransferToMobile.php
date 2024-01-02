@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -74,26 +74,26 @@ class TransferToMobile extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('username, password', 'required'),
-            array('id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
+        $rules = [
+            ['username, password', 'required'],
+            ['id_user, id_group, id_plan, id_offer, active, enableexpire, expiredays,
                     typepaid, creditlimit, credit_notification,sipaccountlimit, restriction,
                     callingcard_pin, callshop, plan_day, active_paypal, boleto,
                     boleto_day, calllimit, disk_space,id_group_agent,transfer_dbbl_rocket_profit,
                     transfer_bkash_profit,transfer_flexiload_profit,transfer_international_profit,
                     transfer_dbbl_rocket,transfer_bkash,transfer_flexiload,transfer_international
-                        ', 'numerical', 'integerOnly' => true),
-            array('language,mix_monitor_format', 'length', 'max' => 5),
-            array('username, zipcode, phone, mobile, vat', 'length', 'max' => 20),
-            array('city, state, country, loginkey', 'length', 'max' => 40),
-            array('lastname, firstname, company_name, redial, prefix_local', 'length', 'max' => 50),
-            array('company_website', 'length', 'max' => 60),
-            array('address, email, description, doc', 'length', 'max' => 100),
-            array('credit', 'type', 'type' => 'double'),
-            array('expirationdate, password, lastuse', 'length', 'max' => 100),
-            array('username', 'unique', 'caseSensitive' => 'false'),
+                        ', 'numerical', 'integerOnly' => true],
+            ['language,mix_monitor_format', 'length', 'max' => 5],
+            ['username, zipcode, phone, mobile, vat', 'length', 'max' => 20],
+            ['city, state, country, loginkey', 'length', 'max' => 40],
+            ['lastname, firstname, company_name, redial, prefix_local', 'length', 'max' => 50],
+            ['company_website', 'length', 'max' => 60],
+            ['address, email, description, doc', 'length', 'max' => 100],
+            ['credit', 'type', 'type' => 'double'],
+            ['expirationdate, password, lastuse', 'length', 'max' => 100],
+            ['username', 'unique', 'caseSensitive' => 'false'],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -106,10 +106,10 @@ class TransferToMobile extends Model
 
     public function relations()
     {
-        return array(
-            'idGroup' => array(self::BELONGS_TO, 'GroupUser', 'id_group'),
-            'idPlan'  => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-            'idUser'  => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idGroup' => [self::BELONGS_TO, 'GroupUser', 'id_group'],
+            'idPlan'  => [self::BELONGS_TO, 'Plan', 'id_plan'],
+            'idUser'  => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

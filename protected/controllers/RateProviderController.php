@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,22 +23,22 @@
 class RateProviderController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array(
+    public $extraValues    = [
         'idProvider' => 'provider_name',
         'idPrefix'   => 'destination,prefix',
-    );
+    ];
 
-    public $fieldsFkReport = array(
-        'id_provider' => array(
+    public $fieldsFkReport = [
+        'id_provider' => [
             'table'       => 'pkg_provider',
             'pk'          => 'id',
             'fieldReport' => 'provider_name',
-        ), 'id_prefix' => array(
+        ], 'id_prefix' => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -81,17 +81,17 @@ class RateProviderController extends Controller
     public function actionImportFromCsv()
     {
 
-        if (!Yii::app()->session['id_user'] || Yii::app()->session['isClient'] == true) {
+        if ( ! Yii::app()->session['id_user'] || Yii::app()->session['isClient'] == true) {
             exit();
         }
         $values = $this->getAttributesRequest();
 
         $this->importRates($values);
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             'msg'              => $this->msgSuccess,
-        ));
+        ]);
     }
 
     public function importPrefixs($values)
@@ -104,10 +104,10 @@ class RateProviderController extends Controller
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
+            ]);
             exit;
 
         }
@@ -117,11 +117,11 @@ class RateProviderController extends Controller
     public function importRates($values)
     {
 
-        if (!isset($_FILES['file']['tmp_name']) || strlen($_FILES['file']['tmp_name']) < 10) {
-            echo json_encode(array(
+        if ( ! isset($_FILES['file']['tmp_name']) || strlen($_FILES['file']['tmp_name']) < 10) {
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'Please select a CSV file'),
-            ));
+            ]);
             exit;
         }
 
@@ -133,16 +133,16 @@ class RateProviderController extends Controller
         $firstLine = explode($values['delimiter'], $firstLine);
 
         if (count($firstLine) < 3) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'CSV format invalid, please check your CSV file and than try again.') . "\n\n" . $firstLine[0],
-            ));
+            ]);
             exit;
         }
 
         $modelPrefix = Prefix::model()->find(1);
 
-        if (!isset($modelPrefix->id)) {
+        if ( ! isset($modelPrefix->id)) {
             $this->importPrefixs($values);
             $modelPrefix = Prefix::model()->find(1);
         }
@@ -159,10 +159,10 @@ class RateProviderController extends Controller
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
+            ]);
             exit;
 
         }
@@ -178,10 +178,10 @@ class RateProviderController extends Controller
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
+            ]);
             exit;
 
         }
@@ -200,10 +200,10 @@ class RateProviderController extends Controller
                 try {
                     Yii::app()->db->createCommand($sql)->execute();
                 } catch (Exception $e) {
-                    echo json_encode(array(
+                    echo json_encode([
                         $this->nameSuccess => false,
                         'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                    ));
+                    ]);
                     exit;
 
                 }
@@ -213,15 +213,15 @@ class RateProviderController extends Controller
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                ));
+                ]);
                 exit;
 
             }
 
-            RateProvider::model()->updateAll(array('dialprefix' => null, 'destination' => null), 'dialprefix > 0');
+            RateProvider::model()->updateAll(['dialprefix' => null, 'destination' => null], 'dialprefix > 0');
 
         }
 
@@ -229,10 +229,10 @@ class RateProviderController extends Controller
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-            ));
+            ]);
             exit;
 
         }

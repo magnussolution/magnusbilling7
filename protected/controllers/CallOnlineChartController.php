@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -25,7 +25,7 @@ class CallOnlineChartController extends Controller
 
     public function init()
     {
-        if (!Yii::app()->session['id_user']) {
+        if ( ! Yii::app()->session['id_user']) {
             die("Access denied to save in module: CallOnlineChart");
             exit;
         }
@@ -65,18 +65,18 @@ class CallOnlineChartController extends Controller
             $group      = 1;
         }
 
-        $modelCallOnlineChart = CallOnlineChart::model()->findAll(array(
+        $modelCallOnlineChart = CallOnlineChart::model()->findAll([
             'select'    => $select,
             'order'     => 'id DESC',
             'group'     => $group,
             'condition' => $filter,
-        ));
+        ]);
 
         # envia o json requisitado
-        echo json_encode(array(
+        echo json_encode([
             $this->nameRoot  => $this->getAttributesModels($modelCallOnlineChart, $this->extraValues),
             $this->nameCount => 0,
-        ));
+        ]);
 
     }
 

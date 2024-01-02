@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class CallOnLine extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'numerical', 'integerOnly' => true),
-            array('canal, tronco, from_ip, sip_account', 'length', 'max' => 50),
-            array('ndiscado, status, duration', 'length', 'max' => 16),
-            array('codec, reinvite', 'length', 'max' => 5),
-        );
+        $rules = [
+            ['id_user', 'numerical', 'integerOnly' => true],
+            ['canal, tronco, from_ip, sip_account', 'length', 'max' => 50],
+            ['ndiscado, status, duration', 'length', 'max' => 16],
+            ['codec, reinvite', 'length', 'max' => 5],
+        ];
         return $this->getExtraField($rules);
 
     }
@@ -67,9 +67,9 @@ class CallOnLine extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
     public function insertCalls($sql)

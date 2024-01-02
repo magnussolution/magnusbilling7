@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,10 +52,10 @@ class ProviderCNL extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_provider, cnl,zone', 'required'),
-            array('zone, cnl', 'length', 'max' => 11),
-        );
+        $rules = [
+            ['id_provider, cnl,zone', 'required'],
+            ['zone, cnl', 'length', 'max' => 11],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -64,9 +64,9 @@ class ProviderCNL extends Model
      */
     public function relations()
     {
-        return array(
-            'idProvider' => array(self::BELONGS_TO, 'Provider', 'id_provider'),
-        );
+        return [
+            'idProvider' => [self::BELONGS_TO, 'Provider', 'id_provider'],
+        ];
     }
 
     public function beforeSave()

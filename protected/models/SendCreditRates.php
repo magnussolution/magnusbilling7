@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,10 +53,10 @@ class SendCreditRates extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user, id_product', 'numerical', 'integerOnly' => true),
-            array('sell_price', 'length', 'max' => 50),
-        );
+        $rules = [
+            ['id_user, id_product', 'numerical', 'integerOnly' => true],
+            ['sell_price', 'length', 'max' => 50],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -65,9 +65,9 @@ class SendCreditRates extends Model
      */
     public function relations()
     {
-        return array(
-            'idProduct' => array(self::BELONGS_TO, 'SendCreditProducts', 'id_product'),
-            'idUser'    => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idProduct' => [self::BELONGS_TO, 'SendCreditProducts', 'id_product'],
+            'idUser'    => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

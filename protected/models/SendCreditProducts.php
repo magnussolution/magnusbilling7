@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,16 +52,16 @@ class SendCreditProducts extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('country_code,status', 'numerical', 'integerOnly' => true),
-            array('country,operator_name,info', 'length', 'max' => 100),
-            array('product,send_value,wholesale_price,provider', 'length', 'max' => 50),
-            array('currency_dest,currency_orig', 'length', 'max' => 3),
-            array('SkuCode', 'length', 'max' => 30),
-            array('operator_id', 'length', 'max' => 11),
-            array('type,retail_price', 'length', 'max' => 50),
+        $rules = [
+            ['country_code,status', 'numerical', 'integerOnly' => true],
+            ['country,operator_name,info', 'length', 'max' => 100],
+            ['product,send_value,wholesale_price,provider', 'length', 'max' => 50],
+            ['currency_dest,currency_orig', 'length', 'max' => 3],
+            ['SkuCode', 'length', 'max' => 30],
+            ['operator_id', 'length', 'max' => 11],
+            ['type,retail_price', 'length', 'max' => 50],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 }

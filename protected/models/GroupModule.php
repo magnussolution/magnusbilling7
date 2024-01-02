@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -65,7 +65,7 @@ class GroupModule extends Model
      */
     public function primaryKey()
     {
-        return array('id_group', 'id_module');
+        return ['id_group', 'id_module'];
     }
 
     /**
@@ -75,11 +75,11 @@ class GroupModule extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_group, id_module', 'required'),
-            array('id_group, id_module, show_menu, createShortCut, createQuickStart', 'numerical', 'integerOnly' => true),
-            array('action', 'length', 'max' => 5),
-        );
+        $rules = [
+            ['id_group, id_module', 'required'],
+            ['id_group, id_module, show_menu, createShortCut, createQuickStart', 'numerical', 'integerOnly' => true],
+            ['action', 'length', 'max' => 5],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -90,10 +90,10 @@ class GroupModule extends Model
      */
     public function relations()
     {
-        return array(
-            'idGroup'  => array(self::BELONGS_TO, 'GroupUser', 'id_group'),
-            'idModule' => array(self::BELONGS_TO, 'Module', 'id_module'),
-        );
+        return [
+            'idGroup'  => [self::BELONGS_TO, 'GroupUser', 'id_group'],
+            'idModule' => [self::BELONGS_TO, 'Module', 'id_module'],
+        ];
     }
 
     public function getGroupModule($id_group, $isClient, $id_user)

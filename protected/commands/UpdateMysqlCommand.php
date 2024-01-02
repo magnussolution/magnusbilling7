@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -1977,6 +1977,15 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->executeDB($sql);
 
             $version = '7.8.4.3';
+            $this->update($version);
+        }
+
+        //2023-11-09
+        if ($version == '7.8.4.3') {
+            $sql = "ALTER TABLE `pkg_user` ADD `inbound_call_limit` INT NOT NULL DEFAULT '-1' AFTER `email_did`;";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.4';
             $this->update($version);
         }
 

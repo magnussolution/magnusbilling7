@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -62,9 +62,9 @@ class CallSummaryPerDay extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('day,id_user,sessiontime,aloc_all_calls,nbcall,buycost,sessionbill,lucro', 'length', 'max' => 50),
-        );
+        $rules = [
+            ['day,id_user,sessiontime,aloc_all_calls,nbcall,buycost,sessionbill,lucro', 'length', 'max' => 50],
+        ];
         return $this->getExtraField($rules);
     }
 

@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -77,7 +77,7 @@ class SipProxyAccountsCommand extends ConsoleCommand
             $sqlproxyadd = 'TRUNCATE address;';
             $sqlproxyadd .= "INSERT INTO $dbname.address (grp,ip,port,context_info) VALUES ";
             $sqlDid = 'TRUNCATE did;';
-            $sqlDid .= "INSERT INTO $dbname.did (did,server) VALUES ";
+            $sqlDid .= "INSERT INTO $dbname.did (did,server,destination) VALUES ";
 
             $dsn = 'mysql:host=' . $hostname . ';dbname=' . $dbname;
 
@@ -89,6 +89,7 @@ class SipProxyAccountsCommand extends ConsoleCommand
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `did` varchar(20) DEFAULT NULL,
                 `server` varchar(20) DEFAULT NULL,
+                `destination` varchar(200) DEFAULT NULL,
                 PRIMARY KEY (`id`),
                 KEY `did` (`did`),
                 KEY `server` (`server`)
@@ -113,8 +114,13 @@ class SipProxyAccountsCommand extends ConsoleCommand
             }
 
             foreach ($modelDid as $key => $did) {
+
                 if (isset($did->idServer->name)) {
-                    $sqlDid .= "('$did->did','" . $did->idServer->host . ":" . $did->idServer->sip_port . "' ),";
+
+                    $modelDidDestination = Diddestination::model()->find('id_did = :key', [':key' => $did->id]);
+
+                    $destination = isset($modelDidDestination->idSip->name) ? $modelDidDestination->idSip->name : '';
+                    $sqlDid .= "('$did->did','" . $did->idServer->host . ":" . $did->idServer->sip_port . "', '" . $destination . "' ),";
                 }
             }
 

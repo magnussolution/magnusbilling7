@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,11 +52,11 @@ class RestrictedPhonenumber extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('id_user, direction', 'numerical', 'integerOnly' => true),
-            array('number', 'length', 'max' => 20),
-        );
+        $rules = [
+            ['id_user', 'required'],
+            ['id_user, direction', 'numerical', 'integerOnly' => true],
+            ['number', 'length', 'max' => 20],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -65,8 +65,8 @@ class RestrictedPhonenumber extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

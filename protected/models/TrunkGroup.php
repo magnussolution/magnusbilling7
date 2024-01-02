@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,12 +53,12 @@ class TrunkGroup extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('name', 'required'),
-            array('type', 'numerical', 'integerOnly' => true),
-            array('description', 'length', 'max' => 500),
-            array('weight', 'match', 'pattern' => '/^[0-9\,]*$|^$/', 'message' => Yii::t('zii', 'Allowed format int,int,int. Ex: 1,2,1,5,3')),
-        );
+        $rules = [
+            ['name', 'required'],
+            ['type', 'numerical', 'integerOnly' => true],
+            ['description', 'length', 'max' => 500],
+            ['weight', 'match', 'pattern' => '/^[0-9\,]*$|^$/', 'message' => Yii::t('zii', 'Allowed format int,int,int. Ex: 1,2,1,5,3')],
+        ];
         return $this->getExtraField($rules);
     }
 

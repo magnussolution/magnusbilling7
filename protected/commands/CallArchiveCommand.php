@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -28,7 +28,7 @@ class CallArchiveCommand extends ConsoleCommand
         CallFailed::model()->createDataBaseIfNotExist();
 
         $c      = 0;
-        $tables = array('pkg_cdr', 'pkg_cdr_failed');
+        $tables = ['pkg_cdr', 'pkg_cdr_failed'];
         foreach ($tables as $key => $table) {
 
             $sql    = "SELECT count(*) AS count FROM $table WHERE $condition ";
@@ -72,7 +72,7 @@ class CallArchiveCommand extends ConsoleCommand
         $prior_cdr_failed_archive_month_delete = $this->config['global']['delete_cdr_failed_archived_prior_x_month'];
 
         $c      = 0;
-        $tables = array('pkg_cdr_archive', 'pkg_cdr_failed_archive');
+        $tables = ['pkg_cdr_archive', 'pkg_cdr_failed_archive'];
         foreach ($tables as $key => $table) {
 
             if ($table == 'pkg_cdr_archive') {

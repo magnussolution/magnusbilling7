@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,7 +23,7 @@
 class CampaignDashBoardController extends Controller
 {
     public $attributeOrder = 't.id DESC';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
     private $uploaddir;
 
     public function init()
@@ -50,35 +50,35 @@ class CampaignDashBoardController extends Controller
         $pkCount = is_array($attributes) || is_object($attributes) ? $attributes : [];
         for ($i = 0; $i < count($pkCount); $i++) {
             //get all campaign phonebook
-            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', array(':key' => $attributes[$i]['id']));
+            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', [':key' => $attributes[$i]['id']]);
 
-            $ids_phone_books = array();
+            $ids_phone_books = [];
             foreach ($modelCampaignPhonebook as $key => $phonebook) {
                 $ids_phone_books[] = $phonebook->id_phonebook;
             }
 
             //Calls Being Placed
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND sip_account LIKE :key1 ',
-                array(
+                [
                     ':key'  => $attributes[$i]['id_user'],
                     ':key1' => 'MC!' . $attributes[$i]['name'] . '%',
-                ));
+                ]);
             $attributes[$i]['callsPlaced'] = $modelCallOnline;
 
             // Calls Ringing
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND status LIKE :key1 ',
-                array(
+                [
                     ':key'  => $attributes[$i]['id_user'],
                     ':key1' => 'Ring%',
-                ));
+                ]);
             $attributes[$i]['callsringing'] = $modelCallOnline;
 
             //Calls in Transfer
             $modelCallOnline = CallOnLine::model()->count('id_user = :key AND status = :key1 ',
-                array(
+                [
                     ':key'  => $attributes[$i]['id_user'],
                     ':key1' => 'Up',
-                ));
+                ]);
             $attributes[$i]['callsInTransfer'] = $modelCallOnline;
 
             //Calls Transfered

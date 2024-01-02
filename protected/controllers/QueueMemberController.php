@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,15 +23,15 @@
 class QueueMemberController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -47,7 +47,7 @@ class QueueMemberController extends Controller
 
         if (isset($values['interface'])) {
             $modelSip = Sip::model()->find("id = :id",
-                array('id' => $values['interface'])
+                ['id' => $values['interface']]
             );
 
             $values['id_user']   = $modelSip->id_user;
@@ -55,7 +55,7 @@ class QueueMemberController extends Controller
         }
         if (isset($values['queue_name'])) {
             $modelQueue = Queue::model()->find("id = :id OR name = :id",
-                array('id' => $values['queue_name'])
+                ['id' => $values['queue_name']]
             );
             $values['queue_name'] = $modelQueue->name;
         }
@@ -72,11 +72,11 @@ class QueueMemberController extends Controller
             $modelQueue = Queue::model()->findByPk((int) $values['queue_name']);
 
             if ($modelSip->id_user != $modelQueue->id_user) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => ['interface' => ['The SIP ACCOUNT must belong to the QUEUE owner']],
-                ));
+                ]);
                 exit;
             }
 
@@ -89,11 +89,11 @@ class QueueMemberController extends Controller
                 $modelQueue = Queue::model()->find('name = :key', [':key' => $modelQueueMember['queue_name']]);
 
                 if ($modelSip->id_user != $modelQueue->id_user) {
-                    echo json_encode(array(
+                    echo json_encode([
                         'success' => false,
-                        'rows'    => array(),
+                        'rows'    => [],
                         'errors'  => ['interface' => ['The SIP ACCOUNT must belong to the QUEUE owner']],
-                    ));
+                    ]);
                     exit;
                 }
             }

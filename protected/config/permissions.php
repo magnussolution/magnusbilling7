@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Heitor Gianastasio Pipet de Oliveira.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -18,6 +18,6 @@
  *
  */
 
-return array(
-    'only_admin' => array('refillprovider', 'provider', 'trunk', 'configuration'),
-);
+return [
+    'only_admin' => ['refillprovider', 'provider', 'trunk', 'configuration'],
+];

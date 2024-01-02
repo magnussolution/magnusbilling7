@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,13 +52,13 @@ class Voucher extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('voucher', 'required'),
-            array('used, id_user, id_plan', 'numerical', 'integerOnly' => true),
-            array('credit', 'numerical'),
-            array('voucher, tag, language, prefix_local', 'length', 'max' => 50),
-            array('usedate, expirationdate', 'safe'),
-        );
+        $rules = [
+            ['voucher', 'required'],
+            ['used, id_user, id_plan', 'numerical', 'integerOnly' => true],
+            ['credit', 'numerical'],
+            ['voucher, tag, language, prefix_local', 'length', 'max' => 50],
+            ['usedate, expirationdate', 'safe'],
+        ];
         return $this->getExtraField($rules);
     }
     /*
@@ -66,9 +66,9 @@ class Voucher extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
     public function beforeSave()
@@ -80,10 +80,10 @@ class Voucher extends Model
             $success = false;
             $msg     = 'Não é possível usar esta opção';
             # retorna o resultado da execucao
-            echo json_encode(array(
+            echo json_encode([
                 'success' => $success,
                 'msg'     => $msg,
-            ));
+            ]);
             exit;
         }
         if ($this->getIsNewRecord()) {

@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -42,9 +42,9 @@ class AtaController extends Controller
         $Profile_Rule = "http://" . $proxy . "/mbilling/index.php/ata?mac=$mac";
         $modelo       = explode(" ", $_SERVER["HTTP_USER_AGENT"]);
 
-        $modelSipuras = Sipuras::model()->find('macadr = :mac', array(':mac' => $mac));
+        $modelSipuras = Sipuras::model()->find('macadr = :mac', [':mac' => $mac]);
 
-        if (!isset($modelSipuras->id)) {
+        if ( ! isset($modelSipuras->id)) {
             echo 'Ata no found';
             $info = 'Username or password is wrong - User ' . $mac . ' from IP - ' . $_SERVER['REMOTE_ADDR'];
             Yii::log($info, 'error');
@@ -62,7 +62,7 @@ class AtaController extends Controller
             $modelSipuras->fultlig      = $date;
 
             //verfica se a senha da linha 1 foi alterada
-            $modelSip = Sip::model()->find('name = :name', array(':name' => $modelSipuras->User_ID_1));
+            $modelSip = Sip::model()->find('name = :name', [':name' => $modelSipuras->User_ID_1]);
 
             if (isset($modelSip->id) && $modelSip->secret != $modelSipuras->Password_1) {
                 $modelSipuras->Password_1 = $modelSip->secret;
@@ -71,7 +71,7 @@ class AtaController extends Controller
             }
 
             //verfica se a senha da linha 2 foi alterada
-            $modelSip = Sip::model()->find("name = :name", array(':name' => $modelSipuras->User_ID_2));
+            $modelSip = Sip::model()->find("name = :name", [':name' => $modelSipuras->User_ID_2]);
 
             if (isset($modelSip->id) && $modelSip->secret != $modelSipuras->Password_2) {
                 $modelSipuras->Password_2 = $modelSip->secret;

@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class Services extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('name, price', 'required'),
-            array('status,disk_space,sipaccountlimit,calllimit,return_credit', 'numerical', 'integerOnly' => true),
-            array('description', 'length', 'min' => 1),
-            array('type', 'length', 'max' => 50),
-        );
+        $rules = [
+            ['name, price', 'required'],
+            ['status,disk_space,sipaccountlimit,calllimit,return_credit', 'numerical', 'integerOnly' => true],
+            ['description', 'length', 'min' => 1],
+            ['type', 'length', 'max' => 50],
+        ];
         return $this->getExtraField($rules);
     }
     /**
@@ -65,9 +65,9 @@ class Services extends Model
      */
     public function relations()
     {
-        return array(
-            'modules'      => array(self::MANY_MANY, 'Module', 'group_module(id_group, id_module)'),
-            'groupModules' => array(self::HAS_MANY, 'GroupModule', 'id_group'),
-        );
+        return [
+            'modules'      => [self::MANY_MANY, 'Module', 'group_module(id_group, id_module)'],
+            'groupModules' => [self::HAS_MANY, 'GroupModule', 'id_group'],
+        ];
     }
 }

@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -29,7 +29,7 @@ class GerencianetCommand extends ConsoleCommand
     public function run($args)
     {
 
-        $modelMethodPay = Methodpay::model()->find('payment_method = :key', array(':key' => 'GerenciaNet'));
+        $modelMethodPay = Methodpay::model()->find('payment_method = :key', [':key' => 'GerenciaNet']);
 
         $clientId     = $modelMethodPay->client_id; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
         $clientSecret = $modelMethodPay->client_secret; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)

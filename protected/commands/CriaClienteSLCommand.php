@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -24,7 +24,7 @@ class CriaClienteSLCommand extends ConsoleCommand
     {
         $modelUser = User::model()->findAll('id_sacado_sac IS NULL AND id_group > 1');
         foreach ($modelUser as $key => $user) {
-            $modelMethodPay = Methodpay::model()->find('payment_method = :key AND active = 0', array(':key' => 'SuperLogica'));
+            $modelMethodPay = Methodpay::model()->find('payment_method = :key AND active = 0', [':key' => 'SuperLogica']);
             if (count($modelMethodPay) > 0) {
 
                 $response = $this->saveUserSLCurl($user, $modelMethodPay->SLAppToken
@@ -43,7 +43,7 @@ class CriaClienteSLCommand extends ConsoleCommand
     {
         $url = "http://api.superlogica.net:80/v2/financeiro/clientes";
 
-        $params = array("ST_NOME_SAC" => $model->firstname . ' ' . $model->lastname,
+        $params = ["ST_NOME_SAC" => $model->firstname . ' ' . $model->lastname,
             "ST_NOMEREF_SAC"              => $model->username,
             "ST_DIAVENCIMENTO_SAC"        => date('d'),
             "ST_CGC_SAC "                 => $model->vat,
@@ -56,7 +56,7 @@ class CriaClienteSLCommand extends ConsoleCommand
             "SENHA"                       => $model->password,
             "SENHA_CONFIRMACAO"           => $model->password,
             "ST_TELEFONE_SAC"             => $model->phone,
-        );
+        ];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -66,10 +66,10 @@ class CriaClienteSLCommand extends ConsoleCommand
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded",
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded",
             "app_token: " . $SLAppToken,
             "access_token:" . $SLAccessToken,
-        ));
+        ]);
 
         $params['identificador'] = '10000' . $model->id;
 
@@ -80,11 +80,11 @@ class CriaClienteSLCommand extends ConsoleCommand
         curl_close($ch);
         if (isset($response[0]->status) && $response[0]->status != 200) {
 
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => Yii::t('zii', $response[0]->msg),
-            ));
+            ]);
 
         }
 

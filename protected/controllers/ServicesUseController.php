@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,13 +23,13 @@
 class ServicesUseController extends Controller
 {
     public $attributeOrder = 'status DESC, DAY( reservationdate ) DESC';
-    public $extraValues    = array('idServices' => 'name,price,type', 'idUser' => 'username');
+    public $extraValues    = ['idServices' => 'name,price,type', 'idUser' => 'username'];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_user',
         'reminded',
         'idUserusername',
-    );
+    ];
     public function init()
     {
         $this->instanceModel = new ServicesUse;

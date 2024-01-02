@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,11 +52,11 @@ class RateAgent extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_plan', 'required'),
-            array('id_plan, id_prefix, initblock, billingblock, minimal_time_charge, package_offer', 'numerical', 'integerOnly' => true),
-            array('rateinitial', 'length', 'max' => 15),
-        );
+        $rules = [
+            ['id_plan', 'required'],
+            ['id_plan, id_prefix, initblock, billingblock, minimal_time_charge, package_offer', 'numerical', 'integerOnly' => true],
+            ['rateinitial', 'length', 'max' => 15],
+        ];
         return $this->getExtraField($rules);
     }
     /**
@@ -64,10 +64,10 @@ class RateAgent extends Model
      */
     public function relations()
     {
-        return array(
-            'idPlan'   => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-            'idPrefix' => array(self::BELONGS_TO, 'Prefix', 'id_prefix'),
-        );
+        return [
+            'idPlan'   => [self::BELONGS_TO, 'Plan', 'id_plan'],
+            'idPrefix' => [self::BELONGS_TO, 'Prefix', 'id_prefix'],
+        ];
     }
 
     public function createAgentRates($model, $id_plan)

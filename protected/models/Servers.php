@@ -54,23 +54,23 @@ class Servers extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('host', 'required'),
-            array('status, weight, last_call_id', 'numerical', 'integerOnly' => true),
-            array('host,name', 'length', 'max' => 100),
-            array('description', 'length', 'max' => 500),
-            array('password, username, last_call', 'length', 'max' => 50),
-            array('type, port, sip_port', 'length', 'max' => 20),
-            array('public_ip', 'length', 'max' => 80),
-            array('password', 'checkpassword'),
-        );
+        $rules = [
+            ['host', 'required'],
+            ['status, weight, last_call_id', 'numerical', 'integerOnly' => true],
+            ['host,name', 'length', 'max' => 100],
+            ['description', 'length', 'max' => 500],
+            ['password, username, last_call', 'length', 'max' => 50],
+            ['type, port, sip_port', 'length', 'max' => 20],
+            ['public_ip', 'length', 'max' => 80],
+            ['password', 'checkpassword'],
+        ];
         return $this->getExtraField($rules);
     }
 
     public function checkpassword($attribute)
     {
 
-        $modelUser = User::model()->find("password = :password", array(':password' => $this->password));
+        $modelUser = User::model()->find("password = :password", [':password' => $this->password]);
         if (is_array($modelUser) && count($modelUser)) {
             $this->addError($attribute, Yii::t('zii', 'This password in in use'));
         }
@@ -79,11 +79,11 @@ class Servers extends Model
     public function getAllAsteriskServers()
     {
 
-        $resultServers[0] = array(
+        $resultServers[0] = [
             'host'     => 'localhost',
             'username' => 'magnus',
             'password' => 'magnussolution',
-        );
+        ];
 
         if ($resultServers[0]['host'] == 'localhost' && file_exists('/etc/asterisk/asterisk2.conf')) {
             $configFile               = '/etc/asterisk/asterisk2.conf';
@@ -92,17 +92,17 @@ class Servers extends Model
         }
 
         $modelServers = Servers::model()->findAll('type = :key AND status = :key1 AND host != :key2',
-            array(
+            [
                 ':key'  => 'asterisk',
                 ':key1' => 1,
                 ':key2' => 'localhost',
-            ));
+            ]);
         foreach ($modelServers as $key => $server) {
-            array_push($resultServers, array(
+            array_push($resultServers, [
                 'host'     => $server->host,
                 'username' => $server->username,
                 'password' => $server->password,
-            ));
+            ]);
         }
         return $resultServers;
     }

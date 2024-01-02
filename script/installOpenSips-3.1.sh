@@ -185,6 +185,7 @@ mv opensips-3.1.cfg opensips.cfg
 sed -i "s/MYSQLUSER:MYSQLPASS/root:$password/g" /etc/opensips/opensips.cfg
 sed -i "s/MYIP/$proxyip/g" /etc/opensips/opensips.cfg
 sed -i "s/LOCALIP/$localIP/g" /etc/opensips/opensips.cfg
+sed -i "s/MASTERIP/$ipMbilling/g" /etc/opensips/opensips.cfg
 
 
 MAXSIZE=10

@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,36 +23,36 @@
 class RateController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array(
+    public $extraValues    = [
         'idTrunkGroup' => 'name',
         'idPlan'       => 'name',
         'idPrefix'     => 'destination,prefix',
-    );
+    ];
 
-    public $fieldsFkReport = array(
-        'id_plan'        => array(
+    public $fieldsFkReport = [
+        'id_plan'        => [
             'table'       => 'pkg_plan',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-        'id_trunk_group' => array(
+        ],
+        'id_trunk_group' => [
             'table'       => 'pkg_trunk_group',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-        'id_prefix'      => array(
+        ],
+        'id_prefix'      => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'prefix',
-        ),
-        't.id'           => array(
+        ],
+        't.id'           => [
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'additional_grace',
         'id_trunk_group',
         'idTrunktrunkcode',
@@ -60,15 +60,15 @@ class RateController extends Controller
         'disconnectcharge',
         'minimal_time_charge',
         'package_offer',
-    );
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'additional_grace',
         'id_trunk_group',
         'idTrunktrunkcode',
         'connectcharge',
         'disconnectcharge',
-    );
+    ];
 
     public $FilterByUser;
 
@@ -91,11 +91,11 @@ class RateController extends Controller
         $this->titleReport = Yii::t('zii', 'Tariffs');
 
         parent::init();
-        if (!Yii::app()->session['isAdmin']) {
-            $this->extraValues = array(
+        if ( ! Yii::app()->session['isAdmin']) {
+            $this->extraValues = [
                 'idPlan'   => 'name',
                 'idPrefix' => 'destination,prefix',
-            );
+            ];
         }
     }
 
@@ -110,7 +110,7 @@ class RateController extends Controller
 
     public function extraFilterCustomAgent($filter)
     {
-        $modelPlan = Plan::model()->findAll('id_user = :key', array(':key' => Yii::app()->session['id_user']));
+        $modelPlan = Plan::model()->findAll('id_user = :key', [':key' => Yii::app()->session['id_user']]);
         $ids_plan  = '';
         foreach ($modelPlan as $key => $plan) {
             $ids_plan .= $plan->id . ',';
@@ -136,7 +136,7 @@ class RateController extends Controller
     {
         if (Yii::app()->session['isAgent'] || Yii::app()->session['id_agent'] > 1) {
             $info = 'Module: rateagent  ' . json_encode($values);
-            LogUsers::model()->updateByPk(Yii::app()->db->getLastInsertID(), array('description' => $info));
+            LogUsers::model()->updateByPk(Yii::app()->db->getLastInsertID(), ['description' => $info]);
         }
     }
 
@@ -160,17 +160,17 @@ class RateController extends Controller
     public function actionImportFromCsv()
     {
 
-        if (!Yii::app()->session['id_user'] || Yii::app()->session['isClient'] == true) {
+        if ( ! Yii::app()->session['id_user'] || Yii::app()->session['isClient'] == true) {
             exit();
         }
         $values = $this->getAttributesRequest();
 
         $this->importRates($values);
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             'msg'              => $this->msgSuccess,
-        ));
+        ]);
     }
 
     public function importPrefixs($values)
@@ -186,10 +186,10 @@ class RateController extends Controller
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                ));
+                ]);
                 exit;
 
             }
@@ -200,11 +200,11 @@ class RateController extends Controller
     public function importRates($values)
     {
 
-        if (!isset($_FILES['file']['tmp_name']) || strlen($_FILES['file']['tmp_name']) < 10) {
-            echo json_encode(array(
+        if ( ! isset($_FILES['file']['tmp_name']) || strlen($_FILES['file']['tmp_name']) < 10) {
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'Please select a CSV file'),
-            ));
+            ]);
             exit;
         }
 
@@ -216,16 +216,16 @@ class RateController extends Controller
         $firstLine = explode($values['delimiter'], $firstLine);
 
         if (count($firstLine) < 3) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 'errors'           => Yii::t('zii', 'CSV format invalid, please check your CSV file and than try again.') . "\n\n" . $firstLine[0],
-            ));
+            ]);
             exit;
         }
 
         $modelPrefix = Prefix::model()->find(1);
 
-        if (!isset($modelPrefix->id)) {
+        if ( ! isset($modelPrefix->id)) {
             $this->importPrefixs($values);
             $modelPrefix = Prefix::model()->find(1);
         }
@@ -242,10 +242,10 @@ class RateController extends Controller
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                ));
+                ]);
                 exit;
 
             }
@@ -265,10 +265,10 @@ class RateController extends Controller
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                ));
+                ]);
                 exit;
 
             }
@@ -290,10 +290,10 @@ class RateController extends Controller
                 $sql = "DELETE FROM pkg_rate WHERE dialprefix > 0";
                 Yii::app()->db->createCommand($sql)->execute();
 
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                ));
+                ]);
                 exit;
 
             }
@@ -312,10 +312,10 @@ class RateController extends Controller
                     try {
                         Yii::app()->db->createCommand($sql)->execute();
                     } catch (Exception $e) {
-                        echo json_encode(array(
+                        echo json_encode([
                             $this->nameSuccess => false,
                             'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                        ));
+                        ]);
                         exit;
 
                     }
@@ -327,10 +327,10 @@ class RateController extends Controller
                 } catch (Exception $e) {
                     $sql = "DELETE FROM pkg_rate WHERE dialprefix > 0";
                     Yii::app()->db->createCommand($sql)->execute();
-                    echo json_encode(array(
+                    echo json_encode([
                         $this->nameSuccess => false,
                         'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                    ));
+                    ]);
                     exit;
 
                 }
@@ -340,10 +340,10 @@ class RateController extends Controller
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     'errors'           => Yii::t('zii', 'MYSQL message.') . "\n\n" . print_r($e, true),
-                ));
+                ]);
                 exit;
 
             }

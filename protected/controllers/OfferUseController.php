@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,20 +23,20 @@
 class OfferUseController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idOffer' => 'label', 'idUser' => 'username');
+    public $extraValues    = ['idOffer' => 'label', 'idUser' => 'username'];
 
-    public $fieldsFkReport = array(
-        'id_user'  => array(
+    public $fieldsFkReport = [
+        'id_user'  => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-        'id_offer' => array(
+        ],
+        'id_offer' => [
             'table'       => 'pkg_offer',
             'pk'          => 'id',
             'fieldReport' => 'label',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -45,9 +45,9 @@ class OfferUseController extends Controller
         $this->titleReport   = Yii::t('zii', 'Offer Use');
 
         if (Yii::app()->session['isAdmin']) {
-            $this->relationFilter['idUser'] = array(
+            $this->relationFilter['idUser'] = [
                 'condition' => "idUser.id_user < 2",
-            );
+            ];
         }
         parent::init();
     }

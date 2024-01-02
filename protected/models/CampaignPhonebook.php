@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -44,7 +44,7 @@ class CampaignPhonebook extends Model
      */
     public function primaryKey()
     {
-        return array('id_campaign', 'id_phonebook');
+        return ['id_campaign', 'id_phonebook'];
     }
 
     /**
@@ -52,10 +52,10 @@ class CampaignPhonebook extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_campaign, id_phonebook', 'required'),
-            array('id_campaign, id_phonebook', 'numerical', 'integerOnly' => true),
-        );
+        $rules = [
+            ['id_campaign, id_phonebook', 'required'],
+            ['id_campaign, id_phonebook', 'numerical', 'integerOnly' => true],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -64,9 +64,9 @@ class CampaignPhonebook extends Model
      */
     public function relations()
     {
-        return array(
-            'idCampaign'  => array(self::BELONGS_TO, 'Campaign', 'id_campaign'),
-            'idPhoneBook' => array(self::BELONGS_TO, 'PhoneBook', 'id_phonebook'),
-        );
+        return [
+            'idCampaign'  => [self::BELONGS_TO, 'Campaign', 'id_campaign'],
+            'idPhoneBook' => [self::BELONGS_TO, 'PhoneBook', 'id_phonebook'],
+        ];
     }
 }

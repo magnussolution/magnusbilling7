@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -36,10 +36,10 @@ class RateCallshopController extends Controller
     {
         $values = $this->getAttributesRequest();
         if (Yii::app()->session['isAdmin'] && (isset($values['id']) && $values['id'] == 0)) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => $this->msgError,
-            ));
+            ]);
             exit;
         }
         parent::actionSave();

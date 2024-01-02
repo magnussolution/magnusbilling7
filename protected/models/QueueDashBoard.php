@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,21 +53,21 @@ class QueueDashBoard extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_queue, id_agent, priority', 'numerical', 'integerOnly' => true),
-            array('keyPressed, holdtime, originalPosition, position', 'length', 'max' => 11),
-            array('queue, timestamp, queue_name', 'length', 'max' => 25),
-            array('status', 'length', 'max' => 30),
-            array('callerId,callId', 'length', 'max' => 40),
-        );
+        $rules = [
+            ['id_queue, id_agent, priority', 'numerical', 'integerOnly' => true],
+            ['keyPressed, holdtime, originalPosition, position', 'length', 'max' => 11],
+            ['queue, timestamp, queue_name', 'length', 'max' => 25],
+            ['status', 'length', 'max' => 30],
+            ['callerId,callId', 'length', 'max' => 40],
+        ];
         return $this->getExtraField($rules);
     }
 
     public function relations()
     {
-        return array(
-            'idQueue' => array(self::BELONGS_TO, 'Queue', 'id_queue'),
-        );
+        return [
+            'idQueue' => [self::BELONGS_TO, 'Queue', 'id_queue'],
+        ];
     }
 
 }

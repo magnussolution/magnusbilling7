@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -54,10 +54,10 @@ class TrunkGroupController extends Controller
     {
         if (Yii::app()->session['isClient']) {
             # retorna o resultado da execucao
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Only admins can batch update this menu',
-            ));
+            ]);
             exit;
         }
 
@@ -80,10 +80,10 @@ class TrunkGroupController extends Controller
 
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameMsg     => 'Success',
-        ));
+        ]);
         exit;
 
     }
@@ -92,11 +92,11 @@ class TrunkGroupController extends Controller
     {
 
         if (count($values['id_trunk']) > 17) {
-            echo json_encode(array(
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => 'Maximum trunks is 17',
-            ));
+            ]);
             exit;
         }
 

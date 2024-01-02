@@ -1,22 +1,22 @@
 <?php
-/**
- * =======================================
- * ###################################
- * MagnusBilling
- *
- * @package MagnusBilling
- * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
- * ###################################
- *
- * This software is released under the terms of the GNU Lesser General Public License v2.1
- * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
- *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
- * =======================================
- * Magnusbilling.com <info@magnusbilling.com>
- *
- */
+    /**
+     * =======================================
+     * ###################################
+     * MagnusBilling
+     *
+     * @package MagnusBilling
+     * @author Adilson Leffa Magnus.
+     * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
+     * ###################################
+     *
+     * This software is released under the terms of the GNU Lesser General Public License v2.1
+     * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+     *
+     * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+     * =======================================
+     * Magnusbilling.com <info@magnusbilling.com>
+     *
+     */
 ?>
 <?php header('Content-type: text/html; charset=utf-8');?>
 <?php if ($send == false): ?>
@@ -34,7 +34,7 @@
                 <div style="color: red; font-size: 10px; width: 100%; text-align: center;"><?php echo Yii::t('zii', 'Example') . ' <b>' . Yii::t('zii', '1+360+NUMBER') . ' </b>' ?> </div>
                 </div>
                 <div class="linha4">
-                <input type="submit" value=" <?php echo Yii::t('zii', 'Call Me') ?>" style="width: 100px; height: 30px; cursor: pointer" />
+                <input type="submit" value="                                             <?php echo Yii::t('zii', 'Call Me') ?>" style="width: 100px; height: 30px; cursor: pointer" />
                 </div>
             </form>
         </div>

@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class Refillprovider extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('credit, id_provider', 'required'),
-            array('id_provider, payment', 'numerical', 'integerOnly' => true),
-            array('description', 'length', 'max' => 500),
+        $rules = [
+            ['credit, id_provider', 'required'],
+            ['id_provider, payment', 'numerical', 'integerOnly' => true],
+            ['description', 'length', 'max' => 500],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
     /**
@@ -65,8 +65,8 @@ class Refillprovider extends Model
      */
     public function relations()
     {
-        return array(
-            'idProvider' => array(self::BELONGS_TO, 'Provider', 'id_provider'),
-        );
+        return [
+            'idProvider' => [self::BELONGS_TO, 'Provider', 'id_provider'],
+        ];
     }
 }

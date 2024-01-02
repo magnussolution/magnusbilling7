@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,10 +52,10 @@ class Prefix extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('destination, prefix', 'required'),
-            array('prefix', 'unique'),
-        );
+        $rules = [
+            ['destination, prefix', 'required'],
+            ['prefix', 'unique'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -108,15 +108,15 @@ class Prefix extends Model
     public function prefixLength()
     {
 
-        $modelPrefix = Prefix::model()->findAll(array(
+        $modelPrefix = Prefix::model()->findAll([
             'select'    => 'SUBSTRING( prefix, 1, 2 ) AS destination, length(prefix) AS prefix',
             'condition' => 'prefix > 0',
             'order'     => 'LENGTH( prefix ) DESC',
-        ));
+        ]);
 
         $modelPrefix = Util::unique_multidim_obj($modelPrefix, 'destination');
 
-        $insert = array();
+        $insert = [];
         foreach ($modelPrefix as $key => $value) {
             $insert[] = '(' . $value->destination . ',' . $value->prefix . ')';
         }

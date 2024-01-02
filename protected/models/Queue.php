@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,18 +52,18 @@ class Queue extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('name, id_user', 'required'),
-            array('id_user, timeout, retry, wrapuptime, weight, periodic-announce-frequency, max_wait_time', 'numerical', 'integerOnly' => true),
-            array('language, joinempty, leavewhenempty, musiconhold,announce-holdtime,leavewhenempty,strategy, ringinuse, announce-position, announce-holdtime, announce-frequency', 'length', 'max' => 128),
-            array('periodic-announce ', 'length', 'max' => 200),
-            array('ring_or_moh ', 'length', 'max' => 4),
-            array('name', 'length', 'max' => 25),
-            array('max_wait_time_action', 'length', 'max' => 50),
-            array('name', 'checkname'),
-            array('max_wait_time_action', 'check_max_wait_time_action'),
+        $rules = [
+            ['name, id_user', 'required'],
+            ['id_user, timeout, retry, wrapuptime, weight, periodic-announce-frequency, max_wait_time', 'numerical', 'integerOnly' => true],
+            ['language, joinempty, leavewhenempty, musiconhold,announce-holdtime,leavewhenempty,strategy, ringinuse, announce-position, announce-holdtime, announce-frequency', 'length', 'max' => 128],
+            ['periodic-announce ', 'length', 'max' => 200],
+            ['ring_or_moh ', 'length', 'max' => 4],
+            ['name', 'length', 'max' => 25],
+            ['max_wait_time_action', 'length', 'max' => 50],
+            ['name', 'checkname'],
+            ['max_wait_time_action', 'check_max_wait_time_action'],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -72,9 +72,9 @@ class Queue extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
     public function check_max_wait_time_action($attribute, $params)
@@ -91,17 +91,17 @@ class Queue extends Model
 
                     switch ($type) {
                         case 'SIP':
-                            $model = Sip::model()->find('UPPER(name) = :key', array(':key' => strtoupper($destination)));
+                            $model = Sip::model()->find('UPPER(name) = :key', [':key' => strtoupper($destination)]);
                             break;
                         case 'QUEUE':
-                            $model = Queue::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
+                            $model = Queue::model()->find('UPPER(name)  = :key', [':key' => strtoupper($destination)]);
                             break;
                         case 'IVR':
-                            $model = Ivr::model()->find('UPPER(name)  = :key', array(':key' => strtoupper($destination)));
+                            $model = Ivr::model()->find('UPPER(name)  = :key', [':key' => strtoupper($destination)]);
                             break;
                     }
                 }
-                if (!isset($model->id)) {
+                if ( ! isset($model->id)) {
                     $this->addError($attribute, Yii::t('zii', 'You need add a existent Sip Account, IVR or Queue.'));
                 }
                 $this->max_wait_time_action = $type . '/' . $destination;
@@ -115,7 +115,7 @@ class Queue extends Model
             $this->addError($attribute, Yii::t('zii', 'No space allow in name'));
         }
 
-        if (!preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->name)) {
+        if ( ! preg_match('/^[0-9]|^[A-Z]|^[a-z]/', $this->name)) {
             $this->addError($attribute, Yii::t('zii', 'Name need start with numbers or letters'));
         }
     }
@@ -169,10 +169,10 @@ class Queue extends Model
 
     public function beforeSave()
     {
-        if (!$this->getIsNewRecord()) {
+        if ( ! $this->getIsNewRecord()) {
             $model = Queue::model()->findByPk($this->id);
 
-            QueueMember::model()->updateAll(array('queue_name' => $this->name), 'queue_name = :key', array(':key' => $model->name));
+            QueueMember::model()->updateAll(['queue_name' => $this->name], 'queue_name = :key', [':key' => $model->name]);
 
         }
         return parent::beforeSave();

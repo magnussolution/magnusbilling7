@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,10 +52,10 @@ class ServicesUse extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user, id_services, status, month_payed, reminded', 'numerical', 'integerOnly' => true),
-            array('reservationdate, releasedate, contract_period, termination_date, next_due_date', 'safe'),
-        );
+        $rules = [
+            ['id_user, id_services, status, month_payed, reminded', 'numerical', 'integerOnly' => true],
+            ['reservationdate, releasedate, contract_period, termination_date, next_due_date', 'safe'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -64,10 +64,10 @@ class ServicesUse extends Model
      */
     public function relations()
     {
-        return array(
-            'idServices' => array(self::BELONGS_TO, 'Services', 'id_services'),
-            'idUser'     => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idServices' => [self::BELONGS_TO, 'Services', 'id_services'],
+            'idUser'     => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
     public function beforeSave()

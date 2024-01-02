@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,13 +52,13 @@ class Callerid extends Model
      */
     public function rules()
     {
-        return array(
-            array('cid, id_user', 'required'),
-            array('id_user', 'numerical', 'integerOnly' => true),
-            array('cid, name', 'length', 'max' => 100),
-            array('description', 'length', 'max' => 500),
-            array('activated', 'length', 'max' => 1),
-        );
+        return [
+            ['cid, id_user', 'required'],
+            ['id_user', 'numerical', 'integerOnly' => true],
+            ['cid, name', 'length', 'max' => 100],
+            ['description', 'length', 'max' => 500],
+            ['activated', 'length', 'max' => 1],
+        ];
     }
 
     /**
@@ -66,8 +66,8 @@ class Callerid extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

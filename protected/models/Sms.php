@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,16 +52,16 @@ class Sms extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('id_user, prefix, status', 'numerical', 'integerOnly' => true),
-            array('telephone', 'numerical'),
-            array('sms', 'length', 'max' => 200),
-            array('result', 'length', 'max' => 500),
-            array('rate', 'length', 'max' => 10),
-            array('sms_from', 'length', 'max' => 16),
+        $rules = [
+            ['id_user', 'required'],
+            ['id_user, prefix, status', 'numerical', 'integerOnly' => true],
+            ['telephone', 'numerical'],
+            ['sms', 'length', 'max' => 200],
+            ['result', 'length', 'max' => 500],
+            ['rate', 'length', 'max' => 10],
+            ['sms_from', 'length', 'max' => 16],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -70,8 +70,8 @@ class Sms extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

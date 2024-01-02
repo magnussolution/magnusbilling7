@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,15 +52,15 @@ class Configuration extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('config_key', 'required'),
-            array('status', 'numerical', 'integerOnly' => true),
-            array('config_title, config_key', 'length', 'max' => 100),
-            array('config_value', 'length', 'max' => 200),
-            array('config_description', 'length', 'max' => 500),
-            array('config_group_title', 'length', 'max' => 64),
-            array('config_value', 'checkConfg'),
-        );
+        $rules = [
+            ['config_key', 'required'],
+            ['status', 'numerical', 'integerOnly' => true],
+            ['config_title, config_key', 'length', 'max' => 100],
+            ['config_value', 'length', 'max' => 200],
+            ['config_description', 'length', 'max' => 500],
+            ['config_group_title', 'length', 'max' => 64],
+            ['config_value', 'checkConfg'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -70,9 +70,9 @@ class Configuration extends Model
         //validation values
 
         if ($this->config_key == 'base_language') {
-            $valuesAllow        = array('es', 'en', 'pt_BR', 'it');
+            $valuesAllow        = ['es', 'en', 'pt_BR', 'it'];
             $this->config_value = $this->config_value == 'br' ? 'pt_BR' : $this->config_value;
-            if (!in_array($this->config_value, $valuesAllow)) {
+            if ( ! in_array($this->config_value, $valuesAllow)) {
                 $error = true;
             }
 
@@ -82,7 +82,7 @@ class Configuration extends Model
         }
 
         if ($this->config_key == 'template') {
-            $valuesAllow = array(
+            $valuesAllow = [
                 'black-triton', 'black-neptune', 'black-crisp',
                 'green-triton', 'green-neptune', 'green-crisp',
                 'blue-triton', 'blue-triton', 'blue-neptune', 'blue-crisp',
@@ -90,9 +90,9 @@ class Configuration extends Model
                 'orange-triton', 'orange-neptune', 'orange-crisp',
                 'purple-triton', 'purple-neptune', 'purple-crisp',
                 'gray-triton', 'gray-neptune', 'gray-crisp',
-                'red-triton', 'red-neptune', 'red-crisp');
+                'red-triton', 'red-neptune', 'red-crisp'];
 
-            if (!in_array($this->config_value, $valuesAllow)) {
+            if ( ! in_array($this->config_value, $valuesAllow)) {
                 $this->addError($attribute, Yii::t('zii', 'ERROR: Invalid option'));
             }
         }
@@ -107,7 +107,7 @@ class Configuration extends Model
         $modelConfig = Configuration::model()->findAll();
         $sql         = '';
         foreach ($modelConfig as $key => $config) {
-            if (!preg_match('/config_t/', Yii::t('yii', 'config_title_' . $config->config_key))) {
+            if ( ! preg_match('/config_t/', Yii::t('yii', 'config_title_' . $config->config_key))) {
                 $sql .= "UPDATE pkg_configuration SET config_title = '" . Yii::t('yii', 'config_title_' . $config->config_key) . "', config_description = '" . Yii::t('yii', 'config_desc_' . $config->config_key) . "' WHERE  config_key = '" . $config->config_key . "';";
             }
         }

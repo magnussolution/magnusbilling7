@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class QueueMember extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id,interface, id_user', 'required'),
-            array('id_user, paused', 'numerical', 'integerOnly' => true),
-            array('membername', 'length', 'max' => 40),
-            array('queue_name, interface', 'length', 'max' => 128),
-        );
+        $rules = [
+            ['id,interface, id_user', 'required'],
+            ['id_user, paused', 'numerical', 'integerOnly' => true],
+            ['membername', 'length', 'max' => 40],
+            ['queue_name, interface', 'length', 'max' => 128],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -66,9 +66,9 @@ class QueueMember extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
     public function beforeSave()
