@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,14 +52,14 @@ class Ivr extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user, use_holidays,direct_extension', 'numerical', 'integerOnly' => true),
-            array('monFriStart,  satStart,  sunStart', 'length', 'max' => 200),
-            array('name, option_0, option_1, option_2, option_3, option_4, option_5, option_6, option_7, option_8, option_9, option_10', 'length', 'max' => 50),
-            array('option_out_0, option_out_1, option_out_2, option_out_3, option_out_4, option_out_5, option_out_6, option_out_7, option_out_8, option_out_9, option_out_10', 'length', 'max' => 50),
-            array('monFriStart,  satStart,  sunStart', 'checkInterval'),
+        $rules = [
+            ['id_user, use_holidays,direct_extension', 'numerical', 'integerOnly' => true],
+            ['monFriStart,  satStart,  sunStart', 'length', 'max' => 200],
+            ['name, option_0, option_1, option_2, option_3, option_4, option_5, option_6, option_7, option_8, option_9, option_10', 'length', 'max' => 50],
+            ['option_out_0, option_out_1, option_out_2, option_out_3, option_out_4, option_out_5, option_out_6, option_out_7, option_out_8, option_out_9, option_out_10', 'length', 'max' => 50],
+            ['monFriStart,  satStart,  sunStart', 'checkInterval'],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -67,14 +67,14 @@ class Ivr extends Model
     {
         $intervals = explode('|', $this->{$attribute});
         foreach ($intervals as $key => $interval) {
-            if (!preg_match('/-/', $interval)) {
+            if ( ! preg_match('/-/', $interval)) {
                 $this->addError($attribute, 'There is a interval with a invalid format, the allowed formatting is: 00:00-00:00. Use | for more than one interval.');
                 return;
             }
 
             $hours = explode('-', $interval);
             foreach ($hours as $key => $hour) {
-                if (!preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $hour)) {
+                if ( ! preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $hour)) {
                     $this->addError($attribute, 'There is a interval with a invalid format, the allowed formatting is: 00:00-00:00. Use | for more than one interval.');
                 }
             }
@@ -87,9 +87,9 @@ class Ivr extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
 }

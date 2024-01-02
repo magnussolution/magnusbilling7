@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -52,7 +52,7 @@ class StatusSystemCommand extends ConsoleCommand
         foreach ($byGroup as $time => $group) {
             $cps         = count($group);
             $hour_minute = date('Y-m-d H:i', $time) . ':00';
-            if (!isset($old_CPS[$hour_minute])) {
+            if ( ! isset($old_CPS[$hour_minute])) {
                 $old_CPS[$hour_minute] = 0;
             }
             if ($cps > $old_CPS[$hour_minute]) {
@@ -90,8 +90,8 @@ class StatusSystemCommand extends ConsoleCommand
                 break;
             }
         }
-        $networkin  = !isset($rx1) ? 0 : (($rx2 - $rx1) / 1000) / 10;
-        $networkout = !isset($tx1) ? 0 : (($tx2 - $tx1) / 1000) / 10;
+        $networkin  =  ! isset($rx1) ? 0 : (($rx2 - $rx1) / 1000) / 10;
+        $networkout =  ! isset($tx1) ? 0 : (($tx2 - $tx1) / 1000) / 10;
 
         $memory = $sysinfo->memory();
 
@@ -125,7 +125,7 @@ class StatusSystemCommand extends ConsoleCommand
     }
     public function group_by($key, $data)
     {
-        $result = array();
+        $result = [];
 
         foreach ($data as $val) {
             if (array_key_exists($key, $val)) {
@@ -154,8 +154,8 @@ class average_rate_calculator
     public function __construct(&$storage_array, $max_age)
     {
         $this->_max_age = $max_age;
-        if (!is_array($storage_array)) {
-            $storage_array = array();
+        if ( ! is_array($storage_array)) {
+            $storage_array = [];
         }
         $this->_values = &$storage_array;
     }
@@ -165,7 +165,7 @@ class average_rate_calculator
      */
     public function add($value, $timestamp = null)
     {
-        if (!$timestamp) {
+        if ( ! $timestamp) {
             $timestamp = time();
         }
 
@@ -178,7 +178,7 @@ class average_rate_calculator
     {
         $this->_clean();
 
-        $avgs      = array();
+        $avgs      = [];
         $last_time = false;
         $last_val  = false;
         foreach ($this->_values as $time => $val) {
@@ -219,7 +219,7 @@ class sysinfo
 
         if (file_exists($strFileName)) {
             if ($fd = fopen($strFileName, 'r')) {
-                while (!feof($fd)) {
+                while ( ! feof($fd)) {
                     $strFile .= fgets($fd, $intBytes);
                     if ($intLines <= $intCurLine && $intLines != 0) {
                         break;
@@ -256,7 +256,7 @@ class sysinfo
     // get the IP address of our canonical hostname
     public function ip_addr()
     {
-        if (!($result = getenv('SERVER_ADDR'))) {
+        if ( ! ($result = getenv('SERVER_ADDR'))) {
             $result = gethostbyname($this->chostname());
         }
         return $result;
@@ -295,8 +295,8 @@ class sysinfo
         if ($bufr != "ERROR") {
             $bufe = explode("\n", $bufr);
 
-            $results = array('cpus' => 0, 'bogomips' => 0);
-            $ar_buf  = array();
+            $results = ['cpus' => 0, 'bogomips' => 0];
+            $ar_buf  = [];
 
             foreach ($bufe as $buf) {
                 if (trim($buf) != "") {
@@ -378,7 +378,7 @@ class sysinfo
         //$rx recebe
         //$tx envia
 
-        $results = array();
+        $results = [];
 
         $bufr = $this->rfts('/proc/net/dev');
         if ($bufr != "ERROR") {
@@ -390,7 +390,7 @@ class sysinfo
 
                     $dev_name           = trim($dev_name);
                     $stats              = preg_split('/\s+/', trim($stats_list));
-                    $results[$dev_name] = array();
+                    $results[$dev_name] = [];
 
                     $results[$dev_name]['rx_bytes']   = $stats[0];
                     $results[$dev_name]['rx_packets'] = $stats[1];
@@ -413,9 +413,9 @@ class sysinfo
 
     public function memory()
     {
-        $results['ram']     = array();
-        $results['swap']    = array();
-        $results['devswap'] = array();
+        $results['ram']     = [];
+        $results['swap']    = [];
+        $results['devswap'] = [];
 
         $bufr = $this->rfts('/proc/meminfo');
         if ($bufr != "ERROR") {
@@ -469,7 +469,7 @@ class sysinfo
                 for ($i = 1; $i < (sizeof($swaps)); $i++) {
                     if (trim($swaps[$i]) != "") {
                         $ar_buf                              = preg_split('/\s+/', $swaps[$i], 6);
-                        $results['devswap'][$i - 1]          = array();
+                        $results['devswap'][$i - 1]          = [];
                         $results['devswap'][$i - 1]['dev']   = $ar_buf[0];
                         $results['devswap'][$i - 1]['total'] = $ar_buf[2];
                         $results['devswap'][$i - 1]['used']  = $ar_buf[3];
@@ -520,14 +520,14 @@ class sysinfo
         echo $program . $args;
         if ($fp = popen("($program $args > /dev/null) 3>&1 1>&2 2>&3", 'r')) {
             print_r($fp);
-            while (!feof($fp)) {
+            while ( ! feof($fp)) {
                 $buffer .= fgets($fp, 4096);
             }
             pclose($fp);
             $buffer = trim($buffer);
         }
         if ($fp = popen("$program $args", 'r')) {
-            while (!feof($fp)) {
+            while ( ! feof($fp)) {
                 $buffer .= fgets($fp, 4096);
             }
             pclose($fp);
@@ -542,8 +542,8 @@ class sysinfo
     {
         global $addpaths;
 
-        $path = array('/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin',
-            '/usr/local/sbin');
+        $path = ['/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin',
+            '/usr/local/sbin'];
 
         if (isset($addpaths) && is_array($addpaths)) {
             $path = array_merge($path, $addpaths);
@@ -559,7 +559,6 @@ class sysinfo
         } else {
             return strpos($program, '.exe');
         }
-        ;
 
         return;
     }
@@ -568,7 +567,7 @@ class sysinfo
     {
         $buf = $this->rfts('/proc/loadavg');
         if ($buf == "ERROR") {
-            $results['avg'] = array('N.A.', 'N.A.', 'N.A.');
+            $results['avg'] = ['N.A.', 'N.A.', 'N.A.'];
         } else {
             $results['avg'] = preg_split("/\s/", $buf, 4);
             unset($results['avg'][3]); // don't need the extra values, only first three

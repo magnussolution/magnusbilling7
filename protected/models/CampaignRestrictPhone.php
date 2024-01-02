@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,11 +52,11 @@ class CampaignRestrictPhone extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('number', 'required'),
-            array('number', 'numerical', 'integerOnly' => true),
-            array('description', 'length', 'max' => 100),
-        );
+        $rules = [
+            ['number', 'required'],
+            ['number', 'numerical', 'integerOnly' => true],
+            ['description', 'length', 'max' => 100],
+        ];
         return $this->getExtraField($rules);
     }
 

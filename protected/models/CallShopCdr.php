@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,14 +53,14 @@ class CallShopCdr extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('id_user, status, sessiontime', 'numerical', 'integerOnly' => true),
-            array('price, buycost, markup,price_min', 'length', 'max' => 20),
-            array('cabina', 'length', 'max' => 30),
-            array('calledstation, sessionid', 'length', 'max' => 50),
-            array('destination, sessionid', 'length', 'max' => 100),
-        );
+        $rules = [
+            ['id_user', 'required'],
+            ['id_user, status, sessiontime', 'numerical', 'integerOnly' => true],
+            ['price, buycost, markup,price_min', 'length', 'max' => 20],
+            ['cabina', 'length', 'max' => 30],
+            ['calledstation, sessionid', 'length', 'max' => 50],
+            ['destination, sessionid', 'length', 'max' => 100],
+        ];
         return $this->getExtraField($rules);
 
     }

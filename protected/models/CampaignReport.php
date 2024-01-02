@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -60,9 +60,9 @@ class CampaignReport extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_campaign, id_phonenumber, id_user, id_trunk, unix_timestamp,status', 'numerical', 'integerOnly' => true),
-        );
+        $rules = [
+            ['id_campaign, id_phonenumber, id_user, id_trunk, unix_timestamp,status', 'numerical', 'integerOnly' => true],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -71,12 +71,12 @@ class CampaignReport extends Model
      */
     public function relations()
     {
-        return array(
-            'idCampaign'    => array(self::BELONGS_TO, 'Campaign', 'id_campaign'),
-            'idPhonenumber' => array(self::BELONGS_TO, 'Phonenumber', 'id_phonenumber'),
-            'idUser'        => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idTrunk'       => array(self::BELONGS_TO, 'Trunk', 'id_trunk'),
-        );
+        return [
+            'idCampaign'    => [self::BELONGS_TO, 'Campaign', 'id_campaign'],
+            'idPhonenumber' => [self::BELONGS_TO, 'Phonenumber', 'id_phonenumber'],
+            'idUser'        => [self::BELONGS_TO, 'User', 'id_user'],
+            'idTrunk'       => [self::BELONGS_TO, 'Trunk', 'id_trunk'],
+        ];
     }
 
     public static function insertReport($data)

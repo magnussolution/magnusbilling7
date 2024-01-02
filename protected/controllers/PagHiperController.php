@@ -9,7 +9,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -31,21 +31,21 @@ class PagHiperController extends Controller
         } else {
             $filter = "payment_method = 'paghiper'";
         }
-        $params = array();
+        $params = [];
 
         if (isset($_GET['id_agent'])) {
             $filter .= " AND id_user = :key1";
-            $params = array(':key1' => (int) $_GET['id_agent']);
+            $params = [':key1' => (int) $_GET['id_agent']];
         } else {
             $filter .= " AND id = 1";
         }
 
-        $modelMethodpay = Methodpay::model()->find(array(
+        $modelMethodpay = Methodpay::model()->find([
             'condition' => $filter,
             'params'    => $params,
-        ));
+        ]);
 
-        if (!count($modelMethodpay)) {
+        if ( ! count($modelMethodpay)) {
             Yii::log(print_r('Not found paghiper method', true), 'error');
             exit;
         }
@@ -153,9 +153,9 @@ class PagHiperController extends Controller
                 if ($status == 'Aprovado') {
                     $modelUser = User::model()->find(
                         "username = :usuario AND id = :key",
-                        array(
+                        [
                             ':usuario' => $usuario,
-                            ':key'     => $id_user)
+                            ':key'     => $id_user]
                     );
 
                     if (count($modelUser) && Refill::model()->countRefill($transacaoID, $modelUser->id) == 0) {

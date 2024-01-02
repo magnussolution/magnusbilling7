@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -59,16 +59,16 @@ class Methodpay extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id, payment_method, country', 'required'),
-            array('active, id_user, fee, SLIdProduto,min,max', 'numerical', 'integerOnly' => true),
-            array('obs, client_id, client_secret', 'length', 'max' => 500),
-            array('P2P_tax_amount', 'length', 'max' => 10),
-            array('P2P_CustomerSiteID, P2P_KeyID, P2P_Passphrase, P2P_RecipientKeyID', 'length', 'max' => 100),
-            array('pagseguro_TOKEN,url, show_name, SLvalidationtoken', 'length', 'max' => 100),
-            array('SLAppToken,SLAccessToken,SLSecret', 'length', 'max' => 50),
-            array('username', 'length', 'max' => 1000),
-        );
+        $rules = [
+            ['id, payment_method, country', 'required'],
+            ['active, id_user, fee, SLIdProduto,min,max', 'numerical', 'integerOnly' => true],
+            ['obs, client_id, client_secret', 'length', 'max' => 500],
+            ['P2P_tax_amount', 'length', 'max' => 10],
+            ['P2P_CustomerSiteID, P2P_KeyID, P2P_Passphrase, P2P_RecipientKeyID', 'length', 'max' => 100],
+            ['pagseguro_TOKEN,url, show_name, SLvalidationtoken', 'length', 'max' => 100],
+            ['SLAppToken,SLAccessToken,SLSecret', 'length', 'max' => 50],
+            ['username', 'length', 'max' => 1000],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -79,8 +79,8 @@ class Methodpay extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

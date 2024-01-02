@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -37,7 +37,7 @@ class CallChartCommand extends ConsoleCommand
                 break;
             }
             try {
-                Servers::model()->updateAll(array('status' => 1), 'status = 2');
+                Servers::model()->updateAll(['status' => 1], 'status = 2');
                 $calls = AsteriskAccess::getCoreShowCdrChannels();
             } catch (Exception $e) {
                 sleep(4);
@@ -77,7 +77,7 @@ class CallChartCommand extends ConsoleCommand
             $totalUp    = $this->totalUpCalls    = 0;
             $totalCalls = $this->totalCalls = 0;
         } catch (Exception $e) {
-            $modelCallOnlineChart = CallOnlineChart::model()->find('date = :key', array(':key' => date('Y-m-d H:i:') . '00'));
+            $modelCallOnlineChart = CallOnlineChart::model()->find('date = :key', [':key' => date('Y-m-d H:i:') . '00']);
         }
 
         if ($modelCallOnlineChart->id > 0) {
@@ -88,14 +88,14 @@ class CallChartCommand extends ConsoleCommand
 
         if (count($calls) > 0) {
 
-            $sql = array();
+            $sql = [];
 
             if ($this->debug > 1) {
                 print_r($calls);
             }
             $config         = LoadConfig::getConfig();
             $ip_tech_length = $config['global']['ip_tech_length'];
-            $sql            = array();
+            $sql            = [];
             foreach ($calls as $key => $call) {
                 $modelDid = $modelSip = [];
                 $type     = '';
@@ -133,7 +133,7 @@ class CallChartCommand extends ConsoleCommand
                     if (preg_match('/^MC\!/', $sip_account)) {
                         echo "torpedo\n";
                         $campaingName  = preg_split('/\!/', $call[1]);
-                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName[1]));
+                        $modelCampaing = Campaign::model()->find('name = :key', [':key' => $campaingName[1]]);
                         $id_user       = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
                         $trunk         = "Campaign " . $campaingName[1];
                     } else {
@@ -177,7 +177,7 @@ class CallChartCommand extends ConsoleCommand
 
                             //try get user
                             if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
-                                if (!strlen($sip_account)) {
+                                if ( ! strlen($sip_account)) {
                                     $sip_account = $call[1] = $call[3];
                                 }
                                 if (false !== $key = array_search($sip_account, $this->sipNames)) {
@@ -188,10 +188,10 @@ class CallChartCommand extends ConsoleCommand
 
                             } else if (strlen($ndiscado) > 15) {
                                 $tech     = substr($ndiscado, 0, $ip_tech_length);
-                                $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', array(':key' => $tech));
+                                $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', [':key' => $tech]);
                             }
 
-                            if (!count($modelSip)) {
+                            if ( ! count($modelSip)) {
                                 if ($status == 'Ring') {
                                     $sip_account = $originate;
                                 }
@@ -204,19 +204,19 @@ class CallChartCommand extends ConsoleCommand
                                 } else if (strlen($accountcode)) {
                                     //echo "check per accountcode $accountcode\n";
                                     $modelSip = Sip::model()->find('accountcode = :key',
-                                        array(
+                                        [
                                             ':key' => $accountcode,
-                                        ));
+                                        ]);
                                 }
 
-                                if (!count($modelSip)) {
+                                if ( ! count($modelSip)) {
 
                                     if (preg_match('/^IAX/', strtoupper($channel))) {
-                                        $modelSip = Iax::model()->find('name = :key', array(':key' => $originate));
+                                        $modelSip = Iax::model()->find('name = :key', [':key' => $originate]);
                                     } else {
                                         //check if is via IP from proxy
                                         $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                                        $modelSip  = Sip::model()->find('host = :key', array(':key' => $callProxy['X-AUTH-IP']));
+                                        $modelSip  = Sip::model()->find('host = :key', [':key' => $callProxy['X-AUTH-IP']]);
                                     }
                                 }
                             }
@@ -253,7 +253,7 @@ class CallChartCommand extends ConsoleCommand
                         //torpedo
                         $campaingName = preg_split('/\!/', $call[1]);
 
-                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName[1]));
+                        $modelCampaing = Campaign::model()->find('name = :key', [':key' => $campaingName[1]]);
 
                         $id_user = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
                         $trunk   = "Campaign " . $campaingName[1];
@@ -302,7 +302,7 @@ class CallChartCommand extends ConsoleCommand
                         //torpedo
                         $campaingName = preg_split('/\!/', $call[1]);
 
-                        $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $campaingName[1]));
+                        $modelCampaing = Campaign::model()->find('name = :key', [':key' => $campaingName[1]]);
 
                         $id_user  = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
                         $trunk    = "Campaign " . $campaingName[1];
@@ -336,13 +336,13 @@ class CallChartCommand extends ConsoleCommand
                     continue;
                 }
 
-                if (!is_numeric($id_user)) {
+                if ( ! is_numeric($id_user)) {
 
                     echo "continue because not found id_user\n";
                     continue;
                 }
 
-                if (!is_numeric($id_user) || !is_numeric($cdr)) {
+                if ( ! is_numeric($id_user) || ! is_numeric($cdr)) {
                     echo "continue because not foun id_user or cdr\n";
                     continue;
                 }
@@ -357,8 +357,8 @@ class CallChartCommand extends ConsoleCommand
                 if (count($callShopIds)) {
                     if (in_array($id_user, $callShopIds)) {
 
-                        if (!isset($modelSip->id)) {
-                            $modelSip = Sip::model()->find('name =:key', array(':key' => $sip_account));
+                        if ( ! isset($modelSip->id)) {
+                            $modelSip = Sip::model()->find('name =:key', [':key' => $sip_account]);
 
                             if (isset($modelSip->id)) {
                                 $modelSip->status         = 3;
@@ -427,7 +427,7 @@ class CallChartCommand extends ConsoleCommand
                 $totalUp    = $this->totalUpCalls    = 0;
                 $totalCalls = $this->totalCalls = 0;
             } catch (Exception $e) {
-                $modelCallOnlineChart = CallOnlineChart::model()->find('date = :key', array(':key' => date('Y-m-d H:i:') . '00'));
+                $modelCallOnlineChart = CallOnlineChart::model()->find('date = :key', [':key' => date('Y-m-d H:i:') . '00']);
             }
 
             if ($modelCallOnlineChart->id > 0) {
@@ -451,7 +451,7 @@ class CallChartCommand extends ConsoleCommand
                     print_r($calls);
                 }
 
-                $sql = array();
+                $sql = [];
                 foreach ($calls as $key => $call) {
 
                     if (isset($_GET['log'])) {
@@ -493,7 +493,7 @@ class CallChartCommand extends ConsoleCommand
                             //torpedo
                             $cdr           = $call[13];
                             $ndiscado      = $call[2];
-                            $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $call[9]));
+                            $modelCampaing = Campaign::model()->find('name = :key', [':key' => $call[9]]);
 
                             $id_user = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
                             $trunk   = "Campaign " . $call[9];
@@ -507,36 +507,36 @@ class CallChartCommand extends ConsoleCommand
                             $config = LoadConfig::getConfig();
                             $tech   = substr($ndiscado, 0, $config['global']['ip_tech_length']);
 
-                            $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', array(':key' => $tech));
-                            if (!count($modelSip)) {
+                            $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', [':key' => $tech]);
+                            if ( ! count($modelSip)) {
                                 if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
                                     $modelSip = Sip::model()->find('name = :key',
-                                        array(
+                                        [
                                             ':key' => $peername,
-                                        ));
+                                        ]);
                                 } else {
                                     $modelSip = Sip::model()->find('name = :key',
-                                        array(
+                                        [
                                             ':key' => $originate,
-                                        ));
+                                        ]);
                                 }
-                                if (!count($modelSip)) {
+                                if ( ! count($modelSip)) {
                                     //check if is via IP from proxy
                                     $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                                    $modelSip  = Sip::model()->find('host = :key', array(':key' => $callProxy['X-AUTH-IP']));
+                                    $modelSip  = Sip::model()->find('host = :key', [':key' => $callProxy['X-AUTH-IP']]);
                                 }
                             }
 
                             if (count($modelSip)) {
                                 $userType = 'User';
                             } else {
-                                $resultTrunk = Trunk::model()->find('trunkcode = :key', array(':key' => $originate));
+                                $resultTrunk = Trunk::model()->find('trunkcode = :key', [':key' => $originate]);
                                 if (count($resultTrunk)) {
                                     $userType = 'Trunk';
                                 }
                             }
 
-                            if (!count($userType)) {
+                            if ( ! count($userType)) {
                                 //not fount the type call
                                 continue;
                             } elseif ($userType == 'User') {
@@ -565,15 +565,15 @@ class CallChartCommand extends ConsoleCommand
                                 } elseif (strlen($call[12]) > 5 || $status == 'Up') {
                                     //chamada DID foi atendida
                                     $usernameReceive = explode("/", substr($call[12], 0, strrpos($call[12], "-")));
-                                    $resultUser      = Sip::model()->findAll(array(
+                                    $resultUser      = Sip::model()->findAll([
                                         'select'    => 'pkg_user.id, username',
                                         'join'      => 'LEFT JOIN pkg_user ON t.id_user = pkg_user.id',
                                         'condition' => "t.name = '" . $usernameReceive[1] . "'",
-                                    ));
+                                    ]);
                                     if (isset($resultUser[0]['id'])) {
                                         $id_user = $resultUser[0]['id'];
                                     } else {
-                                        $modelDid = Did::model()->find('did = :key', array(':key' => $call[2]));
+                                        $modelDid = Did::model()->find('did = :key', [':key' => $call[2]]);
                                         $id_user  = count($modelDid) ? $modelDid->id_user : null;
                                     }
                                 }
@@ -586,7 +586,7 @@ class CallChartCommand extends ConsoleCommand
                             //torpedo
                             $cdr           = $call[12];
                             $ndiscado      = $call['2'];
-                            $modelCampaing = Campaign::model()->find('name = :key', array(':key' => $call[9]));
+                            $modelCampaing = Campaign::model()->find('name = :key', [':key' => $call[9]]);
 
                             $id_user = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
                             $trunk   = "Campaign " . $call[9];
@@ -645,11 +645,11 @@ class CallChartCommand extends ConsoleCommand
                         continue;
                     }
 
-                    if (!is_numeric($id_user) || !is_numeric($cdr)) {
+                    if ( ! is_numeric($id_user) || ! is_numeric($cdr)) {
                         continue;
                     }
 
-                    $modelDid = Did::model()->find('did =:key', array(':key' => $ndiscado));
+                    $modelDid = Did::model()->find('did =:key', [':key' => $ndiscado]);
                     if (isset($modelDid->id)) {
                         $didChannel = AsteriskAccess::getCoreShowChannel($channel);
                         // is a DID

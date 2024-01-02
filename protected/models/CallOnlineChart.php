@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,10 +52,10 @@ class CallOnlineChart extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('total', 'numerical', 'integerOnly' => true),
-            array('date, answer', 'length', 'max' => 100),
-        );
+        $rules = [
+            ['total', 'numerical', 'integerOnly' => true],
+            ['date, answer', 'length', 'max' => 100],
+        ];
 
         $rules = $this->getExtraField($rules);
 

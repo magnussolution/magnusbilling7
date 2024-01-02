@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class Provider extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('provider_name', 'required'),
-            array('description, credit_control', 'length', 'max' => 100),
-            array('credit', 'type', 'type' => 'double'),
-            array('provider_name', 'unique'),
-        );
+        $rules = [
+            ['provider_name', 'required'],
+            ['description, credit_control', 'length', 'max' => 100],
+            ['credit', 'type', 'type' => 'double'],
+            ['provider_name', 'unique'],
+        ];
         return $this->getExtraField($rules);
     }
 

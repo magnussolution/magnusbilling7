@@ -1,51 +1,51 @@
 <?php
-/**
- * =======================================
- * ###################################
- * MagnusBilling
- *
- * @package MagnusBilling
- * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
- * ###################################
- *
- * This software is released under the terms of the GNU Lesser General Public License v2.1
- * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
- *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
- * =======================================
- * Magnusbilling.com <info@magnusbilling.com>
- *
- */
+    /**
+     * =======================================
+     * ###################################
+     * MagnusBilling
+     *
+     * @package MagnusBilling
+     * @author Adilson Leffa Magnus.
+     * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
+     * ###################################
+     *
+     * This software is released under the terms of the GNU Lesser General Public License v2.1
+     * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+     *
+     * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+     * =======================================
+     * Magnusbilling.com <info@magnusbilling.com>
+     *
+     */
 ?>
 
 
 <?php
-$error = $success = '';
+    $error = $success = '';
 
-if ($_POST) {
+    if ($_POST) {
 
-    require_once 'lib/stripe/autoload.php';
+        require_once 'lib/stripe/autoload.php';
 
-    \Stripe\Stripe::setApiKey($modelMethodPay->client_id);
-    $error   = '';
-    $success = '';
+        \Stripe\Stripe::setApiKey($modelMethodPay->client_id);
+        $error   = '';
+        $success = '';
 
-    $amount = preg_replace("/\.|\,/", '', $_GET['amount']);
+        $amount = preg_replace("/\.|\,/", '', $_GET['amount']);
 
-    try {
-        if (!isset($_POST['stripeToken'])) {
-            throw new Exception("The Stripe Token was not generated correctly");
+        try {
+            if ( ! isset($_POST['stripeToken'])) {
+                throw new Exception("The Stripe Token was not generated correctly");
+            }
+
+            \Stripe\Charge::create(["amount" => floatval($amount),
+                "currency"                            => "usd",
+                "card"                                => $_POST['stripeToken']]);
+            $success = 'Your payment was successful.';
+        } catch (Exception $e) {
+            $error = $e->getMessage();
         }
-
-        \Stripe\Charge::create(array("amount" => floatval($amount),
-            "currency"                            => "usd",
-            "card"                                => $_POST['stripeToken']));
-        $success = 'Your payment was successful.';
-    } catch (Exception $e) {
-        $error = $e->getMessage();
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +99,7 @@ if ($_POST) {
         <form action="" method="POST" id="payment-form">
             <div class="form-container">
             <div class="personal-information">
-                <h1>Payment Information : Amount <?php echo $_GET['amount'] ?></h1>
+                <h1>Payment Information : Amount                                                 <?php echo $_GET['amount'] ?></h1>
             </div> <!-- end of personal-information -->
 
           <input id="column-left" type="text" name="first-name" placeholder="First Name"/>

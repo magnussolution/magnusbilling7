@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -22,15 +22,15 @@ class NotifyClientDailyCommand extends ConsoleCommand
     public function run($args)
     {
 
-        $modelUser = User::model()->findAll(array(
+        $modelUser = User::model()->findAll([
             'condition' => 'credit_notification_daily = 1',
-        ));
+        ]);
 
         foreach ($modelUser as $user) {
 
-            $modelSmtp = Smtps::model()->find('id_user = :key', array(':key' => $user->id_user));
+            $modelSmtp = Smtps::model()->find('id_user = :key', [':key' => $user->id_user]);
 
-            if (!isset($modelSmtp->id)) {
+            if ( ! isset($modelSmtp->id)) {
                 continue;
             }
 

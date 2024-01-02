@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -55,13 +55,13 @@ class Refill extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('payment', 'numerical', 'integerOnly' => true),
-            array('credit', 'numerical', 'integerOnly' => false),
-            array('description, invoice_number, image, date', 'length', 'max' => 500),
+        $rules = [
+            ['id_user', 'required'],
+            ['payment', 'numerical', 'integerOnly' => true],
+            ['credit', 'numerical', 'integerOnly' => false],
+            ['description, invoice_number, image, date', 'length', 'max' => 500],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
     /*
@@ -69,9 +69,9 @@ class Refill extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
     public function beforeSave()
     {
@@ -100,7 +100,7 @@ class Refill extends Model
 
     public function countRefill($code, $id_user)
     {
-        return Refill::model()->count('description LIKE :key AND id_user = :key1', array(':key' => '%' . $code . '%', ':key1' => (int) $id_user));
+        return Refill::model()->count('description LIKE :key AND id_user = :key1', [':key' => '%' . $code . '%', ':key1' => (int) $id_user]);
 
     }
 }

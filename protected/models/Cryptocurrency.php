@@ -41,13 +41,13 @@ class Cryptocurrency extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user,status', 'numerical', 'integerOnly' => true),
-            array('amountCrypto,amount', 'numerical', 'integerOnly' => false),
-            array('amountCrypto,amount', 'length', 'max' => 10),
-            array('date, expirationdate', 'safe'),
+        $rules = [
+            ['id_user,status', 'numerical', 'integerOnly' => true],
+            ['amountCrypto,amount', 'numerical', 'integerOnly' => false],
+            ['amountCrypto,amount', 'length', 'max' => 10],
+            ['date, expirationdate', 'safe'],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -56,8 +56,8 @@ class Cryptocurrency extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

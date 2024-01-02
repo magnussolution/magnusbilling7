@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,12 +53,12 @@ class UserRate extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user, id_prefix', 'required'),
-            array('id_user, id_prefix, initblock, billingblock', 'numerical', 'integerOnly' => true),
-            array('rateinitial', 'length', 'max' => 10),
+        $rules = [
+            ['id_user, id_prefix', 'required'],
+            ['id_user, id_prefix, initblock, billingblock', 'numerical', 'integerOnly' => true],
+            ['rateinitial', 'length', 'max' => 10],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -67,9 +67,9 @@ class UserRate extends Model
      */
     public function relations()
     {
-        return array(
-            'idPrefix' => array(self::BELONGS_TO, 'Prefix', 'id_prefix'),
-            'idUser'   => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idPrefix' => [self::BELONGS_TO, 'Prefix', 'id_prefix'],
+            'idUser'   => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

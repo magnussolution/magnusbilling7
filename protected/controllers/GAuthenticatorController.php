@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -61,12 +61,12 @@ class GAuthenticatorController extends Controller
         $oneCodePost = $values['code'];
         $checkResult = $ga->verifyCode($secret, $oneCodePost, 2);
 
-        if (!$checkResult) {
-            echo json_encode(array(
+        if ( ! $checkResult) {
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => Yii::t('zii', 'Invalid Code'),
-            ));
+            ]);
             $info = 'Username ' . Yii::app()->session['username'] . ' try inactive GoogleToken with Invalid Code to user ' . $modelUser->username;
             MagnusLog::insertLOG(2, $info);
             exit;

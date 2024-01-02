@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,24 +23,24 @@
 class SmtpsController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_user',
         'password',
         'username',
         'host',
         'port',
         'encryption',
-    );
+    ];
 
     public function init()
     {
@@ -64,9 +64,9 @@ class SmtpsController extends Controller
     {
         //se é agente filtrar pelo user.id_user
 
-        $this->relationFilter['idUser'] = array(
+        $this->relationFilter['idUser'] = [
             'condition' => "idUser.id LIKE :agfby",
-        );
+        ];
 
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
 
@@ -79,11 +79,11 @@ class SmtpsController extends Controller
 
             $modelUser = Smtps::model()->find("id_user = " . Yii::app()->session['id_user']);
             if (isset($modelUser->id)) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => Yii::t('zii', 'Do you already have a SMTP'),
-                ));
+                ]);
                 exit;
             }
 
@@ -119,12 +119,12 @@ class SmtpsController extends Controller
 
         $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
 
-        if (!preg_match("/@/", $modelUser->email)) {
+        if ( ! preg_match("/@/", $modelUser->email)) {
 
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'PLEASE CONFIGURE A VALID EMAIL TO USER ' . $modelUser->username,
-            ));
+            ]);
             exit;
         }
 
@@ -140,10 +140,10 @@ class SmtpsController extends Controller
             $sussess = true;
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $sussess,
             $this->nameMsg     => $mail->output,
-        ));
+        ]);
     }
 
 }

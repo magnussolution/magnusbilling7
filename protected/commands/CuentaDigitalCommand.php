@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -40,12 +40,12 @@ class CuentaDigitalCommand extends ConsoleCommand
             $line = preg_split("/\//", $lines[$i]);
 
             $identification = Util::getDataFromMethodPay($line[4]);
-            if (!is_array($identification)) {
+            if ( ! is_array($identification)) {
                 exit;
             }
 
-            $modelUser = User::model()->find('username = :key', array(':key' => $identification['id_user']));
-            if (!count($modelUser)) {
+            $modelUser = User::model()->find('username = :key', [':key' => $identification['id_user']]);
+            if ( ! count($modelUser)) {
                 exit;
             }
 

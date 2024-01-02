@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -58,9 +58,9 @@ class CallSummaryMonthDid extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('month, sessiontime, aloc_all_calls, nbcall, sessionbill, id_did', 'length', 'max' => 50),
-        );
+        $rules = [
+            ['month, sessiontime, aloc_all_calls, nbcall, sessionbill, id_did', 'length', 'max' => 50],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -69,9 +69,9 @@ class CallSummaryMonthDid extends Model
      */
     public function relations()
     {
-        return array(
-            'idDid' => array(self::BELONGS_TO, 'Did', 'id_did'),
-        );
+        return [
+            'idDid' => [self::BELONGS_TO, 'Did', 'id_did'],
+        ];
     }
 
 }

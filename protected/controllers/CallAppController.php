@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -47,7 +47,7 @@ class CallAppController extends Controller
     public function actionIndex()
     {
 
-        if (!isset($_GET['number'])) {
+        if ( ! isset($_GET['number'])) {
 
             echo 'error, numer is necessary';
 
@@ -63,10 +63,10 @@ class CallAppController extends Controller
             $modelPhoneNumber->save();
             $idNumber = $modelPhoneNumber->getPrimaryKey();
 
-            $array = array(
+            $array = [
                 'msg' => 'success',
                 'id'  => $idNumber,
-            );
+            ];
 
             echo json_encode($array);
 
@@ -76,22 +76,22 @@ class CallAppController extends Controller
     public function actionGetReturn()
     {
 
-        if (!isset($_GET['id'])) {
+        if ( ! isset($_GET['id'])) {
 
-            if (!isset($_GET['number'])) {
+            if ( ! isset($_GET['number'])) {
                 echo 'error, numer is necessary';
                 exit;
             }
 
             $modelPhoneNumber = PhoneNumber::model()->find(
-                array(
+                [
                     'condition' => 'id_phonebook = :id_phonebook AND number = :destination AND name = :name',
-                    'params'    => array(
+                    'params'    => [
                         ':id_phonebook' => $this->id_phonebook,
                         ':destination'  => $this->destination,
                         ':name'         => $this->name,
-                    ),
-                )
+                    ],
+                ]
             );
         } else {
             $modelPhoneNumber = PhoneNumber::model()->findByPk((int) $_GET['id']);
@@ -105,19 +105,19 @@ class CallAppController extends Controller
             $msg    = 'Invalid Number';
         }
 
-        $array = array(
+        $array = [
             'msg'    => $msg,
             'status' => $status,
-        );
+        ];
 
         echo json_encode($array);
     }
 
     public function getIdPhoneBook()
     {
-        $modelUser = User::model()->find("username = :username", array(':username' => $this->user));
+        $modelUser = User::model()->find("username = :username", [':username' => $this->user]);
 
-        if (!is_array($modelUser) || !count($modelUser)) {
+        if ( ! is_array($modelUser) || ! count($modelUser)) {
             $error_msg = Yii::t('zii', 'Error : User no Found!');
             echo $error_msg;
             exit;
@@ -126,20 +126,20 @@ class CallAppController extends Controller
         $id_user = $modelUser->id;
 
         $modelCampaign = Campaign::model()->find("status = 1 AND id_user = :id_user",
-            array(':id_user' => $id_user)
+            [':id_user' => $id_user]
         );
 
         if (is_array($modelUser) && count($modelCampaign)) {
 
             $modelCampaignPhonebook = CampaignPhonebook::model()->find("id_campaign = :id_campaign",
-                array(':id_campaign' => $modelCampaign->id)
+                [':id_campaign' => $modelCampaign->id]
             );
         } else {
             echo "User not have campaign";
             exit;
         }
 
-        if (!$modelCampaignPhonebook) {
+        if ( ! $modelCampaignPhonebook) {
             echo "Campaign not have PhoneBook";
             exit;
         }

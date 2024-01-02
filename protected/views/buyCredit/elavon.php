@@ -1,24 +1,24 @@
 <?php
-/**
- * =======================================
- * ###################################
- * MagnusBilling
- *
- * @package MagnusBilling
- * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
- * ###################################
- *
- * This software is released under the terms of the GNU Lesser General Public License v2.1
- * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
- *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
- * =======================================
- * Magnusbilling.com <info@magnusbilling.com>
- *
- */
+    /**
+     * =======================================
+     * ###################################
+     * MagnusBilling
+     *
+     * @package MagnusBilling
+     * @author Adilson Leffa Magnus.
+     * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
+     * ###################################
+     *
+     * This software is released under the terms of the GNU Lesser General Public License v2.1
+     * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+     *
+     * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+     * =======================================
+     * Magnusbilling.com <info@magnusbilling.com>
+     *
+     */
 
-/*
+    /*
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
 
 <div id="load" ><?php echo Yii::t('zii', 'Please wait while loading...') ?></div>
@@ -47,80 +47,80 @@ form.submit();
 </form>
 
  */
-$error   = '';
-$success = '';
-if ($_POST) {
+    $error   = '';
+    $success = '';
+    if ($_POST) {
 
-    $url = 'https://www.myvirtualmerchant.com/VirtualMerchant/process.do';
+        $url = 'https://www.myvirtualmerchant.com/VirtualMerchant/process.do';
 
-    //$url = 'https://demo.myvirtualmerchant.com/VirtualMerchantDemo/process.do';
+        //$url = 'https://demo.myvirtualmerchant.com/VirtualMerchantDemo/process.do';
 
-    if (strlen($_POST['card-address']) > 1) {
-        $modelUser->address = $_POST['card-address'];
+        if (strlen($_POST['card-address']) > 1) {
+            $modelUser->address = $_POST['card-address'];
+        }
+        if (strlen($_POST['card-city']) > 1) {
+            $modelUser->city = $_POST['card-city'];
+        }
+        if (strlen($_POST['card-state']) > 1) {
+            $modelUser->state = $_POST['card-state'];
+        }
+        if (strlen($_POST['card-zip']) > 1) {
+            $modelUser->zipcode = $_POST['card-zip'];
+        }
+        try {
+            $modelUser->save();
+        } catch (Exception $e) {
+            //
+        }
+
+        $fields = [
+            'ssl_merchant_id'        => $modelMethodPay->username,
+            'ssl_user_id'            => $modelMethodPay->client_id,
+            'ssl_pin'                => $modelMethodPay->client_secret,
+            'ssl_show_form'          => 'false',
+            'ssl_result_format'      => 'ASCII',
+            'ssl_test_mode'          => 'false',
+            'ssl_transaction_type'   => 'ccsale',
+            'ssl_amount'             => $_GET['amount'],
+            'ssl_card_number'        => urlencode($_POST['card-number']),
+            'ssl_exp_date'           => urlencode($_POST['card-exp_date']),
+            'ssl_cvv2cvc2_indicator' => 1,
+            'ssl_cvv2cvc2'           => urlencode($_POST['card-cvc']),
+            'ssl_customer_code'      => urlencode(substr($reference, 8)),
+            'ssl_avs_address'        => urlencode($_POST['card-address']),
+            'ssl_city'               => urlencode($_POST['card-city']),
+            'ssl_state'              => urlencode($_POST['card-state']),
+            'ssl_avs_zip'            => urlencode($_POST['card-zip']),
+            'ssl_country'            => urlencode($_POST['card-country']),
+        ];
+
+        $fields_string = '';
+
+        foreach ($fields as $key => $value) {$fields_string .= $key . '=' . $value . '&';}
+        rtrim($fields_string, "&");
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+
+        if (preg_match('/ssl_result_message=APPROV/', $result)) {
+            $success = 'Your payment was successful.';
+            UserCreditManager::releaseUserCredit($modelUser->id, $_GET['amount'] * 0.97, 'Payment via Elevon', 1, $reference);
+
+        } else {
+            //$result = explode('errorMessage=', $result);
+            $error = print_r($result, true);
+        }
+
     }
-    if (strlen($_POST['card-city']) > 1) {
-        $modelUser->city = $_POST['card-city'];
-    }
-    if (strlen($_POST['card-state']) > 1) {
-        $modelUser->state = $_POST['card-state'];
-    }
-    if (strlen($_POST['card-zip']) > 1) {
-        $modelUser->zipcode = $_POST['card-zip'];
-    }
-    try {
-        $modelUser->save();
-    } catch (Exception $e) {
-        //
-    }
-
-    $fields = array(
-        'ssl_merchant_id'        => $modelMethodPay->username,
-        'ssl_user_id'            => $modelMethodPay->client_id,
-        'ssl_pin'                => $modelMethodPay->client_secret,
-        'ssl_show_form'          => 'false',
-        'ssl_result_format'      => 'ASCII',
-        'ssl_test_mode'          => 'false',
-        'ssl_transaction_type'   => 'ccsale',
-        'ssl_amount'             => $_GET['amount'],
-        'ssl_card_number'        => urlencode($_POST['card-number']),
-        'ssl_exp_date'           => urlencode($_POST['card-exp_date']),
-        'ssl_cvv2cvc2_indicator' => 1,
-        'ssl_cvv2cvc2'           => urlencode($_POST['card-cvc']),
-        'ssl_customer_code'      => urlencode(substr($reference, 8)),
-        'ssl_avs_address'        => urlencode($_POST['card-address']),
-        'ssl_city'               => urlencode($_POST['card-city']),
-        'ssl_state'              => urlencode($_POST['card-state']),
-        'ssl_avs_zip'            => urlencode($_POST['card-zip']),
-        'ssl_country'            => urlencode($_POST['card-country']),
-    );
-
-    $fields_string = '';
-
-    foreach ($fields as $key => $value) {$fields_string .= $key . '=' . $value . '&';}
-    rtrim($fields_string, "&");
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
-    $result = curl_exec($ch);
-
-    curl_close($ch);
-
-    if (preg_match('/ssl_result_message=APPROV/', $result)) {
-        $success = 'Your payment was successful.';
-        UserCreditManager::releaseUserCredit($modelUser->id, $_GET['amount'] * 0.97, 'Payment via Elevon', 1, $reference);
-
-    } else {
-        //$result = explode('errorMessage=', $result);
-        $error = print_r($result, true);
-    }
-
-}
 
 ?>
 <!DOCTYPE html>
@@ -139,7 +139,7 @@ if ($_POST) {
             <div class="form-container">
                 El sistema descontara el 3% del total de la transaccion por el pago con tarjeta de credito.
             <div class="personal-information">
-                <h1>Payment Information : Amount <?php echo $_GET['amount'] ?></h1>
+                <h1>Payment Information : Amount                                                 <?php echo $_GET['amount'] ?></h1>
             </div> <!-- end of personal-information -->
 
           <input id="column-left" type="text" name="first-name" placeholder="First Name" value="<?php echo $modelUser->firstname ?>" />

@@ -1,22 +1,22 @@
 <?php
-/**
- * =======================================
- * ###################################
- * MagnusBilling
- *
- * @package MagnusBilling
- * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
- * ###################################
- *
- * This software is released under the terms of the GNU Lesser General Public License v2.1
- * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
- *
- * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
- * =======================================
- * Magnusbilling.com <info@magnusbilling.com>
- *
- */
+    /**
+     * =======================================
+     * ###################################
+     * MagnusBilling
+     *
+     * @package MagnusBilling
+     * @author Adilson Leffa Magnus.
+     * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
+     * ###################################
+     *
+     * This software is released under the terms of the GNU Lesser General Public License v2.1
+     * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
+     *
+     * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
+     * =======================================
+     * Magnusbilling.com <info@magnusbilling.com>
+     *
+     */
 ?>
 <div id="load" ><?php echo Yii::t('zii', 'Please wait while loading...') ?></div>
 
@@ -27,8 +27,8 @@
     };
 </script>
 <?php
-//need receive two decimal.
-$amount = $_GET['amount'];
+    //need receive two decimal.
+    $amount = $_GET['amount'];
 
 ?>
 <form method="POST" action="https://paynow.sagepay.co.za/site/paynow.aspx" id="buyForm">
@@ -40,7 +40,7 @@ $amount = $_GET['amount'];
 
 
 <input type='hidden' name='p4' value='<?php echo $amount; ?>'/>
-<input type='hidden' name='p3' value='VoIP Refill ammount <?php echo $amount; ?> ZAR for <?php echo $modelUser->firstname . ' ' . $modelUser->lastname ?>'/>
+<input type='hidden' name='p3' value='VoIP Refill ammount                                                          <?php echo $amount; ?> ZAR for<?php echo $modelUser->firstname . ' ' . $modelUser->lastname ?>'/>
 <input type='hidden' name='p2' value='<?php echo $reference; ?>'/>
 
 

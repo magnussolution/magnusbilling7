@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -21,20 +21,20 @@ class DidCheckCommand extends ConsoleCommand
 {
     public function run($args)
     {
-        $modelDidUse = DidUse::model()->findAll(array(
+        $modelDidUse = DidUse::model()->findAll([
             'condition' => '(releasedate IS NULL OR releasedate < :key) AND status = 1',
-            'with'      => array(
-                'idDid' => array(
+            'with'      => [
+                'idDid' => [
                     'condition' => "idDid.billingtype <> 3 AND idDid.fixrate > 0",
-                ),
-            ),
-            'params'    => array(
+                ],
+            ],
+            'params'    => [
                 ':key' => '1984-01-01 00:00:00',
-            ),
-        )
+            ],
+        ]
         );
 
-        if (!count($modelDidUse)) {
+        if ( ! count($modelDidUse)) {
             exit($this->debug >= 3 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " NO DID IN USE ") : null);
             exit;
         }
@@ -214,7 +214,7 @@ class DidCheckCommand extends ConsoleCommand
                         $modelDid->id_user  = null;
                         $modelDid->save();
 
-                        Diddestination::model()->deleteAll('id_did = :key', array(':key' => $didUse->id_did));
+                        Diddestination::model()->deleteAll('id_did = :key', [':key' => $didUse->id_did]);
 
                         $modelDidHistory                  = new DidHistory();
                         $modelDidHistory->username        = $didUse->idUser->username;

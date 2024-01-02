@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,15 +52,15 @@ class Api extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('api_key, api_secret', 'required'),
-            array('api_key, api_secret', 'unique'),
-            array('id_user, status', 'numerical', 'integerOnly' => true),
-            array('api_key, api_secret, api_restriction_ips', 'length', 'max' => 150),
-            array('api_key, api_secret', 'length', 'min' => 15),
-            array('action', 'length', 'max' => 7),
-            array('api_key', 'checksecret'),
-        );
+        $rules = [
+            ['api_key, api_secret', 'required'],
+            ['api_key, api_secret', 'unique'],
+            ['id_user, status', 'numerical', 'integerOnly' => true],
+            ['api_key, api_secret, api_restriction_ips', 'length', 'max' => 150],
+            ['api_key, api_secret', 'length', 'min' => 15],
+            ['action', 'length', 'max' => 7],
+            ['api_key', 'checksecret'],
+        ];
         return $this->getExtraField($rules);
     }
     public function checksecret($attribute, $params)
@@ -83,8 +83,8 @@ class Api extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

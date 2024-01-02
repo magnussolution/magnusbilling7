@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -24,15 +24,15 @@ class ProviderCNLController extends Controller
 {
     public $attributeOrder = 'id';
     public $filterByUser   = false;
-    public $extraValues    = array('idProvider' => 'provider_name');
+    public $extraValues    = ['idProvider' => 'provider_name'];
 
-    public $fieldsFkReport = array(
-        'id_provider' => array(
+    public $fieldsFkReport = [
+        'id_provider' => [
             'table'       => 'pkg_provider',
             'pk'          => 'id',
             'fieldReport' => 'provider_name',
-        ),
-    );
+        ],
+    ];
     public function init()
     {
         $this->instanceModel = new ProviderCNL;

@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,13 +52,13 @@ class TemplateMail extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user,status', 'numerical', 'integerOnly' => true),
-            array('mailtype', 'length', 'max' => 50),
-            array('fromname, fromemail, language', 'length', 'max' => 70),
-            array('subject', 'length', 'max' => 130),
-            array('messagehtml', 'length', 'max' => 3000),
-        );
+        $rules = [
+            ['id_user,status', 'numerical', 'integerOnly' => true],
+            ['mailtype', 'length', 'max' => 50],
+            ['fromname, fromemail, language', 'length', 'max' => 70],
+            ['subject', 'length', 'max' => 130],
+            ['messagehtml', 'length', 'max' => 3000],
+        ];
         return $this->getExtraField($rules);
     }
     /**
@@ -66,8 +66,8 @@ class TemplateMail extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 }

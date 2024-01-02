@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,17 +23,17 @@
 class VoucherController extends Controller
 {
     public $attributeOrder        = 't.id';
-    public $extraValues           = array('idUser' => 'username');
-    public $fieldsInvisibleClient = array(
+    public $extraValues           = ['idUser' => 'username'];
+    public $fieldsInvisibleClient = [
         'tag',
         'creationdate',
         'expirationdate',
         'used',
         'currency',
-    );
-    public $fieldsInvisibleAgent = array(
+    ];
+    public $fieldsInvisibleAgent = [
         'tag',
-    );
+    ];
 
     public function init()
     {
@@ -55,10 +55,10 @@ class VoucherController extends Controller
             $values = $this->getAttributesRequest();
 
             $modelVoucher = $this->abstractModel->find('id_user IS NULL AND voucher= :voucher AND used = 0 AND usedate = :key1',
-                array(
+                [
                     ':voucher' => $values['voucher'],
                     ':key1'    => '0000-00-00 00:00:00',
-                ));
+                ]);
 
             if (isset($modelVoucher->id)) {
                 $modelVoucher->id_user = Yii::app()->session['id_user'];
@@ -82,10 +82,10 @@ class VoucherController extends Controller
             }
 
             # retorna o resultado da execucao
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => $this->success,
                 $this->nameMsg     => $this->msg,
-            ));
+            ]);
         } else {
 
             $values = $this->getAttributesRequest();
@@ -106,18 +106,18 @@ class VoucherController extends Controller
                 }
             }
 
-            $newRecord = $this->abstractModel->findAll(array(
+            $newRecord = $this->abstractModel->findAll([
                 'select' => $this->select,
                 'join'   => $this->join,
                 'order'  => 'id DESC',
                 'limit'  => 1,
-            ));
+            ]);
 
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => true,
                 $this->nameRoot    => $this->getAttributesModels($newRecord, $this->extraValues),
                 $this->nameMsg     => $this->msgSuccess,
-            ));
+            ]);
             exit;
 
         }

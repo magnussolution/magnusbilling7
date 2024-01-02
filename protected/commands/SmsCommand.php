@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -30,7 +30,7 @@ class SmsCommand extends ConsoleCommand
     {
         $UNIX_TIMESTAMP = "UNIX_TIMESTAMP(";
 
-        $tab_day  = array(1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+        $tab_day  = [1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         $num_day  = date('N');
         $name_day = $tab_day[$num_day];
 
@@ -39,18 +39,18 @@ class SmsCommand extends ConsoleCommand
         $filter = 'status = :key1 AND type = :key0  AND ' . $name_day . ' = :key1 AND startingdate <= :key2 AND expirationdate > :key2
                         AND  daily_start_time <= :key3 AND daily_stop_time > :key3';
 
-        $params = array(
+        $params = [
             ':key0' => 0,
             ':key1' => 1,
             ':key2' => date('Y-m-d H:i:s'),
             ':key3' => date('H:i:s'),
 
-        );
+        ];
 
-        $modelCampaign = Campaign::model()->findAll(array(
+        $modelCampaign = Campaign::model()->findAll([
             'condition' => $filter,
             'params'    => $params,
-        ));
+        ]);
 
         if ($this->debug >= 1) {
             echo "\nFound " . count($modelCampaign) . " Campaign\n\n";
@@ -63,8 +63,8 @@ class SmsCommand extends ConsoleCommand
             }
 
             //get all campaign phonebook
-            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', array(':key' => $campaign->id));
-            $ids_phone_books        = array();
+            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', [':key' => $campaign->id]);
+            $ids_phone_books        = [];
             foreach ($modelCampaignPhonebook as $key => $phonebook) {
                 $ids_phone_books[] = $phonebook->id_phonebook;
             }
@@ -81,7 +81,7 @@ class SmsCommand extends ConsoleCommand
                 echo 'Found ' . count($modelPhoneNumber) . ' Numbers in Campaign ' . "\n";
             }
 
-            if (!count($modelPhoneNumber)) {
+            if ( ! count($modelPhoneNumber)) {
                 if ($this->debug >= 1) {
                     echo "NO PHONE FOR CALL" . "\n\n\n";
                 }
@@ -115,7 +115,7 @@ class SmsCommand extends ConsoleCommand
                 $text = preg_replace("/\%email\%/", $sms->email, $text);
                 $text = preg_replace("/\%info\%/", $sms->info, $text);
 
-                if ($sms->number == '' || !is_numeric($sms->number)) {
+                if ($sms->number == '' || ! is_numeric($sms->number)) {
                     PhoneNumber::model()->deleteByPk((int) $sms->id);
                     continue;
                 }

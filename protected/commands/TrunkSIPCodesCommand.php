@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -40,7 +40,7 @@ class TrunkSIPCodesCommand extends ConsoleCommand
 
         LinuxAccess::exec('cp -rf /var/log/asterisk/magnus /var/log/asterisk/magnus_new');
 
-        LinuxAccess::exec('diff -u /var/log/asterisk/magnus_processed /var/log/asterisk/magnus_new ', $lines);
+        $lines = LinuxAccess::exec('diff -u /var/log/asterisk/magnus_processed /var/log/asterisk/magnus_new');
 
         LinuxAccess::exec('rm -rf /var/log/asterisk/magnus_processed');
         LinuxAccess::exec('mv /var/log/asterisk/magnus_new /var/log/asterisk/magnus_processed');

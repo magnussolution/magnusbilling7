@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -26,7 +26,7 @@ class BDServiceCommand extends CConsoleCommand
         define('LOGFILE', 'protected/runtime/BDServicePid.log');
         define('DEBUG', 0);
 
-        if (!defined('PID')) {
+        if ( ! defined('PID')) {
             define("PID", "/var/run/magnus/BDServicePid.php");
         }
 
@@ -60,15 +60,15 @@ class BDServiceCommand extends CConsoleCommand
 
         foreach ($modelSendCreditSummary as $key => $sendCredit) {
             $url = "http://takasend.org/ezzeapi/status?id=" . $sendCredit->id . "&user=" . $userBD . "&key=" . $keyBD . "";
-            if (!$result = @file_get_contents($url, false)) {
+            if ( ! $result = @file_get_contents($url, false)) {
                 $result = '';
             }
             echo $result . " $sendCredit->id \n";
             $modelRefill = Refill::model()->find('invoice_number = :key AND id_user = :key1',
-                array(
+                [
                     ':key'  => $sendCredit->id,
                     ':key1' => $sendCredit->id_user,
-                ));
+                ]);
 
             if (preg_match("/ERROR|CANCELLED/", strtoupper($result))) {
 
@@ -99,10 +99,10 @@ class BDServiceCommand extends CConsoleCommand
                         echo "is agent \n";
                         $id_agent         = $modelUser->id_user;
                         $modelRefillAgent = Refill::model()->find('invoice_number = :key AND id_user = :key1',
-                            array(
+                            [
                                 ':key'  => $sendCredit->id,
                                 ':key1' => $id_agent,
-                            ));
+                            ]);
 
                         if (isset($modelRefillAgent->id)) {
                             $modelRefillAgent->description = $modelRefillAgent->description . '. Status: ' . $result[0] . '. Ref:' . $result[1];
@@ -148,10 +148,10 @@ class BDServiceCommand extends CConsoleCommand
                         echo "is agent \n";
                         $id_agent         = $modelUser->id_user;
                         $modelRefillAgent = Refill::model()->find('invoice_number = :key AND id_user = :key1',
-                            array(
+                            [
                                 ':key'  => $sendCredit->id,
                                 ':key1' => $id_agent,
-                            ));
+                            ]);
 
                         $modelRefillAgent->description = @$modelRefillAgent->description . '. Status: ' . $result[0] . '. Ref:' . $result[1];
                         $modelRefillAgent->payment     = 1;
@@ -184,12 +184,12 @@ class BDServiceCommand extends CConsoleCommand
         $BDService_url = $config['global']['BDService_url'];
 
         $url = $BDService_url . "/ezzeapi/balance?user=$userBD&key=$keyBD";
-        if (!$result = @file_get_contents($url, false)) {
+        if ( ! $result = @file_get_contents($url, false)) {
             $result = '';
         }
 
-        Configuration::model()->updateAll(array('config_value' => $result), 'config_key = :key',
-            array(':key' => 'BDService_credit_provider'));
+        Configuration::model()->updateAll(['config_value' => $result], 'config_key = :key',
+            [':key' => 'BDService_credit_provider']);
 
         $modelSendCreditSummary = SendCreditSummary::model()->findAll('confirmed = 0 AND service != :key AND date > :key1 ', [
             ':key'  => 'international',
@@ -202,7 +202,7 @@ class BDServiceCommand extends CConsoleCommand
 
             $url = $BDService_url . "/ezzeapi/status?id=" . $idApi . "&user=" . $userBD . "&key=" . $keyBD;
 
-            if (!$result = @file_get_contents($url, false)) {
+            if ( ! $result = @file_get_contents($url, false)) {
                 $result = '';
             }
 
@@ -211,19 +211,19 @@ class BDServiceCommand extends CConsoleCommand
             if (preg_match("/SUCCESS/", $result)) {
 
                 $modelRefill = Refill::model()->find('invoice_number = :key AND id_user = :key1',
-                    array(
+                    [
                         ':key'  => $sendCredit->id,
                         ':key1' => $sendCredit->id_user,
-                    ));
+                    ]);
 
-                if (!count($modelRefill)) {
+                if ( ! count($modelRefill)) {
                     continue;
                 }
                 $message = explode("SUCCESS: ", $result);
                 User::model()->updateByPk($sendCredit->id_user,
-                    array(
+                    [
                         'credit' => new CDbExpression('credit + ' . $modelRefill->credit),
-                    )
+                    ]
                 );
 
                 $modelRefill->payment     = 1;
@@ -238,15 +238,15 @@ class BDServiceCommand extends CConsoleCommand
                     echo "\n\nIS A USER AGENT" . $sendCredit->idUser->id_user;
 
                     $modelRefill = Refill::model()->find('invoice_number = :key AND id_user = :key1',
-                        array(
+                        [
                             ':key'  => $sendCredit->id,
                             ':key1' => $sendCredit->idUser->id_user,
-                        ));
+                        ]);
 
                     User::model()->updateByPk($sendCredit->idUser->id_user,
-                        array(
+                        [
                             'credit' => new CDbExpression('credit + ' . $modelRefill->credit),
-                        )
+                        ]
                     );
 
                     $modelRefill->payment     = 1;
@@ -259,7 +259,7 @@ class BDServiceCommand extends CConsoleCommand
                 $sendCredit->confirmed = 3;
                 $sendCredit->save();
 
-                $modelRefill = Refill::model()->find('invoice_number = :key', array(':key' => $sendCredit->id));
+                $modelRefill = Refill::model()->find('invoice_number = :key', [':key' => $sendCredit->id]);
                 if (count($modelRefill)) {
                     $modelRefill->description = $modelRefill->description . '. Ref: ' . $result;
                     $modelRefill->save();

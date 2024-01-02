@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -54,16 +54,16 @@ if ($response->approved) {
     $model->payment     = 1;
     $model->save();
 
-    echo json_encode(array(
+    echo json_encode([
         'success' => true,
         'msg'     => 'Thank You! You have successfully completed the payment!',
-    ));
+    ]);
     exit;
 
 } else {
-    echo json_encode(array(
+    echo json_encode([
         'success' => false,
         'msg'     => 'Oops, some error occured <br>' . $response->response_reason_text,
-    ));
+    ]);
     exit;
 }

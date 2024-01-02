@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,17 +23,17 @@
 class MethodpayController extends Controller
 {
     public $attributeOrder = 'id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'pagseguro_TOKEN',
         'P2P_CustomerSiteID',
         'P2P_KeyID',
@@ -48,10 +48,10 @@ class MethodpayController extends Controller
         'SLIdProduto',
         'SLvalidationtoken',
 
-    );
-    public $fieldsInvisibleAgent = array(
+    ];
+    public $fieldsInvisibleAgent = [
         'id_group',
-    );
+    ];
 
     public function init()
     {
@@ -66,21 +66,21 @@ class MethodpayController extends Controller
 
         $values = explode(":", $this->config['global']['purchase_amount']);
 
-        $amount = array();
+        $amount = [];
 
         foreach ($values as $key => $value) {
 
-            array_push($amount, array(
+            array_push($amount, [
                 'id'     => $key + 1,
-                'amount' => $value)
+                'amount' => $value]
             );
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameRoot  => $amount,
             $this->nameCount => 10,
-            $this->nameSum   => array(),
-        ));
+            $this->nameSum   => [],
+        ]);
 
     }
 

@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,7 +23,7 @@
 class PlanController extends Controller
 {
     public $attributeOrder = 't.name';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
     public $nameModelRelated   = 'ServicesPlan';
     public $nameFkRelated      = 'id_plan';
@@ -89,19 +89,19 @@ class PlanController extends Controller
 
         $modelRate = Rate::model()->findAll($filter);
 
-        if (!isset($modelRate[0]->id)) {
+        if ( ! isset($modelRate[0]->id)) {
             $url = "https://www.magnusbilling.com/download/cod_operadora.csv";
-            if (!$file = @file_get_contents($url, false)) {
+            if ( ! $file = @file_get_contents($url, false)) {
                 return;
             }
 
             $file    = explode("\n", $file);
-            $prefixs = array();
+            $prefixs = [];
 
             //adiciona o codigo para qualquer operarado
             $file[] = preg_replace("/1111/", '55', $filterPrefix) . ",Brasil $filter_name Outras Operadoras";
 
-            $rates = array();
+            $rates = [];
 
             $price            = '0.1000';
             $initblock        = 30;
@@ -118,7 +118,7 @@ class PlanController extends Controller
                 $prefix      = '1111' . substr($collum[0], 2);
                 $destination = trim($collum[1]);
 
-                if (!strlen($destination)) {
+                if ( ! strlen($destination)) {
                     continue;
                 }
                 if (preg_match("/$filter_name/", $destination)) {
@@ -174,7 +174,7 @@ class PlanController extends Controller
         $arrPost = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
 
         /*permite salvar quando tem audio e extrafield*/
-        $id_service = array();
+        $id_service = [];
         foreach ($arrPost as $key => $value) {
             if ($key == 'id_services_array') {
                 if (isset($_POST['id_services_array']) && strlen($value) > 0) {
@@ -182,7 +182,7 @@ class PlanController extends Controller
                 }
 
             }
-        };
+        }
 
         return $arrPost;
     }

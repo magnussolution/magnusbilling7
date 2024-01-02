@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class Firewall extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('ip, action', 'required'),
-            array('action', 'numerical', 'integerOnly' => true),
-            array('description,jail', 'length', 'max' => 200),
+        $rules = [
+            ['ip, action', 'required'],
+            ['action', 'numerical', 'integerOnly' => true],
+            ['description,jail', 'length', 'max' => 200],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 }

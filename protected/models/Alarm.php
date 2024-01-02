@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,13 +52,13 @@ class Alarm extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('type, amount, condition, status', 'required'),
-            array('type, amount, condition, status, id_plan, period', 'numerical', 'integerOnly' => true),
-            array('subject', 'length', 'max' => 200),
-            array('message', 'length', 'max' => 1000),
+        $rules = [
+            ['type, amount, condition, status', 'required'],
+            ['type, amount, condition, status, id_plan, period', 'numerical', 'integerOnly' => true],
+            ['subject', 'length', 'max' => 200],
+            ['message', 'length', 'max' => 1000],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -67,9 +67,9 @@ class Alarm extends Model
      */
     public function relations()
     {
-        return array(
-            'idPlan' => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-        );
+        return [
+            'idPlan' => [self::BELONGS_TO, 'Plan', 'id_plan'],
+        ];
     }
 
     public function beforeSave()

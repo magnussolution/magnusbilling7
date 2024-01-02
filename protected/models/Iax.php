@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -59,25 +59,25 @@ class Iax extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_user', 'required'),
-            array('id_user,calllimit ', 'numerical', 'integerOnly' => true),
-            array('name, callerid, context, fromuser, fromdomain, md5secret, secret', 'length', 'max' => 80),
-            array('regexten, insecure, accountcode', 'length', 'max' => 20),
-            array('amaflags, dtmfmode, qualify', 'length', 'max' => 7),
-            array('callgroup, pickupgroup', 'length', 'max' => 10),
-            array('DEFAULTip, ipaddr', 'length', 'max' => 15),
-            array('nat, host', 'length', 'max' => 31),
-            array('language', 'length', 'max' => 2),
-            array('mailbox', 'length', 'max' => 50),
-            array('rtpholdtimeout', 'length', 'max' => 3),
-            array('deny, permit', 'length', 'max' => 95),
-            array('port', 'length', 'max' => 5),
-            array('type', 'length', 'max' => 6),
-            array('disallow, allow, useragent', 'length', 'max' => 100),
-            array('username', 'checkusername'),
-            array('username', 'unique', 'caseSensitive' => 'false'),
-        );
+        $rules = [
+            ['id_user', 'required'],
+            ['id_user,calllimit ', 'numerical', 'integerOnly' => true],
+            ['name, callerid, context, fromuser, fromdomain, md5secret, secret', 'length', 'max' => 80],
+            ['regexten, insecure, accountcode', 'length', 'max' => 20],
+            ['amaflags, dtmfmode, qualify', 'length', 'max' => 7],
+            ['callgroup, pickupgroup', 'length', 'max' => 10],
+            ['DEFAULTip, ipaddr', 'length', 'max' => 15],
+            ['nat, host', 'length', 'max' => 31],
+            ['language', 'length', 'max' => 2],
+            ['mailbox', 'length', 'max' => 50],
+            ['rtpholdtimeout', 'length', 'max' => 3],
+            ['deny, permit', 'length', 'max' => 95],
+            ['port', 'length', 'max' => 5],
+            ['type', 'length', 'max' => 6],
+            ['disallow, allow, useragent', 'length', 'max' => 100],
+            ['username', 'checkusername'],
+            ['username', 'unique', 'caseSensitive' => 'false'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -102,9 +102,9 @@ class Iax extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
 }

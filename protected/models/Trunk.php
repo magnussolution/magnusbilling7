@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -54,26 +54,26 @@ class Trunk extends Model
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        $rules = array(
-            array('trunkcode, id_provider, allow, providertech, host', 'required'),
-            array('allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use, cnl', 'numerical', 'integerOnly' => true),
-            array('secret', 'length', 'max' => 50),
-            array('nat, trunkcode, sms_res', 'length', 'max' => 50),
-            array('trunkprefix, providertech, removeprefix, context, insecure, disallow', 'length', 'max' => 20),
-            array('providerip, user,fromuser, allow, host, fromdomain', 'length', 'max' => 80),
-            array('addparameter, block_cid', 'length', 'max' => 120),
-            array('link_sms', 'length', 'max' => 250),
-            array('dtmfmode, qualify', 'length', 'max' => 7),
-            array('directmedia,sendrpid', 'length', 'max' => 10),
-            array('cid_add,cid_remove', 'length', 'max' => 11),
-            array('type, language', 'length', 'max' => 6),
-            array('transport,encryption', 'length', 'max' => 3),
-            array('port', 'length', 'max' => 5),
-            array('register_string', 'length', 'max' => 300),
-            array('sip_config', 'length', 'max' => 500),
-            array('trunkcode', 'checkTrunkCode'),
-            array('trunkcode', 'uniquePeerName'),
-        );
+        $rules = [
+            ['trunkcode, id_provider, allow, providertech, host', 'required'],
+            ['allow_error, id_provider, failover_trunk, secondusedreal, register, call_answered,port, call_total, inuse, maxuse, status, if_max_use, cnl', 'numerical', 'integerOnly' => true],
+            ['secret', 'length', 'max' => 50],
+            ['nat, trunkcode, sms_res', 'length', 'max' => 50],
+            ['trunkprefix, providertech, removeprefix, context, insecure, disallow', 'length', 'max' => 20],
+            ['providerip, user,fromuser, allow, host, fromdomain', 'length', 'max' => 80],
+            ['addparameter, block_cid', 'length', 'max' => 120],
+            ['link_sms', 'length', 'max' => 250],
+            ['dtmfmode, qualify', 'length', 'max' => 7],
+            ['directmedia,sendrpid', 'length', 'max' => 10],
+            ['cid_add,cid_remove', 'length', 'max' => 11],
+            ['type, language', 'length', 'max' => 6],
+            ['transport,encryption', 'length', 'max' => 3],
+            ['port', 'length', 'max' => 5],
+            ['register_string', 'length', 'max' => 300],
+            ['sip_config', 'length', 'max' => 500],
+            ['trunkcode', 'checkTrunkCode'],
+            ['trunkcode', 'uniquePeerName'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -89,11 +89,11 @@ class Trunk extends Model
      */
     public function relations()
     {
-        return array(
-            'idProvider'    => array(self::BELONGS_TO, 'Provider', 'id_provider'),
-            'failoverTrunk' => array(self::BELONGS_TO, 'trunk', 'failover_trunk'),
-            'trunks'        => array(self::HAS_MANY, 'trunk', 'failover_trunk'),
-        );
+        return [
+            'idProvider'    => [self::BELONGS_TO, 'Provider', 'id_provider'],
+            'failoverTrunk' => [self::BELONGS_TO, 'trunk', 'failover_trunk'],
+            'trunks'        => [self::HAS_MANY, 'trunk', 'failover_trunk'],
+        ];
     }
 
     public function beforeSave()

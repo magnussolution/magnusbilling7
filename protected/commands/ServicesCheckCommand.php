@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -19,17 +19,17 @@
  */
 class ServicesCheckCommand extends ConsoleCommand
 {
-    private $userNotify = array();
+    private $userNotify = [];
     private $next_due_date;
     private $days_remaining;
 
     public function run($args)
     {
-        $modelServiceUser = ServicesUse::model()->findAll(array(
+        $modelServiceUser = ServicesUse::model()->findAll([
             'condition' => 'status=1',
-        ));
+        ]);
 
-        if (!count($modelServiceUser)) {
+        if ( ! count($modelServiceUser)) {
             if ($this->debug >= 1) {
                 echo " NO SERVICE IN USE ";
             }
@@ -145,7 +145,7 @@ class ServicesCheckCommand extends ConsoleCommand
 
     public function notifyUser($service, $type)
     {
-        if (!in_array($service->idUser, $this->userNotify)) {
+        if ( ! in_array($service->idUser, $this->userNotify)) {
 
             echo 'Send notify email';
             $this->userNotify[] = $service->idUser;

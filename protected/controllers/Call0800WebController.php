@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -30,23 +30,23 @@ class Call0800WebController extends Controller
 
         Yii::app()->setLanguage($this->config['global']['base_language']);
 
-        if (!isset($_REQUEST['number'])) {
+        if ( ! isset($_REQUEST['number'])) {
 
-            $this->render('index', array(
+            $this->render('index', [
                 'send' => false,
-            ));
+            ]);
 
         } else {
 
             $destination = isset($_REQUEST['number']) ? $_REQUEST['number'] : '';
             $user        = isset($_GET['user']) ? $_GET['user'] : '';
 
-            $model = Sip::model()->find("name = :user", array(':user' => $user));
+            $model = Sip::model()->find("name = :user", [':user' => $user]);
 
-            if (!isset($model->id)) {
+            if ( ! isset($model->id)) {
 
-                $model = Iax::model()->find("name = :user", array(':user' => $user));
-                if (!isset($model->id)) {
+                $model = Iax::model()->find("name = :user", [':user' => $user]);
+                if ( ! isset($model->id)) {
                     $error_msg = Yii::t('zii', 'Error : User no Found!');
                     echo $error_msg;
                     exit;
@@ -79,9 +79,9 @@ class Call0800WebController extends Controller
 
             AsteriskAccess::generateCallFile($call);
 
-            $this->render('index', array(
+            $this->render('index', [
                 'send' => true,
-            ));
+            ]);
 
         }
 
@@ -96,13 +96,13 @@ class Call0800WebController extends Controller
 
             Yii::log(print_r($data, true), 'error');
 
-            if (!isset($data[2])) {
+            if ( ! isset($data[2])) {
                 echo 'Your number is required';
 
             } else if (strlen($data[2]) < 4) {
                 echo 'The minimum length for your number is 4';
 
-            } else if (!isset($data[3])) {
+            } else if ( ! isset($data[3])) {
                 echo 'Destination is required';
 
             } else if (strlen($data[3]) < 4) {
@@ -115,7 +115,7 @@ class Call0800WebController extends Controller
 
                 $modelSip = AccessManager::checkAccess($user, $pass);
 
-                if (!isset($modelSip->id)) {
+                if ( ! isset($modelSip->id)) {
                     echo 'User or password is invalid';
                     exit;
                 }
@@ -165,7 +165,7 @@ class Call0800WebController extends Controller
                 $callTrunk    = $SearchTariff->find($yournumber, $modelSip->idUser->id_plan, $modelSip->idUser->id);
 
                 $result = Plan::model()->searchTariff($modelSip->idUser->id_plan, $yournumber);
-                if (!is_array($result) || count($result) == 0) {
+                if ( ! is_array($result) || count($result) == 0) {
                     return 0;
                 }
 
@@ -173,10 +173,10 @@ class Call0800WebController extends Controller
                 $result       = $result[1];
 
                 //Select custom rate to user
-                $modelUserRate = UserRate::model()->find('id_prefix = :key AND id_user = :key1', array(
+                $modelUserRate = UserRate::model()->find('id_prefix = :key AND id_user = :key1', [
                     ':key'  => $result[0]['id_prefix'],
                     ':key1' => $modelSip->idUser->id,
-                ));
+                ]);
 
                 //change custom rate to user
                 if (count($modelUserRate)) {
@@ -185,7 +185,7 @@ class Call0800WebController extends Controller
                     $result[0]['billingblock'] = $modelUserRate->billingblock;
                 }
 
-                if (!is_array($callTrunk) || !count($callTrunk)) {
+                if ( ! is_array($callTrunk) || ! count($callTrunk)) {
                     echo Yii::t('zii', 'Prefix not found to you number');
                     exit;
                 }
@@ -194,7 +194,7 @@ class Call0800WebController extends Controller
 
                 $callTrunkDestination = $SearchTariff->find($destination, $modelSip->idUser->id_plan, $modelSip->idUser->id);
 
-                if (!is_array($callTrunkDestination) || count($callTrunkDestination) == 0) {
+                if ( ! is_array($callTrunkDestination) || count($callTrunkDestination) == 0) {
                     echo $sql;
                     echo Yii::t('zii', 'Prefix not found to destination');
 

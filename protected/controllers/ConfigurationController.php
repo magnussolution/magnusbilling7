@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -35,55 +35,55 @@ class ConfigurationController extends Controller
 
     public function actionLayout()
     {
-        if (!isset($_POST['status'])) {
+        if ( ! isset($_POST['status'])) {
             exit;
         }
 
-        $model         = Configuration::model()->find('config_key = :config_key', array('config_key' => 'layout'));
+        $model         = Configuration::model()->find('config_key = :config_key', ['config_key' => 'layout']);
         $model->status = $_POST['status'];
         if ($_POST['status'] == 0) {
             $model->config_value = 0;
         }
         $model->save();
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => '',
-        ));
+        ]);
     }
 
     public function actionTheme()
     {
-        if (!isset($_POST['field']) || !isset($_POST['value'])) {
+        if ( ! isset($_POST['field']) || ! isset($_POST['value'])) {
             exit;
         }
         $info = 'User change the theme ' . $_POST['value'];
         MagnusLog::insertLOG(2, $info);
 
-        $model               = Configuration::model()->find('config_key = :config_key', array(':config_key' => $_POST['field']));
+        $model               = Configuration::model()->find('config_key = :config_key', [':config_key' => $_POST['field']]);
         $model->config_value = $_POST['value'];
         $model->save();
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => '',
-        ));
+        ]);
     }
 
     public function actionSetData()
     {
-        if (!isset($_POST)) {
+        if ( ! isset($_POST)) {
             exit;
         }
 
-        $model               = Configuration::model()->find('config_key = :config_key', array('config_key' => 'admin_email'));
+        $model               = Configuration::model()->find('config_key = :config_key', ['config_key' => 'admin_email']);
         $model->config_value = $_POST['email'];
         $model->save();
 
-        $model               = Configuration::model()->find('config_key = :config_key', array('config_key' => 'base_country'));
+        $model               = Configuration::model()->find('config_key = :config_key', ['config_key' => 'base_country']);
         $model->config_value = $_POST['countryiso'];
         $model->save();
 
-        $model               = Configuration::model()->find('config_key = :config_key', array('config_key' => 'base_currency'));
+        $model               = Configuration::model()->find('config_key = :config_key', ['config_key' => 'base_currency']);
         $model->config_value = $_POST['currency'];
         $model->save();
 
@@ -91,10 +91,10 @@ class ConfigurationController extends Controller
         Yii::app()->session['email']        = $_POST['email'];
         Yii::app()->session['currency']     = $_POST['currency'];
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => 'Success',
-        ));
+        ]);
     }
 
     public function setAttributesModels($attributes, $models)

@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,12 +53,12 @@ class Portability extends Model
 
     public function rules()
     {
-        $rules = array(
-            array('number', 'numerical', 'integerOnly' => true),
-            array('number', 'length', 'max' => 15),
-            array('company', 'length', 'max' => 5),
-            array('date', 'length', 'max' => 30),
-        );
+        $rules = [
+            ['number', 'numerical', 'integerOnly' => true],
+            ['number', 'length', 'max' => 15],
+            ['company', 'length', 'max' => 5],
+            ['date', 'length', 'max' => 30],
+        ];
         return $this->getExtraField($rules);
     }
 

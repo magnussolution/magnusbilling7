@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -61,17 +61,17 @@ class Campaign extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('name, id_user', 'required'),
-            array('id_user, digit_authorize, id_plan,restrict_phone, secondusedreal, enable_max_call, nb_callmade, type, monday, tuesday, wednesday, thursday, friday, saturday, sunday, status, frequency, auto_reprocess, max_frequency', 'numerical', 'integerOnly' => true),
-            array('name, audio, audio_2,record_call, callerid', 'length', 'max' => 100),
-            array('startingdate, expirationdate', 'length', 'max' => 50),
-            array('daily_start_time, daily_stop_time', 'length', 'max' => 8),
-            array('forward_number', 'length', 'max' => 160),
-            array('description', 'length', 'max' => 300),
-            array('tts_audio,tts_audio2,asr_audio,asr_options', 'length', 'max' => 200),
-            array('from', 'length', 'max' => 20),
-        );
+        $rules = [
+            ['name, id_user', 'required'],
+            ['id_user, digit_authorize, id_plan,restrict_phone, secondusedreal, enable_max_call, nb_callmade, type, monday, tuesday, wednesday, thursday, friday, saturday, sunday, status, frequency, auto_reprocess, max_frequency', 'numerical', 'integerOnly' => true],
+            ['name, audio, audio_2,record_call, callerid', 'length', 'max' => 100],
+            ['startingdate, expirationdate', 'length', 'max' => 50],
+            ['daily_start_time, daily_stop_time', 'length', 'max' => 8],
+            ['forward_number', 'length', 'max' => 160],
+            ['description', 'length', 'max' => 300],
+            ['tts_audio,tts_audio2,asr_audio,asr_options', 'length', 'max' => 200],
+            ['from', 'length', 'max' => 20],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -80,10 +80,10 @@ class Campaign extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-            'idPlan' => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+            'idPlan' => [self::BELONGS_TO, 'Plan', 'id_plan'],
+        ];
     }
 
     public function checkCampaignActive($id_campaign, $nbpage, $name_day)

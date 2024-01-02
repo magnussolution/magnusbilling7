@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class DidHistory extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('did, username', 'length', 'max' => 50),
-            array('description', 'length', 'max' => 500),
-            array('month_payed', 'numerical', 'integerOnly' => true),
-            array('reservationdate, releasedate', 'safe'),
-        );
+        $rules = [
+            ['did, username', 'length', 'max' => 50],
+            ['description', 'length', 'max' => 500],
+            ['month_payed', 'numerical', 'integerOnly' => true],
+            ['reservationdate, releasedate', 'safe'],
+        ];
         return $this->getExtraField($rules);
     }
 

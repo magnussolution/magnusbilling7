@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,15 +23,15 @@ class PlanCheckCommand extends ConsoleCommand
     {
         $this->debug = 10;
 
-        $modelOfferUse = OfferUse::model()->findAll(array(
+        $modelOfferUse = OfferUse::model()->findAll([
             'condition' => '(releasedate IS NULL OR releasedate < :key) AND status = 1',
-            'params'    => array(
+            'params'    => [
                 ':key' => '1984-01-01 00:00:00',
-            ),
-        )
+            ],
+        ]
         );
 
-        if (!count($modelOfferUse)) {
+        if ( ! count($modelOfferUse)) {
             if ($this->debug >= 1) {
                 echo " NO PLAN IN USE ";
             }
@@ -89,9 +89,9 @@ class PlanCheckCommand extends ConsoleCommand
                         $refill->save();
 
                         User::model()->updateByPk($offerUse->idUser->id,
-                            array(
+                            [
                                 'credit' => new CDbExpression('credit - ' . $offerUse->idOffer->price),
-                            )
+                            ]
                         );
 
                         $mail = new Mail(Mail::$TYPE_PLAN_PAID, $offerUse->idUser->id);
@@ -133,9 +133,9 @@ class PlanCheckCommand extends ConsoleCommand
                         $refill->save();
 
                         User::model()->updateByPk($offerUse->idUser->id,
-                            array(
+                            [
                                 'credit' => new CDbExpression('credit - ' . $offerUse->idOffer->price),
-                            )
+                            ]
                         );
 
                         $mail = new Mail(Mail::$TYPE_PLAN_PAID, $offerUse->idUser->id);
@@ -152,7 +152,7 @@ class PlanCheckCommand extends ConsoleCommand
                         $offerUse->releasedate = date('Y-m-d H:i:s');
                         $offerUse->status      = 0;
                         $offerUse->save();
-                        User::model()->updateByPk((int) $offerUse->idUser->id, array('id_offer' => 0));
+                        User::model()->updateByPk((int) $offerUse->idUser->id, ['id_offer' => 0]);
 
                         $mail = new Mail(Mail::$TYPE_PLAN_RELEASED, $offerUse->idUser->id);
                         $mail->replaceInEmail(Mail::$PLAN_LABEL, $offerUse->idOffer->label);

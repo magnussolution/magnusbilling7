@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,15 +23,15 @@
 class RefillproviderController extends Controller
 {
     public $attributeOrder = 'id';
-    public $extraValues    = array('idProvider' => 'provider_name');
+    public $extraValues    = ['idProvider' => 'provider_name'];
     public $filterByUser   = false;
-    public $fieldsFkReport = array(
-        'id_provider' => array(
+    public $fieldsFkReport = [
+        'id_provider' => [
             'table'       => 'pkg_provider',
             'pk'          => 'id',
             'fieldReport' => 'provider_name',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -51,7 +51,7 @@ class RefillproviderController extends Controller
 
             //add credit
             $resultProvider->credit = $model->credit > 0 ? $resultProvider->credit + $model->credit : $resultProvider->credit - ($model->credit * -1);
-            $resultProvider->saveAttributes(array('credit' => $resultProvider->credit));
+            $resultProvider->saveAttributes(['credit' => $resultProvider->credit]);
 
         }
         return;

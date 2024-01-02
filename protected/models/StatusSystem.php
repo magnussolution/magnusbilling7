@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,11 +52,11 @@ class StatusSystem extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('cpuMediaUso,cpuPercent,memUsed,networkin,networkout,disk_free,disk_perc', 'numerical'),
-            array('date', 'length', 'max' => 30),
+        $rules = [
+            ['cpuMediaUso,cpuPercent,memUsed,networkin,networkout,disk_free,disk_perc', 'numerical'],
+            ['date', 'length', 'max' => 30],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 

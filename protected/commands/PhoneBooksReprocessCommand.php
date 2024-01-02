@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -25,9 +25,9 @@ class PhoneBooksReprocessCommand extends ConsoleCommand
         $modelCampaign = Campaign::model()->findAll('status = 1 AND auto_reprocess = 1');
         foreach ($modelCampaign as $key => $campaign) {
 
-            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', array(':key' => $campaign->id));
+            $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key', [':key' => $campaign->id]);
 
-            if (!isset($modelCampaignPhonebook[0]->id_phonebook)) {
+            if ( ! isset($modelCampaignPhonebook[0]->id_phonebook)) {
                 continue;
             }
 
@@ -49,7 +49,7 @@ class PhoneBooksReprocessCommand extends ConsoleCommand
             $criteria = new CDbCriteria;
             $criteria->addInCondition('id_phonebook', $ids_phone_books);
             $criteria->addCondition('status = 2');
-            PhoneNumber::model()->updateAll(array('status' => 1, 'try' => 0), $criteria);
+            PhoneNumber::model()->updateAll(['status' => 1, 'try' => 0], $criteria);
         }
     }
 }

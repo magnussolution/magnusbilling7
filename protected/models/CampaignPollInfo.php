@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -57,11 +57,11 @@ class CampaignPollInfo extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_campaign_poll', 'numerical', 'integerOnly' => true),
-            array('number', 'length', 'max' => 18),
-            array('obs, resposta', 'length', 'max' => 200),
-        );
+        $rules = [
+            ['id_campaign_poll', 'numerical', 'integerOnly' => true],
+            ['number', 'length', 'max' => 18],
+            ['obs, resposta', 'length', 'max' => 200],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -70,8 +70,8 @@ class CampaignPollInfo extends Model
      */
     public function relations()
     {
-        return array(
-            'idCampaignPoll' => array(self::BELONGS_TO, 'CampaignPoll', 'id_campaign_poll'),
-        );
+        return [
+            'idCampaignPoll' => [self::BELONGS_TO, 'CampaignPoll', 'id_campaign_poll'],
+        ];
     }
 }

@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -24,24 +24,24 @@ class MassiveCallCommand extends ConsoleCommand
         $config         = LoadConfig::getConfig();
         $UNIX_TIMESTAMP = "UNIX_TIMESTAMP(";
 
-        $tab_day  = array(1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+        $tab_day  = [1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         $num_day  = date('N');
         $name_day = $tab_day[$num_day];
 
         $filter = 'status = :key AND type = :key  AND ' . $name_day . ' = :key AND startingdate <= :key1 AND expirationdate > :key1
                         AND  daily_start_time <= :key2 AND daily_stop_time > :key2 AND frequency > 0';
 
-        $params = array(
+        $params = [
             ':key'  => 1,
             ':key1' => date('Y-m-d H:i:s'),
             ':key2' => date('H:i:s'),
-        );
+        ];
 
-        $modelCampaign = Campaign::model()->findAll(array(
+        $modelCampaign = Campaign::model()->findAll([
             'condition' => $filter,
             'params'    => $params,
             'order'     => 'RAND()',
-        ));
+        ]);
 
         if ($this->debug >= 1) {
             echo "\nFound " . count($modelCampaign) . " Campaign\n\n";
@@ -74,20 +74,20 @@ class MassiveCallCommand extends ConsoleCommand
                 continue;
             }
 
-            $modelServers = Servers::model()->count('status = 1 AND weight > 0 AND (type = :key OR type = :key1)', array(':key' => 'mbilling', ':key1' => 'asterisk'));
+            $modelServers = Servers::model()->count('status = 1 AND weight > 0 AND (type = :key OR type = :key1)', [':key' => 'mbilling', ':key1' => 'asterisk']);
 
             $campaign->frequency = $modelServers > 0 ? ceil($campaign->frequency / $modelServers) : $campaign->frequency;
 
             //get all campaign phonebook
             $modelCampaignPhonebook = CampaignPhonebook::model()->findAll(
-                array(
+                [
                     'condition' => 'id_campaign = :key',
-                    'params'    => array(':key' => $campaign->id),
+                    'params'    => [':key' => $campaign->id],
                     'order'     => 'RAND()',
-                )
+                ]
             );
 
-            $ids_phone_books = array();
+            $ids_phone_books = [];
             foreach ($modelCampaignPhonebook as $key => $phonebook) {
                 $ids_phone_books[] = $phonebook->id_phonebook;
             }
@@ -104,7 +104,7 @@ class MassiveCallCommand extends ConsoleCommand
                 echo 'Found ' . count($modelPhoneNumber) . ' Numbers in Campaign ' . "\n";
             }
 
-            if (!isset($modelPhoneNumber[0])) {
+            if ( ! isset($modelPhoneNumber[0])) {
                 if ($this->debug >= 1) {
                     echo "NO PHONE FOR CALL" . "\n\n\n";
                 }
@@ -122,7 +122,7 @@ class MassiveCallCommand extends ConsoleCommand
             }
 
             $i         = 0;
-            $ids       = array();
+            $ids       = [];
             $sleepNext = 1;
 
             foreach ($modelPhoneNumber as $phone) {
@@ -132,10 +132,10 @@ class MassiveCallCommand extends ConsoleCommand
             $criteria = new CDbCriteria();
             $criteria->addInCondition('id', $ids);
             PhoneNumber::model()->updateAll(
-                array(
+                [
                     'status' => '2',
                     'try'    => new CDbExpression('try + 1'),
-                ),
+                ],
                 $criteria
             );
 
@@ -146,7 +146,7 @@ class MassiveCallCommand extends ConsoleCommand
                 $destination = $phone->number;
 
                 if ($campaign->restrict_phone == 1) {
-                    $modelCampaignRestrictPhone = CampaignRestrictPhone::model()->find('number = :key', array(':key' => $destination));
+                    $modelCampaignRestrictPhone = CampaignRestrictPhone::model()->find('number = :key', [':key' => $destination]);
 
                     if (isset($modelCampaignRestrictPhone->id)) {
                         $phone->status = 4;
@@ -170,7 +170,7 @@ class MassiveCallCommand extends ConsoleCommand
                     continue;
                 }
 
-                if (!strlen($destination)) {
+                if ( ! strlen($destination)) {
                     $phone->status = 0;
                     $phone->save();
                     if ($this->debug >= 1) {
@@ -183,7 +183,7 @@ class MassiveCallCommand extends ConsoleCommand
 
                 $searchTariff = Plan::model()->searchTariff($id_plan, $destination);
 
-                if (!isset($searchTariff[1][0])) {
+                if ( ! isset($searchTariff[1][0])) {
                     $phone->status = 0;
                     $phone->save();
                     if ($this->debug >= 1) {
@@ -218,7 +218,7 @@ class MassiveCallCommand extends ConsoleCommand
                     break;
                 }
 
-                if (!isset($idTrunk) || $idTrunk < 1) {
+                if ( ! isset($idTrunk) || $idTrunk < 1) {
                     continue;
                 }
 

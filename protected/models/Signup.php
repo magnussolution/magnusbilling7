@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -45,33 +45,33 @@ class Signup extends Model
     public function rules()
     {
 
-        $rules = array(
-            array('username,password,lastname, firstname, email, city, state, phone, id_plan, id_user', 'required'),
-            array('phone, vat, mobile,calllimit', 'numerical'),
-            array('password, password2', 'length', 'min' => 6),
-            array('lastname,firstname, city, state', 'length', 'min' => 2),
-            array('country', 'length', 'min' => 1),
-            array('zipcode', 'length', 'min' => 5),
-            array('doc', 'length', 'min' => 11),
-            array('username', 'length', 'min' => 5),
-            array('username', 'checkusername'),
-            array('password', 'checksecret'),
-            array('doc', 'checkdoc'),
-            array('state_number', 'length', 'max' => 40),
-            array('neighborhood', 'length', 'max' => 50),
-            array('address, company_name', 'length', 'max' => 100),
-            array('mobile, phone', 'length', 'min' => 10),
-            array('email', 'checkemail'),
-            array('email,username', 'unique'),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || $this->captcha == false),
-            array('accept_terms', 'required', 'requiredValue' => 1, 'message' => 'You must accept the Terms and Conditons in order to register.'),
-        );
+        $rules = [
+            ['username,password,lastname, firstname, email, city, state, phone, id_plan, id_user', 'required'],
+            ['phone, vat, mobile,calllimit', 'numerical'],
+            ['password, password2', 'length', 'min' => 6],
+            ['lastname,firstname, city, state', 'length', 'min' => 2],
+            ['country', 'length', 'min' => 1],
+            ['zipcode', 'length', 'min' => 5],
+            ['doc', 'length', 'min' => 11],
+            ['username', 'length', 'min' => 5],
+            ['username', 'checkusername'],
+            ['password', 'checksecret'],
+            ['doc', 'checkdoc'],
+            ['state_number', 'length', 'max' => 40],
+            ['neighborhood', 'length', 'max' => 50],
+            ['address, company_name', 'length', 'max' => 100],
+            ['mobile, phone', 'length', 'min' => 10],
+            ['email', 'checkemail'],
+            ['email,username', 'unique'],
+            ['verifyCode', 'captcha', 'allowEmpty' =>  ! CCaptcha::checkRequirements() || $this->captcha == false],
+            ['accept_terms', 'required', 'requiredValue' => 1, 'message' => 'You must accept the Terms and Conditons in order to register.'],
+        ];
         return $this->getExtraField($rules);
     }
 
     public function checkemail($attribute, $params)
     {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if ( ! filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $this->addError($attribute, Yii::t('zii', 'Invalid Email'));
         }
 
@@ -97,7 +97,7 @@ class Signup extends Model
         }
 
         if ($config['global']['signup_unique_doc'] == 0 && strlen($this->doc)) {
-            $modelUserCheck = User::model()->find('doc = :key', array(':key' => $this->doc));
+            $modelUserCheck = User::model()->find('doc = :key', [':key' => $this->doc]);
             if (isset($modelUserCheck->id)) {
                 $this->addError($attribute, Yii::t('zii', 'This DOC is already used per other user'));
             }
@@ -109,7 +109,7 @@ class Signup extends Model
             $this->addError($attribute, Yii::t('zii', 'No space allow in username'));
         }
 
-        if (!preg_match('/^[1-9]|^[A-Z]|^[a-z]/', $this->username)) {
+        if ( ! preg_match('/^[1-9]|^[A-Z]|^[a-z]/', $this->username)) {
             $this->addError($attribute, Yii::t('zii', 'Username need start with numbers or letters'));
         }
 

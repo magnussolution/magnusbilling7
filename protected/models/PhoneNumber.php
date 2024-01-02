@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class PhoneNumber extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_phonebook, status, try', 'numerical', 'integerOnly' => true),
-            array('name, city', 'length', 'max' => 40),
-            array('number', 'length', 'max' => 30),
-            array('info, doc, email', 'length', 'max' => 200),
-        );
+        $rules = [
+            ['id_phonebook, status, try', 'numerical', 'integerOnly' => true],
+            ['name, city', 'length', 'max' => 40],
+            ['number', 'length', 'max' => 30],
+            ['info, doc, email', 'length', 'max' => 200],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -66,9 +66,9 @@ class PhoneNumber extends Model
      */
     public function relations()
     {
-        return array(
-            'idPhonebook' => array(self::BELONGS_TO, 'PhoneBook', 'id_phonebook'),
-        );
+        return [
+            'idPhonebook' => [self::BELONGS_TO, 'PhoneBook', 'id_phonebook'],
+        ];
     }
 
     public function beforeSave()

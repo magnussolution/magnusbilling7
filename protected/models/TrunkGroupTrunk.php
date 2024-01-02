@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -44,7 +44,7 @@ class TrunkGroupTrunk extends Model
      */
     public function primaryKey()
     {
-        return array('id', 'id_trunk_group', 'id_trunk');
+        return ['id', 'id_trunk_group', 'id_trunk'];
     }
 
     /**
@@ -52,10 +52,10 @@ class TrunkGroupTrunk extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('id_trunk_group, id_trunk', 'required'),
-            array('id_trunk_group, id_trunk', 'numerical', 'integerOnly' => true),
-        );
+        $rules = [
+            ['id_trunk_group, id_trunk', 'required'],
+            ['id_trunk_group, id_trunk', 'numerical', 'integerOnly' => true],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -64,9 +64,9 @@ class TrunkGroupTrunk extends Model
      */
     public function relations()
     {
-        return array(
-            'idTrunk'      => array(self::BELONGS_TO, 'Trunk', 'id_trunk'),
-            'idTrunkGroup' => array(self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'),
-        );
+        return [
+            'idTrunk'      => [self::BELONGS_TO, 'Trunk', 'id_trunk'],
+            'idTrunkGroup' => [self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'],
+        ];
     }
 }

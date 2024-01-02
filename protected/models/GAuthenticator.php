@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -59,10 +59,10 @@ class GAuthenticator extends Model
      */
     public function rules()
     {
-        $rules = array(
-            array('googleAuthenticator_enable', 'numerical', 'integerOnly' => true),
-            array('google_authenticator_key', 'length', 'max' => 50),
-        );
+        $rules = [
+            ['googleAuthenticator_enable', 'numerical', 'integerOnly' => true],
+            ['google_authenticator_key', 'length', 'max' => 50],
+        ];
         return $this->getExtraField($rules);
     }
 }

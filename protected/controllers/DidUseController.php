@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,14 +23,14 @@
 class DidUseController extends Controller
 {
     public $attributeOrder = 'status DESC, DAY( reservationdate ) ASC';
-    public $extraValues    = array('idDid' => 'did', 'idUser' => 'username');
+    public $extraValues    = ['idDid' => 'did', 'idUser' => 'username'];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_user',
         'month_payed',
         'reminded',
         'idUserusername',
-    );
+    ];
     public function init()
     {
 

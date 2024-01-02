@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,10 +23,10 @@
 class CallBackController extends Controller
 {
     public $attributeOrder        = 't.id DESC';
-    public $extraValues           = array('idUser' => 'username', 'idDid' => 'did');
-    public $fieldsInvisibleClient = array(
+    public $extraValues           = ['idUser' => 'username', 'idDid' => 'did'];
+    public $fieldsInvisibleClient = [
         'variable',
-    );
+    ];
 
     public function init()
     {
@@ -45,10 +45,10 @@ class CallBackController extends Controller
 
         $filter = preg_replace('/t.status/', 'status', $filter);
 
-        CallBack::model()->updateAll(array('status' => '1', 'num_attempt' => 0, 'sessiontime' => 0), $filter, $this->paramsFilter);
-        echo json_encode(array(
+        CallBack::model()->updateAll(['status' => '1', 'num_attempt' => 0, 'sessiontime' => 0], $filter, $this->paramsFilter);
+        echo json_encode([
             'success' => true,
             'msg'     => $this->msgSuccess,
-        ));
+        ]);
     }
 }

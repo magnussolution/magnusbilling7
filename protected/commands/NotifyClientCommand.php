@@ -6,7 +6,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -35,10 +35,10 @@ class NotifyClientCommand extends ConsoleCommand
 
         $filter = 'credit_notification > 0  AND active = 1 AND credit + creditlimit < credit_notification AND ' . $delayClause;
 
-        $modelUser = User::model()->findAll(array(
+        $modelUser = User::model()->findAll([
             'condition' => $filter,
             'order'     => 'id',
-        ));
+        ]);
 
         foreach ($modelUser as $user) {
             if ($user->id_user == null || $user->id_user == '') {
@@ -46,9 +46,9 @@ class NotifyClientCommand extends ConsoleCommand
                 $user->save();
             }
 
-            $modelSmtp = Smtps::model()->find('id_user = :key', array(':key' => $user->id_user));
+            $modelSmtp = Smtps::model()->find('id_user = :key', [':key' => $user->id_user]);
 
-            if (!isset($modelSmtp->id)) {
+            if ( ! isset($modelSmtp->id)) {
                 continue;
             }
 

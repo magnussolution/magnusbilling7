@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -55,14 +55,14 @@ class TrunkSipCodes extends Model
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        $rules = array(
-            array('ip, code, total,', 'required'),
-            array('total, code', 'numerical', 'integerOnly' => true),
-            array('ip', 'length', 'max' => 100),
-            array('code', 'length', 'max' => 5),
-            array('total', 'length', 'max' => 11),
+        $rules = [
+            ['ip, code, total,', 'required'],
+            ['total, code', 'numerical', 'integerOnly' => true],
+            ['ip', 'length', 'max' => 100],
+            ['code', 'length', 'max' => 5],
+            ['total', 'length', 'max' => 11],
 
-        );
+        ];
         return $this->getExtraField($rules);
     }
 

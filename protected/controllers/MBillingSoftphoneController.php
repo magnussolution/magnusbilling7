@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -37,7 +37,7 @@ class MBillingSoftphoneController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!isset($modelSip->id)) {
+            if ( ! isset($modelSip->id)) {
                 echo 'false';
                 exit;
             }
@@ -54,11 +54,11 @@ class MBillingSoftphoneController extends Controller
             }
             //$result[0]['version'] = 'MPhone-1.0.5';
 
-            $result = json_encode(array(
+            $result = json_encode([
                 $this->nameRoot  => $result,
                 $this->nameCount => 1,
                 $this->nameSum   => '',
-            ));
+            ]);
 
             $result = json_decode($result, true);
 
@@ -71,7 +71,7 @@ class MBillingSoftphoneController extends Controller
         if (isset($_GET['l'])) {
             $user = $_GET['l'];
 
-            $modelSip = Sip::model()->find("name = :user", array(':user' => $user));
+            $modelSip = Sip::model()->find("name = :user", [':user' => $user]);
 
             if (isset($modelSip->callshopnumber) && strlen($modelSip->callshopnumber) > 5) {
                 $sessiontime = $modelSip->callshoptime;
@@ -104,7 +104,7 @@ class MBillingSoftphoneController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!isset($modelSip->id)) {
+            if ( ! isset($modelSip->id)) {
                 echo 'false';
                 exit;
             }
@@ -115,19 +115,19 @@ class MBillingSoftphoneController extends Controller
             $result[0]['lastname']  = $modelSip->idUser->lastname;
             $result[0]['currency']  = $this->config['global']['base_currency'];
 
-            $modelCallShop = CallShopCdr::model()->find(array(
+            $modelCallShop = CallShopCdr::model()->find([
                 'select'    => 'SUM(price) price',
                 'condition' => 'status = 0 AND cabina = :user',
-                'params'    => array(":user" => $user),
-            ));
+                'params'    => [":user" => $user],
+            ]);
 
             $result[0]['credit'] = count($modelCallShop) ? number_format($modelCallShop->price, 2) : '0.00';
 
-            $result = json_encode(array(
+            $result = json_encode([
                 $this->nameRoot  => $result,
                 $this->nameCount => 1,
                 $this->nameSum   => '',
-            ));
+            ]);
             $result = json_decode($result, true);
             echo '<pre>';
             print_r($result);

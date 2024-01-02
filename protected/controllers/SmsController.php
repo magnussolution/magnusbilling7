@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -23,7 +23,7 @@
 class SmsController extends Controller
 {
     public $attributeOrder = 'date DESC';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
     public function init()
     {
@@ -47,9 +47,9 @@ class SmsController extends Controller
     public function actionSend()
     {
         SqlInject::sanitize($_GET);
-        if (!isset($_GET['number']) || !isset($_GET['text']) || !isset($_GET['username']) || !isset($_GET['password'])) {
+        if ( ! isset($_GET['number']) || ! isset($_GET['text']) || ! isset($_GET['username']) || ! isset($_GET['password'])) {
             exit('invalid data');
-        } elseif (!is_numeric($_GET['number'])) {
+        } elseif ( ! is_numeric($_GET['number'])) {
             exit('invalid non-numeric number');
         } else if (strlen($_GET['number']) > 15) {
             exit('invalid number');
@@ -61,7 +61,7 @@ class SmsController extends Controller
 
         $modelSip = AccessManager::checkAccess($_GET['username'], $_GET['password']);
 
-        if (!isset($modelSip->id)) {
+        if ( ! isset($modelSip->id)) {
             exit('invalid user');
         }
 
@@ -94,7 +94,7 @@ class SmsController extends Controller
          */
 
         SqlInject::sanitize($_POST);
-        if (!isset($_POST['number']) || !isset($_POST['text']) || !isset($_POST['username'])) {
+        if ( ! isset($_POST['number']) || ! isset($_POST['text']) || ! isset($_POST['username'])) {
             exit('invalid data');
         } else if (strlen($_POST['text']) > 200) {
             exit('invalid number');
@@ -102,8 +102,8 @@ class SmsController extends Controller
             exit('invalid user');
         }
 
-        $modelUser = User::model()->find('username = :key', array(':key' => $_POST['username']));
-        if (!isset($modelUser->id)) {
+        $modelUser = User::model()->find('username = :key', [':key' => $_POST['username']]);
+        if ( ! isset($modelUser->id)) {
             exit('invalid data');
         }
         $numbers = explode(',', $_POST['number']);

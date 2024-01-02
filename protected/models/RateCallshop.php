@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -52,12 +52,12 @@ class RateCallshop extends Model
      */
     public function rules()
     {
-        $rules = array(
+        $rules = [
             //array('dialprefix', 'required'),
-            array('id_user, minimo, block, minimal_time_charge', 'numerical', 'integerOnly' => true),
-            array('dialprefix, destination', 'length', 'max' => 30),
-            array('buyrate', 'length', 'max' => 15),
-        );
+            ['id_user, minimo, block, minimal_time_charge', 'numerical', 'integerOnly' => true],
+            ['dialprefix, destination', 'length', 'max' => 30],
+            ['buyrate', 'length', 'max' => 15],
+        ];
         return $this->getExtraField($rules);
     }
 

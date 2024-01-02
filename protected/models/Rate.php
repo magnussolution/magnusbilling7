@@ -7,7 +7,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v3
@@ -53,11 +53,11 @@ class Rate extends Model
     public function rules()
     {
 
-        $rules = array(
-            array('id_plan', 'required'),
-            array('id_plan, id_prefix, id_trunk_group,initblock, billingblock, package_offer, minimal_time_charge ', 'numerical', 'integerOnly' => true),
-            array('rateinitial,connectcharge,disconnectcharge, additional_grace,status', 'length', 'max' => 15),
-        );
+        $rules = [
+            ['id_plan', 'required'],
+            ['id_plan, id_prefix, id_trunk_group,initblock, billingblock, package_offer, minimal_time_charge ', 'numerical', 'integerOnly' => true],
+            ['rateinitial,connectcharge,disconnectcharge, additional_grace,status', 'length', 'max' => 15],
+        ];
         return $this->getExtraField($rules);
 
     }
@@ -67,11 +67,11 @@ class Rate extends Model
     public function relations()
     {
 
-        return array(
-            'idTrunkGroup' => array(self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'),
-            'idPlan'       => array(self::BELONGS_TO, 'Plan', 'id_plan'),
-            'idPrefix'     => array(self::BELONGS_TO, 'Prefix', 'id_prefix'),
-        );
+        return [
+            'idTrunkGroup' => [self::BELONGS_TO, 'TrunkGroup', 'id_trunk_group'],
+            'idPlan'       => [self::BELONGS_TO, 'Plan', 'id_plan'],
+            'idPrefix'     => [self::BELONGS_TO, 'Prefix', 'id_prefix'],
+        ];
 
     }
 

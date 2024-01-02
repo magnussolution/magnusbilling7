@@ -8,7 +8,7 @@
  *
  * @package MagnusBilling
  * @author Adilson Leffa Magnus.
- * @copyright Copyright (C) 2005 - 2021 MagnusSolution. All rights reserved.
+ * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
  * ###################################
  *
  * This software is released under the terms of the GNU Lesser General Public License v2.1
@@ -35,7 +35,7 @@ class CallShopCdrController extends Controller
             $_GET['filter'] = $_GET['filters'];
         }
 
-        if (!Yii::app()->session['id_user']) {
+        if ( ! Yii::app()->session['id_user']) {
             exit;
         }
 
@@ -48,23 +48,23 @@ class CallShopCdrController extends Controller
     public function applyFilterToLimitedAdmi2()
     {
         if (Yii::app()->session['user_type'] == 1 && Yii::app()->session['adminLimitUsers'] == true) {
-            $this->relationFilter = array(
-                'idUser' => array(
+            $this->relationFilter = [
+                'idUser' => [
                     'condition' => "id_group IN (SELECT gug.id_group FROM pkg_group_user_group gug WHERE gug.id_group_user = :idgA0) ",
-                ),
-            );
+                ],
+            ];
             $this->paramsFilter['idgA0'] = Yii::app()->session['id_group'];
         }
     }
 
     public function getSumPrice()
     {
-        return $this->abstractModel->find(array(
+        return $this->abstractModel->find([
             'select'    => "SUM(price) price",
             'join'      => $this->join,
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
-        )
+        ]
         );
     }
 
