@@ -156,9 +156,9 @@ class RefillController extends Controller
 
             LinuxAccess::exec('rm -rf resources/images/refill/' . $model->id . '*');
 
-            $ext = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+            $typefile = Util::valid_extension($_FILES["image"]["name"], ['png', 'jpeg', 'jpg']);
 
-            $uploadfile = 'resources/images/refill/' . $model->id . '.' . $ext;
+            $uploadfile = 'resources/images/refill/' . $model->id . '.' . $typefile;
 
             Yii::log(print_r($uploadfile, true), 'error');
             move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile);

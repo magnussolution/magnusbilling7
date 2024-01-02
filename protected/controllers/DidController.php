@@ -23,25 +23,25 @@
 class DidController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idUser' => 'username', 'idServer' => 'name');
+    public $extraValues    = ['idUser' => 'username', 'idServer' => 'name'];
     public $config;
 
     private $uploaddir;
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
-    public $fieldsInvisibleAgent = array(
+        ],
+    ];
+    public $fieldsInvisibleAgent = [
         'buy_rate_1',
         'buy_rate_2',
         'buy_rate_3',
-    );
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_user',
         'id_didgroup',
         'activated',
@@ -57,7 +57,7 @@ class DidController extends Controller
         'agent_client_rate_1',
         'agent_client_rate_2',
         'agent_client_rate_3',
-    );
+    ];
 
     public function init()
     {
@@ -101,10 +101,10 @@ class DidController extends Controller
         $modelUser = User::model()->findByPK(Yii::app()->session['id_user']);
 
         if ($modelUser->id_user > 1) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Not allowed',
-            ));
+            ]);
             exit;
         }
         if ($modelUser->typepaid == 1) {
@@ -115,27 +115,27 @@ class DidController extends Controller
             $modelDid = Did::model()->findByPk($id);
 
             if ($modelDid->reserved == 1) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'You select one or more DID that is reserved',
-                ));
+                ]);
                 exit;
             }
             if ($modelDid->activated == 0) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'You select one or more DID that is not activated',
-                ));
+                ]);
                 exit;
             }
             $priceDidTotal += $modelDid->connection_charge + $modelDid->fixrate;
         }
 
         if ($priceDidTotal > $modelUser->credit) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'You not have enough credit to buy the DID',
-            ));
+            ]);
             exit;
         }
 
@@ -161,7 +161,7 @@ class DidController extends Controller
             $modelDidUse->month_payed = 1;
             $modelDidUse->save();
 
-            $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
+            $modelSip = Sip::model()->find('id_user = :key', [':key' => $id_user]);
 
             $modelDiddestination              = new Diddestination();
             $modelDiddestination->id_user     = $id_user;
@@ -198,10 +198,10 @@ class DidController extends Controller
         $success          = true;
         $this->msgSuccess = Yii::t('zii', 'The DID has been activated for you.');
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $success,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
     }
     public function actionBuy()
     {
@@ -237,7 +237,7 @@ class DidController extends Controller
                 $modelDidUse->month_payed = 1;
                 $modelDidUse->save();
 
-                $modelSip = Sip::model()->find('id_user = :key', array(':key' => $id_user));
+                $modelSip = Sip::model()->find('id_user = :key', [':key' => $id_user]);
 
                 $modelDiddestination              = new Diddestination();
                 $modelDiddestination->id_user     = $id_user;
@@ -279,10 +279,10 @@ class DidController extends Controller
             }
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $success,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
     }
 
     public function actionRead($asJson = true, $condition = null)
@@ -321,8 +321,7 @@ class DidController extends Controller
             if (file_exists($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav');
             }
-            $data       = explode('.', $_FILES["workaudio"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["workaudio"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idDidAudioProWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["workaudio"]["tmp_name"], $uploadfile);
         }
@@ -330,8 +329,7 @@ class DidController extends Controller
             if (file_exists($this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.wav');
             }
-            $data       = explode('.', $_FILES["noworkaudio"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["noworkaudio"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idDidAudioProNoWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["noworkaudio"]["tmp_name"], $uploadfile);
         }
@@ -381,10 +379,10 @@ class DidController extends Controller
                     $date = date('Y-m-d', strtotime($didUse->reservationdate . " + " . $modelDid->idUser->did_days . " day"));
 
                     if ($date > date('Y-m-d')) {
-                        echo json_encode(array(
+                        echo json_encode([
                             $this->nameSuccess => false,
                             $this->nameMsg     => 'DID ' . $modelDid->did . '. Clients are requested to hold the DID for at least ' . $modelDid->idUser->did_days . ' days before deleting the DID as per carrier policy to avoid spamming fresh DIDs. Thank you',
-                        ));
+                        ]);
                         exit;
                     }
                 }
@@ -395,12 +393,12 @@ class DidController extends Controller
                 if ($modelDid->reserved == 1 && $modelDid->id_user > 0) {
                     Did::model()->updateByPk(
                         $id,
-                        array(
+                        [
                             'reserved' => 0,
                             'id_user'  => null,
-                        ));
+                        ]);
 
-                    Diddestination::model()->deleteAll("id_did = :key", array(':key' => $id));
+                    Diddestination::model()->deleteAll("id_did = :key", [':key' => $id]);
 
                     $didUse = DidUse::model()->find('id_did = :key AND releasedate = :key1 AND status = 1', [
                         'key'   => $id,
@@ -424,28 +422,28 @@ class DidController extends Controller
                     }
 
                     DidUse::model()->updateAll(
-                        array(
+                        [
                             'releasedate' => date('Y-m-d H:i:s'),
                             'status'      => 0,
-                        ),
+                        ],
                         'id_did = :key AND releasedate = :key1 AND status = 1',
-                        array(
+                        [
                             ':key'  => $id,
                             ':key1' => '0000-00-00 00:00:00',
-                        ));
+                        ]);
 
                 }
             }
 
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => true,
                 $this->nameMsg     => $this->msgSuccess,
-            ));
+            ]);
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Did not selected',
-            ));
+            ]);
         }
     }
 
@@ -462,15 +460,15 @@ class DidController extends Controller
             foreach ($values as $key => $value) {
                 $modelDid = Did::model()->findByPK($value['id']);
                 if ($modelDid->reserved == 0) {
-                    CallSummaryMonthDid::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
-                    DidUse::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
+                    CallSummaryMonthDid::model()->deleteAll("id_did = :key", [':key' => $modelDid->id]);
+                    DidUse::model()->deleteAll("id_did = :key", [':key' => $modelDid->id]);
                 }
             }
         } else {
             $modelDid = Did::model()->findByPK($values['id']);
             if ($modelDid->reserved == 0) {
-                CallSummaryMonthDid::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
-                DidUse::model()->deleteAll("id_did = :key", array(':key' => $modelDid->id));
+                CallSummaryMonthDid::model()->deleteAll("id_did = :key", [':key' => $modelDid->id]);
+                DidUse::model()->deleteAll("id_did = :key", [':key' => $modelDid->id]);
             }
 
         }

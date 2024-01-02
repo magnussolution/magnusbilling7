@@ -23,16 +23,16 @@
 class CampaignPollController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idCampaign' => 'name', 'idUser' => 'username');
+    public $extraValues    = ['idCampaign' => 'name', 'idUser' => 'username'];
 
     private $uploaddir;
-    public $fieldsFkReport = array(
-        'id_campaign' => array(
+    public $fieldsFkReport = [
+        'id_campaign' => [
             'table'       => 'pkg_campaign',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -66,8 +66,7 @@ class CampaignPollController extends Controller
             if (file_exists($this->uploaddir . 'idPoll_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idPoll_' . $model->id . '.wav');
             }
-            $data       = explode('.', $_FILES["arq_audio"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["arq_audio"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idPoll_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["arq_audio"]["tmp_name"], $uploadfile);
         }

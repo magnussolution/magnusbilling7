@@ -174,8 +174,7 @@ class IvrController extends Controller
             if (file_exists($this->uploaddir . 'idIvrDidWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idIvrDidWork_' . $model->id . '.wav');
             }
-            $data       = explode('.', $_FILES["workaudio"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["workaudio"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idIvrDidWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["workaudio"]["tmp_name"], $uploadfile);
         }
@@ -184,8 +183,7 @@ class IvrController extends Controller
             if (file_exists($this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.wav');
             }
-            $data       = explode('.', $_FILES["noworkaudio"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["noworkaudio"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idIvrDidNoWork_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["noworkaudio"]["tmp_name"], $uploadfile);
         }

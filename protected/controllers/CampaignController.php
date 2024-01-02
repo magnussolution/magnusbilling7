@@ -26,16 +26,16 @@ class CampaignController extends Controller
     public $nameModelRelated   = 'CampaignPhonebook';
     public $nameFkRelated      = 'id_campaign';
     public $nameOtherFkRelated = 'id_phonebook';
-    public $extraValues        = array('idUser' => 'username', 'idPlan' => 'name');
+    public $extraValues        = ['idUser' => 'username', 'idPlan' => 'name'];
     private $uploaddir;
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'id_user',
         'idCardusername',
         'enable_max_call',
         'nb_callmade',
         'secondusedreal',
-    );
+    ];
 
     public function init()
     {
@@ -59,11 +59,11 @@ class CampaignController extends Controller
 
                 if ($values['frequency'] > $this->config['global']['campaign_user_limit']) {
 
-                    echo json_encode(array(
+                    echo json_encode([
                         'success' => false,
                         'rows'    => [],
                         'errors'  => ['frequency' => [Yii::t('zii', 'The call limit need be less than') . ' ', $this->config['global']['campaign_user_limit']]],
-                    ));
+                    ]);
                     exit;
 
                 }
@@ -72,11 +72,11 @@ class CampaignController extends Controller
 
                 if ($values['frequency'] > $modelCampaign->max_frequency) {
 
-                    echo json_encode(array(
+                    echo json_encode([
                         'success' => false,
                         'rows'    => [],
                         'errors'  => ['frequency' => [Yii::t('zii', 'The call limit need be less than') . ' ', $modelCampaign->max_frequency]],
-                    ));
+                    ]);
                     exit;
                 }
             }
@@ -95,7 +95,7 @@ class CampaignController extends Controller
         }
 
         //only allow edit max complet call, if campaign is inactive
-        if ($values['status'] == 1 && !$this->isNewRecord) {
+        if ($values['status'] == 1 && ! $this->isNewRecord) {
             unset($values['secondusedreal']);
         }
 
@@ -120,8 +120,7 @@ class CampaignController extends Controller
             if (file_exists($this->uploaddir . 'idCampaign_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idCampaign_' . $model->id . '.wav');
             }
-            $data       = explode('.', $_FILES["audio"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["audio"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idCampaign_' . $model->id . '.' . $typefile;
             move_uploaded_file($_FILES["audio"]["tmp_name"], $uploadfile);
         }
@@ -129,8 +128,7 @@ class CampaignController extends Controller
             if (file_exists($this->uploaddir . 'idCampaign_' . $model->id . '_2.wav')) {
                 unlink($this->uploaddir . 'idCampaign_' . $model->id . '_2.wav');
             }
-            $data       = explode('.', $_FILES["audio_2"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["audio_2"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idCampaign_' . $model->id . '_2.' . $typefile;
             move_uploaded_file($_FILES["audio_2"]["tmp_name"], $uploadfile);
         }
@@ -146,7 +144,7 @@ class CampaignController extends Controller
                 $itemOption               = explode("|", $attributes[$i]['forward_number']);
                 $attributes[$i]['type_0'] = $itemOption[0];
 
-                if (!isset($itemOption[1])) {
+                if ( ! isset($itemOption[1])) {
                     continue;
                 }
                 $type = $itemOption[0];
@@ -172,7 +170,7 @@ class CampaignController extends Controller
         $arrPost = array_key_exists($this->nameRoot, $_POST) ? json_decode($_POST[$this->nameRoot], true) : $_POST;
 
         /*permite salvar quando tem audio e extrafield*/
-        $id_phonebook = array();
+        $id_phonebook = [];
         foreach ($arrPost as $key => $value) {
             if ($key == 'id_phonebook_array') {
                 if (isset($_POST['id_phonebook_array']) && strlen($value) > 0) {
@@ -180,7 +178,7 @@ class CampaignController extends Controller
                 }
 
             }
-        };
+        }
 
         return $arrPost;
     }
@@ -236,10 +234,10 @@ class CampaignController extends Controller
         $modelCampaign->save();
 
         if (count($modelCampaign->getErrors())) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => true,
                 $this->nameMsg     => print_r($modelCampaign->getErrors(), true),
-            ));
+            ]);
             exit;
         }
 
@@ -269,8 +267,7 @@ class CampaignController extends Controller
             if (file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav')) {
                 unlink($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav');
             }
-            $data       = explode('.', $_FILES["audio_path"]["name"]);
-            $typefile   = array_pop($data);
+            $typefile   = Util::valid_extension($_FILES["audio_path"]["name"], ['gsm', 'wav']);
             $uploadfile = $this->uploaddir . 'idCampaign_' . $id_campaign . '.' . $typefile;
             move_uploaded_file($_FILES["audio_path"]["tmp_name"], $uploadfile);
         }
@@ -279,7 +276,7 @@ class CampaignController extends Controller
             $interpreter      = new CSVInterpreter($_FILES['csv_path']['tmp_name']);
             $array            = $interpreter->toArray();
             $additionalParams = [['key' => 'id_phonebook', 'value' => $id_phonebook], ['key' => 'creationdate', 'value' => $creationdate]];
-            $errors           = array();
+            $errors           = [];
             if ($array) {
                 $instanceModel = new PhoneNumber;
                 $recorder      = new CSVActiveRecorder($array, $instanceModel, $additionalParams);
@@ -290,10 +287,10 @@ class CampaignController extends Controller
                 $errors = $interpreter->getErrors();
             }
 
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => count($errors) > 0 ? false : true,
                 $this->nameMsg     => count($errors) > 0 ? implode(',', $errors) : $this->msgSuccess,
-            ));
+            ]);
 
             exit;
 
@@ -311,10 +308,10 @@ class CampaignController extends Controller
                 $modelPhoneNumber->save();
             }
         }
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameMsg     => $this->msg,
-        ));
+        ]);
 
     }
 
@@ -324,14 +321,14 @@ class CampaignController extends Controller
         if (isset($_POST['id']) && $_POST['id'] > 0) {
             $id_campaign = json_decode($_POST['id']);
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Please Select one campaign',
-            ));
+            ]);
             exit;
         }
 
-        $tab_day  = array(1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+        $tab_day  = [1 => 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         $num_day  = date('N');
         $name_day = $tab_day[$num_day];
 
@@ -341,77 +338,77 @@ class CampaignController extends Controller
 
         $modelCampaign = $this->abstractModel->findByPk((int) $id_campaign);
 
-        if (!count($campaignResult)) {
+        if ( ! count($campaignResult)) {
 
             if ($modelCampaign->status == 0) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Please active this campaign',
-                ));
+                ]);
                 exit;
             }
 
             if ($modelCampaign->idUser->credit < 1) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The user not have enough credit',
-                ));
+                ]);
                 exit;
             }
 
             if ($modelCampaign->startingdate > date('Y-m-d H:i:s')) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The startdate is in the future',
-                ));
+                ]);
                 exit;
             }
 
             if ($modelCampaign->expirationdate < date('Y-m-d H:i:s')) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The expirationdate is in the past',
-                ));
+                ]);
                 exit;
             }
 
             if ($modelCampaign->daily_start_time > date('H:i:s')) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The start time is out of the hour of work',
-                ));
+                ]);
                 exit;
             }
 
             if ($modelCampaign->daily_stop_time < date('H:i:s')) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The stop time is out of the hour of work',
-                ));
+                ]);
                 exit;
             }
 
             if ($modelCampaign->{$name_day} == 0) {
-                echo json_encode(array(
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Campaign is not active to start in ' . $name_day,
-                ));
+                ]);
                 exit;
             }
 
             //get campaingphonebookes
             $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key',
-                array(':key' => $id_campaign));
+                [':key' => $id_campaign]);
 
-            if (!count($modelCampaignPhonebook)) {
-                echo json_encode(array(
+            if ( ! count($modelCampaignPhonebook)) {
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Please select one o more phonebook',
-                ));
+                ]);
                 exit;
             }
 
-            $ids_phone_books = array();
+            $ids_phone_books = [];
             foreach ($modelCampaignPhonebook as $key => $phonebook) {
                 $ids_phone_books[] = $phonebook->id_phonebook;
             }
@@ -421,11 +418,11 @@ class CampaignController extends Controller
             $criteria->addInCondition('id', $ids_phone_books);
             $modelPhoneBook = PhoneBook::model()->findAll($criteria);
 
-            if (!count($modelPhoneBook)) {
-                echo json_encode(array(
+            if ( ! count($modelPhoneBook)) {
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Campaign Not have phonebook',
-                ));
+                ]);
                 exit;
             }
             //find only active phonebook
@@ -435,11 +432,11 @@ class CampaignController extends Controller
             $criteria->params[':key'] = 1;
             $modelPhoneBook           = PhoneBook::model()->findAll($criteria);
 
-            if (!count($modelPhoneBook)) {
-                echo json_encode(array(
+            if ( ! count($modelPhoneBook)) {
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Campaign Not have phonebook',
-                ));
+                ]);
                 exit;
             }
 
@@ -450,11 +447,11 @@ class CampaignController extends Controller
             $criteria->params[':key'] = 1;
             $modelPhoneNumber         = PhoneNumber::model()->findAll($criteria);
 
-            if (!count($modelPhoneNumber)) {
-                echo json_encode(array(
+            if ( ! count($modelPhoneNumber)) {
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The phonebook not have numbers or not have active numbers',
-                ));
+                ]);
                 exit;
             } else {
 
@@ -465,36 +462,36 @@ class CampaignController extends Controller
                 $criteria->params[':key1'] = date('Y-m-d H:i:s');
                 $modelPhoneNumber          = PhoneNumber::model()->find($criteria);
 
-                if (!count($modelPhoneNumber)) {
-                    echo json_encode(array(
+                if ( ! count($modelPhoneNumber)) {
+                    echo json_encode([
                         $this->nameSuccess => false,
                         $this->nameMsg     => 'There are active numbers but the start time is in the future',
-                    ));
+                    ]);
                     exit;
                 }
             }
 
             //tem erro mais nao foi identificado
 
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'error',
-            ));
+            ]);
             exit;
 
         }
 
         if ($modelCampaign->type == 0) {
 
-            $criteria = new CDbCriteria(array(
+            $criteria = new CDbCriteria([
                 'condition' => 'id_plan = :key',
-                'params'    => array(':key' => $modelCampaign->idUser->id_plan),
-                'with'      => array(
-                    'idPrefix' => array(
+                'params'    => [':key' => $modelCampaign->idUser->id_plan],
+                'with'      => [
+                    'idPrefix' => [
                         'condition' => "idPrefix.prefix LIKE '999%'",
-                    ),
-                ),
-            ));
+                    ],
+                ],
+            ]);
 
             if ($modelCampaign->idUser->id_user > 1) {
                 $modelRate = RateAgent::model()->find($criteria);
@@ -502,28 +499,28 @@ class CampaignController extends Controller
                 $modelRate = Rate::model()->find($criteria);
             }
 
-            if (!count($modelRate)) {
-                echo json_encode(array(
+            if ( ! count($modelRate)) {
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Not existe the prefix 999 to send SMS',
-                ));
+                ]);
                 exit;
             }
         } else {
             //verificar se exite audio
             Yii::log($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav', 'info');
-            if (!file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav') && !file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.gsm')) {
-                echo json_encode(array(
+            if ( ! file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.wav') && ! file_exists($this->uploaddir . 'idCampaign_' . $id_campaign . '.gsm')) {
+                echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Not existe audio to this Campaign',
-                ));
+                ]);
                 exit;
             }
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => 'Campaign is ok',
-        ));
+        ]);
     }
 }
