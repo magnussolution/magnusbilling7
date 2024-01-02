@@ -342,7 +342,7 @@ class AsteriskAccess
         @chgrp("$arquivo_call", "asterisk");
         chmod("$arquivo_call", 0755);
 
-        LinuxAccess::system("mv $arquivo_call /var/spool/asterisk/outgoing/$aleatorio.call");
+        LinuxAccess::exec("mv $arquivo_call /var/spool/asterisk/outgoing/$aleatorio.call");
     }
 
     public function getCallsPerDid($did, $agi = null)
