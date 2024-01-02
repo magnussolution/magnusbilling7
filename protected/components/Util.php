@@ -294,4 +294,20 @@ class Util
         $ratecost = $ratecost;
         return $ratecost;
     }
+
+    public static function valid_extension($filename, $allowed = [])
+    {
+        $ext = strtolower(CFileHelper::getExtension($filename));
+
+        if ( ! in_array($ext, $allowed)) {
+            echo json_encode([
+                'success' => false,
+                'errors'  => 'File error',
+            ]);
+            exit;
+        }
+
+        return $ext;
+
+    }
 }

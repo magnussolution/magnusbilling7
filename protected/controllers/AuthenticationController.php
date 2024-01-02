@@ -436,6 +436,7 @@ class AuthenticationController extends Controller
             } else {
                 $uploadfile = $uploaddir . 'logo_custom.png';
             }
+            $typefile = Util::valid_extension($_FILES["logo"]["name"], ['png']);
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $uploadfile);
         }
@@ -450,9 +451,9 @@ class AuthenticationController extends Controller
     {
         if (isset($_FILES['wallpaper']['tmp_name']) && strlen($_FILES['wallpaper']['tmp_name']) > 3) {
 
-            $uploaddir  = "resources/images/wallpapers/";
-            $data       = explode('.', $_FILES["wallpaper"]["name"]);
-            $typefile   = array_pop($data);
+            $uploaddir = "resources/images/wallpapers/";
+            $typefile  = Util::valid_extension($_FILES["wallpaper"]["name"], ['jpg']);
+
             $uploadfile = $uploaddir . 'Customization.jpg';
             move_uploaded_file($_FILES["wallpaper"]["tmp_name"], $uploadfile);
         }
@@ -479,6 +480,8 @@ class AuthenticationController extends Controller
         $msg     = 'error';
 
         if (isset($_FILES['loginbackground']['tmp_name']) && strlen($_FILES['loginbackground']['tmp_name']) > 3) {
+
+            $typefile = Util::valid_extension($_FILES["loginbackground"]["name"], ['jpg']);
 
             $uploadfile = 'resources/images/lock-screen-background.jpg';
             try {
