@@ -145,11 +145,12 @@ class AuthenticationController extends Controller
                 }
                 Yii::app()->session['googleAuthenticatorKey'] = $ga->getQRCodeGoogleUrl('VoIP-' . $modelUser->username . '-' . $modelUser->id, $secret);
 
-                $modelLogUsers = LogUsers::model()->count('id_user = :key AND ip = :key1 AND description = :key2',
+                $modelLogUsers = LogUsers::model()->count('id_user = :key AND ip = :key1 AND description = :key2 AND date > :key3',
                     [
                         ':key'  => $modelUser->id,
                         ':key1' => $_SERVER['REMOTE_ADDR'],
                         ':key2' => 'Username Login on the panel - User ' . $modelUser->username,
+                        ':key3' => date('Y-m-d'),
                     ]);
                 if ($modelLogUsers > 0) {
                     Yii::app()->session['checkGoogleAuthenticator'] = false;
