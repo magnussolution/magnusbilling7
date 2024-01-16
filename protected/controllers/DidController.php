@@ -57,6 +57,7 @@ class DidController extends Controller
         'agent_client_rate_1',
         'agent_client_rate_2',
         'agent_client_rate_3',
+        'calllimit',
     ];
 
     public function init()

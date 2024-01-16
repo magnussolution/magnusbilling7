@@ -13,28 +13,28 @@ class UserController extends Controller
     public $titleReport    = 'User';
     public $subTitleReport = 'User';
 
-    public $extraValues   = array('idGroup' => 'name,id_user_type', 'idPlan' => 'name', 'idUser' => 'username');
+    public $extraValues   = ['idGroup' => 'name,id_user_type', 'idPlan' => 'name', 'idUser' => 'username'];
     public $nameFkRelated = 'idUser';
 
-    public $fieldsFkReport = array(
-        'id_group' => array(
+    public $fieldsFkReport = [
+        'id_group' => [
             'table'       => 'pkg_group_user',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-        'id_plan'  => array(
+        ],
+        'id_plan'  => [
             'table'       => 'pkg_plan',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-        'id_user'  => array(
+        ],
+        'id_user'  => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'active_paypal',
         'boleto',
         'boleto_day',
@@ -59,17 +59,19 @@ class UserController extends Controller
         'plan_day',
         'idGroupid_user_type',
         'idPlanname',
-    );
+        'calllimit',
+        'inbound_call_limit',
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'id_group',
         'idGroupname',
         'enableexpire',
         'expirationdate',
         'loginkey',
-    );
+    ];
 
-    public $fieldsNotUpdateClient = array(
+    public $fieldsNotUpdateClient = [
         'credit',
         'id_plan',
         'id_user',
@@ -80,16 +82,16 @@ class UserController extends Controller
         'calllimit',
         'restriction',
         'restriction_use',
-    );
+    ];
 
-    public $fieldsNotUpdateAgent = array(
+    public $fieldsNotUpdateAgent = [
         'credit',
         'id_user',
         'id_group_agent',
         'calllimit',
         'restriction',
         'restriction_use',
-    );
+    ];
 
     public function init()
     {
@@ -111,12 +113,12 @@ class UserController extends Controller
     public function checkAgentEdit($values)
     {
         //not allow agent edit his account.
-        if (Yii::app()->session['isAgent'] && !$this->isNewRecord && Yii::app()->session['id_user'] == $values['id']) {
-            echo json_encode(array(
+        if (Yii::app()->session['isAgent'] && ! $this->isNewRecord && Yii::app()->session['id_user'] == $values['id']) {
+            echo json_encode([
                 'success' => false,
-                'rows'    => array(),
+                'rows'    => [],
                 'errors'  => Yii::t('zii', 'You cannot EDIT your account.'),
-            ));
+            ]);
             exit();
 
         }
@@ -131,26 +133,27 @@ class UserController extends Controller
 
     public function beforeDestroy($values)
     {
+        $this->checkAdminPermissionAction($values, 'd');
         $this->checkAgentEdit($values);
         return $values;
     }
 
     public function beforeSave($values)
     {
-
+        $this->checkAdminPermissionAction($values, 'u');
         if (isset($values['id_group_agent'])) {
             if (Yii::app()->session['user_type'] == 1 && $values['id_group_agent'] > 0) {
 
                 $modelGroupUser = GroupUser::model()->find('id_user_type = 3 AND id = :key',
-                    array(':key' => $values['id_group_agent'])
+                    [':key' => $values['id_group_agent']]
                 );
 
-                if (!isset($modelGroupUser)) {
-                    echo json_encode(array(
+                if ( ! isset($modelGroupUser)) {
+                    echo json_encode([
                         'success' => false,
-                        'rows'    => array(),
+                        'rows'    => [],
                         'errors'  => Yii::t('zii', 'Group no allow for agent users'),
-                    ));
+                    ]);
                     exit();
                 }
             }
@@ -158,10 +161,10 @@ class UserController extends Controller
 
         $methodModel = Methodpay::Model()->findAll(
             "payment_method=:field1 AND active=:field12",
-            array(
+            [
                 "field1"  => 'SuperLogica',
                 "field12" => '1',
-            )
+            ]
         );
 
         $values = $this->superLogica($methodModel, $values);
@@ -182,11 +185,11 @@ class UserController extends Controller
             }
 
             if (isset($error)) {
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => $error,
-                ));
+                ]);
                 exit();
             }
         }
@@ -195,9 +198,9 @@ class UserController extends Controller
 
             $groupType = GroupUser::model()->find(
                 "id=:field1",
-                array(
+                [
                     'field1' => $values['id_group'],
-                )
+                ]
             );
             $idUserType = $groupType->id_user_type;
 
@@ -213,15 +216,15 @@ class UserController extends Controller
                     $error = Yii::t('zii', 'First name');
                 } else if (strlen($values['doc']) < 11) {
                     $error = Yii::t('zii', 'DOC');
-                } else if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $values['email'])) {
+                } else if ( ! preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $values['email'])) {
                     $error = Yii::t('zii', 'Email');
                 }
                 if (isset($error)) {
-                    echo json_encode(array(
+                    echo json_encode([
                         'success' => false,
-                        'rows'    => array(),
+                        'rows'    => [],
                         'errors'  => Yii::t('zii', $error) . ' ' . Yii::t('zii', 'Is required'),
-                    ));
+                    ]);
                     exit();
                 }
 
@@ -247,21 +250,21 @@ class UserController extends Controller
             if (isset($idUserTypeOld) && $idUserTypeOld == 1 && isset($values['password'])) {
                 MagnusLog::insertLOG(2, 'User try change the password');
 
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => Yii::t('zii', 'You are not allowed to edit this field'),
-                ));
+                ]);
                 exit;
             }
 
             if (isset($idUserType) && $idUserType != $idUserTypeOld) {
                 MagnusLog::insertLOG(2, 'User try change the group');
-                echo json_encode(array(
+                echo json_encode([
                     'success' => false,
-                    'rows'    => array(),
+                    'rows'    => [],
                     'errors'  => Yii::t('zii', 'You cannot change user type group'),
-                ));
+                ]);
                 exit;
             }
 
@@ -274,7 +277,7 @@ class UserController extends Controller
         }
 
         if (isset($values['id_group_agent'])) {
-            $values['id_group_agent'] = $values['id_group_agent'] == 0 || !is_numeric($values['id_group_agent'])
+            $values['id_group_agent'] = $values['id_group_agent'] == 0 || ! is_numeric($values['id_group_agent'])
             ? null :
             $values['id_group_agent'];
         }
@@ -292,7 +295,7 @@ class UserController extends Controller
         if ($model->idGroup->idUserType->id == 3) {
             $modelSip = $this->isNewRecord ?
             new Sip() :
-            Sip::model()->findByAttributes(array('id_user' => $model->id));
+            Sip::model()->findByAttributes(['id_user' => $model->id]);
 
             if ($this->isNewRecord || isset($modelSip->id_user)) {
                 $modelSip->id_user = $model->id;
@@ -313,8 +316,8 @@ class UserController extends Controller
             AsteriskAccess::instance()->generateSipPeers();
         }
 
-        if (!$this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
-            $modelUser = User::model()->find("id_user = :key", array(':key' => $model->id));
+        if ( ! $this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
+            $modelUser = User::model()->find("id_user = :key", [':key' => $model->id]);
             if (isset($modelUser->id)) {
                 $modelUser->id_group = $model->id_group_agent;
                 $modelUser->save();
@@ -323,9 +326,9 @@ class UserController extends Controller
 
         $modelOfferUse = OfferUse::model()->findAll(
             "id_user = :id_user AND releasedate = '0000-00-00 00:00:00' AND status = 1 ",
-            array(
+            [
                 ':id_user' => $model->id,
-            )
+            ]
         );
 
         if ($model->id_offer > 0) {
@@ -358,18 +361,81 @@ class UserController extends Controller
         return;
     }
 
+    public function checkAdminPermissionAction($values = '', $type)
+    {
+        if (Yii::app()->session['isAdmin']) {
+
+            if ($this->isNewRecord) {
+                $user_id_group = $values['id_group'];
+
+            } else if ($type == 'u' || $type == 'd') {
+
+                $modelUser     = User::model()->findByPk($values['id']);
+                $user_id_group = $modelUser->id_group;
+
+            }
+
+            if (isset($user_id_group)) {
+                $modelGroupUser = GroupUser::model()->find('id_user_type = 1 AND id = :key',
+                    [':key' => $user_id_group]
+                );
+
+                if (isset($modelGroupUser->id)) {
+                    // try create or edit a administratio, check permissions
+                    $modelModels = Module::model()->find('module = :key', [':key' => 'groupuser']);
+
+                    $modelGroupModule = GroupModule::model()->find('id_group = :key AND id_module = :key1', [
+                        ':key'  => Yii::app()->session['id_group'],
+                        ':key1' => $modelModels->id,
+                    ]);
+                    Yii::log($type, 'error');
+                    if ($type == 'd') {
+                        if ( ! preg_match('/d/', $modelGroupModule->action)) {
+                            echo json_encode([
+                                'success' => false,
+                                'rows'    => [],
+                                'errors'  => Yii::t('zii', 'You have no permission to delete administrator users'),
+                            ]);
+                            exit();
+                        }
+                    } else if ($type == 'c') {
+                        if ( ! preg_match('/c/', $modelGroupModule->action)) {
+                            echo json_encode([
+                                'success' => false,
+                                'rows'    => [],
+                                'errors'  => Yii::t('zii', 'You have no permission to create administrator users'),
+                            ]);
+                            exit();
+                        }
+                    } else {
+                        if ( ! preg_match('/c|u/', $modelGroupModule->action)) {
+                            echo json_encode([
+                                'success' => false,
+                                'rows'    => [],
+                                'errors'  => Yii::t('zii', 'You have no permission to update administrator users'),
+                            ]);
+                            exit();
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
+
     public function createCallshopRates($model, $values)
     {
 
         if ($model->callshop == 0) {
 
             $modelRateCallshop = RateCallshop::model()->deleteAll('id_user = :id_user',
-                array(':id_user' => $model->id)
+                [':id_user' => $model->id]
             );
         } elseif ($model->callshop == 1) {
 
             $modelRateCallshop = RateCallshop::model()->findAll('id_user = :id_user',
-                array(':id_user' => $model->id)
+                [':id_user' => $model->id]
             );
             if (count($modelRateCallshop) == 0) {
                 RateCallshop::model()->createCallShopRates($model);
@@ -398,13 +464,13 @@ class UserController extends Controller
 
     public function actionCredit()
     {
-        if (!Yii::app()->session['id_user']) {
+        if ( ! Yii::app()->session['id_user']) {
             die("Access denied to save in module: $module");
             exit;
         }
 
         $modelUser = $this->abstractModel->findByPk((int) $_POST['id']);
-        $credit    = array('rows' => array('credit' => $modelUser->credit));
+        $credit    = ['rows' => ['credit' => $modelUser->credit]];
 
         echo json_encode($credit);
     }
@@ -430,26 +496,26 @@ class UserController extends Controller
 
     public function actionGetNewUsername()
     {
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             'newUsername'      => Util::getNewUsername(false),
-        ));
+        ]);
     }
 
     public function actionGetNewPassword()
     {
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             'newPassword'      => Util::generatePassword(8, true, true, true, false),
-        ));
+        ]);
     }
 
     public function actionGetNewPinCallingcard()
     {
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess  => true,
             'newCallingcardPin' => Util::generatePinCallingcard(),
-        ));
+        ]);
     }
 
     public function actionBulk()
@@ -474,10 +540,10 @@ class UserController extends Controller
         $modelGroupUser = GroupUser::model()->findByPk((int) $values['id_group']);
 
         if ($modelGroupUser->id_user_type != 3) {
-            echo json_encode(array(
+            echo json_encode([
                 $this->nameSuccess => false,
                 $this->nameMsg     => 'Only allowed create user. you try create admin or agent',
-            ));
+            ]);
             exit;
         }
         for ($i = 0; $i < $values['totalToCreate']; $i++) {
@@ -519,10 +585,10 @@ class UserController extends Controller
 
         AsteriskAccess::instance()->generateSipPeers();
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
     }
 
     public function actionResendActivationEmail()
@@ -544,12 +610,12 @@ class UserController extends Controller
 
             if ($attributes[$i]['id_offer'] > 0) {
 
-                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1 AND status = 1 AND releasedate = "0000-00-00 00:00:00"', array(
+                $modelOfferUse = OfferUse::model()->find('id_offer = :key AND id_user = :key1 AND status = 1 AND releasedate = "0000-00-00 00:00:00"', [
                     ':key'  => $attributes[$i]['id_offer'],
                     ':key1' => $attributes[$i]['id'],
-                ));
+                ]);
 
-                if (!isset($modelOfferUse->id)) {
+                if ( ! isset($modelOfferUse->id)) {
                     $attributes[$i]['offer'] = 0;
                     continue;
                 }
@@ -591,7 +657,7 @@ class UserController extends Controller
 
             } else {
 
-                $modelSip                    = Sip::model()->count('id_user = :key', array(':key' => $attributes[$i]['id']));
+                $modelSip                    = Sip::model()->count('id_user = :key', [':key' => $attributes[$i]['id']]);
                 $attributes[$i]['sip_count'] = $modelSip;
                 $attributes[$i]['offer']     = 0;
             }

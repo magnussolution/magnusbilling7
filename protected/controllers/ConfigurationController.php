@@ -122,11 +122,11 @@ cpstotal = ' . $cpstotal . '
 ip_tech_length = ' . $this->config['global']['ip_tech_length'] . '
 bloc_time_call = ' . $this->config['global']['bloc_time_call'] . '
 global_monitor = ' . $this->config['global']['global_record_calls'] . '
+dialcommand_param = ' . $this->config['agi-conf1']['dialcommand_param'] . '
 ';
 
         if (isset($this->config['global']['total_analysis_time']) && strlen($this->config['global']['total_analysis_time'])) {
             $lines .= '
-
 [general]
 total_analysis_time = ' . $this->config['global']['total_analysis_time'] . '
 wait_when_silence = ' . $this->config['global']['wait_when_silence'] . '
@@ -135,6 +135,7 @@ maximum_number_of_words = ' . $this->config['global']['maximum_number_of_words']
 maximum_number_of_words_ringing = ' . $this->config['global']['maximum_number_of_words_ringing'] . '
 total_analysis_time_ringing = ' . $this->config['global']['total_analysis_time_ringing'] . '
 hangup_after_total_time_ringing = ' . $this->config['global']['hangup_after_total_time_ringing'] . '
+
 ';
         }
 
