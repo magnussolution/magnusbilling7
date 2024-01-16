@@ -70,8 +70,7 @@ class User extends Model
                     transfer_bkash_profit,transfer_flexiload_profit,transfer_international_profit,
                     transfer_dbbl_rocket,transfer_bkash,transfer_flexiload,transfer_international,
                     transfer_bdservice_rate,transfer_show_selling_price,cpslimit,
-                    restriction_use,credit_notification_daily,email_services,email_did
-                        ', 'numerical', 'integerOnly' => true],
+                    restriction_use,credit_notification_daily,email_services,email_did, inbound_call_limit', 'numerical', 'integerOnly' => true],
             ['language,mix_monitor_format,calllimit_error', 'length', 'max' => 5],
             ['zipcode, phone, mobile, vat', 'length', 'max' => 20],
             ['city, state, country, loginkey', 'length', 'max' => 40],

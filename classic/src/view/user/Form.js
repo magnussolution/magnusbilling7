@@ -405,17 +405,11 @@ Ext.define('MBilling.view.user.Form', {
                         minValue: -1,
                         flex: 2
                     }, {
-                        xtype: 'combobox',
-                        name: 'calllimit_error',
-                        fieldLabel: t('Limit error'),
-                        labelWidth: 170,
-                        forceSelection: true,
-                        editable: false,
-                        value: '503',
-                        store: [
-                            ['503', t('Congestion')],
-                            ['403', t('Busy')]
-                        ],
+                        xtype: 'textfield',
+                        name: 'inbound_call_limit',
+                        fieldLabel: t('Inbound Call Limit'),
+                        minLength: 0,
+                        hidden: !window.didChannelLimit || !App.user.isAdmin,
                         flex: 3
                     }]
                 }, {
