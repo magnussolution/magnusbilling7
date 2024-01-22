@@ -839,14 +839,7 @@ install_fail2ban()
 {
   if [ ${DIST} = "CENTOS" ]; then
     yum install -y iptables-services
-
-    rm -rf /etc/fail2ban
-    cd /tmp
-    git clone https://github.com/fail2ban/fail2ban.git
-    cd /tmp/fail2ban
-    python setup.py install
-
-
+    yum install -y fail2ban
     systemctl mask firewalld.service
     systemctl enable iptables.service
     systemctl enable ip6tables.service

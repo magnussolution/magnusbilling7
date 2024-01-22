@@ -499,7 +499,12 @@ table.blueTable tfoot .links a{
 
                     $lines = LinuxAccess::exec('grep ' . $model->calledstation . ' /var/log/asterisk/magnus');
 
-                    $lines = htmlentities($lines);
+                    if ( ! isset($lines[0])) {
+                        echo "Log not found";
+                        exit;
+                    }
+
+                    $lines = htmlentities($lines[0]);
 
                     $ora_books = preg_split('/\n/', $lines);
 
