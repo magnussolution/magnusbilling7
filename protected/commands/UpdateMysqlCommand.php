@@ -1988,6 +1988,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.4.4';
             $this->update($version);
         }
+        //2024-01-22
+        if ($version == '7.8.4.4') {
+            $sql = "INSERT INTO pkg_configuration VALUES
+                (NULL, 'Max call duration', 'max_call_duration', '3600', 'Maximum call duration in seconds', 'global', '1');
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.5';
+            $this->update($version);
+        }
 
     }
 

@@ -67,9 +67,9 @@ class Magnus
     public $language;
     public $sip_account;
     public $user_calllimit = 0;
-    public $modelUser      = array();
-    public $modelSip       = array();
-    public $modelUserAgent = array();
+    public $modelUser      = [];
+    public $modelSip       = [];
+    public $modelUserAgent = [];
     public $demo           = false;
     public $voicemail;
     public $magnusFilesDirectory = '/usr/local/src/magnus/';
@@ -90,7 +90,7 @@ class Magnus
     }
 
     /*  load_conf */
-    public function load_conf(&$agi, $config = null, $webui = 0, $idconfig = 1, $optconfig = array())
+    public function load_conf(&$agi, $config = null, $webui = 0, $idconfig = 1, $optconfig = [])
     {
         $this->idconfig = 1;
         $sql            = "SELECT id, config_key , config_value , config_group_title  FROM pkg_configuration";
@@ -188,7 +188,7 @@ class Magnus
 
     public static function getDialStatus_Revert_List()
     {
-        $dialstatus_rev_list                = array();
+        $dialstatus_rev_list                = [];
         $dialstatus_rev_list["ANSWER"]      = 1;
         $dialstatus_rev_list["BUSY"]        = 2;
         $dialstatus_rev_list["NOANSWER"]    = 3;
@@ -303,7 +303,7 @@ class Magnus
             }
         }
 
-        if (!$res_all_calcultimeout) {
+        if ( ! $res_all_calcultimeout) {
             $this->executePlayAudio("prepaid-no-enough-credit", $agi);
             return false;
         }
@@ -477,7 +477,7 @@ class Magnus
         /* say 'the cost of the call is '*/
         $agi->stream_file('prepaid-cost-call', '#');
         $this->agiconfig['play_rate_cents_if_lower_one'] = 1;
-        if ($units == 0 && $cents == 0 && $this->agiconfig['play_rate_cents_if_lower_one'] == 0 && !($this->agiconfig['play_rate_cents_if_lower_one'] == 1 && $point == 0)) {
+        if ($units == 0 && $cents == 0 && $this->agiconfig['play_rate_cents_if_lower_one'] == 0 && ! ($this->agiconfig['play_rate_cents_if_lower_one'] == 1 && $point == 0)) {
             $agi->say_number(0);
             $agi->stream_file($unit_audio, '#');
         } else {
@@ -738,7 +738,7 @@ class Magnus
                 }
             } else if ($this->restriction == 2) {
                 /* ALLOW TO CALL ONLY RESTRICTED NUMBERS */
-                if (!isset($modelRestrictedPhonenumber->id)) {
+                if ( ! isset($modelRestrictedPhonenumber->id)) {
                     /*NUMBER NOT AUHTORIZED*/
                     $agi->verbose("NUMBER NOT AUHTORIZED - ALLOW TO CALL ONLY RESTRICTED NUMBERS", 1);
                     if ($this->play_audio == 1) {
@@ -911,4 +911,4 @@ class Magnus
         return $password;
     }
 
-};
+}

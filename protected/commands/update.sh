@@ -23,6 +23,31 @@ if [[ -e /var/www/html/mbilling/protected/commands/update2.sh ]]; then
 	exit;
 fi
 
+
+get_linux_distribution ()
+{ 
+    if [ -f /etc/debian_version ]; then
+        DIST="DEBIAN"
+        HTTP_DIR="/etc/apache2/"
+        HTTP_CONFIG=${HTTP_DIR}"apache2.conf"
+        MYSQL_CONFIG="/etc/mysql/mariadb.conf.d/50-server.cnf"
+    elif [ -f /etc/redhat-release ]; then
+        DIST="CENTOS"
+        HTTP_DIR="/etc/httpd/"
+        HTTP_CONFIG=${HTTP_DIR}"conf/httpd.conf"
+        MYSQL_CONFIG="/etc/my.cnf"
+    else
+        DIST="OTHER"
+        echo 'Installation does not support your distribution'
+        exit 1
+    fi
+}
+
+
+
+get_linux_distribution
+
+
 cd /var/www/html/mbilling
 rm -rf MagnusBilling-current.tar.gz
 wget --no-check-certificate https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/build/MagnusBilling-current.tar.gz
@@ -62,7 +87,12 @@ chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
 chmod -R 555 /var/www/html/mbilling/resources/asterisk/
-
+rm -rf /var/lib/asterisk/sbin/*
+if [ ${DIST} = "DEBIAN" ]; then
+    CRONPATH='/var/spool/cron/crontabs/asterisk'
+elif [ ${DIST} = "CENTOS" ]; then
+    CRONPATH='/var/spool/cron/asterisk'
+fi
 
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
 	for color in black blue gray orange purple red yellow green
