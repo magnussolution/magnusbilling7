@@ -40,11 +40,11 @@ class CalcAgi
     public $sessionbill               = 0;
     public $sipiax                    = 0;
     public $id_campaign               = '';
-    public $tariffObj                 = array();
-    public $freetimetocall_left       = array();
-    public $freecall                  = array();
-    public $offerToApply              = array();
-    public $didAgi                    = array();
+    public $tariffObj                 = [];
+    public $freetimetocall_left       = [];
+    public $freecall                  = [];
+    public $offerToApply              = [];
+    public $didAgi                    = [];
     public $dialstatus_rev_list;
     public $id_prefix;
     public $id_provider;
@@ -67,7 +67,7 @@ class CalcAgi
 
     public function calculateAllTimeout(&$MAGNUS, $agi)
     {
-        if (!is_array($this->tariffObj) || count($this->tariffObj) == 0) {
+        if ( ! is_array($this->tariffObj) || count($this->tariffObj) == 0) {
             return false;
         }
 
@@ -115,14 +115,14 @@ class CalcAgi
                         $agi->verbose("offer Unlimited calls");
                         $this->freecall[0]     = true;
                         $package_selected      = true;
-                        $this->offerToApply[0] = array(
+                        $this->offerToApply[0] = [
                             "id"                  => $id_offer,
                             "label"               => "Unlimited calls",
                             "type"                => $packagetype,
                             "billingblock"        => $modelOffer->billingblock,
                             "initblock"           => $modelOffer->initblock,
                             "minimal_time_charge" => $modelOffer->minimal_time_charge,
-                        );
+                        ];
                         break;
                     case 1:
 
@@ -133,14 +133,14 @@ class CalcAgi
                             if ($number_calls_used < $freetimetocall) {
                                 $this->freecall[0]     = true;
                                 $package_selected      = true;
-                                $this->offerToApply[0] = array(
+                                $this->offerToApply[0] = [
                                     "id"                  => $id_offer,
                                     "label"               => "Number of Free calls",
                                     "type"                => $packagetype,
                                     "billingblock"        => $modelOffer->billingblock,
                                     "initblock"           => $modelOffer->initblock,
                                     "minimal_time_charge" => $modelOffer->minimal_time_charge,
-                                );
+                                ];
                                 $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
@@ -156,14 +156,14 @@ class CalcAgi
 
                             if ($this->freetimetocall_left[0] > 0) {
                                 $package_selected      = true;
-                                $this->offerToApply[0] = array(
+                                $this->offerToApply[0] = [
                                     "id"                  => $id_offer,
                                     "label"               => "Free minutes",
                                     "type"                => $packagetype,
                                     "billingblock"        => $modelOffer->billingblock,
                                     "initblock"           => $modelOffer->initblock,
                                     "minimal_time_charge" => $modelOffer->minimal_time_charge,
-                                );
+                                ];
                                 $agi->verbose(print_r($this->offerToApply[0], true), 6);
                             }
                         }
@@ -174,34 +174,30 @@ class CalcAgi
 
         $credit -= $connectcharge;
         $this->tariffObj[0]['timeout']                     = 0;
-        $this->tariffObj[0]['timeout_without_rules']       = 0;
         $this->tariffObj[0]['freetime_include_in_timeout'] = $this->freetimetocall_left[0];
         $agi->verbose("Credit $credit", 20);
-        if ($credit < 0 && !$this->freecall[0] && $this->freetimetocall_left[0] <= 0) {
+        if ($credit < 0 && ! $this->freecall[0] && $this->freetimetocall_left[0] <= 0) {
             return "ERROR CT1";
             /*NO  CREDIT TO CALL */
         }
 
         $TIMEOUT              = 0;
         $answeredtime_1st_leg = 0;
-        if ($rateinitial <= 0) /*Se o preÃ§o for 0, entao retornar o timeout em 3600 s*/ {
-            $this->tariffObj[0]['timeout']               = 3600;
-            $this->tariffObj[0]['timeout_without_rules'] = 3600;
-            $TIMEOUT                                     = 3600;
+        if ($rateinitial <= 0) /*Se o preÃ§o for 0, entao retornar o timeout em 3600 s*/{
+            $this->tariffObj[0]['timeout'] = $MAGNUS->config['global']['max_call_duration'];
+            $TIMEOUT                       = $MAGNUS->config['global']['max_call_duration'];
             return $TIMEOUT;
         }
 
-        if ($this->freecall[0]) /*usado para planos gratis*/ {
-            $this->tariffObj[0]['timeout']                     = 3600;
-            $TIMEOUT                                           = 3600;
-            $this->tariffObj[0]['timeout_without_rules']       = 3600;
-            $this->tariffObj[0]['freetime_include_in_timeout'] = 3600;
+        if ($this->freecall[0]) /*usado para planos gratis*/{
+            $this->tariffObj[0]['timeout']                     = $MAGNUS->config['global']['max_call_duration'];
+            $TIMEOUT                                           = $MAGNUS->config['global']['max_call_duration'];
+            $this->tariffObj[0]['freetime_include_in_timeout'] = $MAGNUS->config['global']['max_call_duration'];
             return $TIMEOUT;
         }
         if ($credit < 0 && $this->freetimetocall_left[0] > 0) {
-            $this->tariffObj[0]['timeout']               = $this->freetimetocall_left[0];
-            $TIMEOUT                                     = $this->freetimetocall_left[0];
-            $this->tariffObj[0]['timeout_without_rules'] = $this->freetimetocall_left[0];
+            $this->tariffObj[0]['timeout'] = $this->freetimetocall_left[0];
+            $TIMEOUT                       = $this->freetimetocall_left[0];
             return $TIMEOUT;
         }
 
@@ -215,6 +211,7 @@ class CalcAgi
         }
 
         $num_sec = intval($num_min * 60) - $answeredtime_1st_leg; /*numero de segundos - o tempo que gastou para completar*/
+
         if ($billingblock > 0) {
             $mod_sec = $num_sec % $billingblock;
             $num_sec = $num_sec - $mod_sec;
@@ -222,12 +219,13 @@ class CalcAgi
         $TIMEOUT = $num_sec;
 
         /*Call time to speak without rate rules... idiot rules*/
-        $num_min_WR                                  = $initial_credit / $rateinitial;
-        $num_sec_WR                                  = intval($num_min_WR * 60);
-        $this->tariffObj[0]['timeout_without_rules'] = $num_sec_WR + $this->freetimetocall_left[0];
-        $this->tariffObj[0]['timeout']               = $TIMEOUT + $this->freetimetocall_left[0];
 
-        return $TIMEOUT + $this->freetimetocall_left[0];
+        if ($TIMEOUT > $MAGNUS->config['global']['max_call_duration']) {
+            $agi->verbose('TIMEOUT1 use max_call_duration ' . $MAGNUS->config['global']['max_call_duration'], 5);
+            $TIMEOUT = $MAGNUS->config['global']['max_call_duration'];
+        }
+        $this->tariffObj[0]['timeout'] = $TIMEOUT + $this->freetimetocall_left[0];
+        return $TIMEOUT;
     }
 
     public function calculateCost(&$MAGNUS, $callduration, $agi)
@@ -464,7 +462,7 @@ class CalcAgi
             $MAGNUS->credit = $MAGNUS->credit - $cost;
             /*CALULATION CUSTO AND SELL RESELLER */
 
-            if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
+            if ( ! is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' ' . $MAGNUS->destination . ' - ' .
                     $calldestinationPortabilidade . ' - ' . $this->real_answeredtime . ' - ' . $cost, 1);
 
@@ -539,7 +537,7 @@ class CalcAgi
     public function updateSystemAgent($agi, $MAGNUS, $calledstation, $cost, $sessiontime)
     {
 
-        if (!isset($MAGNUS->modelRateAgent[0]['rateinitial'])) {
+        if ( ! isset($MAGNUS->modelRateAgent[0]['rateinitial'])) {
             $agi->verbose('NOT FOUND AGENT TARRIF, USE AGENT COST PRICE');
             $cost_customer = $cost;
         } else {
@@ -565,7 +563,7 @@ class CalcAgi
 
     public function sendCall($agi, $destination, &$MAGNUS, $typecall = 0)
     {
-        if (substr("$destination", 0, 4) == 1111) /*Retira o techprefix de numeros portados*/ {
+        if (substr("$destination", 0, 4) == 1111) /*Retira o techprefix de numeros portados*/{
             $destination = str_replace(substr($destination, 0, 7), "", $destination);
         }
         $old_destination = $destination;
@@ -580,7 +578,7 @@ class CalcAgi
         }
         $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
-        if (!isset($modelTrunks[0]->id)) {
+        if ( ! isset($modelTrunks[0]->id)) {
             $MAGNUS->hangup($agi, 34);
             return;
         }
@@ -634,7 +632,7 @@ class CalcAgi
                 }
             }
             if ($typecall == 1) {
-                $timeout = 3600;
+                $timeout = $MAGNUS->config['global']['max_call_duration'];
             }
 
             if ($modelTrunk->credit_control == 1 && $provider_credit <= 0) {
@@ -751,7 +749,7 @@ class CalcAgi
                                 AND id_user= $MAGNUS->id_user   ORDER BY LENGTH(dialprefix) DESC LIMIT 1";
                 $modelReteCallshop = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-                if (!isset($modelReteCallshop->id)) {
+                if ( ! isset($modelReteCallshop->id)) {
                     $agi->verbose('Not found CallShop rate => ' . $MAGNUS->destination . ' ' . $MAGNUS->id_user);
                     return;
                 }
@@ -799,11 +797,11 @@ class CalcAgi
         $CalcAgi->saveCDR($agi, $MAGNUS);
          */
 
-        if ($this->sipiax == 3 && !preg_match('/\_WT/', $MAGNUS->sip_account)) {
+        if ($this->sipiax == 3 && ! preg_match('/\_WT/', $MAGNUS->sip_account)) {
             //if call is a DID, check is sipaccount is valid, else, set the callerid
             $sql             = "SELECT name FROM pkg_sip WHERE name  = '" . $MAGNUS->sip_account . "' LIMIT 1";
             $modelSipaccount = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            if (!isset($modelSipaccount->name)) {
+            if ( ! isset($modelSipaccount->name)) {
                 $MAGNUS->sip_account = $MAGNUS->CallerID;
             }
         }

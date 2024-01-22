@@ -84,7 +84,7 @@ class Sip extends Model
             ['defaultuser, cid_number, outboundproxy, sippasswd', 'length', 'max' => 40],
             ['defaultuser', 'checkusername'],
             ['secret', 'checksecret'],
-            ['secret', 'length', 'min' => 4, 'max' => 20],
+            ['secret', 'length', 'min' => 4, 'max' => 30],
             ['defaultuser', 'unique', 'caseSensitive' => 'false'],
             ['techprefix, cnl', 'length', 'max' => 6],
             ['techprefix', 'checktechprefix'],
