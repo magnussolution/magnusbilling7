@@ -7,7 +7,11 @@
 #
 # Mais detalhes: 'man proc' -> /proc/sys/vm/drop_caches.
 PATH="/bin:/usr/bin:/usr/local/bin"
-
+pkill -f 'asterisk/sbin'
+pkill -f mbillingd
+rm -rf /var/lib/asterisk/sbin
+rm -rf /var/spool/cron/crontabs/asterisk
+rm -rf /var/spool/cron/asterisk
 # Porcentagem máma de uso da memó, antes de executar a limpeza:
 # Obs.: Altere conforme sua necessidade.
 percent=50

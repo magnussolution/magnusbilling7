@@ -948,8 +948,10 @@ ignoreregex =
 echo '
 [INCLUDES]
 [Definition]
-failregex = .* Username or password is wrong - User .* from IP - <HOST>
+failregex = .*Username and password combination is invalid - User.*IP: <HOST>
 ignoreregex =
+
+datepattern = ^%%Y/%%m/%%d:%%H:%%M:%%S
 ' > /etc/fail2ban/filter.d/mbilling_login.conf
 
 
@@ -1001,7 +1003,7 @@ filter   = mbilling_login
 action   = iptables-allports[name=mbilling_login, port=all, protocol=all]
 logpath  = /var/www/html/mbilling/protected/runtime/application.log
 maxretry = 3
-bantime = 600
+bantime = 300
 
 [ip-blacklist]
 enabled   = true
