@@ -47,7 +47,7 @@ class MassiveCall
             $now = time();
         }
 
-        if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
+        if ($MAGNUS->dnid == 'failed' || ! is_numeric($MAGNUS->dnid)) {
             $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed", 25);
             $MAGNUS->hangup($agi);
         }
@@ -55,13 +55,13 @@ class MassiveCall
         $sql           = "SELECT *, pkg_campaign.id AS id, pkg_campaign.id_user AS id_user, pkg_campaign.description AS description, pkg_campaign.record_call AS record_call FROM pkg_campaign LEFT JOIN pkg_user ON pkg_campaign.id_user = pkg_user.id WHERE pkg_campaign.id = $idCampaign LIMIT 1";
         $modelCampaign = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-        if (!isset($modelCampaign->id)) {
+        if ( ! isset($modelCampaign->id)) {
             $agi->verbose($idCampaign . ' campaing not exist');
             return;
         }
         $sql              = "SELECT * FROM pkg_phonenumber WHERE id = $idPhonenumber LIMIT 1";
         $modelPhoneNumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-        if (!isset($modelPhoneNumber->id)) {
+        if ( ! isset($modelPhoneNumber->id)) {
             $agi->verbose($idPhonenumber . ' number not exist');
             exit;
         }
@@ -379,7 +379,7 @@ class MassiveCall
 
                             $agi->verbose($url);
 
-                            if (!$res = @file_get_contents($url, false)) {
+                            if ( ! $res = @file_get_contents($url, false)) {
                                 $agi->verbose("ERRO SMS -> " . $url);
                             }
 
@@ -451,7 +451,7 @@ class MassiveCall
                         $agi->verbose("Cliente votou na opcao: $dtmf_result", 5);
 
                         //Hungaup call if the fisrt poll dtmf is not numeric
-                        if ($i == 0 && !is_numeric($dtmf_result)) {
+                        if ($i == 0 && ! is_numeric($dtmf_result)) {
                             $agi->verbose('nao votou nada na 1º enquete', 5);
                             break;
                         }
@@ -510,8 +510,13 @@ class MassiveCall
 
                             $url = preg_replace("/\%number\%/", $destination, $poll->{'option' . $dtmf_result});
                             $url = preg_replace("/\%name\%/", $modelPhoneNumber->name, $url);
-
-                            if (preg_match('/POST/', $url)) {
+                            if (preg_match('/JSON/', $url)) {
+                                $url2  = explode('?', $url);
+                                $parts = parse_url($url);
+                                parse_str($parts['query'], $query);
+                                $data = json_encode($query);
+                                exec(" curl -k -X POST  -d '" . $data . "' " . $url2[0] . "");
+                            } else if (preg_match('/POST/', $url)) {
                                 $url = explode('?', $url);
                                 exec(" curl -k -X POST  -d '" . $url[1] . "' " . $url[0] . "");
                             } else {
@@ -617,7 +622,7 @@ class MassiveCall
         $sql       = "SELECT * FROM pkg_rate WHERE id = $idRate LIMIT 1";
         $modelRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-        if (!isset($modelRate->id)) {
+        if ( ! isset($modelRate->id)) {
             return;
         }
 
@@ -702,7 +707,7 @@ class MassiveCall
 
             }
 
-            if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
+            if ( ! is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
                 $CalcAgi->agent_bill = $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost, $duration);
             }
 
