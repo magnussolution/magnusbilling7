@@ -26,15 +26,16 @@ class MassiveCall
         require_once 'Tts.php';
         $uploaddir = $MAGNUS->magnusFilesDirectory . 'sounds/';
 
-        $id_trunk            = $agi->get_variable("TRUNK_ID", true);
-        $idPhonenumber       = $agi->get_variable("PHONENUMBER_ID", true);
-        $phonenumberCity     = $agi->get_variable("PHONENUMBER_CITY", true);
-        $idCampaign          = $agi->get_variable("CAMPAIGN_ID", true);
-        $idRate              = $agi->get_variable("RATE_ID", true);
-        $MAGNUS->id_user     = $agi->get_variable("IDUSER", true);
-        $MAGNUS->username    = $MAGNUS->accountcode    = $agi->get_variable("USERNAME", true);
-        $MAGNUS->id_agent    = $agi->get_variable("AGENT_ID", true);
-        $MAGNUS->destination = $destination = $MAGNUS->dnid;
+        $id_trunk              = $agi->get_variable("TRUNK_ID", true);
+        $idPhonenumber         = $agi->get_variable("PHONENUMBER_ID", true);
+        $phonenumberCity       = $agi->get_variable("PHONENUMBER_CITY", true);
+        $idCampaign            = $agi->get_variable("CAMPAIGN_ID", true);
+        $idRate                = $agi->get_variable("RATE_ID", true);
+        $MAGNUS->id_user       = $agi->get_variable("IDUSER", true);
+        $MAGNUS->username      = $MAGNUS->accountcode      = $agi->get_variable("USERNAME", true);
+        $MAGNUS->id_agent      = $agi->get_variable("AGENT_ID", true);
+        $MAGNUS->id_plan_agent = $agi->get_variable("AGENT_ID_PLAN", true);
+        $MAGNUS->destination   = $destination   = $MAGNUS->dnid;
 
         $agi->answer();
 
@@ -708,7 +709,16 @@ class MassiveCall
             }
 
             if ( ! is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
-                $CalcAgi->agent_bill = $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost, $duration);
+                $sql = "SELECT rateinitial, initblock, billingblock, minimal_time_charge, package_offer " .
+                    "FROM pkg_plan " .
+                    "LEFT JOIN pkg_rate_agent ON pkg_rate_agent.id_plan=pkg_plan.id " .
+                    "LEFT JOIN pkg_prefix ON pkg_rate_agent.id_prefix=pkg_prefix.id " .
+                    "WHERE $prefixclause AND " .
+                    "pkg_plan.id= $MAGNUS->id_plan_agent ORDER BY LENGTH(prefix) DESC LIMIT 3";
+                $MAGNUS->modelRateAgent = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+                $result[0]['package_offer'] = $MAGNUS->modelRateAgent[0]['package_offer'];
+                $CalcAgi->agent_bill        = $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost, $duration);
             }
 
             $CalcAgi->starttime        = date("Y-m-d H:i:s", time() - $duration);
