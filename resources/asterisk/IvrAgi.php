@@ -225,7 +225,7 @@ class IvrAgi
                     $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
                     $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
-                    if (!isset($modelSip[0]->id)) {
+                    if ( ! isset($modelSip[0]->id)) {
                         $agi->verbose('GROUP NOT FOUND');
                         $agi->stream_file('prepaid-invalid-digits', '#');
                         continue;

@@ -18,15 +18,15 @@
 class CallOnLineController extends Controller
 {
     public $attributeOrder = 't.duration DESC, status ASC';
-    public $extraValues    = array('idUser' => 'username,credit');
+    public $extraValues    = ['idUser' => 'username,credit'];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'tronco',
-    );
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'tronco',
-    );
+    ];
 
     public function init()
     {
@@ -73,9 +73,9 @@ class CallOnLineController extends Controller
 
         if (preg_match('/^MC\!/', $channel['accountcode'])) {
 
-            $modelPhonenumber = PhoneNumber::model()->find('number = :key', array(':key' => $channel['Caller ID']));
+            $modelPhonenumber = PhoneNumber::model()->find('number = :key', [':key' => $channel['Caller ID']]);
 
-            echo json_encode(array(
+            echo json_encode([
                 'success'     => true,
                 'msg'         => 'success',
                 'description' => Yii::app()->session['isAdmin'] ? print_r($channel, true) : '',
@@ -85,10 +85,10 @@ class CallOnLineController extends Controller
                 'from_ip'     => $from_ip,
                 'reinvite'    => preg_match("/local/", $reinvite) ? 'no' : 'yes',
                 'ndiscado'    => $channel['Caller ID'],
-            ));
+            ]);
 
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 'success'     => true,
                 'msg'         => 'success',
                 'description' => Yii::app()->session['isAdmin'] ? print_r($channel, true) : '',
@@ -98,13 +98,13 @@ class CallOnLineController extends Controller
                 'from_ip'     => $from_ip,
                 'reinvite'    => preg_match("/local/", $reinvite) ? 'no' : 'yes',
                 'ndiscado'    => $channel['dnid'],
-            ));
+            ]);
         }
     }
 
     public function actionDestroy()
     {
-        if (!AccessManager::getInstance($this->instanceModel->getModule())->canDelete()) {
+        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canDelete()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to delete in module:" . $this->instanceModel->getModule());
         }
@@ -113,27 +113,27 @@ class CallOnLineController extends Controller
         $values       = $this->getAttributesRequest();
         $namePk       = $this->abstractModel->primaryKey();
         $arrayPkAlias = explode('.', $this->abstractModel->primaryKey());
-        $ids          = array();
+        $ids          = [];
 
         foreach ($values as $key => $channel) {
 
-            $modelChannel = $this->abstractModel->find('canal = :key', array(':key' => $channel['channel']));
+            $modelChannel = $this->abstractModel->find('canal = :key', [':key' => $channel['channel']]);
             if (isset($modelChannel->canal)) {
                 AsteriskAccess::instance()->hangupRequest($modelChannel->canal, $modelChannel->server);
             }
         }
 
         # retorna o resultado da execucao
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->success,
-        ));
+        ]);
 
     }
 
     public function actionSpyCall()
     {
-        if (!isset($_POST['id_sip'])) {
+        if ( ! isset($_POST['id_sip'])) {
             $dialstr = 'SIP/' . $this->config['global']['channel_spy'];
         } else {
             $modelSip = Sip::model()->findByPk((int) $_POST['id_sip']);
@@ -153,10 +153,10 @@ class CallOnLineController extends Controller
 
         AsteriskAccess::generateCallFile($call);
 
-        echo json_encode(array(
+        echo json_encode([
             'success' => true,
             'msg'     => 'Start Spy',
-        ));
+        ]);
     }
 
     public function setAttributesModels($attributes, $models)
@@ -166,28 +166,34 @@ class CallOnLineController extends Controller
             $modelSip     = Sip::model()->findAll();
             $modelServers = Servers::model()->findAll('type != :key1 AND status IN (1,4) AND host != :key', [':key' => 'localhost', ':key1' => 'sipproxy']);
 
-            if (!isset($modelServers[0])) {
-                array_push($modelServers, array(
+            if ( ! isset($modelServers[0])) {
+                array_push($modelServers, [
                     'name'     => 'Master',
                     'host'     => 'localhost',
                     'type'     => 'mbilling',
                     'username' => 'magnus',
                     'password' => 'magnussolution',
-                ));
+                ]);
             }
 
             $array   = '';
             $totalUP = 0;
+            $i       = 1;
             foreach ($modelServers as $key => $server) {
                 if ($server['type'] == 'mbilling') {
                     $server['host'] = 'localhost';
                 }
 
-                $modelCallOnLine = CallOnLine::model()->count('server = :key', array('key' => $server['host']));
+                $modelCallOnLine = CallOnLine::model()->count('server = :key', ['key' => $server['host']]);
 
-                $modelCallOnLineUp = CallOnLine::model()->count('server = :key AND status = :key1', array('key' => $server['host'], ':key1' => 'Up'));
+                $modelCallOnLineUp = CallOnLine::model()->count('server = :key AND status = :key1', ['key' => $server['host'], ':key1' => 'Up']);
                 $totalUP += $modelCallOnLineUp;
                 $array .= '<font color="black">' . strtoupper($server['name']) . '</font> <font color="blue">T:' . $modelCallOnLine . '</font> <font color="green">A:' . $modelCallOnLineUp . '</font>&ensp;|&ensp;';
+
+                if ($i % 13 == 0) {
+                    $array .= "<br>";
+                }
+                $i++;
             }
 
             $attributes[0]['serverSum'] = $array;
