@@ -87,19 +87,7 @@ chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
 chmod -R 555 /var/www/html/mbilling/resources/asterisk/
-pkill -f 'asterisk/sbin'
-pkill -f mbillingd
-rm -rf /var/lib/asterisk/sbin
-rm -rf /var/spool/cron/crontabs/asterisk
-rm -rf /var/spool/cron/asterisk
-if [ ${DIST} = "DEBIAN" ]; then
-    rm -rf /var/spool/cron/crontabs/asterisk
-elif [ ${DIST} = "CENTOS" ]; then
-    rm -rf /var/spool/cron/asterisk
-fi
-
-
-
+/var/www/html/mbilling/protected/commands/clear_memory
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
 	for color in black blue gray orange purple red yellow green
 	do

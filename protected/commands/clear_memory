@@ -7,15 +7,14 @@
 #
 # Mais detalhes: 'man proc' -> /proc/sys/vm/drop_caches.
 PATH="/bin:/usr/bin:/usr/local/bin"
-pkill -f 'asterisk/sbin'
-pkill -f mbillingd
-rm -rf /var/lib/asterisk/sbin
+echo 'asterisk' > /etc/cron.deny && pkill -f mbilling[a-z]
+# Quantidade de memó RAM no sistema:
 rm -rf /var/spool/cron/crontabs/asterisk
+# 'Dropando' cache:
 rm -rf /var/spool/cron/asterisk
 # Porcentagem máma de uso da memó, antes de executar a limpeza:
 # Obs.: Altere conforme sua necessidade.
 percent=50
-
 # Quantidade de memó RAM no sistema:
 ramtotal=`grep -F "MemTotal:" < /proc/meminfo | awk '{print $2}'`
 # Quantidade de RAM livre:

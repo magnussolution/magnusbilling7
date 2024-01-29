@@ -219,7 +219,8 @@ mv /var/www/html/mbilling/script/asterisk-13.35.0.tar.gz /usr/src/
 tar xzvf asterisk-13.35.0.tar.gz
 rm -rf asterisk-13.35.0.tar.gz
 cd asterisk-*
-useradd -c 'Asterisk PBX' -d /var/lib/asterisk asterisk
+useradd -c 'Asterisk PBX' -d /var/lib/asterisk asterisk -s /sbin/nologin
+echo 'asterisk' > /etc/cron.deny
 mkdir /var/run/asterisk
 mkdir /var/log/asterisk
 chown -R asterisk:asterisk /var/run/asterisk
@@ -756,8 +757,6 @@ echo "
 1 * * * * php /var/www/html/mbilling/cron.php NotifyClient
 1 22 * * * php /var/www/html/mbilling/cron.php DidCheck
 1 23 * * * php /var/www/html/mbilling/cron.php PlanCheck
-* * * * * php /var/www/html/mbilling/cron.php MassiveCall
-* * * * * php /var/www/html/mbilling/cron.php Sms
 0 2 * * * php /var/www/html/mbilling/cron.php Backup
 0 4 * * * /var/www/html/mbilling/protected/commands/clear_memory
 */2 * * * * php /var/www/html/mbilling/cron.php SummaryTablesCdr

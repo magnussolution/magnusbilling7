@@ -250,7 +250,7 @@ class IvrController extends Controller
     public function actionDeleteAudio()
     {
 
-        if (is_numeric($_POST['id_ivr'])) {
+        if ( ! is_numeric($_POST['id_ivr'])) {
             return;
         }
 
