@@ -159,7 +159,9 @@ class CallChartCommand extends ConsoleCommand
                             }
 
                             if ($des_chan != '<none>') {
-                                if (isset($didChannel['DIALEDPEERNUMBER'])) {
+                                if (isset($didChannel['SIPADDHEADER01=P-SipAccount'])) {
+                                    $sip_account = $trunk = $didChannel['SIPADDHEADER01=P-SipAccount'];
+                                } else if (isset($didChannel['DIALEDPEERNUMBER'])) {
                                     $sip_account = $didChannel['DIALEDPEERNUMBER'];
                                 }
                             }
