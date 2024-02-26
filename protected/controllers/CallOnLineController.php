@@ -133,7 +133,9 @@ class CallOnLineController extends Controller
 
     public function actionSpyCall()
     {
-        if ( ! isset($_POST['id_sip'])) {
+        if (isset($_POST['sipuser'])) {
+            $dialstr = 'SIP/' . $_POST['sipuser'];
+        } elseif ( ! isset($_POST['id_sip'])) {
             $dialstr = 'SIP/' . $this->config['global']['channel_spy'];
         } else {
             $modelSip = Sip::model()->findByPk((int) $_POST['id_sip']);
@@ -142,11 +144,9 @@ class CallOnLineController extends Controller
 
         $call = "Action: Originate\n";
         $call .= "Channel: " . $dialstr . "\n";
-        $call .= "Callerid: " . Yii::app()->session['username'] . "\n";
         $call .= "Context: billing\n";
         $call .= "Extension: 5555\n";
         $call .= "Priority: 1\n";
-        $call .= "Set:USERNAME=" . Yii::app()->session['username'] . "\n";
         $call .= "Set:SPY=1\n";
         $call .= "Set:SPYTYPE=" . $_POST['type'] . "\n";
         $call .= "Set:CHANNELSPY=" . $_POST['channel'] . "\n";
@@ -156,6 +156,7 @@ class CallOnLineController extends Controller
         echo json_encode([
             'success' => true,
             'msg'     => 'Start Spy',
+
         ]);
     }
 

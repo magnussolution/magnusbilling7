@@ -1999,6 +1999,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->update($version);
         }
 
+        //2024-01-22
+        if ($version == '7.8.4.5') {
+            $sql = "INSERT INTO pkg_configuration VALUES
+                (NULL, 'API allow multiple user/email', 'api_allow_same_ip', '0', 'Allow create muiltiple clients with same email via API', 'global', '1');
+                ";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.6';
+            $this->update($version);
+        }
+
     }
 
     public function executeDB($sql)

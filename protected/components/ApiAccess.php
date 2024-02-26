@@ -193,6 +193,8 @@ class ApiAccess
             $action = 'r';
         } else if ($_POST['action'] == 'resendActivationEmail') {
             $action = 'r';
+        } else if ($_POST['action'] == 'spyCall') {
+            $action = 'r';
         }
 
         if ( ! preg_match('/' . $action . '/', $modelApi->action)) {
@@ -206,17 +208,19 @@ class ApiAccess
 
         $values = $_POST;
 
-        $modelUser = User::model()->find('email = :key', [':key' => $values['email']]);
+        if ($baseController->config['global']['api_allow_same_ip'] == 0) {
+            $modelUser = User::model()->find('email = :key', [':key' => $values['email']]);
 
-        if (isset($modelUser->id)) {
+            if (isset($modelUser->id)) {
 
-            echo json_encode([
-                'success' => false,
-                'errors'  => 'This email already in use',
-            ]);
+                echo json_encode([
+                    'success' => false,
+                    'errors'  => 'This email already in use',
+                ]);
 
-            exit;
+                exit;
 
+            }
         }
 
         if (isset($values['username'])) {
