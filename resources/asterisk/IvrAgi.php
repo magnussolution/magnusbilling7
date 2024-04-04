@@ -213,6 +213,7 @@ class IvrAgi
                 } else if ($optionType == 'repeat') // CUSTOM
                 {
                     $agi->verbose("repetir IVR");
+                    $continue = true;
                     continue;
                 } else if (preg_match("/hangup/", $optionType)) // hangup
                 {
