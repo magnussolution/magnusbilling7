@@ -268,6 +268,10 @@ class IvrAgi
                 {
                     $insertCDR = false;
                     $agi->verbose("CALL number $optionValue");
+                    $sql              = "SELECT * FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " LIMIT 1";
+                    $modelSIPCallerid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $MAGNUS->CallerID = isset($modelSIPCallerid->callerid) ? $modelSIPCallerid->callerid : $MAGNUS->CallerID;
+                    $agi->set_callerid($MAGNUS->CallerID);
                     $DidAgi->call_did($agi, $MAGNUS, $CalcAgi, $optionValue);
                 }
             }

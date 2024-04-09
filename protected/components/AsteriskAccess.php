@@ -864,9 +864,6 @@ class AsteriskAccess
                 fclose($fd);
             }
 
-            fwrite($fsubs, $subscriber);
-            fclose($fsubs);
-
         }
 
         AsteriskAccess::instance()->sipReload();
