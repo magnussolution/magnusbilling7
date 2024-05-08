@@ -43,6 +43,11 @@ class DidCheckCommand extends ConsoleCommand
         $oneday   = 60 * 60 * 24;
 
         foreach ($modelDidUse as $didUse) {
+
+            if ( ! isset($didUse->idUser->id)) {
+                continue;
+            }
+
             $id_agent = $didUse->idUser->id_user;
 
             $day_remaining = 0;

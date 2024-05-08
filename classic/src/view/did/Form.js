@@ -185,7 +185,7 @@ Ext.define('MBilling.view.did.Form', {
             }, {
                 title: t('Billing'),
                 reference: 'billingTab',
-                hidden: !App.user.isAdmin,
+                hidden: App.user.isClient,
                 items: [{
                     xtype: 'fieldset',
                     style: 'margin-top:5px; overflow: visible;',
@@ -221,7 +221,7 @@ Ext.define('MBilling.view.did.Form', {
                         xtype: 'moneyfield',
                         mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'agent_client_rate_1',
-                        fieldLabel: t('Agent\'s client price per min'),
+                        fieldLabel: App.user.isAgent ? t('Sell price per min') : t('Agent\'s client price per min'),
                         value: '0',
                         hidden: App.user.isClient
                     }, {
@@ -241,7 +241,7 @@ Ext.define('MBilling.view.did.Form', {
                     title: t('DID billing per minute rate') + ' 2',
                     collapsible: false,
                     collapsed: false,
-                    hidden: !App.user.isAdmin,
+                    hidden: App.user.isClient,
                     defaults: {
                         labelWidth: 250,
                         anchor: '100%',
@@ -271,7 +271,7 @@ Ext.define('MBilling.view.did.Form', {
                         xtype: 'moneyfield',
                         mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'agent_client_rate_2',
-                        fieldLabel: t('Agent\'s client price per min'),
+                        fieldLabel: App.user.isAgent ? t('Sell price per min') : t('Agent\'s client price per min'),
                         value: '0',
                         hidden: App.user.isClient
                     }, {
@@ -291,7 +291,7 @@ Ext.define('MBilling.view.did.Form', {
                     title: t('DID billing per minute rate') + ' 3',
                     collapsible: false,
                     collapsed: false,
-                    hidden: !App.user.isAdmin,
+                    hidden: App.user.isClient,
                     defaults: {
                         labelWidth: 250,
                         anchor: '100%',
@@ -321,7 +321,7 @@ Ext.define('MBilling.view.did.Form', {
                         xtype: 'moneyfield',
                         mask: App.user.currency + ' #9.999.990,' + App.user.decimalPrecision,
                         name: 'agent_client_rate_3',
-                        fieldLabel: t('Agent\'s client price per min'),
+                        fieldLabel: App.user.isAgent ? t('Sell price per min') : t('Agent\'s client price per min'),
                         value: '0',
                         hidden: App.user.isClient
                     }, {

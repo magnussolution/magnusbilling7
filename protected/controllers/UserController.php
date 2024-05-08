@@ -126,7 +126,6 @@ class UserController extends Controller
     public function afterDestroy($values)
     {
         AsteriskAccess::instance()->generateSipPeers();
-        AsteriskAccess::instance()->generateSipDid();
 
         return;
     }
@@ -355,8 +354,6 @@ class UserController extends Controller
         if ($model->idGroup->idUserType->id == 3) {
             $this->createCallshopRates($model, $values);
         }
-
-        AsteriskAccess::instance()->generateSipDid();
 
         return;
     }
