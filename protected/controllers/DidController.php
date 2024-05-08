@@ -36,28 +36,98 @@ class DidController extends Controller
         ],
     ];
     public $fieldsInvisibleAgent = [
-        'buy_rate_1',
-        'buy_rate_2',
-        'buy_rate_3',
-    ];
-
-    public $fieldsInvisibleClient = [
+        'did',
         'id_user',
         'id_didgroup',
         'activated',
-        'creationdate',
-        'startingdate',
-        'expirationdate',
-        'description',
-        'billingtype',
-        'selling_rate',
+        'connection_sell',
+        'minimal_time_buy',
+        'buyrateinitblock',
+        'buyrateincrement',
+        'minimal_time_charge',
+        'initblock',
+        'increment',
+        'charge_of',
+        'id_server',
+        'block_expression_1',
+        'block_expression_2',
+        'block_expression_3',
+        'send_to_callback_1',
+        'send_to_callback_2',
+        'send_to_callback_3',
+        'cbr',
+        'cbr_ua',
+        'cbr_total_try',
+        'cbr_time_try',
+        'cbr_em',
+        'TimeOfDay_monFri',
+        'TimeOfDay_sat',
+        'TimeOfDay_sun',
+        'workaudio',
+        'noworkaudio',
+        'fixrate',
         'buy_rate_1',
         'buy_rate_2',
         'buy_rate_3',
+        'calllimit',
+        'expression_1',
+        'expression_2',
+        'expression_3',
+        'buy_rate_1',
+        'buy_rate_2',
+        'buy_rate_3',
+        'selling_rate_1',
+        'selling_rate_2',
+        'selling_rate_3',
+    ];
+
+    public $fieldsInvisibleClient = [
+        'did',
+        'id_user',
+        'id_didgroup',
+        'activated',
+        'connection_sell',
+        'minimal_time_buy',
+        'buyrateinitblock',
+        'buyrateincrement',
+        'minimal_time_charge',
+        'initblock',
+        'increment',
+        'charge_of',
+        'id_server',
+        'block_expression_1',
+        'block_expression_2',
+        'block_expression_3',
+        'send_to_callback_1',
+        'send_to_callback_2',
+        'send_to_callback_3',
+        'cbr',
+        'cbr_ua',
+        'cbr_total_try',
+        'cbr_time_try',
+        'cbr_em',
+        'TimeOfDay_monFri',
+        'TimeOfDay_sat',
+        'TimeOfDay_sun',
+        'workaudio',
+        'noworkaudio',
+        'fixrate',
+        'buy_rate_1',
+        'buy_rate_2',
+        'buy_rate_3',
+        'calllimit',
+        'expression_1',
+        'expression_2',
+        'expression_3',
+        'buy_rate_1',
+        'buy_rate_2',
+        'buy_rate_3',
+        'selling_rate_1',
+        'selling_rate_2',
+        'selling_rate_3',
         'agent_client_rate_1',
         'agent_client_rate_2',
         'agent_client_rate_3',
-        'calllimit',
     ];
 
     public function init()
@@ -316,8 +386,6 @@ class DidController extends Controller
     public function afterSave($model, $values)
     {
 
-        AsteriskAccess::instance()->generateSipDid();
-
         if (isset($_FILES["workaudio"]) && strlen($_FILES["workaudio"]["name"]) > 1) {
             if (file_exists($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav')) {
                 unlink($this->uploaddir . 'idDidAudioProWork_' . $model->id . '.wav');
@@ -446,12 +514,6 @@ class DidController extends Controller
                 $this->nameMsg     => 'Did not selected',
             ]);
         }
-    }
-
-    public function afterDestroy($values)
-    {
-        AsteriskAccess::instance()->generateSipDid();
-        return;
     }
 
     public function beforeDestroy($values)

@@ -270,7 +270,6 @@ class DiddestinationController extends Controller
             }
         }
 
-        AsteriskAccess::instance()->generateSipDid();
         echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameMsg     => $this->msg,
@@ -290,8 +289,6 @@ class DiddestinationController extends Controller
                 $modelDid->reserved = 1;
                 $modelDid->id_user  = $model->id_user;
                 $modelDid->save();
-
-                AsteriskAccess::instance()->generateSipDid();
 
                 //discount credit of customer
                 $priceDid = $modelDid->connection_charge + $modelDid->fixrate;
@@ -339,13 +336,11 @@ class DiddestinationController extends Controller
 
             }
         }
-        AsteriskAccess::instance()->generateSipDid();
         return;
     }
 
     public function afterDestroy($values)
     {
-        AsteriskAccess::instance()->generateSipDid();
         return;
     }
 

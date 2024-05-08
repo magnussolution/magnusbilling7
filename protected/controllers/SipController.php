@@ -190,7 +190,6 @@ class SipController extends Controller
     {
         if ($_SERVER['HTTP_HOST'] != 'localhost') {
             AsteriskAccess::instance()->generateSipPeers();
-            AsteriskAccess::instance()->generateSipDid();
             AsteriskAccess::instance()->generateQueueFile();
         }
 
@@ -202,7 +201,6 @@ class SipController extends Controller
     public function afterDestroy($values)
     {
         AsteriskAccess::instance()->generateSipPeers();
-        AsteriskAccess::instance()->generateSipDid();
         AsteriskAccess::instance()->generateQueueFile();
 
         $this->siproxyServer($values, 'destroy');
