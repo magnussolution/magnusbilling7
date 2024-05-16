@@ -418,7 +418,7 @@ class BaseController extends CController
 
         $recordsSum = $this->recordsExtraSum($records);
 
-        $this->afterRead($records);
+        $records = $this->afterRead($records);
 
         $return[$this->nameRoot]  = $records;
         $return[$this->nameCount] = $countRecords;
@@ -470,7 +470,7 @@ class BaseController extends CController
 
     public function afterRead($records)
     {
-        return;
+        return $records;
     }
     public function hidenInvisibleField($values)
     {
