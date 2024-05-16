@@ -19,7 +19,7 @@ class QueueDashBoardController extends Controller
 {
 
     public $attributeOrder = 'callId';
-    public $extraValues    = array('idQueue' => 'name');
+    public $extraValues    = ['idQueue' => 'name'];
 
     public function init()
     {
@@ -43,9 +43,9 @@ class QueueDashBoardController extends Controller
         if (array_key_exists('idQueue', $this->relationFilter)) {
             $this->relationFilter['idQueue']['condition'] .= " AND idQueue.id_user LIKE :agfby";
         } else {
-            $this->relationFilter['idQueue'] = array(
+            $this->relationFilter['idQueue'] = [
                 'condition' => "idQueue.id_user LIKE :agfby",
-            );
+            ];
         }
         $this->paramsFilter[':agfby'] = Yii::app()->session['id_user'];
 
@@ -66,6 +66,7 @@ class QueueDashBoardController extends Controller
 
     public function getQueue()
     {
+        QueueDashBoard::model()->deleteAll('time < :key', [':key' => date('Y-m-d 00:00:00')]);
 
         QueueMember::model()->truncateQueueAgentStatus();
 
@@ -103,7 +104,7 @@ class QueueDashBoardController extends Controller
                     $agentStatus = substr($agentStatus, 0, 7) == 'in call' ? 'in call' : $agentStatus;
                     $last_call   = $this->get_string_between($line, '(last was ', ' secs ago)');
                     $last_call   = is_numeric($last_call) ? $last_call : 0;
-                    $resultSIP   = Sip::model()->findAll(array('condition' => "name = '$username'"));
+                    $resultSIP   = Sip::model()->findAll(['condition' => "name = '$username'"]);
                     $id_user     = $resultSIP[0]->id_user;
 
                     $valuesInsert = ":id_user, :username, :agentStatus, :totalCalls, :last_call, :queueId";

@@ -36,10 +36,8 @@ class DidController extends Controller
         ],
     ];
     public $fieldsInvisibleAgent = [
-        'did',
         'id_user',
         'id_didgroup',
-        'activated',
         'connection_sell',
         'minimal_time_buy',
         'buyrateinitblock',
@@ -82,10 +80,8 @@ class DidController extends Controller
     ];
 
     public $fieldsInvisibleClient = [
-        'did',
         'id_user',
         'id_didgroup',
-        'activated',
         'connection_sell',
         'minimal_time_buy',
         'buyrateinitblock',
@@ -128,6 +124,18 @@ class DidController extends Controller
         'agent_client_rate_1',
         'agent_client_rate_2',
         'agent_client_rate_3',
+    ];
+
+    public $fieldsNotUpdateClient = [
+
+        'did',
+        'activated',
+    ];
+
+    public $fieldsNotUpdateAgent = [
+
+        'did',
+        'activated',
     ];
 
     public function init()
