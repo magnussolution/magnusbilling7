@@ -118,6 +118,11 @@ class AsteriskAccess
         return $this->asmanager->Command("sip reload");
     }
 
+    public function VoiceMailReload()
+    {
+        return $this->asmanager->Command("voicemail reload");
+    }
+
     public function sipShowPeer($peer)
     {
         return $this->asmanager->Command("sip show peer " . $peer);
@@ -671,12 +676,22 @@ class AsteriskAccess
         $subscriberfile = '/etc/asterisk/sip_magnus_subscriber.conf';
         $subscriber     = '[subscribe]';
 
+        $voicemailFile = '/etc/asterisk/voicemail_magnus.conf';
+        LinuxAccess::exec('touch ' . $registerFile);
+        $fr_voicemail = fopen($voicemailFile, "w");
+        $voicemail    = "[billing]\n";
+
         if (count($modelSip)) {
 
+            $fd = fopen($buddyfile, "w");
             $fd = fopen($buddyfile, "w");
 
             if ($fd) {
                 foreach ($modelSip as $key => $sip) {
+
+                    if (isset($sip->voicemail) && $sip->voicemail == 1) {
+                        $voicemail .= $sip->name . " => " . $sip->voicemail_password . "," . $sip->idUser->lastname . ' ' . $sip->idUser->firstname . "," . $sip->voicemail_email . "\n";
+                    }
 
                     if ($sip->idUser->active == 0) {
                         continue;
@@ -837,6 +852,10 @@ class AsteriskAccess
             }
 
         }
+        if (fwrite($fr_voicemail, $voicemail) === false) {
+            echo "Impossible to write to the file ($fr_voicemail)";
+        }
+        AsteriskAccess::instance()->VoiceMailReload();
 
         AsteriskAccess::instance()->sipReload();
 
