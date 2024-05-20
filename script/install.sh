@@ -592,10 +592,7 @@ write = system,call,agent,user,config,command,reporting,originate
 echo "#include extensions_magnus.conf" >> /etc/asterisk/extensions.conf
 echo '#include extensions_magnus_did.conf' >> /etc/asterisk/extensions.conf
 echo "#include musiconhold_magnus.conf" >> /etc/asterisk/musiconhold.conf
-
-echo "[settings]
-voicemail => mysql,general,pkg_voicemail_users
-" > /etc/asterisk/extconfig.conf
+echo "#include voicemail_magnus.conf" >> /etc/asterisk/voicemail.conf
 
 echo "
 noload => res_config_sqlite3.so
