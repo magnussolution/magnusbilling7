@@ -265,8 +265,8 @@ class ApiAccess
             $values['id_group'] = $values['id_group'];
         } else {
             $modelGroupUser = GroupUser::model()->findAllByAttributes(["id_user_type" => 3]);
-            if (isset($modelGroupUser->id)) {
-                $values['id_group'] = $modelGroupUser[0]['id'];
+            if (isset($modelGroupUser[0]->id)) {
+                $values['id_group'] = $modelGroupUser[0]->id;
             } else {
                 echo json_encode([
                     'success' => false,

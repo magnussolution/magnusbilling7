@@ -418,7 +418,7 @@ class BaseController extends CController
 
         $recordsSum = $this->recordsExtraSum($records);
 
-        $records = $this->afterRead($records);
+        $this->afterRead($records);
 
         $return[$this->nameRoot]  = $records;
         $return[$this->nameCount] = $countRecords;
@@ -470,7 +470,7 @@ class BaseController extends CController
 
     public function afterRead($records)
     {
-        return $records;
+        return;
     }
     public function hidenInvisibleField($values)
     {
@@ -1753,7 +1753,7 @@ class BaseController extends CController
                     ($fieldName == 'id' && $fieldReport == 'destination') ||
                     ($fieldName == 'idPrefixprefix' && $fieldReport == 'destination')) {
                     //altera as colunas para poder pegar o destino das tarifas
-                    $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.id_prefix) AS connectcharge";
+                    $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t.id_prefix) AS destination";
                 } else {
                     if (isset($fk['where'])) {
                         $subSelect = "(SELECT $fieldReport FROM $table WHERE $table.$pk = t." . $fk['where'] . ") AS $fieldName";

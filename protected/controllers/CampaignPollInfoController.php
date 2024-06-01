@@ -18,17 +18,17 @@
 class CampaignPollInfoController extends Controller
 {
     public $attributeOrder = 't.id';
-    public $extraValues    = array('idCampaignPoll' => 'name');
+    public $extraValues    = ['idCampaignPoll' => 'name'];
 
     public $nameFileReport = 'exported';
 
-    public $fieldsFkReport = array(
-        'id_campaign_poll' => array(
+    public $fieldsFkReport = [
+        'id_campaign_poll' => [
             'table'       => 'pkg_campaign_poll',
             'pk'          => 'id',
             'fieldReport' => 'name',
-        ),
-    );
+        ],
+    ];
 
     public function init()
     {
@@ -69,4 +69,21 @@ class CampaignPollInfoController extends Controller
 
         return $filter;
     }
+
+    public function subscribeColunms($columns = '')
+    {
+
+        for ($i = 0; $i < count($columns); $i++) {
+
+            if ($columns[$i]['dataIndex'] == 'resposta') {
+                $columns[$i]['header'] = 'DTMF';
+            }
+
+        }
+
+        $columns[] = ['header' => 'Response', 'dataIndex' => 'resposta_text'];
+
+        return $columns;
+    }
+
 }
