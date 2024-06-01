@@ -57,7 +57,7 @@ class CampaignPoll extends Model
             ['id_user,ordem_exibicao, repeat, id_campaign, digit_authorize, request_authorize',
                 'numerical', 'integerOnly' => true],
             ['name, arq_audio', 'length', 'max' => 100],
-            ['option0, option1, option2, option3, option4, option5, option6, option7, option8, option9',
+            ['option0, option1, option2, option3, option4, option5, option6, option7, option8, option9, option10',
                 'length', 'max' => 300],
             ['description', 'length', 'max' => 300],
 

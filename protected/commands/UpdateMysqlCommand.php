@@ -2010,6 +2010,22 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->update($version);
         }
 
+        //2024-05-27
+        if ($version == '7.8.4.6') {
+            $sql = " ALTER TABLE `pkg_campaign_poll` ADD `option10` VARCHAR(150) NULL DEFAULT NULL AFTER `option9`;";
+            $this->executeDB($sql);
+
+            $sql = " ALTER TABLE `pkg_campaign_poll_info` ADD `resposta_text` VARCHAR(150) NULL DEFAULT NULL AFTER `city`";
+            $this->executeDB($sql);
+
+            $sql = "
+            ALTER TABLE `pkg_campaign_poll_info` CHANGE `resposta` `resposta` INT(11) NOT NULL;";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.7';
+            $this->update($version);
+        }
+
     }
 
     public function executeDB($sql)

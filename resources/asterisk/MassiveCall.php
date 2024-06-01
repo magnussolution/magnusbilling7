@@ -410,6 +410,11 @@ class MassiveCall
 
                 foreach ($modelCampaignPoll as $poll) {
 
+                    if (isset($execute_poll_name)) {
+                        $poll = $execute_poll_name;
+                        unset($execute_poll_name);
+                    }
+
                     $repeat = $poll->repeat;
 
                     if ($dtmf_result == -1) {
@@ -430,6 +435,7 @@ class MassiveCall
 
                         $audio = $uploaddir . "idPoll_" . $poll->id;
 
+                        $agi->verbose("audio: $audio", 5);
                         if ($poll->request_authorize == 1) {
                             $agi->verbose('Request authorize', 5);
                             //IF CUSTOMER MARK 1 EXECUTE POLL
@@ -443,13 +449,47 @@ class MassiveCall
                             }
 
                         } else {
-                            $res_dtmf = $agi->get_data($audio, 5000, 1);
+
+                            $agi->verbose("poll->option10: $poll->option10", 5);
+
+                            if (strlen($poll->option10)) {
+
+                                if (preg_match('/\#/', $poll->option10)) {
+                                    $digit_timeout = preg_split('/\#/', $poll->option10);
+
+                                    $agi->verbose(print_r($digit_timeout, true), 5);
+                                    $digit_timeout = end($digit_timeout);
+
+                                } else {
+                                    $digit_timeout = strlen($poll->option10);
+                                }
+
+                                $res_dtmf = $agi->get_data($audio, strlen($poll->option10) * 2000, $digit_timeout);
+                            } else {
+                                $res_dtmf = $agi->get_data($audio, 5000, 1);
+                            }
+
                         }
 
                         //GET RESULT OF POLL
                         $dtmf_result = $res_dtmf['result'];
 
                         $agi->verbose("Cliente votou na opcao: $dtmf_result", 5);
+
+                        $sql   = "SELECT * FROM pkg_campaign_poll WHERE name = '" . $poll->{'option' . $dtmf_result} . "' AND id_campaign = $idCampaign";
+                        $poll2 = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+
+                        if (isset($poll2[0]->id)) {
+                            //execute other poll
+                            $fields = "id_campaign_poll,resposta,number,city,resposta_text";
+                            $values = "'$poll->id', '$dtmf_result', '$destination', '$phonenumberCity','" . strtok($poll->{'option' . $dtmf_result}, '#') . "'";
+                            $sql    = "INSERT INTO pkg_campaign_poll_info ($fields) VALUES ($values)";
+                            $agi->exec($sql);
+
+                            $execute_poll_name = $poll2[0];
+                            continue;
+
+                        }
 
                         //Hungaup call if the fisrt poll dtmf is not numeric
                         if ($i == 0 && ! is_numeric($dtmf_result)) {
@@ -505,6 +545,16 @@ class MassiveCall
                     }
 
                     if (is_numeric($dtmf_result) && $dtmf_result >= 0) {
+
+                        if (preg_match('/play_/', $poll->{'option' . $dtmf_result})) {
+
+                            preg_match_all('/play_(.*)\#/', $poll->{'option' . $dtmf_result}, $play_audio);
+
+                            if (isset($play_audio[1][0])) {
+                                $agi->stream_file($play_audio[1][0], ' #');
+                            }
+                        }
+
                         if (preg_match('/^http/', $poll->{'option' . $dtmf_result})) {
 
                             $agi->verbose('chamar API', 25);
@@ -532,7 +582,7 @@ class MassiveCall
 
                         }
                         //si esta hangup en la opcion, corlgar.
-                        else if (preg_match('/hangup/', $poll->{'option' . $dtmf_result})) {
+                        else if ($poll->{'option' . $dtmf_result} == 'hangup') {
 
                             $agi->verbose('desligar chamadas', 25);
 
@@ -588,8 +638,8 @@ class MassiveCall
 
                         } else {
 
-                            $fields = "id_campaign_poll,resposta,number,city";
-                            $values = "'$poll->id', '$dtmf_result', '$destination', '$phonenumberCity'";
+                            $fields = "id_campaign_poll,resposta,number,city,resposta_text";
+                            $values = "'$poll->id', '$dtmf_result', '$destination', '$phonenumberCity','" . strtok($poll->{'option' . $dtmf_result}, '#') . "'";
                             $sql    = "INSERT INTO pkg_campaign_poll_info ($fields) VALUES ($values)";
                             $agi->exec($sql);
 
@@ -608,6 +658,10 @@ class MassiveCall
 
                                 $MAGNUS->stopRecordCall($agi);
                             }
+                        }
+
+                        if (preg_match('/hangup/', $poll->{'option' . $dtmf_result})) {
+                            break;
                         }
 
                     } else {

@@ -37,6 +37,10 @@ class RateProviderController extends Controller
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
+        ], 't.id' => [
+            'table'       => 'pkg_prefix',
+            'pk'          => 'id',
+            'fieldReport' => 'destination',
         ],
     ];
 
@@ -71,11 +75,24 @@ class RateProviderController extends Controller
             $_GET['columns'] = preg_replace("/$destino/", $destinoNew, $_GET['columns']);
         }
 
+        $destino    = '{"header":"Prefix","dataIndex":"idPrefixprefix"},';
+        $destinoNew = '{"header":"Prefix","dataIndex":"id_prefix"},';
+        if (preg_match("/$destino/", $_GET['columns'])) {
+            $_GET['columns'] = preg_replace("/$destino/", $destinoNew, $_GET['columns']);
+        }
+
         $destino    = '{"header":"Destino","dataIndex":"idPrefixdestination"},';
         $destinoNew = '{"header":"Destino","dataIndex":"id"},';
         if (preg_match("/$destino/", $_GET['columns'])) {
             $_GET['columns'] = preg_replace("/$destino/", $destinoNew, $_GET['columns']);
         }
+
+        $destino    = '{"header":"Destination","dataIndex":"idPrefixdestination"},';
+        $destinoNew = '{"header":"Destination","dataIndex":"id"},';
+        if (preg_match("/$destino/", $_GET['columns'])) {
+            $_GET['columns'] = preg_replace("/$destino/", $destinoNew, $_GET['columns']);
+        }
+
     }
 
     public function actionImportFromCsv()

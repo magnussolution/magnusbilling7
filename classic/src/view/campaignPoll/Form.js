@@ -125,6 +125,10 @@ Ext.define('MBilling.view.campaignPoll.Form', {
                     name: 'option9',
                     fieldLabel: t('Option 9'),
                     allowBlank: true
+                }, {
+                    name: 'option10',
+                    fieldLabel: t('Option 10'),
+                    allowBlank: true
                 }]
             }]
         }];
