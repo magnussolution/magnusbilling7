@@ -882,6 +882,14 @@ iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sipvicious" --
 iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "iWar" --algo bm
 iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "sipcli/" --algo bm
 iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "VaxSIPUserAgent/" --algo bm
+iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "sipcli" --algo bm
+iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "VaxSIPUserAgent" --algo bm
+iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sip:carol@chicago.com" --algo bm
+iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sip-scan" --algo bm
+iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "eyeBeam" --algo bm
+iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sip:nm@nm" --algo bm
+iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sip:nm2@nm2" --algo bm
+iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sip:n@n" --algo bm
 
 
 if [ ${DIST} = "DEBIAN" ]; then
