@@ -122,33 +122,38 @@ class AGI_AsteriskManager
      *
      * @param string $config is an array of configuration vars and vals, stuffed into $this->config
      */
-    public function __construct($config = array())
+    public function __construct($config = [])
     {
         //No Errors to the screen
         error_reporting(0);
         @ini_set('display_errors', 0);
 
         // load config
-        if (!is_null($config) && file_exists($config)) {
-            $this->config = parse_ini_file($config, true);
-        } elseif (file_exists(DEFAULT_PHPAGI_CONFIG)) {
-            $this->config = parse_ini_file(DEFAULT_PHPAGI_CONFIG, true);
+        if (is_array($config)) {
+            $this->config = $config;
+        } else {
+
+            if ( ! is_null($config) && file_exists($config)) {
+                $this->config = parse_ini_file($config, true);
+            } elseif (file_exists(DEFAULT_PHPAGI_CONFIG)) {
+                $this->config = parse_ini_file(DEFAULT_PHPAGI_CONFIG, true);
+            }
         }
 
         // add default values to config for uninitialized values
-        if (!isset($this->config['server'])) {
+        if ( ! isset($this->config['server'])) {
             $this->config['server'] = 'localhost';
         }
-        if (!isset($this->config['port'])) {
+        if ( ! isset($this->config['port'])) {
             $this->config['port'] = 5038;
         }
-        if (!isset($this->config['username'])) {
+        if ( ! isset($this->config['username'])) {
             $this->config['username'] = 'phpagi';
         }
-        if (!isset($this->config['secret'])) {
+        if ( ! isset($this->config['secret'])) {
             $this->config['secret'] = 'phpagi';
         }
-        if (!isset($this->config['timeout'])) {
+        if ( ! isset($this->config['timeout'])) {
             $this->config['timeout'] = 5;
         }
         if (isset($this->config['cachemode'])) {
@@ -177,7 +182,7 @@ class AGI_AsteriskManager
      * @param array $parameters
      * @return array of parameters
      */
-    public function send_request($action, $parameters = array(), $retry = true)
+    public function send_request($action, $parameters = [], $retry = true)
     {
         $reconnects = $this->reconnects;
 
@@ -195,7 +200,7 @@ class AGI_AsteriskManager
         $req .= "\r\n";
         $this->log("Sending Request down socket:", 10);
         $this->log($req, 10);
-        if (!$this->connected()) {
+        if ( ! $this->connected()) {
             //echo ("Asterisk is not connected\n");
             return;
         }
@@ -210,7 +215,7 @@ class AGI_AsteriskManager
             $this->log("Unexpected failure executing command: $action, reconnecting to manager and retrying: $reconnects");
             $this->disconnect();
             if ($this->connect($this->server . ':' . $this->port, $this->username, $this->secret, $this->events) !== false) {
-                if (!$this->connected()) {
+                if ( ! $this->connected()) {
                     // echo ("Asterisk is not connected\n");
                     break;
                 }
@@ -226,7 +231,7 @@ class AGI_AsteriskManager
             }
             $reconnects--;
         }
-        if ($action == 'Command' && empty($response['data']) && !empty($response['Output'])) {
+        if ($action == 'Command' && empty($response['data']) && ! empty($response['Output'])) {
             $response['data'] = $response['Output'];
             unset($response['Output']);
         }
@@ -245,12 +250,12 @@ class AGI_AsteriskManager
     public function wait_response($allow_timeout = false)
     {
         $timeout = false;
-        set_error_handler("Asterisk\AMI\phpasmanager_error_handler");
+
         do {
             $type       = null;
-            $parameters = array();
+            $parameters = [];
 
-            if (!$this->socket || feof($this->socket)) {
+            if ( ! $this->socket || feof($this->socket)) {
                 $this->log("Got EOF in wait_response() from socket waiting for response, returning false", 10);
                 restore_error_handler();
                 return false;
@@ -260,7 +265,7 @@ class AGI_AsteriskManager
                 $a = strpos($buffer, ':');
 
                 if ($a) {
-                    if (!count($parameters)) {
+                    if ( ! count($parameters)) {
 // first line in a response?
                         $type = strtolower(substr($buffer, 0, $a));
                         if ((substr($buffer, $a + 2) == 'Follows')) {
@@ -318,7 +323,7 @@ class AGI_AsteriskManager
                     $this->log('Unhandled response packet (' . $type . ') from Manager: ' . print_r($parameters, true));
                     break;
             }
-        } while ($type != 'response' && $type != 'message' && !$timeout);
+        } while ($type != 'response' && $type != 'message' && ! $timeout);
 
         if (preg_match("/Output/", $buffer)) {
             $parameters['data'] .= preg_replace("/Output: /", '', $buffer);
@@ -346,8 +351,6 @@ class AGI_AsteriskManager
      */
     public function connect($server = null, $username = null, $secret = null, $events = 'on')
     {
-        set_error_handler("Asterisk\AMI\phpasmanager_error_handler");
-        // use config if not specified
 
         if (is_null($server)) {
             $server = $this->config['server'];
@@ -371,7 +374,7 @@ class AGI_AsteriskManager
         $errno        = $errstr        = null;
         $this->socket = stream_socket_client("tcp://" . $this->server . ":" . $this->port, $errno, $errstr, 3);
         stream_set_timeout($this->socket, 5);
-        if (!$this->socket) {
+        if ( ! $this->socket) {
             restore_error_handler();
             $this->log("Unable to connect to manager {$this->server}:{$this->port} ($errno): $errstr");
         }
@@ -390,11 +393,11 @@ class AGI_AsteriskManager
 
         // login
         $res = $this->send_request('login',
-            array(
+            [
                 'Username' => $this->username,
                 'Secret'   => $this->secret,
                 'Events'   => $this->events,
-            ),
+            ],
             false);
         if ($res['Response'] != 'Success') {
             $this->disconnect();
@@ -426,7 +429,7 @@ class AGI_AsteriskManager
      */
     public function connected()
     {
-        return is_resource($this->socket) && !feof($this->socket);
+        return is_resource($this->socket) && ! feof($this->socket);
     }
 
     /**
@@ -441,7 +444,7 @@ class AGI_AsteriskManager
      */
     public function AbsoluteTimeout($channel, $timeout)
     {
-        return $this->send_request('AbsoluteTimeout', array('Channel' => $channel, 'Timeout' => $timeout));
+        return $this->send_request('AbsoluteTimeout', ['Channel' => $channel, 'Timeout' => $timeout]);
     }
 
     /**
@@ -469,7 +472,7 @@ class AGI_AsteriskManager
      */
     public function AgentLogoff($agent, $soft = 'false')
     {
-        return $this->send_request('AgentLogoff', array('Agent' => $agent, 'Soft' => $soft));
+        return $this->send_request('AgentLogoff', ['Agent' => $agent, 'Soft' => $soft]);
     }
 
     /**
@@ -497,7 +500,7 @@ class AGI_AsteriskManager
      */
     public function AGI($channel, $command, $commandid)
     {
-        return $this->send_request('AGI', array('Channel' => $channel, 'Command' => $command, "CommandID" => $commandid));
+        return $this->send_request('AGI', ['Channel' => $channel, 'Command' => $command, "CommandID" => $commandid]);
     }
 
     /**
@@ -509,9 +512,9 @@ class AGI_AsteriskManager
      * @param string $channel
      * @param string $file
      */
-    public function UserEvent($event, $headers = array())
+    public function UserEvent($event, $headers = [])
     {
-        $d = array('UserEvent' => $event);
+        $d = ['UserEvent' => $event];
         $i = 1;
         foreach ($headers as $header) {
             $d['Header' . $i] = $header;
@@ -531,7 +534,7 @@ class AGI_AsteriskManager
      */
     public function ChangeMonitor($channel, $file)
     {
-        return $this->send_request('ChangeMonitor', array('Channel' => $channel, 'File' => $file));
+        return $this->send_request('ChangeMonitor', ['Channel' => $channel, 'File' => $file]);
     }
 
     /**
@@ -546,7 +549,7 @@ class AGI_AsteriskManager
      */
     public function Command($command, $actionid = null)
     {
-        $parameters = array('Command' => $command);
+        $parameters = ['Command' => $command];
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
         }
@@ -580,14 +583,14 @@ class AGI_AsteriskManager
         if (version_compare($this->settings['AsteriskVersion'], "12.0", "lt")) {
             return false;
         }
-        $parameters = array();
-        if (!empty($context)) {
+        $parameters = [];
+        if ( ! empty($context)) {
             $parameters['Context'] = $context;
         }
-        if (!empty($mailbox)) {
+        if ( ! empty($mailbox)) {
             $parameters['Mailbox'] = $mailbox;
         }
-        if (!empty($actionid)) {
+        if ( ! empty($actionid)) {
             $parameters['ActionID'] = $actionid;
         }
         return $this->send_request('VoicemailRefresh', $parameters);
@@ -619,7 +622,7 @@ class AGI_AsteriskManager
         if (preg_match_all('/\d{1,6}\s*' . $type . '\s*([a-z0-9]*)\s/i', $ret['data'], $matches)) {
             return $matches[1];
         } else {
-            return array();
+            return [];
         }
     }
 
@@ -634,7 +637,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeKick($conference, $channel)
     {
-        return $this->send_request('ConfbridgeKick', array('Conference' => $conference, 'Channel' => $channel));
+        return $this->send_request('ConfbridgeKick', ['Conference' => $conference, 'Channel' => $channel]);
     }
 
     /**
@@ -645,11 +648,11 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeList($conference)
     {
-        $this->add_event_handler("confbridgelist", array($this, 'Confbridge_catch'));
-        $this->add_event_handler("confbridgelistcomplete", array($this, 'Confbridge_catch'));
-        $response = $this->send_request('ConfbridgeList', array('Conference' => $conference));
+        $this->add_event_handler("confbridgelist", [$this, 'Confbridge_catch']);
+        $this->add_event_handler("confbridgelistcomplete", [$this, 'Confbridge_catch']);
+        $response = $this->send_request('ConfbridgeList', ['Conference' => $conference]);
         if ($response["Response"] == "Success") {
-            $this->response_catch = array();
+            $this->response_catch = [];
             $this->wait_response(true);
             stream_set_timeout($this->socket, 30);
         } else {
@@ -667,11 +670,11 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeListRooms()
     {
-        $this->add_event_handler("confbridgelistrooms", array($this, 'Confbridge_catch'));
-        $this->add_event_handler("confbridgelistroomscomplete", array($this, 'Confbridge_catch'));
+        $this->add_event_handler("confbridgelistrooms", [$this, 'Confbridge_catch']);
+        $this->add_event_handler("confbridgelistroomscomplete", [$this, 'Confbridge_catch']);
         $response = $this->send_request('ConfbridgeListRooms');
         if ($response["Response"] == "Success") {
-            $this->response_catch = array();
+            $this->response_catch = [];
             $this->wait_response(true);
             stream_set_timeout($this->socket, 30);
         } else {
@@ -736,7 +739,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeLock($conference)
     {
-        return $this->send_request('ConfbridgeLock', array('Conference' => $conference));
+        return $this->send_request('ConfbridgeLock', ['Conference' => $conference]);
     }
 
     /**
@@ -748,7 +751,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeMute($conference, $channel)
     {
-        return $this->send_request('ConfbridgeMute', array('Conference' => $conference, 'Channel' => $channel));
+        return $this->send_request('ConfbridgeMute', ['Conference' => $conference, 'Channel' => $channel]);
     }
 
     /**
@@ -760,7 +763,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeSetSingleVideoSrc($conference, $channel)
     {
-        return $this->send_request('ConfbridgeSetSingleVideoSrc', array('Conference' => $conference, 'Channel' => $channel));
+        return $this->send_request('ConfbridgeSetSingleVideoSrc', ['Conference' => $conference, 'Channel' => $channel]);
     }
 
     /**
@@ -775,7 +778,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeStartRecord($conference, $recordFile)
     {
-        return $this->send_request('ConfbridgeStartRecord', array('Conference' => $conference, 'RecordFile' => $recordFile));
+        return $this->send_request('ConfbridgeStartRecord', ['Conference' => $conference, 'RecordFile' => $recordFile]);
     }
 
     /**
@@ -786,7 +789,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeStopRecord($conference)
     {
-        return $this->send_request('ConfbridgeStopRecord', array('Conference' => $conference));
+        return $this->send_request('ConfbridgeStopRecord', ['Conference' => $conference]);
     }
 
     /**
@@ -797,7 +800,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeUnlock($conference)
     {
-        return $this->send_request('ConfbridgeUnlock', array('Conference' => $conference));
+        return $this->send_request('ConfbridgeUnlock', ['Conference' => $conference]);
     }
 
     /**
@@ -808,7 +811,7 @@ class AGI_AsteriskManager
      */
     public function ConfbridgeUnmute($conference, $channel)
     {
-        return $this->send_request('ConfbridgeUnmute', array('Conference' => $conference, 'Channel' => $channel));
+        return $this->send_request('ConfbridgeUnmute', ['Conference' => $conference, 'Channel' => $channel]);
     }
 
     /**
@@ -820,7 +823,7 @@ class AGI_AsteriskManager
     public function Events($eventmask)
     {
         $this->events = $eventmask;
-        return $this->send_request('Events', array('EventMask' => $eventmask));
+        return $this->send_request('Events', ['EventMask' => $eventmask]);
     }
 
     /**
@@ -838,7 +841,7 @@ class AGI_AsteriskManager
      */
     public function ExtensionState($exten, $context, $actionid = null)
     {
-        $parameters = array('Exten' => $exten, 'Context' => $context);
+        $parameters = ['Exten' => $exten, 'Context' => $context];
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
         }
@@ -855,7 +858,7 @@ class AGI_AsteriskManager
      */
     public function GetVar($channel, $variable, $actionid = null)
     {
-        $parameters = array('Channel' => $channel, 'Variable' => $variable);
+        $parameters = ['Channel' => $channel, 'Variable' => $variable];
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
         }
@@ -870,7 +873,7 @@ class AGI_AsteriskManager
      */
     public function Hangup($channel)
     {
-        return $this->send_request('Hangup', array('Channel' => $channel));
+        return $this->send_request('Hangup', ['Channel' => $channel]);
     }
 
     /**
@@ -895,7 +898,7 @@ class AGI_AsteriskManager
      */
     public function PresenceState($provider)
     {
-        return $this->send_request('PresenceState', array('Provider' => $provider));
+        return $this->send_request('PresenceState', ['Provider' => $provider]);
     }
 
     /**
@@ -909,7 +912,7 @@ class AGI_AsteriskManager
     public function ListCommands($actionid = null)
     {
         if ($actionid) {
-            return $this->send_request('ListCommands', array('ActionID' => $actionid));
+            return $this->send_request('ListCommands', ['ActionID' => $actionid]);
         } else {
             return $this->send_request('ListCommands');
         }
@@ -924,7 +927,7 @@ class AGI_AsteriskManager
      */
     public function Logoff()
     {
-        return $this->send_request('Logoff', array(), false);
+        return $this->send_request('Logoff', [], false);
     }
 
     /**
@@ -941,7 +944,7 @@ class AGI_AsteriskManager
      */
     public function MailboxCount($mailbox, $actionid = null)
     {
-        $parameters = array('Mailbox' => $mailbox);
+        $parameters = ['Mailbox' => $mailbox];
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
         }
@@ -962,7 +965,7 @@ class AGI_AsteriskManager
      */
     public function MailboxStatus($mailbox, $actionid = null)
     {
-        $parameters = array('Mailbox' => $mailbox);
+        $parameters = ['Mailbox' => $mailbox];
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
         }
@@ -1002,11 +1005,11 @@ class AGI_AsteriskManager
      */
     public function MeetmeList($conference)
     {
-        $this->add_event_handler("meetmelist", array($this, 'Meetme_catch'));
-        $this->add_event_handler("meetmelistcomplete", array($this, 'Meetme_catch'));
-        $response = $this->send_request('MeetmeList', array('Conference' => $conference));
+        $this->add_event_handler("meetmelist", [$this, 'Meetme_catch']);
+        $this->add_event_handler("meetmelistcomplete", [$this, 'Meetme_catch']);
+        $response = $this->send_request('MeetmeList', ['Conference' => $conference]);
         if ($response["Response"] == "Success") {
-            $this->response_catch = array();
+            $this->response_catch = [];
             $this->wait_response(true);
             stream_set_timeout($this->socket, 30);
         } else {
@@ -1024,11 +1027,11 @@ class AGI_AsteriskManager
      */
     public function MeetmeListRooms()
     {
-        $this->add_event_handler("meetmelistrooms", array($this, 'Meetme_catch'));
-        $this->add_event_handler("meetmelistroomscomplete", array($this, 'Meetme_catch'));
+        $this->add_event_handler("meetmelistrooms", [$this, 'Meetme_catch']);
+        $this->add_event_handler("meetmelistroomscomplete", [$this, 'Meetme_catch']);
         $response = $this->send_request('MeetmeListRooms');
         if ($response["Response"] == "Success") {
-            $this->response_catch = array();
+            $this->response_catch = [];
             $this->wait_response(true);
             stream_set_timeout($this->socket, 30);
         } else {
@@ -1046,7 +1049,7 @@ class AGI_AsteriskManager
      */
     public function MeetmeMute($meetme, $usernum)
     {
-        return $this->send_request('MeetmeMute', array('Meetme' => $meetme, 'Usernum' => $usernum));
+        return $this->send_request('MeetmeMute', ['Meetme' => $meetme, 'Usernum' => $usernum]);
     }
 
     /**
@@ -1060,7 +1063,7 @@ class AGI_AsteriskManager
      */
     public function MeetmeUnmute($meetme, $usernum)
     {
-        return $this->send_request('MeetmeUnmute', array('Meetme' => $meetme, 'Usernum' => $usernum));
+        return $this->send_request('MeetmeUnmute', ['Meetme' => $meetme, 'Usernum' => $usernum]);
     }
 
     /**
@@ -1074,14 +1077,14 @@ class AGI_AsteriskManager
      */
     public function Monitor($channel, $file = null, $format = null, $mix = null)
     {
-        $parameters = array('Channel' => $channel);
+        $parameters = ['Channel' => $channel];
         if ($file) {
             $parameters['File'] = $file;
         }
         if ($format) {
             $parameters['Format'] = $format;
         }
-        if (!is_null($file)) {
+        if ( ! is_null($file)) {
             $parameters['Mix'] = ($mix) ? 'true' : 'false';
         }
         return $this->send_request('Monitor', $parameters);
@@ -1114,7 +1117,7 @@ class AGI_AsteriskManager
         if ($num_args === 10) {
             $args = func_get_args();
 
-            $parameters = array();
+            $parameters = [];
             if ($args[0]) {
                 $parameters['Channel'] = $args[0];
             }
@@ -1164,7 +1167,7 @@ class AGI_AsteriskManager
     public function ParkedCalls($actionid = null)
     {
         if ($actionid) {
-            return $this->send_request('ParkedCalls', array('ActionID' => $actionid));
+            return $this->send_request('ParkedCalls', ['ActionID' => $actionid]);
         } else {
             return $this->send_request('ParkedCalls');
         }
@@ -1190,7 +1193,7 @@ class AGI_AsteriskManager
      */
     public function QueueAdd($queue, $interface, $penalty = 0)
     {
-        $parameters = array('Queue' => $queue, 'Interface' => $interface);
+        $parameters = ['Queue' => $queue, 'Interface' => $interface];
         if ($penalty) {
             $parameters['Penalty'] = $penalty;
         }
@@ -1206,7 +1209,7 @@ class AGI_AsteriskManager
      */
     public function QueueRemove($queue, $interface)
     {
-        return $this->send_request('QueueRemove', array('Queue' => $queue, 'Interface' => $interface));
+        return $this->send_request('QueueRemove', ['Queue' => $queue, 'Interface' => $interface]);
     }
     /**
      * Queues
@@ -1227,7 +1230,7 @@ class AGI_AsteriskManager
     public function QueueStatus($actionid = null)
     {
         if ($actionid) {
-            return $this->send_request('QueueStatus', array('ActionID' => $actionid));
+            return $this->send_request('QueueStatus', ['ActionID' => $actionid]);
         } else {
             return $this->send_request('QueueStatus');
         }
@@ -1245,7 +1248,7 @@ class AGI_AsteriskManager
      */
     public function Redirect($channel, $extrachannel, $exten, $context, $priority)
     {
-        return $this->send_request('Redirect', array('Channel' => $channel, 'ExtraChannel' => $extrachannel, 'Exten' => $exten, 'Context' => $context, 'Priority' => $priority));
+        return $this->send_request('Redirect', ['Channel' => $channel, 'ExtraChannel' => $extrachannel, 'Exten' => $exten, 'Context' => $context, 'Priority' => $priority]);
     }
 
     /**
@@ -1258,7 +1261,7 @@ class AGI_AsteriskManager
      */
     public function SetCDRUserField($userfield, $channel, $append = null)
     {
-        $parameters = array('UserField' => $userfield, 'Channel' => $channel);
+        $parameters = ['UserField' => $userfield, 'Channel' => $channel];
         if ($append) {
             $parameters['Append'] = $append;
         }
@@ -1275,7 +1278,7 @@ class AGI_AsteriskManager
      */
     public function SetVar($channel, $variable, $value)
     {
-        return $this->send_request('SetVar', array('Channel' => $channel, 'Variable' => $variable, 'Value' => $value));
+        return $this->send_request('SetVar', ['Channel' => $channel, 'Variable' => $variable, 'Value' => $value]);
     }
 
     /**
@@ -1296,7 +1299,7 @@ class AGI_AsteriskManager
      */
     public function Status($channel, $actionid = null)
     {
-        $parameters = array('Channel' => $channel);
+        $parameters = ['Channel' => $channel];
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
         }
@@ -1311,7 +1314,7 @@ class AGI_AsteriskManager
      */
     public function StopMonitor($channel)
     {
-        return $this->send_request('StopMonitor', array('Channel' => $channel));
+        return $this->send_request('StopMonitor', ['Channel' => $channel]);
     }
 
     /**
@@ -1325,7 +1328,7 @@ class AGI_AsteriskManager
     {
         //TODO: need to look at source to find this function...
         if ($zapchannel && $number) {
-            return $this->send_request('ZapDialOffhook', array('ZapChannel' => $zapchannel, 'Number' => $number));
+            return $this->send_request('ZapDialOffhook', ['ZapChannel' => $zapchannel, 'Number' => $number]);
         } else {
             return $this->send_request('ZapDialOffhook');
         }
@@ -1340,7 +1343,7 @@ class AGI_AsteriskManager
     {
         //TODO: need to look at source to find this function...
         if ($zapchannel) {
-            return $this->send_request('ZapDNDoff', array('ZapChannel' => $zapchannel));
+            return $this->send_request('ZapDNDoff', ['ZapChannel' => $zapchannel]);
         } else {
             return $this->send_request('ZapDNDoff');
         }
@@ -1356,7 +1359,7 @@ class AGI_AsteriskManager
     {
         //TODO: need to look at source to find this function...
         if ($zapchannel) {
-            return $this->send_request('ZapDNDon', array('ZapChannel' => $zapchannel));
+            return $this->send_request('ZapDNDon', ['ZapChannel' => $zapchannel]);
         } else {
             return $this->send_request('ZapDNDon');
         }
@@ -1372,7 +1375,7 @@ class AGI_AsteriskManager
     {
         //TODO: need to look at source to find this function...
         if ($zapchannel) {
-            return $this->send_request('ZapHangup', array('ZapChannel' => $zapchannel));
+            return $this->send_request('ZapHangup', ['ZapChannel' => $zapchannel]);
         } else {
             return $this->send_request('ZapHangup');
         }
@@ -1388,7 +1391,7 @@ class AGI_AsteriskManager
     {
         //TODO need to look at source to find this function...
         if ($zapchannel) {
-            return $this->send_request('ZapTransfer', array('ZapChannel' => $zapchannel));
+            return $this->send_request('ZapTransfer', ['ZapChannel' => $zapchannel]);
         } else {
             return $this->send_request('ZapTransfer');
         }
@@ -1403,7 +1406,7 @@ class AGI_AsteriskManager
     public function ZapShowChannels($actionid = null)
     {
         if ($actionid) {
-            return $this->send_request('ZapShowChannels', array('ActionID' => $actionid));
+            return $this->send_request('ZapShowChannels', ['ActionID' => $actionid]);
         } else {
             return $this->send_request('ZapShowChannels');
         }
@@ -1482,7 +1485,7 @@ class AGI_AsteriskManager
     private function process_event($parameters)
     {
         $ret      = false;
-        $handlers = array();
+        $handlers = [];
         $e        = strtolower($parameters['Event']);
         $this->log("Got event... $e");
 
@@ -1526,7 +1529,7 @@ class AGI_AsteriskManager
             } else {
                 $key = '/' . $family;
                 if (isset($this->memAstDB[$key])) {
-                    return array($key => $this->memAstDB[$key]);
+                    return [$key => $this->memAstDB[$key]];
                 } elseif (isset($this->memAstDBArray[$key])) {
                     return $this->memAstDBArray[$key];
                 } else {
@@ -1534,7 +1537,7 @@ class AGI_AsteriskManager
                     $k = $key;
                     $key .= '/';
                     $len     = strlen($key);
-                    $fam_arr = array();
+                    $fam_arr = [];
                     foreach ($this->memAstDB as $this_key => $value) {
                         if (substr($this_key, 0, $len) == $key) {
                             $fam_arr[$this_key] = $value;
@@ -1548,7 +1551,7 @@ class AGI_AsteriskManager
         $r = $this->command("database show $family");
 
         $data = explode("\n", $r["data"]);
-        $db   = array();
+        $db   = [];
 
         // Remove the Privilege => Command initial entry that comes from the heading
         //
@@ -1579,9 +1582,9 @@ class AGI_AsteriskManager
     public function database_put($family, $key, $value)
     {
         $write_through = false;
-        if (!empty($this->memAstDB)) {
+        if ( ! empty($this->memAstDB)) {
             $keyUsed = "/" . str_replace(" ", "/", $family) . "/" . str_replace(" ", "/", $key);
-            if (!isset($this->memAstDB[$keyUsed]) || $this->memAstDB[$keyUsed] != $value) {
+            if ( ! isset($this->memAstDB[$keyUsed]) || $this->memAstDB[$keyUsed] != $value) {
                 $this->memAstDB[$keyUsed] = $value;
                 $write_through            = true;
             }
@@ -1641,7 +1644,7 @@ class AGI_AsteriskManager
     {
         $r      = $this->command("database del " . str_replace(" ", "/", $family) . " " . str_replace(" ", "/", $key));
         $status = (bool) strstr($r["data"], "removed");
-        if ($status && !empty($this->memAstDB)) {
+        if ($status && ! empty($this->memAstDB)) {
             $keyUsed = "/" . str_replace(" ", "/", $family) . "/" . str_replace(" ", "/", $key);
             unset($this->memAstDB[$keyUsed]);
             if (isset($this->memAstDBArray[$keyUsed])) {
@@ -1663,7 +1666,7 @@ class AGI_AsteriskManager
     {
         $r      = $this->command("database deltree " . str_replace(" ", "/", $family));
         $status = (bool) strstr($r["data"], "removed");
-        if ($status && !empty($this->memAstDB)) {
+        if ($status && ! empty($this->memAstDB)) {
             $keyUsed = "/" . str_replace(" ", "/", $family);
             foreach ($this->memAstDB as $key => $val) {
                 $reg = preg_quote($keyUsed, "/");
@@ -1745,7 +1748,7 @@ class AGI_AsteriskManager
     {
         static $pre = '';
 
-        if (!$pre) {
+        if ( ! $pre) {
             //TODO: Query Asterisk for it's version during start up
             $pre = version_compare($this->settings['AsteriskVersion'], "1.6.1", "ge") ? 'dialplan' : 'core';
         }
@@ -1761,7 +1764,7 @@ class AGI_AsteriskManager
      */
     public function Reload($module = null, $actionid = null)
     {
-        $parameters = array();
+        $parameters = [];
 
         if ($actionid) {
             $parameters['ActionID'] = $actionid;
@@ -1787,7 +1790,7 @@ class AGI_AsteriskManager
      */
     public function mixmonitor($channel, $file, $options = '', $postcommand = '', $actionid = null)
     {
-        if (!$channel || !$file) {
+        if ( ! $channel || ! $file) {
             return false;
         }
         $args = 'mixmonitor start ' . trim($channel) . ' ' . trim($file);
@@ -1812,7 +1815,7 @@ class AGI_AsteriskManager
      */
     public function stopmixmonitor($channel, $actionid = null)
     {
-        if (!$channel) {
+        if ( ! $channel) {
             return false;
         }
         $args = 'mixmonitor stop ' . trim($channel);
@@ -1830,10 +1833,10 @@ class AGI_AsteriskManager
      */
     public function PJSIPShowEndpoint($dev)
     {
-        $this->add_event_handler("endpointdetail", array($this, 'Endpoint_catch'));
-        $this->add_event_handler("authdetail", array($this, 'Endpoint_catch'));
-        $this->add_event_handler("endpointdetailcomplete", array($this, 'Endpoint_catch'));
-        $params   = array("Endpoint" => $dev);
+        $this->add_event_handler("endpointdetail", [$this, 'Endpoint_catch']);
+        $this->add_event_handler("authdetail", [$this, 'Endpoint_catch']);
+        $this->add_event_handler("endpointdetailcomplete", [$this, 'Endpoint_catch']);
+        $params   = ["Endpoint" => $dev];
         $response = $this->send_request('PJSIPShowEndpoint', $params);
         if ($response["Response"] == "Success") {
             $this->wait_response(true);
@@ -1885,11 +1888,11 @@ class AGI_AsteriskManager
      */
     public function CoreShowChannels()
     {
-        $this->add_event_handler("coreshowchannel", array($this, 'coreshowchan_catch'));
-        $this->add_event_handler("coreshowchannelscomplete", array($this, 'coreshowchan_catch'));
+        $this->add_event_handler("coreshowchannel", [$this, 'coreshowchan_catch']);
+        $this->add_event_handler("coreshowchannelscomplete", [$this, 'coreshowchan_catch']);
         $response = $this->send_request('CoreShowChannels');
         if ($response["Response"] == "Success") {
-            $this->response_catch = array();
+            $this->response_catch = [];
             $this->wait_response(true);
             stream_set_timeout($this->socket, 30);
         } else {

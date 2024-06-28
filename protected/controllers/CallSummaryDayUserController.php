@@ -19,25 +19,29 @@ class CallSummaryDayUserController extends Controller
 {
     public $attributeOrder = 'day DESC';
     public $join           = 'JOIN pkg_user c ON t.id_user = c.id';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
 
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'buycost',
         'sumbuycost',
-    );
+        'sumlucro',
+        'lucro',
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'buycost',
         'sumbuycost',
-    );
+        'sumlucro',
+        'lucro',
+    ];
 
     public function init()
     {
@@ -52,7 +56,7 @@ class CallSummaryDayUserController extends Controller
         parent::init();
     }
 
-    public function recordsExtraSum($records = array())
+    public function recordsExtraSum($records = [])
     {
         foreach ($records as $key => $value) {
             $records[0]->sumsessiontime += $value['sessiontime'] / 60;
@@ -68,7 +72,7 @@ class CallSummaryDayUserController extends Controller
         return $records;
     }
 
-    public function getAttributesModels($models, $itemsExtras = array())
+    public function getAttributesModels($models, $itemsExtras = [])
     {
         $attributes = false;
         foreach ($models as $key => $item) {
@@ -122,7 +126,7 @@ class CallSummaryDayUserController extends Controller
     public function actionExportCsvCalls()
     {
 
-        if (!Yii::app()->session['isAdmin']) {
+        if ( ! Yii::app()->session['isAdmin']) {
             exit;
         }
 
@@ -154,7 +158,7 @@ class CallSummaryDayUserController extends Controller
         //create a file pointer
         $f = fopen('php://memory', 'w');
         foreach ($command->queryAll() as $key => $fields) {
-            $fieldsCsv = array();
+            $fieldsCsv = [];
             foreach ($fields as $key => $value) {
                 array_push($fieldsCsv, $value);
             }

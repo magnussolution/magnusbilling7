@@ -17,18 +17,19 @@ class BuyCreditController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if (!isset($modelSip->id)) {
+            if ( ! isset($modelSip->id)) {
                 echo 'User or password is invalid';
                 exit;
             }
             if (isset($data[3])) {
                 $_GET['id_method'] = $data[3];
             } else {
-                $methodPay         = Methodpay::model()->find('payment_method = :key', array(':key' => 'Paypal'));
+                $methodPay         = Methodpay::model()->find('payment_method = :key', [':key' => 'Paypal']);
                 $_GET['id_method'] = $methodPay->id;
             }
-            Yii::app()->session['id_user'] = $modelSip->id_user;
-            Yii::app()->session['id_plan'] = $modelSip->idUser->id_plan;
+            Yii::app()->session['id_user']  = $modelSip->id_user;
+            Yii::app()->session['id_plan']  = $modelSip->idUser->id_plan;
+            Yii::app()->session['currency'] = $this->config['global']['base_currency'];
 
         }
 
@@ -57,11 +58,11 @@ class BuyCreditController extends Controller
                     $modelMethodPay = Methodpay::model()->findAll('active = 1');
                 }
 
-                $this->render('mobile', array(
+                $this->render('mobile', [
                     'modelMethodPay' => $modelMethodPay,
                     'modelUser'      => $modelUser,
                     'reference'      => date('YmdHis') . '-' . $modelUser->username . '-' . $modelUser->id,
-                ));
+                ]);
                 exit;
             }
 
@@ -98,11 +99,11 @@ class BuyCreditController extends Controller
         } elseif ($modelMethodPay->payment_method == 'SuperLogica') {
             SLUserSave::criarBoleto($modelMethodPay, $modelUser);
         } else {
-            $this->render(strtolower($modelMethodPay->payment_method), array(
+            $this->render(strtolower($modelMethodPay->payment_method), [
                 'modelMethodPay' => $modelMethodPay,
                 'modelUser'      => $modelUser,
                 'reference'      => date('YmdHis') . '-' . $modelUser->username . '-' . $modelUser->id,
-            ));
+            ]);
         }
     }
 
@@ -121,7 +122,7 @@ class BuyCreditController extends Controller
             //$criteriaUser->addInCondition('reminded', array(2,3));
             $criteriaUser->params[':id_user'] = $id_user;
             $modelServicesUse                 = ServicesUse::model()->findAll($criteriaUser);
-            $ids                              = array();
+            $ids                              = [];
             foreach ($modelServicesUse as $key => $value) {
                 $ids[] = $value->id;
             }
@@ -139,10 +140,10 @@ class BuyCreditController extends Controller
             foreach ($modelServicesUse as $key => $value) {
                 $total += $modelServicesUse[0]->idServices->price;
                 if ($value->id_user != $modelServicesUse[0]->id_user) {
-                    $this->render('payservicelink', array(
+                    $this->render('payservicelink', [
                         'model'   => $model,
                         'message' => 'Your cannot process service payment of diferent users.',
-                    ));
+                    ]);
                     exit;
                 }
             }
@@ -151,39 +152,39 @@ class BuyCreditController extends Controller
                 $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit + $modelServicesUse[0]->idUser->creditlimit;
             }
 
-            if (!isset($modelServicesUse[0]->id)) {
-                $this->render('payservicelink', array(
+            if ( ! isset($modelServicesUse[0]->id)) {
+                $this->render('payservicelink', [
                     'model'   => $model,
                     'message' => 'This service was paid or canceled.',
-                ));
+                ]);
                 exit;
             } else if ($modelServicesUse[0]->idUser->credit >= $total) {
-                ServicesProcess::activation(array(
+                ServicesProcess::activation([
                     'id_services' => $ids,
                     'id_user'     => (int) $modelServicesUse[0]->id_user,
                     'id_method'   => null,
-                ));
-                $this->render('payservicelink', array(
+                ]);
+                $this->render('payservicelink', [
                     'model'   => $model,
                     'message' => 'Your services are actived!',
-                ));
+                ]);
 
                 return;
             } else {
-                $this->render('payservicelink', array(
+                $this->render('payservicelink', [
                     'model'   => $model,
                     'message' => 'User not have enogth credit to pay the services.',
-                ));
+                ]);
                 exit;
             }
 
         }
 
-        if (!is_array($modelServicesUse) || !isset($modelServicesUse[0]->id)) {
-            $this->render('payservicelink', array(
+        if ( ! is_array($modelServicesUse) || ! isset($modelServicesUse[0]->id)) {
+            $this->render('payservicelink', [
                 'model'   => $model,
                 'message' => 'Your selection not have any service pending.',
-            ));
+            ]);
             exit;
         }
 
@@ -199,15 +200,15 @@ class BuyCreditController extends Controller
                 }
 
                 if ($modelServicesUse[0]->idUser->credit >= $total) {
-                    ServicesProcess::activation(array(
+                    ServicesProcess::activation([
                         'id_services' => $ids,
                         'id_user'     => (int) Yii::app()->session['id_user'],
                         'id_method'   => (int) $_POST['ServicesUse']['id_method'],
-                    ));
-                    $this->render('payservicelink', array(
+                    ]);
+                    $this->render('payservicelink', [
                         'model'   => $model,
                         'message' => 'Your services are actived!',
-                    ));
+                    ]);
 
                     return;
                 } else {
@@ -241,29 +242,29 @@ class BuyCreditController extends Controller
                 $modelMethodPay = Methodpay::model()->findByPk((int) $_POST['ServicesUse']['id_method']);
                 $total          = $modelMethodPay->payment_method == 'Pagseguro' ? intval($total) : $total;
 
-                $this->redirect(array(
+                $this->redirect([
                     'buyCredit/method',
                     'amount'    => $total,
                     'id_method' => (int) $_POST['ServicesUse']['id_method'],
                     'id_user'   => $modelServicesUse[0]->id_user,
-                )
+                ]
                 );
 
             }
         }
 
         $modelMethodPay = Methodpay::model()->findAll('id_user = :key AND active = 1',
-            array(':key' => $modelServicesUse[0]->idUser->id_user));
+            [':key' => $modelServicesUse[0]->idUser->id_user]);
 
         if ($modelServicesUse[0]->idUser->typepaid == 1) {
             $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit + $modelServicesUse[0]->idUser->creditlimit;
         }
 
-        $this->render('payservicelink', array(
+        $this->render('payservicelink', [
             'model'            => $model,
             'modelMethodPay'   => $modelMethodPay,
             'modelServicesUse' => $modelServicesUse,
             'currency'         => Yii::app()->session['currency'],
-        ));
+        ]);
     }
 }
