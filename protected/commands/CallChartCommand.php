@@ -356,7 +356,7 @@ class CallChartCommand extends ConsoleCommand
 
                 $sql[] = "(NULL,'" . $uniqueid . "', '$sip_account', $id_user, '$channel', '" . utf8_encode($trunk) . "', '$ndiscado', '" . preg_replace('/\(|\)/', '', $codec) . "', '$status', '$cdr', 'no','no', '" . $call['server'] . "')";
 
-                if (count($callShopIds)) {
+                if (is_array($callShopIds)) {
                     if (in_array($id_user, $callShopIds)) {
 
                         if ( ! isset($modelSip->id)) {
@@ -669,7 +669,7 @@ class CallChartCommand extends ConsoleCommand
 
                     $sql[] = "(NULL, '$uniqueid', '$peername', $id_user, '$channel', '" . utf8_encode($trunk) . "', '$ndiscado', 'NULL', '$status', '$cdr', 'no','no', '" . $call['server'] . "')";
 
-                    if (count($callShopIds)) {
+                    if (is_array($callShopIds)) {
                         if (in_array($modelSip->id_user, $callShopIds)) {
                             $modelSip->status         = 3;
                             $modelSip->callshopnumber = $ndiscado;

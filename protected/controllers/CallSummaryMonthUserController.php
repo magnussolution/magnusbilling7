@@ -19,25 +19,29 @@ class CallSummaryMonthUserController extends Controller
 {
     public $attributeOrder = 'month DESC';
 
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
     public $join           = 'JOIN pkg_user c ON t.id_user = c.id';
-    public $fieldsFkReport = array(
-        'id_user' => array(
+    public $fieldsFkReport = [
+        'id_user' => [
             'table'       => 'pkg_user',
             'pk'          => 'id',
             'fieldReport' => 'username',
-        ),
-    );
+        ],
+    ];
 
-    public $fieldsInvisibleClient = array(
+    public $fieldsInvisibleClient = [
         'buycost',
         'sumbuycost',
-    );
+        'sumlucro',
+        'lucro',
+    ];
 
-    public $fieldsInvisibleAgent = array(
+    public $fieldsInvisibleAgent = [
         'buycost',
         'sumbuycost',
-    );
+        'sumlucro',
+        'lucro',
+    ];
 
     public function init()
     {
@@ -52,7 +56,7 @@ class CallSummaryMonthUserController extends Controller
         parent::init();
     }
 
-    public function recordsExtraSum($records = array())
+    public function recordsExtraSum($records = [])
     {
         foreach ($records as $key => $value) {
             $records[0]->sumsessiontime += $value['sessiontime'] / 60;
@@ -68,7 +72,7 @@ class CallSummaryMonthUserController extends Controller
         return $records;
     }
 
-    public function getAttributesModels($models, $itemsExtras = array())
+    public function getAttributesModels($models, $itemsExtras = [])
     {
         $attributes = false;
         foreach ($models as $key => $item) {

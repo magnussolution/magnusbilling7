@@ -100,7 +100,7 @@ class Magnus
         }
 
         foreach ($modelConfig as $var => $val) {
-            $this->config["agi-conf$idconfig"]->$var = $val;
+            $this->config["agi-conf$idconfig"][$var] = $val;
         }
 
         $this->agiconfig = $this->config["agi-conf$idconfig"];
