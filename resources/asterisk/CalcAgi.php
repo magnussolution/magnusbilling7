@@ -618,13 +618,13 @@ class CalcAgi
                     if ($MAGNUS->modelSip->cnl == 'DYN') {
                         $sql              = "SELECT zone FROM pkg_cadup a JOIN pkg_provider_cnl b ON a.cnl = b.cnl WHERE prefix = '55" . substr($MAGNUS->CallerID, 0, 6) . "' AND id_provider = " . $modelTrunk->id_provider . " LIMIT 1";
                         $modelCNLCALLERID = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-                        if (isset($modelCNL->zone) && isset($modelCNLCALLERID->zone) && $modelCNL->zone == $modelCNLCALLERID->zone) {
+                        if (isset($modelCNL->zone) && isset($modelCNLCALLERID->zone) && trim($modelCNL->zone) == trim($modelCNLCALLERID->zone)) {
                             $removeprefix = "XXXX";
                             $prefix       = "";
                         }
                     } else {
 
-                        if (isset($modelCNL->zone) && $modelCNL->zone == $MAGNUS->modelSip->cnl) {
+                        if (isset($modelCNL->zone) && trim($modelCNL->zone) == $MAGNUS->modelSip->cnl) {
                             $removeprefix = "XXXX";
                             $prefix       = "";
                         }
