@@ -509,16 +509,8 @@ cp -rf /var/www/html/mbilling/resources/sounds/en /var/lib/asterisk/sounds
 installBr() {
    clear
    language='br'
+   cp -rf /var/www/html/mbilling/script/br /var/lib/asterisk/
    cd /var/lib/asterisk
-   wget --no-check-certificate https://ufpr.dl.sourceforge.net/project/disc-os/Disc-OS%20Sounds/1.0-RELEASE/Disc-OS-Sounds-1.0-pt_BR.tar.gz
-   tar xzf Disc-OS-Sounds-1.0-pt_BR.tar.gz
-   rm -rf Disc-OS-Sounds-1.0-pt_BR.tar.gz
-
-   cp -n /var/lib/asterisk/sounds/pt_BR/*  /var/lib/asterisk/sounds/br
-   rm -rf /var/lib/asterisk/sounds/pt_BR
-   mkdir -p /var/lib/asterisk/sounds/br/digits
-   cp -rf /var/lib/asterisk/sounds/digits/pt_BR/* /var/lib/asterisk/sounds/br/digits
-   cp -n /var/www/html/mbilling/resources/sounds/br/* /var/lib/asterisk/sounds
 }
 
 installEn() {
