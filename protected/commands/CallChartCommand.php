@@ -43,6 +43,8 @@ class CallChartCommand extends ConsoleCommand
                 sleep(4);
                 continue;
             }
+
+            print_r($calls);
             echo "\n\n\n\nSTART ------" . $calls . "\n\n";
 
             if ($calls == 'old_version') {
@@ -510,7 +512,7 @@ class CallChartCommand extends ConsoleCommand
                             $tech   = substr($ndiscado, 0, $config['global']['ip_tech_length']);
 
                             $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', [':key' => $tech]);
-                            if ( ! count($modelSip)) {
+                            if ( ! isset($modelSip->id)) {
                                 if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
                                     $modelSip = Sip::model()->find('name = :key',
                                         [
@@ -522,23 +524,23 @@ class CallChartCommand extends ConsoleCommand
                                             ':key' => $originate,
                                         ]);
                                 }
-                                if ( ! count($modelSip)) {
+                                if ( ! isset($modelSip->id)) {
                                     //check if is via IP from proxy
                                     $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
                                     $modelSip  = Sip::model()->find('host = :key', [':key' => $callProxy['X-AUTH-IP']]);
                                 }
                             }
 
-                            if (count($modelSip)) {
+                            if (isset($modelSip->id)) {
                                 $userType = 'User';
                             } else {
                                 $resultTrunk = Trunk::model()->find('trunkcode = :key', [':key' => $originate]);
-                                if (count($resultTrunk)) {
+                                if (isset($resultTrunk->id)) {
                                     $userType = 'Trunk';
                                 }
                             }
 
-                            if ( ! count($userType)) {
+                            if ( ! isset($userType)) {
                                 //not fount the type call
                                 continue;
                             } elseif ($userType == 'User') {

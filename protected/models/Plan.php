@@ -53,13 +53,14 @@ class Plan extends Model
 
     public function rules()
     {
-        $rules = array(
-            array('name', 'required'),
-            array('id_user, tariff_limit, play_audio,techprefix, lcrtype, signup, portabilidadeMobile, portabilidadeFixed', 'numerical', 'integerOnly' => true),
-            array('name, ini_credit', 'length', 'max' => 50),
-            array('techprefix', 'length', 'max' => 5),
-            array('name', 'unique', 'caseSensitive' => 'false'),
-        );
+        $rules = [
+            ['name', 'required'],
+            ['id_user, tariff_limit, play_audio,techprefix, lcrtype, signup, portabilidadeMobile, portabilidadeFixed', 'numerical', 'integerOnly' => true],
+            ['name, ini_credit', 'length', 'max' => 50],
+            ['techprefix', 'length', 'max' => 5],
+            ['name', 'unique', 'caseSensitive' => 'false'],
+            ['creationdate', 'safe'],
+        ];
         return $this->getExtraField($rules);
     }
 
@@ -68,9 +69,9 @@ class Plan extends Model
      */
     public function relations()
     {
-        return array(
-            'idUser' => array(self::BELONGS_TO, 'User', 'id_user'),
-        );
+        return [
+            'idUser' => [self::BELONGS_TO, 'User', 'id_user'],
+        ];
     }
 
     public function searchTariff($id_plan, $destination)
@@ -92,6 +93,6 @@ class Plan extends Model
                 LEFT JOIN pkg_trunk_group ON pkg_trunk_group.id = pkg_rate.id_trunk_group
                 WHERE pkg_plan.id=$id_plan AND pkg_rate.status = 1 AND $prefixclause
                 ORDER BY LENGTH( prefix ) DESC  LIMIT 1";
-        return array($sql, Yii::app()->db->createCommand($sql)->queryAll(), $prefixclause);
+        return [$sql, Yii::app()->db->createCommand($sql)->queryAll(), $prefixclause];
     }
 }
