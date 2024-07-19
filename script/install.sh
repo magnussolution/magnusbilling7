@@ -851,41 +851,24 @@ echo
 
 ssh_port=$(cat /etc/ssh/sshd_config | grep Port |  awk 'NR==1{print $2}')
 
+apt install -y firewalld
+
 install_fail2ban
 
-iptables -F
-iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
-iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport $ssh_port -j ACCEPT
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 10000:50000 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "friendly-scanner" --algo bm
-iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sundayddr" --algo bm
-iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sipsak" --algo bm
-iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "sipvicious" --algo bm
-iptables -I INPUT -j DROP -p udp --dport 5060 -m string --string "iWar" --algo bm
-iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "sipcli/" --algo bm
-iptables -A INPUT -j DROP -p udp --dport 5060 -m string --string "VaxSIPUserAgent/" --algo bm
+systemctl disable iptables
+systemctl start firewalld
+systemctl enable firewalld
+systemctl enable fail2ban
 
-
-if [ ${DIST} = "DEBIAN" ]; then
-    echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
-    echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
-    apt-get install -y iptables-persistent
-    sudo iptables-save > /etc/iptables/rules.v4
-elif [ ${DIST} = "CENTOS" ]; then
-    service iptables save
-    systemctl restart iptables
-fi
-
+firewall-cmd --zone=public --add-port=$sshPort/tcp --permanent
+firewall-cmd --zone=public --add-port=22/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --zone=public --add-port=5060/udp --permanent
+firewall-cmd --zone=public --add-port=10000-50000/udp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --zone=public --list-all
 
 
 
