@@ -106,7 +106,14 @@ class Report extends FPDF
     {
         if ($this->PageNo() === 1) {
             $date = utf8_decode($this->strDate) . date($this->formatDate);
-            $user = isset($_SESSION[$this->idxUserSession]) ? utf8_decode($this->strUser) . $_SESSION[$this->idxUserSession] : isset($this->user) ? $this->user : null;
+
+            if (isset($_SESSION[$this->idxUserSession])) {
+                $user = utf8_decode($this->strUser) . $_SESSION[$this->idxUserSession];
+            } elseif (isset($this->user)) {
+                $user = $this->user;
+            } else {
+                $user = null;
+            }
 
             if (strlen($this->logo) > 10) {
                 $this->Image($this->logo, 10, 8, 50);
