@@ -198,6 +198,7 @@ Ext.define('MBilling.view.user.Controller', {
             params: {
                 id: record.get(me.idProperty)
             },
+            timeout: 500000,
             url: 'index.php/user/resendActivationEmail',
             scope: me,
             success: function(response) {

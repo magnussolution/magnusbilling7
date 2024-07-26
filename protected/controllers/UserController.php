@@ -595,6 +595,10 @@ class UserController extends Controller
         $mail      = new Mail(Mail::$TYPE_SIGNUPCONFIRM, $modelUser->id);
         try {
             $mail->send();
+            echo json_encode([
+                $this->nameSuccess => true,
+                $this->nameMsg     => '',
+            ]);
         } catch (Exception $e) {
         }
     }

@@ -378,13 +378,22 @@ class Mail
 
         Yii::import('application.extensions.phpmailer.JPhpMailer');
         $mail = new JPhpMailer;
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->IsSMTP();
-        $mail->SMTPAuth   = true;
-        $mail->Host       = $smtp_host;
-        $mail->SMTPSecure = $smtp_encryption;
-        $mail->Username   = $smtp_username;
-        $mail->Password   = $smtp_password;
-        $mail->Port       = $smtp_port;
+        $mail->SMTPAuth = true;
+        $mail->Host     = $smtp_host;
+
+        if ($smtp_port == 465) {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
+        } else if ($smtp_port == 587) {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
+        } else {
+            $mail->SMTPSecure = $smtp_encryption;
+        }
+
+        $mail->Username = $smtp_username;
+        $mail->Password = $smtp_password;
+        $mail->Port     = $smtp_port;
 
         if ($smtp_host == 'smtp.office365.com') {
             $mail->SetFrom($smtp_username, $this->from_name);
