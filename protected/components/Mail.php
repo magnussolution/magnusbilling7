@@ -395,7 +395,7 @@ class Mail
         $mail->Password = $smtp_password;
         $mail->Port     = $smtp_port;
 
-        if ($smtp_host == 'smtp.office365.com') {
+        if ($smtp_host == 'smtp.office365.com' || $this->from_email == 'noreply@site.com') {
             $mail->SetFrom($smtp_username, $this->from_name);
         } else {
             $mail->SetFrom($this->from_email, $this->from_name);
