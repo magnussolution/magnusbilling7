@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Salve este script no diretó /etc/cron.hourly e dêermissã# de execuç a ele. Desse modo a cada hora sera verificada se a
 # porcentagem de memó utilizada pelo sistema atingiu o valor definido

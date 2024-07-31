@@ -992,6 +992,7 @@ if [ ${DIST} = "DEBIAN" ]; then
 echo "
 [sshd]
 enablem=true
+backend=systemd
 
 [mbilling_ddos]
 enabled  = true

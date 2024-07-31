@@ -373,7 +373,12 @@ class AGI_AsteriskManager
         // connect the socket
         $errno        = $errstr        = null;
         $this->socket = stream_socket_client("tcp://" . $this->server . ":" . $this->port, $errno, $errstr, 3);
+
+        if ( ! is_resource($this->socket)) {
+            return false;
+        }
         stream_set_timeout($this->socket, 5);
+
         if ( ! $this->socket) {
             restore_error_handler();
             $this->log("Unable to connect to manager {$this->server}:{$this->port} ($errno): $errstr");
