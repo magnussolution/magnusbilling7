@@ -193,6 +193,9 @@ Ext.define('MBilling.model.User', {
         name: 'sip_count',
         type: 'int'
     }, {
+        name: 'inbound_call_limit',
+        type: 'int'
+    }, {
         name: 'dist',
         type: 'string'
     }, 'idUserusername', 'idGroupname', 'idGroupid_user_type', 'idPlanname'],
