@@ -235,36 +235,35 @@ echo
 echo "Installing Fail2ban & Iptables"
 echo
 
+ssh_port=$(cat /etc/ssh/sshd_config | grep Port |  awk 'NR==1{print $2}')
 
-iptables -F
-iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
-iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-iptables -A INPUT -p udp -m udp --dport 10000:50000 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+apt install -y firewalld fail2ban
+
+systemctl disable iptables
+systemctl start firewalld
+systemctl enable firewalld
+systemctl enable fail2ban
+
+
+firewall-cmd --zone=public --add-port=$sshPort/tcp --permanent
+firewall-cmd --zone=public --add-port=22/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --zone=public --add-port=5060/udp --permanent
+firewall-cmd --zone=public --add-port=10000-50000/udp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
 iptables -A INPUT -p tcp -m tcp --dport 19639 -j ACCEPT
-iptables -I INPUT -p tcp -s $ipMbilling --dport 3306 -j ACCEPT
+firewall-cmd --zone=public --add-rich-rule="
+  rule family=\"ipv4\"
+  source address=\"$ipMbilling/32\"
+  port protocol=\"tcp\" port=\"3306\" accept" --permanent
 
 if [[ ${ipMbilling} != ${localIP} ]]; then
-  iptables -I INPUT -p tcp -s $localIP --dport 3306 -j ACCEPT
+firewall-cmd --zone=public --add-rich-rule="rule family=\"ipv4\" source address=\"$ipMbilling/32\" port protocol=\"tcp\" port=\"localIP\" accept" --permanent
 fi
+firewall-cmd --reload
+firewall-cmd --zone=public --list-all
 
-
-echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
-echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
-apt-get install -y iptables-persistent
-
-sudo iptables-save > /etc/iptables/rules.v4
-
-apt-get -y install fail2ban
-systemctl enable fail2ban
 
 echo "
 [DEFAULT]
@@ -275,6 +274,10 @@ maxretry = 3
 backend = auto
 usedns = warn
 
+
+[sshd]
+enablem=true
+backend=systemd
 
 [opensips-iptables]
 enabled  = true
@@ -316,8 +319,6 @@ echo $'
 [Definition]
 failregex = Blocking traffic from <HOST>
 ' > /etc/fail2ban/filter.d/opensips.conf
-
-
 
 
 systemctl restart fail2ban 
