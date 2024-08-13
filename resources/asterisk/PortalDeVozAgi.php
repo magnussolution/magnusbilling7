@@ -20,7 +20,7 @@
 class PortalDeVozAgi
 {
 
-    public function send(&$agi, &$MAGNUS, &$CalcAgi, &$DidAgi)
+    public static function send(&$agi, &$MAGNUS, &$CalcAgi, &$DidAgi)
     {
         $agi->answer();
         $agi->verbose('PortalDeVozAgi');
@@ -31,7 +31,7 @@ class PortalDeVozAgi
             $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR alias = '$MAGNUS->dnid' LIMIT 1 ";
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-            if (!isset($MAGNUS->modelSip->id)) {
+            if ( ! isset($MAGNUS->modelSip->id)) {
                 $agi->verbose('User no found', 15);
                 $agi->stream_file('prepaid-invalid-digits', '#');
                 continue;

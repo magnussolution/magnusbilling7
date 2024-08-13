@@ -20,7 +20,7 @@
 
 class IvrAgi
 {
-    public function callIvr(&$agi, &$MAGNUS, &$CalcAgi, &$DidAgi = null, $type = 'ivr')
+    public static function callIvr(&$agi, &$MAGNUS, &$CalcAgi, &$DidAgi = null, $type = 'ivr')
     {
 
         $agi->verbose("Ivr module", 5);

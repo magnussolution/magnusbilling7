@@ -20,12 +20,12 @@
 
 class CallbackAgi
 {
-    public function callbackCID($agi, $MAGNUS, $CalcAgi, $DidAgi)
+    public static function callbackCID($agi, $MAGNUS, $CalcAgi, $DidAgi)
     {
         $agi->verbose("MAGNUS CID CALLBACK");
         $MAGNUS->agiconfig['cid_enable'] = 1;
 
-        if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
+        if ($MAGNUS->dnid == 'failed' || ! is_numeric($MAGNUS->dnid)) {
             $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed", 25);
             $MAGNUS->hangup($agi);
             exit;
@@ -119,7 +119,7 @@ class CallbackAgi
 
         $agi->verbose("MAGNUS 0800 CALLBACK");
 
-        if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
+        if ($MAGNUS->dnid == 'failed' || ! is_numeric($MAGNUS->dnid)) {
             $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed");
             $MAGNUS->hangup($agi);
             exit;
@@ -140,7 +140,7 @@ class CallbackAgi
         $sql              = "SELECT * FROM pkg_sip WHERE id_user = " . $DidAgi->modelDestination[0]['id_user'] . " LIMIT 1";
         $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-        if (!isset($MAGNUS->modelSip->id)) {
+        if ( ! isset($MAGNUS->modelSip->id)) {
             $agi->verbose("Username not have SIP ACCOUNT");
             $MAGNUS->hangup($agi);
             return;
@@ -188,7 +188,7 @@ class CallbackAgi
     public static function chargeFistCall($agi, $MAGNUS, $CalcAgi, $sessiontime = 0)
     {
 
-        if ($MAGNUS->dnid == 'failed' || !is_numeric($MAGNUS->dnid)) {
+        if ($MAGNUS->dnid == 'failed' || ! is_numeric($MAGNUS->dnid)) {
             $agi->verbose("Hangup becouse dnid is OutgoingSpoolFailed", 25);
             $MAGNUS->hangup($agi);
             exit;

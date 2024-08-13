@@ -206,7 +206,40 @@ set cl.column6 warning
 set cl.column6.width 0' > /usr/local/etc/sngreprc
 
 
-echo "local0.*                                            /var/log/opensips.log" >> /etc/rsyslog.conf
+echo '
+module(load="imuxsock") # provides support for local system logging
+module(load="imklog")   # provides kernel logging support
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+$FileOwner root
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+$WorkDirectory /var/spool/rsyslog
+$IncludeConfig /etc/rsyslog.d/*.conf
+auth,authpriv.*     /var/log/auth.log
+*.*;auth,authpriv.none    -/var/log/syslog
+#cron.*       /var/log/cron.log
+daemon.*      -/var/log/daemon.log
+kern.*        -/var/log/kern.log
+lpr.*       -/var/log/lpr.log
+mail.*        -/var/log/mail.log
+user.*        -/var/log/user.log
+mail.info     -/var/log/mail.info
+mail.warn     -/var/log/mail.warn
+mail.err      /var/log/mail.err
+*.=debug;\
+  auth,authpriv.none;\
+  mail.none   -/var/log/debug
+*.=info;*.=notice;*.=warn;\
+  auth,authpriv.none;\
+  cron,daemon.none;\
+  mail.none   -/var/log/messages
+*.emerg       :omusrmsg:*
+local0.*       /var/log/opensips.log
+' > /etc/rsyslog.conf
+
+
 systemctl restart rsyslog
 systemctl restart opensips 
 

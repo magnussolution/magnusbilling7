@@ -5,7 +5,7 @@
 class SipCallAgi
 {
 
-    public function processCall(&$MAGNUS, &$agi, &$CalcAgi, $type = 'normal')
+    public static function processCall(&$MAGNUS, &$agi, &$CalcAgi, $type = 'normal')
     {
         if (($MAGNUS->agiconfig['use_dnid'] == 1) && (strlen($MAGNUS->dnid) > 2)) {
             $MAGNUS->destination = $MAGNUS->dnid;
@@ -59,7 +59,7 @@ class SipCallAgi
 
         $agi->verbose("[" . $MAGNUS->username . " Friend]:[ANSWEREDTIME=" . $answeredtime . "-DIALSTATUS=" . $dialstatus . "]", 6);
 
-        if (!preg_match('/^CANCEL|^ANSWER/', strtoupper($dialstatus))) {
+        if ( ! preg_match('/^CANCEL|^ANSWER/', strtoupper($dialstatus))) {
 
             $sql             = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->destination' LIMIT 1 ";
             $modelSipForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -107,14 +107,14 @@ class SipCallAgi
 
             $MAGNUS->hangup($agi);
         } else {
-            return array(
+            return [
                 'dialstatus'   => $dialstatus,
                 'answeredtime' => $answeredtime,
-            );
+            ];
         }
     }
 
-    public function callForward($MAGNUS, $agi, $CalcAgi, $modelSipForward)
+    public static function callForward($MAGNUS, $agi, $CalcAgi, $modelSipForward)
     {
 
         $forward     = explode(("|"), $modelSipForward->forward);
@@ -137,7 +137,7 @@ class SipCallAgi
             $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
             $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
-            if (!isset($modelSip[0]->id)) {
+            if ( ! isset($modelSip[0]->id)) {
                 $agi->verbose('GROUP NOT FOUND');
                 $agi->stream_file('prepaid-invalid-digits', '#');
             }
@@ -195,7 +195,7 @@ class SipCallAgi
 
     }
 
-    public function smsForward($MAGNUS, $agi, $CalcAgi, $optionValue)
+    public static function smsForward($MAGNUS, $agi, $CalcAgi, $optionValue)
     {
         $agi->verbose("try send SMS", 5);
 
@@ -263,7 +263,7 @@ class SipCallAgi
 
         $agi->verbose($url);
 
-        if (!$res = @file_get_contents($url, false)) {
+        if ( ! $res = @file_get_contents($url, false)) {
             $agi->verbose("ERRO SMS -> " . $url);
         }
 

@@ -20,7 +20,7 @@
 
 class QueueAgi
 {
-    public function callQueue(&$agi, &$MAGNUS, &$CalcAgi, $DidAgi = null, $type = 'queue', $startTime = 0)
+    public static function callQueue(&$agi, &$MAGNUS, &$CalcAgi, $DidAgi = null, $type = 'queue', $startTime = 0)
     {
         $agi->verbose("Queue module", 5);
         $MAGNUS->sip_account = '';
@@ -125,7 +125,7 @@ class QueueAgi
         if ($siptransfer['data'] != 'yes' && $type == 'queue') {
 
             $CalcAgi->real_sessiontime = intval($CalcAgi->sessiontime);
-            if (!is_null($DidAgi)) {
+            if ( ! is_null($DidAgi)) {
                 $DidAgi->billDidCall($agi, $MAGNUS, $CalcAgi->sessiontime, $CalcAgi);
             }
 

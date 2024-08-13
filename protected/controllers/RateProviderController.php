@@ -191,7 +191,7 @@ class RateProviderController extends Controller
 
         }
 
-        $sql = "UPDATE pkg_rate_provider t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0 AND p.prefix > 0";
+        $sql = "UPDATE pkg_rate_provider t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix IS NOT NULL AND p.prefix > 0";
         try {
             Yii::app()->db->createCommand($sql)->execute();
         } catch (Exception $e) {
@@ -203,7 +203,7 @@ class RateProviderController extends Controller
 
         }
 
-        $modelRate = RateProvider::model()->findAll('dialprefix > 0');
+        $modelRate = RateProvider::model()->findAll('dialprefix IS NOT NULL');
         if (isset($modelRate[0]->id)) {
             //check if there are more than 2000 new prefix, if yes, import using LOAD DATA.
             if (count($modelRate) > 2000) {
@@ -226,7 +226,7 @@ class RateProviderController extends Controller
                 }
             }
 
-            $sql = "UPDATE pkg_rate_provider t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix > 0";
+            $sql = "UPDATE pkg_rate_provider t JOIN pkg_prefix p ON t.dialprefix = p.prefix SET t.id_prefix = p.id, t.dialprefix = NULL, t.destination = NULL WHERE dialprefix IS NOT NULL";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
@@ -238,7 +238,7 @@ class RateProviderController extends Controller
 
             }
 
-            RateProvider::model()->updateAll(['dialprefix' => null, 'destination' => null], 'dialprefix > 0');
+            RateProvider::model()->updateAll(['dialprefix' => null, 'destination' => null], 'dialprefix IS NOT NULL');
 
         }
 
