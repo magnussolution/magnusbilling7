@@ -20,7 +20,7 @@
 
 class SipTransferAgi
 {
-    public function billing(&$MAGNUS, $agi, &$CalcAgi)
+    public static function billing(&$MAGNUS, $agi, &$CalcAgi)
     {
         $siptransfer = $agi->get_variable("SIPTRANSFER");
         if ($siptransfer['data'] == 'yes') {

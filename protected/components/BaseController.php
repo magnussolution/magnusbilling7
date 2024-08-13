@@ -824,6 +824,9 @@ class BaseController extends CController
         $sort      = $sort ? $firstSort . implode(',', $sort) : null;
 
         $this->sort = $this->replaceOrder();
+        if ( ! strlen($this->sort)) {
+            $this->order = $this->attributeOrder;
+        }
 
         $this->select = $this->getColumnsFromReport($columns, $fieldGroup, 'pdf');
 

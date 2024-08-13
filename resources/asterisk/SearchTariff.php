@@ -48,7 +48,7 @@ class SearchTariff
             "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
         $result = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!is_array($result) || count($result) == 0) {
+        if ( ! is_array($result) || count($result) == 0) {
             return 0;
         }
 

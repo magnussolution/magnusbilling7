@@ -20,7 +20,7 @@
 
 class MassiveCall
 {
-    public function send($agi, &$MAGNUS, &$CalcAgi)
+    public static function send($agi, &$MAGNUS, &$CalcAgi)
     {
 
         require_once 'Tts.php';
