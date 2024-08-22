@@ -14,6 +14,9 @@ class FirewallController extends Controller
 
     public function init()
     {
+        if ( ! Yii::app()->session['isAdmin']) {
+            exit;
+        }
         $this->instanceModel = new Firewall;
         $this->abstractModel = Firewall::model();
         $this->titleReport   = Yii::t('zii', 'Firewall');

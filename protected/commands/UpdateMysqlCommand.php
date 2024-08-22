@@ -17,11 +17,16 @@
  * Magnusbilling.com <info@magnusbilling.com>
  *
  */
-class UpdateMysqlCommand extends ConsoleCommand
+class UpdateMysqlCommand extends CConsoleCommand
 {
+
+    public $debug = 0;
+    public $config;
 
     public function run($args)
     {
+
+        $this->config = LoadConfig::getConfig();
 
         if (file_exists('/var/spool/cron/root')) {
             $CRONPATH = '/var/spool/cron/root';

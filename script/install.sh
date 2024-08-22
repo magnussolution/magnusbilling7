@@ -163,10 +163,12 @@ fi
 
 if [ ${DIST} = "DEBIAN" ]; then
     apt-get update --allow-releaseinfo-change
-    echo "LC_ALL=en_US.UTF-8" >> /etc/environment
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    apt-get install -y locales
+    echo "LANG=en_US.utf-8" >> /etc/locale.gen
+    echo "LC_ALL=en_US.utf-8" >> /etc/locale.gen
     echo "LANG=en_US.UTF-8" > /etc/locale.conf
     locale-gen en_US.UTF-8
+    source /etc/environment
 
     apt-get -o Acquire::Check-Valid-Until=false update 
     apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet  apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 

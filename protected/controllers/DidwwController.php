@@ -86,6 +86,10 @@ class DidwwController extends Controller
     public function confirmeDid($id_did)
     {
 
+        if ( ! is_numeric($id_did)) {
+            exit;
+        }
+
         $result = LinuxAccess::exec("
         curl -H 'Accept: application/vnd.api+json' \
         -H  'Api-Key: " . $this->api_key . "' \
@@ -170,6 +174,9 @@ class DidwwController extends Controller
     public function getDids($id_city)
     {
 
+        if ( ! is_numeric($id_city)) {
+            exit;
+        }
         $result = LinuxAccess::exec("
         curl -H 'Accept: application/vnd.api+json' \
         -H  'Api-Key: " . $this->api_key . "' \

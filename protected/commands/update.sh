@@ -54,10 +54,6 @@ wget --no-check-certificate https://raw.githubusercontent.com/magnussolution/mag
 tar xzf MagnusBilling-current.tar.gz
 
 
-
-##update database
-php /var/www/html/mbilling/cron.php UpdateMysql
-
 ## remove unnecessary directories
 rm -rf /var/www/html/mbilling/doc
 rm -rf /var/www/html/mbilling/script
@@ -99,6 +95,10 @@ if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; 
 	done	
 fi
 
+##update database
+php /var/www/html/mbilling/cron.php UpdateMysql
+
 if [[ -e /var/www/html/mbilling/protected/commands/update3.sh ]]; then
 	/var/www/html/mbilling/protected/commands/update3.sh
 fi
+
