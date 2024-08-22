@@ -281,7 +281,7 @@ class BaseController extends CController
     public function setLimit($value)
     {
         $limit       = isset($value[$this->nameParamLimit]) ? $value[$this->nameParamLimit] : -1;
-        $this->limit = (strlen($this->filter) < 2 && isset($this->limit)) ? $this->limit : $limit;
+        $this->limit = ( ! is_null($this->limit) && strlen($this->filter) < 2 && isset($this->limit)) ? $this->limit : $limit;
     }
 
     public function setSort()
@@ -1187,7 +1187,7 @@ class BaseController extends CController
 
     public function getAttributesModels($models, $itemsExtras = [])
     {
-        $attributes = false;
+        $attributes = [];
         $namePk     = $this->abstractModel->primaryKey();
         foreach ($models as $key => $item) {
             $attributes[$key] = $item->attributes;

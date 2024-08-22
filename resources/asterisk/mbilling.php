@@ -213,7 +213,7 @@
             $MAGNUS->modelUser             = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $MAGNUS->accountcode           = isset($MAGNUS->modelUser->username) ? $MAGNUS->modelUser->username : null;
 
-            $sql                 = "SELECT * FROM pkg_sip WHERE name = '" . $MAGNUS->dnid . "' LIMIT 1";
+            $sql                 = "SELECT * FROM pkg_sip WHERE name = '" . $MAGNUS->dnid . "'  OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
             $MAGNUS->modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $MAGNUS->sip_account = $MAGNUS->modelSip->name;
 

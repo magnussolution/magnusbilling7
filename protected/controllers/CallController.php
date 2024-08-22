@@ -183,7 +183,7 @@ class CallController extends Controller
 
                 $host   = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
                 $url    = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
-                $output = LinuxAccess::exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . $uniqueid . ".gsm '$url'");
+                $output = LinuxAccess::exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . trim($uniqueid) . ".gsm '$url'");
                 header("Cache-Control: public");
                 header("Content-Description: File Transfer");
                 header("Content-Disposition: attachment; filename=" . $uniqueid);
@@ -194,7 +194,7 @@ class CallController extends Controller
                 exit;
             }
 
-            $output = LinuxAccess::exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ');
+            $output = LinuxAccess::exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . trim($uniqueid) . '* ');
 
             if (isset($output[0])) {
 
@@ -258,7 +258,7 @@ class CallController extends Controller
                     $username = $records->idUser->username;
 
                     $mix_monitor_format = $this->config['global']['MixMonitor_format'];
-                    LinuxAccess::exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . $uniqueid . '* ' . $folder . '/');
+                    LinuxAccess::exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . trim($uniqueid) . '* ' . $folder . '/');
                 }
 
                 LinuxAccess::exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
@@ -423,7 +423,23 @@ class CallController extends Controller
         $this->convertRelationFilter();
         $header = '';
         foreach ($columns as $key => $value) {
+            if (strlen($value['header']) > 40) {
+                MagnusLog::insertLOG('EDIT', $id_user, $_SERVER['REMOTE_ADDR'], 'CDR export columns have more than 40 char.' . print_r($columns, true));
+                exit;
+            }
             $header .= "'" . ($value['header']) . "',";
+        }
+
+        if (preg_match('/echo|system|exec|touch|pass|cd |rm |curl|wget|assets|resources|mbilling|protected/', $header)) {
+            $info    = 'Trying SQL inject, code: ' . $value . '. Controller => ' . Yii::app()->controller->id;
+            $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
+            MagnusLog::insertLOG('EDIT', $id_user, $_SERVER['REMOTE_ADDR'], $info);
+            echo json_encode([
+                'rows'  => [],
+                'count' => 0,
+                'sum'   => [],
+                'msg'   => 'SQL INJECT FOUND',
+            ]);
         }
 
         $fileName = 'cdr_' . time();
