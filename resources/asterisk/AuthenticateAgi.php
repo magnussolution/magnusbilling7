@@ -76,14 +76,17 @@ class AuthenticateAgi
     {
         if ($authentication == false && $MAGNUS->agiconfig['cid_enable'] == 1 && is_numeric($MAGNUS->CallerID) && $MAGNUS->CallerID > 0) {
             $agi->verbose('Try callerID authentication ' . $MAGNUS->CallerID, 15);
-            $sql           = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID' AND activated = 1 LIMIT 1";
+            $sql = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID' AND activated = 1 LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelCallerid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelCallerid->id)) {
-                $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = '$modelCallerid->id_user' LIMIT 1";
+                $sql = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = '$modelCallerid->id_user' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 $sql       = "SELECT * FROM pkg_sip  WHERE id_user = '$modelUser->id' LIMIT 1";
-                $modelSip  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                $agi->verbose($sql, 25);
+                $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 $MAGNUS->sip_account = $modelSip->name;
 
@@ -99,8 +102,9 @@ class AuthenticateAgi
     public static function techPrefixAuthenticate(&$MAGNUS, &$agi, $authentication)
     {
 
-        $tech     = substr($MAGNUS->dnid, 0, $MAGNUS->config['global']['ip_tech_length']);
-        $sql      = "SELECT * FROM pkg_sip WHERE techprefix = '$tech' AND host != 'dynamic' LIMIT 1";
+        $tech = substr($MAGNUS->dnid, 0, $MAGNUS->config['global']['ip_tech_length']);
+        $sql  = "SELECT * FROM pkg_sip WHERE techprefix = '$tech' AND host != 'dynamic' LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if ($authentication != true && isset($modelSip->id)) {
@@ -116,7 +120,8 @@ class AuthenticateAgi
 
             if ($modelSip->host == $from) {
 
-                $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id =  $modelSip->id_user LIMIT 1";
+                $sql = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id =  $modelSip->id_user LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser, $modelSip);
@@ -134,7 +139,8 @@ class AuthenticateAgi
     {
         if (strlen($MAGNUS->accountcode) >= 1 && $authentication != true) {
             $agi->verbose('Try accountcode authentication ' . $MAGNUS->accountcode, 15);
-            $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE username = '$MAGNUS->accountcode'  LIMIT 1";
+            $sql = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE username = '$MAGNUS->accountcode'  LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelUser->id)) {
@@ -148,23 +154,26 @@ class AuthenticateAgi
 
     public static function sipProxyAuthenticate(&$MAGNUS, &$agi, $authentication)
     {
-        if ($authentication != true && !filter_var($agi->get_variable("SIP_HEADER(X-AUTH-IP)", true), FILTER_VALIDATE_IP) === false) {
+        if ($authentication != true && ! filter_var($agi->get_variable("SIP_HEADER(X-AUTH-IP)", true), FILTER_VALIDATE_IP) === false) {
             $agi->verbose("TRY Authentication via Proxy ");
             $agi->verbose($agi->get_variable("SIP_HEADER(P-Accountcode)", true), 1);
             $proxyServer = explode("@", $agi->get_variable("SIP_HEADER(to)", true));
             $proxyServer = isset($proxyServer[1]) ? substr($proxyServer[1], 0, -1) : '';
 
-            $sql          = "SELECT id FROM pkg_servers WHERE host = '$proxyServer'  LIMIT 1";
+            $sql = "SELECT id FROM pkg_servers WHERE host = '$proxyServer'  LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelServers = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelServers->id)) {
                 if ($agi->get_variable("SIP_HEADER(P-Accountcode)", true) == '<null>') {
 
-                    $sql      = "SELECT * FROM pkg_sip WHERE host = '" . $agi->get_variable("SIP_HEADER(X-AUTH-IP)", true) . "'  LIMIT 1";
+                    $sql = "SELECT * FROM pkg_sip WHERE host = '" . $agi->get_variable("SIP_HEADER(X-AUTH-IP)", true) . "'  LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                     if (isset($modelSip->id)) {
-                        $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE id = '$modelSip->id_user' LIMIT 1";
+                        $sql = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE id = '$modelSip->id_user' LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                         AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser, $modelSip);
@@ -174,7 +183,8 @@ class AuthenticateAgi
                 } else {
                     $MAGNUS->accountcode = $agi->get_variable("SIP_HEADER(P-Accountcode)", true);
                     $sql                 = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE username = '$MAGNUS->accountcode' LIMIT 1";
-                    $modelUser           = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $agi->verbose($sql, 25);
+                    $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     if (isset($modelUser->id)) {
                         AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser);
                         $authentication = true;
@@ -193,7 +203,8 @@ class AuthenticateAgi
     {
 
         $agi->verbose('Try pin authentication ' . $pin, 15);
-        $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE callingcard_pin = '$pin' LIMIT 1";
+        $sql = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE callingcard_pin = '$pin' LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if (isset($modelUser->id)) {
@@ -209,7 +220,8 @@ class AuthenticateAgi
     {
         $agi->verbose("Check voucher Number $pin");
         //check if the PIN is a valid voucher
-        $sql          = "SELECT * FROM pkg_voucher WHERE voucher = '$pin' AND used = 0 LIMIT 1";
+        $sql = "SELECT * FROM pkg_voucher WHERE voucher = '$pin' AND used = 0 LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelVoucher = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($modelVoucher->id)) {
             $agi->verbose("Found valid voucher Number $pin");
@@ -225,18 +237,22 @@ class AuthenticateAgi
                     '" . $modelVoucher->prefix_local . "'";
 
             $sql = "INSERT INTO pkg_user ($fields) VALUES ($values)";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
             $MAGNUS->id_user = $agi->lastInsertId();
 
             //Marca o voucher como usado
             $sql = "UPDATE pkg_voucher SET id_user = $MAGNUS->id_user, usedate = NOW(), used = 1 WHERE voucher = '$pin' LIMIT 1";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
 
             $values = "" . $MAGNUS->id_user . ",'" . $modelVoucher->credit . "','Voucher " . $modelVoucher->voucher . ". Old credit " . $modelUser->credit . "',1";
             $sql    = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES ($values)";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
 
-            $sql       = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = $MAGNUS->id_user LIMIT 1";
+            $sql = "SELECT *, u.id id, u.id_user id_user FROM pkg_user u INNER JOIN pkg_plan p ON u.id_plan = p.id WHERE u.id = $MAGNUS->id_user LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $modelUser);
@@ -271,7 +287,7 @@ class AuthenticateAgi
 
                     $pin = $res_dtmf["result"];
 
-                    if (!isset($pin) || strlen($pin) == 0) {
+                    if ( ! isset($pin) || strlen($pin) == 0) {
                         $prompt = "prepaid-no-card-entered";
                         $agi->verbose('No user entered', 6);
                         continue;
@@ -313,10 +329,12 @@ class AuthenticateAgi
 
             //if user callerId is equal the fist 4 digits of dialnumber, it is a intra call
             if (substr($MAGNUS->modelSip->callerid, 0, 4) == substr($MAGNUS->dnid, 0, 4)) {
-                $sql       = "SELECT name FROM pkg_plan WHERE id = " . $MAGNUS->id_plan . "  LIMIT 1";
+                $sql = "SELECT name FROM pkg_plan WHERE id = " . $MAGNUS->id_plan . "  LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelPlan = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
-                $sql       = "SELECT * FROM pkg_plan WHERE name = '" . $modelPlan->name . " Intra'  LIMIT 1";
+                $sql = "SELECT * FROM pkg_plan WHERE name = '" . $modelPlan->name . " Intra'  LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelPlan = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (isset($modelPlan->id)) {
                     //if found plan with Intra in the name, change the plan
@@ -330,9 +348,10 @@ class AuthenticateAgi
     public static function checkIfIsAgent(&$MAGNUS, $agi)
     {
         /*check if user is a agent user*/
-        if (!is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
-            $MAGNUS->id_plan_agent  = $MAGNUS->id_plan;
-            $sql                    = "SELECT * FROM pkg_user WHERE id =" . $MAGNUS->id_agent . " LIMIT 1";
+        if ( ! is_null($MAGNUS->id_agent) && $MAGNUS->id_agent > 1) {
+            $MAGNUS->id_plan_agent = $MAGNUS->id_plan;
+            $sql                   = "SELECT * FROM pkg_user WHERE id =" . $MAGNUS->id_agent . " LIMIT 1";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelUserAgent = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $MAGNUS->id_plan       = $MAGNUS->modelUserAgent->id_plan;
@@ -346,7 +365,8 @@ class AuthenticateAgi
     {
         if (strlen($MAGNUS->dnid) > 13) {
             //tech prefix to route
-            $sql       = "SELECT id,portabilidadeFixed,portabilidadeMobile FROM pkg_plan WHERE techprefix = '" . substr($MAGNUS->dnid, 0, 5) . "'  LIMIT 1";
+            $sql = "SELECT id,portabilidadeFixed,portabilidadeMobile FROM pkg_plan WHERE techprefix = '" . substr($MAGNUS->dnid, 0, 5) . "'  LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelPlan = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelPlan->id)) {
@@ -382,7 +402,8 @@ class AuthenticateAgi
             $channelsData = $asmanager->command("core show channels concise");
             $channelsData = explode("\n", $channelsData["data"]);
             $asmanager->disconnect();
-            $sql         = "SELECT name FROM pkg_sip WHERE accountcode = '" . $MAGNUS->username . "'";
+            $sql = "SELECT name FROM pkg_sip WHERE accountcode = '" . $MAGNUS->username . "'";
+            $agi->verbose($sql, 25);
             $modelSip    = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
             $sipAccounts = '';
             foreach ($modelSip as $key => $sip) {
@@ -392,7 +413,7 @@ class AuthenticateAgi
             $sipAccounts = substr($sipAccounts, 0, -1);
             $calls       = 0;
             foreach ($channelsData as $key => $line) {
-                if (preg_match("/^SIP\/($sipAccounts)-.*(Ring|Up)/", $line) && !preg_match("/Outgoing Line/", $line)) {
+                if (preg_match("/^SIP\/($sipAccounts)-.*(Ring|Up)/", $line) && ! preg_match("/Outgoing Line/", $line)) {
                     $calls++;
                 }
             }
@@ -415,7 +436,8 @@ class AuthenticateAgi
     {
         //verfica se é cliente de callshop, e se a cabina esta ativa
         if ($MAGNUS->callshop == 1) {
-            $sql      = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->sip_account'  LIMIT 1";
+            $sql = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->sip_account'  LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelSip->status) && $modelSip->status == 0) {
@@ -430,8 +452,9 @@ class AuthenticateAgi
     public static function setMagnusAttrubutes(&$MAGNUS, &$agi, $model, $modelSip = null)
     {
 
-        if (!isset($model->removeinterprefix)) {
-            $sql                        = "SELECT removeinterprefix, play_audio, portabilidadeMobile, portabilidadeFixed, tariff_limit  FROM pkg_plan WHERE id = " . $model->id_plan . " LIMIT 1";
+        if ( ! isset($model->removeinterprefix)) {
+            $sql = "SELECT removeinterprefix, play_audio, portabilidadeMobile, portabilidadeFixed, tariff_limit  FROM pkg_plan WHERE id = " . $model->id_plan . " LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelPlan                  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $model->removeinterprefix   = $modelPlan->removeinterprefix;
             $model->portabilidadeMobile = $modelPlan->portabilidadeMobile;
@@ -473,8 +496,9 @@ class AuthenticateAgi
         ? $MAGNUS->credit + $MAGNUS->creditlimit
         : $MAGNUS->credit;
 
-        if (!isset($modelSip->id)) {
-            $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->sip_account' LIMIT 1";
+        if ( ! isset($modelSip->id)) {
+            $sql = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->sip_account' LIMIT 1";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         } else {
             $MAGNUS->modelSip = $modelSip;
@@ -488,4 +512,4 @@ class AuthenticateAgi
         $MAGNUS->record_call = (isset($MAGNUS->modelSip->id) && $MAGNUS->modelSip->record_call) || $MAGNUS->agiconfig['record_call'] ? true : false;
     }
 
-};
+}

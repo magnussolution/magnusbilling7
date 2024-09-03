@@ -17,7 +17,8 @@ class IaxCallAgi
 
         $agi->verbose('IaxCallAgi 2');
 
-        $sql               = "SELECT * FROM pkg_user WHERE id = " . $modeIax->id_user . " LIMIT 1";
+        $sql = "SELECT * FROM pkg_user WHERE id = " . $modeIax->id_user . " LIMIT 1";
+        $agi->verbose($sql, 25);
         $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         AuthenticateAgi::setMagnusAttrubutes($MAGNUS, $agi, $MAGNUS->modelUser);
 

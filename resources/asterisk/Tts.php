@@ -39,7 +39,7 @@ class Tts
 
         $file = 'tts_audio_' . MD5($string);
 
-        if (!file_exists('/tmp/' . $file . '.wav')) {
+        if ( ! file_exists('/tmp/' . $file . '.wav')) {
 
             $tts_url = preg_replace('/\$name/', $name, $MAGNUS->config['global']['tts_url']);
 

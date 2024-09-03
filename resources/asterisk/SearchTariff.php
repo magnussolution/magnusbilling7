@@ -46,6 +46,7 @@ class SearchTariff
         "LEFT JOIN pkg_trunk_group ON pkg_trunk_group.id = pkg_rate.id_trunk_group " .
         "WHERE pkg_plan.id=$MAGNUS->id_plan AND pkg_rate.status = 1 AND " . $MAGNUS->prefixclause .
             "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+        $agi->verbose($sql, 25);
         $result = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         if ( ! is_array($result) || count($result) == 0) {
@@ -61,13 +62,15 @@ class SearchTariff
                 "LEFT JOIN pkg_prefix ON pkg_rate_agent.id_prefix=pkg_prefix.id " .
                 "WHERE $MAGNUS->prefixclause AND " .
                 "pkg_plan.id= $MAGNUS->id_plan_agent ORDER BY LENGTH(prefix) DESC LIMIT 3";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelRateAgent = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
             $result[0]['package_offer'] = $MAGNUS->modelRateAgent[0]['package_offer'];
         }
 
         //Select custom rate to user
-        $sql           = "SELECT * FROM pkg_user_rate WHERE id_user = $MAGNUS->id_user AND id_prefix = '" . $result[0]['id_prefix'] . "' LIMIT 1";
+        $sql = "SELECT * FROM pkg_user_rate WHERE id_user = $MAGNUS->id_user AND id_prefix = '" . $result[0]['id_prefix'] . "' LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelUserRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         //change custom rate to user

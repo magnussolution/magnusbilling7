@@ -94,7 +94,8 @@ class Magnus
     {
         $this->idconfig = 1;
         $sql            = "SELECT id, config_key , config_value , config_group_title  FROM pkg_configuration";
-        $modelConfig    = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        $agi->verbose($sql, 25);
+        $modelConfig = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
         foreach ($modelConfig as $key => $conf) {
             $this->config[$conf->config_group_title][$conf->config_key] = $conf->config_value;
         }
@@ -120,7 +121,8 @@ class Magnus
         $this->lastapp = isset($agi->request['agi_lastapp']) ? $agi->request['agi_lastapp'] : null;
 
         if (preg_match('/^Local\//', $this->channel) && strlen($this->accountcode) < 4) {
-            $sql               = "SELECT * FROM pkg_sip WHERE name = '$this->dnid' LIMIT 1";
+            $sql = "SELECT * FROM pkg_sip WHERE name = '$this->dnid' LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelSip          = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $this->accountcode = $modelSip->accountcode;
         }
@@ -236,8 +238,8 @@ class Magnus
             $this->hangup($agi);
         }
         if ($this->dnid == '*160') {
-            $sql = "SELECT sessionbill, sessiontime  FROM pkg_cdr
-                                WHERE id_user = $this->id_user ORDER BY starttime DESC ";
+            $sql = "SELECT sessionbill, sessiontime  FROM pkg_cdr WHERE id_user = $this->id_user ORDER BY starttime DESC ";
+            $agi->verbose($sql, 25);
             $modelCall = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelCall->sessionbill)) {
                 $agi->verbose("SAY PRICE LAST CALL : " . $modelCall->sessionbill, 1);
@@ -295,7 +297,8 @@ class Magnus
 
         if ($this->id_agent > 1) {
             $agi->verbose("Check reseller credit -> " . $this->id_agent, 20);
-            $sql              = "SELECT credit, creditlimit FROM pkg_user WHERE id = $this->id_agent LIMIT 1";
+            $sql = "SELECT credit, creditlimit FROM pkg_user WHERE id = $this->id_agent LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelAgendCredit = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelAgendCredit->credit) && $modelAgendCredit->credit + $modelAgendCredit->creditlimit < 0) {
                 $this->executePlayAudio("prepaid-no-enough-credit", $agi);
@@ -555,8 +558,9 @@ class Magnus
     public function freeCallUsed($agi, $id_user, $id_offer, $billingtype, $startday)
     {
 
-        $CLAUSE_DATE   = $this->checkDaysPackage($agi, $startday, $billingtype);
-        $sql           = "SELECT  COUNT(*) AS status FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
+        $CLAUSE_DATE = $this->checkDaysPackage($agi, $startday, $billingtype);
+        $sql         = "SELECT  COUNT(*) AS status FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$id_user' AND id_offer = '$id_offer' LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelOfferCdr = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         return isset($modelOfferCdr->status) ? $modelOfferCdr->status : 0;
@@ -566,7 +570,7 @@ class Magnus
     {
         $CLAUSE_DATE = $this->checkDaysPackage($agi, $startday, $billingtype);
         $sql         = "SELECT sum(used_secondes) AS used_secondes FROM pkg_offer_cdr " . "WHERE $CLAUSE_DATE AND id_user = '$this->id_user' AND id_offer = '$id_offer' ";
-
+        $agi->verbose($sql, 25);
         $modelOfferCdr = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         return isset($modelOfferCdr->used_secondes) ? $modelOfferCdr->used_secondes : 0;
@@ -583,6 +587,7 @@ class Magnus
                 $agi->verbose('User expired => ' . $this->modelUser->expirationdate);
                 $prompt = "prepaid-card-expired";
                 $sql    = "UPDATE pkg_user SET active = 0 WHERE id = " . $this->id_user;
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
             }
@@ -718,7 +723,7 @@ class Magnus
             } else {
                 $sql = "SELECT id FROM pkg_restrict_phone WHERE  direction = " . $direction . " AND id_user = $this->id_user AND number = SUBSTRING('" . $destination . "',1,length(number)) ORDER BY LENGTH(number) DESC";
             }
-
+            $agi->verbose($sql, 25);
             $modelRestrictedPhonenumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $agi->verbose("RESTRICTED NUMBERS ", 15);
@@ -872,15 +877,17 @@ class Magnus
             while ($existsUsername) {
                 $randUserName = $prefix . $this->generatePassword($length, false, false, true, false) . "\n";
 
-                $sql            = "SELECT count(*) FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
+                $sql = "SELECT count(*) FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 $existsUsername = ($countUsername->count > 0);
             }
         } else {
 
             while ($existsUsername) {
-                $randUserName   = mt_rand(10000, 99999);
-                $sql            = "SELECT count(*) as count FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
+                $randUserName = mt_rand(10000, 99999);
+                $sql          = "SELECT count(*) as count FROM pkg_user WHERE username = '" . $randUserName . "' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 $existsUsername = ($countUsername->count > 0);
             }

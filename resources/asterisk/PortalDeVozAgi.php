@@ -28,7 +28,8 @@ class PortalDeVozAgi
             $res_dtmf     = $agi->get_data('prepaid-enter-dest', 5000, 10);
             $MAGNUS->dnid = $res_dtmf["result"];
 
-            $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR alias = '$MAGNUS->dnid' LIMIT 1 ";
+            $sql = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR alias = '$MAGNUS->dnid' LIMIT 1 ";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if ( ! isset($MAGNUS->modelSip->id)) {

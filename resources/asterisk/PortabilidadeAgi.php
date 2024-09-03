@@ -47,7 +47,7 @@ class PortabilidadeAgi
                     $url  = "http://consultas.portabilidadecelular.com/painel/consulta_numero.php?user=" . $user . "&pass=" . $pass . "&seache_number=" . $number . "";
                     $agi->verbose($url, 25);
 
-                    if (!$operadora = @file_get_contents($url, false)) {
+                    if ( ! $operadora = @file_get_contents($url, false)) {
                         $operadora = '55999';
                     }
                     $company = str_replace("55", "", $operadora);
@@ -75,7 +75,8 @@ class PortabilidadeAgi
 
                         }
                     }
-                    $sql                = "SELECT company FROM pkg_portabilidade WHERE number = '$ddd' ORDER BY id DESC LIMIT 1";
+                    $sql = "SELECT company FROM pkg_portabilidade WHERE number = '$ddd' ORDER BY id DESC LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelPortabilidade = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                     if (isset($modelPortabilidade->company)) {
@@ -88,6 +89,7 @@ class PortabilidadeAgi
                         } else {
                             $sql = "SELECT company FROM pkg_portabilidade_prefix WHERE number = " . substr($ddd, 0, 6) . " LIMIT 1";
                         }
+                        $agi->verbose($sql, 25);
                         $modelPortabilidade = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                         if (isset($modelPortabilidade->company)) {

@@ -69,6 +69,9 @@ class BuyCreditController extends Controller
         }
 
         $modelMethodPay = Methodpay::model()->findByPK((int) $_GET['id_method']);
+        if ( ! isset($modelMethodPay->id)) {
+            exit;
+        }
 
         $plan_parts = explode(' ', $modelPlan->name);
         if (is_numeric(end($plan_parts))) {

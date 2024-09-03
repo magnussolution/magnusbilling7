@@ -137,7 +137,8 @@ class CallbackAgi
 
         $user = $MAGNUS->modelUser->username;
 
-        $sql              = "SELECT * FROM pkg_sip WHERE id_user = " . $DidAgi->modelDestination[0]['id_user'] . " LIMIT 1";
+        $sql = "SELECT * FROM pkg_sip WHERE id_user = " . $DidAgi->modelDestination[0]['id_user'] . " LIMIT 1";
+        $agi->verbose($sql, 25);
         $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if ( ! isset($MAGNUS->modelSip->id)) {
@@ -208,7 +209,8 @@ class CallbackAgi
             $idPrefix         = $agi->get_variable("IDPREFIX", true);
             $called           = $agi->get_variable("CALLED", true);
 
-            $sql                 = "SELECT * FROM pkg_sip WHERE id_user = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
+            $sql = "SELECT * FROM pkg_sip WHERE id_user = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $MAGNUS->sip_account = $MAGNUS->modelSip->name;
 
@@ -219,6 +221,7 @@ class CallbackAgi
 
                 //desconto 1 minuto assim que o cliente atende a chamada
                 $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($sell30)) . " WHERE id = '$MAGNUS->id_user' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
                 $sessiontime1fsLeg = 30;
@@ -243,10 +246,12 @@ class CallbackAgi
                 $buycost     = ($buycost / 60) * $sessiontime;
 
                 $sql = "UPDATE pkg_cdr SET sessiontime = '$sessiontime', sessionbill = '$sell', buycost = '$buycost', calledstation = '$called' WHERE id = '$CalcAgi->idCallCallBack' LIMIT 1 ";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
                 $sql = "UPDATE pkg_user SET credit = credit - $MAGNUS->round_precision(abs($selltNew))
                             WHERE id = $MAGNUS->modelUser->id LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
             }
@@ -268,15 +273,18 @@ class CallbackAgi
         $work   = $MAGNUS->checkIVRSchedule($DidAgi->modelDid->TimeOfDay_monFri, $DidAgi->modelDid->TimeOfDay_sat, $DidAgi->modelDid->TimeOfDay_sun);
         $status = $work != 'open' ? 4 : 1;
 
-        $sql           = "SELECT * FROM pkg_callback WHERE exten = '$callerID' AND status IN (1,4) AND id_did = " . $DidAgi->modelDestination[0]['id_did'] . " LIMIT 1 ";
+        $sql = "SELECT * FROM pkg_callback WHERE exten = '$callerID' AND status IN (1,4) AND id_did = " . $DidAgi->modelDestination[0]['id_did'] . " LIMIT 1 ";
+        $agi->verbose($sql, 25);
         $modelCallBack = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if (isset($modelCallBack->id)) {
             $sql = "UPDATE pkg_callback SET status = '$status' WHERE id = $modelCallBack->id LIMIT 1";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
         } else {
             $sql = "INSERT INTO pkg_callback (id_did,exten, id_user, status, entry_time) VALUES ('" . $DidAgi->modelDestination[0]['id_did'] . "',
                     '$callerID','" . $DidAgi->modelDestination[0]['id_user'] . "', $status, '" . date('Y-m-d H:i:s') . "')";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
         }
 
