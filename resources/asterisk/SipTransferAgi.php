@@ -30,7 +30,8 @@ class SipTransferAgi
             $MAGNUS->agiconfig['cid_enable']     = 0;
             $MAGNUS->agiconfig['say_timetocall'] = 0;
             if (strlen($MAGNUS->CallerID) < 6) {
-                $sql       = "SELECT * FROM pkg_cdr WHERE uniqueid = '$MAGNUS->uniqueid' AND starttime = '" . date("Y-m-d") . "' ";
+                $sql = "SELECT * FROM pkg_cdr WHERE uniqueid = '$MAGNUS->uniqueid' AND starttime = '" . date("Y-m-d") . "' ";
+                $agi->verbose($sql, 25);
                 $modelCall = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (isset($modelCall->id)) {
                     $MAGNUS->CallerID = $modelCall->calledstation;

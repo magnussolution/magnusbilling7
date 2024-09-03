@@ -36,7 +36,8 @@ class DidAgi
     {
 
         if (strlen($MAGNUS->accountcode) > 3) {
-            $sql                              = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' LIMIT 1";
+            $sql = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' LIMIT 1";
+            $agi->verbose($sql, 25);
             $this->did_voip_model             = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $this->did_voip_model_sip_account = $MAGNUS->sip_account;
         }
@@ -51,7 +52,8 @@ class DidAgi
         $mydnid = $MAGNUS->config['global']['did_ignore_zero_on_did'] == 1 && substr($MAGNUS->dnid, 0, 1) == '0' ? substr($MAGNUS->dnid, 1) : $MAGNUS->dnid;
 
         if ($MAGNUS->config['global']['apply_local_prefix_did_sip'] == 1) {
-            $sql          = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' AND active = 1 LIMIT 1";
+            $sql = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "' AND active = 1 LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelDidUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelDidUser->prefix_local) && strlen($modelDidUser->prefix_local) > 2) {
                 $MAGNUS->prefix_local = $modelDidUser->prefix_local;
@@ -61,11 +63,13 @@ class DidAgi
         }
 
         $agi->verbose('Check If Is Did ' . $mydnid, 10);
-        $sql            = "SELECT * FROM pkg_did WHERE did = '$mydnid' AND activated = 1 LIMIT 1";
+        $sql = "SELECT * FROM pkg_did WHERE did = '$mydnid' AND activated = 1 LIMIT 1";
+        $agi->verbose($sql, 25);
         $this->modelDid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($this->modelDid->id)) {
             $agi->verbose("Is a DID call", 5);
-            $sql                    = "SELECT * FROM pkg_did_destination WHERE id_did = '" . $this->modelDid->id . "' ORDER BY priority";
+            $sql = "SELECT * FROM pkg_did_destination WHERE id_did = '" . $this->modelDid->id . "' ORDER BY priority";
+            $agi->verbose($sql, 25);
             $this->modelDestination = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
             if (isset($this->did_voip_model->record_call) && $this->did_voip_model->record_call == 1) {
@@ -79,20 +83,23 @@ class DidAgi
                 $agi->set_variable("RECORD_CALL_DID", $MAGNUS->record_call);
                 $agi->set_variable('DID_NUMBER', $this->did);
 
-                $sql               = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
+                $sql = "SELECT * FROM pkg_user WHERE id = " . $this->modelDid->id_user . " LIMIT 1";
+                $agi->verbose($sql, 25);
                 $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 if ($this->id_prefix == 0) {
 
                     $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('" . $this->did . "',1,length(prefix))
                                     ORDER BY LENGTH(prefix) DESC";
+                    $agi->verbose($sql, 25);
                     $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     if ( ! isset($modelPrefix->id)) {
                         $agi->verbose('Not found prefix to DID ' . $this->did);
                     }
                     $CalcAgi->id_prefix = $modelPrefix->id;
 
-                    $sql              = "SELECT * FROM pkg_trunk WHERE trunkcode = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                    $sql = "SELECT * FROM pkg_trunk WHERE trunkcode = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelTrunk       = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     $MAGNUS->id_trunk = isset($modelTrunk->id) ? $modelTrunk->id : null;
                 } else {
@@ -131,7 +138,8 @@ class DidAgi
 
                 if (isset($MAGNUS->modelUser->inbound_call_limit) && $MAGNUS->modelUser->inbound_call_limit > 0) {
 
-                    $sql         = "SELECT * FROM pkg_did WHERE id_user = " . $MAGNUS->modelUser->id;
+                    $sql = "SELECT * FROM pkg_did WHERE id_user = " . $MAGNUS->modelUser->id;
+                    $agi->verbose($sql, 25);
                     $modelDIDAll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
                     $asmanager   = new AGI_AsteriskManager();
                     $asmanager->connect('localhost', 'magnus', 'magnussolution');
@@ -193,7 +201,8 @@ class DidAgi
         //if DID option charge of was = 0 only allow call from existent callerid
         if ($this->modelDid->charge_of == 0) {
 
-            $sql           = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID'  AND activated = 1 LIMIT 1";
+            $sql = "SELECT * FROM pkg_callerid WHERE cid = '$MAGNUS->CallerID'  AND activated = 1 LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelCallerId = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelCallerId->id)) {
                 $agi->verbose('found callerid, new user = ' . $MAGNUS->modelUser->username . ' ' . $this->sell_price);
@@ -227,7 +236,8 @@ class DidAgi
                 return;
             }
         } else if ($agi->get_variable("ISFROMCALLBACKPRO", true)) {
-            $sql              = "SELECT * FROM pkg_callback WHERE id = '" . $agi->get_variable("IDCALLBACK", true) . "' LIMIT 1";
+            $sql = "SELECT * FROM pkg_callback WHERE id = '" . $agi->get_variable("IDCALLBACK", true) . "' LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelCallback    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $MAGNUS->CallerID = $modelCallback->exten;
             $agi->set_callerid($MAGNUS->CallerID);
@@ -296,6 +306,7 @@ class DidAgi
             $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
             "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $MAGNUS->id_trunk . ") AND " . $prefixclause .
                 "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
             $sessiontime         = time() - $this->startCall;
@@ -324,6 +335,7 @@ class DidAgi
 
             $sql = "UPDATE pkg_callback SET status = 3, last_attempt_time = '" . date('Y-m-d H:i:s') . "', sessiontime = $sessiontime
                         WHERE id = " . $agi->get_variable("IDCALLBACK", true);
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
 
             $MAGNUS->hangup($agi);
@@ -379,7 +391,8 @@ class DidAgi
                 /* IF SIP CALL*/
                 if ($inst_listdestination['voip_call'] == 1) {
                     $agi->verbose("DID destination type SIP user ", 6);
-                    $sql              = "SELECT * FROM pkg_sip WHERE id = " . $inst_listdestination['id_sip'] . " LIMIT 1";
+                    $sql = "SELECT * FROM pkg_sip WHERE id = " . $inst_listdestination['id_sip'] . " LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $MAGNUS->modelSip = $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                     if (isset($modelSip->id)) {
@@ -410,7 +423,8 @@ class DidAgi
                 /* Call to group*/
                 else if ($inst_listdestination['voip_call'] == 8) {
                     $agi->verbose("DID destination type SIP group ", 6);
-                    $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '" . $inst_listdestination['destination'] . "'";
+                    $sql = "SELECT * FROM pkg_sip WHERE sip_group = '" . $inst_listdestination['destination'] . "'";
+                    $agi->verbose($sql, 25);
                     $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
                     $agi->verbose("Call group $group ", 6);
                     if ( ! isset($modelSip[0]->id)) {
@@ -473,7 +487,8 @@ class DidAgi
                         //CODIFICA O TESTO DO SMS
                         $text = urlencode($text);
 
-                        $sql        = "SELECT link_sms, removeprefix, trunkprefix FROM pkg_trunk WHERE trunkcode = '$trunk' LIMIT 1";
+                        $sql = "SELECT link_sms, removeprefix, trunkprefix FROM pkg_trunk WHERE trunkcode = '$trunk' LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                         //retiro e adiciono os prefixos do tronco
@@ -605,6 +620,7 @@ class DidAgi
 
                         $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $CalcAgi->answeredtime
                                 WHERE id = " . $this->modelDestination[0]['id'] . " LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $agi->exec($sql);
 
                         /* THEN STATUS IS ANSWER*/
@@ -630,6 +646,7 @@ class DidAgi
                         '$id_trunk','$MAGNUS->CallerID', 'DID Call',
                         '" . date('Y-m-d H:i:s') . "', '0','3','$CalcAgi->id_prefix','0'";
             $sql = "INSERT INTO pkg_cdr_failed ($fields) VALUES ($values) ";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
             return 1;
         }
@@ -854,6 +871,7 @@ class DidAgi
                     WHERE  id = " . $this->modelDestination[0]['id'] . " LIMIT 1;
                 UPDATE pkg_did SET secondusedreal = secondusedreal + $answeredtime
                     WHERE  id = " . $this->modelDid->id . " LIMIT 1";
+        $agi->verbose($sql, 25);
         $agi->exec($sql);
 
         if (isset($this->did_voip_model->id)) {

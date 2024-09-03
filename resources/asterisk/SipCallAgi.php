@@ -25,7 +25,8 @@ class SipCallAgi
         }
         $dialparams = implode(',', $dialparams);
 
-        $sql               = "SELECT * FROM pkg_user WHERE id = " . $MAGNUS->modelSip->id_user . " LIMIT 1";
+        $sql = "SELECT * FROM pkg_user WHERE id = " . $MAGNUS->modelSip->id_user . " LIMIT 1";
+        $agi->verbose($sql, 25);
         $MAGNUS->modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if ($MAGNUS->modelSip->record_call == 1) {
             $record_call = 1;
@@ -61,7 +62,8 @@ class SipCallAgi
 
         if ( ! preg_match('/^CANCEL|^ANSWER/', strtoupper($dialstatus))) {
 
-            $sql             = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->destination' LIMIT 1 ";
+            $sql = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->destination' LIMIT 1 ";
+            $agi->verbose($sql, 25);
             $modelSipForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelSipForward->id) && strlen($modelSipForward->forward) > 3) {
                 SipCallAgi::callForward($MAGNUS, $agi, $CalcAgi, $modelSipForward);
@@ -69,7 +71,8 @@ class SipCallAgi
             }
         }
 
-        $sql               = "SELECT voicemail FROM pkg_sip WHERE name = '$MAGNUS->destination' LIMIT 1 ";
+        $sql = "SELECT voicemail FROM pkg_sip WHERE name = '$MAGNUS->destination' LIMIT 1 ";
+        $agi->verbose($sql, 25);
         $modelSipVoiceMail = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($modelSipForward->id)) {
             $MAGNUS->voicemail = $modelSipVoiceMail->voicemail;
@@ -124,8 +127,9 @@ class SipCallAgi
         if ($optionType == 'sip') // SIP
         {
             $agi->verbose('Sip call', 25);
-            $insertCDR        = true;
-            $sql              = "SELECT name, callerid,id_user,dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
+            $insertCDR = true;
+            $sql       = "SELECT name, callerid,id_user,dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $MAGNUS->dnid = $MAGNUS->destination = $MAGNUS->sip_account = $MAGNUS->modelSip->name;
@@ -134,7 +138,8 @@ class SipCallAgi
         } else if ($optionType == 'group') // CUSTOM
         {
             $agi->verbose("Call to group " . $optionValue, 1);
-            $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
+            $sql = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
+            $agi->verbose($sql, 25);
             $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
             if ( ! isset($modelSip[0]->id)) {
@@ -180,7 +185,8 @@ class SipCallAgi
             $dialstatus = $CalcAgi->sessiontime > 0 ? 'ANSWER' : 'DONTCALL';
         } else if (preg_match("/^number/", $optionType)) //envia para um fixo ou celular
         {
-            $sql                 = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
+            $sql = "SELECT * FROM pkg_user WHERE id = $modelSipForward->id_user  LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelUserForward    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $MAGNUS->CallerID    = $modelSipForward->callerid;
             $MAGNUS->accountcode = $modelUserForward->accountcode;
@@ -216,6 +222,7 @@ class SipCallAgi
                             WHERE prefix = SUBSTRING(999$destination,1,length(prefix)) and pkg_plan.id= " . $MAGNUS->modelUser->id_plan . "
                             ORDER BY LENGTH(prefix) DESC";
 
+        $agi->verbose($sql, 25);
         $modelRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         $agi->verbose($sql, 1);
 
@@ -227,11 +234,13 @@ class SipCallAgi
         } else if ($modelRate[0]['trunk_group_type'] == 3) {
             $sql = "SELECT *, (SELECT buyrate FROM pkg_rate_provider WHERE id_provider = tr.id_provider AND id_prefix = " . $modelRate->id_prefix . " LIMIT 1) AS buyrate  FROM pkg_trunk_group_trunk t  JOIN pkg_trunk tr ON t.id_trunk = tr.id WHERE id_trunk_group = " . $modelRate->id_trunk_group . " ORDER BY buyrate IS NULL , buyrate ";
         }
+        $agi->verbose($sql, 25);
         $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
         $agi->verbose($sql, 1);
 
         foreach ($modelTrunks as $key => $trunk) {
-            $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
+            $sql = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if ($modelTrunk->credit_control == 1 && $modelTrunk->credit <= 0) {

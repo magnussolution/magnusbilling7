@@ -91,24 +91,29 @@
 
         $dtmf = $res_dtmf["result"];
 
-        $sql          = "SELECT * FROM pkg_voucher WHERE voucher = '$dtmf' AND used = 0 LIMIT 1";
+        $sql = "SELECT * FROM pkg_voucher WHERE voucher = '$dtmf' AND used = 0 LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelVoucher = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($modelVoucher->id)) {
             $agi->verbose("Found valid voucher Number $modelVoucher->voucher");
 
-            $sql       = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "'";
+            $sql = "SELECT * FROM pkg_user WHERE username = '" . $MAGNUS->accountcode . "'";
+            $agi->verbose($sql, 25);
             $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($modelUser->id)) {
 
                 $sql = "UPDATE pkg_voucher SET id_user = $modelUser->id, usedate = NOW(), used = 1 WHERE voucher = '$modelVoucher->voucher' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
                 $sql = "UPDATE pkg_user SET credit = credit + " . $modelVoucher->credit . " WHERE username = '" . $modelUser->username . "' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
                 $values = "" . $modelUser->id . ",'" . $modelVoucher->credit . "','Voucher " . $modelVoucher->voucher . ". Old credit " . $modelUser->credit . "',1";
                 $sql    = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES ($values)";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
                 $prompt = "prepaid-final";
 
@@ -130,7 +135,8 @@
     }
 
     if ($agi->get_variable("IDCALLBACK", true)) {
-        $sql      = "SELECT callerid FROM pkg_sip WHERE id_user = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
+        $sql = "SELECT callerid FROM pkg_sip WHERE id_user = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($modelSip->callerid)) {
             $agi->set_callerid($modelSip->callerid);
@@ -148,12 +154,14 @@
 
     if ($agi->get_variable("MEMBERNAME", true) || $agi->get_variable("QUEUEPOSITION", true)) {
 
-        $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = (SELECT accountcode FROM pkg_sip WHERE name = '" . substr($agi->get_variable("MEMBERNAME", true), 4) . "') ) LIMIT 1";
+        $sql = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = (SELECT accountcode FROM pkg_sip WHERE name = '" . substr($agi->get_variable("MEMBERNAME", true), 4) . "') ) LIMIT 1";
+        $agi->verbose($sql, 25);
         $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($MAGNUS->modelSip->id) && strlen($MAGNUS->modelSip->name) > 3) {
 
             if ($MAGNUS->dnid == $MAGNUS->modelSip->alias) {
-                $sql              = "SELECT alias FROM pkg_sip WHERE name = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                $sql = "SELECT alias FROM pkg_sip WHERE name = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelSipCallerID = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (strlen($modelSipCallerID->alias)) {
                     $agi->set_callerid($modelSipCallerID->alias);
@@ -210,10 +218,12 @@
             $agi->stream_file('prepaid-secondCall', '#');
             $MAGNUS->agiconfig['use_dnid'] = 1;
             $sql                           = "SELECT * FROM pkg_user WHERE id = " . $agi->get_variable("IDUSER", true) . " LIMIT 1";
-            $MAGNUS->modelUser             = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            $MAGNUS->accountcode           = isset($MAGNUS->modelUser->username) ? $MAGNUS->modelUser->username : null;
+            $agi->verbose($sql, 25);
+            $MAGNUS->modelUser   = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $MAGNUS->accountcode = isset($MAGNUS->modelUser->username) ? $MAGNUS->modelUser->username : null;
 
-            $sql                 = "SELECT * FROM pkg_sip WHERE name = '" . $MAGNUS->dnid . "'  OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
+            $sql = "SELECT * FROM pkg_sip WHERE name = '" . $MAGNUS->dnid . "'  OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelSip    = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             $MAGNUS->sip_account = $MAGNUS->modelSip->name;
 
@@ -228,14 +238,16 @@
                 $agi->verbose(25, "Get account code from trasnfered DID");
                 $MAGNUS->accountcode = $agi->get_variable("DIDACCOUNTCODE", true);
             }
-            $sql              = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
+            $sql = "SELECT * FROM pkg_sip WHERE name = '$MAGNUS->dnid' OR (alias = '$MAGNUS->dnid' AND accountcode = '$MAGNUS->accountcode') LIMIT 1";
+            $agi->verbose($sql, 25);
             $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             if (isset($MAGNUS->modelSip->id) && strlen($MAGNUS->modelSip->name) > 3) {
 
                 if ($MAGNUS->dnid == $MAGNUS->modelSip->alias) {
                     //find the caller alias set callerid
-                    $sql              = "SELECT alias FROM pkg_sip WHERE name = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                    $sql = "SELECT alias FROM pkg_sip WHERE name = '" . $MAGNUS->sip_account . "' LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelSipCallerID = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     if (strlen($modelSipCallerID->alias)) {
                         $agi->set_callerid($modelSipCallerID->alias);
@@ -260,7 +272,8 @@
                 if ($MAGNUS->config['global']['use_sip_to_iax'] == 1) {
                     require_once 'IaxCallAgi.php';
 
-                    $sql     = "SELECT * FROM pkg_iax WHERE name = '$MAGNUS->dnid'  LIMIT 1";
+                    $sql = "SELECT * FROM pkg_iax WHERE name = '$MAGNUS->dnid'  LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modeIax = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     if (isset($modeIax->id) && strlen($modeIax->name) > 3) {
                         $MAGNUS->destination = $MAGNUS->dnid = $modeIax->name;

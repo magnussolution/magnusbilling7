@@ -31,7 +31,8 @@ class IvrAgi
 
         $MAGNUS->destination = $DidAgi->modelDid->did;
 
-        $sql      = "SELECT *, pkg_ivr.id id, pkg_ivr.id_user id_user FROM pkg_ivr LEFT JOIN pkg_user ON pkg_ivr.id_user = pkg_user.id WHERE pkg_ivr.id = " . $DidAgi->modelDestination[0]['id_ivr'] . " LIMIT 1";
+        $sql = "SELECT *, pkg_ivr.id id, pkg_ivr.id_user id_user FROM pkg_ivr LEFT JOIN pkg_user ON pkg_ivr.id_user = pkg_user.id WHERE pkg_ivr.id = " . $DidAgi->modelDestination[0]['id_ivr'] . " LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelIvr = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         $username        = $modelIvr->username;
@@ -41,7 +42,8 @@ class IvrAgi
         $work = $MAGNUS->checkIVRSchedule($modelIvr->monFriStart, $modelIvr->satStart, $modelIvr->sunStart);
 
         if ($modelIvr->use_holidays == 1) {
-            $sql           = "SELECT * FROM pkg_holidays  WHERE day = '" . date('Y-m-d') . "' LIMIT 1";
+            $sql = "SELECT * FROM pkg_holidays  WHERE day = '" . date('Y-m-d') . "' LIMIT 1";
+            $agi->verbose($sql, 25);
             $modelHolidays = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
             if (isset($modelHolidays->id)) {
                 $work = 'closed';
@@ -74,14 +76,16 @@ class IvrAgi
             $wait_time     = 3000;
 
             if ($modelIvr->direct_extension == 1) {
-                $sql            = "SELECT name FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " AND name REGEXP '^[0-9]*$' ORDER BY LENGTH(name) DESC LIMIT 1";
+                $sql = "SELECT name FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " AND name REGEXP '^[0-9]*$' ORDER BY LENGTH(name) DESC LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelSipDirect = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 if (isset($modelSipDirect->name)) {
                     $digit_timeout       = strlen($modelSipDirect->name);
                     $wait_time           = 6000;
                     $is_direct_extention = true;
                 } else {
-                    $sql                 = "SELECT alias FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " ORDER BY LENGTH(alias) DESC LIMIT 1";
+                    $sql = "SELECT alias FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " ORDER BY LENGTH(alias) DESC LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelSipDirect      = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     $digit_timeout       = strlen($modelSipDirect->alias);
                     $wait_time           = 6000;
@@ -107,7 +111,8 @@ class IvrAgi
             } else if (isset($is_direct_extention) && $is_direct_extention == 1 && strlen($option) > 1) {
                 $agi->verbose('Dial to expecific SIP ACCOUNT', 5);
 
-                $sql      = "SELECT name, dial_timeout FROM pkg_sip WHERE name = '$option' OR (alias = '$option' AND id_user = " . $MAGNUS->id_user . ")  LIMIT 1";
+                $sql = "SELECT name, dial_timeout FROM pkg_sip WHERE name = '$option' OR (alias = '$option' AND id_user = " . $MAGNUS->id_user . ")  LIMIT 1";
+                $agi->verbose($sql, 25);
                 $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                 if (isset($modelSip->name)) {
@@ -129,9 +134,10 @@ class IvrAgi
                     $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
                     $MAGNUS->run_dial($agi, $dialstr);
 
-                    $dialstatus      = $agi->get_variable("DIALSTATUS");
-                    $dialstatus      = $dialstatus['data'];
-                    $sql             = "SELECT * FROM pkg_sip WHERE name = '$modelSip->name' LIMIT 1";
+                    $dialstatus = $agi->get_variable("DIALSTATUS");
+                    $dialstatus = $dialstatus['data'];
+                    $sql        = "SELECT * FROM pkg_sip WHERE name = '$modelSip->name' LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelSipForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     if (strlen($modelSipForward->forward) > 3 && $dialstatus != 'CANCEL' && $dialstatus != 'ANSWER') {
                         $agi->verbose(" SIP HAVE callForward " . $modelSip->name);
@@ -167,7 +173,7 @@ class IvrAgi
                 $data          = explode('_', $type);
                 $idPhonenumber = $data[1];
                 $sql           = "UPDATE pkg_phonenumber SET info = CONCAT(info,'|IVR " . $modelIvr->name . " DTMF " . $option . " at " . date('Y-m-d H:i:s') . "') WHERE id = $idPhonenumber LIMIT 1";
-                $agi->verbose($sql, 1);
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
             }
 
@@ -179,7 +185,8 @@ class IvrAgi
                     $agi->verbose('Sip call, active insertCDR', 25);
                     $insertCDR = true;
                     $sql       = "SELECT name, dial_timeout FROM pkg_sip WHERE id = $optionValue LIMIT 1";
-                    $modelSip  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+                    $agi->verbose($sql, 25);
+                    $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                     $dialparams = $dialparams = $MAGNUS->agiconfig['dialcommand_param_sipiax_friend'];
                     $dialparams = str_replace("%timeout%", 3600, $dialparams);
@@ -198,9 +205,10 @@ class IvrAgi
                     $agi->set_variable("CALLERID(num)", $MAGNUS->CallerID);
                     $MAGNUS->run_dial($agi, $dialstr, $dialparams);
 
-                    $dialstatus      = $agi->get_variable("DIALSTATUS");
-                    $dialstatus      = $dialstatus['data'];
-                    $sql             = "SELECT * FROM pkg_sip WHERE name = '$modelSip->name' LIMIT 1";
+                    $dialstatus = $agi->get_variable("DIALSTATUS");
+                    $dialstatus = $dialstatus['data'];
+                    $sql        = "SELECT * FROM pkg_sip WHERE name = '$modelSip->name' LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelSipForward = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     if (strlen($modelSipForward->forward) > 3 && $dialstatus != 'CANCEL' && $dialstatus != 'ANSWER') {
                         $agi->verbose(" SIP HAVE callForward " . $modelSip->name);
@@ -223,7 +231,8 @@ class IvrAgi
                 } else if ($optionType == 'group') // CUSTOM
                 {
                     $agi->verbose("Call to group " . $optionValue, 1);
-                    $sql      = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
+                    $sql = "SELECT * FROM pkg_sip WHERE sip_group = '$optionValue'";
+                    $agi->verbose($sql, 25);
                     $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                     if ( ! isset($modelSip[0]->id)) {
@@ -268,7 +277,8 @@ class IvrAgi
                 {
                     $insertCDR = false;
                     $agi->verbose("CALL number $optionValue");
-                    $sql              = "SELECT * FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " LIMIT 1";
+                    $sql = "SELECT * FROM pkg_sip WHERE id_user = " . $MAGNUS->id_user . " LIMIT 1";
+                    $agi->verbose($sql, 25);
                     $modelSIPCallerid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                     $MAGNUS->CallerID = isset($modelSIPCallerid->callerid) ? $modelSIPCallerid->callerid : $MAGNUS->CallerID;
                     $agi->set_callerid($MAGNUS->CallerID);

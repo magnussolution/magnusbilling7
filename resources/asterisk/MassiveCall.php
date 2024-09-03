@@ -40,6 +40,7 @@ class MassiveCall
         $agi->answer();
 
         $sql = "UPDATE pkg_campaign_report SET status = 3 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+        $agi->verbose($sql, 25);
         $agi->exec($sql);
 
         if ($agi->get_variable("STARTTIME", true) && $agi->get_variable("STARTTIME", true) > 1) {
@@ -53,14 +54,16 @@ class MassiveCall
             $MAGNUS->hangup($agi);
         }
 
-        $sql           = "SELECT *, pkg_campaign.id AS id, pkg_campaign.id_user AS id_user, pkg_campaign.description AS description, pkg_campaign.record_call AS record_call FROM pkg_campaign LEFT JOIN pkg_user ON pkg_campaign.id_user = pkg_user.id WHERE pkg_campaign.id = $idCampaign LIMIT 1";
+        $sql = "SELECT *, pkg_campaign.id AS id, pkg_campaign.id_user AS id_user, pkg_campaign.description AS description, pkg_campaign.record_call AS record_call FROM pkg_campaign LEFT JOIN pkg_user ON pkg_campaign.id_user = pkg_user.id WHERE pkg_campaign.id = $idCampaign LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelCampaign = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if ( ! isset($modelCampaign->id)) {
             $agi->verbose($idCampaign . ' campaing not exist');
             return;
         }
-        $sql              = "SELECT * FROM pkg_phonenumber WHERE id = $idPhonenumber LIMIT 1";
+        $sql = "SELECT * FROM pkg_phonenumber WHERE id = $idPhonenumber LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelPhoneNumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if ( ! isset($modelPhoneNumber->id)) {
             $agi->verbose($idPhonenumber . ' number not exist');
@@ -72,14 +75,17 @@ class MassiveCall
             $agi->verbose(date("Y-m-d H:i:s") . " => " . $MAGNUS->dnid . ': amd_status ' . $amd_status . ", hangup call", 5);
 
             $sql = "UPDATE pkg_campaign_report SET status = 4 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
 
             $sql = "UPDATE pkg_phonenumber SET status = 5, info = '" . $agi->get_variable("AMDCAUSE", true) . "' WHERE id = $idPhonenumber LIMIT 1";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
 
         } else {
 
             $sql = "UPDATE pkg_phonenumber SET status = 3 WHERE id = $idPhonenumber LIMIT 1";
+            $agi->verbose($sql, 25);
             $agi->exec($sql);
 
             $forward_number = $modelCampaign->forward_number;
@@ -98,14 +104,16 @@ class MassiveCall
                 $res_dtmf['result'] = $res[3];
 
                 /*VERIFICA SE CAMPAÃ‘A TEM ENCUESTA*/
-                $sql               = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
+                $sql = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
+                $agi->verbose($sql, 25);
                 $modelCampaignPoll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
                 $forward_number    = "";
 
             } else {
 
                 /*VERIFICA SE CAMPAÃ‘A TEM ENCUESTA*/
-                $sql               = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
+                $sql = "SELECT * FROM pkg_campaign_poll WHERE id_campaign = $idCampaign";
+                $agi->verbose($sql, 25);
                 $modelCampaignPoll = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                 if (isset($modelCampaign->audio_2) && strlen($modelPhoneNumber->name) > 3 && (strlen($modelCampaign->audio_2) > 5) || strlen($modelCampaign->tts_audio2) > 2) {
@@ -214,9 +222,11 @@ class MassiveCall
             if (strlen($forward_number) > 2 && (($res_dtmf['result'] == $modelCampaign->digit_authorize) || ($res_dtmf['result'] >= 0 && strlen($res_dtmf['result']) > 0 && $modelCampaign->digit_authorize == -2) || $modelCampaign->digit_authorize == -3)) {
                 $agi->verbose("have Forward number $forward_number");
                 $sql = "UPDATE pkg_phonenumber SET info = 'Forward DTMF " . $res_dtmf['result'] . " at " . date('Y-m-d H:i:s') . "' WHERE id = $idPhonenumber LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
                 $sql = "UPDATE pkg_campaign_report SET status = 7 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
                 $chanStatus = $agi->channel_status($MAGNUS->channel);
@@ -232,7 +242,8 @@ class MassiveCall
 
                     if ($forwardOptionType == 'sip') {
 
-                        $sql      = "SELECT name FROM pkg_sip WHERE id = $forwardOption[1] LIMIT 1";
+                        $sql = "SELECT name FROM pkg_sip WHERE id = $forwardOption[1] LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                         $dialstr = 'SIP/' . $modelSip->name;
@@ -277,7 +288,8 @@ class MassiveCall
                     } elseif ($forwardOptionType == 'group') {
 
                         $agi->verbose("Call group " . $forwardOption[1], 25);
-                        $sql      = "SELECT name FROM pkg_sip WHERE `sip_group` = '" . $forwardOption[1] . "'";
+                        $sql = "SELECT name FROM pkg_sip WHERE `sip_group` = '" . $forwardOption[1] . "'";
+                        $agi->verbose($sql, 25);
                         $modelSip = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                         if (isset($modelSip[0]) == 0) {
@@ -330,7 +342,7 @@ class MassiveCall
                             LEFT JOIN pkg_trunk_group ON pkg_trunk_group.id = pkg_rate.id_trunk_group
                             WHERE prefix = SUBSTRING(999$destination,1,length(prefix)) and pkg_plan.id= " . $modelCampaign->id_plan . "
                             ORDER BY LENGTH(prefix) DESC";
-
+                            $agi->verbose($sql, 25);
                             $modelRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                             $agi->verbose($sql, 1);
 
@@ -342,11 +354,13 @@ class MassiveCall
                             } else if ($modelRate[0]['trunk_group_type'] == 3) {
                                 $sql = "SELECT *, (SELECT buyrate FROM pkg_rate_provider WHERE id_provider = tr.id_provider AND id_prefix = " . $modelRate->id_prefix . " LIMIT 1) AS buyrate  FROM pkg_trunk_group_trunk t  JOIN pkg_trunk tr ON t.id_trunk = tr.id WHERE id_trunk_group = " . $modelRate->id_trunk_group . " ORDER BY buyrate IS NULL , buyrate ";
                             }
+                            $agi->verbose($sql, 25);
                             $modelTrunks = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
                             $agi->verbose($sql, 1);
 
                             foreach ($modelTrunks as $key => $trunk) {
-                                $sql        = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
+                                $sql = "SELECT *, pkg_trunk.id id  FROM pkg_trunk JOIN pkg_provider ON id_provider = pkg_provider.id WHERE pkg_trunk.id = " . $trunk->id_trunk . " LIMIT 1";
+                                $agi->verbose($sql, 25);
                                 $modelTrunk = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                                 if ($modelTrunk->credit_control == 1 && $modelTrunk->credit <= 0) {
@@ -400,6 +414,7 @@ class MassiveCall
 
             } else if (is_numeric($res_dtmf['result'])) {
                 $sql = "UPDATE pkg_campaign_report SET status = 4 WHERE id_phonenumber = $idPhonenumber AND id_campaign = $idCampaign ORDER BY id DESC LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
             } else {
                 $MAGNUS->sip_account = $MAGNUS->username;
@@ -476,7 +491,8 @@ class MassiveCall
 
                         $agi->verbose("Cliente votou na opcao: $dtmf_result", 5);
 
-                        $sql   = "SELECT * FROM pkg_campaign_poll WHERE name = '" . $poll->{'option' . $dtmf_result} . "' AND id_campaign = $idCampaign";
+                        $sql = "SELECT * FROM pkg_campaign_poll WHERE name = '" . $poll->{'option' . $dtmf_result} . "' AND id_campaign = $idCampaign";
+                        $agi->verbose($sql, 25);
                         $poll2 = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
                         if (isset($poll2[0]->id)) {
@@ -484,6 +500,7 @@ class MassiveCall
                             $fields = "id_campaign_poll,resposta,number,city,resposta_text";
                             $values = "'$poll->id', '$dtmf_result', '$destination', '$phonenumberCity','" . strtok($poll->{'option' . $dtmf_result}, '#') . "'";
                             $sql    = "INSERT INTO pkg_campaign_poll_info ($fields) VALUES ($values)";
+                            $agi->verbose($sql, 25);
                             $agi->exec($sql);
 
                             $execute_poll_name = $poll2[0];
@@ -518,7 +535,8 @@ class MassiveCall
                                 if (is_numeric($dtmf_result)) {
                                     $agi->verbose("dtmf_result es numerico ", 8);
 
-                                    $sql               = "SELECT option" . $dtmf_result . " as resposta_option FROM pkg_campaign_poll WHERE id = $poll->id LIMIT 1";
+                                    $sql = "SELECT option" . $dtmf_result . " as resposta_option FROM pkg_campaign_poll WHERE id = $poll->id LIMIT 1";
+                                    $agi->verbose($sql, 25);
                                     $modelCampaignPoll = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                                     $agi->verbose('$i' . $i . " " . $repeat, 25);
@@ -576,6 +594,7 @@ class MassiveCall
 
                             $sql = "INSERT INTO pkg_campaign_poll_info (id_campaign_poll,resposta,number,city ) VALUES
                              (  $poll->id, '$dtmf_result', '$destination', '$phonenumberCity') ";
+                            $agi->verbose($sql, 25);
                             $agi->exec($sql);
 
                             break;
@@ -596,20 +615,23 @@ class MassiveCall
 
                             $sql = "INSERT INTO pkg_campaign_poll_info (id_campaign_poll,resposta,number,city ) VALUES
                              (  $poll->id, '$dtmf_result', '$destination', '$phonenumberCity') ";
+                            $agi->verbose($sql, 25);
                             $agi->exec($sql);
 
                             break;
 
                         } elseif (preg_match('/create/', $poll->{'option' . $dtmf_result})) {
 
-                            $sql       = "SELECT * FROM pkg_plan WHERE signup = 1 LIMIT 1";
+                            $sql = "SELECT * FROM pkg_plan WHERE signup = 1 LIMIT 1";
+                            $agi->verbose($sql, 25);
                             $modelPlan = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
                             if (isset($modelPlan->id)) {
 
-                                $id_plan         = $modelPlan->id;
-                                $credit          = $modelPlan->ini_credit;
-                                $sql             = "SELECT * FROM pkg_group_user WHERE id_user_type = 3 LIMIT 1";
+                                $id_plan = $modelPlan->id;
+                                $credit  = $modelPlan->ini_credit;
+                                $sql     = "SELECT * FROM pkg_group_user WHERE id_user_type = 3 LIMIT 1";
+                                $agi->verbose($sql, 25);
                                 $modelGroupUser  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                                 $id_group        = $modelGroupUser->id;
                                 $password        = Util::generatePassword(8, true, true, true, false);
@@ -621,7 +643,7 @@ class MassiveCall
                                 $values = "'$destination', '$password', '1', '$id_plan', '$credit', '$id_group',
                                     '1', '$prefix_local', '$callingcard_pin', '', 0";
                                 $sql = "INSERT INTO pkg_user ($fields) VALUES ($values)";
-
+                                $agi->verbose($sql, 25);
                                 if ($agi->exec($sql)) {
 
                                     $fields = "id_user,accountcode,name,allow,host,insecure,defaultuser,secret";
@@ -629,6 +651,7 @@ class MassiveCall
                                             'g729,gsm,g726,alaw,ulaw', 'dynamic', 'no',
                                             '$destination', '$password'";
                                     $sql = "INSERT INTO pkg_user ($fields) VALUES ($values)";
+                                    $agi->verbose($sql, 25);
                                     $agi->exec($sql);
                                 }
 
@@ -641,6 +664,7 @@ class MassiveCall
                             $fields = "id_campaign_poll,resposta,number,city,resposta_text";
                             $values = "'$poll->id', '$dtmf_result', '$destination', '$phonenumberCity','" . strtok($poll->{'option' . $dtmf_result}, '#') . "'";
                             $sql    = "INSERT INTO pkg_campaign_poll_info ($fields) VALUES ($values)";
+                            $agi->verbose($sql, 25);
                             $agi->exec($sql);
 
                             if (preg_match('/SIP|sip/', $poll->{'option' . $res_dtmf['result']})) {
@@ -674,7 +698,8 @@ class MassiveCall
                 $agi->stream_file('prepaid-final', ' #');
             }
         }
-        $sql       = "SELECT * FROM pkg_rate WHERE id = $idRate LIMIT 1";
+        $sql = "SELECT * FROM pkg_rate WHERE id = $idRate LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelRate = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         if ( ! isset($modelRate->id)) {
@@ -693,6 +718,7 @@ class MassiveCall
         $sql = "SELECT * FROM pkg_rate_provider t  JOIN pkg_prefix p ON t.id_prefix = p.id WHERE " .
             "id_provider = ( SELECT id_provider FROM pkg_trunk WHERE id = " . $id_trunk . ") AND " . $prefixclause .
             "ORDER BY LENGTH( prefix ) DESC LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelRateProvider = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
         /*buy rate*/
@@ -758,6 +784,7 @@ class MassiveCall
                 $status = $modelCampaign->secondusedreal < 1 ? 0 : 1;
                 $sql    = "UPDATE pkg_campaign SET status = $status, secondusedreal = secondusedreal -1
                         WHERE id = $modelCampaign->id LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
 
             }
@@ -769,6 +796,7 @@ class MassiveCall
                     "LEFT JOIN pkg_prefix ON pkg_rate_agent.id_prefix=pkg_prefix.id " .
                     "WHERE $prefixclause AND " .
                     "pkg_plan.id= $MAGNUS->id_plan_agent ORDER BY LENGTH(prefix) DESC LIMIT 3";
+                $agi->verbose($sql, 25);
                 $MAGNUS->modelRateAgent = $agi->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
                 $result[0]['package_offer'] = $MAGNUS->modelRateAgent[0]['package_offer'];

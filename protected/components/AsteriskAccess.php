@@ -669,6 +669,8 @@ class AsteriskAccess
 
     public function generateSipPeers()
     {
+        ini_set('memory_limit', '-1');
+
         $modelSip = Sip::model()->findAll();
 
         $buddyfile = '/etc/asterisk/sip_magnus_user.conf';
@@ -677,7 +679,7 @@ class AsteriskAccess
         $subscriber     = '[subscribe]';
 
         $voicemailFile = '/etc/asterisk/voicemail_magnus.conf';
-        LinuxAccess::exec('touch ' . $registerFile);
+        LinuxAccess::exec('touch ' . $voicemailFile);
         $fr_voicemail = fopen($voicemailFile, "w");
         $voicemail    = "[billing]\n";
 

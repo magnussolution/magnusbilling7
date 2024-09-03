@@ -12,11 +12,11 @@ class GroupUserController extends Controller
     public $titleReport             = 'GroupUser';
     public $subTitleReport          = 'GroupUser';
     public $nameModelRelated        = 'GroupModule';
-    public $extraFieldsRelated      = array('show_menu', 'action', 'id_module', 'createShortCut', 'createQuickStart');
-    public $extraValuesOtherRelated = array('idModule' => 'text');
+    public $extraFieldsRelated      = ['show_menu', 'action', 'id_module', 'createShortCut', 'createQuickStart'];
+    public $extraValuesOtherRelated = ['idModule' => 'text'];
     public $nameFkRelated           = 'id_group';
     public $nameOtherFkRelated      = 'id_module';
-    public $extraValues             = array('idUserType' => 'name');
+    public $extraValues             = ['idUserType' => 'name'];
 
     public $filterByUser = false;
 
@@ -32,7 +32,7 @@ class GroupUserController extends Controller
     {
 
         $modelGroupUserGroup = GroupUserGroup::model()->find('id_group_user = :key',
-            array(':key' => Yii::app()->session['id_group']));
+            [':key' => Yii::app()->session['id_group']]);
 
         if (isset($modelGroupUserGroup->id)) {
             $filter .= ' AND t.id IN (SELECT id_group FROM pkg_group_user_group WHERE id_group_user = ' . Yii::app()->session['id_group'] . ') ';
@@ -45,14 +45,14 @@ class GroupUserController extends Controller
         $filter       = isset($_POST['filter']) ? $_POST['filter'] : null;
         $this->filter = $filter ? $this->createCondition(json_decode($filter)) : $this->defaultFilter;
 
-        $modelGroupUser = $this->abstractModel->find(array(
+        $modelGroupUser = $this->abstractModel->find([
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
-        ));
+        ]);
 
-        echo json_encode(array(
-            $this->nameRoot => $modelGroupUser->id_user_type == 1 ? true : false,
-        ));
+        echo json_encode([
+            $this->nameRoot => iseet($modelGroupUser->id_user_type) && $modelGroupUser->id_user_type == 1 ? true : false,
+        ]);
     }
 
     public function actionIndex()
@@ -60,24 +60,24 @@ class GroupUserController extends Controller
         $filter       = isset($_POST['filter']) ? $_POST['filter'] : null;
         $this->filter = $filter ? $this->createCondition(json_decode($filter)) : $this->defaultFilter;
         //AND t.id_user_type = 2
-        $modelGroupUser = $this->abstractModel->findAll(array(
+        $modelGroupUser = $this->abstractModel->findAll([
             'condition' => $this->filter,
             'params'    => $this->paramsFilter,
-        ));
-        $ids = array();
+        ]);
+        $ids = [];
 
         foreach ($modelGroupUser as $value) {
             $ids[] = $value->id;
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameRoot => $ids,
-        ));
+        ]);
     }
 
     public function actionClone()
     {
-        if (!Yii::app()->session['isAdmin']) {
+        if ( ! Yii::app()->session['isAdmin']) {
             exit;
         }
 
@@ -91,7 +91,7 @@ class GroupUserController extends Controller
                 $this->instanceModel->save();
                 $newGroupId = $this->instanceModel->id;
 
-                $modelGroupModule = $this->abstractModelRelated->findAll('id_group = :key', array(':key' => $modelGroupUser->id));
+                $modelGroupModule = $this->abstractModelRelated->findAll('id_group = :key', [':key' => $modelGroupUser->id]);
                 foreach ($modelGroupModule as $groupModule) {
                     $modelGroupModuleNew             = new GroupModule();
                     $modelGroupModuleNew->attributes = $groupModule->getAttributes();
@@ -111,9 +111,9 @@ class GroupUserController extends Controller
             }
 
         }
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => $success,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
     }
 }

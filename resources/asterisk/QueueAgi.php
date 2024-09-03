@@ -31,6 +31,7 @@ class QueueAgi
         $sql = "SELECT  *, pkg_queue.id AS id, pkg_queue.id_user AS id_user , pkg_user.id_user AS id_agent FROM pkg_queue
                             LEFT JOIN pkg_user ON pkg_queue.id_user = pkg_user.id
                             WHERE pkg_queue.id = " . $DidAgi->modelDestination[0]['id_queue'] . " LIMIT 1 ";
+        $agi->verbose($sql, 25);
         $modelQueue = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         $agi->set_variable("UNIQUEID", $MAGNUS->uniqueid);
@@ -44,6 +45,7 @@ class QueueAgi
         $sql = "INSERT INTO pkg_queue_status (id_queue, callId, queue_name, callerId, time, channel, status)
                         VALUES (" . $modelQueue->id . ", '" . $MAGNUS->uniqueid . "', '$queueName', '" . $MAGNUS->CallerID . "',
                         '" . date('Y-m-d H:i:s') . "', '" . $MAGNUS->channel . "', 'ringing')";
+        $agi->verbose($sql, 25);
         $agi->exec($sql);
 
         $ring_or_moh = $modelQueue->ring_or_moh == 'ring' ? 'r' : '';
@@ -63,7 +65,8 @@ class QueueAgi
                 $destination = $data[1];
                 switch ($actionType) {
                     case 'SIP':
-                        $sql              = "SELECT * FROM pkg_sip WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $sql = "SELECT * FROM pkg_sip WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $MAGNUS->modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                         $MAGNUS->dnid     = $MAGNUS->destination     = $MAGNUS->sip_account     = $MAGNUS->modelSip->name;
                         $callToSip        = SipCallAgi::processCall($MAGNUS, $agi, $CalcAgi, 'fromqueue');
@@ -72,19 +75,22 @@ class QueueAgi
                         }
                         break;
                     case 'QUEUE':
-                        $sql                                     = "SELECT * FROM pkg_queue WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $sql = "SELECT * FROM pkg_queue WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $modelQueue                              = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                         $DidAgi->modelDestination[0]['id_queue'] = $modelQueue->id;
                         $MAGNUS->stopRecordCall($agi);
 
                         $sql = "DELETE FROM pkg_queue_status WHERE callId = " . $MAGNUS->uniqueid;
+                        $agi->verbose($sql, 25);
                         $agi->exec($sql);
 
                         QueueAgi::callQueue($agi, $MAGNUS, $CalcAgi, $DidAgi);
                         $noCDR = true;
                         break;
                     case 'IVR':
-                        $sql                                   = "SELECT * FROM pkg_ivr WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $sql = "SELECT * FROM pkg_ivr WHERE UPPER(name) = '" . $destination . "' LIMIT 1";
+                        $agi->verbose($sql, 25);
                         $modelIrv                              = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                         $DidAgi->modelDestination[0]['id_ivr'] = $modelIrv->id;
                         IvrAgi::callIvr($agi, $MAGNUS, $CalcAgi, $DidAgi, 'queue');
@@ -101,6 +107,7 @@ class QueueAgi
         $MAGNUS->stopRecordCall($agi);
 
         $sql = "DELETE FROM pkg_queue_status WHERE callId = " . $MAGNUS->uniqueid;
+        $agi->verbose($sql, 25);
         $agi->exec($sql);
 
         $stopTime = time();
@@ -131,6 +138,7 @@ class QueueAgi
 
             $sql = "SELECT id FROM pkg_prefix WHERE prefix = SUBSTRING('$MAGNUS->destination',1,length(prefix))
                                 ORDER BY LENGTH(prefix) DESC  ";
+            $agi->verbose($sql, 25);
             $modelPrefix = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $MAGNUS->id_user           = $modelQueue->id_user;
@@ -153,6 +161,7 @@ class QueueAgi
             if (isset($DidAgi->modelDid->id)) {
                 $sql = "UPDATE pkg_did_destination SET secondusedreal = secondusedreal + $CalcAgi->sessiontime
                                 WHERE id = " . $DidAgi->modelDid->id . " LIMIT 1";
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
             }
 
@@ -180,7 +189,8 @@ class QueueAgi
         $MAGNUS->record_call = $agi->get_variable("RECORD_CALL_DID", true);
         $did                 = $agi->get_variable("DID_NUMBER", true);
 
-        $sql      = "SELECT id_user, mohsuggest FROM pkg_sip WHERE name = '$operator' LIMIT 1";
+        $sql = "SELECT id_user, mohsuggest FROM pkg_sip WHERE name = '$operator' LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelSip = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
         if (isset($modelSip->mohsuggest) && strlen($modelSip->mohsuggest) > 1) {
             $agi->execute('SetMusicOnHold', $modelSip->mohsuggest);
@@ -188,11 +198,13 @@ class QueueAgi
 
         $sql = "UPDATE pkg_queue_status SET status = 'answered', agentName = '$operator' ,
                     holdtime = '$holdtime'  WHERE callId = '$MAGNUS->uniqueid' ";
+        $agi->verbose($sql, 25);
         $agi->exec($sql);
 
         $agi->verbose("\n\n" . $MAGNUS->uniqueid . " $operator answer the call from QUEUE \n\n", 6);
 
-        $sql       = "SELECT mix_monitor_format FROM pkg_user WHERE id = $modelSip->id_user LIMIT 1";
+        $sql = "SELECT mix_monitor_format FROM pkg_user WHERE id = $modelSip->id_user LIMIT 1";
+        $agi->verbose($sql, 25);
         $modelUser = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         $MAGNUS->mix_monitor_format = $modelUser->mix_monitor_format;
@@ -209,7 +221,8 @@ class QueueAgi
     public function pauseQueue($agi, $MAGNUS)
     {
 
-        $sql        = "SELECT * FROM pkg_queue_member WHERE interface = 'SIP/" . $MAGNUS->sip_account . "'";
+        $sql = "SELECT * FROM pkg_queue_member WHERE interface = 'SIP/" . $MAGNUS->sip_account . "'";
+        $agi->verbose($sql, 25);
         $modelQueue = $agi->query($sql)->fetchAll(PDO::FETCH_OBJ);
         if (isset($modelQueue[0])) {
             $asmanager = new AGI_AsteriskManager();
@@ -230,6 +243,7 @@ class QueueAgi
                     $asmanager->command($command);
                     $agi->stream_file('agent-loggedoff', '#');
                 }
+                $agi->verbose($sql, 25);
                 $agi->exec($sql);
             }
         }
