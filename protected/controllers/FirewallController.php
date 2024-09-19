@@ -36,7 +36,7 @@ class FirewallController extends Controller
 
         $this->getLinesCommand('asterisk-iptables', 0);
         $this->getLinesCommand('ip-blacklist', 1);
-        if ($this->getLinesCommand('ssh-iptables', 0) == false) {
+        if ($this->getLinesCommand('sshd', 0) == false) {
             $this->getLinesCommand('sshd', 0);
 
         }
@@ -64,7 +64,7 @@ class FirewallController extends Controller
                             $obs = $this->readLogMBilling($ip);
                         } elseif ($command == 'ip-blacklist') {
                             $obs = 'Permanently IP BlackList';
-                        } elseif ($command == 'ssh-iptables') {
+                        } elseif ($command == 'sshd') {
                             $obs = 'Try connect via ssh';
                         } elseif ($command == 'asterisk-iptables') {
                             $obs = $this->readLogAsterisk($ip);
@@ -256,7 +256,7 @@ class FirewallController extends Controller
 
                 @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . $result[0]['ip']);
 
-                @LinuxAccess::exec("sudo fail2ban-client set ssh-iptables unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . $result[0]['ip']);
             } elseif ($result[0]['action'] == 1) {
                 $sql     = "DELETE FROM pkg_firewall WHERE ip = :ip";
                 $command = Yii::app()->db->createCommand($sql);
@@ -265,7 +265,7 @@ class FirewallController extends Controller
 
                 @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . $result[0]['ip']);
 
-                @LinuxAccess::exec("sudo fail2ban-client set ssh-iptables unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . $result[0]['ip']);
 
                 $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
                 $result = Yii::app()->db->createCommand($sql)->queryAll();
