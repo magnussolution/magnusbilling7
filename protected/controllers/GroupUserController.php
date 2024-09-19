@@ -51,7 +51,7 @@ class GroupUserController extends Controller
         ]);
 
         echo json_encode([
-            $this->nameRoot => iseet($modelGroupUser->id_user_type) && $modelGroupUser->id_user_type == 1 ? true : false,
+            $this->nameRoot => isset($modelGroupUser->id_user_type) && $modelGroupUser->id_user_type == 1 ? true : false,
         ]);
     }
 
