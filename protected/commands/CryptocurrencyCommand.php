@@ -40,6 +40,10 @@ class CryptocurrencyCommand extends CConsoleCommand
             $command = 'python3.9 /var/www/html/mbilling/protected/commands/crypto.py ' . $modelMethodPay->client_id . ' ' . $modelMethodPay->client_secret . ' ' . $payment->currency . ' ' . $last_30_minutes;
             //Yii::log($command, 'error');
             exec($command, $result);
+            if ( ! isset($result[0])) {
+                $command = 'python3 /var/www/html/mbilling/protected/commands/crypto.py ' . $modelMethodPay->client_id . ' ' . $modelMethodPay->client_secret . ' ' . $payment->currency . ' ' . $last_30_minutes;
+                exec($command, $result);
+            }
             Yii::log(print_r($result, true), 'error');
             $result = implode("\n", $result);
             $result = json_decode($result);
