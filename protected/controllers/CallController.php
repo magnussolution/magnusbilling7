@@ -532,7 +532,7 @@ class CallController extends Controller
                         break;
                     case 'string':
 
-                        if (strlen($value) > 15) {
+                        if (strlen($value) > 25) {
                             echo 'Invalid Filter';
                             exit;
                         }
