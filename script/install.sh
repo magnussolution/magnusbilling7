@@ -174,7 +174,7 @@ if [ ${DIST} = "DEBIAN" ]; then
     apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet  apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 
     apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
     apt-get -y install mariadb-server php-mysql
-    apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep cron
+    apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
 elif  [ ${DIST} = "CENTOS" ]; then
     yum clean all
     yum -y install kernel-devel.`uname -m` epel-release
