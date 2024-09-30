@@ -155,8 +155,8 @@ fi
 if [ ${DIST} = "CENTOS" ]; then
 echo '[mariadb]
 name = MariaDB
-baseurl = https://yum.mariadb.org/10.11/centos7-amd64
-gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+baseurl = http://mirror.mephi.ru/mariadb/yum/10.11/centos7-amd64
+gpgkey=https://mirror.mariadb.org/yum/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 sslverify=0' > /etc/yum.repos.d/MariaDB.repo 
 fi
