@@ -66,23 +66,24 @@ chown -R asterisk:asterisk /etc/asterisk
 chown -R asterisk:asterisk /var/www/html/mbilling
 chown -R asterisk:asterisk /var/lib/asterisk/moh/
 chown -R asterisk:asterisk /var/lib/asterisk/sounds/
-chmod -R 777 /tmp
-chmod -R 555 /var/www/html/mbilling/
-chmod -R 700 /var/www/html/mbilling/resources/reports 
-chmod -R 774 /var/www/html/mbilling/protected/runtime/
-chmod -R 700 /var/www/html/mbilling/lib
 mkdir -p /usr/local/src/magnus
-chmod -R 755 /usr/local/src/magnus
-chmod 774 /var/www/html/mbilling/resources/ip.blacklist
 rm -rf /var/www/html/mbilling/tmp
 mkdir -p /var/www/html/mbilling/tmp
 chown -R asterisk:asterisk /var/www/html/mbilling/tmp
+chmod -R 777 /tmp
+chmod -R 755 /usr/local/src/magnus
+chmod -R 555 /var/www/html/mbilling/
+chmod -R 700 /var/www/html/mbilling/resources/reports 
+chmod -R 774 /var/www/html/mbilling/protected/runtime/
+chmod 774 /var/www/html/mbilling/resources/ip.blacklist
 chmod -R 755 /var/www/html/mbilling/tmp
 chmod -R 700 /var/www/html/mbilling/assets
-chmod -R 700 /var/www/html/mbilling/resources/sounds
 chmod -R 700 /var/www/html/mbilling/resources/images
+echo 'Options -Indexes
+Order Deny,Allow
+Deny from all
+' > /var/www/html/mbilling/assets/.htaccess
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
-chmod -R 555 /var/www/html/mbilling/resources/asterisk/
 /var/www/html/mbilling/protected/commands/clear_memory
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
 	for color in black blue gray orange purple red yellow green
