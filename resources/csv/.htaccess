@@ -1,2 +1,6 @@
-RewriteEngine on
-RewriteRule ^.*$ index.php
+Options -Indexes
+
+<FilesMatch "\.(csv)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
