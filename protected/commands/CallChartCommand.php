@@ -44,18 +44,11 @@ class CallChartCommand extends ConsoleCommand
                 continue;
             }
 
-            print_r($calls);
-            echo "\n\n\n\nSTART ------" . $calls . "\n\n";
+            echo "\n\n\n\nSTART ------\n\n";
 
-            if ($calls == 'old_version') {
-                echo "user core show channels concise\n";
-                sleep(3);
-                $this->use_concise();
-                exit;
-            } else {
-                echo "use cdr show \n\n";
-                $this->user_cdr_show($calls);
-            }
+            echo "use cdr show \n\n";
+            $this->user_cdr_show($calls);
+
         }
     }
 
@@ -185,7 +178,7 @@ class CallChartCommand extends ConsoleCommand
                                     $sip_account = $call[1] = $call[3];
                                 }
                                 if (false !== $key = array_search($sip_account, $this->sipNames)) {
-                                    $modelSip = $this->sips[$key];
+                                    $modelSip = Sip::model()->find('name = :key', [':key' => $this->sips[$key]['name']]);
                                 } else {
                                     continue;
                                 }
@@ -195,14 +188,15 @@ class CallChartCommand extends ConsoleCommand
                                 $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', [':key' => $tech]);
                             }
 
-                            if ( ! count($modelSip)) {
+                            if ( ! isset($modelSip->name)) {
+
                                 if ($status == 'Ring') {
                                     $sip_account = $originate;
                                 }
                                 if (strlen($sip_account) > 3) {
                                     //echo "check per sip_account $originate\n";
                                     if (false !== $key = array_search($originate, $this->sipNames)) {
-                                        $modelSip = $this->sips[$key];
+                                        $modelSip = Sip::model()->find('name = :key', [':key' => $this->sips[$key]['name']]);
                                     }
 
                                 } else if (strlen($accountcode)) {
@@ -213,7 +207,7 @@ class CallChartCommand extends ConsoleCommand
                                         ]);
                                 }
 
-                                if ( ! count($modelSip)) {
+                                if ( ! isset($modelSip->name)) {
 
                                     if (preg_match('/^IAX/', strtoupper($channel))) {
                                         $modelSip = Iax::model()->find('name = :key', [':key' => $originate]);
@@ -406,313 +400,6 @@ class CallChartCommand extends ConsoleCommand
         }
         sleep(4);
 
-    }
-
-    public function use_concise()
-    {
-        for (;;) {
-
-            $modelUserCallShop = User::model()->count('callshop = 1');
-
-            if ($modelUserCallShop > 0) {
-                $callShopIds       = [];
-                $modelUserCallShop = User::model()->findAll('callshop = 1');
-                foreach ($modelUserCallShop as $key => $value) {
-                    $callShopIds[] = $value->id;
-                }
-            }
-
-            $modelCallOnlineChart         = new CallOnlineChart();
-            $modelCallOnlineChart->date   = date('Y-m-d H:i:') . '00';
-            $modelCallOnlineChart->answer = 0;
-            $modelCallOnlineChart->total  = 0;
-            try {
-                $modelCallOnlineChart->save();
-                $totalUp    = $this->totalUpCalls    = 0;
-                $totalCalls = $this->totalCalls = 0;
-            } catch (Exception $e) {
-                $modelCallOnlineChart = CallOnlineChart::model()->find('date = :key', [':key' => date('Y-m-d H:i:') . '00']);
-            }
-
-            if ($modelCallOnlineChart->id > 0) {
-                $callOnlineId = $modelCallOnlineChart->id;
-            } else {
-                $callOnlineId = 0;
-            }
-
-            try {
-                $calls = AsteriskAccess::getCoreShowChannels();
-            } catch (Exception $e) {
-                continue;
-            }
-
-            $total = 0;
-            if (count($calls) > 0) {
-
-                if ($this->debug > 1) {
-
-                    echo '<pre>';
-                    print_r($calls);
-                }
-
-                $sql = [];
-                foreach ($calls as $key => $call) {
-
-                    if (isset($_GET['log'])) {
-                        echo "<br><br>|" . $call[5] . "|<br>";
-                    }
-
-                    $userType = '';
-                    $channel  = $call[0];
-
-                    $status = $call[4];
-                    if ((preg_match("/Congestion/", $status) || preg_match("/Busy/", $status)) ||
-                        (preg_match('/Ring/', $status) && $call[11] > 60)
-                    ) {
-                        AsteriskAccess::instance()->hangupRequest($channel);
-                        continue;
-                    } elseif ($status == 'Ringing') {
-                        continue;
-                    }
-
-                    $account     = explode("-", $channel);
-                    $account     = explode("/", $account[0]);
-                    $sip_account = $account[1];
-
-                    $trunk         = null;
-                    $uniqueid      = $call[13];
-                    $bridgeChannel = $channel[12];
-                    $ndiscado      = $call[2];
-                    $cdr           = $call[11];
-                    $peername      = $call[9];
-                    $originate     = explode("/", substr($channel, 0, strrpos($channel, "-")));
-                    $originate     = $originate[1];
-
-                    if ($call[5] == 'Dial' || $call[5] == 'Mbilling') {
-                        if (isset($_GET['log'])) {
-                            echo '156 ' . $call[5];
-                        }
-
-                        if ($call[8] == 'MC') {
-                            //torpedo
-                            $cdr           = $call[13];
-                            $ndiscado      = $call[2];
-                            $modelCampaing = Campaign::model()->find('name = :key', [':key' => $call[9]]);
-
-                            $id_user = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
-                            $trunk   = "Campaign " . $call[9];
-                        } else {
-
-                            //is the caller leg
-
-                            //verifico quem iniciou a chamada user ou tronco
-
-                            //se é autenticado por techprefix
-                            $config = LoadConfig::getConfig();
-                            $tech   = substr($ndiscado, 0, $config['global']['ip_tech_length']);
-
-                            $modelSip = Sip::model()->find('techprefix = :key AND host != "dynamic" ', [':key' => $tech]);
-                            if ( ! isset($modelSip->id)) {
-                                if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
-                                    $modelSip = Sip::model()->find('name = :key',
-                                        [
-                                            ':key' => $peername,
-                                        ]);
-                                } else {
-                                    $modelSip = Sip::model()->find('name = :key',
-                                        [
-                                            ':key' => $originate,
-                                        ]);
-                                }
-                                if ( ! isset($modelSip->id)) {
-                                    //check if is via IP from proxy
-                                    $callProxy = AsteriskAccess::getCoreShowChannel($channel, null, $call['server']);
-                                    $modelSip  = Sip::model()->find('host = :key', [':key' => $callProxy['X-AUTH-IP']]);
-                                }
-                            }
-
-                            if (isset($modelSip->id)) {
-                                $userType = 'User';
-                            } else {
-                                $resultTrunk = Trunk::model()->find('trunkcode = :key', [':key' => $originate]);
-                                if (isset($resultTrunk->id)) {
-                                    $userType = 'Trunk';
-                                }
-                            }
-
-                            if ( ! isset($userType)) {
-                                //not fount the type call
-                                continue;
-                            } elseif ($userType == 'User') {
-                                $trunk = isset($call[6]) ? $call[6] : 0;
-
-                                if (preg_match("/\&/", $trunk)) {
-                                    $trunk = preg_split("/\&/", $trunk);
-                                    $trunk = explode("/", $trunk[0]);
-
-                                } else if (preg_match("/@/", $trunk)) {
-                                    $trunk    = explode("@", $trunk);
-                                    $trunk    = explode(",", $trunk[1]);
-                                    $trunk[1] = $trunk[0];
-                                } else {
-                                    $trunk = explode("/", $trunk);
-                                }
-
-                                $trunk   = isset($trunk[1]) ? $trunk[1] : 0;
-                                $id_user = $modelSip->id_user;
-
-                            } elseif ($userType == 'Trunk') {
-                                $trunk = $originate . ' DID Call';
-                                //a chamada nao foi atendida ainda
-                                if ($call[12] == '(None)' && $status == 'Ring') {
-                                    $id_user = 'NULL';
-                                } elseif (strlen($call[12]) > 5 || $status == 'Up') {
-                                    //chamada DID foi atendida
-                                    $usernameReceive = explode("/", substr($call[12], 0, strrpos($call[12], "-")));
-                                    $resultUser      = Sip::model()->findAll([
-                                        'select'    => 'pkg_user.id, username',
-                                        'join'      => 'LEFT JOIN pkg_user ON t.id_user = pkg_user.id',
-                                        'condition' => "t.name = '" . $usernameReceive[1] . "'",
-                                    ]);
-                                    if (isset($resultUser[0]['id'])) {
-                                        $id_user = $resultUser[0]['id'];
-                                    } else {
-                                        $modelDid = Did::model()->find('did = :key', [':key' => $call[2]]);
-                                        $id_user  = count($modelDid) ? $modelDid->id_user : null;
-                                    }
-                                }
-
-                            }
-                        }
-                    } elseif ($call[5] == 'AGI') {
-
-                        if ($call[8] == 'MC') {
-                            //torpedo
-                            $cdr           = $call[12];
-                            $ndiscado      = $call['2'];
-                            $modelCampaing = Campaign::model()->find('name = :key', [':key' => $call[9]]);
-
-                            $id_user = isset($modelCampaing->id_user) ? $modelCampaing->id_user : 'NULL';
-                            $trunk   = "Campaign " . $call[9];
-                        } else {
-                            //check if is a DID number
-                            $resultDid = $this->isDid($call[2]);
-                            if (isset($resultDid[0]['id'])) {
-                                $ndiscado = $call['2'];
-                                $id_user  = $resultDid[0]['id_user'];
-
-                                switch ($resultDid[0]['voip_call']) {
-                                    case 2:
-                                        $trunk = $originate . ' IVR';
-                                        break;
-                                    case 3:
-                                        $trunk = $originate . ' CallingCard';
-                                        break;
-                                    case 4:
-                                        $trunk = $originate . ' portalDeVoz';
-                                        break;
-                                    case 4:
-                                        $trunk = $originate . ' CID Callback';
-                                        break;
-                                    case 5:
-                                        $trunk = $originate . ' CID Callback';
-                                        break;
-                                    case 6:
-                                        $trunk = $originate . ' 0800 Callback';
-                                        break;
-                                    default:
-                                        $trunk = $originate . ' DID Call';
-                                        break;
-                                }
-
-                            } else {
-                                $ndiscado = $call['2'];
-                                $id_user  = 'NULL';
-                            }
-                        }
-                    } elseif ($call[5] == 'Queue') {
-                        //check if is a DID number
-                        $resultDid = $this->isDid($call[2]);
-                        if (isset($resultDid[0]['id'])) {
-                            $ndiscado = $call['2'];
-                            $id_user  = $resultDid[0]['id_user'];
-                            $trunk    = $originate . ' Queue ' . substr($call[6], 0, strpos($call[6], ','));
-
-                        } else {
-                            $ndiscado = $call['2'];
-                            $id_user  = 'NULL';
-                        }
-                    } else {
-                        if (isset($_GET['log'])) {
-                            echo '295 ' . $call[5];
-                        }
-                        continue;
-                    }
-
-                    if ( ! is_numeric($id_user) || ! is_numeric($cdr)) {
-                        continue;
-                    }
-
-                    $modelDid = Did::model()->find('did =:key', [':key' => $ndiscado]);
-                    if (isset($modelDid->id)) {
-                        $didChannel = AsteriskAccess::getCoreShowChannel($channel);
-                        // is a DID
-                        if (isset($didChannel['DIALEDPEERNUMBER'])) {
-                            $peername = $didChannel['DIALEDPEERNUMBER'];
-                        }
-
-                    }
-
-                    if (preg_match("/Up/", $status)) {
-                        $totalUp++;
-                    }
-
-                    $totalCalls++;
-
-                    $sql[] = "(NULL, '$uniqueid', '$peername', $id_user, '$channel', '" . utf8_encode($trunk) . "', '$ndiscado', 'NULL', '$status', '$cdr', 'no','no', '" . $call['server'] . "')";
-
-                    if (is_array($callShopIds)) {
-                        if (in_array($modelSip->id_user, $callShopIds)) {
-                            $modelSip->status         = 3;
-                            $modelSip->callshopnumber = $ndiscado;
-                            $modelSip->callshoptime   = $cdr;
-                            $modelSip->save();
-                            $modelSip = null;
-                        }
-                    }
-                }
-
-                if ($totalUp > $this->totalUpCalls) {
-                    $this->totalUpCalls = $totalUp;
-                    echo "totalUp é > total1\n";
-                }
-
-                if ($totalCalls > $this->totalCalls) {
-                    $this->totalCalls = $totalCalls;
-                }
-
-                $modelCallOnlineChart->answer = $this->totalUpCalls;
-                $modelCallOnlineChart->total  = $this->totalCalls;
-                $modelCallOnlineChart->save();
-
-                //echo 'totalUp = ' . $totalUp . ' -> totalCalls = ' . $totalCalls . "\n";
-                //echo 'this->totalUpCalls = ' . $this->totalUpCalls . ' -> this->totalCalls = ' . $this->totalCalls . "\n";
-                CallOnLine::model()->deleteAll();
-
-                $totalUp = $totalCalls = 0;
-
-                if (count($sql) > 0) {
-                    $result = CallOnLine::model()->insertCalls($sql);
-                    if ($this->debug > 1) {
-                        print_r($result);
-                    }
-                }
-            } else {
-                CallOnLine::model()->deleteAll();
-            }
-            sleep(4);
-
-        }
     }
 
     private function isDid()

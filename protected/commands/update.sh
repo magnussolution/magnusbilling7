@@ -31,11 +31,13 @@ get_linux_distribution ()
         HTTP_DIR="/etc/apache2/"
         HTTP_CONFIG=${HTTP_DIR}"apache2.conf"
         MYSQL_CONFIG="/etc/mysql/mariadb.conf.d/50-server.cnf"
+        SERVICE='apache2'
     elif [ -f /etc/redhat-release ]; then
         DIST="CENTOS"
         HTTP_DIR="/etc/httpd/"
         HTTP_CONFIG=${HTTP_DIR}"conf/httpd.conf"
         MYSQL_CONFIG="/etc/my.cnf"
+         SERVICE='httpd'
     else
         DIST="OTHER"
         echo 'Installation does not support your distribution'
@@ -84,6 +86,8 @@ Order Deny,Allow
 Deny from all
 ' > /var/www/html/mbilling/assets/.htaccess
 chmod +x /var/www/html/mbilling/resources/asterisk/mbilling.php
+sed -i "s/AllowOverride None/AllowOverride All/" ${HTTP_CONFIG}
+systemctl reload ${SERVICE}
 /var/www/html/mbilling/protected/commands/clear_memory
 if [[ -e /var/www/html/mbilling/resources/images/lock-screen-background.jpg ]]; then
 	for color in black blue gray orange purple red yellow green

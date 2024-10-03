@@ -323,6 +323,7 @@ AddType application/octet-stream .csv
 </IfModule>
 
 <Directory "/var/www/html">
+    AllowOverride All
     DirectoryIndex index.htm index.html index.php index.php3 default.html index.cgi
 </Directory>
 

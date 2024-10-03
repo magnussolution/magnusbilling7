@@ -6,6 +6,8 @@ rm -rf *202*
 rm -rf asterisk/*202*
 rm -rf httpd/*202*
 rm -rf apache2/*202*
+rm -rf apache2/access.log.*
+rm -rf apache2/error.log.*
 rm -rf asterisk/messages.*
 rm -rf /var/www/html/mbilling/protected/runtime/*.log.*
 
