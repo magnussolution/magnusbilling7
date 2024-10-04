@@ -23,7 +23,6 @@ if [[ -f /var/www/html/mbilling/index.php ]]; then
   echo "This server already has MagnusBilling installed";
   exit;
 fi
-# Linux Distribution CentOS or Debian
 get_linux_distribution ()
 { 
     if [ -f /etc/debian_version ]; then
@@ -31,11 +30,6 @@ get_linux_distribution ()
         HTTP_DIR="/etc/apache2/"
         HTTP_CONFIG=${HTTP_DIR}"apache2.conf"
         MYSQL_CONFIG="/etc/mysql/mariadb.conf.d/50-server.cnf"
-    elif [ -f /etc/redhat-release ]; then
-        DIST="CENTOS"
-        HTTP_DIR="/etc/httpd/"
-        HTTP_CONFIG=${HTTP_DIR}"conf/httpd.conf"
-        MYSQL_CONFIG="/etc/my.cnf"
     else
         DIST="OTHER"
         echo 'Installation does not support your distribution'
@@ -53,11 +47,7 @@ startup_services()
     if [ ${DIST} = "DEBIAN" ]; then
         systemctl restart mysql
         systemctl restart apache2
-        systemctl restart asterisk
-    elif  [ ${DIST} = "CENTOS" ]; then
-        systemctl restart mariadb
-        systemctl restart httpd
-        systemctl restart asterisk    
+        systemctl restart asterisk   
     fi
 }
 
@@ -149,17 +139,7 @@ fi
 touch /root/passwordMysql.log
 echo "$password" > /root/passwordMysql.log 
 
-if  [ ${DIST} = "CENTOS" ]; then
-    sed 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config > borra && mv -f borra /etc/selinux/config
-fi
-if [ ${DIST} = "CENTOS" ]; then
-echo '[mariadb]
-name = MariaDB
-baseurl = https://yum.mariadb.org/10.11/centos7-amd64
-gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1
-sslverify=0' > /etc/yum.repos.d/MariaDB.repo 
-fi
+
 
 if [ ${DIST} = "DEBIAN" ]; then
     apt-get update --allow-releaseinfo-change
@@ -175,18 +155,6 @@ if [ ${DIST} = "DEBIAN" ]; then
     apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
     apt-get -y install mariadb-server php-mysql
     apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
-elif  [ ${DIST} = "CENTOS" ]; then
-    yum clean all
-    yum -y install kernel-devel.`uname -m` epel-release
-    yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-    yum -y install yum-utils gcc.`uname -m` gcc-c++.`uname -m` make.`uname -m` git.`uname -m` wget.`uname -m` bison.`uname -m` openssl-devel.`uname -m` ncurses-devel.`uname -m` doxygen.`uname -m` newt-devel.`uname -m` mlocate.`uname -m` lynx.`uname -m` tar.`uname -m` wget.`uname -m` nmap.`uname -m` bzip2.`uname -m` mod_ssl.`uname -m` speex.`uname -m` speex-devel.`uname -m` unixODBC.`uname -m` unixODBC-devel.`uname -m` libtool-ltdl.`uname -m` sox libtool-ltdl-devel.`uname -m` flex.`uname -m` screen.`uname -m` autoconf automake libxml2.`uname -m` libxml2-devel.`uname -m` sqlite* subversion
-    yum-config-manager --enable remi-php71
-    yum -y install php.`uname -m` php-cli.`uname -m` php-devel.`uname -m` php-gd.`uname -m` php-mbstring.`uname -m` php-pdo.`uname -m` php-xml.`uname -m` php-xmlrpc.`uname -m` php-process.`uname -m` php-posix libuuid uuid uuid-devel libuuid-devel.`uname -m`
-    yum -y install jansson.`uname -m` jansson-devel.`uname -m` unzip.`uname -m` ntp
-    yum -y install mysql mariadb-server  mariadb-devel mariadb php-mysql mysql-connector-odbc
-    yum -y install xmlstarlet libsrtp libsrtp-devel dmidecode gtk2-devel binutils-devel svn libtermcap-devel libtiff-devel audiofile-devel cronie cronie-anacron
-    yum -y install perl perl-libwww-perl perl-LWP-Protocol-https perl-JSON cpan flac libcurl-devel nss
-    yum -y install libpcap-devel autoconf automake git ncurses-devel ssmtp htop
 fi
 
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
@@ -247,75 +215,9 @@ ldconfig
 clear
 
 
-if [ ${DIST} = "CENTOS" ]; then
-cd /usr/src
-git clone https://github.com/irontec/sngrep.git
-cd sngrep
-./bootstrap.sh
-./configure
-make && make install 
-clear
-fi
-
 
 chmod -R 777 /tmp
  
-if [ ${DIST} = "CENTOS" ]; then
-    cd /usr/src
-    wget --no-check-certificate http://magnussolution.com/download/mpg123-1.20.1.tar.bz2
-    tar -xjvf mpg123-1.20.1.tar.bz2
-    cd mpg123-1.20.1
-    ./configure && make && make install
-
-    echo "
-    <IfModule mod_deflate.c>
-      AddOutputFilterByType DEFLATE text/plain
-      AddOutputFilterByType DEFLATE text/html
-      AddOutputFilterByType DEFLATE text/xml
-      AddOutputFilterByType DEFLATE text/css
-      AddOutputFilterByType DEFLATE text/javascript
-      AddOutputFilterByType DEFLATE image/svg+xml
-      AddOutputFilterByType DEFLATE image/x-icon
-      AddOutputFilterByType DEFLATE application/xml
-      AddOutputFilterByType DEFLATE application/xhtml+xml
-      AddOutputFilterByType DEFLATE application/rss+xml
-      AddOutputFilterByType DEFLATE application/javascript
-      AddOutputFilterByType DEFLATE application/x-javascript
-      DeflateCompressionLevel 9
-      BrowserMatch ^Mozilla/4 gzip-only-text/html
-      BrowserMatch ^Mozilla/4\.0[678] no-gzip
-      BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-      BrowserMatch \bOpera !no-gzip
-      DeflateFilterNote Input instream
-      DeflateFilterNote Output outstream
-      DeflateFilterNote Ratio ratio
-      LogFormat '\"%r\" %{outstream}n/%{instream}n (%{ratio}n%%)' deflate
-    </IfModule>
-    " >> /etc/httpd/conf.d/deflate.conf
-
-    echo "
-    <IfModule mod_expires.c>
-     ExpiresActive On
-     ExpiresByType image/jpg \"access plus 60 days\"
-     ExpiresByType image/png \"access plus 60 days\"
-     ExpiresByType image/gif \"access plus 60 days\"
-     ExpiresByType image/jpeg \"access plus 60 days\"
-     ExpiresByType text/css \"access plus 1 days\"
-     ExpiresByType image/x-icon \"access plus 1 month\"
-     ExpiresByType application/pdf \"access plus 1 month\"
-     ExpiresByType audio/x-wav \"access plus 1 month\"
-     ExpiresByType audio/mpeg \"access plus 1 month\"
-     ExpiresByType video/mpeg \"access plus 1 month\"
-     ExpiresByType video/mp4 \"access plus 1 month\"
-     ExpiresByType video/quicktime \"access plus 1 month\"
-     ExpiresByType video/x-ms-wmv \"access plus 1 month\"
-     ExpiresByType application/x-shockwave-flash \"access 1 month\"
-     ExpiresByType text/javascript \"access plus 1 week\"
-     ExpiresByType application/x-javascript \"access plus 1 week\"
-     ExpiresByType application/javascript \"access plus 1 week\"
-    </IfModule>
-    " >> /etc/httpd/conf.d/expire.conf
-fi
 
 echo '
 <IfModule mime_module>
@@ -365,15 +267,14 @@ sed -i "s/max_execution_time = 30/max_execution_time = 90/" ${PHP_INI}
 sed -i "s/max_input_time = 60/max_input_time = 120/" ${PHP_INI}
 sed -i '/date.timezone/s/= .*/= '$phptimezone'/' ${PHP_INI}
 sed -i "s/session.cookie_secure = 1/" ${PHP_INI}
-if [ ${DIST} = "CENTOS" ]; then
-    sed -i "s/User apache/User asterisk/" ${HTTP_CONFIG}
-    sed -i "s/Group apache/Group asterisk/" ${HTTP_CONFIG}
-elif [ ${DIST} = "DEBIAN" ]; then
-    sed -i 's/User ${APACHE_RUN_USER}/User asterisk/' ${HTTP_CONFIG}
-    sed -i 's/Group ${APACHE_RUN_GROUP}/Group asterisk/' ${HTTP_CONFIG}
-    mkdir -p /var/www/html
-    sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' ${HTTP_CONFIG}
-fi; 
+
+sed -i 's/User ${APACHE_RUN_USER}/User asterisk/' ${HTTP_CONFIG}
+sed -i 's/Group ${APACHE_RUN_GROUP}/Group asterisk/' ${HTTP_CONFIG}
+sed -i "s/memory_limit = 16M/memory_limit = 512M /" /etc/php/8.1/apache2/php.ini
+sed -i "s/memory_limit = 128M/memory_limit = 512M /" /etc/php/8.1/apache2/php.ini
+mkdir -p /var/www/html
+sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' ${HTTP_CONFIG}
+
 
 echo
 echo "----------- Create mysql password: Your mysql root password is $password ----------"
@@ -397,24 +298,6 @@ fi
 mysql -uroot -e "SET PASSWORD FOR 'root'@localhost = PASSWORD('${password}'); FLUSH PRIVILEGES;"
 
 
-
-if [ ${DIST} = "CENTOS" ]; then
-echo "
-[mysqld]
-join_buffer_size = 128M
-sort_buffer_size = 2M
-read_rnd_buffer_size = 2M
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-secure-file-priv = ''
-symbolic-links=0
-sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
-max_connections = 500
-[mysqld_safe]
-log-error=/var/log/mariadb/mariadb.log
-pid-file=/var/run/mariadb/mariadb.pid
-" > ${MYSQL_CONFIG}
-elif [ ${DIST} = "DEBIAN" ]; then
 echo "
 [server]
 
@@ -450,7 +333,7 @@ open_files_limit=500000
 
 [mariadb-10.1]
 " > ${MYSQL_CONFIG}
-fi;
+
 
 
 startup_services
@@ -460,10 +343,8 @@ echo
 echo '----------- Installing the Web Interface ----------'
 echo
 sleep 2
-if [ ${DIST} = "DEBIAN" ]; then
-    rm -rf /var/www/html/index.html
-fi;
 
+rm -rf /var/www/html/index.html
 cd  /var/www/html/mbilling/resources/images/
 rm -rf lock-screen-background.jpg
 wget --no-check-certificate https://magnusbilling.org/download/lock-screen-background.jpg
@@ -737,11 +618,9 @@ echo '
 * hard sigpending unlimited' >> /etc/security/limits.conf
 
 
-if [ ${DIST} = "DEBIAN" ]; then
-    CRONPATH='/var/spool/cron/crontabs/root'
-elif [ ${DIST} = "CENTOS" ]; then
-    CRONPATH='/var/spool/cron/root'
-fi
+
+CRONPATH='/var/spool/cron/crontabs/root'
+
 
 echo "
 8 8 * * * php /var/www/html/mbilling/cron.php servicescheck
@@ -828,23 +707,7 @@ systemctl daemon-reload
 
 install_fail2ban()
 {
-  if [ ${DIST} = "CENTOS" ]; then
-    yum install -y iptables-services
-    yum install -y fail2ban
-    systemctl mask firewalld.service
-    systemctl enable iptables.service
-    systemctl enable ip6tables.service
-    systemctl stop firewalld.service
-    systemctl start iptables.service
-    systemctl start ip6tables.service
-    systemctl enable iptables
-    systemctl stop firewalld
-    chkconfig --levels 123456 firewalld off
-  fi      
-  if [ ${DIST} = "DEBIAN" ]; then
     apt-get -y install fail2ban
-  fi 
-      
 }
 
 
@@ -991,7 +854,6 @@ bantime   = -1
 
 
 
-if [ ${DIST} = "DEBIAN" ]; then
 echo "
 [sshd]
 enablem=true
@@ -1004,25 +866,7 @@ action   = iptables-allports[name=mbilling_ddos, port=all, protocol=all]
 logpath  = /var/log/apache2/error.log
 maxretry = 20
 bantime = 3600" >> /etc/fail2ban/jail.local
-elif [ ${DIST} = "CENTOS" ]; then
-echo "
-[ssh-iptables]
-enabled  = true
-filter   = sshd
-action   = iptables-allports[name=SSH, port=all, protocol=all]
-logpath  = /var/log/secure
-maxretry = 3
-bantime = 600
 
-[mbilling_ddos]
-enabled  = true
-filter   = mbilling_ddos
-action   = iptables-allports[name=mbilling_ddos, port=all, protocol=all]
-logpath  = /var/log/httpd/error_log
-maxretry = 20
-bantime = 3600
- " >> /etc/fail2ban/jail.local
-fi
 
 
 
@@ -1046,9 +890,7 @@ messages => notice,warning,error
 magnus => debug
 " > /etc/asterisk/logger.conf
 
-if [ ${DIST} = "CENTOS" ]; then  
-  cp -rf /tmp/fail2ban/build/fail2ban.service /usr/lib/systemd/system/fail2ban.service
-fi
+
 
 mkdir /var/run/fail2ban/
 asterisk -rx "module reload logger"
