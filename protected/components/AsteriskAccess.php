@@ -496,9 +496,6 @@ class AsteriskAccess
 
             $linesCallsResult = explode("\n", $data['data']);
 
-            if ($linesCallsResult[1] != 'magnus') {
-                return 'old_version';
-            }
             for ($i = 5; $i < count($linesCallsResult) - 1; $i++) {
                 $call = explode("|", $linesCallsResult[$i]);
                 if ($call[4] == 'Down') {
