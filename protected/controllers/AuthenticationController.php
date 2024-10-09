@@ -166,6 +166,10 @@ class AuthenticationController extends Controller
             MagnusLog::insertLOG(1, 'Username Login on the panel - User ' . Yii::app()->session['username']);
         }
 
+        if (isset($_REQUEST['securityLogin'])) {
+            header("Location: ../../../");
+        }
+
         if (isset($_REQUEST['remote'])) {
             header("Location: ../..");
         }

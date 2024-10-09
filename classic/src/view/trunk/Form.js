@@ -265,11 +265,13 @@ Ext.define('MBilling.view.trunk.Form', {
                     allowBlank: true,
                     emptyText: t('Replace %number% and %text% on the provider URL- Ex: http://website.com/sms.php?username=USER&pass=PASS&number=%number%&msg=%text%'),
                     height: 60,
-                    anchor: '100%'
+                    anchor: '100%',
+                    hidden: true
                 }, {
                     name: 'sms_res',
                     fieldLabel: t('SMS match result'),
-                    allowBlank: true
+                    allowBlank: true,
+                    hidden: true
                 }]
             }, {
                 title: t('Asterisk extra config'),
