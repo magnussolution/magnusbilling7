@@ -33,8 +33,8 @@ class PlacetoPayController extends Controller
 
             echo $rest['requestId'];
 
-            $modelRefill = Refill::model()->find('invoice_number = :key', array('key' => $rest['requestId']));
-            if (count($modelRefill)) {
+            $modelRefill = Refill::model()->find('invoice_number = :key', ['key' => $rest['requestId']]);
+            if (isset($modelRefill->id)) {
 
                 if ($rest['status']['status'] == 'APPROVED') {
                     $description = 'Recarga PlaceToPay <font color=green>Aprobada</font>. Referencia: ' . $rest['reference'];

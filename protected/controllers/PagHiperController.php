@@ -45,7 +45,7 @@ class PagHiperController extends Controller
             'params'    => $params,
         ]);
 
-        if ( ! count($modelMethodpay)) {
+        if ( ! isset($modelMethodpay->id)) {
             Yii::log(print_r('Not found paghiper method', true), 'error');
             exit;
         }
@@ -158,7 +158,7 @@ class PagHiperController extends Controller
                             ':key'     => $id_user]
                     );
 
-                    if (count($modelUser) && Refill::model()->countRefill($transacaoID, $modelUser->id) == 0) {
+                    if (isset($modelUser->id) && Refill::model()->countRefill($transacaoID, $modelUser->id) == 0) {
                         Yii::log('teste liberar credito=' . $modelUser->id, 'error');
                         UserCreditManager::releaseUserCredit($modelUser->id, $monto, $description, 1, $transacaoID);
                     }

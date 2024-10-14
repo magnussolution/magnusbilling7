@@ -338,7 +338,7 @@ class CampaignController extends Controller
 
         $modelCampaign = $this->abstractModel->findByPk((int) $id_campaign);
 
-        if ( ! count($campaignResult)) {
+        if ( ! isset($campaignResult->id)) {
 
             if ($modelCampaign->status == 0) {
                 echo json_encode([
@@ -400,7 +400,7 @@ class CampaignController extends Controller
             $modelCampaignPhonebook = CampaignPhonebook::model()->findAll('id_campaign = :key',
                 [':key' => $id_campaign]);
 
-            if ( ! count($modelCampaignPhonebook)) {
+            if ( ! isset($modelCampaignPhonebook->id)) {
                 echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Please select one o more phonebook',
@@ -418,7 +418,7 @@ class CampaignController extends Controller
             $criteria->addInCondition('id', $ids_phone_books);
             $modelPhoneBook = PhoneBook::model()->findAll($criteria);
 
-            if ( ! count($modelPhoneBook)) {
+            if ( ! isset($modelPhoneBook[0])) {
                 echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Campaign Not have phonebook',
@@ -432,7 +432,7 @@ class CampaignController extends Controller
             $criteria->params[':key'] = 1;
             $modelPhoneBook           = PhoneBook::model()->findAll($criteria);
 
-            if ( ! count($modelPhoneBook)) {
+            if ( ! isset($modelPhoneBook[0])) {
                 echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Campaign Not have phonebook',
@@ -447,7 +447,7 @@ class CampaignController extends Controller
             $criteria->params[':key'] = 1;
             $modelPhoneNumber         = PhoneNumber::model()->findAll($criteria);
 
-            if ( ! count($modelPhoneNumber)) {
+            if ( ! isset($modelPhoneNumber[0])) {
                 echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'The phonebook not have numbers or not have active numbers',
@@ -462,7 +462,7 @@ class CampaignController extends Controller
                 $criteria->params[':key1'] = date('Y-m-d H:i:s');
                 $modelPhoneNumber          = PhoneNumber::model()->find($criteria);
 
-                if ( ! count($modelPhoneNumber)) {
+                if ( ! isset($modelPhoneNumber[0])) {
                     echo json_encode([
                         $this->nameSuccess => false,
                         $this->nameMsg     => 'There are active numbers but the start time is in the future',
@@ -499,7 +499,7 @@ class CampaignController extends Controller
                 $modelRate = Rate::model()->find($criteria);
             }
 
-            if ( ! count($modelRate)) {
+            if ( ! isset($modelRate->id)) {
                 echo json_encode([
                     $this->nameSuccess => false,
                     $this->nameMsg     => 'Not existe the prefix 999 to send SMS',

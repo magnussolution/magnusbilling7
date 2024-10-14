@@ -216,7 +216,7 @@ class BDServiceCommand extends CConsoleCommand
                         ':key1' => $sendCredit->id_user,
                     ]);
 
-                if ( ! count($modelRefill)) {
+                if ( ! isset($modelRefill->id)) {
                     continue;
                 }
                 $message = explode("SUCCESS: ", $result);
@@ -260,7 +260,7 @@ class BDServiceCommand extends CConsoleCommand
                 $sendCredit->save();
 
                 $modelRefill = Refill::model()->find('invoice_number = :key', [':key' => $sendCredit->id]);
-                if (count($modelRefill)) {
+                if (isset($modelRefill->id)) {
                     $modelRefill->description = $modelRefill->description . '. Ref: ' . $result;
                     $modelRefill->save();
                 }

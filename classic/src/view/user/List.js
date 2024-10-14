@@ -10,6 +10,8 @@ Ext.define('MBilling.view.user.List', {
     fieldSearch: 'username',
     initComponent: function() {
         var me = this;
+        me.buttonCsv = false;
+        me.allowPrint = false;
         me.extraButtons = [{
             text: t('Bulk user'),
             handler: 'onBulk',

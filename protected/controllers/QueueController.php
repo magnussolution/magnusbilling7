@@ -106,7 +106,7 @@ class QueueController extends Controller
     public function actionDeleteMusicOnHold()
     {
         $modelQueue = Queue::model()->findByPk((int) $_POST['id_queue']);
-        if (count($modelQueue)) {
+        if (isset($modelQueue->id)) {
             LinuxAccess::exec('rm -rf /var/lib/asterisk/moh/' . $modelQueue->name . '/*');
             echo json_encode([
                 $this->nameSuccess => true,
