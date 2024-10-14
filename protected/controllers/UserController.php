@@ -367,9 +367,12 @@ class UserController extends Controller
 
             } else if ($type == 'u' || $type == 'd') {
 
-                $modelUser     = User::model()->findByPk($values['id']);
+                if (isset($values['id'])) {
+                    $modelUser = User::model()->findByPk($values['id']);
+                } else if ($values[0]['id']) {
+                    $modelUser = User::model()->findByPk($values[0]['id']);
+                }
                 $user_id_group = $modelUser->id_group;
-
             }
 
             if (isset($user_id_group)) {
