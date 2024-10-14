@@ -31,7 +31,7 @@ class PlanCheckCommand extends ConsoleCommand
         ]
         );
 
-        if ( ! count($modelOfferUse)) {
+        if ( ! isset($modelOfferUse[0])) {
             if ($this->debug >= 1) {
                 echo " NO PLAN IN USE ";
             }

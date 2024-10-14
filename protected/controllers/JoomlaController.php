@@ -8,15 +8,15 @@
 
 class JoomlaController extends Controller
 {
-    private $menu = array();
+    private $menu = [];
 
     public function actionEdit()
     {
 
         if (isset($_POST['key'])) {
 
-            $modelUser = User::model()->find('username = :key', array('key' => $_POST['user']));
-            if (count($modelUser)) {
+            $modelUser = User::model()->find('username = :key', ['key' => $_POST['user']]);
+            if (isset($modelUser->id)) {
                 $key = sha1($modelUser->username . $modelUser->password);
 
                 if ($key == $_POST['key']) {
@@ -44,9 +44,9 @@ class JoomlaController extends Controller
             $_REQUEST['password'] = trim(Util::generatePassword(20, true, true, true, false));
             $_REQUEST['active']   = 0;
         }
-        $modelUser = User::model()->find('email = :key', array(':key' => $_REQUEST['email']));
+        $modelUser = User::model()->find('email = :key', [':key' => $_REQUEST['email']]);
 
-        if (count($modelUser)) {
+        if (isset($modelUser->id)) {
             if (isset($is_android)) {
                 exit(Yii::t('zii', 'Email already in use'));
             } else {
@@ -54,15 +54,15 @@ class JoomlaController extends Controller
             }
 
         }
-        $modelUser = User::model()->find('username = :key', array(':key' => $_REQUEST['user']));
+        $modelUser = User::model()->find('username = :key', [':key' => $_REQUEST['user']]);
 
-        if (count($modelUser)) {
+        if (isset($modelUser->id)) {
             exit('COM_USERS_PROFILE_USERNAME_MESSAGE');
         }
 
         $modelPlan = Plan::model()->find('signup = 1');
 
-        if (count($modelPlan)) {
+        if (isset($modelPlan->id)) {
             $id_plan = $modelPlan->id;
         } else {
             exit('No plan active');
@@ -75,9 +75,9 @@ class JoomlaController extends Controller
 
         } else {
 
-            $modelGroupUser = GroupUser::model()->findAllByAttributes(array("id_user_type" => 3));
-            if (count($modelGroupUser)) {
-                $id_group = $modelGroupUser[0]['id'];
+            $modelGroupUser = GroupUser::model()->findAllByAttributes(["id_user_type" => 3]);
+            if (isset($modelGroupUser[0]->id)) {
+                $id_group = $modelGroupUser[0]->id;
             } else {
                 exit('No plan group for user');
             }
@@ -167,7 +167,7 @@ class JoomlaController extends Controller
         $command->bindValue(":user", $user, PDO::PARAM_STR);
         $result = $command->queryAll();
 
-        if (!isset($result[0]['username']) || sha1($result[0]['password']) != $password) {
+        if ( ! isset($result[0]['username']) || sha1($result[0]['password']) != $password) {
             exit;
         }
 
@@ -184,18 +184,18 @@ class JoomlaController extends Controller
         Yii::app()->session['language'] = $this->config['global']['base_language'];
         Yii::app()->session['decimal']  = $this->config['global']['decimal_precision'];
 
-        echo json_encode(array(
+        echo json_encode([
             'id'       => Yii::app()->session['menu'],
             'currency' => Yii::app()->session['currency'],
             'language' => Yii::app()->session['language'],
             'decimal'  => Yii::app()->session['decimal'],
-        ));
+        ]);
     }
 
     public function actionUpdatePassword()
     {
 
-        $modelUser = User::model()->find('username = :key', array(':key' => $_POST['username']));
+        $modelUser = User::model()->find('username = :key', [':key' => $_POST['username']]);
         if (strtoupper($_POST['data']) == strtoupper(MD5($modelUser->username . ':' . $modelUser->password))) {
             $modelUser->password = trim($_POST['new_password']);
             $modelUser->save();

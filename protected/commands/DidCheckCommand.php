@@ -34,7 +34,7 @@ class DidCheckCommand extends ConsoleCommand
         ]
         );
 
-        if ( ! count($modelDidUse)) {
+        if ( ! isset($modelDidUse[0])) {
             exit($this->debug >= 3 ? MagnusLog::writeLog(LOGFILE, ' line:' . __LINE__ . " NO DID IN USE ") : null);
             exit;
         }

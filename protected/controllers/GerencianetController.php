@@ -33,7 +33,7 @@ class GerencianetController extends Controller
             $command->bindValue(':description', "%" . $_POST['notification'] . "%", PDO::PARAM_STR);
             $resultRefill = $command->queryAll();
 
-            if (count($resultRefill) < 1) {
+            if ( ! isset($resultRefill[0]['id'])) {
                 $sql = "INSERT INTO pkg_refill (id_user,credit,description,payment) VALUES
                             (:id_user, :amount, :description , '0')";
                 Yii::log(print_r($sql, true), 'error');

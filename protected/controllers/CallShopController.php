@@ -18,7 +18,7 @@
 class CallShopController extends Controller
 {
     public $attributeOrder = 't.callerid';
-    public $extraValues    = array('idUser' => 'username');
+    public $extraValues    = ['idUser' => 'username'];
     public $join           = ' INNER JOIN pkg_user c ON t.id_user = c.id';
     public $defaultFilter  = 'c.callshop = 1';
 
@@ -35,7 +35,7 @@ class CallShopController extends Controller
         return parent::actionRead($asJson = true, $condition = null);
     }
 
-    public function getAttributesModels($models, $itemsExtras = array())
+    public function getAttributesModels($models, $itemsExtras = [])
     {
 
         $attributes = false;
@@ -54,8 +54,8 @@ class CallShopController extends Controller
                 $command      = Yii::app()->db->createCommand($sql);
                 $resultPrefix = $command->queryAll();
 
-                $attributes[$key]['price_min']   = count($resultPrefix) ? $resultPrefix[0]['buyrate'] : 0;
-                $attributes[$key]['destination'] = count($resultPrefix) ? $resultPrefix[0]['destination'] : '';
+                $attributes[$key]['price_min']   = isset($resultPrefix[0]['buyrate']) ? $resultPrefix[0]['buyrate'] : 0;
+                $attributes[$key]['destination'] = isset($resultPrefix[0]['destination']) ? $resultPrefix[0]['destination'] : '';
             }
 
             foreach ($itemsExtras as $relation => $fields) {
@@ -85,7 +85,7 @@ class CallShopController extends Controller
 
         if (isset($_GET['id'])) {
             $id = (int) $_GET['id'];
-            Sip::model()->updateByPk((int) $id, array('status' => 2));
+            Sip::model()->updateByPk((int) $id, ['status' => 2]);
         } else {
 
             if (isset($_GET['name'])) {
@@ -94,16 +94,16 @@ class CallShopController extends Controller
                 $filter = json_decode($_POST['filter'], true);
             }
 
-            $modelSip         = Sip::model()->find("name = :name ", array(':name' => $filter[0]['value']));
+            $modelSip         = Sip::model()->find("name = :name ", [':name' => $filter[0]['value']]);
             $modelSip->status = 2;
             $modelSip->save();
 
         }
 
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
 
     }
 
@@ -117,7 +117,7 @@ class CallShopController extends Controller
             $modelSip->callshoptime   = 0;
             $modelSip->save();
 
-            CallShopCdr::model()->updateAll(array('status' => '1'), 'cabina = :key', array(':key' => $modelSip->name));
+            CallShopCdr::model()->updateAll(['status' => '1'], 'cabina = :key', [':key' => $modelSip->name]);
         } else {
 
             if (isset($_GET['name'])) {
@@ -126,17 +126,17 @@ class CallShopController extends Controller
                 $filter = json_decode($_POST['filter'], true);
             }
 
-            $modelSip                 = Sip::model()->find("name = :name ", array(':name' => $filter[0]['value']));
+            $modelSip                 = Sip::model()->find("name = :name ", [':name' => $filter[0]['value']]);
             $modelSip->status         = 0;
             $modelSip->callshopnumber = 'NULL';
             $modelSip->callshoptime   = 0;
             $modelSip->save();
 
-            CallShopCdr::model()->updateAll(array('status' => '1'), 'cabina = :key', array(':key' => $filter[0]['value']));
+            CallShopCdr::model()->updateAll(['status' => '1'], 'cabina = :key', [':key' => $filter[0]['value']]);
         }
-        echo json_encode(array(
+        echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,
-        ));
+        ]);
     }
 }

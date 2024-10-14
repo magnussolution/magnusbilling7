@@ -1346,7 +1346,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                     'params'    => [':key' => 'sip'],
                 ]);
 
-            if (count($model)) {
+            if (isset($model[0])) {
                 AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
             }
 
