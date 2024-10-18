@@ -198,16 +198,15 @@ class AsteriskAccess
         $rows = Util::getColumnsFromModel($model);
 
         $fd = fopen($file, "w");
-
-        LinuxAccess::exec('touch ' . $file);
+        file_put_contents($file, '');
 
         if ($head_field == 'trunkcode' && preg_match("/sip/", $file)) {
             $registerFile = '/etc/asterisk/sip_magnus_register.conf';
-            LinuxAccess::exec('touch ' . $registerFile);
+            file_put_contents($registerFile, '');
             $fr = fopen($registerFile, "w");
         } elseif ($head_field == 'trunkcode' && preg_match("/iax/", $file)) {
             $registerFile = '/etc/asterisk/iax_magnus_register.conf';
-            LinuxAccess::exec('touch ' . $registerFile);
+            file_put_contents($registerFile, '');
             $fr = fopen($registerFile, "w");
         }
 
@@ -335,7 +334,7 @@ class AsteriskAccess
     public static function generateCallFile($callFile, $time = 0)
     {
         $aleatorio    = str_replace(" ", "", microtime(true));
-        $arquivo_call = "/var/www/html/mbilling/tmp/$aleatorio.call";
+        $arquivo_call = "/var/www/html/mbilling/tmp/" . $aleatorio . ".call";
         $fp           = fopen("$arquivo_call", "a+");
         fwrite($fp, $callFile);
         fclose($fp);
@@ -347,7 +346,10 @@ class AsteriskAccess
         @chgrp("$arquivo_call", "asterisk");
         chmod("$arquivo_call", 0755);
 
-        LinuxAccess::exec("mv $arquivo_call /var/spool/asterisk/outgoing/$aleatorio.call");
+        $destination_file = '/var/spool/asterisk/outgoing/' . $aleatorio . '.call'; // Assuming $aleatorio is defined
+
+        rename($arquivo_call, $destination_file);
+
     }
 
     public function getCallsPerDid($did, $agi = null)
@@ -676,7 +678,7 @@ class AsteriskAccess
         $subscriber     = '[subscribe]';
 
         $voicemailFile = '/etc/asterisk/voicemail_magnus.conf';
-        LinuxAccess::exec('touch ' . $voicemailFile);
+        file_put_contents($voicemailFile, '');
         $fr_voicemail = fopen($voicemailFile, "w");
         $voicemail    = "[billing]\n";
 

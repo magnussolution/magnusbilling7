@@ -23,6 +23,15 @@
 class BackupController extends Controller
 {
     private $diretory = "/usr/local/src/magnus/backup/";
+
+    public function init()
+    {
+        if ( ! Yii::app()->session['isAdmin']) {
+            exit;
+        }
+        parent::init();
+    }
+
     public function actionRead($asJson = true, $condition = null)
     {
         if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
@@ -137,10 +146,10 @@ class BackupController extends Controller
         $username = Yii::app()->db->username;
         $password = Yii::app()->db->password;
         $data     = date("d-m-Y");
-        $comando  = "mysqldump -u" . $username . " -p" . $password . " " . $dataBase . " --ignore-table=" . $dataBase . ".pkg_portabilidade --ignore-table=" . $dataBase . ".pkg_cdr_archive --ignore-table=" . $dataBase . ".pkg_cdr_failed > /tmp/base.sql";
+        $comando  = "mysqldump -u" . escapeshellarg($username) . " -p" . escapeshellarg($password) . " " . escapeshellarg($dataBase) . " --ignore-table=" . escapeshellarg($dataBase) . ".pkg_portabilidade --ignore-table=" . escapeshellarg($dataBase) . ".pkg_cdr_archive --ignore-table=" . escapeshellarg($dataBase) . ".pkg_cdr_failed > /tmp/base.sql";
         LinuxAccess::exec($comando);
-        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch.$data.tgz /tmp/base.sql /etc/asterisk");
-        LinuxAccess::exec("rm -f /tmp/base.sql");
+        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch." . escapeshellarg($data) . ".tgz /tmp/base.sql /etc/asterisk");
+        unlink("/tmp/base.sql");
 
         echo json_encode([
             $this->nameSuccess => $this->success,

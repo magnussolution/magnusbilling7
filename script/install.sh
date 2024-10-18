@@ -52,76 +52,6 @@ startup_services()
 }
 
 
-set_timezone ()
-{ 
-  #yum -y install ntp
-  directory=/usr/share/zoneinfo
-  for (( l = 0; l < 5; l++ )); do
-
-    echo "entrar no diretorio $directory"
-    cd $directory
-    files=("")  
-
-    i=0
-    s=65    # decimal ASCII "A" 
-    for f in *
-    do
-
-      if [[ "$i" = "0" && "$l" = "0" ]]; then
-        files[i]="BRASIL Brasilia"
-        files[i+1]=""
-      else
-        files[i]="$f"
-          files[i+1]=""
-      fi      
-        ((i+=2))
-        ((s++))
-    done
-
-    files[i+1]="MAIN MENU"
-    files[i+2]="Back to main menu"
-
-    zone=$(whiptail --title "Restore Files" --menu "Please select your timezone" 20 60 12 "${files[@]}" 3>&1 1>&2 2>&3)
-
-
-    if [ "$zone" = "BRASIL Brasilia" ]; then
-      echo "é um arquivo, setar timezone BRASIL"
-      directory=$directory/America/Sao_Paulo  
-      break
-    fi
-
-    directory=$directory/$zone
-
-
-    if [ -f "$directory" ]; then
-      #echo "é um arquivo, setar timezone"
-      break
-    fi
-
-    if [ "$zone" = "MAIN MENU" ]; then
-      directory=/usr/share/zoneinfo
-      l=0
-    fi
-
-    if test -z "$zone"; then
-      break
-    fi  
-
-    echo fim do loop
-
-  done
-
-  if [ -f "$directory" ]; then    
-    rm -f /etc/localtime
-    ln -s $directory /etc/localtime
-    phptimezone="${directory//\/usr\/share\/zoneinfo\//}"
-    phptimezone="${phptimezone////\/}"
-    systemctl reload httpd
-  fi
-
-}
-
-set_timezone
 
 genpasswd() 
 {
@@ -141,21 +71,21 @@ echo "$password" > /root/passwordMysql.log
 
 
 
-if [ ${DIST} = "DEBIAN" ]; then
-    apt-get update --allow-releaseinfo-change
-    apt-get install -y locales
-    echo "LANG=en_US.utf-8" >> /etc/locale.gen
-    echo "LC_ALL=en_US.utf-8" >> /etc/locale.gen
-    echo "LANG=en_US.UTF-8" > /etc/locale.conf
-    locale-gen en_US.UTF-8
-    source /etc/environment
+apt-get update --allow-releaseinfo-change
+apt-get install -y locales
+echo "LANG=en_US.utf-8" >> /etc/locale.gen
+echo "LC_ALL=en_US.utf-8" >> /etc/locale.gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+locale-gen en_US.UTF-8
+source /etc/environment
 
-    apt-get -o Acquire::Check-Valid-Until=false update 
-    apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet  apache2 libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 
-    apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
-    apt-get -y install mariadb-server php-mysql
-    apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
-fi
+apt-get -o Acquire::Check-Valid-Until=false update 
+apt-get install -y apache2
+apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 
+apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
+apt-get install -y mariadb-server php-mysql
+apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
+
 
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 
@@ -280,22 +210,13 @@ echo
 echo "----------- Create mysql password: Your mysql root password is $password ----------"
 echo
 
-
-if [ ${DIST} = "DEBIAN" ]; then
-    systemctl start mariadb
-    systemctl enable apache2 
-    systemctl enable mariadb
-    chkconfig ntp on
-else [ -f /etc/redhat-release ]
-    systemctl enable httpd
-    systemctl enable mariadb
-    systemctl start mariadb
-    chkconfig ntpd on
-fi
+systemctl start mariadb
+systemctl enable apache2 
+systemctl enable mariadb
+chkconfig ntp on
 
 
-
-mysql -uroot -e "SET PASSWORD FOR 'root'@localhost = PASSWORD('${password}'); FLUSH PRIVILEGES;"
+mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${password}';"
 
 
 echo "
@@ -539,9 +460,7 @@ mysql -uroot -p${password} -e "create database mbilling;"
 mysql -uroot -p${password} -e "CREATE USER 'mbillingUser'@'localhost' IDENTIFIED BY '${MBillingMysqlPass}';"
 mysql -uroot -p${password} -e "GRANT ALL PRIVILEGES ON \`mbilling\` . * TO 'mbillingUser'@'localhost' WITH GRANT OPTION;FLUSH PRIVILEGES;"    
 mysql -uroot -p${password} -e "GRANT FILE ON * . * TO  'mbillingUser'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
-if [ ${DIST} = "DEBIAN" ]; then
 mysql -uroot -p${password} -e "update mysql.user set plugin='' where User='root';"
-fi;
 mysql mbilling -u root -p${password}  < /var/www/html/mbilling/script/database.sql
 rm -rf /var/www/html/mbilling/script
 
@@ -731,8 +650,7 @@ firewall-cmd --zone=public --add-port=22/tcp --permanent
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=5060/udp --permanent
-firewall-cmd --zone=public --add-port=10000-50000/udp --permanent
-firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=10000-60000/udp --permanent
 firewall-cmd --reload
 firewall-cmd --zone=public --list-all
 
@@ -800,12 +718,13 @@ findtime  = 600
 maxretry = 3
 backend = auto
 usedns = warn
+banaction = firewallcmd-multiport
+banaction_allports = firewallcmd-multiport
 
 
 [asterisk-iptables]   
 enabled  = true           
 filter   = asterisk       
-action   = iptables-allports[name=ASTERISK, port=all, protocol=all]   
 logpath  = /var/log/asterisk/messages 
 maxretry = 5  
 bantime = 600
@@ -813,7 +732,6 @@ bantime = 600
 [ast-cli-attck]   
 enabled  = true           
 filter   = asterisk_cli     
-action   = iptables-allports[name=AST_CLI_Attack, port=all, protocol=all]
 logpath  = /var/log/asterisk/messages 
 maxretry = 1  
 bantime = -1
@@ -821,7 +739,6 @@ bantime = -1
 [asterisk-manager]   
 enabled  = true           
 filter   = asterisk_manager     
-action   = iptables-allports[name=AST_MANAGER, port=all, protocol=all]
 logpath  = /var/log/asterisk/messages 
 maxretry = 1  
 bantime = -1
@@ -829,7 +746,6 @@ bantime = -1
 [ast-hgc-200]
 enabled  = true           
 filter   = asterisk_hgc_200     
-action   = iptables-allports[name=AST_HGC_200, port=all, protocol=all]
 logpath  = /var/log/asterisk/messages
 maxretry = 20
 bantime = -1
@@ -837,7 +753,6 @@ bantime = -1
 [mbilling_login]
 enabled  = true
 filter   = mbilling_login
-action   = iptables-allports[name=mbilling_login, port=all, protocol=all]
 logpath  = /var/www/html/mbilling/protected/runtime/application.log
 maxretry = 3
 bantime = 300
@@ -845,27 +760,28 @@ bantime = 300
 [ip-blacklist]
 enabled   = true
 filter    = ip-blacklist
-action    = iptables-allports[name=ASTERISK, protocol=all] 
 logpath   = /var/www/html/mbilling/resources/ip.blacklist
 maxretry  = 0
 findtime  = 15552000
 bantime   = -1
-" > /etc/fail2ban/jail.local
 
 
+[apache-auth]
+enabled = true
+port = http,https
+logpath = /var/log/apache2/error.log
+maxretry = 5
 
-echo "
-[sshd]
+[ssh]
 enablem=true
 backend=systemd
 
 [mbilling_ddos]
 enabled  = true
 filter   = mbilling_ddos
-action   = iptables-allports[name=mbilling_ddos, port=all, protocol=all]
 logpath  = /var/log/apache2/error.log
 maxretry = 20
-bantime = 3600" >> /etc/fail2ban/jail.local
+bantime = 3600" > /etc/fail2ban/jail.local
 
 
 
@@ -890,7 +806,7 @@ messages => notice,warning,error
 magnus => debug
 " > /etc/asterisk/logger.conf
 
-
+touch /var/log/auth.log
 
 mkdir /var/run/fail2ban/
 asterisk -rx "module reload logger"

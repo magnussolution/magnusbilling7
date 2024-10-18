@@ -31,11 +31,11 @@ class Tts
 
         $name = urlencode($string);
 
-        $file = 'tts_audio_' . MD5($string);
+        $file = 'tts_audio_' . MD5(escapeshellarg($string));
 
         if ( ! file_exists('/tmp/' . $file . '.wav')) {
 
-            $tts_url = preg_replace('/\$name/', $name, $config['global']['tts_url']);
+            $tts_url = escapeshellarg(preg_replace('/\$name/', $name, $config['global']['tts_url']));
 
             if (preg_match("/ttsgo/", $tts_url)) {
 

@@ -502,7 +502,7 @@ class AuthenticationController extends Controller
         foreach ($colors as $key => $color) {
             $types = ['crisp', 'neptune', 'triton'];
             foreach ($types as $key => $type) {
-                LinuxAccess::exec("yes | cp -rf /var/www/html/mbilling/resources/images/lock-screen-background.jpg /var/www/html/mbilling/$color-$type/resources/images/");
+                copy("/var/www/html/mbilling/resources/images/lock-screen-background.jpg", "/var/www/html/mbilling/$color-$type/resources/images/lock-screen-background.jpg");
             }
         }
 

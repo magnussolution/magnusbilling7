@@ -402,7 +402,7 @@ class SipTraceController extends Controller
     public function actionDestroy()
     {
         SipTrace::model()->deleteAll();
-        LinuxAccess::exec("rm -rf /var/www/html/mbilling/resources/reports/siptrace.log");
+        unlink('/var/www/html/mbilling/resources/reports/siptrace.log');
     }
 
     public function actionExport()

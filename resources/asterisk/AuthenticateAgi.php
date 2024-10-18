@@ -509,7 +509,9 @@ class AuthenticateAgi
         if ($MAGNUS->voicemail != 1) {
             $MAGNUS->voicemail = isset($MAGNUS->modelSip->id) ? $MAGNUS->modelSip->voicemail : false;
         }
-        $MAGNUS->record_call = (isset($MAGNUS->modelSip->id) && $MAGNUS->modelSip->record_call) || $MAGNUS->agiconfig['record_call'] ? true : false;
+        if ($MAGNUS->record_call == 0) {
+            $MAGNUS->record_call = (isset($MAGNUS->modelSip->id) && $MAGNUS->modelSip->record_call) || $MAGNUS->agiconfig['record_call'] ? true : false;
+        }
     }
 
 }
