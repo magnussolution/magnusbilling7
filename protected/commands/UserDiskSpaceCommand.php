@@ -37,11 +37,11 @@ class UserDiskSpaceCommand extends ConsoleCommand
         foreach ($modelUser as $user) {
             $userDiskSpace = $user->disk_space;
 
-            $directory = '/var/spool/asterisk/monitor/' . $user->username . '/';
+            $directory = '/var/spool/asterisk/monitor/' . escapeshellarg($user->username) . '/';
             //delete record less than 10k. About 5 seconds.
-            LinuxAccess::exec('find ' . $directory . ' -size -10k -delete');
+            LinuxAccess::exec('find ' . escapeshellarg($directory) . ' -size -10k -delete');
 
-            $totalDiskSpave = LinuxAccess::getDirectoryDiskSpaceUsed('*', $directory);
+            $totalDiskSpave = LinuxAccess::getDirectoryDiskSpaceUsed('*', escapeshellarg($directory));
             $totalMonitorGB = is_numeric($totalDiskSpave) ? $totalDiskSpave / 1000000000 : 0;
 
             if ($totalMonitorGB > $userDiskSpace) {
@@ -59,7 +59,7 @@ class UserDiskSpaceCommand extends ConsoleCommand
                 echo "Older file found=" . date('Y-m-d', $lastFileTime) . "\n";
                 $lastFileTime += 604800;
                 echo "DELETE files from 7 days after " . date('Y-m-d', $lastFileTime) . "\n";
-                LinuxAccess::exec('find ' . $directory . ' -not -newermt "' . date('Y-m-d', $lastFileTime) . '" -delete');
+                LinuxAccess::exec('find ' . escapeshellarg($directory) . ' -not -newermt "' . date('Y-m-d', escapeshellarg($lastFileTime)) . '" -delete');
             } else {
                 continue;
             }

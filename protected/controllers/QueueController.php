@@ -51,7 +51,11 @@ class QueueController extends Controller
         if (isset($_FILES["musiconhold"]) && strlen($_FILES["musiconhold"]["name"]) > 1) {
 
             $uploaddir = '/var/lib/asterisk/moh/' . $model->name;
-            LinuxAccess::exec('mkdir -p ' . $uploaddir);
+
+            if ( ! is_dir($uploaddir)) {
+                mkdir($uploaddir, 0755, true);
+            }
+
             $typefile = Util::valid_extension($_FILES["musiconhold"]["name"], ['gsm', 'wav']);
 
             $uploadfile = $uploaddir . '/queue-' . time() . '.' . $typefile;
@@ -107,7 +111,7 @@ class QueueController extends Controller
     {
         $modelQueue = Queue::model()->findByPk((int) $_POST['id_queue']);
         if (isset($modelQueue->id)) {
-            LinuxAccess::exec('rm -rf /var/lib/asterisk/moh/' . $modelQueue->name . '/*');
+            rmdir('/var/lib/asterisk/moh/' . $modelQueue->name);
             echo json_encode([
                 $this->nameSuccess => true,
                 $this->nameMsg     => 'All musiconhold deleted from queue',

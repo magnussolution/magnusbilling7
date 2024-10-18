@@ -47,7 +47,7 @@ class FirewallController extends Controller
 
     public function getLinesCommand($command, $action = 0)
     {
-        $status = LinuxAccess::exec("sudo fail2ban-client status $command");
+        $status = LinuxAccess::exec("sudo fail2ban-client status " . escapeshellarg($command));
         if ( ! isset($status[1])) {
             return false;
         }
@@ -84,7 +84,7 @@ class FirewallController extends Controller
 
     public function readLog($ip)
     {
-        $line = LinuxAccess::exec("tac /var/log/fail2ban.log | egrep -m 1 '$ip' ");
+        $line = LinuxAccess::exec("tac /var/log/fail2ban.log | egrep -m 1 '" . escapeshellarg($ip) . "' ");
         if ( ! isset($line[0])) {
             return true;
         }
@@ -94,7 +94,7 @@ class FirewallController extends Controller
 
     public function readLogAsterisk($ip)
     {
-        $line = LinuxAccess::exec("tac /var/log/asterisk/messages | egrep -m 10 '$ip' ");
+        $line = LinuxAccess::exec("tac /var/log/asterisk/messages | egrep -m 10 '" . escapeshellarg($ip) . "' ");
         $log  = '';
         foreach ($line as $value) {
             $logs = explode(" ", $value);
@@ -112,7 +112,7 @@ class FirewallController extends Controller
     public function readLogMBilling($ip)
     {
 
-        $line = LinuxAccess::exec("tac /var/www/html/mbilling/protected/runtime/application.log | egrep -m 10 '$ip' ");
+        $line = LinuxAccess::exec("tac /var/www/html/mbilling/protected/runtime/application.log | egrep -m 10 '" . escapeshellarg($ip) . "' ");
         $log  = '';
         foreach ($line as $value) {
             $logs = explode(" ", $value);
@@ -141,23 +141,23 @@ class FirewallController extends Controller
 
             if ($values['action'] == 0) {
                 //add in asterisk-iptables
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . escapeshellarg($values['ip']));
 
                 //unbanip
-                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . escapeshellarg($values['ip']));
 
-                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . escapeshellarg($values['ip']));
 
             } elseif ($values['action'] == 1) {
 
                 //unbanip asterisk-iptables
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . escapeshellarg($values['ip']));
 
                 //ban in ip-blacklist
-                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist banip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist banip " . escapeshellarg($values['ip']));
 
                 //ban in ip-blacklist
-                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login banip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login banip " . escapeshellarg($values['ip']));
 
             }
 
@@ -175,7 +175,7 @@ class FirewallController extends Controller
             $file = "/var/www/html/mbilling/resources/ip.blacklist";
             $fp   = fopen($file, "a+");
             $date = date("d/m/Y H:i:s");
-            LinuxAccess::exec("sudo echo '' > $file");
+            file_put_contents($file, '');
             foreach ($result as $ip) {
                 fwrite($fp, $ip['ip'] . " [" . $date . "]\n");
             }
@@ -185,7 +185,7 @@ class FirewallController extends Controller
 //if is save
 
             if ($values['action'] == 0) {
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . $values['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . escapeshellarg($values['ip']));
             } elseif ($values['action'] == 1) {
 
                 if (isset($values['ip'])) {
@@ -213,7 +213,7 @@ class FirewallController extends Controller
                 $file = "/var/www/html/mbilling/resources/ip.blacklist";
                 $fp   = fopen($file, "a+");
                 $date = date("d/m/Y H:i:s");
-                LinuxAccess::exec("sudo echo '' > $file");
+                file_put_contents($file, '');
                 foreach ($result as $ip) {
                     fwrite($fp, $ip['ip'] . " [" . $date . "]\n");
                 }
@@ -252,20 +252,20 @@ class FirewallController extends Controller
             $result = $command->queryAll();
 
             if ($result[0]['action'] == 0) {
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . escapeshellarg($result[0]['ip']));
 
-                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . escapeshellarg($result[0]['ip']));
 
-                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . escapeshellarg($result[0]['ip']));
             } elseif ($result[0]['action'] == 1) {
                 $sql     = "DELETE FROM pkg_firewall WHERE ip = :ip";
                 $command = Yii::app()->db->createCommand($sql);
                 $command->bindValue(":ip", $result[0]['ip'], PDO::PARAM_STR);
                 $command->execute();
 
-                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . escapeshellarg($result[0]['ip']));
 
-                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . $result[0]['ip']);
+                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . escapeshellarg($result[0]['ip']));
 
                 $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
                 $result = Yii::app()->db->createCommand($sql)->queryAll();

@@ -72,6 +72,7 @@ mkdir -p /usr/local/src/magnus
 rm -rf /var/www/html/mbilling/tmp
 mkdir -p /var/www/html/mbilling/tmp
 chown -R asterisk:asterisk /var/www/html/mbilling/tmp
+chown -R asterisk:asterisk /var/run/magnus/
 chmod -R 777 /tmp
 chmod -R 755 /usr/local/src/magnus
 chmod -R 555 /var/www/html/mbilling/

@@ -36,7 +36,7 @@ class ConvertAudiotoGSMCommand extends ConsoleCommand
 
                 echo 'Convert ' . $audio . " to GSM\n";
                 LinuxAccess::exec('sox ' . $this->diretory . $audio . ' ' . $this->diretory . substr($audio, 0, -4) . '.gsm');
-                LinuxAccess::exec('rm -rf ' . $this->diretory . $audio);
+                unlink($this->diretory . $audio);
             }
         }
 

@@ -25,7 +25,7 @@ class TrunkSIPCodesCommand extends ConsoleCommand
         $time = time();
 
         $cache_path = '/tmp/cache_mbilling_codes.sqlite';
-        LinuxAccess::exec('rm -rf ' . $cache_path);
+        unlink($cache_path);
         $fields = "data,ip,code,msg";
         try {
             $db = new SQLite3($cache_path);
@@ -35,15 +35,16 @@ class TrunkSIPCodesCommand extends ConsoleCommand
         }
 
         if ( ! file_exists('/var/log/asterisk/magnus_processed ')) {
-            LinuxAccess::exec('touch /var/log/asterisk/magnus_processed ');
+
+            file_put_contents('/var/log/asterisk/magnus_processed', '');
         }
 
-        LinuxAccess::exec('cp -rf /var/log/asterisk/magnus /var/log/asterisk/magnus_new');
+        copy('cp -rf /var/log/asterisk/magnus /var/log/asterisk/magnus_new');
 
         $lines = LinuxAccess::exec('diff -u /var/log/asterisk/magnus_processed /var/log/asterisk/magnus_new');
 
-        LinuxAccess::exec('rm -rf /var/log/asterisk/magnus_processed');
-        LinuxAccess::exec('mv /var/log/asterisk/magnus_new /var/log/asterisk/magnus_processed');
+        unlinkc('/var/log/asterisk/magnus_processed');
+        rename('/var/log/asterisk/magnus_new /var/log/asterisk/magnus_processed');
 
         $values = '';
 

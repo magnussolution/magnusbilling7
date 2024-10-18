@@ -383,7 +383,7 @@ class BaseController extends CController
 
             $recordCont = $this->abstractModel->find($criteria);
 
-            return $recordCont[$this->abstractModel->primaryKey()];
+            return isset($recordCont[$this->abstractModel->primaryKey()]) ? $recordCont[$this->abstractModel->primaryKey()] : [];
         }
     }
     /**

@@ -150,7 +150,7 @@ class CallArchiveController extends Controller
 
             $day = $day[2] . $day[1] . $day[0];
 
-            $output = LinuxAccess::exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . $uniqueid . '* ');
+            $output = glob('/var/spool/asterisk/monitor/' . $modelCall->idUser->username . '/*.' . trim($uniqueid) . '* ');
 
             if (isset($output[0])) {
 
@@ -163,8 +163,7 @@ class CallArchiveController extends Controller
                     header("Content-Transfer-Encoding: binary");
                     readfile($output[0]);
                 } else {
-                    LinuxAccess::exec('rm -rf /var/www/html/mbilling/tmp/*');
-                    LinuxAccess::exec('cp -rf ' . $output[0] . ' /var/www/html/mbilling/tmp/');
+                    copy($output[0], ' /var/www/html/mbilling/tmp/');
                     echo '<body style="margin:0px;padding:0px;overflow:hidden">
                             <iframe src="../../tmp/' . end($file_name) . '" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
                         </body>';
@@ -209,21 +208,26 @@ class CallArchiveController extends Controller
             array_map('unlink', glob("$folder/*"));
 
             if (count($modelCdr)) {
+
+                $tarFile = '/var/www/html/mbilling/tmp/records_' . Yii::app()->session['username'] . '.tar';
+                unlink($tarFile . '.gz');
+                // Cria um arquivo tar
+                $tar = new PharData($tarFile);
+
                 foreach ($modelCdr as $records) {
                     $number   = $records->calledstation;
                     $day      = $records->starttime;
                     $uniqueid = $records->uniqueid;
                     $username = $records->idUser->username;
 
-                    $mix_monitor_format = $this->config['global']['MixMonitor_format'];
-                    LinuxAccess::exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . $uniqueid . '* ' . $folder . '/');
+                    if (isset($file[0])) {
+
+                        $tar->addFile($file[0], basename($file[0]));
+                    }
                 }
 
-                LinuxAccess::exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
-
-                $file_name = 'records_' . Yii::app()->session['username'] . '.tar.gz';
-                $path      = $folder . '/' . $file_name;
-                header('Content-type: application/tar+gzip');
+                $tar->compress(Phar::GZ);
+                unlink($tarFile);
 
                 echo json_encode([
                     $this->nameSuccess => true,
@@ -232,16 +236,14 @@ class CallArchiveController extends Controller
 
                 header('Content-Description: File Transfer');
                 header("Content-Type: application/x-tar");
-                header('Content-Disposition: attachment; filename=' . basename($file_name));
+                header('Content-Disposition: attachment; filename=' . basename($tarFile . '.gz'));
                 header("Content-Transfer-Encoding: binary");
                 header('Accept-Ranges: bytes');
                 header('Content-type: application/force-download');
                 ob_clean();
                 flush();
-                if (readfile($path)) {
-                    unlink($path);
-                }
-                LinuxAccess::exec("rm -rf $folder/*");
+                readfile($tarFile . '.gz');
+                unlink($tarFile . '.gz');
             } else {
                 echo json_encode([
                     $this->nameSuccess => false,
