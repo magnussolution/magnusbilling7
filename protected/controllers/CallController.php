@@ -181,9 +181,22 @@ class CallController extends Controller
 
             if ($modelCall->id_server > 0 && $modelCall->idServer->type == 'asterisk') {
 
-                $host   = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
-                $url    = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
-                $output = LinuxAccess::exec("cd /var/www/html/mbilling/tmp/ && wget --quiet -O " . trim($uniqueid) . ".gsm '$url'");
+                $host = $modelCall->idServer->public_ip > 0 ? $modelCall->idServer->public_ip : $modelCall->idServer->host;
+                $url  = 'http://' . $host . '/mbilling/record.php?id=' . $uniqueid . '&u=' . $modelCall->idUser->username;
+
+                $fileContent = file_get_contents($url);
+
+                if ($fileContent === false) {
+                    die('Failed to download the file.');
+                }
+                // Save the content in the specified directory
+                $savedSuccessfully = file_put_contents("/var/www/html/mbilling/tmp/" . trim($uniqueid) . ".gsm", $fileContent);
+
+                // Check if the file was saved correctly
+                if ($savedSuccessfully === false) {
+                    die('Failed to save the file.');
+                }
+
                 header("Cache-Control: public");
                 header("Content-Description: File Transfer");
                 header("Content-Disposition: attachment; filename=" . $uniqueid);
@@ -193,8 +206,7 @@ class CallController extends Controller
                 unlink('/var/www/html/mbilling/tmp/' . $uniqueid . '.gsm');
                 exit;
             }
-
-            $output = LinuxAccess::exec("ls /var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . trim($uniqueid) . '* ');
+            $files = scandir("/var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . trim($uniqueid) . '* ');
 
             if (isset($output[0])) {
 
@@ -250,22 +262,28 @@ class CallController extends Controller
             }
             array_map('unlink', glob("$folder/*"));
 
-            if (count($modelCdr)) {
+            if (isset($modelCdr[0]->id)) {
+
+                $tarFile = '/var/www/html/mbilling/tmp/records_' . Yii::app()->session['username'] . '.tar';
+                unlink($tarFile . '.gz');
+                // Cria um arquivo tar
+                $tar = new PharData($tarFile);
+
                 foreach ($modelCdr as $records) {
                     $number   = $records->calledstation;
                     $day      = $records->starttime;
                     $uniqueid = $records->uniqueid;
                     $username = $records->idUser->username;
 
-                    $mix_monitor_format = $this->config['global']['MixMonitor_format'];
-                    LinuxAccess::exec('cp -rf  /var/spool/asterisk/monitor/' . $username . '/*.' . trim($uniqueid) . '* ' . $folder . '/');
+                    $file = glob('/var/spool/asterisk/monitor/' . $username . '/*.' . trim($uniqueid) . '* ');
+                    if (isset($file[0])) {
+
+                        $tar->addFile($file[0], basename($file[0]));
+                    }
                 }
 
-                LinuxAccess::exec("cd $folder && tar -czf records_" . Yii::app()->session['username'] . ".tar.gz *");
-
-                $file_name = 'records_' . Yii::app()->session['username'] . '.tar.gz';
-                $path      = $folder . '/' . $file_name;
-                header('Content-type: application/tar+gzip');
+                $tar->compress(Phar::GZ);
+                unlink($tarFile);
 
                 echo json_encode([
                     $this->nameSuccess => true,
@@ -274,16 +292,15 @@ class CallController extends Controller
 
                 header('Content-Description: File Transfer');
                 header("Content-Type: application/x-tar");
-                header('Content-Disposition: attachment; filename=' . basename($file_name));
+                header('Content-Disposition: attachment; filename=' . basename($tarFile . '.gz'));
                 header("Content-Transfer-Encoding: binary");
                 header('Accept-Ranges: bytes');
                 header('Content-type: application/force-download');
                 ob_clean();
                 flush();
-                if (readfile($path)) {
-                    unlink($path);
-                }
-                LinuxAccess::exec("rm -rf $folder/*");
+                readfile($tarFile . '.gz');
+                unlink($tarFile . '.gz');
+
             } else {
                 echo json_encode([
                     $this->nameSuccess => false,
@@ -443,29 +460,46 @@ class CallController extends Controller
         }
 
         $fileName = 'cdr_' . time();
-        LinuxAccess::exec("echo '" . substr($header, 0, -1) . "' >  /var/www/html/mbilling/tmp/" . $fileName . ".csv ");
+
+        file_put_contents('/var/www/html/mbilling/tmp/' . $fileName . '.csv', substr($header, 0, -1));
 
         $this->filter = preg_replace('/:clfby|:agfby/', Yii::app()->session['id_user'], $this->filter);
         $sql          = "SELECT " . $this->getColumnsFromReport($columns) . " FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter";
-        $configFile   = '/etc/asterisk/res_config_mysql.conf';
-        $array        = parse_ini_file($configFile);
 
-        if (Yii::app()->session['language'] == 'pt_BR') {
-            @LinuxAccess::exec('mysql -u' . $array['dbuser'] . ' -p' . $array['dbpass'] . ' -h' . $array['dbhost'] . '  ' . $array['dbname'] . ' -e "' . $sql . '"  | sed "s/\'/\'/;s/\t/;/g;s/^//;s/$//;s/\n//g" > /var/www/html/mbilling/tmp/' . $fileName . '.csv ');
-        } else {
-            @LinuxAccess::exec('mysql -u' . $array['dbuser'] . ' -p' . $array['dbpass'] . ' -h' . $array['dbhost'] . '  ' . $array['dbname'] . ' -e "' . $sql . '"  | sed "s/\'/\'/;s/\t/,/g;s/^//;s/$//;s/\n//g" > /var/www/html/mbilling/tmp/' . $fileName . '.csv ');
-        }
+        $output = fopen('php://output', 'w');
+
+        fputcsv($output, [substr($header, 0, -1)], ';');
+
+        $limit  = 10000;
+        $offset = 0;
 
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $fileName . '.csv"');
-        header('Content-Transfer-Encoding: binary');
-        header('Accept-Ranges: bytes');
-        ob_clean();
-        flush();
-        if (readfile('/var/www/html/mbilling/tmp/' . $fileName . '.csv')) {
-            unlink('/var/www/html/mbilling/tmp/' . $fileName . '.csv');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+
+        for (;;) {
+            $sql     = "SELECT " . $this->getColumnsFromReport($columns) . " FROM " . $this->abstractModel->tableName() . " t $this->join WHERE $this->filter LIMIT :limit OFFSET :offset";
+            $command = Yii::app()->db->createCommand($sql);
+            $command->bindValue(":limit", $limit, PDO::PARAM_INT);
+            $command->bindValue(":offset", $offset, PDO::PARAM_INT);
+
+            try {
+                $rows = $command->queryAll();
+            } catch (Exception $e) {
+                print_r($e);
+                exit;
+            }
+
+            if (count($rows) > 0) {
+                foreach ($rows as $row) {
+                    fputcsv($output, $row, ';');
+                }
+                $offset += $limit;
+            } else {
+                break;
+            }
         }
-        exit;
     }
 
     public function createCondition($filter)

@@ -11,6 +11,7 @@ class LinuxAccess
 
     public static function exec($command)
     {
+
         Yii::log('LinuxAccess::exec -> ' . $command, 'error');
         exec($command, $output);
         return $output;
@@ -28,9 +29,4 @@ class LinuxAccess
         return @LinuxAccess::exec($command);
     }
 
-    public static function deleteFile($file, $directory = '/var/spool/asterisk/monitor/')
-    {
-        $command = 'rm -f ' . $directory . $file;
-        @LinuxAccess::exec($command);
-    }
 }

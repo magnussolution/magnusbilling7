@@ -47,243 +47,243 @@ class FirewallController extends Controller
 
     public function getLinesCommand($command, $action = 0)
     {
-        $status = LinuxAccess::exec("sudo fail2ban-client status $command");
-        if ( ! isset($status[1])) {
-            return false;
-        }
+        $status = LinuxAccess::exec("sudo fail2ban-client status " . escapeshellarg($command);
+            if ( ! isset($status[1])) {
+                return false;
+            }
 
-        foreach ($status as $value) {
+            foreach ($status as $value) {
 
-            if (preg_match("/IP list/", $value)) {
-                $line = preg_split('/[\s]+/', $value);
+                if (preg_match("/IP list/", $value)) {
+                    $line = preg_split('/[\s]+/', $value);
 
-                foreach ($line as $ip) {
-                    if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                        $obs = $command;
-                        if ($command == 'mbilling_login') {
-                            $obs = $this->readLogMBilling($ip);
-                        } elseif ($command == 'ip-blacklist') {
-                            $obs = 'Permanently IP BlackList';
-                        } elseif ($command == 'sshd') {
-                            $obs = 'Try connect via ssh';
-                        } elseif ($command == 'asterisk-iptables') {
-                            $obs = $this->readLogAsterisk($ip);
-                        }
+                    foreach ($line as $ip) {
+                        if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                            $obs = $command;
+                            if ($command == 'mbilling_login') {
+                                $obs = $this->readLogMBilling($ip);
+                            } elseif ($command == 'ip-blacklist') {
+                                $obs = 'Permanently IP BlackList';
+                            } elseif ($command == 'sshd') {
+                                $obs = 'Try connect via ssh';
+                            } elseif ($command == 'asterisk-iptables') {
+                                $obs = $this->readLogAsterisk($ip);
+                            }
 
-                        $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail) VALUES ('$ip',$action, NOW(), '$obs','$command')";
-                        try {
-                            Yii::app()->db->createCommand($sql)->execute();
-                        } catch (Exception $e) {
+                            $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail) VALUES ('$ip',$action, NOW(), '$obs','$command')";
+                            try {
+                                Yii::app()->db->createCommand($sql)->execute();
+                            } catch (Exception $e) {
 
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    public function readLog($ip)
+        public function readLog($ip)
     {
-        $line = LinuxAccess::exec("tac /var/log/fail2ban.log | egrep -m 1 '$ip' ");
-        if ( ! isset($line[0])) {
-            return true;
+            $line = LinuxAccess::exec("tac /var/log/fail2ban.log | egrep -m 1 '" . escapeshellarg($ip) . "' ");
+            if ( ! isset($line[0])) {
+                return true;
+            }
+            $array = explode(",", $line[0]);
+            return $array[0];
         }
-        $array = explode(",", $line[0]);
-        return $array[0];
-    }
 
-    public function readLogAsterisk($ip)
+        public function readLogAsterisk($ip)
     {
-        $line = LinuxAccess::exec("tac /var/log/asterisk/messages | egrep -m 10 '$ip' ");
-        $log  = '';
-        foreach ($line as $value) {
-            $logs = explode(" ", $value);
-            if (isset($logs[13])) {
-                $log .= 'Registration from ' . $logs[6] . ' ' . $logs[12] . ' ' . $logs[13] . "\n";
-            } else {
-                $log .= 'Registration from ' . $logs[6] . ' ' . $logs[11] . ' ' . $logs[12] . "\n";
-            }
-
-        }
-        $log = preg_replace("/\"|'/", "", $log);
-        return $log;
-    }
-
-    public function readLogMBilling($ip)
-    {
-
-        $line = LinuxAccess::exec("tac /var/www/html/mbilling/protected/runtime/application.log | egrep -m 10 '$ip' ");
-        $log  = '';
-        foreach ($line as $value) {
-            $logs = explode(" ", $value);
-
-            if (preg_match("/Username or password is wrong/", $value)) {
-                $log .= $value . "\n";
-            }
-
-        }
-        $log = preg_replace("/\"|'/", "", $log);
-        return $log;
-    }
-
-    public function actionSave()
-    {
-        $values = $this->getAttributesRequest();
-
-        //if is Edit
-        if (isset($values['id']) && $values['id'] > 0) {
-            $sql     = 'SELECT ip FROM pkg_firewall WHERE id = :id';
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id", $values['id'], PDO::PARAM_STR);
-            $result = $command->queryAll();
-
-            $values['ip'] = $result[0]['ip'];
-
-            if ($values['action'] == 0) {
-                //add in asterisk-iptables
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . $values['ip']);
-
-                //unbanip
-                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . $values['ip']);
-
-                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . $values['ip']);
-
-            } elseif ($values['action'] == 1) {
-
-                //unbanip asterisk-iptables
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . $values['ip']);
-
-                //ban in ip-blacklist
-                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist banip " . $values['ip']);
-
-                //ban in ip-blacklist
-                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login banip " . $values['ip']);
-
-            }
-
-            //update status table
-            $sql     = 'UPDATE pkg_firewall SET action = :action WHERE id = :id';
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id", $values['id'], PDO::PARAM_INT);
-            $command->bindValue(":action", $values['action'], PDO::PARAM_STR);
-            $command->execute();
-
-            //generate new blacklist
-            $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
-            $result = Yii::app()->db->createCommand($sql)->queryAll();
-
-            $file = "/var/www/html/mbilling/resources/ip.blacklist";
-            $fp   = fopen($file, "a+");
-            $date = date("d/m/Y H:i:s");
-            LinuxAccess::exec("sudo echo '' > $file");
-            foreach ($result as $ip) {
-                fwrite($fp, $ip['ip'] . " [" . $date . "]\n");
-            }
-            fclose($fp);
-
-        } else {
-//if is save
-
-            if ($values['action'] == 0) {
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . $values['ip']);
-            } elseif ($values['action'] == 1) {
-
-                if (isset($values['ip'])) {
-                    $ip = $values['ip'];
+            $line = LinuxAccess::exec("tac /var/log/asterisk/messages | egrep -m 10 '" . escapeshellarg($ip) . "' ");
+            $log  = '';
+            foreach ($line as $value) {
+                $logs = explode(" ", $value);
+                if (isset($logs[13])) {
+                    $log .= 'Registration from ' . $logs[6] . ' ' . $logs[12] . ' ' . $logs[13] . "\n";
                 } else {
-                    $sql     = 'SELECT ip FROM pkg_firewall WHERE id = :id';
-                    $command = Yii::app()->db->createCommand($sql);
-                    $command->bindValue(":id", $values['id'], PDO::PARAM_STR);
-                    $result = $command->queryAll();
-
-                    $ip = $result[0]['ip'];
+                    $log .= 'Registration from ' . $logs[6] . ' ' . $logs[11] . ' ' . $logs[12] . "\n";
                 }
-                $date    = date("Y-m-d H:i:s");
-                $obs     = 'Permanently IP BlackList';
-                $sql     = "INSERT INTO pkg_firewall (ip,action, date, description) VALUES (:ip,1, :date, :obs)";
+
+            }
+            $log = preg_replace("/\"|'/", "", $log);
+            return $log;
+        }
+
+        public function readLogMBilling($ip)
+    {
+
+            $line = LinuxAccess::exec("tac /var/www/html/mbilling/protected/runtime/application.log | egrep -m 10 '" . escapeshellarg($ip) . "' ");
+            $log  = '';
+            foreach ($line as $value) {
+                $logs = explode(" ", $value);
+
+                if (preg_match("/Username or password is wrong/", $value)) {
+                    $log .= $value . "\n";
+                }
+
+            }
+            $log = preg_replace("/\"|'/", "", $log);
+            return $log;
+        }
+
+        public function actionSave()
+    {
+            $values = $this->getAttributesRequest();
+
+            //if is Edit
+            if (isset($values['id']) && $values['id'] > 0) {
+                $sql     = 'SELECT ip FROM pkg_firewall WHERE id = :id';
                 $command = Yii::app()->db->createCommand($sql);
-                $command->bindValue(":ip", $ip, PDO::PARAM_STR);
-                $command->bindValue(":date", $date, PDO::PARAM_STR);
-                $command->bindValue(":obs", $obs, PDO::PARAM_STR);
+                $command->bindValue(":id", $values['id'], PDO::PARAM_STR);
+                $result = $command->queryAll();
+
+                $values['ip'] = $result[0]['ip'];
+
+                if ($values['action'] == 0) {
+                    //add in asterisk-iptables
+                    @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . escapeshellarg($values['ip']));
+
+                    //unbanip
+                    @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . escapeshellarg($values['ip']));
+
+                    @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . escapeshellarg($values['ip']));
+
+                } elseif ($values['action'] == 1) {
+
+                    //unbanip asterisk-iptables
+                    @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . escapeshellarg($values['ip']));
+
+                    //ban in ip-blacklist
+                    @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist banip " . escapeshellarg($values['ip']));
+
+                    //ban in ip-blacklist
+                    @LinuxAccess::exec("sudo fail2ban-client set mbilling_login banip " . escapeshellarg($values['ip']));
+
+                }
+
+                //update status table
+                $sql     = 'UPDATE pkg_firewall SET action = :action WHERE id = :id';
+                $command = Yii::app()->db->createCommand($sql);
+                $command->bindValue(":id", $values['id'], PDO::PARAM_INT);
+                $command->bindValue(":action", $values['action'], PDO::PARAM_STR);
                 $command->execute();
 
+                //generate new blacklist
                 $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
                 $result = Yii::app()->db->createCommand($sql)->queryAll();
 
                 $file = "/var/www/html/mbilling/resources/ip.blacklist";
                 $fp   = fopen($file, "a+");
                 $date = date("d/m/Y H:i:s");
-                LinuxAccess::exec("sudo echo '' > $file");
+                file_put_contents($file, '');
                 foreach ($result as $ip) {
                     fwrite($fp, $ip['ip'] . " [" . $date . "]\n");
                 }
                 fclose($fp);
-            }
-        }
 
-        echo json_encode([
-            $this->nameSuccess => true,
-            $this->nameMsg     => $this->msgSuccess,
-            $this->nameRoot    => [['id' => 0]],
-        ]);
-    }
+            } else {
+//if is save
 
-    public function actionDestroy()
-    {
-        $values = $this->getAttributesRequest();
-        $namePk = 'id';
-        $ids    = [];
+                if ($values['action'] == 0) {
+                    @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables banip " . escapeshellarg($values['ip']));
+                } elseif ($values['action'] == 1) {
 
-        # Se existe a chave 0, indica que existe um array interno (mais de 1 registro selecionado)
-        if (array_key_exists(0, $values)) {
-            # percorre o array para excluir o(s) registro(s)
-            foreach ($values as $value) {
-                array_push($ids, $value[$namePk]);
-            }
-        } else {
-            array_push($ids, $values[$namePk]);
-        }
+                    if (isset($values['ip'])) {
+                        $ip = $values['ip'];
+                    } else {
+                        $sql     = 'SELECT ip FROM pkg_firewall WHERE id = :id';
+                        $command = Yii::app()->db->createCommand($sql);
+                        $command->bindValue(":id", $values['id'], PDO::PARAM_STR);
+                        $result = $command->queryAll();
 
-        foreach ($ids as $value) {
+                        $ip = $result[0]['ip'];
+                    }
+                    $date    = date("Y-m-d H:i:s");
+                    $obs     = 'Permanently IP BlackList';
+                    $sql     = "INSERT INTO pkg_firewall (ip,action, date, description) VALUES (:ip,1, :date, :obs)";
+                    $command = Yii::app()->db->createCommand($sql);
+                    $command->bindValue(":ip", $ip, PDO::PARAM_STR);
+                    $command->bindValue(":date", $date, PDO::PARAM_STR);
+                    $command->bindValue(":obs", $obs, PDO::PARAM_STR);
+                    $command->execute();
 
-            $sql     = 'SELECT * FROM pkg_firewall WHERE id = :id';
-            $command = Yii::app()->db->createCommand($sql);
-            $command->bindValue(":id", $value, PDO::PARAM_STR);
-            $result = $command->queryAll();
+                    $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
+                    $result = Yii::app()->db->createCommand($sql)->queryAll();
 
-            if ($result[0]['action'] == 0) {
-                @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . $result[0]['ip']);
-
-                @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . $result[0]['ip']);
-
-                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . $result[0]['ip']);
-            } elseif ($result[0]['action'] == 1) {
-                $sql     = "DELETE FROM pkg_firewall WHERE ip = :ip";
-                $command = Yii::app()->db->createCommand($sql);
-                $command->bindValue(":ip", $result[0]['ip'], PDO::PARAM_STR);
-                $command->execute();
-
-                @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . $result[0]['ip']);
-
-                @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . $result[0]['ip']);
-
-                $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
-                $result = Yii::app()->db->createCommand($sql)->queryAll();
-
-                $file = "/var/www/html/mbilling/resources/ip.blacklist";
-                $fp   = fopen($file, "a+");
-
-                foreach ($result as $ip) {
-                    fwrite($fp, $ip['ip'] . " [" . $ip['date'] . "]\n");
+                    $file = "/var/www/html/mbilling/resources/ip.blacklist";
+                    $fp   = fopen($file, "a+");
+                    $date = date("d/m/Y H:i:s");
+                    file_put_contents($file, '');
+                    foreach ($result as $ip) {
+                        fwrite($fp, $ip['ip'] . " [" . $date . "]\n");
+                    }
+                    fclose($fp);
                 }
-
-                fclose($fp);
             }
+
+            echo json_encode([
+                $this->nameSuccess => true,
+                $this->nameMsg     => $this->msgSuccess,
+                $this->nameRoot    => [['id' => 0]],
+            ]);
         }
 
-        echo json_encode([
-            $this->nameSuccess => true,
-            $this->nameMsg     => $this->msgSuccess,
-        ]);
+        public function actionDestroy()
+    {
+            $values = $this->getAttributesRequest();
+            $namePk = 'id';
+            $ids    = [];
+
+            # Se existe a chave 0, indica que existe um array interno (mais de 1 registro selecionado)
+            if (array_key_exists(0, $values)) {
+                # percorre o array para excluir o(s) registro(s)
+                foreach ($values as $value) {
+                    array_push($ids, $value[$namePk]);
+                }
+            } else {
+                array_push($ids, $values[$namePk]);
+            }
+
+            foreach ($ids as $value) {
+
+                $sql     = 'SELECT * FROM pkg_firewall WHERE id = :id';
+                $command = Yii::app()->db->createCommand($sql);
+                $command->bindValue(":id", $value, PDO::PARAM_STR);
+                $result = $command->queryAll();
+
+                if ($result[0]['action'] == 0) {
+                    @LinuxAccess::exec("sudo fail2ban-client set asterisk-iptables unbanip " . escapeshellarg($result[0]['ip']));
+
+                    @LinuxAccess::exec("sudo fail2ban-client set mbilling_login unbanip " . escapeshellarg($result[0]['ip']));
+
+                    @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . escapeshellarg($result[0]['ip']));
+                } elseif ($result[0]['action'] == 1) {
+                    $sql     = "DELETE FROM pkg_firewall WHERE ip = :ip";
+                    $command = Yii::app()->db->createCommand($sql);
+                    $command->bindValue(":ip", $result[0]['ip'], PDO::PARAM_STR);
+                    $command->execute();
+
+                    @LinuxAccess::exec("sudo fail2ban-client set ip-blacklist unbanip " . escapeshellarg($result[0]['ip']));
+
+                    @LinuxAccess::exec("sudo fail2ban-client set sshd unbanip " . escapeshellarg($result[0]['ip']));
+
+                    $sql    = 'SELECT * FROM pkg_firewall WHERE action = 1';
+                    $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+                    $file = "/var/www/html/mbilling/resources/ip.blacklist";
+                    $fp   = fopen($file, "a+");
+
+                    foreach ($result as $ip) {
+                        fwrite($fp, $ip['ip'] . " [" . $ip['date'] . "]\n");
+                    }
+
+                    fclose($fp);
+                }
+            }
+
+            echo json_encode([
+                $this->nameSuccess => true,
+                $this->nameMsg     => $this->msgSuccess,
+            ]);
+        }
     }
-}

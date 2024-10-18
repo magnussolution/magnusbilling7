@@ -90,10 +90,31 @@ class DidwwController extends Controller
             exit;
         }
 
-        $result = LinuxAccess::exec("
-        curl -H 'Accept: application/vnd.api+json' \
-        -H  'Api-Key: " . $this->api_key . "' \
-        '" . $this->url . "/available_dids/" . $id_did . "?include=did_group.stock_keeping_units'");
+        $url     = $this->url . "/available_dids/" . $id_did . "?include=did_group.stock_keeping_units";
+        $api_key = $this->api_key;
+
+        // Initialize cURL session
+        $curl = curl_init();
+
+        // Set cURL options
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Accept: application/vnd.api+json',
+            'Api-Key: ' . $api_key,
+        ]);
+
+        // Execute the request and store the result
+        $result = curl_exec($curl);
+
+        // Check for errors
+        if (curl_errno($curl)) {
+            $error_message = curl_error($curl);
+            // Handle the error if needed
+        }
+
+        // Close the cURL session
+        curl_close($curl);
 
         $dids = json_decode($result);
 
@@ -140,15 +161,35 @@ class DidwwController extends Controller
 
         $attributes = json_encode($attributes);
 
-        //order reservation
-        $result = LinuxAccess::exec("
-        curl -H 'Content-Type: application/vnd.api+json' \
-        -H 'Accept: application/vnd.api+json' \
-        -H  'Api-Key: " . $this->api_key . "' \
-        '" . $this->url . "/orders' \
-        -d '" . $attributes . "'
+        $url     = $this->url . "/orders";
+        $api_key = $this->api_key;
+        $data    = $attributes;
 
-        ");
+        // Initialize cURL session
+        $curl = curl_init();
+
+        // Set cURL options
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true); // Use POST method
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data); // Set the data to be sent
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/vnd.api+json',
+            'Accept: application/vnd.api+json',
+            'Api-Key: ' . $api_key,
+        ]);
+
+        // Execute the request and store the result
+        $result = curl_exec($curl);
+
+        // Check for errors
+        if (curl_errno($curl)) {
+            $error_message = curl_error($curl);
+            // Handle the error if needed
+        }
+
+        // Close the cURL session
+        curl_close($curl);
 
         $order = json_decode($result);
 
@@ -177,10 +218,32 @@ class DidwwController extends Controller
         if ( ! is_numeric($id_city)) {
             exit;
         }
-        $result = LinuxAccess::exec("
-        curl -H 'Accept: application/vnd.api+json' \
-        -H  'Api-Key: " . $this->api_key . "' \
-        '" . $this->url . "/available_dids?filter\[city.id\]=" . $id_city . "'");
+
+        $url     = $this->url . "/available_dids?filter[city.id]=" . $id_city;
+        $api_key = $this->api_key;
+
+        // Initialize cURL session
+        $curl = curl_init();
+
+        // Set cURL options
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Accept: application/vnd.api+json',
+            'Api-Key: ' . $api_key,
+        ]);
+
+        // Execute the request and store the result
+        $result = curl_exec($curl);
+
+        // Check for errors
+        if (curl_errno($curl)) {
+            $error_message = curl_error($curl);
+            // Handle the error if needed
+        }
+
+        // Close the cURL session
+        curl_close($curl);
 
         $dids = json_decode($result);
 
@@ -211,10 +274,31 @@ class DidwwController extends Controller
 
             $url = $this->url . "/cities?filter\[country.id\]=" . $country_id . '&page\[number\]=' . $i;
 
-            $result_url = LinuxAccess::exec("
-            curl -H 'Accept: application/vnd.api+json' \
-                 -H  'Api-Key: " . $this->api_key . "' \
-                 '$url'");
+            $api_key = $this->api_key;
+            $url     = $url; // Assuming $url is already defined earlier
+
+            // Initialize cURL session
+            $curl = curl_init();
+
+            // Set cURL options
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                'Accept: application/vnd.api+json',
+                'Api-Key: ' . $api_key,
+            ]);
+
+            // Execute the request and store the result
+            $result_url = curl_exec($curl);
+
+            // Check for errors
+            if (curl_errno($curl)) {
+                $error_message = curl_error($curl);
+                // Handle the error if needed
+            }
+
+            // Close the cURL session
+            curl_close($curl);
 
             $did_groups = json_decode($result_url);
 
@@ -245,10 +329,31 @@ class DidwwController extends Controller
     public function getCountries()
     {
 
-        $result = LinuxAccess::exec("
-        curl -H 'Accept: application/vnd.api+json' \
-             -H  'Api-Key: " . $this->api_key . "' \
-             '" . $this->url . "/countries'");
+        $url     = $this->url . "/countries";
+        $api_key = $this->api_key;
+
+        // Initialize cURL session
+        $curl = curl_init();
+
+        // Set cURL options
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Accept: application/vnd.api+json',
+            'Api-Key: ' . $api_key,
+        ]);
+
+        // Execute the request and store the result
+        $result = curl_exec($curl);
+
+        // Check for errors
+        if (curl_errno($curl)) {
+            $error_message = curl_error($curl);
+            // Handle the error if needed
+        }
+
+        // Close the cURL session
+        curl_close($curl);
 
         if (strlen($result)) {
 

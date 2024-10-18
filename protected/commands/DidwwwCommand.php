@@ -35,12 +35,36 @@ class DidwwwCommand extends ConsoleCommand
                 continue;
             }
 
-            $result = LinuxAccess::exec("
-                curl -H 'Content-Type: application/vnd.api+json' \
-                -H 'Accept: application/vnd.api+json' \
-                -H  'Api-Key: " . $api_key . "' \
-                '" . $url . "/orders/" . $order_id[1] . "'
-                ");
+            $api_key  = $this->api_key; // Assuming $this->api_key is already defined
+            $order_id = $order_id[1]; // Assuming $order_id is an array and you want the second element
+            $url      = $url; // Assuming $url is already defined
+
+            // Initialize cURL session
+            $curl = curl_init();
+
+            // Set the complete URL
+            $complete_url = $url . "/orders/" . $order_id;
+
+            // Set cURL options
+            curl_setopt($curl, CURLOPT_URL, $complete_url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/vnd.api+json',
+                'Accept: application/vnd.api+json',
+                'Api-Key: ' . $api_key,
+            ]);
+
+            // Execute the request and store the result
+            $result = curl_exec($curl);
+
+            // Check for errors
+            if (curl_errno($curl)) {
+                $error_message = curl_error($curl);
+                // Handle the error as needed (e.g., log it or throw an exception)
+            }
+
+            // Close the cURL session
+            curl_close($curl);
 
             $order = json_decode($result);
 

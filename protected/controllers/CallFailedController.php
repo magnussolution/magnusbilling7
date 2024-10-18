@@ -497,16 +497,23 @@ table.blueTable tfoot .links a{
 
                 if ( ! isset($model->idServer->id) || $model->idServer->type == 'mbilling') {
 
-                    $lines = LinuxAccess::exec('grep ' . $model->calledstation . ' /var/log/asterisk/magnus');
+                    $log_file       = '/var/log/asterisk/magnus';
+                    $called_station = $model->calledstation;
 
-                    if ( ! isset($lines[0])) {
+                    // Read the log file
+                    $lines = file($log_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+                    //$lines = htmlentities($lines[0]);
+
+                    // Filter lines that contain the $called_station value
+                    $matched_lines = array_filter($lines, function ($line) use ($called_station) {
+                        return strpos($line, $called_station) !== false;
+                    });
+
+                    if ( ! count($matched_lines)) {
                         echo "Log not found";
                         exit;
                     }
-
-                    $lines = htmlentities($lines[0]);
-
-                    $ora_books = preg_split('/\n/', $lines);
 
                     echo '<br>';
                     echo '<table class="blueTable" width=100%><tr>';
@@ -518,7 +525,10 @@ table.blueTable tfoot .links a{
                     echo '<th>To tag</th>';
                     echo '<th>Sip Code</th>';
                     echo '<th>Reason</th>';
-                    foreach ($ora_books as $key => $value) {
+                    foreach ($matched_lines as $key => $value) {
+
+                        $value = htmlentities($value);
+
                         $line = explode('|', $value);
                         if ( ! isset($line[1])) {
                             continue;

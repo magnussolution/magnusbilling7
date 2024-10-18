@@ -254,8 +254,10 @@ class IvrController extends Controller
             return;
         }
 
-        LinuxAccess::exec('rm -rf ' . $this->uploaddir . 'idIvrDidWork_' . $_POST['id_ivr'] . '*');
-        LinuxAccess::exec('rm -rf ' . $this->uploaddir . 'idIvrDidNoWork_' . $_POST['id_ivr'] . '*');
+        unlink($this->uploaddir . 'idIvrDidWork_' . $_POST['id_ivr'] . '.gsm');
+        unlink($this->uploaddir . 'idIvrDidNoWork_' . $_POST['id_ivr'] . '.gsm');
+        unlink($this->uploaddir . 'idIvrDidWork_' . $_POST['id_ivr'] . '.wav');
+        unlink($this->uploaddir . 'idIvrDidNoWork_' . $_POST['id_ivr'] . '.wav');
         echo json_encode([
             $this->nameSuccess => true,
             $this->nameMsg     => $this->msgSuccess,

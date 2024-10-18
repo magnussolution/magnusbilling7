@@ -23,7 +23,10 @@ class Process
     public static function isActive()
     {
         $pid = Process::getPID();
-        LinuxAccess::exec("mkdir -p /var/run/magnus/");
+
+        if (mkdir('/var/run/magnus/', 0755, true)) {
+            echo "Diretório criado com sucesso: $directory_path.";
+        }
         if ($pid == null) {
             $ret = false;
         } else {

@@ -21,8 +21,6 @@ class BackupCommand extends ConsoleCommand
 {
     public function run($args)
     {
-
-        LinuxAccess::exec("rm -f /var/wwww/html/mbilling/assets/*");
         $dbString = explode('dbname=', Yii::app()->db->connectionString);
         $dataBase = end($dbString);
 
@@ -36,6 +34,6 @@ class BackupCommand extends ConsoleCommand
         LinuxAccess::exec($comando);
 
         LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch.$data.tgz /tmp/base.sql /etc/asterisk");
-        LinuxAccess::exec("rm -f /tmp/base.sql");
+        unlink("rm -f /tmp/base.sql");
     }
 }

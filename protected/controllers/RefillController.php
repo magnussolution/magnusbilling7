@@ -154,7 +154,9 @@ class RefillController extends Controller
 
         if (isset($_FILES["image"]) && strlen($_FILES["image"]["name"]) > 1) {
 
-            LinuxAccess::exec('rm -rf resources/images/refill/' . $model->id . '*');
+            unlink('/var/www/html/mbilling/resources/images/refill/' . $model->id . '.png');
+            unlink('/var/www/html/mbilling/resources/images/refill/' . $model->id . '.jpeg');
+            unlink('/var/www/html/mbilling/resources/images/refill/' . $model->id . '.jpg');
 
             $typefile = Util::valid_extension($_FILES["image"]["name"], ['png', 'jpeg', 'jpg']);
 
