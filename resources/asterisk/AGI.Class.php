@@ -336,11 +336,7 @@ class AGI extends PDO
             $level = 1;
         }
 
-        error_log("verbose start2\n\n", 3, "/var/log/my-errors.log");
-
         foreach (explode("\n", str_replace("\r\n", "\n", print_r($message, true))) as $msg) {
-            //@syslog(LOG_WARNING, $msg);
-            error_log("request VERBOSE start2\n\n", 3, "/var/log/my-errors.log");
             $ret = $this->evaluate("VERBOSE \"$msg\" $level");
         }
         return $ret;
