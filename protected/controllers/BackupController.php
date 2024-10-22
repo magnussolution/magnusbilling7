@@ -137,24 +137,11 @@ class BackupController extends Controller
 
     public function actionSave()
     {
-        if (Yii::app()->session['isAdmin'] != true || ! Yii::app()->session['id_user']) {
-            exit;
-        }
-        $dbString = explode('dbname=', Yii::app()->db->connectionString);
-        $dataBase = end($dbString);
-
-        $username = Yii::app()->db->username;
-        $password = Yii::app()->db->password;
-        $data     = date("d-m-Y");
-        $comando  = "mysqldump -u" . escapeshellarg($username) . " -p" . escapeshellarg($password) . " " . escapeshellarg($dataBase) . " --ignore-table=" . escapeshellarg($dataBase) . ".pkg_portabilidade --ignore-table=" . escapeshellarg($dataBase) . ".pkg_cdr_archive --ignore-table=" . escapeshellarg($dataBase) . ".pkg_cdr_failed > /tmp/base.sql";
-        LinuxAccess::exec($comando);
-        LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch." . escapeshellarg($data) . ".tgz /tmp/base.sql /etc/asterisk");
-        unlink("/tmp/base.sql");
 
         echo json_encode([
             $this->nameSuccess => $this->success,
             $this->nameRoot    => $this->attributes,
-            $this->nameMsg     => $this->msg . ' Backup in process, this task can spend many time to finish.',
+            $this->nameMsg     => $this->msg . 'This option has been discontinued. To create a new backup, run the following command via SSH: php /var/www/html/mbilling/cron.php Backup',
         ]);
 
     }
