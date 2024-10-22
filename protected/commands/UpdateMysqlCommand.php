@@ -2031,6 +2031,17 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $this->update($version);
         }
 
+        //2024-10-23
+        if ($version == '7.8.4.7') {
+            $sql = "DELETE FROM pkg_group_module WHERE id_module = (SELECT id FROM pkg_module WHERE module = 'firewall')";
+            $this->executeDB($sql);
+
+            $sql = "DELETE FROM pkg_module WHERE module = 'firewall'";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.8';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

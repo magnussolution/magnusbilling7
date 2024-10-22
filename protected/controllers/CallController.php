@@ -206,24 +206,37 @@ class CallController extends Controller
                 unlink('/var/www/html/mbilling/tmp/' . $uniqueid . '.gsm');
                 exit;
             }
-            $files = scandir("/var/spool/asterisk/monitor/" . $modelCall->idUser->username . '/*.' . trim($uniqueid) . '* ');
 
-            if (isset($output[0])) {
+            $directory       = "/var/spool/asterisk/monitor/" . $modelCall->idUser->username;
+            $uniqueidPattern = trim($uniqueid);
 
-                if (isset($output[1]) && filesize($output[1]) > filesize($output[0])) {
-                    $output[0] = $output[1];
+            if ($handle = opendir($directory)) {
+                while (false !== ($file = readdir($handle))) {
+
+                    if ($file != "." && $file != "..") {
+
+                        if (preg_match("/\." . $uniqueidPattern . "\./", $file)) {
+
+                            $filePath = $directory . "/" . $file;
+
+                            if (file_exists($filePath)) {
+                                $filefound = true;
+                                header('Content-Description: File Transfer');
+                                header('Content-Type: application/octet-stream');
+                                header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
+                                header('Expires: 0');
+                                header('Cache-Control: must-revalidate');
+                                header('Pragma: public');
+                                header('Content-Length: ' . filesize($filePath));
+                                readfile($filePath);
+                                exit;
+                            }
+                        }
+                    }
                 }
-
-                $file_name = explode("/", $output[0]);
-
-                header("Cache-Control: public");
-                header("Content-Description: File Transfer");
-                header("Content-Disposition: attachment; filename=" . end($file_name));
-                header("Content-Type: audio/x-gsm");
-                header("Content-Transfer-Encoding: binary");
-                readfile($output[0]);
-
-            } else {
+                closedir($handle);
+            }
+            if ( ! isset($filefound)) {
 
                 if (strlen($this->config['global']['external_record_link']) > 20) {
                     $url = $this->config['global']['external_record_link'];
