@@ -766,12 +766,6 @@ findtime  = 15552000
 bantime   = -1
 
 
-[apache-auth]
-enabled = true
-port = http,https
-logpath = /var/log/apache2/error.log
-maxretry = 5
-
 [ssh]
 enablem=true
 backend=systemd
