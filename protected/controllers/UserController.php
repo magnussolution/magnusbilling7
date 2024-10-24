@@ -88,7 +88,6 @@ class UserController extends Controller
         'credit',
         'id_user',
         'id_group_agent',
-        'calllimit',
         'restriction',
         'restriction_use',
     ];
