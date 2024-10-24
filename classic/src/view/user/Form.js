@@ -392,7 +392,7 @@ Ext.define('MBilling.view.user.Form', {
                     defaults: {
                         labelAlign: 'right',
                         hidden: !haveServiceMenu,
-                        readOnly: !App.user.isAdmin,
+                        readOnly: App.user.isClient,
                         allowBlank: true,
                         flex: 1
                     },
