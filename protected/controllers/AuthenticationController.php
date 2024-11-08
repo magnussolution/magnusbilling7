@@ -316,12 +316,31 @@ class AuthenticationController extends Controller
         }
 
         if (Yii::app()->session['isClientAgent']) {
-            $logo = file_exists('resources/images/logo_custom_' . Yii::app()->session['id_agent'] . '.png') ? 'resources/images/logo_custom_' . Yii::app()->session['id_agent'] . '.png' : 'resources/images/logo.png';
+
+            if (file_exists('resources/images/logo_custom_' . Yii::app()->session['id_agent'] . '.png')) {
+                $logo = 'resources/images/logo_custom_' . Yii::app()->session['id_agent'] . '.png';
+            } else {
+                if (file_exists('resources/images/logo_custom.png')) {
+                    $logo = 'resources/images/logo_custom.png';
+                } else {
+                    $logo = 'resources/images/logo.png';
+                }
+            }
         } else if (Yii::app()->session['isAgent']) {
-            $logo = file_exists('resources/images/logo_custom_' . Yii::app()->session['id_user'] . '.png') ? 'resources/images/logo_custom_' . Yii::app()->session['id_user'] . '.png' : 'resources/images/logo.png';
+
+            if (file_exists('resources/images/logo_custom_' . Yii::app()->session['id_user'] . '.png')) {
+                $logo = 'resources/images/logo_custom_' . Yii::app()->session['id_user'] . '.png';
+            } else {
+                if (file_exists('resources/images/logo_custom.png')) {
+                    $logo = 'resources/images/logo_custom.png';
+                } else {
+                    $logo = 'resources/images/logo.png';
+                }
+            }
         } else {
             $logo = file_exists('resources/images/logo_custom.png') ? 'resources/images/logo_custom.png' : 'resources/images/logo.png';
         }
+
         echo json_encode([
             'id'                       => $id_user,
             'id_agent'                 => $id_agent,
