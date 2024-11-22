@@ -84,15 +84,6 @@ Bloquear endereço de IP
 
 Salvar mudanças
 ^^^^^^^^^^^^^
-
-Centos
-::
-     
-  service iptables save
-
-Debian / Ubuntu
-
-::
      
 	apt-get install iptables-persistent
 	service iptables-persistent save

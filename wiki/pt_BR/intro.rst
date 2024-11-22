@@ -6,7 +6,7 @@ Introdução
 
 `MagnusBilling`_  é uma ferramenta de software livre escrita em PHP e JAVASCRIPT, usando os frameworks EXTJS 6 e YII FRAMEWORK, destinada a provedores de telefonia IP MagnusBilling provê um sistema completo, realmente potente, para qualquer pessoa possa iniciar um provedor de telefonia IP em questão de minutos. MagnusBilling usa `Asterisk`_ para conexão entre clientes e provedores. 
 
-* MagnusBilling pode ser instalado em Linux Centos 7 ou Debian 10.
+* MagnusBilling pode ser instalado em Linux Debian .
 
 * MagnusBilling tem uma interface moderna e robusta que torna muito fácil a administração de todas as funções.
 
@@ -25,16 +25,15 @@ Funções suportadas
 ==================
 
 +-------------------------+-----------------------+-----------------------+----------------------+
-| SoftSwitch 4 & 4        | Envio de SMS          | Pacotes grátis de min | Paypal               |
+| SoftSwitch 4 & 4        |   Ivr                 | Pacotes grátis de min | Paypal               |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| Torpedo de voz          | CallShop              | Pré e pós pago        | Pagseguro            |
+|  CallBack               | CallShop              | Pré e pós pago        | Pagseguro            |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| CallingCard             | CidCallBack           | Venda de serviços     | Moip                 |
+| CallingCard             | CidCallBack           | Venda de serviços     |  Fila de espera      |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| Gerenciamento de DID    | Ivr                   | SIP e IAX             | GerenciaNet          |
+| Gerenciamento de DID    | SIP e IAX             |    e muito mais...     
 +-------------------------+-----------------------+-----------------------+----------------------+
-| CallBack                | Fila de espera        | URA reversa           | e muito mais...      |
-+-------------------------+-----------------------+-----------------------+----------------------+
+
 
 .. _Asterisk: http://www.asterisk.org
 .. _Canal youtube: https://www.youtube.com/channel/UCish_6Lxfkh29n4CLVEd90Q

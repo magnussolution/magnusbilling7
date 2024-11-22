@@ -6,7 +6,7 @@ Introduction
 
 `MagnusBilling`_ is an open source tool written in PHP and JAVASCRIPT, using the EXTJS 6 and YII FRAMEWORK frameworks, aimed at IP telephony providers. MagnusBilling provides a complete and powerful system for anyone to start an IP telephony provider in a matter of minutes. MagnusBilling uses `Asterisk`_ for connection between customers and providers.
 
-* MagnusBilling can be installed on Linux, Centos 7 or Debian 10.
+* MagnusBilling can be installed on Linux, Debian.
 
 * MagnusBilling has a modern and robust interface that makes the administration of all functions very easy to understand.
 
@@ -24,16 +24,15 @@ Supported functions
 ==================
 
 +-------------------------+-----------------------+-----------------------+----------------------+
-| SoftSwitch 4 & 4        | SMS                   | Packages offer        | Paypal               |
+| SoftSwitch 4 & 4        | CallBack              | Packages offer        | Paypal               |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| VoiceBroadcasting       | CallShop              | Pre and pos           | Pagseguro            |
+| Queus                   | CallShop              | Pre and pos           | Pagseguro            |
 +-------------------------+-----------------------+-----------------------+----------------------+
-| CallingCard             | CidCallBack           | Services              | Moip                 |
+| CallingCard             | CidCallBack           | Services              |    Ivr               |
 +-------------------------+-----------------------+-----------------------+----------------------+
-|  DID numbers            | Ivr                   | SIP & IAX             | GerenciaNet          |
+|  DID numbers            | SIP & IAX             |            and more...  
 +-------------------------+-----------------------+-----------------------+----------------------+
-| CallBack                | Queus                 | Reverse URA           | and more...          |
-+-------------------------+-----------------------+-----------------------+----------------------+
+
 
 .. _Asterisk: http://www.asterisk.org
 .. _Canal youtube: https://www.youtube.com/channel/UCish_6Lxfkh29n4CLVEd90Q
