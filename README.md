@@ -18,7 +18,7 @@ Video:
 
 ### Prerequisites
 
-Linux Debian 11 or Centos 7. Recomended DEBIAN 11
+Linux Debian. Recomended DEBIAN
 
 
 ### Installing
