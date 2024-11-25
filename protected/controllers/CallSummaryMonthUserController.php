@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Call".
  *
@@ -39,8 +40,6 @@ class CallSummaryMonthUserController extends Controller
     public $fieldsInvisibleAgent = [
         'buycost',
         'sumbuycost',
-        'sumlucro',
-        'lucro',
     ];
 
     public function init()

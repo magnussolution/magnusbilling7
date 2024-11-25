@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Call".
  *
@@ -39,8 +40,6 @@ class CallSummaryDayUserController extends Controller
     public $fieldsInvisibleAgent = [
         'buycost',
         'sumbuycost',
-        'sumlucro',
-        'lucro',
     ];
 
     public function init()
@@ -126,7 +125,7 @@ class CallSummaryDayUserController extends Controller
     public function actionExportCsvCalls()
     {
 
-        if ( ! Yii::app()->session['isAdmin']) {
+        if (! Yii::app()->session['isAdmin']) {
             exit;
         }
 
