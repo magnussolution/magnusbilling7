@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Plan".
  *
@@ -38,7 +39,7 @@ class PlayAudioController extends Controller
             $file_name = $this->magnusFilesDirectory . 'sounds/' . $_GET['audio'];
         }
 
-        if ( ! file_exists($file_name)) {
+        if (! file_exists($file_name)) {
             exit('<center><br>' . Yii::t('zii', 'File not found') . '</center>');
         }
         if (preg_match('/gsm/', $file_name)) {
@@ -49,12 +50,10 @@ class PlayAudioController extends Controller
             header("Content-Transfer-Encoding: binary");
             readfile($file_name);
         } else {
-            copy(preg_replace('/ /', '', $file_name), '/var/www/html/mbilling/tmp/');
+            copy(preg_replace('/ /', '', $file_name), '/var/www/html/mbilling/tmp/' . $_GET['audio']);
             echo '<body style="margin:0px;padding:0px;overflow:hidden">
                             <iframe src="../../tmp/' . $_GET['audio'] . '" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
                         </body>';
         }
-
     }
-
 }
