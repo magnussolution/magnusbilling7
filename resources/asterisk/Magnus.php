@@ -1,4 +1,5 @@
 <?php
+
 /**
  * =======================================
  * ###################################
@@ -151,12 +152,10 @@ class Magnus
             if ($mod_sec > 0) {
                 $ratecallduration += ($increment - $mod_sec);
             }
-
         }
         $ratecost = ($ratecallduration / 60) * $buyrate;
         $ratecost = $ratecost;
         return $ratecost;
-
     }
     //hangup($agi);
     public function hangup(&$agi, $code = '')
@@ -207,8 +206,7 @@ class Magnus
     {
         $res               = 0;
         $prompt_enter_dest = 'prepaid-enter-dest';
-        $msg               = "use_dnid:" . $this->agiconfig['use_dnid'] . " && len_dnid:(" . strlen($this->
-                dnid) . " || len_exten:" . strlen($this->extension) . " ) && (try_num:$try_num)";
+        $msg               = "use_dnid:" . $this->agiconfig['use_dnid'] . " && len_dnid:(" . strlen($this->dnid) . " || len_exten:" . strlen($this->extension) . " ) && (try_num:$try_num)";
         $agi->verbose($msg, 15);
 
         if (($this->agiconfig['use_dnid'] == 1) && $try_num == 0) {
@@ -306,7 +304,7 @@ class Magnus
             }
         }
 
-        if ( ! $res_all_calcultimeout) {
+        if (! $res_all_calcultimeout) {
             $this->executePlayAudio("prepaid-no-enough-credit", $agi);
             return false;
         }
@@ -408,7 +406,6 @@ class Magnus
                 } else {
                     $agi->stream_file($cent_audio, '#');
                 }
-
             }
         }
     }
@@ -425,7 +422,6 @@ class Magnus
             } else {
                 $agi->say_number($array[$i]);
             }
-
         }
         if ($cents) {
             $agi->stream_file('prepaid-cents', '#');
@@ -574,7 +570,6 @@ class Magnus
         $modelOfferCdr = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
         return isset($modelOfferCdr->used_secondes) ? $modelOfferCdr->used_secondes : 0;
-
     }
 
     public function check_expirationdate_customer($agi)
@@ -589,9 +584,7 @@ class Magnus
                 $sql    = "UPDATE pkg_user SET active = 0 WHERE id = " . $this->id_user;
                 $agi->verbose($sql, 25);
                 $agi->exec($sql);
-
             }
-
         }
         return $prompt;
     }
@@ -649,16 +642,13 @@ class Magnus
                     $destination = preg_replace('/^' . $grab . '/', $replace, $destination);
                     break;
                 }
-
             } else if (strlen($destination) == $digit) {
                 if ($grab == '*' && strlen($destination) == $digit) {
                     $destination = $replace . $destination;
                     break;
-
                 } else if ($number_prefix == $grab) {
                     $destination = $replace . substr($destination, strlen($grab));
                     break;
-
                 }
             }
         }
@@ -680,7 +670,6 @@ class Magnus
                 $agi->verbose($prompt, 3);
                 $agi->answer();
                 $agi->stream_file($prompt, '#');
-
             }
         }
     }
@@ -743,7 +732,7 @@ class Magnus
                 }
             } else if ($this->restriction == 2) {
                 /* ALLOW TO CALL ONLY RESTRICTED NUMBERS */
-                if ( ! isset($modelRestrictedPhonenumber->id)) {
+                if (! isset($modelRestrictedPhonenumber->id)) {
                     /*NUMBER NOT AUHTORIZED*/
                     $agi->verbose("NUMBER NOT AUHTORIZED - ALLOW TO CALL ONLY RESTRICTED NUMBERS", 1);
                     if ($this->play_audio == 1) {
@@ -766,7 +755,6 @@ class Magnus
                 $command_mixmonitor = "MixMonitor /var/spool/asterisk/monitor/$this->accountcode/{$addicional}-{$this->CallerID}.{$this->uniqueid}." . $this->mix_monitor_format . ",b";
             } else {
                 $command_mixmonitor = "MixMonitor /var/spool/asterisk/monitor/$this->accountcode/{$this->sip_account}-{$this->destination}{$addicional}.{$this->uniqueid}." . $this->mix_monitor_format . ",b";
-
             }
             $agi->execute($command_mixmonitor);
             $agi->verbose($command_mixmonitor, 6);
@@ -787,18 +775,18 @@ class Magnus
             if ($dialstatus == "BUSY") {
                 $answeredtime = 0;
                 $agi->answer();
-                $agi->execute(VoiceMail, $this->destination . "@billing,b");
+                $agi->execute('VoiceMail ' . $this->destination . "@billing,b");
             } elseif ($dialstatus == "NOANSWER") {
                 $answeredtime = 0;
                 $agi->answer();
-                $agi->execute(VoiceMail, $this->destination . "@billing");
+                $agi->execute('VoiceMail ' . $this->destination . "@billing");
             } elseif ($dialstatus == "CANCEL") {
                 $answeredtime = 0;
             }
             if (($dialstatus == "CHANUNAVAIL") || ($dialstatus == "CONGESTION")) {
-                $agi->verbose("CHANNEL UNAVAILABLE - GOTO VOICEMAIL ($dest_username)", 6);
+                $agi->verbose("CHANNEL UNAVAILABLE - GOTO VOICEMAIL ($this->destination)", 6);
                 $agi->answer();
-                $agi->execute(VoiceMail, $this->destination . '@billing,u');
+                $agi->execute('VoiceMail ' . $this->destination . '@billing,u');
             }
         }
         return $answeredtime;
@@ -816,7 +804,6 @@ class Magnus
             if ($mod_sec > 0) {
                 $sessiontime += ($billingblock - $mod_sec);
             }
-
         }
         return ($sessiontime / 60) * $sell;
     }
@@ -891,7 +878,6 @@ class Magnus
                 $countUsername  = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
                 $existsUsername = ($countUsername->count > 0);
             }
-
         }
         return trim($randUserName);
     }
@@ -917,5 +903,4 @@ class Magnus
 
         return $password;
     }
-
 }
