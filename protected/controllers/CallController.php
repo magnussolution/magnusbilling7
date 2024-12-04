@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Call".
  *
@@ -74,8 +75,7 @@ class CallController extends Controller
             'table'       => 'pkg_prefix',
             'pk'          => 'id',
             'fieldReport' => 'destination',
-        ]
-        ,
+        ],
         'id_campaign' => [
             'table'       => 'pkg_campaign',
             'pk'          => 'id',
@@ -96,7 +96,7 @@ class CallController extends Controller
 
         parent::init();
 
-        if ( ! Yii::app()->session['isAdmin']) {
+        if (! Yii::app()->session['isAdmin']) {
             $this->extraValues = [
                 'idUser'   => 'username',
                 'idPlan'   => 'name',
@@ -167,7 +167,7 @@ class CallController extends Controller
                 $modelCall = Call::model()->findByPk((int) $_GET['id']);
             }
 
-            if ( ! isset($modelCall->id)) {
+            if (! isset($modelCall->id)) {
                 echo yii::t('zii', 'Audio no found');
                 exit;
             }
@@ -236,7 +236,7 @@ class CallController extends Controller
                 }
                 closedir($handle);
             }
-            if ( ! isset($filefound)) {
+            if (! isset($filefound)) {
 
                 if (strlen($this->config['global']['external_record_link']) > 20) {
                     $url = $this->config['global']['external_record_link'];
@@ -270,7 +270,7 @@ class CallController extends Controller
 
             $folder = $this->magnusFilesDirectory . 'monitor';
 
-            if ( ! file_exists($folder)) {
+            if (! file_exists($folder)) {
                 mkdir($folder, 0777, true);
             }
             array_map('unlink', glob("$folder/*"));
@@ -313,7 +313,6 @@ class CallController extends Controller
                 flush();
                 readfile($tarFile . '.gz');
                 unlink($tarFile . '.gz');
-
             } else {
                 echo json_encode([
                     $this->nameSuccess => false,
@@ -332,7 +331,7 @@ class CallController extends Controller
             $filterCampaign = json_decode($_GET['filter']);
 
             foreach ($filterCampaign as $f) {
-                if ( ! isset($f->type) || $f->field != 'id_campaign') {
+                if (! isset($f->type) || $f->field != 'id_campaign') {
                     continue;
                 }
                 if (count($f->value) > 1) {
@@ -383,7 +382,6 @@ class CallController extends Controller
                 $this->limit          = 1;
                 $this->titleReport    = "Estatistica da campanha $nameCampaign";
                 $this->subTitleReport = "Total de chamadas $count";
-
             }
         }
 
@@ -422,12 +420,12 @@ class CallController extends Controller
     public function actionCsv()
     {
 
-        if ( ! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
+        if (! AccessManager::getInstance($this->instanceModel->getModule())->canRead()) {
             header('HTTP/1.0 401 Unauthorized');
             die("Access denied to read in module:" . $this->instanceModel->getModule());
         }
 
-        if ( ! isset(Yii::app()->session['id_user'])) {
+        if (! isset(Yii::app()->session['id_user'])) {
             $info = 'User try export CSV without login';
             MagnusLog::insertLOG(7, $info);
             exit;
@@ -521,14 +519,14 @@ class CallController extends Controller
 
             $condition = '1';
 
-            if ( ! is_array($filter)) {
+            if (! is_array($filter)) {
                 return $condition;
             }
 
             foreach ($filter as $key => $f) {
                 $isSubSelect = false;
 
-                if ( ! isset($f->type)) {
+                if (! isset($f->type)) {
                     continue;
                 }
 
@@ -596,7 +594,6 @@ class CallController extends Controller
                                             'condition' => "$field LIKE '" . $value . "%'",
                                         ];
                                     }
-
                                 } else {
                                     $condition .= " AND $field LIKE '" . $value . "%'";
                                 }
@@ -640,9 +637,8 @@ class CallController extends Controller
                                             ];
                                         }
                                     } else {
-                                        $condition .= " AND LOWER($field) LIKE %" . strtolower($value) . "%";
+                                        $condition .= " AND LOWER($field) LIKE '%" . strtolower($value) . "%'";
                                     }
-
                                 }
                                 break;
                             case 'eq':
@@ -664,14 +660,14 @@ class CallController extends Controller
 
                         break;
                     case 'boolean':
-                        if ( ! is_numeric($value)) {
+                        if (! is_numeric($value)) {
                             echo 'Invalid Filter';
                             exit;
                         }
                         $condition .= " AND $field = " . (int) $value . " ";
                         break;
                     case 'numeric':
-                        if ( ! is_numeric($value)) {
+                        if (! is_numeric($value)) {
                             echo 'Invalid Filter';
                             exit;
                         }
@@ -727,7 +723,7 @@ class CallController extends Controller
 
                         foreach ($value as $keyIn => $v) {
 
-                            if ( ! is_numeric($v)) {
+                            if (! is_numeric($v)) {
                                 echo 'Invalid Filter';
                                 exit;
                             }
@@ -743,10 +739,8 @@ class CallController extends Controller
             }
 
             return $condition;
-
         } else {
             return parent::createCondition($filter);
         }
     }
-
 }
