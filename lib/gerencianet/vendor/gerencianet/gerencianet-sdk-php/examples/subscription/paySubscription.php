@@ -1,11 +1,11 @@
 <?php
 
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 use Gerencianet\Exception\GerencianetException;
 use Gerencianet\Gerencianet;
 
-$file = file_get_contents(__DIR__.'/../config.json');
+$file = file_get_contents(__DIR__ . '/../config.json');
 $options = json_decode($file, true);
 unset($options['pix_cert']);
 
@@ -15,9 +15,9 @@ $paymentToken = 'payment_token';
 
 $customer = [
   'name' => 'Gorbadoc Oldbuck',
-  'cpf' => '04267484171' ,
+  'cpf' => '04267484171',
   'phone_number' => '5144916523',
-  'email' => 'oldbuck@gerencianet.com.br',
+  'email' => 'oldbuckapi.efipay.com.br',
   'birth' => '1977-01-15'
 ];
 
@@ -41,14 +41,14 @@ $body = [
 ];
 
 try {
-    $api = new Gerencianet($options);
-    $subscription = $api->paySubscription($params, $body);
+  $api = new Gerencianet($options);
+  $subscription = $api->paySubscription($params, $body);
 
-    print_r($subscription);
+  print_r($subscription);
 } catch (GerencianetException $e) {
-    print_r($e->code);
-    print_r($e->error);
-    print_r($e->errorDescription);
+  print_r($e->code);
+  print_r($e->error);
+  print_r($e->errorDescription);
 } catch (Exception $e) {
-    print_r($e->getMessage());
+  print_r($e->getMessage());
 }

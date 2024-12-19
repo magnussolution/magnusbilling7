@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Override default Controller methods.
  *
@@ -54,7 +55,7 @@ class Controller extends BaseController
             'buyCredit',
             'callApp',
             'clicToCall',
-            'gerencianet',
+            'efi',
             'joomla',
             'mBillingSoftphone',
             'moip',
@@ -74,5 +75,4 @@ class Controller extends BaseController
         }
         return in_array($this->controllerName, $allow);
     }
-
 }

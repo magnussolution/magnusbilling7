@@ -1,7 +1,7 @@
 # SDK GERENCIANET FOR PHP
 
 Sdk for Gerencianet Pagamentos' API.
-For more informations about parameters and values, please refer to [Gerencianet](http://gerencianet.com.br) documentation.
+For more informations about parameters and values, please refer to [Gerencianet](https://sejaefi.com.br) documentation.
 
 [![Build Status](https://travis-ci.org/gerencianet/gn-api-sdk-php.svg)](https://travis-ci.org/gerencianet/gn-api-sdk-php)
 [![Code Climate](https://codeclimate.com/github/gerencianet/gn-api-sdk-php/badges/gpa.svg)](https://codeclimate.com/github/gerencianet/gn-api-sdk-php)
@@ -101,7 +101,7 @@ Then open any example in your browser.
 
 ## Additional Documentation
 
-The full documentation with all available endpoints is in https://dev.gerencianet.com.br/.
+The full documentation with all available endpoints is in https://sejaefi.com.br/.
 
 ## License ##
 [MIT](LICENSE)

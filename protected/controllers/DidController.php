@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Did".
  *
@@ -272,7 +273,6 @@ class DidController extends Controller
                 $mail->replaceInEmail(Mail::$DID_COST_KEY, '-' . $modelDid->fixrate);
                 $mail->send();
             }
-
         }
         $success          = true;
         $this->msgSuccess = Yii::t('zii', 'The DID has been activated for you.');
@@ -341,7 +341,6 @@ class DidController extends Controller
                         $description = Yii::t('zii', 'Activation DID') . ' ' . $modelDid->did;
 
                         UserCreditManager::releaseUserCredit($id_user, $credit, $description, 0);
-
                     }
 
                     $mail = new Mail(Mail::$TYPE_DID_CONFIRMATION, $id_user);
@@ -434,7 +433,6 @@ class DidController extends Controller
                     }
                 }
             }
-
         }
     }
 
@@ -473,7 +471,8 @@ class DidController extends Controller
                         [
                             'reserved' => 0,
                             'id_user'  => null,
-                        ]);
+                        ]
+                    );
 
                     Diddestination::model()->deleteAll("id_did = :key", [':key' => $id]);
 
@@ -494,7 +493,6 @@ class DidController extends Controller
                         try {
                             $modelDidHistory->save();
                         } catch (Exception $e) {
-
                         }
                     }
 
@@ -507,8 +505,12 @@ class DidController extends Controller
                         [
                             ':key'  => $id,
                             ':key1' => '0000-00-00 00:00:00',
-                        ]);
+                        ]
+                    );
 
+                    $info    = 'DID ' . $modelDid->did . ' was released User: ' . Yii::app()->session['username'] . ' IP: ' . $_SERVER['REMOTE_ADDR'];
+                    Yii::log($info, 'error');
+                    MagnusLog::insertLOG(1, $info);
                 }
             }
 
@@ -541,7 +543,6 @@ class DidController extends Controller
                 CallSummaryMonthDid::model()->deleteAll("id_did = :key", [':key' => $modelDid->id]);
                 DidUse::model()->deleteAll("id_did = :key", [':key' => $modelDid->id]);
             }
-
         }
 
         return $values;
