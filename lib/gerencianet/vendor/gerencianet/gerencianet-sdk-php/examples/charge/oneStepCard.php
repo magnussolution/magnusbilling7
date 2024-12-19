@@ -24,7 +24,7 @@ $customer = [
    'name' => 'Gorbadoc Oldbuck',
    'cpf' => '04267484171',
    'phone_number' => '5144916523',
-   'email' => 'oldbuck@gerencianet.com.br',
+   'email' => 'oldbuck@api.efipay.com.br',
    'birth' => '1977-01-15'
 ];
 $billingAddress = [

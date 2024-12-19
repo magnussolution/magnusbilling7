@@ -1,16 +1,16 @@
 {
   "URL": {
-    "DEFAULT" : {
-      "production": "https://api.gerencianet.com.br",
-      "sandbox": "https://sandbox.gerencianet.com.br"
+    "DEFAULT": {
+      "production": "https://cobrancas.api.efipay.com.br",
+      "sandbox": "https://sandbox.api.efipay.com.br"
     },
     "PIX": {
-      "production": "https://api-pix.gerencianet.com.br",
-      "sandbox": "https://api-pix-h.gerencianet.com.br"
+      "production": "https://pix.api.efipay.com.br",
+      "sandbox": "https://pix-h.api.efipay.com.br"
     }
   },
   "ENDPOINTS": {
-    "DEFAULT" : {
+    "DEFAULT": {
       "authorize": {
         "route": "/v1/authorize",
         "method": "post"
@@ -165,24 +165,22 @@
         "route": "/oauth/token",
         "method": "post"
       },
-
       "pixConfigWebhook": {
-          "route": "/v2/webhook/:chave",
-          "method": "put"
+        "route": "/v2/webhook/:chave",
+        "method": "put"
       },
       "pixGetWebhook": {
-          "route": "/v2/webhook/:chave",
-          "method": "get"
+        "route": "/v2/webhook/:chave",
+        "method": "get"
       },
       "pixListWebhook": {
-          "route": "/v2/webhook",
-          "method": "get"
+        "route": "/v2/webhook",
+        "method": "get"
       },
       "pixDeleteWebhook": {
-          "route": "/v2/webhook/:chave",
-          "method": "delete"
+        "route": "/v2/webhook/:chave",
+        "method": "delete"
       },
-
       "pixCreateCharge": {
         "route": "/v2/cob/:txid",
         "method": "put"

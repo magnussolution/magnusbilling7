@@ -1,4 +1,5 @@
 <?php
+
 /**
  * =======================================
  * ###################################
@@ -65,7 +66,6 @@ class UpdateMysqlCommand extends CConsoleCommand
             foreach ($result as $key => $provider) {
                 $sql = "INSERT INTO `pkg_rate_provider` (`id_provider`, `id_prefix`, `buyrate`, `buyrateinitblock`, `buyrateincrement`, `minimal_time_buy`)    SELECT " . $provider['id'] . ", t.id, 0, 1, 1, 0  FROM `pkg_prefix` t ";
                 $this->executeDB($sql);
-
             }
 
             $sql = "UPDATE pkg_rate LEFT JOIN  pkg_trunk ON pkg_rate.id_trunk = pkg_trunk.id  SET pkg_rate.starttime = pkg_trunk.id_provider;";
@@ -317,7 +317,6 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
-
             }
             $idServiceModule = Yii::app()->db->lastInsertID;
 
@@ -433,7 +432,6 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql = "ALTER TABLE `pkg_cdr` DROP `stoptime`;";
             $this->executeDB($sql);
-
         }
 
         if ($version == '7.0.8') {
@@ -698,14 +696,12 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                     $sql = "INSERT INTO pkg_trunk_group_trunk (id_trunk_group, id_trunk) VALUES ( $id_trunk_group, " . $modelTrunk[0]['id'] . " )";
                     Yii::app()->db->createCommand($sql)->execute();
 
-                    if ( ! is_numeric($modelTrunk[0]['failover_trunk'])) {
+                    if (! is_numeric($modelTrunk[0]['failover_trunk'])) {
                         break;
                     }
                     $sql        = "SELECT * FROM pkg_trunk WHERE id = " . $modelTrunk[0]['failover_trunk'];
                     $modelTrunk = Yii::app()->db->createCommand($sql)->queryAll();
-
                 }
-
             }
 
             $sql = "
@@ -811,7 +807,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql    = "SELECT * FROM pkg_module WHERE module = 'backup'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if ( ! isset($result[0])) {
+            if (! isset($result[0])) {
 
                 $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Backup'')', 'backup', 'x-fa fa-desktop', 12,15)";
                 $this->executeDB($sql);
@@ -844,7 +840,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
 
             $sql    = "SELECT * FROM pkg_module WHERE module = 'campaignreport'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if ( ! isset($result[0])) {
+            if (! isset($result[0])) {
                 $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Campaign Report'')', 'campaignreport', 'x-fa fa-desktop', 13,12)";
                 $this->executeDB($sql);
                 $idServiceModule = Yii::app()->db->lastInsertID;
@@ -1344,7 +1340,8 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
                     'select'    => $select,
                     'condition' => 'providertech = :key AND status = 1',
                     'params'    => [':key' => 'sip'],
-                ]);
+                ]
+            );
 
             if (isset($model[0])) {
                 AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/sip_magnus.conf', 'trunkcode');
@@ -1636,7 +1633,7 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         if ($version == '7.8.1.3') {
             $sql    = "SELECT * FROM pkg_module WHERE module = 'providercnl'";
             $result = Yii::app()->db->createCommand($sql)->queryAll();
-            if ( ! isset($result[0]['id'])) {
+            if (! isset($result[0]['id'])) {
                 $sql = "INSERT INTO pkg_module VALUES (NULL, 't(''Provider CNL'')', 'providercnl', 'x-fa fa-desktop', 10,7)";
                 $this->executeDB($sql);
             }
@@ -2042,6 +2039,15 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.4.8';
             $this->update($version);
         }
+
+        //2024-12-17
+        if ($version == '7.8.4.8') {
+            $sql = "UPDATE `pkg_method_pay` SET `show_name` = 'EFI' , `payment_method` = 'EFI' WHERE `payment_method` = 'GerenciaNet'";
+            $this->executeDB($sql);
+
+            $version = '7.8.4.9';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)
@@ -2058,5 +2064,4 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
         $sql = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
         $this->executeDB($sql);
     }
-
 }
