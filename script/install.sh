@@ -3,7 +3,7 @@ clear
 echo
 echo
 echo
-echo "===================BY WWW.MAGNUSSOLUTION.COM=========================";
+echo "===================BY WWW.MAGNUSBILLING.ORG=========================";
 echo "_      _                               ______ _ _ _ _                ";
 echo "|\    /|                               | ___ (_) | (_)               ";
 echo "| \  / | ___  ____  _ __  _   _  _____ | |_/ /_| | |_ _ __   ____    ";
@@ -189,19 +189,16 @@ AddType application/octet-stream .csv
 rm -rf ${PHP_INI}_old
 cp -rf ${PHP_INI} ${PHP_INI}_old
 
-sed -i "s/memory_limit = 16M/memory_limit = 512M /" ${PHP_INI}
-sed -i "s/memory_limit = 128M/memory_limit = 512M /" ${PHP_INI} 
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 3M /" ${PHP_INI}
 sed -i "s/post_max_size = 8M/post_max_size = 20M/" ${PHP_INI}
 sed -i "s/max_execution_time = 30/max_execution_time = 90/" ${PHP_INI}
 sed -i "s/max_input_time = 60/max_input_time = 120/" ${PHP_INI}
 sed -i '/date.timezone/s/= .*/= '$phptimezone'/' ${PHP_INI}
 sed -i "s/session.cookie_secure = 1/" ${PHP_INI}
-
 sed -i 's/User ${APACHE_RUN_USER}/User asterisk/' ${HTTP_CONFIG}
 sed -i 's/Group ${APACHE_RUN_GROUP}/Group asterisk/' ${HTTP_CONFIG}
-sed -i "s/memory_limit = 16M/memory_limit = 512M /" /etc/php/8.1/apache2/php.ini
-sed -i "s/memory_limit = 128M/memory_limit = 512M /" /etc/php/8.1/apache2/php.ini
+sed -i "s/memory_limit = 16M/memory_limit = 512M /" ${PHP_INI}
+sed -i "s/memory_limit = 128M/memory_limit = 512M /" ${PHP_INI}
 mkdir -p /var/www/html
 sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' ${HTTP_CONFIG}
 
@@ -316,6 +313,8 @@ installBr() {
    language='br'
    cp -rf /var/www/html/mbilling/script/br /var/lib/asterisk/
    cd /var/lib/asterisk
+   wget --no-check-certificate https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/sounds/Sounds-br.tar.gz
+   tar xzvf Sounds-br.tar.gz
 }
 
 installEn() {
