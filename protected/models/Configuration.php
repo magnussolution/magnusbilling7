@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Modelo para a tabela "Configuration".
  * =======================================
@@ -66,13 +67,16 @@ class Configuration extends Model
 
     public function checkConfg($attribute, $params)
     {
+
         $error = false;
         //validation values
 
         if ($this->config_key == 'base_language') {
-            $valuesAllow        = ['es', 'en', 'pt_BR', 'it'];
+            $valuesAllow        = ['pt_BR', 'en', 'es', 'fr', 'it', 'ru', 'de', 'pl'];
             $this->config_value = $this->config_value == 'br' ? 'pt_BR' : $this->config_value;
-            if ( ! in_array($this->config_value, $valuesAllow)) {
+            if (! in_array($this->config_value, $valuesAllow)) {
+
+
                 $error = true;
             }
 
@@ -83,16 +87,34 @@ class Configuration extends Model
 
         if ($this->config_key == 'template') {
             $valuesAllow = [
-                'black-triton', 'black-neptune', 'black-crisp',
-                'green-triton', 'green-neptune', 'green-crisp',
-                'blue-triton', 'blue-triton', 'blue-neptune', 'blue-crisp',
-                'yellow-triton', 'yellow-neptune', 'yellow-crisp',
-                'orange-triton', 'orange-neptune', 'orange-crisp',
-                'purple-triton', 'purple-neptune', 'purple-crisp',
-                'gray-triton', 'gray-neptune', 'gray-crisp',
-                'red-triton', 'red-neptune', 'red-crisp'];
+                'black-triton',
+                'black-neptune',
+                'black-crisp',
+                'green-triton',
+                'green-neptune',
+                'green-crisp',
+                'blue-triton',
+                'blue-triton',
+                'blue-neptune',
+                'blue-crisp',
+                'yellow-triton',
+                'yellow-neptune',
+                'yellow-crisp',
+                'orange-triton',
+                'orange-neptune',
+                'orange-crisp',
+                'purple-triton',
+                'purple-neptune',
+                'purple-crisp',
+                'gray-triton',
+                'gray-neptune',
+                'gray-crisp',
+                'red-triton',
+                'red-neptune',
+                'red-crisp'
+            ];
 
-            if ( ! in_array($this->config_value, $valuesAllow)) {
+            if (! in_array($this->config_value, $valuesAllow)) {
                 $this->addError($attribute, Yii::t('zii', 'ERROR: Invalid option'));
             }
         }
@@ -104,10 +126,11 @@ class Configuration extends Model
 
     public function updateSqlConfig()
     {
+
         $modelConfig = Configuration::model()->findAll();
         $sql         = '';
         foreach ($modelConfig as $key => $config) {
-            if ( ! preg_match('/config_t/', Yii::t('yii', 'config_title_' . $config->config_key))) {
+            if (! preg_match('/config_t/', Yii::t('yii', 'config_title_' . $config->config_key))) {
                 $sql .= "UPDATE pkg_configuration SET config_title = '" . Yii::t('yii', 'config_title_' . $config->config_key) . "', config_description = '" . Yii::t('yii', 'config_desc_' . $config->config_key) . "' WHERE  config_key = '" . $config->config_key . "';";
             }
         }
@@ -121,8 +144,9 @@ class Configuration extends Model
         } elseif ($this->config_value == 'es' || $this->config_value == 'en') {
             $sql = "UPDATE pkg_configuration SET status = 0  WHERE  config_key = 'portabilidadeUsername';
                 UPDATE pkg_configuration SET status = 0  WHERE  config_key = 'portabilidadePassword'";
+        } else {
+            return;
         }
         Yii::app()->db->createCommand($sql)->execute();
     }
-
 }

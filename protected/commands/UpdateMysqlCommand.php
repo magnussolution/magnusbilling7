@@ -2048,6 +2048,16 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.4.9';
             $this->update($version);
         }
+
+
+        //2025-01-06
+        if ($version == '7.8.4.9') {
+            $sql = "ALTER TABLE pkg_trunk DROP FOREIGN KEY fk_pkg_trunk_pkg_trunk";
+            $this->executeDB($sql);
+
+            $version = '7.8.5.0';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)
