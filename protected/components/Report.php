@@ -1,4 +1,5 @@
 <?php
+
 /**
  * =======================================
  * ###################################
@@ -177,13 +178,12 @@ class Report extends FPDF
             } else {
                 $this->Ln(20);
             }
-
         }
     }
 
     public function bodyExtra()
     {
-        if ( ! $this->recordsDetails) {
+        if (! $this->recordsDetails) {
             return;
         }
         if (isset($this->secondListTitle)) {
@@ -266,7 +266,7 @@ class Report extends FPDF
 
     public function body()
     {
-        if ( ! $this->records) {
+        if (! $this->records) {
             return;
         }
 
@@ -373,14 +373,13 @@ class Report extends FPDF
                     }
                 }
                 if ($columnRecord != 'connectcharge') {
-                    if ( ! $columnExists && $columnRecord != 'status') {
+                    if (! $columnExists && $columnRecord != 'status') {
                         unset($this->records[$i][$columnRecord]);
                     }
                 }
 
                 $columnExists = false;
             }
-
         }
     }
 
@@ -658,7 +657,6 @@ class Report extends FPDF
         } else {
             return $value;
         }
-
     }
 
     public function formatSipiax($value)
@@ -686,7 +684,6 @@ class Report extends FPDF
         } else {
             return $value;
         }
-
     }
 
     public function formatTerminatecauseid($value)
@@ -712,7 +709,6 @@ class Report extends FPDF
         } else {
             return $value;
         }
-
     }
 
     public function formatLcrtype($value)
@@ -726,7 +722,6 @@ class Report extends FPDF
         } else {
             return $value;
         }
-
     }
 
     public function formtSeconds($seconds)

@@ -21,19 +21,14 @@
 Ext.define('Ext.ux.button.Locale', {
     extend: 'Ext.button.Split',
     alias: 'widget.locale',
-    handler: function() {
+    handler: function () {
         this.showMenu()
     },
-    supportLang: ['pt_BR', 'en', 'es', 'fr', 'it', 'ru', 'de'],
+    supportLang: ['pt_BR', 'en', 'es', 'fr', 'it', 'ru', 'de', 'pl'],
     iconCls: 'flag-' + window.lang,
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
         me.menu = [{
-            text: t('German'),
-            iconCls: 'flag-de',
-            scope: me,
-            handler: me.setLocale
-        }, {
             text: t('English'),
             iconCls: 'flag-en',
             scope: me,
@@ -44,8 +39,23 @@ Ext.define('Ext.ux.button.Locale', {
             scope: me,
             handler: me.setLocale
         }, {
+            text: t('German'),
+            iconCls: 'flag-de',
+            scope: me,
+            handler: me.setLocale
+        }, {
             text: t('Italian'),
             iconCls: 'flag-it',
+            scope: me,
+            handler: me.setLocale
+        }, {
+            text: t('Polish'),
+            iconCls: 'flag-pl',
+            scope: me,
+            handler: me.setLocale
+        }, {
+            text: t('Portuguese'),
+            iconCls: 'flag-pt_BR',
             scope: me,
             handler: me.setLocale
         }, {
@@ -58,15 +68,10 @@ Ext.define('Ext.ux.button.Locale', {
             iconCls: 'flag-es',
             scope: me,
             handler: me.setLocale
-        }, {
-            text: t('Portuguese'),
-            iconCls: 'flag-pt_BR',
-            scope: me,
-            handler: me.setLocale
         }];
         me.callParent(arguments);
     },
-    setLocale: function(item) {
+    setLocale: function (item) {
         var me = this,
             icon = item.iconCls,
             lang = icon.replace('flag-', '');

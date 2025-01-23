@@ -320,20 +320,16 @@ installBr() {
 installEn() {
     clear
     language='en'
-    cp -n /var/www/html/mbilling/resources/sounds/en/* /var/lib/asterisk/sounds
 }
 
 installEs() {
   clear
-  language='es'
-  mkdir -p /var/lib/asterisk/sounds/es
-  cd /var/lib/asterisk/sounds/es
-  wget -O core.zip http://www.asterisksounds.org/es-ar/download/asterisk-sounds-core-es-AR-sln16.zip
-  wget -O extra.zip http://www.asterisksounds.org/es-ar/download/asterisk-sounds-extra-es-AR-sln16.zip
-  unzip core.zip
-  unzip extra.zip
-  chown -R asterisk.asterisk /var/lib/asterisk/sounds/es
-  cp -n /var/www/html/mbilling/resources/sounds/es/* /var/lib/asterisk/sounds
+    language='en'
+    cp -n /var/www/html/mbilling/resources/sounds/en/* /var/lib/asterisk/sounds
+    mkdir /var/lib/asterisk/es
+    cd /var/lib/asterisk/es
+     wget --no-check-certificate https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/sounds/Sounds-es.tar.gz
+   tar xzvf Sounds-es.tar.gz
 }
 
 

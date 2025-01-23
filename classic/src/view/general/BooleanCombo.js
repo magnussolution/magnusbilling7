@@ -212,10 +212,14 @@ Ext.define('MBilling.view.general.Typelanguage', {
     value: 'en',
     store: [
         ['', t('Undefined')],
-        ['br', t('Portuguese')],
         ['en', t('English')],
-        ['es', t('Spanish')],
-        ['ru', t('Russian')]
+        ['fr', t('French')],
+        ['de', t('German')],
+        ['it', t('Italian')],
+        ['pl', t('Polish')],
+        ['br', t('Portuguese')],
+        ['ru', t('Russian')],
+        ['es', t('Spanish')]
     ]
 });
 Ext.define('MBilling.view.general.TypeCampaign', {
@@ -261,7 +265,7 @@ Ext.define('MBilling.view.general.CountryISOCombo', {
     forceSelection: true,
     editable: true,
     listeners: {
-        focus: function(combo) {
+        focus: function (combo) {
             combo.expand();
         }
     },
@@ -525,7 +529,7 @@ Ext.define('MBilling.view.general.CountryCombo', {
     editable: true,
     allowBlank: true,
     listeners: {
-        focus: function(combo) {
+        focus: function (combo) {
             combo.expand();
         }
     },
