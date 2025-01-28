@@ -1271,6 +1271,8 @@ class BaseController extends CController
                 unset($arrPost[$field]);
             }
         }
+        if (isset($arrPost['sipshowpeer']))
+            unset($arrPost['sipshowpeer']);
         return $arrPost;
     }
 
