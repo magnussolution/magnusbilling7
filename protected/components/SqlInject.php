@@ -76,11 +76,44 @@ class sqlInject
 
                 if (is_array($value)) {
                     foreach ($value as $key => $valuearray) {
-                        foreach ($valuearray as $key => $value) {
 
-                            $value = strtolower($value);
+                        if (is_array($valuearray)) {
+                            foreach ($valuearray as $key => $value) {
+
+                                $value = strtolower($value);
+                                if (strlen($value) > 250) {
+                                    $info    = 'Variable to long: ' . $value . '. Controller => ' . Yii::app()->controller->id;
+                                    $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
+                                    MagnusLog::insertLOG('EDIT', $id_user, $_SERVER['REMOTE_ADDR'], $info);
+                                    echo json_encode([
+                                        'rows'  => [],
+                                        'count' => 0,
+                                        'sum'   => [],
+                                        'msg'   => $info
+                                    ]);
+                                    exit;
+                                }
+
+
+                                if (preg_match("/$code/", $value)) {
+
+
+                                    $info    = 'Trying SQL inject, code: ' . $value . '. Controller => ' . Yii::app()->controller->id . '. Code ' . $code;
+                                    $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
+                                    MagnusLog::insertLOG(2, $info);
+                                    echo json_encode([
+                                        'rows'  => [],
+                                        'count' => 0,
+                                        'sum'   => [],
+                                        'msg'   => $info
+                                    ]);
+                                    exit;
+                                }
+                            }
+                        } else {
+                            $value = strtolower($valuearray);
                             if (strlen($value) > 250) {
-                                $info    = 'Variable to long: ' . $value . '. Controller => ' . Yii::app()->controller->id;
+                                $info    = 'Variable to long: ' . $valuearray . '. Controller => ' . Yii::app()->controller->id;
                                 $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
                                 MagnusLog::insertLOG('EDIT', $id_user, $_SERVER['REMOTE_ADDR'], $info);
                                 echo json_encode([
@@ -93,10 +126,10 @@ class sqlInject
                             }
 
 
-                            if (preg_match("/$code/", $value)) {
+                            if (preg_match("/$code/", $valuearray)) {
 
 
-                                $info    = 'Trying SQL inject, code: ' . $value . '. Controller => ' . Yii::app()->controller->id . '. Code ' . $code;
+                                $info    = 'Trying SQL inject, code: ' . $valuearray . '. Controller => ' . Yii::app()->controller->id . '. Code ' . $code;
                                 $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
                                 MagnusLog::insertLOG(2, $info);
                                 echo json_encode([
