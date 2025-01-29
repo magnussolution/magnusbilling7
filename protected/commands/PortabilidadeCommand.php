@@ -1,4 +1,5 @@
 <?php
+
 /**
  * =======================================
  * ###################################
@@ -22,17 +23,18 @@ class PortabilidadeCommand extends CConsoleCommand
     public function run($args)
     {
 
-        if ($args[2] == 'did') {
+
+        if (isset($args[2]) && $args[2] == 'did') {
             $this->checkDID($args);
             exit;
         }
 
         shell_exec('mkdir -p /usr/src/ChipCerto');
         shell_exec('rm -rf /usr/src/ChipCerto/*');
-        shell_exec('cd /usr/src/ChipCerto && wget ftp://' . $_SERVER['argv']['2'] . ':' . $_SERVER['argv']['3'] . '@ftp.portabilidadecelular.com:2157/portabilidade.tar.bz2 && tar -jxvf portabilidade.tar.bz2');
-        shell_exec('cd /usr/src/ChipCerto && wget ftp://' . $_SERVER['argv']['2'] . ':' . $_SERVER['argv']['3'] . '@ftp.portabilidadecelular.com:2157/prefix_anatel.csv');
+        shell_exec('cd /usr/src/ChipCerto && wget ftp://' . $args['0'] . ':' . $args['1'] . '@ftp.portabilidadecelular.com:2157/portabilidade.tar.bz2 && tar -jxvf portabilidade.tar.bz2');
+        shell_exec('cd /usr/src/ChipCerto && wget ftp://' . $args['0'] . ':' . $args['1'] . '@ftp.portabilidadecelular.com:2157/prefix_anatel.csv');
 
-        if ( ! file_exists("/usr/src/ChipCerto/prefix_anatel.csv")) {
+        if (! file_exists("/usr/src/ChipCerto/prefix_anatel.csv")) {
             exit;
         }
 
@@ -56,7 +58,7 @@ class PortabilidadeCommand extends CConsoleCommand
         $sql = "LOAD DATA LOCAL INFILE '/usr/src/ChipCerto/prefix_anatel.csv' INTO TABLE pkg_portabilidade_prefix FIELDS TERMINATED BY ';'  LINES TERMINATED BY '\n'  (number, company);";
         Yii::app()->db->createCommand($sql)->execute();
 
-        if ( ! file_exists("/usr/src/ChipCerto/exporta.csv")) {
+        if (! file_exists("/usr/src/ChipCerto/exporta.csv")) {
             exit;
         }
 
@@ -98,14 +100,14 @@ class PortabilidadeCommand extends CConsoleCommand
 
             $url = "https://consultas.portabilidadecelular.com/painel/consulta_numero.php?user=" . $args[0] . "&pass=" . $args[1] . "&seache_number=" . $did->did . "&completo";
 
-            if ( ! $result = @file_get_contents($url, false, stream_context_create($arrContextOptions))) {
+            if (! $result = @file_get_contents($url, false, stream_context_create($arrContextOptions))) {
 
                 $did->country = 'Operadora não identificada';
             } else {
                 $res = preg_split('/\|/', $result);
             }
 
-            if ( ! isset($res[1])) {
+            if (! isset($res[1])) {
                 print_r($result);
                 continue;
             }
@@ -124,7 +126,6 @@ class PortabilidadeCommand extends CConsoleCommand
             echo $did->did . ' ' . $did->country . "\n";
 
             $did->save();
-
         }
     }
 }

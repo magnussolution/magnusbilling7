@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Actions of module "GroupUser".
  *
@@ -31,8 +32,10 @@ class GroupUserController extends Controller
     public function extraFilterCustomAdmin($filter)
     {
 
-        $modelGroupUserGroup = GroupUserGroup::model()->find('id_group_user = :key',
-            [':key' => Yii::app()->session['id_group']]);
+        $modelGroupUserGroup = GroupUserGroup::model()->find(
+            'id_group_user = :key',
+            [':key' => Yii::app()->session['id_group']]
+        );
 
         if (isset($modelGroupUserGroup->id)) {
             $filter .= ' AND t.id IN (SELECT id_group FROM pkg_group_user_group WHERE id_group_user = ' . Yii::app()->session['id_group'] . ') ';
@@ -77,7 +80,7 @@ class GroupUserController extends Controller
 
     public function actionClone()
     {
-        if ( ! Yii::app()->session['isAdmin']) {
+        if (! Yii::app()->session['isAdmin']) {
             exit;
         }
 
@@ -85,6 +88,8 @@ class GroupUserController extends Controller
         $this->msgSuccess = 'invalid group';
         if (isset($_POST['id'])) {
             $modelGroupUser = $this->abstractModel->findByPk((int) $_POST['id']);
+
+            print_r($modelGroupUser->attributes);
             if (isset($modelGroupUser->id)) {
                 $this->instanceModel->name         = $modelGroupUser->name . ' Cloned';
                 $this->instanceModel->id_user_type = $modelGroupUser->id_user_type;
@@ -99,6 +104,7 @@ class GroupUserController extends Controller
 
                     try {
                         $success = $modelGroupModuleNew->save();
+                        $this->msgSuccess = 'Success';
                     } catch (Exception $e) {
                         $this->msgSuccess = $this->getErrorMySql($e);
                     }
@@ -109,7 +115,6 @@ class GroupUserController extends Controller
                 $info = 'Group ' . $this->instanceModel->name;
                 MagnusLog::insertLOG(4, $info);
             }
-
         }
         echo json_encode([
             $this->nameSuccess => $success,
