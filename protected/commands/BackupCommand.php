@@ -34,6 +34,6 @@ class BackupCommand extends ConsoleCommand
         LinuxAccess::exec($comando);
 
         LinuxAccess::exec("tar czvf /usr/local/src/magnus/backup/backup_voip_softswitch.$data.tgz /tmp/base.sql /etc/asterisk");
-        unlink("rm -f /tmp/base.sql");
+        unlink("/tmp/base.sql");
     }
 }
