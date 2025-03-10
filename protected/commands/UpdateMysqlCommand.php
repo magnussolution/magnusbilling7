@@ -2058,6 +2058,24 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.5.0';
             $this->update($version);
         }
+
+        //2025-02-03
+        if ($version == '7.8.4.9') {
+            $sql = "ALTER TABLE `pkg_servers` CHANGE `last_call_id` `last_call_id` BIGINT(11) NULL DEFAULT NULL;";
+            $this->executeDB($sql);
+
+            $version = '7.8.5.0';
+            $this->update($version);
+        }
+
+        //2025-03-10
+        if ($version == '7.8.5.0') {
+            $sql = "ALTER TABLE `pkg_sip` CHANGE `forward` `forward` VARCHAR(100) NOT NULL DEFAULT '';";
+            $this->executeDB($sql);
+
+            $version = '7.8.5.1';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

@@ -588,7 +588,7 @@ DROP TABLE IF EXISTS `pkg_cdr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pkg_cdr` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_plan` int(11) DEFAULT NULL,
   `id_trunk` int(11) DEFAULT NULL,
@@ -660,7 +660,7 @@ DROP TABLE IF EXISTS `pkg_cdr_archive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pkg_cdr_archive` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_plan` int(11) DEFAULT NULL,
   `id_trunk` int(11) DEFAULT NULL,
@@ -700,7 +700,7 @@ DROP TABLE IF EXISTS `pkg_cdr_failed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pkg_cdr_failed` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_plan` int(11) DEFAULT NULL,
   `id_trunk` int(11) DEFAULT NULL,
@@ -3472,6 +3472,7 @@ CREATE TABLE `pkg_user_rate` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+
 -- Dumping data for table `pkg_user_rate`
 --
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Modelo para a tabela "Sip".
  * =======================================
@@ -72,13 +73,13 @@ class Sip extends Model
             ['DEFAULTip, ipaddr, maxcallbitrate, rtpkeepalive', 'length', 'max' => 15],
             ['nat, host', 'length', 'max' => 31],
             ['language', 'length', 'max' => 2],
-            ['mailbox,forward,addparameter', 'length', 'max' => 50],
+            ['mailbox,addparameter', 'length', 'max' => 50],
             ['sip_group', 'length', 'max' => 20],
             ['rtptimeout, rtpholdtimeout,videosupport', 'length', 'max' => 3],
             ['deny, permit', 'length', 'max' => 95],
             ['type', 'length', 'max' => 6],
             ['url_events, description', 'length', 'max' => 150],
-            ['disallow, allow, setvar, useragent,block_call_reg, voicemail_email', 'length', 'max' => 100],
+            ['disallow,forward, allow, setvar, useragent,block_call_reg, voicemail_email', 'length', 'max' => 100],
             ['lastms', 'length', 'max' => 11],
             ['directmedia,alias', 'length', 'max' => 10],
             ['defaultuser, cid_number, outboundproxy, sippasswd', 'length', 'max' => 40],
@@ -156,7 +157,6 @@ class Sip extends Model
         if (preg_match('/ /', $this->defaultuser)) {
             $this->addError($attribute, Yii::t('zii', 'No space allow in defaultuser'));
         }
-
     }
     public function checksecret($attribute, $params)
     {
@@ -175,7 +175,6 @@ class Sip extends Model
         if ($this->secret == $this->defaultuser) {
             $this->addError($attribute, Yii::t('zii', 'Password cannot be equal username'));
         }
-
     }
     /*
      * @return array regras de relacionamento.
