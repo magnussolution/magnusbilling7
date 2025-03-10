@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Sip".
  *
@@ -82,7 +83,6 @@ class SipController extends Controller
             if ($columns[$i]['dataIndex'] == 'lineStatus') {
                 unset($columns[$i]);
             }
-
         }
         return $columns;
     }
@@ -111,7 +111,6 @@ class SipController extends Controller
             } else {
 
                 $values['forward'] = $values['type_forward'] . '|' . $values['id_' . $values['type_forward']];
-
             }
         } else if ((isset($values['id_sip']) || isset($values['id_ivr']) || isset($values['id_queue'])) &  ! $this->isNewRecord) {
 
@@ -127,6 +126,11 @@ class SipController extends Controller
             } else {
                 $values['forward'] = $type_forward[0] . '|' . $values['id_' . $type_forward[0]];
             }
+        } else if ($values['extension'] &&  ! $this->isNewRecord) {
+
+            $modelSip = Sip::model()->findByPk($values['id']);
+            $type_forward = explode('|', $modelSip->forward);
+            $values['forward']   = $type_forward[0] . '|' . $values['extension'];
         }
 
         if ($this->isNewRecord) {
@@ -144,8 +148,10 @@ class SipController extends Controller
                 exit;
             }
 
-            if ( ! Yii::app()->session['isAdmin'] && $modelUser->sipaccountlimit > 0
-                && $modelSipCount >= $modelUser->sipaccountlimit) {
+            if (
+                ! Yii::app()->session['isAdmin'] && $modelUser->sipaccountlimit > 0
+                && $modelSipCount >= $modelUser->sipaccountlimit
+            ) {
                 echo json_encode([
                     'success' => false,
                     'rows'    => [],
@@ -156,10 +162,9 @@ class SipController extends Controller
             $values['regseconds'] = 1;
             $values['context']    = 'billing';
             $values['regexten']   = $values['name'];
-            if ( ! $values['callerid']) {
+            if (! $values['callerid']) {
                 $values['callerid'] = $values['name'];
             }
-
         }
 
         if (isset($values['defaultuser'])) {
@@ -228,7 +233,7 @@ class SipController extends Controller
 
             $remoteProxyIP = trim(end(explode("|", $server->description)));
 
-            if ( ! filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
+            if (! filter_var($remoteProxyIP, FILTER_VALIDATE_IP)) {
                 $remoteProxyIP = $hostname;
             }
 
@@ -282,7 +287,7 @@ class SipController extends Controller
                         $itemOption = explode("|", $value);
                         $itemKey    = explode("_", $key);
 
-                        if ( ! isset($attributes[$i]['type_forward'])) {
+                        if (! isset($attributes[$i]['type_forward'])) {
                             $attributes[$i]['type_forward'] = $itemOption[0];
                         }
 
@@ -292,7 +297,14 @@ class SipController extends Controller
                             $attributes[$i]['id_' . $itemOption[0]] = end($itemOption);
                             if (is_numeric($itemOption[1])) {
                                 $model = ucfirst($itemOption[0]);
-                                $model = $model::model()->findByPk(end($itemOption));
+
+
+                                if (class_exists($model)) {
+                                    $model = $model::model()->findByPk(end($itemOption));
+                                } else {
+                                    continue;
+                                }
+
 
                                 $attributes[$i]['id_' . $itemOption[0] . '_name'] = isset($model->name) ? $model->name : '';
                             } else {
@@ -392,5 +404,4 @@ class SipController extends Controller
             $this->nameMsg     => $this->msgSuccess,
         ]);
     }
-
 }
