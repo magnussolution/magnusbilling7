@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe de com funcionalidades globais
  *
@@ -85,14 +86,14 @@ class AsteriskAccess
         $model  = Queue::model()->findAll(
             [
                 'select' => $select,
-            ]);
+            ]
+        );
 
         if (count($model)) {
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/queues_magnus.conf', 'name');
         }
 
         AsteriskAccess::instance()->mohReload();
-
     }
 
     public function mohReload()
@@ -105,7 +106,6 @@ class AsteriskAccess
 
         AsteriskAccess::instance($server, 'magnus', 'magnussolution');
         $this->asmanager->Command("hangup request " . $channel);
-
     }
 
     public function dialPlanReload()
@@ -210,7 +210,7 @@ class AsteriskAccess
             $fr = fopen($registerFile, "w");
         }
 
-        if ( ! $fd) {
+        if (! $fd) {
             echo "</br><center><b><font color=red>" . gettext("Could not open buddy file") . $file . "</font></b></center>";
         } else {
             foreach ($rows as $key => $data) {
@@ -254,9 +254,7 @@ class AsteriskAccess
                         foreach ($modelMember as $member) {
                             $line .= 'member=' . $member['interface'] . "\n";
                         }
-
                     }
-
                 }
 
                 if (isset($fr)) {
@@ -315,7 +313,6 @@ class AsteriskAccess
                         break;
                     }
                 }
-
             }
 
             fclose($fd);
@@ -327,7 +324,6 @@ class AsteriskAccess
             } else {
                 AsteriskAccess::instance()->queueReload();
             }
-
         }
     }
     //call file , time in seconds to create the file
@@ -349,7 +345,6 @@ class AsteriskAccess
         $destination_file = '/var/spool/asterisk/outgoing/' . $aleatorio . '.call'; // Assuming $aleatorio is defined
 
         rename($arquivo_call, $destination_file);
-
     }
 
     public function getCallsPerDid($did, $agi = null)
@@ -412,7 +407,6 @@ class AsteriskAccess
                         if (preg_match("/Up |Ring /", $channel['State'])) {
                             $count++;
                         }
-
                     }
                 }
             }
@@ -441,7 +435,7 @@ class AsteriskAccess
         foreach ($modelServers as $key => $server) {
             $data = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->sipShowPeers();
 
-            if ( ! isset($data['data']) || strlen($data['data']) < 10) {
+            if (! isset($data['data']) || strlen($data['data']) < 10) {
                 continue;
             }
 
@@ -487,19 +481,24 @@ class AsteriskAccess
 
             $data = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->cdrShowActive();
 
-            if ( ! isset($data) || ! isset($data['data'])) {
+            if (! isset($data) || ! isset($data['data'])) {
                 Servers::model()->updateByPk($server['id'], ['status' => 2]);
                 continue;
             }
 
-            if ( ! isset($data) || ! isset($data['data'])) {
+            if (! isset($data) || ! isset($data['data'])) {
                 continue;
             }
 
             $linesCallsResult = explode("\n", $data['data']);
 
-            for ($i = 5; $i < count($linesCallsResult) - 1; $i++) {
+            for ($i = 0; $i < count($linesCallsResult) - 1; $i++) {
                 $call = explode("|", $linesCallsResult[$i]);
+
+                if (!preg_match('/^SIP|^IAX|^PJSIP/', $call[0])) {
+                    continue;
+                }
+
                 if ($call[4] == 'Down') {
                     continue;
                 }
@@ -532,7 +531,7 @@ class AsteriskAccess
             $columns = ['Channel', 'Context', 'Exten', 'Priority', 'Stats', 'Application', 'Data', 'CallerID', 'Accountcode', 'Amaflags', 'Duration', 'Bridged'];
             $data    = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->coreShowChannelsConcise();
 
-            if ( ! isset($data) || ! isset($data['data'])) {
+            if (! isset($data) || ! isset($data['data'])) {
                 return;
             }
 
@@ -544,14 +543,12 @@ class AsteriskAccess
 
             for ($i = 0; $i < count($linesCallsResult); $i++) {
                 $call = explode("!", $linesCallsResult[$i]);
-                if ( ! preg_match("/\//", $call[0])) {
+                if (! preg_match("/\//", $call[0])) {
                     continue;
                 }
                 $call['server'] = $server['host'];
                 $channels[]     = $call;
-
             }
-
         }
         return $channels;
     }
@@ -573,7 +570,7 @@ class AsteriskAccess
             $columns = ['Channel', 'Context', 'Extension', 'Prio', 'State', 'Application', 'Data', 'CallerID', 'Duration', 'Accountcode', 'PeerAccount', 'BridgedTo'];
             $data    = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->coreShowChannelsVerbose();
 
-            if ( ! isset($data) || ! isset($data['data'])) {
+            if (! isset($data) || ! isset($data['data'])) {
                 return;
             }
 
@@ -589,14 +586,12 @@ class AsteriskAccess
                     continue;
                 }
                 $call = preg_split("/\s+/", $linesCallsResult[$i]);
-                if ( ! preg_match("/\//", $call[0])) {
+                if (! preg_match("/\//", $call[0])) {
                     continue;
                 }
                 $call['server'] = $server['host'];
                 $channels[]     = $call;
-
             }
-
         }
         return $channels;
     }
@@ -624,13 +619,12 @@ class AsteriskAccess
                 'username' => 'magnus',
                 'password' => 'magnussolution',
             ]);
-
         }
 
         $channels = [];
         foreach ($modelServers as $key => $server) {
             $data = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->coreShowChannel($channel);
-            if ( ! isset($data['data']) || strlen($data['data']) < 10 || preg_match("/is not a known channe/", $data['data'])) {
+            if (! isset($data['data']) || strlen($data['data']) < 10 || preg_match("/is not a known channe/", $data['data'])) {
                 continue;
             }
             $linesCallResult = explode("\n", $data['data']);
@@ -653,17 +647,14 @@ class AsteriskAccess
 
                 if ($key == 'SIPCALLID') {
                     $result[trim($key)] = AsteriskAccess::instance($server['host'], $server['username'], $server['password'])->sipShowChannel(trim($value));
-
                 } else {
                     $result[trim($key)] = trim($value);
                 }
-
             }
             break;
         }
 
         return $result;
-
     }
 
     public function generateSipPeers()
@@ -730,7 +721,6 @@ class AsteriskAccess
                     if ($sip->host != 'dynamic') {
                         $line .= 'deny=0.0.0.0/0.0.0.0' . "\n";
                         $line .= 'permit=' . $sip->host . "/255.255.255.0\n";
-
                     } else {
                         if (strlen($sip->deny) > 1) {
                             $line .= 'deny=' . $sip->deny . "\n";
@@ -846,12 +836,10 @@ class AsteriskAccess
                     if (strlen($sip->defaultuser) > 1) {
                         $subscriber .= 'exten => ' . $sip->defaultuser . ',hint,SIP/' . $sip->defaultuser . "\n";
                     }
-
                 }
 
                 fclose($fd);
             }
-
         }
         if (fwrite($fr_voicemail, $voicemail) === false) {
             echo "Impossible to write to the file ($fr_voicemail)";
@@ -859,7 +847,6 @@ class AsteriskAccess
         AsteriskAccess::instance()->VoiceMailReload();
 
         AsteriskAccess::instance()->sipReload();
-
     }
     public function generateIaxPeers()
     {
@@ -968,7 +955,6 @@ class AsteriskAccess
         }
 
         AsteriskAccess::instance()->iaxReload();
-
     }
 
     public function writeDidContext()
@@ -988,7 +974,5 @@ class AsteriskAccess
         }
 
         AsteriskAccess::instance()->dialPlanReload();
-
     }
-
 }

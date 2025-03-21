@@ -13,7 +13,7 @@ class MagnusLog
         $id_user                       = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : null;
         $modelLogUsers                 = new LogUsers();
         $modelLogUsers->id_user        = $id_user;
-        $modelLogUsers->description    = $description;
+        $modelLogUsers->description    = CHtml::encode($description);
         $modelLogUsers->id_log_actions = $action;
         $modelLogUsers->ip             = $_SERVER['REMOTE_ADDR'];
         try {
