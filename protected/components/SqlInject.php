@@ -63,7 +63,10 @@ class sqlInject
             'pg_query',
             'sqlite_query',
             'prepare',
-
+            'alert',
+            'src=',
+            '<img',
+            'console'
         ];
 
 
@@ -75,6 +78,9 @@ class sqlInject
             foreach ($codes as $code) {
 
                 $code = strtolower($code);
+                if (Util::isJson($value)) {
+                    $value = json_decode($value);
+                }
 
                 if (is_array($value)) {
                     foreach ($value as $key => $valuearray) {
@@ -82,7 +88,7 @@ class sqlInject
                         if (is_array($valuearray)) {
                             foreach ($valuearray as $key => $value) {
 
-                                $value = strtolower($value);
+                                $value = @strtolower($value);
                                 if (strlen($value) > 250) {
                                     $info    = 'Variable to long: ' . $value . '. Controller => ' . Yii::app()->controller->id;
                                     $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
@@ -91,7 +97,7 @@ class sqlInject
                                         'rows'  => [],
                                         'count' => 0,
                                         'sum'   => [],
-                                        'msg'   => $info
+                                        'msg'   => CHtml::encode($info)
                                     ]);
                                     exit;
                                 }
@@ -107,13 +113,13 @@ class sqlInject
                                         'rows'  => [],
                                         'count' => 0,
                                         'sum'   => [],
-                                        'msg'   => $info
+                                        'msg'   =>  CHtml::encode($info)
                                     ]);
                                     exit;
                                 }
                             }
                         } else {
-                            $value = strtolower($valuearray);
+                            $value = @strtolower($valuearray);
                             if (strlen($value) > 250) {
                                 $info    = 'Variable to long: ' . $valuearray . '. Controller => ' . Yii::app()->controller->id;
                                 $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
@@ -122,10 +128,15 @@ class sqlInject
                                     'rows'  => [],
                                     'count' => 0,
                                     'sum'   => [],
-                                    'msg'   => $info
+                                    'msg'   =>  CHtml::encode($info)
                                 ]);
                                 exit;
                             }
+
+                            if (isset($valuearray->data->type) && $valuearray->data->type == 'list') {
+                                return;
+                            }
+
 
 
                             if (preg_match("/$code/", $valuearray)) {
@@ -138,7 +149,7 @@ class sqlInject
                                     'rows'  => [],
                                     'count' => 0,
                                     'sum'   => [],
-                                    'msg'   => $info
+                                    'msg'   => CHtml::encode($info)
                                 ]);
                                 exit;
                             }
@@ -146,7 +157,7 @@ class sqlInject
                     }
                 } else {
 
-                    if (strlen($value) > 250) {
+                    if (strlen($value) > 1000) {
                         $info    = 'Variable to long2: ' . $value . '. Controller => ' . Yii::app()->controller->id;
                         $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';
                         MagnusLog::insertLOG('EDIT', $id_user, $_SERVER['REMOTE_ADDR'], $info);
@@ -154,7 +165,7 @@ class sqlInject
                             'rows'  => [],
                             'count' => 0,
                             'sum'   => [],
-                            'msg'   => $info
+                            'msg'   => CHtml::encode($info)
                         ]);
                         exit;
                     }
@@ -167,7 +178,7 @@ class sqlInject
                             'rows'  => [],
                             'count' => 0,
                             'sum'   => [],
-                            'msg'   => $info
+                            'msg'   => CHtml::encode($info)
                         ]);
                         exit;
                     }

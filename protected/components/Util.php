@@ -1,4 +1,5 @@
 <?php
+
 /**
  * =======================================
  * ###################################
@@ -59,8 +60,10 @@ class Util
             $length = $config['global']['generate_length'] == 0 ? 5 : $config['global']['generate_length'];
 
             if (isset($_SESSION['id_group']) && Yii::app()->session['id_group'] > 0) {
-                $modeGroupUser = GroupUser::model()->find('id = :key',
-                    [':key' => Yii::app()->session['id_group']]);
+                $modeGroupUser = GroupUser::model()->find(
+                    'id = :key',
+                    [':key' => Yii::app()->session['id_group']]
+                );
             }
 
             if (isset($modeGroupUser->id) && strlen($modeGroupUser->user_prefix) > 0) {
@@ -194,7 +197,7 @@ class Util
         $key_array  = [];
 
         foreach ($array as $val) {
-            if ( ! in_array($val[$key], $key_array)) {
+            if (! in_array($val[$key], $key_array)) {
                 $key_array[$i]  = $val[$key];
                 $temp_array[$i] = $val;
             }
@@ -210,7 +213,7 @@ class Util
         $key_array  = [];
 
         foreach ($obj as $val) {
-            if ( ! in_array($val->$key, $key_array)) {
+            if (! in_array($val->$key, $key_array)) {
                 $key_array[$i]  = $val->$key;
                 $temp_array[$i] = $val;
             }
@@ -259,7 +262,6 @@ class Util
                 } elseif ($number_prefix == $grab) {
                     $destination = $replace . substr($destination, strlen($grab));
                 }
-
             } else {
 
                 if (strlen($destination) == $digit) {
@@ -288,7 +290,6 @@ class Util
             if ($mod_sec > 0) {
                 $ratecallduration += ($increment - $mod_sec);
             }
-
         }
         $ratecost = ($ratecallduration / 60) * $buyrate;
         $ratecost = $ratecost;
@@ -299,7 +300,7 @@ class Util
     {
         $ext = strtolower(CFileHelper::getExtension($filename));
 
-        if ( ! in_array($ext, $allowed)) {
+        if (! in_array($ext, $allowed)) {
             echo json_encode([
                 'success' => false,
                 'errors'  => 'File error',
@@ -308,6 +309,13 @@ class Util
         }
 
         return $ext;
-
+    }
+    public static function isJson($string)
+    {
+        if (!is_string($string)) {
+            return false;
+        }
+        json_decode($string);
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 }
