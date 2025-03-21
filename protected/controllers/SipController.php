@@ -126,7 +126,7 @@ class SipController extends Controller
             } else {
                 $values['forward'] = $type_forward[0] . '|' . $values['id_' . $type_forward[0]];
             }
-        } else if ($values['extension'] &&  ! $this->isNewRecord) {
+        } else if (isset($values['extension']) &&  ! $this->isNewRecord) {
 
             $modelSip = Sip::model()->findByPk($values['id']);
             $type_forward = explode('|', $modelSip->forward);

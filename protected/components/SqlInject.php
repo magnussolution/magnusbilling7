@@ -69,7 +69,9 @@ class sqlInject
 
         foreach ($src as $key => $value) {
 
-
+            if ($key == 'key' && Yii::app()->controller->id == 'authentication') {
+                continue;
+            }
             foreach ($codes as $code) {
 
                 $code = strtolower($code);
