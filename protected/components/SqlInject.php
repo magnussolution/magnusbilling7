@@ -135,6 +135,8 @@ class sqlInject
 
                             if (isset($valuearray->data->type) && $valuearray->data->type == 'list') {
                                 return;
+                            } else  if (isset($valuearray->type) && $valuearray->type == 'numeric') {
+                                return;
                             }
 
 
