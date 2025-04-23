@@ -39,7 +39,7 @@ Ext.define('MBilling.model.Firewall', {
     }, {
         name: 'jail',
         type: 'string'
-    }],
+    }, 'idServername'],
     proxy: {
         type: 'uxproxy',
         module: 'firewall'
