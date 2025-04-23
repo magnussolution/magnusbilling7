@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Modelo para a tabela "Firewall".
  * =======================================
@@ -54,10 +55,32 @@ class Firewall extends Model
     {
         $rules = [
             ['ip, action', 'required'],
-            ['action', 'numerical', 'integerOnly' => true],
+            ['action, id_server', 'numerical', 'integerOnly' => true],
             ['description,jail', 'length', 'max' => 200],
+            ['ip', 'checkip'],
 
         ];
         return $this->getExtraField($rules);
+    }
+
+    public function checkip($attribute, $params)
+    {
+        if (!preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\z/', $this->ip)) {
+            $this->addError($attribute, Yii::t('zii', 'The IP is not valid'));
+        }
+    }
+
+    public function relations()
+    {
+        return [
+            'idServer' => [self::BELONGS_TO, 'Servers', 'id_server'],
+        ];
+    }
+    public function beforeSave()
+    {
+        if ($this->getIsNewRecord()) {
+            $this->id_server = 1;
+        }
+        return parent::beforeSave();
     }
 }

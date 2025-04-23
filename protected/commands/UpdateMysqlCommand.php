@@ -2076,6 +2076,32 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.5.1';
             $this->update($version);
         }
+
+        //2025-04-23
+        if ($version == '7.8.5.1') {
+
+            $sql = "INSERT INTO `pkg_module`(`id`, `text`, `module`, `icon_cls`, `id_module`, `priority`) VALUES (82,'t(\'Fail2ban\')','firewall','x-fa fa-desktop',12,82);";
+            $this->executeDB($sql);
+
+            $sql = "INSERT INTO `pkg_group_module` (`id_group`, `id_module`, `action`, `show_menu`, `createShortCut`, `createQuickStart`) VALUES ('1', '82', 'crud', '1', '0', '0');";
+            $this->executeDB($sql);
+
+            $sql = "TRUNCATE TABLE pkg_firewall";
+            $this->executeDB($sql);
+
+            $sql = " ALTER TABLE `pkg_firewall` ADD `id_server` INT(11) NOT NULL AFTER `jail`;";
+            $this->executeDB($sql);
+
+            $sql = "ALTER TABLE pkg_firewall ADD  UNIQUE KEY ipperserver (ip, id_server);";
+            $this->executeDB($sql);
+
+            exec("echo '\n* * * * * root php /var/www/html/mbilling/cron.php failtwobanip' >> /etc/crontab");
+            exec("sed -i 's/ssh-iptables/sshd/g' /etc/fail2ban/jail.local");
+            exec("systemctl restart fail2ban");
+
+            $version = '7.8.5.2';
+            $this->update($version);
+        }
     }
 
     public function executeDB($sql)

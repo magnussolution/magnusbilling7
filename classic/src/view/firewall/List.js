@@ -22,7 +22,7 @@ Ext.define('MBilling.view.firewall.List', {
     extend: 'Ext.ux.grid.Panel',
     alias: 'widget.firewalllist',
     store: 'Firewall',
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
         me.textDelete = 'Unban';
         me.textNew = t('Ban new IP');
@@ -53,6 +53,16 @@ Ext.define('MBilling.view.firewall.List', {
                 ]
             },
             flex: 2
+        }, {
+            header: t('Server'),
+            dataIndex: 'idServername',
+            filter: {
+                type: 'string',
+                field: 'idServer.name'
+            },
+            flex: 3,
+            hidden: App.user.isClient,
+            hideable: !App.user.isClient
         }]
         me.callParent(arguments);
     }
