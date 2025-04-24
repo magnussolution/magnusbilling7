@@ -22,6 +22,8 @@ class FailtwobanipCommand extends ConsoleCommand
 {
     protected $resultBanIps = [];
     protected $resultUnBanIps = [];
+    protected $ignogeips;
+    protected $ssh_port = 22;
     public function run($args)
     {
 
@@ -53,18 +55,31 @@ ignoreregex =
 
 
 
+        if (isset($args[0])) {
+            $this->ssh_port = $args[0];
+        }
+
+
+
         $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 3';
         $command = Yii::app()->db->createCommand($sql);
         $this->resultUnBanIps = $command->queryAll();
 
-        $sql     = 'DELETE FROM pkg_firewall WHERE action = 3';
-        $command = Yii::app()->db->createCommand($sql);
-
+        foreach ($this->resultUnBanIps as  $unbanIP) {
+            $sql     = 'DELETE FROM pkg_firewall WHERE ip = "' . $unbanIP['ip'] . '"';
+            Yii::app()->db->createCommand($sql)->execute();
+        }
 
         $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 1';
         $command = Yii::app()->db->createCommand($sql);
         $this->resultBanIps = $command->queryAll();
 
+
+        echo "\n\nresultUnBanIps";
+        print_r($this->resultUnBanIps);
+
+        echo "\nresultBanIps";
+        print_r($this->resultBanIps);
 
         $sql = 'TRUNCATE TABLE pkg_firewall';
         Yii::app()->db->createCommand($sql)->execute();
@@ -88,9 +103,17 @@ ignoreregex =
             $modelServers = Servers::model()->findAll('status IN (1,3,4)');
         }
 
+        $this->ignogeips = 'ignoreip = 127.0.0.1 ';
+        foreach ($modelServers as $key => $server) {
+            $this->ignogeips .= $server['host'] . " ";
+        }
+
+
+        $modelServers = Servers::model()->findAll('status IN (1,3,4)');
+
         foreach ($modelServers as $key => $server) {
 
-            echo $server['host'] . "\n";
+            echo "\n" . $server['host'] . "\n\n";
 
             if ($server['type'] == 'sipproxy') {
 
@@ -107,11 +130,18 @@ ignoreregex =
 
     public function getLinesCommand($command, $action = 0, $server)
     {
+
+        echo "sed -i 's/^ignoreip = .*/" . $this->ignogeips . "/' /etc/fail2ban/jail.local\n";
+
         if ($server['type'] == 'mbilling') {
+
+            shell_exec("sed -i 's/^ignoreip = .*/" . $this->ignogeips . "/' /etc/fail2ban/jail.local");
+            shell_exec("systemctl reload fail2ban");
+
 
             foreach ($this->resultUnBanIps as  $unbanIP) {
 
-                echo "unbanip IP " .  $unbanIP['ip'] . "\n";
+                echo "unbanip IP " .  $unbanIP['ip'] . " on MASTER\n";
 
                 @shell_exec("sudo fail2ban-client set asterisk-iptables unbanip " .  $unbanIP['ip']);
                 @shell_exec("sudo fail2ban-client set ip-blacklist unbanip " .  $unbanIP['ip']);
@@ -138,19 +168,22 @@ ignoreregex =
             $status = shell_exec("fail2ban-client status " . $command);
         } else {
 
+            @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "sed -i \'s/^ignoreip = .*/' . $this->ignogeips . '/\' /etc/fail2ban/jail.local" ');
+            @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "systemctl reload fail2ban"');
+
             foreach ($this->resultUnBanIps as  $unbanIP) {
 
-                echo "unbanip IP " .  $unbanIP['ip'] . "\n";
+                echo "unbanip IP " .  $unbanIP['ip'] . " on " . $server['host'] . "\n";
 
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p 22 "fail2ban-client set asterisk-iptables unbanip ' . $unbanIP['ip'] . '" ');
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p 22 "fail2ban-client set ip-blacklist unbanip ' . $unbanIP['ip'] . '" ');
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p 22 "fail2ban-client set sshd unbanip ' . $unbanIP['ip'] . '" ');
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p 22 "fail2ban-client set opensips-iptables unbanip ' . $unbanIP['ip'] . '" ');
+                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set asterisk-iptables unbanip ' . $unbanIP['ip'] . '" ');
+                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set ip-blacklist unbanip ' . $unbanIP['ip'] . '" ');
+                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set sshd unbanip ' . $unbanIP['ip'] . '" ');
+                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set opensips-iptables unbanip ' . $unbanIP['ip'] . '" ');
             }
 
             if ($command == 'ip-blacklist') {
                 foreach ($this->resultBanIps as  $blokedIP) {
-                    $status =  shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p 22 "fail2ban-client set ip-blacklist banip ' . $blokedIP['ip'] . '" ');
+                    $status =  shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set ip-blacklist banip ' . $blokedIP['ip'] . '" ');
 
                     $sqlCheck = "SELECT COUNT(*) FROM pkg_firewall WHERE ip = '" . $blokedIP['ip'] . "' AND id_server = '" . $server['id'] . "'";
                     $exists = Yii::app()->db->createCommand($sqlCheck)->queryScalar();
@@ -165,8 +198,7 @@ ignoreregex =
                 }
             }
 
-
-            $status =  shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p 22 "fail2ban-client status ' . $command . '" ');
+            $status =  shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client status ' . $command . '" ');
         }
 
         preg_match('/Banned IP list:\s*(.*)/', $status, $ipMatches);

@@ -23,7 +23,7 @@ Ext.define('MBilling.view.sip.List', {
     alias: 'widget.siplist',
     store: 'Sip',
     fieldSearch: 'name',
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
         me.extraButtons = [{
             text: t('Bulk SIP'),
@@ -32,6 +32,11 @@ Ext.define('MBilling.view.sip.List', {
             disabled: false,
             hidden: App.user.isClient || !me.allowCreate || window.isTablet
         }];
+
+        if (App.user.isAdmin) {
+            me.buttonImportCsv = true;
+        }
+
         me.columns = me.columns || [{
             header: t('ID'),
             dataIndex: 'id',
@@ -179,7 +184,7 @@ Ext.define('MBilling.view.sip.List', {
             hidden: true,
             hideable: window.dma && window.dialC,
             flex: 2,
-            renderer: function(value) {
+            renderer: function (value) {
                 return value == 1 ? t('Enable') : t('Disable');
             },
             filter: {

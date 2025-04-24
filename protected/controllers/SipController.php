@@ -404,4 +404,27 @@ class SipController extends Controller
             $this->nameMsg     => $this->msgSuccess,
         ]);
     }
+
+    public function actionImportFromCsv()
+    {
+
+        parent::actionImportFromCsv();
+
+        $sql = "UPDATE pkg_sip SET accountcode = ( SELECT username FROM pkg_user WHERE pkg_user.id = pkg_sip.id_user)";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        $sql = "UPDATE pkg_sip SET context = 'billing' WHERE context IS NULL";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        $sql = "UPDATE pkg_sip SET host = 'dynamic' WHERE host IS NULL";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        $sql = "UPDATE pkg_sip SET allow = 'g729,gsm,alaw,ulaw' WHERE allow IS NULL";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        $sql = "UPDATE pkg_sip SET defaultuser = name";
+        Yii::app()->db->createCommand($sql)->execute();
+
+        AsteriskAccess::instance()->generateSipPeers();
+    }
 }
