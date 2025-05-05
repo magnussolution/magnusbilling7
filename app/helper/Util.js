@@ -18,7 +18,7 @@ Ext.define('Helper.Util', {
     noValue: t('No'),
     activeValue: t('Active'),
     inactiveValue: t('Inactive'),
-    getListFilter: function(combo, name) {
+    getListFilter: function (combo, name) {
         var store,
             labelField;
         combo = Ext.widget(combo);
@@ -32,7 +32,7 @@ Ext.define('Helper.Util', {
             idField: combo.valueField
         };
     },
-    formatQueueState: function(value) {
+    formatQueueState: function (value) {
         switch (value) {
             case 'ringing':
                 value = '<span style="color:blue; font-weight: bold; ">' + t('Receiving') + '</span>';
@@ -46,7 +46,7 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    formatQueueAgentState: function(value) {
+    formatQueueAgentState: function (value) {
         switch (value) {
             case 'Not in use':
                 value = '<span style="color:green; font-weight: bold; ">' + t('Waiting') + '</span>';
@@ -66,7 +66,7 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    enableComboRelated: function(combo, comboRelated, valueComboRelated) {
+    enableComboRelated: function (combo, comboRelated, valueComboRelated) {
         var store = comboRelated.store,
             nameField = combo.name,
             valueCombo = combo.getValue(),
@@ -85,13 +85,13 @@ Ext.define('Helper.Util', {
             params: {
                 filter: Ext.encode(valueFilter)
             },
-            callback: function() {
+            callback: function () {
                 comboRelated.setValue(valueComboRelated);
                 comboRelated.enable();
             }
         });
     },
-    utf8Encode: function(argString) {
+    utf8Encode: function (argString) {
         if (argString === null || typeof argString === "undefined") {
             return "";
         }
@@ -124,12 +124,12 @@ Ext.define('Helper.Util', {
         }
         return utftext;
     },
-    sha1: function(str) {
-        var rotate_left = function(n, s) {
+    sha1: function (str) {
+        var rotate_left = function (n, s) {
             var t4 = (n << s) | (n >>> (32 - s));
             return t4;
         };
-        var cvt_hex = function(val) {
+        var cvt_hex = function (val) {
             var str = "";
             var i;
             var v;
@@ -229,35 +229,35 @@ Ext.define('Helper.Util', {
         temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
         return temp.toLowerCase();
     },
-    formatBooleanFree: function(value) {
+    formatBooleanFree: function (value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'orange' : '#FFCC00';
         value = value == 0 ? t('Blocked') : value == 1 ? t('Free') : value == 2 ? t('In use') : value == 3 ? t('Calling') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatBoleto: function(value) {
+    formatBoleto: function (value) {
         var me = Helper.Util,
             color = value == 'P' ? me.colorYesValue : me.colorNoValue;
         value = value = 'P' ? me.yesValue : me.noValue;
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatPackageType: function(value) {
+    formatPackageType: function (value) {
         value = value == 0 ? t('Unlimited calls') : value == 1 ? t('Number free calls') : t('Free seconds');
         return value;
     },
-    formatBooleancallback: function(value) {
+    formatBooleancallback: function (value) {
         color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'orange' : value == 4 ? 'black' : '#FFCC00';
         value = value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 4 ? t('Not working') : t('Sent');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatPorcente: function(value) {
+    formatPorcente: function (value) {
         return value + '%';
     },
-    formatBillingType: function(value) {
+    formatBillingType: function (value) {
         value = value == 0 ? t('Monthly') : t('Weekly');
         return value;
     },
-    formatDidType: function(value) {
+    formatDidType: function (value) {
         switch (value) {
             case 0:
                 value = t('Call to PSTN');
@@ -298,16 +298,16 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    formatLcrtype: function(value) {
+    formatLcrtype: function (value) {
         var me = Helper.Util,
             value = value == 1 ? t('LCR According buyer Price') : value == 2 ? t('Load Balancer') : value == 0 ? t('LCR According seller Price') : '';
         return value;
     },
-    formatMoneyDecimalWithoutColor: function(value) {
+    formatMoneyDecimalWithoutColor: function (value) {
         var format = Ext.util.Format.numberRenderer('0.000');
         return App.user.currency + ' ' + format(value);
     },
-    formatMoneyDecimal: function(value) {
+    formatMoneyDecimal: function (value) {
         var me = Helper.Util,
             fnName = t('id') + 'Money',
             format = Ext.util.Format.numberRenderer('0.000');
@@ -319,7 +319,7 @@ Ext.define('Helper.Util', {
             return '<span style="color:blue;">' + App.user.currency + ' ' + format(value) + '</span>';
         }
     },
-    formatMoneyDecimal4: function(value) {
+    formatMoneyDecimal4: function (value) {
         var me = Helper.Util,
             fnName = t('id') + 'Money',
             format = Ext.util.Format.numberRenderer('0.' + App.user.decimalPrecision);
@@ -331,7 +331,7 @@ Ext.define('Helper.Util', {
             return '<span style="color:blue;">' + App.user.currency + ' ' + format(value) + '</span>';
         }
     },
-    formatMoneyDecimal2: function(value) {
+    formatMoneyDecimal2: function (value) {
         var me = Helper.Util,
             fnName = t('id') + 'Money',
             format = Ext.util.Format.numberRenderer('0.00');
@@ -343,12 +343,12 @@ Ext.define('Helper.Util', {
             return '<span style="color:blue;">' + App.user.currency + ' ' + format(value) + '</span>';
         }
     },
-    formatUserType: function(value) {
+    formatUserType: function (value) {
         var me = Helper.Util,
             value = value == 1 ? t('Admin') : value == 2 ? t('Agent') : value == 3 ? t('User') : t('NULL');
         return value;
     },
-    formatMoney: function(value) {
+    formatMoney: function (value) {
         var me = Helper.Util,
             fnName = 'globalMoney',
             format = Ext.isFunction(Ext.util.Format[fnName]) ? Ext.util.Format[fnName] : me[fnName] || Ext.util.Format.usMoney;
@@ -361,21 +361,21 @@ Ext.define('Helper.Util', {
             return '<span style="color:blue;">' + format(value) + '</span>';
         }
     },
-    formattyyesno: function(value) {
+    formattyyesno: function (value) {
         var me = Helper.Util,
             color = value ? me.colorYesValue : me.colorNoValue;
         value = value ? me.yesValue : me.noValue;
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatCampaignType: function(value) {
+    formatCampaignType: function (value) {
         value = value == 1 ? t('Voice') : t('SMS');
         return value;
     },
-    formatDirection: function(value) {
+    formatDirection: function (value) {
         value = value == 1 ? t('Outbound') : value == 2 ? t('Inbound') : t('Outbound & CallerID');
         return value;
     },
-    formatHangupCause: function(value) {
+    formatHangupCause: function (value) {
         switch (value) {
             case 0:
                 value = t('Cause not defined');
@@ -500,7 +500,7 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    formatCallType: function(value) {
+    formatCallType: function (value) {
         switch (value) {
             case 0:
                 value = t('Standard');
@@ -535,24 +535,24 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    formatWhatsapp: function(value) {
+    formatWhatsapp: function (value) {
         color = value == 0 ? 'blue' : value == 1 ? 'green' : value == 2 ? 'red' : value == 3 ? 'black' : value == 4 ? 'red' : '#FFCC00';
         value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('Blocked') : value == 3 ? t('Wrong identity') : value == 4 ? t('Blocked') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatBoleto: function(value) {
+    formatBoleto: function (value) {
         var me = Helper.Util,
             color = value == 'P' ? me.colorYesValue : me.colorNoValue;
         value = value = 'P' ? me.yesValue : me.noValue;
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatBooleanActive: function(value) {
+    formatBooleanActive: function (value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : value == 3 ? 'green' : value == 4 ? 'red' : value == 5 ? 'orange' : '#FFCC00';
         value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('Pending') : value == 3 ? t('Sent') : value == 4 ? t('Blocked') : value == 5 ? t('AMD') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatUserStatus: function(value) {
+    formatUserStatus: function (value) {
         var me = Helper.Util;
         switch (value) {
             case 0:
@@ -578,22 +578,22 @@ Ext.define('Helper.Util', {
         }
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatBooleanSms: function(value) {
+    formatBooleanSms: function (value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? 'blue' : '#FFCC00',
             value = value == 0 ? t('Error') : value == 1 ? t('Sent') : value == 2 ? t('Received') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatBooleanServers: function(value) {
+    formatBooleanServers: function (value) {
         var me = Helper.Util,
             color = value == 0 ? 'red' : value == 1 ? 'green' : value == 2 ? '#FFCC00' : '#FFCC00',
             value = value == 0 ? t('Inactive') : value == 1 ? t('Active') : value == 2 ? t('OffLine') : value == 3 ? t('Error') : value == 4 ? t('Alert') : t('Pending');
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatLanguageImage: function(value) {
+    formatLanguageImage: function (value) {
         return '<img src="resources/images/flags/' + value + '.png" />';
     },
-    formatsecondsToTime: function(secs) {
+    formatsecondsToTime: function (secs) {
         var hr = Math.floor(secs / 3600);
         var min = Math.floor((secs - (hr * 3600)) / 60);
         var sec = secs - (hr * 3600) - (min * 60);
@@ -609,13 +609,13 @@ Ext.define('Helper.Util', {
         sec = sec < 10 ? '0' + sec : sec
         return hr + ':' + min + ':' + sec;
     },
-    formatBoleto: function(value) {
+    formatBoleto: function (value) {
         var me = Helper.Util,
             color = value == 'P' ? me.colorYesValue : me.colorNoValue;
         value = value = 'P' ? me.yesValue : me.noValue;
         return '<span style="color:' + color + '">' + value + '</span>';
     },
-    formatDialStatus: function(value) {
+    formatDialStatus: function (value) {
         switch (value) {
             case 1:
                 value = t('Answer');
@@ -650,7 +650,7 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    formatQueueStatus: function(value) {
+    formatQueueStatus: function (value) {
         switch (value) {
             case 'inQue':
                 value = '<span style="color:blue; font-weight: bold; ">' + t('Receiving') + '</span>';
@@ -667,36 +667,56 @@ Ext.define('Helper.Util', {
         }
         return value;
     },
-    convertErrorsJsonToString: function(json) {
+    formatFail2banAction: function (value) {
+        switch (value) {
+            case 0:
+                value = t('Temp ban');
+                break;
+            case 1:
+                value = t('Permanent ban');
+                break;
+            case 3:
+                value = t('Unban');
+                break;
+            case 4:
+                value = t('Callback');
+                break;
+            case 5:
+                value = t('IgnoreIP');
+                break;
+        }
+        return value;
+    },
+    convertErrorsJsonToString: function (json) {
         var errors = '';
-        if (typeof(json) === 'string') {
+        if (typeof (json) === 'string') {
             return json;
         }
-        Ext.iterate(json, function(field) {
-            Ext.each(json[field], function(error) {
+        Ext.iterate(json, function (field) {
+            Ext.each(json[field], function (error) {
                 errors += t(error) + '<br>';
             });
         });
         return errors;
     },
-    formatStatusImage: function(value) {
+    formatStatusImage: function (value) {
         if (value.match(/^OK/g)) return '<img src="resources/images/registered.png" /> ' + t(value);
         else if (value.match(/^LAGGED/g)) return '<img src="resources/images/Unmonitored.png" /> ' + t(value);
         else return '<img src="resources/images/' + value + '.png" /> ' + t(value);
     },
-    formatSipDirection: function(value) {
+    formatSipDirection: function (value) {
         if (value == 'IN') return '<img src="resources/images/in.png" /> ';
         else return '<img src="resources/images/out.png" /> ';
     },
-    formatDateTime: function(value) {
+    formatDateTime: function (value) {
         if (Ext.Date.format(value, 'Y') < '2000') return '';
         else return value == '0000-00-00 00:00:00' ? '' : Ext.Date.format(value, 'Y-m-d H:i:s')
     },
-    formatTranslate: function(value) {
+    formatTranslate: function (value) {
         return t(value);
     }
 });
-! function(n) {
+! function (n) {
     "use strict";
 
     function t(n, t) {
@@ -796,7 +816,7 @@ Ext.define('Helper.Util', {
     function A(n, t, r) {
         return t ? r ? s(t, n) : C(t, n) : r ? m(n) : p(n)
     }
-    "function" == typeof define && define.amd ? define(function() {
+    "function" == typeof define && define.amd ? define(function () {
         return A
     }) : "object" == typeof module && module.exports ? module.exports = A : n.md5 = A
 }(this);

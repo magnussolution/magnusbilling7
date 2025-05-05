@@ -297,7 +297,13 @@ logpath  = /var/log/opensips.log
 maxretry = 10
 bantime  = 1800
 
- " >> /etc/fail2ban/jail.local
+[ip-blacklist]
+enabled   = true
+maxretry  = 0
+findtime  = 15552000
+bantime   = -1
+
+ " > /etc/fail2ban/jail.local
 
 
 
@@ -330,7 +336,10 @@ echo $'
 failregex = Blocking traffic from <HOST>
 ' > /etc/fail2ban/filter.d/opensips.conf
 
-
+echo "[Definition]
+failregex = ^<HOST> \[.*\]$
+ignoreregex =
+" > /etc/fail2ban/filter.d/ip-blacklist.conf 
 
 
 systemctl restart fail2ban 

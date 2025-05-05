@@ -22,7 +22,7 @@ class FailtwobanipCommand extends ConsoleCommand
 {
     protected $resultBanIps = [];
     protected $resultUnBanIps = [];
-    protected $ignogeips;
+    protected $ignogeips = 'ignoreip = 127.0.0.1 ';
     protected $ssh_port = 22;
     public function run($args)
     {
@@ -60,6 +60,14 @@ ignoreregex =
         }
 
 
+        $sql = "SELECT count(id) as logged FROM pkg_log where id_log_actions = 1 AND date >= NOW() - INTERVAL (SELECT config_value FROM pkg_configuration WHERE config_key = 'session_timeout') SECOND AND id_user IN (SELECT id FROM pkg_user WHERE id_group IN (SELECT id FROM pkg_group_user WHERE id_user_type = 1))";
+        $command = Yii::app()->db->createCommand($sql);
+        $resultAdmins = $command->queryAll();
+        if ($resultAdmins[0]['logged']  == 0) {
+            echo "Admin not logged\n";
+            return;
+        }
+
 
         $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 3';
         $command = Yii::app()->db->createCommand($sql);
@@ -75,6 +83,15 @@ ignoreregex =
         $this->resultBanIps = $command->queryAll();
 
 
+        $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 5';
+        $command = Yii::app()->db->createCommand($sql);
+        $modelServersIgnoreIPs = $command->queryAll();
+
+        foreach ($modelServersIgnoreIPs as $key => $server) {
+            $this->ignogeips .= $server['ip'] . " ";
+        }
+
+
         echo "\n\nresultUnBanIps";
         print_r($this->resultUnBanIps);
 
@@ -83,6 +100,15 @@ ignoreregex =
 
         $sql = 'TRUNCATE TABLE pkg_firewall';
         Yii::app()->db->createCommand($sql)->execute();
+
+        foreach ($modelServersIgnoreIPs as $key => $server) {
+            $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $server['ip'] . "',5, NOW(), '','IgnoreIP','1')";
+            try {
+                Yii::app()->db->createCommand($sql)->execute();
+            } catch (Exception $e) {
+            }
+        }
+
 
         $modelServers = Servers::model()->findAll('status IN (1,3,4)');
 
@@ -103,10 +129,12 @@ ignoreregex =
             $modelServers = Servers::model()->findAll('status IN (1,3,4)');
         }
 
-        $this->ignogeips = 'ignoreip = 127.0.0.1 ';
         foreach ($modelServers as $key => $server) {
-            $this->ignogeips .= $server['host'] . " ";
+            if ($server['host'] != 'localhost') {
+                $this->ignogeips .= $server['host'] . " ";
+            }
         }
+
 
 
         $modelServers = Servers::model()->findAll('status IN (1,3,4)');

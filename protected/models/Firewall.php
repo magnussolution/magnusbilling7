@@ -65,9 +65,22 @@ class Firewall extends Model
 
     public function checkip($attribute, $params)
     {
-        if (!preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\z/', $this->ip)) {
-            $this->addError($attribute, Yii::t('zii', 'The IP is not valid'));
+        // Check if it's a plain IP
+        if (filter_var($this->ip, FILTER_VALIDATE_IP)) {
+            return;
         }
+
+        // Check if it's in CIDR format (e.g., 192.168.0.0/24)
+        $parts = explode('/', $this->ip);
+        if (count($parts) === 2) {
+            [$ip, $mask] = $parts;
+
+            if (filter_var($ip, FILTER_VALIDATE_IP) && ctype_digit($mask) && $mask >= 0 && $mask <= 32) {
+                return;
+            }
+        }
+
+        $this->addError($attribute, Yii::t('zii', 'The IP or IP range is not valid'));
     }
 
     public function relations()

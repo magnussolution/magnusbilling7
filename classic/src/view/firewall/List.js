@@ -25,7 +25,6 @@ Ext.define('MBilling.view.firewall.List', {
     initComponent: function () {
         var me = this;
         me.textDelete = 'Unban';
-        me.textNew = t('Ban new IP');
         me.buttonCsv = false;
         me.buttonUpdateLot = false;
         me.buttonCleanFilter = true;
@@ -42,14 +41,16 @@ Ext.define('MBilling.view.firewall.List', {
             dataIndex: 'jail',
             flex: 4
         }, {
-            header: t('Perm ban'),
+            header: t('Action'),
             dataIndex: 'action',
-            renderer: Helper.Util.formattyyesno,
+            renderer: Helper.Util.formatFail2banAction,
             filter: {
                 type: 'list',
                 options: [
-                    [0, t('No')],
-                    [1, t('Yes')]
+                    [0, t('Temp ban')],
+                    [1, t('Permanent ban')],
+                    [3, t('Unban')],
+                    [5, t('IgnoreIP')]
                 ]
             },
             flex: 2

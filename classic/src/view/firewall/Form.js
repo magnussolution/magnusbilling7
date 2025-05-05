@@ -21,16 +21,26 @@
 Ext.define('MBilling.view.firewall.Form', {
     extend: 'Ext.ux.form.Panel',
     alias: 'widget.firewallform',
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
         me.items = [{
             name: 'ip',
             fieldLabel: t('IP'),
-            vtype: 'IPAddress'
+            vtype: 'IPOrCIDR'
         }, {
-            xtype: 'yesnocombo',
+            xtype: 'combobox',
+            store: [
+                ['0', 'Temp ban'],
+                ['1', 'Permanent ban'],
+                ['3', 'Unban'],
+                ['5', 'Add to IgnoreIP']
+            ],
             name: 'action',
-            fieldLabel: t('Perm ban')
+            fieldLabel: t('Action'),
+            forceSelection: true,
+            editable: false,
+            allowBlank: true,
+            value: '0'
         }, {
             xtype: 'textarea',
             name: 'description',
