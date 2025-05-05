@@ -119,7 +119,7 @@ class sqlInject
                                 }
                             }
                         } else {
-                            $value = @strtolower($valuearray);
+                            $value = is_string($valuearray) ?  @strtolower($valuearray) : NULL;
                             if (strlen($value) > 250) {
                                 $info    = 'Variable to long: ' . $valuearray . '. Controller => ' . Yii::app()->controller->id;
                                 $id_user = isset(Yii::app()->session['id_user']) ? Yii::app()->session['id_user'] : 'NULL';

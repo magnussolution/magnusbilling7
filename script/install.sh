@@ -84,8 +84,8 @@ apt-get install -y apache2
 apt-get install -y autoconf automake devscripts gawk ntpdate ntp g++ git-core curl sudo xmlstarlet libjansson-dev git  odbcinst1debian2 libodbc1 odbcinst unixodbc unixodbc-dev 
 apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-cli php-sqlite3 php-curl php-mbstring unzip libapache2-mod-php uuid-dev libxml2 libxml2-dev openssl libcurl4-openssl-dev gettext gcc g++ libncurses5-dev sqlite3 libsqlite3-dev subversion mpg123
 apt-get install -y mariadb-server php-mysql
-apt-get install -y  unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
-
+apt-get install -y unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
+apt-get install -y rsyslog
 
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 
@@ -760,10 +760,8 @@ maxretry  = 0
 findtime  = 15552000
 bantime   = -1
 
-
 [ssh]
-enablem=true
-backend=systemd
+enabled=true
 
 [mbilling_ddos]
 enabled  = true
@@ -771,8 +769,6 @@ filter   = mbilling_ddos
 logpath  = /var/log/apache2/error.log
 maxretry = 20
 bantime = 3600" > /etc/fail2ban/jail.local
-
-
 
 
 rm -rf /var/www/html/mbilling/resources/ip.blacklist
