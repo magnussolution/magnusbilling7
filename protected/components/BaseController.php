@@ -482,7 +482,7 @@ class BaseController extends CController
         }
     }
 
-    public function checkActionAccess($values = '', $module, $action)
+    public function checkActionAccess($values = [], $module, $action)
     {
         if ($action == 'canUpdate' || $action == 'canCreate') {
             if (isset($values['id']) && ! AccessManager::getInstance($module)->$action()) {
