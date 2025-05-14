@@ -3,13 +3,14 @@
  * Yii bootstrap file.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @link http://www.yiiframework.com/
+ * @link https://www.yiiframework.com/
  * @copyright 2008-2013 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @license https://www.yiiframework.com/license/
  * @package system
  * @since 1.0
  */
 
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 if(!class_exists('YiiBase', false))
 	require(dirname(__FILE__).'/YiiBase.php');
 
