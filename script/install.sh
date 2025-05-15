@@ -844,24 +844,24 @@ p4_proc()
 
     if [ "$4" == "Celeron" ]; then
 
-        wget https://raw.githubusercontent.com/Khaled-IamZ/codec/main/codec_g723-ast14-gcc4-glibc-pentium.so
-        wget https://raw.githubusercontent.com/Khaled-IamZ/codec/main/codec_g729-ast14-gcc4-glibc-pentium.so
-        cp /usr/src/codec_g723-ast14-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g723.so
-        cp /usr/src/codec_g729-ast14-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g729.so
+        wget https://www.magnusbilling.org/download/codecs/codec_g723-ast13-gcc4-glibc-pentium.so
+        wget https://www.magnusbilling.org/download/codecs/codec_g729-ast13-gcc4-glibc-pentium.so
+        cp /usr/src/codec_g723-ast13-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g723.so
+        cp /usr/src/codec_g729-ast13-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g729.so
          
         return 0;
     fi
 
-    wget http://asterisk.hosting.lv/bin/codec_g723-ast130-gcc4-glibc-pentium4.so   
-    wget http://asterisk.hosting.lv/bin/codec_g729-ast130-gcc4-glibc-pentium4.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g723-ast130-gcc4-glibc-pentium4.so   
+    wget https://www.magnusbilling.org/download/codecs/codec_g729-ast130-gcc4-glibc-pentium4.so
     mv /usr/src/codec_g723-ast130-gcc4-glibc-pentium4.so  /usr/lib/asterisk/modules/codec_g723.so
     mv codec_g729-ast130-gcc4-glibc-pentium4.so /usr/lib/asterisk/modules/codec_g729.so            
 
 }
 p4_x64_proc()
 {         
-    wget http://asterisk.hosting.lv/bin/codec_g723-ast130-gcc4-glibc-x86_64-pentium4.so
-    wget http://asterisk.hosting.lv/bin/codec_g729-ast130-gcc4-glibc-x86_64-pentium4.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g723-ast130-gcc4-glibc-x86_64-pentium4.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g729-ast130-gcc4-glibc-x86_64-pentium4.so
     mv /usr/src/codec_g723-ast130-gcc4-glibc-x86_64-pentium4.so /usr/lib/asterisk/modules/codec_g723.so
     mv /usr/src/codec_g729-ast130-gcc4-glibc-x86_64-pentium4.so /usr/lib/asterisk/modules/codec_g729.so
       
@@ -870,22 +870,22 @@ p3_proc()
 {       
     set $(grep "model name" /proc/cpuinfo);
     if [ "$4" == "Intel(R)" &&  "$5" == "Pentium(R)" && "$6"== "III" ];then
-        wget http://asterisk.hosting.lv/bin/codec_g723-ast130-gcc4-glibc-pentium.so   
-        wget http://asterisk.hosting.lv/bin/codec_g729-ast130-gcc4-glibc-pentium.so
+        wget https://www.magnusbilling.org/download/codecs/codec_g723-ast130-gcc4-glibc-pentium.so   
+        wget https://www.magnusbilling.org/download/codecs/codec_g729-ast130-gcc4-glibc-pentium.so
         mv /usr/src/codec_g723-ast130-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g723.so
         mv /usr/src/codec_g729-ast130-gcc4-glibc-pentium.so /usr/lib/asterisk/modules/codec_g729.so
         return 0;
     fi
-    wget http://asterisk.hosting.lv/bin/codec_g723-ast130-gcc4-glibc-pentium3.so
-    wget http://asterisk.hosting.lv/bin/codec_g729-ast130-gcc4-glibc-pentium3.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g723-ast130-gcc4-glibc-pentium3.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g729-ast130-gcc4-glibc-pentium3.so
     mv /usr/src/codec_g723-ast130-gcc4-glibc-pentium3.so /usr/lib/asterisk/modules/codec_g723.so
     mv /usr/src/codec_g729-ast130-gcc4-glibc-pentium3.so /usr/lib/asterisk/modules/codec_g729.so
 
 }
 AMD_proc()
 {
-    wget http://asterisk.hosting.lv/bin/codec_g729-ast130-gcc4-glibc-athlon-sse.so
-    wget http://asterisk.hosting.lv/bin/codec_g723-ast130-gcc4-glibc-athlon-sse.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g729-ast130-gcc4-glibc-athlon-sse.so
+    wget https://www.magnusbilling.org/download/codecs/codec_g723-ast130-gcc4-glibc-athlon-sse.so
     mv /usr/src/codec_g723-ast130-gcc4-glibc-athlon-sse.so /usr/lib/asterisk/modules/codec_g723.so
     mv /usr/src/codec_g729-ast130-gcc4-glibc-athlon-sse.so /usr/lib/asterisk/modules/codec_g729.so
 
