@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Call".
  *
@@ -22,7 +23,7 @@
 
 class TrunkGroupController extends Controller
 {
-    public $attributeOrder     = 't.id DESC';
+    public $attributeOrder     = 't.name ASC';
     public $nameModelRelated   = 'TrunkGroupTrunk';
     public $nameFkRelated      = 'id_trunk_group';
     public $nameOtherFkRelated = 'id_trunk';
@@ -77,7 +78,6 @@ class TrunkGroupController extends Controller
                 $id_trunk_group . ' ' . $value;
                 $this->success = $model->save();
             }
-
         }
 
         echo json_encode([
@@ -85,7 +85,6 @@ class TrunkGroupController extends Controller
             $this->nameMsg     => 'Success',
         ]);
         exit;
-
     }
 
     public function beforeSave($values)
@@ -102,5 +101,4 @@ class TrunkGroupController extends Controller
 
         return $values;
     }
-
 }
