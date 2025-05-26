@@ -18,7 +18,7 @@ Ext.define('MBilling.view.restrictedPhonenumber.ImportCsv', {
     alias: 'widget.restrictedphonenumberimportcsv',
     htmlTipInfo: '<br>number<br>',
     fieldsImport: [{
-        xtype: 'usercombo',
+        xtype: 'userlookup',
         width: 350
     }]
 });
