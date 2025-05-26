@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Acoes do modulo "Provider".
  *
@@ -22,7 +23,7 @@
 
 class ProviderController extends Controller
 {
-    public $attributeOrder = 'id';
+    public $attributeOrder      = 't.provider_name ASC';
     public $filterByUser   = false;
 
     public function init()
@@ -32,5 +33,4 @@ class ProviderController extends Controller
         $this->titleReport   = Yii::t('zii', 'Provider');
         parent::init();
     }
-
 }
