@@ -704,7 +704,7 @@ class Magnus
                 $this->hangup($agi);
             }
         }
-        if ($this->restriction == 1 || $this->restriction == 2) {
+        if ($this->restriction == 1 || $this->restriction == 2 || $type == 'did') {
             /*Check if Account have restriction*/
 
             if ($this->restriction == 1 && $this->restriction_use == 3 && $type == 'outbound') {
@@ -716,6 +716,22 @@ class Magnus
             $modelRestrictedPhonenumber = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
 
             $agi->verbose("RESTRICTED NUMBERS ", 15);
+
+            $sql =  "SELECT id FROM pkg_restrict_phone WHERE direction = 2 AND (id_user = '" . $this->id_user . "' OR id_user = '1')  AND number = SUBSTRING('" . $this->CallerID . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+            $agi->verbose($sql, 25);
+            $modelRestrictedPhonenumberCallerid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
+            $agi->verbose(print_r($modelRestrictedPhonenumberCallerid, true), 25);
+            if (isset($modelRestrictedPhonenumberCallerid->id)) {
+                $agi->verbose("CALLERID NOT AUHTORIZED - NOT ALLOW TO CALL RESTRICTED NUMBERS", 1);
+                if ($this->play_audio == 1) {
+                    $agi->answer();
+                    $agi->stream_file('prepaid-dest-unreachable', '#');
+                } else {
+                    $agi->execute((congestion), Congestion);
+                }
+                $this->hangup($agi);
+            }
+
 
             if ($this->restriction == 1) {
                 /* NOT ALLOW TO CALL RESTRICTED NUMBERS*/
