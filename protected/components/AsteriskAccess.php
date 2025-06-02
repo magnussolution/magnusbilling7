@@ -941,7 +941,7 @@ class AsteriskAccess
                         }
 
                         if ($iax->calllimit > 0) {
-                            $line .= 'call-limit=' . $sip->calllimit . "\n";
+                            $line .= 'call-limit=' . $iax->calllimit . "\n";
                         }
 
                         if (fwrite($fd, $line) === false) {
