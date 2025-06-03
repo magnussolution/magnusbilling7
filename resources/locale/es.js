@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2023
+ * 2025
  */
 Locale.load({
     '': '',
@@ -84,7 +84,6 @@ Locale.load({
     'Available options': 'Opciones disponibles',
     'Backup': 'Respaldo',
     'Backup the manual code': 'Respaldar el código de forma Manual',
-    'Ban new IP': 'Bloquear la IP',
     'Bank': 'Banco',
     'Bars': 'Barras',
     'Batch  update': 'Actualización en lote',
@@ -174,8 +173,6 @@ Locale.load({
     'Campaign Restrict Phone': 'Números Bloqueados ',
     'Campaign type': 'Tipo de campaña',
     'CampaignLog': 'Registro de Campaña',
-    'Campaigns': 'Campañas',
-    'Campaigns DashBoard': 'Panel de Campaña',
     'Cancel': 'Cancelar',
     'Cancel service': 'Cancele servicio',
     'Cannot call to restricted numbers': 'No puedo llamar a números restringidos',
@@ -200,7 +197,6 @@ Locale.load({
     'Client': 'Cliente',
     'Client id': 'ID de cliente',
     'Client secret': 'Contraseña de cliente',
-    'Clients': 'Clientes',
     'Clone': 'Clon',
     'Close': 'Cerrar',
     'Code': 'Código',
@@ -291,7 +287,6 @@ Locale.load({
     'Destination number': 'Número destino',
     'Destination out of order': 'Destino fuera de servicio',
     'Details': 'Detalles',
-    'Developed by': 'Creado por',
     'Dial Number': 'Dial Number',
     'Dial Tone': 'Dial Tone',
     'Dial parameter': 'Parámetro Dial',
@@ -371,6 +366,7 @@ Locale.load({
     'Failed calls': 'Llamadas fallidas',
     'Failed. Try again...': 'Ha fallado. Inténtalo de nuevo...',
     'Failover trunk': 'Troncal de backup',
+    'Fake Ring': 'Ring falso',
     'Field list': 'Lista de campo',
     'File': 'Archivo',
     'File CSV': 'Archivo CSV',
@@ -494,7 +490,6 @@ Locale.load({
     'Leave when empty': 'Dejar cuando esté vacío',
     'Less than': 'Menor que',
     'Limit': 'Límite',
-    'Limit error': 'Tipo de respuesta de error',
     'Limit refill exceeded, your limit is': 'Límite de recarga excedido, su límite es',
     'Lines': 'Líneas',
     'Link SMS': 'Link SMS',
@@ -673,7 +668,6 @@ Locale.load({
     'Percentage': 'Porcentaje',
     'Period': 'Periodo',
     'Periodic announce': 'Anuncio periódico',
-    'Perm ban': 'Bloqueado permanente',
     'Permissions': 'Permisos',
     'Permit': 'Permit',
     'Personal data': 'Información personal',
@@ -681,7 +675,6 @@ Locale.load({
     'Phone Number': 'Telefono fijo',
     'Phone is required': 'Telefono fijo es obligatorio',
     'Phonebook': 'Agenda',
-    'Phonebooks': 'Agendas',
     'Phonenumber': 'Números',
     'Phonenumbers': 'Números',
     'Picture': 'Imagen ',
@@ -707,8 +700,6 @@ Locale.load({
     'Please, select a DID': 'Por favor, seleccione un DID',
     'Poll': 'Encuesta',
     'Poll Info': 'Información de la encuesta ',
-    'Polls': 'Encuestas',
-    'Polls Reports': 'Informes de encuestas ',
     'Port': 'Puerto ',
     'Portuguese': 'Portugués',
     'Postpaid': 'Pospago',
@@ -754,7 +745,6 @@ Locale.load({
     'Queue name': 'Nombre de la cola',
     'Queues': 'Colas',
     'Queues Members': 'Miembros de la cola',
-    'Quick Campaign': 'Campaña rápida',
     'Quick init.': 'Inicio rápido.',
     'Random': 'Random',
     'Rates': 'Tarifas',
@@ -819,7 +809,6 @@ Locale.load({
     'Return credit after cancellation': 'Devolucion de crédito después de la baja',
     'Ring': 'Sonar',
     'Ring all available channels until one answers': 'Hacer sonar todas las cuentas SIP hasta que una conteste',
-    'Fake Ring': 'Ring falso',
     'Ring for': 'Sonar por',
     'Ring interface which was least recently called by this queue': 'Sonar la cuenta SIP que llamó menos',
     'Ring or playing MOH': 'Sonar o executar MOH',
@@ -1150,4 +1139,5 @@ Locale.load({
     'name': 'nombre',
     'to refill': 'para recargar',
     'week': 'semana',
+
 });

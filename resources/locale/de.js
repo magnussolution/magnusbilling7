@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2023
+ * 2025
  */
 Locale.load({
     ',': ',',
@@ -88,7 +88,6 @@ Locale.load({
     'Available options': 'Verfügbare Optionen',
     'Backup': 'Backup',
     'Backup the manual code': 'Manuelle Code-Sicherung',
-    'Ban new IP': 'Neue Ip-Adresse blockieren',
     'Bank': 'Bank',
     'Bars': 'Bars',
     'Batch  update': 'Massen-Update',
@@ -178,8 +177,6 @@ Locale.load({
     'Campaign Restrict Phone': 'Kampagne, Nummern eingeschränkt',
     'Campaign type': 'Kampagnentyp',
     'CampaignLog': 'Kampagnenlog',
-    'Campaigns': 'Kampagnen',
-    'Campaigns DashBoard': 'Kampagnen Dashboard',
     'Cancel': 'Stornieren',
     'Cancel service': 'Service abbrechen',
     'Cannot call to restricted numbers': 'Anruf zu eingeschränkten Nummern nicht möglich',
@@ -204,7 +201,6 @@ Locale.load({
     'Client': 'Kunde',
     'Client id': 'Kundennummer',
     'Client secret': 'Kunden Geheimnis (Passwort?)',
-    'Clients': 'Kunden',
     'Clone': 'Klonen',
     'Close': 'Schließen',
     'Code': 'Code',
@@ -296,7 +292,6 @@ Locale.load({
     'Destination number': 'Ziel-Rufnummer',
     'Destination out of order': 'Ziel außer Betrieb',
     'Details': 'Details',
-    'Developed by': 'Entwickelt von',
     'Dial Number': '',
     'Dial Tone': 'Wählton',
     'Dial parameter': 'Anruf Parameter',
@@ -378,6 +373,7 @@ Locale.load({
     'Failed calls': 'Fehlgeschlagene Anrufe',
     'Failed. Try again...': 'Fehler. Versuchen Sie es nochmal...',
     'Failover trunk': 'Failover Trunk',
+    'Fake Ring': 'Fake Ring',
     'Field list': 'Liste der Felder',
     'File': 'Datei',
     'File CSV': 'CSV-Datei',
@@ -502,7 +498,6 @@ Locale.load({
     'Leave when empty': 'Verlassen wenn leer',
     'Less than': 'Kleiner als',
     'Limit': 'Limit',
-    'Limit error': 'Limit Fehler',
     'Limit refill exceeded, your limit is': 'Die Wiederaufladungslimit überschritten, Ihr Limit ist',
     'Line 1': 'Linie 1',
     'Line 2': 'Zeile 2',
@@ -690,7 +685,6 @@ Locale.load({
     'Percentage': 'Prozentsatz',
     'Period': 'Zeitraum',
     'Periodic announce': 'Regelmäßige Ankündigung',
-    'Perm ban': 'permanent blockieren',
     'Permissions': 'Berechtigungen',
     'Permit': 'Erlauben',
     'Personal data': 'persönliche Daten',
@@ -698,7 +692,6 @@ Locale.load({
     'Phone Number': 'Telefonnummer',
     'Phone is required': 'Telefon ist erforderlich',
     'Phonebook': 'Telefonbuch',
-    'Phonebooks': 'Telefonbücher',
     'Phonenumber': 'Telefonnummer',
     'Phonenumbers': 'Telefonnummern',
     'Picture': 'Bild',
@@ -724,8 +717,6 @@ Locale.load({
     'Please, select a DID': 'Bitte wählen Sie eine DID',
     'Poll': 'Umfrage',
     'Poll Info': 'Informationen zur Umfrage',
-    'Polls': 'Umfragen',
-    'Polls Reports': 'Umfrageberichte',
     'Port': 'Port',
     'Portuguese': 'Portugiesisch',
     'Postpaid': 'Postpaid',
@@ -771,7 +762,6 @@ Locale.load({
     'Queue name': 'Name des Warteschlangens',
     'Queues': 'Warteschlangen',
     'Queues Members': 'Warteschlangenmitglieder.',
-    'Quick Campaign': 'Schnelle Kampagne.',
     'Quick init.': 'Schneller Start',
     'Random': 'Zufällig',
     'Rates': 'Preise',
@@ -840,7 +830,6 @@ Locale.load({
     'Return credit after cancellation': '',
     'Ring': 'Klingeln',
     'Ring all available channels until one answers': 'Alle verfügbaren SIP-Kanäle anrufen, bis einer antwortet',
-    'Fake Ring': 'Fake Ring',
     'Ring for': 'Ring for',
     'Ring interface which was least recently called by this queue': 'Ringschnittstelle, die erst kürzlich von dieser Warteschlange angerufen wurde',
     'Ring or playing MOH': 'Rufe an oder spiele MOH ab',
@@ -1180,4 +1169,5 @@ Locale.load({
     'success': 'Erfolg',
     'to refill': 'zum aufladen',
     'week': 'Woche',
+
 });

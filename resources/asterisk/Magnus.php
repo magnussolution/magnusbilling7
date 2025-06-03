@@ -717,10 +717,9 @@ class Magnus
 
             $agi->verbose("RESTRICTED NUMBERS ", 15);
 
-            $sql =  "SELECT id FROM pkg_restrict_phone WHERE direction = 2 AND (id_user = '" . $this->id_user . "' OR id_user = '1')  AND number = SUBSTRING('" . $this->CallerID . "',1,length(number)) ORDER BY LENGTH(number) DESC";
+            $sql =  "SELECT id FROM pkg_restrict_phone WHERE direction IN(3,4) AND (id_user = '" . $this->id_user . "' OR id_user = '1')  AND number = SUBSTRING('" . $this->CallerID . "',1,length(number)) ORDER BY LENGTH(number) DESC";
             $agi->verbose($sql, 25);
             $modelRestrictedPhonenumberCallerid = $agi->query($sql)->fetch(PDO::FETCH_OBJ);
-            $agi->verbose(print_r($modelRestrictedPhonenumberCallerid, true), 25);
             if (isset($modelRestrictedPhonenumberCallerid->id)) {
                 $agi->verbose("CALLERID NOT AUHTORIZED - NOT ALLOW TO CALL RESTRICTED NUMBERS", 1);
                 if ($this->play_audio == 1) {

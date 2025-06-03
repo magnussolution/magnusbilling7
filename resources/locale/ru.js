@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2023
+ * 2025
  */
 Locale.load({
     ',': ',',
@@ -83,7 +83,6 @@ Locale.load({
     'Available options': '',
     'Backup': '',
     'Backup the manual code': '',
-    'Ban new IP': '',
     'Bank': '',
     'Bars': '',
     'Batch  update': '',
@@ -173,8 +172,6 @@ Locale.load({
     'Campaign Restrict Phone': '',
     'Campaign type': '',
     'CampaignLog': '',
-    'Campaigns': '',
-    'Campaigns DashBoard': '',
     'Cancel': '',
     'Cancel service': '',
     'Cannot call to restricted numbers': '',
@@ -199,7 +196,6 @@ Locale.load({
     'Client': '',
     'Client id': '',
     'Client secret': '',
-    'Clients': '',
     'Clone': '',
     'Close': '',
     'Code': '',
@@ -287,7 +283,6 @@ Locale.load({
     'Destination number': '',
     'Destination out of order': '',
     'Details': '',
-    'Developed by': '',
     'Dial Number': '',
     'Dial Tone': '',
     'Dial parameter': '',
@@ -489,7 +484,6 @@ Locale.load({
     'Leave when empty': '',
     'Less than': '',
     'Limit': '',
-    'Limit error': '',
     'Limit refill exceeded, your limit is': '',
     'Lines': '',
     'Link SMS': '',
@@ -671,7 +665,6 @@ Locale.load({
     'Percentage': 'Процент',
     'Period': 'Период',
     'Periodic announce': 'Периодическое объявление',
-    'Perm ban': 'Пермский запрет',
     'Permissions': 'Разрешения',
     'Permit': 'Разрешать',
     'Personal data': 'Личные данные',
@@ -679,7 +672,6 @@ Locale.load({
     'Phone Number': 'Телефонный номер',
     'Phone is required': 'Требуется телефон',
     'Phonebook': 'Телефонная книга',
-    'Phonebooks': 'Телефонные книги',
     'Phonenumber': 'Телефонный номер',
     'Phonenumbers': 'Телефонные номера',
     'Picture': 'Картина',
@@ -705,8 +697,6 @@ Locale.load({
     'Please, select a DID': 'Пожалуйста, выберите A сделал',
     'Poll': 'Голосование',
     'Poll Info': 'Информация о опросе',
-    'Polls': 'Опросы',
-    'Polls Reports': 'Опросы отчеты',
     'Port': 'Порт',
     'Portuguese': 'португальский',
     'Postpaid': 'Поститала',
@@ -752,7 +742,6 @@ Locale.load({
     'Queue name': 'Имя очереди',
     'Queues': 'Очередь',
     'Queues Members': 'Члены очереди',
-    'Quick Campaign': 'Быстрая кампания',
     'Quick init.': 'Быстрый init.',
     'Random': 'Случайный',
     'Rates': 'Тарифы',
