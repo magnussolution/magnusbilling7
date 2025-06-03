@@ -11,7 +11,7 @@
  * ###################################
  * =======================================
  * MagnusSolution.com <info@magnussolution.com>
- * 2023
+ * 2025
  */
 Locale.load({
     ',': ',',
@@ -83,7 +83,6 @@ Locale.load({
     'Available options': '',
     'Backup': '',
     'Backup the manual code': '',
-    'Ban new IP': '',
     'Bank': '',
     'Bars': '',
     'Batch  update': '',
@@ -173,8 +172,6 @@ Locale.load({
     'Campaign Restrict Phone': '',
     'Campaign type': '',
     'CampaignLog': '',
-    'Campaigns': '',
-    'Campaigns DashBoard': '',
     'Cancel': '',
     'Cancel service': '',
     'Cannot call to restricted numbers': '',
@@ -199,7 +196,6 @@ Locale.load({
     'Client': '',
     'Client id': '',
     'Client secret': '',
-    'Clients': '',
     'Clone': '',
     'Close': '',
     'Code name': '',
@@ -286,7 +282,6 @@ Locale.load({
     'Destination number': '',
     'Destination out of order': '',
     'Details': '',
-    'Developed by': '',
     'Dial Number': '',
     'Dial Tone': '',
     'Dial parameter': '',
@@ -366,6 +361,7 @@ Locale.load({
     'Failed calls': '',
     'Failed. Try again...': '',
     'Failover trunk': '',
+    'Fake Ring': 'Anello falso',
     'Field list': '',
     'File': '',
     'File CSV': '',
@@ -488,7 +484,6 @@ Locale.load({
     'Leave when empty': '',
     'Less than': '',
     'Limit': '',
-    'Limit error': '',
     'Limit refill exceeded, your limit is': '',
     'Lines': '',
     'Link SMS': '',
@@ -670,7 +665,6 @@ Locale.load({
     'Percentage': 'Percentuale',
     'Period': 'Periodo',
     'Periodic announce': 'Annuncio periodico',
-    'Perm ban': 'Perm Ban',
     'Permissions': 'Autorizzazioni',
     'Permit': 'Permesso',
     'Personal data': 'Dati personali',
@@ -678,7 +672,6 @@ Locale.load({
     'Phone Number': 'Numero di telefono',
     'Phone is required': 'Il telefono è richiesto',
     'Phonebook': 'Rubrica telefonica',
-    'Phonebooks': 'Rubinetteria',
     'Phonenumber': 'Numero di telefono',
     'Phonenumbers': 'Numeri di telefono',
     'Picture': 'Immagine',
@@ -704,8 +697,6 @@ Locale.load({
     'Please, select a DID': 'Per favore, seleziona un had',
     'Poll': 'Sondaggio',
     'Poll Info': 'Informazioni sul sondaggio',
-    'Polls': 'Sondaggi',
-    'Polls Reports': 'Sondaggi segnalati',
     'Port': 'Porta',
     'Portuguese': 'portoghese',
     'Postpaid': 'Postpagato',
@@ -751,7 +742,6 @@ Locale.load({
     'Queue name': 'Nome della coda',
     'Queues': 'Code',
     'Queues Members': 'I membri delle code',
-    'Quick Campaign': 'Campagna veloce',
     'Quick init.': 'Init rapido',
     'Random': 'Casuale',
     'Rates': 'Aliquote',
@@ -818,7 +808,6 @@ Locale.load({
     'Return credit after cancellation': '',
     'Ring': 'Squillare',
     'Ring all available channels until one answers': 'Suonare tutti i canali disponibili fino a quando non risponde',
-    'Fake Ring': 'Anello falso',
     'Ring for': 'Anello per',
     'Ring interface which was least recently called by this queue': 'Interfaccia ad anello che è stata recentemente recentemente chiamata di recente da questa coda',
     'Ring or playing MOH': 'Anello o giocare a moh',
@@ -1158,4 +1147,5 @@ Locale.load({
     'success': 'successo',
     'to refill': 'per ricaricare',
     'week': 'settimana',
+
 });

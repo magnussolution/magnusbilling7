@@ -24,7 +24,7 @@ Ext.define('MBilling.view.restrictedPhonenumber.List', {
     store: 'RestrictedPhonenumber',
     buttonImportCsv: true,
     fieldSearch: 'number',
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
         me.columns = [{
             header: t('ID'),
@@ -52,10 +52,14 @@ Ext.define('MBilling.view.restrictedPhonenumber.List', {
             renderer: Helper.Util.formatDirection,
             filter: {
                 type: 'list',
-                options: [
+                options: window.dialC ? [
                     [1, t('Outbound')],
                     [2, t('Inbound')],
-                    [3, t('Outbound & CallerID')]
+                    [3, t('Outbound & CallerID')],
+                    [4, t('CallerID')]
+                ] : [
+                    [1, t('Outbound')],
+                    [2, t('Inbound')]
                 ]
             },
             flex: 1
@@ -63,3 +67,5 @@ Ext.define('MBilling.view.restrictedPhonenumber.List', {
         me.callParent(arguments);
     }
 });
+
+

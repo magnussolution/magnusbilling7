@@ -900,6 +900,9 @@ processor_type()
         else _64BIT=0;
     fi;
 }
+
+cd /usr/src/asterisk-13.35.0 
+make config
 clear 
 echo "INSTALLING G723 and G729 CODECS......... FROM http://asterisk.hosting.lv";   
 cd /usr/src
