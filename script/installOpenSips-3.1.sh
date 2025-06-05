@@ -251,6 +251,10 @@ firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=5060/udp --permanent
 firewall-cmd --zone=public --add-port=10000-50000/udp --permanent
 firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-rich-rule="
+  rule family=\"ipv4\"
+  source address=\"$ipMbilling/32\"
+  port protocol=\"tcp\" port=\"3306\" accept" --permanent
 iptables -A INPUT -p tcp -m tcp --dport 19639 -j ACCEPT
 
 
