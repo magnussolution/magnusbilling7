@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Actions of module "User".
  *
@@ -61,6 +62,7 @@ class UserController extends Controller
         'idPlanname',
         'calllimit',
         'inbound_call_limit',
+        'active'
     ];
 
     public $fieldsInvisibleAgent = [
@@ -119,7 +121,6 @@ class UserController extends Controller
                 'errors'  => Yii::t('zii', 'You cannot EDIT your account.'),
             ]);
             exit();
-
         }
     }
     public function afterDestroy($values)
@@ -142,11 +143,12 @@ class UserController extends Controller
         if (isset($values['id_group_agent'])) {
             if (Yii::app()->session['user_type'] == 1 && $values['id_group_agent'] > 0) {
 
-                $modelGroupUser = GroupUser::model()->find('id_user_type = 3 AND id = :key',
+                $modelGroupUser = GroupUser::model()->find(
+                    'id_user_type = 3 AND id = :key',
                     [':key' => $values['id_group_agent']]
                 );
 
-                if ( ! isset($modelGroupUser)) {
+                if (! isset($modelGroupUser)) {
                     echo json_encode([
                         'success' => false,
                         'rows'    => [],
@@ -214,7 +216,7 @@ class UserController extends Controller
                     $error = Yii::t('zii', 'First name');
                 } else if (strlen($values['doc']) < 11) {
                     $error = Yii::t('zii', 'DOC');
-                } else if ( ! preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $values['email'])) {
+                } else if (! preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $values['email'])) {
                     $error = Yii::t('zii', 'Email');
                 }
                 if (isset($error)) {
@@ -225,7 +227,6 @@ class UserController extends Controller
                     ]);
                     exit();
                 }
-
             }
 
             if (Yii::app()->session['user_type'] == 2) {
@@ -234,11 +235,9 @@ class UserController extends Controller
                 $modelAgent = User::model()->findByPk((int) $values['id_user']);
 
                 $values['id_group'] = $modelAgent->id_group_agent;
-
             } else {
                 $values['id_user'] = 1;
             }
-
         } else {
 
             $modelUser = User::model()->findByPk((int) $values['id']);
@@ -276,8 +275,8 @@ class UserController extends Controller
 
         if (isset($values['id_group_agent'])) {
             $values['id_group_agent'] = $values['id_group_agent'] == 0 || ! is_numeric($values['id_group_agent'])
-            ? null :
-            $values['id_group_agent'];
+                ? null :
+                $values['id_group_agent'];
         }
 
         if (isset($values['id_offer'])) {
@@ -292,8 +291,8 @@ class UserController extends Controller
 
         if ($model->idGroup->idUserType->id == 3) {
             $modelSip = $this->isNewRecord ?
-            new Sip() :
-            Sip::model()->findByAttributes(['id_user' => $model->id]);
+                new Sip() :
+                Sip::model()->findByAttributes(['id_user' => $model->id]);
 
             if ($this->isNewRecord || isset($modelSip->id_user)) {
                 $modelSip->id_user = $model->id;
@@ -314,7 +313,7 @@ class UserController extends Controller
             AsteriskAccess::instance()->generateSipPeers();
         }
 
-        if ( ! $this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
+        if (! $this->isNewRecord && isset($model->id_group_agent) && $model->id_group_agent > 1) {
             $modelUser = User::model()->find("id_user = :key", [':key' => $model->id]);
             if (isset($modelUser->id)) {
                 $modelUser->id_group = $model->id_group_agent;
@@ -363,7 +362,6 @@ class UserController extends Controller
 
             if ($this->isNewRecord) {
                 $user_id_group = $values['id_group'];
-
             } else if ($type == 'u' || $type == 'd') {
 
                 if (isset($values['id'])) {
@@ -375,7 +373,8 @@ class UserController extends Controller
             }
 
             if (isset($user_id_group)) {
-                $modelGroupUser = GroupUser::model()->find('id_user_type = 1 AND id = :key',
+                $modelGroupUser = GroupUser::model()->find(
+                    'id_user_type = 1 AND id = :key',
                     [':key' => $user_id_group]
                 );
 
@@ -389,7 +388,7 @@ class UserController extends Controller
                     ]);
                     Yii::log($type, 'error');
                     if ($type == 'd') {
-                        if ( ! preg_match('/d/', $modelGroupModule->action)) {
+                        if (! preg_match('/d/', $modelGroupModule->action)) {
                             echo json_encode([
                                 'success' => false,
                                 'rows'    => [],
@@ -398,7 +397,7 @@ class UserController extends Controller
                             exit();
                         }
                     } else if ($type == 'c') {
-                        if ( ! preg_match('/c/', $modelGroupModule->action)) {
+                        if (! preg_match('/c/', $modelGroupModule->action)) {
                             echo json_encode([
                                 'success' => false,
                                 'rows'    => [],
@@ -407,7 +406,7 @@ class UserController extends Controller
                             exit();
                         }
                     } else {
-                        if ( ! preg_match('/c|u/', $modelGroupModule->action)) {
+                        if (! preg_match('/c|u/', $modelGroupModule->action)) {
                             echo json_encode([
                                 'success' => false,
                                 'rows'    => [],
@@ -416,10 +415,8 @@ class UserController extends Controller
                             exit();
                         }
                     }
-
                 }
             }
-
         }
     }
 
@@ -428,18 +425,19 @@ class UserController extends Controller
 
         if ($model->callshop == 0) {
 
-            $modelRateCallshop = RateCallshop::model()->deleteAll('id_user = :id_user',
+            $modelRateCallshop = RateCallshop::model()->deleteAll(
+                'id_user = :id_user',
                 [':id_user' => $model->id]
             );
         } elseif ($model->callshop == 1) {
 
-            $modelRateCallshop = RateCallshop::model()->findAll('id_user = :id_user',
+            $modelRateCallshop = RateCallshop::model()->findAll(
+                'id_user = :id_user',
                 [':id_user' => $model->id]
             );
             if (count($modelRateCallshop) == 0) {
                 RateCallshop::model()->createCallShopRates($model);
             }
-
         }
     }
 
@@ -447,14 +445,21 @@ class UserController extends Controller
     {
         if ($this->isNewRecord) {
             if (isset($methodModel[0]->SLAppToken)) {
-                $response = SLUserSave::saveUserSLCurl($this, $methodModel[0]->SLAppToken
-                    , $methodModel[0]->SLAccessToken);
+                $response = SLUserSave::saveUserSLCurl(
+                    $this,
+                    $methodModel[0]->SLAppToken,
+                    $methodModel[0]->SLAccessToken
+                );
                 $values['id_sacado_sac'] = $response[0]->data->id_sacado_sac;
             }
         } else {
             if (isset($methodModel[0]->SLAppToken)) {
-                $response = SLUserSave::saveUserSLCurl($this, $methodModel[0]->SLAppToken
-                    , $methodModel[0]->SLAccessToken, false);
+                $response = SLUserSave::saveUserSLCurl(
+                    $this,
+                    $methodModel[0]->SLAppToken,
+                    $methodModel[0]->SLAccessToken,
+                    false
+                );
             }
         }
 
@@ -463,7 +468,7 @@ class UserController extends Controller
 
     public function actionCredit()
     {
-        if ( ! Yii::app()->session['id_user']) {
+        if (! Yii::app()->session['id_user']) {
             die("Access denied to save in module: $module");
             exit;
         }
@@ -579,7 +584,6 @@ class UserController extends Controller
                 $modelRefill->description = Yii::t('zii', 'Automatic credit');
                 $modelRefill->save();
             }
-
         }
 
         AsteriskAccess::instance()->generateSipPeers();
@@ -618,7 +622,7 @@ class UserController extends Controller
                     ':key1' => $attributes[$i]['id'],
                 ]);
 
-                if ( ! isset($modelOfferUse->id)) {
+                if (! isset($modelOfferUse->id)) {
                     $attributes[$i]['offer'] = 0;
                     continue;
                 }
@@ -657,14 +661,12 @@ class UserController extends Controller
                         }
                         break;
                 }
-
             } else {
 
                 $modelSip                    = Sip::model()->count('id_user = :key', [':key' => $attributes[$i]['id']]);
                 $attributes[$i]['sip_count'] = $modelSip;
                 $attributes[$i]['offer']     = 0;
             }
-
         }
         return $attributes;
     }
@@ -686,7 +688,6 @@ class UserController extends Controller
         $modelOfferCdr = OfferCdr::model()->findBySql($sql);
 
         return isset($modelOfferCdr->used_secondes) ? $modelOfferCdr->used_secondes : 0;
-
     }
 
     public function checkDaysPackage($startday, $billingtype)
