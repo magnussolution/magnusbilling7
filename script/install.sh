@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 echo
 echo
 echo
@@ -86,6 +85,7 @@ apt-get install -y php-fpm php  php-dev php-common php-cli php-gd php-pear php-c
 apt-get install -y mariadb-server php-mysql
 apt-get install -y unzip git libcurl4-openssl-dev htop sngrep firewalld fail2ban cron
 apt-get install -y rsyslog
+apt-get install -y whiptail
 
 PHP_INI=$(php -i | grep /.+/php.ini -oE)
 
@@ -114,7 +114,6 @@ echo
 sleep 1
 cd /usr/src
 rm -rf asterisk*
-clear
 mv /var/www/html/mbilling/script/asterisk-13.35.0.tar.gz /usr/src/
 tar xzvf asterisk-13.35.0.tar.gz
 rm -rf asterisk-13.35.0.tar.gz
@@ -141,9 +140,6 @@ make install
 make samples
 make config
 ldconfig
-
-clear
-
 
 
 chmod -R 777 /tmp
@@ -200,13 +196,13 @@ sed -i 's/Group ${APACHE_RUN_GROUP}/Group asterisk/' ${HTTP_CONFIG}
 sed -i "s/memory_limit = 16M/memory_limit = 512M /" ${PHP_INI}
 sed -i "s/memory_limit = 128M/memory_limit = 512M /" ${PHP_INI}
 mkdir -p /var/www/html
-sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' ${HTTP_CONFIG}
+sed -i 's/<Directory \/var\/www\/>/<Directory \/var\/www\/html\/>/' "${HTTP_CONFIG}"
 
 
 echo
 echo "----------- Create mysql password: Your mysql root password is $password ----------"
 echo
-
+mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl start mariadb
 systemctl enable apache2 
 systemctl enable mariadb
@@ -256,7 +252,6 @@ open_files_limit=500000
 
 startup_services
 
-clear
 echo
 echo '----------- Installing the Web Interface ----------'
 echo
@@ -309,7 +304,7 @@ cp -rf /var/www/html/mbilling/resources/sounds/es /var/lib/asterisk/sounds
 cp -rf /var/www/html/mbilling/resources/sounds/en /var/lib/asterisk/sounds
 
 installBr() {
-   clear
+
    language='br'
    cp -rf /var/www/html/mbilling/script/br /var/lib/asterisk/
    cd /var/lib/asterisk
@@ -318,12 +313,12 @@ installBr() {
 }
 
 installEn() {
-    clear
+
     language='en'
 }
 
 installEs() {
-  clear
+
     language='en'
     cp -n /var/www/html/mbilling/resources/sounds/en/* /var/lib/asterisk/sounds
     mkdir /var/lib/asterisk/es
@@ -903,7 +898,7 @@ processor_type()
 
 cd /usr/src/asterisk-13.35.0 
 make config
-clear 
+
 echo "INSTALLING G723 and G729 CODECS......... FROM http://asterisk.hosting.lv";   
 cd /usr/src
 rm -rf codec_*
