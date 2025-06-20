@@ -92,6 +92,23 @@ ignoreregex =
         }
 
 
+        $sql     = 'SELECT host FROM pkg_sip JOIN pkg_user ON pkg_sip.id_user = pkg_user.id  WHERE pkg_user.active = 1 AND host !=  "dynamic"';
+        $command = Yii::app()->db->createCommand($sql);
+        $modelServersIgnoreIPs = $command->queryAll();
+
+        foreach ($modelServersIgnoreIPs as $key => $server) {
+            $this->ignogeips .= $server['host'] . " ";
+        }
+
+        $sql     = 'SELECT host FROM pkg_trunk WHERE status = 1 AND host !=  "dynamic"';
+        $command = Yii::app()->db->createCommand($sql);
+        $modelServersIgnoreIPs = $command->queryAll();
+
+        foreach ($modelServersIgnoreIPs as $key => $server) {
+            $this->ignogeips .= $server['host'] . " ";
+        }
+
+
         echo "\n\nresultUnBanIps";
         print_r($this->resultUnBanIps);
 
@@ -101,11 +118,16 @@ ignoreregex =
         $sql = 'TRUNCATE TABLE pkg_firewall';
         Yii::app()->db->createCommand($sql)->execute();
 
+
         foreach ($modelServersIgnoreIPs as $key => $server) {
-            $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $server['ip'] . "',5, NOW(), '','IgnoreIP','1')";
-            try {
-                Yii::app()->db->createCommand($sql)->execute();
-            } catch (Exception $e) {
+
+            if (strlen($server['ip']) > 5) {
+                $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $server['ip'] . "',5, NOW(), '','IgnoreIP','1')";
+                echo $sql . "\n";
+                try {
+                    Yii::app()->db->createCommand($sql)->execute();
+                } catch (Exception $e) {
+                }
             }
         }
 
@@ -168,12 +190,8 @@ ignoreregex =
 
 
             foreach ($this->resultUnBanIps as  $unbanIP) {
-
                 echo "unbanip IP " .  $unbanIP['ip'] . " on MASTER\n";
-
-                @shell_exec("sudo fail2ban-client set asterisk-iptables unbanip " .  $unbanIP['ip']);
-                @shell_exec("sudo fail2ban-client set ip-blacklist unbanip " .  $unbanIP['ip']);
-                @shell_exec("sudo fail2ban-client set sshd unbanip " . $unbanIP['ip']);
+                @shell_exec("sudo fail2ban-client unban " .  $unbanIP['ip']);
             }
             if ($command == 'ip-blacklist') {
 
@@ -187,6 +205,7 @@ ignoreregex =
                     }
 
                     $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $blokedIP['ip'] . "',1, NOW(), '" . $server['name'] . "','$command','" . $server['id'] . "')";
+                    echo $sql . "\n";
                     try {
                         Yii::app()->db->createCommand($sql)->execute();
                     } catch (Exception $e) {
@@ -203,10 +222,7 @@ ignoreregex =
 
                 echo "unbanip IP " .  $unbanIP['ip'] . " on " . $server['host'] . "\n";
 
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set asterisk-iptables unbanip ' . $unbanIP['ip'] . '" ');
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set ip-blacklist unbanip ' . $unbanIP['ip'] . '" ');
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set sshd unbanip ' . $unbanIP['ip'] . '" ');
-                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set opensips-iptables unbanip ' . $unbanIP['ip'] . '" ');
+                @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client unban ' . $unbanIP['ip'] . '" ');
             }
 
             if ($command == 'ip-blacklist') {
@@ -219,6 +235,7 @@ ignoreregex =
                         continue;
                     }
                     $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $blokedIP['ip'] . "',1, NOW(), '" . $server['name'] . "','$command','" . $server['id'] . "')";
+                    echo $sql . "\n";
                     try {
                         Yii::app()->db->createCommand($sql)->execute();
                     } catch (Exception $e) {
@@ -241,7 +258,7 @@ ignoreregex =
         foreach ($ips as $ip) {
             $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('$ip',$action, NOW(), '" . $server['name'] . "','$command','" . $server['id'] . "')";
 
-            echo $sql;
+            echo $sql . "\n";
             try {
                 Yii::app()->db->createCommand($sql)->execute();
             } catch (Exception $e) {
