@@ -170,9 +170,13 @@ mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER T
 mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE subscriber ADD  cpslimit INT( 11 ) NOT NULL DEFAULT  '-1'"
 mysql -u root -p$(awk '{print $1}' /root/passwordMysql.log) opensips -e "ALTER TABLE address CHANGE context_info  context_info CHAR( 70 ) NULL DEFAULT NULL ;"
 
+
+wget https://raw.githubusercontent.com/magnussolution/magnusbilling7/source/script/sync_opensips_reload.sh
+
+chmod +x sync_opensips_reload.sh
+
 echo "
-* * * * * root /usr/bin/opensips-cli -x mi ds_reload
-* * * * * root /usr/bin/opensips-cli -x mi address_reload
+* * * * * root /root/sync_opensips_reload.sh
 " >> /etc/crontab
 
 
