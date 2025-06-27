@@ -654,12 +654,6 @@ echo
 echo "Fail2ban configuration!"
 echo
 
-echo '
-Defaults!/usr/bin/fail2ban-client !requiretty
-asterisk ALL=(ALL) NOPASSWD: /usr/bin/fail2ban-client
-' >> /etc/sudoers
-
-
 
 echo '
 [INCLUDES]
