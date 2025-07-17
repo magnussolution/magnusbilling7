@@ -1,241 +1,107 @@
-<?php
-    /**
-     * =======================================
-     * ###################################
-     * MagnusBilling
-     *
-     * @package MagnusBilling
-     * @author Adilson Leffa Magnus.
-     * @copyright Copyright (C) 2005 - 2023 MagnusSolution. All rights reserved.
-     * ###################################
-     *
-     * This software is released under the terms of the GNU Lesser General Public License v2.1
-     * A copy of which is available from http://www.gnu.org/copyleft/lesser.html
-     *
-     * Please submit bug reports, patches, etc to https://github.com/magnusbilling/mbilling/issues
-     * =======================================
-     * Magnusbilling.com <info@magnusbilling.com>
-     *
-     */
-?>
-
-
-<?php
-    $error = $success = '';
-
-    if ($_POST) {
-
-        require_once 'lib/stripe/autoload.php';
-
-        \Stripe\Stripe::setApiKey($modelMethodPay->client_id);
-        $error   = '';
-        $success = '';
-
-        $amount = preg_replace("/\.|\,/", '', $_GET['amount']);
-
-        try {
-            if ( ! isset($_POST['stripeToken'])) {
-                throw new Exception("The Stripe Token was not generated correctly");
-            }
-
-            \Stripe\Charge::create(["amount" => floatval($amount),
-                "currency"                            => "usd",
-                "card"                                => $_POST['stripeToken']]);
-            $success = 'Your payment was successful.';
-        } catch (Exception $e) {
-            $error = $e->getMessage();
-        }
-    }
-?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Stripe Getting Started Form</title>
-        <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-<!-- jQuery is used only for this example; it isn't required to use Stripe -->
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-        <script type="text/javascript">
-
-            // this identifies your website in the createToken call below
-            Stripe.setPublishableKey('<?php echo $modelMethodPay->client_secret; ?>');
-            function stripeResponseHandler(status, response) {
-                if (response.error) {
-                    // re-enable the submit button
-                    $('.submit-button').removeAttr("disabled");
-                    // show the errors on the form
-                    $(".payment-errors").html(response.error.message);
-                } else {
-                    var form$ = $("#payment-form");
-                    // token contains id, last4, and card type
-                    var token = response['id'];
-                    // insert the token into the form so it gets submitted to the server
-                    form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-                    // and submit
-                    form$.get(0).submit();
-                }
-            }
-            $(document).ready(function() {
-                $("#payment-form").submit(function(event) {
-                    // disable the submit button to prevent repeated clicks
-                    $('.submit-button').attr("disabled", "disabled");
-                    // createToken returns immediately - the supplied callback submits the form if there are no errors
-                    Stripe.createToken({
-                        number: $('.card-number').val(),
-                        cvc: $('.card-cvc').val(),
-                        exp_month: $('.card-expiry-month').val(),
-                        exp_year: $('.card-expiry-year').val()
-                    }, stripeResponseHandler);
-                    return false; // submit from callback
-                });
-            });
-        </script>
-    </head>
-    <body>
-<!-- to display errors returned by createToken -->
-        <span class="payment-errors"><center><font color=red size=5 ><?php echo $error ?></font></center> </span>
-        <span class="payment-success"><center><font color=green size=7 ><?php echo $success ?></font></center> </span>
-
-        <form action="" method="POST" id="payment-form">
-            <div class="form-container">
-            <div class="personal-information">
-                <h1>Payment Information : Amount                                                 <?php echo $_GET['amount'] ?></h1>
-            </div> <!-- end of personal-information -->
-
-          <input id="column-left" type="text" name="first-name" placeholder="First Name"/>
-          <input id="column-right" type="text" name="last-name" placeholder="Surname"/>
-          <input id="input-field" class="card-number" card-numbertautocomplete="off" type="text" name="card-number" placeholder="Card Number" />
-          <input id="column-left" type="text" class="card-expiry-month" placeholder="MM "/>
-          <input id="column-right" type="text" class="card-expiry-year" placeholder="YYYY "/>
-          <input id="input-field" class="card-cvc"  type="text" name="card-cvc" placeholder="CCV"/>
-
-
-          <input id="input-button" type="submit" class="submit-button" value="Submit Payment"/>
-
-        </form>
-
-        <style type="text/css">
-            @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500);
-
-body {
-  padding: 60px 0;
-  background-color: rgba(178,209,229,0.7);
-  margin: 0 auto;
-  width: 600px;
-}
-.body-text {
-  padding: 0 20px 30px 20px;
-  font-family: "Roboto";
-  font-size: 1em;
-  color: #333;
-  text-align: center;
-  line-height: 1.2em;
-}
-.form-container {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.card-wrapper {
-  background-color: #6FB7E9;
-  width: 100%;
-  display: flex;
-
-}
-.personal-information {
-  background-color: #3C8DC5;
-  color: #fff;
-  padding: 1px 0;
-  text-align: center;
-}
-h1 {
-  font-size: 1.3em;
-  font-family: "Roboto"
-}
-input {
-  margin: 1px 0;
-  padding-left: 3%;
-  font-size: 14px;
-}
-input[type="text"]{
-  display: block;
-  height: 50px;
-  width: 97%;
-  border: none;
-}
-input[type="email"]{
-  display: block;
-  height: 50px;
-  width: 97%;
-  border: none;
-}
-input[type="submit"]{
-  display: block;
-  height: 60px;
-  width: 100%;
-  border: none;
-  background-color: #3C8DC5;
-  color: #fff;
-  margin-top: 2px;
-  curson: pointer;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  font-weight: bold;
-  cursor: pointer;
-}
-input[type="submit"]:hover{
-  background-color: #6FB7E9;
-  transition: 0.3s ease;
-}
-#column-left {
-  width: 46.8%;
-  float: left;
-  margin-bottom: 2px;
-}
-#column-right {
-  width: 46.8%;
-  float: right;
-}
-
-@media only screen and (max-width: 480px){
+<style>
   body {
-    width: 100%;
-    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background: #f7f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
   }
-  .form-container {
-    margin: 0 2%;
+
+  .container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
   }
-  input {
-    font-size: 1em;
+
+  .checkmark {
+    font-size: 60px;
+    color: #27ae60;
+    margin-bottom: 20px;
   }
-  #input-button {
-    width: 100%;
-  }
-  #input-field {
-    width: 96.5%;
-  }
+
   h1 {
-    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 10px;
   }
-  input {
-    margin: 2px 0;
-  }
-  input[type="submit"]{
-    height: 50px;
-  }
-  #column-left {
-    width: 96.5%;
-    display: block;
-    float: none;
-  }
-  #column-right {
-    width: 96.5%;
-    display: block;
-    float: none;
-  }
-}
 
-        </style>
+  p {
+    color: #555;
+    font-size: 16px;
+  }
 
-    </body>
-</html>
+  a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    background: #27ae60;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+
+  .error-icon {
+    font-size: 60px;
+    color: #e74c3c;
+    margin-bottom: 20px;
+  }
+
+  a:hover {
+    background: #219150;
+  }
+</style>
+
+<?php if (isset($result)): ?>
+
+  <?php if ($result == 'success'): ?>
+    <div class="container">
+      <div class="checkmark">✔</div>
+      <h1> <?php echo Yii::t('zii', 'Payment Successful') ?> </h1>
+      <p><?php echo Yii::t('zii', 'Your credits have been added successfully.') ?> </p>
+      <a href="../../"><?php echo Yii::t('zii', 'Back') ?> </a>
+    </div>
+  <?php elseif ($result == 'error'): ?>
+    <div class="container">
+      <div class="error-icon">✖</div>
+      <h1><?php echo Yii::t('zii', 'Payment Failed') ?></h1>
+      <p><?php echo Yii::t('zii', 'The transaction was canceled or could not be completed.') ?></p>
+      <a href="../../"><?php echo Yii::t('zii', 'Try Again') ?></a>
+    </div>
+  <?php endif; ?>
+  <?php exit; ?>
+<?php endif; ?>
+<script src="https://js.stripe.com/v3/"></script>
+
+
+<script>
+  window.onload = function() {
+    fetch('../createCheckoutSessionStripe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'amount=<?php echo  number_format($_GET['amount'], 2) ?>'
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(session) {
+        return Stripe('<?php echo $modelMethodPay->client_id ?>').redirectToCheckout({
+          sessionId: session.id
+        });
+      })
+      .then(function(result) {
+        if (result.error) {
+          alert(result.error.message);
+        }
+      })
+      .catch(error => {
+        console.error('Stripe Checkout error:', error);
+      });
+  };
+</script>
