@@ -17,7 +17,7 @@ class BuyCreditController extends Controller
 
             $modelSip = AccessManager::checkAccess($user, $pass);
 
-            if ( ! isset($modelSip->id)) {
+            if (! isset($modelSip->id)) {
                 echo 'User or password is invalid';
                 exit;
             }
@@ -30,7 +30,6 @@ class BuyCreditController extends Controller
             Yii::app()->session['id_user']  = $modelSip->id_user;
             Yii::app()->session['id_plan']  = $modelSip->idUser->id_plan;
             Yii::app()->session['currency'] = $this->config['global']['base_currency'];
-
         }
 
         $modelUser = User::model()->findByPk((int) Yii::app()->session['id_user']);
@@ -65,11 +64,10 @@ class BuyCreditController extends Controller
                 ]);
                 exit;
             }
-
         }
 
         $modelMethodPay = Methodpay::model()->findByPK((int) $_GET['id_method']);
-        if ( ! isset($modelMethodPay->id)) {
+        if (! isset($modelMethodPay->id)) {
             exit;
         }
 
@@ -155,7 +153,7 @@ class BuyCreditController extends Controller
                 $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit + $modelServicesUse[0]->idUser->creditlimit;
             }
 
-            if ( ! isset($modelServicesUse[0]->id)) {
+            if (! isset($modelServicesUse[0]->id)) {
                 $this->render('payservicelink', [
                     'model'   => $model,
                     'message' => 'This service was paid or canceled.',
@@ -180,10 +178,9 @@ class BuyCreditController extends Controller
                 ]);
                 exit;
             }
-
         }
 
-        if ( ! is_array($modelServicesUse) || ! isset($modelServicesUse[0]->id)) {
+        if (! is_array($modelServicesUse) || ! isset($modelServicesUse[0]->id)) {
             $this->render('payservicelink', [
                 'model'   => $model,
                 'message' => 'Your selection not have any service pending.',
@@ -221,7 +218,6 @@ class BuyCreditController extends Controller
 
             if ($_POST['ServicesUse']['id_method'] < 1) {
                 $model->addError('id_method', Yii::t('zii', 'Group no allow for agent users'));
-
             } else {
 
                 if (isset($_GET['id_service_use'])) {
@@ -245,19 +241,21 @@ class BuyCreditController extends Controller
                 $modelMethodPay = Methodpay::model()->findByPk((int) $_POST['ServicesUse']['id_method']);
                 $total          = $modelMethodPay->payment_method == 'Pagseguro' ? intval($total) : $total;
 
-                $this->redirect([
-                    'buyCredit/method',
-                    'amount'    => $total,
-                    'id_method' => (int) $_POST['ServicesUse']['id_method'],
-                    'id_user'   => $modelServicesUse[0]->id_user,
-                ]
+                $this->redirect(
+                    [
+                        'buyCredit/method',
+                        'amount'    => $total,
+                        'id_method' => (int) $_POST['ServicesUse']['id_method'],
+                        'id_user'   => $modelServicesUse[0]->id_user,
+                    ]
                 );
-
             }
         }
 
-        $modelMethodPay = Methodpay::model()->findAll('id_user = :key AND active = 1',
-            [':key' => $modelServicesUse[0]->idUser->id_user]);
+        $modelMethodPay = Methodpay::model()->findAll(
+            'id_user = :key AND active = 1',
+            [':key' => $modelServicesUse[0]->idUser->id_user]
+        );
 
         if ($modelServicesUse[0]->idUser->typepaid == 1) {
             $modelServicesUse[0]->idUser->credit = $modelServicesUse[0]->idUser->credit + $modelServicesUse[0]->idUser->creditlimit;
@@ -268,6 +266,110 @@ class BuyCreditController extends Controller
             'modelMethodPay'   => $modelMethodPay,
             'modelServicesUse' => $modelServicesUse,
             'currency'         => Yii::app()->session['currency'],
+        ]);
+    }
+
+
+    public function actionCreateCheckoutSessionStripe()
+    {
+
+        $modelMethodPay = Methodpay::model()->find('payment_method = "Stripe"');
+
+        require_once('/var/www/html/mbilling/lib/stripe/vendor/autoload.php');
+
+        \Stripe\Stripe::setApiKey($modelMethodPay->client_secret);
+
+        $amount = (float) $_POST['amount'];
+        $userId = Yii::app()->user->id;
+
+        if (Yii::app()->session['currency'] == 'U$S' || Yii::app()->session['currency'] == 'U$' || Yii::app()->session['currency'] == '$') {
+            $currency = 'USD';
+        } else if (Yii::app()->session['currency'] == 'R$') {
+            $currency = 'BRL';
+        } elseif (Yii::app()->session['currency'] == '€') {
+            $currency = 'EUR';
+        } elseif (Yii::app()->session['currency'] == 'AUD$') {
+            $currency = 'AUD';
+        } else {
+            $currency = Yii::app()->session['currency'];
+        }
+
+
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => $currency,
+                    'product_data' => [
+                        'name' => "user," . Yii::app()->session['username'],
+                    ],
+                    'unit_amount' => intval($amount * 100),
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'client_reference_id' => "user," . Yii::app()->session['id_user'],
+            'success_url' => $_SERVER['HTTP_REFERER'] . 'index.php/buyCredit/stripSuccess?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' =>  $_SERVER['HTTP_REFERER'] . 'index.php/buyCredit/stripError',
+            'metadata' => [
+                'user_id' => Yii::app()->session['id_user']
+            ]
+        ]);
+
+        echo json_encode(['id' => $session->id]);
+    }
+
+    public function actionStripSuccess()
+    {
+
+        $modelMethodPay = Methodpay::model()->find('payment_method = "Stripe"');
+
+        require_once('/var/www/html/mbilling/lib/stripe/vendor/autoload.php');
+        \Stripe\Stripe::setApiKey($modelMethodPay->client_secret);
+
+        Yii::log(print_r($_REQUEST, true), 'error');
+
+        $sessionId = $_GET['session_id'] ?? null;
+
+        if (!$sessionId) {
+            Yii::log("Stripe: session_id not found", 'error');
+            throw new CHttpException(400, 'Sessão inválida');
+        }
+
+        try {
+
+            $session = \Stripe\Checkout\Session::retrieve($sessionId);
+
+            $userId = $session->metadata->user_id ?? null;
+            $amount = $session->amount_total / 100.0;
+
+            Yii::log("payment aproved via Stripe to user para user_id: $userId - amount: $amount", 'info');
+            $modelUser = User::model()->findByPk($userId);
+
+            if (isset($modelUser->id) && Refill::model()->countRefill($sessionId, $modelUser->id) == 0) {
+                $description      = 'Stripe, transaccion ' . $sessionId;
+                Yii::log($modelUser->id . ' ' . $amount . ' ' . $description . ' ' . $sessionId, 'error');
+                UserCreditManager::releaseUserCredit($modelUser->id, $amount, $description, 1, $sessionId);
+            }
+
+            // Redireciona para a tela de sucesso
+            $this->render(strtolower($modelMethodPay->payment_method), [
+                'result' => 'success',
+            ]);
+            exit;
+        } catch (Exception $e) {
+            Yii::log("Erro Stripe: " . $e->getMessage(), 'error');
+            $this->render(strtolower($modelMethodPay->payment_method), [
+                'result' => 'error',
+            ]);
+        }
+    }
+    public function actionStripError()
+    {
+        $modelMethodPay = Methodpay::model()->find('payment_method = "Stripe"');
+
+        $this->render(strtolower($modelMethodPay->payment_method), [
+            'result' => 'error',
         ]);
     }
 }

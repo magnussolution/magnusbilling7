@@ -1,0 +1,2 @@
+build/MagnusBilling-current.tar.gz filter=lfs diff=lfs merge=lfs -text
+/build/MagnusBilling-current.tar.gz filter=lfs diff=lfs merge=lfs -text
