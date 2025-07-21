@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe de com funcionalidades globais
  *
@@ -13,20 +14,21 @@ class LinuxAccess
     {
 
         Yii::log('LinuxAccess::exec -> ' . $command, 'error');
-        exec($command, $output);
+        $sanitized = escapeshellcmd($command);
+        exec($sanitized, $output);
         return $output;
     }
 
     public static function getDirectoryDiskSpaceUsed($filter = '*', $directory = '/var/spool/asterisk/monitor/')
     {
-        $command = 'ls -lR  ' . $directory . $filter . ' | grep -v \'^d\' | awk \'{total += $5} END {print total}\'';
-        return @LinuxAccess::exec($command);
+
+        $command = 'ls -lR  ' . escapeshellarg($directory) . escapeshellarg($filter) . ' | grep -v \'^d\' | awk \'{total += $5} END {print total}\'';
+        return @self::exec($command);
     }
 
     public static function getLastFileInDirectory($filter = '*', $directory = '/var/spool/asterisk/monitor/')
     {
-        $command = 'ls -tr ' . $directory . $filter . ' | head -n 1';
-        return @LinuxAccess::exec($command);
+        $command = 'ls -tr ' . escapeshellarg($directory) . escapeshellarg($filter) . ' | head -n 1';
+        return @self::exec($command);
     }
-
 }
