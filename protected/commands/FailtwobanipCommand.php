@@ -53,13 +53,19 @@ ignoreregex =
         add the ~/.ssh/id_rsa.pub on /root/.ssh/authorized_keys of the proxy and slaves.
         */
 
+        $action = [
+            ['0', 'Temp ban'],
+            ['1', 'Permanent ban'],
+            ['3', 'Unban'],
+            ['5', 'Add to IgnoreIP']
+        ];
 
 
         if (isset($args[0])) {
             $this->ssh_port = $args[0];
         }
 
-
+        //only execute this script if the admin is logged on magnusbilling
         $sql = "SELECT count(id) as logged FROM pkg_log where id_log_actions = 1 AND date >= NOW() - INTERVAL (SELECT config_value FROM pkg_configuration WHERE config_key = 'session_timeout') SECOND AND id_user IN (SELECT id FROM pkg_user WHERE id_group IN (SELECT id FROM pkg_group_user WHERE id_user_type = 1))";
         $command = Yii::app()->db->createCommand($sql);
         $resultAdmins = $command->queryAll();
@@ -68,21 +74,24 @@ ignoreregex =
             return;
         }
 
-
+        //get all ips that action is 3 (to unban)
         $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 3';
         $command = Yii::app()->db->createCommand($sql);
         $this->resultUnBanIps = $command->queryAll();
 
+
+        //delete all that already added on $this->resultUnBanIps
         foreach ($this->resultUnBanIps as  $unbanIP) {
             $sql     = 'DELETE FROM pkg_firewall WHERE ip = "' . $unbanIP['ip'] . '"';
             Yii::app()->db->createCommand($sql)->execute();
         }
 
+        //get all ips that action is 1  (Permanent ban)
         $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 1';
         $command = Yii::app()->db->createCommand($sql);
         $this->resultBanIps = $command->queryAll();
 
-
+        //get all ips that action is 5  (Add to IgnoreIP) and add it to $this->ignogeips
         $sql     = 'SELECT ip FROM pkg_firewall WHERE action = 5';
         $command = Yii::app()->db->createCommand($sql);
         $modelServersIgnoreIPs = $command->queryAll();
@@ -91,18 +100,19 @@ ignoreregex =
             $this->ignogeips .= $server['ip'] . " ";
         }
 
-
+        //get all ips of the clients and add it to $this->ignogeips
         $sql     = 'SELECT host FROM pkg_sip JOIN pkg_user ON pkg_sip.id_user = pkg_user.id  WHERE pkg_user.active = 1 AND host !=  "dynamic"';
         $command = Yii::app()->db->createCommand($sql);
-        $modelServersIgnoreIPs = $command->queryAll();
+        $modelServersIgnoreIPsSips = $command->queryAll();
 
-        foreach ($modelServersIgnoreIPs as $key => $server) {
+        foreach ($modelServersIgnoreIPsSips as $key => $server) {
             $this->ignogeips .= $server['host'] . " ";
         }
 
+        //get all ips of the trunks and add it to $this->ignogeips
         $sql     = 'SELECT host FROM pkg_trunk WHERE status = 1 AND host !=  "dynamic"';
         $command = Yii::app()->db->createCommand($sql);
-        $modelServersIgnoreIPs = $command->queryAll();
+        $modelServersIgnoreIPstrunks = $command->queryAll();
 
         foreach ($modelServersIgnoreIPs as $key => $server) {
             $this->ignogeips .= $server['host'] . " ";
@@ -115,10 +125,12 @@ ignoreregex =
         echo "\nresultBanIps";
         print_r($this->resultBanIps);
 
+        //truncate the table
         $sql = 'TRUNCATE TABLE pkg_firewall';
         Yii::app()->db->createCommand($sql)->execute();
 
 
+        //insert all the ips with status 5 (IgnoreIP) again to the table
         foreach ($modelServersIgnoreIPs as $key => $server) {
 
             if (strlen($server['ip']) > 5) {
@@ -134,6 +146,7 @@ ignoreregex =
 
         $modelServers = Servers::model()->findAll('status IN (1,3,4)');
 
+        //if there no server, add the localhost
         if (! isset($modelServers[0])) {
 
             $modelServers = new Servers;
@@ -150,20 +163,15 @@ ignoreregex =
             $modelServers->save();
             $modelServers = Servers::model()->findAll('status IN (1,3,4)');
         }
-
+        //include all the servers on $this->ignogeips
         foreach ($modelServers as $key => $server) {
             if ($server['host'] != 'localhost') {
                 $this->ignogeips .= $server['host'] . " ";
             }
         }
 
-
-
-        $modelServers = Servers::model()->findAll('status IN (1,3,4)');
-
+        //loop for all the servers to process the data
         foreach ($modelServers as $key => $server) {
-
-            echo "\n" . $server['host'] . "\n\n";
 
             if ($server['type'] == 'sipproxy') {
 
@@ -183,27 +191,36 @@ ignoreregex =
 
         echo "sed -i 's/^ignoreip = .*/" . $this->ignogeips . "/' /etc/fail2ban/jail.local\n";
 
+
+        //if is master server
         if ($server['type'] == 'mbilling') {
 
+            //add the ignore ips to jail.local and reload fail2ban
             shell_exec("sed -i 's/^ignoreip = .*/" . $this->ignogeips . "/' /etc/fail2ban/jail.local");
             shell_exec("systemctl reload fail2ban");
 
-
+            //unban all the ips of $this->resultUnBanIps
             foreach ($this->resultUnBanIps as  $unbanIP) {
                 echo "unbanip IP " .  $unbanIP['ip'] . " on MASTER\n";
                 @shell_exec("sudo fail2ban-client unban " .  $unbanIP['ip']);
             }
+
+            //if command is ip-blacklist 
             if ($command == 'ip-blacklist') {
 
                 foreach ($this->resultBanIps as  $blokedIP) {
+                    //ban the ip on ip-blacklist jail
                     $status = shell_exec("fail2ban-client set ip-blacklist banip " . $blokedIP['ip']);
 
+
+                    //check if exist on the table pkg_firewall
                     $sqlCheck = "SELECT COUNT(*) FROM pkg_firewall WHERE ip = '" . $blokedIP['ip'] . "' AND id_server = '" . $server['id'] . "'";
                     $exists = Yii::app()->db->createCommand($sqlCheck)->queryScalar();
                     if ($exists > 0) {
                         continue;
                     }
 
+                    //if not exist, add it
                     $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $blokedIP['ip'] . "',1, NOW(), '" . $server['name'] . "','$command','" . $server['id'] . "')";
                     echo $sql . "\n";
                     try {
@@ -212,28 +229,41 @@ ignoreregex =
                     }
                 }
             }
+            //get all ips banned on the jail
             $status = shell_exec("fail2ban-client status " . $command);
         } else {
 
+            //if is a Slave or proxy execute the commands via SSH
+
+
+            //add the ignore ips to jail.local and reload fail2ban
             @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "sed -i \'s/^ignoreip = .*/' . $this->ignogeips . '/\' /etc/fail2ban/jail.local" ');
             @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "systemctl reload fail2ban"');
 
             foreach ($this->resultUnBanIps as  $unbanIP) {
-
+                //unban all the ips of $this->resultUnBanIps
                 echo "unbanip IP " .  $unbanIP['ip'] . " on " . $server['host'] . "\n";
-
                 @shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client unban ' . $unbanIP['ip'] . '" ');
             }
 
+
+            //if command is ip-blacklist 
+
             if ($command == 'ip-blacklist') {
+
+
                 foreach ($this->resultBanIps as  $blokedIP) {
+
+                    //ban the ip on ip-blacklist jail
                     $status =  shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client set ip-blacklist banip ' . $blokedIP['ip'] . '" ');
 
+                    //check if exist on the table pkg_firewall
                     $sqlCheck = "SELECT COUNT(*) FROM pkg_firewall WHERE ip = '" . $blokedIP['ip'] . "' AND id_server = '" . $server['id'] . "'";
                     $exists = Yii::app()->db->createCommand($sqlCheck)->queryScalar();
                     if ($exists > 0) {
                         continue;
                     }
+                    //if not exist, add it
                     $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('" . $blokedIP['ip'] . "',1, NOW(), '" . $server['name'] . "','$command','" . $server['id'] . "')";
                     echo $sql . "\n";
                     try {
@@ -242,12 +272,14 @@ ignoreregex =
                     }
                 }
             }
-
+            //get all ips banned on the jail
             $status =  shell_exec('ssh -o StrictHostKeyChecking=no root@' . $server['host'] . ' -p ' . $this->ssh_port . ' "fail2ban-client status ' . $command . '" ');
         }
 
+        //get all the ips banned
         preg_match('/Banned IP list:\s*(.*)/', $status, $ipMatches);
 
+        //if there no ips, return
         if (!isset($ipMatches[1]) || empty($ipMatches[1])) {
             return;
         }
@@ -256,6 +288,7 @@ ignoreregex =
 
 
         foreach ($ips as $ip) {
+            //insert the ips on the table.
             $sql = "INSERT INTO pkg_firewall (ip,action, date, description, jail, id_server) VALUES ('$ip',$action, NOW(), '" . $server['name'] . "','$command','" . $server['id'] . "')";
 
             echo $sql . "\n";
