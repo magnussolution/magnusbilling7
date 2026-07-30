@@ -368,6 +368,8 @@ touch /etc/asterisk/extensions_magnus_did.conf
 touch /etc/asterisk/sip_magnus_register.conf
 touch /etc/asterisk/sip_magnus.conf
 touch /etc/asterisk/sip_magnus_user.conf
+touch /etc/asterisk/pjsip_magnus.conf
+touch /etc/asterisk/pjsip_magnus_user.conf
 touch /etc/asterisk/iax_magnus_register.conf
 touch /etc/asterisk/iax_magnus.conf
 touch /etc/asterisk/iax_magnus_user.conf

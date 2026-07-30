@@ -63,6 +63,8 @@ rm -rf /var/www/html/mbilling/doc
 rm -rf /var/www/html/mbilling/script
 rm -rf /var/www/html/mbilling/assets/*
 touch /etc/asterisk/voicemail_magnus.conf
+touch /etc/asterisk/pjsip_magnus.conf
+touch /etc/asterisk/pjsip_magnus_user.conf
 
 ## set default permissions 
 
