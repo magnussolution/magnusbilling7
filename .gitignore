@@ -87,3 +87,5 @@ build/ApplicationPUBLIC.js
 wiki/generate.php
 script/install_18.sh
 script/test.sql
+classic/src/Application.js
+classic/src/Application.js
