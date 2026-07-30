@@ -37,6 +37,10 @@ class PjsipConfiguration
         foreach ($rows as $data) {
             $name = $data['trunkcode'];
             $host = trim($data['host']);
+            $hostWithPort = self::hostWithPort(
+                $host,
+                isset($data['port']) ? $data['port'] : null
+            );
             $authName = self::sectionName(
                 'auth_reg_' . $name . '_' . $data['user'] . '_' . $host
             );
@@ -49,8 +53,8 @@ class PjsipConfiguration
                 $output .= "expiration=120\n";
                 $output .= "transport=transport-udp\n";
                 $output .= "outbound_auth=" . $authName . "\n";
-                $output .= "client_uri=sip:" . $data['user'] . '@' . $host . "\n";
-                $output .= "server_uri=sip:" . $host . "\n";
+                $output .= "client_uri=sip:" . $data['user'] . '@' . $hostWithPort . "\n";
+                $output .= "server_uri=sip:" . $hostWithPort . "\n";
                 $output .= "contact_user=" . $data['user'] . "\n";
             }
 
@@ -100,10 +104,14 @@ class PjsipConfiguration
     {
         $host = trim($data['host']);
         $hostWithoutPort = strtok($host, ':');
+        $hostWithPort = self::hostWithPort(
+            $host,
+            isset($data['port']) ? $data['port'] : null
+        );
         $line  = "\n\n[" . $name . "]\n";
         $line .= "type=aor\n";
         $line .= "contact=sip:";
-        $line .= strlen($data['user']) ? $data['user'] . '@' . $host : $host;
+        $line .= strlen($data['user']) ? $data['user'] . '@' . $hostWithPort : $hostWithPort;
         $line .= "\n";
         $qualify = strtolower(trim((string) $data['qualify']));
         if ($qualify === 'yes') {
@@ -162,7 +170,7 @@ class PjsipConfiguration
     {
         $output  = "[global]\n";
         $output .= "type=global\n";
-        $output .= "endpoint_identifier_order=ip,username,auth_username,anonymous\n";
+        $output .= "endpoint_identifier_order=ip,username,auth_username\n";
 
         foreach ($modelSip as $sip) {
             if ($sip->idUser->active == 0) {
@@ -262,6 +270,26 @@ class PjsipConfiguration
             trim($parts[0]),
             isset($parts[1]) && ctype_digit($parts[1]) ? (int) $parts[1] : 5060,
         ];
+    }
+
+    private static function hostWithPort($host, $port)
+    {
+        $host = trim($host);
+        $port = trim((string) $port);
+
+        if (
+            $host === '' ||
+            $host === 'dynamic' ||
+            strpos($host, ':') !== false ||
+            ! ctype_digit($port) ||
+            (int) $port < 1 ||
+            (int) $port > 65535 ||
+            (int) $port === 5060
+        ) {
+            return $host;
+        }
+
+        return $host . ':' . (int) $port;
     }
 
     private static function isIpOnly($sip)

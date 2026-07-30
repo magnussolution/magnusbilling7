@@ -173,7 +173,7 @@ class CallChartCommand extends ConsoleCommand
                             //se é autenticado por techprefix
 
                             //try get user
-                            if (preg_match('/^SIP\/sipproxy\-/', $channel)) {
+                            if (preg_match('/^(?:SIP|PJSIP)\/sipproxy\-/', $channel)) {
                                 if ( ! strlen($sip_account)) {
                                     $sip_account = $call[1] = $call[3];
                                 }
@@ -322,7 +322,11 @@ class CallChartCommand extends ConsoleCommand
                                     $cdr = time() - intval($callQueue['UniqueID']);
                                 }
                                 if (isset($callQueue['MEMBERNAME'])) {
-                                    $sip_account = substr($callQueue['MEMBERNAME'], 4);
+                                    $sip_account = preg_replace(
+                                        '/^(?:SIP|PJSIP)\//',
+                                        '',
+                                        $callQueue['MEMBERNAME']
+                                    );
                                 }
                             }
                         } else {

@@ -661,9 +661,25 @@ class AsteriskAccess
             }
 
             $linesCallsResult = explode("\n", $data['data']);
+            $hasEndpointColumn = false;
+
+            foreach ($linesCallsResult as $line) {
+                $header = array_map('trim', explode('|', $line));
+                if (
+                    isset($header[0], $header[1]) &&
+                    $header[0] === 'Channel' &&
+                    strcasecmp($header[1], 'Endpoint') === 0
+                ) {
+                    $hasEndpointColumn = true;
+                    break;
+                }
+            }
 
             for ($i = 0; $i < count($linesCallsResult) - 1; $i++) {
-                $call = explode("|", $linesCallsResult[$i]);
+                $call = self::normalizeCdrActiveRow(
+                    explode("|", $linesCallsResult[$i]),
+                    $hasEndpointColumn
+                );
 
                 if (!preg_match('/^SIP|^IAX|^PJSIP/', $call[0])) {
                     continue;
@@ -681,6 +697,30 @@ class AsteriskAccess
         }
 
         return $channels;
+    }
+
+    public static function normalizeCdrActiveRow($call, $hasEndpointColumn)
+    {
+        $call = array_map('trim', $call);
+
+        if (! $hasEndpointColumn || count($call) < 12) {
+            return $call;
+        }
+
+        return [
+            0  => $call[0],  // Channel
+            1  => $call[1],  // Endpoint -> sipaccount
+            2  => $call[2],  // number
+            3  => '',        // AccountCode is not present in Asterisk 20
+            4  => $call[4],  // Status
+            5  => $call[5],  // codec
+            6  => $call[9],  // Dst. Channel
+            7  => $call[3],  // LastApp
+            8  => $call[10], // Billsec
+            9  => $call[11], // Duration
+            10 => $call[10],
+            11 => $call[11],
+        ];
     }
 
     public static function getCoreShowChannels()
