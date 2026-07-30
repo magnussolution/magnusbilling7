@@ -105,7 +105,12 @@ class PjsipConfiguration
         $line .= "contact=sip:";
         $line .= strlen($data['user']) ? $data['user'] . '@' . $host : $host;
         $line .= "\n";
-        $line .= "qualify_frequency=" . ($data['qualify'] == 'yes' ? '60' : $data['qualify']) . "\n";
+        $qualify = strtolower(trim((string) $data['qualify']));
+        if ($qualify === 'yes') {
+            $line .= "qualify_frequency=60\n";
+        } elseif (ctype_digit($qualify) && (int) $qualify > 0) {
+            $line .= "qualify_frequency=" . (int) $qualify . "\n";
+        }
         $line .= "max_contacts=1\n";
 
         if ($hostWithoutPort != 'dynamic') {
