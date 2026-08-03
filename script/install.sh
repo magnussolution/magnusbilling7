@@ -146,8 +146,8 @@ fi
 
 mkdir -p /var/www/html/mbilling
 cd /var/www/html/mbilling
-wget --no-check-certificate  https://magnusbilling.org/download/MagnusBilling-current.tar.gz
-tar xzf MagnusBilling-current.tar.gz
+wget --no-check-certificate  https://magnusbilling.org/download/MagnusBilling7-current.tar.gz
+tar xzf MagnusBilling7-current.tar.gz
 
 echo
 echo '----------- Install PJPROJECT ----------'
