@@ -404,3 +404,46 @@ Are you looking for help choosing/configuring MagnusBilling to manage your own V
 ### Reuse rule
 
 Reuse only when the new conversation has the same technical conditions. Preserve the contact language and ask for clarification when the context differs.
+
+## Approved support guidance — 2026-08-11T16:52:47.467Z
+
+- Category: `magnusbilling_general`
+- Source: `telegram_owner_approval`
+
+### Situation
+
+Saudações, Adilson. Espero que vc esteja bem. Estou depurando alguns comportamentos estranhos no MB-8 e separando o que é de fato importante vc analisar. Constatei falha na gravação de chamadas, quando atendidas e a origem são filas de atendimento.
+
+O erro esta no arquivo /var/www/html/mbilling/resources/asterisk/QueueAgi.php
+Especificamente na linha 235, no REGEX q esta removendo apenas a palavra SIP/, quando deveria estar removendo PJSIP/.
+
+Para validar a solução, eu alterei o arquivo QueueAgi.php manualmente, testei e voltou a gravar corretamente.
+
+Um forte abraço e mais uma vez obrigado por este projeto incrível que vc mantem até hoje.
+
+### Approved guidance
+
+Olá, Livison! Muito obrigado pelo relato detalhado e pela validação prática. Entendi o problema no MB-8: na `QueueAgi.php`, a expressão da linha 235 trata apenas `SIP/`, enquanto chamadas atendidas por filas com canais `PJSIP/` deixam de gravar corretamente. Como você já confirmou que o ajuste restaura as gravações, vou encaminhar esse ponto para análise do Magnus. Se possível, envie também o trecho original e a alteração aplicada, sem incluir credenciais ou outros dados sensíveis. Um forte abraço e obrigado por contribuir com o projeto!
+
+### Reuse rule
+
+Reuse only when the new conversation has the same technical conditions. Preserve the contact language and ask for clarification when the context differs.
+
+## Approved support guidance — 2026-08-17T13:55:35.949Z
+
+- Category: `magnusbilling_general`
+- Source: `telegram_owner_approval`
+
+### Situation
+
+Outros botões de menu q antes apareciam, tb deixaram de aparecer.
+
+### Approved guidance
+
+Olá, Livison, boa tarde! Entendi. Como o problema continua após o `Ctrl+F5` e afeta todos os usuários, além de outros botões do menu terem desaparecido, isso indica que não se trata apenas de cache do navegador. O caso precisa ser analisado após a atualização para a versão [redacted-ip], verificando o carregamento do frontend e as permissões dos módulos do menu.
+
+Vou encaminhar novamente para análise do Magnus. Se possível, envie uma captura da tela mostrando a edição da URA e os menus que desapareceram, sem incluir credenciais ou dados sensíveis. Não faça novas alterações manuais nos arquivos até a análise.
+
+### Reuse rule
+
+Reuse only when the new conversation has the same technical conditions. Preserve the contact language and ask for clarification when the context differs.

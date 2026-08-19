@@ -340,14 +340,21 @@ class AsteriskAccess
     public static function buildCallFile($directives, $variables = [])
     {
         $allowedDirectives = [
-            'Channel', 'Callerid', 'Account', 'MaxRetries',
-            'RetryTime', 'WaitTime', 'Context', 'Extension', 'Priority',
+            'Channel',
+            'Callerid',
+            'Account',
+            'MaxRetries',
+            'RetryTime',
+            'WaitTime',
+            'Context',
+            'Extension',
+            'Priority',
             'Archive',
         ];
         $callFile = '';
 
         foreach ($directives as $name => $value) {
-            if ( ! in_array($name, $allowedDirectives, true)) {
+            if (! in_array($name, $allowedDirectives, true)) {
                 throw new InvalidArgumentException('Invalid Asterisk call-file directive');
             }
 
@@ -355,7 +362,7 @@ class AsteriskAccess
         }
 
         foreach ($variables as $name => $value) {
-            if ( ! is_string($name) || ! preg_match('/\A[A-Z][A-Z0-9_]*(?:\([A-Za-z0-9_]+\))?\z/', $name)) {
+            if (! is_string($name) || ! preg_match('/\A[A-Z][A-Z0-9_]*(?:\([A-Za-z0-9_]+\))?\z/', $name)) {
                 throw new InvalidArgumentException('Invalid Asterisk call-file variable');
             }
 
@@ -374,7 +381,11 @@ class AsteriskAccess
      */
     public static function callFileValue($value)
     {
-        if ( ! is_scalar($value)) {
+        if (!strlen($value)) {
+            return $value;
+        }
+        if (! is_scalar($value)) {
+            print_r($value);
             throw new InvalidArgumentException('Invalid Asterisk call-file value');
         }
 
@@ -415,7 +426,7 @@ class AsteriskAccess
      */
     private static function validateCallFile($callFile)
     {
-        if ( ! is_string($callFile) || $callFile === '' || substr($callFile, -1) !== "\n") {
+        if (! is_string($callFile) || $callFile === '' || substr($callFile, -1) !== "\n") {
             throw new InvalidArgumentException('Invalid Asterisk call file');
         }
 
@@ -425,14 +436,21 @@ class AsteriskAccess
 
         $singleDirectives = [];
         $allowedDirectives = [
-            'Channel', 'Callerid', 'Account', 'MaxRetries',
-            'RetryTime', 'WaitTime', 'Context', 'Extension', 'Priority',
+            'Channel',
+            'Callerid',
+            'Account',
+            'MaxRetries',
+            'RetryTime',
+            'WaitTime',
+            'Context',
+            'Extension',
+            'Priority',
             'Archive',
         ];
 
         foreach (explode("\n", rtrim($callFile, "\n")) as $line) {
             if (strpos($line, 'Set:') === 0) {
-                if ( ! preg_match('/\ASet:[A-Z][A-Z0-9_]*(?:\([A-Za-z0-9_]+\))?=[^\r\n]*\z/', $line)) {
+                if (! preg_match('/\ASet:[A-Z][A-Z0-9_]*(?:\([A-Za-z0-9_]+\))?=[^\r\n]*\z/', $line)) {
                     throw new InvalidArgumentException('Invalid Asterisk call-file variable');
                 }
                 continue;
@@ -440,13 +458,13 @@ class AsteriskAccess
 
             $separator = strpos($line, ':');
             $name      = $separator === false ? '' : substr($line, 0, $separator);
-            if ( ! in_array($name, $allowedDirectives, true) || isset($singleDirectives[$name])) {
+            if (! in_array($name, $allowedDirectives, true) || isset($singleDirectives[$name])) {
                 throw new InvalidArgumentException('Invalid Asterisk call-file directive');
             }
             $singleDirectives[$name] = true;
         }
 
-        if ( ! isset($singleDirectives['Channel'])) {
+        if (! isset($singleDirectives['Channel'])) {
             throw new InvalidArgumentException('Asterisk call file requires a Channel directive');
         }
     }
@@ -459,7 +477,7 @@ class AsteriskAccess
         $outgoingDirectory = '/var/spool/asterisk/outgoing';
         $stagingDirectory  = $outgoingDirectory . '/.magnusbilling-tmp';
 
-        if ( ! is_dir($stagingDirectory) && ! mkdir($stagingDirectory, 0770, true) && ! is_dir($stagingDirectory)) {
+        if (! is_dir($stagingDirectory) && ! mkdir($stagingDirectory, 0770, true) && ! is_dir($stagingDirectory)) {
             throw new RuntimeException('Unable to create Asterisk call-file staging directory');
         }
 
@@ -486,24 +504,24 @@ class AsteriskAccess
                 $written += $result;
             }
 
-            if ( ! fflush($fp)) {
+            if (! fflush($fp)) {
                 throw new RuntimeException('Unable to flush temporary Asterisk call file');
             }
             fclose($fp);
             $fp = null;
 
             $scheduledTime = time() + max(0, (int) $time);
-            if ( ! touch($temporaryFile, $scheduledTime)) {
+            if (! touch($temporaryFile, $scheduledTime)) {
                 throw new RuntimeException('Unable to schedule Asterisk call file');
             }
 
             @chown($temporaryFile, 'asterisk');
             @chgrp($temporaryFile, 'asterisk');
-            if ( ! chmod($temporaryFile, 0640)) {
+            if (! chmod($temporaryFile, 0640)) {
                 throw new RuntimeException('Unable to set Asterisk call-file permissions');
             }
 
-            if ( ! rename($temporaryFile, $finalFile)) {
+            if (! rename($temporaryFile, $finalFile)) {
                 throw new RuntimeException('Unable to publish Asterisk call file');
             }
         } catch (Exception $exception) {

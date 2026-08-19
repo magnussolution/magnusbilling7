@@ -2192,6 +2192,22 @@ exten => s,1,Set(MASTER_CHANNEL(TRUNKANSWERTIME)=\${EPOCH})
             $version = '7.8.5.8';
             $this->updateCritical($version);
         }
+
+        //2026-08-15
+        if ($version == '7.8.5.8') {
+            $sql = "INSERT INTO pkg_configuration
+                (config_title, config_key, config_value, config_description, config_group_title, status)
+                SELECT 'GitHub star prompt dismissed', 'github_star_prompt_dismissed', '0',
+                    'Internal flag set after an administrator confirms support on GitHub.', 'global', 0
+                FROM DUAL
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM pkg_configuration WHERE config_key = 'github_star_prompt_dismissed'
+                );";
+            $this->executeDB($sql);
+
+            $version = '7.8.5.9';
+            $this->update($version);
+        }
     }
 
     private function migrateRateAndPrefixIndexes()
